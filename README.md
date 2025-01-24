@@ -9,7 +9,7 @@ S2ORC_Enhanced500v1 is an enriched subset of the [Semantic Scholar Open Research
 * Labels Included: `Title`, `Author`, `Affiliation`, `Venue`, `Abstract`, `Email`, `DOI`, `URI`, `Date`
 
 # Purpose
-S2ORC_Enhanced500v1 is designed to support researchers in developing and refining algorithms that automatically extract metadata from scholarly texts. This dataset is particularly prepared for the NFDI4DS shared task MESD, which is organized at the NLSP Workshop @ESWC, where the focus is on enhancing the precision of metadata extraction techniques in academic literature.
+S2ORC_Enhanced500v1 is designed to support researchers in developing and refining algorithms that automatically extract metadata from scholarly texts. This dataset is particularly prepared for the NFDI4DS shared task MESD, organized at the NLSP Workshop @ESWC 2025, where the focus is on enhancing the precision of metadata extraction techniques in academic literature.
 
 # Access
 Participants can access the S2ORC_Enhanced500v1 dataset by closing this repository. The test set will be released according the [timeline announced in the workshop page](https://nfdi4ds.github.io/nslp2025/docs/mesd_shared_task.html)
@@ -24,7 +24,7 @@ Please cite the S2ORC_Enhanced500v1 dataset in any publications or presentations
   year={2025}
 }
 ```
-Other related publicaitons: 
+Other related publications: 
 
 ```
 @inproceedings{boukhers2022vision,
@@ -59,6 +59,6 @@ Other related publicaitons:
 ```
 
 # Contact
-For further inquiries or additional information, please contact [Zeyd Boukhers](zeyd.boukhers@fit.fraunhofer.de).
+Please get in touch with [Zeyd Boukhers](zeyd.boukhers@fit.fraunhofer.de) for further inquiries or additional information.
 
 
