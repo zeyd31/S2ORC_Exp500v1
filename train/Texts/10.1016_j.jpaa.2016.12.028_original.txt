@@ -1,0 +1,550 @@
+
+ON K 1 OF AN ASSEMBLER
+16 Sep 2016
+
+Inna Zakharevich 
+ON K 1 OF AN ASSEMBLER
+16 Sep 2016arXiv:1506.06197v3 [math.KT]
+This paper contains a construction of generators and partial relations for K1 of a simplicial Waldhausen category where cofiber sequences split up to weak equivalence. The main application of these generators and relations is to produce generators for K1 of a (simplicial) assembler.
+
+Introduction
+
+In this paper we develop tools with which we can analyze K 1 of an assembler. Assemblers were introduced in [ZakC] as a formal framework with which to analyze abstract scissors congruence relations using spectra instead of groups; as this paper relies heavily on the notation and tools of the previous paper, that paper should be read first. The spectra used are obtained using algebraic K-theory, which is notoriously difficult to compute. In [ZakC] there were no tools for computing higher homotopy groups of assemblers.
+
+In this paper we take inspiration from the author's previous work on polytope complexes [Zak12,Zak13] and Muro and Tonks' work on identifying the 1-type of a Waldhausen K-theory spectrum [MT07,MT08] to construct a model for K 1 of an assembler. The main theorem of the paper is this:
+
+Theorem A. Suppose that E• is a nice simplicial Waldhausen category. Then every element of K 1 (E•) is represented by a diagram in E 0 of the form
+B ⊔ d 1 W ∼ f A ∼ g B ⊔ d 1 V
+where V, W are in E 1 satisfy the additional condition that d 0 V 1 = d 0 W 1 .
+
+The technical conditions are listed in Proposition 3.4; the theorem is proved in Theorem 3.8. The statement of the theorem also includes several relations that these generators satisfy.
+
+The main application of this theorem is this:
+
+Theorem B. For any assembler C, every element of K 1 (C) can be represented by a pair of morphisms A B f g in W(C). These satisfy the relations
+A B f f = 0, B C g 1 g 2 + A B f 1 f 2 = A C g 1 f 1 g 2 f 2 and A B f 1 f 2 + C D g 1 g 2 = A ∐ C B ∐ D f 1 ∐ g 1 f 2 ∐ g 2
+This is proved in Corollary 3.12. A more general statement for K 1 of the cofiber of a morphism of assemblers is given in Corollary 3.10. In addition, Theorem 3.8 gives a general description of elements in K 1 of a (particularly nice type of) simplicial Waldhausen category.
+
+We give two applications of this theorem. First, we compute K 1 of the assembler of segments in a line, and show that it is isomorphic to the abelianization of the group of interval exchange transformations. For more details, see Section 4. For the second, we describe how to compute the differentials in the spectral sequence for scissors congruence groups constructed in [ZakC,Section 5.2]; see Section 5. A further application to the Grothendieck ring of varieties is developed in much greater depth in [ZakA].
+
+This paper is organized as follows. Section 1 gives a quick review of the definition of assemblers, as well as a definition of the K-theory of an assembler using Waldhausen's construction. Section 2 shows that this definition of the K-theory agrees with the definition given in [ZakC]. Section 3 develops the model for K 1 of an assembler and proves the main theorem. Sections 4 and 5 contain applications of these theorems to interval exchange transformations and to the spectral sequence associated to n-dimensional scissors congruence groups. Section 6 contains a proof of the main theorem of Section 3.
+
+
+The K-theory of a closed assembler
+
+In this section we recall the definition of a closed assembler, and construct its K-theory spectrum as a Waldhausen category. For more on assemblers, as well as the original definition of the functor K: Asm Sp, see [ZakC, Section 1].
+
+Definition 1.1. In any category with an initial object ∅, we say that two morphisms f : A C and g: B C are disjoint if the pullback A× C B exists and is equal to ∅. A family {f i : A i A} i∈I is a disjoint family if for i = i ′ the morphisms f i and f i ′ are disjoint.
+
+Definition 1.2. Let C be a Grothendieck site. We denote the full subcategory of noninitial objects by C • . We say that a family of maps {A i A} i∈I is a covering family if it generates a covering sieve in the topology.
+
+A closed assembler is a small Grothendieck site C satisfying the following extra conditions: (I) C has an initial object ∅ and the empty family is a covering family of ∅.
+
+(P) C is closed under pullbacks.
+
+(M) All morphisms in C are monomorphisms. A morphism of closed assemblers F : C D is a continuous (in the sense of Grothendieck topologies) functor which preserves pullbacks and the initial object. We denote the category of closed assemblers and morphisms of closed assemblers by cAsm.
+
+In order to construct scissors congruence categories associated to assemblers, we need to be able to construct formal sums and decompositions of objects in an assembler. For this we need Grothendieck twists.
+
+Definition 1.3. The Grothendieck twist of C, written Tw(C), is defined to be the category whose objects are tuples {A i } i∈I , where I is a finite set and each a i is in ob C. A morphism {A i } i∈I {B j } j∈J in Tw(C) consists of a morphism of finite sets f : I J, together with morphisms f i : A i B f (i) for all i ∈ I. In general we denote a morphism of Tw(C) by a lower-case letter. By an abuse of notation, we use the same letter to refer to the morphism's underlying map of sets, and subscripted versions of the letter to refer to the C-components of the morphism (as we did above).
+
+
+The functor Tw(C)
+
+FinSet given by forgetting the C-components is a fibration of categories.
+
+Proposition 1.4. Let C be any category and let D be a sieve in C.
+
+(1) If C has all pullbacks then so does Tw(C D).
+
+(2) If C has all finite connected colimits (equivalently: all pushouts and coequalizers) then Tw(C) has all pushouts.
+
+(3) If C contains all pushouts then Tw(C) is closed under pushouts along morphisms whose underlying maps of sets are injective. Let C be an assembler, and consider Tw(C • ). It contains three distinguished types of morphisms.
+Proof. Part (1) is proved in [Zak12,Definition 1.5. A morphism f : {A i } i∈I {B j } j∈J in Tw(C • ) is a sub-map: if for all i, i ′ ∈ I such that f (i) = f (i ′ ), the morphisms f i : A i B f (i) and f i ′ : A i ′ B f (i ′ ) are disjoint. Sub-maps are denoted .
+The subcategory of sub-maps is denoted Tw(C • ) Sub . covering sub-map: if it is a sub-map and for all j ∈ J the family {f i : A i B j } i∈f −1 (j) is a covering family. Covering sub-maps are denoted . The subcategory of covering sub-maps is denoted W(C) move: if for all i ∈ I, f i is an isomorphism. Moves are denoted . Note that W is a functor cAsm Cat.
+
+Proposition 1.6. Let C be a closed assembler.
+
+(1) Tw(C • ) is closed under pullbacks and coproducts. The pullback of a sub-map (resp. covering sub-map, move) is a sub-map (resp. covering sub-map, move). The subcategory of sub-maps (resp. covering sub-maps, moves) is closed under coproducts.
+
+(2) All morphisms in W(C) are monomorphisms.
+
+(3) W(C) has all pullbacks.
+
+(4) For any family of assemblers {C x } x∈X , write x∈X C x for the assembler whose objects are {∅} ∪ x∈X ob C • x and where
+Hom(A, B) =      Hom Cx (A, B) if A, B ∈ C x , * if A = ∅, ∅ otherwise.
+The topology is induced from the topologies of the C x . Then
+Tw x∈X C x ≃ x∈X Tw(C x ),
+where
+Tw(C x ) is the full subcategory of Tw(C x )
+where all but finitely many of the objects are the object indexed by the empty set. The same holds with Tw replaced by W.
+
+Proof. Part (1) is direction from the definitions. Part (2) is proved in [ZakC, Proposition 1.10(1)]. Part (3) follows directly from axiom (P). To prove part (4), observe that we have a functor
+P : Tw( x∈X C x ) x∈X Tw(C x ) with projections F x : Tw( x∈X C x ) Tw(C x )
+that send all C y for y = x to the initial object, and send C x to itself via the identity. As each object of Tw( x∈X C x ) is indexed by a finite set it must land in x∈X Tw(C x ), so we see that P is actually a functor Tw( x∈X C x ) x∈X Tw(C x ). To see that this is an equivalence, note that it is full and faithful and hits all objects indexed by disjoint indexing sets; since this is an equivalent subcategory, P is also essentially surjective. That this statement holds with Tw replaced by W is [ZakC, Proposition 1.10(3)].
+
+We are now ready to define the Waldhausen K-theory of an assembler.
+
+Definition 1.7. Let C be a closed assembler. The category SC(C) is defined to have ob SC(C) = ob (Tw(C • )). The morphisms of SC(C) are equivalence classes of diagrams in Tw(C • )
+A p A ′ σ B,
+where p is a sub-map and σ is a move, and where two diagrams are considered equivalent if there is an isomorphism ι: A ′ 1 A ′ 2 ∈ Tw(C • ) which makes the following diagram commute:
+A ′ 1 A B A ′ 2 p 1 p 2 σ 1 σ 2 ι
+We say that a morphism A p A ′ σ B is a cofibration: if p is a covering sub-map and the projection of σ to FinSet is injective, and a weak equivalence: if p is a covering sub-map and the projection of σ to FinSet is bijective. Note that any weak equivalence can be uniquely represented by a diagram where A ′ = B and σ = 1 B . The composition of two morphisms f : A B and g: B C represented by
+A p A ′ σ B and B q B ′ τ C
+is defined to be the morphism represented by the outside of the diagram
+A ′ × B B ′ A ′ B ′ A B C p q σ τ
+The left-hand side of the pullback square is a sub-map and the right-hand side is a move by Proposition 1.6(1).
+
+Remark 1.8. The subcategory of weak equivalences of SC(C) is isomorphic to W(C) op .
+
+Theorem 1.9. SC is a functor cAsm WaldCat. Every Waldhausen category in the image of SC has a canonical splitting (up to weak equivalence) for every cofibration sequence.
+
+We omit the proof of the theorem, as it is essentially the same as the proof of [Zak12, Theorem 4.2]; for more information on translating between polytope complexes and assemblers, see [ZakC,Example 2.10] and Appendix A. It is important to note that this theorem only holds for closed assemblers, not all assemblers, as pullbacks in C are necessary to construct pushouts inside SC(C).
+
+Definition 1.10. For any closed assembler C, we define K W (C), the Waldhausen K-theory spectrum of C to be K(SC(C)). We write K i (C) for π i K W (C).
+
+We see in Theorem 2.1 that this is consistent with the definition of K i (C) in [ZakC]. There is one aspect of the Waldhausen categories SC(C) that it is important to mention here. Not all categories SC(C) satisfy the Saturation Axiom; in other words, the subcategory of weak equivalences wSC(C) does not necessarily satisfy two-of-three. The following proposition (originally appearing as [Zak12, Lemma 6.9]) highlights the cases in which saturation is satisfied: Proposition 1.11. For any two composable morphisms f and g in SC(C), if gf and f are weak equivalences then so is g. If C satisfies the extra condition (G) The empty family is not a covering family for any noninitial object of C. Given a family A = {X α X} α∈A and covering families {X αβ X α } β∈Bα , if the refined family
+{X αβ X} (α,β)∈ α∈A Bα
+is a covering family then so is A. then if gf and g are weak equivalences, then so is f .
+
+In other words, if (G) is satisfied then SC(C) satisfies the Saturation Axiom. Condition (G) is satisfied in all of the examples we have considered so far; however, in future work it will be necessary to consider assemblers which do not satisfy this condition.
+
+To finish this section, we recall the notion of a simplicial assembler and its Waldhausen K-theory.
+
+Definition 1.12. A simplicial closed assembler is a functor C•: ∆ op cAsm. A morphism of simplicial closed assemblers is a natural transformation of functors. We define the Waldhausen K-theory spectrum by
+K W (C•) = hocolim [n]∈∆ op K W (C n ).
+Example 1.13. For any pointed set S and any closed assembler C, let
+S ∧ C = S { * } C.
+This is functorial in S: given a map f : S T we get a map S ∧ C T ∧ C in the following manner. For all s ∈ S such that f (s) = * the copy of C indexed by s is mapped via the identity to the copy of C indexed by f (s). When f (s) = * the copy of C indexed by s is mapped to the initial object.
+
+Let X• be a pointed simplicial set. Then for any closed assembler C, the simplicial closed assembler X• ∧ C is defined by (X• ∧ C) k = X k ∧ C. The simplicial maps are induced from the simplicial maps on X•.
+
+
+A comparison of K and K W
+
+We now have two different definitions of K i (C) for a closed assembler C: the definition from [ZakC] and the definition given here. Our goal in this section is to prove that they are equivalent.
+
+Theorem 2.1. There is a natural transformation η: K K W such that for every closed assembler
+C and k ≥ 1, the k-th component of η C is a weak equivalence K(C) k K W (C) k .
+If we are given two k-simplicial spaces then a level equivalence gives an equivalence on geometric realization, so we do a levelwise analysis of the categories that assemble to construct K(C) and K W (C). First we recall two results from [Zak13]:  . Let W n SC(C) be the full subcategory of S n SC(C) containing all objects A 1 ∼ A 2 ∼ · · · ∼ A n . Then W n SC(C) is a Waldhausen category and we have an exact equivalence of Waldhausen categories
+St: L n SC(C) n i=1 W i SC(C) :CP.
+The proofs from [Zak13] are stated for the case when C is a polytope complex, but they work almost verbatim for the case when C is an assembler as well, so we do not reproduce them here.
+
+Lemma 2.4. Let p n : W n SC(C) SC(C) be the functor which takes A 1 ∼ · · · ∼ A n to A n , and let c n : SC(C) W n SC(C) be the functor that takes A to the diagram A · · · A. Then (p n ⊣ c n ) is an exact adjunction.
+
+Proof. c n is exact by definition, and p n is also exact once we notice that all cofibrations, weak equivalences, and pushouts are levelwise in W n SC(C). Thus all we need to check is that the functors are adjoints and that the unit and counit are natural weak equivalences. As p n c n = 1 SC(C) the counit is the identity. The unit is represented by the diagram
+A 1 A 2 · · · A n A n A n · · · A n f 1 ∼ f 2 ∼ f n−1 ∼ g 1 ∼ g 2 ∼
+where g i = f n−1 • · · · • f i . Both the unit and counit are levelwise equivalences, and thus are weak equivalences in W n SC(C) and SC(C), respectively. Checking that they satisfy the relations to be the unit and counit of an adjunction is direct from the definition.
+
+Definition 2.5. For any nonnegative integer n, let n + be the pointed set { * , 1, . . . , n} with * as its basepoint. Let S 1 be the pointed simplicial set with (S 1 ) n = n + , and let S k be the smash product of S 1 with itself k times. For any k-tuple of nonnegative integers n 1 , . . . , n k write S k n 1 ,...,n k = (S 1 ) n 1 ∧ · · · ∧ (S 1 ) n k . For any Waldhausen category E write S n 1 ,...,n k E = S n 1 · · · S n k E.
+
+Proposition 2.6. For any k-tuple of nonnegative integers n 1 , . . . , n k , there is an exact functor of Waldhausen categories, natural in C, C n 1 ,...,n k : SC(n + 1 ∧ · · · ∧ n + k ∧ C) S n 1 ,...,n k SC(C)
+
+which induces a homotopy equivalence after applying |w · |.
+
+Proof. If any of the n i is equal to zero, then both sides are just the trivial Waldhausen category, so the proposition clearly holds. Thus we can assume that all n i are positive. We prove the proposition by induction on k. In the base case k = 1 we have an exact functor
+C n : SC(n + ∧ C) ≃ n i=1 SC(C) n i=1 c n−i n i=1 W i SC(C) CP L n SC(C) S n SC(C),
+where the first three functors are exact equivalences, and the last one induces the identity morphism on K-theory. In particular, the composition induces a homotopy equivalence after applying |wS n 1 · · · S n ℓ · | for all tuples (n 1 , . . . , n ℓ ); the proposition follows by setting ℓ = 0; we mention the more general statement as it is necessary in the proof of the inductive step. Now suppose that we know the proposition holds up to k − 1. Letting D = n + k ∧ C, by the induction hypothesis we have an exact functor C n 1 ,...,n k−1 : SC(n + 1 ∧ · · · ∧ n + k−1 ∧ D) S n 1 ,...,n k−1 SC(D)
+
+which is a homotopy equivalence after applying |w · |. By the base case we have an exact functor SC(D) S n k SC(C) which induces a homotopy equivalence after applying |wS n 1 · · · S n k−1 · |. Thus the composite C n 1 ,...,n k : SC(n + 1 ∧ · · · ∧ n + k−1 ∧ D) Cn 1 ,...,n k−1 S n 1 ,...,n k−1 SC(D) Sn 1 ,...,n k−1 Cn k S n 1 ,...,n k SC(C)
+
+is also a homotopy equivalence after applying |w · |. As every step of this construction is natural in C, we see that the functors are also natural in C.
+
+We show that the above functors C n 1 ,...,n k properly assemble into k-simplicial functors, so that we have induced maps wSC(S k ∧ C) ∼ wS• · · · S•SC(C) which are weak equivalences because they are levelwise weak equivalences. To check that this works, we just need to check that these maps commute properly with the simplicial structure maps.
+
+Lemma 2.7. For all 1 ≤ j ≤ k and for all 0 ≤ i ≤ n j , the following diagram commutes:
+SC(S k n 1 ,...,n k ∧ C) S n 1 ,...,n k SC(C)
+SC(S k n 1 ,...,n j −1,...,n k ∧ C) S n 1 ,...,n j −1,...,n k SC(C)
+Cn 1 ,...,n k C n 1 ,...,n j −1,...,n k 1, . . . , d i , . . . , 1 1, . . . , d i , . . . , 1
+Proof. We prove this by induction on k. First consider the base case k = 1. We want to show that the following diagram commutes:
+SC((S 1 ) n ∧ C) S n SC(C) SC((S 1 ) n−1 ∧ C) S n−1 SC(C) Cn d i C n−1 d i
+This is straightforward from the definition of C n and C n−1 . Now suppose that we know the lemma for k − 1, and consider it for k. Let D = n + k ∧ C. If j < k the construction of C n 1 ,...,n k lets us rewrite the above diagram in the following manner:
+SC(S k−1 n 1 ,...,n k−1 ∧ D) S n 1 ,...,n k−1 SC(D) S n 1 ,...,n k SC(C) SC(S k−1 n 1 ,...,n j −1,...,n k ∧ D) S n 1 ,...,n j −1,...,n k−1 SC(D) S n 1 ,...,n j −1,...,n k SC(C) C··· 1, . . . , d i , . . . , 1 C··· 1, . . . , d i , . . . , 1 1, . . . , d i , . . . , 1
+The right-hand square commutes because C n k : SC(D) S n SC(C) is an exact functor and thus induces a natural transformation of simplicial Waldhausen categories
+S• · · · S•SC(D) S• · · · S•SC(C).
+The left-hand square commutes by the induction hypothesis. Now suppose that j = k and let D ′ = (n k − 1) + ∧ C. Then we can rewrite the square in the statement of the lemma as
+SC(S k−1 n 1 ,...,n k−1 ∧ D) S n 1 ,...,n k−1 SC(D) S n 1 ,...,n k SC(C) SC(S k−1 n 1 ,...,n k−1 ∧ D ′ ) S n 1 ,...,n k−1 SC(D ′ ) S n 1 ,...,n k −1 SC(C) C··· 1, . . . , d i C··· 1, . . . , d i 1, . . . , d i
+Here the left-hand square commutes because the construction of C ··· is natural in C, and the vertical maps are induced from a morphism of assemblers D D ′ . The right-hand square is S n 1 · · · S n k−1 applied to the base case, and thus it also commutes.
+
+Lemma 2.7 shows that we can assemble the C's into morphisms between realizations of ksimplicial sets. Thus |C ··· | gives a weak equivalence |wSC(S k ∧ C)| ∼ |wS• · · · S•SC(C)| for all k. In order to prove Theorem 2.1 it suffices to show that these maps assemble into a morphism of spectra.
+
+Lemma 2.8. The following diagram commutes for all k:
+S 1 ∧ |wSC(S k ∧ C)| S 1 ∧ |wS (k) • SC(C)| |wSC(S k+1 ∧ C)| |wS (k+1) • SC(C)| S 1 ∧ |C···| |C···|
+Proof. This follows directly from the definition of the spectral structure maps. For an explicit description of these for the S• construction, see [ZakB, Section 6].
+
+We now have all of the pieces of the proof of the main theorem:
+
+Proof of Theorem 2.1. We define the map η C : K(C) K W (C) componentwise by
+|C ··· |: |W(S k ∧ C)| = |wSC(S k ∧ C)| ∼ |wS (k) • SC(C)|,
+where the equality follows because W(D) = (wSC(D)) op for all closed assemblers D. By Proposition 2.6 and Lemma 2.7 these maps are well-defined weak equivalences. We also know, by Lemma 2.8 that these assemble into well-defined morphisms of spectra. That η is a natural transformation follows from Proposition 2.6.
+
+Applying [ZakC, Theorem C] we conclude the following:
+
+Corollary 2.9. For any simplicial closed assembler C•, K(C•) K W (C•) is a weak equivalence. For any morphism of simplicial closed assemblers g: D• C•,
+K W (D•) K W (C•) K W ((C/g)•)
+is a cofiber sequence.
+
+
+K 1 of an assembler
+
+In this section we give a combinatorial description of K 1 of an assembler, similar to the description of K 0 in [ZakC, Theorem A]. As the structure of K 1 is much more complicated than the structure of K 0 , the associated description must also be more complicated. However, it is possible to make the description simple enough that it can be used to compute the boundary homomorphism K 1 ((C/g)•)
+
+K 0 (D). In order to write down this description we must first establish some terminology.
+
+The results in this section are inspired by the work of Muro and Tonks in [MT07,MT08].
+
+Definition 3.1. A stable quadratic module C * consists of the data of a pair of groups C 0 and C 1 together with a homomorphism ∂: C 1 C 0 and a bilinear form ·, · : C ab 0 ⊗ C ab 0 C 1 satisfying the following relations:
+(SQ1) for c 0 , d 0 in C 0 , ∂ c 0 , d 0 = [d 0 , c 0 ], (SQ2) for c 1 , d 1 in C 1 , ∂c 1 , ∂d 1 = [d 1 , c 1 ], and (SQ3) for c 0 , d 0 in C 0 , c 0 , d 0 d 0 , c 0 = 0. Here, [x, y] = x −1 y −1 xy.
+Stable quadratic modules were first introduced in [Bau91]. However, we use the convention for ·, · used in [MT07, MT08] and switch to multiplicative notation to emphasize that C 0 and C 1 are not necessarily abelian. In any stable quadratic module there is a right action of C 0 on C 1 defined by c c 0 1 = c 1 c 0 , ∂c 1 . In addition, directly from the axioms it follows that im ·, · and ker ∂ are central in C 1 . In this section we will be constructing stable quadratic modules via generators and relations. Note that we will not be able to write down a complete set of relations induced by the stable quadratic module structure; to see a detailed discussion of stable quadratic modules via generators and relations, see
+[MT07, Appendix A].
+We write
+τ A 0 ,B 0 def = B 0 ⊔ A 0 ∼ A 0 ⊔ B 0 .
+Definition 3.2. Let E• be a simplicial Waldhausen category. We define the stable quadratic module D * E• to be the stable quadratic module generated by • a generator [A 0 ] for every object A 0 in E 0 in degree 0, • a generator [A 1 ] for every object A 1 in E 1 in degree 1, and • a generator [A 0 ∼ B 0 ] for every weak equivalence in E 0 in degree 1. On the generators, we define
+∂[A 1 ] = [d 0 A 1 ] −1 [d 1 A 1 ] and ∂[A 0 ∼ B 0 ] = [B 0 ] −1 [A 0 ]
+and
+[A 0 ], [B 0 ] = [τ A 0 ,B 0 ].
+These satisfy the following relations:
+(A1) For all objects A 0 in E 0 , [s 0 A 0 ] = [A 0 A 0 ] = 1. (A2) For all objects A 0 , B 0 in E 0 , [A 0 ⊔ B 0 ] = [A 0 ][B 0 ]. (A3) For every composable pair of weak equivalences A 0 ∼ f B 0 ∼ g C 0 , [A 0 ∼ gf C 0 ] = [B 0 ∼ g C 0 ][A 0 ∼ f B 0 ]. (A4) For every object A 2 in E 2 , [d 1 A 2 ] = [d 0 A 2 ][d 2 A 2 ]. (A5) For every weak equivalence A 1 ∼ B 1 in E 1 , [B 1 ][d 1 A 1 ∼ d 1 B 1 ] = [d 0 A 1 ∼ d 0 B 1 ][A 1 ].
+(A6) For all objects C 0 and weak equivalences (1) E 0 , E 1 and E 2 have strictly associative and unital coproducts which are compatible with the simplicial structure maps.
+A 0 ∼ f B 0 in E 0 , [C 0 ⊔ A 0 ∼ 1 C 0 ⊔ f C 0 ⊔ B 0 ] = [A 0 ∼ f B 0 ]. For any object A 1 in E 1 , [A 1 ] = [s 0 C 0 ⊔ A 1 ]. (A7) For any two objects A 1 , B 1 in E 1 , [A 1 ⊔ B 1 ] = [B 1 ][A 1 ⊔ s 0 d 1 B 1 ].
+(2) There exists a set S 0 of objects of E 0 which freely generates the monoid of objects of E 0 .
+
+(3) All cofiber sequences in E 0 split compatibly up to weak equivalence, in the sense that for
+every cofiber sequence A B B/A there exists a morphism α: B/A ∼ B which fits into a commutative diagram A B/A ⊔ A B/A A B B/A α ∼ such that for every diagram C/B B/A C/A A B C the square C/B ⊔ B/A ⊔ A C/B ⊔ B C/A ⊔ A C 1 C/B ⊔ α α α α ⊔ 1 A commutes. Then D * E• encodes the 1-type of K(E•), in the sense that K 0 (E•) ∼ = coker ∂ and K 1 (E•) ∼ = ker ∂,
+
+and the first Postnikov invariant can be computed from D * E•.
+
+We postpone the proof of this proposition to Section 6.
+
+Remark 3.5. Conditions (1) and (2) in the proposition are present in order to simplify computations. A levelwise construction analogous to [MT08,Proposition 4.3] should work on any simplicial Waldhausen category to produce one where (1) and (2) hold. However, the third condition is nontrivial and does not hold in most Waldhausen categories.
+
+Now we prove a result analogous to that of [MT08, Theorem 2.2], which constructs a diagram such that every element of K 1 of a Waldhausen category is represented by a diagram of that shape.
+
+Definition 3.6. Let A 0 , B 0 be objects in E 0 and V 1 be an object in E 1 . Suppose that there exists a weak equivalence f :
+A 0 ∼ B 0 ⊔ d 1 V 1 in E 0 . Then we write {f V 1 : A 0 ∼ B 0 } for the element in D 1 E• represented by [V 1 ][A 0 f B 0 ⊔ d 1 V 1 ]. For objects V 1 , W 1 in E 1 such that d 0 V 1 = d 0 W 1 we use the shorthand {f V 1 , g W 1 : A 0 ∼ B 0 } for the element {f V 1 : A 0 ∼ B 0 } −1 {g W 1 : A 0 ∼ B 0 }. Note that ∂({f V 1 , g W 1 : A 0 ∼ B 0 }) = 0. Thus {f V 1 , g W 1 : A 0 ∼ B 0 } represents an element of K 1 (E•), and is central in D 1 E•.
+The rest of this section relies extensively on relations (B1)-(B6) proved in Lemma 6.3. For the reader interested in the technical details, we recommend consulting that lemma first; we postpone stating and proving this lemma, as it is technical and does not affect the overall understanding of the results in this section.
+Lemma 3.7. Suppose that V 1 , W 1 , X 1 , Y 1 are objects in E 1 such that d 0 V 1 = d 0 W 1 and d 0 X 1 = d 0 Y 1 . Then {f V 1 , g W 1 : A 0 ∼ B 0 }{r X 1 , s Y 1 : C 0 ∼ D 0 } = {(f ⊔ r) V 1 ⊔X 1 , (g ⊔ s) W 1 ⊔Y 1 : A 0 ⊔ C 0 ∼ B 0 ⊔ D 0 }. If in addition D 0 = A 0 then this is also equal to {(f r) X 1 ⊔V 1 , (gs) Y 1 ⊔W 1 : C 0 ∼ B 0 }. Proof. Observe that since [τ A,B ] is central in D 1 E•, by (SQ2) all commutators are also central. Thus we compute that {g W 1 : A 0 ∼ B 0 }{s Y 1 : C 0 ∼ D 0 } = = [W 1 ][Y 1 ][A 0 ∼ B 0 ⊔ d 1 W 1 ][C 0 ∼ D 0 ⊔ d 1 Y 1 ] [A 0 ∼ B 0 ⊔ d 1 W 1 ], [Y 1 ] (A3) = [W 1 ⊔ Y 1 ][D 0 ⊔ d 1 W 1 ⊔ d 1 Y 1 ∼ d 1 W 1 ⊔ D 0 ⊔ d 1 Y 1 ][A 0 ⊔ C 0 ∼ B 0 ⊔ D 0 ⊔ d 1 W 1 ⊔ d 1 Y 1 ] [τ d 0 Y 1 ,d 0 W 1 ][τ d 1 W 1 ,d 0 Y 1 ][τ D 0 ⊔d 1 Y 1 ,B 0 ⊔d 1 W 1 ][τ A 0 ,D 0 ⊔d 1 Y 1 ] [A 0 ∼ B 0 ⊔ d 1 W 1 ], [Y 1 ] (B6),(B2) = {(g ⊔ s) W 1 ⊔Y 1 : A 0 ⊔ C 0 ∼ B 0 ⊔ D 0 }α [τ d 0 Y 1 ,d 0 W 1 ][τ d 1 W 1 ,d 0 Y 1 ][τ d 1 Y 1 ,B 0 ][τ d 1 Y 1 ,d 1 W 1 ][τ A 0 ,d 1 Y 1 ] [A 0 ∼ B 0 ⊔ d 1 W 1 ], [Y 1 ] = {(g ⊔ s) W 1 ⊔Y 1 : A 0 ⊔ C 0 ∼ B 0 ⊔ D 0 }α[τ d 0 Y 1 ,d 0 W 1 ][τ d 0 Y 1 ,B 0 ][τ A 0 ,d 0 Y 1 ]. where α = [τ D 0 ,B 0 ][τ A 0 ,D 0 ]. Analogously we compute that {f V 1 : A 0 ∼ B 0 }{r X 1 : C 0 ∼ D 0 } = = {(f ⊔ r) V 1 ⊔X 1 : A 0 ⊔ C 0 ∼ B 0 ⊔ D 0 }α[τ d 0 X 1 ,d 0 V 1 ][τ d 0 X 1 ,B 0 ][τ A 0 ,d 0 X 1 ].
+Note that
+{f V 1 , g W 1 : A 0 ∼ B 0 }{r X 1 , s Y 1 : C 0 ∼ D 0 } = {r X 1 : C 0 ∼ D 0 } −1 {f V 1 : A 0 ∼ B 0 } −1 {g W 1 : A 0 ∼ B 0 }{s Y 1 : C 0 ∼ D 0 }, since {f V 1 , g W 1 : A 0 ∼ B 0 } is central.
+Thus the difference between the left hand side and the right-hand side of the desired equality is
+([τ d 0 X 1 ,d 0 V 1 ][τ d 0 X 1 ,B 0 ][τ A 0 ,d 0 X 1 ]) −1 [τ d 0 Y 1 ,d 0 W 1 ][τ d 0 Y 1 ,B 0 ][τ A 0 ,d 0 Y 1 ].
+However, since d 0 V 1 = d 0 W 1 and d 0 X 1 = d 0 Y 1 this is equal to 1, and the desired equality follows. The second formula follows by a similar analysis and the observation that
+{f V 1 : A 0 ∼ B 0 }{r X 1 : C 0 ∼ A 0 } = {(f r) X 1 ⊔V 1 : C 0 ∼ B 0 }[τ d 0 V X ,B 0 ][τ A 0 ,d 0 X 1 ].
+Since d 0 X 1 = d 0 Y 1 the τ 's cancel out, and we are left with the desired relation.
+
+The following theorem is the main technical result of the paper. It is important to note that we do not know that the stated relations are all of the relations satisfied by the generators. As observed in [MT08], the structure of the stable quadratic module imposes additional relations between generators than the ones listed above, and this may lead to extra relations between the generators of K 1 . However, this theorem is sufficient for several applications; see Sections 4 and 5 and [ZakA]. 
+{f V 1 , f V 1 : A 0 ∼ B 0 } = 0 {f V 1 , g W 1 : A 0 ∼ B 0 }{r X 1 , s Y 1 : C 0 ∼ D 0 } = {(f ⊔ r) V 1 ⊔X 1 , (g ⊔ s) W 1 ⊔Y 1 : A 0 ⊔ C 0 ∼ B 0 ⊔ D 0 }. {f ′ V ′ 1 , g ′ W ′ 1 : B 0 ∼ C 0 }{f V 1 , g W 1 : A 0 ∼ B 0 } = {(f ′ f ) V 1 ⊔V ′ 1 , (g ′ g) W 1 ⊔W ′ 1 : A 0 ∼ C 0 }. Proof. We follow the proof of [MT08, Theorem 2.2].
+Let G be the image of ·, · and note that D 1 E•/G is abelian by relation (SQ2). We first show that every element x in D 1 E•/G can be represented in this way. Indeed, note from Lemma 6.3(B4) that
+[A 0 ∼ B 0 ][C 0 ∼ D 0 ] ≡ G [A 0 ⊔ C 0 ∼ B 0 ⊔ D 0 ] and from Lemma 6.3(B5) [A 1 ][B 1 ] ≡ G [B 1 ⊔ A 1 ]. Thus we can write x = [A 0 ∼ B 0 ] −1 [C 1 ] −1 [D 1 ][E 0 ∼ F 0 ] ≡ G [A 0 ⊔ F 0 ∼ B 0 ⊔ F 0 ] −1 [C 1 ⊔ s 0 d 0 D 1 ] −1 [s 0 d 0 C 1 ⊔ D 1 ][B 0 ⊔ E 0 ∼ B 0 ⊔ F 0 ]. Write X 0 = A 0 ⊔ F 0 , Y 0 = B 0 ⊔ E 0 and Z 0 = B 0 ⊔ F 0 . Also write V 1 = C 1 ⊔ s 0 d 0 D 1 and W 1 = s 0 d 0 C 1 ⊔ D 1 . Then d 0 V 1 = d 0 W 1 , and we have x ≡ G [X 0 ∼ Z 0 ] −1 [V 1 ] −1 [W 1 ][Y 0 ∼ Z 0 ]. Then in (D 0 E•) ab we have ∂x = [X 0 ] −1 [Z 0 ][d 1 V 1 ] −1 [d 0 V 1 ][d 0 W 1 ] −1 [d 1 W 1 ][Z 0 ] −1 [Y 0 ] = [X 0 ] −1 [d 1 V 1 ] −1 [d 1 W 1 ][Y 0 ].
+The group (D 0 E•) ab is the free abelian group on the elements of S 0 (the set of generators for the object set of E 0 ); thus if ∂x = 1 there exists an isomorphism
+X 0 ⊔ d 1 V 1 ∼ = Y 0 ⊔ d 1 W 1 which is a
+permutation of factors in a coproduct. This isomorphism is in the image of ·, · . Thus modulo G,
+[Y 0 ∼ Z 0 ] ≡ G [Y 0 ⊔d 1 W 1 ∼ Z 0 ⊔d 1 W 1 ][X 0 ⊔d 1 V 1 ∼ Y 1 ⊔d 1 W 1 ] = [X 0 ⊔d 1 V 1 ∼ Z 0 ⊔d 1 W 1 ]. If we write X ′ 0 = X 0 ⊔ d 1 V 1 , f : X ′ 0 ∼ Z 0 ⊔ d 1 V 1 and g: X ′ 0 ∼ d 1 W 1 we can write x ≡ G [X 0 ⊔ d 1 V 1 ∼ Z 0 ⊔ d 1 V 1 ] −1 [V 1 ] −1 [W 1 ][X 0 ⊔ d 1 V 1 ∼ Z 0 ⊔ d 1 W 1 ] = {f V 1 , g W 1 : X ′ 0 ∼ Z 0 }. Since ∂{f V 1 , g W 1 : X ′ 0 ∼ Z 0 } = 1, we can write x = {f V 1 , g W 1 : X ′ 0 ∼ Z 0 }α,
+where ∂α = 1 and α is in G. (We can assume α is on the right because G is central.) D 0 E• is a free group of nilpotency class 2, so we can apply [MT08, Lemma 5.2] to conclude that α must be of the form y, y for some y in D 0 E•. But y, y only depends on y mod 2, so we can assume that y is a sum of objects of E 0 , and thus that it is equal to [A 0 ] for some A 0 in E 0 . Note, however, that
+[A 0 ], [A 0 ] = {(τ A 0 ,A 0 ) 0 , 1 0 : A 0 ⊔ A 0 ∼ A 0 ⊔ A 0 }.
+Therefore x is the product of two elements of the desired form, and by Lemma 3.7 it can also be represented in such a form. The first relation follows from the definition of {f V 1 , f V 1 : A 0 ∼ B 0 }. The second and third follow from Lemma 3.7.
+
+Remark 3.9. Let E• be a simplicial Waldhausen category in which every weak equivalence in E 0 is a cofibration, and in which weak equivalences are preserved under pushouts. Then if we have a pushout square
+A 0 B 0 ⊔ d 1 V 1 B 0 ⊔ d 1 W 1 C 0 f ∼ g ∼ g ′ ∼ f ′ ∼ then the element in K 1 (E•) represented by {f V 1 , g W 1 : A 0 ∼ B 0 } is also represented by [B 0 ⊔ d 1 V 1 f ′ C 0 ] −1 [V 1 ] −1 [W 1 ][B 0 ⊔ d 1 W 1 g ′ C 0 ].
+Thus the objects V 1 and W 1 can be chosen to modify either the domains or the codomains of the pair of morphisms.
+
+The key observation for using Theorem 3.8 to work with K 1 of an assembler is that for any simplicial closed assembler C•, SC(C•) satisfies the conditions of Proposition 3.4. For this it is important that we chose a model for FinSet that has a strictly associative coproduct.
+
+We can now use the Waldhausen structure on SC(C) to get generators and relations for K 1 (C). We start by examining a more general case first, as it will be useful in [ZakA]. Recall that W(C) = (wSC(C)) op ; we use this notation here to avoid clutter.
+
+For any morphism of assemblers F : D C there exists a simplicial assembler (C/F )•, together with a moprhism C (C/F )• of simplicial assemblers such that
+K(D) K(F ) K(C) K((C/F )•)
+is a cofiber sequence. The simplicial assembler has  
+(C/F ) 0 = C and (C/F ) 1 = C ∨ D with d i | C = s i |C = 1 C and d 0 | D = F .A B ⊔ W(ι)(C) B ⊔ W(ι)(C) f f = 0, A B ⊔ W(ι)(C) B ⊔ W(ι)(D) f g + B B ′ ⊔ W(ι)(C ′ ) B ′ ⊔ W(ι)(D ′ ) f ′ g ′ = A B ′ ⊔ W(ι)(C ⊔ C ′ ) B ′ ⊔ W(ι)(D ⊔ D ′ ) f ′ f g ′ g and A B ⊔ W(ι)(C) B ⊔ W(ι)(D) f g + A ′ B ′ ⊔ W(ι)(C ′ ) B ′ ⊔ W(ι)(D ′ ) f ′ g ′ = A ⊔ A ′ B ⊔ B ′ ⊔ W(ι)(C ⊔ C ′ ) B ⊔ B ′ ⊔ W(ι)(D ⊔ D ′ ) f ⊔ f ′ g ⊔ g ′ .
+We do not claim that these are all of the relations that these generators satisfy. As mentioned in [MT08], it is conjectured that these are all of the relations, but proving this is more difficult.
+
+Proof. Since SC((C/ι) 1 ) = SC(C ∨ D), it naturally contains a copy of SC(C) and one of SC(D). In the course of this proof we will consider SC(C) and SC(D) as subcategories of SC(C ∨ D).
+
+We think of a diagram Thus to check that K 1 ((C/ι)•) is generated by the given diagrams it suffices to check that every element can be represented by such a diagram. Let x in K 1 ((C/ι)•) be any element, and pick a representative
+{f V 1 : A 0 ∼ B 0 } −1 {g W 1 : A 0 ∼ B 0 }. Write V 1 = {v i } i∈I and W 1 = {w j } j∈J . Then d 0 V 1 = {v i } i∈I and d 0 W 1 = {ιw j } j∈J . Since d 0 V 1 = d 0 W 1
+it follows that J = I and for all i ∈ I, v i = ιw i . Define a partition of I by
+I CC = {i ∈ I | v i ∈ C, w i ∈ C}, I CD = {i ∈ I | v i ∈ C, w i ∈ D}, I DC = {i ∈ I | v i ∈ D, w i ∈ C}, and I DD = {i ∈ I | v i ∈ D, w i ∈ D}.
+For χ = CC, CD, DC, DD we define V χ 1 = {v i } i∈I χ and W χ 1 = {w i } i∈I χ . For conciseness we also
+write V ′ 1 = {v i } i∈I I CC and W ′ 1 = {w i } i∈I I CC , so that d 0 V ′ 1 = d 0 W ′ 1 . Then we have V CC 1 = W CC 1 V CD 1 = SC(ι)(W CD 1 ) W DC 1 = SC(ι)(V DC 1 ) V DD 1 = W DD 1 . Note that s 0 d 0 V CC 1 = V CC 1 . Write Z = d 0 V CC 1 = d 1 V CC 1
+, and let ϕ: I I CC ⊔ (I I CC ) be the natural isomorphism. Let ϕ V 1 and ϕ W 1 be the induced isomorphisms
+ϕ V 1 : V 1 ∼ = s 0 Z ⊔ V ′ 1 and ϕ W 1 : W 1 ∼ = s 0 Z ⊔ W ′ 1 . It follows that {f V 1 : A 0 ∼ B 0 } = [V 1 ][B 0 ⊔ Z ⊔ d 1 V ′ 1 B 0 ⊔ d 1 ϕ −1 V 1 B 0 ⊔ d 1 V 1 ][A 0 (B 0 ⊔ ϕ V 1 )f V 1 B 0 ⊔ Z ⊔ d 1 V ′ 1 ] = [V 1 ][Z ⊔ d 1 V ′ 1 d 1 ϕ −1 V 1 d 1 V 1 ][A 0 ∼ B 0 ⊔ Z ⊔ d 1 V ′ 1 ] = [Z ⊔ d 0 V ′ 1 d 0 ϕ −1 V 1 d 0 V 1 ][s 0 Z ⊔ V ′ 1 ][A 0 ∼ B 0 ⊔ Z ⊔ d 1 V ′ 1 ]
+. where the last line uses relation (A5). Thus
+x = {f V ′ 1 : A 0 ∼ B 0 ⊔ Z} −1 [Z ⊔ d 0 V ′ 1 d 0 ϕ V 1 • d 0 ϕ −1 W 1 Z ⊔ d 0 W ′ 1 ]{g W ′ 1 : A 0 ∼ B 0 ⊔ Z}.
+Here, we used that d 0 V ′ 1 = d 0 W ′ 1 to compose the two isomorphisms we get in the middle. By construction, the middle isomorphism is induced by the identity on the indexing set and is therefore the identity, so that we get
+x = {f V ′ 1 , g W ′ 1 : A 0 ∼ B 0 ⊔ Z}.
+Thus we can always choose a representative for x in which V CC 1 = W CC 1 = 0; from this point on, we assume that this was originally the case for x.
+
+By using a similar construction to the one for ϕ above, we can assume that The relations follow from the statement of Theorem 3.8.
+V ′ 1 = V CD 1 ⊔V DC 1 ⊔V DD 1 and similarly for W ′ 1 . Let V ′′ 1 = V CD 1 ⊔ V DC 1 and W ′′ 1 = W CD 1 ⊔ W DC 1 , and let Z ′ = V DD 1 = W DD 1 . Note that d 1 Z ′ = 0. By (A7), [V ′ 1 ] = [V ′′ 1 ⊔ Z ′ ] = [Z ′ ][V ′′ 1 ⊔ 0] = [Z ′ ][V ′′ 1 ]. Then we can write {f V ′ 1 , g W ′ 1 : A 0 ∼ B 0 } = [A 0 ∼ B 0 ⊔ d 1 V ′′ 1 ] −1 [V ′′ 1 ] −1 [Z ′ ] −1 [Z ′ ][W ′′ 1 ][A 0 ∼ B 0 ⊔ d 1 W ′′ 1 ] = {f V ′′ 1 , g W ′′ 1 : A 0 ∼ B 0 }.
+Remark 3.11. When ι is any morphism of assemblers the proof above works to show that V CC 1 and W CC 1 can be chosen to be zero; however, it is no longer the case that V DD 1 and W DD 1 can be chosen to be zero. In fact, for any pair of objects V DD 1 and W DD 1 such that SC(ι)(V DD 1 ) = SC(ι)(W DD 1 ) we get a different representation, and the relations in K 1 become significantly more complicated.
+
+By applying this in the case when D is the trivial assembler, we get the following: 
+A B f f = 0, B C g 1 g 2 + A B f 1 f 2 = A C g 1 f 1 g 2 f 2 and A B f 1 f 2 + C D g 1 g 2 = A ∐ C B ∐ D f 1 ∐ g 1 f 2 ∐ g 2
+In addition, we can use the description in Theorem 3.8 to give a formula for the boundary map K 1 ((C/ι)•) K 0 (D). Since (C/ι) 1 = C ∨ D, any object A in SC((C/ι) 1 ) can be write as A C ⊔ A D , where A C ∈ SC(C) and A D ∈ SC(D). 
+α = {f V 1 , g W 1 : A 0 ∼ B 0 } of K 1 ((C/ι)•) in K 0 (D) is [(V 1 ) D ] −1 [(W 1 ) D ].
+When ι is the inclusion of a subassembler and α is expressed in the notation of Corollary 3.10,
+∂ A B ⊔ W(ι)(C) B ⊔ W(ι)(D) f g = [D] − [C].
+Proof. By [ZakC, Theorem C] the boundary morphism K 1 ((C/ι)•) K 0 (D) is induced by the morphism of simplicial closed assemblers (C/ι)• S 1 ∧ D which collapses each copy of C to the initial object. Thus by Lemma 3.3 we just need to see what such a morphism of assemblers does to the representative. Since A 0 ∼ B 0 ⊔ d 1 V 1 and A 0 ∼ B 0 ⊔ d 1 W 1 both get mapped to 1 ∅ , the image of α is equal to the image of [V 1 ] −1 [W 1 ]. The object V 1 is a tuple of objects, some from C and some from D; when we collapse all of C to a point we just keep the ones from D; similarly, the
+image of [W 1 ] is [(W 1 ) D ].
+This will be used to compute the differentials in the spectral sequences that converge to K 0 [V k ] and K 0 [V k ]/([A 1 ]) in [ZakA].
+
+
+Application: Interval Exchange Transformations
+
+Consider the assembler C whose objects are half-open intervals [a, b) of the real line. A morphism [a, b) [c, d) is a real number x such that [a + x, b + x) ⊆ [c, d); the topology is the usual topology. We show that K 1 of this assembler is the abelianization of the group G of interval exchange transformations (for more on inteval exchange transformations, see for example [Vee84A,Vee84B,Vee84C]). By [Vee84C, Theorem 1.3] G ab is isomorphic to R ∧ Q R, the exterior tensor square of the reals over the rationals.
+
+First, we construct a homomorphism from G to K 1 . An interval exchange transformation of [0, 1) is a sequence of real numbers 1 = a 0 < a 1 < · · · < a n = 1 and a sequence of real numbers x i for i = 1, . . . , n such that
+[x i + a i−1 , x i + a i ) ∩ [x j + a j−1 , x j + a j ) = ∅ i = j and n i=1 [x i + a i−1 , x i + a i ) = [0, 1)
+. These data give us an element of K 1 (C)
+{[a i−1 , a i )} n i=1 {[0, 1)} ∪ f where f i : [a i−1 , a i )
+[0, 1) is given by the real number x i and ∪ i is given by 0. We need to check that the composition of elements of K 1 (C) corresponds to composition of interval exchange transformations. Suppose that we are given two interval exchange transformations
+A {[0, 1)} ∪ f and B {[0, 1)} ∪ g .
+Consider the diagram
+C ′ A C B {[0, 1)} A {[0, 1)} ∪ ∪ ∪ ∪ g g ′ ∪ ∪
+where both squares are pullback squares, and ∪'s denote morphisms which are unions of intervals. Then
+B {[0, 1)} ∪ g = C ′ B ∪ ∪ + B {[0, 1)} ∪ g = C ′ {[0, 1)} ∪ ∪g = C ′ {[0, 1)} ∪ ∪g ′ ∪ = C ′ A ∪ ∪g ′ + A {[0, 1)} ∪ ∪ = C ′ A ∪ ∪g ′ . Thus A {[0, 1)} ∪ f + B {[0, 1)} ∪ g = C ′ {[0, 1)} ∪ ∪g ′ f .
+This is the formula for the composition of interval exchange transformations.
+
+We now have a homomorphism G K 1 (C), which gives a homomorphism ψ: G ab K 1 (C); we show that this is an isomorphism. First, we show that it is surjective: every element of K 1 (C) can be represented by an interval exchange transformation. Write |[a, b)| = b − a and [n) = [0, n). For any α ∈ R, define
+τ α = {[α), [α)} {[2α)} τ 1 ,
+where τ is given by the sequence (α, 0) and 1 is given by the sequence (0, α). But 2τ α = 0 and τ α = 6τ α/2 , so τ α = 0 for all α. Any object {A i } i∈I has a morphism to i∈I |A i | , so
+A {B j } j∈J f g = A {B j } j∈J f g + {B j } j∈J j∈J |B j | α α = A j∈J |B j | αf αg
+for any choice of morphism α: {B j } j∈J j∈J |B j | . Thus we can assume that B always consists of a single segment.
+
+By adding in a segment to both A and B we can also ensure that j∈J |B j | = 2 n for some integer n. In addition, since τ α = 0 for all α we can write
+A {[2 n )} f g = A ′ {[2 n−1 )} f ′ g ′ + A ′′ {[2 n−1 )} f ′′ g ′′
+by subdividing A further and then ensuring that each segment maps to either the first half of [2 n ) or the second under both f and g; thus K 1 (C) is generated by elements of the form
+A [1) f g . Write A = {[a i , b i )} i∈I
+, and let f be defined by the real numbers x i and g by the real numbers
+y i . Let h: {[a i + x i , b i + x i )} i∈I
+A be defined by the identity map on I and the real numbers −x i ; then
+A {[1)} f g + {[a i + x i , b i + x i )} i∈I A h h = {[a i + x i , b i + x i )} i∈I {[1)} hf hg ,
+where hf = ∪. Thus ψ is surjective. We now construct a surjective homomorphism ϕ: K 1 (C) R ∧ Q R such that ϕψ is an isomorphism, completing our proof. To do this, we first need to show how to construct morphisms out of K 1 (C).
+
+Lemma 4.1. Given an abelian group A, there is a stable quadratic module A * with A 0 = 0 and A 1 = A. For any other stable quadratic module C * , any homomorphism f : C 1 A such that the composition
+C ab 0 ⊗ C ab 0 ·, · C 1 f A
+is uniformly 0 gives rise to a morphism of stable quadratic modules C * A * .
+
+We omit the proof of this as it follows directly from the definitions. From this lemma we see that to produce a morphism K 1 (C) R ∧ Q R it suffices to construct a homomorphism D 1 SC(C) R ∧ Q R satisfying the condition of the lemma. Here, we are considering SC(C) to be a constant simplicial Waldhausen category; in this context, the presentation of D 1 SC(C) is significantly simplified, since by (A1) it is generated simply by morphisms [A ∼ f B] in SC(C). We define the map ϕ:
+D 1 SC(C) R ∧ Q R in the following manner. Write A = {[a i , a i + ǫ i )} i∈I , B = {[b j , b j + δ j )} j∈J , and suppose that f i : [a i , a i + ǫ i ) [b f (i) , b f (i) + δ f (i) ) is given by translation by x i . We define ϕ[A ∼ B] = i∈I ǫ i ∧ x i .
+Note that ϕ[τ A,B ] = 0, so the relation from Lemma 4.1 holds. We must check that ϕ is a welldefined homomorphism out of D 1 SC(C). To check that it is compatible with relations (A1)-(A7) follows directly from the definitions; the only complication comes in relation (A3), where we must use that i∈f −1 (j) ǫ i = δ j . To check that it does not contradict a relation induced by the fact that we are working with a stable quadratic module we note that this homomorphism is 0 on the image of ·, · ; since all such relations are induced by the interaction of ∂ and ·, · with commutators (which must also all map to 0, since R ∧ Q R is abelian) this homomorphism is well-defined.
+
+We define ϕ: K 1 (C) R ∧ Q R to be ϕ| ker ∂ . It remains to check that ϕ is surjective, and that the composition ϕψ is an isomorphism. Consider the element
+{[0, ǫ), [ǫ, δ)} {[0, δ)} ∪ t ,
+where t is defined by the translations (ǫ, −ǫ). By definition, ϕ maps this to
+−ǫ ∧ ǫ − (δ − ǫ) ∧ (−ǫ) = δ ∧ ǫ.
+Since δ and ǫ were arbitrary, ϕ is surjective. The homomorphism ϕψ is exactly equal to half of the scissors congruence invariant S introduced in [Vee84C, Equation 1.2]. Since S is an isomorphism G ab R ∧ Q R, ϕψ must also be an isomorphism.
+
+
+Application: Differentials in a spectral sequence
+
+This section is a sequel to [ZakC, Section 2.2], and we liberally use the definitions and notation from that section. Recall that G n is the assembler whose objects are finite unions of open n-simplices in R ∞ with covering families {P i P } i∈I where P i∈I ϕ i (P i ) has dimension less than n. The assembler G has objects finite unions of open simplices (not necessarily of the same dimension) in R ∞ ; a family {ϕ i : P i P } i∈I is a covering family if i∈I ϕ i (P i ) = P . We write G (n) for the subassembler of polytopes of dimension at most n. Then, by [ZakC, Proposition 2.4]
+K(G (n−1) ) K(G (n) ) K(G n )
+is a cofiber sequence for all n ≥ 0. This gives us a spectral sequence
+E 1 p,q = K p (G q ) K p (G).
+(The indexing is inspired by the Adams spectral sequence, so that the associated graded of each homotopy group appears in a column.) Here d r : E r p,q E r p−1,q−r . In particular, the 0-th column converges to the associated graded of the filtration on K 0 (G) induced by the images of the homomorphisms K 0 (G (0) ) K 0 (G (1) ) · · · K 0 (G).
+
+Thus we see that the n-th filtered part of K 0 (G) is a quotient of K 0 (G (n) ); the kernel of the quotient homomorphism K 0 (G (n) ) K 0 (G) is determined by the images of the differentials d r : E r 1,m+r E r 1,m for all r ≥ 1 and m ≤ n. In particular, K 0 (G) (n) = K 0 (G (n) ) if and only if all of these differentials are zero.
+
+The differential d r : E r 1,m+r E r 1,m is defined to be
+K 1 (G m+r ) ∂ K 0 (G (m+r−1) ) ι −1 K 0 (G (m) ) K 0 (G m ).
+It is only defined on those x in K 1 (G m+r ) such that ι −1 (x) is nonempty, and it is well-defined by the general theory of spectral sequences. Here, ι is the inclusion K 0 (G (m) ) K 0 (G (m+r−1) ) induced by the inclusion of assemblers G (m) G (m+r−1) . We wish to compute this differential. Let x be in K 1 (G m+r ); x must correspond to an element in K 1 (G (m+r) /ι ′ ), where ι ′ is the inclusion of assemblers G (m+r−1) G (m+r) . By Corollary 3.12 x is represented by a diagram of the form
+{P i } i∈I {Q} ∪ ϕ ;
+we can assume that the domain is a single polytope and the first map is union by the same logic employed in Section 4. Let
+T = Q i∈I P i and T ′ = Q i∈I ϕ i (P i ).
+Then T, T ′ ∈ G (m+r−1) and we have an element [a, b] and sends it to the difference between the number of points where it is undefined in the domain and the codomain. Since these numbers must be the same, we see that d 1 : E 1 1,1 E 1 0,0 is uniformly zero. It is unknown whether there are nonzero differentials for other values of m and r.
+{Q} {P i } i∈I ⊔ W(i)({T }) {P i } i∈I ⊔ W(i)({T ′ }) ∪ f in K 1 (G (
+
+Generalizing the construction of Muro and Tonks
+
+The goal of this section is to prove a generalization of the construction given by Muro and Tonks in [MT07,MT08] of the 1-type of a Waldhausen category and prove Proposition 3.4. To get their construction, Muro and Tonks take the bisimplicial set X•• = N•wS•E for a Waldhausen category E, and then compute a representation of its fundamental crossed complex πX••. They then note that this crossed complex inherits a monoid structure from the symmetric monoidal structure (induced by coproduct) on E, and use it to construct a stable quadratic module determined by X••; K 1 (E) is then the kernel of the boundary map of the stable quadratic module.
+
+To generalize this to simplicial Waldhausen categories, we note that the key features of a Waldhausen category used by Muro and Tonks are the following:
+
+• When using the S• construction, K(E) is an Ω-spectrum above level 1, so identifying the 2-type of K(E) 1 is equivalent to identifying the 1-type of K(E). • X•• is horizontally reduced, in the sense that X 0• = ∆ 0 . • X•• has a strictly unital monoid structure that comes from the coproduct structure on E.
+
+Let E• be a simplicial Waldhausen category. We define a bisimplicial set Y•• by
+Y mn = N n wS m E n .
+Then Y•• has all of the same properties that X•• has, above, and thus the 1-type of K(E•) can be recovered from the fundamental crossed complex of K(E•) 1 .
+
+Using the generators and relations given in [MT07,Lemma 4.6] together with the methods described on [MT07, page 18] we can define the stable quadratic module D * E• associated to a simplicial Waldhausen category in the following manner. The module D * E• is closely related to, but not isomorphic to, D * E•; we use similar notation to emphasize this fact.
+
+Definition 6.1. Let E• be a simplicial Waldhausen category. The stable quadratic module D * E• is defined as follows.
+D 0 E• has generators [A 0 ] for A 0 in ob E 0 . D 1 E• has generators • [A 1 ∼ B 1 ] for weak equivalences A 1 ∼ B 1 in wE 1 , and • [A 0 B 0 B 0 /A 0 ] for cofiber sequences A 0 B 0 B 0 /A 0 in E 0 .
+We use subscripts to keep track of the simplicial dimension of a generator. Thus an object A i lives in E i . These satisfy the following relations:
+(R1) ∂[A 1 ∼ B 1 ] = [d 0 B 1 ] −1 [d 1 A 1 ]. (R2) ∂[A 0 B 0 B 0 /A 0 ] = [B 0 ] −1 [B 0 /A 0 ][A 0 ]. (R3) [0] = 1. (R4) [s 0 A 0 s 0 A 0 ] = 1. (R5) [A 0 A 0 0] = [0 A 0 A 0 ] = 1. (R6) For any pair of composable weak equivalences A 2 ∼ B 2 ∼ C 2 in E 2 , [d 1 A 2 ∼ d 1 C 2 ] = [d 0 B 2 ∼ d 0 C 2 ][d 2 A 2 ∼ d 2 B 2 ].
+(R7) For any commutative diagram
+A 1 B 1 B 1 /A 1 A ′ 1 B ′ 1 B ′ 1 /A ′ 1 ∼ ∼ ∼ in E 1 , the element [A 1 ∼ A ′ 1 ][B 1 /A 1 ∼ B ′ 1 /A ′ 1 ] [d 1 A 1 ]
+is equal to
+[d 0 A ′ 1 d 0 B ′ 1 d 0 (B ′ 1 /A ′ 1 )] −1 [B 1 ∼ B ′ 1 ][d 1 A 1 d 1 B 1 d 1 (B 1 /A 1 )].
+(R8) For any commutative diagram
+C 0 /B 0 B 0 /A 0 C 0 /A 0 A 0 B 0 C 0 the element [A 0 C 0 C 0 /A 0 ][B 0 /A 0 C 0 /A 0 C 0 /B 0 ] [A 0 ] is equal to [B 0 C 0 C 0 /B 0 ][A 0 B 0 B 0 /A 0 ].
+(R9) For any pair of objects A 0 , B 0 in E 0 ,
+[A 0 ], [B 0 ] = [B 0 A 0 ⊔ B 0 A 0 ] −1 [A 0 A 0 ⊔ B 0 B 0 ].
+(We use analogous names and relations to [MT07,MT08]. However, we use multiplicative and not additive notation to emphasize the fact that these groups are not abelian.)
+
+The stable quadratic module D + * E• is the quotient of D * E• by the additional relation
+(R10) [B A ⊔ B A] = 0. In D + * E•, (R9) is equivalent to the relation [A 0 ], [B 0 ] = [s 0 B 0 ⊔ s 0 A 0 ∼ = s 0 A 0 ⊔ s 0 B 0 ]. In addition, (R10) implies that [A 0 ⊔ B 0 ] = [A 0 ][B 0 ].
+Then the proof for [MT07, Theorem 1.7, Corollary 1.9] works to show that the stable quadratic module obtained from Y•• gives the 1-type of K(E•); it turns out that this stable quadratic module is D * E•. If E 0 , E 1 and E 2 have a strictly associative and unital coproduct which is compatible with the simplicial structure maps we can apply [MT08, Theorem 4.2] (whose proof works identically for a simplicial Waldhausen category) to get the following:
+
+Theorem 6.2. For any simplicial Waldhausen category E• such that E 0 , E 1 and E 2 have a strictly associative and unital coproduct compatible with the simplicial structure maps, the stable quadratic module D + * E• satisfies
+K 1 (E•) ∼ = ker ∂ and K 0 (E•) ∼ = coker ∂,
+where ∂ is the boundary map in D + * E•. In addition, the first Postnikov invariant can be obtained fro the structure of D + * E•. Lemma 6.3. In D * E• the following extra relations hold:
+(B1) [τ A 0 ,B 0 ] is central for all A 0 , B 0 in E 0 . (B2) [τ A 0 ,B 0 ⊔C 0 ] = [τ A 0 ,B 0 ][τ A 0 ,C 0 ] and [τ A 0 ⊔B 0 ,C 0 ] = [τ A 0 ,C 0 ][τ B 0 ,C 0 ].
+(B3) For any weak equivalence A 0 ∼ B 0 in E 0 , any object C 0 in E 0 and any object A 1 in E 1
+[A 0 ∼ B 0 ] [C 0 ] = [A 0 ⊔ C 0 ∼ B 0 ⊔ C 0 ] and [A 1 ] [C 0 ] = [A 1 ⊔ s 0 C 0 ].
+(B4) For any two weak equivalences A 0 ∼ B 0 and C 0 ∼ D 0 in E 0 ,
+[A 0 ∼ B 0 ][C 0 ∼ D 0 ] = [A 0 ⊔ C 0 ∼ B 0 ⊔ D 0 ][τ D 0 ,B 0 ][τ A 0 ,D 0 ].
+(B5) For any two objects A 1 , B 1 in E 1 ,
+[A 1 ][B 1 ] = [A 1 ⊔ B 1 ][τ d 0 B 1 ,d 0 A 1 ][τ d 1 A 1 ,d 0 B 1 ].
+(B6) For any three objects A 0 , B 0 , C 0 in E 0 ,
+[τ A 0 ,B 0 ⊔ C 0 ] = [τ A 0 ,B 0 ].
+Proof. Relations (B1) and (B2) follow directly from the definition of a stable quadratic module. The others follow straightforwardly from relations (A1)-(A7) as well as (B1) and (B2). As an example, we prove (B4); the others follow similarly.
+[A 0 ∼ B 0 ][C 0 ∼ D 0 ] (A6) = [τ D 0 ,B 0 ][τ B 0 ,D 0 ] [D 0 ⊔ A 0 ∼ D 0 ∼ B 0 ] [τ D 0 ,A 0 ][τ A 0 ,D 0 ] [A 0 ⊔ C 0 ∼ A 0 ⊔ D 0 ] (B1) = [D 0 ⊔ B 0 ∼ B 0 ⊔ D 0 ][D 0 ⊔ A 0 ∼ D 0 ⊔ B 0 ][A 0 ⊔ D 0 ∼ D 0 ⊔ A 0 ] [A 0 ⊔ C 0 ∼ A 0 ⊔ D 0 ][τ D 0 ,B 0 ][τ A 0 ,D 0 ] (A3) = [A 0 ⊔ C 0 ∼ B 0 ⊔ D 0 ][τ D 0 ,B 0 ][τ A 0 ,D 0 ].
+We are now ready to prove Proposition 3.4.
+
+Proof of Proposition 3.4. By Theorem 6.2 it suffices to show that D +
+* E• ∼ = D * E•. We define the homomorphism f : D + * E• D * E• by f ([A 0 ]) = [A 0 ], f ([A 1 ∼ B 1 ]) = [B 1 ][d 1 A 1 ∼ d 1 B 1 ], and f ([A 0 B 0 B 0 /A 0 ]) = [B 0 /A 0 ⊔ A 0 ∼ B 0 ]. Let g: D * E• D + * E• be defined by g([A 0 ]) = [A 0 ], g([A 1 ]) = [A 1 A 1 ], and g([A 0 ∼ B 0 ]) = [s 0 A 0 ∼ s 0 B 0 ].
+On the generators in degree 0 f and g are clearly inverses of one another. Note that the following equalities hold.
+f g([A 1 ]) = f ([A 1 A 1 ]) = [A 1 ][d 1 A 1 d 1 A 1 ] (A1) = [A 1 ]. f g([A 0 ∼ B 0 ]) = f ([s 0 A 0 ∼ s 0 B 0 ]) = [s 0 B 0 ][d 1 s 0 A 0 ∼ d 1 s 0 B 0 ] (A1) = [A 0 ∼ B 0 ]. gf ([A 1 ∼ B 1 ]) = g([B 1 ][d 1 A 1 ∼ d 1 B 1 ]) = [B 1 B 1 ][s 0 d 1 A 1 ∼ s 0 d 1 B 1 ]. gf ([A 0 B 0 B 0 /A 0 ]) = g([B 0 /A 0 ⊔ A 0 ∼ B 0 ]) = [s 0 B 0 /A 0 ⊔ s 0 A 0 ∼ s 0 B 0 ].
+Let A 1 ∼ B 1 be a weak equivalence in E 1 . Then in E 2 we have the composite
+s 0 A 1 ∼ s 0 B 1 s 0 B 1 ;
+applying (R6) we get that 
+[A 1 ∼ B 1 ] = [B 1 B 1 ][d 2 s 0 A 1 ∼ d 2 s 0 B 1 ] = [B 1 B 1 ][s 0 d 1 A 1 ∼ s 0 d 1 B 1 ].s 0 A 0 s 0 B 0 /A 0 ⊔ s 0 A 0 s 0 B 0 /A 0 s 0 A 0 s 0 B 0 s 0 B 0 /A 0 ∼
+Applying (R7) and simplifying using (R4) and (R10) we get
+1 = [A 0 B 0 B 0 /A 0 ] −1 [s 0 B 0 /A 0 ⊔ A 0 ∼ s 0 B 0 ]. Thus gf ([A 0 B 0 B 0 /A 0 ]) = [A 0 B 0 B 0 /A 0 ]
+. Thus in order to show that f and g are inverse isomorphisms it remains to check that they are well-defined.
+
+The function g clearly has no choices to be made in its definition, but the definition of f has the possibility of a choice in how to split weak equivalences. However, the compatibility condition ensures that this is not the case. First, note that for any cofiber sequence of the form A A 0 α must be the identity on A (since the disjoint union is strictly unital). Now suppose that for some cofiber sequence A B B/A there exist two choices α and α ′ that both satisfy condition (3). We consider the diagram
+0 B/A B/A A B B f
+where we think of the splitting for f as being α and the splitting of 1 B • f as being α ′ . Then the compatibility condition ensures that α = α ′ , so f is well-defined on elements. Checking that f and g commute with ∂ and ·, · is straightforward, and thus they both also commute with the action of the 0-level on the 1-level. It remains to check that all relations in D + * E• and D * E• are preserved by f and g, respectively. We check that applying f to each of the relations (R3)-(R8) and (R10) gives a valid equality in D * E•. Relations (R3)-(R5) follow directly from the definitions. The other relations follow directly from relations (A1)-(A7), with judicious use of (B3) whenever the action of D + 0 E• on D + 1 E• is needed. As an example of this kind of computation, we prove (R8); the others follow analogously. The key idea in all of the proofs is to compose as many morphisms as possible and use (A5) to commute the object-type generators past the morphism-type generators.
+
+Suppose that we have a commutative diagram
+C 0 /B 0 B 0 /A 0 C 0 /A 0 A 0 B 0 C 0 in E 0 . We have f ([A 0 C 0 C 0 /A 0 ][B 0 /A 0 C 0 /A 0 C 0 /B 0 ] [A 0 ] ) = [C 0 /A 0 ⊔ A 0 ∼ C 0 ][C 0 /B 0 ⊔ B 0 /A 0 ∼ C 0 /A 0 ] [A 0 ] (B3) = [C 0 /A 0 ⊔ A 0 ∼ C 0 ][C 0 /B 0 ⊔ B 0 /A 0 ⊔ A 0 ∼ C 0 /A 0 ⊔ A 0 ] = [C 0 /B 0 ⊔ B 0 /A 0 ⊔ A 0 ∼ C 0 ].
+On the other hand, we have
+f ([B 0 C 0 C 0 /B 0 ][A 0 B 0 B 0 /A 0 ]) = [C 0 /B 0 ⊔ B 0 ∼ C 0 ][B 0 /A 0 ⊔ A 0 ∼ B 0 ] (A6) = [C 0 /B 0 ⊔ B 0 ∼ C 0 ][C 0 /B 0 ⊔ B 0 /A 0 ⊔ A 0 ∼ C 0 /B 0 ⊔ B 0 ] (A3) = [C 0 /B 0 ⊔ B 0 /A 0 ⊔ A 0 ∼ C 0 ],
+and this must be the same morphism as in the previous part by the compatibility condition (3).
+
+To check g we need to show that relations (A1)-(A7) still hold after applying g. We summarize the main steps of checking each relation.
+
+(A1) Follows directly from (R4 
+A 0 ∼ B 0 ∼ C 0 in E 0 , apply (R6) to the composition s 0 s 0 A 0 ∼ s 0 s 0 B 0 ∼ s 0 s 0 C 0 . (A4) Applying (R6) to the composition A 2 A 2 A 2 gives the relation [d 1 A 2 d 1 A 2 ] = [d 0 A 2 d 0 A 2 ][d 2 A 2 d 2 A 2 ]. (A5) For any weak equivalence A 1 ∼ B 1 in E 1 , apply (R6) to the two compositions s 0 A 1 ∼ s 0 B 1 s 0 B 1 and s 1 A 1 s 1 A 1 ∼ s 1 B 1 . (A6)
+For any weak equivalence A 1 ∼ B 1 in E 1 and any object C 0 in E 0 apply (R7) to the diagram
+A 1 s 0 C 0 ⊔ A 1 s 0 C 0 B 1 s 0 C 0 ⊔ B 1 s 0 C 0 ∼ ∼
+and simplify using (R4) and (R10). (A7) To the diagram
+B 1 A 1 ⊔ B 1 A 1 B 1 A 1 ⊔ B 1 A 1
+apply (R7) and and (R10).
+
+Appendix A. Remarks about the proof of Theorem 1.9
+
+In this section we prove the technical results that are necessary for the proof of Theorem 1.9. We omit the main body of the proof, as the proof of [Zak12, Theorem 4.2] works analogously here; however, we prove some of the technical lemmas needed for that proof. We have the following observation:
+
+Observation A.2. Given any diagram
+A B C D f h j g
+where D = {D l } l∈L , we can write it as a coproduct of diagrams of fibers
+A l B l C l D l f | l h| l j| l g| l
+Thus any pushout or pullback in Tw(C) can be computed by computing it on each fiber independently.
+
+The main technical work necessary for the proof of Theorem 1.9 is the construction of pushouts in SC(C). These depend on dependent products in Tw(C), which we construct in Lemma A.6. (For more on dependent products, see [MLM94,Section IV].) The functor Π σ , below, was denoted σ * in [Zak12].
+
+We begin by showing that in many cases Grothendieck twists have dependent products.
+
+Lemma A.3. Suppose that C is a category with all pullbacks and D is a sieve in C. Let σ: A B be a morphism in Tw(iso C D). The functor σ * : (Tw(C D)/B) (Tw(C D)/A) has a right adjoint Π σ . If σ has an injective set map then σ * Π σ ∼ = 1; if σ has a surjective set map then Π σ σ * ∼ = 1.
+
+Proof. Write σ: A B, and let σ * : Tw(C D)/B Tw(C D)/A be the functor pulling back along σ. We want to show that σ * has a right adjoint Π σ . By Observation A.2 we can assume that B = {b}.
+
+Write A = {A i } i∈I . If I = ∅ then there is exactly one object above A: {} ∅ . Thus in this case we can define Π σ = B and the lemma clearly holds. Thus from now on we can assume that I = ∅. For any p: A ′ A with A ′ = {A ′ k } k∈K , write A ′ (i) = {A ′ k } k∈p −1 (i) for i ∈ I. Let A be the limit of the following diagram:
+{a i } A ′ (i) {b} . . . . . . {a i ′ } A ′ (i ′ ) p| i p| i ′ σ i σ i ′
+where the spokes are indexed over all elements of I. (Note that the limit exists because it can be computed as an iterated pullback.) We then define Π σ (p) = A {b}. We now need to show that Π σ is right adjoint to σ * . We do this by showing that A is the terminal object in σ * /A ′ for all A ′ . Indeed, suppose that we have an object (B ′ q B, p ′ ) in σ * /A ′ . Write
+σ * B ′ = {B ′ q {b} {Σ −1 i } {a i }} i∈I .
+As σ * B ′ sits above A ′ we are given morphisms h i such that for each i the diagram
+B ′ {b} A ′ (i) {a i } q {Σ −1 i } p| i h i
+commutes. However, this means that the diagram
+{a i } A ′ (i) {b} . . . . . . B ′ {a i ′ A ′ (i ′ ) p| i p| i ′ {σ i } {σ i ′ } h i h i ′
+commutes as well, which gives us a unique factorization of σ * B ′ through A. Thus A is a terminal object and Π σ is right adjoint to σ * . Now suppose that σ has an injective set map. This means that I is either a singleton or empty, so we just need to prove that σ * Π σ ∼ = 1 in those cases. If I = ∅ then σ * Π σ {} ∅ = {} ∅ , so σ * Π σ ∼ = 1 trivially. If I = { * } then
+σ * Π σ (B ′ {b}) = σ * (B ′ {b} {Σ * } {a * }) = B ′ {b},
+so σ * Π σ ∼ = 1. On the other hand, suppose that σ has a surjective set map. Then we can assume that I is nonempty, and write σ * (B ′ {b}) = i∈I (B ′ {b}
+{Σ −1 i } {a i })
+. But then B ′ is a pullback of the desired diagram, so we see that Π σ σ * ∼ = 1.
+
+Lemma A.4. Given two composable morphisms f : A B and g: B C in Tw(C • ), if gf is a sub-map then so is f . If in addition g and gf are covering sub-maps, then so is f . Proof. Write A = {A i } i∈I , B = {B j } j∈J and C = {C k } k∈K . We need to show that if f (i) = f (i ′ ) for i, i ′ ∈ I then a i × b f (i) a i ′ = ∅. If f (i) = f (i ′ ) then gf (i) = gf (i ′ ), and as gf is a sub-map a i × c gf (i) a i ′ = ∅. However, we have a morphism
+a i × b f (i) a i ′ a i × c gf (i) a i ′ induced by the morphism G f (i) : b f (i)
+c gf (i) , so we conclude that a i × b f (i) a i ′ = ∅. We now turn our attention to the second part of the lemma. We first prove it in the case when f is a section of g, so that C = A and gf = 1 A . By Observation A.2 we can assume that A = {a}; we write the indexing set as { * }. Then we have two composable morphisms in C,
+a F * b f ( * ) G f ( * ) a,
+which compose to the identity. By axiom (M), any such diagram must have both morphisms be isomorphisms. As g is a covering sub-map this means that J = { * } as well, since otherwise b f ( * ) × a b j ∼ = b j = ∅, which contradicts the sub-map condition. Thus f is an isomorphism, and in particular a covering sub-map. Now we consider the general case. We have the following diagram,
+A × C B B A C gf g t s f
+where s is the section of t: A × C B A induced by f . Applying the special case of the lemma to s and t we see that s must be a covering sub-map, and thus f is also one.
+
+The following is an immediate consequence of Lemma A.4:
+
+Observation A.5. For any object A in Tw(C • ), Tw(C • ) Sub /A is a preorder of which W(C)/A is a full subcategory. Lemma A.3 implies that Grothendieck twists of assemblers have dependent products; it now remains only to check that they preserve sub-maps and covering sub-maps. Proof. By Lemma A.3 Π σ exists, so all we need to check is that it preserves (covering) sub-maps. Using Lemma A.4, in order to show that Π σ preserves (covering) sub-maps it suffices to show that if A ′ p A is a (covering) sub-map then so is Π σ (A ′ p A). By examining the proof of Lemma A.3 we see that Π σ is computed as a pullback of morphisms
+A ′ i p| i {a i } {Σ i } {b}.
+If p is a (covering) sub-map then so is each p| i , and thus so is {Σ i } • p| i . Since Π σ is computed as the pullback of all of these and (covering) sub-maps are preserved under pullbacks, Π σ preserves (covering) sub-maps. We prove the restriction statement by showing that the unit and counit of the adjunction are both covering sub-maps. Consider the unit; for a morphism q: B ′ B it is given by a diagram
+B ′ Π σ σ * B ′ B ηq q Πσσ * q
+If q is a (covering) sub-map then so is Π σ σ * q, and thus by Lemma A.4 so is η q . The counit is handled analogously.
+
+
+Lemma 2.2 ([Zak13, Lemma 5.3]). Let L n SC(C) be the full subcategory of S n SC(C) containing all objects A 1 ∼ A 2 ∼ · · · ∼ A n in which all morphisms are layered (in the sense of [Zak13, Definition 5.1]). Then L n SC(C) is a Waldhausen category and the inclusion L n SC(C) S n SC(C) induces the identity morphism on K-theory.
+
+
+Lemma 3.3. D * is a functor from the category of Waldhausen categories and exact functors to the category of stable quadratic modules. Exact equivalences of categories induce homotopy equivalences of stable quadratic modules. Proof. This follows by the same proof as [MT07, Theorem 3.2]. Proposition 3.4. Let E• be a simplicial Waldhausen category satisfying the following additional conditions:
+
+Theorem 3. 8 .
+8Suppose that E• satisfies the conditions in Proposition 3.4. Every element of K 1 (E•) is represented by some {f V 1 , g W 1 : A 0 ∼ B 0 } where V 1 and W 1 satisfy the extra condition that d 0 V 1 = d 0 W 1 . These satisfy the relations
+
+
+For a more detailed discussion of (C/F )• and the cofiber sequence, see[ZakC, Section 6].
+
+Corollary 3 . 10 .
+310Let ι: D C be an inclusion of a subassembler. Then K 1 ((C/ι)•) is generated by diagrams in W(A, B in W(C) and C, D in W(D). These satisfy the relations
+
+
+{f SC(ι)(C)⊔D : A ∼ B} −1 {g C⊔SC(ι)(D) : A ∼ B}.
+
+
+In particular, we could also have chosen our representative for x to have V DD1 = W DD 1 = 0. Let V = V DC 1 and W = W CD 1 . Then V ′′ 1 = V ⊔ SC(ι)(W )and W ′′ 1 = SC(ι)(V ) ⊔ W. This is the information contained in the desired diagram.
+
+Corollary 3 . 12 .
+312Every element of K 1 (C) can be represented by a pair of morphisms A B f g in W(C). These satisfy the relations
+
+Proposition 3 . 13 .
+313Let ι: D C be any morphism of assemblers. The image of the element
+
+
+m+r) /ι ′ ). By Proposition 3.13 ∂x = [T ′ ] − [T ].Since ι −1 (x) = ∅ this means that we can write [T ′ ] − [T ] = [R ′ ] − [R] with dim R ′ , dim R ≤ m. The projection to K 0 (G m ) takes this to the difference [R ′ ] − [R], whereR denotes the m-dimensional interior.For example, when m = 0 and r = 1 this takes an interval exchange transformation which splits a segment [a, b] into n segments, thought of as an almost-everywhere defined injective piecewise isometry[a, b]   
+
+Definition A. 1 .
+1The set map of a morphism f : {A i } i∈I {B j } j∈J in Tw(C) is the underlying map of sets f : I J.
+
+Lemma A. 6 .
+6Let C be a closed assembler. Let σ: A B be a move. The functor σ * : (Tw(C • )/B) (Tw(C • )/A) has a right adjoint Π σ , which also preserves (covering) sub-maps. These functors restrict to adjoint pairs σ * : Tw(C • ) Sub /B Tw(C • ) Sub /A : Π σ and σ * : W(C)/B W(C)/A : Π σ .
+
+
+Thus gf ([A 1 ∼ B 1 ]) = [A 1 ∼ B 1 ]. Now let A 0 B 0 B 0 /A 0be a cofiber sequence in E 0 . Then we have the following diagram in E 1 :
+
+
+). (A2) The key step here is that [A 0 ⊔ B 0 ] = [A 0 ][B 0 ] by applying ∂ to (R10). (A3) For any two composable weak equivalences
+
+Combinatorial homotopy and 4-dimensional complexes. Hans Joachim Baues, of de Gruyter Expositions in Mathematics. Ronald BrownBerlinWalter de Gruyter & Co2Hans Joachim Baues. Combinatorial homotopy and 4-dimensional complexes, volume 2 of de Gruyter Ex- positions in Mathematics. Walter de Gruyter & Co., Berlin, 1991. With a preface by Ronald Brown.
+
+A first introduction to topos theory. Mac Saunders, Ieke Lane, Moerdijk, Springer-VerlagNew YorkUniversitextSheaves in geometry and logic. Corrected reprint of the 1992 editionSaunders Mac Lane and Ieke Moerdijk. Sheaves in geometry and logic. Universitext. Springer-Verlag, New York, 1994. A first introduction to topos theory, Corrected reprint of the 1992 edition.
+
+The 1-type of a Waldhausen K-theory spectrum. Fernando Muro, Andrew Tonks, Adv. Math. 2161Fernando Muro and Andrew Tonks. The 1-type of a Waldhausen K-theory spectrum. Adv. Math., 216(1):178-211, 2007.
+
+On K1 of a Waldhausen category. Fernando Muro, Andrew Tonks, K-theory and noncommutative geometry. ZürichEur. Math. Soc.Fernando Muro and Andrew Tonks. On K1 of a Waldhausen category. In K-theory and noncommutative geometry, EMS Ser. Congr. Rep., pages 91-115. Eur. Math. Soc., Zürich, 2008.
+
+The metric theory of interval exchange transformations. I. Generic spectral properties. William A Veech, Amer. J. Math. 1066William A. Veech. The metric theory of interval exchange transformations. I. Generic spectral properties. Amer. J. Math., 106(6):1331-1359, 1984.
+
+The metric theory of interval exchange transformations. II. Approximation by primitive interval exchanges. William A Veech, Amer. J. Math. 1066William A. Veech. The metric theory of interval exchange transformations. II. Approximation by primitive interval exchanges. Amer. J. Math., 106(6):1361-1387, 1984.
+
+The metric theory of interval exchange transformations. III. The Sah-Arnoux-Fathi invariant. William A Veech, Amer. J. Math. 1066William A. Veech. The metric theory of interval exchange transformations. III. The Sah-Arnoux-Fathi invariant. Amer. J. Math., 106(6):1389-1422, 1984.
+
+The annihilator of the Lefschetz motive. Inna Zakharevich, Inna Zakharevich. The annihilator of the Lefschetz motive. http://arxiv.org/abs/1506.06200.
+
+The category of Waldhausen categories as a closed multicategory. Inna Zakharevich, Inna Zakharevich. The category of Waldhausen categories as a closed multicategory. http://arxiv.org/abs/1410.4834.
+
+The K-theory of assemblers. Inna Zakharevich, Inna Zakharevich. The K-theory of assemblers. http://arxiv.org/abs/1401.3712.
+
+Scissors congruence as K-theory. Homology, Homotopy and Applications. Inna Zakharevich, 14Inna Zakharevich. Scissors congruence as K-theory. Homology, Homotopy and Applications, 14:181-202, 2012.
+
+Inna Zakharevich, Simplicial polytope complexes and deloopings of K-theory. Homology, Homotopy and Applications. 15Inna Zakharevich. Simplicial polytope complexes and deloopings of K-theory. Homology, Homotopy and Applications, 15:301-330, 2013.

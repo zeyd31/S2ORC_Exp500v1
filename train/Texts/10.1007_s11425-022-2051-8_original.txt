@@ -1,0 +1,275 @@
+
+VIRTUAL HOMOLOGICAL EIGENVALUES AND THE WEIL-PETERSSON TRANSLATION LENGTH
+7 May 2022
+
+Y I Liu 
+VIRTUAL HOMOLOGICAL EIGENVALUES AND THE WEIL-PETERSSON TRANSLATION LENGTH
+7 May 2022
+For any pseudo-Anosov automorphism on an orientable closed surface, an inquality is established bounding certain growth of virtual homological eigenvalues with the Weil-Petersson translation length. The new inquality fits nicely with other known inequalities due to Kojima and McShane, and due to Lê.The new quantity to be considered is the square sum of the logarithmic radii of the homological eigenvalues (with multiplicity) outside the complex unit circle, called the homological Jensen square sum. The main theorem is as follows. For any cofinal sequence of regular finite covers of a given surface, together with lifts of a given pseudo-Anosov, the homological Jensen square sum of the lifts grows at most linearly fast compared to the covering degree, and the square root of the growth rate is at most 1/ √ 4π times the Weil-Petersson translation length of the given pseudo-Anosov.
+
+Introduction
+
+Let S be a connected closed orientable surface of genus at least 2. Let f : S → S be a pseudo-Anosov automorphism. In [KojM18], S. Kojima and G. McShane establish an elegant inequality, which we can rearrange as
+(1.1) Vol h (M f ) 6π ≤ ℓ WP (f ) √ 4π
+× genus(S) − 1.
+
+In this inequality, Vol h (M f ) denotes the hyperbolic volume of the mapping torus M f of f , with respect to its isometrically unique hyperbolic geometry, and ℓ WP (f ) denotes the Weil-Petersson translation length of f , as a mapping class acting on the Teichmüller space of S. The left-hand side of (1.1) is equal to the logarithmic L 2 torsion of the orientable closed 3-manifold M f ; see [Lüc02, Chapter 3] (with a different sign convention). This quantity is a known upper bound for the superior linear growth rate of the virtual homological logarithmic Mahler measures, with respect to any cofinal sequence of regular finite covers (S ′ n ) n∈N of S and lifts (f ′ n ) n∈N of f . To be precise, if κ n : S ′ n → S are cofinal regular finite covering maps (that is, the corresponding finite-index normal subgroups of π 1 (S) have trivial common intersection), and if f ′ n : S ′ n → S ′ n are coverings of f (that is, κ n • f ′ n = f • κ n ), then the following inequality holds,
+(1.2) lim n→∞ m (P n ) [S ′ n : S] ≤ Vol h (M f ) 6π .
+In this inequality, [S ′ n : S] denotes the covering degree, and m(P n ) denotes the logarithmic Mahler measure of the characteristic polynomial P n of the induced linear automorphism f ′ n * : H 1 (S ′ n ; C) → H 1 (S ′ n ; C). In fact, (1.2) follows easily from an inequality due to T. T. Q. Lê [Lê18], combined with [Lê14, Theorem 1].
+
+We recall that for any nonzero complex polynomial Q = Q(z), the logarithmic Mahler measure of Q refers to the non-negative quantity
+m(Q) = 1 2π 2π 0 log Q e √ −1·θ
+dθ.
+
+When Q is monic of degree d with complex roots λ 1 , · · · , λ d , the Jensen formula implies that m(Q) measures exactly the total logarithmic radii of those roots outside the complex unit circle, namely,
+m(Q) = d j=1
+log max(1, |λ j |).
+
+
+See [EveW99, Chapter 1].
+
+For any monic polynomial Q of degree d with roots λ 1 , · · · , λ d , we introduce another non-negative quantity
+(1.3) w(Q) = d j=1
+log 2 max (1, |λ j |) .
+
+In general, w(Q) is very different from the average of log 2 |Q| over the unit circle. The latter has been called the second higher Mahler measure; compare [KurLO08]. Let us call w(Q) the Jensen square sum of Q. The polynomials P n in (1.2) are monic of degree 2 × genus(S ′ n ). Moreover, they are all reciprocal. We observe an elementary Cauchy-Schwartz inequality,
+m(P n ) [S ′ n : S] ≤ w(P n ) [S ′ n : S] × genus(S ′ n ) [S ′ n : S] ,
+where the limit of the last factor is clear,
+lim n→∞ genus(S ′ n ) [S ′ n : S] = genus(S) − 1.
+In light of (1.1) and (1.2), there seems to be some unrevealed inequality between the growth of w(P n ) and ℓ WP (f ). In this paper, we establish that inequality, exactly in the predicted form. This is the following main theorem.
+
+Theorem 1.1. Let f : S → S be a pseudo-Anosov automorphism on a connected closed orientable surface of genus at least 2. Then, for any cofinal sequence of regular finite covers (S ′ n ) n∈N of S with lifts (f ′ n ) n∈N of f , the following inequality holds,
+lim n→∞ w(P n ) [S ′ n : S] ≤ ℓ WP (f ) √ 4π ,
+where P n denotes the characteristic polynomial of f ′ n * on H 1 (S ′ n ; C). With notations of Theorem 1.1, denote by h(P n ) the maximum of log max(1, |λ|) where λ ranges over all the complex roots of P n . Denote by ℓ T (f ) the Teichmüller translation length of f , which is equal to the entropy of f . In [McM13], C. T. Mc-Mullen shows that the well-known inequality
+lim n→∞ h(P n ) ≤ ℓ T (f ),
+must be strict if the invariant foliations of f have a prong singularity of odd order, and moreover, in that case, there is a uniform gap that depends only on f . It seems reasonable to guess that the inequality in Theorem 1.1 is strict for many, if not all, pseudo-Anosov f , and there is a uniform gap that depends only on f .
+
+For any pseudo-Anosov (S, f ), one can always find a sequence (S ′ n , f ′ n ) n∈N as in Theorem 1.1, such that h(P n ) > 0 holds for each f ′ n ; see [Liu20]. Hence, m(P n ) > 0 and w(P n ) > 0 also hold.
+
+Note that lim n w(P n )/[S ′ n : S] > 0 holds if and only if lim n m(P n )/[S ′ n : S] > 0 holds. Although it appears heuristically very possible, there are no known examples of a pseudo-Anosov (S, f ) and a sequence (S ′ n , f ′ n ) n∈N as in Theorem 1.1, such that w(P n ) or m(P n ) grows strictly linearly fast compared to the covering degree.
+
+Below, we outline the proof of Theorem 1.1. Our argument is inspired by [McM13]. The main difference is that we make use of invariant metrics on the Teichmüller space related to the Weil-Petersson metric, rather than the Teichmüller metric.
+
+Using the Bergman metric on Riemann surfaces X marked by S, one obtains an invariant Riemannian metric on the Teichmüller space Teich(S), which we call the Habermann-Jost metric. The way is just the same as obtaining the Weil-Petersson metric on Teich(S) from the conformal hyperbolic metric on X. Using the natural map Teich(S) → H(S) of the Teichmüller space to the Siegel space of Hodge structures on H 1 (S; C), one obtains an invariant Riemannian pseudometric on Teich(S) pulling back the Siegel metric on H(S), which we call the Royden-Siegel metric. Upon suitable normalization, the L 2 norms of these metrics satisfy the comparison 2 × ξ HJ ≥ ξ RS , for any tangent vector ξ ∈ T X Teich(S).
+
+Moreover, virtual versions of the above metrics on Teich(S) can be defined using regular finite covering S ′ → S and the natural embedding Teich(S) → Teich(S ′ ). Upon suitable normalization, the L 2 norms of the virtual Habermann-Jost metrics satisfy the convergence lim n ξ HJ ′ n = ξ WP / √ 4π, for any sequence of covers (S ′ n ) n∈N as assumed. This is basically because the virtual Bergmann metrics g B ′ n on X converges to the rescaled conformal hyperbolic metric g h /4π. With the above facts, consider any point on the Weil-Petersson axis in Teich(S) of a given pseudo-Anosov f on S. Then, essentially speaking, we can obtain comparison of translation lengths (see Definition 2.2) as follows:
+ℓ WP (f ) √ 4π ≥ lim n→∞ ℓ HJ ′ n (f ) ≥ lim n→∞ ℓ RS ′ n (f ) 2 ≥ lim n→∞ ℓ S (f ′ n * ) 2 × [S ′ n : S] .
+The nominator ℓ S (f ′ n * ) in the last expression refers to the Siegel translation length of f ′ n * ∈ Sp(H 1 (S ′ n ; R)) acting on H(S ′ n ). On the other hand, we can establish the formula
+ℓ S (f ′ n * ) = 2 × w(P n ),
+by studying the Siegel geometry on the generalized upper half plane model. Then the desired inequality follows. This paper is organized as follows. In Section 2, we recall structures associated to the Teichmüller space, and general properties of translation length. In Section 3, we determine the Siegel translation length of a symplectic linear transformation. In Section 4, we recall several invariant Riemannian metrics on the Teichmüller space, as mentioned above, and discuss their virtual versions. In Section 5, we prove two technical lemmas regarding comparison and convergence of virtual metrics. In Section 6, we prove our main result (Theorem 1.1).
+
+
+Preliminaries
+
+In this section, we recall background materials needed for our discussion. For general reference books, see [Hub06] for Teichmüller theory, and [Sie64] for the Siegel geometry, and [BriH99, Chapter II.6] about the translation length of isometries on metric spaces. We only consider closed surfaces of hyperbolic type, as it suffices for our purpose.
+
+2.1. The Teichmüller space. Let S be an oriented closed surface of genus at least 2. The Teichmüller space Teich(S) consists of all the isotopy classes of complex structures on S, compatible with the fixed orientation. Equivalently, we think of any point of Teich(S) as represented by a Riemann surface X together with an orientation-preserving homeomorphism S → X, called the marking of X, and denote the point as X with the marking implicit.
+
+We think of Teich(S) as a smooth (real) manifold, diffeomorphic to an open cell of dimension 6 × (genus(S) − 1). There are natural identifications of the tangent and the cotangent spaces (as real vector spaces)
+T * X Teich(S) ∼ = Q(X), T X Teich(S) ∼ = B(X)/Q(X) ⊥ ,
+at any point X ∈ Teich(S). Here, Q(X) denotes the space of all the holomorphic quadratic differentials on X, and B(X) denotes the space of all the L ∞ Beltrami differentials on X. These spaces pair naturally as
+Q(X) × B(X) −→ R : (q, µ) → X qµ, so Q(X) ⊥ refers to the subspace of B(X) annihilated by Q(X), namely, µ ∈ B(X) lies in Q(X) ⊥ if and only if X qµ = 0 holds for all q ∈ Q(X).
+The mapping class group Mod(S) of S, consisting of all the isotopy classes of orientation-preserving self-homeomorphisms, acts properly and diffeomorphically on Teich(S), transforming the markings of points.
+
+There are many natural differential metrics (or pseudometrics) on Teich(S) that are invariant under the action of Mod(S). For example, the Teichmüller metric d T is an invariant Finsler metric determined uniquely by the formula
+d T (X, Y ) = log K(X, Y ) 2 ,
+for any X, Y ∈ Teich(S), where K(X, Y ) > 1 denotes the quasiconformity constant of the Teichmüller extremal map X → Y that commutes homotopically with the markings. The infinitesmal forms of d T are the norms
+q T = X |q| for any q in Q(X) ∼ = T * X Teich(S), and ξ T = sup X qµ : X |q| ≤ 1 for any ξ = µ + Q(X) ⊥ in B(X)/Q(X) ⊥ ∼ = T X Teich(S).
+We recall the Weil-Petersson metric d WP and other invariant Riemannian metrics on Teich(S) in Section 4 with more discussion.
+
+2.2. The Siegel space. Let V be a real vector space of dimension 2p furnished with a symplectic form ω. Then ω extends complex linearly over the complex vector space V ⊗ R C as a complex-valued alternating 2-form, and determines a Hermitian
+form of signature (p, p) on V ⊗ R C, z, w = √ −1 2 · ω(z,w).
+The Siegel space H(V ) consists of all the Hermitian orthogonal splittings
+V ⊗ R C = V 1,0 ⊕ V 0,1 ,
+such that , is positive definite on V 1,0 , and the complex conjugation z →z maps V 1,0 isomorphically onto V 0,1 . We call any point of the Siegel space H(V ) a Hodge structure on V ⊗ R C with respect to ω. The group Sp(V ) ∼ = Sp(2p, R) of symplectic linear transformations acts transitively on H(V ), such that any ϕ ∈ Sp(V ) extends complex linearly over V ⊗ R C, and takes any Hodge structure V 1,0 ⊕ V 0,1 to ϕ(V 1,0 ) ⊕ ϕ(V 0,1 ). The isotropy group at V 1,0 ⊕ V 0,1 is isomorphic to the unitary group U(V 1,0 ) ∼ = U(p), acting simultaneously on the summands V 1,0 and V 0,1 as canonical unitary transformations and their complex conjugates, respectively. In particular, H(V ) is the homogenous space associated to Sp(V ), diffeomorphic to an open cell of dimension p 2 + p.
+
+The most important example to our interest is the Siegel space of Hodge structures on a surface. If S is an oriented closed surface of genus at least 2, then the first real cohomology H 1 (S; R) is furnished with a natural symplectic form, evaluating the cup product of any pair of 1-classes on the fundamental class. In this case, we simply denote the Siegel space of Hodge structures on H 1 (S; C) as H(S). For any Teichmüller point X ∈ Teich(S), we obtain a unique Hermitian orthogonal splitting
+H 1 (S; C) ∼ = H 1 (X; C) = H 1,0 (X) ⊕ H 0,1 (X) ∼ = Ω 1 (X) ⊕ Ω 1 (X),
+where the complex linear subspaces H 1,0 (X) and H 0,1 (X) of H 1 (X; C) are naturally identified as the spaces Ω 1 (X) and Ω 1 (X) of the holomorphic and the antiholomorphic differentials on X, respectively, and where H 1 (S; C) is identified with H 1 (X; C) via the marking. Therefore, the construction determines a natural map
+(2.1) J : Teich(S) → H(S),
+which is equivariant with respect to the natural group homomorphism Mod(S) → Sp(H 1 (S; R)). It is known that J is surjective and smooth, and the tangent map of J is injective except along the hyperelliptic locus; see [Roy74, Section 3] for more information.
+
+Back to the general setting with (V, ω). There is a unique invariant Riemannian metric on H(V ) with respect to Sp(V ), up to normalization. In fact, (H(V ), Sp(V )) forms a simple Riemannian symmetric space of noncompact type, (and morover, a Hermitian symmetric domain). This metric has been studied by C. L. Siegel systematically in his expository book [Sie64]. Fixing a symplectic basis of V , we can identify V as the real linear space spanned by x 1 , · · · , x p , y 1 , · · · , y p and furnished with the standard symplectic form x * 1 ∧ y * 1 + · · · + x * p ∧ y * p . Then the transformational geometry of the Siegel space (H(V ), Sp(V )) can be identified with Siegel's generalized upper half plane model, on which the invariant metric can be described explicitly. We recall the explicit description below, following Siegel's normalization in [Sie64].
+
+2.3. The generalized upper half plane. For any natural number p, the generalized upper half plane H p of rank p refers to the open subset of symmetric p × pmatrices of complex entries, such that the imaginary parts are positive definite. Namely,
+(2.2) H p = Z ∈ Sym p×p (C) : ℑZ > 0 , where we denote Sym p×p (C) = {Z ∈ Mat p×p (C) : Z † = Z} ( † meaning transpose) and ℑZ = (Z −Z)/2 √ −1 [Sie64, Chapter I, §2
+]. The Riemannian metric tensor of the the Siegel metric at any point Z ∈ H p is defined as 
+(2.3) g S = tr Y −1 · dZ · Y −1 · dZ where we denote Y = ℑZR = R(Z, W ) = (Z − W ) · (Z −W ) −1 · (Z −W ) · (Z − W ) −1
+is defined in Mat p×p (C), with all characteristic roots contained in [0, 1). Hence the series expression
+log 2 1 + R 1/2 1 − R 1/2 = 4R · ∞ m=0
+R m 2m + 1 2 converges absolutely to a matrix in Mat p×p (C). The Siegel distance between the pair of points Z, W ∈ H p can be calculated as
+(2.4) d S (Z, W ) = tr log 2 1 + R 1/2 1 − R 1/2 . See [Sie64, Chapter III, §13].
+The symplectic group Sp(2p, R) acts on H p by generalized fractional linear transformations, as follows. Any matrix ϕ ∈ Sp(2p, R) can be divided into four blocks A, B, C, D ∈ Mat p×p (R), such that the basis transforms as ϕ * ( x 1 · · · x p y 1 · · · y p ) = ( x 1 · · · x p y 1 · · · y p ) A B C D . 
+z 1 = x 1 + √ −1 · y 1 , · · · , z p = x p + √ −1 · y p Hence, V 0,1 = V 1,0 . In general, any point X + √ −1 · Y in H p is the transformation image of √ −1 · I under the symplectic matrix M = I X 0 I · Y 1/2 0 0 Y −1/2 = Y 1/2 X · Y −1/2 0 Y −1/2 ,
+so the Hodge structure corresponding to Z = X + √ −1 · Y has V 1,0 spanned by M z 1 , · · · , M z p .
+
+
+Translation length.
+
+Definition 2.2. For any metric space (X , d X ), the translation length of an isometry σ : X → X is defined as
+ℓ X (σ) = inf x∈X d X (x, σ.x).
+The translation length can be thought of as a function on the isometry group of X ,
+ℓ X : Isom(X ) → [0, +∞).
+This function is clearly invariant under conjugations and inversion. Moreover, it satisfies the following upper semi-continuity with respect to sequences of pointwise convergence.
+
+Lemma 2.3. If (σ m ) m∈N is a sequence of isometries on a metric space (X , d X ) that converges to an isometry ϕ ∞ everywhere in X , then
+lim m→∞ ℓ X (σ m ) ≤ ℓ X (σ ∞ ).
+Proof. For any x ∈ X and ǫ > 0, we obtain d X (x, σ m .x) ≤ d X (x, σ ∞ .x) + ǫ for all sufficiently large m. Then ℓ X (σ m ) ≤ d X (x, σ ∞ .x) + ǫ, and then lim m→∞ ℓ X (σ m ) ≤ d X (x, σ ∞ .x) + ǫ. Taking the infimum over all x ∈ X , we obtain lim m→∞ ℓ X (σ m ) ≤ ℓ X (σ ∞ ) + ǫ. Let ǫ tend to 0+, the asserted inequality follows.
+
+
+The Siegel translation length of symplectic linear transformations
+
+In this section, we figure out the translation length of a symplectic matrix with respect to its fractional linear transformation on the generalized upper half plane and the Siegel metric. This is not a difficult task, the most importantly because symplectic linear transformations have been well understood. In fact, conjugacy classes in Sp(2p, R) have been classified with normal forms all listed. The theory is similar to the well-known Jordan normal form theory for SL(n, R), although notationally more involved. For details of that theory, we refer to J. Gutt [Gu14]. However, we need a few ingredients from [Gu14] in our proof of Theorem 3.1, and we elaborate when we use them.
+
+Theorem 3.1. Let (V, ω) be a finite-dimensional real symplectic vector space. Then, for any symplectic linear transformation ϕ ∈ Sp(V ), the Siegel translation length of ϕ satisfies the formula
+ℓ S (ϕ) = 2 × w(P ϕ )
+where P ϕ denotes the characteristic polynomial of ϕ, and where w denotes the Jensen square sum as defined in (1.3).
+
+The rest of this section is devoted to the proof of Theorem 3.1.
+Lemma 3.2. If V = V 1 ⊕ · · · ⊕ V k is a symplectic orthogonal decomposition of V into symplectic summands V i that are invariant under ϕ. Then ℓ S (ϕ) = ℓ S (ϕ 1 ) 2 + · · · + ℓ S (ϕ k ) 2
+where ϕ i ∈ Sp(V i ) denotes the restricted transformation of ϕ.
+
+Proof. The decomposition induces a natural inclusion H(V 1 )×· · ·×H(V k ) into H(V ). With respect to the cartesian product of Siegel metrics on H(V 1 ) × · · · × H(V k ) and the Siegel metric on H(V ), the inclusion is an isometric embedding with totally geodesic image, by (2.3) and simple observation. Since the Siegel space H(V ) is Hadamard with respect to the Siegel metric, the closest point projection H(V ) → H(V 1 )×· · ·×H(V k ) is well-defined and distance non-increasing; see [BriH99, Chapter II, Corollary 2.5]. It follows that ℓ S (ϕ) is witnessed by some sequence of points in H(V 1 ) × · · · × H(V k ), so it agrees with the translation distance of ϕ acting on H(V 1 )× · · ·× H(V k ). The latter is evidently equal to (ℓ S (ϕ 1 ) 2 + · · ·+ ℓ S (ϕ k ) 2 ) 1/2 . Let (V, ω) be a finite-dimensional real symplectic vector space. For any element ϕ ∈ Sp(V ), it follows from the Jordan-Chevalley decomposition that there is a unique, commutative factorization of ϕ in Sp(V ), ϕ = ϕ ss ϕ u = ϕ u ϕ ss , such that the eigenvectors of ϕ ss span V ⊗ R C, and the only eigenvalue of ϕ u is 1. In fact, the Jordan-Chevalley decomposition in the semisimple real Lie algebra sp(V ) is the same as inherited from gl(V ), and it detemines the factorization in the linear group Sp(V ); see [Hum72,Chapter II,§6.4].
+
+We refer to ϕ ss and ϕ u as the semisimple factor and the unipotent factor of ϕ, respectively. Proof. We say that (V, ϕ) is symplectic simple if ϕ = ϕ ss , and if V contains no nontrivial ϕ-invariant symplectic subspaces. In this case, (V, ϕ) decomposes as a direct sum of symplectic simple transformations (V i , ϕ i ). In view of the Pythagorean formula (Lemma 3.2) for ℓ S (ϕ) and the obvious similar formula for 2 × w(P ϕ ), it suffices to prove the lemma for any symplectic simple transformation.
+
+Any symplectic simple transformation (V, ϕ) is either 2-dimensional central (with a unique eigenvalue λ = ±1 of multiplicity 2), or 2-dimensional hyperbolic (with distinct real eigenvalues {λ, 1/λ}), or 2-dimensional elliptic (with distinct unimodular eigenvalues {λ,λ}), or otherwise, 4-dimensional 'loxodromic' (with distinct complex eigenvalues {λ,λ, 1/λ, 1/λ} off the unit circle and the real axis). See [Gu14, Theorem 1.2] for general normal forms of matrices in Sp(2p, R).
+
+When V is 2-dimensional, the formula for ℓ S (ϕ) is actually well-known. In this case, the Siegel metric on Siegel space H(V ) agrees with the hyperbolic metric on the upper-half complex plane (of constant curvature −1), and Sp(V ) ∼ = SL(2, R) acts the same way as the fractional linear transformations, so
+ℓ S (ϕ) = 0 ϕ central/elliptic |2 log |λ|| ϕ hyperbolic .
+In any of the subcases, ℓ S (ϕ) is equal to 2 × w(P ϕ ), as asserted. When V is 4-dimensional, the Siegel space H(V ) can be identified with the generalized upper half plane H 2 , consisting of all the symmetric complex 2 × 2matrices with positive definite imaginary part. Any symplectic transformation with distinct eigenvalues {λ,λ, 1/λ, 1/λ} can be conjugated in Sp(4, R) into the normal form
+ϕ = A B C D =     ρ · cos θ − sin θ sin θ cos θ ρ −1 · cos θ − sin θ sin θ cos θ    
+denoting ρ = |λ| and θ = arg λ. Recall that ϕ acts isometrically on H 2 as Z → (AZ + B)(CZ + D) −1 . The purely positive imaginary scalar 2 × 2-matrices form a ϕ-invariant geodesic l in the Hadamard manifold H 2 . As the closest point projection H 2 → l is distance non-increasing [BriH99, Chapter II, Corollary 2.5], the translation length of ϕ is realized at every point on l. On l we can apply (2.4) and compute directly
+ℓ S (ϕ) = √ 2 · |2 log |λ|| ,
+which is also 2 × w(P ϕ ), as asserted.
+
+Lemma 3.4.
+ℓ S (ϕ) = ℓ S (ϕ ss )
+Proof. For any r ∈ R, the element ϕ r u ∈ Sp(V ) is well defined via the series expansion (1 + x) r = ∞ j=0 r j x j , because ϕ u − 1 is nilpotent in End R (V ). Moreover, for any r > 0, the element ϕ ss ϕ r u is conjugate to ϕ = ϕ ss ϕ u in Sp(V ). For example, this follows from Gutt's characterization of conjugacy classes; the characterization only uses eigenvalues, and dimensions of generalized eigenspaces, and the ranks and signatures of certain symmetric forms on the generalized eigenspaces, all of which are obviously preserved as r > 0 varies; see [Gu14, Theorem 1.2]. Observe ℓ S is constant on any conjugacy class of Sp(V ). By Lemma 2.3, we obtain
+ℓ S (ϕ) = lim m→∞ ℓ S ϕ ss ϕ 1/m u ≤ ℓ S (ϕ ss ).
+To see the other direction, we observe that symplectic linear transformations with no redundant characteristic roots form a dense open subset of Sp(V ). (In fact, the discriminant of the characteristic polynomial being zero determines an algebraic, proper subset of the real algebraic group Sp(V ), whose interior has to be empty.) Therefore, we can take a sequence (ψ m ) m∈N in Sp(V ), converging to ϕ, such that each ψ m has no redudant characteristic roots. In particular, ψ m are all semisimple. It follows from Lemma 3.3 that the formula in Theorem 3.1 holds for all ℓ S (ψ m ) and for ℓ S (ϕ ss ). Note that ϕ ss has the same characteristic polynomial as that of ϕ, so the characteristic roots of ψ m converge to those of ϕ ss . By Lemma 2.3, we obtain ℓ S (ϕ ss ) = lim
+m→∞ ℓ S (ψ m ) ≤ ℓ S (ϕ).
+We conclude that ℓ S (ϕ) must be equal to ℓ S (ϕ ss ).
+
+Theorem 3.1 follows from Lemmas 3.3 and 3.4.
+
+
+Invariant Riemannian metrics on the Teichmüller space
+
+In this section, we recall some invariant Riemannian metrics or pseudometrics on the Teichmüller space, and also consider similar constructions associated to regular finite covers of the surface. As some of the metrics have name collision in the literature, we rename a few in this paper, not necessarily suggesting an accurate attribution.
+
+
+Ordinary versions.
+
+4.1.1. The Weil-Petersson metric. By the uniformization theorem, there is a unique conformal hyperbolic metric g h on X, (that is, a Riemannian metric of constant curvature −1 conformal to the complex charts). The well-known Gauss-Bonnet theorem implies Area h (X) = −2πχ(S) = 4π × (genus(S) − 1).
+
+With respect to g h , any tangent vector ξ ∈ T X Teich(S) is represented by a unique harmonic Beltrami differential µ ∈ B(X), that is, µ = q/g h for some holomorphic quadratic differential q ∈ Q(X). The Weil-Petersson metric on Teich(S) is the Riemannian metric determined by
+(4.1) ξ 2 WP = X |µ| 2 dArea h = X qq g h
+for any ξ ∈ T X Teich(S) = B(X)/Q(X) ⊥ and the hyperbolic harmonic representative µ = q/g h . The Weil-Petersson metric on Teich(S) has nonpositive sectional curvature. It is not complete, but any pair of points in Teich(S) can be connected with a unique geodesic segment. The mapping class group Mod(S) acting on Teich(S) preserves the Weil-Petersson metric. Moreover, any pseudo-Anosov mapping class f ∈ Mod(S) has an axis, namely, a unique invariant complete geodesic, along which the Weil-Petersson translation length ℓ WP (f ) is realized. See the survey [Wol09] of S. A. Wolpert for more information.
+
+4.1.2. The Habermann-Jost metric. Using the Bergmann metric instead of the hyperbolic metric, we obtain what we call the Habermann-Jost metric on Teich(S). This metric has been studied by L. Habermann and J. Jost [HabJ96] in detail.
+
+For any X ∈ Teich(S), the Bergmann metric g B on X refers to the pullback of the canonical flat metric on Jac(X) = Ω 1 (X) * /H 1 (X; Z) via the Abel-Jacobi map X → Jac(X), which is independent of the auxiliary base point. To avoid confusion about the normalization, one makes sure Area B (X) = genus(S).
+
+The Haberman-Jost metric on Teich(S) is the Riemannian metric determined by
+(4.2) ξ 2 HJ = X |µ| 2 dArea B = X qq g B ,
+for any ξ ∈ T X Teich(S) = B(X)/Q(X) ⊥ and its Bergman harmonic representative µ = q/g B ∈ B(X), for some unique q ∈ Q(X).
+
+Lemma 4.1. Let θ 1 , · · · , θ p be a Hermitian orthonormal basis of Ω 1 (X), where p = dim C Ω 1 (X) is equal to the genus of S. Then, the following formulas hold,
+g B = p j=1 θ jθj ,
+and for any ξ ∈ T X Teich(S) represented uniquely as µ = q/g B ,
+ξ 2 HJ = p j=1 X µθ j µθ j .
+Proof. In fact, the formula for g B in Lemma 4.1 is a usual definition of the Bergman metric on X, and its geometric interpretation is our above description with the Abel-Jacobi map. The formula for HJ in Lemma 4.1 follows immediately from the formula for g B and the defining expression in (4.2). Note that µθ j are differentials of type (1, 0), but not holomorphic in general. For any ξ ∈ T X Teich(S), the Royden-Siegel metric is the Riemannian pseudometric determined by Lemma 4.2. Let θ 1 , · · · , θ p be a Hermitian orthonormal basis of Ω 1 (X), where p = dim C Ω 1 (X) is equal to the genus of S. Then, for any ξ ∈ T X Teich(S) represented by any µ ∈ B(X), the following formula holds, 
+ξ 2 RS = 4 × p j=1 p k=1 X µθ j θ k 2 .ξ 2 RS = 4 × X X µ(x ′ )K(x ′ , x ′′ )µ(x ′′ ),
+where x ′ parametrizes the first X and x ′′ parametrizes the second X. The kernel K(x ′ , x ′′ ) is a holomorphic quadratic differential in the first variable, and an anti-holomorphic quadratic differential in the second variable, and is Hermitian symmetric under switching of the variables. It is explicitly constructed as
+K(x ′ , x ′′ ) = l θ l (x ′ )θ l (x ′′ ) 2 = j k θ j (x ′ )θ k (x ′ )θ j (x ′′ )θ k (x ′′ ),
+indices all ranging over {1, · · · , p}. Plug the last expression into the above double integral, and move the summations out of the integrations. Then the variables separate, and the asserted formula follows.
+
+
+Virtual versions.
+
+Any regular finite covering map S ′ → S induces a canonical embedding Teich(S) → Teich(S ′ ), such that any Riemann surface with marking S → X goes to S ′ → X ′ where X ′ → X is holomorphic and equivariant with S ′ → S. The Royden-Siegel metric on Teich(S ′ ) induces a pseudometric on Teich(S) by restriction. To normalize, we introduce the virtual Royden-Siegel metric on Teich(S) with respect to the regular finite cover S ′ as the Riemannian pseudometric, such that for any ξ ∈ T X Teich(S), we define
+(4.4) ξ 2 RS ′ = ξ ′ 2 RS × 1 [S ′ : S] = J ′ * (ξ ′ ) 2 S × 1 [S ′ : S] ,
+where ξ ′ ∈ T X ′ Teich(S ′ ) denotes the tangent map image of ξ, and where J ′ denotes the natural map Teich(S ′ ) → H(S ′ ) as in (2.1). We introduce the virtual Haberman-Jost metric on Teich(S) with respect to any regular finite cover S ′ as follows. For any X ∈ Teich(S), since the deck transformations on the corresponding X ′ are all biholomorphic, they all preserve the Bergman metric g ′ B on X ′ . Therefore, g ′ B is the pullback of a unique conformal metric g B ′ on X. We notice the relation
+Area B ′ (X) = Area B (X ′ ) [S ′ : S] = genus(S) − 1 + 1 [S ′ : S] .
+For any ξ ∈ T X Teich(S), we define
+ξ 2 HJ ′ = X |µ| 2 dArea B ′ = X qq g B ′ ,
+where µ = q/g B ′ denotes the Beltrami differential representative of ξ that is harmonic with respect to g B ′ . The last expression implies a relation
+ξ 2 HJ ′ = ξ ′ 2 HJ × 1 [S ′ : S] ,
+cover. Then, for all X ∈ Teich(S) and ξ ∈ T X Teich(S), the following convergence holds,
+lim n→∞ ξ HJ ′ n = 1 √ 4π × ξ WP ,
+where the notation n in the subscript indicates the respective cover S ′ n . Morover, the convergence is uniform on any compact set of tangent vectors (X, ξ) on Teich(S).
+
+Proof. For any compact Riemann surface X, Kazhdan [Kaz75] shows that the sequence of virtual Bergmann metrics g B ′ n on X converges uniformly everywhere to the hyperbolic metric g h rescaled by 1/4π (that is, by 1/ √ 4π in length); see [McM13,Appendix] for a clear statement and a short proof. See also Remark 5.3 regarding the assumption on the covering sequence.
+
+For any cotangent vector q in T * X Teich(S) = Q(X), the dual norm squares of q converge as lim n→∞ q 2
+HJ ′ n = lim n→∞ X qq g B ′ n = 4π × X qq g h = 4π × q 2 WP .
+This implies the asserted convergence of norms
+lim n→∞ ξ HJ ′ n = 1 √ 4π × ξ WP ,
+for any tangent vector ξ ∈ T X Teich(S). Moreover, the convergence is uniform on any compact subsets of tangent vectors, because the norm HJ ′ n and WP are continuous functions on the Teichmüller tangent bundle.
+
+Remark 5.3. In the literature, Kazhdan's theorem is classically stated for cofinal towers of regular finite covers of a compact Riemann surface X. However, we can replace 'tower' with 'sequence'. In fact, as is evident from the proof in [McM13,Appendix], the argument only relies on the properties that π 1 (X) acts on all the covers X ′ n , and that X ′ n are all compact, and that the hyperbolic injectivity radii of X ′ n tend to infinity.
+
+
+Proof of the main theorem
+
+This section is devoted to the proof of Theorem 1.1. Let f : S → S be a pseudo-Anosov automorphism on a connected closed orientable surface of genus at least 2. Suppose that (S ′ n , f ′ n ) n∈N is a cofinal sequence of regular finite covers (S ′ n ) n∈N of S together with pseudo-Anosov automorphisms f ′ n : S ′ n → S ′ n lifting f . Let (S ′ , f ′ ) = (S ′ n , f ′ n ) be any term of the above sequence. Denote by J ′ the canonical composite map Teich(S) → Teich(S ′ ) → H(S ′ ), where the first map is the embedding induced by S ′ → S. By definition, the action of f ′ ∈ Mod(S ′ ) on Teich(S ′ ) preserves Teich(S), and extends the action of f ∈ Mod(S) on Teich(S).
+
+For any regular path γ : [0, 1] → Teich(S) with the property γ(1) = f.γ(0), it follows that the induced action f ′ * on H(S) also moves J ′ (γ(0)) to J ′ (γ(1)). We obtain by Theorem 3.1,
+Length S (J ′ • γ) ≥ ℓ S (f ′ * ) = 2 × w(P ),
+where P denotes the characteristic polynomial of f ′ * on H 1 (S ′ ; C). On the other hand, we obtain by Lemma 5.1 and (4.3),
+Length S (J ′ • γ) = Length RS ′ (γ) × [S ′ : S] ≤ 2 × Length HJ ′ (γ) × [S ′ : S].
+Retaining the subscript n, the above inequalities yield w(P n ) [S ′ n : S] ≤ Length HJ ′ n (γ). Passing to limit, we obtain by Lemma 5.2,
+lim n→∞ w(P n ) [S ′ n : S] ≤ Length WP (γ) √ 4π .
+Apply the above inequality to a regular path γ along the Weil-Petersson axis of f . The Weil-Petersson translation length is realized as ℓ WP (f ) = d WP (γ(0), γ(1)) = Length WP (γ). In particular, we obtain the desired inequality,
+lim n→∞ w(P n ) [S ′ n : S] ≤ ℓ WP (f ) √ 4π .
+This completes the proof of Theorem 1.1.
+
+
+Then ϕ being symplectic is equivalent to the conditions A † C = C † A, and D † B = B † D and A † D − C † B = I altogether (I denoting the identity matrix). The action of Sp(2p, R) on H p is explicitlyϕ : Z → (AZ + B) · (CZ + D) −1 for any ϕ ∈ Sp(2p, R) and Z ∈ H p . See [Sie64, Chapter II, § §4-5].Remark 2.1. For any real vector space V of dimension 2p furnished with a symplectic form ω, an identification (H(V ), Sp(V )) ∼ = (H p , Sp(2p, R)) is canonically determined by fixing a symplectic basis of V . Since the canonical identifications V ∼ = R 2p and Sp(V ) ∼ = Sp(2p, R) are obvious, it remains to identify any point Z ∈ H p with a Hodge structure on V ⊗ R C ∼ = C 2p . We first require the distinguished point Z = √ −1 · I to be identified with the Hodge structure V 1,0 ⊕ V 0,1 where V 1,0 is the real linear subspace spanned by the complex vectors:
+
+Lemma 3 . 3 .
+33Theorem 3.1 holds if ϕ = ϕ ss .
+
+4. 1 . 3 .
+13The Royden-Siegel metric. The natural map J : Teich(S) → H(S) and the Siegel metric on H(S) induces a canonical Riemannian pseudometric on Teich(S), degenerating exactly on the hyperelliptic locus. This construction results in what we call the Royden-Siegel metric. In the survey [Roy74], H. L. Royden discusses several such pullback metrics on Teich(S) using canonical differential metrics on H(S).
+
+
+RS = J * (ξ) 2 S , according to our notations in (2.1) and (2.3).
+
+
+and treat the matrix entries of the real and the imaginary parts as coordinates [Sie64, Chapter III, §11]. The Siegel metric g S has nonpositive sectional curvature everywhere [Sie64, Chapter III, §17]. In other words, (H p , g S ) forms a Hadamard manifold, (by definition, simply connected, metric complete, and nonpositively curved).For any pair of points Z, W ∈ H p , the generalized cross-ratio matrix
+where ξ ′ ∈ T X ′ Teich(S ′ ) denotes the tangent map image of ξ.There is no need to introduce any "virtual Weil-Petersson metric", as it would be the same thing as the Weil-Petersson metric. This is because the conformal hyperbolic metric g ′ h on X ′ agrees with the pullback of g h on X. We only mention the obvious relationwhere ξ ′ ∈ T X ′ Teich(S ′ ) denotes the tangent map image of ξ ∈ T X Teich(S).Comparison and convergence of virtual metricsIn this section, we prove two lemmas regarding relation of virtual metrics on the Teichmüller space. The first is an inequality due to Habermann and Jost[HabJ96]in the case of ordinary metrics, and we only carry it onto the virtual version (Lemma 5.1). The second is an application of a well-known theorem due to D. A. Kazhdan[Kaz75], regarding convergence of the Bergmann metrics on finite coverings of Riemann surfaces (Lemma 5.2).Lemma 5.1. Let S be a closed orientable surface of genus at least 2. With respect to any finite regular cover S ′ over S, and for all X ∈ Teich(S) and ξ ∈ T X Teich(S), the following inequality holds,Proof. In the ordinary case, the inequality ξ RS ≤ 2× ξ HJ is the same as [HabJ96, Lemma 6.3], except a constant factor due to normalization; (check the formula (6.5) therein, which has to agree with Royden's normalization of the Siegel metric [Roy74, Eq. (15) on p. 397], rather than Siegel's[Sie64,Eq.(2) on p. 3]). For the reader's convenience, below we derive the inequality quickly from Lemmas 4.1 and 4.2, following the same idea as in[HabJ96].Note that it suffices to prove the ordinary case S ′ = S, otherwise arguing with S ′ and dividing both sides by [S ′ : S]. Fix an orthonormal basis of holomorphic differentials θ 1 , · · · , θ p in Ω 1 (X). Let µ = q/g B be a Bergmann harmonic Beltrami differential representative of ξ. We denote by η j (µ) ∈ Ω 1 (X) the orthogonal summand of the (1, 0)-differential µθ j ∈ A 1,0 (X), namely,for any j = 1, · · · , p. Since θ 1 , · · · , θ j are orthonormal, we obtain by Lemma 4.2,Then the asserted inequality follows.Lemma 5.2. Let S be a closed orientable surface of genus at least 2. Suppose (S ′ n → S) n∈N is a sequence of finite regular covers converging to the universal
+Metric Spaces of Non-Positive Curvature. Grundlehren der mathematischen Wissenschaften. M R Bridson, A Haefliger, Springer-Verlag319BerlinM. R. Bridson and A. Haefliger, Metric Spaces of Non-Positive Curvature. Grundlehren der mathematischen Wissenschaften, 319. Springer-Verlag, Berlin, 1999.
+
+Heights of Polynomials and Entropy in Algebraic Dynamics. G Everest, T Ward, Springer-Verlag London, LtdLondonUniversitextG. Everest and T. Ward, Heights of Polynomials and Entropy in Algebraic Dynamics, Universitext, Springer-Verlag London, Ltd., London, 1999.
+
+Normal forms for symplectic matrices. J Gutt, Portugal. Math. (N.S.). 71J. Gutt, Normal forms for symplectic matrices, Portugal. Math. (N.S.) 71 (2014), 109- 139.
+
+Riemannian metrics on Teichmüller space. L Habermann, J Jost, Manuscripta Math. 89L. Habermann and J. Jost, Riemannian metrics on Teichmüller space, Manuscripta Math. 89 (1996), 281-306.
+
+Teichmüller theory. With contributions by A. J H Hubbard ; Douady, W Dunbar, R Roeder, S Bonnot, D Brown, A Hatcher, C Hruska, S Mitra, Teichmüller theory and Applications to Geometry, Topology, and Dynamics. Ithaca, NY1J. H. Hubbard, Teichmüller theory and Applications to Geometry, Topology, and Dy- namics. Vol. 1. Teichmüller theory. With contributions by A. Douady, W. Dunbar, R. Roeder, S. Bonnot, D. Brown, A. Hatcher, C. Hruska and S. Mitra. Matrix Editions, Ithaca, NY, 2006.
+
+Introduction to Lie Algebras and Representation Theory. J E Humphreys, Graduate Texts in Mathematics. 9Springer-VerlagJ. E. Humphreys, Introduction to Lie Algebras and Representation Theory, Graduate Texts in Mathematics, Vol. 9. Springer-Verlag, New York-Berlin, 1972.
+
+On arithmetic varieties. D A Kazhdan, Lie groups and their representations (Proc. Budapest; Halsted, NewYorkSummer SchoolD. A. Kazhdan, "On arithmetic varieties", Lie groups and their representations (Proc. Summer School, Bolyai János Math. Soc., Budapest, 1971), pp. 151-217, Halsted, NewYork 1975.
+
+Normalized entropy versus volume for pseudo-Anosovs. S Kojima, G Mcshane, Geom. Topol. 22S. Kojima and G. McShane, Normalized entropy versus volume for pseudo-Anosovs, Geom. Topol., 22 (2018), 2403-2426.
+
+Higher Mahler measures and zeta functions. N Kurokawa, M Lalin, H Ochiai, Acta Arith. 135N. Kurokawa, M. Lalin, H. Ochiai, Higher Mahler measures and zeta functions, Acta Arith. 135 (2008), 269-297.
+
+Homology torsion growth and Mahler measure. T T Q Lê, Comment. Math. Helv. 89T. T. Q. Lê, Homology torsion growth and Mahler measure, Comment. Math. Helv. 89 (2014), 719-757.
+
+Growth of homology torsion in finite coverings and hyperbolic volume. T T Q Lê, Ann. Inst. Fourier, Grenoble. 68T. T. Q. Lê, Growth of homology torsion in finite coverings and hyperbolic volume, Ann. Inst. Fourier, Grenoble 68 (2018), 611-645.
+
+Virtual homological spectral radii for automorphisms of surfaces. Y Liu, J. Amer. Math. Soc. 334Y. Liu, Virtual homological spectral radii for automorphisms of surfaces, J. Amer. Math. Soc. 33 (2020), no. 4, 1167-1227.
+
+L 2 -Invariants: Theory and Applications to Geometry and K-Theory, Ergebnisse der Mathematik und ihrer Grenzgebiete. W Lück, SpringerBerlinW. Lück, L 2 -Invariants: Theory and Applications to Geometry and K-Theory, Ergeb- nisse der Mathematik und ihrer Grenzgebiete. Springer, Berlin, 2002.
+
+Entropy on Riemann surfaces and the Jacobians of finite covers. C T Mcmullen, Comm. Math. Helv. 88C. T. McMullen, Entropy on Riemann surfaces and the Jacobians of finite covers, Comm. Math. Helv. 88 (2013), 953-964.
+
+Invariant metrics on Teichmüller space. H L Royden, Contributions to Analysis (a collection of papers dedicated to Lipman Bers). New YorkAcademic PressH. L. Royden, "Invariant metrics on Teichmüller space", Contributions to Analysis (a collection of papers dedicated to Lipman Bers), pp. 393-399. Academic Press, New York, 1974.
+
+. C L Siegel, Symplectic Geometry, Academic PressNew York-LondonC. L. Siegel, Symplectic Geometry. Academic Press, New York-London, 1964.
+
+The Weil-Petersson metric geometry. S A Wolpert, Handbook of Teichmüller Theory. ZürichIICenter for Mathematical Research, Peking UniversityBeijing InternationalChina P.R.. Email address: liuyi@bicmr.pku.edu.cnS. A. Wolpert, "The Weil-Petersson metric geometry". In: Handbook of Teichmüller Theory. Vol. II, pp. 47-64, IRMA Lect. Math. Theor. Phys., 13, Eur. Math. Soc., Zürich, 2009. Beijing International Center for Mathematical Research, Peking University, Bei- jing 100871, China P.R. Email address: liuyi@bicmr.pku.edu.cn

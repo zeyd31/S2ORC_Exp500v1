@@ -1,0 +1,252 @@
+
+Output Feedback Consensus for Networked Heterogeneous Nonlinear Negative-Imaginary Systems with Free Body Motion
+Jul 2021
+
+Kanghong Shi 
+Fellow, IEEEIan R Petersen 
+Igor G Vladimirov 
+Output Feedback Consensus for Networked Heterogeneous Nonlinear Negative-Imaginary Systems with Free Body Motion
+Jul 2021Index Terms-nonlinear Negative-Imaginary systemsfree body motionheterogeneous systemsconsensusrobust control
+This paper provides a protocol to address the robust output feedback consensus problem for networked heterogeneous nonlinear negative-imaginary (NI) systems with free body dynamics. We extend the definition of nonlinear NI systems to allow for systems with free body motion. A new stability result is developed for the interconnection of a nonlinear NI system and a nonlinear output strictly negative-imaginary (OSNI) system. Also, a class of networked nonlinear OSNI controllers is proposed to achieve output feedback consensus for heterogeneous networked nonlinear NI systems. We show that in this control framework, the system outputs converge to the same limit trajectory. This consensus protocol is illustrated by a numerical example.
+
+This control paradigm enables multiple systems to perform team missions and has been applied on autonomous vehicles including mobile robots, unmanned air vehicles (UAVs), autonomous underwater vehicles (AUVs) and other applications [22]. Consensus, that is convergence to an agreement through information sharing among agents, is one of the most important problems in the area of cooperative control [23]. Consensus algorithms were first studied for first-order dynamics (see [24]- [26], etc) and then extended to secondorder systems (see [27]- [30], etc).
+
+As NI properties arise naturally in autonomous vehicles and a wide variety of other applications [31], consensus problems were investigated in [8] for heterogeneous NI systems. Using NI systems theory, the consensus algorithms in [8] only require outputs of the agents, and consensus is guaranteed if a simple DC gain condition is satisfied. The theoretical result presented in [8] has already been applied to real-world cooperative control problems (see [32]- [36]). However, this result is restricted to linear systems. Motivated by nonlinear NI systems theory, the result of [8] has been recently extended in [37], which provides a protocol that achieves output feedback consensus for networked heterogeneous nonlinear NI systems. However, [37] uses the definition of nonlinear NI systems from [19], which excludes systems with free body motion such as integrators.
+
+In this work, we use an alternative definition for a class of nonlinear NI systems to include systems with free body motion. We obtain a stability result for the interconnection of a nonlinear NI system and a nonlinear output strictly negative-imaginary (OSNI) system (see also [38] and [39] for linear OSNI systems), where nonlinear OSNI systems are also redefined to allow direct feedthrough from the input to the output. Then we consider the output feedback consensus problem for multiple nonlinear NI systems with different state-space models. We aim to find a control protocol such that the difference between the outputs of any two agents connected in a network converges to zero. We model the communication between multiple nonlinear NI systems using an undirected connected graph, where the nonlinear NI plants and the nonlinear OSNI controllers correspond to the nodes and the edges of the graph, respectively. Each controller takes the difference between the outputs of the two plants connected to it as input and feeds back its output to the plants. This forms an augmented system whose stability is investigated in order to achieve output consensus for the nonlinear NI plants. We prove the networked nonlinear NI plants act as an augmented nonlinear NI system and the networked nonlinear OSNI controllers act as an augmented nonlinear OSNI system. Therefore, the entire networked control system can be regarded as the interconnection of a nonlinear NI system and a nonlinear OSNI system. Similarly to the stability result mentioned above, an extended stability result is established for the networked control system that guarantees output consensus. This shows that for networked heterogeneous nonlinear NI systems satisfying certain assumptions, output feedback consensus can be achieved by using suitable nonlinear OSNI controllers in the proposed control framework. The control framework is robust with respect to bounded perturbations in the system models for both the nonlinear NI plants and the nonlinear OSNI controllers.
+
+This paper contributes an output feedback consensus protocol for networked heterogeneous nonlinear NI systems with free body motion. This work differs from the related previous results in the following aspects: [19] defines nonlinear NI systems but does not allow for systems with free body motion while this work does; [20] only considers consensus for agents with the same model while this work allows agents to have different state-space models; [20] and [37] only deal with consensus problems for nonlinear NI systems without free body motion while this restriction is lifted in this work. This work can also be regarded as an extension of the papers [18] and [8] to nonlinear systems.
+
+Notation: The notation in this paper is standard. R and C denote the fields of real and complex numbers, respectively. R m×n and C m×n denote the spaces of real and complex matrices of dimension m × n, respectively. A T and A * denote the transpose and complex conjugate transpose of a matrix A, respectively. λ max (·) denotes the maximum eigenvalue of a matrix with only real eigenvalues. A ⊗ B denotes the Kronecker product of matrices A and B.· denotes a constant value for a given vector or scalar signal. · denotes the Euclidean norm of a vector. I n is the n×n identity matrix. For a nonlinear dynamical system H with input u and output y, y = H(u) describes its input-output relationship. diag{a 1 , a 2 , · · · , a l } represents a diagonal matrix with the values a 1 , a 2 , · · · , a l on its diagonal.
+
+Graph Theory Preliminaries: G = (V, E), where V = {v 1 , v 2 , · · · , v N } and E = {e 1 , e 2 , · · · , e l } ⊆ V ×V, describes an undirected graph with N nodes and l edges. The corresponding symmetric adjacency matrix A = [a ij ] ∈ R N ×N is defined so that a ii = 0, and ∀i = j, a ij = 1 if (v i , v j ) ∈ E and a ij = 0 otherwise. A sequence of unrepeated edges in E that joins a sequence of nodes in V defines a path. An undirected graph is connected if there is a path between every pair of nodes. Given an undirected graph G, a corresponding directed graph can be obtained by defining a direction for each edge of G. The incidence matrix Q = [q ev ] ∈ R l×N of a directed graph is defined so that the elements in Q are given by
+q ev :=      1
+if v is the initial vertex of edge e, −1 if v is the terminal vertex of edge e, 0
+
+if v does not belong to edge e.
+
+In this paper, the initial and terminal vertices of an edge in a directed graph can both send information to each other via the corresponding controller. For an undirected graph G, the choice of a corresponding directed graph is not unique. However, the Laplacian matrix L N of G has the following relationship with the incidence matrix Q of any directed graph corresponding to G: L N = Q T Q.
+
+
+II. AN INITIAL STABILITY RESULT
+
+In this section, new definitions of nonlinear NI and nonlinear OSNI systems are provided and a new stability result is established for the interconnection of a single nonlinear NI system and a single nonlinear OSNI system. The new stability result is applicable to nonlinear NI systems with free body motion, which are excluded in the previous stability result given in [20].
+
+Consider the following general nonlinear system:
+x(t) = f (x(t), u(t)),(1)y(t) = h(x(t)) + Du(t),(2)
+where x(t) ∈ R n is the state, u(t) ∈ R m is the input, and
+y(t) ∈ R m is the output, f : R n × R m → R n is a Lipschitz continuous function, h : R n → R m is a class C 1 function and D ∈ R m×m is a symmetric matrix; i.e., D = D T .
+Definition 1: The system (1), (2) is said to be a nonlinear negative-imaginary (NI) system if there exists a positive semidefinite storage function V :
+R n → R of class C 1 such thatV (x(t)) ≤ u(t) Tẏ (t),(3)for all t ≥ 0, whereỹ (t) = h(x(t)).(4)
+In contrast to Definition 3 in [19], which excludes linear NI systems with poles at the origin, Definition 1 now includes all linear NI systems satisfying the definition given in [18] by allowing the storage function of the system to be positive semidefinite instead of positive definite.
+
+Definition 2: The system (1), (2) is said to be a nonlinear output strictly negative-imaginary (OSNI) system if there exists a positive semidefinite storage function V : R n → R of class C 1 and a scalar ǫ > 0 such thaṫ
+V (x(t)) ≤ u(t) Tẏ (t) − ǫ ẏ (t) 2 ,(5)
+for all t ≥ 0, whereỹ(t) is as defined in (4). In this case, we also say that system (1), (2) is nonlinear OSNI with degree of output strictness ǫ.
+
+In this paper, nonlinear OSNI systems defined as in Definition 2 are applied as controllers to achieve the robust output feedback consensus for networked heterogeneous nonlinear NI systems defined as in Definition 1. First, we provide a stability result for a single feedback interconnection of nonlinear NI systems.
+
+Consider a multiple-input multiple-output (MIMO) nonlinear NI system H 1 with the following state-space model:
+H 1 :ẋ 1 (t) = f 1 (x 1 (t), u 1 (t)),(6)y 1 (t) = h 1 (x 1 (t)),(7)
+where x 1 (t) ∈ R n is the state, u 1 (t) ∈ R m is the input, and
+y 1 (t) ∈ R m is the output, f 1 : R n × R m → R n is a Lipschitz continuous function and h 1 : R n → R m is a class C 1 function.
+For the system H 1 with the state-space model (6), (7), we suppose the following assumption is satisfied.
+
+Assumption I: When the system H 1 is in steady state; i.e., u 1 (t) ≡ū 1 , x 1 (t) ≡x 1 and y 1 (t) ≡ȳ 1 , we haveū T 1ȳ1 ≥ 0. For nonlinear NI systems, Assumption I corresponds to the property of linear NI systems stated in Lemma 2 in [1].
+
+Consider a MIMO nonlinear OSNI system H 2 with the following state-space model:
+H 2 :ẋ 2 (t) = f 2 (x 2 (t), u 2 (t)), (8) y 2 (t) = h 2 (x 2 (t)) + D 2 u 2 (t),(9)
+where x 2 (t) ∈ R n is the state, u 2 (t) ∈ R m is the input, and
+y 2 (t) ∈ R m is the output, f 2 : R n × R m → R n is a Lipschitz continuous function, h 2 : R n → R m is a class C 1 function and D 2 ∈ R m×m is a symmetric matrix; i.e., D 2 = D T 2 .
+For the system H 2 with the state-space model (8), (9), we suppose that the following assumption is satisfied.
+
+Assumption II: When the system H 2 is in steady state; i.e., u 2 (t) ≡ū 2 , x 2 (t) ≡x 2 and y 2 (t) ≡ȳ 2 , we haveū T 2ȳ 2 ≤ −γ ū 2 2 with γ > 0. It might be observed that as nonlinear OSNI systems belong to a subclass of nonlinear NI systems, Assumption II seems to have a conflicting relationship with Assumption I. In fact, Assumption II can be satisfied because of the term D 2 u 2 (t) in the output equation (9) and it corresponds to the inequality (61) for linear NI systems in [18].
+
+In addition, both of the systems H 1 and H 2 are assumed to satisfy the following assumptions. For the system H 1 with input u 1 (t), state x 1 (t) and output y 1 (t) = h 1 (x 1 (t)) described by the state-space model (6), (7) and the system H 2 with input u 2 (t), state x 2 (t) and the auxiliary output y 2 (t) = h 2 (x 2 (t)) described by the state-space model (8), (9), we suppose for i = 1 and 2, the following conditions are satisfied.
+
+Assumption III:
+Over any time interval [t a , t b ] where t b > t a , h i (x i (t)) remains constant if and only if x i (t) remains constant; i.e.,ḣ i (x i (t)) ≡ 0 ⇐⇒ẋ i (t) ≡ 0. Moreover, h i (x i (t)) ≡ 0 ⇐⇒ x i (t) ≡ 0. Assumption IV: Over any time interval [t a , t b ] where t b > t a , x i (t) remains constant only if u i (t) remains constant; i.e., x i (t) ≡x i =⇒ u i (t) ≡ū i . Moreover, x i (t) ≡ 0 =⇒ u i (t) ≡ 0.
+In the case of linear systems, Assumption III corresponds to observability and Assumption IV corresponds to the B matrix in the realisation (A, B, C, D) of the linear system having full column rank. Theorem 1: Consider the closed-loop positive feedback interconnection of the system H 1 with state-space model (6), (7) and H 2 with state-space model (8), (9), as shown in Fig. 1. Suppose that Assumptions I-IV are satisfied, and the storage function, defined as
+W (x 1 , x 2 ) := V 1 (x 1 ) + V 2 (x 2 ) − h 1 (x 1 ) T h 2 (x 2 ) − 1 2 h 1 (x 1 ) T D 2 h 1 (x 1 ),(10)
+is positive definite, where V 1 (x 1 ) and V 2 (x 2 ) are positive semidefinite storage functions that satisfy (3) for the system H 1 and (5) for the system H 2 , respectively. Then, the closedloop interconnection of the systems H 1 and H 2 is asymptotically stable.
+
+Proof: According to the nonlinear NI property (3) for the system H 1 , the nonlinear OSNI property (5) for the system H 2 and the system setting u 1 (t) ≡ y 2 (t) and u 2 (t) ≡ y 1 (t) in Fig. 1, we havė
+V 1 (x 1 ) ≤ u T 1ẏ1 = y T 2ẏ1 =[h 2 (x 2 ) + D 2 u 2 ] Tḣ 1 (x 1 ) =[h 2 (x 2 ) + D 2 y 1 ] Tḣ 1 (x 1 ) =[h 2 (x 2 ) + D 2 h 1 (x 1 )] Tḣ 1 (x 1 ),(11)andV 2 (x 2 ) ≤ u T 2ẏ2 − ǫ ẏ 2 2 = y T 1ẏ2 − ǫ ẏ 2 2 = h 1 (x 1 ) Tḣ 2 (x 2 ) − ǫ ḣ 2 (x 2 ) 2 ,(12)
+where the above equalities also use (7) and (9). We obtain the time derivative of the storage function W (x 1 , x 2 ) in (10) using (11) and (12):
+W (x 1 , x 2 ) =V 1 (x 1 ) +V 2 (x 2 ) −ḣ 1 (x 1 ) T h 2 (x 2 ) − h 1 (x 1 ) Tḣ 2 (x 2 ) − h 1 (x 1 ) T D 2ḣ1 (x 1 ) ≤ [h 2 (x 2 ) + D 2 h 1 (x 1 )] Tḣ 1 (x 1 ) + h 1 (x 1 ) Tḣ 2 (x 2 ) − ǫ ḣ 2 (x 2 ) 2 −ḣ 1 (x 1 ) T h 2 (x 2 ) − h 1 (x 1 ) Tḣ 2 (x 2 ) − h 1 (x 1 ) T D 2ḣ1 (x 1 ) = − ǫ ḣ 2 (x 2 ) 2 ≤ 0.(13)
+From this it follows thatẆ (x 1 , x 2 ) = 0 is only possible wheṅ h 2 (x 2 ) = 0. Hence,Ẇ (x 1 , x 2 ) can remain zero only ifḣ 2 (x 2 ) remains zero; i.e.,Ẇ (x 1 , x 2 ) ≡ 0 =⇒ḣ 2 (x 2 (t)) ≡ 0. According to Assumptions III and IV,ḣ 2 (x 2 (t)) ≡ 0 =⇒ x 2 (t) ≡ 0 =⇒ u 2 (t) ≡ū 2 . Hence, the system H 2 is in steady-state. According to the system setting in Fig. 1, y 1 (t) ≡ u 2 (t). Hence, using Assumptions III and IV,ẏ 1 (t) ≡ 0 =⇒ x 1 (t) ≡ 0 =⇒ u 1 (t) ≡ū 1 . Thus, the system H 1 is also in steady-state. Then, according to Assumption II, we havē
+u T 2ȳ 2 ≤ −γ ū 2 2 .
+Ifū 2 = 0, thenū T 2ȳ 2 = 0. According to Assumptions III and IV, and the system setting in Fig. 1,ū 2 = 0 =⇒ȳ 1 = 0 =⇒ x 1 = 0 =⇒ū 1 = 0 =⇒ȳ 2 = 0 =⇒x 2 = 0. Hence, in this case, the system is in equilibrium. Otherwise, ifū 2 = 0, we haveū T 2ȳ2 < 0.
+
+Also, according to Assumption I, we havē
+u T 1ȳ 1 ≥ 0.(15)
+According to the system setting in Fig. 1, we haveū 1 =ȳ 2 andȳ 1 =ū 2 . Hence, (15) can be rewritten as u T 2ȳ2 ≥ 0, which contradicts (14). Thus, we can conclude thatẆ (x 1 , x 2 ) cannot remain zero unless x 1 = x 2 = 0. Thus, according to LaSalle's invariance principle, W (x 1 , x 2 ) will keep decreasing until W (x 1 , x 2 ) = 0. Hence, the equilibrium at (x 1 , x 2 ) = (0, 0) of the closed-loop interconnection is asymptotically stable.
+
+
+III. OUTPUT FEEDBACK CONSENSUS
+
+Consider N heterogeneous nonlinear plants H pi (i = 1, 2, · · · , N ) described as
+H pi :ẋ pi (t) = f pi (x pi (t), u pi (t)), (16) y pi (t) = h pi (x pi (t)),(17)
+where x pi (t) ∈ R n is the state, u pi (t) ∈ R m is the input, and y pi (t) ∈ R m is the output, f pi : R n × R m → R n are Lipschitz continuous functions and h pi : R n → R m are class C 1 functions. These systems operate independently in parallel and each of them has its own input u pi ∈ R m and output y pi ∈ R m , (i = 1, 2, · · · , N ), which is shown in Fig. 2. The subscript "p" indicates that this system will play the role of a plant in what follows. We combine the inputs and outputs respectively as the vectors  (16) and (17), with independent inputs and outputs combined as the input and output of the networked system Hp.
+U p = [u T p1 , u T p2 , · · · , u T pN ] T ∈ R N m×1 and Y p = [y T p1 , y T p2 , · · · , y T pN ] T = [h p1 (x p1 ) T , h p2 (x p2 ) T , · · · , h pN (x pN ) T ] T ∈ R N m×1 ,
+Let us consider the networked plants connected according to the graph network topologyĤ p as shown in Fig. 3, where Q is the incidence matrix of a directed graph that represents the communication links between the heterogeneous nonlinear NI plants.
+
+For the systemĤ p shown in Fig. 3, we have the following lemma: Lemma 1: If the plants H pi are nonlinear NI systems for all i = 1, 2, · · · , N , then the networked plantĤ p is also a nonlinear NI system.
+H p H p1 H p2 H pN U p Y p . . . H p U pŶp Q ⊗ I m Q T ⊗ I m
+Proof: According to Definition 1, each nonlinear NI system H pi (i = 1, 2, · · · , N ) must have a corresponding positive semidefinite storage function V pi (x pi ) such thatV pi (x pi ) ≤ u T piẏ pi , where x pi is the state of the system H pi . We define the storage function for the systemĤ p asV
+p = N i=1 V pi (x pi ), which is positive semidefinite. Theṅ V p = N i=1V pi (x pi ) ≤ N i=1 u T piẏpi = U T pẎp .(18)
+LetÛ p andŶ p denote the input and output of the systemĤ p , respectively. According to the system setting in Fig. 3, we have
+U p = (Q T ⊗ I m )Û p , andŶ p = (Q ⊗ I m )Y p .
+Therefore, we have
+U T p Y p = [(Q T ⊗ I m )Û p )] T Y p =Û T p (Q ⊗ I m )Y p =Û T pŶp .(19)
+According to (18) and (19), we obtain the nonlinear NI inequality for the systemĤ p :
+V p ≤Û T pẎp .(20)
+Therefore,Ĥ p is a nonlinear NI system. Now we give a definition of output feedback consensus for a network of systems as shown in Fig. 2.
+
+Definition 3: A distributed output feedback control law achieves output feedback consensus for a network of systems if |y pi (t) − y pj (t)| → 0 as t → +∞, ∀i, j ∈ {1, 2, · · · , N }.
+
+Consider a series of heterogeneous nonlinear OSNI controllers H ck (k = 1, 2, · · · , l) applied at the edges in the network. The OSNI controllers have the following state-space models:
+H ck :ẋ ck (t) = f ck (x ck (t), u ck (t)), (21) y ck (t) = h ck (x ck (t)) + D ck u ck (t),(22)
+where x ck (t) ∈ R q is the state, u ck (t) ∈ R m is the input, and y ck (t) ∈ R m is the output, f ck : R q × R m → R q are Lipschitz continuous functions, h ck : R q → R m are class C 1 functions and D ck ∈ R m×m are symmetric matrices. These systems operate independently in parallel and each of them has its own input u ck ∈ R and output y ck ∈ R, k = 1, 2, · · · , l, which is shown in Fig. 4. The subscript "c" indicates that this system will play the role of a controller in what follows. We combine the inputs and outputs respectively as the vectors
+U c = [u T c1 , u T c2 , · · · , u T cl ] T ∈ R lm×1 and Y c = [y T c1 , y T c2 , · · · , y T cl ] T = Π c + D c U c ∈ R lm×1 , where Π c =      h c1 (x c1 ) h c2 (x c2 ) . . . h cl (x cl )      ∈ R lm×1 ,(23)
+and
+D c = diag{D c1 , D c2 , · · · , D cl } ∈ R lm×lm .(24)
+ag replacements
+H c u c1 y c1 u c2 y c2 u cl y cl H c1 H c2 H cl . . . . . .
+. . . Fig. 4. A controller Hc consisting of l independent and heterogeneous nonlinear OSNI systems H ck (k = 1, 2, · · · , l) in (21) and (22), with independent inputs and outputs combined as the input and output of the networked system Hc.
+
+
+Lemma 2:
+
+If the controllers H ck are nonlinear OSNI systems for all k = 1, 2, · · · , l, then the networked controller H c is also a nonlinear OSNI system.
+
+Proof: For every nonlinear OSNI system H ck , we have a positive semidefinite storage function V ck (x ck ) and a constant ǫ k > 0 such thaṫ
+V ck (x ck ) ≤ u T ckẏck − ǫ k ẏ ck 2 ,(25)
+whereỹ ck = h ck (x ck ) and ǫ k is the level of output strictness of the system H ck . For the system H c , we define its storage function V c as the sum of the storage functions of all the networked controllers; i.e.,V c := l k=1 V ck (x ck ), which is positive semidefinite. The time derivative of V c is:
+V c = l k=1V ck (x ck ) ≤ l k=1 u T ckẏ ck − l k=1 ǫ k ẏ ck 2 ≤ l k=1 u T ckẏck − ǫ min l k=1 ẏ ck 2 = U T cΠ c − ǫ min Π c 2 ,(26)
+where ǫ min = min{ǫ 1 , ǫ 2 , · · · , ǫ l }. Hence, the system H c satisfies the definition of a nonlinear OSNI system and ǫ min quantifies a level of output strictness of the system. This completes the proof. Now consider the closed-loop positive feedback interconnection of the networked plants shown in Fig. 3 and the networked controllers shown in Fig. 4, which is depicted in Fig. 5. In this paper, robust output consensus of heterogeneous nonlinear NI plants is achieved by constructing a control system with the block diagram shown in Fig. 5 and choosing suitable controllers that satisfy certain conditions. Detailed description of the control framework in Fig. 5 can be found in [37], which uses a similar control framework. As is shown in Fig. 5, the control input for the networked plant H p is
+
+
+PSfrag replacements
+H p H c H p1 H p2 H pN H c1 H c2 H cl U p Y p U c Y c . . . . . . H p U pŶp Q T ⊗ I m Q ⊗ I mU p = (Q T ⊗ I m )H c ((Q ⊗ I m )Y p ) ,(27)
+where Q is the incidence matrix of the directed graph that represents the communication links between the heterogeneous nonlinear NI plants. Equivalently, the distributed control protocol for the plant H i (i = 1, 2, · · · , N ) is defined by the equationsẋ
+ck (t) = f ck   x ck (t), N j=1 q kj y pj   ,(28)y ck (t) = h ck (x ck (t)) + D ck N j=1 q kj y pj ,(29)u pi = l k=1 q ki y ck ,(30)
+where q kj and q ki are the j-th and i-th elements in the k-th row of the incidence matrix Q, respectively. Here, N j=1 q kj y pj represents the difference between the outputs of the two plants connected by the edge e k .
+
+Before we present the main result, let us make another assumption. For the systemĤ p with inputÛ p (t) and output Y p (t), we suppose the following assumption is satisfied.
+
+Assumption V: Given a constant inputÛ p (t) ≡Ū p to the systemĤ p , if its output is also constant; i.e.,Ŷ p (t) ≡Ȳ p , then U p andȲ p satisfyŪ T pȲ p ≥ 0. In fact, Assumption I implies Assumption V in the case that all the plants H pi are in steady state. This is because when all the plants satisfy Assumption I and are in steady state, we haveŪ T pȲp ≥ 0 and according to the system Consider four nonlinear NI plants H pi at the vertices v i of the graph in Fig. 6. We choose directions of the edges as
+e 1 = (v 1 , v 2 ), e 2 = (v 2 , v 3 ), e 3 = (v 2 , v 4 ) and e 4 = (v 3 , v 4 ).
+Then the incidence matrix of the directed graph corresponding to G is
+Q =     1 −1 0 0 0 1 −1 0 0 1 0 −1 0 0 1 −1     .
+The plants are nonlinear single integrators which have the following state-space models:
+
+H pi :ẋ pi (t) = µ i u 3 pi (t), y pi (t) = x pi (t), i = 1, 2, · · · , 4, where µ 1 = 10, µ 2 = 30, µ 3 = 25 and µ 4 = 5 are constant coefficients. The storage functions for these four plants are all V pi (x pi ) = 0. The states x p1 , x p2 , x p3 and x p4 of these four plants have initial values 30, 15, −5 and −10, respectively. We aim to synchronise the outputs of these four plants to the same limit trajectory by using nonlinear OSNI controllers H ck at the edges e k of the graph in Fig.6.
+H ck :ẋ ck (t) = − α k x ck (t) − β k x 3 ck (t) + u ck (t), y ck (t) = x ck (t) − u ck (t), k = 1, 2, · · · , 4,
+where α k and β k are constant coefficients. α 1 = 5, α 2 = 8, α 3 = 7, α 4 = 3; β 1 = 3, β 2 = 2, β 3 = 5 and β 4 = 2, respectively.
+
+The storage functions of Controllers 1, 2, 3 and 4 are V c1 =
+5 2 x 2 c1 + 3 4 x 4 c1 , V c2 = 4x 2 c2 + 1 2 x 4 c2 , V c3 = 7 2 x 2 c3 + 5 4 x 4 c3 and V c4 = 3 2 x 2 c4 + 1 2 x 4
+c4 , respectively. The networked plant systemĤ p in this example is given by the equations:
+x 1 = 10û 3 1 + 30(û 1 −û 2 −û 3 ) 3 , x 2 = 30(−û 1 +û 2 +û 3 ) 3 + 25(û 2 −û 4 ) 3 , x 3 = 30(−û 1 +û 2 +û 3 ) 3 + 5(û 3 +û 4 ) 3 , x 4 = 25(−û 2 +û 4 ) 3 + 5(û 3 +û 4 ) 3 , y 1 =x 1 ,ŷ 2 =x 2 ,ŷ 3 =x 3 ,ŷ 4 =x 4 .
+The storage function of the closed-loop system provided by Theorem 2 takes the form x 4 x c4
+W = 5 2 x 2 c1 + 3 4 x 4 c1 + 4x 2 c2 + 1 2 x 4 c2 + 7 2 x 2 c3 + 5 4 x 4 c3 + 3 2 x 2 c4 + 1 2 x 4 c4 −x 1 x c1 −x 2 x c2 −x 3 x c3 −x 4 x c4 + 1 2x 2 1 + 1 2x 2 2 + 1 2x 2 3 + 1 2x 2 4 = x 1 x c1 1 2 − 1 2 − 1 2 5 2 x 1 x c1 + 3 4 x 4 c1 + x 2 x c2 1 2 − 1 2 − 1 2 4 x 2 x c2 + 1 2 x 4 c2 + x 3 x c3+ 1 2 x 4 c4 ,
+which is positive definite. Assumptions II-V in Sections II and III are satisfied. Output feedback consensus is achieved, as shown in Fig. 7. Because of the cubic nonlinearity in the plants and the controllers, their outputs have different rates of convergence in the domains where the states are far and close to the limit values. Therefore, a log scale is used for the time axis in the plot shown in Fig. 7.
+
+
+V. CONCLUSION
+
+This paper provides a control framework to achieve robust output feedback consensus for networked heterogeneous nonlinear NI systems including systems with free body motion, using nonlinear OSNI controllers. New definitions for nonlinear NI systems and nonlinear OSNI systems are given and a stability result is established for the simple feedback interconnection of a nonlinear NI plant and a nonlinear OSNI controller. A networked control framework is then considered by modelling the communication topology between systems as a connected graph, where the plants are nodes and the controllers are edges. The network of nonlinear NI plants and the network of OSNI controllers are proved to be a nonlinear NI system and a nonlinear OSNI system, respectively. Under reasonable assumptions, output feedback consensus is established for the networked heterogeneous nonlinear NI systems, and the result is robust against variations in the system models of both the plants and controllers provided that the relevant nonlinear NI and nonlinear OSNI properties are preserved. Finally, an example is given to demonstrate the proposed result on a consensus problem to which earlier results are not applicable.
+
+Fig. 1 .
+1Closed-loop interconnection of a MIMO nonlinear NI system H 1 and a MIMO nonlinear OSNI system H 2 .
+
+Fig. 3 .
+3Heterogeneous nonlinear NI plants connected according to the directed graph network topology.
+
+Fig. 5 .
+5Positive feedback interconnection of heterogeneous nonlinear NI plants and nonlinear OSNI controllers according to the directed graph network topology.
+
+Fig. 6 .
+6An undirected and connected graph consisting of four nodes.
+
+Fig. 7 .
+7Output feedback consensus for four nonlinear single integrator plants with different system models. Starting from different initial conditions, the outputs of the plants converge to the same limit trajectory under the effect of the proposed control framework of Section III.
+setting inFig. 5we haveŪ T pȲ p = [(Q T ⊗ I m ) TŪ p ] TȲ p = U T p (Q ⊗ I m )Ȳ p =Ū T pȲp similarly to(19). HenceŪ T pȲp ≥ 0. However, Assumption V is assumed for the networked plantŝ H p in the following theorem instead of assuming Assumption I for each individual plant because Assumption V also allows for the situation in which the input and output of the system H p are constant, but the individual plants H pi are not all in steady state. This situation is possible because the matrix Q ⊗ I m takes the difference between the outputs of the plants. Under constant inputs, if the plants oscillate with a constant difference between their outputs, then this situation is allowed under Assumption V.Theorem 2: Consider an undirected connected graph G that models the communication links for a network of heterogeneous nonlinear NI systems H pi (i = 1, 2, · · · , N ) as shown inFig. 2, and any directed graph corresponding to G with the incidence matrix Q. Also, consider the heterogeneous nonlinear OSNI control laws H ck (k = 1, 2, · · · , l) for all of the edges. Suppose Assumptions III and IV are satisfied for the plants H pi , Assumptions II, III and IV are satisfied for the controllers H ck (with γ = γ k for the controller H ck in Assumption II) and Assumption V is satisfied by the system H p . Also, suppose the storage function, defined aŝis positive definite, whereV p and V c are positive semidefinite storage functions that satisfy(20)for the systemĤ p and(26)for the systemĤ c , respectively. Here,Ŷ p is the output of the systemĤ p . Π c and D c are terms in the output Y c of the system H and are defined in(23)and(24). Then robust output feedback consensus can be achieved via the protocol(27), or equivalently (28)-(30) in a distributed manner for each plant p i , as shown inFig. 5.Proof: According to(20), (26) and the system settinĝ U p ≡ Y c and U c ≡Ŷ p shown inFig. 5, we havėAccording to(31),(32)and the symmetry of D c in(24), the time derivative of the storage functionŴ satisfies the following inequality:Hence, the closed-loop system is at least Lyapunov stable. Moreover,Ẇ = 0 can hold only ifΠ c = 0. In other words, W can remain zero only ifḣ ck (x ck (t)) remains zero for all k = 1, 2, · · · , l. According to Assumptions III and IV,ḣ ck (x ck (t)) ≡ 0 =⇒ẋ ck (t) ≡ 0 =⇒ u ck (t) ≡ū ck . Hence, H ck is in steady-state for all k = 1, 2, · · · , l. We have U c (t) ≡Ū c and Y c (t) ≡Ȳ c . According to the system setting inFig. 5thatÛ p (t) ≡ Y c (t) and U c (t) ≡Ŷ p (t), we also havê U p (t) ≡Ū p andŶ p (t) ≡Ȳ p . According to Assumption V, we haveŪ T pȲ p ≥ 0.According to Assumption II, we havēwhere γ min = min{γ 1 , γ 2 · · · , γ l }. In the case thatŪ c = 0, we haveŪ T cȲ c < 0which contradicts (34) becauseŪ T cȲ c =Ū T pȲ p . In the case thatŪ c = 0, all connected plants have the difference between their system outputs being zero. Hence, output consensus has already been achieved. Otherwise,Ẇ cannot remain zero. According to LaSalle's invariance principle,Ŵ will keep decreasing until eitherŪ c = 0 orŴ = 0. Thus, output consensus is achieved in both cases. This completes the proof.IV. ILLUSTRATIVE EXAMPLE PSfrag replacements
+Stability robustness of a feedback interconnection of systems with negative imaginary frequency response. A Lanzon, I R Petersen, IEEE Transactions on Automatic Control. 534A. Lanzon and I. R. Petersen, "Stability robustness of a feedback interconnection of systems with negative imaginary frequency response," IEEE Transactions on Automatic Control, vol. 53, no. 4, pp. 1042-1046, 2008.
+
+Feedback control of negative-imaginary systems. I R Petersen, A Lanzon, IEEE Control Systems Magazine. 305I. R. Petersen and A. Lanzon, "Feedback control of negative-imaginary systems," IEEE Control Systems Magazine, vol. 30, no. 5, pp. 54-72, 2010.
+
+A negative imaginary approach to modeling and control of a collocated structure. B Bhikkaji, S R Moheimani, I R Petersen, IEEE/ASME Transactions on Mechatronics. 174B. Bhikkaji, S. R. Moheimani, and I. R. Petersen, "A negative imaginary approach to modeling and control of a collocated structure," IEEE/ASME Transactions on Mechatronics, vol. 17, no. 4, pp. 717-727, 2011.
+
+On lossless negative imaginary systems. J Xiong, I R Petersen, A Lanzon, 2009 7th Asian Control Conference. IEEEJ. Xiong, I. R. Petersen, and A. Lanzon, "On lossless negative imaginary systems," in 2009 7th Asian Control Conference. IEEE, 2009, pp. 824- 829.
+
+A negative-imaginary lemma without minimality assumptions and robust state-feedback synthesis for uncertain negative-imaginary systems. Z Song, A Lanzon, S Patra, I R Petersen, Systems & Control Letters. 6112Z. Song, A. Lanzon, S. Patra, and I. R. Petersen, "A negative-imaginary lemma without minimality assumptions and robust state-feedback syn- thesis for uncertain negative-imaginary systems," Systems & Control Letters, vol. 61, no. 12, pp. 1269-1276, 2012.
+
+Finite frequency negative imaginary systems. J Xiong, I R Petersen, A Lanzon, IEEE Transactions on Automatic Control. 5711J. Xiong, I. R. Petersen, and A. Lanzon, "Finite frequency negative imaginary systems," IEEE Transactions on Automatic Control, vol. 57, no. 11, pp. 2917-2922, 2012.
+
+Robust performance analysis for uncertain negative-imaginary systems. Z Song, A Lanzon, S Patra, I R Petersen, International Journal of Robust and Nonlinear Control. 223Z. Song, A. Lanzon, S. Patra, and I. R. Petersen, "Robust performance analysis for uncertain negative-imaginary systems," International Jour- nal of Robust and Nonlinear Control, vol. 22, no. 3, pp. 262-281, 2012.
+
+Robust cooperative control of multiple heterogeneous negative-imaginary systems. J Wang, A Lanzon, I R Petersen, Automatica. 61J. Wang, A. Lanzon, and I. R. Petersen, "Robust cooperative control of multiple heterogeneous negative-imaginary systems," Automatica, vol. 61, pp. 64-72, 2015.
+
+A negative imaginary lemma and the stability of interconnections of linear negative imaginary systems. J Xiong, I R Petersen, A Lanzon, IEEE Transactions on Automatic Control. 5510J. Xiong, I. R. Petersen, and A. Lanzon, "A negative imaginary lemma and the stability of interconnections of linear negative imaginary sys- tems," IEEE Transactions on Automatic Control, vol. 55, no. 10, pp. 2342-2347, 2010.
+
+Dissipative systems analysis and control. B Brogliato, R Lozano, B Maschke, O Egeland, Theory and Applications. 2B. Brogliato, R. Lozano, B. Maschke, and O. Egeland, "Dissipative systems analysis and control," Theory and Applications, vol. 2, 2007.
+
+Fast scanning using piezoelectric tube nanopositioners: A negative imaginary approach. B Bhikkaji, S Moheimani, 2009 IEEE/ASME International Conference on Advanced Intelligent Mechatronics. IEEEB. Bhikkaji and S. Moheimani, "Fast scanning using piezoelectric tube nanopositioners: A negative imaginary approach," in 2009 IEEE/ASME International Conference on Advanced Intelligent Mechatronics. IEEE, 2009, pp. 274-279.
+
+Positive position feedback control for large space structures. J Fanson, T K Caughey, AIAA journal. 284J. Fanson and T. K. Caughey, "Positive position feedback control for large space structures," AIAA journal, vol. 28, no. 4, pp. 717-724, 1990.
+
+Stability analysis for a string of coupled stable subsystems with negative imaginary frequency response. C Cai, G Hagen, IEEE Transactions on Automatic Control. 558C. Cai and G. Hagen, "Stability analysis for a string of coupled stable subsystems with negative imaginary frequency response," IEEE Transactions on Automatic Control, vol. 55, no. 8, pp. 1958-1963, 2010.
+
+Modal actuation for high bandwidth nano-positioning. J Van Hulzen, G Schitter, P Van Den Hof, J Van Eijk, Proceedings of the 2010 American Control Conference. the 2010 American Control ConferenceIEEEJ. van Hulzen, G. Schitter, P. Van den Hof, and J. Van Eijk, "Modal actuation for high bandwidth nano-positioning," in Proceedings of the 2010 American Control Conference. IEEE, 2010, pp. 6525-6530.
+
+A survey of control issues in nanopositioning. S Devasia, E Eleftheriou, S R Moheimani, IEEE Transactions on Control Systems Technology. 155S. Devasia, E. Eleftheriou, and S. R. Moheimani, "A survey of control issues in nanopositioning," IEEE Transactions on Control Systems Technology, vol. 15, no. 5, pp. 802-823, 2007.
+
+Design methodologies for robust nano-positioning. A Sebastian, S M Salapaka, IEEE Transactions on Control Systems Technology. 136A. Sebastian and S. M. Salapaka, "Design methodologies for robust nano-positioning," IEEE Transactions on Control Systems Technology, vol. 13, no. 6, pp. 868-876, 2005.
+
+Robust MIMO control of a parallel kinematics nano-positioner for high resolution high bandwidth tracking and repetitive tasks. J Dong, S M Salapaka, P M Ferreira, 2007 46th IEEE Conference on Decision and Control. IEEEJ. Dong, S. M. Salapaka, and P. M. Ferreira, "Robust MIMO control of a parallel kinematics nano-positioner for high resolution high band- width tracking and repetitive tasks," in 2007 46th IEEE Conference on Decision and Control. IEEE, 2007, pp. 4495-4500.
+
+Generalizing negative imaginary systems theory to include free body dynamics: Control of highly resonant structures with free body motion. M A Mabrok, A G Kallapur, I R Petersen, A Lanzon, IEEE Transactions on Automatic Control. 5910M. A. Mabrok, A. G. Kallapur, I. R. Petersen, and A. Lanzon, "General- izing negative imaginary systems theory to include free body dynamics: Control of highly resonant structures with free body motion," IEEE Transactions on Automatic Control, vol. 59, no. 10, pp. 2692-2707, 2014.
+
+Extending negative imaginary systems theory to nonlinear systems. A G Ghallab, M A Mabrok, I R Petersen, IEEE Conference on Decision and Control (CDC). IEEE. A. G. Ghallab, M. A. Mabrok, and I. R. Petersen, "Extending negative imaginary systems theory to nonlinear systems," in 2018 IEEE Confer- ence on Decision and Control (CDC). IEEE, 2018, pp. 2348-2353.
+
+Robust output feedback consensus for networked identical nonlinear negative-imaginary systems. K Shi, I Vladimirov, I Petersen, arXiv:2005.1149224th International Symposium on Mathematical Theory of Networks and Systems. To appear in theK. Shi, I. Vladimirov, and I. Petersen, "Robust output feedback consen- sus for networked identical nonlinear negative-imaginary systems," To appear in the 24th International Symposium on Mathematical Theory of Networks and Systems, arXiv:2005.11492, 2020.
+
+Recent research in cooperative control of multivehicle systems. R M Murray, R. M. Murray, "Recent research in cooperative control of multivehicle systems," 2007.
+
+A survey of consensus problems in multi-agent coordination. W Ren, R W Beard, E M Atkins, Proceedings of the 2005. the 2005IEEEW. Ren, R. W. Beard, and E. M. Atkins, "A survey of consensus problems in multi-agent coordination," in Proceedings of the 2005, American Control Conference, 2005. IEEE, 2005, pp. 1859-1864.
+
+Consensus strategies for cooperative control of vehicle formations. W Ren, IET Control Theory & Applications. 12W. Ren, "Consensus strategies for cooperative control of vehicle forma- tions," IET Control Theory & Applications, vol. 1, no. 2, pp. 505-512, 2007.
+
+Coordination of groups of mobile autonomous agents using nearest neighbor rules. A Jadbabaie, J Lin, A S Morse, IEEE Transactions on automatic control. 486A. Jadbabaie, J. Lin, and A. S. Morse, "Coordination of groups of mobile autonomous agents using nearest neighbor rules," IEEE Transactions on automatic control, vol. 48, no. 6, pp. 988-1001, 2003.
+
+Consensus problems in networks of agents with switching topology and time-delays. R Olfati-Saber, R M Murray, IEEE Transactions on automatic control. 499R. Olfati-Saber and R. M. Murray, "Consensus problems in networks of agents with switching topology and time-delays," IEEE Transactions on automatic control, vol. 49, no. 9, pp. 1520-1533, 2004.
+
+Stability of multiagent systems with time-dependent communication links. L Moreau, IEEE Transactions on automatic control. 502L. Moreau, "Stability of multiagent systems with time-dependent com- munication links," IEEE Transactions on automatic control, vol. 50, no. 2, pp. 169-182, 2005.
+
+Stable flocking of mobile agents, part i: Fixed topology. H G Tanner, A Jadbabaie, G J Pappas, 42nd IEEE International Conference on Decision and Control. IEEE2H. G. Tanner, A. Jadbabaie, and G. J. Pappas, "Stable flocking of mobile agents, part i: Fixed topology," in 42nd IEEE International Conference on Decision and Control (IEEE Cat. No. 03CH37475), vol. 2. IEEE, 2003, pp. 2010-2015.
+
+Flocking with obstacle avoidance: Cooperation with limited communication in mobile networks. R O Saber, R M Murray, 42nd IEEE International Conference on Decision and Control. IEEE2R. O. Saber and R. M. Murray, "Flocking with obstacle avoidance: Cooperation with limited communication in mobile networks," in 42nd IEEE International Conference on Decision and Control (IEEE Cat. No. 03CH37475), vol. 2. IEEE, 2003, pp. 2022-2028.
+
+Distributed control gains design for consensus in multi-agent systems with second-order nonlinear dynamics. W Yu, W Ren, W X Zheng, G Chen, J Lü, Automatica. 497W. Yu, W. Ren, W. X. Zheng, G. Chen, and J. Lü, "Distributed control gains design for consensus in multi-agent systems with second-order nonlinear dynamics," Automatica, vol. 49, no. 7, pp. 2107-2115, 2013.
+
+Adaptive second-order consensus of networked mobile agents with nonlinear dynamics. H Su, G Chen, X Wang, Z Lin, Automatica. 472H. Su, G. Chen, X. Wang, and Z. Lin, "Adaptive second-order consensus of networked mobile agents with nonlinear dynamics," Automatica, vol. 47, no. 2, pp. 368-375, 2011.
+
+Negative imaginary systems theory and applications. I R Petersen, Annual Reviews in Control. 42I. R. Petersen, "Negative imaginary systems theory and applications," Annual Reviews in Control, vol. 42, pp. 309-318, 2016.
+
+Formation control of multiuavs using negative-imaginary systems theory. V P Tran, M Garratt, I R Petersen, 2017 11th Asian Control Conference (ASCC). IEEEV. P. Tran, M. Garratt, and I. R. Petersen, "Formation control of multi- uavs using negative-imaginary systems theory," in 2017 11th Asian Control Conference (ASCC). IEEE, 2017, pp. 2031-2036.
+
+Cooperative assembling using multiple robotic manipulators. Y Qi, J Wang, Q Jia, J Shan, 2016 35th Chinese Control Conference (CCC). IEEEY. Qi, J. Wang, Q. Jia, and J. Shan, "Cooperative assembling using mul- tiple robotic manipulators," in 2016 35th Chinese Control Conference (CCC). IEEE, 2016, pp. 7973-7978.
+
+Distributed adaptive time-varying group formation tracking for multiagent systems with multiple leaders on directed graphs. J Hu, P Bhowmick, A Lanzon, IEEE Transactions on Control of Network Systems. 71J. Hu, P. Bhowmick, and A. Lanzon, "Distributed adaptive time-varying group formation tracking for multiagent systems with multiple leaders on directed graphs," IEEE Transactions on Control of Network Systems, vol. 7, no. 1, pp. 140-150, 2019.
+
+Robust cooperative tracking of multiple p-order power integrators. J Peng, J Wang, J Shan, 2016 Chinese Control and Decision Conference (CCDC). IEEEJ. Peng, J. Wang, and J. Shan, "Robust cooperative tracking of multiple p-order power integrators," in 2016 Chinese Control and Decision Conference (CCDC). IEEE, 2016, pp. 951-956.
+
+Cooperative control of integrator negative imaginary systems with application to rendezvous multiple mobile robots. O Skeik, J Hu, F Arvin, A Lanzon, 2019 12th International Workshop on Robot Motion and Control (RoMoCo). IEEEO. Skeik, J. Hu, F. Arvin, and A. Lanzon, "Cooperative control of integrator negative imaginary systems with application to rendezvous multiple mobile robots," in 2019 12th International Workshop on Robot Motion and Control (RoMoCo). IEEE, 2019, pp. 15-20.
+
+Robust output feedback consensus for networked heterogeneous nonlinear negative-imaginary systems. K Shi, I G Vladimirov, I R Petersen, 2020 Australian and New Zealand Control Conference (ANZCC). K. Shi, I. G. Vladimirov, and I. R. Petersen, "Robust output feedback consensus for networked heterogeneous nonlinear negative-imaginary systems," in 2020 Australian and New Zealand Control Conference (ANZCC), 2020, pp. 214-219.
+
+On LTI output strictly negative-imaginary systems. P Bhowmick, S Patra, Systems & Control Letters. 100P. Bhowmick and S. Patra, "On LTI output strictly negative-imaginary systems," Systems & Control Letters, vol. 100, pp. 32-42, 2017.
+
+Output strictly negative imaginary systems and its connections to dissipativity theory. P Bhowmick, A Lanzon, 2019 IEEE 58th Conference on Decision and Control (CDC). IEEEP. Bhowmick and A. Lanzon, "Output strictly negative imaginary systems and its connections to dissipativity theory," in 2019 IEEE 58th Conference on Decision and Control (CDC). IEEE, 2019, pp. 6754- 6759.

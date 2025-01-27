@@ -1,0 +1,581 @@
+
+Toroidic and antitoroidic orders in hexagonal arrays of dielectric trimers: magnetic group approach
+
+
+Victor Dmitriev 
+Electrical Engineering Department
+Federal University of Para
+R. Augusto Correa 0166075-900Belem, ParaCEPBrazil
+
+Silvio Domingos 
+Silva Santos 
+Electrical Engineering Department
+Federal University of Para
+R. Augusto Correa 0166075-900Belem, ParaCEPBrazil
+
+Andrey B Evlyukhin 
+Institute of Quantum Optics
+Leibniz Universität Hannover
+Welfengarten Street 130167HannoverGermany
+
+Anton S Kupriianov 
+College of Physics
+Jilin University
+2699 Qianjin Street130012ChangchunChina
+
+Vladimir R Tuz 
+College of Electronic Science and Engineering
+International Center of Future Science
+State Key Laboratory of Integrated Optoelectronics
+Jilin University
+2699 Qianjin Street130012ChangchunChina
+
+Toroidic and antitoroidic orders in hexagonal arrays of dielectric trimers: magnetic group approach
+(Dated: January 27, 2021)
+Herein, we investigate symmetry-protected toroidal dipole resonances and conditions of their excitation in a new type of electromagnetic metamaterials. These metamaterials are all-dielectric planar periodic arrays of dielectric disks disposed on a dielectric substrate. The elementary building blocks of the array are trimers which are distributed in hexagonal unit supercells. The highest geometrical symmetry of the unit supercell is C6v. The analysis is fulfilled by using the representation theory of groups with application of the magnetic group theory, which is a new approach in solving such problems. We have shown that to get access to the toroidal supermodes of the array, symmetry of the unit supercell must be broken twice: firstly, the C3v symmetry of the trimer, and secondly, the C6v symmetry of the unit supercell needs to be reduced. Selection rules for the symmetric and antisymmetric orders of the toroidal dipole moments in the arrays are defined. In particular, we have shown that with the reduction of the unit supercell symmetry to the C2v group, the array exhibits the toroidal dipole resonance with antitoroidic order. The arrays with the lower Cs symmetry can provide the resonances with both toroidic and antitoroidic orders. It is also shown that these arrays are always polarization sensitive. Full-wave simulations and experiments confirm the theoretical predictions. The suggested metamaterials can provide an enhanced light-matter interaction due to the spatially and temporally confined light in resonant systems with very high quality factors. arXiv:2101.08714v2 [physics.optics]
+
+I. INTRODUCTION
+
+The majority of physical systems possess intrinsic symmetries which define the areas of possible solutions of the equations governing these systems. With the use of group-theoretical methods, one can classify the corresponding solutions defined by the underlying symmetries. In particular, symmetry analysis by the group-theoretical approach has been successfully applied to simplify the description of different physical phenomena and used as a general guideline to design many practical devices in electronics, acoustics, and optics [1][2][3][4][5][6][7]. To date, there exist many textbooks describing the use of group theory for solving specific physical problems [8][9][10][11][12][13][14].
+
+Besides simplification of numerical calculations, group theory can be applied to classify promising systems for further investigations, such as in the case of search for multiferroic materials (ferroics) [15,16]. Different ferroics are classified in terms of spatial inversion and time reversal symmetry of their order parameter [17]. In general, four primary orders are distinguished in ferroics: ferroelasticity, ferroelectricity, ferromagnetism, and ferrotoroidicity [18][19][20] (in what follows, the prefix "ferro" for the ferrotoroidicity is omitted). The magnetoelectric coupling is a secondary ferroic effect, which is inherent * tvr@jlu.edu.cn to toroidic order. It is of special interest in applications [21]. The occurrence of multiple ferroic properties in one phase is related to specific symmetry conditions a material has to accomplish.
+
+The lack of natural ferroic materials usable in optics has motivated a search for structures and systems that may exhibit magnetoelectric coupling arising from the metamaterial design. In particular, specifically designed particles (meta-atoms or meta-molecules) can acquire coupled electric and magnetic polarizabilities associated with the conduction currents that occur when metamaterials are irradiated by electromagnetic fields [22]. Such particles typically are metallic split-ring resonators (SRRs) whose dynamic magneto-optical response somewhat resembles the static one of natural ferroic substances [23][24][25][26][27][28]. To describe the properties of such metamaterials composed of SRRs, the group-theoretical approach can be used. It allows one to calculate the electromagnetic modes of a resonator and determine whether this resonator exhibits a desired magneto-optical response [29][30][31][32][33][34][35][36]. Nevertheless, as far as we know, such an approach has not previously been used to describe the properties of SRR-based metamaterials exhibiting toroidicity.
+
+Recent progress in the area of metamaterials is related to the investigation of their all-dielectric implementations [37][38][39][40] that are promising candidates to overcome some issues inherent to metallic SRR-based metamaterials at higher frequencies. In all-dielectric metamaterials, Mie resonances of dielectric nanoparticles caused by displacement currents provide an alternative route for achieving dynamic magneto-optical response [41][42][43][44][45]. Symmetry of the dielectric resonators is tightly related to the mode structure which determines the electromagnetic features of the resonator. The structure of fields can be derived using the group-theoretical approach [46,47].
+
+Group-theoretical methods are especially useful for metamaterials whose constitutive particles have a complex shape [48] or possess an in-plane broken symmetry [49][50][51][52][53]. The resonant conditions in such metamaterials are stipulated by inherently nonradiating symmetry protected (dark) modes existing in the particles. Such modes become weakly radiative when the symmetry of the particles is broken (such symmetry protected states are also referred to as trapped modes [54] or, recently, as bound states in the continuum (BICs) [55]). The coupling to these trapped modes with incoming radiation can be controlled by the strength of asymmetry introduced in the particle. After a group-theoretical analysis of asymmetric particles, it is revealed that the dynamic magneto-optical response of the entire metamaterial can resemble the characteristics of ferroics with the magnetic dipole arrangement in either ferromagnetic or antiferromagnetic order when the trapped mode is excited [56,57].
+
+The mechanism of symmetry reduction for the trapped mode excitation covered by the group-theoretical approach is also applicable to all-dielectric metamaterials composed of particle clusters [58]. In the context of ferroics, such metamaterials can possess toroidicity arising from the collective modes (supermodes) of the clusters [59][60][61][62][63]. Due to low inherent losses in constituent materials, the symmetry-protected toroidal modes in alldielectric metamaterials demonstrate a very high quality factor (high-Q) resonant response accompanied by the near-surface confinement of the strong electromagnetic field [64][65][66]. Remarkably, the conditions for the appearance of toroidal dipole modes in cluster-based alldielectric metamaterials can be expressed in the explicit electromagnetic formulation and described in the grouptheoretical language [67].
+
+In the present paper, we aim to introduce a special approach based on the magnetic group theory to describe characteristics of the toroidal supermodes, which are implemented in cluster-based all-dielectric metamaterials. The constitutive cluster of these metamaterials has a hexagonal geometry, which is a key design in the topological photonics [68][69][70][71][72][73]. We demonstrate that in the given metamaterials, it is possible to realize excitation of the toroidal supermodes possessing either symmetric order (toroidal order, TO), when the toroidal dipole moments of all trimers are parallel, or antisymmetric order (antitoroidal order, ATO), when the toroidal dipole moments in the neighboring trimers are antiparallel having a staggered distribution. We define the selection rules and show in detail how these resonances can be excited by a specific breaking of the metamaterial unit cell symmetry. We perform a set of numerical simulations supported by microwave experiments to reveal specific physical properties of such metamaterials.
+
+The rest of the paper is organized as follows. Section II introduces the concept of a toroidal dipole moment existing in a trimer of dielectric disks. Then, in Sec. III, a metamaterial composed of hexagonal unit supercells of trimers is designed to obtain a system supporting a net toroidal dipole moment. In Sec. IV the symmetry analysis of the hexagonal unit supercell is performed. We explain what perturbations should be introduced into the supercell to excite the toroidal dipole moments of the hexagonal cluster by the field of a normally incident linearly polarized wave. The theory of magnetic groups applied to the hexagonal structure is presented in Sec. V. This theory predicts that the toroidal dipole moments of the supercell can appear either in symmetric or antisymmetric order. The selection rules for these orders are derived in Sec. VI. Theoretical description and numerical simulations of excitation of the symmetric and antisymmetric orders in arrays due to specific perturbations of their hexagonal unit supercell are given in Secs. VII and VIII, respectively. In Sec. IX, the verification of theory with a microwave experiment is provided. The presented results are discussed and summarized in Secs. X and XI, respectively.
+
+
+II. TOROIDAL DIPOLE MODE OF TRIMER
+
+Clusters of dielectric particles (meta-molecules) possess a set of natural modes (eigenmodes) that are defined by the cluster symmetry and obey group theory rules. This is similar to the case of conventional molecules. The eigenmodes can be related to coefficients of the multipole decomposition of the corresponding Mie solution derived for the problem of particles interacting with an electromagnetic field [74]. When the particles are arranged into a cluster, the eigenmodes of individual particles strongly interact and form supermodes of the cluster. A particular supermode can be designated as bonding or antibonding, depending on whether the induced coupling between the particles in the cluster appears in the low-or high-energy configuration [75,76]. The exact arrangement of the dielectric particles within a cluster therefore has an essential impact on the symmetry of the resulting supermode.
+
+In the present study, we consider a complex hexagonal cluster consisting of six trimers of dielectric disk-shaped particles. Thus, we have the following interaction hierarchy: the eigenmodes of three individual disks are coupled into the trimer eigenmodes, which are then coupled into the hexagonal cluster supermode. We are interested in a particular eigenmode of the trimer, which exhibits a significant contribution from the toroidal dipole moment [62,66,67]. Then we consider the coupling of these toroidal eigenmodes within the hexagonal cluster which can be realized as a bonding (antitoroidal) or antibonding (toroidal) state.
+
+One should note that the analysis of eigenmodes of a complex system of dielectric particles does not necessarily require the involvement of the concept of a toroidal moment. For instance, a mode coupling theory used for designing dielectric antennas and microwave circuits can be considered as an alternative approach [77][78][79]. Nevertheless, we are convinced that our description based on the toroidal modes makes it possible to obtain a clear physical picture of the realization of a specific resonant state in the system under consideration.
+
+In what follows we analyze the conditions of appearance of a toroidal dipole moment in a single trimer of dielectric disk-shaped particles. Each disk in the trimer is situated in the vertex of an equilateral triangle, therefore the trimer symmetry is described by the point group C 3v . The triangle side size is a d . The radius and thickness of the disks are r d and h d , respectively. The disks are made of a nonmagnetic material with permittivity ε d and arranged in a homogeneous ambient space with permittivity ε s = 1.
+
+A toroidal dipole moment of a system with electric current density distribution j(r, ω) (where r is the radiusvector of a volume element and ω is the angular frequency) is governed by the following equation [80][81][82][83] 
+T = 1 10 V [(r · j)r − 2r 2 j]dr,(1)
+where V is the volume occupied by the current density.
+
+Here we omitted the arguments of the current density j(r, ω) and consider that the toroidal dipole moment is located at the origin of the chosen coordinate frame. Equation (1) can be directly obtained from the Cartesian multipole decomposition of the current density where toroidal dipole moment presents a third-order multipole term [82,83]. This multipole decomposition is based on the Taylor series of the Dirac δ-function.
+
+In the approach based on the spherical harmonic expansion of radiated (scattered) waves [84,85], the explicit contribution of the toroidal dipole moment in the multipole decomposition does not appear, and it is associated with the exact electric dipole moment [86]:
+p = i ω V j 0 (kr)j + k 2 ω j 2 (kr) (kr) 2 [3(r · j)r − r 2 j] dr,(2)
+where j 0 (kr) and j 2 (kr) are the spherical Bessel functions of the zero-and second-order, respectively, k is the wave number in surrounding medium. Applying the corresponding Taylor expansions to the Bessel functions in Eq.
+
+(2) and writing out the first three terms explicitly, one obtains where c is the light speed in surrounding medium, p 0 is the Cartesian electric dipole moment obtained from the δ-function Taylor expansion corresponding to the longwavelength approximation (LWA) [84], T (R) is the meansquare radius of the toroidal moment [87,88]. From Eq. (3) one can consider the toroidal dipole moment as only a next correcting term to the Cartesian electric dipole moment p 0 used for calculation of the exact electric dipole moment p, and, thus, the toroidal dipole moment cannot be considered separately. However, this statement does not reflect total physical role of the toroidal dipole moment. Indeed, depending on the frequency of electromagnetic fields, shape, size, and material parameters of an electric current system, it can appear that the first term in Eq. (3) is very small, or even equals to zero, so that the main contribution goes from the toroidal term (ikT/c). In this case, the electric current systems can be considered as supporting a purely electric toroidal response, and, thus, the toroidal dipole moment acquires an independent physical meaning.
+p = i ω V jdr + ik c 1 10 V [(r · j)r − 2r 2 j]dr + ik 3 c 1 280 V [3r 4 j − 2r 2 (r · j)r]dr + . . . = p 0 + ik c T + ik 3 c T (R) + . . .(3)
+To demonstrate this peculiarity, we consider the trimer irradiation by an electromagnetic plane wave from both lateral and frontal directions. The absolute value of the exact electric dipole moment p and the corresponding contributions of the LWA electric dipole p 0 and the toroidal dipole moments T together with the meansquare radius T (R) are presented in Fig. 1 for two irradiation conditions of the linearly polarized plane wave. Calculation procedure corresponds to the description from [66]. In our calculations, we normalize the incident wavelength and all geometrical parameters of the problem on the disk diameter D = 2r d .
+
+One can see that at the lateral irradiation condition [ Fig. 1(a)], the exact dipole moment of the trimer is resonantly excited. Decomposition of its value on the basis of Eq. (3) shows that the toroidal dipole T provides the main contribution in the resonant exact electric dipole moment p [the corresponding wavelength is indicated by a red cross in Fig. 1]. In this case, the electric dipole response of the trimer is associated with excitation of the trimer toroidal dipole mode [see the inset with the trimer toroidal eigenmode in Fig. 1(a)]. For the other irradiation conditions [ Fig. 1(b)] the toroidal dipole mode is not excited. In this case, the exact dipole moment p is basically determined by the interference between the p 0 and T dipole moments. Note that in this condition the significant suppression of p appears at the region of large wavelengths as a result of destructive interference. This state can be attributed to the anapole state [89][90][91][92].
+
+Therefore, it is revealed that for the given eigenmode of the trimer, the toroidal dipole moment provides a dominant contribution, and this eigenmode can arise only for a certain type of excitation of the incident field. In particular, this toroidal mode can be considered as a dark and bright state for the field of frontally and laterally incident wave, respectively. In what follows, we show the mechanism of access to this indicated dark state under frontal irradiation conditions in metamaterials composed of hexagonal clusters of trimers by breaking their symmetry.
+
+
+III. METAMATERIAL WITH HEXAGONAL UNIT SUPERCELL
+
+We consider a metamaterial composed of a planar array with trimers of dielectric disks (i.e., the trimer is a minicell of the metamaterial). The six trimers are arranged in such a way that hexagonal clusters appear (i.e., the hexagonal cluster is a supercell of the metamaterial). The hexagon lateral size is p. The array of disks is situated in the x-y plane as it is shown schematically in Fig. 2. To form a metamaterial, the dielectric disks are immersed symmetrically (preserving the plane of symmetry z = 0) into a dielectric substrate with relative permittivity ε s and thickness h s .
+
+A peculiarity of this new type of metamaterial is a highly symmetric hexagonal geometry of its unit supercells based on dielectric trimers. The optical response of the entire metamaterial is largely determined by the symmetry of the supercell, which can be deliberately lowered by introducing certain perturbations into the hexagonal cluster. Our goal is to find specific perturbations so that the toroidal dipole mode of the trimers can be effectively excited in the metamaterial by the field of a normally incident linearly polarized wave with the wave vector k = {0, 0, −k z } and wavelength λ = 2πc/ω. We define that the metamaterial is irradiated by either x-polarized
+(E, H = {E x , H y ,0}) or y-polarized (E, H = {H x , E y , 0})
+wave. Due to nature of the toroidal dipole mode, it is appropriate to consider the problem using the magnetic field H of the incident wave as the exciting source.
+
+
+IV. SUPERCELL SYMMETRY ANALYSIS
+
+For the given planar arrays of dielectric disks, one can consider the problem in the framework of twodimensional (2D) symmetry. Since the center of the equilateral triangle of the underlying trimer and the center of the minicell are the same, the minicell geometry corresponds to the C 3v symmetry. To get access to the toroidal dipole mode, the minicell symmetry must be reduced [67]. This symmetry reduction can be realized in several ways. In particular, the thickness of particular disks in the trimers can be resized (out-of-plane perturbation) or these disks can be shifted aside (in-plane perturbation).
+
+The geometry of the hexagonal unit supercell corresponds to the C 6v symmetry. As a main reference point, the scheme of the supercell with planes of symmetry and rotational elements of the C 6v group are presented in Fig. 3 (the Schöenflies notation of elements of point symmetry is given in Appendix A). With such a supercell symmetry, the toroidal dipole mode is a dark state of the hexagonal cluster and cannot be excited by the field of a normally incident linearly polarized wave. Therefore, the symmetry C 6v must be reduced. Particular pertur- bations lead to different manifestations of the toroidal dipole mode in the metamaterial, which can arise in either symmetric or antisymmetric order. The relationship between the perturbed supercell symmetry and the toroidal dipole mode order is the subject of our subsequent study.
+
+Here we introduce a classification of possible reductions of the supercell symmetry, assuming that only one disk in each trimer forming the hexagonal cluster can be perturbed and only one type of perturbation is allowed. With a set of such allowed perturbations, one can design supercells having the highest C 6v symmetry as well as the symmetries of the C 6v subgroups (the subgroup decomposition of the C 6v group with the C 6 , C 3v , C 3 , C 2v , C 2 , and C s subgroups is illustrated in Fig. 11 of Appendix A).
+
+The unique way to obtain the C 6v symmetry in the perturbed supercell is shown in Fig. 4(a). In this geometry, all six perturbed disks are closest to the center of the hexagonal supercell. The perturbed supercells with the C 6 , C 3v , and C 3 symmetries are shown in Figs. 4
+(b)-4(d).
+Notice that these geometries are not unique and the positions of the perturbed disks can be different. The geometries of the supercells with the C 2v and C 2 symmetries are presented in Figs. 4(e) and 4(f), respectively. These geometries are also not unique.
+
+The C s symmetry can be realized in two variants, where the plane of symmetry σ passes through an apex 
+
+
+V. MAGNETIC GROUP DESCRIPTION
+
+We investigate electromagnetic response of the given metamaterial to external excitation by an alternating electromagnetic field. However, at a certain point in time, one can get a fixed picture of the field distribution in the unit supercell. This field pattern is associated with the characteristics of both the eigenmode that is excited and the magnetic field vector of the incident wave. Thus one can construct a general theory which combines the geometric symmetry of the unit supercell and the "dynamic" symmetry of the alternating magnetic fields and toroidal moment (see Appendix D).
+
+In the eigenmode of unperturbed trimer, the toroidal dipole moment T has only single component T z [67]. In a fixed moment of time, the normalized vector T can acquire only two states being oriented either "up" (T z = +1) or "down" (T z = −1). Accordingly, in a set of two trimers, two combinations of the toroidal dipole moments are possible when they are paired in either bonding (contra-directional) or antibonding (co-directional) fashion. When considering the hexagonal unit supercell, we are interested in two specific toroidal eigenmodes, whose moments are oriented either in the staggered order or in the same direction in all six trimers (see Fig. 5). In what follows, we distinguish these eigenmodes as the ATO and TO modes, respectively.
+
+In the symmetry analysis, these eigenmodes can be attributed to the one-dimensional (1D) irreducible representations (IRREPs) of the C 6v group. The TO mode belongs to IRREP A 1 , i.e., it is not changed under all the symmetry elements. The ATO mode is transformed in accordance with IRREP B 1 and the toroidal dipole moment changes its sign under the C 2 , C 1 6 , and C −1 6 transformations, and three reflections σ d (see Table II of Appendix B). Notice that the in-plane magnetic dipole moments induced in dielectric disks by the external magnetic field can be used to construct an alternative theory. In this case, one has to work with 2D representations of the axial vector m rather than with 1D IRREPs of the polar vector T. However, this alternative description involves more complex transformation properties of m and this complicates the analysis.
+
+Taking advantage of the time reversal symmetry of the toroidal dipole moment T, one can use this quantity to define the magnetic symmetry of the alternating fields in the array. Magnetic groups based on the C 6v group of symmetry, its subgroups and elements of these groups are summarized in Table I. In this table, T is the time reversal operator. In terms of magnetic groups, the vector T is odd in time. Application of the time reversal operator T to the toroidal dipole moment T z results in the vector T reorientation, T T z = −T z . Table II of Appendix B in the first seven columns presents space transformation properties of the polar vector T. This transformation is defined by the formula
+T z = χT z , where T z is a given toroidal moment, T z is (c) (d) (a) (b) (e) (f) σ (g) σ (h) FIG. 4.
+Examples of the perturbed hexagonal unit supercells whose symmetry is reduced to the groups:
+(a) C6v, (b) C6, (c) C3v, (d) C3, (e) C2v, (f) C2, (g) C (1) s , and (h) C (2)
+s . Perturbed disks are denoted by red circles. 
+C6v + T C6v C6 + T C6 C3v + T C3v C3 + T C3 C2v + T C2v C2 + T C2 Cs + T Cs 2nd category C6v C6 C3v C3 C2v C2 Cs Content e, C6, C −1 6 , C2 e, C6, C −1 6 e, C3, C −1 3 e, C3, C −1 3 e, C2 e, C2 e, σ C3, C −1 3 , 3σv, 3σ d C3, C −1 3 , C2 σ1, σ2, σ3 σ1, σ2, 3rd category C6v(C6) C6v(C3v) C6(C3) C3v(C3) C2v(C2) C2v(Cs) C2(C1) Cs(C1) Content e, C6, C −1 6 e, C3, C −1 3 e, C3, C −1 3 e, C3, C −1 3 e, C2 e, σ1 e, T C2 e, T σ C2, C3, C −1 3 σ1, σ2, σ3 T C2, T C6, T σ1, T σ2, T σ1, T σ2 T C2, T σ2 3T σv T C2, T C6 T C −1 6 T σ3 3T σ d T C −1 6
+the mapped moment, and χ is 1D IRREP of the rotationreflection symmetry element R. The eighth column of this table consists of the space-time transformation of T (which is an odd in time quantity) in terms of magnetic groups. Thus, Table II provides a description of two sides (two physical properties) of the toroidal moment T.
+
+It should be emphasized that we apply the theory of magnetic groups only to the fields and toroidal dipole moments T of the corresponding eigenmodes. However, the possible magnetic groups are defined by geometrical symmetry of the unit supercell.
+
+
+VI. SELECTION RULES AND POLARIZATION PROPERTIES OF ARRAYS
+
+A detailed description of selection rules for the quasibound states in the case of photonic crystal slabs is presented in [58], where the authors intensively used the theory of nonmagnmetic groups. One of our motivations in this work is to show that the magnetic group theory gives some advantages in description of toroidal dipole mode resonances.
+
+The problem of the toroidal dipole mode excitation in the array of hexagonal supercells can be divided into two subproblems: (i) excitation of the toroidal dipole mode in an individual trimer and (ii) excitation of the whole hexagonal unit supercell.
+
+To resolve the first subproblem, one should reduce the C 3v symmetry of the trimer to the C s group. This mechanism is studied both theoretically and experimentally in Refs. [62,66,67], so we omit the details here (for a brief description, see Appendix D). In the present consideration, we concentrate on solving the second subproblem, i.e., defining the selection rules for symmetries of the hexagonal supercell which allow or forbid excitation of toroidal dipole modes in the metamaterial by the field of a normally incident linearly polarized wave. 
+
+
+A. Selection rules for ATO mode
+
+The magnetic field H of the incident wave contains the elements e, T C 2 , T σ 2 , and σ 1 of magnetic symmetry (see Appendix C). The element C 2 is incompatible with T C 2 of the magnetic field H (these elements are "orthogonal" in the sense that their application leads to opposite orientations of the toroidal dipole moment). Therefore, if magnetic symmetry contains the C 2 element, excitation of an ATO mode in the metamaterial with such a symmetry is forbidden. It imposes a very rigid (hard) restriction, which does not depend on the orientation of the magnetic field H. The same is true for the groups of symmetries containing the C 6 and C 3 elements, because the C 6 element is always accompanied by the C 2 element, whereas, from the viewpoint of polarization properties, the C 2 element is "hidden" in the C 3 group. However, there is no restriction on the presence of the element T C 2 . Now we apply to the restrictions imposing by planes σ and antiplanes T σ of symmetry. The magnetic groups of ATO mode cannot contain an element σ coinciding with T σ of the magnetic field. Analogously, the magnetic groups of the ATO mode cannot contain the element T σ coinciding with σ of the magnetic field. Therefore, the vector H of the incident wave parallel to σ, or perpendicular to T σ (both σ and T σ are elements of the toroidal eigenmode of the supercell) cannot be coupled to this mode. However, a small deviation of orientation of H from the discussed planes leads to appearance of the field H component which can interact with the corresponding mode of the hexagonal unit supercell. Therefore, these selection rules can be called soft restrictions.
+
+The above analysis allows us to exclude from con-sideration those symmetries for which excitation of the ATO mode in the hexagonal unit supercell is forbidden. The magnetic groups which permit excitation of the ATO mode are subgroups of the group of magnetic field H. They are C 2v (C s ) (the group of H itself), C 2 (C 1 ), C s (C 1 ), and C s (see Table I). It means that the corresponding geometrical symmetries of the unit supercells are C 2v , C 2 , and C s (see corresponding perturbations of the hexagonal unit supercell in Fig. 4).
+
+
+B. Selection rules for TO mode
+
+Now we apply to the selections rules of the TO mode. After application of any of the rotations C 6 , C 3 , and C 2 , the sign of T must be preserved. Therefore, rotations with T in the magnetic groups which change the sign of T are prohibited (they are T C 2 and T C 6 ; the T C 3 element does not exist in the magnetic groups). For the same reason, the T σ elements are also not allowed. Summarizing, the antiunitary elements cannot enter in the magnetic groups of the TO mode.
+
+On the other hand, the elements C 2 , C 3 , and C 6 are not allowed due to their incompatibility with the field H symmetry. Therefore, the plane σ is the only permissible element of symmetry, and for the mode excitation, this element must be oriented perpendicular to the field H. Thus, the toroidal dipole mode can be excited in the unit supercell with C s symmetry of the magnetic groups, which contains the element σ. This condition is similar to that defining the excitation of the toroidal dipole mode in an isolated trimer [67].
+
+Two schemes of perturbation of the unit supercell described by the C s group are shown in Figs. 4(g) and 4(h). Among them, the scheme presented in Fig. 4(g) permits excitation of both the ATO and TO modes.
+
+
+C. Polarization properties of arrays with ATO and TO modes
+
+Polarization properties of the given arrays depend on their symmetry conditions. As it is known, for the polarization insensitivity the object must have the rotational symmetry with the axis C 3 , C 4 , . . . , C ∞ [93]. From the foregoing analysis, it follows that the symmetries allowing the excitation of the ATO and TO modes do not contain rotational elements C n with n > 2. Therefore, polarization insensitivity of the arrays is not possible for both the ATO and TO modes. of the hexagonal unit supercell needs to be reduced to the C 2v (C s ) groups [the corresponding unit supercell perturbation is presented in Fig. 4(e)]. The C 2v (C s ) group of the third category does not contain the isolated time reversal operator T . Thus, at an arbitrary fixed moment in time, changing the sign of time inverts T z .
+
+In the group-theoretical language, the ATO mode belongs to the IRREP B 1 of the C 6v group (see Table II in Appendix B). In this symmetry, the toroidal dipole mode is a dark state. The IRREP B 1 of the C 6v degenerates in the IRREP B 1 of the lower C 2v group (see Tables III and  V in Appendix B). The geometrical symmetry described by the C 2v group is consistent with the C 2v (C s ) symmetry of the incident magnetic field H. Therefore, in this case, one can expect an efficient excitation of the toroidal dipole mode by a normally incident electromagnetic wave with a proper polarization.
+
+To obtain the high-Q resonant conditions, the introduced perturbation in the unit supercell should be small. When the perturbation is small, the characteristics of the local electromagnetic fields in the array with the C 2v symmetry does not differ significally from those of the B 1 dark eigenmode in the non-perturbed array with the C 6v symmetry. One can conclude, that the approximate symmetry of the electromagnetic field in the hexagonal unit supercell with the C 2v symmetry corresponds to the IRREP B 1 of the C 6v group or, in the framework of magnetic groups, to the C 6v (C 3v ) group.
+
+
+B. ATO and TO modes in Cs supercells
+
+Reduction of the C 6v symmetry to the C s group allows one to excite the ATO and TO modes (see Tables IV and V in Appendix B). Besides the unit element e, the C s group contains only one plane of symmetry σ. This plane can either lie between the trimers [ Fig. 4(g)] or pass through the centers of the trimers [ Fig. 4(h)]. Recall, that these geometries are not unique, some other positions of the perturbed disks can also result in the C s symmetry.
+
+Noteworthy that if the magnetic field H of the incident wave is orthogonal to σ [see Fig. 6(a)], the ATO mode can be excited, whereas for the same geometry but with the magnetic field H parallel to σ [see Fig. 6(b)], the TO mode arises.
+
+
+C. Rule of thumb for mode order
+
+To determine the direction of in-plane rotation of the magnetic field in the trimers and therefore the orientation of the out-of-plane toroidal dipole moments in the array, the following simple rule of thumb can be used. One should draw test lines through the centers of all trimers in the unit supercell parallel to the magnetic field H. If the perturbed disk of a given trimer is on one side of the test line, it corresponds to a certain direction of rotation of the local magnetic field of the corresponding mode. If the perturbed disk is on the other side of the test line, this gives the opposite direction of rotation of the local magnetic field. This allows one to define immediately the order of the excited net toroidal dipole mode. If the test line passes through the center of the perturbed disk, this resonator cannot be excited directly by the incident field. However, it can be excited indirectly via the neighboring resonators due to the coupling effect between particles in the array.
+
+This intuitive picture can be understood from Fig. 6, where the hexagonal unit supercell with the C (1) s symmetry is presented. When the vector H is parallel to the x axis [ Fig. 6(a)], the perturbed disks appear at different sides of the test lines which results in the staggered orientation of the toroidal moments in the neighboring trimers, i.e., the ATO mode can be excited. Contrariwise, for the same unit supercell but when the vector H is parallel to the y axis [ Fig. 6(b)], the structure produces parallel orientation of the toroidal moments, i.e., the TO mode can be excited.
+
+
+VIII. NUMERICAL RESULTS
+
+We now proceed to check our group-theoretical description of the excitation of toroidal dipole modes in the discussed arrays by performing the full-wave numerical simulations. To calculate both eigenmodes and transmitted spectra of the array irradiated by a linearly polarized plane wave, we use the RF module of the commercial COMSOL Multiphysics finite-element electromagnetic solver. In the solver, we impose the Floquetperiodic boundary conditions on four sides of the unit cell to simulate an infinitely extended in the x-y plane arrangement of dielectric disks. The code related to the multipole decomposition with accounting for the toroidal dipole term defined by Eq. (1) is incorporated into the solver as a special component. The solver allows us to plot the distribution of the inner electromagnetic field within the hexagonal unit supercell at a specified resonant wavelength.
+
+Initially we calculate the eigenmodes that exist in a reference metamaterial composed of unperturbed supercells. The material losses in the disks are excluded in these simulations. From the released results, two specific eigenmodes are selected, which demonstrate the appearance of the parallel or antiparallel orientation of the toroidal dipoles. Then the transmitted spectra of the metamaterial are calculated in the wavelength range where the selected eigenmodes exist. Both x-polarized and y-polarized waves are under consideration.
+
+The results of our simulations of characteristics of the reference metamaterial are presented in Fig. 7. As before, we present our results in the dimensionless parameters, where all values are related to the disk diameter D. The eigenwave solution shows that the corresponding mode of the trimer exists in the array in the ATO and TO states, whose resonant wavelengths are different from the resonant wavelength of the toroidal dipole mode of a single trimer.
+
+One can conclude, that the spectral characteristics of the metamaterial are the same for waves of both polarizations, and while the symmetry of the supercells is preserved, there are no peculiarities in the transmitted spectra at the wavelengths of the ATO and TO modes. This confirms the dark feature of these modes.
+
+Further two particular designs of the perturbed unit supercells are chosen to show a possibility to excite the ATO and TO modes in the metamaterial. They are the supercells with the C 2v and C (1) s symmetries [see Figs. 4(e) and 4(g), respectively]. As a perturbance, we consider the change in the thickness of a corresponding disk in each trimer forming the unit supercells. This change is defined by the value ∆h d , and the dimensionless unit supercell asymmetry parameter is introduced as
+θ = (h d + ∆h d )/h d .
+
+A. Array with C2v symmetry of unit supercell
+
+High symmetry imposes severe constraints on the possible geometry of the electromagnetic field in the array. The group-theoretical description suggests that the C 2v group is the highest symmetry that allows excitation of the ATO mode. This mode can be excited by the wave whose vector H is parallel to the x axis (y-polarized wave). This selection rule is confirmed by our numerical calculations presented in Fig. 8(a), where the resonance occurs in the transmitted spectra directly at the wavelength of the ATO mode. Due to the high symmetry of the unit supercell, the spectral characteristic around the ATO resonance is rather "clean", i.e., the toroidal dipole mode appears to be well isolated from other resonances in the spectra, and the wavelength separation of the ATO mode is relatively large. When the vector H of the incident wave is parallel to the y axis, none of the trimers is excited, which is in full accordance with the rule of 
+
+
+thumb.
+
+The frequency shift and quality factor of the ATO resonance as functions of the asymmetry parameter θ are presented in Fig. 8(b). It is evident that the less the asymmetry, the higher the quality factor, which reaches values higher than 10 5 . The resonant wavelength shifts up as the thickness of the perturbed disks increases.
+
+
+B. Array with the Cs symmetry of unit supercell
+
+The group-theoretical description predicts that in a metamaterial composed of unit supercells with the C s symmetry, both ATO and TO modes can be excited. The results of corresponding calculations are presented in Fig. 9(a). These results confirm that the ATO and TO modes arise when the metamaterial is irradiated by the x-polarized and y-polarized wave, respectively. In general, these resonances occur at different wavelengths. However, due to the low symmetry of the unit supercell, the transmitted spectra are filled with several resonances, so that the ATO and TO resonances appear to be somewhat masked against their background.
+
+Since the material losses are excluded from the present simulations, the maximal value of the quality factor of the given resonances depends only on the asymmetry parameter θ, which defines the coupling degree of the toroidal dipole mode with free space. The net toroidal dipole moment related to the ATO mode is almost zero since the antisymmetric toroidal dipole moments in adjacent trimers compensate each other and reduce the electro- magnetic coupling of this mode with free space. The equally oriented moments of the TO mode are lack of this property. Comparing quality factors of the ATO and TO resonances presented in Fig. 9(b), one can conclude that the ATO mode possesses the lower radiation losses and consequently higher quality factor than that of the TO mode. In particular, these quality factors differ by one order of magnitude. Besides, the ATO and TO resonances experience the same wavelength shift when the parameter θ changes.
+
+
+IX. EXPERIMENTAL RESULTS
+
+We further validate our theory in neat experiments. To this end, we construct a metamaterial prototype based on the C (1) s unit supercells since this design provides the efficient coupling of the metamaterial with a linearly polarized incident wave via both the ATO and TO modes. We assemble the array on a dielectric substrate utilizing disks made of a low-loss, high-permittivity microwave ce- 
+
+
+ramic.
+
+For our experiments, we use a well-established technique that was described in detail earlier [94]. In particular, we perform our experimental study in the microwave range (8−15 GHz) using Rohde & Schwarz ZVA50 Vector Network Analyzer as the main measurement platform. Our setup also includes a pair of dielectric-lens antennas, a near-field imaging system, and all other necessary accessories.
+
+The results of our measurements are summarized in Fig. 10. It includes a photo of the actual metamaterial prototype, simulated and measured transmitted spectra and electric near-field patterns plotted at the corresponding resonant wavelengths. In the simulations supporting our experimental studies, the real material losses (tan δ) existing in the metamaterial constituents are taken into 
+
+
+account.
+
+Foremost, one can conclude that our experimental data are in good agreement with the simulation results. The measurements performed confirm the existence of polarization-dependent resonances for the ATO and TO modes. Importantly, both resonances survive in a lossy metamaterial. Since the TO mode has a lower quality factor, it can be more easily detected in the experiment.
+
+The calculated and measured characteristics of the electric near-field show a fundamental difference in these two types of toroidal dipole orders. For the ATO mode, the electric near-field is confined in the centers of minicells, while it is practically zero at the center of the hexagonal unit supercells. In the trimers, one can clearly see the staggered distribution of the real part of the normal (E z ) component of the electric near-field. This staggered distribution is additionally confirmed by the phase pattern of the E z component. Contrariwise, for the TO mode, the electric near-field has a bright hotspot in the center of the hexagonal unit supercells complemented by lower intensity hotspots at the center of each minicell. The maximal field concentration is reached outside the dielectric particles, which can be considered as a signature of the toroidal dipole mode. Thus, we have two different conditions of the field concentration in the same metamaterial, where the form of the field concentration is determined only by the given polarization of the incident wave. We believe that this peculiarity is a rather unique feature of the proposed metamaterial, which is very promising for practical applications.
+
+
+X. DISCUSSION
+
+We have focused in this paper only on two possible eigenmodes of the hexagonal unit supercells, namely, the ATO and TO modes which belong to IRREPs A 1 and B 1 (see Table II in Appendix B). However, there are also possible resonant modes belonging to other IRREPs, which can be defined using, for example, the method of symmetry adapted linear combinations (SALC) [67].
+
+Symmetry breaking in the unit supercell of the proposed metamaterials can be fulfilled in many different ways. Besides the discussed above methods of the out-ofplane symmetry breaking, the in-plane symmetry breaking can be introduced. For instance, one trimer or a cluster of several trimers in a hexagonal unit supercell can be dislocated or rotated with respect to the other trimers. Effectiveness of the rotation method in the metamaterial composed of square unit cells of trimers was demonstrated recently [66]. However, the point symmetry of the resulting unit supercell in this case is usually completely lost, and the symmetry analysis cannot be applied for such perturbed arrays.
+
+In the framework of a chosen symmetry, the geometry is not always defined uniquely due to a high number of disks included in the unit supercell and different kinds of their perturbation. Therefore, the geometry can be optimized following simple rules introduced here. This optimization can be performed before the full-wave numerical simulations, which can significantly reduce the time needed to find the desired configuration of the unit supercell.
+
+The proposed configurations of hexagonal arrays based on trimers possess a technological advantage to have a free space in the center of the hexagonal unit supercell, where an additional element (for example, a nonlinear or control element) can be deposited. In particular, for the case of the excitation of the TO mode, a strong concentration of electric near-field appears in this free space which can be useful in sensoric and lasing applications.
+
+
+XI. CONCLUSIONS
+
+We have proposed and studied all-dielectric metamaterials composed of hexagonal trimer-based unit cells which are able to support two types of toroidal supermodes. These supermodes differ in the net order of the toroidal dipole moments. The moments distributed in trimers can possess either co-directional (symmetric, TO) or staggered (antisymmetric, ATO) arrangement.
+
+A new theoretical approach based on the magnetic group theory is developed to analyze the mechanism of excitation of these supermodes by the field of a normally incident linearly polarized wave. This mechanism implies symmetry breaking in the supercell of the metamaterial. It is revealed that the ATO mode can be excited in metamaterials whose unit supercells possess the C 2v , C 2 , and C s symmetries, whereas the TO mode can be excited only in the supercells with the C s symmetry. All these symmetries can be realized by different arrangements of perturbed trimers in the unit supercell.
+
+It was demonstrated that the magnetic groups approach simplifies greatly the analysis of the arrays and provides a deeper physical insight into the mechanism of the toroidal modes excitation.
+
+We have found out that by adjusting the perturbation parameters of the trimers, it is possible to excite the ATO and TO modes in the same metamaterial by the wave with a proper polarization. Excitation of these modes results in different characteristics of the electric near-field localization, which can be important for practical applications.
+
+The method of magnetic groups introduced in this paper can be also applied for the analysis of arrays with square and rectangular unit supercells as well as to the isolated oligomers with high symmetries and their assemblies. In a more wide aspect, this method can be used for the analysis of complex systems with 3D symmetries and eigenmodes different from the toroidal ones. Appendix A: Elements of point symmetry in Schöenflies notation [13] In Schöenflies system, an n-fold rotation through 2π/n (where n is an integer; in our case n = 2, 3, 6) about the z axis is denoted by the symbol C n (C means Cyklus). The symbol σ v (the subscript v for vertical) defines reflection in a plane passing through this axis. The symbol σ d (the subscript d for diagonal) designates a mirror plane containing the axis which is diagonal to the already existing plane σ v .
+
+Let us apply now to the group notations. The groups with one axis of symmetry are denoted by C n . Notice that in this case, the notations for the group elements and groups themselves coincide. For example, the symbol C 2 denotes the operation of rotation about an axis by π, and also it may denote the C 2 group consisting of two elements: the identity e and the rotation C 2 . The meaning of the notations can be clearly understood from the context. The C nv group has an n-fold rotational axis C n and a finite number of planes of symmetry passing through the axis C n . The C s group contains two elements: the identity e and the reflection σ v .
+
+The subgroup decomposition (the group tree) of the C 6v group, which is discussed in the main body of this paper, is shown in Fig. 11. The C 6v group has the following subgroups: C 6 , C 3v , C 3 , C 2v , C 2 , C s , and C 1 .
+C1 C C 3 2 C C 6 2v
+Cs C 6v
+
+C3v FIG. 11. Group decomposition of C6v group. Thick and dotted lines indicate that the corresponding subgroup is not invariant and is not of index 2 with respect to the higher group, respectively. It means that these two groups cannot form a group of the third category [95].  C2v e C2 σ1 σ2 Magnetic group Mode order can be an element of magnetic groups entering in these groups either separately or in combination with elements of the geometrical symmetry. The T operator changes the sign of time t (t → −t), commutes with all elements of the geometrical symmetry, and has the property T T = T 2 = e, where e is the unit element of the group.
+A1 1 1 1 1 1 1 C6v dark TO A2 1 1 1 1 −1 −1 C6v(C6) B1 1 −1 1 −1 1 −1 C6v(C3v) dark ATO B2 1 −1 1 −1 −1 1 C6v(C3v) E1 2 −2 −1 1 0 0 E1 2 2 −1 −1 0 0A1 1 1 1 1 C2v dark TO A2 1 1 −1 −1 C2v(C2) B1 1 −1 1 −1 C2v(Cs) bright ATO B2 1 −1 −1 1 C2v(Cs)
+Here we shall discuss only those properties of the T operator which are necessary for our present consideration. In particular, the T operator reverses the velocities and changes the current directions, signs of magnetic fluxes, magnetic fields, toroidal moments, wave vector, and Poynting vector. All these quantities are odd in time.
+
+Categories of magnetic groups. There exist three categories of discrete and continuous point magnetic groups. The group of the first category G consists of a unitary subgroup H (in our case, it contains the usual rotationreflection elements) and products of T with all the elements of H. The full group is then H + T H including T = T e (these groups are also referred to as nonmagnetic ones, see the first column of Table VI).
+
+In the case of magnetic groups of the second category G, there is no point group elements combined with the time reversal operator T , and T itself is not an element of the groups. The nomenclature and notations of the groups of the first (nonmagnetic) and second (magnetic) category coincides. Therefore, to distinguish them, we use bold letters for denoting the groups of the second category (see second column of Table VI). The Schöenflies system is particularly suitable for notation of the magnetic groups of the third category. In this case, the notation presents explicitly the structure of the group, i.e., the unitary subgroup (it contains only elements of the geometrical symmetry) and the antiunitary elements (these elements are the product of the operator T and an element of the geometrical symmetry).
+
+In addition to the rotation-reflection elements of the subgroup H of pure geometrical operators, the magnetic groups of the third category G(H) also contain the elements which are the product of T and the usual geometrical symmetry elements. These combined elements cause the existence of the so-called antiaxes and antiplanes of symmetry. The full group is H + T H without T . Notice that the elements of H are different from those of H (see third column of Table VI).
+
+Geometrical elements of a magnetic group of the third category form a subgroup of index 2. It means that in each group of the third category, there is an equal number of elements with and without T (see Fig. 11). In contrast to the groups of the first category, the operator T itself is not an element of the magnetic groups of the third category.
+
+Appendix D: "Dynamic" magnetic symmetry of alternating magnetic field, magnetic, and toroidal dipole moments
+
+The term dynamic symmetry is used in classical and quantum mechanical systems when describing dynamical interactions and revealing the relations between dynamics and geometry. Description of the dynamic symmetry is based on the Lie groups. In particular, in electromagnetic theory, the dynamic symmetry is related to the invariance of the Maxwell equations under the conformal group of transformations [96]. In our present consideration, the notion of "dynamic" symmetry has another meaning, which is discussed below. That is why we put the term dynamic in quotes.
+
+The theory of nonmagnetic groups is frequently used to describe optical properties of metamaterials without magnetic inclusions (e.g., see Ref. [32]), while a traditional application of magnetic groups is related to the description of systems with a static magnetic field and a static magnetization in magnetic substances. An external static magnetic field together with geometrical symmetry of the medium constituents defines symmetry of the whole magnetic system. This is used, for instance, to calculate the composition of permittivity and permeability tensors (i.e., to impose some restrictions on the elements of these tensors) and also to define the structure of the scattering matrices [95].
+
+In our case, we shall consider two alternating magnetic fields with different symmetries. They are the fields of the incident wave and toroidal dipole mode. Although these magnetic fields interact in a nonmagnetic environment of the array of dielectric particles, an approach based on the magnetic groups makes it possible to get a deep physical insight into the problem of the toroidal mode excitation.
+
+Let us consider a trimer based on an equilateral triangle illuminated by a normally incident linearly polarized wave with the wave vector k. For the chosen geometry of the problem, the magnetic field of the incident wave H lies in the x-y plane. We suppose that a toroidal dipole mode is excited in the trimer. This mode appears from the circular flow of the magnetic field h, which also lies in the x-y plane. The appearance of the vectors H and h is schematically given in Fig. 12.
+
+To relate the symmetries of the magnetic fields of the incident wave H and toroidal dipole mode h, two prerequisites must be fulfilled: (i) the loop of the magnetic field h is uniform along its circumference, and (ii) a phase shift between the fields H and h is absent. It means that these two dynamic quantities are in phase being considered at a fixed point of time. This time can be fixed at an arbitrary moment, for example, when the fields reach their maximal values during the oscillation period.
+
+In nonmagnetic symmetry, the magnetic field H has only one element of symmetry, namely, the plane perpendicular to the vector H. In magnetic symmetry, the magnetic field H can be described by the 2D (in the xy plane) magnetic symmetry, namely, by the group of the third category C 2v (C s ), which contains the following elements and antielements:
+
+• the unit element e,
+
+• the antiaxis T C 2 along the z axis,
+
+• the vertical plane σ 1 perpendicular to the vector H (the plane x = 0),
+
+• the vertical antiplane T σ 2 , parallel to the vector H (the plane y = 0). In this group, the time reversal operator T is combined with the geometrical elements of the C 2 symmetry and σ 2 .
+
+In an ideal case, the magnetic field h of the toroidal mode presents a circle [see Fig. 12(a)]. Considering the x-y plane where this circle is situated, the 2D group of symmetry of h is C ∞v of the second category with the z axis of infinite order C ∞ , and an infinite number of the planes of symmetry σ v passing through this axis. The time reversal operator T is not the element of C ∞v since when t → −t, the sign of h changes.
+
+Comparing symmetries of the fields, one can see that the fields H and h have the antiaxis T C 2 and axis C 2 , respectively. Moreover, the field H has the antiplane T σ, while the field h has the plane σ which coincides with T σ. T C 2 and C 2 , and also T σ and σ are incompatible with each other. This incompatibility can be considered as a selection rule. Therefore, in the given symmetry, excitation of the toroidal dipole mode having a circular flow of h induced by the field H is impossible. Now we apply to a realistic case. In an isolated trimer, there is a particular eigensolution where three in-plane magnetic dipoles m i (i = 1, 2, 3) appears to be arranged in a head-to-tail fashion [ Fig. 12(b)]. In the linear regime, the moment m of the magnetic dipole in a dielectric disk is proportional to the incident magnetic field H:
+m = αH,(D1)
+where α is the magnetic polarizability. The trimer based on an equilateral triangle can be described by symmetry C 3v with the C 3 axis directed along the z axis and three planes of symmetry σ. Evidently, the cluster of three magnetic dipoles m i inherits the magnetic symmetry C 3v . In this case, the excitation of the toroidal dipole mode in the trimer by the incident field H is also impossible [67]. The excitation of the toroidal dipole mode in the trimer becomes possible after removing the C 3 axis and two planes of its symmetry σ. It can be made by introducing some perturbation to the trimer geometry (e.g., by changing the geometric dimensions or material parameters of one disk in the trimer [67]). This perturbation reduces the geometric symmetry of the trimer to the C s group. Notice that the position of the perturbed disk in the trimer defines the orientation of its symmetry plane σ, and, consequently, imposes a constraint on the orientation of the vector H necessary for the toroidal dipole mode excitation.
+
+FIG. 1 .
+1Exact electric dipole moment with corresponding contributions of the LWA electric dipole and toroidal dipole moments of a single trimer for its (a) lateral and (b) frontal irradiation by a linearly polarized wave. The designation of the vectors k and E of the incident wave and an appearance of the trimer toroidal eigenmode are given in the inserts. In the eigenmode, red and black arrows correspond to the flow of electric polarization currents and magnetic field respectively, the bold yellow arrow indicates the toroidal dipole moment T, and the bold blue arrows indicate the magnetic dipole moments m of individual disks. The eigenmode position on the wavelength scale is marked by a red cross. Parameters of the trimer are: ε d = 22, h d /D = 0.45, and at/D = 1.125.
+
+FIG. 2 .
+2Coordinate frame and schematic view of a dielectric hexagonal array composed of trimer-based supercells. The unit supercell is outlined by a red dashed contour.
+
+FIG. 3 .
+3Hexagonal supercell described by the C6v group and elements of this group.
+
+
+[Fig. 4(g)] or between two apexes [Fig. 4(h)] of the hexagon. These variants are designated as the C (1) s and C (2) s symmetries, respectively. Again, different geometries are possible in the hexagonal clusters with the C
+
+FIG. 5 .
+5Schematics of (a) ATO and (b) TO modes in a hexagonal unit supercell. Blue and yellow arrows demonstrate the magnetic field flow and orientation of the toroidal dipole moments, respectively.
+
+FIG. 6 .
+6VII. SPECIFIC ARRAYS DESCRIPTIONA. ATO mode in C2v supercells From the preceding consideration of the selection rules it follows that to get access to the ATO mode, symmetry σ Excitation of (a) ATO mode and (b) TO mode in the same hexagonal supercell whose symmetry is reduced to the C (1) s group. Perturbed disks are denoted by red circles. Orientation of the magnetic fields H of the incident wave and flow of the inner magnetic field of the toroidal dipole eigenmode are given by the dark and light blue arrows, respectively. The test lines are denoted by grey color.
+
+FIG
+. 7. (a) Transmitted spectra of the metamaterial with unperturbed unit supercells excited by the x-polarized (solid blue lines) and y-polarized (dashed red lines) wave. The normalized magnitude and flow of the magnetic near-field of the (b) ATO and (c) TO modes. The material and geometrical parameters of the trimers are the same as in Fig. 1 and p/D = 3.375.
+
+FIG. 8 .
+8(a) Transmitted spectra of the metamaterial with perturbed trimers excited by the x-polarized (solid blue lines) and y-polarized (dashed red lines) wave. The trimers are perturbed by resonators with different height. The unit supercell symmetry is C2v. The normalized magnitude and flow of the magnetic near-field of the ATO mode are given in the inserts, where the perturbed resonators are denoted by dashed circles. (b) Evolution of the quality factor (blue line) and normalized resonant wavelength (red line) of the ATO mode as functions of the asymmetry parameter θ. All parameters of the structure are the same as inFig. 7.
+
+FIG. 9 .
+9Same as in Fig. 8 but for arrays with the Cs symmetry of the hexagonal unit supercell. The corresponding normalized magnitude and flow of the magnetic near-field of the ATO and TO modes are given in the middle planes.
+
+FIG. 10 .
+10Simulated and measured transmitted spectra and resonant patterns of the real part and phase of the z-component of the electric near-field for an actual array with the C (1) s symmetry of the hexagonal unit supercell. The array is irradiated by the (a) x-polarized and (b) y-polarized wave to excite the ATO and TO mode, respectively. The inset demonstrates a photo of the metamaterial prototype. Parameters of the prototype are: ε d = 22 ± 1, tan δ ≈ 1 × 10 −3 , r d = 4, h d = 3.5, ∆h d = −1 (θ ≈ 0.71), εs = 1.1, hs = 10, a d = 9, p = 27. All geometrical parameters are given in millimeters.
+
+
+ACKNOWLEDGMENT VD thanks the Brazilian Agency National Council of Technological and Scientific Development (CNPq) for financial support. SDSS acknowledges support from CNPq (Grant No. 160344/2019-0). ASK and VRT acknowledge financial support from the National Key R&D Program of China (Project No. 2018YFE0119900). ABE thanks funding support from the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) under Germany's Excellence Strategy within the Cluster of Excellence PhoenixD (EXC 2122, Project ID 390833453).
+
+
+12. (a) Electric E and magnetic H fields of an incident wave with the wave vector k and circular magnetic field h of an idealized toroidal dipole mode. (b) Orientation of the magnetic dipole moments mi (i = 1, 2, 3) and toroidal dipole moment T in the magnetic field H of the incident wave for the trimer with plane of symmetry σ.
+
+TABLE I .
+IPossible symmetries of toroidal dipole modes: magnetic groups based on the C6v symmetry, their subgroups and elements 1st category
+
+TABLE II .
+IICharacter table of C6v group and magnetic groups of the second and third categories, and corresponding possible toroidal dipole mode orders. C6v e C2 2C3 2C6 3σv 3σ d Magnetic group Mode order
+
+TABLE III .
+IIIIrreducible representations of C2v group and their relation to magnetic groups, and corresponding possible toroidal dipole mode orders.
+
+TABLE IV .
+IVIrreducible representations of Cs group and their relation to magnetic groups of the second and third categories, and corresponding possible toroidal dipole mode orders. Superscripts in Cs denote orientation of the σ plane in the hexagonal cluster, [see Figs. 4(g) and 4(h)].TABLE V. Symmetry degeneration table of C6v group into C2v and Cs groups [58]. Superscripts in Cs denote orientation of the σ plane in the hexagonal cluster [see Figs. 4(g) and 4(h)]. B2 A, B A, B E2 A1, A2 A, B A, B Appendix C: Brief description of magnetic groups Time reversal operator. The time reversal operator TCs e σv Magnetic group Mode order 
+
+A 
+1 1 
+C 
+
+(1) 
+s 
+
+bright TO 
+B 
+1 −1 
+C 
+
+(1) 
+
+s (C1) 
+bright ATO 
+
+C6v C2v 
+C 
+
+(1) 
+s 
+
+C 
+
+(2) 
+s 
+
+A1 
+A1 
+A 
+A 
+A2 
+A2 
+B 
+B 
+B1 
+B1 
+A 
+B 
+B2 
+B2 
+B 
+A 
+E1 B1, 
+
+TABLE VI .
+VIContent of magnetic groups of symmetry 1st category 2nd category 3rd category G = H + T H G G(H) = H + T H , H = H including T without T T only in combination with rotation-reflections
+Tables of group theory
+Normal mode determination in crystals. D L Rousseau, R P Bauman, S P S Porto, 10.1002/jrs.1250100152J. Raman Spectrosc. 10D. L. Rousseau, R. P. Bauman, and S. P. S. Porto, "Nor- mal mode determination in crystals," J. Raman Spec- trosc. 10, 253-290 (1981).
+
+Symmetry, stability, and elastic properties of icosahedral incommensurate crystals. P Bak, 10.1103/PhysRevB.32.5764Phys. Rev. B. 32P. Bak, "Symmetry, stability, and elastic properties of icosahedral incommensurate crystals," Phys. Rev. B 32, 5764-5772 (1985).
+
+Symmetry, degeneracy, and uncoupled modes in two-dimensional photonic lattices. K Sakoda, 10.1103/PhysRevB.52.7982Phys. Rev. B. 52K. Sakoda, "Symmetry, degeneracy, and uncoupled modes in two-dimensional photonic lattices," Phys. Rev. B 52, 7982-7986 (1995).
+
+Dispersion relation and optical transmittance of a hexagonal photonic crystal slab. T Ochiai, K Sakoda, 10.1103/PhysRevB.63.125107Phys. Rev. B. 63125107T. Ochiai and K. Sakoda, "Dispersion relation and opti- cal transmittance of a hexagonal photonic crystal slab," Phys. Rev. B 63, 125107 (2001).
+
+Group theoretical investigations of photonic band structures. W Hergert, M Däne, 10.1002/pssa.200303110Phys. Status Solidi (a). 197W. Hergert and M. Däne, "Group theoretical investiga- tions of photonic band structures," Phys. Status Solidi (a) 197, 620-634 (2003).
+
+Space group theory and Fourier space analysis of two-dimensional photonic crystal waveguides. A Mock, L Lu, J O&apos;brien, 10.1103/PhysRevB.81.155115Phys. Rev. B. 81155115A. Mock, L. Lu, and J. O'Brien, "Space group theory and Fourier space analysis of two-dimensional photonic crystal waveguides," Phys. Rev. B 81, 155115 (2010).
+
+Symmetries of the eigenstates in an anisotropic photonic crystal. G Alagappan, X W Sun, H D Sun, 10.1103/PhysRevB.77.195117Phys. Rev. B. 77195117G. Alagappan, X. W. Sun, and H. D. Sun, "Symme- tries of the eigenstates in an anisotropic photonic crys- tal," Phys. Rev. B 77, 195117 (2008).
+
+M Hamermesh, A A Mullin, Group Theory and its Applications to Physical Problems. New YorkDover Publictions IncM. Hamermesh and A. A. Mullin, Group Theory and its Applications to Physical Problems (Dover Publictions Inc., New York, 1962).
+
+M Tinkham, Group Theory and Quantum Mechanics. New YorkMcGraw-HillM. Tinkham, Group Theory and Quantum Mechanics (McGraw-Hill, New York, 1964).
+
+J F Cornwell, Group Theory in Physics, Techniques of Physics. LondonAcademic PressJ. F. Cornwell, Group Theory in Physics, Techniques of Physics (Academic Press, London, 1984).
+
+W Ludwig, C Falter, Symmetries in Physics: Group Theory Applied to Physical Problems. BerlinSpringer64W. Ludwig and C. Falter, Symmetries in Physics: Group Theory Applied to Physical Problems, Springer Series in Solid-State Sciences, Vol. 64 (Springer, Berlin, 1988).
+
+T Inui, Y Tanabe, Y Onodera, Group Theory and its Application in Physics. BerlinSpringerT. Inui, Y. Tanabe, and Y. Onodera, Group Theory and its Application in Physics (Springer, Berlin, 1996).
+
+C J Bradley, A P Cracknell, The Mathematical Theory of Symmetry in Solids: Representation Theory for Point Groups and Space Groups, Oxford Classic Texts in the Physical Sciences. New YorkOxford University Press IncC. J. Bradley and A. P. Cracknell, The Mathematical Theory of Symmetry in Solids: Representation Theory for Point Groups and Space Groups, Oxford Classic Texts in the Physical Sciences (Oxford University Press Inc., New York, 2009).
+
+W Hergert, R M Geilhufe, Group Theory in Solid State Physics and Photonics: Problem Solving with Mathematica. WeinheimJohn Wiley & SonsW. Hergert and R. M. Geilhufe, Group Theory in Solid State Physics and Photonics: Problem Solving with Mathematica (John Wiley & Sons, Weinheim, 2018).
+
+Some symmetry aspects of ferroics and single phase multiferroics. H Schmid, 10.1088/0953-8984/20/43/434201J. Phys. Condens. Matter. 20434201H. Schmid, "Some symmetry aspects of ferroics and sin- gle phase multiferroics," J. Phys. Condens. Matter 20, 434201 (2008).
+
+Magnetic symmetry of lowdimensional multiferroics and ferroelastics. A Saxena, T Lookman, 10.1080/01411594.2011.553171Phase Transitions. 84A. Saxena and T. Lookman, "Magnetic symmetry of low- dimensional multiferroics and ferroelastics," Phase Tran- sitions 84, 421-437 (2011).
+
+The toroidal moment in condensed-matter physics and its relation to the magnetoelectric effect. N A Spaldin, M Fiebig, M Mostovoy, 10.1088/0953-8984/20/43/434203J. Phys. Condens. Matter. 20434203N. A. Spaldin, M. Fiebig, and M. Mostovoy, "The toroidal moment in condensed-matter physics and its re- lation to the magnetoelectric effect," J. Phys. Condens. Matter 20, 434203 (2008).
+
+Multiferroics. A Loidl, H Von Loehneysen, G M Kalvius, 10.1088/0953-8984/20/43/430301J. Phys. Condens. Matter. 20430301A. Loidl, H. von Loehneysen, and G. M. Kalvius, "Mul- tiferroics," J. Phys. Condens. Matter 20, 430301 (2008).
+
+Trend: Classifying multiferroics: Mechanisms and effects. D Khomskii, 10.1103/Physics.2.20Physics. 220D. Khomskii, "Trend: Classifying multiferroics: Mecha- nisms and effects," Physics 2, 20 (2009).
+
+The fourth ferroic order: Current status on ferrotoroidic materials. S Gnewuch, E E Rodriguez, 10.1016/j.jssc.2018.12.035J. Solid State Chem. 271S. Gnewuch and E. E. Rodriguez, "The fourth ferroic order: Current status on ferrotoroidic materials," J. Solid State Chem. 271, 175-190 (2019).
+
+Recent developments in singlemolecule toroics. X.-L Li, J Tang, 10.1039/C9DT02113BDalton Trans. 48X.-L. Li and J. Tang, "Recent developments in single- molecule toroics," Dalton Trans. 48, 15358-15370 (2019).
+
+The quest for optical magnetism: From split-ring resonators to plasmonic nanoparticles and nanoclusters. F Monticone, A Alù, 10.1039/C4TC01406EJ. Mater. Chem. C. 2F. Monticone and A. Alù, "The quest for optical mag- netism: From split-ring resonators to plasmonic nanopar- ticles and nanoclusters," J. Mater. Chem. C 2, 9059-9072 (2014).
+
+Magnetism from conductors and enhanced nonlinear phenomena. J B Pendry, A J Holden, D J Robbins, W J Stewart, 10.1109/22.798002IEEE Trans. Microwave Theory Techn. 47J. B. Pendry, A. J. Holden, D. J. Robbins, and W. J. Stewart, "Magnetism from conductors and enhanced nonlinear phenomena," IEEE Trans. Microwave Theory Techn. 47, 2075-2084 (1999).
+
+Saturation of the Magnetic Response of Split-Ring Resonators at Optical Frequencies. J Zhou, Th Koschny, M Kafesaki, E N Economou, J B Pendry, C M Soukoulis, 10.1103/PhysRevLett.95.223902Phys. Rev. Lett. 95223902J. Zhou, Th. Koschny, M. Kafesaki, E. N. Economou, J. B. Pendry, and C. M. Soukoulis, "Saturation of the Magnetic Response of Split-Ring Resonators at Optical Frequencies," Phys. Rev. Lett. 95, 223902 (2005).
+
+Magnetization waves in split-ring-resonator arrays: Evidence for retardation effects. M Decker, S Burger, S Linden, M Wegener, 10.1103/PhysRevB.80.193102Phys. Rev. B. 80193102M. Decker, S. Burger, S. Linden, and M. Wegener, "Mag- netization waves in split-ring-resonator arrays: Evidence for retardation effects," Phys. Rev. B 80, 193102 (2009).
+
+Toroidal dipolar response in a metamaterial. T Kaelberer, V A Fedotov, N Papasimakis, D P Tsai, N I Zheludev, 10.1126/science.1197172Science. 330T. Kaelberer, V. A. Fedotov, N. Papasimakis, D. P. Tsai, and N. I. Zheludev, "Toroidal dipolar response in a meta- material," Science 330, 1510-1512 (2010).
+
+Toroidal dipolar excitation and macroscopic electromagnetic properties of metamaterials. V Savinov, V A Fedotov, N I Zheludev, 10.1103/PhysRevB.89.205112Phys. Rev. B. 89205112V. Savinov, V. A. Fedotov, and N. I. Zheludev, "Toroidal dipolar excitation and macroscopic electromagnetic prop- erties of metamaterials," Phys. Rev. B 89, 205112 (2014).
+
+A metamaterial analog of the Ising model. L Cong, V Savinov, Y K Srivastava, S Han, R Singh, 10.1002/adma.201804210Adv. Mater. 301804210L. Cong, V. Savinov, Y. K. Srivastava, S. Han, and R. Singh, "A metamaterial analog of the Ising model," Adv. Mater. 30, 1804210 (2018).
+
+Group theory based design of isotropic negative refractive index metamaterials. N Wongkasem, A Akyurtlu, K A Marx, 10.2528/PIER06062103Prog. Electromagn. Res. 63N. Wongkasem, A. Akyurtlu, and K. A. Marx, "Group theory based design of isotropic negative refractive in- dex metamaterials," Prog. Electromagn. Res. 63, 295- 310 (2006).
+
+Electrically small isotropic three-dimensional magnetic resonators for metamaterial design. J D Baena, L Jelinek, R Marqués, J Zehentner, 10.1063/1.2190442Appl. Phys. Lett. 88134108J. D. Baena, L. Jelinek, R. Marqués, and J. Zehentner, "Electrically small isotropic three-dimensional magnetic resonators for metamaterial design," Appl. Phys. Lett. 88, 134108 (2006).
+
+Towards a systematic design of isotropic bulk magnetic metamaterials using the cubic point groups of symmetry. J D Baena, L Jelinek, R Marqués, 10.1103/PhysRevB.76.245115Phys. Rev. B. 76245115J. D. Baena, L. Jelinek, and R. Marqués, "Towards a systematic design of isotropic bulk magnetic metamate- rials using the cubic point groups of symmetry," Phys. Rev. B 76, 245115 (2007).
+
+Group theoretical description of artificial electromagnetic metamaterials. W J Padilla, 10.1364/OE.15.001639Opt. Express. 15W. J. Padilla, "Group theoretical description of artificial electromagnetic metamaterials," Opt. Express 15, 1639- 1646 (2007).
+
+Symmetry principles and group-theoretical methods in electromagnetics of complex media. V Dmitriev, Metamaterials Handbook. Theory and Phenomena of Metamaterials. F. CapolinoBoca Raton, FLCRC Press1V. Dmitriev, "Symmetry principles and group-theoretical methods in electromagnetics of complex media," in Meta- materials Handbook. Theory and Phenomena of Metama- terials, Vol. 1, edited by F. Capolino (CRC Press, Boca Raton, FL, 2009) Chap. 3, pp. 3-1-3-19.
+
+Symmetry properties of electromagnetic planar arrays: Long-wave approximation and normal incidence. V Dmitriev, 10.1016/j.metmat.2011.04.003Metamaterials. 5V. Dmitriev, "Symmetry properties of electromagnetic planar arrays: Long-wave approximation and normal in- cidence," Metamaterials 5, 141-148 (2011).
+
+Symmetry properties of electromagnetic planar arrays in transfer matrix description. V Dmitriev, 10.1109/TAP.2012.2220316IEEE Trans. Antennas Propag. 61V. Dmitriev, "Symmetry properties of electromagnetic planar arrays in transfer matrix description," IEEE Trans. Antennas Propag. 61, 185-194 (2013).
+
+Group-theory approach to tailored electromagnetic properties of metamaterials: An inverse-problem solution. C M Reinke, T M De La Mata Luque, M F Su, M B Sinclair, I El-Kady, 10.1103/PhysRevE.83.066603Phys. Rev. E. 8366603C. M. Reinke, T. M. De la Mata Luque, M. F. Su, M. B. Sinclair, and I. El-Kady, "Group-theory approach to tailored electromagnetic properties of metamaterials: An inverse-problem solution," Phys. Rev. E 83, 066603 (2011).
+
+Optical response features of si-nanoparticle arrays. A B Evlyukhin, C Reinhardt, A Seidel, B S Luk&apos;yanchuk, B N Chichkov, Physical Review B. 8245404A. B. Evlyukhin, C. Reinhardt, A. Seidel, B. S. Luk'yanchuk, and B. N. Chichkov, "Optical response fea- tures of si-nanoparticle arrays," Physical Review B 82, 045404 (2010).
+
+All-dielectric metamaterials. S Jahani, Z Jacob, 10.1038/nnano.2015.304Nat. Nanotechnol. 11S. Jahani and Z. Jacob, "All-dielectric metamaterials," Nat. Nanotechnol. 11, 23-36 (2016).
+
+Functional meta-optics and nanophotonics governed by Mie resonances. S Kruk, Y Kivshar, 10.1021/acsphotonics.7b01038ACS Photonics. 4S. Kruk and Y. Kivshar, "Functional meta-optics and nanophotonics governed by Mie resonances," ACS Pho- tonics 4, 2638-2649 (2017).
+
+Multipole lattice effects in high refractive index metasurfaces. V E Babicheva, A B Evlyukhin, Journal of Applied Physics. 129V. E. Babicheva and A. B. Evlyukhin, "Multipole lattice effects in high refractive index metasurfaces," Journal of Applied Physics 129 (2021).
+
+Demonstration of magnetic dipole resonances of dielectric nanospheres in the visible region. A B Evlyukhin, S M Novikov, U Zywietz, R L Eriksen, C Reinhardt, S I Bozhevolnyi, B N Chichkov, Nano letters. 12A. B. Evlyukhin, S. M. Novikov, U. Zywietz, R. L. Erik- sen, C. Reinhardt, S. I. Bozhevolnyi, and B. N. Chichkov, "Demonstration of magnetic dipole resonances of dielec- tric nanospheres in the visible region," Nano letters 12, 3749-3755 (2012).
+
+Optically induced interaction of magnetic moments in hybrid metamaterials. A E Miroshnichenko, B Luk&apos;yanchuk, S A Maier, Y S Kivshar, 10.1021/nn204348jACS Nano. 6A. E. Miroshnichenko, B. Luk'yanchuk, S. A. Maier, and Y. S. Kivshar, "Optically induced interaction of magnetic moments in hybrid metamaterials," ACS Nano 6, 837- 842 (2012).
+
+Antiferromagnetic order in hybrid electromagnetic metamaterials. A E Miroshnichenko, D Filonov, D Lukyanchuk, Y Kivshar, 10.1088/1367-2630/aa6a33New J. Phys. 1983013A. E. Miroshnichenko, D. Filonov, D. Lukyanchuk, and Y. Kivshar, "Antiferromagnetic order in hybrid elec- tromagnetic metamaterials," New J. Phys. 19, 083013 (2017).
+
+Near-field coupling effects in Mie-resonant photonic structures and all-dielectric metasurfaces. S Lepeshov, Y Kivshar, 10.1021/acsphotonics.8b00246ACS Photonics. 5S. Lepeshov and Y. Kivshar, "Near-field coupling effects in Mie-resonant photonic structures and all-dielectric metasurfaces," ACS Photonics 5, 2888-2894 (2018).
+
+Multipole analysis of dielectric metasurfaces composed of nonspherical nanoparticles and lattice invisibility effect. P D Terekhov, V E Babicheva, K V Baryshnikova, A S Shalin, A Karabchevsky, A B Evlyukhin, Physical Review B. 9945424P. D. Terekhov, V. E. Babicheva, K. V. Baryshnikova, A. S. Shalin, A. Karabchevsky, and A. B. Evlyukhin, "Multipole analysis of dielectric metasurfaces composed of nonspherical nanoparticles and lattice invisibility ef- fect," Physical Review B 99, 045424 (2019).
+
+Multipolar origin of bound states in the continuum. Z Sadrieva, K Frizyuk, M Petrov, Y Kivshar, A Bogdanov, 10.1103/PhysRevB.100.115303Phys. Rev. B. 100115303Z. Sadrieva, K. Frizyuk, M. Petrov, Y. Kivshar, and A. Bogdanov, "Multipolar origin of bound states in the continuum," Phys. Rev. B 100, 115303 (2019).
+
+Symmetry analysis and multipole classification of eigenmodes in electromagnetic resonators for engineering their optical properties. S Gladyshev, K Frizyuk, A Bogdanov, 10.1103/PhysRevB.102.075103Phys. Rev. B. 10275103S. Gladyshev, K. Frizyuk, and A. Bogdanov, "Symme- try analysis and multipole classification of eigenmodes in electromagnetic resonators for engineering their optical properties," Phys. Rev. B 102, 075103 (2020).
+
+On the constraints of electromagnetic multipoles for symmetric scatterers: eigenmode analysis. Z Xiong, Q Yang, W Chen, Z Wang, J Xu, W Liu, Y Chen, 10.1364/OE.382239Opt. Express. 28Z. Xiong, Q. Yang, W. Chen, Z. Wang, J. Xu, W. Liu, and Y. Chen, "On the constraints of electromagnetic mul- tipoles for symmetric scatterers: eigenmode analysis," Opt. Express 28, 3073-3085 (2020).
+
+A giant red shift and enhancement of the light confinement in a planar array of dielectric bars. V V Khardikov, E O Iarko, S L Prosvirnin, 10.1088/2040-8978/14/3/035103J. Opt. 1435103V. V. Khardikov, E. O. Iarko, and S. L. Prosvirnin, "A giant red shift and enhancement of the light confinement in a planar array of dielectric bars," J. Opt. 14, 035103 (2012).
+
+High-quality trapped modes in all-dielectric metamaterials. V R Tuz, V V Khardikov, A S Kupriianov, K L Domina, S Xu, H Wang, H.-B Sun, 10.1364/OE.26.002905Opt. Express. 26V. R. Tuz, V. V. Khardikov, A. S. Kupriianov, K. L. Domina, S. Xu, H. Wang, and H.-B. Sun, "High-quality trapped modes in all-dielectric metamaterials," Opt. Ex- press 26, 2905-2916 (2018).
+
+Controlling high-Q trapped modes in polarization-insensitive alldielectric metasurfaces. A Sayanskiy, A S Kupriianov, S Xu, P Kapitanova, V Dmitriev, V V Khardikov, V R Tuz, 10.1103/PhysRevB.99.085306Phys. Rev. B. 9985306A. Sayanskiy, A. S. Kupriianov, S. Xu, P. Kapitanova, V. Dmitriev, V. V. Khardikov, and V. R. Tuz, "Control- ling high-Q trapped modes in polarization-insensitive all- dielectric metasurfaces," Phys. Rev. B 99, 085306 (2019).
+
+Homogeneous enhancement of near-fields in all-dielectric metasurfaces with clusterbased unit cells. A S Kupriiannov, K L Domina, V V Khardikov, A B Evlyukhin, V R Tuz, 10.1364/OL.384983Opt. Lett. 45A. S. Kupriiannov, K. L. Domina, V. V. Khardikov, A. B. Evlyukhin, and V. R. Tuz, "Homogeneous enhancement of near-fields in all-dielectric metasurfaces with cluster- based unit cells," Opt. Lett. 45, 1527-1530 (2020).
+
+Bianisotropy for light trapping in all-dielectric metasurfaces. A B Evlyukhin, V R Tuz, V S Volkov, B N Chichkov, 10.1103/PhysRevB.101.205415Phys. Rev. B. 101205415A. B. Evlyukhin, V. R. Tuz, V. S. Volkov, and B. N. Chichkov, "Bianisotropy for light trapping in all-dielectric metasurfaces," Phys. Rev. B 101, 205415 (2020).
+
+Sharp Trapped-Mode Resonances in Planar Metamaterials with a Broken Structural Symmetry. V A Fedotov, M Rose, S L Prosvirnin, N Papasimakis, N I Zheludev, 10.1103/PhysRevLett.99.147401Phys. Rev. Lett. 99147401V. A. Fedotov, M. Rose, S. L. Prosvirnin, N. Papasi- makis, and N. I. Zheludev, "Sharp Trapped-Mode Reso- nances in Planar Metamaterials with a Broken Structural Symmetry," Phys. Rev. Lett. 99, 147401 (2007).
+
+Asymmetric Metasurfaces with High-Q Resonances Governed by Bound States in the Continuum. K Koshelev, S Lepeshov, M Liu, A Bogdanov, Y Kivshar, 10.1103/PhysRevLett.121.193903Phys. Rev. Lett. 121193903K. Koshelev, S. Lepeshov, M. Liu, A. Bogdanov, and Y. Kivshar, "Asymmetric Metasurfaces with High-Q Res- onances Governed by Bound States in the Continuum," Phys. Rev. Lett. 121, 193903 (2018).
+
+All-dielectric metasurfaces with trapped modes: Grouptheoretical description. P Yu, A S Kupriianov, V Dmitriev, V R Tuz, 10.1063/1.5087054J. Appl. Phys. 125143101P. Yu, A. S. Kupriianov, V. Dmitriev, and V. R. Tuz, "All-dielectric metasurfaces with trapped modes: Group- theoretical description," J. Appl. Phys. 125, 143101 (2019).
+
+Magnetic dipole ordering in resonant dielectric metasurfaces. V R Tuz, P Yu, V Dmitriev, Y S Kivshar, 10.1103/PhysRevApplied.13.044003Phys. Rev. Applied. 1344003V. R. Tuz, P. Yu, V. Dmitriev, and Y. S. Kivshar, "Mag- netic dipole ordering in resonant dielectric metasurfaces," Phys. Rev. Applied 13, 044003 (2020).
+
+Selection rules for quasibound states in the continuum. A C Overvig, S C Malek, M J Carter, S Shrestha, N Yu, 10.1103/PhysRevB.102.035434Phys. Rev. B. 10235434A. C. Overvig, S. C. Malek, M. J. Carter, S. Shrestha, and N. Yu, "Selection rules for quasibound states in the continuum," Phys. Rev. B 102, 035434 (2020).
+
+Dielectric metamaterials with toroidal dipolar response. A A Basharin, M Kafesaki, E N Economou, C M Soukoulis, V A Fedotov, V Savinov, N I Zheludev, 10.1103/PhysRevX.5.011036Phys. Rev. X. 511036A. A. Basharin, M. Kafesaki, E. N. Economou, C. M. Soukoulis, V. A. Fedotov, V. Savinov, and N. I. Zhe- ludev, "Dielectric metamaterials with toroidal dipolar re- sponse," Phys. Rev. X 5, 011036 (2015).
+
+Toroidal eigenmodes in all-dielectric metamolecules. A C Tasolamprou, O Tsilipakos, M Kafesaki, C M Soukoulis, E N Economou, 10.1103/PhysRevB.94.205433Phys. Rev. B. 94205433A. C. Tasolamprou, O. Tsilipakos, M. Kafesaki, C. M. Soukoulis, and E. N. Economou, "Toroidal eigenmodes in all-dielectric metamolecules," Phys. Rev. B 94, 205433 (2016).
+
+Toroidal multipoles in metamaterials. A C Tasolamprou, O Tsilipakos, A Basharin, M Kafesaki, C M Soukoulis, E N Economou, 10.1142/9789813270343_0007Compendium on Electromagnetic Analysis. V. A. MarkelSingaporeWorld Scientific5A. C. Tasolamprou, O. Tsilipakos, A. Basharin, M. Kafe- saki, C. M. Soukoulis, and E. N. Economou, "Toroidal multipoles in metamaterials," in Compendium on Elec- tromagnetic Analysis, Vol. 5, edited by V. A. Markel (World Scientific, Singapore, 2020) Chap. 7, pp. 237-278.
+
+Experimental observation of toroidal dipole modes in alldielectric metasurfaces. S Xu, A Sayanskiy, A S Kupriianov, V R Tuz, P Kapitanova, H.-B Sun, W Han, Y S Kivshar, 10.1002/adom.201801166Adv. Opt. Mater. 71801166S. Xu, A. Sayanskiy, A. S. Kupriianov, V. R. Tuz, P. Kap- itanova, H.-B. Sun, W. Han, and Y. S. Kivshar, "Ex- perimental observation of toroidal dipole modes in all- dielectric metasurfaces," Adv. Opt. Mater. 7, 1801166 (2019).
+
+Toroidal dipole resonances in all-dielectric oligomer metasurfaces. G Zhang, C Lan, R Gao, Y Wen, J Zhou, 10.1002/adts.201900123Adv. Theory Simul. 21900123G. Zhang, C. Lan, R. Gao, Y. Wen, and J. Zhou, "Toroidal dipole resonances in all-dielectric oligomer metasurfaces," Adv. Theory Simul. 2, 1900123 (2019).
+
+Alldielectric resonant metasurfaces with a strong toroidal response. V R Tuz, V V Khardikov, Y S Kivshar, 10.1021/acsphotonics.8b00098ACS Photonics. 5V. R. Tuz, V. V. Khardikov, and Y. S. Kivshar, "All- dielectric resonant metasurfaces with a strong toroidal response," ACS Photonics 5, 1871-1876 (2018).
+
+Metasurface engineering through bound states in the continuum. A S Kupriianov, Y Xu, A Sayanskiy, V Dmitriev, Y S Kivshar, V R Tuz, 10.1103/PhysRevApplied.12.014024Phys. Rev. Applied. 1214024A. S. Kupriianov, Y. Xu, A. Sayanskiy, V. Dmitriev, Y. S. Kivshar, and V. R. Tuz, "Metasurface engineer- ing through bound states in the continuum," Phys. Rev. Applied 12, 014024 (2019).
+
+Antitoroidic and toroidic orders in all-dielectric metasurfaces for optical near-field manipulation. V R Tuz, V Dmitriev, A B Evlyukhin, 10.1021/acsanm.0c02421ACS Appl. Nano Mater. 3V. R. Tuz, V. Dmitriev, and A. B. Evlyukhin, "Anti- toroidic and toroidic orders in all-dielectric metasurfaces for optical near-field manipulation," ACS Appl. Nano Mater. 3, 11315-11325 (2020).
+
+Symmetry analysis of trimer-based all-dielectric metasurfaces with toroidal dipole modes. V Dmitriev, A S Kupriianov, S D S Santos, V R Tuz, 10.1088/1361-6463/abccf1J. Phys. D Appl. Phys. 54115107V. Dmitriev, A. S. Kupriianov, S. D. S. Santos, and V. R. Tuz, "Symmetry analysis of trimer-based all-dielectric metasurfaces with toroidal dipole modes," J. Phys. D Appl. Phys. 54, 115107 (2021).
+
+Scheme for Achieving a Topological Photonic Crystal by Using Dielectric Material. Long-Hua Wu, Xiao Hu, 10.1103/PhysRevLett.114.223901Phys. Rev. Lett. 114223901Long-Hua Wu and Xiao Hu, "Scheme for Achieving a Topological Photonic Crystal by Using Dielectric Mate- rial," Phys. Rev. Lett. 114, 223901 (2015).
+
+Far-field probing of leaky topological states in all-dielectric metasurfaces. M A Gorlach, X Ni, D A Smirnova, D Korobkin, D Zhirihin, A P Slobozhanyuk, P A Belov, A Alù, A B Khanikaev, 10.1038/s41467-018-03330-9Nat. Commun. 9909M. A. Gorlach, X. Ni, D. A. Smirnova, D. Korobkin, D. Zhirihin, A. P. Slobozhanyuk, P. A. Belov, A. Alù, and A. B. Khanikaev, "Far-field probing of leaky topolog- ical states in all-dielectric metasurfaces," Nat. Commun. 9, 909 (2018).
+
+Visualization of a Unidirectional Electromagnetic Waveguide Using Topological Photonic Crystals Made of Dielectric Materials. Y Yang, Y F Xu, T Xu, H.-X Wang, J.-H Jiang, X Hu, Z H Hang, 10.1103/PhysRevLett.120.217401Phys. Rev. Lett. 120217401Y. Yang, Y. F. Xu, T. Xu, H.-X. Wang, J.-H. Jiang, X. Hu, and Z. H. Hang, "Visualization of a Unidi- rectional Electromagnetic Waveguide Using Topological Photonic Crystals Made of Dielectric Materials," Phys. Rev. Lett. 120, 217401 (2018).
+
+Double Dirac cones in two-dimensional photonic crystals with C6 symmetry. J.-R Jiang, S.-C Wu, W.-T Chen, R.-L Chern, 10.1080/09500340.2019.1696997J. Mod. Opt. 66J.-R. Jiang, S.-C. Wu, W.-T. Chen, and R.-L. Chern, "Double Dirac cones in two-dimensional photonic crys- tals with C6 symmetry," J. Mod. Opt. 66, 2119-2130 (2019).
+
+Polarization-resolved edge states in terahertz topological photonic crystal. H Xiong, Q Wu, Y Lu, R Wang, Q Zhang, J Qi, J Yao, J Xu, 10.1364/OE.27.022819Opt. Express. 27H. Xiong, Q. Wu, Y. Lu, R. Wang, Q. Zhang, J. Qi, J. Yao, and J. Xu, "Polarization-resolved edge states in terahertz topological photonic crystal," Opt. Express 27, 22819-22826 (2019).
+
+Topological photonic crystal of large valley Chern numbers. X Xi, K.-P Ye, R.-X Wu, 10.1364/PRJ.396872Photon. Res. 8X. Xi, K.-P. Ye, and R.-X. Wu, "Topological photonic crystal of large valley Chern numbers," Photon. Res. 8, B1-B7 (2020).
+
+Absorption and Scattering of Light by Small Particles. C F Bohren, D R Huffman, WileyNew YorkC. F. Bohren and D. R. Huffman, Absorption and Scatter- ing of Light by Small Particles (Wiley, New York, 1998).
+
+Optical properties of two interacting gold nanoparticles. W Rechberger, A Hohenau, A Leitner, J R Krenn, B Lamprecht, F R Aussenegg, 10.1016/S0030-4018(03)01357-9Opt. Commun. 220W. Rechberger, A. Hohenau, A. Leitner, J. R. Krenn, B. Lamprecht, and F. R. Aussenegg, "Optical properties of two interacting gold nanoparticles," Opt. Commun. 220, 137-141 (2003).
+
+Trimeric plasmonic molecules: The role of symmetry. L Chuntonov, G Haran, 10.1021/nl2008532Nano Lett. 11L. Chuntonov and G. Haran, "Trimeric plasmonic molecules: The role of symmetry," Nano Lett. 11, 2440- 2445 (2011).
+
+Dielectric resonators and filters. C Wang, K A Zaki, 10.1109/MMM.2007.903648IEEE Microwave Mag. 8C. Wang and K. A. Zaki, "Dielectric resonators and fil- ters," IEEE Microwave Mag. 8, 115-127 (2007).
+
+Lattices of Dielectric Resonators. A Trubin, 10.1007/978-3-319-25148-6Springer Series in Advanced Microelectronics. 53SpringerA. Trubin, Lattices of Dielectric Resonators, Springer Series in Advanced Microelectronics, Vol. 53 (Springer Cham, Heidelberg, 2016).
+
+Approach to analysis of all-dielectric free-form antenna systems. V I Fesenko, A S Kupriianov, A Sayanskiy, V I Shcherbinin, A Trubin, V R Tuz, 10.1364/OE.27.022363Opt. Express. 27V. I. Fesenko, A. S. Kupriianov, A. Sayanskiy, V. I. Shcherbinin, A. Trubin, and V. R. Tuz, "Approach to analysis of all-dielectric free-form antenna systems," Opt. Express 27, 22363-22374 (2019).
+
+Toroid moments in electrodynamics and solid-state physics. V M Dubovik, V V Tugushev, 10.1016/0370-1573(90)90042-ZPhys. Rep. 187V. M. Dubovik and V. V. Tugushev, "Toroid moments in electrodynamics and solid-state physics," Phys. Rep. 187, 145-202 (1990).
+
+Toroidal metamaterial. K Marinov, A D Boardman, V A Fedotov, N Zheludev, 10.1088/1367-2630/9/9/324New J. Phys. 9324K. Marinov, A.D. Boardman, V.A. Fedotov, and N. Zhe- ludev, "Toroidal metamaterial," New J. Phys. 9, 324 (2007).
+
+Optical pulling force. J Chen, J Ng, C T Lin, Z Chan, 10.1038/nphoton.2011.153Nat. Photonics. 5J. Chen, J. Ng, and C.T. Lin, Z.and Chan, "Optical pulling force," Nat. Photonics 5, 531-534 (2011).
+
+Optical theorem and multipole scattering of light by arbitrarily shaped nanoparticles. A B Evlyukhin, T Fischer, C Reinhardt, B N Chichkov, 10.1103/PhysRevB.94.205434Phys. Rev. B. 94205434A. B. Evlyukhin, T. Fischer, C. Reinhardt, and B. N. Chichkov, "Optical theorem and multipole scattering of light by arbitrarily shaped nanoparticles," Phys. Rev. B 94, 205434 (2016).
+
+An electromagnetic multipole expansion beyond the longwavelength approximation. R Alaee, C Rockstuhl, I Fernandez-Corbaton, 10.1016/j.optcom.2017.08.064Opt. Commun. 407R. Alaee, C. Rockstuhl, and I. Fernandez-Corbaton, "An electromagnetic multipole expansion beyond the long- wavelength approximation," Opt. Commun. 407, 17-21 (2018).
+
+Multipole decompositions for directional light scattering. A B Evlyukhin, B N Chichkov, 10.1103/PhysRevB.100.125415Phys. Rev. B. 100125415A. B. Evlyukhin and B. N. Chichkov, "Multipole decom- positions for directional light scattering," Phys. Rev. B 100, 125415 (2019).
+
+On the dynamic toroidal multipoles from localized electric current distributions. I Fernandez-Corbaton, S Nanz, C Rockstuhl, 10.1038/s41598-017-07474-4Sci. Rep. 7I. Fernandez-Corbaton, S. Nanz, and C. Rockstuhl, "On the dynamic toroidal multipoles from localized electric current distributions," Sci. Rep. 7, 1-8 (2017).
+
+Electromagnetic sources beyond common multipoles. N A Nemkov, A A Basharin, V A Fedotov, Physical Review A. 9823858N. A. Nemkov, A. A. Basharin, and V. A. Fedotov, "Electromagnetic sources beyond common multipoles," Physical Review A 98, 023858 (2018).
+
+The high-order toroidal moments and anapole states in all-dielectric photonics. E A Gurvitz, K S Ladutenko, P A Dergachev, A B Evlyukhin, A E Miroshnichenko, A S Shalin, 10.1002/lpor.201800266Laser Photonics Rev. 131800266E. A. Gurvitz, K. S. Ladutenko, P. A. Dergachev, A. B. Evlyukhin, A. E. Miroshnichenko, and A. S. Shalin, "The high-order toroidal moments and anapole states in all-dielectric photonics," Laser Photonics Rev. 13, 1800266 (2019).
+
+Direct amplitude-phase near-field observation of higher-order anapole states. V A Zenin, A B Evlyukhin, S M Novikov, Y Yang, R Malureanu, A Lavrinenko, B N Chichkov, S I Bozhevolnyi, 10.1021/acs.nanolett.7b04200Nano Lett. 17V. A. Zenin, A. B. Evlyukhin, S. M. Novikov, Y. Yang, R. Malureanu, A. V Lavrinenko, B. N. Chichkov, and S. I. Bozhevolnyi, "Direct amplitude-phase near-field ob- servation of higher-order anapole states," Nano Lett. 17, 7152-7159 (2017).
+
+Nonradiating anapole states in nanophotonics: from fundamentals to applications. Y Yang, S I Bozhevolnyi, 10.1088/1361-6528/ab02b0Nanotechnology. 30204001Y. Yang and S. I. Bozhevolnyi, "Nonradiating anapole states in nanophotonics: from fundamentals to applica- tions," Nanotechnology 30, 204001 (2019).
+
+Optical anapoles: Concepts and applications. K V Baryshnikova, D A Smirnova, B S Luk&apos;yanchuk, Y S Kivshar, 10.1002/adom.201801350Adv. Opt. Mater. 71801350K. V. Baryshnikova, D. A. Smirnova, B. S. Luk'yanchuk, and Y. S. Kivshar, "Optical anapoles: Concepts and ap- plications," Adv. Opt. Mater. 7, 1801350 (2019).
+
+Optical anapoles. V Savinov, N Papasimakis, D P Tsai, N I Zheludev, 10.1038/s42005-019-0167-zCommun. Phys. 2V. Savinov, N. Papasimakis, D.P. Tsai, and N.I. Zhe- ludev, "Optical anapoles," Commun. Phys. 2, 1-4 (2019).
+
+Proof of polarisation independence and nonexistence of crosspolar terms for targets presenting n-fold (n > 2) rotational symmetry with special reference to frequency-selective surfaces. A Mackay, 10.1049/el:19891088Electron. Lett. 25A. Mackay, "Proof of polarisation independence and nonexistence of crosspolar terms for targets presenting n-fold (n > 2) rotational symmetry with special refer- ence to frequency-selective surfaces," Electron. Lett. 25, 1624-1625 (1989).
+
+Microwave approach to study resonant features of all-dielectric metasurfaces. A S Kupriianov, V R Tuz, 10.1109/PIERS-Fall48861.2019.90213272019 Photonics Electromagnetics Research Symposium -Fall (PIERS -Fall. A. S. Kupriianov and V. R. Tuz, "Microwave approach to study resonant features of all-dielectric metasurfaces," in 2019 Photonics Electromagnetics Research Symposium - Fall (PIERS -Fall) (2019) pp. 866-870.
+
+A A Barybin, V A Dmitriev, Modern Electrodynamics and Coupled-Mode Theory: Application to Guided-Wave Optics. Rinton Press PrincetonA. A. Barybin and V. A. Dmitriev, Modern Electro- dynamics and Coupled-Mode Theory: Application to Guided-Wave Optics (Rinton Press Princeton, New Jer- sey, 2002).
+
+C E Wulfman, Dynamical Symmetry. New JerseyWorld Scientific Publishing CompanyC. E. Wulfman, Dynamical Symmetry (World Scientific Publishing Company, New Jersey, 2010).

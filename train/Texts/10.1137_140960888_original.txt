@@ -1,0 +1,316 @@
+
+Decomposition of random graphs into complete bipartite graphs
+26 Nov 2015
+
+Fan Chung 
+Xing Peng 
+Decomposition of random graphs into complete bipartite graphs
+26 Nov 2015arXiv:1402.0860v3 [math.CO] graph G in G(n, p), where p is a constant no greater than 1/2, asymptotically almost surely τ (G) is between n − c(log 1/p n) 3+ǫ and n − (2 + o(1)) log 1/(1−p) n for any positive constants c and ǫ.
+We consider the problem of partitioning the edge set of a graph G into the minimum number τ (G) of edge-disjoint complete bipartite subgraphs. We show that for a random
+
+Introduction
+
+For a graph G, the bipartition number, denoted by τ (G), is the minimum number of complete bipartite subgraphs that are edge-disjoint and whose union is the edge set of G. In 1971, Graham and Pollak [6] proved that τ (K n ) = n − 1.
+
+(1)
+
+In particular, they showed that for a graph G on n vertices, the bipartition number τ (G) is bounded below as follows:
+τ (G) ≥ max {n + , n − }(2)
+where n + is the number of positive eigenvalues and n − is the number of negative eigenvalues of the adjacency matrix of G. Then, (1) follows from (2). Since then, there have been a number of alternative proofs for (1) by using linear algebra [10,11,12] or by using matrix enumeration [13,14]. Let α(G) denote the independence number of G, which is the maximum number of vertices so that there are no edges among some set of α(G) vertices in G. A star is a special bipartite graph in which all edges share a common vertex which we call the center of the star. For a graph G on n vertices, the edge set of G can obviously be decomposed into n − α(G) stars centered at vertices in the complement of a largest independent set. It follows immediately that τ (G) ≤ n − α(G).
+
+(
+
+It was mentioned in a 1988 paper [9], by Kratzke, Reznick and West, that Erdős conjectured the equality in (3) holds for almost all graphs G ∈ G(n, 1/2), although we could not find this conjecture in any other publication on Erdős' problems.
+
+Theorem 1 For a random graph G in G(n, 1/2), asymptotically almost surely the bipartition number τ (G) of G satisfies n − c(log 2 n) 3+ǫ ≤ τ (G) ≤ n − (2 + o(1)) log 2 n for any positive constants c and ǫ.
+
+Theorem 1 is a special case of the following theorem.
+
+Theorem 2 For a random graph G in G(n, p), where p is a constant no greater than 1/2 , asymptotically almost surely the bipartition number τ (G) of G satisfies n − c(log 1/p n) 3+ǫ ≤ τ (G) ≤ n − (2 + o(1)) log 1/(1−p) n for any positive constants c and ǫ.
+
+We remark that our techniques can be extended to the case where p ≤ 1 − c for any positive constant c, but we restrict our attention here to the case where p ≤ 1/2.
+
+Alon [1] disproved Erdős' conjecture by showing asymptotically almost surely τ (G) ≤ n − α(G) − 1 for most values of n if G ∈ G(n, 1/2). Recently, Alon, Bohman, and Huang [2] established a better upper bound which asserts if G ∈ G(n, 1/2), then asymptotically almost surely τ (G) ≤ n − (1 + c)α(G) for some small positive constant c. This result implies that Erdős' conjecture is even false. For sparser random graphs, Alon [1] proved that there exists some (small) constant c such that for 2 n ≤ p ≤ c, the bipartition number for a random graph G in G(n, p) satisfies τ (G) = n − Θ log np p asymptotically almost surely. We remark that the difficulty for computing τ (G) is closely related to the intractability of computing α(G). In general, the problem of determining α(G) is an NP-complete problem, as one of the original 21 NP-complete problems in Karp [8]. If G does not contain a 4-cycle, then τ (G) = n−α(G). Schrijver showed that the problem of determining α(G) for the family of C 4 -free graphs G remains NP-complete [9]. Therefore the problem of determining τ (G) is also NP-complete. Nevertheless, Theorem 2 implies that for almost all graphs G, we can bound τ (G) within a relatively small range.
+
+We also consider a variation of the bipartition number by requiring an additional condition that no complete bipartite graph in the partition is a star. We define the strong bipartition number, denoted by τ ′ (G), to be the minimum number of complete bipartite graphs (which are not stars) needed to partition the edge set of G. It is possible that a graph G dose not admit such a partition, then we define τ ′ (G) as ∞ in this case; if |V (G)| ≤ 2, then we define τ ′ (G) to be zero. We will show that for a random graph G ∈ G(n, p), the strong bipartition number satisfies τ ′ (G) ≥ 1.0001n if p is a constant and p ≤ 1 2 . The paper is organized as follows: In the next section, we state some definitions and basic facts that we will use later. In Section 3, we establish upper bounds for the number of edges covered by several specified families of complete bipartite subgraphs. In Section 4, we consider the remaining uncovered edges and give corresponding lower bounds that our main theorem needs. In Section 5, we show that asymptotically almost surely the strong bipartition number is at least 1.0001n for a random graph on n vertices. In Section 6, we use the lemmas and the strong bipartition theorem to prove Theorem 2. A number of problems and remarks are mentioned in Section 7.
+
+
+Preliminaries
+Let G = (V, E) be a graph. For a vertex v ∈ V (G), the neighborhood N G (v) of v is the set {u : u ∈ V (G) and {u, v} ∈ E(G)} and the degree d G (v) of v is |N G (v)|. For a hypergraph H = (V, E) and v ∈ V (H), we define the degree d H (v) to be |{F : v ∈ F and F ∈ E(H)}|. For U ⊆ V (G)
+, let e(U ) be the number of edges of G with both endpoints in U and G[U ] be the subgraph induced by U . Furthermore, 2 U denotes the power set of U . For two subsets A and B of V , we define E(A, B) = {{u, v} ∈ E : u ∈ A and v ∈ B}. We say A and B form a complete bipartite graph if A ∩ B = ∅ and {u, v} ∈ E(G) for all u ∈ A and v ∈ B.
+
+We will use the following versions of Chernoff's inequality and Azuma's inequality.
+
+Theorem 3 [4] Let X 1 , . . . , X n be independent random variables with
+Pr(X i = 1) = p i , Pr(X i = 0) = 1 − p i . We consider the sum X = n i=1 X i with expectation E(X) = n i=1 p i . Then we have (Lower tail) Pr(X ≤ E(X) − λ) ≤ e −λ 2 /2E(X) , (Upper tail) Pr(X ≥ E(X) + λ) ≤ e − λ 2
+2(E(X)+λ/3) .
+
+
+Theorem 4 [3]
+
+Let X be a random variable determined by m trials T 1 , . . . , T m , such that for each i, and any two possible sequences of outcomes t 1 , . . . , t i and t 1 , . . . , t i−1 , t ′ i :
+|E (X|T 1 = t 1 , . . . , T i = t i ) − E (X|T 1 = t 1 , . . . , T i−1 = t i−1 , T i = t ′ i ) | ≤ c i then Pr (|X − E(X)| ≥ λ) ≤ 2e −λ 2 /2 m i=1 c 2 i .
+The following lemma on edge density will be useful later.
+
+
+Lemma 1 Asymptotically almost surely a random graph
+G in G(n, p) satisfies, for all U ⊂ V (G) with |U | ≥ √ log n, e(U ) − p 2 |U | 2 ≤ C|U | 3/2 log 1/2 n where C is some positive constant.
+The lemma follows from Theorem 3.
+
+The following lemma is along the lines of a classical result of Erdős for random graphs [5]. We include the statement and a short proof here for the sake of completeness.
+
+Lemma 2 For G ∈ G(n, p), where p is a constant no greater than 1/2, asymptotically almost surely all complete bipartite graphs K A,B in G with |A| ≤ |B| satisfy |A| ≤ 2 log b n where b = 1/p.
+
+Proof: For two subsets A and B of V (G), with |A| = |B| = k, the probability that A and B form a complete bipartite graph in G(n, p) is at most p k 2 . There are at most n k n k choices for A and B. For k ≥ 2 log b n, we have n k
+2 p k 2 = o(1)
+as p is a constant. The lemma then follows.
+
+The upper bound in Theorem 2 is an immediate consequence of (3). The problem of determining the independence number for a random graph has been extensively studied in the literature. The asymptotic order of α(G) for G in G(n, p) was determined in [7].
+
+Theorem 5 [7] If p is a constant, p < 1 − c, and G ∈ G(n, p), then asymptotically almost surely α(G) is of order
+α(G) = 2 log 1/(1−p) n + o(log n)
+where c is a positive constant .
+
+
+Edges covered by a given family of subsets
+
+For a graph G = (V, E) and A ⊂ V , we define
+V (G, A) = {v : v ∈ V (G) \ A and {u, v} ∈ E for all u ∈ A}.
+It immediately follows that A and B form a complete bipartite graph if B is contained in V (G, A), namely, B ⊆ V (G, A). We say an edge {u, v} ∈ E is covered by A if either u ∈ A and v ∈ V (G, A) or v ∈ A and u ∈ V (G, A). For A = {A 1 , A 2 , . . . , A k } ⊆ 2 V and σ, a linear ordering of [k], we define a function l as follows. For notational convenience, we use i to denote the i-th element under the ordering σ. For each 1 ≤ i ≤ k, we define G i and l(i) recursively. We let G 1 = G and let l(1) be an arbitrary subset of V (G 1 , A 1 ). Given G i−1 , we let G i be a new graph with the vertex set V (G) and the edge set E(G i−1 ) \ E(A i−1 , l(i − 1)). We set l(i) to be an arbitrary subset of
+V (G i , A i ). We define f (G, A) = max σ max l k i=1 |E(A i , l(i))|.
+Basically, for given A i 's, we wish to choose B i 's so that the complete bipartite graphs K A1,B1 , . . . , K A k ,B k cover as many edges in G as possible. An example is illustrated in Figure  1 for  
+A = {A 1 , A 2 , A 3 } with A 1 = {a,(2) = l(3) = {e}. We observe f (G, A) ≤ k i=1 |E(A i , V (G, A i ))| as l(i) ⊆ V (G, A i ). When U ⊂ V (G) and A ⊂ U for each A ∈ A, we use f (G, U, A) to denote f (G[U ], A). Note that G[U ] denotes the induced subgraph of G on a subset U of V (G).e i = {u i , v i } for 1 ≤ i ≤ m, we consider T i ∈ {H, T} where T i = H means e i
+is an edge and T i = T means e i is not an edge. To simplify the notation we use X to denote the random variable f (G, U, A) and notice that X is determined by T 1 , . . . , T m . Given the outcome t j of T j for each 1 ≤ j ≤ i − 1 we wish to establish an upper bound for
+|E(X|T 1 = t 1 , . . . , T i−1 = t i−1 , T i = H) − E(X|T 1 = t 1 , . . . , T i−1 = t i−1 , T i = T)| .(4)
+Let K 1 be the set of graphs over U such that e j is given by t j for each 1 ≤ j ≤ i − 1 and e i is a non-edge. Similarly, let K 2 be the set of graphs over U such that e j is given by t j for each 1 ≤ j ≤ i − 1 and e i is an edge. We have |K 1 | = |K 2 |. Thus we get
+E(X|T 1 = t 1 , . . . , T i−1 = t i−1 , T i = T) = K∈K1 f (K, A)Pr(K ∈ K 1 ) and E(X|T 1 = t 1 , . . . , T i−1 = t i−1 , T i = H) = K∈K2 f (K, A)Pr(K ∈ K 2 ).
+Define a mapping µ : K 1 → K 2 such that E(K) and E(µ(K)) differ only by e i for each K ∈ K 1 . We get µ is a bijection and Pr(K ∈ K 1 ) = Pr(µ(K) ∈ K 2 ). Therefore the expression (4) can be bounded from above by
+K∈K1 |f (K, A) − f (µ(K), A)|Pr(K ∈ K 1 ).
+Notice that each edge can be covered by at most once. We observe |f (K, A)−f (µ(K), A)| ≤ 2 because e i and the other edge sharing one endpoint with e i could be covered by A in µ(K) but not in K. Therefore (4) is bounded above by 2. Now we apply Theorem 4 for λ = 8|U | 3/2 log n and c i = 2. Then we have
+Pr |X − E(X)| ≥ 8|U | 3/2 log n ≤ 2e −64|U| 3 log 2 n/2 m i=1 c 2 i ≤ 2e −4|U| log 2 n ,(5)using the fact m ≤ |U| 2 2 . To estimate E(X), we note that E(f (G, U, A)) ≤ 2p 2 |U | for a fixed A ∈ A. Therefore, E(X) ≤ A∈A E (f (G, U, A)) ≤ 2p 2 |A||U |.
+Thus (5) implies
+Pr X ≥ 2p 2 |A||U | + 8|U | 3/2 log n ≤ Pr |X − E(X)| ≥ 8|U | 3/2 log n ≤ 2e −4|U| log 2 n .
+Recall the assumptions |A| ≤ 1.0001|U | and |A| = 2 for each A ∈ A. For fixed sizes of U and A, the number of choices for U and A is at most n |U| |U | 2|A| which is less than n 3.5|U| . Therefore the probability that there are some U and A which violate the assertion in the lemma is at most 1.0001|U | × n × n 3.5|U| × 2e −4|U| log 2 n < 2e − log 2 n for sufficiently large n, which completes the proof of this lemma.
+
+The following lemmas for other families of sets A have proofs which are quite similar to the proof of Lemma 3. We will sketch proofs here.
+Lemma 4 Suppose G ∈ G(n, p), A is a family of subsets of U ⊆ V (G) satisfying |A| ≤ 1.0001|U | and 2 ≤ |A| ≤ 2 log 2 n for each A ∈ A. If p ≤ 1 2 , then asymptotically almost surely we have f (G, U, A) ≤ 2p 2 |A||U | + 8|U | 3/2 log 3/2 n log 1/2 |U |
+for all choices of U and A satisfying |U | ≥ log 2 n.
+
+Proof: We will use the Azuma's inequality. For e i = {u i , v i }, we define K 1 , K 2 , and a bijection µ similarly. The only difference is that |f (K, A) − f (µ(K), A)| ≤ 2 log 2 n for each K ∈ K 1 . This is because e i and at most other 2 log 2 n − 1 edges sharing the same endpoint with e i could by covered by A in µ(K) but not in K.
+
+Therefore the corresponding expression for (4) can be upper bounded by 2 log 2 n. We can then estimate X = f (G, U, A) by applying Theorem 4 with
+λ = 8|U | 3/2 log 3/2 n log 1/2 |U | and c i = 2 log 2 n.
+This leads to
+Pr |X − E(X)| ≥ 8|U | 3/2 log 3/2 n log 1/2 |U | ≤ 2e −4|U| log n log |U| .(6)
+Since E(X) ≤ A∈A E(f (G, U, A)) ≤ 2p 2 |A||U | and the number of choices for U and A can be bounded from above by 1.0001|U | × n 1+|U| × |U | 2.0003|U| log 2 n ≤ e 2.5|U| log n log |U| .
+
+Here we used the following simple fact 1≤t≤k s t = (1 + o(1))) s k if k is much smaller than s. Therefore, the probability that there are some U and A which violate the lemma is at most e −|U| log n log |U| ≤ e − log 2 n , which completes the proof of the lemma.
+Lemma 5 Suppose G ∈ G(n, p), A is a family of subsets of U ⊆ V (G) satisfying |A| ≤ 1.0001|U | and 3 ≤ |A| ≤ 2 log 2 n for each A ∈ A. If p ≤ 1 2 , then asymptotically almost surely we have f (G, U, A) ≤ 3p 3 |A||U | + 8|U | 3/2 log 3/2 n log 1/2 |U |
+for all choices of U and A satisfying |U | ≥ log 2 n.
+
+Proof: The proof is similar to that of Lemma 4. The only difference is that we assume |A| ≥ 3 and therefore
+E(f (G, U, A)) ≤ A∈A E(f (G, U, A)) ≤ 3p 3 |A||U |.
+We use Theorem 4 in a similar way as in the proof of Lemma 4 to complete the proof of Lemma 5.
+Lemma 6 Suppose G ∈ G(n, p), A is a family of subsets of U ⊆ V (G) satisfying |A| ≤ |U | 1+δ and δ log b |U | ≤ |A| ≤ 2 log 2 n for each A ∈ A, where b = 1 p and δ is a fixed small positive constant. If p ≤ 1 2 , then asymptotically almost surely we have f (G, U, A) ≤ δ|A||U | 1−δ log b |U | + 8|U | (3+δ)/2 log 3/2 n log 1/2 |U |
+for all choices of U and A satisfying |U | ≥ log 2 n.
+
+Proof: We use the assumptions on |A| to derive
+E(f (G, U, A)) ≤ A∈A E(f (G, U, A)) ≤ δ log b |U |p δ log b |U| |A||U | ≤ δ|A||U | 1−δ log b |U |.
+Then we bound the number of choices for U and A from above by
+|U | 1+δ × n 1+|U| × |U | 2.01|U| 1+δ log 2 n ≤ e 3.5|U| 1+δ log n log |U| .
+Applying Theorem 4 for λ = 8|U | (3+δ)/2 log 2 n log |U | log 2 n and c i = 2 log 2 n, the lemma then follows.
+
+
+Bounding uncovered edges
+
+In order to prove the bipartite decomposition theorem, we also need to establish lower bounds for the number of uncovered edges for a given family A of subsets. First, we will derive a lower bound on the number of uncovered edges for a collection A of 2-sets of V (G) provided G ∈ G(n, p). Let S 0 be the set of u ∈ V (G) such that u is in only one A ∈ A. For u in S 0 , we denote the only 2-set containing u by A u . Our goal is to give a lower bound on the number of uncovered edges with both endpoints in S 0 . To simplify the estimate, we impose some technical restrictions and work on a subset S of S 0 . To do so, we will lose at most a factor of 2 in the lower bound estimate (which is tolerable). To form S, for each A u = {u, v} with u, v ∈ S 0 , we delete one of u and v arbitrarily from S 0 . Let T = ∪ u∈S {A u \ {u}}. Clearly S and T are disjoint. We note that S and T are determined by A. Furthermore, |S| ≥ |T |.
+
+Suppose G ∈ G(n, p). For u, v ∈ S, let X u,v be the indicator random variable such that
+{u, v} ∈ E(G), {u, A v \ {v}} ∈ E(G), and {v, A u \ {u}} ∈ E(G). Then we define g(G, A, S, T ) = {u,v}∈( S 2 ) X u,v
+We observe that g(G, A, S, T ) indeed gives a lower bound on the number of edges which are not covered by A. Since if X u,v = 1 and {u, v} is covered by some A ∈ A, then either A = A u or A = A v . The former case can not happen because we assume {v, A u \ {u}} is not an edge. We have the similar argument for the latter case. For each e i = {u i , v i } for 1 ≤ i ≤ m, we consider T i ∈ {H, T} where T i = H means e i is an edge and T i = T means e i is not an edge. Let X denote the random variable g (G, A, S, T ) for G ∈ G(n, p). We note that X is determined by T 1 , . . . , T m . For the fixed outcome t j of T j for 1 ≤ j ≤ i − 1, we consider
+|E(X|T 1 = t 1 , . . . , T i−1 = t i−1 , T i = H) − E(X|T 1 = t 1 , . . . , T i−1 = t i−1 , T i = T)| . (7) For e i = {u i , v i }, if u i , v i ∈ T
+then the outcome of T i does not contribute to (7). If u i , v i ∈ S then the outcome of T i can change (7) by at most one depending on whether e i is covered or not. If u i ∈ S and v i ∈ T then the outcome of T i could effect (7) by at most one. This is because e i could make another edge {u i , w} covered by the 2-set {v i , w}. Thus (7) is bounded above by one.
+
+Applying Azuma's theorem as stated in Theorem 4 with λ = 4|U | 3/2 log n and c i = 1, we have
+
+Pr
+|X − E(X)| ≥ 4|U | 3/2 log n ≤ 2e −4|U| log 2 n ,(8)using m ≤ |U| 2 . To estimate E(X), we note Pr(X u,v = 1) = p(1 − p) 2 ≥ p 3 as p ≤ 1 2 . Thus, E(X) = {u,v}∈( S 2 ) Pr(X u,v = 1) ≥ p 3 |S| 2 ,
+which implies
+Pr X ≤ p 3 |S| 2 − 4|U | 3/2 log n ≤ Pr X ≤ E(X) − 4|U | 3/2 log n ≤ 2e −4|U| log 2 n .
+We recall S and T are determined by A. For fixed sizes of U and A, the number of choices for U and A is at most n |U| |U | 2|A| .
+
+As |A| ≤ 1.0001|U |, the probability that there are some U and A which violate this lemma is at most
+1.0001|U | × n 1+|U| × |U | 2.0003|U| × 2e −4|U| log 2 n ≤ e −0.5|U| log 2 n < e − log 2 n .
+The lemma is proved. Next, we wish to establish a lower bound on the number of uncovered edges for general cases of A.
+
+For W ⊂ U ⊂ V (G), we consider L : W → 2 U\W with the property L(w) ∩ L(w ′ ) = ∅ for w, w ′ ∈ W . We define h(G, U, W, L) to be the number of edges {w, w ′ } in G such that w, w ′ ∈ W , {w, z} ∈ E(G) for each z ∈ L(w ′ ), and {w ′ , z ′ } ∈ E(G) for each z ′ ∈ L(w). We will use the following Lemma (later we will show that h(G, U, W, L) gives a lower bound for the number of uncovered edges). Proof: For u, v ∈ W , let X u,v denote the event that {u, v} ∈ E(G), {u, w} ∈ E(G) for each w ∈ L(v), and {v, z} ∈ E(G) for each z ∈ L(u). Here G ∈ G(n, p). The indicator random variable for X u,v is written as I u,v . From the definition of h, we have h(G, U, W, L) = u,v∈W I u,v = Y for G ∈ G(n, p). Since Pr(
+I u,v = 1) ≥ b −1−2c log b |U| , we have E(Y ) ≥ b −1−2c log b |U| |W | 2 ≥ c ′ |U | 2−2c / log 4 b |U |,
+for some constant c ′ . From the definition of L, we have X u,v are independent of one another. By applying the Chernoff's bound for the lower tail in Theorem 3 with λ = 2|U | 3/2 √ log n, we have
+Pr(Y ≤ c ′ |U | 2−2c / log 4 b |U | − 2|U | 3/2 log n) ≤ Pr(Y ≤ E(Y ) − 2|U | 3/2 log n) ≤ e − 4|U| 3 log n 2E(Y ) ≤ e −2|U| log n ,
+using the fact that E(Y ) ≤ |U | 2 . For a given size |U | of U , it is straightforward to bound the number of choices for U , W and L from above by
+n |U| |U | |U|/ log 2 b |U| |U | 1.1c|U|/ log b |U| < n |U| |U | 2c|U|/ log b |U| ≤ n 1.5|U| ,
+when n is sufficiently large. The probability that there is some U , W and L which violate the lemma is at most ne −2|U| log n n 1.5|U| < e − log 2 n if n is large enough. This completes the proof of the lemma.
+
+
+A theorem on strong bipartition decompositions
+
+Recall the strong bipartition number τ ′ (G) is the minimum number of complete bipartite graphs whose edges partition the edge set of G and none of them is a star. We fix the constant b = 1 p and we will prove the following theorem.
+
+Theorem 6 Suppose G ∈ G(n, p), U ⊆ V (G) is a vertex subset with |U | ≥ c(log b n) 3+ǫ where b = 1/p, c and ǫ are positive constants. For p being a positive constant no greater than 1/2, asymptotically almost surely for all U we have
+τ ′ (G[U ]) ≥ 1.0001|U |.
+The proof of Theorem 6 is based on several lemmas which we will first prove. In this section, we may assume that G ∈ G(n, p) satisfies the statements in all lemmas in the preceding sections. By Lemma 1, the number of edges in G[U ] satisfies e(G[U ]) = ( p 2 + o(1))u 2 , here |U | = u. We will prove Theorem 6 by contradiction. Suppose
+E(G[U ]) = m i=1 E(K Ai,Bi )
+and m < 1 + 1 10000 u where '⊔' denotes the disjoint union. We assume further |A i | ≤ |B i | for each 1 ≤ i ≤ m. Lemma 2 implies |A i | ≤ 2 log b n ≤ 2 log 2 n for each 1 ≤ i ≤ m.
+
+We define L = {A i : 1 ≤ i ≤ m}. We consider three subsets of L defined as follows:
+L 1 = {A i ∈ L : |A i | < δ 1 log b u} L 2 = {A i ∈ L : |A i | < δ 2 log b u} L 3 = {A i ∈ L : |A i | = 2}, where δ 1 = min ǫ 4(3 + ǫ)
+, 1 200 and δ 2 = δ 1 10 4 .
+
+We observe that a typical complete bipartite graph K 2,B in a random graph G(n, 1/2) roughly contains the same the number of edges as a typical star does. This is the reason why we define the set L 3 .
+
+We have the following lemma.
+
+
+Lemma 9
+
+If |L 2 | ≤ 1 2 + 1 1500 u, then we have |L 3 | ≥ 1 2 + 1 2000 u. Proof: We will first prove the following claim: Claim 1: |L 3 | ≥ 1 2 − 1 250 u. Proof of Claim 1: Suppose the contrary. By Lemma 3, the number of edges covered by L 3 is at most 2p 2 |L 3 |u + 8u 3/2 log 1/2 n.
+
+By Lemma 5, the number of edges covered by L 2 \ L 3 (i.e., |A i | ≥ 3) is at most
+3p 3 |L 2 \ L 3 |u + 8u 3/2 log 3/2 n log 1/2 u.
+Therefore the total number of edges covered by L 2 is at most
+2p 2 |L 3 |u + 3p 3 |L 2 \ L 3 |u + 8u 3/2 log 1/2 n + 8u 3/2 log 3/2 n log 1/2 u.
+Thus the number of edges which are not in any K Ai,Bi with A i ∈ L 2 is at least
+p 2 + o(1) u 2 − 2p 2 |L 3 |u − 3p 3 |L 2 \ L 3 |u − 8u 3/2 log 1/2 n − 8u 3/2 log 3/2 n log 1/2 u.
+Observe that the expression above is a decreasing function if we view |L 3 | as the variable. From the assumptions |L 3 | < 1 2 − 1 250 u and |L 2 | ≤ 1 2 + 1 1500 u, the number of edges which are not contained in any K Ai,Bi with A i ∈ L 2 is at least
+p 2 u 2 − 1 2 − 1 250 2p 2 u 2 − 7 500 p 3 u 2 + o(u 2 ) ≥ p 2 125 − 7p 3 500 + o(1) u 2
+when n is large enough. Here we note that u 3/2 log 3/2 n log 1/2 u = o(u 2 ) as we assume u ≥ c(log b n) 3+ǫ . Since p ≤ 1 2 and p is a constant, we get that p 2 125 − 7p 3 500 is a positive constant.
+
+Applying Lemma 6 with δ = δ 2 , the number of edges covered by L \ L 2 (i.e., |A i | ≥ δ 2 log b n) is at most
+δ 2 |L \ L 2 |u 1−δ2 log b u + 8u (3+δ2)/2 log 3/2 n log 1/2 u.
+Since u (3+δ2)/2 log 3/2 n log 1/2 u = o(u 2 ) by the choice of δ 2 , in order to cover the remaining edges, we need at least C 1 u 1+δ2/2 extra complete bipartite graphs for some positive constant C 1 , i.e., |L \ L 2 | ≥ C 1 u 1+δ2/2 . Since C 1 u 1+δ2/2 > 1 + 1 10000 u for sufficiently large n, this leads to a contradiction. Thus we have |L 3 | ≥ ( 1 2 − 1 250 ) and the claim is proved. Now we proceed to prove the lemma using the fact that |L 3 | ≥ 1 2 − 1 250 u. We consider a auxiliary graph U * whose vertex set is U and edge set is L 3 . We partition the vertex set of U * into three sets U 1 , U 2 , and U 3 , where
+U 1 = {v ∈ V (U * ) : d U * (v) = 0}, U 2 = {v ∈ V (U * ) : d U * (v) = 1}, and U 3 = {v ∈ V (U * ) : d U * (v) ≥ 2}.
+We will prove the following. Claim 2: The number of edges not contained in any K Ai,Bi for A i ∈ L 3 is at least p |U1|
+2 + p 3 |U2|/2 2 + o(u 2 ).
+Proof of Claim 2: The first part of the sum follows from Lemma 1. For the second part of the sum, we let U ′ 2 be a maximum subset of U 2 such that for each v ∈ U ′ 2 , the neighbor of v in U * is not in U ′ 2 . We have |U ′ 2 | ≥ |U 2 |/2. Then we apply Lemma 7 with S = U ′ 2 and T consisting of neighbors of S ′ in U * . To finish the proof of Claim 2, we use the fact u 3/2 log n = o(u 2 ) as u ≥ c(log b n) 3+ǫ . We will prove Lemma 9 by contradiction. Suppose |L 3 | ≤ 1 2 + 1 2000 u. This implies that the average degree of U * is at most 1 + 1 1000 . We consider the following cases. Case 1: |U 3 | ≥ 1 5 u. By considering the total sum of degrees of U * , we have
+2|U 3 | + (u − |U 1 | − |U 3 |) ≤ 1 + 1 1000 u.
+Thus, |U 3 | ≥ 1 5 u implies |U 1 | ≥ 1 6 u. Claim 2 together with this lower bound on |U 1 | implies that the number of edges not in any K Ai,Bi with A i ∈ L 3 is at least p 72 + o(1) u 2 . By Claim 1 we have |L 3 | ≥ 1 2 − 1 250 u, so the number of additional complete bipartite graphs K Ai,Bi with A i ∈ L 2 \ L 3 is at most 7 1500 u using the assumption |L 3 | ≤ 1 2 + 1 2000 u. These complete bipartite graphs can cover at most ( 7p 3 500 + o(1))u 2 edges by Lemma 5. Thus we conclude that the number of edges not covered by any of K Ai,Bi with A i ∈ L 2 is at least
+p 72 − 7p 3 500 + o(1) u 2 .
+Note that p 72 − 7p 3 500 is a positive constant when p is constant and p ≤ 1 2 . By applying Lemma 6 with δ = δ 2 , the bipartite graphs K Ai,Bi with A i ∈ L \ L 2 (i.e., |A i | ≥ δ 2 log b n) can cover at most δ 2 |L \ L 2 |u 1−δ2 log b u + 8u (3+δ2)/2 log 3/2 n log 1/2 u edges. We note u (3+δ2)/2 log 3/2 n log 1/2 u = o(u 2 ) because of the choice of δ 2 . To cover the remaining edges, we need at least C ′ 1 u 1+δ2/2 extra complete bipartite graphs K Ai,Bi with A i ∈ L \ L 2 for some positive constant C ′ 1 , i.e., |L \ L 2 | ≥ C ′ 1 u 1+δ2/2 . Since C ′ 1 u 1+δ2/2 > 1 + 1 10000 u for n large enough, we get a contradiction to the assumption |L| ≤ 1 + 1 10000 u. Case 2: |U 3 | < 1 5 u. In this case we have |U 1 | + |U 2 | ≥ 4 5 u. Note that the lower bound given by Claim 2 is minimized when |U 2 | = 4 5 u, i.e., the number of edges not contained in any K Ai,Bi with A i ∈ L 3 is at least 2 25 p 3 + o(1) u 2 . By the same argument as in Case 1 we can show the number of edges in K Ai,Bi with A i ∈ L 2 \ L 3 is at most ( 7p 3 500 + o(1))u 2 . Now there are at least 33 500
+p 3 + o(1) u 2
+edges which is not in any K Ai,Bi with A i ∈ L 2 . We note that 33 500 p 3 is a positive constant as we assume p is a constant. By using Lemma 6 with δ = δ 2 , the bipartite graphs K Ai,Bi with A i ∈ L \ L 2 (i.e., |A i | ≥ δ 2 log b n) can cover at most
+δ 2 |L \ L 2 |u 1−δ2 log b u + o(u 2 )
+edges. As in Case 1, we consider the number of extra bipartite graphs K Ai,Bi with A i ∈ L \ L 2 needed to cover the remaining edges, leading to the same contradiction to the assumption on L.
+
+Therefore we have proved |L 3 | > ( 1 2 + 1 2000 ). Remark: When we apply Lemma 6, we require the error term is in a lower order of magnitude in comparison to the main term. To make this satisfied, we have to assume |U | = Ω((log n) 3+ǫ ) .
+
+Lemma 10 Let H be a hypergraph with the vertex set U and the edge set L 1 . There is some positive constant C 2 such that there are C 2 u vertices of H with degree less than δ1 2 − δ1 3000 log b u.
+
+Proof: We consider several cases.
+
+Case a: |L 2 | > 1 2 + 1 1500 u. The sum of degrees in H is less than
+δ 2 |L 2 | log b u + δ 1 |L 1 \ L 2 | log b u ≤ δ 2 1 2 + 1 1500 u log b u + δ 1 1 2 + 1 10000 − 1 1500 u log b u ≤ δ 1 2 − δ 1 2000 u log b u.
+Here we used the assumption |L 1 | ≤ |L| = m < 1 + 1 10000 u and the choice of δ 2 .
+
+Case b: |L 2 | ≤ 1 2 + 1 1500 u. By Lemma 9, |L 3 | ≥ 1 2 + 1 2000 u. The sum of degrees is at most
+2|L 3 | + δ 1 |L 1 \ L 3 | log b u ≤ 2 1 2 + 1 2000 u + δ 1 1 2 + 1 10000 − 1 2000 u log b u ≤ δ 1 2 − δ 1 2000 u log b u.
+We have proved that the sum of degrees of H is less than δ1 2 − δ1 2000 u log b u. Let U ′ be the set of vertices with degree at least δ1 2 − δ1 3000 log b u. We consider
+|U ′ | δ 1 2 − δ 1 3000 log b u ≤ δ 1 2 − δ 1 2000 u log b u,
+which yields |U ′ | ≤ (1 − C 2 )u for some positive constant C 2 . Each vertex in U \ U ′ has degree less than δ1 2 − δ1 3000 log b u and |U \ U ′ | ≥ C 2 u. The lemma is proved. We recall that G[U ] is the subgraph of G induced by U . We have the following lemma.
+
+
+Lemma 11
+
+The number of edges in G[U ] which are not contained in any K Ai,Bi with A i ∈ L 1 is at least C 3 u 2−δ1+δ1/2000 for some positive constant C 3 .
+
+Proof: We consider the hypergraph H with the vertex set U and the edge set L 1 as defined in Lemma 10. Let W be the set of vertices with degree less than δ1 2 − δ1 3000 log b u in H; we have |W | ≥ C 2 u for some positive constant C 2 by Lemma 10.
+
+We will use Lemma 8 to prove Lemma 11. In order to apply Lemma 8, we will first find a subset W ′ of W such that for any u, v ∈ W ′ there is no A i ∈ L 1 containing u and v. Also we will associate each w ∈ W ′ with a set L(w) ⊂ U \ W ′ satisfying the property that L(w) ∩ L(w ′ ) = ∅ for each w = w ′ ∈ W ′ .
+
+To do so, we consider an arbitrary linear ordering of vertices in W . Let q = |W |/ log 2 b u, W 0 = W , Z 0 = ∅ and H 0 = H. For each 1 ≤ i ≤ q, we recursively define a vertex v i , a set W i , a set Z i and a hypergraph H i as follows: For given W i−1 and H i−1 , we
+let v i be the first vertex in W i−1 and define F (v i ) = {A ∈ E(H i−1 ) : v i ∈ A}.
+By the assumption on the size of sets in L 1 and the degree upper bound for vertices in W , we have
+| ∪ A∈F (vi) A| ≤ log 2 b u/2. We define Z i = {A ∈ E(H i−1 ) : |A \ ∪ A ′ ∈F (vi) A ′ | = 1}. Then | ∪ A∈Zi A \ ∪ A ′ ∈F (vi) A ′ | ≤ log 2 b u/2 since each A ′ ∈ F (v i )
+can contribute at most δ 1 log b u to the sum and |F (v i )| ≤ δ1 2 log b u because of the degree upper bound for vertices in W . We define W i = W i−1 \ ∪ A∈Zi∪F (vi) A and H i to be the new hypergraph with the vertex
+set V (H i−1 ) \ ∪ A∈Zi∪F (vi) A . If A ∈ E(H i−1 ) then A \ ∪ A∈Zi∪F (vi) A ∈ E(H i ). Thus |V (H i )| = |W i | ≥ |W i−1 | − log 2 b u and W q−1 = ∅. Therefore, v i is well-defined for 1 ≤ i ≤ q. We write W ′ = {v 1 , v 2 , . . . , v q }. For each A ∈ F (v i ) and A ′ ∈ F (v j ) with i < j we have A ∩ A ′ = ∅ as we delete the set ∪ A∈Zi∪F (vi) A in step i. For each v i ∈ W ′ and each A ∈ F (v i ), we let f (A) be an arbitrary vertex other than v i from A and F ′ (v i ) = ∪ A∈F (vi) {f (A)}. It follows from the preceding definitions that F ′ (v i ) ∩ F ′ (v j ) = ∅ for 1 ≤ i = j ≤ q. Now an application of Lemma 8 with U = V (H), W = W ′ , L(v i ) = F ′ (v i ) for each v i and c = δ1
+2 − δ1 3000 will prove the lemma. We are left to verify the function h(G, U, W, L) indeed gives a lower bound on the number of edges which is not covered by L 1 . From the construction , for each v i and each A ∈ L 1
+containing v i , either A is in F (v i ) or a subset of A with size at least two is in F (v i ). Hence, A ∩ F ′ (v i ) = ∅. For an edge {v i , v j }, if {v i , z} is a non-edge for each z ∈ F ′ (v j ) and {v j , z ′ } is a non-edge for each z ′ ∈ F ′ (v i ), then the edge {v i , v j } is uncovered by the family of sets L 1 . Suppose {v i , v j } is in K A,B for some A ∈ L 1 . We have either v i ∈ A or v j ∈ A.
+In the former case we get A ∩ L(v i ) = ∅ by the definition of L(v i ). Let z ∈ A ∩ L(v i ). Then A and B does not form a complete bipartite graph since {v j , z} is not an edge by the assumption. We get a contradiction and we have a similar argument for the latter case. Remark: We mention here that when we defined the set W ′ ⊂ W , we did not aim to find the largest one as |W ′ | = |W |/ log 2 b n is large enough for proving Theorem 6. We are ready to prove Theorem 6. Proof of Theorem 6: Suppose that
+E(G[U ]) = m i=1 E(K Ai,Bi ).
+If m > 1 + 1 10000 u, then we are done. Otherwise, Lemma 11 implies that there are at least C 3 u 2−δ1+δ1/2000 edges uncovered after we delete the edges in K Ai,Bi for each A i ∈ L 1 . We then apply Lemma 6 with δ = δ 1 which gives an upper bound for the number of edges covered by L \ L 1 (i.e., |A i | ≥ δ 1 log b u) :
+δ 1 |L \ L 1 |u 1−δ1 log b u + 8u (3+δ1)/2 log 3/2 n log 1/2 u.
+Here we note that u (3+δ1)/2 log 3/2 n log 1/2 u = o(u 2−δ1+δ1/2000 ) because of the choice of δ 1 . Therefore we need at least C 4 u 1+δ1/2500 additional complete bipartite graphs K Ai,Bi with A i ∈ L \ L 1 to cover the remaining edges, where C 4 is some positive constant. Since C 4 u 1+δ1/2500 > 1.0001u when n is sufficiently large and we get a contradiction. Theorem 6 is proved.
+
+
+Proof of Theorem 2
+
+Before proving Theorem 2, we first state the following lemma. The proof will be omitted as it is very simple.
+
+
+Lemma 12
+
+Suppose that edges of G can be decomposed into k 1 complete bipartite graphs, of which k 2 complete bipartite graphs are stars for some k 2 ≤ k 1 . Then G has an edge decomposition E(G) = ⊔ k i=1 E(K Ai,Bi ) with k ≤ k 1 such that for i ≤ k 2 , K Ai,Bi are stars and for j > k 2 , we have
+A j , B j ⊆ V (G) \ ∪ k2 i=1 A i .
+We are ready to prove Theorem 2. Proof of Theorem 2: The upper bound follows from the well-known fact (see Theorem 5) that asymptotically almost surely a random graph G ∈ G(n, p) has an independent set I with size (2 + o(1)) log 1/(1−p) n where p is constant. We consider vertices v 1 , . . . , v m with m = n − 2 + o(1)) log 1/(1−p) n, which are not contained in I . For each 1 ≤ i ≤ m we define a star K Ai,Bi with A i = {v i } and B i = {v j : j > i and {v i , v j } ∈ E(G)}. We have
+E(G) = m i=1 E(K Ai,Bi ).
+Therefore we have τ (G) ≤ n − (2 + o(1)) log 1/(1−p) n.
+
+For the lower bound, we may assume that G ∈ G(n, p) satisfies all statements in the lemmas in the preceding sections. Suppose G has an edge decomposition:
+E(G) = k i=1 E(K Ai,Bi ),
+with k = τ (G) and assume that for some l ≤ k, we have A i = {v i } for 1 ≤ i ≤ l.
+
+Let W = {v 1 , . . . , v l }. If W = ∅ then Theorem 2 follows from Theorem 6 directly. We need only to consider the case W = ∅. By Lemma 12, we can assume E(G ′ ) = ⊔ k i=l+1 E(K Ai,Bi ) where G ′ is the subgraph induced by T = V (G) \ W . We get
+τ (G) = |W | + τ ′ (G ′ ).(9)
+We will prove l > n − c(log 1/p n) 3+ǫ for any positive constants c and ǫ. Suppose l ≤ n − c(log 1/p n) 3+ǫ for some c and ǫ. Thus, |T | ≥ c(log 1/p n) 3+ǫ . By Theorem 6 we have τ ′ (G[T ]) ≥ 1 + 1 10000 |T |. Therefore τ (G) = |W | + τ ′ (G ′ ) ≥ |W | + 1 + 1 10000 |T | ≥ n, which is a contradiction. Theorem 2 is proved.
+
+
+Problems and remarks
+
+The results on the bipartite decomposition in this paper lead to many questions, several of which we mention here. For G ∈ G(n, 1/2), the lower bound τ (G) ≥ n − o((log n) 3+ǫ ) for any positive constant ǫ is given by Theorem 1 in this paper. For the upper bound, the result from [2] gives asymptotically almost surely τ (G) ≤ n − (1 + c)α(G) for some positive constant c. Similar upper bound is not known for any constant p with p < 1/2. We believe the following conjecture is true.
+
+Conjecture 1: For a random graph G ∈ G(n, p), where p is a constant and p < 1/2, asymptotically almost surely we have τ (G) = n − (2 + o(1)) log 1/(1−p) n.
+
+For sparser random graphs, Alon [1] showed that there exists some (small) constant c such that for 2 n ≤ p ≤ c, a random graph G in G(n, p) satisfies τ (G) = n − Θ log np p . It will be of interest to further sharpen the lower bound. Conjecture 2: For a random graph G ∈ G(n, p), with p = o(1), asymptotically almost surely τ (G) = n − (1 + o(1)) 2 p log np.
+
+In this paper, we have given rather crude estimates for the constants involved. In particular, for the strong bipartition number τ ′ (G), a consequence of Theorem 6 states that for G ∈ G(n, p), where p is a constant no greater than 1/2, asymptotically almost surely τ ′ (G) ≥ 1.0001n. For the case of p ≤ c for some small c, Alon [1] showed that asymptotically almost surely τ ′ (G) ≥ 2n for G ∈ G(n, p). A natural question is to improve the lower bound for τ ′ (G).
+
+
+b}, A 2 = {b, c}, and A 3 = {c, d}. Here f (G, A) = 4 is achieved by σ = identity, l(1) = {e}, l(2) = ∅, and l(3) = {e}, or σ = (213), l(1) = ∅ and l
+
+Lemma 3 Figure 1 :
+31Suppose G ∈ G(n, p), U ⊆ V (G), and A is a family of 2-sets of U with |A| ≤ 1.0001|U |. If p ≤ 1 2 , then asymptotically almost surely we have f (G, U, A) ≤ 2p 2 |A||U | + 8|U | 3/2 log n for all choices of U and A. An illustration of f (G, A). Proof: We list edges with both endpoints in U as e 1 , e 2 , . . . , e m where m = |U| 2 . For each
+
+Lemma 7
+7Suppose G ∈ G(n, p), U ⊆ V (G), and A ⊆ U 2 with |A| ≤ 1.0001|U |. Let S and T be defined as above. If p ≤ 1 2 , then asymptotically almost surely we haveg(G, A, S, T ) ≥ p 3 |S| 2 − 4|U | 3/2 log nfor all choices of U and A with |U | ≥ log 2 n.Proof: We sketch the proof here which is similar to that of Lemma 3. We list edges with endpoints in S ∪ T as e 1 , . . . , e m , where m = |S∪T | 2 and m ≤ |U| 2 .
+
+Lemma 8
+8Suppose G ∈ G(n, p), p is a constant no greater than 1/2, b = 1 p , and |U | ≥ log 2 n. Assume W ⊂ U satisfies |W | = |U |/ log 2 b |U | and L as defined above satisfies 1 ≤ |L(w)| ≤ c log b |U | for some positive constant c. Then asymptotically almost surely we have h(G, U, W, L) ≥ c ′ |U | 2−2c / log 4 b |U | − 2|U | 3/2 log n for all choices of U , W and L, where c ′ is some positive constant.
+
+Bipartite decomposition of random graphs. N Alon, J. Combin. Theory Ser. B. 113N. Alon, Bipartite decomposition of random graphs, J. Combin. Theory Ser. B, 113 (2015), 220-235.
+
+N Alon, T Bohman, H Huang, arXiv:1409.6165More on the bipartite decomposition of random graphs. math.CON. Alon, T. Bohman, and H. Huang, More on the bipartite decomposition of random graphs, arXiv: 1409.6165[math.CO].
+
+Weighted sums of certain dependent random variables. K Azuma, Tohuku Math. Journal. 193K. Azuma, Weighted sums of certain dependent random variables, Tohuku Math. Journal, 19(3) (1967), 357-367.
+
+A note on an inequality involving the normal distribution. H Chernoff, Ann. Probab. 9H. Chernoff, A note on an inequality involving the normal distribution, Ann. Probab., 9 (1981), 533-535.
+
+Some remarks on the theory of graphs. P Erdős, Bull. Amer. Math. Soc. 53P. Erdős, Some remarks on the theory of graphs, Bull. Amer. Math. Soc., 53 (1947), 292-294.
+
+On the addressing problem for loop switching. R L Graham, H O Pollak, Bell Syst. Tech. J. 508R. L. Graham and H. O. Pollak, On the addressing problem for loop switching, Bell Syst. Tech. J., 50 (8) (1971), 2495-2519.
+
+On colouring random graphs. G R Grimmett, C J H Mcdirmid, Math. Proc. Cambridge Phil. Soc. 77G. R. Grimmett and C. J. H. McDirmid, On colouring random graphs, Math. Proc. Cambridge Phil. Soc., 77 (1975), 313-324.
+
+Reducibility among combinatorial problems. R Karp, Complexity of Computer Computations. R. E. Miller, J. W. Thatcher eds.) PlenumR. Karp, Reducibility among combinatorial problems, Complexity of Computer Compu- tations (R. E. Miller, J. W. Thatcher eds.) Plenum, New York, (1972), 85-103.
+
+Eigensharp graphs: Decomposition into complete bipartite subgraphs. T Kratzke, B Reznick, D West, Trans. Amer. Math. Soc. 308T. Kratzke, B. Reznick and D. West, Eigensharp graphs: Decomposition into complete bipartite subgraphs, Trans. Amer. Math. Soc. , 308 (1988), 637-653.
+
+On coverings of graphs. L Lovász, Theory of Graphs (Proc. Conf. Tihany). Academic PressL. Lovász, On coverings of graphs, Theory of Graphs (Proc. Conf. Tihany), Academic Press, (1969), 231-236.
+
+A new proof of a theorem of Graham and Pollak. G W Peck, Discrete Math. 49G. W. Peck, A new proof of a theorem of Graham and Pollak, Discrete Math., 49 (1984), 327-328.
+
+On the decomposition of K n into complete bipartite graphs. H Tverberg, J. Graph Theory. 6H. Tverberg, On the decomposition of K n into complete bipartite graphs, J. Graph Theory, 6 (1982), 493-494.
+
+A polynomial space proof of the Graham-Pollak theorem. S Vishwanathan, J. Combin. Theory Ser. A. 115S. Vishwanathan, A polynomial space proof of the Graham-Pollak theorem, J. Com- bin. Theory Ser. A, 115 (2008), 674-676.
+
+A counting proof of the Graham Pollak Theorem. S Vishwanathan, Discrete Math. 3136S. Vishwanathan, A counting proof of the Graham Pollak Theorem, Discrete Math., 313(6) (2013), 765-766.
+
+A simple proof of Graham and Pollak's theorem. W Yan, Y Ye, J. Combin. Theory Ser. A. 113W. Yan and Y. Ye, A simple proof of Graham and Pollak's theorem, J. Combin. Theory Ser. A, 113, (2006), 892-893.

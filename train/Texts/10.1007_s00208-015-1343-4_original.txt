@@ -1,0 +1,471 @@
+
+Mathematics Subject Classification: 53C21, 53C80
+2010
+
+Bing-Long Chen 
+Xian-Tao Huang 
+Mathematics Subject Classification: 53C21, 53C80
+2010Four-manifoldspositive isotropic curvatureRicci flow with surgery
+In this paper we prove the path connectedness of the moduli spaces of metrics with positive isotropic curvature on certain compact four-dimensional manifolds.
+
+Introduction
+
+Let M be a compact n-dimensional smooth manifold. In Riemannian geometry, whether M admits a metric with certain curvature restriction is a fundamental problem. These curvature conditions may include positive scalar curvature, positive Ricci curvature, positive or negative sectional curvature, etc. Suppose M admits such a metric, people are also interested in the topology of the spaces of all such Riemannian metrics on M .
+
+Denote the set of Riemannian metrics g with positive scalar curvature R g by R + (M ). The group of diffeomorphisms on M , denoted by Diff(M ), acts on R + (M ) naturally. In 1916, Weyl [35] proved that R + (S 2 ) is path-connected. Rosenberg and Stolz [30] further showed that R + (S 2 ) is contractible.
+
+When dimension n ≥ 7, there are many examples with disconnected R + (M n ) or even the moduli spaces R + (M n )/Diff(M n ), see [13], [9], [4], [17], [29] etc. However, when dimension n = 3, Marques [19] proved recently that the moduli space R + (M )/Diff(M ) is path-connected if M is compact orientable and R + (M ) = ∅. Combining the result of Cerf [5] on Diff + (S 3 ), Marques [19] further argued that R + (S 3 ) is path-connected.
+
+In dimension 4, we remark that the connectedness of the moduli space R + (S 4 )/Diff(S 4 ) is still unknown. The structure of Diff(S 4 ) is also a big unsolved problem.
+
+In this paper, instead, we consider the positive isotropic curvature condition on fourmanifolds. The notion of positive isotropic curvature was introduced by Micallef and Moore [21]. This elegant curvature condition plays a key role in Brendle-Schoen's proof of famous 1/4-sphere theorem, see [3]. The recent research [11] [6] [7] shows that positive isotropic curvature in dimension 4 is analogues to positive scalar curvature in dimension 3. For instance, Schoen-Yau [31] and Perelman [28] showed that a compact orientable threemanifold admits a metric with positive scalar curvature if and only if it is diffeomorphic to a connected sum of orientable spherical space forms S 3 /Γ i and quotients (S 2 ×R)/G j , where the actions of Γ i and G j are standard. In [7], the authors proved that a compact fourmanifold admits a metric with positive isotropic curvature if and only if it is diffeomorphic to S 4 , RP 4 , (S 3 × R)/G, or a connected sum of them, where the action of G on S 3 × R is also standard isometric action.
+
+Motivated by this result, we investigate the space of metrics on M with positive isotropic curvature. Denote this space by PIC(M ). It is well known that PIC(M ) ⊂ R + (M ). The purpose of this paper is trying to prove that the moduli space PIC(M )/Diff(M ) is pathconnected. The result is the following: (1) S 4 , (2) (S 3 × R)/G, where G is a cocompact fixed point free discrete subgroup of isometries of S 3 × R, (3) a finite connected sum (S 3 /Γ i × S 1 )# . . . #(S 3 /Γ k × S 1 ), where Γ i (1 ≤ i ≤ k) is either the trivial group or a non-cyclic isometric group of S 3 .
+
+The dissatisfaction of the above result is that not all manifolds with PIC(M ) = ∅ have been handled. Let g, g ′ be metrics with positive isotropic curvature. We call g is isotopic to g ′ if there exists a continuous path g µ , µ ∈ [0, 1] such that g 0 = g, g 1 = g ′ and g µ ∈ PIC(M ) for every µ ∈ [0, 1]. We require that PIC(M ) is always equipped with the C ∞ -topology. The path connectedness of PIC(M )/Diff(M ) just means that for any two g 1 , g 2 ∈ PIC(M ), there is a diffeomorphism ϕ such that g 1 is isotopic to ϕ * g 2 .
+
+The proof of Theorem 1.1 is mainly using Ricci flow with surgery. The idea is to use Ricci flow to deform the initial metric g 0 = g. Since Ricci flow preserves positive isotropic curvature, the solution g t is isotopic to g 0 until singularities were hit for the first time t 1 . Cutting off the higher curvature part, gluing back suitable caps, we find g t 1 is 'separated' into several pieces. Running g t + 1 with the Ricci flow on the pieces with lower curvature again, for t > t 1 , g t is isotopic to g t + 1 until it hits some singularities again at some time t 2 > t 1 . Repeating these procedures until all pieces are terminated. Remember that at each singular time t k , the orbifold M t − k is decomposed into several pieces M k 1 , · · · , M k l . The orbifold M t − k can be obtained as an orbifold connected sum (See [7], or Section 2) of these M k i 's. The point, here, is to show that the metric g t − k on M t − k is isotopic to a metric obtained through a canonical construction from those (M k i , g t + k )'s. Trying to assemble all pieces together, one can finally show that the initial metric is isotopic to a canonical metric obtained from some standard pieces. Theorem 1.2. Let M 4 be a compact four-dimensional manifold with PIC(M ) = ∅. If g ∈ PIC(M ), then there is a path of metrics g µ , µ ∈ [0, 1] such that g 0 = g, g 1 is a canonical metric, and g µ ∈ PIC(M ) for all µ ∈ [0, 1].
+
+The precise definition of a canonical metric is given in Section 3. The above idea has been successfully used by Marques [19] in dimension 3. The main steps of our proof follows the line of arguments in [19]. To prove Theorem 1.1, one has to prove the canonical metrics of Theorem 1.2 are unique module the group of diffeomorphisms. See Section 8 for the differences between dimension 3 and 4.
+
+The organization of this paper is as follows. In Section 2, we fix some terminologies and discuss Micallef and Wang's connected sum construction of manifolds with PIC, and extend it to families of orbifold connected sums. In Section 3, we give the definition of canonical metrics used throughout this paper. In Section 4, we give some preliminary results on deforming metrics with positive isotropic curvature. In Section 5, we recall surgery process of Hamilton on orbifolds and discuss the isotopic property of the metric during the surgeries. In Section 6, we discuss the canonical neighborhood assumption. In Section 7, we prove Theorem 1.2. In Section 8, we prove Theorem 1.1.
+
+
+Preliminaries and M-W connected sum
+
+2.1. Positive isotropic curvature. Let's recall the notion of positive isotropic curvature.
+
+Let (M n , g) be an n-dimensional Riemannian manifold, n ≥ 4. (M n , g) is said to have positive isotropic curvature (PIC for short) if R 1313 + R 1414 + R 2323 + R 2424 − 2R 1234 > 0 for any othornormal four vectors e 1 , e 2 , e 3 , e 4 . PIC was introduced by Micallef and Moore [21], it appears naturally in the second variation formula of area of surfaces. PIC implies the positive scalar curvature condition (see [22]). One of the most interesting thing is that PIC is preserved by Ricci flow (see [11], [3], [25]).
+
+Let (M 4 , g) be a four-dimensional Riemannian manifold. The orientation gives the bundle Λ 2 T M a decomposition Λ 2 T M = Λ 2 + T M Λ 2 − T M into its self-dual and anti-selfdual parts. Therefore the curvature operator has a block decomposition
+R = A B B t C ,
+where A = W + + R 12 I, C = W − + R 12 I, and B is the traceless part of the Ricci curvature, W ± are the self-dual and anti-self-dual Weyl tensors respectively. Denote the eigenvalues of the matrices A, C and
+√ BB t by a 1 ≤ a 2 ≤ a 3 , c 1 ≤ c 2 ≤ c 3 , b 1 ≤ b 2 ≤ b 3
+respectively. It is known that PIC is equivalent to a 1 + a 2 > 0 and c 1 + c 2 > 0 (see [11]). From this, it is clear that if g is locally conformally flat, then g has positive scalar curvature if and only if g has positive isotropic curvature.
+
+If we define
+σ g := R g − 6 max{λ max (W + ), λ max (W − )},
+where λ max (W ± ) are the largest eigenvalue of W ± respectively. Since both W + and W − are trace free, it is easy to see that the condition σ g > 0 is equivalent to a 1 + a 2 > 0 and c 1 + c 2 > 0, that is to say, (M 4 , g) has positive isotropic curvature. Letg = u 2 g, u ∈ C ∞ (M ), u > 0, then by direct computation we can obtain the following relations:
+Rg = u −3 (−6∆u + R g u), σg = u −3 (−6∆u + σ g u).
+2.2. Orbifolds. We will clarify some terminologies and notations about orbifolds. For an n-dimensional orbifold X n , x ∈ X, we use Γ x to denote the local uniformization group at x, that is, there is an open neighborhood B x ∋ x, such that B x = B n /Γ x , where B n is diffeomorphic to R n and Γ x is a finite subgroup of linear transformations fixing the origin.
+
+By the Lefschetz fixed-point formula, every orientation-reversing diffeomorphism of S 3 has a fixed point (see [32]). Therefore, if X is a four dimensional orbifold with at most isolated singularities, then for every point x ∈ X, Γ x ⊂ SO(4).
+
+We will fix some notations of orbifolds that will appear in this paper. Suppose Γ is a fixed point free finite subgroup of SO(4) acting on S 3 . If we write the equation of S 4 as x 2 1 + . . . + x 2 5 = 1. Regard S 3 as an equator in S 4 , Γ can naturally extend to act isometrically on S 4 by fixing the x 1 -axis. We will still use Γ to denote this group action. The orbifold S 4 /Γ has exactly two fixed points (1, 0, 0, 0, 0) and (−1, 0, 0, 0, 0) with local uniformization group Γ. In this paper, if we say a spherical orbifold is of the form S 4 /Γ with Γ ⊂ SO(4), we always means this case.
+
+If S 3 /Γ admits a fixed point free isometry τ satisfying τ 2 = 1, then we can define an actionτ on S 3 /Γ × R byτ (θ, r) = (τ (θ), −r), where θ ∈ S 3 /Γ, r ∈ R. The quotient (S 3 /Γ × R)/{1,τ } is a smooth four manifold with a neck-like end S 3 /Γ × R. We denote this manifold by C τ Γ . If we think of S 4 as the compactification of S 3 × R by adding two points at infinities of S 3 × R, then Γ andτ can be naturally regarded as isometries of the standard S 4 . We denote S 4 / Γ,τ the resulting orbifold in this paper. Obviously, C τ Γ is diffeomorphic to the smooth manifold obtained by removing the orbifold singularity (or a smooth point when Γ is trivial) from S 4 / Γ,τ . RP 4 \B 4 is an example of C τ Γ . In the following, we define topologically necks and caps whose meaning will be fixed in our subsequent discussions. A neck is defined to be a manifold diffeomorphic to S 3 /Γ × R. For caps, we have smooth caps and orbifold caps. Smooth caps consist of C τ Γ and B 4 . Our orbifold caps have two types.
+
+The orbifold cap of Type I is diffeomorphic to R 4 /Γ, where Γ ⊂ SO(4) is a finite subgroup fixing the origin of R 4 and acting freely on the unit three-sphere in R 4 . We denote it by C Γ . C Γ has a neck-like end S 3 /Γ × R and one orbifold singularity with local uniformization group Γ.
+
+The orbifold cap of type II is constructed as follows. Let the equation of S 3 be
+x 2 1 + . . . + x 2 4 = 1. The isometry γ : (x 1 , x 2 , x 3 , x 4 ) → (x 1 , −x 2 , −x 3 , −x 4
+) has exactly two fixed points p 1 = (1, 0, 0, 0) and p 2 = (−1, 0, 0, 0), and satisfies γ 2 = 1. We define an actionγ on S 3 × R byγ(x, r) = (γ(x), −r), where x ∈ S 3 , r ∈ R.It is clearγ 2 = 1. Denote the quotient orbifold (S 3 × R)/{1,γ} by C II , and call it the orbifold cap of Type II. It has a neck-like end S 3 × R and two orbifold singularities (p 1 , 0), (p 2 , 0) with local uniformization group Z 2 . There is another way to understand C II . Let the equation of S 4 be x 2 1 + . . . + x 2 5 = 1, the isometry ζ : (
+x 1 , x 2 , x 3 , x 4 , x 5 ) → (x 1 , −x 2 , −x 3 , −x 4
+, −x 5 ) has exactly two fixed points (1, 0, 0, 0, 0) and (−1, 0, 0, 0, 0). Removing a smooth point from S 4 /{1, ζ}, we get an orbifold diffeomorphic to C II .
+
+
+2.3.
+
+Orbifold connected sum. Suppose X 1 , X 2 are n-dimensional orbifolds (not necessarily distinct) with at most isolated singularities. Let x 1 ∈ X 1 , x 2 ∈ X 2 be two distinct points (not necessarily singular) such that Γ x 1 is conjugate to Γ x 2 as linear subgroups. Let f be a diffeomorphism from ∂B x 1 to ∂B x 2 , we remove B x 1 and B x 2 from the orbifolds, and identify the boundary ∂B x 1 and ∂B x 2 by the diffeomorphism f . The resulting orbifold is denoted by # f ;x 1 ,x 2 (X 1 , X 2 ) or # f (X 1 , X 2 ), and is called orbifold connected sum of X 1 and X 2 . Note that the diffeomorphism type of the resulting orbifold depends only on the isotopy class of f . When orientation is taken into account, we adopt the convention that the orientation of ∂B x 1 is induced from the orientation of X 1 , while the orientation of ∂B x 2 is reverse to that induced from X 2 .
+
+It has to be mentioned that any diffeomorphim f ∈ Diff(S 3 /Γ) must be isotopic to some isometry f ′ ∈ Isom(S 3 /Γ) by [20].
+
+Suppose X is diffeomorphic to S 4 /Γ, Γ ⊂ SO(4), with two orbifold singularities p 1 and p 2 (when Γ is trivial, we take p 1 and p 2 to be arbitrary two different smooth points). If we perform an orbifold connected sum on X with itself at p 1 and p 2 by f ∈ Diff(S 3 /Γ), then we obtain the mapping torus of f , and denote it by S 3 /Γ × f S 1 . S 3 /Γ × f S 1 has the structure of a fiber bundle over S 1 with fibers S 3 /Γ and the monodromy f . It is easy to see that the bundle structure depends only on the isotopy class of f .
+
+2.4. M-W connected sum. Schoen and Yau [31], Gromov and Lawson [8] independently proved that the connected sum of two manifolds with positive scalar curvature still admits a metric with positive scalar curvature. In the paper [22], Micallef and Wang proved that the positive isotropic curvature condition is also preserved under connected sums. We give a short description of Micallef and Wang's construction here.
+
+Let (M n 1 , g 1 ) be a Riemannian manifold with positive isotropic curvature. Given p 1 ∈ M 1 , denote B r (p 1 ) the geodesic ball of radius r around p 1 . Let r 1 > ρ 1 > 0 be two positive number. By careful computations (see [22] for details), Micallef and Wang showed that we can find a nonincreasing smooth function α : (0, r 1 ] → R such that
+2k 1 + α( 3 2 − α) r 2 + α ′ r > 0, α(r) ≡ 1 near 0, α(r) ≡ 0 on [r * 1 , r 1 ]
+, where k 1 is the minimum of isotropic curvatures of g 1 , r * 1 < r 1 is a sufficiently small constant depending on g 1 . If we take u(r) = exp( r 1 r (α(x)/x)dx) in B r 1 (p 1 ), and u ≡ 1 outside B r 1 (p 1 ), then the metric g ′ 1 = u 2 g 1 is a complete metric with positive isotropic curvature on M \ {p 1 }, is the same as g 1 outside B r 1 (p 1 ), and near p 1 becomes C 2 close to the product metric ds 2 + ρ 2 dθ 2 on S n−1 × R + for some sufficiently small ρ < ρ 1 , where dθ 2 is the metric on S n−1 with constant curvature 1. We can slightly modify g ′ 1 at the halfcylinder end with a cut-off function to obtain a metricg 1 with positive isotropic curvature such that it is the product metric ds 2 + ρ 2 dθ 2 on S n−1 × R + when s is large enough.
+
+Suppose we have another manifold (M n 2 , g 2 ) with positive isotropic curvature and p 2 ∈ M 2 , we can do the same construction as above such that the new metricg 2 also has the same half-cylinder end with metric ds 2 + ρ 2 dθ 2 . We cut the two ends when s is large enough and glue M n 1 \ {p 1 } and M n 2 \ {p 2 } together by an f ∈ Isom(S n−1 ). We obtain a manifold # f ;p 1 ,p 2 (M 1 , M 2 ) with a metric # f ;p 1 ,p 2 (g 1 , g 2 ) of positive isotropic curvature.
+
+Remark 2.1. Clearly, the resulting metric # f ;p 1 ,p 2 (g 1 , g 2 ) in the above construction is not unique. It depends on our choice of the small parameters r 1 , ρ 1 and the function α and the isomorphism f. But the resulting metrics with all continuous different choices are isotopic.
+
+Since the inequalities the function α satisfied depend only on the lower bound of the isotropy curvature, the above construction can also applied to a continuous family of metrics with PIC. The construction above is local, we can apply it to orbifold connected sums. Therefore, the above construction can be generalized to the case of a families of orbifolds. The precise description is given in the following remark.
+
+Remark 2.2. Let (X 1 , g 1,µ ), (X 2 , g 2,µ ), µ ∈ [0, 1] be two continuous paths of metrics with PIC on compact orbifolds X 1 and X 2 with at most isolated singularities. Suppose x 1,µ ∈ X 1 , x 2,µ ∈ X 2 are two family of points (not necessarily singular) such that Γ x 1,µ is conjugate to Γ x 2,µ as linear subgroups and independent of µ (so we can denote them by Γ). Then one can deform these two families of metrics to get (X i \ {x i,µ },g i,µ ) with PIC, i = 1, 2, such that outside small geodesic balls (B i (x i,µ , r), g i,µ ) they are the same as (X i , g i,µ ), and near x i,µ the metrics are the product metrics ds 2 + ρ 2 dθ 2 on S n−1 /Γ × R + for some ρ ≪ r. For a continuous path of isometrics f µ ∈ Isom(S n−1 /Γ), one can form a continuous path of metrics # fµ;x 1,µ ,x 2,µ (g 1,µ , g 2,µ ), µ ∈ [0, 1] with PIC on a fixed orbifold X ∼ = # fµ;x 1,µ ,x 2,µ (X 1 , X 2 ). In addition, we can apply the same construction to a fixed (X, g µ ) with x 1,µ , x 2,µ ∈ X, and obtain a family of metrics # fµ;x 1,µ ,x 2,µ (g µ ) with PIC on a fixed Y ∼ = # fµ;x 1,µ ,x 2,µ (X) for µ ∈ [0, 1].
+
+We will call such a procedure an M-W connected sum for short. We summarize the above result into a proposition: Proposition 2.3. The M-W connected sum can be performed continuously on orbifolds, such that the resulting metrics have PIC and vary continuously with the parameters. Remark 2.4. Let (M 1 , g 1 ) and (M 2 , g 2 ) be two locally conformally flat four-manifolds (or orbifolds) with positive scalar curvature. There is another well-known connected sum construction (M 1 #M 2 , g) from g 1 and g 2 so that the resulting metric g is conformally flat with positive scalar curvature (see [31] [14]). Note that (M i , g i ) also has PIC for i = 1, 2, so we may also construct an M-W connected sum g ′ from g 1 and g 2 . The latter construction is performed at two small geodesic balls, while the former is performed at two Euclidean balls conformal to the original metrics, we require the gluing map f ∈ Iso(S 3 /Γ) in these two constructions lying in the same mapping class. Here, we remark that two metrics g and g ′ obtained from the above two different constructions are isotopic.
+
+
+Standard metrics and canonical metrics
+
+3.1. Standard metrics. Let h std be the standard cylindrical metric of constant scalar curvature 1 on S 3 × R. Let G be a cocompact fixed point free discrete subgroup of the isometry group of (S 3 × R, h std ). We denote Γ = G Isom(S 3 × {0}). Recall that every orientation-reversing diffeomorphism of S 3 has a fixed point. Since the action G is discrete and free, Γ is finite, and the action of Γ on S 3 is orientation-preserving. Clearly, G/Γ acts isometrically on S 3 /Γ × R with the quotient (S 3 × R)/G, and (G/Γ) Isom(S 3 /Γ × {0}) = ∅. We denote p 2 the projection from Isom(S 3 /Γ × R) = Isom(S 3 /Γ) × Isom(R) into the second factor. Since G/Γ acts cocompactly on S 3 /Γ × R, p 2 (G) is a discrete subgroup of Isom(R), hence is Z or D(∞), where D(∞) denote the isometry group of R generated by two reflections ς 1 : r → −r and ς 2 : r → r 1 − r, with r 1 = 0.
+
+If
+p 2 (G/Γ) = Z, let ς 0 be a generator of Z, then ρ = p −1 2 (ς 0 ) satisfying ρ : (θ, r) → (f (θ), r + r 0 ), with r 0 > 0, f ∈ Isom(S 3 /Γ). In this case, (S 3 × R)/G is obtained from identifying the boundaries of S 3 /Γ×[0, r 0 ] by the isometry f ∈ Isom(S 3 /Γ), i.e. (S 3 ×R)/G is of the form S 3 /Γ × f S 1 .
+If p 2 (G/Γ) = D(∞), let ρ 1 = p −1 2 (ς 1 ) and ρ 2 = p −1 2 (ς 2 ) be two inverses of the reflecting generators of D(∞). As isometries of S 3 /Γ × R, ρ 1 and ρ 2 have the following forms ρ 1 : (θ, r) → (τ 1 (θ), −r), ρ 2 : (θ, r) → (τ 2 (θ), r 1 − r). Since the action G/Γ is free, τ 1 , τ 2 ∈ Isom(S 3 /Γ) are orientation-preserving involutions. Therefore, in this case the quotient (S 3 × R)/G is not orientable. Note that by Section 2.2, S 4 / Γ,τ i are spherical orbifolds with one singularity of local uniformization group Γ. It is clear that (S 3 × R)/G is diffeomorphic to an orbifold connected sum of S 4 / Γ,τ 1 and S 4 / Γ,τ 2 .
+
+Suppose M is a differentiable manifold obtained by identifying the boundaries of [20], M is diffeomorphic to S 3 /Γ × f ′ S 1 , and admits a geometry structure induced by an isometric group action G on S 3 × R as described above. Similarly, if M is obtained by performing an orbifold connected sum of S 4 / Γ,τ 1 and S 4 / Γ,τ 2 at the singularities, then M also admits a geometry structure induced by an isometry group action G on S 3 × R. The induced metric from S 3 × R on M is also called a standard metric, and is denoted by h std .
+S 3 /Γ× [0, r 0 ] by f ∈ Diff(S 3 /Γ). Since f ∈ Diff(S 3 /Γ) is isotopic to an isometry f ′ ∈ Isom(S 3 /Γ) by
+Remark 3.1. We note that standard metrics on such M are not unique. It depends on the diffeomorphism from M to some (S 3 × R)/G.
+
+Let h round be the standard metric of constant curvature 1 on the sphere S 4 . If Γ is a discrete subgroup of isometries of S 4 , we will also call the induced metric on S 4 /Γ a standard metric, and still denote it by h round .
+
+Suppose S 4 /Γ is a spherical orbifold with at most isolated singularities. By studying the corresponding group actions on S 4 (see Lemma 5.1 and 5.2 in [7]), one can derive that such a S 4 /Γ has no more than two orbifold singularities. So there are three possible types of S 4 /Γ according to the number of singularities: the first type is S 4 or RP 4 , the second type is of the form S 4 / Γ,τ with Γ ⊂ SO(4), the third case is of the form S 4 /Γ with Γ ⊂ SO(4).
+
+In summary, we only defined the standard metrics on manifolds or orbifolds of the following types:
+i) S 3 /Γ × f S 1 , S 4 / Γ,τ 1 # f S 4 / Γ,τ 2 , ii) S 4 /Γ.
+
+Canonical metrics.
+
+In the following, we will define canonical metrics on certain four-manifolds or orbifolds.
+Let p 1 , . . . , p k , q 1 , . . . , q l be (k + l) distinct points on (S 4 , h round ). Let (M i , h i ), i ∈ {1, . . . , k} be compact manifolds diffeomorphic to (S 3 × R)/G i with standard metrics, with p ′ i ∈ M i . Let (X j ,h j ), j ∈ {1, . . . , l}, be spherical orbifolds S 4 /Γ j with isolated singularities and with standard metrics, where Γ j ⊂ O(5), Γ j = {1}. Let q ′
+j ∈ X j be smooth points of X j , for j = 1, 2, · · · , l. If we perform the M-W connected sum operation (see Section 2.4 for definition) on (S 4 , h round , p 1 , · · · , p k , q 1 , · · · , q l ) and those (M i , h i , p ′ i ) and (X j ,h j , q ′ j ), we obtain a Riemannian orbifold (X,ĝ). We will call suchĝ a canonical metric. Clearly, the resulting metricĝ has positive isotropic curvature.
+
+The sphere (S 4 , h round ) in the above construction will be called a principal sphere. (M i , h i ) and (X j ,h j ) in the above construction will be called subcomponents of X. The decomposition of X as the connected sum of subcomponents of above types is called a canonical decomposition of X in this paper.
+
+Since the resulting metricĝ depends on the choice of parameters in the M-W connected sum process, canonical metrics constructed above are not unique. However, the different choice of parameters in the M-W connected sum process will produce an isotopy between canonical metrics.
+
+The orbifolds admitting a canonical decomposition will naturally appear in the process of Ricci flow with surgery. We will prove that our initial manifold (M, g) admits a canonical decomposition, and g is isotopic to a canonical metric.
+
+In paper [19], Marques also gave the notion of a canonical metric, where he allowed to perform connected sum on the principle sphere S 3 with itself, and the other subcomponents are spherical three-manifolds. In dimension four, we have to face with orbifold singularities, and we do not allow to perform connected sums on the principle sphere S 4 with itself in a canonical metric, and we consider the subcomponents of the form (S 3 × R)/G so that we have a uniform description.
+
+Remark 3.2. Here we note that a canonical metric on (
+S 3 × R)/G (or S 4 /Γ with Γ = {1})
+is not the same as the standard metric induced from the (S 3 × R, h std ) (or (S 4 , h round )). The reason is that we always require the presence of the principle sphere in the definition of canonical metrics. However, we will prove that a canonical metric on such orbifolds is always isotopic to a standard metric in Section 4.
+
+
+Deforming canonical metrics
+
+4.1. Deforming standard metrics. In this section, we will give some preliminary results on deforming metrics with positive isotropic curvature. Proof. Recall that we have defined σ g := R g − 6 max{λ max (W + ), λ max (W − )} in Section 2, and we know σ g > 0 is equivalent to PIC. Letg = u 2 g, u ∈ C ∞ (M ), u > 0, we have:
+σg = u −3 (−6∆u + σ g u).
+Denote u µ = (1 − µ + µu), g µ = u 2 µ g, µ ∈ [0, 1], σ µ = σ gµ , then g 0 = g, g 1 =g. Suppose both σ g and σg are positive, we have
+u 3 µ σ µ = µ(−6∆u + σ g u) + (1 − µ)σ g > 0.
+Hence every g µ has positive isotropic curvature and we finish the proof. Proof. Let g ′ be a locally conformally flat metric with positive scalar curvature obtained from the connected sum of (M, g) and (S 4 , h round ) in the sense of [31] and [14] (see Remark 2.4). Then g ′ is conformal to g, hence isotopic to g by Proposition 4.1. On the other hand, by Remark 2.4,g is isotopic to g ′ , hence to g.
+Proposition 4.3. Let (M, g) be S 4 /G, S 3 /Γ × f S 1 , or S 4 / Γ,τ 1 # f S 4 / Γ,τ 1 , equipped
+with a standard metric, (M,g) be the canonical metric obtained from an M-W connected sum of (M 4 , g) with a sphere S 4 . Theng is isotopic to g.
+
+Proof. The standard metrics are locally conformally flat with positive scalar curvature. The result follows from Proposition 4.2.
+
+We remark that the Proposition 4.3 does not claim the following statement: any canonical metric on an orbifold diffeomorphic to one of the above orbifolds in Proposition 4.3 is isotopic to a standard one. Nevertheless, at least, we can handle the spherical case at present: Proposition 4.4. Any canonical metric on an orbifold diffeomorphic to S 4 /G is isotopic to standard metric.
+
+From the construction of canonical metrics and the van Kampen theorem for orbifolds (see [1]), we know in the canonical decomposition of S 4 /G, there is at most one nontrivial standard piece, which is diffeomorphic to S 4 /G itself. Hence Proposition 4.4 follows from Proposition 4.3.
+
+The following proposition provides another proof of Proposition 4.4, it also has its own interest.
+Proposition 4.5. Let (S 4 /G, g) be an orbifold, where G is a finite subgroup of O(5).
+Suppose g is locally conformally flat with PIC, then g is isotopic to a constant curvature metric.
+
+Proof. We pull back g to a G-invariant, locally conformally flat metricg with PIC on S 4 . By the works of Kuiper ([18]),g is conformally equivalent to a constant curvature metric. Recall that in dimension four, a locally conformally flat metric has positive scalar curvature if and only if it has PIC. We solve the Yamabe flow on S 4 :
+∂g(t) ∂t = −(R g(t) − r g(t) )g(t), g(0) =g,
+where r g(t) is the mean value of the scalar curvature. Since the Yamabe flow preserves the conformal structure, g(t) is locally conformally flat for every t. By the evolution equation of R g , one can derive that the positive scalar curvature condition is preserved by the Yamabe flow. Hence, in this case, the Yamabe flow preserves the positive isotropic curvature condition. By the result of Ye [36] (see also [2]), if the initial metric on S n is conformally equivalent to the standard metric, then the Yamabe flow has a global solution which converges exponentially to a metric of constant sectional curvature. Because the initial metricg is G-invariant, by the uniqueness of the solution of the Yamabe flow, Yamabe flow descents to a flow on the orbifold S 4 /G. This produces a desired deformation.
+
+Let dθ 2 be a constant curvature metric of scalar curvature 1 on a spherical manifold S 3 /Γ, where Γ is a finite subgroup of SO(4) acting freely on S 3 .
+Proposition 4.6. Let g = dr 2 + ω 2 (r)dθ 2 be a warped product metric on S 3 /Γ × (−a, a) with PIC and ω(r) ≡ 1 on (−a, −b) (b, a), 0 < b < a.
+Then there exists a continuous path of warped product metrics g µ , µ ∈ [0, 1] with PIC, such that g 0 = g,
+g 1 = dr 2 + dθ 2 , g µ ≡ g on S 3 /Γ × (−a, −b) ∪ (b, a).
+In addition, if g is symmetric under reflection, i.e. ω(r) = ω(−r) for r ∈ (−a, a), then g µ can also be chosen to be symmetric under reflection. 1 2 ]. It is obvious that g µ is warped product(not necessarily in the same (r, θ) coordinates). From the proof of Proposition 4.1, g µ has positive isotropic curvature for every µ ∈ [0, 1 2 ].
+Proof. Letg = ω(r) −2 g, υ(r) = r 0 ω −1 (x)dx, theng = dυ 2 + dθ 2 , which clearly has positive isotropic curvature. For µ ∈ [0, 1 2 ], let g µ = (1 − 2µ + 2µω −1 (r)) 2 g. Then g 0 = g, g 1 2 =g, g µ = g on S 3 /Γ × (−a, −b) and S 3 /Γ × (b, a) for every µ ∈ [0,For µ ∈ [ 1 2 , 1], let g µ = [(2 − 2µ)ω −2 (r) + 2µ − 1]dr 2 + dθ 2 . Then g 1 2 =g, g 1 = dr 2 + dθ 2 , g µ = g on S 3 /Γ × (−a, −b) and S 3 /Γ × (b, a) for every µ ∈ [ 1 2 , 1].
+It's obvious that g µ is warped product and has PIC on S 3 /Γ × (−a, a) for every µ ∈ [0, 1].
+
+If ω(r) = ω(−r) for r ∈ (−a, a), then from the above construction g µ is symmetric with respect to the reflection on the r-coordinate for every µ ∈ [0, 1].
+
+Let g = dr 2 + ω 2 (r)dθ 2 be a warped product metric on S 3 /Γ × R with PIC. We assume ω(r) is invariant under a cocompact discrete isometric subgroup G of S 3 /Γ × R. That is to say, either ω(r) is periodic or ω(r) is periodic and reflectively invariant. By the same argument as in the proof of Proposition 4.6, there exists a continuous path of metrics g µ , µ ∈ [0, 1], such that g 0 = g, g 1 = dr 2 + dθ 2 , g µ is warped product and has PIC for all µ ∈ [0, 1], and g µ is also invariant under G. By taking quotient of (S 3 /Γ × R, g µ ) by G, we obtain:
+Proposition 4.7. If S 3 /Γ × f S 1 admits a PIC metric g induced from a warped product dr 2 + ω 2 (r)dθ 2 on S 3 /Γ × R,
+where ω is a period function satisfying ω(r) = ω(r + 2π), then there exists a continuous path of PIC metrics g µ , µ ∈ [0, 1], on S 3 /Γ × f S 1 such that g 0 = g, g 1 is a standard metric.
+Proposition 4.8. Suppose # f (S 4 / Γ,τ 1 , S 4 / Γ,τ 2 ) admits a PIC metric g induced from a warped product metric dr 2 + ω 2 (r)dθ 2 on S 3 /Γ × R,
+where ω is a function satisfying ω(r) = ω(−r) and ω(r) = ω(r 0 − r), r 0 = 0. Then there exists a continuous path of PIC metrics g µ , µ ∈ [0, 1], on # f (S 4 / Γ,τ 1 , S 4 / Γ,τ 2 ) such that g 0 = g, g 1 is a standard metric.
+
+
+4.2.
+
+Deforming canonical metrics. Proposition 4.9. Suppose g is a canonical metric on S 4 /Γ with Γ ⊂ SO(4). We perform M-W connected sum at the two orbifold singularities p 1 and p 2 (in the case Γ = {1}, p 1 and p 2 are both smooth points) with f ∈ Isom(S 3 /Γ). Then the resulting metricg = # f ;p 1 ,p 2 (g) is isotopic to a standard metric on S 3 /Γ × f S 1 .
+
+Proof. Note that g is isotopic to some h round by Proposition 4.4. Letḡ be the metric obtained from M-W connected sum on (S 4 /Γ, h round ) at the two orbifold singularities p 1 and p 2 . By Proposition 2.3,ḡ is isotopic tog. Sinceḡ is PIC and warped product, by Proposition 4.7, it is isotopic to a standard metric on S 3 /Γ × f S 1 . The result follows from Proposition 2.3.
+
+Proposition 4.10. Suppose (X 1 , g 1 ) is S 4 /Γ or S 4 / Γ,τ 1 , and (X 2 , g 2 ) is also S 4 /Γ or S 4 / Γ,τ 2 , both equipped with canonical metrics. We perform M-W connected sum on orbifold singularities p 1 ∈ X 1 and p 2 ∈ X 2 with f ∈ Isom(S 3 /Γ). Then the resulting metricg = # f (g 1 , g 2 ) is isotopic to a standard metric on S 4 /Γ, S 4 / Γ,τ or
+# f (S 4 / Γ,τ 1 , S 4 / Γ,τ 2 ).
+Proof. The proof is similar to Proposition 4.9.
+
+Proposition 4.11. Let g be a canonical metric on an orbifold X. If we perform M-W connected sum at two smooth points of X by an f ∈ Isom(S 3 ), then the resulting metric is isotopic to an M-W connected sum of (X, g) and some (S 3 × f S 1 , h std ).
+
+Proof. By Proposition 2.3, we can assume those two smooth points where connected sum is performed are on the principal sphere of X. The result follows from Proposition 4.9 and Proposition 2.3.
+
+The following theorem is the main result of this section: Proposition 4.12. Suppose (X 1 , g 1 ), . . . , (X l , g l ) are orbifolds endowed with canonical metrics. If (X, g) is the resulting Riemannian orbifold by performing M-W connected sums between them (we allow performing connected sums on some X i with itself ), then g is isotopic to a canonical metric on X.
+
+Proof. By induction on l, we only need to consider l = 2 case. Suppose M-W connected sum is performed at two points p 1 ∈ X 1 , p 2 ∈ X 2 or X 1 . We divide our argument into 4 cases: i) p 1 ∈ X 1 , p 2 ∈ X 2 and p 1 , p 2 are smooth, ii) p 1 ∈ X 1 , p 2 ∈ X 2 and p 1 , p 2 are singular, iii) p 1 , p 2 ∈ X 1 and p 1 , p 2 are smooth, iv) p 1 , p 2 ∈ X 1 and p 1 , p 2 are singular. Case i): By Proposition 2.3, we may assume p 1 and p 2 lie in the principle spheres. Note that by the same argument of Proposition 4.10, M-W connected sum of two spheres is isotopic to one sphere. From this fact and Proposition 2.3, we can merge the two principal spheres gradually to one sphere and this simultaneously produces an isotopy of g on X to some canonical metric.
+
+Case ii): Let p 1 (p 2 ) lie in some subcomponent SX 1 (SX 2 ). Let (X ′ 1 , g ′ 1 ) ((X ′ 2 , g ′ 2 )) be the orbifold with a canonical metric such that X 1 is an M-W connected sum of SX 1 (SX 2 ) with X ′ 1 (X ′ 2 ) at its principle sphere. In this case SX 1 and SX 2 are spherical orbifolds of the form S 4 /Γ or S 4 / Γ,τ with Γ ⊂ SO(4). By Proposition 4.11 an M-W connected sum of SX 1 and SX 2 at their singular points is isotopic to a standard metric on X 3 = # f (SX 1 , SX 2 ), where the possible topological type of X 3 is S 4 /Γ, S 4 / Γ,τ or # f (S 4 / Γ,τ 1 , S 4 / Γ,τ 2 ). This isotopy shows that the metric g is isotopic to an M-W connected sum between a canonical metric on X ′ 1 #X 3 and a canonical metric on X ′ 2 at smooth points. This reduces to the case i).
+
+Case iii): This case has been treated by Proposition 4.11. Case iv): If p 1 and p 2 lie in one subcomponent SX 1 , then SX 1 can only has the form S 4 /Γ, with Γ ⊂ SO(4). By Propositions 2.3 and 4.7, g is isotopic to a canonical metric obtained as an M-W connected sum of a canonical metric on X ′ 1 and S 3 /Γ × f S 2 at the principle sphere. If p 1 and p 2 lie in different subcomponents, by similar argument as in case ii), these two subcomponents can merge together to give a standard piece. Our metric g is isotopic to an M-W connected sum of a canonical metric on X 3 at two smooth points. This reduces to case iii).
+
+
+Surgery
+
+Ricci flow with surgery was introduced first by R. Hamilton in [11], where the author gave a detailed description on how to do surgery on Ricci flow. We need one crucial property of this construction, namely, preserving positivity of the curvature operator.
+
+Consider the standard round cylinder S 3 × R with the metric h std of scalar curvature 1. Denote the coordinate of the second factor by s. Let f be a smooth function defined by Here we remark that the property ofĥ stated in Proposition 5.1 was not used in the usual theory on four-dimensional Ricci flow [11] [6] [7]. The result in dimension three appeared in [24]. Since there is no further literature for four dimensional case, we give the details for completeness.
+(5.1) f (s) = 0, s ≤ 0, ce − q s , s > 0, where c > 0, q > 0. Suppose h is a metric on N = S 3 × (−4, 4), which is ǫ-close to h std in C [ 1 ǫ ] -topology. Let h = e −
+Proof of Proposition 5.1. First we fix the constant q 0 ≫ 16 such that q 2 s 4 e − q s ≪ 1 for every q > q 0 and s ∈ (0, 4]. We will fix c 0 to be a small constant, such that for every c < c 0 and q > q 0 , 
+q s 2 f 2 ≪ q 2 s 4 f 2 ≪ q s 2 f ≪ 1, ∀s ∈ (0, 4]. Let {E 0 , E 1 , E 2 , E 3 } bef 00 = ( q 2 s 4 − 2q s 3 )f + q s 2 f O(ǫ), f i0 = q s 2 f O(ǫ), for 1 ≤ i ≤ 3, f ij = q s 2 f O(ǫ), for 1 ≤ i, j ≤ 3, where f i means ∇ i f , f ij = (Hessf ) ij = ∂ i f j − f k Γ k
+ij is the Hessian of f with respect to the metric h.
+
+Let's considerĥ = e −2f h. We denote byR = (R ijkl ) the matrix of the curvature operator ofĥ with respect to the basis {E 0 , E 1 , E 2 , E 3 }.
+
+The following formula for the curvature of a conformally changed metric is well known:
+R ijkl = e −2f [R ijkl − f j f k h il + f j f l h ik + f i f k h jl − f i f l h jk −(∧ 2 h) ijkl |∇f | 2 − f jk h il + f ik h jl + f jl h ik − f il h jk ], where (∧ 2 h) ijkl = h ik h jl − h il h jk . Hence, if 1 ≤ i, j, k, l ≤ 3, we havê R 0i0j = e −2f [R 0i0j + ( q 2 s 4 − 2q s 3 )f h ij + q s 2 f O(ǫ)], R ijk0 = e −2f [R ijk0 + q s 2 f O(ǫ)], R ijij = e −2f [R ijij − q 2 s 4 f 2 + q s 2 f O(ǫ)], R ijkl = e −2f [R ijkl + q s 2 f O(ǫ)] (for {i, j} = {k, l}). Therefore, with respect to the basis B 0 = {E 0 ∧ E 1 , E 0 ∧ E 2 , E 0 ∧ E 3 , E 1 ∧ E 2 , E 1 ∧ E 3 , E 2 ∧ E 3 },
+the (0,4) curvature tensorR, regarded as a quadratic form on 2 , has the following form:
+e −2f R + ( q 2 s 4 − 2q s 3 )f I O O − q 2 s 4 f 2 I + q s 2 f O(ǫ) ,
+where O and I are the zero and 3 × 3 identity matrix respectively. Since h is ǫ-close to h std , there exists a basis {F 0 , F 1 , F 2 , F 3 } which is orthonormal with respect to the metric h such that: i) the matrix of basis change from
+{E 0 , E 1 , E 2 , E 3 } to {F 0 , F 1 , F 2 , F 3 } is I + (O(ǫ)), ii) the curvature R with respect to the basis B 1 = {F 0 ∧ F 1 , F 0 ∧ F 2 , F 0 ∧ F 3 , F 1 ∧ F 2 , F 1 ∧ F 3 , F 2 ∧ F 3 } of 2 T N is R = O O O 1 6 I + (O(ǫ)).
+Moreover, we may find a new orthogonal basis B 2 of 2 T N such that the matrix of basis change from B 2 to B 1 is a 6 × 6 matrix A 1 = I + O(ǫ) and
+A t 1 RA 1 = B 1 O O B 2 ,
+with B 1 = (O(ǫ)), B 2 = 1 6 I + (O(ǫ)). Denote the smallest eigenvalue of B 1 by λ, which is also the smallest eigenvalue of the matrix A t 1 RA 1 . Obviously, λ = O(ǫ). On the other hand, with respect to the basis B 2 ,R is of the form
+e −2f B 1 O O B 2 + ( q 2 s 4 − 2q s 3 )f I O O − q 2 s 4 f 2 I + q 2 s 4 f O(ǫ) = e −2f A. For a vector x = x 1 x 2 with x 1 , x 2 ∈ R 3 , if ǫ is small enough, we have x T Ax = x T 1 B 1 x 1 + x T 2 B 2 x 2 + [( q 2 s 4 − 2q s 3 )f ]x T 1 x 1 − ( q 2 s 4 f 2 )x T 2 x 2 + ( q 2 s 4 f O(ǫ))x T x ≥ [λ + ( q 2 s 4 − 2q s 3 )f − q 2 s 4 f O(ǫ)]x T 1 x 1 + [ 1 6 − O(ǫ) − q 2 s 4 f 2 − q 2 s 4 f O(ǫ)]x T 2 x 2 > (λ + q 2 2s 4 f )x T x.
+By assumption, h has positive curvature operator, hence λ > 0. Therefore, the matrix e −2f A is positive definite, i.e.ĥ has positive curvature operator. The proof is completed.
+
+On the other hand, Hamilton showed that if c is small enough and q large enough (independent of ǫ), the metricĥ = e −2f h satisfies Hamilton's improved pinching estimates [11] on s ∈ [0, 4], and has positive curvature operator for s ∈ (1,4] if h is ǫ-close to h std with ǫ sufficiently small. From now on we will fix a small c and a large q satisfying Proposition 5.1 and Hamilton's result. It is easy to extend the metric (S 3 × (−∞, 4], e −2f h std ) to a rotationally symmetric metric on R 4 by gluing a suitable chosen nice cap with positive curvature operator and satisfying Hamilton's improved pinching estimates. We will fix such a metric, denote it by g std . The fixed point p of the SO(4)-action on (R 4 , g std ) is called the tip. From the construction, there is a positive constant A 0 such that outside the geodesic ball B(p, A 0 ) in (R 4 , g std ), (R 4 \ B(p, A 0 ), g std ) is isometric to a half cylinder. We denote the isometry by ψ std : (R 4 \ B(p, A 0 ), g std ) → (S 3 × (−∞, 0], h std ). We also define a function s std : (R 4 , g std ) → R to be s std (x) = A 0 − dist g std (x, p).
+
+Let α : R → [0, 1] be a cutoff function such that α(s) ≡ 1 if s ≤ 2 and α(s) ≡ 0 if s ≥ 3. There exists a universal constant ǫ 3 , if h is ǫ-close to h std with ǫ < ǫ 3 , then the metrič h = e −2f [α(s)h + (1 − α(s))h std ] has positive curvature operator on s ∈ (1, 4], andȟ has positive curvature operator on s ∈ (0, 1] provided h has positive curvature operator. Sincě h equals to e −2f h std on s ∈ [3, 4], we can glue the corresponding portion of (R 4 , g std ) to it and obtain a new manifold S, diffeomorphic to R 4 , with a new metric h surg . This is the so-called Hamilton's surgery process.
+
+From the construction above, we have:
+Proposition 5.2. Suppose h is a metric on S 3 × (−4, 4) such that h is ǫ-close to h std in the C [ 1 ǫ ] -topology with ǫ < ǫ 3 .
+If h has positive curvature operator, so does h surg .
+
+Remark 5.3. From the construction above, it's clear that if 0 < ǫ < ǫ 3 , and h µ , µ ∈ [0, 1], is a continuous path of metrics ǫ-close to h std on S 3 × (−4, 4), then (h µ ) surg is a continuous path of metrics with positive isotropic curvature on S.
+
+The following lemma concerns the deformation of metrics on surgery caps. We can also perform the same surgery process as above on a neck ((S 3 /Γ) × (−4, 4), h) to obtain a Riemannian orbifold (S, h surg ), where S is diffeomorphic to C Γ . Proposition 5.2 and Lemma 5.4 are also valid in this case.
+
+Let h be a Riemannian metric on S 3 /Γ × (−4, 4) which is ǫ-close to the standard metric h std = ds 2 + dθ 2 , where dθ 2 is a constant curvature metric of scalar curvature 1 on S 3 /Γ. Let (S ± , h ± surg ) be the orbifolds obtained by cutting along the central slice S 3 /Γ × {0} and gluing surgery caps to both sides of the central slice, respectively. We can perform the M-W connected sum at the tips p ± of the surgery caps and obtain (S + #S − , h + surg #h − surg ) with PIC. was introduced by Hamilton [10]. Now let g 0 be a metric with PIC on a compact fourmanifold. We evolve g 0 by the Ricci flow and get a solution g t for t > 0. Since the scalar curvature is positive, the solution will blow up in finite time. After performing surgeries, the solution may be resumed; repeating these procedures many times till we get nothing. This will produce a solution g t to the Ricci flow with surgery (see [6] [7]). Gluing all pieces left by surgeries together, at length, the following theorem can be proven (see [7]):
+
+Theorem 6.1. (Main Theorem in [7]) Let (M 4 , g) be a compact four-dimensional manifold. Then it admits a metric with positive isotropic curvature if and only if it is diffeomorphic to S 4 , RP 4 , (S 3 × R)/G or a connected sum of them. Here G is a cocompact fixed point free discrete isometric subgroup of the standard S 3 × R.
+
+In this paper, we are concerned not only the topology but also the geometry of the manifold M . So we have to investigate closely the geometric structure of the pieces left by surgeries. In order to understand the singularities of the Ricci flow solution, we need to investigate the ancient κ-solution (X, g t ), t ∈ (−∞, 0], on an four-orbifold X with at most isolated singularities, such that g t is PIC and satisfies the so called the restricted isotropic curvature pinching condition a 3 ≤ Λa 1 , c 3 ≤ Λc 1 , b 2 3 ≤ a 1 c 1 , where Λ is a positive constant. As in [7], we call such a solution an ancient κ-orbifold solution for short. 6.2. Ancient solution. The classification of ancient κ-orbifold solutions was done in Chapter 3 of [7], we state the results in the following theorem: Theorem 6.2. (Theorem 3.2-3.8 in [7]) For a four-dimensional ancient κ-orbifold solution (X, g t ), t ∈ (−∞, 0], (1) if the curvature operator has nontrivial null eigenvector somewhere, then X is isometric to S 3 /Γ × R, C τ Γ or C II , with the induced metric from the product metric on S 3 × R, (2) if the curvature operator is strictly positive everywhere, then either X is compact and diffeomorphic to a spherical space form S 4 /Γ with at most isolated singularities, or X is noncompact and diffeomorphic to R 4 or C Γ . Furthermore, for ǫ > 0 small enough one can find positive constants C 1 = C 1 (ǫ), C 2 = C 2 (ǫ), such that for every (x, t), there is a radius r, 1 
+C 1 (R(x, t)) − 1 2 < r < C 1 (R(x, t)) − 1 2 , so that some open neighborhood B t (x, r) ⊂ B ⊂ B t (x,{(x ′ , t ′ )|x ′ ∈ B, t ′ ∈ [t − R(x, t) −1 , t]},
+where the solution is well defined on the whole parabolic neighborhood and is, after scaling with factor R(x, t) and shifting the time t to zero, ǫ-close to the corresponding subset of the evolving round cylinder S 3 /Γ × R with scalar curvature 1 at the time zero), (ii): B is an evolving ǫ-cap (in the sense that it is the time slice at the time t of an evolving metric on open caps R 4 , C τ Γ , C Γ or C II such that the region outside some suitable compact subset is an evolving ǫ-neck), (iii): at time t, x is contained in a connected compact component with positive curvature operator. Moreover, the scalar curvature of B in cases (i) and (ii) at time t is between C −1 2 R(x, t) and C 2 R(x, t).
+
+Usually, an ǫ-cap in a four-orbifold (X 4 , g) is defined to be an open submanifold C ⊂ X such that C is topologically a cap diffeomorphic to R 4 , C τ Γ , C Γ or C II , and there are open sets N, Y ⊂ C satisfying the following: N is an ǫ-neck, and Y = C \ N is a compact submanifold with boundary, and ∂Y is a central slice of some ǫ-neck. The set Y in the above definition is called the core of C. The above information is usually sufficient for topological applications, but in this paper we are dealing with the properties of metrics, so we require more information about the geometry of an ǫ-cap.
+
+In order to do this, we discuss some properties of a noncompact ancient κ-orbifold solution with positive curvature operator. Proposition 6.3. There exists a universal function λ : (0, ∞) → (0, ∞) with the following property. Let (X, g t ) (t ∈ (−∞, 0]) be a noncompact ancient κ-orbifold solution with positive curvature operator, then at every time t 0 , there exits a point x 0 such that for any y ∈ X, the smallest eigenvalue of the curvature operator R at (y, t 0 ) is greater than λ(d t 0 (x 0 , y)R(x 0 , t 0 )
+1 2 )R(x 0 , t 0 ).
+Proof of Proposition 6.3. By Corollary 3.6 of [7], X is diffeomorphic to some C Γ . We denote the orbifold universal cover of X byX, which is diffeomorphic to R 4 . Let π :X → X be the quotient map, andg t = π * g t . We denoted t 0 the distance function with respect tog t 0 .
+
+From the argument in the proof of Theorem 3.7 of [7], for ǫ > 0 small enough, we can always find a Γ-invariant ǫ-capΩ in (X,g t 0 ) such that: i) every point outsideΩ is a center of a Γ-invariant ǫ-neck, ii) there exits a pointx 0 such that for everyz ∈Ω,d t 0 (x 0 ,z) is bounded from above bỹ R(x 0 , t 0 ) − 1 2D , whereD =D(ǫ) is a constant depending on ǫ. In the following, we fix a sufficiently small ǫ, hence also fixD =D(ǫ). Rescale the metricg t and shift the time t 0 to 0 such thatR(x 0 , 0) = 1. Thend 0 (x 0 ,z) ≤D for everỹ z ∈Ω. For every D >D, we denoteC D := {z|d 0 (x 0 ,z) < D}. In the following, we will prove that the smallest eigenvalue of the curvature operatorR 0 onC D has a positive lower boundλ(D).
+
+Suppose this is not true, then we can find a sequence of ancient κ-solutions (M (i) ,g (i) t ), t ∈ (−∞, 0], and two sequences of pointsx t ), such that the limit (M 4 ,x 0 ,ǧ(t)), t ∈ (−∞, 0], is a noncompact ancient κ 0 -solution to the Ricci flow with nonnegative curvature operator and satisfies the restricted isotropic curvature pinching condition. On the other hand, (x (i) , 0) converge to a point (x, 0) where the smallest eigenvalue of the curvature operator vanish. Hence, by Hamilton's strong maximum principle and the restricted isotropic curvature pinching condition, one can prove that (M 4 ,ǧ(t)) is an evolving cylinder S 3 × R or a noncompact metric quotient of the cylinder (see Lemma 3.2 of [6]).
+(i) 0 ,x (i) ∈ M (i) such that: i) M (i) is diffeomorphic to R 4 ,g (i) t has positive curvature operator, ii)R (i) (x (i) 0 , 0) = 1, iii)x (i) 0 lies in a Γ-invariant ǫ-capΩ (i) withd 0 (x (i) 0 ,z) ≤D for everyz ∈Ω (i) , iv)d 0 (x (i) ,x
+Recall that a noncompact metric quotient of the round cylinder is isometric to the product metric on S 3 /Γ×R or the Z 2 quotient of S 3 /Γ×R (Γ may be trivial). If (M 4 ,ǧ(0)) is diffeomorphic to S 3 /Γ × R, then the geodesic ball B 0 (x 0 , R 0 ) has two ends for large R 0 . If (M 4 ,ǧ(0)) is diffeomorphic to the Z 2 quotient of S 3 /Γ × R, then the geodesic ball B 0 (x 0 , R 0 ), for large R 0 , is diffeomorphic to a cap of the form C τ Γ , which is not orientable. On the other hand, if we choose R 0 ≫ D >D, then for every i, B 0 (x (i) 0 , R 0 ) is a cap diffeomorphic to R 4 and has one neck-like end. This is a contradiction. This contradiction shows that the estimate is true for the orbifold universal cover. The result follows by passing down to the quotient.
+
+The following corollary is easy to see: Corollary 6.4. For ǫ > 0 small enough and C > 0, there exists a positive number ǫ =ǫ(ǫ, C), depending on ǫ and C, satisfying the following property. Let (C, g) be a capǫclose to an ǫ-cap (C, g t 0 ) in an ancient κ-orbifold solution with positive curvature operator such that there exists some x 0 ∈C with d to (x 0 , z) ≤ R(x 0 , t 0 ) − 1 2 C for every z ∈C. Then (C, g) has positive curvature operator.
+
+6.3. Canonical neighborhood assumption. Let ǫ > 0 be a constant, r : [0, ∞) → R + a non-increasing positive function. As in [7], we say that a Ricci flow with surgery (M, g(t)), t ∈ [0, b], satisfies the ǫ-canonical neighborhood assumption with parameter r, if there exist two constants C 1 = C 1 (ǫ), C 2 = C 2 (ǫ) depending only on ǫ such that every point (x, t) ∈ M × [0, b] with R(x, t) ≥ r(t) −2 has an open neighborhood B, called an ǫ-canonical neighborhood, satisfying the properties that B t (x, r) ⊂ B ⊂ B t (x, 2r) with 0 < r < C 1 R(x, t) − 1 2 , and one of the followings: Moreover, for cases (a) and (b), the scalar curvature in B at time t is between C −1 2 R(x, t) and C 2 R(x, t), and satisfies the gradient estimate |∇R| < ηR 3 2 and | ∂R ∂t | < ηR 2 , where η is a universal constant.
+
+The existence of canonical neighborhoods of Ricci flow with surgery on four-dimensional orbifolds with PIC was established in [6] and [7].
+
+From the proof of Lemma 4.5 in [7] and Proposition 5.4 in [6], it can be shown that the ǫ-caps (C, g) in the ǫ-canonical neighborhood assumption actually fall into one of the following types:
+
+A: (C, g) is diffeomorphic to R 4 or C Γ , and g isǫ-close to a corresponding piece of an ancient κ-orbifold solution with positive curvature operator R 4 or C Γ , whereǫ = ǫ(ǫ, 2C 1 (ǫ)) is the constant in Corollary 6.4. Hence, (C, g) has positive curvature operator. B: (C, g) is diffeomorphic to C τ Γ or C II , and there exists a double covering ϕ C :
+S 3 /Γ × (− 3 ǫ − 10, 3 ǫ + 10) → C with ϕ C (τ (x), −t) = ϕ C (x, t), or ϕ C : S 3 × (− 3 ǫ − 10, 3 ǫ + 10) → C with ϕ C (τ (x), −t) = ϕ C (x, t), such that h −2 ϕ * C g is ǫ− close to h std , where h = R g (z) − 1 2 for some z ∈ ϕ C (S 3 /Γ × {− 2 ǫ }) or z ∈ ϕ C (S 3 × {− 2 ǫ })
+. C: (C, g) is diffeomorphic to R 4 or C Γ , and g is ǫ-close to the corresponding piece of (R 4 , g std ) or (C Γ , g std ) in the sense that there exists a diffeomorphism ϕ C :
+s −1 std ((− 3 ǫ , A 0 ]) → C such that the metric h −2 ϕ * C g is ǫ−close to g std , where h = R g (z) − 1 2 for some z ∈ ϕ C [s −1 std (− 2 ǫ )], A 0 is the constant such that (R 4 \B(p, A 0 ), g std ) is isometric to a half cylinder.
+The existence of ǫ-canonical neighborhood can be proved by an argument contradiction as in [6], [7]. We roughly describe the proof here. The purpose is to indicate to the reader how these types of neighborhoods arise. If the ǫ-canonical neighborhood assumption is not true, one can find a sequence of Ricci flows with surgery on orbifolds with points (x i , t i ) violating the ǫ-canonical neighborhood assumption with parameters r i → 0, then we rescale the flows around (x i , t i ) so that the scalar curvature at x i becomes 1. A delicate argument (see the proof of Lemma 4.5 in [7] and the proof of Proposition 5.4 in [6] for details) guarantees that we can find a subsequence converging to a smooth limit on the maximal time interval (−t max , 0]. If t max < ∞, there will be a surgery region near x i for i large, and a neighborhood of x i is close to a piece of (R 4 , g std ) or (C Γ , g std ), hence is covered by ǫ-necks or ǫ-caps of type C. If t max = ∞, then one can prove that the limiting Ricci flow is an ancient κ-orbifold solution, and a neighborhood of x i is close to a region in an ancient κ-orbifold solution for i large. As described in Theorem 6.2, all possible ancient κ-orbifold solutions can be classified. If the limiting ancient solution is in case (1), then x i is covered by an ǫ-necks or an ǫ-caps of type B for i large. If the limit is in case (2), then x i is covered by a compact connected component of positive curvature operator, an ǫ-necks or an ǫ-caps of type A for i large.
+
+
+Proof of Theorem 1.2
+
+Our proof will follow the same strategy as in [19]. Similar results on three dimensional manifolds with positive scalar curvature were obtained by Marques in [19].
+
+We first consider metrics on compact orbifolds where every point is covered by an ǫ-canonical neighborhood.
+
+Proposition 7.1. Suppose (X, g) is a compact connected four-orbifold with isolated singularities and with PIC such that every point x ∈ (X, g) has an ǫ-canonical neighborhood. Then g is isotopic to a canonical metric, and X is diffeomorphic to one of the following orbifolds: Before the proof of Proposition 7.1, we need a lemma:
+Lemma 7.2.
+There exists a universal constant ǫ 1 > 0 with the following property. If 0 < ǫ < ǫ 1 , and N 1 , N 2 are two ǫ-necks in (X, g) with scales h N 1 , h N 2 respectively. If there is a point z ∈ s −1
+N 1 (− 0.95 ǫ , 0.95 ǫ ) s −1 N 2 (− 0.95 ǫ , 0.95 ǫ ) with g( ∂ ∂s N 1 , ∂ ∂s N 2 ) > 0 at z. In addition, s −1 N 1 (− 1 ǫ , s N 1 (z)−2) s −1 N 2 (s N 2 (z)+2, 1 ǫ ) = ∅.
+Then there exists a diffeomorphism ψ :
+S 3 /Γ × (− 1 ǫ , β) → N 1 N 2 , β = 1 ǫ − s N 2 (z) + s N 1 (z)
+, with the following properties:
+1: ψ(θ, t) = ψ 1 (θ, t) for (θ, t) ∈ S 3 /Γ × (− 1 ǫ , s N 1 (z) − 0.02 ǫ ), 2: ψ(θ, t) = ψ 2 (A(θ), t − β + 1 ǫ ) for (θ, t) ∈ S 3 /Γ × (β + s N 2 (z) − 0.98 ǫ , β),
+where A is an isometry of (S 3 /Γ, dθ 2 ), 3: there exists a continuous path of metrics g µ , µ ∈ [0, 1], with positive isotropic curvature on S 3 /Γ × (− 1 ǫ , β), such that g 0 = ψ * (g), g 1 is a warped product metric dt 2 +ω(t) 2 dθ 2 , and such that g µ restricts to the linear homotopy
+g µ = (1−µ)ψ * (g)+ µh 2 N 1 h std for (θ, t) ∈ S 3 /Γ × (− 1 ǫ , s N 1 (z) − 0.02 ǫ ) and to the linear homotopy g µ = (1 − µ)ψ * (g) + µh 2 N 2 h std for (θ, t) ∈ S 3 /Γ × (β + s N 2 (z) − 0.98 ǫ , β)
+. An ǫ-tube T ⊂ X is a submanifold diffeomorphic to S 3 /Γ × (0, 1) such that every point of the tube is a center of an ǫ-neck. By suitably decomposing the ǫ-tube into a sequence of overlapped ǫ-necks and then applying Lemma 7.2, we can deform the metric on the ǫ-tube to a warped product metric with a deformation which restricts to linear homotopies at the two ends of the tube.
+
+This lemma is a four-dimensional version of the Lemma 4.1 in [19], the readers can consult Chapter 4 of [19] for details of the proof. The idea is the following. Suppose N 1 and N 2 are two adjacent ǫ-necks satisfying the conditions in Lemma 7.2. If ǫ is small enough, the scales of N 1 and N 2 are very close to each other, and the two metrics h −2 N 1 ψ * N 1 (g) and h −2 N 2 ψ * N 2 (g) are both small pertubations of h std , and the slices of the two necks in the overlap region ψ N 1 (S 3 /Γ × (s N 1 (z) − 4, s N 1 (z) + 4)) are almost isometric. Then we can define the diffeomorphism ψ and the deformation of metrics g µ as in the proof of Lemma 4.1 of [19].
+
+Proof of Proposition 7.1. The proof is divided into three cases.
+
+Case 1. (X, g) is a compact orbifold with positive curvature operator. Since the normalized Ricci flow converges to a metric of constant curvature (see [12]), we know the space is diffeomorphic to S 4 /G. Since X has only isolated singularities, by an algebraic lemma of [7], X is either S 4 /Γ or S 4 / Γ,τ with Γ ⊂ SO(4) (Γ may be trivial). By Proposition 4.3, the constant curvature metric is isotopic to a canonical metric. Hence g is isotopic to a canonical metric.
+
+In the following discussion, we assume that every point of X is covered by an ǫ-neck or an ǫ-cap.
+
+Case 2. Assume that there is no ǫ-cap in X. Then every point is contained in an ǫ-neck. Hence X is diffeomorphic to some S 3 /Γ × f S 1 . Let N be one ǫ-neck with central slice S. Perform surgery around S and glue surgery caps C Γ to both left and right sides of it, we get an orbifold (S,g) which is diffeomorphic to S 4 /Γ, with Γ ⊂ SO(4). If we perform M-W connected sum at the tips of the two surgery caps, by Lemma 5.5, the resulting metric is isotopic to g.
+
+We claim (S,g) is isotopic to a metric of constant curvature. The reason is that, from Lemma 7.2 the ǫ-tube in S can be deformed to a warped product with PIC with a deformation which restricts to linear homotopies at the two ends of this tube. By Lemma 5.4, this deformation extends to the two surgery caps C Γ . Hence the metricg is isotopic to a locally conformally flat metric with positive scalar curvature. The latter is isotopic to a metric of constant curvature by Proposition 4.5. Together with Propositions 2.3, 4.9, we know that (X, g) is isotopic to a canonical metric on S 3 /Γ × f S 1 .
+
+Case 3. Suppose there exists an ǫ-cap C. Denote the neck and the core of C by N and Y . The neck N is oriented so that the positive s N -direction points towards the boundary of the cap. There exist a finite sequence of ǫ-necks {N 1 = N, . . . , N a } with centers x i ∈ s −1 N i (0), 1 ≤ i ≤ a, and an ǫ-capC with a coreỸ and an ǫ-neckÑ =C \Ỹ , such that i) s N i (x i+1 ) = 0.9 ǫ and g( ∂
+∂s N i , ∂ ∂s N i+1 ) > 0 for all 1 ≤ i < a,
+ii) there exists z ∈ s −1 Na ( 0.9 ǫ ) contained in the coreỸ , iii) X = C N 2 . . . N a C . We will orient the neckÑ so that the positive sÑ -direction points towards the corẽ Y . It is easy to see s −1
+N (0) ⊂ Y s −1 N (− 1 ǫ , 0.9 ǫ ) N 2 . . . N a−1 s −1 Na (− 1 ǫ , 0.9 ǫ )
+. In the following, we denote C 0.9 = Y s −1 N ((− 1 ǫ , 0.9 ǫ )) andC 0 =Ỹ s −1 N ((0, 1 ǫ )). Recall that we have required ǫ-caps in the canonical neighborhood assumption fall into types A, B or C. The argument is divided into the following cases, according to which types of the caps are.
+
+Case A-A. C andC are both of type A. In this case, X is diffeomorphic to S 4 /Γ with Γ ⊂ SO(4).
+
+If ∂C 0 ⊂ C 0.9 , then it's easy to see that ∂C 0.9 ⊂C 0 , and X = C C has positive curvature operator. This reduces to Case 1.
+
+If ∂C 0 is not contained in C 0.9 , then ∂C 0 ⊂ s −1 N k ((− 0.01 ǫ , 0.95 ǫ )) for some 2 ≤ k ≤ a. We perform surgeries along the two slices S 1 = s −1 N 1 (0) and S k = s −1 N k (0.5), and glue surgery caps to both left and right sides of each slice as in Section 5. Now X is decomposed into three components all diffeomorphic to S 4 /Γ. Denote them by (S 1 , g 1 ), (P, g P ), and (S 2 , g 2 ).
+
+For (S 1 , g 1 ) and (S 2 , g 2 ), by our assumption of type A and Proposition 5.2, both g 1 and g 2 have positive curvature operators, hence are isotopic to canonical metrics on S 4 /Γ as in Case 1.
+
+Now we treat the middle piece (P, g P ). By Lemma 7.2, we can deform the metric g on the ǫ-tube k i=1 N i to a warped product metric dr 2 + ω(r) 2 dθ 2 through PIC metrics and the deformation restricts to linear homotopies g µ = (1 − µ)g + µh 2 N 1 h std and g µ = (1 − µ)g + µh 2 N k h std (µ ∈ [0, 1]) on the two ends s −1 N 1 (− 1 ǫ , 0.02 ǫ ) and s −1 N k ( 0.02 ǫ , 1 ǫ ) respectively. By Lemma 5.4, (P, g P ) is isotopic to a locally conformally flat metric with PIC, hence isotopic to a canonical metric on S 4 /Γ. Now we perform M-W connected sum at the tips of the surgery caps of (S 1 , g 1 ), (P, g P ), and (S 2 , g 2 ) and obtain a metricg on X. On one hand, by Lemma 5.5,g is isotopic to g. On the other hand, we have shown that the metrics on these three pieces are isotopic to canonical metrics,g is isotopic to a canonical metric on X = S 4 /Γ by Proposition 4.12. Therefore, g is isotopic a canonical metric on S 4 /Γ.
+
+Case C-C. Both C andC are of type C. In this case, X is diffeomorphic to S 4 /Γ. The method is the same as in treating (S,g) in the proof of Case 2.
+
+Case A-C. C is of type A,C are of type C. In this case, X is diffeomorphic to S 4 /Γ, this case can be handled by a cut-past argument and results in Cases A-A and C-C.
+
+Case AC-B. C is of type A or C,C is of type B. In this case, X is diffeomorphic to spherical orbifold S 4 /{1, ζ} or S 4 / Γ,τ with Γ ⊂ SO(4). By the assumption on type B,C is diffeomorphic to C τ Γ or C II , and the metric g outsideC can be deformed to a locally conformally flat metric though metrics with positive isotropic curvature, and the deformation restricts to a linear homotopy at the end ofC. By a cut-past argument as before, one can show g is isotopic a locally conformally flat metric on the spherical orbifold.
+
+Case B-B. C andC are of type B. In this case, X is diffeomorphic to #(S 4 /{1, ζ}, RP 4 ), #(S 4 /{1, ζ}, S 4 /{1, ζ}) or #(S 4 / Γ,τ 1 , S 4 / Γ,τ 2 ). By performing a cut-past argument, the metric g is isotopic to an M-W connected sum of two orbifolds in Case AC-B. By invoking Proposition 4.12, g is isotopic to a canonical metric.
+
+The proof is complete.
+
+Now we begin to prove Theorem 1.2.
+
+Proof of Theorem 1.2. Let g 0 be a PIC metric on M . By the theorems in Section 4 of [7], there exist two sequences of non-increasing small positive numbers {r i }, {δ i }, and a Ricci flow with surgery on orbifolds with at most isolated singularities (X i , g i (t)) t∈[t i ,t i+1 ) , 0 ≤ i ≤ p, such that:
+
+1): X 0 = M , and g 0 (0) = g 0 , 2): the flow becomes extinct at a finite time T = t p+1 , 3): for every 0 ≤ i ≤ p, the flow (X i , g i (t)) t∈[t i ,t i+1 ) satisfies the ǫ-canonical neighborhood assumption with parameter r i and pinching assumption,
+4): for every 0 ≤ i ≤ p − 1, (X i+1 , g i+1 (t i+1 )) is obtained from (X i , g i (t)) t∈[t i ,t i+1 ) by
+doing surgery at singular time t i+1 with parameters r i , δ i .
+
+Let A i be the assertion that the restriction of g i (t i ) to each component of X i is isotopic to a canonical metric. We will prove the theorem by backward induction on i.
+
+First, since the flow becomes extinct at T , at a time t ′ ∈ [t p , T ) sufficiently close to T , every point is covered by a canonical neighborhood. By Proposition 7.1, (X p , g p (t ′ )) is isotopic to a canonical metric. By Ricci flow equation, g p (t p ) is isotopic to g p (t ′ ). Hence g p (t p ) is isotopic to a canonical metric on X i , and A p is proven.
+
+In the following, providing A i+1 is true for some 0 ≤ i ≤ p − 1, we will prove that A i is true. Let's recall how the Ricci flow can be extended across the time t i+1 . Denote
+g i (t − i+1 ) = lim tրt i+1 g i (t), then g i (t − i+1
+) is a metric with unbounded curvature on X i . Note that X i may contain several compact connected components. For those components of X i with positive curvature operator at time t i+1 , we know the metrics g i (t − i+1 ) on these components are isotopic to spherical metrics. Denote the union of the remaining components of X i by Ω. Let ρ = δ i r i and Ω ρ = {x ∈ Ω| lim Lemma 8.2. Suppose M is orientable and diffeomorphic to S 3 /Γ × f S 1 , then π 1 (M ) is freely indecomposable.
+
+Proof. Let G = π 1 (M ) be the deck transformation group acting isometrically on S 3 × R. Then Γ = G Isom(S 3 × {0}) is a finite normal subgroup of G, and G is isomorphic to a semidirect product G = Γ ⋊ Z. Suppose G = A * B, where A and B are both proper subgroups of G. We select nontrivial elements a ∈ A, b ∈ B, and suppose they have the forms a : (x, t) → (h(x), t + 2kπ) and b : (
+x, t) → (h(x), t + 2lπ), where h,h ∈ Isom(S 3 ), k, l ∈ Z. The commutator [a, b] = aba −1 b −1 : (x, t) → (hhh −1h−1 (x), t), i.e. aba −1 b −1 ∈ Γ.
+But Γ is a finite group, then there exist a positive number n such that (aba −1 b −1 ) n = id, this contradicts the assumption that there is no relation between the elements of A and B. Hence G is freely indecomposable.
+
+The proof of Theorem 8.1 relies on the following Kurosh's Subgroup Theorem (see [27]): Theorem 8.3. Suppose that a group G admits two free product decompositions G 1 * . . . * G k , G ′ 1 * . . . * G ′ l , each of whose factors is non-trivial and freely indecomposable. Then these two decompositions are isomorphic in the sense that k = l and there is a permutation σ of {1, . . . , k} such that G i ∼ = G ′ σ(i) for all 1 ≤ i ≤ k. Proof of Theorem 8.1. By van Kampen Theorem, π 1 (M ) ∼ = π 1 (M 1 ) * · · · * π 1 (M k ) ∼ = π 1 (N 1 ) * · · · * π 1 (N l ). The result then follows from Theorem 8.3 and Lemma 8.2.
+
+Suppose M is diffeomorphic to S 4 #M 1 #M 2 · · · #M k , where M i is diffeomorphic to S 3 /Γ i × f i S 1 . When k = 0, M is diffeomorphic to S 4 . Since the canonical metric on S 4 is the standard round metric, the result is clearly true in this case. Now we handle the k = 1 case. Proposition 8.4. Let M be an orientable four manifold equipped with two canonical metricsg i and the associated canonical decompositions S 4 #M i has only one nontrivial piece. Then there is a diffeomorphism ϕ such thatg 1 is isotopic to ϕ * g 2 .
+
+Before the proof of Proposition 8.4, we need some preliminary results on fiber bundles. For two fiber bundles π 1 : E 1 → B 1 and π 2 : E 2 → B 2 with the same fiber F , we call E 1 and E 2 are weakly equivalent if there exists a differmorphism φ : B 1 → B 2 and a bundle map Φ : E 1 → E 2 such that the following diagram commutes:
+E 1 π 1 Φ / / E 2 π 2 B 1 φ / / B 2
+The above Φ is called a weak bundle isomorphism. Roughly speaking, a weak bundle isomorphism is a diffeomorphism of the total space which preserves the fibers. In the proof of of Proposition 8.4 we need the following theorem:
+
+Proposition 8.5 (Proposition 8 of [34], see also [15] and [26]). Let M i = F i × f i S 1 , i = 1, 2, be two bundles over S 1 with fibers F i and monodromy f i , where F i are spherical 3-manifolds. Then there is a weak bundle isomorphism between M 1 and M 2 , if one of the following two conditions holds: i) M 1 is diffeomorphic to M 2 as differential manifolds, ii) π 1 (M 1 ) ∼ = π 1 (M 2 ) and F 1 is diffeomorphic to F 2 .
+
+Proof of Proposition 8.4. A diffeomorphism ϕ : M → S 3 /Γ × f S 1 with f ∈ Isom(S 3 /Γ) induced a bundle structure with base S 1 , fiber F = S 3 /Γ and monodromy f . On the other hand, by Proposition 8.5, if there are two diffeomorphisms ϕ 1 : M → S 3 /Γ 1 × f 1 S 1 and ϕ 2 : M → S 3 /Γ 2 × f 2 S 1 , then we have a weak bundle isomorphism between S 3 /Γ 1 × f 1 S 1 and S 3 /Γ 2 × f 2 S 1 . By the theory of fiber bundles, one can prove that the fiber bundles S 3 /Γ × f 1 S 1 and S 3 /Γ × f 2 S 1 are weakly equivalent if and only if there exists a β ∈ Diff(S 3 /Γ) such that f 1 (or f −1 1 ) is isotopic to βf 2 β −1 in Diff(S 3 /Γ) (see Section 18 of [33]). Since any element in Diff(S 3 /Γ) is isotopic to an element in Isom(S 3 /Γ). We can assume the above f 1 , f 2 , β ∈ Isom(S 3 /Γ). For f ∈ Isom(S 3 /Γ), let G f be the isometric subgroup of (S 3 /Γ)×R generated by ρ : (θ, s) → (f (θ), s+2π). Let S 3 /Γ× f S 1 is equipped with the quotient metric g f induced from (S 3 /Γ) × R. For f, β ∈ Isom(S 3 /Γ), we define a map ι : S 3 /Γ × f S 1 → S 3 /Γ × βf β −1 S 1 by ι(θ, s) = (β(θ), s), where (θ, s) is the coordinate of S 3 /Γ × f S 1 and S 3 /Γ × βf β −1 S 1 induced from (S 3 /Γ) × R respectively. It is easy to verify that ι is well defined, and ι * (g βf β −1 ) = g f . Similarly, the map χ : S 3 /Γ × f S 1 → S 3 /Γ × βf −1 β −1 S 1 defined by χ(θ, s) = (β(θ), −s) also satisfies χ * (g βf −1 β −1 ) = g f . When k ≥ 2, we have the following theorem: Theorem 8.7. Let M be a manifold diffeomorphic to a finite connected sum of S 3 /Γ i ×S 1 , 1 ≤ i ≤ k, where Γ i is either the trivial group or a non-cyclic discrete isometric group of S 3 . Then PIC(M )/Diff(M ) is path-connected.
+
+Proof. As before, let g 1 , g 2 ∈ PIC(M ), then by Theorem 1.2, there are two canonical metricsg 1 ,g 2 ∈ PIC(M ) such that g i is isotopic tog i for i = 1, 2. Let S 4 #M 1 #M 2 · · · #M k , and S 4 #N 1 #N 2 · · · #N k , be the associated canonical decompositions respectively. Denote by (M j , h j , σ j ) the standard metric h j and orientation σ j on M j inherited from M in the above decompositions. Denote the corresponding quantity on N j by (N j , h ′ j , σ ′ j ). From Theorem 8.3, we may assume π 1 (M j ) = π 1 (N j ) = Γ j × Z for 1 ≤ j ≤ k. Note that if two spherical 3-manifolds F 1 , F 2 satisfy that π 1 (F 1 ) = π 1 (F 2 ) are trivial or non-cyclic, then F 1 , F 2 are diffeomorphic to each other (see [20]). Combining this fact with ii) in Proposition 8.5 and Proposition 8.4, both M j and N j are diffeomorphic to S 3 /Γ j ×S 1 , and the standard metrics on them are isotopic to the standard product metrics (hence we may assume h j and h ′ j are product metrics). Note that there is an orientation reversing isometry of the standard product metric on S 3 /Γ×S 1 defined by χ : S 3 /Γ×S 1 → S 3 /Γ×S 1 , χ(θ, s) = (θ, −s). So there always is an orientation preserving diffeomorphism ϕ j from (M j , σ j ) to (N j , σ ′ j ) such that ϕ * j h ′ j is isotopic to h j . From Proposition 2.3, during making M-W connected sums, these ϕ j 's may be glued together to give a global diffeomorphism ϕ from M to itself, such that ϕ * g 2 is isotopic tog 1 . From this, we know g 1 is isotopic to ϕ * g 2 . The proof is complete. Theorem 1.1 follows from Theorem 8.7, Corollary 8.6 and Proposition 4.4.
+
+Remark 8.8. In dimension three, any compact orientable manifold M 3 admits a prime decomposition M 3 = M 1 # · · · #M k , moreover, this decomposition is unique up to order and homeomorphism. The existence part is due to Kneser [16], and the uniqueness part is due to Milnor [23]. When dimension equals to four, the uniqueness of such a decomposition is not true in general, for instance, Hirzebruch proved (see [23]) that (S 2 × S 2 )#CP 2 is diffeomorphic to CP 2 #CP 2 #CP 2 . This is a big difference between dimension 3 and 4. For the sake of completely solving the isotopy problem of PIC metrics, the technique employed in this paper relies on the uniqueness of the canonical decompositions for manifolds with PIC metrics.
+
+Theorem 1 . 1 .
+11The moduli space PIC(M )/Diff(M ) is path-connected if M is orientable and diffeomorphic to one of the following manifolds:
+
+Proposition 4 . 1 .
+41Let (M, g) be a compact four orbifold with positive isotropic curvature. Then the space PIC(M ) {g|g = u 2 g, u ∈ C ∞ (M ), u > 0} of metrics is star-shaped, hence contractible.
+
+Proposition 4 . 2 .
+42Let (M, g) be a compact locally conformally flat four orbifold with positive scalar curvature. Suppose (M,g) is obtained from an M-W connected sum of (M, g) with a sphere (S 4 , h round ). Theng is isotopic to g.
+
+
+2f h be a new metric. Throughout the paper, without further indications, ǫ-close is always understood in C [ 1 ǫ ] -topology.Proposition 5.1. There exist positive constants c 0 , q 0 and ǫ 2 with the following property. For any c < c 0 and q > q 0 in (5.1), and 0 < ǫ < ǫ 2 , if h is a metric on N = S 3 × (−4, 4) which is ǫ-close to h std and has positive curvature operator, then the metricĥ = e −2f h also has positive curvature operator.
+
+
+an orthonormal basis for the tangent space at a point (x, s) ∈ N = S 3 × (−4, 4) with respect to the metric h std such that E 0 points to the positive s-direction. We denote the covariant derivative with respect to h by ∇, and denote the matrix of the curvature operator of h with respect to this basis by R = (R ijkl ). Since h is ǫ-close to h std , at a point (x, s) ∈ N , h ij = δ ij + O(ǫ), and the Christoffel symbols Γ i jk of h are within ǫ in the C [ 1 ǫ ]−1 -topology of those of h std . Therefore, with respect to the basis {E 0 , E 1 , E 2 , E 3 }, f 0 = q s 2 f and f i = 0 for 1 ≤ i ≤ 3, and |∇f | h = q s 2 f (1 + O(ǫ)),
+
+Lemma 5. 4 .
+4There exits a small constant ǫ 4 with the following property. If 0 < ǫ < ǫ 4 and h is a metric on S 3 × (−4, 4) such that h is ǫ-close to h std , then there exists a continuous path of metrics h µ , µ ∈ [0, 1], with positive isotropic curvature on S such that h 0 = h surg , h 1 is rotationally symmetric, and h µ restricts to the linear homotopy (1 − µ)h + µh std on s −1((−4, 0)) for all µ ∈ [0, 1].Proof. Defineh µ = (1 − µ)h + µh std , and h µ = (h µ ) surg for µ ∈ [0, 1]. It's clear that (h 1 ) surg is rotationally symmetric.
+
+Lemma 5 . 5 .
+55There is a universal constant ǫ 5 with the following property. For any 0 < ǫ < ǫ 5 , if (S 3 /Γ×(−4, 4), h) is ǫ-close to h std , there is a diffeomorphism from (S 3 /Γ×(−4, 4), h) to S + #S − such that the pulled back of the metric h + surg #h − surg can be deformed to (S 3 /Γ × (−4, 4), h) through PIC metrics which all coincide with h on the regions s −1 ((−4, −3)) and s −1 ((3, 4)).Proof. Let α : R → [0, 1] be a cutoff function such that α(s) ≡ 1 if |s| ≤ 2 and α(s) ≡ 0 if |s| ≥ 3. Let h µ = (1 − µα(s))h + µα(s)h std , µ ∈ [0, 1]. Note that h µ = h for all µ ∈ [0, 1] if |s| ≥ 3, and h 1 = h std if s ∈ [−2, 2]. If h is ǫ-closed to h std with ǫ small enough,then by Remark 5.3, and Proposition 2.3, (S + #S − , h + surg #h − surg ) can be deformed to (S + #S − , (h 1 ) + surg #(h 1 ) − surg ) through PIC metrics which coincide with h near the two ends of S + #S − . On the other hand, we can reparameterize (S + #S − , (h 1 ) + surg #(h 1 ) − surg ) to get (S 3 /Γ × (−4 − a, 4 + a),h) for some suitable a > 0 such that, when r ∈ (−4 − a, −a) (a, 4 + a),h coincide with h 1 on s −1 ((−4, 0) (0, 4)); when r ∈ (−2 − a, 2 + a), h = dr 2 + ω 2 (r)dθ 2 ; when r ∈ (−2 − a, −a) (a, 2 + a), ω ≡ 1. By Proposition 4.6, we can deform the metrich on the region r ∈ (−2 − a, 2 + a) to h std through PIC metrics with fixed two ends. Thus we can deform (S + #S − , (h 1 ) + surg #(h 1 ) − surg ) to (S 3 /Γ × (−4, 4), h 1 ) through PIC metrics with fixed two ends. Finally we can deform h 1 back to h by the deformation h µ . 6. Canonical neighborhood assumption 6.1. Ricci flow with surgery. The Ricci flow equation ∂g ∂t = −2Ric g
+
+
+2r) falls into one of the following categories:(i): B is an evolving ǫ-neck around (x, t) (in the sense that it is the time slice at time t of the parabolic region
+
+
+≤ D and the smallest eigenvalue of the curvature operator at (x (i) , 0) converges to zero as i → ∞.By Theorem 3.5 of[6],g(i)t are all κ 0 -noncollapsed for all scales for some universal κ 0 . By the κ 0 -noncollapsed, Proposition 3.6 of[6], the Li-Yau-Hamilton inequality and Hamilton's compactness theorem, we can extract a C ∞ loc converging pointed subsequence, still denote it by (M (i)
+
+
+(a): B is an ǫ-neck around (x, t), (b): B is an ǫ-cap, (c): at time t, x lies in a compact connected component with positive curvature operator.
+
+
+1): S 4 /Γ or S 4 / Γ,τ , where Γ ⊂ SO(4) (Γ may be trivial), 2): #(S 4 /{1, ζ}, S 4 /{1, ζ}) or #(S 4 /{1, ζ}, RP 4 ),where the connected sum is performed at smooth points, 3): (S 3 × R)/G, where G a cocompact fixed point free discrete isometric subgroup of (S 3 × R, h std ).
+
+Corollary 8 . 6 .
+86Let M be an orientable manifold diffeomorphic to S 3 /Γ × f S 1 . Then PIC(M )/Diff(M ) is path-connected.
+Acknowledgments. The authors would like to thank Professors X.P.Zhu and S. H. Tang for helpful discussions. The first author is partially supported by NSFC 11025107.
+There are finite number of connected components of Ω \ Ω ρ whose one end is in Ω ρ , another end has unbounded curvature. These components are called ǫ-horns and we denote them by H j , 1 ≤ j ≤ k. Each of these components is diffeomorphic to S 3 /Γ × (0, 1) for Γ ⊂ SO(4). By Proposition 4.2 inan ǫ-neck or ǫ-cap neighborhood. There are finite number of connected components of Ω \ Ω ρ whose one end is in Ω ρ , another end has unbounded cur- vature. These components are called ǫ-horns and we denote them by H j , 1 ≤ j ≤ k. Each of these components is diffeomorphic to S 3 /Γ × (0, 1) for Γ ⊂ SO(4). By Proposition 4.2 in
+
+− µ)g i (t ′ ) + µg i+1 (t i+1 ) (µ ∈ [0, 1]) on the curvature finite partΩ ∪ ∪ j N j have positive isotropic curvature and has δ i -neck structures on each N j . Gluing surgery caps at the slices S j on this family of metrics, we know that (X i+1 , g i (t ′ ) surg ) is isotopic to (X i+1 , g i+1 (t i+1 )). By induction assumption A i+1 , on X i+1 , g i (t ′ ) surg is isotopic to a canonical metric. Moreover, at time t ′ , if we glue back caps to the boundary necks ofΩ, we get a (possibly disconnected) closed orbifold (Y i+1 , g i (t ′ ) surg ). Every point of Y i+1 has a canonical neighborhood, by Proposition 7.1, on each connected component of Y i+1 , g i (t ′ ) surg is isotopic to a canonical metric. Finally, by Lemma 5.5, if we perform M-W connected sums at the tips of the surgery caps of (X i+1 , g i (t ′ ) surg ) and (Y i+1 , g i (t ′ ) surg ), the resulting metric on Ω is isotopic to g i (t ′ ). Hence the metric g i (t ′ ) on Ω is isotopic to a canonical metric by. Ω = Ω \ω, Now we cut off the δ i -neck N j along S j , and glue back caps to boundary necks ofΩ. We denote the resulting orbifold by C i+1 . Clearly, C i+1 is just (X i+1 , g i+1 (t i+1 )). On the other hand, for t ′ ∈ (t i , t i+1 ) sufficiently close to t i+1 , the family of metrics. Proposition 4.12. This proves A i . Repeating the above procedure. we know there is no subcomponent (in the canonical decomposition) containing singular points. Therefore, every subcomponent is either diffeomorphic to RP 4 or (S 3 × R)/G. The proof is complete. 8. Proof of Theorem 1.1Ω = Ω \Ω. Now we cut off the δ i -neck N j along S j , and glue back caps to boundary necks ofΩ. We denote the resulting orbifold by C i+1 . Clearly, C i+1 is just (X i+1 , g i+1 (t i+1 )). On the other hand, for t ′ ∈ (t i , t i+1 ) sufficiently close to t i+1 , the family of metrics (1 − µ)g i (t ′ ) + µg i+1 (t i+1 ) (µ ∈ [0, 1]) on the curvature finite partΩ ∪ ∪ j N j have positive isotropic curvature and has δ i -neck structures on each N j . Gluing surgery caps at the slices S j on this family of metrics, we know that (X i+1 , g i (t ′ ) surg ) is isotopic to (X i+1 , g i+1 (t i+1 )). By induction assumption A i+1 , on X i+1 , g i (t ′ ) surg is isotopic to a canonical metric. Moreover, at time t ′ , if we glue back caps to the boundary necks ofΩ, we get a (possibly disconnected) closed orbifold (Y i+1 , g i (t ′ ) surg ). Every point of Y i+1 has a canonical neigh- borhood, by Proposition 7.1, on each connected component of Y i+1 , g i (t ′ ) surg is isotopic to a canonical metric. Finally, by Lemma 5.5, if we perform M-W connected sums at the tips of the surgery caps of (X i+1 , g i (t ′ ) surg ) and (Y i+1 , g i (t ′ ) surg ), the resulting metric on Ω is isotopic to g i (t ′ ). Hence the metric g i (t ′ ) on Ω is isotopic to a canonical metric by Proposition 4.12. This proves A i . Repeating the above procedure, we know that g 0 is isotopic to a canonical metric on M . Since M is itself a manifold, we know there is no subcomponent (in the canoni- cal decomposition) containing singular points. Therefore, every subcomponent is either diffeomorphic to RP 4 or (S 3 × R)/G. The proof is complete. 8. Proof of Theorem 1.1
+
+be a compact orientable four-manifold with positive isotropic curvature. we know M is diffeomorphic to a connected sum S 4 #M 1 #M 2 · · · #M k , whereLet (M, g) be a compact orientable four-manifold with positive isotropic curvature. Then by [7], we know M is diffeomorphic to a connected sum S 4 #M 1 #M 2 · · · #M k , where
+
+Recall that a group G is called freely indecomposable if G does not admit a nontrivial free product decomposition G = A * B with A, B proper subgroups of G. ReferencesRecall that a group G is called freely indecomposable if G does not admit a nontrivial free product decomposition G = A * B with A, B proper subgroups of G. References
+
+Three-Dimensional Orbifolds and their Geometric Structures, Panaromas et Synthèses 15. M Boileau, S Maillot, J Porti, Soc. Math. de FranceParisM. Boileau, S. Maillot, J. Porti, Three-Dimensional Orbifolds and their Geometric Structures, Pa- naromas et Synthèses 15, Soc. Math. de France, Paris (2003).
+
+A short proof for the convergence of the Yamabe flow on S n. S Brendle, Pure Appl. Math. Q. 3S. Brendle, A short proof for the convergence of the Yamabe flow on S n , Pure Appl. Math. Q., 3 (2007), 499-512.
+
+Manifolds with 1/4-pinched curvature are space forms. S Brendle, R Schoen, J. Amer. Math. Soc. 22S. Brendle, R. Schoen, Manifolds with 1/4-pinched curvature are space forms, J. Amer. Math. Soc., 22 (2009), 287-307.
+
+Construction of manifolds of positive scalar curvature. R Carr, Trans. Amer. Math. Soc. 307R. Carr, Construction of manifolds of positive scalar curvature, Trans. Amer. Math. Soc., 307 (1988), 63-74.
+
+Sur les difféomorphismes de la sphère de dimension trois (Γ4 = 0). J Cerf, Lecture Notes on Math. 53Springer-VerlagJ. Cerf, Sur les difféomorphismes de la sphère de dimension trois (Γ4 = 0), Lecture Notes on Math., 53, Springer-Verlag, Berlin-New York, (1968).
+
+Ricci flow with surgery on four-manifolds with positive isotropic curvature. B L Chen, X P Zhu, J. Diff. Geom. 74B. L. Chen, X. P. Zhu, Ricci flow with surgery on four-manifolds with positive isotropic curvature, J. Diff. Geom., 74 (2006), 177-264.
+
+Complete classification of compact four manifolds with positive isotropic curvature. B L Chen, S H Tang, X P Zhu, J. Diff. Geom. 91B. L. Chen, S. H. Tang, X. P. Zhu, Complete classification of compact four manifolds with positive isotropic curvature, J. Diff. Geom., 91 (2012), 41-80.
+
+The classiffication of simply connected manifolds of positive scalar curvature. M Gromov, H B Lawson, Jr , Ann. of Math. 111M. Gromov, H. B. Lawson,Jr., The classiffication of simply connected manifolds of positive scalar curvature, Ann. of Math., 111 (1980), 423-434.
+
+Positive scalar curvature and the Dirac operator on complete Riemannian manifolds. M Gromov, H B Lawson, Jr , Inst. HautesÉtudes Sci. Publ. Math. 58M. Gromov, H. B. Lawson,Jr., Positive scalar curvature and the Dirac operator on complete Riemann- ian manifolds, Inst. HautesÉtudes Sci. Publ. Math., 58 (1983), 83-196.
+
+Three-manifolds with positive Ricci curvature. R Hamilton, J. Diff. Geom. 17R. Hamilton, Three-manifolds with positive Ricci curvature, J. Diff. Geom., 17 (1982), 255-306.
+
+Four-manifolds with positive isotropic curvatures. R Hamilton, Comm. Anal. Geom. 5R. Hamilton, Four-manifolds with positive isotropic curvatures, Comm. Anal. Geom., 5 (1997), 1-92.
+
+Four-manifolds with positive curvature operator. R Hamilton, J. Diff. Geom. 24R. Hamilton, Four-manifolds with positive curvature operator, J. Diff. Geom., 24 (1986), 153-179.
+
+Harmonic spinors. N Hitchin, Adv. Math. 14N. Hitchin, Harmonic spinors, Adv. Math., 14 (1974), 1-55.
+
+S Hoelzel, Surgery stable curvature conditions. S. Hoelzel, Surgery stable curvature conditions, http://arxiv.org/abs/1303.6531v1.
+
+Topology of Hopf surfaces. M Kato, J. Math. Soc. Japan. 27M. Kato, Topology of Hopf surfaces, J. Math. Soc. Japan, 27 (1975), 222-238.
+
+H Kneser, Geschlossene Flächen in dreidimensionalen Mannigfaltigkeiten. 38H. Kneser, Geschlossene Flächen in dreidimensionalen Mannigfaltigkeiten, Jahresbericht der Deut. Math. Verein. 38(1929),248-260.
+
+Nonconnected moduli spaces of positive sectional curvature metrics. M Kreck, S Stolz, J. Amer. Math. Soc. 6M. Kreck, S. Stolz, Nonconnected moduli spaces of positive sectional curvature metrics, J. Amer. Math. Soc., 6 (1993), 825-850.
+
+On conformally flat spaces in the large. N Kuiper, Ann. of Math. 50N. Kuiper, On conformally flat spaces in the large, Ann. of Math., 50 (1949), 916-924.
+
+Deforming three-manifolds with positive scalar curvature. F C Marques, Ann. of Math. 176F. C. Marques, Deforming three-manifolds with positive scalar curvature, Ann. of Math., 176 (2012), 815-863.
+
+Isometries of elliptic 3-manifolds. D Mccullough, J. London Math. Soc. 65D. McCullough, Isometries of elliptic 3-manifolds, J. London Math. Soc., 65 (2002), 167-182.
+
+Minimal two-spheres and the topology of manifolds with positive curvature on totally isotropic two-planes. M Micallef, J D Moore, Ann. of Math. 127M. Micallef, J. D. Moore, Minimal two-spheres and the topology of manifolds with positive curvature on totally isotropic two-planes, Ann. of Math., 127 (1988), 199-227.
+
+Metrics with nonnegative isotropic curvatures. M Micallef, M Wang, Duke Math. J. 72M. Micallef, M. Wang, Metrics with nonnegative isotropic curvatures, Duke Math. J., 72 (1993), 649-672.
+
+A unique factorization theorem for 3-manifolds. J Milnor, Amer. J. Math. 84J. Milnor, A unique factorization theorem for 3-manifolds, Amer. J. Math., 84 (1962), 1-7.
+
+Ricci flow and the Poincaré conjecture. J Morgan, G Tian, Clay Mathematics Monographs. American Mathematical SocietyJ. Morgan, G. Tian, Ricci flow and the Poincaré conjecture, Clay Mathematics Monographs, American Mathematical Society, (2007).
+
+Isotropic curvature and the Ricci flow. H Nguyen, Internat. Math. Res. Notices. 3H. Nguyen, Isotropic curvature and the Ricci flow, Internat. Math. Res. Notices, 3 (2010), 536-558.
+
+On fiber bundles over S 1 having small Seifert manifolds as fibers. K Ohba, J. Fac. Sci. Tokyo. K. Ohba, On fiber bundles over S 1 having small Seifert manifolds as fibers, J. Fac. Sci. Tokyo, 37 (1990), 659-702.
+
+K Ohshika, Discrete Groups, Iwanami Series in Modern Mathematics. American Mathematical SocietyK. Ohshika, Discrete Groups, Iwanami Series in Modern Mathematics. American Mathematical Soci- ety.
+
+G Perelman, arXiv:math.DG/0303109v1Ricci flow with surgery on three manifolds. G. Perelman, Ricci flow with surgery on three manifolds, arXiv: math.DG/0303109v1.
+
+Manifolds of positive scalar curvature: a progress report. J Rosenberg, Surv. Diff. Geom. 11Int. PressJ. Rosenberg, Manifolds of positive scalar curvature: a progress report, Surv. Diff. Geom., Int. Press, Somerville, MA, 11 (2007), 259-294.
+
+Metrics of positive scalar curvature and connections with surgery, Surveys on surgery theory. J Rosenberg, S Stolz, Ann. of Math. Stud. 149Princeton Univ. PressJ. Rosenberg, S. Stolz, Metrics of positive scalar curvature and connections with surgery, Surveys on surgery theory., Ann. of Math. Stud., 149, 353-386, Princeton Univ. Press, Princeton, NJ, 2001.
+
+On the structure of manifolds with positive scalar curvature. R Schoen, S T Yau, Manuscripta Math. 28R. Schoen, S.T. Yau, On the structure of manifolds with positive scalar curvature, Manuscripta Math., 28 (1979), 159-183.
+
+The geometries of 3-manifolds. P Scott, Bull. London Math. Soc. 15P. Scott, The geometries of 3-manifolds, Bull. London Math. Soc., 15 (1983), 401-487.
+
+N Steenrod, Topology of fibre bundles. Princeton University PressN. Steenrod, Topology of fibre bundles, Princeton University Press, (1951).
+
+Geometric 4-manifolds in the sense of Thurston and Seifert 4-manifolds II. M Ue, J. Math. Soc. Japan. 43M. Ue, Geometric 4-manifolds in the sense of Thurston and Seifert 4-manifolds II, J. Math. Soc. Japan, 43 (1991), 149-183.
+
+H , Über die Bestimmung einer geschlossenen konvexen Fläche durch ihr Linienelement, Vierteljahrsschr. 61H. Weyl,Über die Bestimmung einer geschlossenen konvexen Fläche durch ihr Linienelement, Viertel- jahrsschr. Naturforsch. Ges. Zür., 61 (1916), 70-72.
+
+Global existence and convergence of the Yamabe flow. R Ye, cn School of Mathematics and Computational science. 39Sun Yat-sen University ; Sun Yat-sen UniversitySchool of Mathematics and Computational science. E-mail address: hxiant@mail2.sysu.edu.cnR. Ye, Global existence and convergence of the Yamabe flow, J. Diff. Geom., 39 (1994), 35-50. School of Mathematics and Computational science, Sun Yat-sen University, Guangzhou 510275, E-mail address: mcscbl@mail.sysu.edu.cn School of Mathematics and Computational science, Sun Yat-sen University, Guangzhou 510275, E-mail address: hxiant@mail2.sysu.edu.cn

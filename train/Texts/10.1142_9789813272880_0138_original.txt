@@ -1,0 +1,411 @@
+
+Symmetry and symmetry breaking: rigidity and flows in elliptic PDEs
+
+
+Jean Dolbeault 
+Maria J Esteban 
+Michael Loss 
+Symmetry and symmetry breaking: rigidity and flows in elliptic PDEs
+
+The issue of symmetry and symmetry breaking is fundamental in all areas of science. Symmetry is often assimilated to order and beauty while symmetry breaking is the source of many interesting phenomena such as phase transitions, instabilities, segregation, self-organization, etc. In this contribution we review a series of sharp results of symmetry of nonnegative solutions of nonlinear elliptic differential equation associated with minimization problems on Euclidean spaces or manifolds. Nonnegative solutions of those equations are unique, a property that can also be interpreted as a rigidity result. The method relies on linear and nonlinear flows which reveal deep and robust properties of a large class of variational problems. Local results on linear instability leading to symmetry breaking and the bifurcation of non-symmetric branches of solutions are reinterpreted in a larger, global, variational picture in which our flows characterize directions of descent.C'est la dissymétrie qui crée le phénomène.In mathematical terms, "dissymétrie" shifts the attention to solutions which may have less symmetries than the problem they solve. Symmetry breaking, especially
+
+INTRODUCTION
+
+Symmetries are fundamental properties of the laws of Physics. They impose constraints on modeling phenomena and, at a more basic level, they serve as criteria of classification. Inspired by his work in crystallography, Pierre Curie made an early attempt (in 1894) to investigate the consequences of symmetries. Since then, symmetry has been an important preoccupation for many scientists.
+
+More intriguing than symmetry is the phenomenon of symmetry breaking, which asserts that the state of a system may have less symmetries than the underlying physical laws. Among various considerations on the causes of the symmetries and what these symmetries mean in physics, P. Curie wrote in [12] that spontaneous symmetry breaking, has been an incredibly fruitful concept over the last century. It appears in mechanics (buckling instabilities), in particle physics, in the description of phase transitions or complex dynamics, etc. One of the basic mechanisms is the bifurcation phenomenon in nonlinear systems, which has to do with the stability analysis of symmetric states.
+
+Symmetry has attracted the attention of mathematicians for diverse reasons which range from assertions like "symmetry is beautiful" to practical motivations: symmetry simplifies the search of solutions and makes their computation more tractable from a numerical point of view by reducing the number of degrees of freedom.
+
+Entropy methods have a long history in various fields of Science and in particular of Mathematics. The notion of entropy that we shall consider here is inspired by results in the theory of nonlinear PDEs and especially nonlinear diffusion equations. It borrows tools from Kinetic Theory and from Information Theory. Other major sources of inspiration are the carré du champ method used in the study of Semigroups and Markov processes as well as the rigidity (uniqueness) techniques in the Theory of Nonlinear Elliptic Equations. In addition to the application to symmetry issues, one of our contributions was to rephrase these two approaches in a common framework of parabolic equations and to emphasize the role of the nonlinear diffusions in the search for optimal ranges and optimal constants in related interpolation inequalities.
+
+It is definitely out of reach to give even a partial account of all mathematical issues of symmetry and symmetry breaking in this paper, so we shall focus on PDEs with two main examples: the first one is the equation
+− div |x| −β ∇w = |x| −γ w 2p−1 − w p in R d \ {0} ,
+which has an interesting feature: there is a competition between nonlinearities and weights. The solutions can be interpreted as critical points of an energy functional. Without weights, solutions are radially symmetric (up to translations). With weights and in some regime of the parameters β, γ and p, non-radial solutions are energetically more favorable. Since we are interested in energy minimizers, as a particular sub-problem, understanding who wins in the competition is a central question.
+
+Alternatively, we shall consider the equation
+−∆ ϕ + Λ ϕ = ϕ p−1 on M ,
+where M is a sphere, a compact manifold or a cylinder. In that case, the geometric properties of the manifold replace the weight and compete with the scale induced by the parameter Λ. If there is enough space, in a precise sense that can be measured, then solutions with less symmetry may have a lower energy. These two equations, although very simple because the nonlinearities (and also the weights in the case of the first equation) obey power laws, are not purely academic. For one, the solutions (and the associated functional inequalities) are of direct interest for instance in some models of fluid mechanics. More important is the fact that power laws appear in many problems when scalings or blow-up methods are used to extract an asymptotic behavior. Hence, we expect that our model equations lie at the core of many nonlinear or weighted problems. Finally, models involving power laws have the advantage that they can be treated by using nonlinear flows and entropy methods. Indeed we are able to give sharp results of rigidity for the equation, and symmetry results for the optimal functions associated with related interpolation inequalities.
+
+Because of the confluence of various branches of analysis such as non-linear diffusion and the calculus of variations, and the fundamental nature of the above equations, we believe that it is worth studying them in great detail, with sharp stability results and sharp constants in the functional inequalities. Note that this amounts to establishing the exact range of the parameters for which extremal functions are symmetric. Variational issues of the symmetry and symmetry breaking will be detailed below.
+
+Let us fix some notations and conventions. Throughout this paper, we shall use the notation 2 * := 2 d d −2 if d ≥ 3, and 2 * := ∞ if d = 1 or 2. We shall say that a function is an extremal function for an optimal functional inequality if equality holds in the inequality. To simplify notations, parameters will be omitted whenever they are not essential for the understanding of the strategy of proof. This paper is a review of various results which were published in several papers (references will appear in the text) and are collected together for the first time. The reader is invited to pay attention that some notations have been redefined compared to the original papers.
+
+
+INTERPOLATION INEQUALITIES AND FLOWS ON COMPACT MANIFOLDS
+
+2.1. Interpolation inequalities on S d . Let us consider the inequality
+∇u 2 L 2 (S d ) + d p − 2 u 2 L 2 (S d ) ≥ d p − 2 u 2 L p (S d ) ∀ u ∈ H 1 (S d , d µ)(1)
+where d µ is the uniform probability measure induced by the Lebesgue measure on
+S d ⊂ R d +1 .
+Here the exponent p is such that 1 ≤ p < 2 or 2 < p < 2 * , or p = 2 * if d ≥ 3. The case p = 2 * corresponds to the usual Sobolev inequality on S d or, using the stereographic projection, to the Sobolev inequality in R d . In the limit case as p → 2, we recover the logarithmic Sobolev inequality
+∇u 2 L 2 (S d ) ≥ d 2ˆSd |u| 2 log |u| 2 u 2 L 2 (S d ) d µ ∀ u ∈ H 1 (S d , d µ) \ {0} .(2)
+In (1) and (2), equality is achieved by any constant non-zero function. The value of the optimal constants, d /(p − 2) and d /2 is obtained by linearization: if ϕ is an eigenfunction associated with the first positive eigenvalue of the Laplace-Beltrami operator on S d , the infimum of
+(p − 2) ∇u 2 L 2 (S d ) u 2 L p (S d ) − u 2 L 2 (S d ) and 2 ∇u 2 L 2 (S d ) S d |u| 2 log |u| 2 u 2 L 2 (S d ) d µ ,
+respectively for p = 2 and for p = 2, is achieved by u = 1 + ε ϕ in the limit as ε → 0.
+
+Inequality (1) has been established in [8] by rigidity methods, in [6] by techniques of harmonic analysis, and using the carré du champ method in [7,5,14], for any p > 2. The case p = 2 was studied in [39]. In [1,2,3], D. Bakry and M. Emery proved the inequalities under the restriction
+2 < p ≤ 2 # := 2 d 2 + 1 (d − 1) 2 .
+Their method relies on a linear heat flow method which is presented below, as well as a nonlinear flow which allow us to get rid of this restriction.
+
+2.2. Flows and carré du champ methods on S d . We start by the linear heat flow method of [3]. For any function ρ > 0 we define a generalized entropy functional E p and a generalized Fisher information functional I p by
+E p [ρ] := 1 p − 2 ˆS d ρ d µ 2 p −ˆS d ρ 2 p d µ and E 2 [ρ] := 1 2ˆSd ρ log ρ ρ L 1 (S d ) d µ
+if p = 2 or p = 2, respectively, and
+I p [ρ] :=ˆS d |∇ρ 1 p | 2 d µ .
+With this notation, (1) and (2) 
+∂ρ ∂t = ∆ρ(3)
+where ∆ denotes the Laplace-Beltrami operator on S d , and compute
+d d t E p [ρ] = − 2 I p [ρ] and d d t I p [ρ] ≤ − 2 d I p [ρ]
+where the differential inequality holds if p ≤ 2 # . Under this condition, we obtain that
+d d t I p [ρ] − d E p [ρ] ≤ 0 .
+On the other hand, ρ(t , ·) converges as t → ∞ to a constant, namely´S d ρ d µ since d µ is a probability measure and´S d ρ d µ is conserved by (3). As a consequence,
+lim t →∞ I p [ρ] − d E p [ρ] = 0, which proves that I p [ρ(t , ·)] − d E p [ρ(t , ·)]
+is nonnegative for any t ≥ 0 and completes the proof. See [3] for details. One may wonder whether the monotonicity property is also true for some p > 2 # . The following result contains a negative answer to this question. Proposition 1. [27] For any p ∈ (2 # , 2 * ) or p = 2 * if d ≥ 3, there exists a function ρ 0 such that, if ρ is a solution of (3) with initial datum ρ 0 , then
+d d t I p [ρ] − d E p [ρ] |t =0 > 0 .
+The function ρ 0 is explicitly constructed in [27].
+
+To overcome the limitation p ≤ 2 # , one can consider a nonlinear diffusion of fast diffusion or porous medium type
+∂ρ ∂t = ∆ρ m .(4)
+With this flow, we no longer have d d t E p [ρ] = − I p [ρ] but we can still prove that
+d d t I p [ρ] − d E p [ρ] ≤ 0 ,
+for any p ∈ [1, 2 * ]. Proofs of the latter have been given in [14,24]. We also refer to [21,22] for results which are more specific to the case of the sphere, and further references therein. Except for p = 1 and p = 2 * with d ≥ 3, there is some flexibility in the choice of m, which can be used to build deficit functionals and improved inequalities: see [14,22]. Notice that ρ 0 in Proposition 1 is a function related with the nonlinear diffusion equation (4). The case of S d highlights the limitations of linear flows and shows the flexibility and strength of nonlinear flows. At least for p < 2 * , the optimal constant in (1) and (2) is established by proving that the minimum of [8,5,6] can be reinterpreted as a purely elliptic method, which goes as follows. A positive minimizer actually exists by standard compactness arguments and any solution ρ satisfies an Euler-Lagrange equation. By testing the equation with ∆ρ m , we observe that the solution is a constant and, as a consequence, that ρ ≡ 1 because of the normalization. We will rely on a similar observation in the next two sections and refer to this method as the elliptic method.
+I p [ρ] − d E p [ρ] is 0. Earlier results in
+The method applies not only to minimizers, but also to any positive solution of the Euler-Lagrange equations. What we prove is a uniqueness result. Since constant functions are solutions, this proves that there are no non-constant solutions. This is why it is called a rigidity result.
+
+Compared to [8,5,6], our approach provides a unified framework for p > 2 and p < 2 (which is not covered in the above mentioned results). However, the main advantage of the method is that it explains why a local result (the best constant is given by the linearization around the constant functions) is actually global:
+I p [ρ] − d E p [ρ]
+is strictly monotone decreasing under the action of the flow, unless the solution has reached the unique, trivial stationary state.
+
+
+2.3.
+
+Inequalities on compact manifolds. The nonlinear diffusion flow method applies not only to spheres, but also to general compact manifolds. Without entering in the details, let us state a result of [24]. Earlier important references are: [35,8,38,14], among many other contributions which are listed in [24].
+
+Let us assume that (M , g ) is a smooth compact connected Riemannian manifold of dimension d ≥ 1, without boundary. We denote by d v g the volume element, by ∆ the Laplace-Beltrami operator on M , by Ric the Ricci tensor and assume for simplicity that vol g (M ) = 1. Let λ 1 be the lowest positive eigenvalue of −∆ and
+λ := inf u∈H 2 (M )ˆM (1 − θ) (∆u) 2 + θ d d −1 Ric(∇u, ∇u) d v ǵ M |∇u| 2 d v g , θ = (d − 1) 2 (p − 1) d (d + 2) + p − 1 .
+
+Theorem 2.
+
+With the above notations, if 0 < λ < λ , then for any p ∈ (1, 2) ∪ (2, 2 * ), the equation
+− ∆v + λ p − 2 v − v p−1 = 0
+has a unique positive solution in C 2 (M ), which is constant and equal to 1.
+
+It has been shown in [24] that nonlinear diffusion flows provide a unified framework for elliptic rigidity and carré du champ methods. The computations heavily rely on the Bochner-Lichnerowicz-Weitzenböck formula
+1 2 ∆ (|∇ f | 2 ) = Hess f 2 + ∇ · (∆ f ) · ∇ f + Ric(∇ f , ∇ f ) .
+More general results can be established using the so-called C D(ρ, N ) condition (see [4] and references therein), but they are formal in most of the cases covered only by nonlinear flows. In dimension d = 2, the Moser-Trudinger-Onofri inequality replaces in a certain sense Sobolev's inequality, and it is possible to extend the method described above to cover this case: see [20]. Bounded convex domains in R d have also been considered in [31] in relation with the Lin-Ni conjecture (homogeneous Neumann boundary conditions). Concerning unbounded domains, subcritical Gagliardo-Nirenberg have been established in the case of the line in [23] while Rényi entropy powers, which will be essential in Section 4, can be used in R d to get sharp interpolation inequalities: see [40,41,33].
+
+
+RIGIDITY ON CYLINDERS AND SHARP SYMMETRY RESULTS IN CRITICAL CAFFARELLI-KOHN-NIRENBERG INEQUALITIES
+
+In this section we use a nonlinear flow to prove rigidity results for nonlinear elliptic problems on non-compact manifolds: cylinders and weigthed Euclidean spaces. All results of this section, and their proofs, can be found in [26].
+
+3.1. Three equivalent rigidity results. Let us consider the spherical cylinder C := R × S d −1 and denote by s ∈ R and ω ∈ S d −1 the coordinates. Let ∆ ω denote the Laplace-Beltrami operator on S d −1 .
+Theorem 3. Let d ≥ 2. For all p ∈ (2, 2 * ) and 0 < Λ ≤ Λ FS := 4 d −1 p 2 −4 , any positive solution ϕ ∈ H 1 (C ) of − ∂ 2 s ϕ − ∆ ω ϕ + Λ ϕ = ϕ p−1 in C (5)
+is, up to a translation in the s-direction, equal to
+ϕ Λ (s) := p 2 Λ 1 p−2 cosh p−2 2 Λ s − 2 p−2 ∀ s ∈ R .
+For any Λ > Λ FS , there are also positive solutions which do not depend only on s.
+
+A similar rigidity result holds for non-spherical cylinders R × M where M is a compact manifold, but in this case we cannot characterize the optimal set of parameters Λ with our method: see [26]. Let
+a c := d − 2 2 and b FS (a) := d (a c − a) 2 (a c − a) 2 + d − 1 + a − a c .
+By using the Emden-Fowler transformation
+v(r, ω) = r a−a c ϕ(s, ω) with r = |x| , s = − log r and ω = x r ,(6)
+Theorem 3 is equivalent to the following result.
+Theorem 4. Assume that d ≥ 2, a < a c and min{a, b FS (a)} < b ≤ a + 1. Then any nonnegative solution v of − ∇ · |x| −2 a ∇v = |x| −b p |v| p−2 v in R d \ {0} (7) which satisfies´R d |v| p |x| b p , d x < ∞, is, up to a scaling, equal to v (x) = 1 + |x| (p−2) (a c −a) − 2 p−2 ∀ x ∈ R d . If a < 0 and a < b < b FS (a)
+, there are also positive solutions which do not depend only on |x|.
+
+Let us define α FS := d −1 n−1 and pick n and α such that
+n = d − b p α = d − 2 a − 2 α + 2 = 2 p p − 2 ,
+so that we also have p = 2 n/(n − 2). Next we consider the diffusion operator
+L w := α 2 w + n − 1 r w − 1 r 2 ∆ ω w . Then, with the change of variables v(r, ω) = w(r α , ω) ∀ (r, ω) ∈ R + × S d −1 ,
+Theorem 4 is equivalent to
+Theorem 5. Assume that n > d ≥ 2 and p = 2 n/(n − 2). If 0 < α ≤ α FS , then any nonnegative solution w(x) = w(r, ω) with r ∈ R + and ω ∈ S d −1 of − L w = w p−1 in R d \ {0} (8) which satisfies´R d |x| n−d |w| p d x < ∞, is equal, up to a scaling, to w (x) = 1 + |x| 2 − n−2 2 ∀ x ∈ R d .
+If α > α FS , there are also solutions which do not depend only on |x|.
+
+Let us complement these results with some remarks: (i) If n is an integer, then (8) is the Euler-Lagrange equation associated with the standard Sobolev inequality
+− α 2 ∆w = w n+2 n−2 in R n ,
+where ∆ denotes the Laplacian operator in R n , but in the class of functions which depend only on the first d − 1 angular variables.
+
+(ii) The conditions on the parameters in Theorems 3, 4 and 5 are equivalent:
+0 < Λ ≤ Λ FS ⇐⇒ b −1 FS (b) ≤ a < a c ⇐⇒ 0 < α ≤ α FS .
+(iii) Solutions of (3), (7) and (8) are stable (in a sense defined below) among nonsymmetric solutions, i.e., solutions which explicitly depend on ω, if and only if the above condition on the parameters is satisfied. Such a condition has been introduced in [11], but the sharp condition was established by V. Felli and M. Schneider in [34], and this is why we use the notation Λ FS , b FS and α FS (see Section 5). Notice that stability is a local property while our uniqueness (rigidity) results are global.
+
+
+Optimal symmetry range in critical Caffarelli-Kohn-Nirenberg inequalities.
+
+The Caffarelli-Kohn-Nirenberg inequalities
+ˆR d |v| p |x| b p d x 2/p ≤ C a,bˆR d |∇v| 2 |x| 2 a d x ∀ v ∈ D a,b(9)
+appear in [10], under the conditions that
+a ≤ b ≤ a + 1 if d ≥ 3, a < b ≤ a + 1 if d = 2, a + 1/2 < b ≤ a + 1 if d = 1, and a < a c where the exponent p = 2 d d − 2 + 2 (b − a)
+is determined by the invariance of the inequality under scalings. Here C a,b denotes the optimal constant in (9) and the space D a,b is defined by
+D a,b := v ∈ L p R d , |x| −b d x : |x| −a |∇v| ∈ L 2 R d , d x .
+These inequalities were apparently introduced first by V.P. Il'in in [36] but are more known as Caffarelli-Kohn-Nirenberg inequalities, according to [10]. Up to a scaling and a multiplication by a constant, any extremal function for the above inequality is a nonnegative solution of (7). It is therefore natural to ask whether v realizes the equality case in (9). Let
+C a,b := ´R d |v | p |x| b p d x 2/ṕ R d |∇v | 2 |x| 2 a d x = p 2 |S d −1 | 1− 2 p (a − a c ) 1+ 2 p   2 π Γ p p−2 (p − 2) Γ 3 p−2 2 (p−2)   p−2 p .
+It was proved in [34] that whenever a < 0 and b < b FS (a), the solutions of (7) are not radially symmetric: this is a symmetry breaking result, based on the linear instability
+of F [v] := C a,b´R d |∇v| 2 |x| 2 a d x − ´R d |v| p |x| b p d x 2/p at v = v .
+The main symmetry result of [26] is In other words, whenever F [v] is linearly stable at v = v , then v is a global extremal function for (9).
+
+3.3. Sketch of the proof of Theorem 5. The case d = 2 requires some specific estimates so we shall assume that d ≥ 3 for simplicity. Let
+u 1 2 − 1 n = w ⇐⇒ u = w p with p = 2 n n − 2 .(10)
+Up to a multiplicative constant, the right hand side in (9) is transformed into a generalized Fisher information functional
+I [u] :=ˆR d u |Dp| 2 d µ where p = m 1 − m u m−1 .(11)
+Here d µ = |x| n−d d x, p is the pressure function, Dp := α ∂p ∂r , 1 r ∇ ω p , and p = ∂p ∂r and ∇ ω p respectively denote the radial and the angular derivatives of p. The left hand side in (9) is now proportional to a mass integral,´R d u d µ. In this section we consider the critical case and make the choice m = 1 − 1/n. After these preliminaries, let us introduce the fast diffusion flow
+∂u ∂t = L u m , m = 1 − 1 n ,(12)
+where the operator L , which has been considered in Theorem 5, is such that L w := − D * D w. The flow associated with (12) preserves the mass. At formal level, the key idea is to prove that I [u(t , ·)] is decreasing w.r.t. t if u solves (12), and that the limit is I [w p ]. A long computation indeed shows that, if u is a smooth solution of (12) with the appropriate behavior as x → 0 and as |x| → +∞, then
+d d t I [u(t , ·)] ≤ − 2ˆR d K[p(t,·)]u(t,·) m d µ
+where, with r = |x|, we have
+K[p] = α 4 1 − 1 n p − p r − ∆ ω p α 2 (n − 1) r 2 2 + 2 α 2 1 r 2 ∇ ω p − ∇ ω p r 2 + (n − 2) α 2 FS − α 2 |∇ ω p| 2 r 4 + ζ (n − d ) |∇ ω p| 4 r 4(13)
+for some positive constant ζ . Hence, if α ≤ α FS , then I [u(t , ·)] is nonincreasing along the flow of (12). However, regularity and decay estimates needed to justify such computations are not known yet and this parabolic approach is therefore formal. As in Section 2, we can instead rely on an elliptic method, which can be justified as follows.
+
+If u 0 is a nonnegative critical point of I under mass constraint, then (12) with initial datum u 0 . Here I [u 0 ] denotes the differential of I at u 0 .
+0 = I [u 0 ] · L u m 0 = d I [u(t , ·)] d t |t =0 ≤ − 2ˆR d K[p 0 ] u 1−n 0 d µ if u solves
+With p 0 = p(0,·), this proves that ∇ ω p 0 = 0: p 0 is radially symmetric. By solving p 0 − p 0 /r = 0, we obtain that p 0 (x) = a + b |x| 2 for some constants a, b ∈ R + . The conclusion easily follows. In practice, we prove that any solution of (5) on C has good decay properties as s → ±∞, by delicate elliptic estimates, which rely on the fact that p = 2 n/(n − 2) < 2 d /(d − 2) is a subcritical exponent on the d -dimensional manifold C . This is enough to justify all integrations by parts and prove as a consequence that a nonnegative solution of (8) satisfies K[p] = 0: the conclusion follows as above. Notice that this amounts to test (8) by L w 2 (n−1)/(n−2) .
+
+
+RIGIDITY AND SHARP SYMMETRY RESULTS IN SUBCRITICAL CAFFARELLI-KOHN-NIRENBERG INEQUALITIES
+
+In this section we consider a class of subcritical Caffarelli-Khon-Nirenberg inequalities and extend the results obtained for the critical case. Most results of this section have been published in [28], a joint paper of the authors with M. Muratori.
+
+
+Subcritical Caffarelli-Kohn-Nirenberg inequalities. With the notation
+w L q,γ (R d ) := ˆR d |w| q |x| −γ d x 1/q , w L q (R d ) := w L q,0 (R d ) ,
+we define L q,γ (R d ) as the space {w ∈ L 1 loc (R d \{0}) : w L q,γ (R d ) < ∞}. We shall work in the space H p β,γ (R d ) of functions w ∈ L p+1,γ (R d ) such that ∇w ∈ L 2,β (R d ), which can also be defined as the completion of D(R d \ {0}) with respect to the norm
+w 2 := (p − p) w 2 L p+1,γ (R d ) + ∇w 2 L 2,β (R d ) .
+Let us consider the family of subcritical Caffarelli-Kohn-Nirenberg interpolation inequalities that can be found in [10] and which is given by
+w L 2p,γ (R d ) ≤ C β,γ,p ∇w ϑ L 2,β (R d ) w 1−ϑ L p+1,γ (R d ) ∀ w ∈ H p β,γ (R d ) .(14)
+Here the parameters β, γ and p are subject to the restrictions
+d ≥ 2 , γ − 2 < β < d − 2 d γ , γ ∈ (−∞, d ) , p ∈ 1, p(15)
+with
+p := d − γ d − β − 2 and ϑ = (d − γ) (p − 1) p d + β + 2 − 2 γ − p (d − β − 2) .
+The critical case p = p determines ϑ = 1 and has been dealt with in Section 3, so we shall focus on the subcritical case p < p . Here by critical we simply mean that w L 2p,γ (R d ) scales like ∇w L 2,β (R d ) and C β,γ,p denotes the optimal constant in (14). The limit case β = γ − 2 and p = 1, which is an endpoint for (15), corresponds to Hardy-type inequalities: optimality is achieved among radial functions but there is no extremal function: see [29]. The other endpoint is β = (d − 2) γ/d , in which case p = d /(d − 2): according to [11] (also see Section 5), either γ ≥ 0, symmetry holds and there exists a symmetric extremal function, or γ < 0, and then symmetry is broken but there is no extremal function. in all other cases, the existence of an extremal function for (14) follows from standard methods: see [11,16,32] for related results.
+
+When β = γ = 0, (14) is a Gagliardo-Nirenberg interpolation inequality which is well known to be related to the fast diffusion equation ∂u ∂t = ∆u m in R d , not only for m = 1 − 1/d but also for any m ∈ [1 − 1/d , 1). Here we generalize this observation to the weighted spaces.
+
+Symmetry in (14) means that the equality case is achieved by Aubin-Talenti type functions
+w (x) = 1 + |x| 2+β−γ −1/(p−1) ∀ x ∈ R d .
+On the contrary, there is symmetry breaking if this is not the case, because the equality case is then achieved by a non-radial extremal function. It has been proved in [9] that symmetry breaking holds in (14) if
+γ < 0 and β FS (γ) < β < d − 2 d γ(16)
+where
+β FS (γ) := d − 2 − (γ − d ) 2 − 4 (d − 1) .
+Under Condition (15), symmetry holds in the complement of the set defined by (16).
+
+
+Theorem 8.
+
+Assume that (15) holds and that
+β ≤ β FS (γ) if γ < 0 .(17)
+Then the extremal functions for (14) are radially symmetric and, up to a scaling and a multiplication by a constant, equal to w .
+
+This means that (16) is the sharp condition for symmetry breaking.
+
+
+A rigidity result. Up to a scaling and a multiplication by a constant, the Euler-Lagrange equation
+− div |x| −β ∇w = |x| −γ w 2p−1 − w p in R d \ {0}(18)
+is satisfied by any extremal function for (14). In the range of parameters given by (15) and (17), our method establishes the symmetry of all positive solutions.
+
+Theorem 9. Assume that (15) and (17) hold. Then all positive solutions to (18) in H p β,γ (R d ) are radially symmetric and, up to a scaling, equal to w . This is again a rigidity result. Nonnegative solutions to (18) are actually positive by the standard Strong Maximum principle. Theorem 8 is therefore a consequence of Theorem 9.
+
+4.3. Sketch of the proof of Theorem 9. Let us give an outline of the strategy of [28]. As in the critical case, Inequality (14) for a function w can be transformed by the change of variables
+w(x) = v(r α , ω) ,
+where r = |x| = 0 and ω = x/r , in the new inequality
+ˆR d |v| 2p d µ 1 2p ≤ K α,n,p ˆR d |Dv| 2 d µ ϑ 2 ˆR d |v| p+1 d µ 1−ϑ p+1 (19) with K α,n,p = α −ζ C β,γ,p , ζ = ϑ 2 + 1−ϑ p+1 − 1 2 p and d µ = |x| n−d d x.
+The condition for the change of variables is
+n = d − β − 2 α + 2 = d − γ α ,
+which reflects the fact that the weights are all the same in (19). It is solved by
+α = 1 + β − γ 2 and n = 2 d − γ β + 2 − γ .
+
+Inequality (19) is a Caffarelli-Kohn-Nirenberg inequality with weight |x| n−d in all
+
+terms, and Dv := α ∂v ∂s , 1 s ∇ ω v . Notice that p = n n−2 , so that 2 p is the critical Sobolev exponent associated with the fractional dimension n considered in (10).
+
+With a generalized Fisher information I and the pressure function p defined by (11), we consider the subcritical range m 1 := 1 − 1/n < m < 1. If u is smooth solution of (12) with sufficient decay properties, we obtain that I evolves according to
+d d t I [u(t , ·)] = − 2ˆR d R[p(t , ·)] u(t , ·) m d µ with R[p] := K[p] + (m − m 1 ) L p 2 ,
+where K is given by (13). We recover the result of the critical case of Section 3 by taking the limit as m → m 1 . Inspired by tools of Information Theory and [40,41,33], we introduce the generalized Rényi entropy power functional
+F [u] := ˆR d u m d µ σ with σ = 2 n 1 1 − m − 1 > 1 and observe that F has the sign of − H [u(t , ·)] where H [u] := (m − m 1 )ˆR d L p −´R d u |Dp| 2 u m d μ R d u m d µ 2 d µ +ˆR d R[p] u m d µ .
+Here F denotes the derivative with respect to t of F [u(t , ·)]. The computation requires many integrations by parts. The fact that boundary terms do not contribute can be justified if u is a nonnegative critical point, i.e., a minimizer of F under mass constraint. Indeed, the minimization of
+ˆR d v p+1 d µ σ−1ˆR d |Dv| 2 d µ with v = u m−1/2
+under the constraint that´R d u d µ =´R d v 2p d µ takes a given positive value is equivalent to the Caffarelli-Kohn-Nirenberg interpolation inequalities (14).
+
+To make the argument rigorous, we can argue as in Section 3 by taking u as initial datum and performing the computation of F at t = 0 only. In other words, we are simply testing the Euler-Lagrange equation satisfied by u with L u m . By elliptic regularity (the estimates are as delicate as in the critical case and we refer to [28] for details), we have enough estimates to prove that H [u] = 0 and deduce that p(x) = a + b|x| 2 for some real constants a and b.
+
+
+Considerations on the optimality of the method.
+
+The symmetry breaking condition in (9) and (14) has been established by proving the linear instability of radial critical points, in [34] and [9] respectively. This amounts to a spectral gap condition in a Hardy-Poincaré inequality: see [9] for details. It is remarkable that the symmetry holds whenever radial critical points are linearly stable and this deserves an explanation. The solution of (12) is attracted by self-similar Barenblatt functions as t → +∞. Since these Barenblatt functions are precisely the radial critical points of our variational problem, the asymptotic rate of convergence is determined by the previous spectral gap, in self-similar variables. It can be checked that the condition that appears in the carré du champ method, which amounts to prove that a quadratic form has a sign, is the same in the asymptotic regime as t → +∞ as the quadratic form which is used to check symmetry breaking. Hence either symmetry breaking occurs, or the carré du champ method shows that the Rényi entropy power functional is monotone non-increasing, at least in the asymptotic regime: see [25] for details. To conclude in the critical case, it is enough to observe that all terms in the expression of K[p] in (13) are quadratic, except the last one, which has a sign and is negligible compared to the others in the asymptotic regime: the sign condition for K[p] away from the asymptotic regime is the same as when t → +∞. This explains why our method for proving symmetry gives the optimal range in the critical case. In the subcritical regime, a similar observation can also be done.
+
+
+BIFURCATIONS AND SYMMETRY BREAKING
+
+The results of this section are taken mostly from [15,17,18].
+
+
+Rigidity and bifurcations.
+
+Let us come back to the critical Caffarelli-Kohn-Nirenberg inequality and consider the Emden-Fowler transformation (6). As noted in [11], Inequality (9) is transformed into the Gagliardo-Nirenberg-Sobolev inequality
+∇ϕ 2 L 2 (C ) + Λ ϕ 2 L 2 (C ) ≥ µ(Λ) ϕ 2 L p (C ) ∀ ϕ ∈ H 1 (C ) where µ(Λ) = C −1 a,b S d −1 1−2/p . Here C := R × S d −1
+is a cylinder and, as in Section 2, we adopt the convention that the measure on the sphere is the uniform probability measure. The extremal functions are, up to multiplication by a constant, and dilation, solutions of (5).
+
+If we restrict the study to symmetric functions, that is, v(r ) = r a−a c ϕ(− log r ) with r = |x|, then the inequality degenerates into the simple Gagliardo-Nirenberg-Sobolev inequality
+∇ϕ 2 L 2 (R) + Λ ϕ 2 L 2 (R) ≥ µ (Λ) ϕ 2 L p (R) ∀ ϕ ∈ H 1 (R) .
+Here we denote by
+µ (Λ) = µ (1) Λ p+2 2 p
+the optimal constant and notice that ϕ (s) = 1 2 p Λ cosh
+p−2 2 Λ s −2 1/(p−2)
+is an optimal function, which is the unique solution of − ϕ + Λ ϕ = |ϕ| p−2 ϕ on R, up to translations. With this notation, we have µ (Λ) = ϕ p−2 L p (R) . If we linearize
+∇ϕ 2 L 2 (C ) + Λ ϕ 2 L 2 (C ) − µ (Λ) ϕ 2 L p (C )
+around ϕ = ϕ , V. Felli and M. Schneider found in [34] that the lowest eigenvalue of the quadratic form, that is, the lowest positive eigenvalue of the Pöschl-Teller oper-
+ator − d 2 d s 2 + Λ + d − 1 − (p − 1) ϕ p−2 , is given by λ 1 (Λ) = − 1 4 (p 2 − 4) (Λ − Λ FS ), so that λ 1 (Λ FS ) < 0 if and only if Λ > Λ FS := 4 d − 1 p 2 − 4 .
+See [37, p. 74] for details. This condition is the symmetry breaking condition of Theorem 3. The branch of non-radial solutions bifurcating from Λ = Λ FS has been computed numerically in [17] and an example is shown in Fig. 1. By construction, we know that Λ → µ(Λ) is increasing, concave, and we read from Theorem 3 that the non-symmetric branch bifurcates from Λ = Λ FS , and is such that µ(Λ) < µ (Λ) if Λ > Λ FS . This simple scenario explains the symmetry and symmetry breaking properties in (9), but is not generic as we shall see next in the case of more complicated interpolation inequalities.
+
+
+Bifurcations, reparametrization and turning points. Let us consider the interpolation inequality
+ˆR d |u| p |x| bp d x 2 p ≤ C a,b,θ ˆR d |∇u| 2 |x| 2a d x θ ˆR d |u| 2 |x| 2 (a+1) d x 1−θ (20) with d ≥ 1, p ∈ (2, 2 * ) or p = 2 * if d ≥ 3, and θ ∈ (ϑ(p), 1] with ϑ(p) := d p−2 2 p . The scaling invariance imposes p = 2 d / d − 2 + 2 (b − a)
+. As proved in [10], the above inequalities hold with a finite constant C a,b,θ if a < a c = (d −2)/2, and b ∈ (a+1/2, a+ 1] when d = 1, b ∈ (a, a +1] when d = 2 and b ∈ [a, a +1] when d ≥ 3. Moreover, there exist extremal functions for the inequalities (20) for any p ∈ (2, 2 * ) and θ ∈ (ϑ(p), 1) or θ = ϑ(p) and d ≥ 2, with a c − a > 0 not too large. On the contrary equality is never achieved for p = 2, or a < 0, p = 2 * and d ≥ 3, or d = 1 and θ = ϑ(p, 1). The existence of extremal functions has been studied in [16]. We may notice that With the same conventions as in the previous subsection, the Emden-Fowler change of variables (6) transforms (20) into the Gagliardo-Nirenberg-Sobolev inequality
+0 ≤ ϑ(p) ≤ θ < 1 ⇐⇒ 2 ≤ p ≤ p * (d , θ) := 2 d d − 2 θ < 2 * .∇ϕ 2 L 2 (C ) + Λ ϕ 2 L 2 (C ) θ ϕ 2(1−θ) L 2 (C ) ≥ µ(θ, Λ) ϕ 2 L p (C ) ∀ ϕ ∈ H 1 (C )(21)on C := R × S d −1 , with Λ = (a − a c ) 2 and µ(θ, Λ) = C −1 a,b,θ S d −1 1−2/p .
+Of course, the case θ = 1 corresponds to the critical case and, consistently, we write µ(1, Λ) = µ(Λ).
+
+For θ < 1, the Euler-Lagrange equation of an extremal function on C is
+− ∆ϕ + 1 θ (1 − θ) ∇ϕ 2 L 2 (C ) ϕ 2 L 2 (C ) + Λ ϕ − ∇ϕ 2 L 2 (C ) + Λ ϕ 2 L 2 (C ) θ ϕ p L p (C ) ϕ p−1 = 0 .(22)
+Up to the reparametrization
+Λ → λ = 1 θ (1 − θ) t [ϕ] + Λ where t [ϕ] := ∇ϕ 2 L 2 (C ) ϕ 2 L 2 (C )
+and a multiplication by a constant, an extremal function ϕ for (21) solves (5). In other words, we can use the set of solutions in the critical case θ = 1 to parametrize the solutions corresponding to θ < 1. Let us start with the symmetric functions. With an evident notation, we define µ (θ, Λ) as the optimal constant in the inequality corresponding to (21) restricted to symmetric functions, i.e., functions depending only on s ∈ R. If we denote by ϕ ,λ the function
+ϕ ,λ (s) = 1 2 p λ cosh p−2 2 λ s −2 1 p−2
+for any λ > 0, then t [ϕ ,λ ] is explicit and we can parametrize the set Λ, µ (θ, Λ) :
+Λ > 0 by θ λ − (1 − θ) t [ϕ ,λ ], µ (λ) : λ > 0 . It turns out that the equation Λ = θ λ − (1 − θ) t [ϕ ,λ ]
+can be inverted, which allows us to obtain λ = Λ θ * (Λ) and get an explicit expression for
+µ (θ, Λ) = µ Λ θ * (Λ) = µ Λ θ * (1) Λ θ− p−2 2 p .
+According to [13], a Taylor expansion around ϕ ,Λ FS shows that for any
+Λ > Λ θ FS , where Λ θ FS := θ µ FS − (1 − θ) t [u FS ]
+, the function ϕ ,λ with λ = Λ θ * (Λ) is linearly unstable, so that µ(θ, Λ) < µ (θ, Λ). The case of non-symmetric functions is more subtle because we do not know the exact multiplicity of the solutions of (5) in the symmetry breaking range. There is a branch of non-symmetric solutions of (22) which bifurcates from the branch of symmetric solutions at Λ = Λ θ FS . This branch has been computed numerically in [17] and a formal asymptotic expansion was performed in a neighborhood of the bifurcation point in [18]. Because of the reparametrization of the solutions of (22) by the solutions of (5), we can use the branch λ → ϕ λ of non-symmetric extremal functions for λ > Λ FS to get an upper bound of µ(θ, Λ):
+µ(θ, Λ) ≤ µ(λ) for any λ > Λ FS such that Λ = θ λ − (1 − θ) t [ϕ λ ] .
+Actually, we deduce from the branch λ → ϕ λ of non-symmetric extremal functions an entire branch of non-symmetric solutions of (22) which is parametrized by λ and deduce a parametric curve B := Λ(λ)
+:= θ λ − (1 − θ) t [ϕ λ ], µ(λ) : λ > Λ FS which
+can be used to bound µ(θ, Λ) from above. If (Λ, µ) ∈ B, we have no proof that ϕ λ is optimal if µ(λ) < µ (θ, Λ), but at least we know that
+µ(λ) = ∇ϕ λ 2 L 2 (C ) + Λ(λ) ϕ λ 2 L 2 (C ) θ ϕ λ 2(1−θ) L 2 (C ) ϕ λ −2 L p (C ) .
+Some numerical results are shown in Fig. 2.
+
+The formal asymptotic expansion of [18] suggests that there are only two possible generic scenarii:
+
+(i) Either the curve B bifurcates to the right, that is, B is included in the region Λ ≥ Λ θ FS , and Λ → µ(θ, Λ) is qualitatively expected to be as in Fig. 1. We know that this is what happens for θ = 1 and expect a similar behavior for any θ close enough to 1. In this case, the region of symmetry breaking is characterized by the linear instability of the symmetric optimal functions.
+
+(ii) Or the curve B bifurcates to the left. For λ − Λ FS > 0, small enough, the curve λ → Λ(λ), µ(λ) satisfies Λ(λ) < Λ θ FS and µ(λ) > µ (θ, Λ(λ)). In that case, the region of symmetry breaking does not seem to be characterized by the linear instability of the symmetric optimal functions and we numerically observe a turning point as in Fig. 2 (right).
+
+In [19], a priori estimates for branches with θ < 1 were deduced from the known symmetry results (later improved in [26]). This further constrains B and the symmetry breaking region and determines a lower bound for the value of Λ corresponding to a turning point of the branch. There are many open questions concerning B  The fact that the symmetry range is an interval of the form (0, Λ s ] can be deduced from a scaling argument: see [30,15] for details. The result is otherwise straightforward but difficult to use because the value of C GN (p) is not known explicitly. From a numerical point of view, it gives a simple criterion, which has been implemented in [15]. Moreover, in [18], it has been observed numerically that the condition C GN (p) < µ (ϑ(p), Λ ϑ(p) FS ) is equivalent to a bifurcation to the left as in Fig. 2. with θ = ϑ(p) .
+Λ µ(θ, Λ) µ (θ, Λ) Λ θ FS µ (θ, Λ θ FS ) B B B Λ θ FS µ (θ, Λ θ FS )
+A computation shows that lim p→2 + h(p) = 1 and lim p→2 + d h d p (p) < 0. For p − 2 > 0, small enough, we obtain that
+C GN (p) ≤ h(p) < µ (θ, Λ θ FS ) .
+A perturbation argument has been used in [15] to establish the following result.
+
+Theorem 11. Let d ≥ 2. There exists η > 0 such that for any p ∈ (2, 2 + η), µ(θ, Λ) < µ (θ, Λ) if Λ θ FS − η < Λ < Λ θ FS and ϑ(p) < θ < ϑ(p) + η .
+
+
+5.
+
+4. An open question. The criterion considered in Lemma 10 is based on energy considerations and provides only a sufficient condition for symmetry breaking. It is difficult to check it in practice, except in asymptotic regimes of the parameters. The formal expansions of the branch near the bifurcation points are based on a purely local analysis, and suggest another criterion: either the branch bifurcates to the right and the symmetry breaking range is characterized by the linear instability of the symmetric optimal functions, or the branch bifurcates to the left, and this is not anymore the case. Is such an observation, which has been made numerically only for some specific values of p, true in general? This seems to be true when θ is close enough to ϑ(p) and at least in this regime we can conjecture that the symmetry breaking range is not characterized by the linear instability of the symmetric optimal functions if and only if the branch bifurcates to the left. An additional question, which corresponds to a limiting case, goes as follows. If θ = ϑ(p), is the range of symmetry determined exactly by the value of the optimal constant in (23), when it is below µ (θ, Λ θ FS )? Numerically, this is supported by the fact that, in this case, the curve B is monotone increasing as a function of Λ.
+
+In the study of the symmetry issue in (9) and (14), the key tool is the nonlinear flow, which extends a local result (linear stability) to a global result (rigidity). A similar tool would be needed to answer the conjecture. In the case θ = ϑ(p), it would be crucial to obtain a variational characterization of the non-symmetric solutions in the curve of non-symmetric functions B and a uniqueness result for any given Λ.
+
+Corollary 6 .
+6Assume that d ≥ 2, a < a c , and b FS (a) ≤ b ≤ a + 1 if a < 0. Then C a,b = C a,b and equality in(9) is achieved by a function v ∈ D a,b if and only if, up to a scaling and a multiplication by a constant, v = v .
+
+Proposition 7 .
+7Let w be a nonnegative solution of (8) and p = (n − 1) w − 2 n−2 . Under the assumptions of Theorem 5, if α ≤ α FS , then K[p] = 0.
+
+Figure 1 :
+1Branches for p = 2.8, d = 5, θ = 1.
+
+Figure 2 :≥
+2Branches for p = 2.8, d = 5, θ = 0.718. Left: the bifurcation point (Λ θ FS , µ (θ, Λ θ FS ) is at the intersection of the horizontal and vertical lines. The area enclosed in the small ellipse is enlarged in the right plot: the branch has a turning point and µ(θ, Λ θ FS ) < µ (θ, Λ θ FS ).and the set of extremal functions when θ < 1, but at least we can prove that the symmetry breaking range does not always coincide with the region of linear instability of symmetric optimal functions.5.3. Symmetry breaking and energy considerations. The exponent ϑ(p)is the exponent which appears in the Gagliardo-C GN (p) u 2L p (R d ) ∀ u ∈ H 1 (R d ) .(23)By considering an extremal function for this inequality and translations, for any p ∈ (2, 2 * ), one can check thatµ(ϑ(p), Λ) ≤ C GN (p) ∀ Λ > 0 .Lemma 10. Let d ≥ 2. For any p ∈ (2, 2 * ), if C GN (p) < µ (ϑ(p), Λ ϑ(p) FS ), there exists Λ s ∈ (0, Λ ϑ(p) FS ) such that µ(ϑ(p), Λ) = µ (ϑ(p), Λ) if and only if Λ ∈ (0, Λ s ].
+
+L
+For θ and p−2 small enough, the assumption of Lemma 10 holds. Let us consider the Gaussian test function g(x) := (2 π) p (R d ) 1 µ (θ, Λ θ FS )
+
+
+amount to I p [ρ] ≥ d E p [ρ]as can be checked using ρ = |u| p . Let us consider the heat flow
+
+Hypercontractivité de semi-groupes de diffusion. D Bakry And M, Émery, C. R. Acad. Sci. Paris Sér. I Math. 299D. BAKRY AND M. ÉMERY, Hypercontractivité de semi-groupes de diffusion, C. R. Acad. Sci. Paris Sér. I Math., 299 (1984), pp. 775-778.
+
+Séminaire de probabilités, XIX. BerlinSpringer84Diffusions hypercontractives, Diffusions hypercontractives, in Séminaire de probabilités, XIX, 1983/84, vol. 1123 of Lecture Notes in Math., Springer, Berlin, 1985, pp. 177-206.
+
+Inégalités de Sobolev pour un semi-groupe symétrique. C. R. Acad. Sci. Paris Sér. I Math. 301, Inégalités de Sobolev pour un semi-groupe symétrique, C. R. Acad. Sci. Paris Sér. I Math., 301 (1985), pp. 411-413.
+
+Analysis and geometry of Markov diffusion operators. D Bakry, I Gentil, And M Ledoux, Springer348Chamof Grundlehren der Mathematischen Wissenschaften [Fundamental Principles of Mathematical SciencesD. BAKRY, I. GENTIL, AND M. LEDOUX, Analysis and geometry of Markov diffusion oper- ators, vol. 348 of Grundlehren der Mathematischen Wissenschaften [Fundamental Prin- ciples of Mathematical Sciences], Springer, Cham, 2014.
+
+Sobolev inequalities and Myers's diameter theorem for an abstract Markov generator. D And M Bakry, Ledoux, Duke Math. J. 85D. BAKRY AND M. LEDOUX, Sobolev inequalities and Myers's diameter theorem for an ab- stract Markov generator, Duke Math. J., 85 (1996), pp. 253-270.
+
+W Beckner, Sharp Sobolev inequalities on the sphere and the Moser-Trudinger inequality. 138W. BECKNER, Sharp Sobolev inequalities on the sphere and the Moser-Trudinger inequal- ity, Ann. of Math. (2), 138 (1993), pp. 213-242.
+
+Inégalité de Sobolev pour l'opérateur ultrasphérique. A Bentaleb, C. R. Acad. Sci. Paris Sér. I Math. 317A. BENTALEB, Inégalité de Sobolev pour l'opérateur ultrasphérique, C. R. Acad. Sci. Paris Sér. I Math., 317 (1993), pp. 187-190.
+
+Nonlinear elliptic equations on compact Riemannian manifolds and asymptotics of Emden equations. M.-F Bidaut-Véron And L, Véron, Invent. Math. 106M.-F. BIDAUT-VÉRON AND L. VÉRON, Nonlinear elliptic equations on compact Rieman- nian manifolds and asymptotics of Emden equations, Invent. Math., 106 (1991), pp. 489- 539.
+
+Weighted fast diffusion equations (Part I): Sharp asymptotic rates without symmetry and symmetry breaking in Caffarelli-Kohn-Nirenberg inequalities, Kinetic and Related Models. M Bonforte, J Dolbeault, M Muratori, And B Nazaret, 10M. BONFORTE, J. DOLBEAULT, M. MURATORI, AND B. NAZARET, Weighted fast diffusion equations (Part I): Sharp asymptotic rates without symmetry and symmetry breaking in Caffarelli-Kohn-Nirenberg inequalities, Kinetic and Related Models, 10 (2017), pp. 33-59.
+
+First order interpolation inequalities with weights. L Caffarelli, R Kohn, And L Nirenberg, Compositio Math. 53L. CAFFARELLI, R. KOHN, AND L. NIRENBERG, First order interpolation inequalities with weights, Compositio Math., 53 (1984), pp. 259-275.
+
+On the Caffarelli-Kohn-Nirenberg inequalities: sharp constants, existence (and nonexistence), and symmetry of extremal functions. F. Catrina And Z.-Q Wang, Comm. Pure Appl. Math. 54F. CATRINA AND Z.-Q. WANG, On the Caffarelli-Kohn-Nirenberg inequalities: sharp con- stants, existence (and nonexistence), and symmetry of extremal functions, Comm. Pure Appl. Math., 54 (2001), pp. 229-258.
+
+Sur la symétrie dans les phénomènes physiques, symétrie d'un champ électrique et d'un champ magnétique. P Curie, J. Phys. Theor. Appl. 3P. CURIE, Sur la symétrie dans les phénomènes physiques, symétrie d'un champ électrique et d'un champ magnétique, J. Phys. Theor. Appl., 3 (1894), pp. 393-415.
+
+A logarithmic Hardy inequality. M Del Pino, J Dolbeault, S Filippas, And A Tertikas, Journal of Functional Analysis. 259M. DEL PINO, J. DOLBEAULT, S. FILIPPAS, AND A. TERTIKAS, A logarithmic Hardy in- equality, Journal of Functional Analysis, 259 (2010), pp. 2045 -2072.
+
+Improved Gagliardo-Nirenberg-Sobolev inequalities on manifolds with positive curvature. J Demange, J. Funct. Anal. 254J. DEMANGE, Improved Gagliardo-Nirenberg-Sobolev inequalities on manifolds with pos- itive curvature, J. Funct. Anal., 254 (2008), pp. 593-611.
+
+Radial symmetry and symmetry breaking for some interpolation inequalities. J Dolbeault, M Esteban, G Tarantello, And A Tertikas, Calculus of Variations and Partial Differential Equations. 42J. DOLBEAULT, M. ESTEBAN, G. TARANTELLO, AND A. TERTIKAS, Radial symmetry and symmetry breaking for some interpolation inequalities, Calculus of Variations and Partial Differential Equations, 42 (2011), pp. 461-485.
+
+Extremal functions for Caffarelli-Kohn-Nirenberg and logarithmic Hardy inequalities. J J Dolbeault And M, Esteban, Proceedings of the Royal Society of Edinburgh. 142Section: A MathematicsJ. DOLBEAULT AND M. J. ESTEBAN, Extremal functions for Caffarelli-Kohn-Nirenberg and logarithmic Hardy inequalities, Proceedings of the Royal Society of Edinburgh, Section: A Mathematics, 142 (2012), pp. 745-767.
+
+A scenario for symmetry breaking in Caffarelli-Kohn-Nirenberg inequalities. J J Dolbeault And M, Esteban, Journal of Numerical Mathematics. 20J. DOLBEAULT AND M. J. ESTEBAN, A scenario for symmetry breaking in Caffarelli-Kohn- Nirenberg inequalities, Journal of Numerical Mathematics, 20 (2013), pp. 233-249.
+
+Branches of non-symmetric critical points and symmetry breaking in nonlinear elliptic partial differential equations. Nonlinearity. 27435, Branches of non-symmetric critical points and symmetry breaking in nonlinear elliptic partial differential equations, Nonlinearity, 27 (2014), p. 435.
+
+Rigidity results with applications to best constants and symmetry of Caffarelli-Kohn-Nirenberg and logarithmic Hardy inequalities. J Dolbeault, M J Esteban, S Filippas, And A Tertikas, Calc. Var. Partial Differential Equations. 54J. DOLBEAULT, M. J. ESTEBAN, S. FILIPPAS, AND A. TERTIKAS, Rigidity results with ap- plications to best constants and symmetry of Caffarelli-Kohn-Nirenberg and logarithmic Hardy inequalities, Calc. Var. Partial Differential Equations, 54 (2015), pp. 2465-2481.
+
+Onofri inequalities and rigidity results, Discrete and Continuous Dynamical Systems. J Dolbeault, M J Esteban, And G Jankowiak, 37J. DOLBEAULT, M. J. ESTEBAN, AND G. JANKOWIAK, Onofri inequalities and rigidity re- sults, Discrete and Continuous Dynamical Systems, 37 (2017), pp. 3059-3078.
+
+J Dolbeault, M J Esteban, M Kowalczyk, And M Loss, Sharp interpolation inequalities on the sphere: New methods and consequences. 34J. DOLBEAULT, M. J. ESTEBAN, M. KOWALCZYK, AND M. LOSS, Sharp interpolation in- equalities on the sphere: New methods and consequences, Chinese Annals of Mathemat- ics, Series B, 34 (2013), pp. 99-112.
+
+Discrete and Continuous Dynamical Systems Series S (DCDS-S). 7Improved interpolation inequalities on the sphere, Improved interpolation inequalities on the sphere, Discrete and Continuous Dy- namical Systems Series S (DCDS-S), 7 (2014), pp. 695-724.
+
+J Dolbeault, M J Esteban, A Laptev, And M Loss, One-dimensional Gagliardo-Nirenberg-Sobolev inequalities: remarks on duality and flows. 90J. DOLBEAULT, M. J. ESTEBAN, A. LAPTEV, AND M. LOSS, One-dimensional Gagliardo- Nirenberg-Sobolev inequalities: remarks on duality and flows, Journal of the London Mathematical Society, 90 (2014), pp. 525-550.
+
+J Dolbeault, M J Esteban, And M Loss, Nonlinear flows and rigidity results on compact manifolds. 267J. DOLBEAULT, M. J. ESTEBAN, AND M. LOSS, Nonlinear flows and rigidity results on com- pact manifolds, Journal of Functional Analysis, 267 (2014), pp. 1338 -1363.
+
+Interpolation inequalities, nonlinear flows, boundary terms, optimality and linearization. Journal of elliptic and parabolic equations. 2, Interpolation inequalities, nonlinear flows, boundary terms, optimality and lin- earization, Journal of elliptic and parabolic equations, 2 (2016), pp. 267-295.
+
+Rigidity versus symmetry breaking via nonlinear flows on cylinders and Euclidean spaces. Invent. Math. 206, Rigidity versus symmetry breaking via nonlinear flows on cylinders and Euclidean spaces, Invent. Math., 206 (2016), pp. 397-440.
+
+Interpolation inequalities on the sphere: linear vs. nonlinear flows (inégalités d'interpolation sur la sphère : flots non-linéaires vs. flots linéaires), Annales de la faculté des sciences de Toulouse Sér. 6, Interpolation inequalities on the sphere: linear vs. nonlinear flows (inégalités d'interpolation sur la sphère : flots non-linéaires vs. flots linéaires), Annales de la faculté des sciences de Toulouse Sér. 6, 26 (2017), pp. 351-379.
+
+Symmetry for extremal functions in subcritical Caffarelli-Kohn-Nirenberg inequalities. J Dolbeault, M J Esteban, M Loss, And M Muratori, Comptes Rendus Mathématique. 355J. DOLBEAULT, M. J. ESTEBAN, M. LOSS, AND M. MURATORI, Symmetry for extremal func- tions in subcritical Caffarelli-Kohn-Nirenberg inequalities, Comptes Rendus Mathéma- tique, 355 (2017), pp. 133 -154.
+
+On the symmetry of extremals for the Caffarelli-Kohn-Nirenberg inequalities. J Dolbeault, M J Esteban, M Loss, And G Tarantello, Advanced Nonlinear Studies. 9J. DOLBEAULT, M. J. ESTEBAN, M. LOSS, AND G. TARANTELLO, On the symmetry of ex- tremals for the Caffarelli-Kohn-Nirenberg inequalities, Advanced Nonlinear Studies, 9 (2009), pp. 713-727.
+
+On the symmetry of extremals for the Caffarelli-Kohn-Nirenberg inequalities. Adv. Nonlinear Stud. 9, On the symmetry of extremals for the Caffarelli-Kohn-Nirenberg inequalities, Adv. Nonlinear Stud., 9 (2009), pp. 713-726.
+
+Uniqueness and rigidity in nonlinear elliptic equations, interpolation inequalities, and spectral estimates. J Dolbeault And M, Kowalczyk, Annales. de la Faculté de Sciences de ToulouseTo appear inJ. DOLBEAULT AND M. KOWALCZYK, Uniqueness and rigidity in nonlinear elliptic equa- tions, interpolation inequalities, and spectral estimates. To appear in Annales de la Fac- ulté de Sciences de Toulouse, Mathématiques, 2017.
+
+Weighted interpolation inequalities: a perturbation approach. J Dolbeault, M Muratori, And B Nazaret, Mathematische Annalen. J. DOLBEAULT, M. MURATORI, AND B. NAZARET, Weighted interpolation inequalities: a perturbation approach, Mathematische Annalen, (2016), pp. 1-34.
+
+Nonlinear diffusions: Extremal properties of Barenblatt profiles, best matching and delays. J Dolbeault And G, Toscani, Nonlinear Analysis: Theory, Methods & Applications. p. to appearJ. DOLBEAULT AND G. TOSCANI, Nonlinear diffusions: Extremal properties of Barenblatt profiles, best matching and delays, Nonlinear Analysis: Theory, Methods & Applications, (2016), p. to appear.
+
+Perturbation results of critical elliptic equations of Caffarelli-Kohn-Nirenberg type. V Felli And M, Schneider, J. Differential Equations. 191V. FELLI AND M. SCHNEIDER, Perturbation results of critical elliptic equations of Caffa- relli-Kohn-Nirenberg type, J. Differential Equations, 191 (2003), pp. 121-142.
+
+Global and local behavior of positive solutions of nonlinear elliptic equations. B And J Gidas, Spruck, Comm. Pure Appl. Math. 34B. GIDAS AND J. SPRUCK, Global and local behavior of positive solutions of nonlinear elliptic equations, Comm. Pure Appl. Math., 34 (1981), pp. 525-598.
+
+Some integral inequalities and their applications in the theory of differentiable functions of several variables, Mat. Sb. V P Il&apos;in, V. P. IL'IN, Some integral inequalities and their applications in the theory of differentiable functions of several variables, Mat. Sb. (N.S.), 54 (96) (1961), pp. 331-380.
+
+Tome III: Mécanique quantique. Théorie non relativiste. (French), Deuxième édition. L D Landau And E, Physique Lifschitz, Théorique, Translated from russian by E. Gloukhian. Éditions Mir. L. D. LANDAU AND E. LIFSCHITZ, Physique théorique. Tome III: Mécanique quantique. Théorie non relativiste. (French), Deuxième édition. Translated from russian by E. Gloukhian. Éditions Mir, Moscow, 1967.
+
+A class of nonlinear conservative elliptic equations in cylinders. J R Licois And L, Véron, Ann. Scuola Norm. Sup. Pisa Cl. Sci. 264J. R. LICOIS AND L. VÉRON, A class of nonlinear conservative elliptic equations in cylin- ders, Ann. Scuola Norm. Sup. Pisa Cl. Sci. (4), 26 (1998), pp. 249-283.
+
+Hypercontractivity for the heat semigroup for ultraspherical polynomials and on the n-sphere. C E B Mueller And F, Weissler, J. Funct. Anal. 48C. E. MUELLER AND F. B. WEISSLER, Hypercontractivity for the heat semigroup for ultra- spherical polynomials and on the n-sphere, J. Funct. Anal., 48 (1982), pp. 252-283.
+
+The concavity of Rényi entropy power. G Savaré And G, Toscani, IEEE Trans. Inform. Theory. 60G. SAVARÉ AND G. TOSCANI, The concavity of Rényi entropy power, IEEE Trans. Inform. Theory, 60 (2014), pp. 2687-2693.
+
+Rényi Entropies and Nonlinear Diffusion Equations. G Toscani, Acta Appl. Math. 132G. TOSCANI, Rényi Entropies and Nonlinear Diffusion Equations, Acta Appl. Math., 132 (2014), pp. 595-604.
+
+. J J Dolbeault &amp; M, Cnrs Esteban: Ceremade, Paris, FranceUniversité Paris-Dauphine, PSL Research University, Place de Lattre de TassignyJ. DOLBEAULT & M.J. ESTEBAN: CEREMADE, CNRS, UMR 7534, Université Paris-Dauphine, PSL Research University, Place de Lattre de Tassigny, F-75016 Paris, France.
+
+E-mail: dolbeaul@ceremade.dauphine.fr, esteban@ceremade.dauphine.fr. E-mail: dolbeaul@ceremade.dauphine.fr, esteban@ceremade.dauphine.fr
+
+M Loss, School of Mathematics, Skiles Building. Georgia Institute of Technology, Atlanta GA 30332-0160, USA. E-mailloss@math.gatech.eduM. LOSS: School of Mathematics, Skiles Building, Georgia Institute of Technology, Atlanta GA 30332-0160, USA. E-mail: loss@math.gatech.edu

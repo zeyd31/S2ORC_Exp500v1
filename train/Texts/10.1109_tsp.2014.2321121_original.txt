@@ -1,0 +1,483 @@
+
+Discrete Signal Processing on Graphs: Frequency Analysis
+
+
+Member, IEEEAliaksei Sandryhaila 
+Fellow, IEEEJosé M F Moura 
+Discrete Signal Processing on Graphs: Frequency Analysis
+1Signal processing on graphsgraph filtertotal variationfilter designregularizationlow passhigh passband pass
+Signals and datasets that arise in physical and engineering applications, as well as social, genetics, biomolecular, and many other domains, are becoming increasingly larger and more complex. In contrast to traditional time and image signals, data in these domains are supported by arbitrary graphs. Signal processing on graphs extends concepts and techniques from traditional signal processing to data indexed by generic graphs. This paper studies the concepts of low and high frequencies on graphs, and low-, high-, and band-pass graph filters. In traditional signal processing, there concepts are easily defined because of a natural frequency ordering that has a physical interpretation. For signals residing on graphs, in general, there is no obvious frequency ordering. We propose a definition of total variation for graph signals that naturally leads to a frequency ordering on graphs and defines low-, high-, and band-pass graph signals and filters. We study the design of graph filters with specified frequency response, and illustrate our approach with applications to sensor malfunction detection and data classification.
+
+I. INTRODUCTION
+
+Signals indexed by graphs arise in many applications, including the analysis of preferences and opinions in social and economic networks [1], [2], [3]; research in collaborative activities, such as paper co-authorship and citations [4]; topics and relevance of documents in the World Wide Web [5], [6]; customer preferences for service providers; measurements from sensor networks; interactions in molecular and gene regulatory networks; and many others.
+
+Signal processing on graphs extends the classical discrete signal processing (DSP) theory for time signals and images [7] to signals indexed by vertices of a graph. There are two basic approaches to signal processing on graphs. The first one uses the graph Laplacian matrix as its basic building block (see a recent review [8] and references therein). The second approach adopts the adjacency matrix of the underlying graph as its fundamental building block [9], [10], [11]. Both frameworks define several signal processing concepts similarly, but the difference in their foundation leads to different techniques for signal analysis and processing.
+
+Methods for Laplacian-based graph signal analysis emerged from research on the spectral graph theory [12] and manifold discovery and embedding [13], [14]. Implicitly or explicitly, in these works graphs discretize continuous high-dimensional manifolds from R M : graph vertices sample a manifold and connect to nearest neighbors as determined by their geodesic distances with respect to the underlying manifold. In this setting, the graph Laplacian operator is the discrete counterpart to the continuous Laplace-Beltrami operator on a manifold [12], [15].
+
+This connection is propagated conceptually to Laplacianbased methods for signal processing on graphs. For example, the graph Fourier transform defined and considered in [8], as well as [16], [17], [18], [19], [20], [21], expands graph signals in the eigenbasis of the graph Laplacian. This parallels the classical Fourier transform that expands signals into the basis of complex exponentials that are eigenfunctions of the one-dimensional Laplace operator -the negative second order derivative operator [8]. The frequencies are the eigenvalues of the Laplace operator. Since the operator is symmetric and positive semi-definite, graph frequencies are real-valued and hence totally ordered. So, just like for time signals, the notions of low and high frequencies are easily defined in this model. However, due to the symmetry and positive semi-definiteness of the operator, the Laplacian-based methods are only applicable to undirected graphs with real, non-negative weights.
+
+In [9], [10], [11] we take a different route. Our approach is motivated by the algebraic signal processing (ASP) theory introduced in [22], [23], [24], [25], [26]; see also [27], [28], [29], [30], [31] for additional developments. In ASP, the shift is the elementary non-trivial filter that generates, under an appropriate notion of shift invariance, all linear shift-invariant filters for a given class of signals. The key insight in [9] to build the theory of signal processing on graphs is to identify the shift operator. We adopted the weighted adjacency matrix of the graph as the shift operator and then developed appropriate concepts of z-transform, impulse and frequency response, filtering, convolution, and Fourier transform. In particular, the graph Fourier transform in this framework expands a graph signal into a basis of eigenvectors of the adjacency matrix, and the corresponding spectrum is given by the eigenvalues of the adjacency matrix. This contrasts with the Laplacian-based approach, where Fourier transform and spectrum are defined by the eigenvectors and eigenvalues of the graph Laplacian, while in our approach the eigenvectors and eigenvalues to expand graph signals are obtained from the spectrum of the adjacency matrix.
+
+The association of the graph shift with the adjacency matrix is natural and has multiple intuitive interpretations. The graph shift is an elementary filter, and its output is a graph signal with the value at vertex n given approximately by a weighted linear combination of the input signal values at neighbors of n [9]. With appropriate edge weights, the graph shift can be interpreted as a (minimum mean square) first-order linear predictor [23], [9]. Another interpretation of the graph filter comes from Markov chain theory [32], where the adjacency matrix represents the one-step transition probability matrix of the chain governing its dynamics. Finally, the graph shift can also be seen as a stencil approximation of the first-order derivative on the graph 1 .
+
+The last interpretation of the graph shift contrasts with the corresponding interpretation of the graph Laplacian: the adjacency matrix is associated with a first-order differential operator, while the Laplacian, if viewed as a shift, is associated with a second-order differential operator. In the one-dimensional case, the eigenfunctions for both, the first order and second order differential operators, are complex exponentials, since
+1 2πj d dt e 2πjf t = f e 2πjf t .(1)
+Interpreting the Laplacian as a shift introduces an even symmetry assumption into the corresponding signal model, and for one-dimensional signals [25], this model assumes that the signals are defined on lines of an image (undirected line graphs) rather than on a time line (directed line graphs). The use of the adjacency matrix as the graph shift does not impose such assumptions, and the corresponding framework can be used for arbitrary signals indexed by general graphs, regardless whether these graphs have undirected or directed edges with real or complex, non-negative or negative weights. This paper is concerned with defining low and high frequencies and low-, high-, and band-pass graph signals and filters on generic graphs. In traditional discrete signal processing (DSP), these concepts have an intuitive interpretation, since the frequency contents of time series and digital images are described by complex or real sinusoids that oscillate at different rates [33]. The oscillation rates provide a physical notion of "low" and "high" frequencies: low-frequency components oscillate less and high-frequency ones oscillate more. However, these concepts do not have a similar interpretation on graphs, and it is not obvious how to order graph frequencies to describe the low-and high-frequency contents of a graph signal.
+
+We present an ordering of the graph frequencies that is based on how "oscillatory" the spectral components are with respect to the indexing graph, i.e., how much they change from a node to neighboring nodes. To quantify this amount, we introduce the graph total variation function that measures how much signal samples (values of a graph signal at a node) vary in comparison to neighboring samples. This approach is analogous to the classical DSP theory, where the oscillations in time and image signals are also quantified by appropriately defined total variations [33]. In Laplacian-based graph signal processing [8], the authors choose to order frequencies based on a quadratic form rather than on the total variation of the graph signal. Once we have an ordering of the frequencies based on the graph total variation function, we define the notions of low and high frequencies, low-, high-, and band-pass graph signals, and low-, high-, and band-pass graph filters. We demonstrate that these concepts can be used effectively in sensor networks analysis and classification of hyperlinked political blogs. In our experiments, we show that naturally occurring graph signals, such as measurements of physical quantities collected by sensor networks or labels for political blogs in a dataset, tend to be low-frequency graph signals, while anomalies in sensor measurements or missing data labels can amplify highfrequency parts of the signals. We demonstrate how these anomalies can be detected using appropriately designed highpass graph filters, and how unknown parts of graph signals can be recovered with appropriately designed regularization techniques.
+
+Summary of the paper. In Section II, we present the notation and review from [9] the basics of discrete signal processing on graphs (DSP G ). In Section III, we define the local and total variation for graph signals. In Section IV, we use the proposed total variation to impose an ordering on frequency components from lowest to highest. In Section V, we discuss low-, high-, and band-pass graph filters and their design. In Section VI, we illustrate these concepts with applications to corrupted measurement detection in sensor networks and data classification, and provide experimental results for real-world datasets. Finally, Section VII concludes the paper.
+
+
+II. DISCRETE SIGNAL PROCESSING ON GRAPHS
+
+In this section, we briefly review notation and main concepts of the DSP G framework that are relevant to our work in this paper. A complete introduction to the theory can be found in [9], [10], [11].
+
+
+A. Graph Signals
+
+Signal processing on graphs is concerned with the analysis and processing of datasets in which data elements can be connected to each other according to some relational property. This relation is expressed though a graph G = (V, A), where V = {v 0 , . . . , v N −1 } is a set of nodes and A is a weighted adjacency matrix of the graph. Each data element corresponds to node v n (we also say the data element is indexed by v n ), and each weight A n,m ∈ C of a directed edge from v m to v n reflects the degree of relation of the mth data element to the nth one. Node v m is an in-neighbor of v n and v n is an out-neighbor of v m if A n,m = 0. All in-neighbors of v n form its in-neighborhood, and we denote a set of their indices as N n = {m | A n,m = 0}. If the graph is undirected, the relation goes both ways, A n,m = A m,n , and the nodes are neighbors.
+
+Using this graph, we refer to the dataset as a graph signal, which is defined as a map
+s : V → C, v n → s n .(2)
+We assume that each dataset element s n is a complex number.
+
+Since each signal is isomorphic to a complex-valued vector with N elements, we write graph signals as vectors
+s = s 0 s 1 . . . s N −1 T ∈ C N .
+However, we emphasize that each element s n is indexed by node v n of a given representation graph G = (V, A), as defined by (2). The space S of graph signals (2) is isomorphic to C N , and its dimension is dim S = N .
+
+
+B. Graph Filters
+
+In general, a graph filter is a system H(·) that takes a graph signal s as an input, processes it, and produces another graph signals = H(s) as an output. A basic non-trivial filter defined on a graph G = (V, A), called the graph shift, is a local operation that replaces a signal value s n at node v n with the linear combination of values at the neighbors of node v ñ s n = m∈Nn A n,m s m .
+
+(
+
+Hence, the output of the graph shift is given by the product of the input signal with the adjacency matrix of the graph:
+s = s 0 . . .s N −1 T = As.(4)
+The graph shift is the basic building block in DSP G . All linear, shift-invariant 2 graph filters in DSP G are polynomials in the adjacency matrix A of the form [9] h
+(A) = h 0 I +h 1 A + . . . + h L A L .(5)
+The output of the filter (5) is the signal
+s = H(s) = h(A)s.
+Linear, shift-invariant graph filters possess a number of useful properties. They have at most L ≤ N A taps h , where N A = deg m A (x) is the degree of the minimal polynomial 3 m A (x) of A. If a graph filter (5) is invertible, i.e., matrix h(A) is non-singular, then its inverse is also a graph filter g(A) = h(A) −1 on the same graph G = (V, A). Finally, the space of graph filters is an algebra, i.e., a vector space that is simultaneously a ring.
+
+These properties guarantee that multiplying A by any nonzero constant does not change the set of corresponding linear, shift-invariant graph filters. In particular, we can define the normalized matrix
+A norm = 1 |λ max | A,(6)
+where λ max denotes the eigenvalue of A with the largest magnitude, i.e.,
+|λ max | ≥ |λ m |(7)
+for all 0 ≤ m ≤ M −1. The normalized matrix (6) has spectral norm ||A norm || 2 = 1 that guarantees that the shifted signal is not scaled up, since ||A norm s|| / ||s|| ≤ 1, and ensures the numerical stability of computing with graph filters h(A norm ).
+
+In this paper, we use the graph shift A norm instead of A when these guarantees are required. 2 Filters are linear if for a linear combination of inputs they produce the same linear combination of outputs. Filters are shift-invariant if the result of consecutive processing of a signal by multiple graph filters does not depend on the order of processing; i.e., shift-invariant filters commute with each other. 3 The minimal polynomial of A is the unique monic polynomial of the smallest degree that annihilates A, i.e., m A (A) = 0 [34], [35].
+
+
+C. Graph Fourier Transform
+
+In general, a Fourier transform performs the expansion of a signal into a Fourier basis of signals that are invariant to filtering. In the DSP G framework, a graph Fourier basis corresponds to the Jordan basis of the graph adjacency matrix A (the Jordan decomposition is reviewed in Appendix A). Following the DSP notation, distinct eigenvalues λ 0 , λ 1 , . . . , λ M −1 of the adjacency matrix A are called the graph frequencies and form the spectrum of the graph, and the Jordan eigenvectors that correspond to a frequency λ m are called the frequency components corresponding to the mth frequency. Since multiple eigenvectors can correspond to the same eigenvalue, in general, a graph frequency can have multiple graph frequency components associated with it.
+
+As reviewed in Appendix A, Jordan eigenvectors form the columns of the matrix V in the Jordan decomposition (47)
+A = V J V −1 .
+Hence, the graph Fourier transform of a graph signal s is
+s = F s,(8)
+where
+F = V −1 is the graph Fourier transform matrix.
+The values s n of the signal's graph Fourier transform (8) characterize the frequency content of the signal s. The inverse graph Fourier transform is given by
+s = F −1 s = V s.(9)
+It reconstructs the original signal from its frequency contents by constructing a linear combination of frequency components weighted by the signal's Fourier transform coefficients.
+
+
+D. Frequency Response
+
+The graph Fourier transform (8) also allows us to characterize the effect of a filter on the frequency content of an input signal. As follows from (5) and (8), as well as (47) in Appendix A,
+s = h(A)s = F −1 h(J) F s ⇔ F s = h(J) s.(10)
+Hence, the frequency content of the output signal is obtained by multiplying the frequency content of the input signal by the block diagonal matrix
+h(J) =    h(J r0,0 (λ 0 )) . . . h(J r M −1,D M −1 (λ M −1 ))    .
+We call this matrix the graph frequency response of the filter h(A), and denote it as
+h(A) = h(J).(11)
+Notice that (10) extends the convolution theorem from classical signal processing [7] to graphs, since filtering a signal on a graph is equivalent in the frequency domain to multiplying the signal's spectrum by the frequency response of the filter. 
+0 v 1 v N-1 v N-2 Fig. 1.
+Traditional graph representation for a finite discrete periodic time series of length N .
+
+
+E. Consistency with the Classical DSP
+
+The DSP G framework is consistent with the classical DSP theory. Finite (or periodic) time series can be represented by the directed cycle graph shown in Fig. 1, see [24], [9]. The direction of the edges represents the flow of time from past to future, and the edge from the last vertex v N −1 to v 0 captures the periodic signal extension s N = s 0 for time series. The adjacency matrix of the graph in Fig. 1 is the N × N cyclic permutation matrix
+A = C =      1 1 . . . 1      .(12)
+Substituting (12) into the graph shift (4) yields the standard time delay s n = s n−1 mod N .
+
+The matrix (12) is diagonalizable. Its eigendecomposition, which coincides with the Jordan decomposition (47), is
+C = 1 N DFT −1 N    e −j 2π·0 N . . . e −j 2π·(N −1) N    DFT N ,
+where DFT N is the discrete Fourier transform matrix. Thus, as expected, the graph Fourier transform for signals indexed by the graph in Fig. 1 is F = DFT N , and the corresponding frequencies are 4 , for 0 ≤ n < N ,
+e −j 2π N n .(14)
+
+III. TOTAL VARIATION ON GRAPHS
+
+In this section, we define he total variation on graph signals that is based on the concept of graph shift.
+
+In classical DSP, the total variation (TV) of a discrete signal is defined as the sum of magnitudes of differences between two consecutive signal samples [33]:
+TV(s) = n s n − s n−1 .(15)
+For a finite time series, the periodicity condition s n = s n mod N yields a modified definition 4 In DSP, the ratio 2π N n in the exponent (14) sometimes is also called frequency. In this case, the frequencies are N real numbers between 0 and 2π. However, to remain consistent with the discussion in this paper, we refer to the exponentials (14) as frequencies, and view them as complex numbers of magnitude 1 residing on the unit circle in the complex plane.
+TV(s) = N −1 n=0 s n − s n−1 mod N .(16)
+The total variation (15) and (16) for time series or space signals, such as images, has an intuitive interpretation: it compares how the signal varies with time or space. These concepts lie at the heart of many applications of DSP, including signal regularization and denoising [33], [36], image compression [37] and others.
+
+The variation (16) compares two consecutive signal samples and calculates a cumulative magnitude of the signal change over time. In terms of the time shift (13), we can say that the total variation compares a signal s to its shifted version: the smaller the difference between the original signal and the shifted one, the lower the signal's variation. Using the cyclic permutation matrix (12), we can write (16) as
+TV(s) = ||s − C s|| 1 .(17)
+The total variation (17) measures the difference between the signal samples at each vertex and at its neighbor on the graph that represents finite time series in Fig. 1.
+
+The DSP G generalizes the DSP theory from lines and regular lattices to arbitrary graphs. Hence, we extend (17) to an arbitrary graph G = (V, A) by defining the total variation on a graph as a measure of similarity between a graph signal and its shifted version (4):
+
+Definition 1 (Total Variation on Graphs): The total variation on a graph (TV G ) of a graph signal s is defined as
+TV G (s) = ||s − A norm s|| 1 .(18)
+The definition uses the normalized adjacency matrix A norm to guarantee that the shifted signal is properly scaled for comparison with the original signal, as discussed in Section II-B. The intuition behind Definition 1 is supported by the underlying mathematical model. Similarly to the calculus on discrete signals that defines the discretized derivative as ∇ n (s) = s n − s n−1 [33], in DSP G the derivative (and the gradient) of a graph signal at the nth vertex is defined by the graph shift A norm as
+ds dv n = ∇ n (s) = s n − m∈Nn A norm n,m s m .(19)
+The local variation of the signal at vertex v n is the magnitude |∇ n (s)| of the corresponding gradient, and the total variation is the sum of local variations for all vertices [33], [8]. In particular, if we define the discrete p-Dirichlet form
+S p (s) = 1 p N −1 n=0 |∇ n (s)| p ,(20)
+then for p = 1 the form
+S 1 (s) = N −1 n=0 |∇ n (s)| (21) = N −1 n=0 s n − m∈Nn A norm n,m s m = ||s − A norm s|| 1
+defines the total variation of the graph signal s. It coincides with Definition 1.
+
+The total variation defined through the 1-Dirichlet form (21) depends on the definition of the signal gradient at a graph vertex. For finite time DSP, the gradient is defined by the discretized derivative ∇ n (s) = s n − s n−1 [33] and yields the total variation (17). The DSP G extends the notion of the shift to (3), which leads to the gradient (19) and the total variation (18).
+
+Remark. In [8], the frequencies are ordered using a 2-Dirichlet form, i.e., a quadratic function.
+
+
+IV. LOW AND HIGH FREQUENCIES ON GRAPHS
+
+In this section, we use the total variation (18) to introduce an ordering on frequencies that leads to the definition of low and high frequencies on graphs. We demonstrate that this ordering is unique for graphs with real spectra and not unique for graphs with complex spectra.
+
+
+A. Variation of the Graph Fourier Basis
+
+As discussed in Section II, the graph Fourier basis for an arbitrary graph is given by the Jordan basis of the adjacency matrix A. Consider an eigenvalue λ of A, and let v = v 0 , v 1 , . . . , v R−1 be a Jordan chain of generalized eigenvectors that corresponds to this eigenvalue. Let the indicator function
+i r = 0, r = 0 1, 1 ≤ r < R
+specify whether v r is a proper eigenvector of A or a generalized one. Then we can write the condition (43) on generalized eigenvectors (see Appendix A) as
+Av r = λv r + i r v r−1 .(22)
+Using (22), we write the total variation (18) of the generalized eigenvector v r as
+TV G (v r ) = ||v r − A norm v r || 1 (23) = v r − 1 |λ max | Av r 1 = v r − λ |λ max | v r − i r |λ max | v r−1 1 .
+In particular, when v r is a proper eigenvector of A, i.e. r = 0 and v 0 = v, we have i 0 = 0. In this case, it follows from (23) that the total variation of the eigenvector v is
+TV G (v) = 1 − λ |λ max | ||v|| 1 .(24)
+When a frequency component is a proper eigenvector of the adjacency matrix A, its total variation (24) is determined by the corresponding eigenvalue, since we can scale all eigenvectors to have the same 1 -norm. Moreover, all proper eigenvectors corresponding to the same eigenvalue have the same total variation. However, when a frequency component is not a proper eigenvector, we must use (23) to compare its variation with other frequency components. Finally, it follows from (7) for ||v|| 1 = 1 that
+TV G (v) = 1 − λ |λ max | ≤ 1 + λ |λ max | ≤ 2.(25)
+Hence, the total variation of a normalized proper eigenvector is a real number between 0 and 2.
+
+
+B. Frequency Ordering
+
+The total variation of the Fourier basis, given by (23) and (24), allows us to order the graph frequency components in the order of increasing variation. Following DSP convention, we call frequency components with smaller variations low frequencies and components with higher variations high frequencies.
+
+Here, we determine the frequency ordering induced by the total variation (24) for graphs that have diagonalizable adjacency matrices, i.e., only have proper eigenvectors. This ordering can be similarly extended to graphs with nondiagonalizable adjacency matrices using the generalized eigenvector variation (23).
+
+The following theorem establishes the relative ordering of two distinct real frequencies.
+
+Theorem 1: Consider two distinct real eigenvalues λ m , λ n ∈ R of the adjacency matrix A with corresponding eigenvectors v m and v n . If the eigenvalues are ordered as
+λ m < λ n ,(26)
+then the total variations of their eigenvectors satisfy
+TV G (v m ) > TV G (v n ).(27)
+Proof: Since the eigenvalues are real, it follows from (26) that the difference between the total variations of the two eigenvectors satisfies
+TV G (v m ) − TV G (v n ) = 1 − λ m |λ max | − 1 − λ n |λ max | (a) = 1 − λ m |λ max | − 1 − λ n |λ max | = λ n − λ m |λ max | > 0,
+which yields (27). Here, equality (a) follows from (7). As follows from Theorem 1, if a graph has a real spectrum and its frequencies are ordered as
+λ 0 > λ 1 > . . . > λ M −1 ,(28)
+then λ 0 represents the lowest frequency and λ M −1 is the highest frequency. Moreover, the ordering (28) is a unique ordering of all frequencies from lowest to highest. This frequency ordering for matrices with real spectra is visualized in Fig. 2(a).
+
+The next theorem extends Theorem 1 and establishes the relative ordering of two distinct frequencies corresponding to complex eigenvalues.
+
+Theorem 2: Consider two distinct complex eigenvalues λ m , λ n ∈ C of the adjacency matrix A. Let v m and v n be the corresponding eigenvectors. The total variations of these eigenvectors satisfy
+TV G (v m ) < TV G (v n )(29)
+if the eigenvalue λ m is located closer to the value |λ max | on the complex plane than the eigenvalue λ n .
+
+Proof: This result follows immediately from the interpretation of the total variation (24) as a distance function on the complex plane. Since λ max = 0 (otherwise A would have been . .  Frequency ordering from low frequencies (LF) to high frequencies (HF) for graphs with real and complex spectra. a zero matrix), multiplying both sides of (29) by |λ max | yields the equivalent inequality
+|λ max | − λ m < |λ max | − λ n .(30)
+The expressions on both sides of (30) are the distances from λ m and λ n to |λ max | on the complex plane. As follows from Theorem 2, frequencies of a graph with a complex spectrum are ordered by their distance from |λ max |. As a result, in contrast to the graphs with real spectra, the induced ordering of complex frequencies from lowest to highest is not unique, since distinct complex frequencies can yield the same total variation for their corresponding frequency components. In particular, all eigenvalues lying on a circle of radius ρ centered at point |λ max | on the complex plane have the same total variation ρ/|λ max |. It also follows from (7) that all graph frequencies λ m can lie only inside and on the boundary of the circle with radius |λ max |. The frequency ordering for adjacency matrices with complex spectra is visualized in Fig. 2(b).
+
+Consistency with DSP theory. The frequency ordering induced by the total variation (18) is consistent with classical DSP. Recall from (14) that the cycle graph in Fig. 1, which represents finite time series, has a complex spectrum λ n = e −j 2π N n for 0 ≤ n < N . Hence, the total variation of the nth frequency component is
+TV G (v n ) = 1 − e −j 2πn N = 1 − cos 2πn N + sin 2πn N .
+Hence, the frequencies λ m and λ N −m have the same variation, and the induced order from lowest to highest frequencies is λ 0 , λ 1 , λ N −1 , λ 2 , λ N −2 , . . ., with the lowest frequency corresponding to λ 0 = 1 and the highest frequency corresponding to λ N/2 = −1 for even N or λ (N ±1)/2 for odd N . This ordering is visualized in Fig. 3, and it is the conventional frequency ordering in DSP [7].
+
+
+C. Frequency Ordering Based on Quadratic Form
+
+Here we compare our ordering of the frequencies based on the total variation with an ordering based on using the 2-Dirichlet form, p = 2, like in [8]. Taking p = 2 in (20), we get
+S 2 (s) = 1 2 N −1 n=0 |∇ n (s)| 2 = 1 2 ||s − A norm s|| 2 2 (31) = 1 2 s H (I −A norm ) H (I −A norm ) s.
+This quadratic form defines the seminorm
+||s|| G = S 2 (s),(32)
+since (I −A norm ) H (I −A norm ) is a positive-semidefinite matrix. The rationale in [8] is that the quadratic form is small when signal values are close to the corresponding linear combinations of their neighbors' values, and large otherwise. We introduce an ordering of the graph Fourier basis from lowest to highest frequencies based on the graph shift quadratic form. As we demonstrate next, this ordering coincides with the ordering induced by the total variation.
+
+The quadratic form (31) of an eigenvector v that corresponds to the eigenvalue λ is
+S 2 (v) = 1 2 ||v − A norm v|| 2 2 = 1 − λ |λ max | 2 ||v|| 2 .(33)
+Consider two real eigenvalues λ m and λ n with corresponding eigenvectors v m and v n . If these eigenvalues satisfy λ m < λ n , then it follows from (33) that
+S 2 (v m ) − S 2 (v n ) = 1 − λ m |λ max | 2 − 1 − λ n |λ max | 2 = 1 − λ m |λ max | 2 − 1 − λ n |λ max | 2 = λ n − λ m |λ max | 2 (λ m + λ n − 2|λ max |) > 0.
+Hence, S 2 (v m ) > S 2 (v n ), and we obtain a reformulation of Theorem 1 for the graph shift quadratic form. As a consequence, arranging frequency components in the increasing order of their graph shift quadratic form leads to the same ordering of frequencies (27) from lowest to highest as the total variation. A similar reformulation of Theorem 2 for the graph shift quadratic form is demonstrated analogously, which leads to the same ordering of complex frequencies as the ordering induced by the total variation.
+
+
+V. FILTER DESIGN
+
+When a graph signal is processed by a graph filter, its frequency content changes according to the frequency response (11) of the filter. Similarly to classical DSP, we can characterize graph filters as low-, high-, and band-pass filters based on their frequency response.
+
+
+A. Low-, High-, and Band-pass Graph Filters
+
+Following the DSP convention, we call filters low-pass if they do not significantly affect the frequency content of lowfrequency signals but attenuate, i.e., reduce, the magnitude of high-frequency signals. Analogously, high-pass filters pass high-frequency signals while attenuating low-frequency ones, and band-pass filters pass signals with frequency content within a specified frequency band while attenuating all others.
+
+The action of a graph filter h(A) of the form (5) on the frequency content of a graph signal s is completely specified by its frequency response (11). For simplicity of presentation, we discuss here graphs with diagonalizable adjacency matrices, for which (11) is a diagonal matrix with h(λ m ) on the main diagonal, 0 ≤ m < M . In this case, the Fourier transform coefficients of the filtered signal s = h(A)s are the Fourier transform coefficients of the input signal multiplied element-wise by the frequency response of the filter:
+F s =    h(λ 0 ) . . . h(λ M −1 )    s =    h(λ 0 ) s 0 . . . h(λ M −1 ) s N −1    .
+Hence, to attenuate the frequency content of a signal inside a specific part of the spectrum, we should design a filter h(A) that for corresponding frequencies λ m satisfies h(λ m ) ≈ 0.
+
+Consider an example of ideal low-pass and high-pass filters h(A) and g(A). Let the cut-off frequency λ cut equal to the median of the bandwidth, i.e., be such that exactly half of frequencies λ m are lower frequencies than λ cut . The frequency responses of these filters are defined as h(λ m ) = 1 − g(λ m ) = 1, λ m > λ cut , 0, λ m ≤ λ cut .
+
+As we demonstrate next, the design of such filters, as well as any low-, high-, and band-pass graph filters, is a linear problem.
+
+
+B. Frequency Response Design for Graph Filters
+
+A graph filter can be defined through its frequency response h(λ m ) at its distinct frequencies λ m , m = 0, . . . , M − 1. Since a graph filter (5) is a polynomial of degree L, the construction of a filter with frequency response h(λ m ) = α m corresponds to inverse polynomial interpolation, i.e., solving a system of M linear equations with L + 1 unknowns h 0 , . . . , h L :
+h 0 + h 1 λ 0 + . . . + h L λ L 0 = α 0 , h 0 + h 1 λ 1 + . . . + h L λ L 1 = α 1 , . . . (35) h 0 + h 1 λ M −1 + . . . + h L λ L M −1 = α M −1 .
+This system can be written as
+     1 λ 0 . . . λ L 0 1 λ 1 . . . λ L 1 . . . . . . 1 λ M −1 . . . λ L M −1           h 0 h 1 . . . h L      =      α 0 α 1 . . . α M −1      .(36)
+The system matrix in (36) is a full-rank M × (L + 1) Vandermonde matrix [34], [35]. Hence, the system has infinitely many exact solutions if M ≤ L and one unique exact solution if M = L + 1.
+
+When M ≥ L + 1, the system is overdetermined and does not have an exact solution. This is a frequent case in practice, since the number of coefficients in the graph filter may be restricted by computational efficiency or numerical stability requirements. In this case, we can find an approximate solution, for example, in the least-squares sense.
+
+As an example of filter construction, consider a network of 150 weather stations that measure daily temperature near major cities across the United States [38]. We represent these stations with a directed 6-nearest neighbor graph, in which every sensor corresponds to a vertex and is connected to six closest sensors by directed edges. The edge weight between connected vertices v n and v m is
+A n,m = e −d 2 nm k∈Nn e −d 2 nk ∈Nm e −d 2 m ,(37)
+where d n,m denotes the geodesical distance between the nth and mth sensors. A daily snapshot of all 150 measurements forms a signal indexed by this graph, such as the example signal shown in Fig. 4. Fig. 5 shows the frequency responses of the low-and highpass filters for this graph that have degree L = 10. These filters are least-squares approximations of the ideal low-and high-pass filters (34). The frequency response in (35) for the low-pass filter is α m = 1 for frequencies lower than λ cut and 0 otherwise; and vice versa for the high-pass filter. By design, the constructed filters satisfy the relation [39] h(A) = I N −g(A).
+
+If we require that h(A) and g(A) do not have the same number of coefficients or if we use an approximation metric other than least squares, the constructed polynomials will not satisfy (38).  Fig. 4. The length of the filters is restricted to 10 coefficients.
+
+
+VI. APPLICATIONS
+
+In this section, we apply the theory discussed in this paper to graphs and datasets that arise in different contexts. We demonstrate how the DSP G framework extends standard signal processing techniques of band-pass filtering and signal regularization to solve interesting problems in sensor networking and data classification.
+
+
+A. Malfunction Detection in Sensor Networks
+
+Today, sensors are ubiquitous. They are usually cheap to manufacture and deploy, so networks of sensors are used to measure and monitor a wide range of physical quantities from structural integrity of buildings to air pollution. However, the sheer quantity of sensors and the area of their deployment may make it challenging to check that every sensor is operating correctly. As an alternative, it is desirable to detect a malfunctioning sensor solely from the data it generates. We illustrate here how the DSP G framework can be used to devise a simple solution to this problem.
+
+Many physical quantities represent graph signals with small variation with respect to the graph of sensors. As an illustration, consider the temperature across the United States measured by 150 weather stations located near major cities [38]. An example temperature measurement is shown in Fig. 4, and the construction of the corresponding weather station graph is discussed in Section V-B. The graph Fourier transform of this temperature snapshot is shown in Fig. 6, with frequencies ordered from lowest to highest. Most of the signal's energy is concentrated in the low frequencies that have small variation. This suggests that the signal varies slowly across the graph, i.e., that cities located close to each other have similar temperatures. A sensor malfunction may cause an unusual difference between its measurements and the measurements of nearby stations. Fig. 7 shows an example of an (artificially) corrupted measurement, where the station located near Colorado Springs, CO, reports a temperature that contains an error of 20 degrees (temperature at each sensor is color-coded using the same color scheme as in Fig. 4). The true measurement in Fig. 7(a) is very similar to measurements at neighboring cities, while the corrupted measurement in Fig. 7(b) differs significantly from its neighbors.
+
+Such difference in temperature at closely located cities results in the increased presence of higher frequencies in the corrupted signal. By high-pass filtering the signal and then thresholding the filtered output, we can detect this anomaly.
+
+Experiment. We consider the problem of detecting a corrupted measurement from a single temperature station. We simulate a signal corruption by changing the measurement of one sensor by 20 degrees; such an error is reasonably small and is hard to detect by direct inspection of measurements of each station separately. To detect the malfunction, we extract the high-frequency component of the resulting graph signal using the high-pass filter in Fig. 5 and then threshold it. If one or more Fourier transform coefficients exceed the threshold value, we conclude that a sensor is malfunctioning. The cut-off threshold is selected automatically as the maximum absolute value of graph Fourier transform coefficients of the high-pass filtered measurements from the previous three days.
+
+Results. We considered 365 measurements collected during the year 2003 by all 150 stations, and conducted 150 × 365 = 54, 750 tests. The resulting average detection accuracy was 89%, so the proposed approach, despite its relative simplicity, correctly detected a corrupted measurement almost 9 times out of 10. Fig. 8 illustrates the conducted experiment. It shows frequency contents of high-pass filtered signals that contain a corrupted measurement from a sensor at five different locations. A comparison with the high-pass component of the uncorrupted signal in Fig. 8(a) shows coefficients above thresholds that lead to the detection of a corrupted signal.
+
+
+B. Data Classification
+
+Data classification is an important problem in machine learning and data mining [40], [41]. Its objective is to classify each element of the dataset based on specified characteristics of the data. For example, image and video databases may be classified based on their contents; documents are grouped with respect to their topics; and customers may be distinguished based on their shopping preferences. In all cases, each dataset element is assigned a label from a pre-defined group of labels.
+
+Large datasets often cannot be classified manually. In this case, a common approach is to classify only a subset of elements and then use a known structure of the dataset to predict the labels for the remaining elements. A key assumption in this approach is that similar elements tend to be in the same class. In this case, the labels tend to form a signal with small variation over the graph of similarities. Hence, information about similarity between dataset elements provides means for inferring unknown labels from known ones.
+
+Consider a graph G = (V, A) with N vertices that represent N data elements. We assume that two elements are similar to each other if the corresponding vertices are connected; if their connection is directed, the similarity is assumed only in the direction of the edge. We define a signal s (known) on this graph that captures known labels. For a two-class problem, this signal is defined as
+s (known) n =      +1
+, nth element belongs to class 1, −1, nth element belongs to class 2, 0, class is unknown.
+
+The predicted labels for all data elements are found as the signal that varies the least on the graph G = (V, A). That is, we find the predicted labels as the solution to the optimization problem
+s (predicted) = argmin s∈R N S 2 (s)(39)
+subject to || C s (known) − C s|| 2 2 < ,
+
+where C is a N × N diagonal matrix such that
+C n,n = 1, if s (known) n = 0, 0, otherwise.
+The parameter in (40) controls how well the known labels are preserved. Alternatively, the problem (39) with condition (40) can be formulated and solved as
+s (predicted) = argmin s∈R N S 2 (s) + α|| C s (known) − C s|| 2 2 . (41)
+Here, the parameter α controls the relative importance of conditions (39) and (40). Once the predicted signal s (predicted) is calculated, the unlabeled data elements are assigned to class 1 if s (predicted) n > 0 and another class otherwise. In classical DSP, minimization-based approaches to signal recovery and reconstruction are called signal regularization. They have been used for signal denoising, deblurring and recovery [42], [43], [44], [45]. In signal processing on graphs, minimization problems similar to (39) and (41) formulated with the Laplacian quadratic form (see (51) in Appendix B) are used for data classification [46], [47], [41], [48], characterization of graph signal smoothness [18] and recovery [8]. The problems (39) and (41) minimize the graph shift quadratic form (31) and represent an alternative approach to graph signal regularization.
+
+Experiments. We illustrate the application of graph signal regularization to data classification by solving the minimization problem (41) for two datasets. The first dataset is a collection of images of handwritten digits 4 and 9 [49]. Since these digits look quite similar, their automatic recognition is a challenging task. For each digit, we use 1000 grayscale images of size 28 × 28. The graph is constructed by viewing each image as a point in a 28 2 = 784-dimensional vector space, computing Euclidean distances between all images, and connecting each image with six nearest neighbors by directed edges, so the resulting graph is a directed six-nearest neighbor graph. We consider unweighted graphs, 5 for which all non-zero edge weights are set to 1.
+
+The second dataset is a collection of 1224 online political blogs [5]. The blogs can be either "conservative" or "liberal." The dataset is represented by a directed graph with vertices corresponding to blogs and directed edges corresponding to hyperlink references between blogs. For this dataset we also use only the unweighted graph (since we cannot assign a similarity value to a hyperlink).
+
+For both datasets, we consider trade-offs between the two parts of the objective function in (41) ranging from 1 to 100. In particular, for each ratio of known labels 0.5%, 1%, 2%, 3%, 5%, 7%, 10% and 15%, we run experiments for 199 different values of α ∈ {1/100, 1/99, . . . , 1/2, 1, 2, . . . , 100}, a total of 8 × 199 = 1592 experiments. In each experiment, we calculate the average classification accuracy over 100 runs. After completing all experiments, we select the highest average accuracy for each ratio of known labels.
+
+For comparison, we also consider the Laplacian quadratic form (51), and solve the minimization problem
+s (predicted) = argmin s∈R N S (L) 2 (s) + α|| C(s (known) − s)|| 2 2 ,(42)
+where we vary α between 0.01 and 100 as well. Since the Laplacian can only be used with undirected graphs, we convert the original directed graphs for digits and blogs to undirected graphs by making all edges undirected.
+
+For a fair comparison with the Laplacian-based minimization (42), we also test our approach (41) on the same undirected graphs. These experiments provide an equal testing ground for the two methods. In addition, by comparing results for our approach on directed and undirected graphs, we determine whether the direction of graph edges provides additional valuable information that can improve the classification accuracy.
+
+Results. Average classification accuracies for image and blog datasets are shown, respectively, in Fig. 9 and Fig. 10. For both datasets, the total variation minimization approach (41) applied to directed graphs has produced highest accuracies. This observation demonstrates that using the information about the direction of graph edges improves the classification accuracy of regularization-based classification.
+
+Furthermore, our approach (41) significantly outperforms the Laplacian-based approach (42) on undirected graphs. In particular, for small ratios of known labels, the differences in average accuracies can exceed 10% for image recognition and 20% for blog classification.
+
+Discussion. The following example illustrates how classification based on signal regularization works. Fig. 11 shows a subgraph of 40 randomly selected blogs with their mutual hyperlinks. Fig. 11(a) contains true labels for these blogs obtained from [5], while the labels in Fig. 11(b) are obtained by randomly switching 7 out of 40 labels to opposite values. The 5 We have also considered weighted graphs with edge weights set to exp(−d 2 n,m ), where dn,m is the Euclidean distance between the images. This is a common way of assigning edge weights for graphs that reflect similarity between objects [50], [51], [16]. Results obtained for these weighted graphs were practically indistinguishable from the results in Fig. 9 and Fig. 10 obtained for unweighted graphs. 
+
+
+Classification accuracy
+
+
+Percentage of initially known labels
+
+Graph shift (directed) Graph shift (undirected) Laplacian (undirected) Fig. 9. Classification accuracy of images of handwritten digits 0 and 1 using the graph shift-based regularization and Laplacian-based regularization on weighted and unweighted similarity graphs. frequency content of the true and synthetic labels as signals on this subgraph are shown in Fig. 12. The true labels form a signal that has more energy concentrated in lower frequencies, i.e., has a smaller variation than the signal formed by the synthetic labels. This observation supports our assumption that the solution to the regularization problem (41) should correspond to correct label assignment. Incidentally, this assumption also explains why the maximum classification accuracy achieved in our experiments is 96%, as seen in Fig. 10. We expect that every blog contains more hyperlinks to blogs of its own type than to blogs of the opposite type. However, after inspecting the entire dataset, we discovered that 50 blogs out of 1224, i.e., 4% of the total dataset, do not obey this assumption. As a result, 4% of all blogs are always misclassified, which results in maximum achievable accuracy of 96%.
+
+
+VII. CONCLUSIONS
+
+In this paper, we introduced low-, high-, and band-pass signals and low-, high-, and band-pass filters on graphs. These (a) True labels (b) Synthetic labels Fig. 11. A subgraph of 40 blogs labels: blue corresponds to "liberal" blogs and red corresponds to "conservative" ones. Labels in (a) form a smoother graph signal than labels in (b).
+
+
+Low frequencies High frequencies
+
+True labels Synthetic labels Fig. 12. Magnitudes of the spectral coefficients for graph signals formed by true and synthetic labels in Fig. 11.
+
+concepts do not have simple and intuitive interpretations for general graphs. We defined them using the concept of frequencies in digital signal processing on graphs. We proposed a novel definition of a total variation on graphs that measures the difference between a graph signal and its shifted version. We then used the total variation to order graph frequencies and to define low-and high-pass graph signals and filters. We demonstrated how to design filters with specified frequency response by finding least squares approximations to solutions of systems of linear algebraic equations. We applied these concepts and methodologies to sensor network analysis and data classification and conducted experiments with real-world datasets of temperature measurements collected by a sensor network and databases of images and hyperlinked documents.
+
+Our experimental results showed that the techniques presented in this paper are promising in problems like detecting sensor malfunctions, graph signal regularization, and classification of partially labeled data. 
+
+We concatenate all blocks V m,d , 0 ≤ d < D m and 0 ≤ m < M , into one block matrix
+V = V 0,0 . . . V M −1,D M −1 ,(46)
+so that the block V m,d is at position m−1 k=0 D k + d in this matrix. Then matrix A is written in its Jordan decomposition form as
+A = V J V −1 ,(47)
+where the block-diagonal matrix The Laplacian matrix for an undirected graph G = (V, A) with real, non-negative edge weights A n,m is defined as
+L = D −A,(49)
+where D is a diagonal matrix with diagonal elements 
+
+In particular, the Laplacian quadratic form (50) of a Fourier basis vector is S (L) 2 (u n ) = β n .
+
+It imposes the following order of the Laplacian Fourier basis from the lowest frequency to the highest one:
+u 0 , u 1 , . . . , u N −1 .(53)
+For a general graph, the total variation (18) and the graph shift quadratic form (31) are different from the (50) and (51). However, as we demonstrate in the following theorem, the DSP G and the Laplacian-based approach to signal processing on graphs lead to the same graph Fourier basis, notions of low and high frequencies, and frequency ordering on any regular 6 graph.
+
+Theorem 3: The quadratic forms (31) and (51) induce the same ordering on the graph Fourier basis for regular graphs.
+
+Proof: Consider a d-regular graph with adjacency matrix A. Since the Laplacian matrix (49) can be defined only for undirected graphs with real non-negative edge weights, we also require that A = A T and has only real non-negative entries. Hence, A has real eigenvalues and a complete set of orthonormal eigenvectors [34], and its Jordan decomposition (47) becomes the eigendecomposition
+A = V Λ V T ,
+where Λ is the diagonal matrix of eigenvalues. Since the graph is d-regular, its Laplacian matrix (49) satisfies
+L = d I −A = V(d I − Λ) V T .
+Hence, L and A have the same eigenvectors u n = v n , i.e., the same graph Fourier basis. The corresponding eigenvalues are β m = d − λ m . Since the smallest eigenvalue of L is β 0 = 0, we also obtain λ max = d.
+
+The graph shift quadratic form (31) of the eigenvector v m satisfies
+S 2 (u m ) = 1 2 I − 1 d A u m 2 2 = 1 2 1 − λ m d 2 = 1 2d 2 (d − λ m ) 2 = 1 2d 2 β 2 m = 1 2d 2 S (L) 2 (s) 2 .(54)
+Since β 2 /(2d 2 ) is a monotonically increasing function for β ≥ 0, it follows from (54) that ordering the graph Fourier basis u n , 0 ≤ n < N , by increasing values of the quadratic form (31) leads to the same order as (53). Hence, the notions of low and high frequencies, and frequency orderings from lowest to highest coincide on regular graphs for the DSP G and the Laplacian-based approach. 6 All vertices of a d-regular graph have the same degree d, so that N −1 m=0 An,m = d.
+
+
+This work was supported in part by AFOSR grant FA95501210087. A. Sandryhaila and J. M. F. Moura are with the Department of Electrical and Computer Engineering, Carnegie Mellon University, Pittsburgh, PA 15213-3890. Ph: (412)268-6341; fax: (412)268-3890. Email: asandryh@andrew.cmu.edu, moura@ece.cmu.edu.
+
+
+Fig. 2. Frequency ordering from low frequencies (LF) to high frequencies (HF) for graphs with real and complex spectra.
+
+Fig. 3 .
+3Frequency ordering for finite discrete periodic time series. Frequencies λm and λ N −m have the same total variations since they lie on the same circle centered around 1.
+
+Fig. 5 .
+5Frequency responses of low-pass and high-pass filters for the sensor graph in
+
+Fig. 6 .Fig. 7 .
+67The frequency content of the graph signal inFig. 4. Frequencies are ordered from the lowest to highest. A subgraph of the sensor graph inFig. 4showing the (a) true and (b) corrupted measurement by the sensor located in Colorado Springs, CO.
+
+Fig. 8 .
+8The magnitudes of spectral coefficients of the original and corrupted temperature measurements after high-pass filtering: (a) the true signal fromFig. 4;(b)-(f) signals obtained from the true signal by corrupting the measurement of a single station located at the indicated city.
+
+Fig. 10 .
+10Classification accuracy of political blogs using the graph shift-based regularization and Laplacian-based regularization on an unweighted graph of hyperlink references.
+
+∈
+matrix A ∈ C N ×N has M ≤ N distinct eigenvalues λ 0 , . . . , λ M −1 . Each eigenvalue λ m has D m corresponding eigenvectors v m,0 , . . . , v m,Dm−1 that satisfy(A − λ m I N )v m,d = 0. Moreover, each eigenvector v m,d can generate a Jordan chain of R m,d ≥ 1 generalized eigenvectors v m,d,r , 0 ≤ r < R m,eigenvector v m,d and its Jordan chain of size R m,d , we define a Jordan block matrix of dimensions R m,d × R mC R m,d ×R m,d . (44) By construction, each eigenvalue λ m is associated with D m Jordan blocks, each of dimension R m,d × R m,d , where 0 ≤ d < D m . Next, for each eigenvector v m,d , we collect its Jordan chain into a N × R m,d matrix V m,d = v m,d,0 . . . v m,d,R m,d −1 .
+
+
+the Jordan normal form of A. The columns of V, i.e., all eigenvectors and generalized eigenvectors of A, are called the Jordan basis of A. APPENDIX B: CONNECTION WITH LAPLACIAN-BASED VARIATION
+
+
+The Laplacian matrix has real non-negative eigenvalues 0 = β 0 < β 1 ≤ β 2 ≤ . . . ≤ β N −1 and a complete set of corresponding orthonormal eigenvectors u n for 0 ≤ n < N .Similarly to the DSP G definition of the graph Fourier transform(8), the Laplacian-based Fourier transform expands a graph signal s into the eigenbasis of L[8]. The total variation is defined as TV L (s
+This analogy is more intuitive to understand if the graph is regular.
+
+. M Jackson, Social and Economic Networks, Princeton Univ.M. Jackson, Social and Economic Networks, Princeton Univ., 2008.
+
+M Newman, Networks: An Introduction. Oxford Univ. PressM. Newman, Networks: An Introduction, Oxford Univ. Press, 2010.
+
+D Easley, J Kleinberg, Networks, Crowds, and Markets. Cambridge Univ. PressD. Easley and J. Kleinberg, Networks, Crowds, and Markets, Cambridge Univ. Press, 2010.
+
+Coauthorship networks and patterns of scientific collaboration. M E J Newman, Proc. Nat. Acad. Sci. 101M. E. J. Newman, "Coauthorship networks and patterns of scientific collaboration," Proc. Nat. Acad. Sci., vol. 101, pp. 5200-5205, 2004.
+
+The political blogosphere and the 2004 U.S. election: Divided they blog. L A Adamic, N Glance, Proc. Int. Workshop on Link Discovery. Int. Workshop on Link DiscoveryL. A. Adamic and N. Glance, "The political blogosphere and the 2004 U.S. election: Divided they blog," in Proc. Int. Workshop on Link Discovery, 2005, pp. 36-43.
+
+The anatomy of a large-scale hypertextual web search engine. S Brin, L Page, Comp. Networks and ISDN Syst. 30S. Brin and L. Page, "The anatomy of a large-scale hypertextual web search engine," Comp. Networks and ISDN Syst., vol. 30, pp. 107-117, 1998.
+
+A V Oppenheim, R W Schafer, J R Buck, Discrete-Time Signal Processing. Prentice Hall2nd editionA. V. Oppenheim, R. W. Schafer, and J. R. Buck, Discrete-Time Signal Processing, Prentice Hall, 2nd edition, 1999.
+
+The emerging field of signal processing on graphs. D I Shuman, S K Narang, P Frossard, A Ortega, P Vandergheynst, IEEE Signal Proc. Mag. 303D. I. Shuman, S. K. Narang, P. Frossard, A. Ortega, and P. Vandergheynst, "The emerging field of signal processing on graphs," IEEE Signal Proc. Mag., vol. 30, no. 3, pp. 83-98, 2013.
+
+Discrete signal processing on graphs. A Sandryhaila, J M F Moura, IEEE Trans. Signal Proc. 617A. Sandryhaila and J. M. F. Moura, "Discrete signal processing on graphs," IEEE Trans. Signal Proc., vol. 61, no. 7, pp. 1644-1656, 2013.
+
+Discrete signal processing on graphs: Graph Fourier transform. A Sandryhaila, J M F Moura, Proc. IEEE Int. Conf. Acoust., Speech and Signal Proc. IEEE Int. Conf. Acoust., Speech and SignalA. Sandryhaila and J. M. F. Moura, "Discrete signal processing on graphs: Graph Fourier transform," in Proc. IEEE Int. Conf. Acoust., Speech and Signal Proc., 2013.
+
+Discrete signal processing on graphs: Graph filters. A Sandryhaila, J M F Moura, Proc. IEEE Int. Conf. Acoust., Speech and Signal Proc. IEEE Int. Conf. Acoust., Speech and SignalA. Sandryhaila and J. M. F. Moura, "Discrete signal processing on graphs: Graph filters," in Proc. IEEE Int. Conf. Acoust., Speech and Signal Proc., 2013.
+
+F R K Chung, Spectral Graph Theory. AMSF. R. K. Chung, Spectral Graph Theory, AMS, 1996.
+
+A global geometric framework for nonlinear dmensionality reduction. J F Tenenbaum, V Silva, J C Langford, Science. 290J. F. Tenenbaum, V. Silva, and J. C. Langford, "A global geometric framework for nonlinear dmensionality reduction," Science, vol. 290, pp. 2319-2323, 2000.
+
+Nonlinear dimensionality reduction by locally linear embedding. S Roweis, L Saul, Science. 290S. Roweis and L. Saul, "Nonlinear dimensionality reduction by locally linear embedding," Science, vol. 290, pp. 2323-2326, 2000.
+
+Geometric diffusions as a tool for harmonic analysis and structure definition of data: Diffusion maps. R R Coifman, S Lafon, A Lee, M Maggioni, B Nadler, F J Warner, S W Zucker, Proc. Nat. Acad. Sci. 10221R. R. Coifman, S. Lafon, A. Lee, M. Maggioni, B. Nadler, F. J. Warner, and S. W. Zucker, "Geometric diffusions as a tool for harmonic analysis and structure definition of data: Diffusion maps," Proc. Nat. Acad. Sci., vol. 102, no. 21, pp. 7426-7431, 2005.
+
+Wavelets on graphs via spectral graph theory. D K Hammond, P Vandergheynst, R Gribonval, J. Appl. Comp. Harm. Anal. 302D. K. Hammond, P. Vandergheynst, and R. Gribonval, "Wavelets on graphs via spectral graph theory," J. Appl. Comp. Harm. Anal., vol. 30, no. 2, pp. 129-150, 2011.
+
+Perfect reconstruction two-channel wavelet filter banks for graph structured data. S K Narang, A Ortega, IEEE Trans. Signal Proc. 606S. K. Narang and A. Ortega, "Perfect reconstruction two-channel wavelet filter banks for graph structured data," IEEE Trans. Signal Proc., vol. 60, no. 6, pp. 2786-2799, 2012.
+
+A spectral graph uncertainty principle. A Agaskar, Y Lu, IEEE Trans. Inf. Theory. 597A. Agaskar and Y. Lu, "A spectral graph uncertainty principle," IEEE Trans. Inf. Theory, vol. 59, no. 7, pp. 4338-4356, 2013.
+
+Multiresolution graph signal processing via circulant structures. V Ekambaram, G Fanti, B Ayazifar, K Ramchandran, Proc. IEEE DSP/SPE Workshop. IEEE DSP/SPE WorkshopV. Ekambaram, G. Fanti, B. Ayazifar, and K. Ramchandran, "Multires- olution graph signal processing via circulant structures," in Proc. IEEE DSP/SPE Workshop, 2013.
+
+Circulant structures and graph signal processing. V Ekambaram, G Fanti, B Ayazifar, K Ramchandran, Proc. IEEE Int. Conf. Image Proc. IEEE Int. Conf. ImageV. Ekambaram, G. Fanti, B. Ayazifar, and K. Ramchandran, "Circulant structures and graph signal processing," in Proc. IEEE Int. Conf. Image Proc., 2013.
+
+Approximating signals supported on graphs. X Zhu, M Rabbat, Proc. IEEE Int. Conf. Acoust., Speech and Signal Proc. IEEE Int. Conf. Acoust., Speech and SignalX. Zhu and M. Rabbat, "Approximating signals supported on graphs," in Proc. IEEE Int. Conf. Acoust., Speech and Signal Proc., 2012, pp. 3921-3924.
+
+The algebraic approach to the discrete cosine and sine transforms and their fast algorithms. M Püschel, J M F Moura, SIAM J. Comp. 325M. Püschel and J. M. F. Moura, "The algebraic approach to the discrete cosine and sine transforms and their fast algorithms," SIAM J. Comp., vol. 32, no. 5, pp. 1280-1316, 2003.
+
+Algebraic signal processing theory. M Püschel, J M F Moura, M. Püschel and J. M. F. Moura, "Algebraic signal processing theory," http://arxiv.org/abs/cs.IT/0612077.
+
+Algebraic signal processing theory: Foundation and 1-D time. M Püschel, J M F Moura, IEEE Trans. Signal Proc. 568M. Püschel and J. M. F. Moura, "Algebraic signal processing theory: Foundation and 1-D time," IEEE Trans. Signal Proc., vol. 56, no. 8, pp. 3572-3585, 2008.
+
+Algebraic signal processing theory: 1-D space. M Püschel, J M F Moura, IEEE Trans. Signal Proc. 568M. Püschel and J. M. F. Moura, "Algebraic signal processing theory: 1-D space," IEEE Trans. Signal Proc., vol. 56, no. 8, pp. 3586-3599, 2008.
+
+Algebraic signal processing theory: Cooley-Tukey type algorithms for DCTs and DSTs. M Püschel, J M F Moura, IEEE Trans. Signal Proc. 564M. Püschel and J. M. F. Moura, "Algebraic signal processing theory: Cooley-Tukey type algorithms for DCTs and DSTs," IEEE Trans. Signal Proc., vol. 56, no. 4, pp. 1502-1521, 2008.
+
+Fourier transform for the directed quincunx lattice. M Püschel, M Rötteler, Proc. ICASSP. ICASSP4M. Püschel and M. Rötteler, "Fourier transform for the directed quincunx lattice," in Proc. ICASSP, 2005, vol. 4, pp. 401-404.
+
+Fourier transform for the spatial quincunx lattice. M Püschel, M Rötteler, Proc. ICIP. ICIP2M. Püschel and M. Rötteler, "Fourier transform for the spatial quincunx lattice," in Proc. ICIP, 2005, vol. 2, pp. 494-497.
+
+Algebraic signal processing theory: 2-D hexagonal spatial lattice. M Püschel, M Rötteler, IEEE Trans. on Image Proc. 166M. Püschel and M. Rötteler, "Algebraic signal processing theory: 2-D hexagonal spatial lattice," IEEE Trans. on Image Proc., vol. 16, no. 6, pp. 1506-1521, 2007.
+
+Algebraic signal processing theory: 1-D Nearest-neighbor models. A Sandryhaila, J Kovacevic, M Püschel, IEEE Trans. on Signal Proc. 605A. Sandryhaila, J. Kovacevic, and M. Püschel, "Algebraic signal processing theory: 1-D Nearest-neighbor models," IEEE Trans. on Signal Proc., vol. 60, no. 5, pp. 2247-2259, 2012.
+
+Algebraic signal processing theory: Cooley-Tukey type algorithms for polynomial transforms based on induction. A Sandryhaila, J Kovacevic, M Püschel, SIAM J. Matrix Analysis and Appl. 322A. Sandryhaila, J. Kovacevic, and M. Püschel, "Algebraic signal pro- cessing theory: Cooley-Tukey type algorithms for polynomial transforms based on induction," SIAM J. Matrix Analysis and Appl., vol. 32, no. 2, pp. 364-384, 2011.
+
+A Papoulis, S U Pillai, Probability, Random Variables and Stochastic Processes. McGraw-Hill4th editionA. Papoulis and S. U. Pillai, Probability, Random Variables and Stochastic Processes, McGraw-Hill, 4th edition, 2002.
+
+S Mallat, A Wavelet Tour of Signal Processing. Academic Press3rd editionS. Mallat, A Wavelet Tour of Signal Processing, Academic Press, 3rd edition, 2008.
+
+P Lancaster, M Tismenetsky, The Theory of Matrices. Academic Press2nd editionP. Lancaster and M. Tismenetsky, The Theory of Matrices, Academic Press, 2nd edition, 1985.
+
+. F R Gantmacher, Matrix Theory. IF. R. Gantmacher, Matrix Theory, vol. I, Chelsea, 1959.
+
+. M Vetterli, J Kovačević, Wavelets , Subband Coding, Signal Processing. Prentice HallM. Vetterli and J. Kovačević, Wavelets and Subband Coding, Signal Processing, Prentice Hall, Englewood Cliffs, NJ, 1995.
+
+A Bovik, Handbook of Image and Video Processing. Academic Press2nd editionA. Bovik, Handbook of Image and Video Processing, Academic Press, 2nd edition, 2005.
+
+National Climatic Data Center. "National Climatic Data Center," 2011, ftp://ftp.ncdc.noaa.gov/pub/data/gsod.
+
+An Introduction to the Approximation of Functions. T J Rivlin, Dover PublicationsT. J. Rivlin, An Introduction to the Approximation of Functions, Dover Publications, 1969.
+
+R O Duda, P E Hart, D G Stork, Pattern Classification. Wiley2nd editionR. O. Duda, P. E. Hart, and D. G. Stork, Pattern Classification, Wiley, 2nd edition, 2000.
+
+O Chapelle, B Schölkopf, A Zien, Semi-Supervised Learning. MIT PressO. Chapelle, B. Schölkopf, and A. Zien, Semi-Supervised Learning, MIT Press, 2006.
+
+Nonlinear total variation based noise removal algorithms. L I Rudin, S Osher, E Fatemi, Physica D. 601-4L. I. Rudin, S. Osher, and E. Fatemi, "Nonlinear total variation based noise removal algorithms," Physica D, vol. 60, no. 1-4, pp. 259-268, 1992.
+
+The digital TV filter and nonlinear denoising. T F Chan, S Osher, J Shen, IEEE Trans. Image Proc. 102T. F. Chan, S. Osher, and J. Shen, "The digital TV filter and nonlinear denoising," IEEE Trans. Image Proc., vol. 10, no. 2, pp. 231-241, 2001.
+
+Adaptive total variation image deblurring: A majorization-minimization approach. J P Oliveira, J M Bioucas-Dias, M A T Figueiredo, Signal Proc. 899J. P. Oliveira, J. M. Bioucas-Dias, and M. A. T. Figueiredo, "Adaptive total variation image deblurring: A majorization-minimization approach," Signal Proc., vol. 89, no. 9, pp. 1683-1693, 2009.
+
+Total variation denoising with overlapping group sparsity. I W Selesnick, P Chen, Proc. IEEE Int. Conf. Acoust., Speech and Signal Proc. IEEE Int. Conf. Acoust., Speech and SignalI. W. Selesnick and P. Chen, "Total variation denoising with overlapping group sparsity," in Proc. IEEE Int. Conf. Acoust., Speech and Signal Proc., 2013.
+
+Learning with local and global consistency. D Zhou, O Bousquet, T N Lal, J Weston, B Schölkopf, Proc. Neural Inf. Proc. Syst. Neural Inf. . SystD. Zhou, O. Bousquet, T. N. Lal, J. Weston, and B. Schölkopf, "Learning with local and global consistency," in Proc. Neural Inf. Proc. Syst., 2004, pp. 321-328.
+
+Regularization and semisupervised learning on large graphs. M Belkin, I Matveeva, P Niyogi, Proc. Conf. Learn. Th. Conf. Learn. ThM. Belkin, I. Matveeva, and P. Niyogi, "Regularization and semi- supervised learning on large graphs," in Proc. Conf. Learn. Th., 2004, pp. 624-638.
+
+Label propagation through linear neighborhoods. F Wang, C Zhang, Proc. Int. Conf. Mach. Learn. Int. Conf. Mach. LearnF. Wang and C. Zhang, "Label propagation through linear neighbor- hoods," in Proc. Int. Conf. Mach. Learn., 2006, pp. 985-992.
+
+Gradient-based learning applied to document recognition. Y Lecun, L Bottou, Y Bengio, P Haffner, Proc. IEEE. IEEE86Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner, "Gradient-based learning applied to document recognition," Proc. IEEE, vol. 86, no. 11, pp. 2278- 2324, 1998.
+
+Laplacian eigenmaps for dimensionality reduction and data representation. M Belkin, P Niyogi, Neural Comp. 156M. Belkin and P. Niyogi, "Laplacian eigenmaps for dimensionality reduction and data representation," Neural Comp., vol. 15, no. 6, pp. 1373-1396, 2003.
+
+Diffusion wavelets. R R Coifman, M Maggioni, Appl. Comp. Harm. Anal. 211R. R. Coifman and M. Maggioni, "Diffusion wavelets," Appl. Comp. Harm. Anal., vol. 21, no. 1, pp. 53-94, 2006.

@@ -1,0 +1,261 @@
+
+A method for extracting the resonance parameters from experimental cross section
+22 Oct 2012 May 3, 2014
+
+S A Rakityansky 
+N Elander 
+Div.of Chemical Physics
+Dept. of Physics
+Stockholm University
+SE-106 91StockholmSweden
+
+
+Dept. of Physics
+University of Pretoria
+0002PretoriaSouth Africa
+
+A method for extracting the resonance parameters from experimental cross section
+22 Oct 2012 May 3, 20141number(s): 0365Nk0365Ge2430Gd *
+The matrix elements of the multi-channel Jost matrices are written in such a way that their dependencies on all possible odd powers of channel momenta are factorized explicitly. As a result the branching of the Riemann energy surface at all the channel thresholds is represented in them via exact analytic expressions. The remaining singlevalued functions of the energy are expanded in the Taylor series near an arbitrary point on the real axis. Using the thus obtained Jost matrices, the S-matrix is constructed and then the scattering cross section is calculated, which therefore depends on the Taylor expansion coefficients. These coefficients are considered as the adjustable parameters that are optimized to fit a given set of experimental data. After finding the coefficients, the resonances are located as zeros of the Jost matrix determinant at complex energies. Within this approach the S-matrix has proper analytic structure. This enables us not only to locate multi-channel resonances but also to reproduce their partial widths as well as the scattering cross section in the channels for which the data are not available.
+
+Introduction
+
+Quantum resonances play an important role in theoretical description and intuitive understanding of physical processes taking place in the microscopic world of molecules, atoms, nuclei, and various nano-systems. This is why locating the corresponding spectral points E = E r − i 2 Γ, i.e. determining the resonance parameters, E r (resonance energy) and Γ (resonance width), is an indispensable part of any theoretical modelling as well as of an analysis of scattering data.
+
+From the theoretical point of view, the resonances, being complex-valued eigen-energies of the Hamiltonian, are not easy to locate. For each angular momentum, they appear as regular strings on the so called non-physical sheet of the complex energy surface (see, for example, Ref. [1]). The influence of these resonances on the corresponding partial-wave cross section depends not only on their distribution over the energy surface but also on the corresponding S-matrix residues [2][3][4][5].
+
+The analysis of scattering data, i.e. phenomenological extraction of resonance parameters, is perhaps even more difficult than their theoretical determination. Indeed, a measured cross section is the sum of all partial-wave cross sections, where the effects of all possible resonances add together. Therefore the sharp structures corresponding to individual resonances, may overlap and smear out their discrete character. Such an overlap very often happens even with resonances belonging to the same partial wave.
+
+In a phenomenological search for resonances, the first step usually consists in performing the so called phase-shift analysis [1,6,7], i.e. in obtaining numerical values of the partial-wave phase shifts or the corresponding reaction amplitudes, for a set of collision energies. Then the amplitudes known on the real axis, are analytically continued onto the complex-energy Riemann surface, where the resonances are identified as their singularities. Various methods differ in the way such an analytic continuation is done [1].
+
+The basic idea underlying the majority of existing approaches of this type, consists in fitting the experimental points with curves obtained from a phenomenological scattering amplitude, where possible resonance poles are artificially embedded by hand and their complex energies serve as the fitting parameters. The most simple of such approaches is the Breit-Wigner parametrization [8]. Another version of the same approach is based on the Fano parametrization [9], where the amplitude is split in the resonant and background parts, which makes it more realistic and allows one to treat more complicated "zigzags" of the cross section. In nuclear and particle physics, the resonances are usually introduced into the fitting procedure via a model propagator with explicit singularities at complex energies (unitary isobar model) [10,11].
+
+Many authors emphasize (see, for example, Chapter 6 of the book [1] and references therein as well as a more recent publication [12]) that for a reliable analytic continuation of the scattering amplitude (or S-matrix) it is very important to construct its phenomenological expression preserving proper analytic structure, i.e. its branching points, various symmetries etc. This can easily be achieved for the single-channel problems and with some effort for two-channel ones (Dalitz-Tuan representation) [13]. However, when the number of channels is three or more, constructing the S-matrix with correct branching at all the thresholds becomes extremely difficult within the traditional approaches [13,14].
+
+In the present paper, we resolved this difficulty. For obtaining the S-matrix, we use the structure of the Jost matrix derived in our early publications [15,16], where all the factors responsible for the branching are given analytically for an arbitrary number of channels. This enables us to perform the analytic continuation and the search for resonances in a modelindependent way, i.e. without embedding the resonance poles by hand.
+
+
+Jost matrices
+
+Consider an N-channel collision process that can symbolically be written as a chemical or nuclear reaction,
+A + B →      A + B , C + D , . . . . . . ,
+with two-body systems in both the initial and final states. We assume that the interaction forces for these systems are of a short-range type, i.e. they vanish at large distances (r → ∞) faster than the Coulomb force. The wave function describing such a process at the collision energy E is a column matrix,
+Ψ(E, r) =    ψ 1 (E, r) ψ 2 (E, r) . . .    ,
+where each of the N lines corresponds to a separate channel. The channels are characterized not only by the type of the particles (A + B, C + D, etc.) but also by the complete sets of the corresponding quantum numbers (such as the threshold energy, angular momentum, spin, etc.). In other words, any two states of the system that differ by at least one quantum number are considered as different channels even if the type of the particles and the threshold energies are the same. This means that a channel state has a definite value of the angular momentum and thus its angular dependence can be factorized as
+ψ n (E, r) = u n (E, r) r Y ℓnmm (θ, ϕ) .
+The set of radial wave functions u n obey the coupled system of radial Schrödinger equations,
+∂ 2 r + k 2 n − ℓ n (ℓ n + 1) r 2 u n (E, r) = 2µ n 2 N n ′ =1 V nn ′ (r)u n ′ (E, r) ,(1)
+where the coupling is due to the off-diagonal elements of the interaction-potential matrix V nn ′ . In Eq. (1), the channel momentum,
+k n = 2µ n 2 (E − E n ) ,(2)
+is determined by the difference between the total energy E and the channel threshold E n , as well as by the reduced mass µ n in the channel n.
+
+Each of the N equations of the set (1) is of the second order. In the theory of differential equations (see, for example, Ref. [17]) it is shown that such a set has 2N linearly independent solutions, i.e. 2N linearly independent columns that form a basis in the solution space, and only half of these columns are regular at r = 0. The regular columns can be combined in a square matrix Φ(E, r), which is called the fundamental matrix of regular solutions. Since a physical wave function must be regular, it is a linear combination of the columns of the matrix Φ(E, r).
+
+When the particles move away from each other (r → ∞), the potential matrix tends to zero and thus the right hand side of Eq. (1) vanishes. The remaining set of N second order (Riccati-Bessel) equations,
+∂ 2 r + k 2 n − ℓ n (ℓ n + 1) r 2 u n (E, r) ≈ 0 , r → ∞ ,(3)
+has 2N linearly independent column-solutions. These 2N columns can be combined in two diagonal square matrices,
+W (in) =       h (−) ℓ 1 (k 1 r) 0 · · · 0 0 h (−) ℓ 2 (k 2 r) · · · 0 . . . . . . . . . . . . 0 0 . . . h (−) ℓ N (k N r)       (4) W (out) =       h (+) ℓ 1 (k 1 r) 0 · · · 0 0 h (+) ℓ 2 (k 2 r) · · · 0 . . . . . . . . . . . . 0 0 . . . h (+) ℓ N (k N r)       (5)
+that involve the Riccati-Hankel functions h (±) ℓ (kr) and represent the in-coming and out-going spherical waves in all N channels.
+
+The 2N columns of the matrices (4) and (5) constitute a basis in the solution space at large distances and thus each column of the fundamental matrix Φ(E, r) is their linear combination when r → ∞. This can be written as
+Φ(E, r) −→ r→∞ W (in) (E, r)F (in) (E) + W (out) (E, r)F (out) (E) ,(6)
+where the combination coefficients are combined in the square matrices F (in) (E) and F (out) (E). They are functions of the energy and are called the Jost matrices.
+
+The S-matrix that completely determines all the scattering observables, is expressed via the Jost matrices (the details can be found, for example, in the textbook [18] or in the papers [2,16,19,20]),
+S(E) = F (out) (E) F (in) (E) −1 .(7)
+The resonances are those spectral points
+E = E r − i 2 Γ , E r > 0 , Γ > 0 ,(8)
+on the Riemann surface of the energy, where
+det F (in) (E) = 0 .(9)
+The energy surface has a square-root branching point at every channel threshold E n . This is because the Jost matrices depend on the energy E via the channel momenta (2) and for each of them there are two possible choices of the sign in front of the square root. The resonance spectral points are located on the so called non-physical sheet of this Riemann surface, i.e. such a layer of the surface where all the channel momenta have negative imaginary parts. In the numerical calculations, the choice of the sheet is done by an appropriate choice of the signs in front of the square roots (2).
+
+
+Analytic structure of the Jost matrices
+
+In the present paper, our main goal is to find a way of a reliable parametrization of experimental data, such that it would allow us to locate the resonance spectral points at complex energies. As we described in the previous section, the multi-channel S-matrix has very complicated energy dependence via the channel momenta and therefore is defined on a Riemann surface with an intricate connection of many layers. This means that a straightforward parametrization of such a matrix using an arbitrarily chosen functional form may give erroneous results. When choosing the parametrization form, it is important to take into account as much information on the symmetry properties and analytic structure of the S-matrix as possible.
+
+First of all, we notice that the S-matrix is a kind of "ratio", given by Eq. (7), of the Jost matrices F (out) and F (in) , which are not completely independent of each other but rather are somehow related. In other words, the parameters in the "numerator" and "denominator" of (7) should be the same. Indeed, as we found in Ref. [16], for the systems interacting via short-range potentials, the Jost matrices have the following structure:
+F (in) mn (E) = k ℓn+1 n 2k ℓm+1 m A mn (E) − ik ℓm m k ℓn+1 n 2 B mn (E) ,(10)F (out) mn (E) = k ℓn+1 n 2k ℓm+1 m A mn (E) + ik ℓm m k ℓn+1 n 2 B mn (E) ,(11)
+where the energy dependent matrices A(E) and B(E) are the same for both F (in) and F (out) . Moreover, in the same Ref. [16] it was established that the matrices A(E) and B(E) are single-valued analytic functions of the energy defined on a single one-layer energy plane. In other words, the matrices A(E) and B(E) are the same for all the sheets of the Riemann surface and all the complications stemming from the branching points are isolated in Eqs. (10) and (11) via the explicit factors depending on the channel momenta. Therefore, by using the expressions (10) and (11) in Eq. (7), we guarantee that the "numerator" is properly related to the "denominator" (which means guaranteed unitarity on the real axis) and that all the branching points are properly embedded. If we find an adequate parametrization of the matrices A(E) and B(E), the resulting S-matrix will automatically have correct values on all the sheets of the Riemann surface.
+
+Since the matrices A(E) and B(E) are analytic functions of the variable E, they can be expanded in the Taylor series,
+A(E) = ∞ n=0 (E − E 0 ) n a n (E 0 ) , B(E) = ∞ n=0 (E − E 0 ) n b n (E 0 ) ,(12)
+near an arbitrary point E 0 within the domain of their analyticity. Here the expansion coefficients a n and b n are matrices of the same dimension as A and B. They depend on the choice of the point E 0 .
+
+In Ref. [16] it was shown that for a given potential the expansion coefficients a n and b n can be obtained as the asymptotic values of the solutions of certain set of differential equations.
+
+In the present paper we are not going to calculate these coefficients since we assume that the potential is not known. Instead, we will use a n and b n as fitting parameters in order to reproduce experimental scattering cross section. As soon as the optimal expansion coefficients corresponding to the experimental data are found, we can use them to obtain the matrices A(E) and B(E) and through them the Jost matrix F (in) (E) given by Eq. (10). Then we can locate the resonances as the complex roots of Eq. (9).
+
+Although we are not going to calculate the expansion coefficients, the fact that they are solutions of certain differential equations derived in Ref. [16] is important. Indeed, that differential equations have real boundary conditions and all their coefficients are real if E 0 is chosen on the real axis. This means that for real E 0 the matrices a n and b n do not have imaginary parts, i.e. the total number of fitting parameters is 2(M + 1)N 2 where N is the matrix dimension (number of channels) and M is the highest power in the expansions
+A(E) ≈ M n=0 (E − E 0 ) n a n (E 0 ) , B(E) ≈ M n=0 (E − E 0 ) n b n (E 0 ) .(13)
+If the central point E 0 of the expansion is taken not on the real axis, then the number of the parameters we have to fit is doubled.
+
+The approximate expansions (13) can only be accurate within a circle around E 0 . In Ref. [16] it is demonstrated how the radius of such a circle increases with the number of terms taken into account. When using this approach to extract the resonance parameters from experimental cross section, we therefore should not fit the data within a too wide energy-interval. The central point E 0 must be placed somewhere in the middle of the interval where it is expected to find a resonance. An adequate width of the interval around E 0 unfortunately cannot be estimated. It is necessary to repeat the analysis with several different widths and make the decision on the basis of the stability of the results thus obtained.
+
+
+Fitting procedure
+
+Suppose we have sets of experimental data for several channels, m → n, m ′ → n ′ , etc.:
+σ mn E (mn) i ± δ (mn) i , σ m ′ n ′ E (m ′ n ′ ) j ± δ (m ′ n ′ ) j ,
+· · · · · · · · · · · · etc.
+i = 1, 2, 3, . . . , N (mn) , j = 1, 2, 3, . . . , N (m ′ n ′ ) , · · · · · ·
+Here σ mn and δ (mn) are the cross section in the channel m → n and the corresponding standard deviation while the energy interval covered by the points E (mn) i is around the energy E 0 where we expect to find a resonance. In order to parametrize the Jost matrix, we construct the χ 2 function
+χ 2 = N (mn) i=1 σ mn (E (mn) i ) − σ fit mn (E (mn) i ) δ (mn) i 2(14)+ N (m ′ n ′ ) j=1 σ m ′ n ′ (E (m ′ n ′ ) j ) − σ fit m ′ n ′ (E (m ′ n ′ ) j ) δ (m ′ n ′ ) j 2 + · · · etc. ,
+where the fitting cross section for the channel m → n σ fit
+mn (E) = π k 2 m (2ℓ m + 1) |S nm (E) − δ nm | 2(15)
+depends on the expansion coefficients of (13) via Eqs. (10), (11), and (7). These coefficients therefore serve as the fitting parameters.
+
+The time-reversal invariance leads to the so called detailed balance theorem which means that the S-matrix is symmetric with respect to the transposition, i.e. S mn = S nm . If we simply minimize the χ 2 -function given by Eq. (14), this symmetry is not guaranteed. If N is the number of channels (the dimension of the matrices), then the symmetry gives us (N 2 − N)/2 equations (the number of the elements above the diagonal of the matrix) relating the variational parameters. By solving this set of equations, we can reduce the number of such parameters. Although the equations are not simple, this can always be done numerically for any reasonable value of N.
+
+There is a more simple way of making the S-matrix symmetric although it requires to vary a bit more parameters. A set of the optimal parameters a 0 , a 1 , . . . , a M , b 0 , b 1 , . . . , b M that give a symmetric S-matrix, can be obtained by minimizing the generalized χ 2 -function
+X 2 (a 0 , a 1 , . . . , a M , b 0 , b 1 , . . . , b M ) = χ 2 + m<n,j |S mn (E j ) − S nm (E j )| 2 ,(16)
+where at all experimental points the differences between the off-diagonal elements are included.
+
+After finding the optimal parameters, we obtain analytic expressions for the Jost matrices and the S-matrix, valid within a circle around E 0 on all the sheets of the Riemann surface. Using these expressions, we should be able not only to locate the nearest resonances but also to calculate the cross sections in all the other channels for which we do not have experimental data.
+
+
+Examples
+
+The proposed procedure for parametrizing experimental cross section and thus locating the resonances needs to be demonstrated by a couple of simple and clear examples. In such examples, we should know the resonance parameters beforehand. This will give us the feeling of how accurate the procedure is.
+
+As the examples, we chose the well-known and well studied one-and two-channel models specified by certain potentials (see the next two sections). We use these potentials to artificially generate "experimental" data points around the energies where they support resonances, and then try to recover these resonances using the suggested parametrization method. Since the exact values of the resonance parameters are known, this shows us how reliable the proposed method is.
+
+
+Single-channel model
+
+The simple potential barrier given by
+V (r) = 7.5r 2 e −r ,(17)
+is very often used as a testing ground for new theoretical methods [21]. In this model, the units are such that 2 /µ = 1 and thus the energy as well as the distances are dimensionless. It has a rich spectrum of resonances. The first two of them with ℓ = 0 are [22]:
+E exact 1 = 3.426390 − i 2 0.025549 ,(18)E exact 2 = 4.834807 − i 2 2.235753 .(19)
+Let us assume that we are given experimental S-wave scattering cross section for a singlechannel system in the energy interval 3 < E < 4.5 as is shown in Fig. 1. Actually, these 15 points are generated using the potential (17), along the corresponding exact cross section shown in Fig. 2 (thin curve), which has a sharp zigzag near the first very narrow resonance (18).
+
+In order to fit the data, we use the approximate expressions (13) with E 0 = 3.4 and M = 5.
+
+Being substituted into Eqs. (10) and (11), they give us the Jost functions, from which we obtain the S-matrix (7) and finally the cross section (15). As we mentioned before, for a real E 0 the coefficients (fitting parameters) a n and b n are also real. This means that we have to adjust 12 parameters that minimize the χ 2 -function of the type (14) where only single elastic channel is taken into account.
+
+As the minimization tool, we used well known program "MINUIT" from the CERN library [23,24]. In order to avoid the situation when we stuck in a local minimum, we repeated the minimization procedure several hundreds of times with randomly chosen initial values of the parameters and took the best findings. The best minimum we found was with χ 2 = 1.5×10 −6 . The result of this fitting is shown in Fig. 2 (thick curve). There is no visible difference between the exact (thin curve) and fitted curve not only within the interval 3 < E < 4.5 covered by the "experimental" points, but also at the nearby points to the left and to the right of that interval. This is because we use proper analytic structure of the fitting S-matrix.
+
+With thus found set of parameters, we located two zeros (9) of the function (10) nearest to the real axis. They gave us the approximate (recovered from experimental data) resonance energies:
+E fit 1 = 3.426388 − i 2 0.025531 ,(20)E fit 2 = 4.821657 − i 2 2.036732 .(21)
+Comparing them with the corresponding exact values (18) and (19), we see that the result of fitting is very accurate for the S-matrix not only on the real axis but also in the nearby domain of the complex E-surface. Actually, when choosing the "experimental" points we did not intend to reproduce the second resonance which is rather far away from the real axis.
+
+In addition to finding the optimal values of the parameters, the minimization program "MI-NUIT" provides statistical errors (standard deviations) for them. This is done by calculating the matrix of partial derivatives of the minimized function with respect to all the parameters [23,24]. Using these statistical errors, we can estimate the corresponding errors of the resonance parameters we found.
+
+To this end we considered the optimal values of the parameters as their mean values and randomly varied all the parameters around these values using a random-number generator with the Gaussian distribution of the width equal to the statistical errors. For each random choice of the parameters, we located zeros of the Jost function and then calculated their mean values and the standard deviations. After 1000 variations, we obtained:
+E fit 1 = (3.426309 ± 0.005361) − i 2 (0.025921 ± 0.010444) ,(22)E fit 2 = (3.810114 ± 0.448626) − i 2 (1.457056 ± 1.090140) .(23)
+As one would expect, the reliability of the recovery of the second resonance is not that good as for the first one (around which the "experimental" points were taken). We however did not even expected to recover the second resonance at all.
+
+
+Two-channel model
+
+The two-channel potential,
+V (r) = −1.0 −7.5 −7.5 7.5 r 2 e −r ,(24)
+of famous Noro and Taylor model [25] extends the single-channel potential of Sec. 5.1. It is written in the same dimensionless units with equal reduced masses µ 1 = µ 2 and angular momenta ℓ 1 = ℓ 2 = 0 in both channels. The threshold energies for the channels are E 1 = 0 and E 2 = 0.1.
+
+The first three resonances of the Noro-Taylor model are given in Table 1 (the calculations can be found, for example, in Ref. [2]). The other resonances supported by the potential (24), are too wide and therefore too far from the real axis.
+
+Since in the previous section we already demonstrated how the method works for a narrow resonance, considering the two-channel model, we focus our attention on the second resonance of the Table 1, which is rather wide. We took "experimental" data in the elastic channels 1 → 1 and 2 → 2 within the energy interval 5 < E < 9. If one considers this segment of the real axis as the diameter of a circle in the complex plane, then such a circle will include the resonance point which we are looking for. The artificial data points (25 in the 1 → 1 and 25 in the 2 → 2 channels) are shown in Figs. 3 and 4.
+
+In the same way as for the single-channel model, these 50 data points were fitted using the approximate matrices (13) with M = 5 and real E 0 = 7.25. In such a case the matrices (13) are real and in total we have to adjust 48 parameters (matrix elements of a n and b n ) in order to minimize the generalized χ 2 -function (16). After a thousand attempts with randomly chosen initial values for a n and b n , the best value of the minimum we found was X 2 = 1.9 × 10 −4 .
+
+The results of this fitting are shown in Figs. 5 and 6 (thick curves). With rather small value of the X 2 achieved, there are no visible difference between the exact (thin curves) and fitted curves within the interval covered by the "experimental" points. However the extremely sharp (first) resonance to the left of this interval is missing since there are no data points reflecting it.
+
+Using the same approximate (fitted) Jost matrices, we calculated the cross sections for the transition processes 1 → 2 and 2 → 1, for which no data points were taken. In Figs. 7 and 8, the comparison of the approximate (thick) and exact (thin) curves shows that we are able to rather accurately predict the cross section in one channel of the reaction on the basis of the data available in the other channels.
+
+Looking for the zero (nearest to E 0 ) of the determinant of the approximate Jost matrix, we found the following resonance:
+E fit 2 = 7.250742 − i 2 1.513332 ,(25)
+which is very close to its exact location (see the second line of Table 1).
+
+In order to find the partial widths, we use the method described in Ref. [2], where it was shown that the ratio of the partial widhts can be found using the matrix elements of the Jost matrices, namely,
+Γ 1 Γ 2 = F (out) 11 F (in) 22 − F (out) 12 F (in) 21 F (out) 22 F (in) 11 − F (out) 21 F (in) 12 E=E .(26)
+Together with the fact that Γ 1 + Γ 2 = Γ, the knowledge of the Jost matrices allows us to easily find Γ 1 and Γ 2 . For the result (25), this gives
+Γ fit 1 = 0.347732 , Γ fit 2 = 1.165600 .(27)
+These values reasonably well reproduce the corresponding exact partial widths given in Table 1.
+
+In the same way as for the single-channel case, we randomly varied (1000 times) the optimal parameters a n and b n , using the errors provided by the "MINUIT", and found the following mean values of the resonance energy and widths together with the corresponding standard deviations:
+E fit 2 = (7.251593 ± 0.292781) − i 2 (1.085568 ± 0.537132) ,(28)
+Γ fit 1 = 0.346348 ± 0.343585 , Γ fit 2 = 0.739220 ± 0.516272 .
+
+Although the third resonance is too wide and far away from the point E 0 , we made an attempt to locate it using the same optimal expansion parameters. What we found,
+E fit 3 = 8.857247 − i 2 2.847466 ,
+significantly underestimates the width. This is not surprizing, of course. The truncated series (13) can only be accurate within certain circle around E 0 . In order to recover the third resonance one has to either take more terms in the series (13) or shift the point E 0 (the center of expansion) down in the complex plane. In both cases the number of fitting parameters would increase.
+
+
+Conclusion
+
+The proposed method is based on proper analytic structure of the parametrized S-matrix that is used to fit experimental data. This mathematical correctness guarantees that after fitting the data, we obtain the S-matrix that is valid in all the channels, even in those where no data are available. This means that we can obtain the cross section for the channels, which are experimentally inaccessible, using the data in the other channels.
+
+The S-matrix properly fitted to the data for real energies is also valid at the nearby complex energies. This enables us to extract the resonance parameters as the real and imaginary parts of the zeros of the Jost matrix determinant that coincide with the S-matrix poles. In addition to the total Γ, we are able to rather accurately obtain the channel partial widths.
+
+The most important limitation of the method described in this paper, is the fact that in its present form the method is only applicable to the systems with short-range interaction forces. A rigorous extension of the method that would include the Coulomb forces, could be done in a way similar to the one described in Ref [16]. This however would require a modified, much more complicated expression for the Jost matrix where all the non-analytic factors (square-root and logarithmic branching points etc.) are explicitly factorized.
+
+The other limitation is the non-relativistic character of the theory used to construct the Smatrix. Although the method can still be used in a very wide range of problems dealing with low-energy atomic and molecular collisions, its possible applications in the intermediate-and high-energy particle physics would require relativistic corrections. This could be done in a way that is customary for those who work with mesons, namely, via using relativistic kinematics. For example, the non-relativistic channel momenta (2) in the Jost matrices (10,11) can be replaced with the corresponding relativistic ones,
+k n = 1 2µ n (E kin − E n ) + E kin − E n c 2 ,
+where E kin = c p 2 + µ 2 c 2 − µc 2 is the kinetic (collision) energy.
+
+If one accepts the approximate approaches that are traditional for meson-nuclear physics, then using such relativistic momenta in our S-matrix that has the correct analytic structure, would be appropriate. Then in a similar simplified fashion the Coulomb corrections could also be introduced as it is done, for example, in Ref. [26], where the K-matrix for a short-range interaction is simply multiplied by a Coulomb-barrier factor C 2 0 (η) = 2πη/(e 2πη − 1). In our case, this trick is equivalent to multiplication of the matrices A and B in Eqs. (10,11) by C 0 (η) and 1/C 0 (η), respectively. The logic behind this is that for charged particles the Riccati-Bessel and Riccati-Neumann functions j ℓ (kr) and y ℓ (kr) are replaced with the corresponding Coulomb functions F ℓ (η, kr) and G ℓ (η, kr), which at short distances differ from j ℓ and y ℓ by the factors C ℓ and C −1 ℓ , and the matrices A and B are the factors combining j ℓ and y ℓ into the regular solution (see Eq. (41) of Ref. [16]). Of course this kind of relativistic and Coulomb corrections are not rigorously justified. However, their usage in meson-nuclear physics is based on some reasonable intuitive argumentation and proved to be working in practical applications. E r Γ Γ 1 Γ 2 1 4.768197 0.001420 0.000051 0.001369 2 7.241200 1.511912 0.363508 1.148404 3 8.171217 6.508332 1.596520 4.911812 Table 1: The exact resonance energies and widths of the first three resonances generated by the potential (24). Γ 1 and Γ 2 are the partial widths for the decays into the first and the second channel, respectively.    
+
+Figure 5 :
+5Exact elastic cross section 1 → 1 (thin curve) for the two-channel model (24) and the result of fitting of the data (thick curve) with M = 5 and E 0 = 7.25 in Eq. (13).
+
+Figure 6 :
+6Exact elastic cross section 2 → 2 (thin curve) for the two-channel model (24) and the result of fitting of the data (thick curve) with M = 5 and E 0 = 7.25 in Eq.(13).
+
+Figure 7 :
+7Exact inelastic cross section 1 → 2 (thin curve) for the two-channel model (24) and the prediction (thick curve) based on fitting of the data in the elastic channels 1 → 1 and 2 → 2 with M = 5 and E 0 = 7.25 in Eq.(13).
+
+Figure 8 :
+8Exact inelastic cross section 2 → 1 (thin curve) for the two-channel model (24) and the prediction (thick curve) based on fitting of the data in the elastic channels 1 → 1 and 2 → 2 with M = 5 and E 0 = 7.25 in Eq.(13).
+t t t t t t t t t t t t t t tFigure 1: Artificial data points for the single-channel model(17).
+t t t t t t t t t t t t t t t Figure 2: Exact cross section (thin curve) for the single-channel model (17) and the result of fitting of the data (thick curve) with M = 5 and E 0 = 3.4 in Eq. (13).
+t t t t t t t t t t t t t t t t t t t t t t t t tFigure 4: Artificial data points for the second elastic channel of the model (24).
+two channels:
+Theory of Resonances. V I Kukulin, V M Krasnopolsky, J Horáček, Kluwer Academic PublishersDordrecht/Boston/LondonV. I. Kukulin, V. M. Krasnopolsky, and J. Horáček, "Theory of Resonances", Kluwer Academic Publishers, Dordrecht/Boston/London (1989).
+
+Analyzing the contribution of individual resonance poles of the S-matrix to the two-channel scattering. S A Rakityansky, N Elander, Int. J. Quantum Chem. 1091105S.A. Rakityansky, N. Elander, "Analyzing the contribution of individual resonance poles of the S-matrix to the two-channel scattering". Int. J. Quantum Chem. 109, 1105 (2006).
+
+The role of resonances in building cross sections: The Mittag-Leffler expansion in a two-channel scattering. K Shilyaeva, N Elander, E Yarevsky, Int. J. Quantum Chem. 109414K. Shilyaeva, N. Elander, E. Yarevsky, " The role of resonances in building cross sec- tions: The Mittag-Leffler expansion in a two-channel scattering." Int. J. Quantum Chem. 109, 414 (2009).
+
+Identifying resonance structures in a scattering cross section using the N 3+ + H → NH 3+ → N 2+ + H + reaction as an example. K Shilyaeva, N Elander, E Yarevsky, J. Phys. B. 4244011K. Shilyaeva, N. Elander, E. Yarevsky, "Identifying resonance structures in a scattering cross section using the N 3+ + H → NH 3+ → N 2+ + H + reaction as an example." J. Phys. B. 42 ,044011 (2009).
+
+Resonances and their relations to Spectral Densities and Scattering Cross Sections in the Schrödinger formulation. N Elander, S A Rakitiansky, Few-Body Systems, On line April27. N. Elander and S.A. Rakitiansky, "Resonances and their relations to Spectral Densities and Scattering Cross Sections in the Schrödinger formulation", Few-Body Systems, On line April27, (2012).
+
+Methods for determining resonances in phase-shift analysis. F Nichitiu, Sov. J. Part. Nucl. 124321F.Nichitiu, "Methods for determining resonances in phase-shift analysis", Sov. J. Part. Nucl. 12 (4), 321 (1981).
+
+Analiza de faza in fizica interactiolor nucleare. F Nichitiu, Editura Academiei RSR. in RomanianF.Nichitiu, " Analiza de faza in fizica interactiolor nucleare", (in Romanian), Editura Academiei RSR, Bucuresti (1980).
+
+Capture of Slow Neutrons. G Breit An, E Wigner, Phys. Rev. 49519G.Breit an E. Wigner, "Capture of Slow Neutrons", Phys. Rev. 49, 519 ( 1936).
+
+Effects of Configuration Interaction on Intensities and Phase Shifts. U Fano, Phys. Rev. 1241866U. Fano, "Effects of Configuration Interaction on Intensities and Phase Shifts", Phys. Rev. 124, 1866 (1961).
+
+Models for extracting N * parameters from meson-baryon reactions. T.-S H Lee, Nstar 2005: Proceedings of the Workshop on the Physics of Excited Nucleons. World Scientific Pub Co Inc1T.-S. H. Lee, "Models for extracting N * parameters from meson-baryon reactions", in: Nstar 2005: Proceedings of the Workshop on the Physics of Excited Nucleons, World Scientific Pub Co Inc, p.1 (2006).
+
+MAID analysis techniques. L Tiator, S Kamalov, Nstar 2005: Proceedings of the Workshop on the Physics of Excited Nucleons. World Scientific Pub Co Inc16L. Tiator, S. Kamalov, "MAID analysis techniques", in: Nstar 2005: Proceedings of the Workshop on the Physics of Excited Nucleons, World Scientific Pub Co Inc, p.16 (2006).
+
+Poles, the only true resonant-state signals, are extracted from a worldwide collection of partial wave amplitudes using only one, well controlled pole-extraction method. M Hadžimehmedović, S Ceci, A Švarc, H Osmanović, J Stahov, arXiv:1103.2653v1hep-phM. Hadžimehmedović, S. Ceci, A.Švarc, H. Osmanović, and J. Stahov, "Poles, the only true resonant-state signals, are extracted from a worldwide collection of partial wave amplitudes using only one, well controlled pole-extraction method", arXiv:1103.2653v1 [hep-ph] (2011).
+
+Resonances in coupled channels in nuclear and particle physics. A M Badalyan, L P Kok, M I Polikarpov, Yu A Simonov, Phys.Rep. 82231A. M. Badalyan, L. P. Kok, M. I. Polikarpov, Yu. A. Simonov, " Resonances in coupled channels in nuclear and particle physics", Phys.Rep. 82(2), 31 (1982).
+
+Parameters of scalar resonances from the combined analysis of data on processes ππ → ππ, KK, ηη and J/ψ decays. Yu S Surovtsev, arXiv:1207.6937v1hep-phYu. S. Surovtsev et al., "Parameters of scalar resonances from the combined analysis of data on processes ππ → ππ, KK, ηη and J/ψ decays", arXiv:1207.6937v1 [hep-ph] (2012).
+
+Generalized effective-range expansion. S A Rakityansky, N Elander, J. Phys. A: Math. Theor. 42225302S. A. Rakityansky, N. Elander, "Generalized effective-range expansion", J. Phys. A: Math. Theor. 42, 225302 (2009)
+
+Multi-channel analog of the effective-range expansion. S A Rakityansky, N Elander, J. Phys. A: Math. Theor. 44115303S. A. Rakityansky, N. Elander, "Multi-channel analog of the effective-range expansion", J. Phys. A: Math. Theor. 44, 115303 (2011)
+
+Differential and Difference Equations. L Brand, John Wiley & Sons, IncNew YorkL. Brand, "Differential and Difference Equations", John Wiley & Sons, Inc., New York, 1966.
+
+Scattering Theory. J R Taylor, John Wiley & SonsNew YorkJ. R. Taylor, "Scattering Theory", John Wiley & Sons, New York, 1972.
+
+Jost function for coupled partial waves. S A Rakityansky, S A Sofianos, Journal of Physics. 31S. A. Rakityansky, S. A. Sofianos, "Jost function for coupled partial waves", Journal of Physics, A31, pp. 5149-5175 (1998).
+
+Jost function for coupled channels. S A Rakityansky, S A Sofianos, Few-Body Systems Suppl. 10S. A. Rakityansky, S. A. Sofianos, "Jost function for coupled channels", Few-Body Systems Suppl., 10, pp. 93-96 (1999).
+
+Complex coordinate studies of resonant electron-atom scattering. R A Bain, J N Bardsley, P R Junker, C V J Sukumar, J. Phys. B: Atom. Mol. Phys. 72189R.A. Bain, J.N. Bardsley, P.R. Junker, C.V.J. Sukumar, "Complex coordinate studies of resonant electron-atom scattering", J. Phys. B: Atom. Mol. Phys., 7, 2189 (1974).
+
+Exact method for locating potential resonances and Regge trajectories. S A Sofianos, S A Rakityansky, J. Phys. A: Math. Gen. 303725S. A. Sofianos and S. A. Rakityansky, "Exact method for locating potential resonances and Regge trajectories", J. Phys. A: Math. Gen. 30 3725 (1997).
+
+MINUIT -a system for function minimization and analysis of the parameter errors and correlations. F James, M Roos, Comp.Phys.Comm. 10343F. James and M. Roos, "MINUIT -a system for function minimization and analysis of the parameter errors and correlations", Comp.Phys.Comm., 10, 343 (1975).
+
+Resonance partial widths and partial photodetachment rate using the rotated-coordinate method. T Noro, H S Taylor, J. Phys. B: Atom. Mol. Phys. 13377T. Noro, H. S. Taylor, "Resonance partial widths and partial photodetachment rate using the rotated-coordinate method", J. Phys. B: Atom. Mol. Phys., 13, L377 (1980).
+
+Pion-nucleon partial-wave analysis to 1100 MeV. R A Arndt, J M Ford, L D Roper, Phys.Rev. 321085R. A. Arndt, J. M. Ford, L. D. Roper, "Pion-nucleon partial-wave analysis to 1100 MeV", Phys.Rev., D32, 1085 (1985).

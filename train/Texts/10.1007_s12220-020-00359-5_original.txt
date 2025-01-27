@@ -1,0 +1,277 @@
+
+An Example on s-H-Convexity in C 2 C 2 C 2
+2021
+
+Lars Simon 
+Berit Stensønes 
+An Example on s-H-Convexity in C 2 C 2 C 2
+
+The Journal of Geometric Analysis
+31202110.1007/s12220-020-00359-5Received: 25 November 2019 / Published online: 27 January 2020s-H-convexity · Worm domain · Stein neighborhood basis Mathematics Subject Classification Primary 32F17 · 32T99 Secondary 32T20
+We construct a bounded domain in C 2 with boundary of class C 1,1 such that has a Stein neighborhood basis, but is not s-H-convex for any real number s ≥ 1.
+
+Introduction
+
+The notion of s-H-convexity was introduced by Chaumat and Chollet in [1] and goes back to work by Dufresnoy [6]. Given a real number s ≥ 1, a compact set ∅ = K ⊆ C n is called s-H-convex, if there exists a C > 0 with C ≤ 1 such that for all , 0 < ≤ 1, there exists an open pseudoconvex subset of C n satisfying Furthermore, the notion of s-H-convexity is related to the Mergelyan property. Specifically, there exists a k 0 (s, n) > 0 such that O( ) is dense in C k ( ) ∩ O( ) whenever k is an integer ≥ k 0 (s, n) and ⊆ C n is a bounded pseudoconvex domain, satisfying suitable assumptions, whose closure is s-H-convex.
+
+Given these ∂-results and the connection to the Mergelyan property, it becomes desirable to identify sets which are s-H-convex for some s ≥ 1. Specifically, given a bounded (pseudoconvex) domain in C n whose closure admits a Stein neighborhood basis, one can ask under which additional assumptions said closure is necessarily s-H-convex for some s ≥ 1.
+
+To our knowledge, it is unknown whether there exists a bounded (pseudoconvex) domain in C 2 with boundary of class C 2 (or C ∞ ) such that has a Stein neighborhood basis, but is not 1-H-convex. In this paper we show that, if the smoothness assumption on the boundary is relaxed appropriately, there exists a bounded domain whose closure admits a Stein neighborhood basis, but is not s-H-convex for any s ≥ 1. This is achieved by modifying the construction of the classical Diederich-Fornaess worm domain [5]. A precise statement of the main result of this paper goes as follows: Theorem 1.1 There exists a bounded (pseudoconvex) domain = ∅ in C 2 with boundary of class C 1,1 , such that:
+
+• has a Stein neighborhood basis, • is not s-H-convex for any real number s ≥ 1.
+
+This paper is organized as follows: in Sect. 2 we introduce some notation, define the domain from Theorem 1.1 and give an informal description of our constructions. In Sect. 3 we show that is not s-H-convex for any s ≥ 1 and in Sect. 4 we construct a Stein neighborhood basis for . Finally, in Sect. 5, we prove the remaining lemmas from Sect. 4.
+
+
+Preliminaries
+
+From now on we let the function g : R → R be given by
+x → 0 i fx ≤ 0, exp (−1/x) if x > 0,
+and fix a function S : R → R as well as real numbers 0 < α < β < π/2 with the following properties:
+
+(1) S is of class C ∞ on R \ {0, π} and of class C 1,1 on neighborhoods of 0 and π , respectively, (2) S is concave on R and satisfies S(x + π/2) = S(−x + π/2) for all x ∈ R, (3) S is ≤ 1 on R and ≡ 1 on [0, π], (4) 0 < S < 1 on (π, π + β) and S < 0 on (π + β, ∞), (5) α < 1/(4π) and the following inequalities hold for x ∈ [−α, α]: (6) for all x ∈ [π, π + α] we have
+• | sin (x) − x| ≤ |x| 3 , • | sin (x)| ≥ (3/4) · |x|, • | tan (x)| ≤ 2|x|,S(x) = cos (x − π) − g(x − π).
+The existence of S, α, and β with these properties is clear. Using this, we define a function
+ρ : (C \ {0}) × C → R, (z, w) → w − exp (i · ln (|z| 2 )) 2 − S(ln (|z| 2 )),
+and a set = (z, w) ∈ C 2 : z = 0 and ρ(z, w) < 0 = ∅.
+
+The we just defined is the set appearing in Theorem 1.1, so we have to show that has the desired properties. We start by collecting some basic properties of in a lemma, whose elementary proof will be omitted:
+Lemma 2.1
+The set is a bounded, connected open subset of C 2 with boundary of class C 1,1 . Furthermore, the boundary of (as a subset of C 2 ) is precisely the set of all points (z, w) ∈ C 2 satisfying z = 0 and ρ(z, w) = 0.
+
+Remark In this paper, we work with the following notion of C 1,1 -boundary: an open set ∅ U R k is said to have boundary of class C 1,1 , if for every boundary point p of U there exist an open neighborhood V of p in R k and a function r : V → R of class C 1,1 such that ∇r vanishes nowhere on V and U ∩ V = {x ∈ V : r (x) < 0}.
+
+
+Notation 2.2
+
+Let M be a subset of C n and let r > 0. Then we define
+M(r ) := z ∈ C n : ∃x ∈ M s.t. ||x − z|| < r . M(r ) obviously is an open subset of C n .
+We end this section with an informal explanation of the intuition behind our constructions A classical worm domain admits a Stein neighborhood basis if the duration of the rotation at maximal radius is less than π . If the duration is exactly π, this fails to be true, as can be seen by refining the classical argument by Diederich and Fornaess [5]. In the case of the domain defined above, we prevent this argument from working by drastically increasing the speed of the round-off, which leads to the boundary regularity dropping to C 1,1 . Using the fact that the function g vanishes to infinite order in 0 ∈ R, one can apply the Kontinuitätssatz for annuli to open pseudoconvex neighborhoods of the closure of to show that is not s-H-convex for any s ≥ 1. The details will be given in Sect. 3.
+
+It is easy to construct a neighborhood basis for (not a Stein one) by taking appropriate worm domains and increasing the radii of the rotating discs without changing the centers. This increase of the radii of course destroys pseudoconvexity. We counteract this by "chopping off" the "bad part," which is done by intersecting with a domain of half planes rotating around 0 in the w-plane. This, however, leads to these sets not being neighborhoods anymore, as can be seen by considering 0 in the w-plane. We finally resolve this issue by moving the center of the rotation from 0 slightly in the direction of −i and slightly slowing down the rotation (symmetrically around the angle π/2), which intuitively speaking amounts to introducing a small tilt. In the wplane, −i represents the "out direction" of , which exists because the duration of the rotation at maximal radius does not exceed π . Since g is positive on R >0 , one actually leaves the closure of , when going from 0 slightly in the direction of −i in the w-plane, which is of course crucial for our construction to work. Since the purpose of the domain of rotating half planes is to help with the pseudoconvexity of the neighborhoods we are constructing, we have to apply these changes to both of the domains we are intersecting. The details will be given in Sect. 4.
+
+
+Regarding s-H-Convexity
+
+For this section we fix an 0 > 0 such that √ S(π + α) + 0 < 1 and 0 < g(α).
+Given 0 < < 0 , we define a map H : [π, π + α] → R by φ → S(φ) − cos (φ − π) + 2 = 2 − g(φ − π).
+By choice of 0 , we can apply the intermediate value theorem to find a zero x ∈ (π, π + α) of H for every ∈ (0, 0 ), which is uniquely determined, since H is strictly decreasing. By direct computation we get
+x = π + 1 − ln ( /2) for all ∈ (0, 0 ).
+Roughly speaking, given some 0 < < 0 and an open pseudoconvex set containing ( ), we need to identify a point contained in said pseudoconvex set that is "far away" from relative to . By inspecting the explicit expression for x , one sees that x − π is much larger than for small enough 0 < 0 . With this in mind, we will identify a point contained in any open pseudoconvex set containing ( ), whose distance to is comparable to x − π . We accomplish this by applying the Kontinuitätssatz for annuli.
+
+The following lemma is the first step of the announced Kontinuitätssatz argument. It deals with the boundaries of the annuli and the "bottom annulus": Lemma 3.1 Given ∈ (0, 0 ), we have:
+
+(1) For all φ, π ≤ φ ≤ x , the following set is contained in ( ):
+(z, w) ∈ C 2 : |z| 2 ∈ {exp (φ), exp (π − φ)} and w = i · sin (φ) .
+(2) The following set is contained in the boundary of and hence in ( ):
+(z, w) ∈ C 2 : exp (0) ≤ |z| 2 ≤ exp (π ) and w = 0 .
+Proof Property 2 is clear, so we only need to prove Property 1. Let ∈ (0, 0 ), let π ≤ φ ≤ x and consider a point (z, w) = (z, i · sin (φ)) contained in the set from the statement of Property 1. We restrict ourselves to the case |z| 2 = exp (φ), since the other case can be handled analogously.
+
+But then, owing to the choices we made,
+(z, w) is contained in , whenever w is contained in the open disc in C centered at exp (i · φ) with radius √ S(φ) > 0. So it suffices to prove that |w − exp (i · φ)| is less than √ S(φ) + .
+Making use of the choices made above (in particular that π<x < π + α< π + β< π + π/2 and H ≥ 0 on [π, x ]), we compute
+|w − exp (i · φ)| = |i · sin (φ) − exp (i · φ)| = (cos (φ)) 2 = cos (φ − π) ≤ cos (φ − π) + H (φ) = S(φ) + /2 < S(φ) + , as desired.
+Armed with Lemma 3.1, we now finish the Kontinuitätssatz argument: Then, for every φ, π ≤ φ ≤ x , the following set is contained in D:
+F φ := (z, w) ∈ C 2 : exp (π − φ) ≤ |z| 2 ≤ exp (φ) and w = i · sin (φ) .
+Proof This follows from Lemma 3.1 via the Kontinuitätssatz for annuli.
+
+In view of Lemma 3.2, we need to identify a point contained in F x that is "far away" from . The obvious choice is the following:
+
+For all ∈ (0, 0 ) we define
+p := exp π 4 , i · sin (x ) ∈ F x .
+The following lemma shows that p is indeed "far away" from Lemma 3.3 There exist constants L > 0 and δ> 0 such that for all ∈ (0, 0 ) we have
+d( p , ) ≥ min δ, x − π L , where d(·, ) denotes the Euclidean distance of a point in C 2 to .
+Proof Owing to Lemma 2.1, we find a δ > 0 such that (δ), the closure of (δ) in C 2 , is a compact subset of (C \ {0}) × C. So, since ρ is of class C 1 on (C \ {0}) × C (see Sect. 2), there exists an L > 0 such that ρ is Lipschitz continuous with Lipschitz constant L on (δ). This immediately gives the estimate
+d( p, ) ≥ min δ, 1 L · ρ( p) for all p ∈ (C \ {0}) × C.
+Hence, given ∈ (0, 0 ), we only need to show that ρ( p ) ≥ x − π . Using that x ∈ (π, π + α) and using the defining properties of α, we compute
+ρ( p ) = |i · sin (x ) − exp (i · π/2)| 2 − S(π/2) = |i · sin (x ) − i| 2 − 1 ≥ − 2 sin (x ) = 2 sin (x − π) ≥ x − π ,
+as desired.
+
+We now combine all the previously developed ingredients to achieve the goal of this section.
+
+
+Proposition 3.4
+
+is not s-H-convex for any real number s ≥ 1.
+
+Proof First note that is indeed compact. Assume for the sake of a contradiction that is s-H-convex for some s ≥ 1. So there exist a constant 0 < C ≤ 1 and a family (D ) 0< ≤1 of open pseudoconvex subsets of C 2 such that
+(C · s ) ⊆ D ⊆ ( ) for all 0 < ≤ 1,
+i.e., we have
+( ) ⊆ D ( /C) 1/s ⊆ (( /C) 1/s ) for all 0 < ≤ C.
+For all 0 < < min{ 0 , C} we then get from Lemma 3.2 that
+p ∈ F x ⊆ D ( /C) 1/s ⊆ (( /C) 1/s ),
+which, using Lemma 3.3, directly implies the estimate
+min δ, x − π L ≤ d( p , ) < C 1/s for all 0 < < min{ 0 , C}.
+So, since δ, L, and C are positive constants, we find a constant K > 0 and an 0 < min{ 0 , C} such that (x − π) s < K for all 0 < < .
+
+Using that
+0 = H (x ) = /2 − g(x − π) = /2 − exp(−1/(x − π))
+for all 0 < < 0 , we get that
+1 − ln ( /2) s < K for all 0 < < ,
+and we arrive at the desired contradiction.
+
+
+Existence of a Stein Neighborhood Basis
+
+In this section, we construct a Stein neighborhood basis for . We fix an > 0 for the remainder of this section. It suffices to find an open pseudoconvex subset D of C 2 satisfying ⊆ D ⊆ ( ).
+
+We start by defining the domains of "half planes rotating in the w-plane" announced in Sect. 2. 
+t < Re w + i · sin δπ 2(1 − δ) · exp −i · δπ 2 + (1 − δ) ln (|z| 2 ) .
+Furthermore we will denote the set H (δ) 0 simply as H (δ) .
+
+The expression sin (δπ /(2(1 − δ))) measures by how much the center of the rotation is moved in the direction of −i. In the exponential-term, δ measures how much the rotation is slowed down symmetrically around the angle π/2. The expression sin (δπ / (2(1 − δ))) was chosen specifically to ensure that an appropriate version of Lemma 4.5 (see below) holds true.
+
+Before we can define the domains of "discs rotating in the w-plane," we need to approximate S from above by smooth concave functions 4.2 There exists an η 0 , 0 < η 0 1/2, such that for all η ∈ (0, η 0 ) there exist a C ∞ -function S η : R → R, a β η > β and an x η > π (not to be confused with the x appearing in Sect. 3) with the following properties:
+
+(1) S η is concave on R and satisfies S η (x + π/2) = S η (−x + π/2) for all x ∈ R, (2) S η is ≤ 1 + η on R and ≡ 1 + η on a neighborhood of [0, π] in R,
+(3) S + η/2 ≤ S η ≤ S + 3η/2 on R,(4)
+S η (π + β η ) = 0 and S η (π + β η ) = 0, (5) S η is > 0 on (−β η , π+β η ) and < 0 on R \ [−β η , π+β η ], (6) x η ∈ (π, π + β η ) and S η (x η ) = 1; furthermore, S η is > 1 on (π, x η ) and < 1 on (x η , ∞),
+(7) we have −S η (φ) ≥ 100|S η (φ)|, whenever π/2 ≤ φ ≤ x η .
+Proof For all γ > 0 we fix a C ∞ -function γ : R → R such that
+• γ ≥ 0 on R,
+• γ ≡ 0 on (−∞, π + γ /4] and γ ≡ 1 on [π + 3γ /4, ∞).
+
+One now readily checks that, if 0 < η 0 1/2 is chosen small enough, then, for all η ∈ (0, η 0 ), one can pick a small 0 < γ (η) α, such that the function S η : R → R, given by
+x → 1 + η + π 2 +|x− π 2 | π 2 S (t) · γ (η) (t) dt
+and the implicitly defined β η and x η have all the desired properties.
+
+We now define the domains of "discs rotating in the w-plane," also announced in Sect. 2. It is important to note that these domains are not pseudoconvex. Definition 4.3 Adopt the notation from 4.2. Then for all δ ∈ (0, 1) and for all η ∈ (0, η 0 ), we define a map ρ δ,η :
+(C \ {0}) × C → R by (z, w) → w + i · sin δπ 2(1 − δ) − exp i · δπ 2 + (1 − δ) ln (|z| 2 ) 2 − S η δπ 2 + (1 − δ) ln (|z| 2 ) ,
+and we define D (δ,η) to be the subset of C 2 consisting of all points (z, w) satisfying z = 0 and ρ δ,η (z, w) < 0.
+
+It should be noted that D (δ,η) is essentially defined the same way as (resp. a classical worm domain), apart from the fact that S is replaced by S η and that the position of the center and the speed of the rotation have been adjusted slightly (in the same way as above).
+
+We now show that ⊆ D (δ,η) ⊆ ( ) for suitable choices of δ and η. Since D (δ,η) is not pseudoconvex, however, some additional considerations are needed in order to achieve the goal stated in the beginning of this section.
+
+
+Lemma 4.4
+
+There exists an η 1 ( ) ∈ (0, η 0 ) such that for each η ∈ (0, η 1 ( )) there exists a d 2 ( , η) ∈ (0, 1/2) with the property that
+⊆ D (δ,η) ⊆ ( ), whenever 0 < δ < d 2 ( , η).
+Proof This follows from a straightforward calculation using the properties in 4.2.
+
+As explained in Sect. 2, we want to intersect the domains of "discs rotating in the w-plane" with suitable domains of "half planes rotating in the w-plane," with the aim of obtaining a pseudoconvex neighborhood of . So we of course need the domains of "half planes rotating in the w-plane" to contain the closure of .
+
+In order to establish this, we need the crucial estimate provided by Lemma 4.5 below. If the function g was replaced by the 0-function in a small neighborhood of 0 ∈ R, then could not possibly have a Stein neighborhood basis as the Kontinuitätssatz for annuli shows. Hence our construction has to make use of the fact that g > 0 on an interval of the form (0, μ) for some small 0 < μ 1. We make use of that fact only once in the entire construction of the Stein neighborhood basis for , namely in the proof of Lemma 4.5, the discovery of which was one of the main obstacles in our construction. In fact, the seemingly arbitrary expression sin (δπ / (2(1 − δ))) featuring in Definition 4.1 was chosen specifically with this lemma in mind.
+
+
+Lemma 4.5
+
+There exists a 0 < d 1 < 1 such that we have the following estimate for all δ, ψ ∈ R with 0 < δ < d 1 and −β ≤ ψ ≤ π + β:
+0 < cos δ π 2 − ψ − S(ψ) + sin ψ + δ π 2 − ψ · sin δπ 2(1 − δ) .
+The proof of Lemma 4.5 can be found in Sect. 5. Using this lemma, we can now show that the domains of "half planes rotating in the w-plane" contain the closure of .  ∈ (0, d 1 ), there exists a t δ ∈ (0, 1) such that
+⊆ H (δ) t for all 0 < t < t δ .
+Proof Let δ ∈ (0, d 1 ). Owing to the compactness of , it suffices to show that ⊆ H (δ) 0 . To this end let (z, w) ∈ . Lemma 2.1 shows that z = 0 and ρ(z, w) ≤ 0. In particular, this implies that ψ:= ln(|z| 2 ) ∈ [−β, π + β] and |w − exp (iψ)| ≤ √ S(ψ). Hence, using that Re(τ ) ≥ −|τ | for all τ ∈ C and writing w = exp (iψ) + (w − exp (iψ)), we get
+Re w + i · sin δπ 2(1 − δ) · exp −i · δπ 2 + (1 − δ) ln (|z| 2 ) ≥ Re exp (iψ) + i · sin δπ 2(1 − δ) · exp −i · δπ 2 + (1 − δ)ψ − |w − exp (iψ)| ≥ cos δ π 2 − ψ − S(ψ) + sin ψ + δ π 2 − ψ · sin δπ 2(1 − δ) ,
+which is > 0 by Lemma 4.5. This shows that (z, w) ∈ H (δ) 0 , as desired. We are now ready to define the Stein neighborhood announced in the beginning of this section. Adopting the notation from Lemmas 4.4 and 4.6, we fix an η ∈ (0, η 1 ( )), a δ> 0 with δ< min{d 1 , d 2 ( , η)} and a t ∈ (0, t δ ) for the remainder of this section. With these fixed choices we now define
+D := D (δ,η) ∩ H (δ) t .
+It is obvious that D is an open subset of C 2 . Furthermore, we have
+⊆ D ⊆ ( )
+by Lemmas 4.4 and 4.6. Hence, we only have to show that D is pseudoconvex. Pseudoconvexity is a local property of the boundary and we have
+bD ⊆ bH (δ) t ∩ bD (δ,η) ∪ bH (δ) t ∩ D (δ,η) ∪ H (δ) t ∩ bD (δ,η) .
+So, since the boundary bD of D is contained in H (δ) 0 ⊆ (C \ {0})×C, pseudoconvexity of D follows from the following two lemmas, the proofs of which can be found in Sect. 5.  Lemma 4.7 deals with the pseudoconvexity of our chosen domain of "half planes rotating in the w-plane" at certain boundary points. Lemma 4.8 says, roughly speaking, that our chosen domain of "discs rotating in the w-plane" is pseudoconvex at the "good" boundary points, which are precisely those contained in H (δ) 0 . As mentioned previously, pseudoconvexity of D follows from Lemmas 4.7 and 4.8, the proofs of which can be found in Sect. 5; so we have shown that D is pseudoconvex. Hence has a Stein neighborhood basis. Together with Proposition 3.4, this provides a proof for Theorem 1.1.
+
+
+Remaining Proofs
+
+In this section, we provide the proofs which remain from Sect. 4. We start by proving the crucial estimate, Lemma 4.5.
+
+Proof of Lemma 4.5 Note first that the expression in the claimed inequality is indeed well-defined since S ≥ 0 on [−β, π + β]. Owing to the symmetry of S, see 2 in Sect. 2, we can restrict ourselves to considering the case where ψ ∈ [−β, π/2]. Noting that [−β, π/2] = [−β, −α/2] ∪ [0, π/2] ∪ (−α/2, 0), we will consider the three intervals on the right-hand side separately. Pick some d 1 ∈ (0, 1/4). By a slight abuse of notation, we will shrink d 1 a finite amount of times over the course of the proof, until it has the desired property.
+
+First consider the interval [−β, −α/2]. Using Properties 2, 4, and 6 in Sect. 2, we find a > 0 such that 
+√ S < 1 − on [−β, −α/2].0 < δ · π 2 < δπ 2(1 − δ) < π 2 .
+We compute, for δ ∈ (0, d 1 ) and ψ ∈ [0, π/2]:
+cos δ π 2 − ψ − S(ψ) + sin ψ + δ π 2 − ψ · sin δπ 2(1 − δ) ≥ cos δ · π 2 −1 + sin δ · π 2 · sin δπ 2(1 − δ) > cos δ · π 2 −1 + sin δ · π 2 2 = cos δ · π 2 · 1 − cos δ · π 2 ,
+which is larger than 0, as desired. Finally consider the interval (−α/2, 0). By shrinking d 1 if necessary, we can assume that δπ/(2(1 − δ)) ∈ (0, α/2) for all δ ∈ (0, d 1 ). For ease of notation, we define a function M :
+(0, 1) × R → R by (t, y) → cos tπ 2(1 − t)
+· cos (t y) − cos (y)
++ sin tπ 2(1 − t) · sin (t y) + sin ((1 − t)y) − sin (y) ,
+and a function φ :
+(0, 1) × R → R by (t, x) → x + tπ 2(1 − t)
+.
+
+Using Properties 2 and 6 in Sect. 2 as well as some elementary trigonometric identities, one readily checks that we have the following for all ψ ∈ (−α/2, 0) and δ ∈ (0, d 1 ):
+g(−ψ) + M(δ, φ(δ, ψ)) = cos δ π 2 − ψ − S(ψ) + sin ψ + δ π 2 − ψ · sin δπ 2(1 − δ) .
+So, since g > 0 on R >0 , it suffices to prove that M(δ, φ(δ, ψ)) ≥ 0 for all ψ ∈ (−α/2, 0) and δ ∈ (0, d 1 ).
+
+First we consider the case where φ(δ, ψ) ≥ 0 for some ψ ∈ (−α/2, 0) and δ ∈ (0, d 1 ). Since δπ/(2(1 − δ)) ∈ (0, π/2) and 0 < δ < 1 and φ(δ, ψ) ∈ [0, π/2), it suffices to prove the following two inequalities for all y ∈ [0, π/2] and t ∈ [0, 1]:
+cos (t y) − cos (y) ≥ 0, sin (t y) + sin ((1 − t)y) − sin (y) ≥ 0.
+The first inequality is trivial and the second inequality is obvious from the fact that sin (0) = 0 and sin is concave on [0, π/2].
+
+Finally, consider some ψ ∈ (−α/2, 0) and δ ∈ (0, d 1 ) for which φ(δ, ψ)< 0. For ease of notation, we simply write φ for φ(δ, ψ). Since −α/2 < ψ < φ < 0 and d 1 < 1/4 and by Property 5 in Sect. 2, we have the following estimates for an appropriate ξ ∈ (φ, δφ) (coming from the mean value theorem):
+cos (δφ) − cos (φ) = (δφ − φ) · (− sin (ξ )) = sin (−ξ) · (1 − δ) · (−φ) ≥ |sin (−δφ)| · (1 − δ) · |φ| ≥ (3/4) · |−δφ| · (3/4) · |φ| > δ|φ| 2 /2, and sin (δφ) + sin ((1 − δ)φ) − sin (φ) ≥ − sin (φ) − |δφ| − |(1 − δ)φ| = −(sin (φ) + |φ|) = −(sin (φ) − φ) ≥ −| sin (φ) − φ| ≥ −|φ| 3 ,
+and finally, since δπ/(2(1 − δ)) ∈ (0, α/2) ⊆ (0, π/2) and α < 1/(4π), we can conclude that
+M(δ, φ(δ, ψ)) = cos δπ 2(1 − δ) · cos (δφ) − cos (φ) + tan δπ 2(1 − δ) · sin (δφ) + sin ((1 − δ)φ) − sin (φ) ≥ cos δπ 2(1 − δ) · 1 2 δ|φ| 2 − tan δπ 2(1 − δ) · |φ| 3 ≥ cos δπ 2(1 − δ) · 1 2 δ|φ| 2 − 2 · δπ 2(1 − δ) · |φ| 3 = 1 2 δ|φ| 2 · cos δπ 2(1 − δ) · 1 − 2 · π 1 − δ · |φ| ≥ 1 2 δ|φ| 2 · cos δπ 2(1 − δ) · 1 − 2π · 4 3 · 1 4π ,
+But if a point (z, w) is contained in said intersection, then said Levi form computes to
+(1 − δ) 2 4|z| 2 · (t − r (z, w)) = (1 − δ) 2 4|z| 2 · t,
+which is clearly > 0 by choice of t.
+
+Finally, we prove Lemma 4.8. Since our chosen domain of "discs rotating in the w-plane" is of course not pseudoconvex, the assumption that (z 0 , w 0 ) is contained in the "good" part of the boundary will be crucial when estimating the Levi form. We introduce some notation: 0 ⊆ (C \ {0}) × C and since furthermore ∇ρ δ,η (z 0 , w 0 ) = 0, the function ρ δ,η is a smooth local defining function for D (δ,η) in an open neighborhood U ⊆ H (δ) 0 of (z 0 , w 0 ). Given ( z, w) ∈ U , we denote the Levi form of ρ δ,η in direction (−∂ρ δ,η /∂w, ∂ρ δ,η /∂z) at ( z, w) as L( z, w). So it suffices to prove that L(z, w) is non-negative for every point (z, w) contained in U ∩ bD (δ,η) .
+
+To this end, let (z, w) ∈ U ∩ bD (δ,η) . Using that ρ δ,η (z, w) = 0, one verifies that (see Notation 5.1):
+|z| 2 · L(z, w)
+(1 − δ) 2 = S η (γ (z)) · −S η (γ (z)) + 2 Re((w + i δ) · exp (−iγ (z))) −S η (γ (z)) · 2 Re(i · (w + i δ) · exp (−iγ (z))) + S η (γ (z)) 2 .
+
+First, we consider the case where S η (γ (z)) ≤ 1. Since ρ δ,η (z, w) = 0, we have S η (γ (z)) ≥ 0. Furthermore −S η is ≥ 0, since S η is smooth and concave. Combining this with the fact that a 2 − 2ab ≥ −b 2 for all a, b ∈ R, we get |z| 2 · L(z, w)
+
+(1 − δ) 2 ≥ S η (γ (z)) · 2 Re((w + i δ) · exp (−iγ (z))) − Re(i · (w + i δ) · exp (−iγ (z))) 2 .
+
+Using once again that ρ δ,η (z, w) = 0, we find a θ ∈ R with the property that (w + i δ) · exp (−iγ (z)) = 1 + S η (γ (z)) · exp (iθ). Plugging in and calculating gives |z| 2 · L(z, w) (1 − δ) 2 ≥ S η (γ (z)) · 1 − S η (γ (z)) + cos (θ ) + S η (γ (z)) 2 which is clearly ≥ 0, since 0 ≤ S η (γ (z)) ≤ 1. Now we consider the case where S η (γ (z)) > 1. Using that (z, w) ∈ U ⊆ H (δ) 0 , we get Re((w + i δ) · exp (−iγ (z))) > 0. So, since S η is smooth and concave and since S η (γ (z)) > 1, we immediately arrive at the following inequality:
+|z| 2 · L(z, w)
+(1 − δ) 2 > −S η (γ (z))−S η (γ (z)) · 2 Re(i · (w + i δ) · exp (−iγ (z)))
+≥ − S η (γ (z))−2 S η (γ (z)) · w + i δ ≥2 S η (γ (z)) · 50 − w + i δ ,
+where the last inequality follows by combining the properties in 4.2 with the fact that S η (γ (z)) > 1. Hence it suffices to show that |w+i δ| < 50. But, since S η ≤ 1 + η < 2, that follows readily from the fact that ρ δ,η (z, w) = 0.
+
+Lemma 3. 2
+2Let ∈ (0, 0 ) and let D ⊆ C 2 be an open pseudoconvex set containing ( ).
+
+Definition 4. 1
+1For every δ ∈ (0, 1) and every t ∈ [0, 1) we define H (δ) t to be the subset of C 2 consisting of all points (z, w) satisfying z = 0 and
+
+Lemma 4. 6
+6Let d 1 ∈ (0, 1) be as in Lemma 4.5. Then, given δ
+
+Lemma 4. 7
+7Let (z 0 , w 0 ) ∈ bH (δ) t and assume that (z 0 , w 0 ) ∈ H (δ) 0 . Then there exists an open neighborhood V of (z 0 , w 0 ) in C 2 such that V ∩ H (δ) t is pseudoconvex.
+
+Lemma 4. 8
+8Let (z 0 , w 0 ) ∈ bD(δ,η)  and assume that (z 0 , w 0 ) ∈ H(δ) 0 . Then there exists an open neighborhood V of (z 0 , w 0 ) in C 2 such that V ∩ D (δ,η) is pseudoconvex.
+
+Notation 5. 1
+1With our fixed choice of δ, we setδ := sin δπ 2(1 − δ) ,and define a map γ :C \ {0} → R by z → δπ 2 + (1 − δ) ln (|z| 2 ).Proof of Lemma 4.8 Since (z 0 , w 0 ) ∈ H (δ)
+
+
+∈ (0, 1) smaller if necessary, we have the following for all δ ∈ (0, d 1 ):By making d 1 ∈ (0, 1) smaller 
+if necessary, we have 
+
+sin 
+δπ 
+2(1 − δ) 
+< 
+4 
+and cos δ 
+π 
+2 
+− ψ > 1 − 
+4 
+
+for all δ ∈ (0, d 1 ) and ψ ∈ [−β, −α/2]. The claimed inequality is then clear in this 
+case. 
+Next consider the interval [0, π/2]. On this interval we have 
+√ 
+S ≡ 1. By making 
+d 1 
+Acknowledgements Open Access funding provided by NTNU Norwegian University of Science and Technology (incl St. Olavs Hospital -Trondheim University Hospital).Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article's Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article's Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.which is clearly ≥ 0, as desired.It remains to prove Lemmas 4.7 and 4.8. Over the course of Sect. 4 we fixed choices of , δ, η, and t. We of course work with those choices in the proofs of said lemmas. We start with the proof of Lemma 4.7:Proof of Lemma 4.7 We define a map r :0 ⊆ (C \ {0}) × C and since the real gradient ∇r vanishes nowhere, we get that r is a smooth local defining function for H(δ)t in an open neighborhood U ⊆ H (δ) 0 of (z 0 , w 0 ). So it suffices to prove that the Levi form of r in direction (−∂r /∂w, ∂r /∂z) is non-negative at every point contained in U ∩ bH(δ)t .
+Noyaux pour résoudre l'équation δu = v dans des classes indéfiniment différentiables. J Chaumat, A.-M Chollet, Comptes Rendus Acad. Sci. Paris Sér. Math. 30614Chaumat, J., Chollet, A.-M.: Noyaux pour résoudre l'équation δu = v dans des classes indéfiniment différentiables. Comptes Rendus Acad. Sci. Paris Sér. Math. 306(14), 585-588 (1988)
+
+Représentation intégrale de certaines classes de jets de Whitney. J Chaumat, A.-M Chollet, The Madison Symposium on Complex Analysis. Madison, WI; Providence, RIAmerican Mathematical Society137Contemporary MathematicsChaumat, J., Chollet, A.-M.: Représentation intégrale de certaines classes de jets de Whitney, The Madison Symposium on Complex Analysis (Madison, WI, 1991), Contemporary Mathematics Volume 137 American Mathematical Society Providence, RI, pp. 133-153 (1992)
+
+Noyaux Pour résoudre l'equation ∂ Dans des Classes Ultradifférentiables sur des Compacts irréguliers de C n. J Chaumat, A.-M Chollet, Several Complex Variables. Stockholm; PrincetonPrinceton University PressMathematical NotesChaumat, J., Chollet, A.-M.: Noyaux Pour résoudre l'equation ∂ Dans des Classes Ultradifférentiables sur des Compacts irréguliers de C n , Several Complex Variables (Stockholm, 1987/1988). Mathematical Notes, pp. 205-226. Princeton University Press, Princeton (1993)
+
+A.-M Chollet, Solution de l'équation ∂u = f Dans Certaines Classes de Domaines IRRéguliers. Analyse Complexe Multivariable: Récents Développements. Guadeloupe; EditEl, Rende5SEM ConferenceChollet, A.-M.: Solution de l'équation ∂u = f Dans Certaines Classes de Domaines IRRéguliers. Anal- yse Complexe Multivariable: Récents Développements (Guadeloupe, 1988), SEM Conference Volume 5, EditEl, Rende, pp. 83-92 (1991)
+
+Pseudoconvex domains: an example with nontrivial Nebenhülle. K Diederich, J E Fornaess, Math. Ann. 2253Diederich, K., Fornaess, J.E.: Pseudoconvex domains: an example with nontrivial Nebenhülle. Math. Ann. 225(3), 275-292 (1977)
+
+Sur l'opérateur d et les fonctions différentiables au sens de Whitney. A Dufresnoy, Ann. Inst. Fourier (Grenoble). 291 xviDufresnoy, A.: Sur l'opérateur d et les fonctions différentiables au sens de Whitney. Ann. Inst. Fourier (Grenoble) 29(1 xvi), 229-238 (1979)
+
+Publisher's Note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations. Publisher's Note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.

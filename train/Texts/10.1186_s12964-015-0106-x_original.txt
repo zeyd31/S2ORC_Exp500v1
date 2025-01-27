@@ -1,0 +1,918 @@
+
+Stimulus-dependent differences in signalling regulate epithelial-mesenchymal plasticity and change the effects of drugs in breast cancer cell lines
+
+
+Joseph Cursons 
+Karl-Johan Leuchowius 
+† 
+Mark Waltham 
+Eva Tomaskovic-Crook 
+Momeneh Foroutan 
+Cameron P Bracken 
+Andrew Redfern 
+Edmund J Crampin 
+Ian Street 
+Melissa J Davis 
+Erik W Thompson 
+Stimulus-dependent differences in signalling regulate epithelial-mesenchymal plasticity and change the effects of drugs in breast cancer cell lines
+10.1186/s12964-015-0106-xR E S E A R C H A R T I C L E Open Access
+Introduction:The normal process of epithelial mesenchymal transition (EMT) is subverted by carcinoma cells to facilitate metastatic spread. Cancer cells rarely undergo a full conversion to the mesenchymal phenotype, and instead adopt positions along the epithelial-mesenchymal axis, a propensity we refer to as epithelial mesenchymal plasticity (EMP). EMP is associated with increased risk of metastasis in breast cancer and consequent poor prognosis. Drivers towards the mesenchymal state in malignant cells include growth factor stimulation or exposure to hypoxic conditions.Methods:We have examined EMP in two cell line models of breast cancer: the PMC42 system (PMC42-ET and PMC42-LA sublines) and MDA-MB-468 cells. Transition to a mesenchymal phenotype was induced across all three cell lines using epidermal growth factor (EGF) stimulation, and in MDA-MB-468 cells by hypoxia. We used RNA sequencing to identify gene expression changes that occur as cells transition to a more-mesenchymal phenotype, and identified the cell signalling pathways regulated across these experimental systems. We then used inhibitors to modulate signalling through these pathways, verifying the conclusions of our transcriptomic analysis.Results: We found that EGF and hypoxia both drive MDA-MB-468 cells to phenotypically similar mesenchymal states. Comparing the transcriptional response to EGF and hypoxia, we have identified differences in the cellular signalling pathways that mediate, and are influenced by, EMT. Significant differences were observed for a number of important cellular signalling components previously implicated in EMT, such as HBEGF and VEGFA. We have shown that EGF-and hypoxia-induced transitions respond differently to treatment with chemical inhibitors (presented individually and in combinations) in these breast cancer cells. Unexpectedly, MDA-MB-468 cells grown under hypoxic growth conditions became even more mesenchymal following exposure to certain kinase inhibitors that prevent growth-factor induced EMT, including the mTOR inhibitor everolimus and the AKT1/2/3 inhibitor AZD5363. Conclusions: While resulting in a common phenotype, EGF and hypoxia induced subtly different signalling systems in breast cancer cells. Our findings have important implications for the use of kinase inhibitor-based therapeutic interventions in breast cancers, where these heterogeneous signalling landscapes will influence the therapeutic response.
+
+Introduction
+
+Epithelial mesenchymal transition (EMT) is the directional process where sessile, polarised epithelial cells alter the expression of key adhesion and regulatory molecules and gain the ability to survive and migrate as single cells. EMT is a normal process that occurs early in development to generate the primary mesenchyme, and later in the ectoderm to form muscle, bone, nerve and connective tissues [1]. In development, EMT is transient, and the phenotypic shift is followed by the reverse transition (MET) at the target site [1,2]. Metastasis is now recognized to have many elements in common with developmental EMT, such as single cell dispersal, increased migratory and invasive potential, and gene expression changes [2][3][4][5]. When these transitions occur in cancer, however, a hybrid/metastable phenotype is reached after the carcinoma undergoes a subtle EMT, rather than full mesenchymal conversion [6][7][8]. We use the term epithelial mesenchymal plasticity (EMP) for phenotypic flux of cancer cells along the EMT-MET axis, as they shift between organized, polarized, sessile epithelial cells and more individual and motile mesenchymal cells, facilitating metastatic spread [5,6,9,10].
+
+Specific support for the importance of EMP in breast cancer (BrCa) pathogenesis comes from the observations that BrCa stem cells (BCSC) exhibit a mesenchymal phenotype [5,[11][12][13]. BCSC exhibit dramatically enhanced malignant/metastatic properties compared to their non-BCSC counterparts, and can regenerate a heterogeneous tumour cell population [14,15]. They overexpress CD44, have low expression of the luminal marker CD24 (CD44 hi CD24 lo/-), and have a transcription profile resembling EMT-transformed cells [13,16]. Basal subtypes of BrCa, which have a poor prognosis, exhibit increased EMT marker expression [17]. The links between EMT, BCSC, and basal breast cancer therefore place EMP at the mechanistic core of the most malignant cells found in clinical BrCa. Further to this, in breast cancer patients EMT correlates with adverse prognosis. An EMT signature was found to predict delayed relapse using available on-line data in 4767 breast cancer tumour samples [18]. In multiple studies, poor patient outcomes have been shown to be correlated with the altered expression of various protein markers of EMT development, including increased vimentin [19], loss of certain epithelial cytokeratins [20], loss of E-cadherin and gain of N-cadherin [21]. Additionally, EMT can be induced in patient breast cancers in response to standard chemotherapies [22] and hormonal therapies [23], suggesting a potential role for EMT in treatment resistance.
+
+EMT is known to be controlled by a set of transcription factors including SNAI1/2, ZEB1/2, and other basic helixloop-helix factors, which coordinate programs of gene expression during EMT (reviewed in [24,25]). Demonstrating the importance of these pathways in treatment outcome, work by a number of groups has shown that overexpression of SNAI1/2, or TWIST1 in breast cancer cells results in both EMT and chemoresistance [26][27][28]. The activity of these transcription factors is controlled through a number of signalling pathways that sense changes to the cellular environment and initiate cascades of signalling that result in transcriptional activation or repression. The stimuli that trigger these regulators to induce EMT vary. Signalling through EGFRs is a well-established driver of breast cancer progression [29,30], and EGF is also known to stimulate EMT in some cells [3,[31][32][33][34][35]. Hypoxia has been shown to induce EMT through HIF1a activation of TWIST in a variety of cell lines [36,37], and through SNAI1 in hepatocellular carcinoma [38]. Furthermore, dysregulated signalling through pathways such p38 MAPK [39] and PI3K-Akt [28,40] has been implicated in EMP regulation. Because such signalling pathways are often druggable, they represent important targets for novel therapeutics. For example, considerable interest has been generated in recent years by classes of kinase inhibitors that are able to modulate cellular signalling and interrupt oncogenic signalling. This motivates the question: if multiple stimuli are able to trigger the more aggressive mesenchymal phenotype in cancer cells, do the responses to these stimuli converge upon common signalling elements, or do they achieve similar phenotypic outcomes through distinctly different molecular pathways? The answer to this question has clear implications for the design of molecular targeted therapies, as well as for managing the fundamental heterogeneity of breast cancer.
+
+We have employed two human BrCa cell line models of stable (PMC42) and dynamically induced (MDA MB 468) EMP. PMC42-LA is an epithelial subline derived from the vimentin + , E-Cadherin − parental PMC42-ET cells [41,42]. PMC42-LA cells demonstrate heterogeneity where approximately 90% of the cells are E-cadherin + while the remaining 10% lack E-cadherin and are vimentin + . PMC42-LA cells undergo a marked EGF-induced EMT [3,42,43]. PMC42-ET cells also undergo EGF-driven EMT, however the change in expression of mesenchymal markers is reduced due to higher basal expression of markers such as vimentin [3,42]. When compared to other BrCa cell lines [44], both PMC42-ET cells and the LA subline exhibit a "Basal B" (mesenchymal) transcriptome, clustering together despite their EMP differences, and irrespective of EGF treatment (E Tomaskovic-Crook & T Blick, unpublished observation). MDA-MB-468 cells have a "Basal A" transcriptome [44] indicating mixed luminal/basal attributes, and although predominantly epithelial and E-cadherin + , they lack α-catenin and tight junction protein 1 (TJP1, or ZO-1). About 5% of these cells are vimentin + and they display intermediate invasiveness [45]. MDA-MB-468 cells also exhibit a marked EGF-regulated EMT, as well as hypoxia-driven EMT (2% O 2 ) [42,46,47]. MDA-MB-468 xenografts exhibit distinct zones of mesenchymal transition, one at the stromal periphery and the other at the interface with the central necrosis common in this xenograft model [48,49].
+
+These models provided an opportunity to investigate both differential lineage-specific cellular responses to the same EMT-promoting stimulus as well as differential responses to varied EMT promoting stimuli in the same cell line. By observing the transcriptional changes in PMC42 cells and in MDA-MB-468 cells under different stimuli, we were able to identify patterns of disruption that are distinct to each stimulus as well as common to all. These observations have clear implications for the therapeutic benefit of pharmaceutical manipulation of these pathways during cancer progression. We tested this notion using drugs targeting these key pathways and demonstrated clear differences in the extent to which different drugs are able to block mesenchymal transition induced by different triggers. The divergence of signalling for EMP regulation between EGF and hypoxia that we characterise here is of therapeutic importance, particularly bearing in mind associations in breast cancer patients between EMT, poor prognosis and treatment resistance.
+
+
+Materials and methods
+
+
+Cell Lines
+
+PMC42-ET (ET) cells were derived from a breast cancer pleural effusion by Dr. Robert Whitehead, Ludwig Institute for Cancer Research, Melbourne, Australia, with appropriate institutional ethics clearance (Institutional Review Board of the Peter MacCallum Hospital, Melbourne) and informed consent of the patient. The PMC42-LA (LA) subline was derived further from the parental PMC42-ET cells by Dr. Leigh Ackland, Deakin University, Melbourne, Australia [50][51][52][53]. MDA-MB-468 cells originally from the ATCC were transferred from the Lombardi Cancer Center, Washington, DC, USA.
+
+Immunofluorescence staining of cells PMC42-LA and PMC42-ET cells were cultured in RPMI 1640 medium with 10% FBS. MDA-MB-468 cells were cultured in DMEM with 10% FBS. The cell lines had all tested negative for mycoplasma infection. Cells were seeded in 384 well flat bottom microtiter plates (#3712, Corning Life Sciences) and allowed to adhere overnight at 37°C/5% CO 2 . The next day, where indicated in the text, human EGF (#8916, Cell Signaling Technology) was added to the cells at a final concentration of 10 ng/mL. After 72 h the cells were fixed with 3.7% formaldehyde in PBS for 10 minutes, then washed with Tris-buffered saline (TBS). The cells were incubated with a blocking solution of 0.3% Triton X-100 (Sigma-Aldrich) and 5% sterile filtered goat serum (Sigma-Aldrich). Next, cells were incubated overnight at 4°C with mouse anti-vimentin antibody (V6630, Sigma-Aldrich), diluted 1:1600 in TBS with 1% BSA (Sigma-Aldrich) and 0.05% Tween-20 (Sigma-Aldrich). Where indicated, a rabbit anti-phospho-ERK1/2 antibody (#4370, Cell Signaling Technology) was also included at a dilution of 1:200. The cells were washed three times for 5 min with washing buffer (1xTBS with 0.05% Tween-20) then stained with an Alexa-594 conjugated goat-anti mouse antibody (115-585-146, Jackson ImmunoResearch) diluted 1:200 in TBS with 1% BSA and 0.05% Tween-20. To stain the nuclei of the cells, Hoechst 33342 (Sigma-Aldrich) was included at a concentration of 3 μg.mL −1 . When the pERK1/2 primary antibody was included, an Alexa-488 conjugated goat-anti rabbit antibody (#4412, Cell Signaling Technology) diluted 1:1000 was included in the secondary antibody mix. The cells were stained for 2 hours then washed 3 × 5 minutes with washing buffer.
+
+The plates were imaged on a Perkin Elmer Operetta using a 10X/0.4 NA air objective and the appropriate excitation and emission filters. Excitation time and intensity were set to avoid overexposed pixels in the measured images. Acquired images were analysed using Perkin Elmer Harmony 3.5 software. Cell nuclei were segmented using the Hoechst images, and the nuclear masks were expanded to cover the cytoplasm of the cells. The mean and total fluorescence intensities of vimentin and phospho-ERK were measured within the masked areas, using image data from the corresponding fluorescently labelled secondary antibodies. Cells were then classified as vimentin + or vimentin − using a decision tree classifier. The decision tree classifier used the mean and total vimentin intensities of the cells to determine thresholds that maximised the separation of the cell populations between unstimulated wells, and stimulatedcell control wells (16 positive and 16 negative control wells were included for each plate). The number of cells imaged, the percent vimentin + cells and the average phospho-ERK intensity per cell were then calculated for each well. The percent inhibition was calculated as 100*(1-(x-mean(x pos ))/(mean(x neg )mean(x pos )), where x indicates the measured variable and mean(x) indicates the mean of the measured variable x among the positive or negative control wells. The dose response curves of the inhibitors tested for the different cell lines and measured variables were fitted and plotted in GraphPad Prism 6. Cooperativity between inhibitors tested in combinations were calculated according to the Median effects method [54] using the CalcuSyn software (Biosoft).
+
+
+Kinase inhibitor treatment of cells
+
+Kinase inhibitors were purchased from Selleck Chemicals and were diluted in DMSO then added to the cells at the concentrations indicated within each figure. For determining IC50 values across the range of kinase inhibitors, compounds were serially diluted 1:2 to produce eleven concentrations, with the highest concentration being 10 μM. The final concentration of DMSO in the wells was 0.5%. Positive and negative control wells were included for each plate where the cells were treated with 1 uM of Erlotinib (Selleck Chemicals) or 0.5% DMSO, respectively. For the hypoxia-treated cells, cells grown under normoxic conditions were used as negative controls. The cells were grown in a humidified atmosphere at 37°C/5% CO 2 for 72 h. Hypoxiatreated cells were grown in a hypoxic chamber at 37°C/5% CO 2 with 1% O 2 for 72 h.
+
+
+Transcript abundance data
+
+A detailed description of the transcriptome analysis is given elsewhere (Tomaskovic-Crook E, Philip G, Blick T, van Denderen BJW, Haviv I, Thompson EW: RNA Sequencing of Induced Epithelial-Mesenchymal Transition in Breast Cancer Cell Lines, in preparation). Briefly, an epithelial-to-mesenchymal transition was induced for PMC42-LA and -ET cell lines through EGF stimulation, and in MDA-MB-468 cells through EGF stimulation or growth under hypoxic conditions. All treatments were applied for 72 h, then RNA was collected from unstimulated and stimulated cells, and mRNA abundances were measured using RNASeq.
+
+Transcript abundance data were compared between unstimulated and stimulated conditions described above: PMC42-ET −/+EGF, PMC42-LA −/+EGF, MDA-MB-468 −/+EGF, MDA-MB-468 −/+HPX. Three 'inter-model' comparisons were also performed, between: PMC-42-ET versus PMC-42-LA with and without EGF, and MDA-MB-468 HPX versus EGF stimulation. These comparisons are arranged such that they are consistent with a ' general EMT' process, as classified by vimentin (VIM) up. Sequence alignment was performed using TopHat and differential analysis was performed using CuffDiff. Transcript abundances and test statistics were imported into the MATLAB scripting language (R2012b) for subsequent analysis and to generate heat map plots.
+
+
+Pathway analysis
+
+Kyoto Encyclopedia for Genes and Genomes (KEGG) maps were downloaded and gene lists were extracted from associated KGML files. For the over-representation analysis (ORA), all maps annotated as signalling pathways or systems were included. The expected and observed numbers of differentially expressed mRNA transcripts (q-value < 0.01) were compared using a χ 2 -test within each condition comparison as outlined above. A Bonferoni correction was applied, such that the estimated p-values were multiplied by 22 (the number of signalling pathways tested).
+
+
+Druggable target and protein-protein interaction networks
+
+Protein interaction networks provide a wider coverage of molecular interactions than are captured by canonical signalling pathways. The Bionet R package [55] was used to compute the top-scoring network in each experiment. First we downloaded the set of human protein interactions provided by the PINA2 website [56] and extracted the network corresponding to proteins encoded by transcripts measured in our MDA-MB-468 experiments (transcripts for which we have no data were excluded from the network). Both the network and the p values from the differential expression analysis were passed to the Bionet package, and we used the runfastheinz function to generate the top scoring network for EGF and hypoxia-induced EMP. Networks were exported in the simple interaction format (.sif) for analysis in Cytoscape 3.1 [57].
+
+The two resulting networks, based on differential expression induced by EGF and Hypoxia, were merged using the Advanced Network Merge functions in Cytoscape, which we also used to calculate node degree. Data on drugs or compounds and their known targets (and where available their mechanism of action) was downloaded from the Drugbank Database (v3.0) [58] and mapped onto our network using the gene name attributes associated with both drug targets and proteins. These data were used to identify druggable proteins within each network. Nodes were then ranked by their degree within this resulting network and druggable nodes selected for further analysis.
+
+
+Results
+
+Induced epithelial-to-mesenchymal transitions promote a similar cellular phenotype, but act through cell-line and stimulus-specific signalling mechanisms  (Figure 1e) are relatively small, consistent with our previous reports on EMT within this cellular system [40,41].
+
+Examining changes in transcript abundance that occurred with the phenotypic EMT (Figure 1a-h) consistent differences were observed for several transcripts that contribute to the canonical mesenchymal phenotype (Figure 1 & j). Transcripts for VIM were significantly increased in all models of induced EMT, including EGF-stimulated PMC42-ET cells, while several other regulatory/signalling components implicated in EMT [13,[59][60][61] (further details in Additional file 1: Table S1) showed consistent changes with various degrees of significance (Figure 1i). A number of transcripts encoding cellular signalling components implicated in EMT also showed large changes between some of the experimental models as detailed in the sections below.
+
+The mRNAs of transcription factors (TFs) implicated in EMT was also examined and only FOSL1 (also known as FRA1) showed significant increases in transcript abundance across all models of induced EMT (Figure 1j). TFs known to play a role in EMT including ETS1, SOX9 and ZEB1 showed consistent increases in transcript abundance, while FOXO4, KLF8 and the epithelial TF GRHL2 were consistently reduced; however, not all of these changes were statistically significant ( Figure 1j). Conversely, several well-studied TFs which drive EMT, such as SNAI1 and TWIST1, showed vastly different expression profiles between differing cell lines and differing stimuli, while ZEB2 and SNAI2 were not reliably detected within the MDA-MB-468 cells, nor were FOXC2 and GSC detected across all cell lines tested ( Figure 1j). Furthermore, normalised count data suggest that the mammary stem cell TF SOX9 was much more abundantly expressed in the MDA-MB-468 cells, while TWIST1 and ZEB1 had much higher transcript counts in the PMC42 sublines (Additional file 2: Figure S1).
+
+These results indicate that a phenotypically-similar EMT process was induced across these different cell lines and stimuli, with consistent changes in the transcripts which mediate these canonical changes, such as VIM, CD44, CDH1 and CDH2. However, variation in the differential abundance patterns observed for specific EMT-implicated TFs suggests that these similar phenotypic behaviours are associated with different regulatory mechanisms.
+
+
+Pathway analysis highlights alternative signalling mechanisms which contribute to EMT
+
+To identify signalling pathways likely to be affected by the transcriptional changes associated with each model of induced EMT, we first assessed the mRNA transcripts that responded within each model and then mapped these to KEGG pathways. EGF stimulation of PMC42-ET cells led to significant (q-value < 0.05) changes in abundance for 238 transcripts (Table 1). This was the lowest number across all of our in vitro models of EMT, consistent with PMC42-ET cells being relatively mesenchymal in the unstimulated state ( Figure 1a). The EGFand HPX-stimulated MDA-MB-468 cells had significant changes in abundance for 3155 and 3716 transcripts, respectively, indicating a much greater response than the EGF-stimulated PMC42-ET or PMC42-LA cells ( Table 1). The number of transcripts with differential abundance for the stimulated MDA-MB-468 cells was of a similar magnitude to the inter-model comparisons between PMC42-ET and -LA sublines in the presence or absence of EGF (3261 and 2938, respectively; Table 1). These inter-model comparisons also show that the number of transcripts with a significantly different abundance between the PMC42-ET and -LA sublines decreased with EGF stimulation, suggesting a potential convergence of phenotypes.
+
+Next we examined the putative signalling effects of these altered transcript abundances, performing an overrepresentation analysis to identify intracellular signalling pathways that may have been perturbed (p-value < 0.05) by concerted changes to numerous signalling components during induced EMT. Eleven signalling pathways showed some evidence of dysregulation (p < 0.05) within at least one model of induced EMT ( Table 1). The PI3K-Akt signalling pathway was the only pathway that showed perturbation of components across all models of induced EMT (Table 1); however, after further correcting for multiple hypothesis testing, the EGF-stimulated PMC42-LA cells remained as the only experimental  Table 1 support the observation that although a phenotypically-similar EMT is induced (Figure 1e-h & 1i), as extensively characterised in previous reports by us and others [3,[41][42][43][46][47][48], there are differences in the molecular mechanisms that drive these phenotypic changes ( Figure 1j).
+
+Both the HIF-1 signaling pathway and Rap1 signaling pathway showed very strong transcriptional perturbations within EGF or HPX-stimulated MDA-MB-468 cells, and there was also evidence of HIF-1 signaling pathway dysregulation between EGF and HPX-stimulated MDA-MB-468 cells (Table 1). Strong dysregulation of Hippo, Hedgehog and TGF-beta signalling components was observed with EGF induced EMT within the PMC42-LA cells, and in the absence of EGF, components of the Wnt signalling pathway showed strong differences in transcript abundance between the PMC42-ET and PMC42-LA sublines (Table 1).
+
+To identify common signalling elements across these different pathways we examined the frequency of components. Changes in mRNA transcript abundance of signalling proteins which were present within at least six of the 11 KEGG maps are shown in Figure 2a Systems-level computational analysis identified putative drug targets to alleviate signalling pathway dysregulation that occurs with induced EMT As described earlier, EGF stimulation and hypoxic tumour environments are both thought to be clinically-relevant drivers of breast cancer progression in vivo. Thus, we focussed our analysis towards elucidating the convergent and divergent alterations to intracellular signalling which may encompass therapeutic targets for controlling EMT within MDA-MB-468 cells as a model of triple-negative breast cancer (TNBC).
+
+To motivate drug target selection several analyses were performed and their results are described together below. First, transcripts showing similar or divergent patterns of differential expression between the EGF-and HPX-stimulated MDA-MB-468 cells were extracted (Additional file 3: Figure S2a & b, respectively). Components of the dysregulated signalling pathways (Table 1)   The first row shows the number of mRNA transcripts with a significant (q-value < 0.05) difference in abundance between the specified cell lines or conditions. Subsequent rows show the estimated p-value for enrichment of elements within KEGG pathways without correction for multiple hypothesis testing. KEGG maps related to signal transduction with a significant (p-value < 0.05) enrichment in at least one comparison are shown (for a complete list please refer to Additional file 8: Table S2). Values in bold are statistically-significant following a Bonferroni correction for multiple hypothesis testing (adjusted p-value < 0.05; n = 22 'signalling pathway' KEGG maps), p-value entries greater than 0.10 are in grey.
+
+abundance data were mapped onto an experimentally verified protein-protein interaction network and signalling components that could be targeted by drugs, inhibitors or antagonists were ranked by the relative level of dysregulation to their local interactome ( Table 2). These results are discussed below with a schematic diagram showing the role of proteins and functional relationships between signalling components, within the context of a broader intracellular signalling network ( Figure 3). These results were used to motivate pharmacological targeting of several points within the dysregulated intracellular signalling network to examine the efficacy of blocking EMT, as indicated within Figure 3.
+
+Given the use of EGF within our experimental models of in vitro induced EMT (Figure 1), kinase inhibitors against EGFR/HER were included as a positive control. The local interaction neighbourhoods of EGFR and ERBB2 were amongst the most dysregulated (Table 2); however, this may reflect the numerous feedback mechanisms which have previously been elucidated for EGFR signalling [62][63][64]. Alternative ligands for EGFR (TGFA, AREG and HBEGF) show significant changes in transcript abundance, suggesting that autocrine/paracrine signalling mechanisms may be activated, with HBEGF showing particularly strong differences between EGF and HPX stimulation ( Figure 3).
+
+Activation of EGFR is known to drive signalling through both PI3K-Akt and MEK-ERK [65], and these signal transduction cascades also appear to be key integrators across all of the dysregulated signalling pathways (Table 1; Figure 2a). Together with further details below, and the results of our pathway analysis, this motivated our experimental screening to focus upon different classes of kinase inhibitors targeting PI3K/mTOR, AKT and MEK1/2 as indicated ( Figure 3).
+
+Some of the strongest transcriptional changes with induced EMT were observed for integrin subunits and corresponding ECM components (Figure 3), and these changes would be expected to influence the formation and regulation of focal adhesion sites. Members of the Src kinase family play an important role in transducing signals from focal adhesion sites [66] to regulate Ras signalling, and the interactomes of both LYN and FYN are relatively enriched for disrupted binding partners, as is the homolog ABL1 ( Table 2). Induction of FYN by PI3K/Akt signalling has previously been implicated as a key mediator of cell invasiveness [40]. LYN has also been identified as an important driver of phospho-tyrosine signalling to induce invasiveness within basal subtype breast cancers, although that study reported a relatively low level of activated LYN within the MDA-MB-468 cell line [67].
+
+Pharmacological modulation of PI3K/mTOR was particularly attractive for this model of in vitro induced EMT, as MDA-MB-468 cells are known to carry an inactivating mutation in the PIP3-phosphatase PTEN [68]. Regulatory Class IA PI3K subunits stabilise the (See figure on previous page.) Figure 2 Numerous signalling components showed significant differences between EGF and HPX mediated EMT. Heat maps for: (a) mRNA transcripts for signalling components which are present across at least six perturbed signalling pathway KEGG maps (Table 1); (b, c) mRNA transcripts with significant (q-value < 0.05) differences in mRNA transcript abundance within at least one PMC42 cell line condition comparison, and differences in mRNA transcript abundance going in (b) the same, or (c) different directions for EGF or HPX-stimulated MDA-MB-468 cells compared to unstimulated, with a significant difference in transcript abundance between the EGF-and HPX-stimulated MDA-MB-468 cells. Membership within KEGG maps that are listed in Table 1 is shown at right (black box). Note the use of alternative colour-bars to indicate statistically significant (**; q-value < 0.05; red-green) and non-significant (brown/orange-teal) changes in abundance. catalytic subunits to inhibit PI3K activity in the absence of upstream signals [69,70], and PIK3R1 (p85α) was significantly downregulated with EGF-or HPX-stimulation, although PIK3R2 (p85β) was increased, particularly with EGF stimulation (Figure 3). Furthermore, when considering disruption to the local interactome PIK3R1 was highly ranked, suggesting a greatly reduced threshold for signalling through PI3K, particularly under conditions where HPX is driving EMT. Given the evidence for signalling through PI3K as described above, it was interesting to note changes in transcript abundance for the AKT scaffolding components Hsp90 and Cdc37 (Figure 3) with the HSP90AA1 and HSP90AB1 local networks showing the greatest degree of disruption (Table 2). Vivanco et al. demonstrated that GSK3B is an important downstream effector of AKT signalling [70], which also showed a high degree of disruption to the local interactome. Furthermore, AKT3 transcript abundance increased significantly under hypoxic conditions (Figure 3).
+
+Increased signalling activity through MEK1/2-ERK-1/2 is the canonical downstream response to EGFR stimulation over many cell types [64,71], and activation of EGFR signalling induces a large number of feedback mechanisms to further modulate pathway activity [63]. This is consistent with the observation that MAPK3 (ERK1) showed some degree of disruption to its local interactome (Table 2), and with the notion that the MEK1/2-ERK-1/2 axis is a key integrator of dysregulated signalling pathways across the various models of induced EMT. It is possible that under conditions where key signalling proteins have been disrupted (e.g. an inactivating mutation in PTEN), some of these feedback mechanisms may lead to aberrant signalling. We examined differentially expressed genes with a previously identified transcriptional signature for MEK pathway activation [72] and found many of these Figure 3 Differences in signalling component transcript changes between EGF and hypoxia induced EMT. Changes in transcript abundance (legend top right) for selected intracellular signalling components, within a schematic representation of the signalling network interactions between encoded proteins. Note the use of alternative colour-bars to indicate statistically significant (**; q-value < 0.05; red-green) and non-significant (brown/orange-teal) changes in abundance. Kinase inhibitors within the families selected for screening (described in text; shown in purple) are listed in Table 3.
+
+transcripts were significantly upregulated within the EGF or HPX-stimulated MDA-MB-468 cells (Additional file 5: Figure S4a).
+
+EGF-and HPX-stimulated MDA-MB-468 cells show different responses to pharmacological inhibition of MEK-ERK and PI3K/Akt signalling As detailed above, systems-level analysis of the mRNA transcript abundance changes that occurred with induction of EMT identified several signalling molecules that were likely to have dysregulated activity, and may play a role in promoting the mesenchymal phenotype. To investigate the potential for therapeutic intervention against these signalling components, a panel of kinase inhibitors ( Table 3) was tested to determine the concentrations at which the fraction of vimentin + cells or cell count was reduced by 50% (IC 50 concentrations).
+
+The majority of inhibitors tested on EGF-stimulated PMC42-ET cells were efficacious at reducing cell count; however, nearly every inhibitor tested had an IC 50 for reducing the number of vimentin + cells well above pharmacologically relevant concentrations (Table 3a-e), thus off-target effects are likely.
+
+As expected, the panel of EGFR kinase inhibitors (Table 3a) were very effective at blocking EGF-induced EMT and cell growth in the PMC42-LA and MDA-MB-468 cells, and with the exception of lapatinib, the IC 50 values for inhibition of vimentin expression are 8-10 fold lower than the corresponding IC 50 values for reduction of cell count. Reduced levels of vimentin expression correlated with the ability of these compounds to inhibit the phosphorylation of ERK1/2 over a range of concentrations (Additional file 6: Figure S5), demonstrating the importance of the EGFR/MEK/ERK canonical pathway and its associated networks in promoting EMT-associated phenotypic changes. The EGFR kinase inhibitors also appeared to have an effect on HPX-stimulated MDA-MB-468 cells, although IC 50 values for HPX-stimulated cells were all higher than corresponding IC 50 values for EGFstimulated cells. In particular, inhibition of the HPX-induced vimentin response in MDA-MB-468 cells occurred at drug concentrations >10-fold higher than required for inhibition of ERK phosphorylation, indicating that the MEK/ERK pathway may be less important for EMP and the regulation of vimentin expression under hypoxic growth conditions. This effect may also be due to drug resistance mechanisms as discussed below. EGFR kinase inhibitormediated reductions in cell count for both EGF-and HPXstimulation were generally observed at concentrations an order of magnitude greater than the effects on vimentinexpression, indicating that our treatments are affecting EMT at relevant concentrations, while reduction in cell viability at higher concentrations may be caused by off target effects. Hypoxia-treated MDA-MB-468 cells were exposed to a small molecule inhibitor of HIF1α accumulation and gene transcriptional activity, CAY10585, to determine whether this could reduce the induction of EMT in these cells. At concentrations below 1 μM CAY10585 did not have a significant effect on the number of vimentin + cells; however, the number of vimentin − cells was potently reduced, suggesting this may have a deleterious effect upon the cell population with an epithelial phenotype (Additional file 7: Figure S6).
+
+Although EGF stimulation further increased the mRNA transcript abundance of EMT markers ( Figure 1i) the inability of EGFR inhibitors to reduce the fraction of vimentin + PMC42-ET cells (Table 3a) suggests that the unstimulated mesenchymal phenotype of these cells is maintained through EGFR-independent signalling mechanisms.
+
+Inhibitors targeting the MEK1/2 (Table 3b) and Srcfamily kinases (Table 3c) showed a similar response profile to the EGFR inhibitors with potent blocking of vimentin expression within the EGF-stimulated cells. For MEK inhibitors the IC 50 values for inhibition of vimentin expression tended to be lower than the corresponding IC 50 values for cell count, and within MDA-MB-468 cells the IC 50 values were again higher with HPX stimulation than EGF stimulation (Table 3b). A similar effect was seen for inhibition of phospho-ERK1/2 (data not shown). A previously reported mRNA transcript signature for 'compensatory resistance' to AZD6244 (Additional file 5: Figure S4b) [72] shows some agreement with the observed efficacy of this MEK inhibitor (Table 3b). The EGF-stimulated PMC42-LA cells had the lowest IC 50 for AZD6244 in reducing the fraction of vimentin + cells by several orders of magnitude, and many of the AZD6244 resistance signature genes showed a decrease in transcript abundance relative to unstimulated PMC42-LA cells (Additional file 5: Figure S4b). Although the profile of this signature was very similar between EGF-and HPX-stimulated MDA-MB-468 cells, several of the transcripts showed a greater degree of upregulation with hypoxia, in agreement with the reduced efficacy of AZD6244 within hypoxia-stimulated MDA-MB-468 cells (Table 3b). For most Src family inhibitors within EGF-stimulated MDA-MB-468 cells the values for IC 50 of vimentin + cells were lower than the IC 50 values for cell count. Conversely, within EGF-stimulated PMC42-LA cells and HPX-stimulated MDA-MB-468 cells the IC 50 for cell count is lower for most Src family inhibitors (Table 3c).
+
+Within EGF-stimulated PMC42-LA cells GDC-0941 and GSK2126458 were the only PI3K/mTOR inhibitors (Table 3d) with pharmacologically relevant IC 50 values for reduction of vimentin + cells, although most inhibitors were capable of reducing cell growth. The PI3K/ mTOR inhibitors were much more efficacious within the MDA-MB-468 cells, and many of the tested compounds Table 3 Targeted Inhibition of signalling molecules show differential effects between EGF-and hypoxia-induced EMT    had a lower IC50 value for the reduction of vimentin + cells compared to the reduction in cell count.
+
+In contrast to PI3K/mTOR inhibitors, the majority of compounds targeting Akt kinases (Table 3e) were only capable of reducing cell count, with A-674563 and AZD5363 the only inhibitors with a pharmacologically relevant IC 50 value for vimentin + cells across any of the cell lines and conditions. Unexpectedly, some Akt inhibitors and mTOR inhibitors were observed to increase the fraction of vimentin + cells and the relative cell density, particularly within HPX-stimulated MDA-MB-468 cells (Figure 4h & k).
+
+The observation that several classes of inhibitors were efficacious within EGF-stimulated MDA-MB-468 cells, but had little effect under hypoxic growth conditions, supports the conclusion from the transcriptome analysis that the phenotypically similar EMT processes induced with EGF or hypoxia are driven by different signalling mechanisms. Furthermore, given differences observed between the EGF-and HPX-induced transcriptional profiles, particularly for signalling ligands where the receptor also has strong increases in transcript abundance, such as HBEGF/EGFR and VEGFA/KDR, we hypothesised that pro-survival signalling through AKT may mediate the reduced efficacy of MEK-1/2 inhibitors under hypoxic conditions. Thus, we also applied the AKT1/2/3 inhibitors GSK690693 or AZD5363 in combination with the MEK1/2 inhibitor AZD6244. The pharmacological efficacy curves suggest that they provide a synergistic effect to block the relative fraction of vimentin + cells (Figure 4 m). Furthermore, this effect was not observed with the AKT1 or AKT1/2 inhibitors tested in combination with AZD6244 ( Figure 4p).
+
+
+Discussion
+
+Transcriptional profiling of two human breast cancer models indicated that subtly different transcriptional responses underpinned EMT induced with EGF or HPX (Figure 1a-h &i). This included variation in the relative abundance of EMT-implicated transcription factors (Figure 1j & k), and alternative signalling pathways dysregulated by the transcriptional changes (Table 1 & 2; Figure 2 & 3). A panel of kinase inhibitors were selected from across the network of disrupted signalling components, within which PI3K-Akt and MEK1/2-ERK-1/2 appeared to act as signal integrators. In general, tested compounds had a much lower potency within our cellular assays compared to results obtained with purified enzymes. This was expected due to effects such as competition with high levels of intracellular ATP, binding to other proteins and limited cellular permeability [73].
+
+A range of factors regulate EMP through various signalling pathways [74], and "kinase switching" from the ErbB axis to FGFR and PDGFR has been associated with EMT in NSCLC models [75]. We focussed on differences in the signalling mechanisms associated with EGF-or HPXinduced EMT within MDA-MB-468 cells as a model of TNBC (Figure 4). Many drugs that induced a response within the EGF-stimulated MDA-MB-468 cells, such as the MEK inhibitor AZD6244 (Figure 4a & b), showed reduced efficacy or even pro-proliferative effects within HPX-stimulated MDA-MB-468 cells. It has previously been reported that hypoxia can have varied effects across different kinase inhibitors, and this may be partially mediated by modulation of hypoxia-induced compensatory mechanisms, such as VEGF signalling [76]. Stark differences were observed in the responses elicited by some inhibitors, including the mTOR inhibitor Everolimus, and the AKT1/2/3 inhibitor AZD5363 (Figure 4 g & h; j & k). These divergent responses to pharmacological perturbation support the conclusion that subtly different signalling mechanisms are responsible for driving the phenotypically similar EMT processes that occurred with EGF or HPX stimulation of MDA-MB-468 cells (Figure 1). Intriguingly, synergistic effects for blocking EGF-induced EMT were observed when combining an AKT1/2/3 inhibitor with the MEK-1/2 inhibitor AZD6244, but not for an inhibitor which targeted AKT1 alone (Figure 4p), indicating that AKT1 is not solely responsible for the protective signalling seen in this system.
+
+
+Differences in the transcriptional profile and pharmacological responsiveness between EGF-and hypoxia-induced EMT
+
+We saw differences in the transcript abundance and/or regulation of several well-studied TFs previously associated with EMT in breast cancer [77][78][79] (Figure 1j). Relatively large (although not statistically significant) changes in transcript abundance for TWIST1 under HPX conditions are consistent with its reported regulation by HIF1 [36,37,80], as are the increases for ZEB1 [80] (Figure 1j). Failure to detect SNAI2 transcripts within the MDA-MB-468 cells data was consistent with one previous report [81]; however, increases in SNAI2 mRNA abundance following EGF stimulation of MDA-MB-468 cells have been reported together with enrichment at sites of in vivo EMT [48]. This discrepancy may reflect the different provenance of MDA-MB-468 cells in Belgium and Australia, or alternatively, SNAI2 transcripts may be expressed at sufficiently low levels that they approach the signal-tonoise ratio of our RNA-Seq protocol. Our previous study showed that treatment of MDA-MB-468 cells with HPX caused a non-significant increased at different time points in SNAI2, TWIST1 and ZEB2, and a significant increase in ZEB1 [42]. The dominant role of ZEB1 in the current study is also consistent with our previous observations that PMC42-ET cells have significantly higher levels of ZEB1 and SNAI2 than PMC42-LA cells, and that ZEB1 and SNAI2 were both increased in PMC42-LA cells after EGF treatment [41,42]. ZEB1 appears to be a downstream integration point for EMT regulation [41], and is subject to complex regulation at multiple levels [82,83]. This differential control between EMT scenarios may have clinical utility in allowing selective inhibition of EMT mechanisms involved in tumour progression, whilst leaving critical physiological processes unperturbed to reduce toxicity.
+
+Numerous transcripts showed differences in abundance between EGF-and HPX-mediated EMT (Figure 2 & 3), and some of the altered signalling components likely contributed to the variable drug efficacy. The multidrug resistance-promoting P-glycoprotein (ABCB1) had a large increase in transcript abundance within hypoxia-stimulated MDA-MB-468 cells (2.6-fold increase, q-value = 0.029; for EGF-stimulation 1.6 fold increase, q-value = 0.36), which may have reduced the efficacy of several kinase inhibitors [76,84,85].
+
+The ability of EGFR inhibitors to block EMT in HPXstimulated MDA-MB-468 s (albeit at higher concentrations than in EGF-stimulated MDA-MB-468 s; Table 3a) suggests that hypoxia-induced EMT may be partially mediated by paracrine/autocrine EGFR signalling. This is supported by the observation that transcript abundances for several EGF ligands were significantly increased with HPX stimulation, as was EGFR itself (Figure 3). This could drive paracrine/autocrine EGFR signalling to promote EMT, although it should be noted that EGF was present within the culture media and this would also drive some EGFR signalling. HB-EGF mediated activation of EGFR is an important driver of MDA-MB-231 cell invasiveness, particularly for brain metastases [86]. A similar role has been described for autocrine TGFβ signalling in promoting EMT [82], and it is interesting that modulators of TGFB signalling showed significant changes in transcript abundance, including: THBS1 (Figure 1i), INHBA, TGFBR2 (Figure 2b), INHBB and BMP4 (Figure 2c).
+
+Many of the 'HIF-1 signalling' transcripts with large differences in abundance between EGF-and HPX-stimulated MDA-MB-468 cells were known transcriptional targets of HIF-1, such as SERPINE1, VEGFA, and EDN1. Although it is not included within the KEGG HIF-1 signaling pathway, DDIT4 is a known HIF-1-responsive transcript (HIF-1 responsive RTP801) which can modulate mTORC1 through the RHEB inhibitors TSC1/TSC2. Other HIF-1 target genes necessary for metabolic adaptation to hypoxic growth also showed large differences, including HK2, LDHA, PFKFB3, and SLC2A1 (Figure 2b). These differences likely reflect stabilisation of HIF-1α under hypoxic growth conditions, although many of the metabolism-associated HIF-1 targets also had increased transcript abundance with EGF stimulation (Figure 2b). This may be mediated by MEK1/2-ERK1/2 signalling through MKNK2 to eIF4E, influencing HIF-1α translation. Pre-clinical studies have observed such effects with hypoxia-induced EMT [39] and this may contribute to the deleterious effect of VEGFR inhibitors [87].
+
+Assuming that increased abundance of SOX9 mRNA (Figure 1i) contributes to increased transcription factor activity, this driver of mammary stem cell behaviour likely promotes EMT (Figure 1a-h). The increase in SOX9 transcript abundance was only significant within the HPX-stimulated MDA-MB-468 cells (Figure 1i), although SOX9 also showed strong differences in transcript abundance (q-value < 0.05) between the ET and LA sublines (Figure 2c). SOX9 has been linked to clinical chemoresistance in colorectal cancer [88], an affect which may be partially mediated by EMT changes. Furthermore, cancer stem cell markers are negative predictive markers for the efficacy of everolimus in treating TNBC [89], and this may underpin the failure of everolimus to block EMT within hypoxia-stimulated MDA-MB-468 cells (Figure 4 k).
+
+
+Pathway convergence on PI3K-Akt and MEK1/2-ERK1/2
+
+The presence of PI3K-Akt and MEK1/2-ERK1/2 components across multiple signalling pathways (Figure 2a) is consistent with the role of these evolutionarilyconserved modules in the integration of various extracellular stimuli [90]. As detailed above, PI3K-Akt and MEK1/2-ERK-1/2 are well-known effectors of EGFR signalling [65] and other receptor tyrosine kinases [69,90], and signalling through these pathways can induce a variety of feedback mechanisms [63]. Even within breast cancer cell lines that do not over-express HER2, such as triple negative MDA-MB-231 cells, EGFR-induced signalling through PI3K/Akt is thought to be involved in mediating EMT [31], while several other studies implicate MEK1/2-ERK1/2 signalling as an important driver [91]. The relatively high frequency of PI3K-Akt and MEK1/2-ERK1/2 may, simply reflect their relatively well-studied nature, however, leading to inclusion across numerous KEGG maps.
+
+
+Activation of MEK-ERK signalling and promotion of signalling through ERK2 may contribute to EMT development in hypoxia
+
+Recent evidence has indicated that ERK2 (MAPK1) signalling is central to EMT, activating DEF-motif transcription factors such as FOSL1 (FRA1) and ZEB1/ZEB2 [92,93]. Although increases in ERK2 (MAPK1) transcript abundance were not significant with EGF or HPX stimulation, there were corresponding decreases in ERK1 (MAPK3) transcript abundance that were significant within hypoxia-stimulated MDA-MB-468 cells (Figure 3). The altered ratio of transcripts may have led to ERK2 becoming the dominant isoform, while activation of Ras under stimulated conditions drives signalling though MEK-1/2 (Additional file 5: Figure S4a) to phosphorylate ERK2. Kinome profiling of TNBC tumours suggests that ERK2 is activated compared to control tissue, while ERK1 activity remains unchanged [94], and it is tempting to speculate that the hypoxic tumour environment drives in vivo ERK2 activation. FOSL1 was one of the few transcripts significantly upregulated across all our models of induced EMT and ZEB2 was not expressed within MDA-MB-468 cells (Figure 1j), suggesting ZEB1 and FOSL1 may be sufficient to mediate this transformation.
+
+
+Clinical Implications
+
+Oncogenic mutations of Ras are important drivers of malignant behaviour within melanoma and pancreatic cancers, and although such activating mutations are relatively rare within breast cancer, overexpression of Ras mRNA and protein has been demonstrated [95]. Our data show a strong increase in transcript abundance for RRAS2 (Figure 3), consistent with reports that RRAS2 drives PI3K-dependent tumorigenesis and contributes to late stage metastasis in certain lung cancers [96]. Activation of Ras proteins by a range of growth factor receptors [97] leads to activation of the Raf-MEK-ERK [94] and the PI3K-Akt signal transduction cascades, culminating in the regulation of cellular survival and proliferation genes [90,98]. Ras is difficult to target therapeutically [99], although up-and downstream pathway components may be inhibited [100]. Inhibition of Src upstream has proved disappointing with response rates below 10% in unselected TNBCs [101] whereas downstream B-Raf inhibition is currently unexplored.
+
+The effects of MEK inhibition within breast cancer are poorly studied in comparison to other cancers, particularly melanoma and lung cancer. Treatment of MDA-MB-231 and SUM159 cells with the MEK inhibitor AZD6244 has been shown to reduce c-Myc mRNA transcript and protein abundance, leading to receptor tyrosine kinase reprogramming which drives MEK inhibitor resistance [94]. Breast cancer cell lines sensitive to the MEK inhibitor selumetinib tend to be a basal subtype with Raf mutations [102], and a number of MEK inhibitors are in early clinical trials across solid tumour types, although information on breast cancer responsiveness is still scarce [103]. A phase II clinical trial for the MEK inhibitor CI-1040 in chemotherapy pre-treated metastatic breast cancer showed no major effects, although one patient developed stable disease [104]. The lack of frequent mutations within the core Ras-Raf-MEK axis, but the potential for cross-talk with a plethora of pathways intrinsic to breast cancer progression, may mean that the potential of MEK blockade lies in treatment combinations to overcome resistance. This is borne out by pre-clinical studies which have shown MEK inhibition has the potential to enhance sensitivity of breast cancer xenografts to HER2 blockade [105] and antiestrogen treatment [106]. Furthermore, studies with breast cancer cell lines have shown that MEK inhibition also increases sensitivity to EGFR blockade [107], and reversed the effects of IGF-1R overexpression in promoting proliferation [108].
+
+Combination therapies with PI3K inhibition have been shown to enhance the effect of MEK inhibition within basal subtype breast cancer cells by alleviating the compensatory activation of PI3K/AKT that occurs with MEK inhibition [109]. We observed that a combination of MEK1/2 and AKT1/2/3 inhibitors had synergistic effects in blocking vimentin induction within our in vitro model of EGF-induced EMT (Figure 4m). It should be noted, however, that when EMT was induced with hypoxic growth conditions this combination of kinase inhibitors promoted an increase in the relative fraction of mesenchymal cells (Figure 4n) demonstrating the importance of elucidating the detailed effects of pathway manipulation in this area before proceeding to clinical studies. Depletion of AKT3 has previously been reported to sensitize TNBC cell lines, including MDA-MB-468 cells, to the pan-Akt inhibitor GSK690693 [110] and The Cancer Genome Atlas Project (TCGA) data show that AKT3 is upregulated in 28% of TNBCs [110,111]. The observation that inhibitors targeting AKT1 (Figure 4p) or AKT1/2 (data not shown) did not have a combinatorial effect with MEK1/2 inhibition suggests that AKT3 mediates sufficient signal transduction to provide functional compensation during inhibition of AKT1 and AKT2. This specific possibility remains to be tested.
+
+
+Conclusions
+
+In this report we have studied the mRNA transcript profile across several models of induced EMT to identify common dysregulated signalling components that may contribute to development and maintenance of the metastatic phenotype. Given the putative role for EGF signalling and hypoxia in mediating tumour progression in vivo, our analysis focussed on the differences between these stimuli in promoting EMT within MDA-MB-468 cells as a model of triple negative breast cancer. A number of kinase inhibitors were targeted at different points across the network of dysregulated signalling components, and the alternative stimuli were associated with variation in the efficacy of kinase inhibitors at blocking induction of EMT. A combination of AKT1/2/3 and MEK1/2 inhibitors was shown to have synergistic effects on blocking the induction of EMT in vitro. The effects of simultaneously blocking these important signalling pathways are likely to be deleterious to many different cell types; however, using novel targeted drug delivery mechanisms that are under development it may be possible to apply this combination therapy for the clinical treatment of EMT within TNBC. Furthermore, with further comparative study the differential control of EMT by alternative driver molecules we have identified may allow a selective effect to be exerted on pathogenic EMT processes whilst leaving physiological processes intact, thereby minimising toxicity to patients.
+
+We have demonstrated that hypoxic conditions fundamentally change the way breast cancer cells respond to drugs and compounds in various stages of development for treatment of breast cancer. The role of HIF1 in promoting a mesenchymal phenotype has been well explored [4,11,36,37], as has the role of hypoxia in promoting drug resistance components [76,84,85]. Perhaps most importantly, our data also indicate that under hypoxic conditions some therapeutic interventions may shift cells into an even more aggressive, mesenchymal phenotype. This highlights the vital importance of evaluating novel drug targets under a more-representative range of stimuli and conditions that mimic the heterogeneity of environmental conditions tumours are exposed to in situ. While attention has recently been drawn to the problem of genetic heterogeneity in breast cancer tumours, our study indicates that extra-cellular conditions, such as those we have explored here to stimulate EMT, can induce divergent molecular states even on a common genetic background, resulting in altered drug sensitivity and response. Given the hypoxic conditions commonly prevalent in the core of solid breast tumours, these findings have clear clinical implications for both treatment, and the drug development process.
+
+
+Additional files
+
+Additional file 1: Table S1. Provenance of EMT-associated transcripts in Figure 1j. References which describe the role of transcripts listed Figure 1j in promoting EMT.
+
+Additional file 2: Figure S1. mRNA abundance data of selected targets with comparison to published data sources for selected transcription factors. (a) changes in mRNA transcript abundance (for Figure 1i & 1j transcripts) between specified cell lines and conditions (at top), with the mean count value (normalised to counts-per-million; CPM) of the compared conditions overlaid. Note the use of alternative color-bars to indicate statistically significant (**; q-value < 0.05; red-green) and non-significant (brown/orange-teal) changes in abundance. Black squares indicate mRNA transcripts that were not reliably detected. (b) Differential transcript abundance within and between the in vitro models of induced EMT for Blick Basal B discriminator transcripts [13]. Note the use of alternative color-bars to indicate statistically significant (**; q-value < 0.05; red-green) and non-significant (brown/ orange-teal) changes in abundance. Black squares indicate mRNA transcripts that were not reliably detected. (c) Relative transcripts abundances for EMT implicated TFs (from Additional file 2: Figure S1a) within the Heiser data [112]. MDA-MB-468 cells are highlighted (cyan). (d) Relative transcripts abundances for EMT implicated TFs (from Additional file 2: Figure S1a) within the Neve data [44]. MDA-MB-468 cells are highlighted (cyan). Unstimulated MDA-MB-468 cells (Figure 1 & Additional file 2: Figure S1a) have a relatively high abundance of SOX9 and a relatively low abundance for FOXA2, FOSL1 SNAI2, TWIST1, ZEB1, ZEB2, in agreement with the both the Heiser et al. [112] (Additional file 2: Figure S1c) and the Neve et al. [44] (Additional file 2: Figure S1d) studies.
+
+Additional file 3: Figure S2. Changes in abundance for selected mRNA transcripts. Heat maps (legend at left) showing changes in transcript abundance between the specified conditions (at top) for specified transcripts where there is a significant difference in abundance between EGF and HPX stimulated MDA-MB-468 cells, with (a) divergent or (b) consistent changes between EGF and HPX stimulated MDA-MB-468 cells. Targets have been clustered by expression pattern and are ordered accordingly.
+
+Additional file 4: Figure S3. Changes in abundance for selected mRNA transcripts. Transcripts with consistent differential transcript abundance across all condition comparisons, and their membership across all KEGG maps (at right).
+
+Additional file 5: Figure S4. Components of transcriptional signatures for MEK signalling activation (at top) and compensatory resistance to AZD6244 (at bottom). To examine the hypothesis that signalling through MEK is implicated in these models of induced EMT, we examined changes in the abundance of genes previously classified as 'transcriptional signatures' for MEK pathway activation and AZD6244 sensitivity [72]. A large number of transcripts within the MEK signalling activation signature showed increased transcript abundance in the EGF stimulated PMC42-ET and PMC42-LA cells, with most of the changes not being statistically significant. Although changes in transcript abundance for components of the MEK signalling signature are less consistent within the stimulated MDA-MB-468 s, there were more transcripts showing a significant (q-value < 0.05) increase in abundance suggesting that signalling through MEK1/2 is active. Examining mRNA transcripts which have been associated with compensatory resistance to AZD6244, the EGF stimulated PMC42-LA cells show a number of transcripts with decreased abundance. For the EGF and HPX stimulated MDA-MB-468 cells a number of these transcripts show increased abundance, with more than half showing a statistically significant (q-value < 0.05) increase in abundance within MDA-MB-468 cells grown under hypoxic conditions. It is interesting to note that the PMC42-ET and -LA subline comparison showed the weakest signature for MEK signalling activation, and the strongest signature for AZD6244 resistance, regardless of EGF stimulation. The AZD6244 resistance signature shows relatively good agreement with our inhibitor screen results ( Table 3), such that EGF stimulated PMC42-LA cells are susceptible to AZD6244, the inhibitor is slightly less efficacious within EGF stimulated MDA-MB-468 cells, and MDA-MB-468 cells grown under hypoxic conditions are not affected by AZD6244.
+
+Additional file 6: Figure S5. Relative to the DMSO treated cells, CAY10585 caused no significant change in the cell count of vimentin + cells; however, there was a profound reduction in the number of vimentin − cells. To ensure that the effect is target-related, an siRNA targeting HIF1α was tested, together with a scrambled siRNA/ negative-control. Relative to the scrambled siRNA treatment, the HIF1α siRNA caused a small increase in the number of vimentin + cells; however, there was a much larger reduction in the number of vimentin − cells, in concordance with the inhibitor data. The transfection of siRNA into MDA-MB-468 cells was performed as a reverse transfection. Lipofectamine 2000 (Life technologies, 0.25 uL per well) and siRNA (final concentration 40 nM) were separately diluted into 25 uL of Opti-MEM (Life technologies) and incubated for 5 minutes. The solutions were then combined and incubated for 15 minutes at room temperature. To this mixture, 8,000 cells diluted into 100 uL of DMEM with 10% FBS, and the combined mixture was seeded in a 96 well assay plate (Corning, #3603). To other wells, 8,000 MDA-MB-468 cells were seeded without any siRNA or transfection reagent. The plates were incubated over night at 37C/5% CO2. The next day, media in the transfected wells were replaced with fresh media. HIF1a inhibitor (CAY10585, sc-205346, Santa Cruz biotechnology) was diluted in DMSO (0.5% final concentration) and added to the untransfected cells at the concentrations indicated in the figure. As a control, cells were treated with 0.5% DMSO. All siRNA and inhibitor reactions were performed in triplicate. The cells were incubated in a hypoxia chamber (1% O2) for 72 h, before being fixed with 3.7% formaldehyde for 15 minutes. The cells were then stained for Vimentin, imaged and analysed as previously described. The siRNAs used were HIF1a siRNA (sc-35561, Santa Cruz Biotechnology) and scrambled control siRNA (sc-37007, Santa Cruz Biotechnology).
+
+Additional file 8: Table S2. Estimated p-values for enrichment of elements within KEGG signal transduction maps without correction for multiple hypothesis testing. Signaling pathway KEGG maps which are over-represented (p-value < 0.05) for transcripts which show differential expression across at least one of the specified conditions are listed in Table 1. 
+
+
+Competing interests
+
+The authors declare that they have no competing interests.
+
+Authors' contributions JC analysed the RNASeq data, performed the computational analysis, and prepared the manuscript. KJL designed and performed pharmacological assays, and analysed the pharmacological data. MW and ETC. participated in the study design and the RNASeq experiments. MF assisted with the computational analysis and analysis of the RNASeq data. CPB assisted with the computational analysis and analysed the RNASeq data. AF participated in study design and analysed the RNASeq data. EJC assisted with the computational analysis. IS designed the pharmacological assays and analysed the pharmacological data. MJD analysed the RNASeq data, performed the computational analysis, and prepared the manuscript. EWT participated in study design, analysed the RNASeq data, and prepared the manuscript. JC and KJL are joint first authors. All authors read and approved the final manuscript.
+
+
+The stimulation of PMC42-LA and MDA-MB-468 cells with EGF, or growth of MDA-MB-468 cells under hypoxic conditions (HPX) each promoted EMT as indicated by an increased proportion of vimentin + cells (red fluorescence; Figure 1b & f, c & g, d & h). Unstimulated PMC42-ET cells express vimentin (Figure 1a), thus increases in the number of vimentin + cells with EGF stimulation
+
+Figure 1
+1Stimulation of PMC42-ET and PMC42-LA cells with EGF, or stimulation of MDA-MB-468 cells with EGF or growth under hypoxic conditions (HPX) promotes a mesenchymal phenotype. (a-h) Fluorescence images of stimulated and unstimulated cells labelled with DAPI (blue) and anti-vimentin (red). Scale bar represents 10 μm. Changes in mRNA transcript abundance between stimulated and unstimulated cells for (i) EMT markers and (j) EMT-implicated transcription factors. Note the use of alternative colour-bars to indicate statistically significant (**; q-value < 0.05; red-green) and non-significant (brown/orange-teal) changes in abundance. Grey squares indicate mRNA transcripts that were not reliably detectednormalised count data are shown in Additional file 2: Figure S1. system showing significant transcriptional dysregulation of PI3K-Akt signalling components. The results shown in
+
+
+. Three proteins were found across seven pathways, encoded by: MAPK1, MAPK3 and PRKCA (Figure 2a; see membership matrix at right). Within six of the maps, the next most common proteins were encoded by: AKT1, AKT2, AKT3, MAP2K1, MAP2K2, PIK3CA, PIK3CB, PIK3CD, PIK3CG, PIK3R1, PIK3R2, PIK3R3, PIK3R5, PRKCB, PRKCG, and RAC1 (Figure 2a). The prevalence of MEK1/2-ERK1/2 and PI3K-Akt across these KEGG maps likely reflects the role of these signal transducers in the integration of numerous upstream signals.
+
+
+are shown inFigure 2b& c. Transcripts that changed in the same direction across all models of induced EMT (including known EMT markers) are also shown in Additional file 4:Figure S3. Next, transcript
+
+
+of vimentin expression and cell counts by a selection of kinase inhibitors. Shown are the IC50 values (where the fraction of vimentin positive cells, or the cell count, was reduced by 50% compared to the controls). Concentrations are specified in μM units. Inhibitors have been grouped according to the kinases they target. The dose-response curves for selected kinase inhibitors are shown inFigure 4. For reference, the IC50 values of each compound measured in biochemical assays with purified enzymes are included.
+
+Figure 4 (
+4See legend on next page.) Cursons et al. Cell Communication and Signaling (2015) 13:26
+
+(
+See figure on previous page.) Figure 4 Hypoxia-and EGF-induced metastatic MDA-MB-468 cells show markedly different responses to pharmacological inhibitors. Pharmacological dose-response curves showing the fraction of vimentin-positive cells (blue; left axes) and cell-count (red; right axes) in the presence of (a-c) the MEK inhibitor AZD6244, (d-f) the PI3K inhibitor GDC-0941, (g-i) the AKT1/2/3 inhibitor AZD5363 (j-l) and the mTOR inhibitor Everolimus. (m-o) pharmacological inhibition of vimentin with a combination of MEK-1/2 (AZD6244) and AKT1/2/3 (AZD5363) inhibitors at varying concentrations. (p) pharmacological inhibition of vimentin with a comination of MEK-1/2 (AZD6244) and AKT1 (Akt-i-1) inhibitors at varying concentrations.
+
+
+Inhibition of ERK phosphorylation shows good correlation with the inhibition of vimentin-positive cells within EGF and HPX induced EMT. Pharmacological response curves for the MEK-1/2 inhibitor CI-1040, showing the %inhibition of vimentin (blue), %inhibition of phospho-ERK-1/2 (green) and reductions in cell count (red). (a) Note that there is good correlation between the inhibition of vimentin and phospho-ERK over a range of concentrations for EGF stimulated MDA-MB-468 cells. (b) For MDA-MB-468 cells grown under hypoxic conditions, inhibition of phospho-ERK shows a similar response; however, inhibition of vimentin expressing cells only occurs at relatively high concentrations of phospho-ERK, suggesting the activation of compensatory signalling mechanisms. Additional file 7: Figure S6. Within hypoxia-treated MDA-MB-468 cells, inhibition of HIF1α with the small molecule inhibitor CAY10585 or transfection with siRNA targeting HIF1α caused a large decrease in the number of vimentin-negative cells. Hypoxia-treated MDA-MBA-468 cells were treated with the small molecule inhibitor of HIF1α activation and nuclear accumulation, CAY10585, or vector/negative-control (DMSO).
+
+
+Abbreviations BCSC: Breast cancer stem cell; BrCa: Breast cancer; EGF: Epidermal growth factor; EMP: Epithelial-mesenchymal plasticity; EMT: Epithelial-mesenchymal transition; ERK: Extracellular-signal regulated kinase; HPX: Hypoxia; MAPK: Mitogen activated protein kinase; MaSC: Mammary stem cell; MEK: MAPK/ERK kinase; MET: Mesenchymal-epithelial transition; PI3K: Phosphatidyl-inositol 3 kinase; TBS: Tris-buffered saline; TF: Transcription factor; TNBC: Triple-negative breast cancer.
+
+Table 1
+1Different signalling pathways are dysregulated between the models of in vitro induced EMTdifferential 
+analysis 
+between: 
+
+Cell Lines 
+PMC42-
+ET 
+
+PMC42-
+LA 
+
+MDA-MB-
+468 
+
+MDA-MB-
+468 
+
+PMC42-ET vs. 
+PMC42-LA 
+
+PMC42-ET vs. 
+PMC42-LA 
+
+MDA-MB-
+468 
+
+Conditions 
++EGF vs. 
+Unstim. 
+
++EGF vs. 
+Unstim. 
+
++EGF vs. 
+Unstim. 
+
++HPX vs. 
+Unstim. 
+
+Unstim. 
++EGF 
++HPX vs 
++EGF 
+
+number of 
+differentially 
+expressed 
+transcripts 
+
+238 
+591 
+3155 
+3716 
+3261 
+2938 
+1626 
+
+KEGG 
+signalling 
+pathway/ 
+system: 
+
+PI3K-Akt 
+0.015 
+0.000 
+0.030 
+0.005 
+0.153 
+0.559 
+0.943 
+
+HIF-1 
+0.952 
+0.244 
+0.002 
+0.002 
+0.982 
+0.732 
+0.000 
+
+Rap1 
+0.562 
+0.014 
+0.000 
+0.000 
+0.175 
+0.075 
+0.742 
+
+Hippo 
+0.173 
+0.000 
+0.022 
+0.085 
+0.004 
+0.297 
+0.996 
+
+Wnt 
+0.015 
+0.371 
+0.038 
+0.071 
+0.002 
+0.455 
+0.534 
+
+MAPK 
+0.214 
+0.044 
+0.312 
+0.680 
+0.360 
+0.634 
+0.768 
+
+Hedgehog 
+0.977 
+0.000 
+0.999 
+0.939 
+0.217 
+0.093 
+0.993 
+
+TGF-beta 
+0.029 
+0.000 
+0.215 
+0.328 
+0.053 
+0.632 
+0.694 
+
+Ras 
+1.000 
+0.169 
+0.259 
+0.022 
+0.120 
+0.065 
+0.783 
+
+Phosphatidyl-
+inositol 
+
+0.796 
+0.833 
+0.238 
+0.049 
+0.753 
+0.923 
+0.893 
+
+cAMP 
+0.992 
+0.639 
+0.242 
+0.017 
+0.983 
+0.756 
+0.201 
+
+
+
+Table 2
+2Signalling pathway components showed variable levels of transcriptional disruption to their local interactomeRank 
+HGNC symbol 
+degree 
+Rank 
+HGNC symbol 
+degree 
+Rank 
+HGNC symbol 
+degree 
+
+1 
+HSP90AA1 
+164 
+11 
+PIK3R1 
+66 
+21 
+ERBB2 
+42 
+
+2 
+HSP90AB1 
+132 
+12 
+VCP 
+59 
+22 
+TGFBR1 
+41 
+
+3 
+EGFR 
+122 
+13 
+CALM1 
+58 
+23 
+HSPA1A 
+39 
+
+4 
+MYC 
+99 
+14 
+TUBB 
+57 
+24 
+RAC1 
+38 
+
+5 
+GSK3B 
+84 
+15 
+LYN 
+49 
+25 
+PIN1 
+37 
+
+6 
+FYN 
+76 
+16 
+JUN 
+48 
+26 
+NFKB1 
+37 
+
+7 
+ABL1 
+70 
+17 
+GAPDH 
+47 
+27 
+CDK6 
+35 
+
+8 
+PRKACA 
+68 
+18 
+FOS 
+45 
+28 
+MAPK3 
+35 
+
+9 
+PRKCA 
+67 
+19 
+CREBBP 
+45 
+29 
+TK1 
+34 
+
+10 
+CDK1 
+67 
+20 
+TUBA1A 
+42 
+30 
+PSMA7 
+34 
+
+mRNA transcripts encoding proteins for which there are drugs, inhibitors or antagonists available (through DrugBank v3.0), ranked by degree within a 
+protein-protein interaction network of differentially expressed transcripts. Degree reflects the number of interaction partners (for the encoded protein) which 
+show significant changes in transcript abundance. 
+
+
+Table 3
+3Targeted Inhibition of signalling molecules show differential effects between EGF-and hypoxia-induced EMT (Continued)BEZ-235 (NVP-BEZ235) 
+p110 (α 4 nM, β 75 nM, 
+γ 5 nM, δ 7 nM) 
+
+>25 
+0.06 
+>25 
+>25 
+0.02 
+0.05 
+0.05 
+3.43 
+
+d) PI3K/mTOR 
+PI103 
+DNA-PK (2 nM), mTORC1 
+(20 nM), PI3K-C2b 
+(26 nM), p110 (α 8 nM, 
+β 88 nM, γ 150 nM, 
+δ 48 nM) 
+
+15.18 
+0.32 
+>25 
+1.82 
+0.38 
+0.88 
+1.22 
+1.04 
+
+GNE-493 
+PI3K (α 3.4 nM, β 12 nM, 
+γ 16 nM, δ 16 nM) 
+
+>25 
+1.11 
+>25 
+12.09 
+0.29 
+1.45 
+0.99 
+6.41 
+
+GSK2126458 (HYR-582) 
+Ki: P110 (α 0.019 nM, 
+β 0.13 nM, γ 0.06 nM, 
+δ 0.024 nM), mTORC1 
+(0.18 nM), mTORC2 
+(0.3 nM) 
+
+>25 
+0.02 
+6.69 
+0.62 
+<0.02 
+0.08 
+0.29 
+0.74 
+
+GNE-490 
+PI3K (α 3.5 nM, β 25 nM, 
+γ 5.2 nM, δ 15 nM) 
+
+>25 
+2.16 
+>25 
+2.23 
+0.93 
+1.25 
+12.68 
+>25 
+
+LY294002 
+PI3K (α 0.5 uM, 
+β 0.97 uM, γ 0.57 uM) 
+
+>25 
+14.86 
+>25 
+12.12 
+4.18 
+13.22 
+>25 
+>25 
+
+GSK690693 
+Akt1 (2 nM), Akt2 
+(13 nM), Akt3 (9 nM) 
+
+>25 
+>25 
+>25 
+8.32 
+>25 
+3.31 
+>25 
+>25 
+
+A-674563 
+Ki: Akt1 (11 nM), PKA 
+(16 nM), CDK2 (46 nM), 
+ERK2 (260 nM) 
+
+>25 
+0.48 
+0.17 
+0.76 
+0.65 
+0.25 
+2.83 
+0.60 
+
+Akt-i-1 
+Akt1 (4.6 μM) 
+>25 
+>25 
+>25 
+>25 
+>25 
+6.46 
+>25 
+12.30 
+
+e) Akt 
+Akt-i-1/2 
+Akt1 (58 nM), Akt2 
+(210 nM) 
+
+>25 
+>25 
+>25 
+>25 
+>25 
+2.82 
+>25 
+4.79 
+
+AT7867 
+Akt1 (32 nM), Akt2 
+(17 nM), Akt3 (47 nM), 
+PKA (20 nM) 
+
+>25 
+2.63 
+>25 
+0.24 
+>25 
+2.95 
+>25 
+4.57 
+
+AZD5363 
+Akt1 (3 nM), Akt2 
+(8 nM), Akt3 (8 nM), 
+ROCK2 (56 nM) 
+
+>25 
+>25 
+>25 
+>25 
+0.63 
+>25 
+>25 
+>25 
+
+Merck-22-6 
+Akt1 (138 nM), Akt2 
+(212 nM) 
+
+>25 
+4.27 
+>25 
+1.48 
+>25 
+0.46 
+>25 
+0.55 
+
+MK-2206 
+Akt1 (8 nM), Akt2 
+(12 nM), Akt3 (65 nM) 
+
+>25 
+5.62 
+>25 
+3.16 
+>25 
+1.86 
+>25 
+9.77 
+
+
+AcknowledgementsThe authors gratefully acknowledge GayleFigure 2(See legend on next page.)
+Epithelium-mesenchyme transition during neural crest development. J L Duband, F Monier, M Delannet, D Newgreen, Acta Anat (Basel). 154Duband JL, Monier F, Delannet M, Newgreen D. Epithelium-mesenchyme transition during neural crest development. Acta Anat (Basel). 1995;154:63-78.
+
+Epithelial-mesenchymal transitions in development and disease. J P Thiery, H Acloque, R Y Huang, M A Nieto, Cell. 139Thiery JP, Acloque H, Huang RY, Nieto MA. Epithelial-mesenchymal transitions in development and disease. Cell. 2009;139:871-90.
+
+Epithelial-mesenchymal and mesenchymal-epithelial transitions in carcinoma progression. H Hugo, M L Ackland, T Blick, M G Lawrence, J A Clements, E D Williams, J Cell Physiol. 213Hugo H, Ackland ML, Blick T, Lawrence MG, Clements JA, Williams ED, et al. Epithelial-mesenchymal and mesenchymal-epithelial transitions in carcinoma progression. J Cell Physiol. 2007;213:374-83.
+
+Epithelial-mesenchymal transition: at the crossroads of development and tumor metastasis. J Yang, R A Weinberg, Dev Cell. 14Yang J, Weinberg RA. Epithelial-mesenchymal transition: at the crossroads of development and tumor metastasis. Dev Cell. 2008;14:818-29.
+
+Transitions between epithelial and mesenchymal states: acquisition of malignant and stem cell traits. K Polyak, R A Weinberg, Nat Rev Cancer. 9Polyak K, Weinberg RA. Transitions between epithelial and mesenchymal states: acquisition of malignant and stem cell traits. Nat Rev Cancer. 2009;9:265-73.
+
+Complex networks orchestrate epithelial-mesenchymal transitions. J P Thiery, J P Sleeman, Nat Rev Mol Cell Biol. 7Thiery JP, Sleeman JP. Complex networks orchestrate epithelial-mesenchymal transitions. Nat Rev Mol Cell Biol. 2006;7:131-42.
+
+The epithelial-mesenchymal transition: new insights in signaling, development, and disease. J M Lee, S Dedhar, R Kalluri, E W Thompson, J Cell Biol. 172Lee JM, Dedhar S, Kalluri R, Thompson EW. The epithelial-mesenchymal transition: new insights in signaling, development, and disease. J Cell Biol. 2006;172:973-81.
+
+Epithelial-mesenchymal transition: a cancer researcher's conceptual friend and foe. M W Klymkowsky, P Savagner, Am J Pathol. 174Klymkowsky MW, Savagner P. Epithelial-mesenchymal transition: a cancer researcher's conceptual friend and foe. Am J Pathol. 2009;174:1588-93.
+
+The social aspects of EMT-MET plasticity. E W Thompson, I Haviv, Nat Med. 17Thompson EW, Haviv I. The social aspects of EMT-MET plasticity. Nat Med. 2011;17:1048-9.
+
+Cancer: The to and fro of tumour spread. B J Van Denderen, E W Thompson, Nature. 493van Denderen BJ, Thompson EW. Cancer: The to and fro of tumour spread. Nature. 2013;493:487-8.
+
+The epithelial-mesenchymal transition generates cells with properties of stem cells. S A Mani, W Guo, M J Liao, E N Eaton, A Ayyanan, A Y Zhou, Cell. 133Mani SA, Guo W, Liao MJ, Eaton EN, Ayyanan A, Zhou AY, et al. The epithelial-mesenchymal transition generates cells with properties of stem cells. Cell. 2008;133:704-15.
+
+Generation of breast cancer stem cells through epithelial-mesenchymal transition. A P Morel, M Lievre, C Thomas, G Hinkal, S Ansieau, A Puisieux, PLoS One. 32888Morel AP, Lievre M, Thomas C, Hinkal G, Ansieau S, Puisieux A. Generation of breast cancer stem cells through epithelial-mesenchymal transition. PLoS One. 2008;3:e2888.
+
+Epithelial mesenchymal transition traits in human breast cancer cell lines parallel the CD44(hi/)CD24 (lo/-) stem cell phenotype in human breast cancer. T Blick, H Hugo, E Widodo, M Waltham, C Pinto, S A Mani, J Mammary Gland Biol Neoplasia. 15Blick T, Hugo H, Widodo E, Waltham M, Pinto C, Mani SA, et al. Epithelial mesenchymal transition traits in human breast cancer cell lines parallel the CD44(hi/)CD24 (lo/-) stem cell phenotype in human breast cancer. J Mammary Gland Biol Neoplasia. 2010;15:235-52.
+
+Keeping abreast of the mammary epithelial hierarchy and breast tumorigenesis. J E Visvader, Genes Dev. 23Visvader JE. Keeping abreast of the mammary epithelial hierarchy and breast tumorigenesis. Genes Dev. 2009;23:2563-77.
+
+Prospective identification of tumorigenic breast cancer cells. M Al-Hajj, M S Wicha, A Benito-Hernandez, S J Morrison, M F Clarke, Proc Natl Acad Sci. 100Al-Hajj M, Wicha MS, Benito-Hernandez A, Morrison SJ, Clarke MF. Prospective identification of tumorigenic breast cancer cells. Proc Natl Acad Sci U S A. 2003;100:3983-8.
+
+p53 regulates epithelial-mesenchymal transition and stem cell properties through modulating miRNAs. C J Chang, C H Chao, W Xia, J Y Yang, Y Xiong, C W Li, Nat Cell Biol. 13Chang CJ, Chao CH, Xia W, Yang JY, Xiong Y, Li CW, et al. p53 regulates epithelial-mesenchymal transition and stem cell properties through modulating miRNAs. Nat Cell Biol. 2011;13:317-23.
+
+Epithelial-mesenchymal transition in breast cancer relates to the basal-like phenotype. D Sarrio, S M Rodriguez-Pinilla, D Hardisson, A Cano, G Moreno-Bueno, J Palacios, Cancer Res. 68Sarrio D, Rodriguez-Pinilla SM, Hardisson D, Cano A, Moreno-Bueno G, Palacios J. Epithelial-mesenchymal transition in breast cancer relates to the basal-like phenotype. Cancer Res. 2008;68:989-97.
+
+A signature of epithelial-mesenchymal plasticity and stromal activation in primary tumor modulates late recurrence in breast cancer independent of disease subtype. Q Cheng, J T Chang, W R Gwin, J Zhu, S Ambs, J Geradts, Breast Cancer Res. 16407Cheng Q, Chang JT, Gwin WR, Zhu J, Ambs S, Geradts J, et al. A signature of epithelial-mesenchymal plasticity and stromal activation in primary tumor modulates late recurrence in breast cancer independent of disease subtype. Breast Cancer Res. 2014;16:407.
+
+The prognostic significance of epithelial-mesenchymal transition in breast cancer. I B Fuchs, W Lichtenegger, H Buehler, W Henrich, H Stein, A Kleine-Tebbe, Anticancer Res. 22Fuchs IB, Lichtenegger W, Buehler H, Henrich W, Stein H, Kleine-Tebbe A, et al. The prognostic significance of epithelial-mesenchymal transition in breast cancer. Anticancer Res. 2002;22:3415-9.
+
+Changes in cytoskeletal protein composition indicative of an epithelial-mesenchymal transition in human micrometastatic and primary breast carcinoma cells. B Willipinski-Stapelfeldt, S Riethdorf, V Assmann, U Woelfle, T Rau, G Sauter, Clin Cancer Res. 11Willipinski-Stapelfeldt B, Riethdorf S, Assmann V, Woelfle U, Rau T, Sauter G, et al. Changes in cytoskeletal protein composition indicative of an epithelial-mesenchymal transition in human micrometastatic and primary breast carcinoma cells. Clin Cancer Res. 2005;11:8006-14.
+
+Significance of E-cadherin expression in triple-negative breast cancer. S Kashiwagi, M Yashiro, T Takashima, S Nomura, S Noda, H Kawajiri, Br J Cancer. 103Kashiwagi S, Yashiro M, Takashima T, Nomura S, Noda S, Kawajiri H, et al. Significance of E-cadherin expression in triple-negative breast cancer. Br J Cancer. 2010;103:249-55.
+
+Metformin reverses multidrug resistance and epithelial-mesenchymal transition (EMT) via activating AMP-activated protein kinase (AMPK) in human breast cancer cells. C Qu, W Zhang, G Zheng, Z Zhang, J Yin, Z He, Mol Cell Biochem. 386Qu C, Zhang W, Zheng G, Zhang Z, Yin J, He Z. Metformin reverses multidrug resistance and epithelial-mesenchymal transition (EMT) via activating AMP-activated protein kinase (AMPK) in human breast cancer cells. Mol Cell Biochem. 2014;386:63-71.
+
+Residual breast cancers after conventional therapy display mesenchymal as well as tumor-initiating features. C J Creighton, X Li, M Landis, J M Dixon, V M Neumeister, A Sjolund, Proc Natl Acad Sci. 106Creighton CJ, Li X, Landis M, Dixon JM, Neumeister VM, Sjolund A, et al. Residual breast cancers after conventional therapy display mesenchymal as well as tumor-initiating features. Proc Natl Acad Sci U S A. 2009;106:13820-5.
+
+Molecular mechanisms of epithelialmesenchymal transition. S Lamouille, J Xu, R Derynck, Nat Rev Mol Cell Biol. 15Lamouille S, Xu J, Derynck R. Molecular mechanisms of epithelial- mesenchymal transition. Nat Rev Mol Cell Biol. 2014;15:178-96.
+
+The epithelial-mesenchymal transition under control: global programs to regulate epithelial plasticity. M A Nieto, A Cano, Semin Cancer Biol. 22Nieto MA, Cano A. The epithelial-mesenchymal transition under control: global programs to regulate epithelial plasticity. Semin Cancer Biol. 2012;22:361-8.
+
+Transcription factors that mediate epithelial-mesenchymal transition lead to multidrug resistance by upregulating ABC transporters. M Saxena, M A Stephens, H Pathak, A Rangarajan, Cell Death Dis. 2179Saxena M, Stephens MA, Pathak H, Rangarajan A. Transcription factors that mediate epithelial-mesenchymal transition lead to multidrug resistance by upregulating ABC transporters. Cell Death Dis. 2011;2:e179.
+
+Extracellular signalregulated kinase signaling pathway regulates breast cancer cell migration by maintaining slug expression. H Chen, G Zhu, Y Li, R N Padia, Z Dong, Z K Pan, Cancer Res. 69Chen H, Zhu G, Li Y, Padia RN, Dong Z, Pan ZK, et al. Extracellular signal- regulated kinase signaling pathway regulates breast cancer cell migration by maintaining slug expression. Cancer Res. 2009;69:9228-35.
+
+Activation of beta-catenin and Akt pathways by Twist are critical for the maintenance of EMT associated cancer stem cell-like characters. J Li, B P Zhou, BMC Cancer. 1149Li J, Zhou BP. Activation of beta-catenin and Akt pathways by Twist are critical for the maintenance of EMT associated cancer stem cell-like characters. BMC Cancer. 2011;11:49.
+
+Role of epidermal growth factor receptor in breast cancer. H Masuda, D Zhang, C Bartholomeusz, H Doihara, G N Hortobagyi, N T Ueno, Breast Cancer Res Treat. 136Masuda H, Zhang D, Bartholomeusz C, Doihara H, Hortobagyi GN, Ueno NT. Role of epidermal growth factor receptor in breast cancer. Breast Cancer Res Treat. 2012;136:331-45.
+
+EGFR signaling in breast cancer: bad to the bone. J Foley, N K Nickerson, Nam S Allen, K T Gilmore, J L Nephew, K P , Semin Cell Dev Biol. 21Foley J, Nickerson NK, Nam S, Allen KT, Gilmore JL, Nephew KP, et al. EGFR signaling in breast cancer: bad to the bone. Semin Cell Dev Biol. 2010;21:951-60.
+
+Differential impact of EGFR-targeted therapies on hypoxia responses: implications for treatment sensitivity in triple-negative metastatic breast cancer. A El Guerrab, R Zegrour, C C Nemlin, F Vigier, A Cayre, F Penault-Llorca, PLoS One. 625080El Guerrab A, Zegrour R, Nemlin CC, Vigier F, Cayre A, Penault-Llorca F, et al. Differential impact of EGFR-targeted therapies on hypoxia responses: implications for treatment sensitivity in triple-negative metastatic breast cancer. PLoS One. 2011;6:e25080.
+
+Differential effects of EGF gradient profiles on MDA-MB-231 breast cancer cell chemotaxis. S J Wang, W Saadi, F Lin, Minh-Canh Nguyen, C , Li Jeon, N , Exp Cell Res. 300Wang SJ, Saadi W, Lin F, Minh-Canh Nguyen C, Li Jeon N. Differential effects of EGF gradient profiles on MDA-MB-231 breast cancer cell chemotaxis. Exp Cell Res. 2004;300:180-9.
+
+The role of the epidermal growth factor receptor family in mammary tumorigenesis and metastasis. H Kim, W J Muller, Exp Cell Res. 253Kim H, Muller WJ. The role of the epidermal growth factor receptor family in mammary tumorigenesis and metastasis. Exp Cell Res. 1999;253:78-87.
+
+Growth factorinduced cell motility in tumor invasion. A Wells, J Kassis, J Solava, T Turner, D A Lauffenburger, Acta Oncol. 41Wells A, Kassis J, Solava J, Turner T, Lauffenburger DA. Growth factor- induced cell motility in tumor invasion. Acta Oncol. 2002;41:124-30.
+
+Epidermal growth factor alters fibroblast migration speed and directional persistence reciprocally and in a matrix-dependent manner. M F Ware, A Wells, D A Lauffenburger, J Cell Sci. 111Pt 16Ware MF, Wells A, Lauffenburger DA. Epidermal growth factor alters fibroblast migration speed and directional persistence reciprocally and in a matrix-dependent manner. J Cell Sci. 1998;111(Pt 16):2423-32.
+
+TWIST activation by hypoxia inducible factor-1 (HIF-1): implications in metastasis and development. M H Yang, K J Wu, Cell Cycle. 7Yang MH, Wu KJ. TWIST activation by hypoxia inducible factor-1 (HIF-1): implications in metastasis and development. Cell Cycle. 2008;7:2090-6.
+
+Direct regulation of TWIST by HIF-1alpha promotes metastasis. M H Yang, M Z Wu, S H Chiou, P M Chen, S Y Chang, C J Liu, Nat Cell Biol. 10Yang MH, Wu MZ, Chiou SH, Chen PM, Chang SY, Liu CJ, et al. Direct regulation of TWIST by HIF-1alpha promotes metastasis. Nat Cell Biol. 2008;10:295-305.
+
+Hypoxia induces epithelial-mesenchymal transition via activation of SNAI1 by hypoxiainducible factor -1alpha in hepatocellular carcinoma. L Zhang, G Huang, X Li, Y Zhang, Y Jiang, J Shen, BMC Cancer. 13108Zhang L, Huang G, Li X, Zhang Y, Jiang Y, Shen J, et al. Hypoxia induces epithelial-mesenchymal transition via activation of SNAI1 by hypoxia- inducible factor -1alpha in hepatocellular carcinoma. BMC Cancer. 2013;13:108.
+
+Pericyte depletion results in hypoxia-associated epithelial-to-mesenchymal transition and metastasis mediated by met signaling pathway. V G Cooke, V S Lebleu, D Keskin, Z Khan, J T O&apos;connell, Y Teng, Cancer Cell. 21Cooke VG, LeBleu VS, Keskin D, Khan Z, O'Connell JT, Teng Y, et al. Pericyte depletion results in hypoxia-associated epithelial-to-mesenchymal transition and metastasis mediated by met signaling pathway. Cancer Cell. 2012;21:66-81.
+
+Fyn is induced by Ras/PI3K/Akt signaling and is required for enhanced invasion/migration. V Yadav, M F Denning, Mol Carcinog. 50Yadav V, Denning MF. Fyn is induced by Ras/PI3K/Akt signaling and is required for enhanced invasion/migration. Mol Carcinog. 2011;50:346-52.
+
+Defining the E-Cadherin Repressor Interactome in Epithelial-Mesenchymal Transition: The PMC42 Model as a Case Study. H J Hugo, M I Kokkinos, T Blick, M L Ackland, E W Thompson, D F Newgreen, Cells Tissues Organs. 193Hugo HJ, Kokkinos MI, Blick T, Ackland ML, Thompson EW, Newgreen DF. Defining the E-Cadherin Repressor Interactome in Epithelial-Mesenchymal Transition: The PMC42 Model as a Case Study. Cells Tissues Organs. 2011;193:23-40.
+
+Direct repression of MYB by ZEB1 suppresses proliferation and epithelial gene expression during epithelial-to-mesenchymal transition of breast cancer cells. H J Hugo, L Pereira, R Suryadinata, Y Drabsch, T J Gonda, N P Gunasinghe, Breast Cancer Res. 15113Hugo HJ, Pereira L, Suryadinata R, Drabsch Y, Gonda TJ, Gunasinghe NP, et al. Direct repression of MYB by ZEB1 suppresses proliferation and epithelial gene expression during epithelial-to-mesenchymal transition of breast can- cer cells. Breast Cancer Res. 2013;15:R113.
+
+Epidermal growth factor-induced epithelio-mesenchymal transition in human breast carcinoma cells. M L Ackland, D F Newgreen, M Fridman, M C Waltham, A Arvanitis, J Minichiello, Lab Invest. 83Ackland ML, Newgreen DF, Fridman M, Waltham MC, Arvanitis A, Minichiello J, et al. Epidermal growth factor-induced epithelio-mesenchymal transition in human breast carcinoma cells. Lab Invest. 2003;83:435-48.
+
+A collection of breast cancer cell lines for the study of functionally distinct cancer subtypes. R M Neve, K Chin, J Fridlyand, J Yeh, F L Baehner, T Fevr, Cancer Cell. 10Neve RM, Chin K, Fridlyand J, Yeh J, Baehner FL, Fevr T, et al. A collection of breast cancer cell lines for the study of functionally distinct cancer subtypes. Cancer Cell. 2006;10:515-27.
+
+Association of increased basement membrane invasiveness with absence of estrogen receptor and expression of vimentin in human breast cancer cell lines. E W Thompson, S Paik, N Brunner, C L Sommers, G Zugmaier, R Clarke, J Cell Physiol. 150Thompson EW, Paik S, Brunner N, Sommers CL, Zugmaier G, Clarke R, et al. Association of increased basement membrane invasiveness with absence of estrogen receptor and expression of vimentin in human breast cancer cell lines. J Cell Physiol. 1992;150:534-44.
+
+Snail and incomplete epithelial-mesenchymal transition in breast cancer. K Lundgren, B Nordenskjold, G Landberg, Hypoxia, Br J Cancer. 101Lundgren K, Nordenskjold B, Landberg G. Hypoxia, Snail and incomplete epithelial-mesenchymal transition in breast cancer. Br J Cancer. 2009;101:1769-81.
+
+Reversibility of epithelial-mesenchymal transition (EMT) induced in breast cancer cells by activation of urokinase receptor-dependent cell signaling. M Jo, R D Lester, V Montel, B Eastman, S Takimoto, S L Gonias, J Biol Chem. 284Jo M, Lester RD, Montel V, Eastman B, Takimoto S, Gonias SL. Reversibility of epithelial-mesenchymal transition (EMT) induced in breast cancer cells by activation of urokinase receptor-dependent cell signaling. J Biol Chem. 2009;284:22825-33.
+
+A dynamic in vivo model of epithelial-to-mesenchymal transitions in circulating tumor cells and metastases of breast cancer. A Bonnomet, L Syne, A Brysse, E Feyereisen, E W Thompson, A Noel, Oncogene. 31Bonnomet A, Syne L, Brysse A, Feyereisen E, Thompson EW, Noel A, et al. A dynamic in vivo model of epithelial-to-mesenchymal transitions in circulating tumor cells and metastases of breast cancer. Oncogene. 2012;31:3741-53.
+
+Mesenchymal-epithelial transition (MET) as a mechanism for metastatic colonisation in breast cancer. N P Gunasinghe, A Wells, E W Thompson, H J Hugo, Cancer Metastasis Rev. 31Gunasinghe NP, Wells A, Thompson EW, Hugo HJ. Mesenchymal-epithelial transition (MET) as a mechanism for metastatic colonisation in breast cancer. Cancer Metastasis Rev. 2012;31:469-78.
+
+PMC42, a novel model for the differentiated human breast. M L Ackland, A Michalczyk, R H Whitehead, Exp Cell Res. 263Ackland ML, Michalczyk A, Whitehead RH. PMC42, a novel model for the differentiated human breast. Exp Cell Res. 2001;263:14-22.
+
+A new human breast carcinoma cell line (PMC42) with stem cell characteristics. I. Morphologic characterization. R H Whitehead, I Bertoncello, L M Webber, J S Pedersen, J Natl Cancer Inst. 70Whitehead RH, Bertoncello I, Webber LM, Pedersen JS. A new human breast carcinoma cell line (PMC42) with stem cell characteristics. I. Morphologic characterization. J Natl Cancer Inst. 1983;70:649-61.
+
+A new human breast carcinoma cell line (PMC42) with stem cell characteristics. II. Characterization of cells growing as organoids. R H Whitehead, P Monaghan, L M Webber, I Bertoncello, A A Vitali, J Natl Cancer Inst. 71Whitehead RH, Monaghan P, Webber LM, Bertoncello I, Vitali AA. A new human breast carcinoma cell line (PMC42) with stem cell characteristics. II. Characterization of cells growing as organoids. J Natl Cancer Inst. 1983;71:1193-203.
+
+A new human breast carcinoma cell line (PMC42) with stem cell characteristics. III. Hormone receptor status and responsiveness. R H Whitehead, S J Quirk, A A Vitali, J W Funder, R L Sutherland, L C Murphy, J Natl Cancer Inst. 73Whitehead RH, Quirk SJ, Vitali AA, Funder JW, Sutherland RL, Murphy LC. A new human breast carcinoma cell line (PMC42) with stem cell characteristics. III. Hormone receptor status and responsiveness. J Natl Cancer Inst. 1984;73:643-8.
+
+Analysis of combined drug effects: a new look at a very old problem. C Ting-Chao, P Talalay, Trends Pharmacol Sci. 4Ting-Chao C, Talalay P. Analysis of combined drug effects: a new look at a very old problem. Trends Pharmacol Sci. 1983;4:450-4.
+
+BioNet: an R-Package for the functional analysis of biological networks. D Beisser, G W Klau, T Dandekar, T Muller, M T Dittrich, Bioinformatics. 26Beisser D, Klau GW, Dandekar T, Muller T, Dittrich MT. BioNet: an R-Package for the functional analysis of biological networks. Bioinformatics. 2010;26:1129-30.
+
+PINA v2.0: mining interactome modules. M J Cowley, M Pinese, K S Kassahn, N Waddell, J V Pearson, S M Grimmond, Nucleic Acids Res. 40Cowley MJ, Pinese M, Kassahn KS, Waddell N, Pearson JV, Grimmond SM, et al. PINA v2.0: mining interactome modules. Nucleic Acids Res. 2012;40:D862-865.
+
+Integration of biological networks and gene expression data using Cytoscape. M S Cline, M Smoot, E Cerami, A Kuchinsky, N Landys, C Workman, Nat Protoc. 2Cline MS, Smoot M, Cerami E, Kuchinsky A, Landys N, Workman C, et al. Integration of biological networks and gene expression data using Cytoscape. Nat Protoc. 2007;2:2366-82.
+
+DrugBank 3.0: a comprehensive resource for 'omics' research on drugs. C Knox, V Law, T Jewison, P Liu, S Ly, A Frolkis, Nucleic Acids Res. 39Knox C, Law V, Jewison T, Liu P, Ly S, Frolkis A, et al. DrugBank 3.0: a comprehensive resource for 'omics' research on drugs. Nucleic Acids Res. 2011;39:D1035-1041.
+
+Gene expression profiling of epithelial-mesenchymal transition in primary breast cancer cell culture. L Minafra, V Bravata, G I Forte, F P Cammarata, M C Gilardi, C Messa, Anticancer Res. 34Minafra L, Bravata V, Forte GI, Cammarata FP, Gilardi MC, Messa C. Gene expression profiling of epithelial-mesenchymal transition in primary breast cancer cell culture. Anticancer Res. 2014;34:2173-83.
+
+FGFR2-related pathogenesis and FGFR2-targeted therapeutics (Review). Y Katoh, M Katoh, Int J Mol Med. 23Katoh Y, Katoh M. FGFR2-related pathogenesis and FGFR2-targeted therapeutics (Review). Int J Mol Med. 2009;23:307-11.
+
+Thrombospondin 1 promotes an aggressive phenotype through epithelial-tomesenchymal transition in human melanoma. A Jayachandran, M Anaka, P Prithviraj, C Hudson, S J Mckeown, P H Lo, Oncotarget. 5Jayachandran A, Anaka M, Prithviraj P, Hudson C, McKeown SJ, Lo PH, et al. Thrombospondin 1 promotes an aggressive phenotype through epithelial-to- mesenchymal transition in human melanoma. Oncotarget. 2014;5:5782-97.
+
+Feedback regulation of EGFR signalling: decision making by early and delayed loops. R Avraham, Y Yarden, Nat Rev Mol Cell Biol. 12Avraham R, Yarden Y. Feedback regulation of EGFR signalling: decision making by early and delayed loops. Nat Rev Mol Cell Biol. 2011;12:104-17.
+
+Fluorescence resonance energy transfer based quantitative analysis of feedforward and feedback loops in epidermal growth factor receptor signaling and the sensitivity to molecular targeting drugs. Y Fujita, N Komatsu, M Matsuda, K Aoki, FEBS J. 281Fujita Y, Komatsu N, Matsuda M, Aoki K. Fluorescence resonance energy transfer based quantitative analysis of feedforward and feedback loops in epidermal growth factor receptor signaling and the sensitivity to molecular targeting drugs. FEBS J. 2014;281:3177-92.
+
+Autocrine loops with positive feedback enable context-dependent cell signaling. S Y Shvartsman, M P Hagan, A Yacoub, P Dent, H S Wiley, D A Lauffenburger, Am J Physiol Cell Physiol. 282Shvartsman SY, Hagan MP, Yacoub A, Dent P, Wiley HS, Lauffenburger DA. Autocrine loops with positive feedback enable context-dependent cell signaling. Am J Physiol Cell Physiol. 2002;282:C545-559.
+
+Landscape of EGFR signaling network in human cancers: biology and therapeutic response in relation to receptor subcellular locations. W Han, H W Lo, Cancer Lett. 318Han W, Lo HW. Landscape of EGFR signaling network in human cancers: biology and therapeutic response in relation to receptor subcellular locations. Cancer Lett. 2012;318:124-34.
+
+Src and FAK signalling controls adhesion fate and the epithelial-to-mesenchymal transition. E Avizienyte, M C Frame, Curr Opin Cell Biol. 17Avizienyte E, Frame MC. Src and FAK signalling controls adhesion fate and the epithelial-to-mesenchymal transition. Curr Opin Cell Biol. 2005;17:542-7.
+
+Tyrosine phosphorylation profiling reveals the signaling network characteristics of Basal breast cancer cells. F Hochgrafe, L Zhang, S A O&apos;toole, B C Browne, M Pinese, Porta Cubas, A , Cancer Res. 70Hochgrafe F, Zhang L, O'Toole SA, Browne BC, Pinese M, Porta Cubas A, et al. Tyrosine phosphorylation profiling reveals the signaling network characteristics of Basal breast cancer cells. Cancer Res. 2010;70:9391-401.
+
+An integrative genomic and proteomic analysis of PIK3CA, PTEN, and AKT mutations in breast cancer. K Stemke-Hale, A M Gonzalez-Angulo, A Lluch, R M Neve, W L Kuo, M Davies, Cancer Res. 68Stemke-Hale K, Gonzalez-Angulo AM, Lluch A, Neve RM, Kuo WL, Davies M, et al. An integrative genomic and proteomic analysis of PIK3CA, PTEN, and AKT mutations in breast cancer. Cancer Res. 2008;68:6084-91.
+
+Class I PI3K in oncogenic cellular transformation. L Zhao, P K Vogt, Oncogene. 27Zhao L, Vogt PK. Class I PI3K in oncogenic cellular transformation. Oncogene. 2008;27:5486-96.
+
+The phosphatidylinositol 3-Kinase AKT pathway in human cancer. I Vivanco, C L Sawyers, Nat Rev Cancer. 2Vivanco I, Sawyers CL. The phosphatidylinositol 3-Kinase AKT pathway in human cancer. Nat Rev Cancer. 2002;2:489-501.
+
+Control of MAPK signalling: from complexity to what really matters. J J Hornberg, B Binder, F J Bruggeman, B Schoeberl, R Heinrich, H V Westerhoff, Oncogene. 24Hornberg JJ, Binder B, Bruggeman FJ, Schoeberl B, Heinrich R, Westerhoff HV. Control of MAPK signalling: from complexity to what really matters. Oncogene. 2005;24:5533-42.
+
+Transcriptional pathway signatures predict MEK addiction and response to selumetinib (AZD6244). J R Dry, S Pavey, C A Pratilas, C Harbron, S Runswick, D Hodgson, Cancer Res. 70Dry JR, Pavey S, Pratilas CA, Harbron C, Runswick S, Hodgson D, et al. Transcriptional pathway signatures predict MEK addiction and response to selumetinib (AZD6244). Cancer Res. 2010;70:2264-73.
+
+Measuring and interpreting the selectivity of protein kinase inhibitors. L A Smyth, I Collins, J Chem Biol. 2Smyth LA, Collins I. Measuring and interpreting the selectivity of protein kinase inhibitors. J Chem Biol. 2009;2:131-51.
+
+Growth factors in induction of epithelial-mesenchymal transition and metastasis. N A Said, E D Williams, Cells Tissues Organs. 193Said NA, Williams ED. Growth factors in induction of epithelial-mesenchymal transition and metastasis. Cells Tissues Organs. 2011;193:85-97.
+
+A systems view of epithelial-mesenchymal transition signaling states. S Thomson, F Petti, I Sujka-Kwok, P Mercado, J Bean, M Monaghan, Clin Exp Metastasis. 28Thomson S, Petti F, Sujka-Kwok I, Mercado P, Bean J, Monaghan M, et al. A systems view of epithelial-mesenchymal transition signaling states. Clin Exp Metastasis. 2011;28:137-55.
+
+Effects of hypoxia on human cancer cell line chemosensitivity. S Strese, M Fryknas, R Larsson, J Gullbo, BMC Cancer. 13331Strese S, Fryknas M, Larsson R, Gullbo J. Effects of hypoxia on human cancer cell line chemosensitivity. BMC Cancer. 2013;13:331.
+
+Transcriptional regulation of cell polarity in EMT and cancer. G Moreno-Bueno, F Portillo, A Cano, Oncogene. 27Moreno-Bueno G, Portillo F, Cano A. Transcriptional regulation of cell polarity in EMT and cancer. Oncogene. 2008;27:6958-69.
+
+Snail family regulation and epithelial mesenchymal transitions in breast cancer progression. A G De Herreros, S Peiro, M Nassour, P Savagner, J Mammary Gland Biol Neoplasia. 15de Herreros AG, Peiro S, Nassour M, Savagner P. Snail family regulation and epithelial mesenchymal transitions in breast cancer progression. J Mammary Gland Biol Neoplasia. 2010;15:135-47.
+
+Key signalling nodes in mammary gland development and cancer. The Snail1-Twist1 conspiracy in malignant breast cancer progression. E Foubert, B De Craene, G Berx, Breast Cancer Res. 12206Foubert E, De Craene B, Berx G. Key signalling nodes in mammary gland development and cancer. The Snail1-Twist1 conspiracy in malignant breast cancer progression. Breast Cancer Res. 2010;12:206.
+
+Hypoxia stimulates the EMT of gastric cancer cells through autocrine TGFbeta signaling. J Matsuoka, M Yashiro, Y Doi, Y Fuyuhiro, Y Kato, O Shinto, PLoS One. 8Matsuoka J, Yashiro M, Doi Y, Fuyuhiro Y, Kato Y, Shinto O, et al. Hypoxia stimulates the EMT of gastric cancer cells through autocrine TGFbeta signaling. PLoS One. 2013;8, e62310.
+
+Epidermal growth factor receptor cooperates with signal transducer and activator of transcription 3 to induce epithelial-mesenchymal transition in cancer cells via up-regulation of TWIST gene expression. H W Lo, S C Hsu, W Xia, X Cao, J Y Shih, Y Wei, Cancer Res. 67Lo HW, Hsu SC, Xia W, Cao X, Shih JY, Wei Y, et al. Epidermal growth factor receptor cooperates with signal transducer and activator of transcription 3 to induce epithelial-mesenchymal transition in cancer cells via up-regulation of TWIST gene expression. Cancer Res. 2007;67:9066-76.
+
+An autocrine TGF-beta/ZEB/miR-200 signaling network regulates establishment and maintenance of epithelial-mesenchymal transition. P A Gregory, C P Bracken, E Smith, A G Bert, J A Wright, S Roslan, Mol Biol Cell. 22Gregory PA, Bracken CP, Smith E, Bert AG, Wright JA, Roslan S, et al. An autocrine TGF-beta/ZEB/miR-200 signaling network regulates establishment and maintenance of epithelial-mesenchymal transition. Mol Biol Cell. 2011;22:1686-98.
+
+The ubiquitin ligase Siah is a novel regulator of Zeb1 in breast cancer. A Chen, C S Wong, M C Liu, C M House, J Sceneay, D D Bowtell, E W Thompson, A Moller, Oncotarget. 62Chen A, Wong CS, Liu MC, House CM, Sceneay J, Bowtell DD, Thompson EW, Moller A: The ubiquitin ligase Siah is a novel regulator of Zeb1 in breast cancer. Oncotarget 2014; 6(2), 862-873.
+
+The role of the MDR1 (P-glycoprotein) gene in multidrug resistance in vitro and in vivo. I B Roninson, Biochem Pharmacol. 43Roninson IB. The role of the MDR1 (P-glycoprotein) gene in multidrug resistance in vitro and in vivo. Biochem Pharmacol. 1992;43:95-102.
+
+Regulation of the multidrug resistance transporter P-glycoprotein in multicellular tumor spheroids by hypoxia-inducible factor (HIF-1) and reactive oxygen species. M Wartenberg, F C Ling, M Muschen, F Klein, H Acker, M Gassmann, FASEB J. 17Wartenberg M, Ling FC, Muschen M, Klein F, Acker H, Gassmann M, et al. Regulation of the multidrug resistance transporter P-glycoprotein in multicellular tumor spheroids by hypoxia-inducible factor (HIF-1) and reactive oxygen species. FASEB J. 2003;17:503-5.
+
+Involvement of epidermal growth factor receptor overexpression in the promotion of breast cancer brain metastasis. F Nie, J Yang, S Wen, Y L An, J Ding, S H Ju, Cancer. 118Nie F, Yang J, Wen S, An YL, Ding J, Ju SH, et al. Involvement of epidermal growth factor receptor overexpression in the promotion of breast cancer brain metastasis. Cancer. 2012;118:5198-209.
+
+An open letter to the FDA and other regulatory agencies: Preclinical drug development must consider the impact on metastasis. P S Steeg, R L Anderson, M Bar-Eli, A F Chambers, S A Eccles, K Hunter, Clin Cancer Res. 154529Steeg PS, Anderson RL, Bar-Eli M, Chambers AF, Eccles SA, Hunter K, et al. An open letter to the FDA and other regulatory agencies: Preclinical drug development must consider the impact on metastasis. Clin Cancer Res. 2009;15:4529.
+
+Notch-induced transcription factors are predictive of survival and 5-fluorouracil response in colorectal cancer patients. P A Candy, M R Phillips, A D Redfern, S M Colley, J A Davidson, L M Stuart, Br J Cancer. 109Candy PA, Phillips MR, Redfern AD, Colley SM, Davidson JA, Stuart LM, et al. Notch-induced transcription factors are predictive of survival and 5-fluorouracil response in colorectal cancer patients. Br J Cancer. 2013;109:1023-30.
+
+Efficacy of everolimus, a novel mTOR inhibitor, against basal-like triple-negative breast cancer cells. M Yunokawa, F Koizumi, Y Kitamura, Y Katanasaka, N Okamoto, M Kodaira, Cancer Sci. 103Yunokawa M, Koizumi F, Kitamura Y, Katanasaka Y, Okamoto N, Kodaira M, et al. Efficacy of everolimus, a novel mTOR inhibitor, against basal-like triple-negative breast cancer cells. Cancer Sci. 2012;103:1665-71.
+
+Integrating signals from RTKs to ERK/MAPK. M M Mckay, D K Morrison, Oncogene. 26McKay MM, Morrison DK. Integrating signals from RTKs to ERK/MAPK. Oncogene. 2007;26:3113-21.
+
+Key signalling nodes in mammary gland development and cancer. Mitogen-activated protein kinase signalling in experimental models of breast cancer progression and in mammary gland development. J Whyte, O Bergin, A Bianchi, S Mcnally, F Martin, Breast Cancer Res. 11209Whyte J, Bergin O, Bianchi A, McNally S, Martin F. Key signalling nodes in mammary gland development and cancer. Mitogen-activated protein kinase signalling in experimental models of breast cancer progression and in mammary gland development. Breast Cancer Res. 2009;11:209.
+
+ERK2/Fra1/ZEB pathway induces epithelial-to-mesenchymal transition. S Shin, J Blenis, Cell Cycle. 9Shin S, Blenis J. ERK2/Fra1/ZEB pathway induces epithelial-to-mesenchymal transition. Cell Cycle. 2010;9:2483-4.
+
+ERK2 but not ERK1 induces epithelial-to-mesenchymal transformation via DEF motif-dependent signaling events. S Shin, C A Dimitri, S O Yoon, W Dowdle, J Blenis, Mol Cell. 38Shin S, Dimitri CA, Yoon SO, Dowdle W, Blenis J. ERK2 but not ERK1 induces epithelial-to-mesenchymal transformation via DEF motif-dependent signaling events. Mol Cell. 2010;38:114-27.
+
+Dynamic reprogramming of the kinome in response to targeted MEK inhibition in triple-negative breast cancer. J S Duncan, M C Whittle, K Nakamura, A N Abell, A A Midland, J S Zawistowski, Cell. 149Duncan JS, Whittle MC, Nakamura K, Abell AN, Midland AA, Zawistowski JS, et al. Dynamic reprogramming of the kinome in response to targeted MEK inhibition in triple-negative breast cancer. Cell. 2012;149:307-21.
+
+Differential expression and mutation of the ras family genes in human breast cancer. S Miyakis, G Sourvinos, D A Spandidos, Biochem Biophys Res Commun. 251Miyakis S, Sourvinos G, Spandidos DA. Differential expression and mutation of the ras family genes in human breast cancer. Biochem Biophys Res Commun. 1998;251:609-12.
+
+Contribution of the R-Ras2 GTP-binding protein to primary breast tumorigenesis and late-stage metastatic disease. R M Larive, G Moriggi, M Menacho-Marquez, M Canamero, E Alava, B Alarcon, Nat Commun. 53881Larive RM, Moriggi G, Menacho-Marquez M, Canamero M, Alava E, Alarcon B, et al. Contribution of the R-Ras2 GTP-binding protein to primary breast tumorigenesis and late-stage metastatic disease. Nat Commun. 2014;5:3881.
+
+Tyrosine kinase/p21ras/MAP-kinase pathway activation by estradiolreceptor complex in MCF-7 cells. A Migliaccio, Di Domenico, M Castoria, G De Falco, A Bontempo, P , Nola E , EMBO J. 15Migliaccio A, Di Domenico M, Castoria G, de Falco A, Bontempo P, Nola E, et al. Tyrosine kinase/p21ras/MAP-kinase pathway activation by estradiol- receptor complex in MCF-7 cells. EMBO J. 1996;15:1292-300.
+
+Overcoming acquired resistance to anticancer therapy: focus on the PI3K/AKT/mTOR pathway. H A Burris 3rd, Cancer Chemother Pharmacol. 71Burris 3rd HA. Overcoming acquired resistance to anticancer therapy: focus on the PI3K/AKT/mTOR pathway. Cancer Chemother Pharmacol. 2013;71:829-42.
+
+Therapeutic targeting of oncogenic K-Ras by a covalent catalytic site inhibitor. S M Lim, K D Westover, S B Ficarro, R A Harrison, H G Choi, M E Pacold, Angew Chem Int Ed Engl. 53Lim SM, Westover KD, Ficarro SB, Harrison RA, Choi HG, Pacold ME, et al. Therapeutic targeting of oncogenic K-Ras by a covalent catalytic site inhibitor. Angew Chem Int Ed Engl. 2014;53:199-204.
+
+Cancer: Drug for an 'undruggable' protein. N M Baker, C J Der, Nature. 497Baker NM, Der CJ. Cancer: Drug for an 'undruggable' protein. Nature. 2013;497:577-8.
+
+Dasatinib as a single agent in triple-negative breast cancer: results of an open-label phase 2 study. R S Finn, C Bengala, N Ibrahim, H Roche, J Sparano, L C Strauss, Clin Cancer Res. 17Finn RS, Bengala C, Ibrahim N, Roche H, Sparano J, Strauss LC, et al. Dasatinib as a single agent in triple-negative breast cancer: results of an open-label phase 2 study. Clin Cancer Res. 2011;17:6905-13.
+
+Identification of common predictive markers of in vitro response to the Mek inhibitor selumetinib (AZD6244; ARRY-142886) in human breast cancer and non-small cell lung cancer cell lines. E B Garon, R S Finn, W Hosmer, J Dering, C Ginther, S Adhami, Mol Cancer Ther. 9Garon EB, Finn RS, Hosmer W, Dering J, Ginther C, Adhami S, et al. Identification of common predictive markers of in vitro response to the Mek inhibitor selumetinib (AZD6244; ARRY-142886) in human breast cancer and non-small cell lung cancer cell lines. Mol Cancer Ther. 2010;9:1985-94.
+
+Targeting the PI3K/AKT/mTOR and Raf/MEK/ERK pathways in the treatment of breast cancer. K S Saini, S Loi, E De Azambuja, O Metzger-Filho, M L Saini, M Ignatiadis, Cancer Treat Rev. 39Saini KS, Loi S, de Azambuja E, Metzger-Filho O, Saini ML, Ignatiadis M, et al. Targeting the PI3K/AKT/mTOR and Raf/MEK/ERK pathways in the treatment of breast cancer. Cancer Treat Rev. 2013;39:935-46.
+
+Multicenter phase II study of the oral MEK inhibitor, CI-1040, in patients with advanced non-small-cell lung, breast, colon, and pancreatic cancer. J Rinehart, A A Adjei, P M Lorusso, D Waterhouse, J R Hecht, R B Natale, J Clin Oncol. 22Rinehart J, Adjei AA, Lorusso PM, Waterhouse D, Hecht JR, Natale RB, et al. Multicenter phase II study of the oral MEK inhibitor, CI-1040, in patients with advanced non-small-cell lung, breast, colon, and pancreatic cancer. J Clin Oncol. 2004;22:4456-62.
+
+MEK inhibition increases lapatinib sensitivity via modulation of FOXM1. S S Gayle, R C Castellino, M C Buss, R Nahta, Curr Med Chem. 20Gayle SS, Castellino RC, Buss MC, Nahta R. MEK inhibition increases lapatinib sensitivity via modulation of FOXM1. Curr Med Chem. 2013;20:2486-99.
+
+Effect of selumetinib on the growth of anastrozole-resistant tumors. G J Sabnis, A Kazi, O Golubeva, P Shah, A Brodie, Breast Cancer Res Treat. 138Sabnis GJ, Kazi A, Golubeva O, Shah P, Brodie A. Effect of selumetinib on the growth of anastrozole-resistant tumors. Breast Cancer Res Treat. 2013;138:699-708.
+
+Breast cancer cells with acquired resistance to the EGFR tyrosine kinase inhibitor gefitinib show persistent activation of MAPK signaling. N Normanno, M Campiglio, M R Maiello, De Luca, A Mancino, M Gallo, M , Breast Cancer Res Treat. 112Normanno N, Campiglio M, Maiello MR, De Luca A, Mancino M, Gallo M, et al. Breast cancer cells with acquired resistance to the EGFR tyrosine kinase inhibitor gefitinib show persistent activation of MAPK signaling. Breast Cancer Res Treat. 2008;112:25-33.
+
+Type I insulin-like growth factor receptor over-expression induces proliferation and anti-apoptotic signaling in a three-dimensional culture model of breast epithelial cells. G M Yanochko, W Eckhart, Breast Cancer Res. 818Yanochko GM, Eckhart W. Type I insulin-like growth factor receptor over-expression induces proliferation and anti-apoptotic signaling in a three-dimensional culture model of breast epithelial cells. Breast Cancer Res. 2006;8:R18.
+
+Basal subtype and MAPK/ERK kinase (MEK)-phosphoinositide 3-kinase feedback signaling determine susceptibility of breast cancer cells to MEK inhibition. O K Mirzoeva, D Das, L M Heiser, S Bhattacharya, D Siwak, R Gendelman, Cancer Res. 69Mirzoeva OK, Das D, Heiser LM, Bhattacharya S, Siwak D, Gendelman R, et al. Basal subtype and MAPK/ERK kinase (MEK)-phosphoinositide 3-kinase feedback signaling determine susceptibility of breast cancer cells to MEK inhibition. Cancer Res. 2009;69:565-72.
+
+Targeting Akt3 signaling in triple-negative breast cancer. Y R Chin, T Yoshida, A Marusyk, A H Beck, K Polyak, A Toker, Cancer Res. 74Chin YR, Yoshida T, Marusyk A, Beck AH, Polyak K, Toker A. Targeting Akt3 signaling in triple-negative breast cancer. Cancer Res. 2014;74:964-73.
+
+Comprehensive molecular portraits of human breast tumours. Tcga Project, Nature. 490Project TCGA. Comprehensive molecular portraits of human breast tumours. Nature. 2012;490:61-70.
+
+Submit your next manuscript to BioMed Central and take full advantage of: • Convenient online submission • Thorough peer review • No space constraints or color figure charges • Immediate publication on acceptance • Inclusion in PubMed, CAS, Scopus and Google Scholar • Research which is freely available for redistribution. L M Heiser, A Sadanandam, W L Kuo, S C Benz, T C Goldstein, S Ng, Proc Natl Acad Sci U S A. 109Subtype and pathway specific responses to anticancer compounds in breast cancer. Submit your manuscript at www.biomedcentral.com/submitHeiser LM, Sadanandam A, Kuo WL, Benz SC, Goldstein TC, Ng S, et al. Subtype and pathway specific responses to anticancer compounds in breast cancer. Proc Natl Acad Sci U S A. 2012;109:2724-9. Submit your next manuscript to BioMed Central and take full advantage of: • Convenient online submission • Thorough peer review • No space constraints or color figure charges • Immediate publication on acceptance • Inclusion in PubMed, CAS, Scopus and Google Scholar • Research which is freely available for redistribution Submit your manuscript at www.biomedcentral.com/submit

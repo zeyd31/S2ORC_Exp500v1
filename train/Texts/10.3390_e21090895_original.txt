@@ -1,0 +1,324 @@
+
+Universality and Exact Finite-Size Corrections for Spanning Trees on Cobweb and Fan Networks
+
+
+Nickolay Izmailian 
+Bogoliubov Laboratory of Theoretical Physics
+Joint Institute for Nuclear Research
+141980DubnaRussia
+
+Ralph Kenna r.kenna@coventry.ac.uk 
+Statistical Physics Group
+Centre for Fluid and Complex Systems
+Coventry University
+CV1 5FBCoventryUK
+
+A Alikhanyan 
+
+National Laboratory (Yerevan Physics Institute)
+Alikhanian Brothers 2375036YerevanArmenia
+
+Universality and Exact Finite-Size Corrections for Spanning Trees on Cobweb and Fan Networks
+10.3390/e21090895Received: 14 August 2019; Accepted: 11 September 2019; Published: 15 September 2019entropy Article * Correspondence: izmail@yerphi.am † (Dated: 10 September 2019).universalitycorrections to scalingcornersspanning treecobwebm fanIvashkevich-Izmailian-Hu algorithm
+The concept of universality is a cornerstone of theories of critical phenomena. It is very well understood in most systems, especially in the thermodynamic limit. Finite-size systems present additional challenges. Even in low dimensions, universality of the edge and corner contributions to free energies and response functions is less investigated and less well understood. In particular, the question arises of how universality is maintained in correction-to-scaling in systems of the same universality class but with very different corner geometries. Two-dimensional geometries deliver the simplest such examples that can be constructed with and without corners. To investigate how the presence and absence of corners manifest universality, we analyze the spanning tree generating function on two different finite systems, namely the cobweb and fan networks. The corner free energies of these configurations have stimulated significant interest precisely because of expectations regarding their universal properties and we address how this can be delivered given that the finite-size cobweb has no corners while the fan has four. To answer, we appeal to the Ivashkevich-Izmailian-Hu approach which unifies the generating functions of distinct networks in terms of a single partition function with twisted boundary conditions. This unified approach shows that the contributions to the individual corner free energies of the fan network sum to zero so that it precisely matches that of the web. It therefore also matches conformal theory (in which the central charge is found to be c = −2) and finite-size scaling predictions. Correspondence in each case with results established by alternative means for both networks verifies the soundness of the Ivashkevich-Izmailian-Hu algorithm. Its broad range of usefulness is demonstrated by its application to hitherto unsolved problems-namely the exact asymptotic expansions of the logarithms of the generating functions and the conformal partition functions for fan and cobweb geometries. We also investigate strip geometries, again confirming the predictions of conformal field theory. Thus, the resolution of a universality puzzle demonstrates the power of the algorithm and opens up new applications in the future.
+
+Introduction
+
+Spanning trees are of fundamental and practical importance for connected graphs as they represent the most efficient manner in which every node in the structure can be linked. Their enumeration is a famous challenge in combinatorial graph theory originally considered by Kirchhoff in the context of electrical networks [1]. Besides being of interest in mathematics as a fundamental challenge [2,3], enumeration of such trees remains of importance to other disciplines such as physics, engineering and computing [4,5]. Diverse contexts include standard [6] and loop-erased random walks [7], and spanning tree numbers can be mapped to the partition function of the q-state Potts model [8] in the limit of q approaching zero. Another limit is v → 0, where v = e J − 1, and J is the coupling constant, with different fixed values of v/q delivering the generating function for spanning trees, or spanning forests, etc. [9]. Another close relationship is to the sandpile model [10]. Because of this diversity of applications [11], mathematical investigations of spanning trees continue apace, building on the considerable progress already achieved. The exact numbers of spanning trees have been determined for regular lattices [4,12,13], networks [14,15] and Sierpinski gaskets [16], and the well-known bijection between close-packed dimer coverings and spanning tree configurations on two related lattices [17] add to their attractiveness as a challenging realm of study.
+
+Systems that are confined by various boundary conditions when finite in extent have the same per-site properties in the bulk limit-e.g., free energy, internal energy, and specific heat. However, boundary characteristics are manifest in the correction terms of finite systems. The study of finite-size scaling and corrections to scaling in this context was instigated over 40 years ago ago by Fisher and Barber [18] and continues to attract a great deal of attention both for fundamental and applied purposes (see, e.g., [19,20] for well-known reviews and [21,22] for corner and boundary effects in Ising and Potts models). Theoretical interest includes extrapolating finite or partially-finite systems to determine critical and non-critical properties of their infinite counterparts. More practical interests in finite-size effects stem from recent progress in fine processing technologies for nanoscale materials with novel shapes that have recently been enabled [23][24][25]. To understand scaling and corrections terms, exact results are of prime interest because only in these cases can the analysis deliver results without the vagaries of numerical errors.
+
+In 2002, Ivashkevich, Izmailian, and Hu [26] developed a method that delivers exact finite-size corrections for various functions of fundamental importance-e.g., partition functions and their derivatives. The method was applied to iconic models of statistical physics such as the Ising, dimer, and Gaussian models and the results demonstrated that the partition function of each model can be written as a generic partition function with twisted-boundary conditions, viz. Z α,β with (α, β) = (1/2, 0), (0, 1/2), and (1/2, 1/2). Building upon this approach, computations by Izmailian, Oganesyan, and Hu [27] delivered finite-size corrections to the free energy of the square-lattice dimer model under five distinct sets of boundary conditions (namely free, cylindrical, and toroidal boundaries as well as the Möbius strip and the Klein bottle). The dependence of finite-size corrections on the aspect ratio was found to be sensitive to boundary conditions as well as to the parity of the number of lattice sites along the lattice axes. In 2014, Izmailian et al. [28] found that in the case of a rectangular (2M − 1) × (2N − 1) lattice with free and cylindrical boundary conditions, with a single monomer on the boundary, the partition functions of the anisotropic dimer model can be written in terms of a partition function with twisted-boundary conditions Z α,β with (α, β) = (0, 0). Based on these considerations, the exact asymptotic expansions of the free energy were calculated.
+
+Let us denote a connected graph by G = G(V, E), where V is the set of its vertices and E is the set of its edges. A spanning tree T is a subgraph of G which has |V| − 1 edges with at least one edge at each vertex (we consider the case without loops). The number of edges attached to a vertex is its degree or coordination number. In 2000, closed-form expressions for the spanning-tree generating function were derived by Tzeng and Wu for a d-dimensional hypercubic lattice with free and periodic boundary conditions and for a combination of the two. Analogous results were obtained for a simple quartic net embedded on two nonorientable surfaces, namely the Klein bottle and Möbius strip [12]. In 2015, Izmailian and Kenna considered five different sets of boundary conditions for the spanning tree on finite square lattices, and expressed the partition functions in terms of a principal partition function with twisted-boundary conditions. In each case, they also derived the exact asymptotic expansions of the logarithm of the partition function [29]. Izmailian, Kenna and Wu also derived the spanning-tree-generating function for cobweb and fan networks [14,15].
+
+In this paper, we complement the above studies by deriving expressions for the generating function of the spanning tree on cobweb and fan networks in terms of a partition function with twisted-boundary conditions Z 0,1/2 (z, M, N ). The significance of this result is that it verifies the applicability of the methods and algorithms developed in Ref. [26]. To demonstrate the broad range of the usage of said the algorithm to hitherto unsolved problems, we furthermore derive the exact asymptotic expansions of the logarithm of the generating function for all networks mentioned above. In all cases we show that the exact asymptotic expansion of the free energy takes the form
+f = f bulk + 2 f 1s M + 2 f 2s N + f corn ln S S + f 0 (ρ) S + ∞ ∑ p=1 f p (ρ) S p+1 .(1)
+Here, S = M × N is the area of the lattice, ρ = zξ and ξ = M/N is the aspect ratio. The term z is
+z = x y ,(2)
+where x and y are the weights associated with the edges in the horizontal and vertical directions, respectively. The bulk free energy is f bulk , the surface free energies are f 1s and f 2s and the corner free energy is f corn . The leading finite-size correction term is f 0 (ρ) and the subleading correction terms are f p (ρ) for p = 1, 2, 3, . . .. The bulk free energy term f bulk is nonuniversal as are the surface free energies f 1s and f 2s and the subleading correction terms f p (ρ) (p = 1, 2, 3, . . .). In contrast, f corn is believed to be universal [30,31]. The leading finite-size correction term f 0 (ρ) is related to the conformal partition function and, in the limits ρ → ∞ and ρ → 0, its value is related to the conformal anomaly c and conformal weights of the underlying conformal theory [32,33]. Moreover, in 1991, Kleban and Vassileva [34] have shown that in a rectangular geometry on the plane the leading finite-size correction term f 0 (ρ) contains a geometry-dependent universal part f univ (ρ) given by
+f univ (ρ) = c 4 ln [η(ρ)η(1/(ρ))].(3)
+Here, η(ρ) is the Dedekind η function. However, Kleban and Vassileva [34] mentioned that f 0 (ρ) can also contain a non-universal additive constant f nonuniv , which is not calculable via conformal field theory methods:
+f 0 (ρ) = f univ (ρ) + f nonuniv .(4)
+There is little evidence to support these predictions from either exact solutions or numerical determinations [28,29,35]. An efficient bond propagation algorithm was recently used to compute the partition function of the Ising model with free edges and corners in two dimensions on a rectangular lattice [35]. An efficient bond propagation algorithm was recently used to compute the partition function of the Ising model with free edges and corners in two dimensions on a rectangular lattice [35]. They verify the predictions of conformal field theory presented in by Equation (3) with central charge c = 1/2. Later, the conformal field theory prediction Equation (3) was confirmed [28] for the dimer model on odd-odd square lattices with one monomer on the boundary, for which the central charge is c = −2 and for another model in the c = −2 universality class, i.e., the spanning-tree model with free boundary conditions [29]. Moreover, the non-universal additive constant f nonuniv has been determined in rectangular geometry in the Ising universality class [35] and in c = −2 universality class for the dimer model [28] and spanning tree model [29]. We are not aware of any other results similar to Equation (3) for other geometries, except the plane. For example, in the torus geometry, the leading finite-size correction term f 0 (ρ) has been derived for three models on a torus in different universality classes, namely the Ising (c = 1/2) [36], dimer (c = −2) [37] and Gaussian (c = 1) models [26]. They take the form
+f 0 (ρ) = − ln θ 2 + θ 3 + θ 4 2η(ρ) for the Ising model,(5)f 0 (ρ) = − ln θ 2 2 + θ 2 3 + θ 2 4 2η 2 (ρ) for the dimer model,(6)f 0 (ρ) = ln √ ρ η 2 (ρ) = ln η(ρ)η(1/ρ) for the Gaussian model.(7)
+One can see from Equations (5)-(7) that in the torus geometry the leading finite-size correction term f 0 (ρ) cannot be represented in a form similar to Equation (3). Nevertheless, they are related to the conformal partition function in a torus geometry. For example, for the c = 1/2 universality class, the conformal partition function on torus (Z) is given by (see, for example, Ref. [38], page 349)
+Z = θ 2 η + θ 3 η + θ 4 η .(8)
+It is easy to see from Equations (5) and (8) that, for the Ising universality class in the torus geometry, the leading finite-size correction term f 0 (ρ) is related to the conformal partition function on the torus Z. The same is true for other geometries and for other universality classes.
+
+In this paper, we derive the leading finite-size correction terms f 0 (ρ) for the spanning tree model on cobweb and fan networks using the algorithm developed in Ref. [26]. We show to which conformal partition functions they are related. We also derive the leading finite-size correction term f 0 (ρ) for the Ising model on a cobweb network to see the difference between the corresponding conformal partition functions in the c = −2 and c = 1/2 universality classes. We are also especially interested in the universal corner terms f corn because they are logarithmic. Using CFT, Cardy and Peschel predicted that a corner with an angle π/2 and two edges under free boundary conditions has
+f corn (0, 0) = − c 32 .(9)
+In this formula, c represents the central charge defining the universality class of the system [31]. We confirmed this in Refs. [35,39] for the square and triangular lattices with free boundary conditions. Imamura et al. [40] and Bondesan et al. [41,42] also used CFT to study the corner terms with different free boundary conditions and found that the contribution to the free energy from a corner with two edges is
+f corn (αβ) = ∆ αβ − c 32 .(10)
+This formula, where ∆ αβ represents the conformal weight of the boundary operator inserted at the corner, was verified in our previous work on the Ising model on the square lattice with different boundary conditions [43].
+
+
+Spanning Tree on Networks
+
+Let us consider the problem of enumerating weighted spanning trees on the M × N network. The enumeration of spanning trees involves the evaluation of the tree generating function (or partition
+function) Z Sp network Z Sp network (L; x, y) = ∑ T x n x y n y ,(11)
+where we assign weights x and y, respectively, to edges in the horizontal and vertical directions. The summation is taken over all spanning tree configurations T on L and n x and n y are the numbers of edges in the spanning tree in the respective directions.
+
+
+Spanning Tree on the Cobweb Network
+
+The cobweb lattice L cob is an M × N rectangular lattice with periodic boundary conditions in the horizontal direction and nodes on one of the two boundaries in the other direction connected to an external common node. Therefore, there is a total of MN + 1 nodes and 2MN edges. Topologically, L cob is of the form of a wheel consisting of N spokes and M concentric circles (see Figure 1) where the circumference of the circle corresponds to the "horizontal" direction and spokes correspond to the "vertical" direction. Note that the cobweb lattice L cob can be considered as rectangular self-dual lattices [44]. The tree generating function (or partition function) for the spanning tree model on cobweb network has been obtained in [14] and can be written as
+Z Sp cobweb (L; x, y) = y MN N−1 ∏ n=0 M−1 ∏ m=0 4 z sin 2 πn N + sin 2 π(m + 1/2) 2M + 1 ,(12)
+where z = x/y and x and y are weights of the edges in the spoke and circle directions, respectively. The weights x and y are assigned to the bonds in circular and radial directions, respectively. The cobweb network can be considered as a cylinder, where all sites on the one boundary are connected to an external common site, which is denoted by 0, while the fan network can be considered as a plane rectangular lattice, where all sites on one of four boundaries are connected to an external common site.
+
+It has been shown [26,27,29,45] that the exact partition functions of the Ising model, dimer model and spanning tree model on different planar lattices under free, cylindrical and periodic boundary conditions can be written in terms of the single expression
+Z α,β (z, M, N ) with (α, β) = (1/2, 0), (0, 1/2) and (1/2, 1/2), where Z 2 α,β (z, M, N ) = M−1 ∏ m=0 N −1 ∏ n=0 4 z sin 2 (n + α)π N + sin 2 (m + β)π M ,(13)
+with (α, β) = (0, 0). Note that the general theory about the asymptotic expansion of Z α,β (z, M, N ) has been given in [26,27].
+
+In what follows, we will show that the tree generating function on the cobweb network can be expressed in terms of Z 0,1/2 (z, M, N ) with M = 2M + 1 and N = N
+Z 2 0,1/2 (z, 2M + 1, N) = N−1 ∏ n=0 2M ∏ m=0 4 z sin 2 nπ N + sin 2 (m+1/2)π 2M+1 .(14)
+First, we express double products
+∏ N−1 n=0 ∏ 2M m=0 f (n, m) in terms of ∏ N−1 n=0 ∏ M−1 m=0 f (n, m), where f (n, m) = 4 z sin 2 nπ N + sin 2 (m+1/2)π 2M+1 .(15)
+It is easy to show that
+N−1 ∏ n=0 2M ∏ m=0 f (n, m) = N−1 ∏ n=0 f (n, M) N−1 ∏ n=0 M−1 ∏ m=0 f (n, m) 2 ,(16)
+with f (n, M) = 4 z sin 2 nπ N + 1 . With the help of the identity [46] 
+K−1 ∏ k=0 4 sinh 2 ω + sin 2 kπ K = 4 sinh 2 (K ω) ,(17)
+the product ∏ N−1 n=0 f (n, M) can be written as
+N−1 ∏ n=0 f (n, M) = 4z N sinh 2 Narcsinh √ 1/z .(18)
+Now, using Equations (12)- (16) and (18), the tree generating function on the cobweb network can be expressed finally as
+Z Sp cobweb (L; x, y) = Q 1 Z 0,1/2 (z, 2M + 1, N),(19)
+with
+Q 1 = y MN 2z N/2 sinh Narcsinh √ 1/z .(20)
+Thus, we have linked the cobweb partition function to the more general expression Z α,β (z, M, N ), further extending the applicability of the latter.
+
+
+Spanning Tree on the Fan Network
+
+The fan lattice L fan is an M × N rectangular lattice of M rows and N columns with free boundary conditions on three sides of the lattice and nodes on the fourth boundary connected to an external additional node. Therefore, there is a total of MN + 1 nodes and 2MN − M edges. We use the term Dirichlet-Neumann to describe the boundary conditions along the fourth boundary. Topologically, the obtained lattice is of the form of "fan" consisting of N radial lines and M transverse arcs (see Figure 1), where transverse arcs correspond to the "horizontal" direction and radial lines correspond to the "vertical" directions. In other words, we impose Neumann or free boundary conditions along the two border spokes and along the outermost arc. We use the term Dirichlet-Neumann to describe the boundary conditions along the innermost arc.
+
+The tree generating function for the spanning tree model on the fan network has been obtained in [14] and can be written as
+Z Sp fan (L; x, y) = y MN M−1 ∏ m=0 N−1 ∏ n=0 4 z sin 2 πn 2N + sin 2 π(m + 1/2) 2M + 1 ,(21)
+where z = x/y.
+
+In what follows, we will show that the tree generating function on the fan network can be expressed in terms of the single quantity Z 0,1/2 (z, 2M + 1, 2N)
+Z 2 0,1/2 (z, 2M + 1, 2N) = 2N−1 ∏ n=0 2M ∏ m=0 4 z sin 2 nπ 2N + sin 2 (m+1/2)π 2M+1 .(22)
+Now, we first express double products
+∏ 2N−1 n=0 ∏ 2M m=0 f (n, m) in terms of ∏ N−1 n=0 ∏ M−1 m=0 f (n, m), where f (n, m) = 4 z sin 2 nπ 2N + sin 2 (m+1/2)π 2M+1 .(23)
+It is easy to show that f (2N − n, m) = f (n, 2M − m) = f (n, m) and thus
+2N−1 ∏ n=0 2M ∏ m=0 f (n, m) = ∏ N−1 n=0 f (n, M) 2 ∏ 2M m=0 f (N, m) ∏ 2M m=0 f (0, m) N−1 ∏ n=0 M−1 ∏ m=0 f (n, m) 4 .(24)
+With the help of the identities [46]
+K−1 ∏ k=0 4 sinh 2 ω + sin 2 kπ K = 4 sinh 2 (K ω) ,(25)K−1 ∏ k=0 4 sinh 2 ω + sin 2 (k+1/2)π K = 4 cosh 2 (K ω) ,(26)M−1 ∏ m=0 4 sin 2 (m + 1/2)π M = 4,(27)
+the products ∏ 2M m=0 f (N, m), ∏ N−1 n=0 f (n, M) 2 and ∏ 2M m=0 f (0, m) can be written as
+N−1 ∏ n=0 f (n, M) 2 = 4z 2N 1 + z sinh 2 2Narcsinh √ 1/z (28) 2M ∏ m=0 f (N, m) = 4 cosh 2 (2M + 1)arcsinh √ z ,(29)2M ∏ m=0 f (0, m) = 4.(30)
+Now using Equations (21)-(24), (28)-(30) the tree generating function on the fan network can finally be expressed as
+Z Sp fan (L; x, y) = Q 2 Z 1/2 0,1/2 (z, 2M + 1, 2N),(31)
+with
+Q 2 = y MN (1 + z) 1/4 2z N sinh 2Narcsinh √ 1/z cosh (2M + 1)arcsinh √ z .(32)
+Again, we have extended the applicability of the general expression Z α,β (z, M, N ) by linking it to the fan partition function.
+
+
+Asymptotic Expansion of Free Energy
+
+Thus, we have expressed the generating functions of the spanning tree on cobweb and fan networks in terms of a principal partition function with twisted-boundary conditions Z 0,1/2 (z, M, N ) only. Based on such results, one can use the exact asymptotic expansions of Z 0,1/2 (z, M, N ) given in Ref. [26] to derive the exact asymptotic expansions of the free energy of the spanning tree f = − 1 S ln Z for all networks mentioned above in terms of the Kronecker's double series [26], which are directly related to elliptic θ functions. For the reader's convenience, the asymptotic expansion of ln Z 0,1/2 (z, M, N ) is given in Appendix A.
+
+Using Equation (A3), we can easily write down all the terms of the exact asymptotic expansion Equation (1) of the free energy, f = − 1 S ln Z for all models under consideration. The bulk free energy f bulk in Equation (1) for the weighted spanning tree on finite M × N + 1 lattices for all networks is given by
+f bulk = − ln y − 2 π π 0 ω z (k)dk = − ln y − 1 π ∑ ∞ n=0 (−1) n (n + 1/2) −2 z n+1/2 = − ln y − z 1/2 Φ(−z,2, 1 2 ) π ,(33)
+where ω z (k) is given by Equation (A2) and Φ(−z, 2, 1/2) is the Lerch transcendent. In particular, for isotropic spanning tree (z = 1), the Lerch transcendent is now Φ(−1, 2, 1/2) = 4G, where G = 0.915965594 . . . is the Catalan constant.
+
+
+Asymptotic Expansion of Free Energy of the Spanning Tree on the Cobweb Network
+
+Using Equations (19), (20) and (A3), the exact asymptotic expansions of the free energy for the spanning tree on the cobweb network, f = − 1 S ln Z Sp cobweb can be written as
+f = − 1 S ln Z Sp cobweb = − ln y + 1 2 ln x+arcsinh 1 √ z (M+ 1 2 ) − 1 S ln Z 0,1/2 (z, 2M + 1, N) = f bulk + 2 f 1s (M+ 1 2 ) − 1 S ln θ 2 (2 √ z ξ) η(2 √ z ξ) + 4πξ S ∑ ∞ p=1 π 2 ξ S p Λ 2p (2p)! K 1 2 ,0 2p+2 (2 i √ z ξ) 2p+2 ,(34)
+where f bulk is given by Equation (33), the surface free energy f 2s is equal to zero and f 1s is given by
+f 1s = 1 4 ln x + 1 2 arcsinh 1 √ z ,(35)
+and S and ξ are given by
+S = M + 1 2 N, ξ = M + 1 2 N .(36)
+The expression for S is neither equal to the number of nodes or of edges; instead, it emerges from the asymptotic expansion of the logarithm of Z 0,1/2 (z, 2M + 1, N). Thus, the exact asymptotic expansions of the free energy for the spanning tree on the cobweb network can be written in the form given by Equation (1). For the leading correction terms f 0 (zξ), we obtain
+f 0 (zξ) = − ln θ 2 (2 √ z ξ) η(2 √ z ξ) .(37)
+To check whether or not the leading finite-size correction term f 0 (ρ) given by Equation (37) can be represented in a form similar to Equation (3), we have to consider the Ising model (c = 1/2) on the cobweb network [8]. We have obtained that the exact asymptotic expansions of the free energy for the Ising model on the cobweb network can be written in the form given by Equation (1) with z = 1 (the details of the calculation will be reported elsewhere). The bulk free energy f bulk for the Ising model on the cobweb network is given by
+f bulk = − 1 2 ln 2 − 2G π .(38)
+The surface free energy f 2s is equal to zero and f 1s is given by
+f 1s = 1 2 ln(1 + √ 2) − 1 8 ln 2 − 1 4π π 0 ln √ 2 sin x + 1 + sin 2 x dx,(39)
+and the leading finite-size correction term f 0 (ξ) for the Ising model in the rectangular geometry on the cobweb network is given by
+f 0 (ξ) = − 1 2 ln 2 θ 4 (2 ξ) η(2 ξ) .(40)
+Note that S and ξ for Ising model on the cobweb network are also given by Equation (36). Thus, we can see from Equations (37) and (40) that the leading finite-size correction term f 0 (ξ) cannot be represented in a form similar to Equation (3). Instead, based on Equations (37) and (40), we can predict that the conformal partition function on the cobweb network for the Ising (c = 1/2) universality class Z Ising is given by
+Z Ising = 2 θ 4 (2 ξ) η(2 ξ)(41)
+and, for the spanning tree (c = −2) universality class, the conformal partition function on cobweb network Z cobweb Sp is given by
+Z cobweb Sp = θ 2 (2 √ z ξ) η(2 √ z ξ) .(42)
+For subleading correction terms f p (zξ) for p = 1, 2, 3, . . . , we get
+f p (z ξ) = 2π 2p+1 ξ p+1 (2p)!(p + 1) Λ 2p K 0,1/2 2p+2 (2i √ z ξ).
+The coefficients Λ 2p are given in Equation (A7) and the Kronecker's double series K 0,1/2 2p+2 (izξ) in terms of the elliptic theta functions are given in [26,27] for arbitrary p.
+
+It is easy to see from Equation (34) that the exact asymptotic expansions of the free energy for the spanning tree on the finite cobweb network do not contain the corner free energy f corner , as it should be, since the logarithmic corner corrections to the free energy density should be absent for the systems without corners.
+
+
+Asymptotic Expansion of Free Energy of the Spanning Tree on the Fan Network
+
+Using Equations (31), (32) and (A3), the exact asymptotic expansions of the free energy for the spanning tree on the fan network, f = − 1 S ln Z Sp fan can be written as
+f = − 1 S ln Z Sp fan = − ln y + 1 2 ln x+arcsinh 1 √ z (M+ 1 2 ) + arcsinh √ z N − 1 4S ln 4(1 + z) − 1 2S ln Z 0,1/2 (z, 2M + 1, 2N) = f bulk + 2 f 1s (M+ 1 2 ) + 2 f 2s N − 1 4S ln 4(1 + z) − 1 2S ln θ 2 ( √ z ξ) η( √ z ξ) + πξ S ∑ ∞ p=1 π 2 ξ 4S p Λ 2p (2p)! K 0, 1 2 2p+2 (i √ z ξ) 2p+2 ,(43)
+where f bulk is given by Equation (33), the surface free energies f 1s is given by Equation (35) and f 2s is given by
+f 2s = 1 2 arcsinh √ z,(44)
+and S and ξ are again given by Equation (36). The exact asymptotic expansions of the free energy for the spanning tree on the fan network can again be written in the form given by Equation (1). For the leading correction terms f 0 (zξ), we obtain
+f 0 (zξ) = − 1 4 ln 4(1 + z) − 1 2 ln θ 2 ( √ z ξ) η( √ z ξ) .(45)
+Thus, from Equation (45), one can see that a geometry-dependent universal part of the free energy f univ (zξ) in the rectangular geometry on the fan network is given by
+f univ (zξ) = − 1 2 ln θ 2 ( √ z ξ) η( √ z ξ) ,(46)
+while a non-universal additive constant f nonuniv is given by
+f nonuniv = − 1 4 ln 4(1 + z).(47)
+As for the case of the cobweb network, we can predict that the conformal partition function for c = −2 universality class on the fan network Z fan Sp is given by
+Z fan Sp = θ 2 ( √ z ξ) η( √ z ξ) .(48)
+It will be interesting to check whether or not the leading finite-size correction term f 0 ( √ z ξ) given by Equation (45) can be represented in a form similar to Equation (3) by considering models in different universality classes on the fan network, as well as to compute that term by the conformal field theory method.
+
+For subleading correction terms f p (zξ) for p = 1, 2, 3, . . . , we get
+f p (z ξ) = π 2p+1 ξ p+1 4 p (2p)!(2p + 2) Λ 2p K 0,1/2 2p+2 (i √ z ξ).(49)
+The coefficients Λ 2p are given in Equation (A7) and Kronecker's double series K 0,1/2 2p+2 (izξ) in terms of the elliptic theta functions are given in [26,27].
+
+Since the fan network is the plane rectangular lattice with three free boundary conditions and one with Dirichlet-Neumann boundary conditions, we have four corners for the fan network and one can expect the corner free energy f corner contribution in the exact asymptotic expansions of the free energy Equation (43). However, it is easy to see from Equation (43) that, in the exact asymptotic expansions of the free energy for the spanning tree on the finite fan network, the corner free energy f corner is equal to zero. Let us consider the corners of the fan network. Two of these corners have two edges each of which are subject to free boundary conditions and two corners have two edges of which one is under free and the other under Dirichlet-Neumann boundary conditions. Thus, the corner free energy f corner can be written as a sum of four corner contribution, namely
+f corner = 2 f corn (0, 0) + 2 f corn (0, β),(50)
+where f corn (0, 0) is the contribution to the free energy from the corner with two edges with free boundary conditions, which is given by Equation (9) with central charge c equal to c = −2, namely f corn (0, 0) = 1 16
+
+and f corn (0, β) is the contribution to the free energy from the corner with two edges one under free and another under Dirichlet-Neumann boundary conditions, which is given by Equation (10) with central charge c = −2 and ∆ 0,β = −1/8. Here, ∆ 0,β = −1/8 is the conformal weight of the boundary operator inserted at that corner. Thus, f corn (0, β) is equal to
+f corn (0, β) = ∆ 0,β − c 32 = − 1 16
+and the total contribution from the corners to free energy f corner is equal to zero. Although the fan network has four corners and each of these gives corner contributions to the free energy, the sum of these contributions ( f corner ) is equal to zero. Thus, our results confirm both conformal theory [31,[40][41][42] and finite-size scaling [47] predictions.
+
+
+Spanning Tree on Infinitely Long Strips
+
+Finally, let us consider the case of an infinitely long strip. Conformal invariance implies that, for an infinitely long two-dimensional (2D) strip of finite width L at criticality, the finite size scaling behavior of the critical free energy f has the form [32,33] 
+f = f bulk + 2 f surf L + A L 2 + O L −3 ,(51)
+where the bulk free energy density f bulk and the surface free energy f surf are nonuniversal constants. In contrast, A is a universal constant, but may depend on the boundary conditions. In some 2D geometries, the values of A are known [32,33,48] to be related to the central charge (c) and the conformal weight of the ground state ∆
+A = 4πζ ∆ − c 24 in cylinder geometry,(52)A = πζ ∆ − c 24 in strip geometry,(53)
+where the anisotropy factor ζ is a nonuniversal constant. Let us consider the spanning tree case on the cobweb and fan network in the case when M → ∞ (or ξ → ∞). In that case, the cobweb becomes an infinitely long cylinder with circumference N and the fan network becomes an infinitely long strip of width N and with free boundary condition on both sides of the strip. The asymptotic expansion of the free energy for the cobweb and fan networks can be obtained from Equations (34) and (43), respectively. Using the facts that lim ξ→∞ θ 2 (
+√ z ξ) = lim ξ→∞ 2e − π √ zξ 4 = 0,(54)lim ξ→∞ θ 4 ( √ z ξ) = lim ξ→∞ θ 3 ( √ z ξ) = 1,(55)lim ξ→∞ η( √ z ξ) = lim ξ→∞ e − π √ zξ 12 = 0,(56)
+the asymptotic expansion of the free energy for the cobweb network on the infinitely long cylinder with circumference N can be obtained from Equation (34)
+f = f bulk + π √ z 3N 2 + . . . .(57)
+Thus, by choosing L = N, the anisotropy factor ζ = √ z, the central charge c = −2 and conformal weight of the ground state ∆ = 0, we get full agreement with conformal field predictions for cylinder geometry given by Equation (51).
+
+Again, using Equations (54) and (56), the asymptotic expansion of the free energy for the fan network on the infinitely long strip with width N and with free boundary condition on both sides of the strip can be obtained from Equation (43) 
+f = f bulk + 2 f 2s N + π √ z 12N 2 + . . . ,(58)
+where f 2s is given by Equation (44). Thus, by choosing L = N, the anisotropy factor ζ = √ z, the central charge c = −2 and conformal weight of the ground state ∆ = 0, we get full agreement with conformal field predictions for strip geometry given by Equation (53).
+
+Let us now consider the spanning tree case on the cobweb and fan networks in the case when N → ∞ (or ξ → 0). In that case, both the cobweb and fan network become infinitely long strips with width M and with free boundary condition on one side of the strip and Dirichlet-Neumann boundary conditions on another side of the strip. The asymptotic expansion of the free energy for the cobweb and fan networks can be obtained from Equations (34) and (43), respectively.
+
+To obtain the asymptotic expansion of the free energy for cobweb and fan networks, we need the behavior of the θ 2 (τ) -function and Dedekind's η(τ) -function under the Jacobi transformation
+τ → τ = −1/τ.
+The result for the θ 2 (τ)-functions and Dedekind's η(τ) function is given in Appendix A of Ref. [49]:
+θ 2 (τ ) = (−iτ) 1/2 θ 4 (τ),(59)η(τ ) = (−iτ) 1/2 η(τ).(60)
+Using Equations (55), (56), (59) and (60), one can obtain the asymptotic behavior of θ 2 (τ ) and η(τ ) as τ → 0 (or N → ∞). Then, from Equations (34) and (43), one can obtain the asymptotic expansion of the free energy for the cobweb and fan networks on the infinitely long strip in the following form
+f = f bulk + 2 f 1s M + 1/2 − π 24 √ z(M + 1/2) 2 + . . . ,(61)
+where f 1s is given by Equation (35). Thus, by choosing L = M + 1/2, the anisotropy factor ζ = 1/ √ z, the central charge c = −2 and conformal weight of the ground state ∆ = −1/8, we will get full agreement with conformal field predictions given by Equations (51) and (53).
+
+
+Conclusions
+
+We analyzed spanning-tree generating functions for finite-size cobweb and fan networks and showed that each can be expressed in terms of a single, unifying partition function with twisted boundary conditions. This reveals that the four corner free energies of the fan network cancel each other out so that their sum matches the vanishing total value for the cobweb (which has no corners).
+
+Thus, we have extended the applicability of the twisted-boundary-method to a broad set of circumstances, opening up possible new approaches to efficiently investigate a multitude of spanning-tree problems of both fundamental and practical relevance. For example, one could work backwards and seek different models which fit to the same Z α,β and thus obey a class of "strong" universality. To further demonstrate the power of the approach, we have used it to derive exact finite-size corrections for the logarithm of the generating function of the spanning tree on both of these networks. Then, based on the unified partition functions, we derived the exact asymptotic expansion of the logarithm of the partition function for the spanning tree on the cobweb and fan networks. We also explain in the context of conformal field theory why the corner free energy for fan network, with its four corners, is equal to zero. Based on our results for the leading finite-size correction term f 0 for the fan and cobweb networks, we have predicted the conformal partition functions in a c = −2 universality class for fan and cobweb geometries. For the Ising model, we have also predicted the conformal partition functions in the Ising (c = 1/2) universality class for cobweb geometries. In addition, finally, we have investigated the strip geometry for both of the above-mentioned models and find an excellent agreement with conformal field theory predictions. Thus, we have confirmed universality for spanning trees and affirmed the robustness of the twisted-boundary-condition approach, opening new possible conduits to future research in a long-standing field of interest for a number of disciplines. 
+
+
+Conflicts of Interest:
+
+The authors declare no conflict of interest.
+
+Figure 1 .
+1An M × N cobweb network with M = 3 and N = 8 (a). An M × N fan network with M = 3 and N = 7 (b).
+
+Author
+Contributions: Conceptualization, N.I. and R.K.; Formal analysis, N.I.; Validation: R.K.; Funding acquisition, N.I.; Investigation, N.I.; Methodology, N.I. and R.K.; Project administration, N.I. and R.K.; Resources, N.I.; Validation, R.K.; Writing-original draft, N.I.; Writing-review & editing, R.K. Funding: This work was partially supported by a grant of the Science Committee of the Ministry of Education and Science of the Republic of Armenia under contract 18T-1C113 and by the JINR program Ter-Antonyan-Smorodinsky.
+For the convenience of the reader, in this appendix, we present the exact asymptotic expansions of the logarithm of Z 0, 1 2 (z, M, N ) given in Ref.[26]. With the help of the identity,the partition function with twisted boundary conditions Z α,β (z, M, N ) given by Equation(13)can be transformed into the simpler formwhere lattice dispersion relation has been usedThe exact asymptotic expansion of the logarithm of Z 0, 1 2 (z, M, N ) in terms of the Kronecker's double series[26,50]can be written asDedekind's η function satisfies the following identity:where θ 2 (τ), θ 3 (τ), θ 4 (τ) are elliptic theta functions. K 0, 1 2 2p (τ) is Kronecker's double series[26,50]. The differential operators Λ 2p that appear here can be expressed via coefficients z 2p of the Taylor expansion of the lattice dispersion relation ω z (x). . .Here, summation is over all positive numbers {k 1 . . . k r } and different positive numbers {p 1 , . . . , p r } such that p 1 k 1 + . . . + p r k r = p and k = k 1 + . . . + k r − 1.Thewhere Φ(x, s, α) is the Lerch transcendent defined asIn particular, for the isotropic spanning tree (z = 1), the Lerch transcendent is now Φ(−1, 2, 1/2) = 4G, where G is the Catalan constant given by G = ∞ ∑ n=0 (−1) n (2n + 1) 2 = 0.915965594 . . . .Kronecker's double series K 0, 1 2 2p (τ) can all be expressed in terms of the elliptic θ-functions only[26].
+Ueber die Auflösung der Gleichungen, auf welche man bei der Untersuchung der linearen Vertheilung galvanischer Ströme geführt wird. G Kirchhoff, 10.1002/andp.18471481202Ann. Phys. Chem. 1847Kirchhoff, G. Ueber die Auflösung der Gleichungen, auf welche man bei der Untersuchung der linearen Vertheilung galvanischer Ströme geführt wird. Ann. Phys. Chem. 1847, 72, 497-508. [CrossRef]
+
+Local characteristics, entropy and limit theorems for spanning trees and domino tilings via transfer-impedances. R Burton, R Pemantle, 10.1214/aop/1176989121Ann. Probab. 21Burton, R.; Pemantle, R. Local characteristics, entropy and limit theorems for spanning trees and domino tilings via transfer-impedances. Ann. Probab. 1993, 21, 1329-1371. [CrossRef]
+
+Asymptotic enumeration of spanning trees. R Lyons, 10.1017/S096354830500684XCombin. Probab. Comput. 14Lyons, R. Asymptotic enumeration of spanning trees. Combin. Probab. Comput. 2005, 14, 491-522. [CrossRef]
+
+Number of spanning trees on a lattice. F Y Wu, 10.1088/0305-4470/10/6/004J. Phys. A. 10113Wu, F.Y. Number of spanning trees on a lattice. J. Phys. A 1977, 10, L113. [CrossRef]
+
+MOD-CHAR: An implementation of char's spanning tree enumeration algorithm and its complexity analysis. R Jayakumar, K Thulasiraman, M Swamy, 10.1109/31.20199IEEE Trans. Circuits Syst. 36Jayakumar, R.; Thulasiraman, K.; Swamy, M. MOD-CHAR: An implementation of char's spanning tree enumeration algorithm and its complexity analysis. IEEE Trans. Circuits Syst. 1989, 36, 219-228. [CrossRef]
+
+Random walks on complex networks. J D Noh, H Rieger, 10.1103/PhysRevLett.92.118701Phys. Rev. Lett. 92Noh, J.D.; Rieger, H. Random walks on complex networks. Phys. Rev. Lett. 2004, 92, 118701. [CrossRef]
+
+Distribution of sizes of erased loops for loop-erased random walks. D Dhar, A Dhar, 10.1103/PhysRevE.55.R2093Phys. Rev. E. 55Dhar, D.; Dhar, A. Distribution of sizes of erased loops for loop-erased random walks. Phys. Rev. E 1997, 55, R2093. [CrossRef]
+
+The potts model. F Y Wu, 10.1103/RevModPhys.54.235Rev. Mod. Phys. 54Wu, F.Y. The potts model. Rev. Mod. Phys. 1982, 54, 235. [CrossRef]
+
+Spanning forests and the q-state Potts model in the limit q → 0. L Jacobsen, J Salas, A D Sokal, 10.1007/s10955-005-4409-yJ. Stat. Phys. 119Jacobsen, L.; Salas, J.; Sokal, A.D. Spanning forests and the q-state Potts model in the limit q → 0. J. Stat. Phys. 2005, 119, 1153-1281. [CrossRef]
+
+Self-organized criticality: An explanation of the 1/f noise. P Bak, C Tang, K Wiesenfeld, 10.1103/PhysRevLett.59.381Phys. Rev. Lett. 59381Bak, P.; Tang, C.; Wiesenfeld, K. Self-organized criticality: An explanation of the 1/f noise. Phys. Rev. Lett. 1987, 59, 381. [CrossRef]
+
+Spanning Trees and Optimization Problems. B Y Wu, K M Chao, Chapman, / Hall, Crc, Boca Raton, FL, USAWu, B.Y.; Chao, K.M. Spanning Trees and Optimization Problems; Chapman and Hall/CRC: Boca Raton, FL, USA, 2004.
+
+Spanning trees on hypercubic lattices and nonorientable surfaces. W J Tzeng, F Y Wu, 10.1016/S0893-9659(00)00071-9Appl. Math. Lett. 13Tzeng, W.J.; Wu, F.Y. Spanning trees on hypercubic lattices and nonorientable surfaces. Appl. Math. Lett. 2000, 13, 19-25. [CrossRef]
+
+Spanning trees on graphs and lattices in d dimensions. R Shrock, F Y Wu, 10.1088/0305-4470/33/21/303J. Phys. A. 333881Shrock, R.; Wu, F.Y. Spanning trees on graphs and lattices in d dimensions. J. Phys. A 2000, 33, 3881. [CrossRef]
+
+The two-point resistance of a resistor network: A new formulation and application to the cobweb network. N S Izmailian, R Kenna, F Y Wu, 10.1088/1751-8113/47/3/035003J. Phys. A: Math. Theor. 4735003Izmailian, N.S.; Kenna, R.; Wu, F.Y. The two-point resistance of a resistor network: A new formulation and application to the cobweb network. J. Phys. A: Math. Theor. 2014, 47, 035003. [CrossRef]
+
+The two-point resistance of fan networks. Chin. N S Izmailian, R Kenna, J. Phys. 40703Izmailian, N.S.; Kenna, R. The two-point resistance of fan networks. Chin. J. Phys. 2015, 53, 040703.
+
+Spanning trees on the Sierpinski gasket. S C Chang, L C Chen, W S Yang, 10.1007/s10955-006-9262-0J. Stat. Phys. 126Chang, S.C.; Chen, L.C.; Yang, W.S. Spanning trees on the Sierpinski gasket. J. Stat. Phys. 2007, 126, 649-667. [CrossRef]
+
+. H N V Temperley, Combinatorics. In London Math. Soc. Lecture Note Series. Temperley, H.N.V. Combinatorics. In London Math. Soc. Lecture Note Series;
+
+. T P Mcdonough, V C Mavron, Eds, Cambridge University Press13Cambridge, UKMcDonough, T.P., Mavron, V.C., Eds.; Cambridge University Press: Cambridge, UK, 1974; Volume 13, pp. 202-204.
+
+Scaling theory for finite-size effects in the critical region. M Fisher, M N Barber, 10.1103/PhysRevLett.28.1516Phys. Rev. Lett. 28Fisher, M.; Barber, M.N. Scaling theory for finite-size effects in the critical region. Phys. Rev. Lett. 1972, 28, 1516. [CrossRef]
+
+Finite-size Scaling and Numerical Simulation of Statistical Systems. V Privman, World ScientificSingaporePrivman, V. (Ed.) Finite-size Scaling and Numerical Simulation of Statistical Systems; World Scientific: Singapore, 1990.
+
+Historical review on analytic, Monte Carlo, and renormalization group approaches to critical phenomena of some lattice Models. C K Hu, Chin. J. Phys. 52Hu, C.K. Historical review on analytic, Monte Carlo, and renormalization group approaches to critical phenomena of some lattice Models. Chin. J. Phys. 2014, 52, 1-76.
+
+Corner free energies and boundary effects for Ising, Potts and fully packed loop models on the square and triangular lattices. E Vernier, J L Jacobsen, 10.1088/1751-8113/45/4/045003J. Phys. A. 4545003Vernier, E.; Jacobsen, J.L. Corner free energies and boundary effects for Ising, Potts and fully packed loop models on the square and triangular lattices. J. Phys. A 2012, 45, 045003. [CrossRef]
+
+The bulk, surface and corner free energies of the square lattice Ising model. R J Baxter, 10.1088/1751-8113/50/1/014001J. Phys. A. 50Baxter, R.J. The bulk, surface and corner free energies of the square lattice Ising model. J. Phys. A 2016, 50, 014001. [CrossRef]
+
+Finer features for functional microdevices. S Kawata, H B Sun, T Tanaka, K Takada, 10.1038/35089130Nature. 412Kawata, S.; Sun, H.B.; Tanaka, T.; Takada, K. Finer features for functional microdevices. Nature 2001, 412, 697. [CrossRef]
+
+Colloidal nanocrystal shape and size control: The case of cobalt. V F Puntes, K M Krishnan, A P Alivisatos, 10.1126/science.1057553Science. 291PubMedPuntes, V.F.; Krishnan, K.M.; Alivisatos, A.P. Colloidal nanocrystal shape and size control: The case of cobalt. Science 2001, 291, 2115-2117. [CrossRef] [PubMed]
+
+Formation of hollow nanocrystals through the nanoscale Kirkendall effect. Y Yin, R M Rioux, C K Erdonmez, S Hughes, G A Somorjai, A P Alivisatos, 10.1126/science.1096566Science. 304PubMedYin, Y.; Rioux, R.M.; Erdonmez, C.K.; Hughes, S.; Somorjai, G.A.; Alivisatos, A.P. Formation of hollow nanocrystals through the nanoscale Kirkendall effect. Science 2004, 304, 711-714. [CrossRef] [PubMed]
+
+Kronecker's double series and exact asymptotic expansions for free models of statistical mechanics on torus. E Ivashkevich, N S Izmailian, C K Hu, 10.1088/0305-4470/35/27/302J. Phys. A Math. Gen. 35Ivashkevich, E.; Izmailian, N.S.; Hu, C.K. Kronecker's double series and exact asymptotic expansions for free models of statistical mechanics on torus. J. Phys. A Math. Gen. 2002, 35, 5543. [CrossRef]
+
+Exact finite-size corrections of the free energy for the square lattice dimer model under different boundary conditions. N S Izmailian, K Oganesyan, C K Hu, 10.1103/PhysRevE.67.066114Phys. Rev. E. 6766114PubMedIzmailian, N.S.; Oganesyan, K.; Hu, C.K. Exact finite-size corrections of the free energy for the square lattice dimer model under different boundary conditions. Phys. Rev. E 2003, 67, 066114. [CrossRef] [PubMed]
+
+Exact finite-size corrections and corner free energies for the c = −2 universality class. N Izmailian, R Kenna, W Guo, X Wu, 10.1016/j.nuclphysb.2014.04.023Nucl. Phys. B. 884Izmailian, N.; Kenna, R.; Guo, W.; Wu, X. Exact finite-size corrections and corner free energies for the c = −2 universality class. Nucl. Phys. B 2014, 884, 157-171. [CrossRef]
+
+Exact finite-size corrections for the spanning-tree model under different boundary conditions. N S Izmailian, R Kenna, 10.1103/PhysRevE.91.022129Phys. Rev. E. 9122129Izmailian, N.S.; Kenna, R. Exact finite-size corrections for the spanning-tree model under different boundary conditions. Phys. Rev. E 2015, 91, 022129. [CrossRef]
+
+Universal critical amplitudes in finite-size scaling. Phys. Rev. B 1984, 30, 322. V Privman, M E Fisher, 10.1103/PhysRevB.30.322Privman, V.; Fisher, M.E. Universal critical amplitudes in finite-size scaling. Phys. Rev. B 1984, 30, 322. [CrossRef]
+
+Peschel, I. Finite-size dependence of the free energy in two-dimensional critical systems. J L Cardy, 10.1016/0550-3213(88)90604-9Nucl. Phys. B. 300Cardy, J.L.; Peschel, I. Finite-size dependence of the free energy in two-dimensional critical systems. Nucl. Phys. B 1988, 300, 377-392. [CrossRef]
+
+Conformal invariance, the central charge, and universal finite-size amplitudes at criticality. H W J Blöte, J L Cardy, M P Nightingale, Phys. Rev. Lett. 742Blöte, H.W.J.; Cardy, J.L.; Nightingale, M.P. Conformal invariance, the central charge, and universal finite-size amplitudes at criticality. Phys. Rev. Lett. 1986, 56, 742.
+
+Universal Term in the Free Energy at a Critical Point and the Conformal Anomaly. I Affleck, 10.1103/PhysRevLett.56.746Phys. Rev. Lett. 56Affleck, I. Universal Term in the Free Energy at a Critical Point and the Conformal Anomaly. Phys. Rev. Lett. 1986, 56, 746-748. [CrossRef]
+
+Free energy of rectangular domains at criticality. P Kleban, I Vassileva, 10.1088/0305-4470/24/14/027J. Phys. A. 243407Kleban, P.; Vassileva, I. Free energy of rectangular domains at criticality. J. Phys. A 1991, 24, 3407. [CrossRef]
+
+Finite-size behavior of the critical Ising model on a rectangle with free boundaries. X Wu, N Izmailian, W Guo, 10.1103/PhysRevE.86.041149Phys. Rev. E. 8641149PubMedWu, X.; Izmailian, N.; Guo, W. Finite-size behavior of the critical Ising model on a rectangle with free boundaries. Phys. Rev. E 2012, 86, 041149. [CrossRef] [PubMed]
+
+Bounded and inhomogeneous Ising models. I. Specific-heat anomaly of a finite lattice. A E Ferdinand, M E Fisher, 10.1103/PhysRev.185.832Phys. Rev. 185Ferdinand, A.E.; Fisher, M.E. Bounded and inhomogeneous Ising models. I. Specific-heat anomaly of a finite lattice. Phys. Rev. 1969, 185, 832. [CrossRef]
+
+Statistical mechanics of dimers on a quadratic lattice. A E Ferdinand, 10.1063/1.1705162J. Math. Phys. 8Ferdinand, A.E. Statistical mechanics of dimers on a quadratic lattice.J. Math. Phys. 1967, 8, 2332-2339. [CrossRef]
+
+Di Francesco, P Mathieu, P Sénégal, D , Conformal Field Theory. New York, NY, USASpringerDi Francesco, P.; Mathieu, P.; Sénégal, D. Conformal Field Theory; Springer: New York, NY, USA, 1997.
+
+Shape-dependent finite-size effect of the critical two-dimensional Ising model on a triangular lattice. X Wu, N Izmailian, W Guo, 10.1103/PhysRevE.87.022124Phys. Rev. E. 87PubMedWu, X.; Izmailian, N.; Guo, W. Shape-dependent finite-size effect of the critical two-dimensional Ising model on a triangular lattice. Phys. Rev. E 2013, 87, 022124. [CrossRef] [PubMed]
+
+Boundary states in the open string channel and CFT near a corner. Y Imamura, H Isono, Y Matsuo, 10.1143/PTP.115.979Prog. Theor. Phys. 115Imamura, Y.; Isono, H.; Matsuo, Y. Boundary states in the open string channel and CFT near a corner. Prog. Theor. Phys. 2006, 115, 979-1002. [CrossRef]
+
+Conformal boundary state for the rectangular geometry. R Bondesan, J Dubail, J L Jacobsen, H Saleur, 10.1016/j.nuclphysb.2012.04.021Nucl. Phys. B. 862Bondesan, R.; Dubail, J.; Jacobsen, J.L.; Saleur, H. Conformal boundary state for the rectangular geometry. Nucl. Phys. B 2012, 862, 553-575. [CrossRef]
+
+Rectangular amplitudes, conformal blocks, and applications to loop models. R Bondesan, J L Jacobsen, H Saleur, 10.1016/j.nuclphysb.2012.10.018Nucl. Phys. B. 867Bondesan, R.; Jacobsen, J.L.; Saleur, H. Rectangular amplitudes, conformal blocks, and applications to loop models. Nucl. Phys. B 2013, 867, 913-949. [CrossRef]
+
+Critical two-dimensional Ising model with free, fixed ferromagnetic, fixed antiferromagnetic, and double antiferromagnetic boundaries. X Wu, N Izmailyan, 10.1103/PhysRevE.91.012102Phys. Rev. E. 9112102Wu, X.; Izmailyan, N. Critical two-dimensional Ising model with free, fixed ferromagnetic, fixed antiferromagnetic, and double antiferromagnetic boundaries. Phys. Rev. E 2015, 91, 012102. [CrossRef]
+
+Partition function zeroes of a self-dual Ising model. W T Lu, F Y Wu, 10.1016/S0378-4371(98)00273-8Physica A. 258Lu, W.T.; Wu, F.Y. Partition function zeroes of a self-dual Ising model. Physica A 1998, 258, 157-170. [CrossRef]
+
+Finite-size corrections and scaling for the triangular lattice dimer model with periodic boundary conditions. N S Izmailian, K B Oganesyan, M C Wu, C K Hu, 10.1103/PhysRevE.73.016128Phys. Rev. E. 73PubMedIzmailian, N.S.; Oganesyan, K.B.; Wu, M.C.; Hu, C.K. Finite-size corrections and scaling for the triangular lattice dimer model with periodic boundary conditions. Phys. Rev. E 2006, 73, 016128. [CrossRef] [PubMed]
+
+. I S Gradshteyn, I M Ryzhik, Table of Integrals, Series and Products. Academic PressGradshteyn, I.S.; Ryzhik, I.M. Table of Integrals, Series and Products; Academic Press: New York, NY, USA, 1965.
+
+Universal size dependence of the free energy of finite systems near criticality. V Privman, 10.1103/PhysRevB.38.9261Phys. Rev. B. 389261PubMedPrivman, V. Universal size dependence of the free energy of finite systems near criticality. Phys. Rev. B 1988, 38, 9261. [CrossRef] [PubMed]
+
+Effect of boundary conditions on the operator content of two-dimensional conformally invariant theories. J L Cardy, 10.1016/0550-3213(86)90596-1Nucl. Phys. B. 275Cardy, J.L. Effect of boundary conditions on the operator content of two-dimensional conformally invariant theories. Nucl. Phys. B 1986, 275, 200-218. [CrossRef]
+
+. A G Korn, T M Korn, ; Handbook, Mcgraw-Hill, New York, NY, USAKorn, A.G.; Korn, T.M. Mathematical Handbook; McGraw-Hill: New York, NY, USA, 1968.
+
+Elliptic Functions According to Eisenshtein and Kronecker. A Weil, Licensee MDPI. Springerc 2019 by the authors. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) licenseWeil, A. Elliptic Functions According to Eisenshtein and Kronecker; Springer: Berlin/Heidelberg, Germany; New York, NY, USA, 1976. c 2019 by the authors. Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (http://creativecommons.org/licenses/by/4.0/).

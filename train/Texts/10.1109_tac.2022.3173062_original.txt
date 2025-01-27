@@ -1,0 +1,566 @@
+
+Accelerated Dual Averaging Methods for Decentralized Constrained Optimization
+
+
+Member, IEEEChangxin Liu 
+Fellow, IEEEYang Shi 
+Senior Member, IEEEHuiping Li 
+Wenli Du 
+Accelerated Dual Averaging Methods for Decentralized Constrained Optimization
+1Index Terms-Decentralized optimizationconstrained opti- mizationdual averagingaccelerationmulti-agent system
+In this work, we study decentralized convex constrained optimization problems in networks. We focus on the dual averaging-based algorithmic framework that is well-documented to be superior in handling constraints and complex communication environments simultaneously. Two new decentralized dual averaging (DDA) algorithms are proposed. In the first one, a second-order dynamic average consensus protocol is tailored for DDA-type algorithms, which equips each agent with a provably more accurate estimate of the global dual variable than conventional schemes. We rigorously prove that the proposed algorithm attains O(1/t) convergence for general convex and smooth problems, for which existing DDA methods were only known to converge at O(1/ √ t) prior to our work. In the second one, we use the extrapolation technique to accelerate the convergence of DDA. Compared to existing accelerated algorithms, where typically two different variables are exchanged among agents at each time, the proposed algorithm only seeks consensus on local gradients. Then, the extrapolation is performed based on two sequences of primal variables which are determined by the accumulations of gradients at two consecutive time instants, respectively. The algorithm is proved to converge at O(1) 1 t 2 + 1 t(1−β) 2 , where β denotes the second largest singular value of the mixing matrix. We remark that the condition for the algorithmic parameter to guarantee convergence does not rely on the spectrum of the mixing matrix, making itself easy to satisfy in practice. Finally, numerical results are presented to demonstrate the efficiency of the proposed methods.
+
+I. INTRODUCTION
+
+Consider a multi-agent system consisting of n agents. Each agent holds a private objective function. They are connected via a communication network in order to collaboratively solve the following optimization problem:
+min x∈X f (x) := 1 n n i=1 f i (x)(1)
+This work was supported in part by the Natural Sciences and Engineering Research Council of Canada, in part by the National Natural Science Foundation of China (NSFC) under Grant  where f i represents the local smooth objective function of agent i and X ⊆ R m denotes the constraint set shared by all the agents. This problem is referred to as decentralized optimization in the literature and finds broad applications in optimal control of cyber-physical systems, sensor networks, and machine learning, to name a few. For an overview of decentralized optimization and its applications, please refer to [1], [2].
+
+Over the last decade, many decentralized optimization algorithms have been proposed for solving Problem (1). For unconstrained problems, i.e., X = R m , the authors in [3], [4] developed decentralized gradient descent (DGD) methods with constant step sizes, where the local search performed by individual agents is guided by local gradients and a consensus protocol. However, because each individual gradient evaluated at the global optimum is not necessarily zero, the search directions induced by consensus-seeking and local gradient may conflict with each other, making it difficult to ascertain the exact solution to the problem. Several efforts have been made to overcome this drawback. For example, the authors in [5] proposed the EXTRA algorithm that adds a cumulative correction term to DGD to achieve consensual optimization. Alternatively, the additional gradient-tracking process based on dynamic average consensus scheme in [6] can be used. It is shown in [7], [8] that, for unconstrained smooth optimization, the algorithms steered by the tracked gradient exactly converge at an O(1/t) rate. Based on this idea, a decentralized Nesterov gradient descent was proposed in [9], where the rate of convergence is accelerated to O(1/t 1.4− ) for any ∈ (0, 1.4) at the expense of exchanging an additional variable among agents at each time instant. In [10], the authors proposed an accelerated decentralized algorithm with multiple consensus rounds at each time instant, and proved that after t local iterations and O(t log t) communication rounds the objective error is bounded by O(1/t 2 ). By modeling Problem (1) as a linearly constrained optimization problem, centralized primal-dual paradigms such as the augmented Lagrangian method (ALM), the alternating direction method of multipliers (ADMM) and the dual ascent can also be used to design decentralized algorithms [11]- [13]. Based on the primal-dual reformulation, an accelerated primal-dual method was developed in [14]. The rate of convergence is improved to O(1) L t 2 + 1 t √ ηt , where L denotes the smoothness parameter of each objective function and η = λ 2 (L)/λ m (L) is the eigengap of the graph Laplacian L. Notably, the authors established a lower bound for a class of decentralized primal-dual methods, suggesting that the developed algorithm therein is optimal in terms of gradient computations. The authors in [15] considered the Lagrangian dual formulation of the decentralized optimization problem and developed two algorithms based on dual accelerated methods. The algorithms are proved to be linearly convergent for strongly convex and smooth problems.
+
+For constrained problems, the design and convergence analysis of decentralized optimization algorithms are more challenging [16]- [18]. The seminal work in [19] is based on the gossip protocol and projected subgradient method, where the step size was made decaying for convergence. The randomized smoothing technique and multi-round consensus scheme are used to design a provably optimal decentralized algorithm for non-smooth convex problems in [20]. To improve the performance using a constant step size, a variant of EXTRA (PG-EXTRA) was developed in [21], where the constraint is modeled as a non-smooth indicator function and handled via the proximal operator. An O(1/t) rate of convergence is proved for the squared norm of the difference of consecutive iterates. Recently the authors in [22] proposed an accelerated decentralized penalty method (APM), where the constraint can be also treated as the non-smooth part of the objective. Notably, there are some decentralized algorithms [23]- [29] available in the literature where the local search mechanism for individual agents is inspired by dual methods [30], e.g., mirror descent and dual averaging [31], [32]. Particularly, dual averaging is provably more efficient in exploiting sparsity than proximal gradient methods for l 1 -regularized problems [32]. For example, the authors in [26] developed a decentralized dual averaging (DDA) algorithm where a linear model of the global objective function is gradually learned by each agent via gossip. Compared to other types of decentralized first-order methods, DDA has the advantage in simultaneously handling constraints and complex communication environments, e.g., directed networks [33], deterministic time-varying networks [29], and stochastic networks [26], [34]. From a technical perspective, this is because that DDA seeks consensus on linear models of the objective function rather than on the local projected iterates as in decentralized primal methods, e.g., DGD, therefore decoupling the consensus-seeking process from nonlinear projection and facilitating the rate analysis in complex communication environments. We present a more detailed comparison in Section III-A.
+
+Although decentralized dual methods in the literature have demonstrated advantages over their primal counterparts in terms of constraint handling and analysis complexity, existing results focused on non-smooth problems and can have an O(1/ √ t) rate of convergence. Considering this, a question naturally arises: If the objective functions exhibit some desired properties, e.g., smoothness, is it possible to accelerate the convergence rate of DDA beyond O(1/ √ t)?
+
+We provide affirmative answer to this question in this work. The main results and contributions are summarized in the following:
+
+• First, we develop a new DDA algorithm, where a secondorder dynamic average consensus protocol is deliberately designed to assist each agent in estimating the global dual variable. Compared to the conventional estimation scheme [26], the proposed method equips each agent with provably more accurate estimates. In particular, the estimation error accumulated over time is proved to admit an upper bound constituted by the successive difference of an auxiliary variable whose update uses the mean of local dual variables. Then a rigorous investigation into the convergence of the auxiliary variable is carried out. Summarizing these two relations, we establish conditions for algorithm parameters such that the estimation error can be fully compensated, leading to an improved rate of convergence O(1/t). • Second, we propose an accelerated DDA (ADDA) algorithm. Different from DDA, each agent employs a firstorder dynamic average consensus protocol to estimate the mean of local gradients and accumulates the estimate over time to generate a local dual variable. By solving the convex conjugate of a 1-strongly convex function over this local dual variable, each agent produces a primal variable and uses it to construct another two sequences of primal variables in an iterative manner based on the extrapolation technique in [35] and the average consensus protocol. The rate of convergence is proved
+to be O(1) 1 t 2 + 1 t(1−β) 2 ,
+where β denotes the second largest singular value of the mixing matrix. Notably, the condition for the algorithmic parameter to ensure convergence does not rely on the mixing matrix. Establishing such a condition that is independent on the mixing matrix offers the appealing advantage of convenient verification in practical applications. • Finally, the proposed algorithms are tested and compared with a few methods in the literature on decentralized LASSO problems characterized by synthetic and real datasets. The comparison results demonstrate the efficiency of the proposed methods.
+
+Notation: We use R and R n to denote the set of reals and the n-dimensional Euclidean space, respectively. Given a real number a, we denote by a the ceiling function that maps a to the least integer greater than or equal to a. Given a vector x ∈ R n , x denotes its 2-norm. Given a matrix P ∈ R n×n , its spectral radius is denoted by ρ(P ). Its eigenvalues and singular values are denoted by λ 1 (P ) ≥ λ 2 (P ) ≥ · · · ≥ λ n (P ) and σ 1 (P ) ≥ σ 2 (P ) ≥ · · · ≥ σ n (P ), respectively.
+
+
+II. PRELIMINARIES
+
+
+A. Basic Setup
+
+We consider the finite-sum optimization problem (1), in which X is a convex and compact set, and f i satisfies the following assumptions for all i = 1, . . . , n:
+Assumption 1. i) f i is continuously differentiable on X .
+ii) f i is convex on X , i.e., for any x, y ∈ X ,
+f i (x) − f i (y) − ∇f i (y), x − y ≥ 0.(2)
+iii) ∇f i is Lipschitz continuous on X with a constant L > 0, i.e., for any x, y ∈ X ,
+∇f i (x) − ∇f i (y) ≤ L x − y .(3)
+A direct consequence of Assumption 1(iii) is
+f i (x)−f i (y)− ∇f i (y), x−y ≤ L 2 x−y 2 , ∀x, y ∈ X . (4)
+The above assumptions are standard in the study of decentralized algorithms for convex optimization problems. Throughout the paper, we denote by x * an optimal solution of Problem (1).
+
+
+B. Communication Network
+
+We consider solving Problem (1) in a decentralized fashion, that is, a pair of agents can exchange information only if they are connected in the communication network. To describe the network topology, an undirected graph G = {V, E} is used, where V = {1, · · · , n} denotes the set of n agents and E ⊆ V × V represents the set of bidirectional channels, i.e., (i, j) ∈ E indicates that nodes i and j can send information to each other. Agent j is said to be a neighbor of i if there exists a link between them, and the set of i's neighbors is denoted by N i = {j ∈ V|(j, i) ∈ E}. For every pair (i, j) ∈ E, a positive weight p ij > 0 is assigned to i and j to weigh the information received from each other. Otherwise p ij = 0 is considered. For the convergence of the algorithm, we make the following assumption for P :
+= [p ij ] ∈ [0, 1] n×n . Assumption 2. i) P 1 = 1 and 1 T P = 1 T , where 1
+denotes the all-one vector of dimension n. ii) P has a strictly positive diagonal. i.e., p ii > 0.
+
+Assumption 2 implies that σ 2 (P ) < 1 [28]. Given a connected network, the constant edge weights and the Metropolis-Hastings algorithm [36] can be used to construct a weight matrix P fulfilling Assumption 2.
+
+
+C. Centralized Dual Averaging
+
+Our algorithms are based on the dual averaging methods [31]. Before introducing them, we state the following definition.
+
+Def inition 1. A differentiable function ψ is strongly convex with modulus µ > 0 on X , if
+ψ(x) − ψ(y) − ∇ψ(y), x − y ≥ µ 2 x − y 2 , ∀x, y ∈ X .
+Let d be a strongly convex and differentiable function with modulus 1 on X such that
+x (0) = argmin x∈X d(x) and d(x (0) ) = 0.(5)
+To meet the condition in (5) for any x (0) ∈ X , one can choose
+d(x) =d(x) −d(x (0) ) − ∇d(x (0) ), x − x (0) ,
+whered is any strongly convex function with modulus 1, e.g., d(x) = x 2 /2. The convex conjugate of d is defined as
+∇d * (·) = argmax x∈X { ·, x − d(x)} .
+As a corollary of Danskin's Theorem, we have the following result [35].
+Lemma 1.
+For all x, y ∈ R m , we have
+∇d * (x) − ∇d * (y) ≤ x − y .(6)
+Dual averaging. The dual averaging method can be applied to solving Problem (1) in a centralized manner. Starting with x (0) , it generates a sequence of variables {x (t) } t≥0 iteratively according to
+x (t) = ∇d * −a t z (t)(7)
+where
+z (t) = t−1 τ =0 ∇f (x (τ ) )(8)
+and {a t } t≥0 is a sequence of positive parameters that determines the rate of convergence.
+Letx (t) = t −1 t−1 τ =0 x (τ ) i . It is proved in [31] that f (x (t) ) − f (x * ) ≤ O(1/ √ t) when a t = Θ(1/ √ t)
+, that is, with order exactly 1/ √ t. When the objective function is convex and smooth, a constant a t = a can be used to achieve an ergodic O(1/t) rate of convergence in terms of objective error [37].
+
+Accelerated dual averaging. To speed up the rate of convergence, an accelerated dual averaging algorithm is developed in [35]. In particular, the variables are updated according to
+u (t) = A t−1 A t v (t−1) + a t A t w (t−1) (9a) v (t) = A t−1 A t v (t−1) + a t A t w (t) ,(9b)
+where a t := a(t + 1) for some a > 0, A t = t τ =1 a τ and
+w (t) = ∇d * − t τ =1 a τ ∇f (u (τ ) ) .(10)
+Note that t ≥ 2 is considered for the above iteration, and the variables are initialized with
+u (1) = w (0) = x (0) , v (1) = w (1) .
+For convex and smooth objective functions, it is proved that
+f (v (t) ) − f (x * ) ≤ O(1/t 2 ) [35].
+
+III. ALGORITHMS AND CONVERGENCE RESULTS
+
+In this section, we develop two new DDA algorithms that are provably more efficient than existing DDA-type algorithms.
+
+
+A. Decentralized Dual Averaging
+
+To solve Problem (1) in a decentralized manner, we propose a novel DDA algorithm. In particular, we employ the following dynamic average consensus protocol to estimate z (t) in (8):
+z (t) i = n j=1 p ij z (t−1) j + s (t−1) j , (11a) s (t) i = n j=1 p ij s (t−1) j + ∇f i (x (t) i ) − ∇f i (x (t−1) i ),(11b)
+where
+z (t) i is a local estimate of z (t) generated by agent i, s (t) i is a proxy of 1 n n i=1 ∇f i (x (t)
+i ) which aims to reduce the consensus error among variables {z
+(t) i : i = 1, · · · , n} t≥0 .
+
+Algorithm 1 Decentralized Dual Averaging
+
+Input: a > 0, x (0) ∈ X and a strongly convex function d with modulus 1 such that (5) holds Initialize:
+x (0) i = x (0) , z (0) i = 0, and s (0) i = ∇f i (x (0) ) for all i = 1, . . . , n for t = 1, 2, · · · do
+In parallel (task for agent i, i = 1, . . . , n) collect z
+(t−1) j and s (t−1) j from all agents j ∈ N i update z (t) i and s (t) i by (11) compute x (t) i by (12) broadcast z (t) i and s (t)
+i to all agents j ∈ N i end for
+
+Using it, each agent i performs a local computation step to update its estimate of x (t) :
+x (t) i = ∇d * −az (t) i .(12)
+The overall algorithm is summarized in Algorithm 1. Before proceeding, we make the following remarks on Algorithm 1.
+
+i) Subproblem solvability. Similar to centralized dual averaging methods, we assume the subproblem in (12) can be solved easily. For general problems, we can choose d(x) = x − x (0) 2 /2 such that the subproblem (12) reduces to computing the projection of variables onto X . If X is simple enough, e.g., the simplex or l 1 -norm ball, a closed-form solution exists.
+
+ii) Comparison with existing DDA algorithms. In existing DDA algorithms [26], [28], [29], each agent estimates z (t) in the following way
+z (t) i = n j=1 p ij z (t−1) j + ∇f i (x (t) i ).(13)
+For this scheme, it is proved that the consensus error among variables {z (t) i : i = 1, · · · , n} t≥0 admits a constant upper bound [26], which necessitates the use of a monotonically decreasing sequence {a t } t≥0 for convergence. However, decreasing a t slows down the convergence significantly; the rate of convergence in [26], [29] is reported to be O(1/ √ t). To speed up the convergence, we develop the consensus protocol in (11), which is inspired by the high-order consensus scheme in [6]. Thanks to it, we are able to prove that the deviation among variables {z (t) i : i = 1, · · · , n} t≥0 asymptotically vanishes as time evolves. Therefore, the parameter in (12) can be set constant, i.e, a t = a > 0, which is key to obtaining the improved rates.
+
+iii) Comparison with DGD algorithms. In existing DGD, a so-called gradient-tracking process similar to (11) is usually observed:
+x (t) i = n j=1 p ij x (t−1) j + as (t−1) j , s (t) i = n j=1 p ij s (t−1) j + ∇f i (x (t) i ) − ∇f i (x (t−1) i ),(14)
+where a represents the step size. The proposed scheme (11) differs from (14) in step (11a). With such a deliberate design and another local dual averaging step in (12), Algorithm 1 solves constrained problems with convergence rate guarantee. To compare DDA with existing algorithms applicable to solving Problem (1), we recall the PG-EXTRA algorithm [21]:
+x (t+1) i = n j=1 p ij x (t) j +x (t) i − n j=1p ij x (t−1) j − a ∇f i (x (t) i ) − ∇f i (x (t−1) i ) x (t+1) i = argmin x∈X x −x (t+1) i 2 (15)
+where a represents the step size andp : i = 1, · · · , n} at time t + 1 that are obtained via a projection operator at time t. In contrast, DDA manages to agree on {z (t) i : i = 1, · · · , n}, which essentially decouples the consensus-seeking procedure from projection. After using the smoothness assumption in (3) (11b), the iteration in (11) can be kept almost linear, which greatly facilitates the rate analysis; see the proof of Lemma 5 for more details.
+to bound ∇f i (x (t) i ) − ∇f i (x (t−1) i ) in
+Next, we present the convergence result of Algorithm 1. Inspired by [26], we first establish the convergence property of an auxiliary sequence {y (t) } t≥0 , which is instrumental in proving the convergence of {x (t) i : i = 1, · · · , n} t≥0 . In particular, the update of y (t) obeys
+y (t) = ∇d * −az (t) ,(16)
+where the initial vector y (0) = x (0) and
+z (t) = 1 n n i=1 z (t)
+i . To proceed, we introduce the following 2 × 2 matrix:
+M = β β aL(β + 1) β(aL + 1)(17)
+where β = σ 2 (P ), and let ρ(M) be the spectral radius of M.
+
+T heorem 1. Suppose that Assumptions 1 and 2 are satisfied. If the constant a in Algorithm 1 satisfies
+1 a > 2L · max β (1 − β) 2 , 1 + 8 9 (1 − (ρ(M)) 2 ) ,(18)
+then, for all t ≥ 1, it holds that
+f (ỹ (t) ) − f (x * ) ≤ C at ,(19)whereỹ (t) = t −1 t τ =1 y (τ ) with y (τ ) defined in (16), C := d(x * ) + 8aπ 2 9nL (1 − (ρ(M)) 2 )
+,
+and π 2 = n i=1 ∇f i (x (0) ) − 1 n n j=1 ∇f j (x (0) ) 2 .(20)
+In addition, for all t ≥ 1 and i = 1, · · · , n, we have
+x (t) i −ỹ (t) i 2 ≤ D t (21) wherex (t) i = t −1 t τ =1 x (τ ) i , D := 8nC 9γ (1 − ρ(M)) 2 + 8π 2 9L 2 (1 − (ρ(M)) 2 )
+,
+and γ := 1 2 − aL − 8aL 9 (1 − (ρ(M)) 2 ) .(22)
+Proof. The proof is postponed to Appendix A.
+
+To obtain a more explicit version of (18), we identify the eigenvalues of M as λ 1 = (ξ 1 + ξ 2 )/2 and λ 2 = (ξ 1 − ξ 2 )/2, where
+ξ 1 = β(2 + aL) > 0, ξ 2 = a 2 β 2 L 2 + 4aLβ(β + 1) > 0.
+(23) Thus, we have |λ 1 | > |λ 2 | and ρ(M) = λ 1 > 0. By routine calculation, we can verify that ρ(M) and ν(a) :=
+8 9(1−(ρ(M)) 2 ) monotonically increase with a. Due to ν( 1 2L ) < 1 1 − 2.5β+ √ 2.25β 2 +2β 2 2 ,
+we have that as long as a satisfies
+1 a > 2L · max            β (1 − β) 2 , 1 + 1 1 − 2.5β+ √ 2.25β 2 +2β 2 2            ,(24)
+then a also satisfies (18). Based on (24), we have
+a = Θ (1 − β) 2 L ,
+whose size is comparable to the DGD algorithms [8], [38], [39] in the literature. Next, we consider an unconstrained version of Problem (1), i.e., X = R m , where the rate of convergence is stated for
+f (x (t) i ) − f (x * ). Corollary 1. Suppose the premise of Theorem 1 holds. If X = R m in (1) and d(x) = x 2 /2 in (12), and 1 a > 2L · max β (1 − β) 2 , 1 + 8 3 (1 − (ρ(M)) 2 ) ,(25)
+then
+f (x (t) i ) − f (x * ) ≤ 1 t n 2a x * 2 + 8π 2 3L (1 − (ρ(M)) 2 )(26)wherex (t) i = t −1 t τ =1 x (τ ) i
+and π 2 is defined in (20).
+
+Proof. The proof is given in Appendix B.
+
+
+Algorithm 2 Accelerated Decentralized Dual Averaging
+
+Input: a > 0, x (0) ∈ X and a strongly convex function d with modulus 1 such that (5) holds
+Initialize: A 1 = a 1 = 2a, u (1) i = w (0) i = x (0) , q (1) i = ∇f i (x (0) ), and v (1) i = w (1) i
+for all i = 1, . . . , n for t = 2, 3, · · · do set a t = a t−1 + a and A t = A t−1 + a t In parallel (task for agent i, i = 1, . . . , n) collect v
+(t−1) j and q (t−1) j from all agents j ∈ N i update u (t) i by (27a) update q (t) i by (29) compute w (t) i by (28) update v (t) i by (27b) broadcast v (t) i and q (t) i
+to all agents j ∈ N i end for
+
+
+B. Accelerated Decentralized Dual Averaging
+
+To further speed up the convergence, we develop a decentralized variant of the accelerated dual averaging method in (9) and (10). Different from Algorithm 1, we consider building consensus among variables {v (t) i , i = 1, · · · , n} and propose the following iteration rule:
+u (t) i = A t−1 A t n j=1 p ij v (t−1) j + a t A t w (t−1) i (27a) v (t) i = A t−1 A t n j=1 p ij v (t−1) j + a t A t w (t) i ,(27b)
+where
+w (t) i = ∇d * − t τ =1 a τ q (τ ) i ,(28)
+and
+q (t) i = n j=1 p ij q (t−1) j + ∇f i (u (t) i ) − ∇f i (u (t−1) i ).(29)
+The overall algorithm is summarized in Algorithm 2. It is worth to mention that agents in Algorithm 2 consume the same communication resources as Algorithm 1 to achieve acceleration.
+
+Assumption 3. For the problem in (1), the constraint set X is bounded with the following diameter:
+G = max x,y∈X x − y .
+T heorem 2. For Algorithm 2, if Assumptions 1, 2, and 3 are satisfied, and
+a ≤ 1 6L ,(30)
+then, for all t ≥ 1, it holds that
+f (v (t) ) − f (x * ) ≤ d(x * ) A t + t A t 2G(LC p + C g ) √ n + 6LC 2 p n ,(31)
+where
+C p := 3 1 − β √ nG and C g := 2L 3 1 − β √ nG + C p 1 − β .
+In addition, for all t ≥ 1 and i = 1, · · · , n, we have
+v (t) i − v (t) 2 ≤ 2aC p A t .(32)
+Proof. The proof is postponed to Appendix C.
+
+For Algorithm 2 and Theorem 2, the following remarks are in order.
+
+i) Comparison with existing accelerated algorithms. Accelerated methods for decentralized constrained optimization are rarely reported in the literature. Recently, the authors in [22] developed the APM algorithm, where the iteration rule reads
+y (t) i =x (t) i + θ t (1 − θ t−1 ) θ t−1 x (t) i − x (t−1) i (33a) s (t) i =∇f i (y (t) i ) + β 0 θ t n i=1 p ij y (t) i − y (t) j (33b) x (t+1) i = arg min x∈X x − y (t) i + s (t) i L + β 0 /θ t 2(33c)
+where β 0 = L/ 1 − λ 2 (P ) and θ k is a decreasing parameter
+satisfying θ k = θ k−1 /(1 + θ k−1 ) with θ 0 = 1. Lettingŝ (t) i = θ k s (t)
+i , we can equivalently rewrite (33b) and (33c) aŝ
+s (t) i =θ t ∇f i (y (t) i ) + β 0 n i=1 p ij y (t) i − y (t) j x (t+1) i = arg min x∈X x − y (t) i +ŝ (t) i Lθ t + β 0 2 ,
+from which we can see that new gradients are assigned with decreasing weights, whereas increasing weights are used for ADDA in (28). The reason for such different choices of parameters may be two-fold. First, parameter choices in (centralized) primal gradient descent and dual averaging methods are intrinsically different. Second, APM gradually increases the penalty parameter 1/θ t in order to enforce consensus, which essentially dilutes the weight for gradients, as shown above. We will show in simulation that decreasing weights over time slows down convergence. There are also a few other accelerated decentralized methods such as [9], [14], however they do not apply to constrained problems.
+
+ii) Discussion about optimality. For ADDA, the rate of convergence is proved to be
+O(1) 1 t 2 + 1 t(1 − β) 2 .
+In light of the lower bound in [14], it is not optimal in terms of the dependence on β. In particular, the dominant term of the error in O(1/(t(1 − β) 2 )) becomes larger as β grows, i.e., the network becomes more sparsely connected. This is mainly because we consider a one-consensus-one-gradient update in the algorithm. However, extending the algorithm in [14] to handle constraints may require further investigation. In the simulation section, we demonstrate the superiority of ADDA over existing decentralized constrained optimization algorithms.
+
+
+IV. SIMULATION
+
+In this section, we verify the proposed methods by applying them to solve the following constrained LASSO problems:
+min x∈R m f (x) = 1 2n n i=1 M i x − c i 2 , s.t. x 1 ≤ R
+where M i ∈ R pi×m , c i ∈ R pi , and R is a constant parameter that defines the constraint. In the simulation, each agent i has access to a local data tuple (y i , A i ) and R. Two different problem instances characterized by both real and synthetic datasets are considered.
+
+
+A. Case I: Real Dataset
+
+In this setting, we use sparco7 [17], [40] to define the LASSO problem, and consider a cycle graph and a complete graph of n = 50 nodes. The corresponding weight matrix P is determined by following the Metropolis-Hastings rule [36]. Each local measurement matrix M i ∈ R 12×2560 , and the local corrupted measurement c i ∈ R 12 . The constraint parameter is set as R = 1.1 · x g 1 , where x g with x g 0 = 20 denotes the unknown variable to be recovered via solving LASSO. In this case, the simulation experiments were performed using MATLAB R2020b.
+
+For comparison, the PG-EXTRA method in [21] and the APM method in [27] are simulated. For their algorithmic parameters, the step size for PG-EXTRA is set as 10 −4 , and the parameters for APM are set as L = 250 and β 0 = L/ 1 − λ 2 (P ). For DDA and ADDA in this work, we use a = 5 · 10 −4 and a t = (t + 1) · 10 −4 , respectively, and x 2 /2 as the prox-function. The projection onto an l 1 ball is carried out via the algorithm in [41]. All the methods are initialized with x (0) i = 0, ∀i ∈ V. The performance of four algorithms are displayed in Figs. 1 and 2. In Fig. 1, the performance is evaluated in terms of the objective error f ( 1
+n n i=1 x (t) i ) − f (x * )
+, where x * is identified using CVX [42]. It demonstrates that the DDA method outperforms other methods when the graph is a cycle. As the graph becomes denser, i.e, complete graph, the convergence of all algorithms becomes faster. Among them, the ADDA method demonstrates the most significant improvement. This is in line with Theorem 2, where the network connectivity impacts the convergence error in O(1/t) as opposed to O(1/t 2 ). In Fig. 2, we compare the trajectories of consensus error, i.e.,
+n i=1 x (t) i − n −1 n j=1 x (t) j
+2 , by all methods. When the graph is a cycle, the APM and PG-EXTRA have smaller consensus error than the developed methods, mainly because they build consensus directly among variables {x (t) i : i = 1, · · · , n} t≥0 . When the graph is complete, the consensus error by the proposed DDA method vanishes because of the conservation property established in Lemma 3 and the complete graph structure.  
+
+
+B. Case II: Synthetic Dataset
+
+For the synthetic dataset, the parameters are set as n = 8, m = 30000, p i = 2000, ∀i ∈ V, and the data is generated in the following way. First, each local measurement matrix M i is randomly generated where each entry follows the normal distribution N (0, 1). Next, each entry of the sparse vector x g to be recovered via LASSO is randomly generated from the normal distribution N (0, 1) with x g 0 = 1500. Then the corrupted measurement c i is produced based on
+c i = M i x g + b i
+where b i represents the Gaussian noise with zero mean and variance 0.01. The constraint parameter is set as R = 1.1 · x g 1 . For this setting, we employed the message passing interface (MPI) in Python 3.7.3 to simulate a network of 8 nodes, where each node i is connected to a subset of nodes {1 + i mod 8, 1 + (i + 3) mod 8, 1 + (i + 6) mod 8}. For comparison, the proposed methods are compared to their centralized counterparts. The parameters for dual averaging and accelerated dual averaging are set as a = 1/(3 · 10 5 ) and a t = a(t + 1), respectively. Similarly, the function x 2 /2 is used as a prox-function, and the algorithms are initialized with x
+(0) i = 0, ∀i ∈ V.
+The performance of the developed algorithms and their centralized counterparts is illustrated in Fig. 3. In particular, the performance is evaluated in terms of objective function value versus computing time. It demonstrates that the proposed methods outperform the corresponding centralized algorithms in the sense that the decentralized algorithms consume less computing time to reach the same degree of accuracy than their centralized counterparts.
+
+
+V. CONCLUSION
+
+In this work, we have designed two DDA algorithms for solving decentralized constrained optimization problems with improved rates of convergence. In the first one, a novel  second-order dynamic average consensus scheme is developed, with which each agent locally generates a more accurate estimate of the dual variable than existing methods under mild assumptions. This property enables each agent to use large constant weight in the local dual average step, and therefore improves the rate of convergence. In the second algorithm, each agent retains the conventional first-order dynamic average consensus method to estimate the average of local gradients. Alternatively, the extrapolation technique together with the average consensus protocol is used to achieve acceleration over a decentralized network. This work opens several avenues for future research. In this work, we focus on the basic setting with time-invariant bidirectional communication networks. We believe that the consensus-based dual averaging framework can be extended to tackle decentralized constrained optimization in complex networks, e.g., directed networks [43] and time-varying net- works [38]. Furthermore, we expect that our approach, as demonstrated by its centralized counterpart, i.e., follow-theregularized-leader, may deliver superb performance in the online optimization setting [44].
+
+APPENDIX A ROADMAP FOR THE PROOFS Before proceeding to the proofs, we present Fig. 4 to illustrate how they relate to each other.
+
+
+APPENDIX B PROOF OF THEOREM 1 A. Preliminaries
+
+We introduce several notations to facilitate the presentation of the proof. Let
+x (t) =     x (t) 1 . . . x (t) n     , z (t) =     z (t) 1 . . . z (t) n     , s (t) =     s (t) 1 . . . s (t) n     ,y (t) =    y (t)
+. . .
+y (t)    , ∇ (t) =     ∇f 1 (x (t) 1 ) . . . ∇f n (x (t) n )     , g (t) = 1 n n i=1 ∇f i (x (t) i ), s (t) = 1 n n i=1 s (t) i , z (t) = 1 n n i=1 z (t) i .
+Using these notations, we express (11) in the following compact form
+z (t) = P z (t−1) + s (t−1) ,(34a)s (t) = Ps (t−1) + ∇ (t) − ∇ (t−1) ,(34b)
+where P = P ⊗ I. Before proceeding to the proof of Theorem 1, we present several technical lemmas. Recall a lemma from [39].
+
+Lemma 2. Suppose that {ε (t) } t≥0 and { (t) } t≥0 are two sequences of positive scalars such that for all t ≥ 0,
+ε (t) ≤ δ t c + t−1 τ =0 δ t−τ −1 (τ )
+where δ ∈ (0, 1) and c ≥ 0 is a constant. Then, the following holds for all t ≥ 1:
+t τ =1 (ε (τ ) ) 2 ≤ 2 (1 − δ) 2 t−1 τ =0 ( (τ ) ) 2 + 2c 2 1 − δ 2 .
+Lemma 3. For Algorithm 1, we have that for any t ≥ 0
+s (t) = g (t) , z (t+1) = t τ =0 s (τ ) .(35)
+Proof of Lemma 3. We prove by induction. For t = 0, we readily have (35) satisfied since s (0) i = ∇f i (x (0) ) and z 0 i = 0 for all i. Suppose that (35) holds for t − 1. Using (34b),
+(A ⊗ B)(C ⊗ D) = (AC ⊗ BD),(36)
+and the double stochasticity of P , we have
+s (t) = 1 n (1 T ⊗ I) Ps (t−1) + ∇ (t) − ∇ (t−1) = 1 n (1 T ⊗ I) (P ⊗ I)s (t−1) + ∇ (t) − ∇ (t−1) = 1 n (1 T P ) ⊗ I s (t−1) + g (t) − g (t−1) = s (t−1) + g (t) − g (t−1) = g (t) .
+Upon using a similar argument for z (t) , we have
+z (t+1) = 1 n (1 T ⊗ I)(P ⊗ I) z (t) + s (t) = z (t) + s (t) = t τ =0 s (τ ) .
+Therefore, (35) holds for all t. Proof of Lemma 4. Recall the two real eigenvalues of M in (23). Since ξ 1 > 0 and ξ 2 > 0, we have ρ(M) = |λ 1 | > |λ 2 |. Also, one can verify that ρ(M) monotonically increases with a. The solution to the equation |λ 1 | = 1 can be identified as a = (1 − β) 2 /(2βL). Therefore, we conclude that ρ(M) < 1 as long as (18) is satisfied.
+
+The following lemma establishes the relation between sequences {x (t) i } t≥0 and {y (t) } t≥0 . Lemma 5. Suppose that Assumptions 1, 2 hold and the parameter a in Algorithm 1 satisfies (18). Then, for all t ≥ 0, it holds that
+t τ =1 x (τ ) − y (τ ) 2 ≤ 8 9 (1 − ρ(M)) 2 t−1 τ =0 y (τ +1) − y (τ ) 2 + 8π 2 9L 2 (1 − (ρ(M)) 2 )(37)
+where
+π 2 = n i=1 ∇f i (x (0) ) − g (0) 2 .
+Proof of Lemma 5. From Lemma 3, we have
+z (τ ) = z (τ −1) + g (τ −1)
+.
+Defines (t) = s (t) − 1 ⊗ s (t) ,z (t) = z (t) − 1 ⊗ z (t) .(38)
+These in conjunction with (34a) lead tõ
+z (τ ) = Pz (τ −1) − 1 ⊗ z (τ −1) + Ps (τ −1) − 1 ⊗ s (τ −1) .(39)
+Because of 1 ⊗z (τ −1) = (1 ⊗ I)z (τ −1) and (36), we have
+1 ⊗z (τ −1) = 1 n (1 ⊗ I)(1 T ⊗ I)z (τ −1) = 11 T n ⊗ I z (τ −1) .
+In addition, we have
+Pz (τ −1) − 1 ⊗ z (τ −1) = (P ⊗ I)z (τ −1) − 11 T n ⊗ I z (τ −1) = P − 11 T n ⊗ I z (τ −1) = P − 11 T n ⊗ I z (τ −1) + (1 ⊗ I)z (τ −1) = P − 11 T n ⊗ I z (τ −1) + ((P 1 − 1) ⊗ I)z (τ −1) = P − 11 T n ⊗ I z (τ −1) ,(40)
+where the last equality is due to the double stochasticity of P . Using the same arguments as above for Ps (τ −1) − 1 ⊗ s (τ −1) and Assumption 2, we have
+z (τ ) ≤ Pz (τ −1) − 1 ⊗ z (τ −1) + Ps (τ −1) − 1 ⊗ s (τ −1) ≤ β z (τ −1) + β s (τ −1) .(41)
+Similarly, from Lemma 3, we obtain
+s (τ ) = Ps (τ −1) − (1 ⊗ I) s (τ −1) + ∇ (τ ) − ∇ (τ −1) ≤ β s (τ −1) + ∇ (τ ) − ∇ (τ −1) ≤ β s (τ −1) + L x (τ ) − x (τ −1)(42)
+where the last inequality is due to Assumption 1. Using
+x (τ ) − x (τ −1) ≤ x (τ ) − y (τ ) + x (τ −1) − y (τ −1) + y (τ ) − y (τ −1) ,
+and Lemma 1, we obtain
+x (τ ) − x (τ −1) ≤ a z (τ ) + a z (τ −1) + y (τ ) − y (τ −1) ≤ a(β + 1) z (τ −1) + aβ s (τ −1) + y (τ ) − y (τ −1) .
+Upon substituting the above inequality into (42), we obtain s (τ ) ≤β(aL + 1) s (τ −1) + aL(β + 1) z (τ −1)
++ L y (τ ) − y (τ −1) .(43)
+By combining (41) and (43), we establish the following inequality:
+z (τ ) s (τ ) ≤ M z (τ −1) s (τ −1) + L 0 y (τ ) − y (τ −1)
+where M is defined in (17). By iterating the above inequality and using
+z (0) = 0, s (0) = n i=1 ∇f i (x (0) ) − g (0) 2 := π,
+we obtain
+z (t) s (t) ≤L t−1 τ =0 M t−τ −1 0 y (τ +1) − y (τ ) + M t 0 π .
+Recall the eigenvalues of matrix M in (23). Then an analytical form can be presented for the nth power of M (see, e.g., [45])
+M n = λ n 1 M − λ 2 I λ 1 − λ 2 − λ n 2 M − λ 1 I λ 1 − λ 2 .
+Therefore, the (1, 2)-th entry of M n can be written as
+(M n ) 12 = M 12 (λ n 1 − λ n 2 ) λ 1 − λ 2 = β(λ n 1 − λ n 2 ) λ 1 − λ 2 ≤ 2β(ρ(M)) n ξ 2 .
+Due to the assumption that 1/a > 2βL/(1 − β) 2 and β ∈ (0, 1), we have
+ξ 2 = βaL 1 + 4(β + 1) βaL > βaL 1 + 8(β + 1) (1 − β) 2 > 3βaL.
+Therefore,
+z (t) ≤ 2βL ξ 2 t−1 τ =0 (ρ(M)) t−τ −1 y (τ +1) − y (τ ) + 2β ξ 2 (ρ(M)) t π ≤ 2 3a t−1 τ =0 (ρ(M)) t−τ −1 y (τ +1) − y (τ ) + 2 3aL (ρ(M)) t π.(44)
+Using Lemma 1, we further obtain
+x (t) − y (t) ≤ a z (t) ≤ 2 3 t−1 τ =0 (ρ(M)) t−τ −1 y (τ +1) − y (τ ) + 2 3L (ρ(M)) t π.(45)
+Further using the above relation and Lemma 2, the inequality (37) follows as desired.
+
+Then, a lemma is stated for the prox-mapping.
+
+Lemma 6. Given a sequence of variables {ζ (t) } t≥0 and a positive sequence {a t } t≥0 , for {ν (t) } t≥0 generated by
+ν (t) = ∇d * − t τ =1 a τ ζ (τ ) ,
+where
+ν (0) = x (0) in (5), it holds that t τ =1 a τ ζ (τ ) , ν (τ ) − x * ≤ d(x * ) − t τ =1 1 2 ν (τ ) − ν (τ −1) 2 .(46)
+Proof of Lemma 6. Define
+m t (x) = t τ =1 a τ ζ (τ ) , x + d(x)
+where m 0 (x) = d(x). Since
+ν (τ −1) = argmin x∈X m τ −1 (x)
+and m τ −1 (x) is strongly convex with modulus 1, we have
+m τ −1 (x) − m τ −1 (ν (τ −1) ) ≥ 1 2 x − ν (τ −1) 2 , ∀x ∈ X .
+Upon taking x = ν (τ ) in the above inequality and using
+m τ (x) = m τ −1 (x) + a τ ζ (τ ) , x , we obtain 0 ≤m τ −1 (ν (τ ) ) − m τ −1 (ν (τ −1) ) − 1 2 ν (τ ) − ν (τ −1) 2 =m τ (ν (τ ) ) − a τ ζ (τ ) , ν (τ ) − m τ −1 (ν (τ −1) ) − 1 2 ν (τ ) − ν (τ −1) 2 ,
+which is equivalent to
+a τ ζ (τ ) , ν (τ ) ≤m τ (ν (τ ) ) − m τ −1 (ν (τ −1) ) − 1 2 ν (τ ) − ν (τ −1) 2 .
+Iterating the above equation from τ = 1 to τ = t yields
+t τ =1 a τ ζ (τ ) , ν (τ ) ≤m t (ν (t) ) − m 0 (ν (0) ) − t τ =1 1 2 ν (τ ) − ν (τ −1) 2 =m t (ν (t) ) − t τ =1 1 2 ν (τ ) − ν (τ −1) 2(47)
+We turn to consider
+t τ =1 a τ ζ (τ ) , −x * ≤ max x∈X t τ =1 a τ ζ (τ ) , −x − d(x) + d(x * ) = − min x∈X t τ =1 a τ ζ (τ ) , x + d(x) + d(x * ) = −m t (ν (t) ) + d(x * ),
+which together with (47) leads to the inequality in (46), thereby concluding the proof.
+
+B. Proof of Theorem 1
+
+Proof of Theorem 1. For all τ ≥ 1, we have
+1 n n i=1 a f i (y (τ ) ) − f i (x * ) ≤ 1 n n i=1 a f i (x (τ −1) i ) − f i (x * ) + L 2 y (τ ) − x (τ −1) i 2 + ∇f i (x (τ −1) i ), y (τ ) − x (τ −1) i ≤ 1 n n i=1 a L 2 y (τ ) − x (τ −1) i 2 + ∇f i (x (τ −1) i ), y (τ ) − x * = 1 n n i=1 a L 2 y (τ ) − x (τ −1) i 2 + a g (τ −1) , y (τ ) − x * ,(48)
+where the two inequalities are due to Assumption 1. By iterating (48) from τ = 1 to τ = t and using Lemma 6 (a τ = a, ζ (τ ) = g (τ −1) , and ν (τ ) = y (τ ) ), we obtain
+t τ =1 a f (y (τ ) ) − f (x * ) ≤ 1 n t τ =1 n i=1 a L 2 y (τ ) − x (τ −1) i 2 − 1 2 t τ =1 y (τ ) − y (τ −1) 2 + d(x * ). = aL 2n t τ =1 y (τ ) − x (τ −1) 2 − 1 2 t τ =1 y (τ ) − y (τ −1) 2 + d(x * ).
+Then we use the inequality
+y (τ ) − x (τ −1) 2 ≤ 2 y (τ ) − y (τ −1) 2 + 2 y (τ −1) − x (τ −1) 2
+and the convexity of f to get
+at f (ỹ (t) ) − f (x * ) ≤ 1 n t τ =1 aL − 1 2 y (τ ) − y (τ −1) 2 + aL n t τ =1 x (τ −1) − y (τ −1) 2 + d(x * ).
+Upon using Lemma 5, one has
+at f (ỹ (t) ) − f (x * ) + γ n t τ =1 y (τ ) − y (τ −1) 2 ≤ d(x * ) + 8aπ 2 9nL (1 − (ρ(M)) 2 ) = C,(49)
+where γ > 0 is defined in (22). Therefore we have (19) as desired.
+From (49) and f (ỹ (t) ) − f (x * ) ≥ 0, we have t τ =1 y (τ ) − y (τ −1) 2 ≤ nC γ .
+By using the above inequality, the convexity of · 2 , Jensen's Inequality, and Lemma 5, we arrive at
+t x (t) −ỹ (t) 2 ≤ t τ =1 x (τ ) − y (τ ) 2 ≤ 8 9 (1 − ρ(M)) 2 t−1 τ =0 y (τ +1) − y (τ ) 2 + 8π 2 9L 2 (1 − (ρ(M)) 2 ) ≤ 8nC 9γ (1 − ρ(M)) 2 + 8π 2 9L 2 (1 − (ρ(M)) 2 ) = D,
+which implies (21) as desired.
+
+
+APPENDIX C PROOF OF COROLLARY 1
+
+Proof of Corollary 1. We consider
+f (x (τ ) i ) − f (y (τ ) ) ≤ 1 n n j=1 f j (x (τ ) i ) − ∇f j (x (τ ) j ), y (τ ) − x (τ ) j − f j (x (τ ) j ) ≤ 1 n n j=1 ∇f j (x (τ ) j ), x (τ ) i − x (τ ) j − ∇f j (x (τ ) j ), y (τ ) − x (τ ) j + L 2 x (τ ) i − y (τ ) + y (τ ) − x (τ ) j 2 = 1 n n j=1 ∇f j (x (τ ) j ), x (τ ) i − y (τ ) + L x (τ ) i − y (τ ) 2 + L y (τ ) − x (τ ) j 2 = g (τ ) , x (τ ) i − y (τ ) + L x (τ ) i − y (τ ) 2 + L n y (τ ) − x (τ ) 2 ,(50)
+where the two inequalities follow from Assumption 1. When X = R m , the closed-form solutions for (12) and (16) can be identified as
+x (τ ) i = −az (τ ) i , y (τ ) = −az (τ ) , implying that y (τ ) = 1 n n i=1 x (t)
+i . Upon summing up (50) from i = 1 to i = n, we obtain
+n i=1 f (x (τ ) i ) − f (y (τ ) ) ≤ 2L y (τ ) − x (τ ) 2 .(51)
+Then, we iterate (51) from τ = 1 to τ = t and use the convexity of f to get
+t n i=1 f (x (t) i ) − f (y (τ ) ) ≤ t τ =1 n i=1 f (x (τ ) i ) − f (y (τ ) ) ≤ 2L t τ =1 y (τ ) − x (τ ) 2 . (52) wherex (t) i = t −1 t τ =1 x (τ )
+i . Using Lemma 5, we obtain
+t n i=1 f (x (t) i ) − f (y (τ ) ) ≤ 16L 9 (1 − ρ(M)) 2 t−1 τ =0 y (τ +1) − y (τ ) 2 + 16π 2 9L (1 − (ρ(M)) 2 ) .(53)
+Recall (49), we have
+at f (ỹ (t) ) − f (x * ) ≤ d(x * ) + 8aπ 2 9nL (1 − (ρ(M)) 2 ) − 1 2 − aL − 8aL 9 (1 − (ρ(M)) 2 ) t τ =1 y (τ ) − y (τ −1) 2 .(54)
+By multiplying n/a > 0 on both sides of (54) and adding the resultant inequality to (53), we get
+t f (x (t) i ) − f (x * ) ≤ t n i=1 f (x (t) i ) − f (x * ) ≤ − 1 2a − L − 8L 3 (1 − ρ(M)) 2 t τ =1 y (τ ) − y (τ −1) 2 + n 2a x * 2 + 8π 2 3L (1 − (ρ(M)) 2 ) .(55)
+Upon using the condition in (25), we arrive at (26) as desired.
+
+
+APPENDIX D PROOF OF THEOREM 2 A. Preliminaries
+
+For Algorithm 2, we define
+u (t) =     u (t) 1 . . . u (t) n     , v (t) =     v (t) 1 . . . v (t) n     , w (t) =     w (t) 1 . . . w (t) n     , q (t) =     q (t) 1 . . . q (t) n     ,∇ (t) =     ∇f 1 (u (t) 1 ) . . . ∇f n (u (t) n )     , u (t) = 1 n n i=1 u (t) i , v (t) = 1 n n i=1 v (t) i , w (t) = 1 n n i=1 w (t) i , g (t) = 1 n n i=1 ∇f i (u (t) i ), q t = 1 n n i=1 q (t) i ,w (t) = w (t) −1⊗w (t) ,u (t) = u (t) −1⊗u (t) ,ṽ (t) = v (t) −1⊗v (t) ,q (t) = q (t) −1⊗q (t) .
+Based on these notations, we present the steps in (27) and (29) in the following compact form
+u (t) = A t−1 A t Pv (t−1) + a t A t w (t−1) , (56a) v (t) = A t−1 A t Pv (t−1) + a t A t w (t) ,(56b)q (t) = Pq (t−1) +∇ (t) −∇ (t−1) ,(56c)
+where P = P ⊗ I. According to (27), we have
+u (t) = A t−1 A t v (t−1) + a t A t w (t−1) , (57a) v (t) = A t−1 A t v (t−1) + a t A t w (t) .(57b)
+Before proving Theorem 2, we present Lemma 7 that establishes upper bounds for consensus error vectorsũ (t) and v (t) .
+
+Lemma 7. For Algorithm 2, if Assumptions 1, 2, and 3 are satisfied, then
+ṽ (t) ≤ a t A t C p , ũ (t) ≤ a t A t C p (58) for all t ≥ 1, where C p = 3 1−β √
+nG, and β = σ 2 (P ).
+
+Proof of Lemma 7. Since both u
+(t) i , v (t)
+i , i = 1, · · · , n, u (t) and v (t) are within the constraint set, we readily have
+u (t) − 1 ⊗ u (t) ≤ √ nG and v (t) − 1 ⊗ v (t) ≤ √ nG
+by Assumption 3. Upon using
+a t A t = 2(t + 1) t(t + 3) ≥ 1 t , ∀t ≥ 1 and the definition of C p = 3 1−β √
+nG, we have that (58) holds for 1 ≤ t < 3 1−β . When t ≥ 3 1−β , we prove by an induction argument. Suppose that (58) holds for some t ≥ 3 1−β . Next, we examine the upper bounds for ṽ (t+1) and ũ (t+1) , respectively.
+
+i) Upper bound for ṽ (t+1) . Using
+Pv (t) − 1 ⊗ v (t) = P − 11 T n ⊗ I ṽ (t) ,
+(56b) and (57b), we obtaiñ
+v (t+1) = A t A t+1 P − 11 T n ⊗ I ṽ (t) + a t+1 A t+1w (t+1) .
+Evaluating the norm of both sides of the above equality yields
+ṽ t+1 = A t A t+1 P − 11 T n ⊗ I ṽ (t) + a t+1 A t+1w (t+1) ≤β ṽ (t) + a t+1 A t+1 w (t+1) ≤ a t A t βC p + a t+1 A t+1 √ nC p ,
+where the last inequality follows from the hypothesis that ṽ (t) ≤ a t C p /A t and Assumption 3. Since a t /A t monotonically decreases with t, we have
+ṽ t+1 ≤ a t A t βC p + √ nG ≤ a t A t C p β + 1 3 1−β ,
+where the last inequality is due to
+√ nG = A t0 a t0 · a t0+1 A t0+1 .
+Since A t a t+1 /(a t A t+1 ) monotonically increases with t, we have (59) satisfied.
+
+ii) Upper bound for ũ (t+1) . Using the same arguments as above, we have
+ũ t+1 = A t A t+1 P − 11 T n ⊗ I ṽ (t) + a t+1 A t+1w (t) ≤β ṽ (t) + a t+1 A t+1 w (t) ≤ a t A t βC p + a t+1 A t+1 √ nC p .
+By following the same line of reasoning as in the first part, we are able to obtain
+ũ (t+1) ≤ a t+1 A t+1 C p .
+Summarizing the above bounds, the proof is completed.
+
+Lemma 8 proves the upper bound for the consensus vector q (t) .
+
+Lemma 8. Suppose Assumptions 1, 2, and 3 are satisfied. For Algorithm 2, we have
+q (t) =ĝ (t)(61)
+and
+q (t) ≤ a t A t C g(62)
+for all t ≥ 1, where C g = 3 1−β L 2 √ nG + 2C p /(1 − β), and β = σ 2 (P ).
+
+Proof of Lemma 8. The proof of (61) directly follows from the proof of Lemma 3, and is omitted here for brevity.
+
+For (62), we subtract 1 ⊗ q (t) from both sides of (56c) to get
+q (t) − 1 ⊗ q (t) =Pq (t−1) − 1 ⊗ q (t−1) +∇ (t) −∇ (t−1) − 1 ⊗ (q (t) − q (t−1) ).(63)
+Using the same procedure in (40) leads to q (t) ≤ β q (t−1) + ∇ (t) −∇ (t−1) − 1 ⊗ (q (t) − q (t−1) ) .
+
+(64) Since the objective is smooth, we obtain
+∇ (t) −∇ (t−1) − 1 ⊗ q (t) − q (t−1) = ∇ (t) −∇ (t−1) − 1 ⊗ ĝ (t) −ĝ (t−1) = ∇ (t) −∇ (t−1) − 11 T n ⊗ I ∇ (t) −∇ (t−1) ≤ ∇ (t) −∇ (t−1) ≤ L u (t) − u (t−1) .
+To bound u (t) − u (t−1) , we consider
+u (t) − u (t−1) = A t−1 A t Pv (t−1) + a t A t w (t−1) − u (t−1) = A t−1 A t P v (t−1) − u (t−1) + A t−1 A t (P − I ⊗ I) u (t−1) + a t A t w (t−1) − u (t−1)
+where the first equality is due to (56a). From (56a) and (56b), we have v (t−1) − u (t−1) = at−1 At−1 w (t−1) − w (t−2) . In addition, we have (P − I ⊗ I) u (t−1) = (P − I ⊗ I) (u (t−1) − 1 ⊗ u (t−1) ). Therefore, it holds that
+u (t) − u (t−1) ≤ A t−1 A t a t−1 A t−1 w (t−1) − w (t−2) + 2A t−1 A t ũ (t−1) + a t A t w (t−1) − u (t−1) ≤ a t A t √ nG + 2a t A t C p + a t A t √ nG = a t A t 2 √ nG + 2C p(65)
+where Lemma 7 and Assumption 3 are used to get the second inequality. By substituting (65) into (64), we obtain
+q (t) ≤ β q (t−1) + a t A t L 2 √ nG + 2C p .(66)
+By initialization, we haveq (0) = 0 and therefore
+q (t0) ≤L 2 √ nG + 2C p t0 τ =1 β t0−τ a τ A τ ≤ L (2 √ nG + 2C p ) 1 − β ,
+implying that (62) is valid for 1 ≤ t < 3 1−β . Next, we prove that (62) also holds for t ≥ 3 1−β by mathematical induction. Suppose that (62) holds true for some t ≥ 3 1−β . Using this hypothesis and (66), we obtain
+q (t+1) ≤ a t A t βC g + a t+1 A t+1 L 2 √ nG + 2C p ≤ a t A t C g β + 1 3 1−β .
+Finally, using the same argument with (59) and (60) in the proof of Lemma 7, we arrive at (62) as desired.
+
+
+B. Proof of Theorem 2
+
+Proof of Theorem 2. Using A τ −1 = A τ − a τ , we have
+A t f (v (t) ) − f (x * ) = t τ =1 A τ f (v (τ ) ) − A τ −1 f (v (τ −1) ) − t τ =1 a τ f (x * ) = t τ =1 A τ f (v (τ ) ) − f (u (τ ) ) + a τ f (u (τ ) ) − f (x * ) + A τ −1 f (u (τ ) ) − f (v (τ −1) )
+Upon using the convexity of f , we obtain
+A t f (v (t) ) − f (x * ) ≤ t τ =1 A τ f (v (τ ) ) − f (u (τ ) ) + a τ ∇f (u (τ ) ), u (τ ) − x * + A τ −1 ∇f (u (τ ) ), u (τ ) − v (τ −1) By (57b), we obtain A t f (v (t) ) − f (x * ) ≤ t τ =1 A τ f (v (τ ) ) − f (u (τ ) ) + ∇f (u (τ ) ), u (τ ) − v (τ ) + t τ =1 a τ ∇f (u (τ ) ), w (τ ) − x * ≤ t τ =1 A τ L 2 u (τ ) − v (τ ) 2 (I) + 1 n n i=1 t τ =1 a τ q (τ ) i , w (τ ) i − x * (II) + 1 n t τ =1 n i=1 a τ ∇f (u (τ ) ) − q (τ ) i , w (τ ) i − x * (III)(67)
+where the last inequality is due to the smoothness of f . To bound (I), we consider
+u (τ ) − v (τ ) 2 = 1 n n i=1 u (τ ) − u (τ ) i + u (τ ) i − v (τ ) i + v (τ ) i − v (τ ) 2 ≤ 1 n(69)
+To bound (III), we use (61) to get
+a τ ∇f (u (τ ) ) − q (τ ) i , w (τ ) i − x * ≤Ga τ ∇f (u (τ ) ) −ĝ (τ ) + q (τ ) − q (τ ) i ≤Ga τ ∇f (u (τ ) ) −ĝ (τ ) + q (τ ) − q (τ ) i .
+Upon using Lemma 7, we obtain
+∇f (u (τ ) ) −ĝ (τ ) ≤ 1 n n i=1 ∇f i (u (τ ) ) − ∇f i (u (τ ) i ) ≤ L n n i=1 u (τ ) − u (τ ) i ≤ L ũ 2 n ≤ a τ A τ LC p √ n . Recall Lemma 8 that q (τ ) − q (τ ) i ≤ C g a τ /( √ nA τ ). There- fore n i=1 a τ ∇f (u (τ ) ) − q (τ ) i , w (τ ) i − x * ≤ a 2 τ A τ √ nG(LC p + C g ).(70)
+Finally, by collectively substituting (68), (69), and (70) into (67), we get
+A t f (v (t) ) − f (x * ) ≤ G(LC p + C g ) √ n + 3LC 2 p n t τ =1 a 2 τ A τ + d(x * ) + 1 2n t τ =1 3La 2 τ A τ − 1 w (τ ) − w (τ −1) 2 .
+Based on the condition in (30) and the fact that a 2 τ /A τ ≤ 2a, we obtain (31) as desired.
+
+The inequality in (32) directly follows from Lemma 7.
+
+
+the (i, j)th entry ofP = (P + I)/2. Notably, PG-EXTRA seeks consensus among variables {x(t) i
+
+Fig. 1 .
+1Comparison of objective error in Case I.
+
+Fig. 2 .
+2Comparison of consensus error in Case I.
+
+Fig. 3 .
+3Comparison of objective value in Case II.
+
+Lemma 4 .
+4If the parameter a satisfies (18), then ρ(M) < 1, where M is defined in(17).
+
+
+61922068, and in part by the Shaanxi Provincial Funds for Distinguished Young Scientists under Grant 2019JC-14x. (Corresponding author: Yang Shi.) C. Liu is with the Key Laboratory of Smart Manufacturing in Energy Chemical Process, Ministry of Education, East China University of Science and Technology, Shanghai, 200237, and also with the Department of Mechanical Engineering, University of Victoria, Victoria, BC V8W 3P6, Canada (e-mail: chxliu@uvic.ca). Y. Shi is with the Department of Mechanical Engineering, University of Victoria, Victoria, BC V8W 3P6, Canada (e-mail: yshi@uvic.ca). H. Li is with the School of Marine Science and Technology, Northwestern Polytechnical University, Xi'an, 710072, China (e-mail: lihuip-ing@nwpu.edu.cn). W. Du is with the Key Laboratory of Smart Manufacturing in Energy Chemical Process, Ministry of Education, East China University of Science and Technology, Shanghai, 200237, China (e-mail: wldu@ecust.edu.cn).
+It then remains to prove β + 1to obtain the bound for ṽ (t+1) as desired. To prove (59), we letBased on the above relation, we further obtainThis in conjunction withand the definitions of a t and A t yields
+Network topology and communication-computation tradeoffs in decentralized optimization. A Nedić, A Olshevsky, M G Rabbat, Proceedings of the IEEE. 1065A. Nedić, A. Olshevsky, and M. G. Rabbat, "Network topology and communication-computation tradeoffs in decentralized optimization," Proceedings of the IEEE, vol. 106, no. 5, pp. 953-976, 2018.
+
+A survey of distributed optimization. T Yang, X Yi, J Wu, Y Yuan, D Wu, Z Meng, Y Hong, H Wang, Z Lin, K H Johansson, Annual Reviews in Control. 47T. Yang, X. Yi, J. Wu, Y. Yuan, D. Wu, Z. Meng, Y. Hong, H. Wang, Z. Lin, and K. H. Johansson, "A survey of distributed optimization," Annual Reviews in Control, vol. 47, pp. 278-305, 2019.
+
+On the convergence of decentralized gradient descent. K Yuan, Q Ling, W Yin, SIAM Journal on Optimization. 263K. Yuan, Q. Ling, and W. Yin, "On the convergence of decentralized gradient descent," SIAM Journal on Optimization, vol. 26, no. 3, pp. 1835-1854, 2016.
+
+Distributed subgradient methods for multiagent optimization. A Nedic, A Ozdaglar, IEEE Transactions on Automatic Control. 541A. Nedic and A. Ozdaglar, "Distributed subgradient methods for multi- agent optimization," IEEE Transactions on Automatic Control, vol. 54, no. 1, pp. 48-61, 2009.
+
+EXTRA: An exact first-order algorithm for decentralized consensus optimization. W Shi, Q Ling, G Wu, W Yin, SIAM Journal on Optimization. 252W. Shi, Q. Ling, G. Wu, and W. Yin, "EXTRA: An exact first-order algorithm for decentralized consensus optimization," SIAM Journal on Optimization, vol. 25, no. 2, pp. 944-966, 2015.
+
+Discrete-time dynamic average consensus. M Zhu, S Martínez, Automatica. 462M. Zhu and S. Martínez, "Discrete-time dynamic average consensus," Automatica, vol. 46, no. 2, pp. 322-329, 2010.
+
+Newton-raphson consensus for distributed convex optimization. D Varagnolo, F Zanella, A Cenedese, G Pillonetto, L Schenato, IEEE Transactions on Automatic Control. 614D. Varagnolo, F. Zanella, A. Cenedese, G. Pillonetto, and L. Schenato, "Newton-raphson consensus for distributed convex optimization," IEEE Transactions on Automatic Control, vol. 61, no. 4, pp. 994-1009, 2015.
+
+Harnessing smoothness to accelerate distributed optimization. G Qu, N Li, IEEE Transactions on Control of Network Systems. 53G. Qu and N. Li, "Harnessing smoothness to accelerate distributed optimization," IEEE Transactions on Control of Network Systems, vol. 5, no. 3, pp. 1245-1260, 2017.
+
+Accelerated distributed nesterov gradient descent. IEEE Transactions on Automatic Control. 656--, "Accelerated distributed nesterov gradient descent," IEEE Trans- actions on Automatic Control, vol. 65, no. 6, pp. 2566-2581, 2019.
+
+Fast distributed gradient methods. D Jakovetić, J Xavier, J M Moura, IEEE Transactions on Automatic Control. 595D. Jakovetić, J. Xavier, and J. M. Moura, "Fast distributed gradient methods," IEEE Transactions on Automatic Control, vol. 59, no. 5, pp. 1131-1146, 2014.
+
+A unification and generalization of exact distributed first-order methods. D Jakovetić, IEEE Transactions on Signal and Information Processing over Networks. 51D. Jakovetić, "A unification and generalization of exact distributed first-order methods," IEEE Transactions on Signal and Information Processing over Networks, vol. 5, no. 1, pp. 31-46, 2018.
+
+On the linear convergence of the ADMM in decentralized consensus optimization. W Shi, Q Ling, K Yuan, G Wu, W Yin, IEEE Transactions on Signal Processing. 627W. Shi, Q. Ling, K. Yuan, G. Wu, and W. Yin, "On the linear convergence of the ADMM in decentralized consensus optimization," IEEE Transactions on Signal Processing, vol. 62, no. 7, pp. 1750-1761, 2014.
+
+A dual approach for optimal algorithms in distributed optimization over networks. C A Uribe, S Lee, A Gasnikov, A Nedić, Optimization Methods and Software. 361C. A. Uribe, S. Lee, A. Gasnikov, and A. Nedić, "A dual approach for optimal algorithms in distributed optimization over networks," Optimiza- tion Methods and Software, vol. 36, no. 1, pp. 171-210, 2021.
+
+Accelerated primal-dual algorithms for distributed smooth convex optimization over networks. J Xu, Y Tian, Y Sun, G Scutari, International Conference on Artificial Intelligence and Statistics. PMLRJ. Xu, Y. Tian, Y. Sun, and G. Scutari, "Accelerated primal-dual algorithms for distributed smooth convex optimization over networks," in International Conference on Artificial Intelligence and Statistics. PMLR, 2020, pp. 2381-2391.
+
+Optimal algorithms for smooth and strongly convex distributed optimization in networks. K Scaman, F Bach, S Bubeck, Y T Lee, L Massoulié, International Conference on Machine Learning. K. Scaman, F. Bach, S. Bubeck, Y. T. Lee, and L. Massoulié, "Optimal algorithms for smooth and strongly convex distributed optimization in networks," in International Conference on Machine Learning. PMLR, 2017, pp. 3027-3036.
+
+New primal-dual proximal algorithm for distributed optimization. P Latafat, L Stella, P Patrinos, 2016 IEEE 55th Conference on Decision and Control (CDC). IEEEP. Latafat, L. Stella, and P. Patrinos, "New primal-dual proximal algo- rithm for distributed optimization," in 2016 IEEE 55th Conference on Decision and Control (CDC). IEEE, 2016, pp. 1959-1964.
+
+Decentralized frank-wolfe algorithm for convex and nonconvex problems. H.-T Wai, J Lafond, A Scaglione, E Moulines, IEEE Transactions on Automatic Control. 6211H.-T. Wai, J. Lafond, A. Scaglione, and E. Moulines, "Decentralized frank-wolfe algorithm for convex and nonconvex problems," IEEE Transactions on Automatic Control, vol. 62, no. 11, pp. 5522-5537, 2017.
+
+New convergence analysis of a primal-dual algorithm with large stepsizes. Z Li, M Yan, Advances in Computational Mathematics. 471Z. Li and M. Yan, "New convergence analysis of a primal-dual algorithm with large stepsizes," Advances in Computational Mathematics, vol. 47, no. 1, pp. 1-20, 2021.
+
+Constrained consensus and optimization in multi-agent networks. A Nedic, A Ozdaglar, P A Parrilo, IEEE Transactions on Automatic Control. 554A. Nedic, A. Ozdaglar, and P. A. Parrilo, "Constrained consensus and optimization in multi-agent networks," IEEE Transactions on Automatic Control, vol. 55, no. 4, pp. 922-938, 2010.
+
+Optimal algorithms for non-smooth distributed optimization in networks. K Scaman, F Bach, S Bubeck, Y T Lee, L Massoulié, 32nd International Conference on Neural Information Processing Systems. K. Scaman, F. Bach, S. Bubeck, Y. T. Lee, and L. Massoulié, "Opti- mal algorithms for non-smooth distributed optimization in networks," in 32nd International Conference on Neural Information Processing Systems, 2018, pp. 2745-2754.
+
+A proximal gradient algorithm for decentralized composite optimization. W Shi, Q Ling, G Wu, W Yin, IEEE Transactions on Signal Processing. 6322W. Shi, Q. Ling, G. Wu, and W. Yin, "A proximal gradient algorithm for decentralized composite optimization," IEEE Transactions on Signal Processing, vol. 63, no. 22, pp. 6013-6023, 2015.
+
+Decentralized accelerated gradient methods with increasing penalty parameters. H Li, C Fang, W Yin, Z Lin, IEEE Transactions on Signal Processing. 68H. Li, C. Fang, W. Yin, and Z. Lin, "Decentralized accelerated gradient methods with increasing penalty parameters," IEEE Transactions on Signal Processing, vol. 68, pp. 4855-4870, 2020.
+
+Multi-agent mirror descent for decentralized stochastic optimization. M Rabbat, 2015 IEEE 6th International Workshop on Computational Advances in Multi-Sensor Adaptive Processing (CAMSAP). IEEEM. Rabbat, "Multi-agent mirror descent for decentralized stochastic op- timization," in 2015 IEEE 6th International Workshop on Computational Advances in Multi-Sensor Adaptive Processing (CAMSAP). IEEE, 2015, pp. 517-520.
+
+Distributed online optimization in dynamic environments using mirror descent. S Shahrampour, A Jadbabaie, IEEE Transactions on Automatic Control. 633S. Shahrampour and A. Jadbabaie, "Distributed online optimization in dynamic environments using mirror descent," IEEE Transactions on Automatic Control, vol. 63, no. 3, pp. 714-725, 2017.
+
+Optimal distributed stochastic mirror descent for strongly convex optimization. D Yuan, Y Hong, D W Ho, G Jiang, Automatica. 90D. Yuan, Y. Hong, D. W. Ho, and G. Jiang, "Optimal distributed stochastic mirror descent for strongly convex optimization," Automatica, vol. 90, pp. 196-203, 2018.
+
+Dual averaging for distributed optimization: Convergence analysis and network scaling. J C Duchi, A Agarwal, M J Wainwright, IEEE Transactions on Automatic Control. 573J. C. Duchi, A. Agarwal, and M. J. Wainwright, "Dual averaging for distributed optimization: Convergence analysis and network scaling," IEEE Transactions on Automatic Control, vol. 57, no. 3, pp. 592-606, 2011.
+
+Accelerated distributed dual averaging over evolving networks of growing connectivity. S Liu, P.-Y. Chen, A O Hero, IEEE Transactions on Signal Processing. 667S. Liu, P.-Y. Chen, and A. O. Hero, "Accelerated distributed dual averag- ing over evolving networks of growing connectivity," IEEE Transactions on Signal Processing, vol. 66, no. 7, pp. 1845-1859, 2018.
+
+A unitary distributed subgradient method for multi-agent optimization with different coupling sources. C Liu, H Li, Y Shi, Automatica. 114108834C. Liu, H. Li, and Y. Shi, "A unitary distributed subgradient method for multi-agent optimization with different coupling sources," Automatica, vol. 114, no. 108834, 2020.
+
+Dual averaging push for distributed convex optimization over time-varying directed graph. S Liang, G Yin, IEEE Transactions on Automatic Control. 654S. Liang, G. Yin et al., "Dual averaging push for distributed convex optimization over time-varying directed graph," IEEE Transactions on Automatic Control, vol. 65, no. 4, pp. 1785-1791, 2019.
+
+Problem Complexity and Method Efficiency in Optimization. A S Nemirovsky, D B Yudin, John Wiley and SonsA. S. Nemirovsky and D. B. Yudin, Problem Complexity and Method Efficiency in Optimization. John Wiley and Sons, 1983.
+
+Primal-dual subgradient methods for convex problems. Y Nesterov, Mathematical Programming. 1201Y. Nesterov, "Primal-dual subgradient methods for convex problems," Mathematical Programming, vol. 120, no. 1, pp. 221-259, 2009.
+
+Dual averaging methods for regularized stochastic learning and onliije-ootimization. L Xiao, Journal of Machine Learning Rescarch. 11L. Xiao, "Dual averaging methods for regularized stochastic learning and onliije-ootimization," Journal of Machine Learning Rescarch, vol. 11, pp. 2543-2596, 2010.
+
+Push-sum distributed dual averaging for convex optimization. K I Tsianos, S Lawlor, M G Rabbat, 2012 IEEE 51st Conference on Decision and Control (CDC). IEEEK. I. Tsianos, S. Lawlor, and M. G. Rabbat, "Push-sum distributed dual averaging for convex optimization," in 2012 IEEE 51st Conference on Decision and Control (CDC). IEEE, 2012, pp. 5453-5458.
+
+Gossip dual averaging for decentralized optimization of pairwise functions. I Colin, A Bellet, J Salmon, S Clémençon, International Conference on Machine Learning. PMLRI. Colin, A. Bellet, J. Salmon, and S. Clémençon, "Gossip dual averaging for decentralized optimization of pairwise functions," in International Conference on Machine Learning. PMLR, 2016, pp. 1388-1396.
+
+On acceleration with noise-corrupted gradients. M Cohen, J Diakonikolas, L Orecchia, International Conference on Machine Learning. M. Cohen, J. Diakonikolas, and L. Orecchia, "On acceleration with noise-corrupted gradients," in International Conference on Machine Learning, 2018, pp. 1019-1028.
+
+Fast linear iterations for distributed averaging. L Xiao, S Boyd, Systems & Control Letters. 531L. Xiao and S. Boyd, "Fast linear iterations for distributed averaging," Systems & Control Letters, vol. 53, no. 1, pp. 65-78, 2004.
+
+Relatively smooth convex optimization by first-order methods, and applications. H Lu, R M Freund, Y Nesterov, SIAM Journal on Optimization. 281H. Lu, R. M. Freund, and Y. Nesterov, "Relatively smooth convex optimization by first-order methods, and applications," SIAM Journal on Optimization, vol. 28, no. 1, pp. 333-354, 2018.
+
+Achieving geometric convergence for distributed optimization over time-varying graphs. A Nedic, A Olshevsky, W Shi, SIAM Journal on Optimization. 274A. Nedic, A. Olshevsky, and W. Shi, "Achieving geometric convergence for distributed optimization over time-varying graphs," SIAM Journal on Optimization, vol. 27, no. 4, pp. 2597-2633, 2017.
+
+Augmented distributed gradient methods for multi-agent optimization under uncoordinated constant stepsizes. J Xu, S Zhu, Y C Soh, L Xie, 2015 IEEE 54th Conference on Decision and Control (CDC). IEEEJ. Xu, S. Zhu, Y. C. Soh, and L. Xie, "Augmented distributed gradient methods for multi-agent optimization under uncoordinated constant stepsizes," in 2015 IEEE 54th Conference on Decision and Control (CDC). IEEE, 2015, pp. 2055-2060.
+
+Sparco: A testing framework for sparse reconstruction. E Van Den, M Berg, G Friedlander, F Hennenfent, R Herrmann, O Saab, Yılmaz, TR-2007-20Dept. Comput. Sci. Tech. Rep.E. van den Berg, M. Friedlander, G. Hennenfent, F. Herrmann, R. Saab, and O. Yılmaz, "Sparco: A testing framework for sparse reconstruction," Dept. Comput. Sci., Univ. British Columbia, Vancouver, Tech. Rep. TR-2007-20,[Online]. Available: http://www. cs. ubc. ca/labs/scl/sparco, 2007.
+
+Fast projection onto the simplex and the l1 ball. L Condat, Mathematical Programming. 1581-2L. Condat, "Fast projection onto the simplex and the l1 ball," Mathe- matical Programming, vol. 158, no. 1-2, pp. 575-585, 2016.
+
+CVX: Matlab software for disciplined convex programming, version 2.1. M Grant, S Boyd, M. Grant and S. Boyd, "CVX: Matlab software for disciplined convex programming, version 2.1," 2014.
+
+A push-pull gradient method for distributed optimization in networks. S Pu, W Shi, J Xu, A Nedić, 2018 IEEE 57th Conference on Decision and Control (CDC). IEEES. Pu, W. Shi, J. Xu, and A. Nedić, "A push-pull gradient method for distributed optimization in networks," in 2018 IEEE 57th Conference on Decision and Control (CDC). IEEE, 2018, pp. 3385-3390.
+
+Distributed online convex optimization with time-varying coupled inequality constraints. X Yi, X Li, L Xie, K H Johansson, IEEE Transactions on Signal Processing. 68X. Yi, X. Li, L. Xie, and K. H. Johansson, "Distributed online convex optimization with time-varying coupled inequality constraints," IEEE Transactions on Signal Processing, vol. 68, pp. 731-746, 2020.
+
+The nth power of a 2×2 matrix. K S Williams, Mathematics Magazine. 655K. S. Williams, "The nth power of a 2×2 matrix," Mathematics Magazine, vol. 65, no. 5, pp. 336-336, 1992.

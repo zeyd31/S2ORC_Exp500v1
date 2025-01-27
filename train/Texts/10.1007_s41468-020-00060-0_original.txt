@@ -1,0 +1,130 @@
+
+ON THE GROWTH OF TOPOLOGICAL COMPLEXITY
+26 May 2020
+
+Daisuke Kishimoto 
+Atsushi Yamaguchi 
+ON THE GROWTH OF TOPOLOGICAL COMPLEXITY
+26 May 2020
+Let TCr(X) denote the r-th topological complexity of a space X. In many cases, the generating function r≥1 TCr+1(X)x r is a rational function P (x)(1−x) 2 where P (x) is a polynomial with P (1) = cat(X), that is, the asymptotic growth of TCr(X) with respect to r is cat(X). In this paper, we introduce a lower bound MTCr(X) of TCr(X) for a rational space X, and estimate the growth of MTCr(X).
+
+Introduction
+
+For a space X, let X r denote the r-th Cartesian procuct of X, and let ∆ r : X → X r denote the diagonal map ∆ r (x) = (x, x, . . . , x) for x ∈ X. The r-th topological complexity TC r (X) of a space X is defined to be the least integer n such that there is an open cover X r = U 0 ∪U 1 ∪· · ·∪U r having the property that each U i has a homotopy section s i : U i → X of ∆ r , that is, ∆ r •s i is homotopic to the inclusion U i → X r . Then TC 2 (X) is the topological complexity of Farber [2], and TC r (X) for r > 2 is the higher topological complexity of Rudyak [10]. It is known that TC r (X) is a homotopy invariant of X.
+
+For a space X, we can define a formal power series
+F X (x) = ∞ r=1 TC r+1 (X)x r .
+In [4], Farber and Oprea asked the following question. Let cat(X) denote the LS-category of a space X. Question 1.1. For which finite CW-complex X, F X (x) is a rational function
+P (x) (1 − x) 2 such that P (x) is a polynomial with P (1) = cat(X)?
+As is observed in [3], Question 1.1 is asking whether or not TC r+1 (X) = TC r (X) + cat(X) for all r large enough. Farber, Kishimoto and Stanley [3] proved that if TC r (X) = zcl r (X; k) and cat(X) = cup(X; k) for some field k and all r large enough, then F X (x) satisfies the condition in Question 1.1, where zcl r (X; k) and cup(X; k) denote the r-th zero-divisors cup-length and the cup-length of X over k, respectively. They also showed that F X (x) does not always satisfy the condition in Question 1.1.
+
+In [9], Jessup, Murillo and Parent defined the module topological complexity, which is a lower bound for the topological complexity of rational spaces. We will define its higher analog, r-th module topological complexity MTC r (X) for a rational space X, and prove: Theorem 1.2. Let X be a simply-connected rational space of finite rational type. Then for
+r ≥ 2, cup(X; Q) ≤ MTC r+1 (X) − MTC r (X) ≤ 2cat(X).
+Let X be a simply-connected rational space of finite rational type. We define
+F X (x) = ∞ r=1 MTC r+1 (X)x r .
+As an application of Theorem 1.2, one gets:
+Corollary 1.3. Let X be a simply-connected rational space of finite rational type. If cat(X) = cup(X; Q), then F X (x) = P (x) (1−x) 2 where P (x)
+is an integer polynomial with P (1) = cat(X).
+
+If MTC r (X) = TC r (X), then Theorem 1.2 gives an estimate of the growth of TC r (X) and Corollary 1.3 gives a criterion for Question 1.1. In view of the celebrated result of Hess [8], one can naively expect that MTC r (X) = TC r (X). Here we give a class of rational spaces, for which one has MTC r (X) = TC r (X). Theorem 1.4. Let X be a simply-connected rational space of finite rational type such that π i (X) = 0 for i even. Then MTC r (X) = TC r (X) = (r − 1)cat(X).
+
+There is an immediate corollary.
+Corollary 1.5. Let X be a simply-connected rational space of finite rational type such that π i (X) = 0 for i even. Then F X (x) = P (x) (1−x) 2 where P (x) is an integer polynomial with P (1) = cat(X).
+By applying Theorem 1.4, we give a rational space X, to which the criterion of Farber, Kishimoto and Stanley [3] mentioned in Section 1 does not apply, but F X (x) satisfies the condition of Question 1.1.
+
+Example 1.6. Let X be a simply-connected rational space whose minimal model is given by Λ(x, y, z), |x| = |y| = 3, |z| = 5, dx = dy = 0, dz = xy.
+
+Then by Corollary 1.5, F X (x) satisfies the condition of Question 1.1. Since H * (X; Q) = x, y, xz, yz, xyz , one has H * (X; Q) 2r−1 = 0, implying zcl r (X; Q) ≤ 2(r − 1). On the other hand, the Toomer invariant of X is 3, which coincides with cat(X) because X is elliptic. Then by Theorem 1.4,
+MTC r (X) = (r − 1)cat(X) = 3(r − 1).
+In particular, zcl r (X; Q) < MTC r (X) for all r ≥ 2.
+
+Acknowledgement: The authors would like to thank Michael Farber and John Oprea for pointing out the error in the earlier version. The first author is partly supported by JSPS KAKENHI 17K05248.
+
+
+Instability of the growth
+
+As mentioned above, Question (1.1) is asking whether or not TC r+1 (X) = TC r (X)+cat(X) for all r large enough. In this section, we observe why we need to consider large r, instead of all r.
+
+Let Γ be a finite simple graph. Let c(Γ) be the cardinality of the maximal clique of Γ, and let z r (Γ) be the maximum of
+r i=1 |C i | where C 1 , . . . , C r are cliques of Γ such that r i=1 C i = ∅.
+Example 2.1. Let Γ be the following graph.
+t t t t t t ✡ ✡ ✡ ✡ ✡ ✡ ✡ ❏ ❏ ❏ ❏ ❏ ❏ ❏ ❏ ❏ ❏ ❏ ✡ ✡ ✡ ✡
+Clearly, c(Γ) = 3, and since any two of 3-cliques intersect, z 2 (Γ) = 5. Since three side 3-cliques do not intersect, z 3 (Γ) = 9, implying z r (Γ) = 3r for r ≥ 3.
+
+Let A Γ denote the right-angled Artin group over Γ. The following are proved by Gonzalez, Gutierrez and Yuzvinsky [7] and Farber and Oprea [4]. Now we are ready to prove the following, which shows us the reason why we need to consider the growth of TC r (X) for all r large enough, instead of all r. Proposition 2.3. Given an integer n ≥ 2, there is a space X such that TC n+1 (X) − TC n (X) > cat(X) and TC r+1 (X) − TC r (X) = cat(X) for all r large enough.
+
+Proof. Let Γ n be the 1-skeleton of a simplicial complex obtained from an n-simplex by attaching an n-simplex on each (n − 1)-face. Then Γ 2 is the graph in Example 2.1. One may assume that the vertex set of Γ n is {0, 1, . . . , 2n + 1} and maximal cliques of Γ n are C 0 , C 1 , . . . , C n+1 , where C 0 = {0, 1, . . . , n} and C i = {0, 1, . . . , i, . . . , n, n + i + 1} for 0 ≤ i ≤ n. By definition, c(Γ n ) = n + 1. For r ≤ n, any r of C 0 , . . . , C n+1 intersect, and C 1 ∩ · · · ∩ C r−1 ∩ (C r − {r}) = ∅. Then z r (Γ n ) = (r − 1)(n + 1) + n = r(n + 1) − 1. For r > n, C 1 ∩ · · · ∩ C n+1 ∩ C 1 ∩ · · · ∩ C 1 r−n−1 = ∅, implying z r (Γ n ) = r(n + 1). Thus by Theorem 2.2, the proof is complete.
+
+Remark 2.4. We would like to thank John Oprea for letting us know the instability of the growth of TC r (BA Γ 2 ), where Proposition 2.3 is its straightforward generalization. He also informed us, in a private communication, that Michael Farber and he also discovered the graph Γ n and showed that the numerator polynomial P (x) in Question 1.1 is of degree n+1, which answers another problem on the generating function F X (x) that they consider.
+
+
+Module topological complexity
+
+In what follows, let X be a simply-connected rational space of finite rational type. Let (ΛV, d) be any Sullivan model of X, and let K r denote the kernel of the multiplication
+(ΛV ) ⊗r → ΛV, v 1 ⊗ · · · ⊗ v r → v 1 · · · v r .
+Then as in [1], TC r (X) equals the least integer n such that the projection p r,n : (ΛV ) ⊗r → (ΛV ) ⊗r /K n+1 r has a differential graded algebra homotopy retraction. Here a homotopy retraction of p r,n means a retraction of a Sullivan model (ΛV ) ⊗r → (ΛV ) ⊗r ⊗ ΛW for the projection p r,n .
+
+For v ∈ V and 1 ≤ i ≤ r, let v(i) = 1 ⊗ · · · ⊗ 1 ⊗ v ⊗ 1 ⊗ · · · ⊗ 1 ∈ (ΛV ) ⊗r where v is in the i-th position. Analogously to [9, Lemma 2.3], one has:
+Lemma 3.1. For r ≥ 2, K r = (v(i) − v(i + 1) | v ∈ V, 1 ≤ i ≤ r − 1).
+In [9], the module topological complexity MTC(X) is defined, and here we define its higher analog.
+
+Definition 3.2. The r-th module topological complexity MTC r (X) is defined to be the least integer n such that the projection p r,n has a differential graded (ΛV ) ⊗r -module homotopy retraction.
+
+For a space Y and a field k, let zcl r (Y ; k) be the greatest n such that there are elements x 1 , . . . , x n in the kernel of the product H * (Y ; k) ⊗n → H * (Y ; k) such that x 1 · · · x n = 0. Then one has:
+Proposition 3.3. For r ≥ 2, zcl r (X; Q) ≤ MTC r (X) ≤ TC r (X).
+Proof. Suppose MTC r (X) = n. Then the projection p r,n is injective in cohomology, and so there are no x 0 , . . . , x n ∈ K r such that the product x 0 · · · x n is a cocycle representing a non-trivial cohomology class of X. Thus zcl r (X; Q) ≤ n = MTC r (X). The inequality MTC r (X) ≤ TC r (X) follows at once from the definition.
+
+
+Proofs of main results
+Lemma 4.1. For r ≥ 2, cup(X; Q) ≤ MTC r+1 (X) − MTC r (X).
+Proof. Let (ΛV, d) be a Sullivan model for X, and suppose cup(X; Q) = n. Then there are cocycles a 1 , . . . , a n ∈ ΛV such that the product a 1 · · · a n represents a non-trivial cohomology class. For each i, let
+a i = 1 ⊗ · · · ⊗ 1 r−1 ⊗a i ⊗ 1 − 1 ⊗ · · · ⊗ 1 r ⊗a i ∈ (ΛV ) ⊗(r+1)
+and let a =ā 1 · · ·ā n . Define a map
+f : (ΛV ) ⊗r → (ΛV ) ⊗(r+1) , x → (x ⊗ 1)a.
+Since a is a cocycle, f is a differential graded (ΛV ) ⊗r -module map. Let W denote a subspace of ΛV ⊗ ΛV spanned by elements of the form x ⊗ 1 − 1 ⊗ x for x ∈ ΛV and 1 ⊗ 1. Then there is a decomposition as a differential graded ΛV ⊗ 1-module
+ΛV ⊗ ΛV = (ΛV ⊗ 1) · W ⊕ (ΛV ⊗ 1) · W ′ for some subspace W ′ ⊂ ΛV ⊗ ΛV .
+Hence there is a decomposition as a differential graded (ΛV ) ⊗r ⊗ 1-module
+(ΛV ) ⊗(r+1) = ((ΛV ) ⊗r ⊗ 1) · a ⊕ ((ΛV ) ⊗r ⊗ 1) · U
+for some subspace U ⊂ (ΛV ) ⊗(r+1) , and so one gets a differential graded (ΛV ) ⊗r -module retraction of f q : (ΛV ) ⊗(r+1) → (ΛV ) ⊗r , q(a) = 1, q(U ) = 0.
+
+It is proved in [3] that zcl r+1 (X; k) = zcl r (X; k)+cup(X; k) for any field k. Then by Lemma 3.3, MTC r+1 (X) = m + n for some non-negative integer m, and so there is a differential graded (ΛV ) ⊗(r+1) -module homotopy retraction q ′ of the projection p r+1,m+n : (ΛV ) ⊗(r+1) →
+(ΛV ) ⊗(r+1) /K m+n+1 r+1
+. On the other hand, since a belongs to K n r+1 , there is a commutative diagram of differential graded (ΛV ) ⊗r -modules
+(ΛV ) ⊗r f / / pr,m (ΛV ) ⊗(r+1) p r+1,m+n (ΛV ) ⊗r /K m+1 rf / / (ΛV ) ⊗(r+1) /K m+n+1 r+1 .
+Then q • q ′ •f is a differential graded (ΛV ) ⊗r -module homotopy retraction of the projection p r,m . Thus MTC r (X) + cup(X; Q) ≤ m + n = MTC r+1 (X).
+Lemma 4.2. For r ≥ 2, MTC r+1 (X) − MTC r (X) ≤ 2cat(X).
+Proof. Since there are obvious inequalities TC r (X) ≤ cat(X r ) ≤ rcat(X), it follows from Proposition 3.3 that MTC r (X) ≤ rcat(X).
+
+There is a homotopy pullback * / / Proof of Corollary 1.3. One has MTC r (X) ≤ TC r (X) ≤ rcat(X). Also MTC r (X) + cup(X; Q) ≤ MTC r+1 by Theorem 1.2. Then the statement follows from [3, Lemma 1].
+
+Proof of Theorem 1.4. Let (ΛV, d) be the minimal model of X. By Lemma 3.1,
+K n+1 r = (v(i) − v(i + 1) | v ∈ V, 1 ≤ i ≤ r − 1) n+1
+where v(i) is as in Lemma 3.1. By assumption, V has no even degree element, and so K n+1 r = 0 for n = (r − 1) dim V . On the other hand, it follows from [5, Example 6, p. 389] that cat(X) = dim V . Then one gets TC r (X) ≤ (r − 1)cat(X).
+
+On the other hand, by (4.1), MTC r (X) ≥ (r − 1)cat(X). Thus the proof is complete by Proposition 3.3.
+
+Theorem 2. 2 .
+2For a finite simple graph Γ and r ≥ 2, cat(BA Γ ) = c(Γ) and TC r (BA Γ ) = z r (Γ).
+
+/
+/ X r where j(x 1 , . . . , x r−1 ) = (x 1 , . . . , x r−1 , * ) for (X 1 , . . . , x r−1 ) ∈ X r−1 . Then by [6, Proposition 5.5] and [5, Theorem 30.2], (4.1) MTC r (X) ≥ cat(X r−1 ) = (r − 1)cat(X). Thus MTC r+1 (X) − MTC r (X) ≤ (r + 1)cat(X) − (r − 1)cat(X) = 2cat(X), as claimed. Now we are ready to prove Theorems 1.2 and 1.4. Proof of Theorem 1.2. Combine Lemmas 4.1 and 4.2.
+
+The rational sectional category of certain maps. J G Carrasquel-Vera, Ann. Sc. Norm. Super. Pisa Cl. Sci. 5J.G. Carrasquel-Vera, The rational sectional category of certain maps, Ann. Sc. Norm. Super. Pisa Cl. Sci. (5) 17 (2017), no. 2, 805-813.
+
+Topological complexity of motion planning. M Farber, Discrete Comput. Geom. 292M. Farber, Topological complexity of motion planning, Discrete Comput. Geom. 29 (2003), no. 2, 211- 221.
+
+M Farber, D Kishimoto, D Stanley, Generating functions and topological complexity. 278107235M. Farber, D. Kishimoto, and D. Stanley, Generating functions and topological complexity, Topology Appl. 278 (2020), 107235.
+
+Higher topological complexity of aspherical spaces. M Farber, J Oprea, Topology Appl. 258M. Farber and J. Oprea, Higher topological complexity of aspherical spaces, Topology Appl. 258 (2019), 142-160.
+
+Rational homotopy theory, Grad. Y Félix, S Halperin, J.-C Thomas, Texts in Math. 205. New YorkSpringerY. Félix, S. Halperin, and J.-C. Thomas, Rational homotopy theory, Grad. Texts in Math. 205, Springer, New York (2001).
+
+Joins of DGA modules and sectional category. L Suárez, P Ghienne, T Kahl, L Vandembroucq, Algebr. Geom. Topol. 6L. Fernández Suárez, P. Ghienne, T. Kahl, and L. Vandembroucq, Joins of DGA modules and sectional category, Algebr. Geom. Topol. 6 (2006), 119-144.
+
+Higher topological complexity of subcomplexes of products of spheres and related polyhedral product spaces. J Gonzalez, B Gutierrez, S Yuzvinsky, Topol. Methods Nonlinear Anal. 482J. Gonzalez, B. Gutierrez, and S. Yuzvinsky, Higher topological complexity of subcomplexes of products of spheres and related polyhedral product spaces, Topol. Methods Nonlinear Anal. 48 (2016), no. 2, 419-451.
+
+A proof of Ganea's conjecture for rational spaces. K Hess, Topology. 30K. Hess, A proof of Ganea's conjecture for rational spaces, Topology 30 (1991), 205-214.
+
+. B Jessup, A Murillo, P.-E Parent, Rational topological complexity. 123Algebr. Geom. Topol.B. Jessup, A. Murillo, and P.-E. Parent, Rational topological complexity, Algebr. Geom. Topol. 12 (2012), no. 3, 1789-1801.
+
+On higher analogs of topological complexity. Y B Rudyak, Topology Appl. 1575Y.B. Rudyak, On higher analogs of topological complexity, Topology Appl. 157 (2010), no. 5, 916-920.

@@ -1,0 +1,149 @@
+
+MISO NOMA Downlink Beamforming Optimization with Per-Antenna Power Constraints
+
+
+Yongwei Huang 
+Longtao Zhou 
+MISO NOMA Downlink Beamforming Optimization with Per-Antenna Power Constraints
+1
+problem for the non-orthogonal multiple access (NOMA) transmission in a multiple-input single-output (MISO) system. The total transmission power minimization problem is formulated subject to both per-antenna power constraints and quality-of-service (QoS) constraints under the NOMA principal. The problem is a non-convex quadratically conite program (SDP) relaxation is not tight. In order to tackle the non-convex NOMA beamforming problem, we construct a second-order cone approximation for each signal-to-interference-plus-noise ratio (SINR) constraint and form an iterative algorithm, in which a sequence of second-order cone programs (SOCPs) are solved. The optimal values of the sequence of SOCPs are non-increasing, and it converges to a locally optimal value. However, our extensive simulation results show that the locally optimal value is more or less as good as the globally optimal value. In particular, we show that the SDP relaxation is tight for two-user case if one of the SINR constraints is strict (non-binding) at the optimality. Detailed simulation results are presented to demonstrate the performance gains of the NOMA downlink beamforming with per-antenna power constraints through the proposed approximate algorithm.Index Terms ing, per-antenna power constraint, SOCP based approximate algorithm, secure beamforming.
+
+I. INTRODUCTION
+
+In a multiuser system, the effective utilization of non-orthogonal multiple access (NOMA) beamforming has been more and more iency, user fairness, the system throughput and so on. The NOMA beamforming allows the base station (BS) to apply superposition coding (SC) using the spatial degree of freedom, and the receivers to conduct successive interference cancellation (SIC) with manageable costs, often assuming perfect channel state information known at the BS. Nowaday, the NOMA beamforming has been an important ation (5G) wireless networks [1], [2].
+
+In this work, we deal with an NOMA beamforming optimization problem with per-antenna power constraints in setting of a multipleinput single-output (MISO) multiuser downlink transmission system. We formulate a total transmission power minimization problem subject to both per-antenna power constraints and quality-of-service (QoS) constraints under the NOMA scheme, and propose a low periteration complexity algorithm based on second-order cone program (SOCP) approximation. In order to proceed, let us mention some related works. In [3], multicast beamforming with SC for multiresolution broadcast with two users is considered, and the optimal beamforming vectors are obtained by minimizing the total transmission power for given target rates in a broadcast system with multiresolution transmissions where the interference is mitigated at a user using SIC. As well, the proposed multicast beamforming with SC is applied to NOMA systems as a two-stage beamforming method. A sum rate maximization problem in a MISO downlink system is studied in [4] relying on NOMA principles, and a concave-convex Y. Huang and L. Zhou are with School of Information Engineering, Guangdong University of Technology, University Town, Guangzhou, Guangdong 510006, China. Emails: ywhuang@gdut.edu.cn, 2111603086@mail2.gdut.edu.cn procedure (CCP) based iterative algorithm is developed to solve the NOMA sum rate maximization problem. In [5], the application of the concept of quasi-degradation to a multi-user MISO downlink is considered, by employing the idea of user pairing. In particular, a QoS optimization problem for two users is formulated by minimizing the total transmit power constrained by the target individual rate, and closed-form expressions for different precoding algorithms including dirty-paper coding (DPC) and zero-forcing beamforming (ZFBF) are obtained. Then the hybrid NOMA precoding algorithm is presented, which is combined with the proposed user pairing algorithm to yield ptimization algorithms for multiuser SC beamforming (SCBF) is studied to solve power minimization and rate maximization problems, and combination SCBF with ZFBF through user grouping is proposed. Optimal results are guaranteed to be found for the two user case, and it is experimentally shown that a nearly optimal performance can be achieved for the three user case with practical problem setups.
+
+In this paper, we propose an SOCP based approximate algorithm for the MISO NOMA downlink beamforming optimization problem. The problem is formulated into the total transmission power minimization subject to the per-antenna power constraints and NOMA signal-to-interference-plus-noise rate (SINR) constraints. In the optimization problem, the number of the SINR constraints is bigger than that of those in the traditional downlink beamforming rogram (SDP) relaxation is not tight [9] any more. Nevertheless, we take into account an SOCP approximation for each SINR constraint for any given initial point, and the new approximation problem is an SOCP, OCP is treated as an iterative point for the next step. In the way, we obtain a sequence of SOCPs with the property that the optimal values are non-increasing. Therefore, it converges to a locally optimal solution. Our extensive simulations show that as long as the number of users is not high, the locally optimal value is very close to the optimal value of the corresponding SDP relaxation problem, which is our benchmark. In particular, when the two-user scenario is considered, we show that the SDP relaxation is tight if one of SINR inequality constraints is strict at the optimality. The approximate algorithm can be extended to solve the NOMA beamforming problem with additional secure beamforming constraints for the scenario that there are external eavesdroppers.
+
+The paper is organized as follows. In Section II, we introduce the system model and formulate the MISO NOMA downlink beamforming problem with per-antenna power constraints. In Section III, we propose the an SOCP based approximate algorithm to solve the downlink beamforming problem, and present an extension of the approximate algorithm to solve the downlink beamforming problem with additional secure beamforming constraints. In Section IV, we present numerical examples showing the performance of the approximate algorithm in difference scenarios. Finally, the paper is concluded in Section V.
+
+
+II. SYSTEM MODEL AND PROBLEM FORMULATION
+
+Consider a wireless NOMA downlink system where a -antenna base station (BS) serves single-antenna users. The transmitted signal by the BS is expressed as where and are the downlink beamforming vector and the information symbol for user (with zero mean and unit variance), respectively. The received signal by user is given by where is the channel vector between the BS and user , and is a zero-mean complex additive white Gaussian noise with variance at user . In order to conduct SIC at the users, we need to build a decoding sequence, which is associated with power level of the users. We suppose that , , follow the Rician channel model [10]:
+(1)
+where is a complex-valued Guassian random vector with zero mean and covariance, and (a column vector) is the array respond vector (steering vector) for a uniform linear array (ULA) of half-wavelength spacing. Here is the angle of departure (AoD) to user , and the large scaling fading factor is given by , where is distance between the BS and receiver , and is the path loss exponent (a nonnegative number). Clearly, if , then which is a Rayleigh fading channel model (e.g., see [6]). If , then , which is the scenario that the BS is equipped with a ULA with antenna spacing . Now suppose that the user set is an ordered set 1 , and a user with stronger channel condition (the distance between the BS and the user is smaller) has a bigger index. Therefore, can decode the information for with , under the QoS conditions SINR where the SINR is given by SINR (2) and with the achievable rate for user . Therefore, we consider the following NOMA downlink beamforming with per-antenna power constraints:
+(3a) (3b) SINR
+(3c) 1 As for how to determine an optimal decoding sequence for a general number of users is an open problem [11]. Here we assume that the order is associated with the distance between the BS and a user due to the assumption that the channel vectors follow the Rician channel model (see (1)).
+
+where is the -th column of the identity matrix of dimension . Evidently, (3b) includes the per-antenna power constraints and is a given power upper bound of each per-antenna constraint. The constraints in (3c) are the user QoS conditions for a NOMA downlink system. Alternatively, we note that the following downlink beamforming problem with per-antenna power constraints can be considered:
+(4a) (4b) SINR
+(4c) us on nd then show that the algorithm is applicable to (4). To determine a best in (3b), we can select the optimal in (4b).
+
+
+III. AN SOCP BASED APPROXIMATE ALGORITHM FOR THE NOMA DOWNLINK BEAMFORMING PROBLEM
+
+In this section, we establish an SOCP based approximate algorithm for (3). To this end, invoking the SINR expressions (2), the NOMA downlink beamforming problem is rewritten into a separable quadratically constrained quadratic program (QCQP):
+(5a) (5b) (5c)
+Observe that the per-antenna power constraints are convex but the NOMA SINR constraints are non-convex. Furthermore, the total number of SINR constraints is , instead of as in [8]. Therefore, the traditional SDP relaxation for (5) is not tight any longer (e.g. see [9]), which indicates that we need to establish a new method without involving the SDP relaxation. Toward that, introducing auxiliary variables , problem (5) can be further recast into
+(6a) (6b) (6c) (6d)
+It is seen that beamforming problem (6) includes the only nonconvex constraints (all others are convex):
+
+In order to design an algorithm for solving (6), we suppose that is any given initial point (to be updated). Observe that (7) It follows that if then one has Therefore, let us consider the following beamforming problem in the SOCP form:
+(8a) (5b) (8b)(8c)
+Observe that for the initial point , problem (8) is always a convex restriction of the orginal NOMA downlink beamforming problem (5).
+
+To further proceed the analysis, let . Solve the SOCP (8), . Again observe that and that implies Then, similarly construct another convex restriction of (5) based on :
+(9a) (5b) (9b)(9c)
+Then, solve (9) getting . Set and solve (9) again, and in the way an iterative procedure is formed. Let stand for the optimal values. We are about to show the important property that is a non-increasing sequence.
+
+Proposition III.1 It holds that for .
+
+Proof: The idea is to prove that the optimal solution for problem (8) with replaced with , is feasible for (9). If that is the case, the optimal solution for (9) simply has the property:
+
+for . We have an immediate check whether is feasible for (9). Since it is optimal for problem (8) with replaced with which imply that (10) (11) and (12) for , respectively. It follows from (10)-(12) that is feasible for (9). Remark that problems (9) for , are convex restrictions of (5) and the optimal values are non-increasing, namely,
+
+. Therefore converges to a locally minimal point for (5) (our extensive numerical simulations show that it goes to the globally minimal point when the number of users is not too high).
+
+Note that we can remove the auxiliary variables, and reformulate (9) equivalently into a compact form (13a) (13b) (13c) Therefore, we summarize an approximate algorithm based on the SOCP restrictions as in Algorithm 1. , and is equal to . Therefore, the total complexity is of order , which is approximately equal to . Recall that the complexity is the worst-cast theoretical value, and it is not real computational cost.
+
+We remark that from optimization point of view, problem (5) with replaced with (general rank) can be solved similarly by using the approximate algorithm.
+
+As for how solve (4), we construct the following SOCP restriction problem similarly:
+(14a) (4b) (6d) (14b)
+for . Like the proof of Proposition III.1, it is not hard to show that the feasible set of SOCP (14) with is always contained in that of the SOCP with for . Therefore, we have for all . Algorithm 1 is applicable to solve (4), simply by changing SOCP (13) in step 3 into (14) with both constraints (6d) and (9c) replaced by (13c).
+
+
+A. Two-User Case
+
+If there are two users in the NOMA downlink transmission system,
+(15a) (15b) (15c) (15d) (15e)
+for which the traditional SDP relaxation is
+tr tr (16a) tr (16b) tr (16c) tr (16d) tr (16e) (16f)
+The dual is the following maximization problem:
+(17a) (17b) (17c) (17d)
+Theorem III.2 Suppose that is an optimal solution for SDP (16) and for . Then is of rank one. If either tr or tr , then is a rank-one matrix.
+
+itions (i.e., the complementary slackness in the KKT optimality conditions). We hence omit it.
+
+Observe that at the optimality, at least one of two inequality constraints (16c)-(16d) holds with equality, and the inequality constraint (16e) becomes equality (active or binding).
+
+
+B. Extensions
+
+In addition to the per-antenna power constraints, let us consider a scenario that there are external eavesdroppers in the NOMA downlink transmission. To control the transmission energy around the eavesdroppers as low as possible, we introduce the following secure beamforming constraint:
+(18) where
+is the channel vector between the BS and eavesdropper , and is the upper bound for transmission energy around eavesdropper (the bound is the lower, the better). Therefore, the new NOMA downlink beamforming problem is expressed as:
+(19a) (5b) (5c)
+Evidently, the problem can be approximated by the following SOCP:
+(20a) (5b) (13c)
+In a similar way, to solve the downlink beamforming problem (19) with the secure beamforming constraints (18), we need only to invoke the approximate algorithm changing (13) in step 3 into SOCP (20).
+
+
+IV. SIMULATIONS RESULTS
+
+In this section, we provide simulation results demonstrating the performance of the proposed approximate algorithm solving NO-MA downlink beamforming optimization problems with per-antenna power constraints. Let us consider a NOMA downlink system where the BS is equipped with antennas, and the receiver noise power W (Watt) for all . Example 1. Suppose that the BS serves users (as in problem (5)). Assume that the Rayleigh fading channel follows (i.e. (1) with ), where is the distance between the BS and user , and is the path loss exponent. We set m (meter), m, m, m, and . The power upper bound for each antenna is W,
+
+. The SINR targets , , , .
+
+In Fig. 1, we have plotted the optimal transmission power on antenna 1 in Fig. 1 (a) for a set of 100 channel realizations (where the feasible sets of problem (5) without the per-antenna power constraints are nonempty), and in Fig. 1 (b) for another set of 100 channel realizations (where the feasible sets of problem (5) are nonempty). Both problem (5) without the per-antenna power constraints and problem (5) are solved by Algorithm 1 (rather than by solving its SDP relaxation) for every feasible channel realization. We observe in Fig. 1 (a) that without the per-antenna power constraints, there are many realizations for which the optimal transmission power on antenna 1 is over per-antenna power upper bound , while in Fig. 1 (b) that in all realizations the transmission power on antenna 1 is equal to or below , which is in line with the condition that the per-antenna power constraints are enforced.
+
+Example 2. Suppose that the BS serves a set of six users , which is an ordered set representing the decoding sequence with bigger index user having stronger channel. Assume that follows the channel model (1) with (i.e. Rayleigh fading channel). The distances between the BS and the users are . The path loss exponent . In addition, we assume that . The power in dB is the ratio of the power in W over the noise power in W, so that 1 corresponds to 0 dB. When we say that the BS serves four (two) users, it refers to the users ( ). The power upper bound dB for each antenna, where is the optimal value for (4) with the same settings as stated in r 100 channel realizations.   2 demonstrates the optimal total transmission power versus the number of transmit antennas. As can be seen, less transmission power is required when the BS has more transmit antennas. This is reasonable since the optimization search space of (5) is larger (the minimal value is smaller) when the number of transmit antennas is bigger. Furthermore, more transmission power is needed when the number of users is increasing. This is also sound since more transmission power is required in order to serve additional users.  Example 3. We consider a scenario that up to four users are served. We assume that the channel vector follows the model (1) Fig. 3 examines how different the optimal values obtained by the SOCP based approximation and by the SDP relaxation are. This ure displays the total transmission power versus the common SINR threshold . We observe in Fig. 3 that the difference between the two optimal values is marginal, which means that the approximation is very closed to the globally optimal value for the NOMA downlink beamforming problem.
+
+
+V. CONCLUSION
+
+In this paper, the MISO NOMA downlink beamforming optimization problem with per-antenna power constraints has been studied. An SOCP based approximate algorithm has been proposed for the downlink beamforming problem. In words, a sequence of SOCPs are solved with the property that the feasible set of SOCP in the -th iteration is always included in that of SOCP in the th iteration. This gives the sequence of SOCPs with non-increasing optimal values, which means that the approximation converges to a locally optimal value. In particular, we have proved that the SDP relaxation for the NOMA downlink beamforming problem with two users is tight if one of the NOMA SINR inequality constraints is strict at the optimality. We have shown that the NOMA downlink beamforming problem with both per-antenna power constraints and secure beamforming constraints can be solved similarly by invoking the proposed approximate algorithm when the scenario with external eavesdroppers is considered. The performance of the proposed beamforming designs has been demonstrated by simulations.
+
+
+the computational complexity, it mainly includes solving SOCP (13) in every iteration. Let us check the worst-case computational complexity for (13) based on [12, page 309]. There are constraints in the SOCP, the length of the optimization (real-valued) variables are
+
+Fig. 1 .
+1The optimal transmission power on antenna 1 versus channel realizations; (a) NOMA beamforming problem (5) excluding the per-antenna power constraints; (b) NOMA beamforming problem (5). The transmission power on antenna 1 is divided by so that 1 corresponds to 0 dB (thus the power upper bound of antenna is 0 dB).
+
+Fig.
+Fig. 2 demonstrates the optimal total transmission power versus the number of transmit antennas. As can be seen, less transmission power is required when the BS has more transmit antennas. This is reasonable since the optimization search space of (5) is larger (the minimal value is smaller) when the number of transmit antennas is bigger. Furthermore, more transmission power is needed when the number of users is increasing. This is also sound since more transmission power is required in order to serve additional users.
+
+Fig. 2 .
+2The optimal total transmission power versus number of transmit antennas, with , , and .
+
+Fig. 3 .
+3The optimal total transmission power versus SINR threshold , with , , and .
+
+
+The power upper bound for each antenna is the same as that in Example 2. Other settings follow Example 2.with 
+and 
+, and the SINR thresholds are equal to each 
+other, i.e. 
+, 
+. The number of transmit antennas 
+. 
+The distances 
+, and the AoDs in (1) 
+are 
+. When saying three (two) 
+users served by the BS, it means that 
+( 
+) are 
+selected. 
+
+. Z Ding, Y Liu, J Choi, Q Sun, M Elkashlan, C.-L I , H V , Z. Ding, Y. Liu, J. Choi, Q. Sun, M. Elkashlan, C.-L. I, and H. V. E and 5G
+
+. IEEE Communications Magazine. 552IEEE Communications Magazine, vol. 55, no. 2, pp. 185-191, February 2017.
+
+rposition coding for multiresolution broadcast and application to NOMA system. Z Ding, X Lei, G K Karagiannidis, R Schober, J Yuan, V , IEEE Journal on Selected Areas in Communications. 3510IEEE Transactions on CommunicationsZ. Ding, X. Lei, G. K. Karagiannidis, R. Schober, J. Yuan, and V. r 5G IEEE Journal on Selected Areas in Communications, vol. 35, no. 10, pp. 2181-2194, October 2017 rposition coding for multiresolution broadcast and application to NOMA system- IEEE Transactions on Communications, Vol. 63, no. 3, pp. 791-800, March 2015.
+
+Karagiannid minorization-maximization method for optimizing sum rate in the. M F Hanif, Z Ding, T Ratnarajah, G K , September 2018. ransmit Handbook of Antennas in Wireless Communications, L. C. Godara. Boca Raton, FLCRC Press64ch. 18. -antennaJournal of Communications and NetworksM. F. Hanif, Z. Ding, T. Ratnarajah, and G. K. Karagiannid minorization-maximization method for optimizing sum rate in the IEEE Transac- tions on Signal Processing, Vol. 64, no. 1, pp. 76-88, January 2016. pplication IEEE Transactions on Signal Processing, Vol. 64, no. 23, pp. 6174-6189, December 2016. ient optimization algorithms for multi-user beamforming with superposition IEEE Transcations on Communications, Septem- ber 2018. ransmit Handbook of Antennas in Wireless Communications, L. C. Godara, Ed. Boca Raton, FL: CRC Press, August 2001, ch. 18. -antenna IEEE Transactions on Signal Processing, vol. 55, no. 6, pp. 2646-2660, June 2007. IEEE Trans- actions on Signal Processing, vol. 58, no. 2, pp. 664-678, February 2010. Journal of Communications and Networks, vol. 19, no. 4, pp. 319-328, August 2017.
+
+x Optimiza-Class Notes, Georgia Institute of Technology, Fall. Y Liu, H Xing, C Pan, A Nallanathan, M Elkashlan, L Hanzo, IEEE Wireless Communications Magazine. Y. Liu, H. Xing, C. Pan, A. Nallanathan, M. Elkashlan, and L. Hanzo, in IEEE Wireless Communications Magazine, January 2018. x Optimiza- Class Notes, Georgia Institute of Technology, Fall 2015. Online: http://www2.isye.gatech.edu/ nemirovs/Lect ModConvOpt.pdf.

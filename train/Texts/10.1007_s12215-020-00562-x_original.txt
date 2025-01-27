@@ -1,0 +1,354 @@
+
+On reconstructing subvarieties from their periods
+3 Oct 2020
+
+Hossein Movasati 
+Emre Can Sertöz 
+On reconstructing subvarieties from their periods
+3 Oct 2020
+We give a new practical method for computing subvarieties of projective hypersurfaces. By computing the periods of a given hypersurface X, we find algebraic cohomology cycles on X. On well picked algebraic cycles, we can then recover the equations of subvarieties of X that realize these cycles. In practice, a bulk of the computations involve transcendental numbers and have to be carried out with floating point numbers. However, if X is defined over algebraic numbers then the coefficients of the equations of subvarieties can be reconstructed as algebraic numbers. A symbolic computation then verifies the results.As an illustration of the method, we compute generators of the Picard groups of some quartic surfaces. A highlight of the method is that the Picard group computations are proved to be correct despite the fact that the Picard numbers of our examples are not extremal.Reconstructing equations of effective Hodge cyclesLet X ⊂ P n+1 k
+
+Introduction
+
+The Hodge conjecture asserts that on a smooth projective variety over C, the Q-span of cohomology classes of algebraic cycles and of Hodge cycles coincide [Del06]. One difficulty of this conjecture lies in the general lack of techniques that can reconstruct algebraic cycles from their cohomology classes. In this article, we take a computational approach to this reconstruction problem and develop Algorithm 3.1. The highlight of this algorithm is its practicality. We have a computer implementation of the method that allows us to give rigorous Picard group computations, see Section 3.1.
+
+Our approach parallels that of [GH83] where it is proven that the periods of a general curve in a high degree surface in P 3 are sufficient to reconstruct the equations of the curve. Because period computations are expensive in practice, our intended applications are towards low degree hypersurfaces where the periods give partial, but substantial, information. The computation of the Picard rank of quartic surfaces in Section 3 is an example. On another note, we expect that one can experiment with reconstructing Hodge cycles in hypersurfaces where the Hodge conjecture is not known, using [Ser19; LS19] and the arguments here.
+
+
+Outline of the method
+
+For a smooth hypersurface X ⊂ P n+1 C of degree d, Griffiths residues [Gri69] establishes a connection between homogeneous polynomials p on P n+1 C and cohomology classes ω p on X, see Section 2.1 for a precise statement. Let S u be the space of degree u ∈ Z homogeneous forms on P n+1 C , with S u = 0 if u < 0. For a topological cycle δ ∈ H n (X, Z) and u, v ∈ Z with u + v = (n/2 + 1)d − n − 2 we consider the following pairing: and the associated map ϕ δ,u : S u → S ∨ v with kernelĨ δ,u . See Section 3 and Algorithm 3.1 in particular on how to computeĨ δ,u .
+S u × S v → C,(1.
+If δ = [Y ] for a subvariety Y ⊂ X then the idealĨ = u∈NĨ δ,u contains the ideal I(Y ) of polynomials vanishing on Y (Proposition 2.2). However, the inclusion can be strict. When Y is a complete intersection in P n+1 C an observation of [Dan17] implies that the idealsĨ δ and I(Y ) coincide up to some explicit degree m (Corollary 2.7). This property is not limited to complete intersections, as we demonstrate by recovering the ideals of twisted cubics on quartic surfaces, see Sections 2.3 and 3.2. We currently do not know how to compute m a priori -unless Y is a complete intersection -but m is often easy to find onceĨ is computed.
+
+
+Applications to quartic surfaces
+
+Starting with the defining equation of the hypersurface X, we can numerically approximate its periods [Ser19], deduce Hodge cycles δ on the cohomology of X [LS19], and compute the associated idealsĨ δ (Section 3). In this manner, it is now possible to construct rigorous lower bounds for the group of Hodge cycles on X. In order to demonstrate the method, we prove that the following two quartic surfaces
+X = Z(x 4 + x 3 z − xy 3 + y 4 + z 4 + w 4 ) ⊂ P 3 C , X = Z(5x 4 − 4x 2 zw + 8y 4 − 5z 4 + 4zw 3 ) ⊂ P 3 C
+have Picard numbers 8 and 14 respectively (Section 3.1).
+
+The novelty of the method is that it bypasses the need to symbolically search for points in Hilbert schemes of X, which is prohibitively expensive to carry out with present day computers. Once the periods of X are computed, simple linear algebra gives (an approximation of) the equations cutting out subvarieties on X.
+
+Explicit determination of algebraic cycles on the surface X gives a lower bound on its Picard group. As our method places these classes inside the integral homology of X, we can saturate the lattice they generate. To claim that this saturation is the Picard group we need to find a (sharp) upper bound on the Picard number. We search for this complementary upper bound by reducing to finite characteristic, see [AKR10] or [CS20].
+
+
+Perfect Hodge cycles
+
+This work prompts the question: Which algebraic subvarieties are reconstructible from their periods in general? A major step forward would be to determine if all the equations obtained from the periods of an algebraic cycle are caused by a representative of that cycle.
+
+The notion of a perfect Hodge class given in Definition 2.10 makes this requirement precise. We demonstrate by way of example that knowing if a cycle is perfect has strong implications for the reconstruction step: Proposition 2.13 states that if the class of a twisted cubic in a quartic surface is perfect then this twisted cubic can be reconstructed from its periods.
+
+We ask in Question 2.12 if all algebraic classes are perfect, believing that an investigation of this problem will be fruitful.
+
+
+Fields of definition of algebraic cycles
+
+In the last section of this article we study smooth projective varieties in general, only with the assumption that they are defined over a subfield k ⊂ C of the complex numbers. In this generality, we can not use Griffiths' basis for cohomology and our method does not generalize. Nevertheless, we want to facilitate the search for algebraic cycles with the aid of periods.
+
+We ask "Given the periods of an algebraic subvariety Y on X, what can we recover about Y ?" If k Y /k is the field generated by the periods of Y over k then there exists an integer m and an algebraic cycle Z on X defined over k Y such that the cohomology class of Z is equal to the cohomology class of mY (Proposition 4.4). In practice, having bounds on m for which such a cycle Z exists is desirable. Working with divisors Y ⊂ X and assuming H 1 (X, O X ) = 0, we compute an explicit bound for m (Theorem 4.5). It follows that if, in addition, H 2 (X, Z) has no torsion and X(k) = ∅ then we may take m = 1. The point of this result is that it simplifies the search for explicit divisors whose classes generate the Picard group of a given variety.
+
+The foundational results in the last section are well-known, but we hope our exposition, with an eye towards computation, will be of help in developing the techniques further.
+
+
+Notation
+
+Throughout this paper, k will be a subfield of the complex numbers C. We will denote by S = k[x 0 , . . . , x n+1 ] the homogeneous coordinate ring of P n+1 k and by S u ⊂ S the subspace of degree u ∈ Z homogeneous forms in S. For a smooth projective variety X/k the symbols H m dR (X/k), H p,q dR (X/k) refer to the algebraic de Rahm cohomology of X [Gro66]. The Hodge filtration on cohomology is denoted by F ℓ H m dR (X/k) ≃ p≥ℓ H p,m−p . We will write H m (X, Z), H m (X, Q), H m (X, Z) and H m (X, Q) for the singular homology and cohomology groups of the underlying complex analytic variety X an of X. The canonical pairing between a cohomology class and a homology class will be denoted by the integration symbol.
+
+, k ⊂ C, be an even dimensional smooth hypersurface given by the zero set of a homogeneous polynomial f ∈ S = k[x 0 , . . . , x n+1 ], and Y ⊂ X a subvariety of dimension n/2. By periods of Y we mean the following linear map:
+(2.1) H n/2,n/2 dR (X/k) → C : ω → Y ω.
+In this section we construct an idealĨ [Y ] from the periods of Y and study how much of the ideal of Y can be recovered fromĨ [Y ] . Combining this with previous work to compute periods, we find the equations for conics and twisted cubics inside quartic surfaces. We also ask if the idealĨ [Y ] is entirely geometric in origin, that is, if it is spanned by the ideals of subvarieties of X whose primitive cohomology classes are proportional to that of Y . We demonstrate how such a result can be used (or falsified) with the example of a twisted cubic on a quartic surface.
+
+A quotient I δ of the ideal π(Ĩ δ ) appears in the literature in the context of the tangent spaces of the Hodge and Noether-Lefschetz loci [Voi07, §6.2], [Dan17], [Vil], [MV,§11]. See Section 2.2 for the relation between these two ideals.
+
+
+An ideal attached to Hodge cycles
+Let X = Z(f ) ⊂ P n+1
+k be a hypersurface of degree d with n even. Let h n/2 ∈ H n (X, Z) be the polarization on X, that is, the Poincaré dual of a (n/2 + 1)-plane section of X. For any ring K we will write PH n (X, K) ⊂ H n (X, K) for the primitive cohomology groups, i.e., the space orthogonal to h n/2 .
+
+Denote by S = k[x 0 , . . . , x n+1 ] the coordinate ring of P n+1 k and for each u ∈ Z let S u ⊂ S be the space of homogenous polynomials of degree u, with S u = 0 if u < 0. For a variety Y ⊂ P n+1
+k let I(Y ) ⊂ S be the ideal of Y . Let N := d − n − 2
+and for each ℓ ≥ 0 denote the Griffiths residue maps [Gri69] as follows:
+S N +ℓd ։ F n−ℓ H n dR (X) = i≤ℓ PH n−i,i (X), (2.2) p → ω p := res p f ℓ+1 Ω , where Ω := n+1 i=0 (−1) i x i dx 0 . . . dx i . . . dx n+1
+and hat denotes omission. In this paper we will identify Hodge cycles in homology and cohomology using Poincaré duality and write Hdg n/2 (X) = δ ∈ H n (X, Z) δ F n/2+1 H n dR (X) = 0 .
+
+Definition 2.1. For each u ∈ Z let v = N + n 2 d − u and, for each Hodge class δ ∈ Hdg n/2 (X), consider the pairing:
+(2.3) S u × S v → C : (p, q) → δ ω pq .
+Expressed differently, we have a map ϕ δ,u : S u ⊗ C → S ∨ v ⊗ C and the kernel I δ,u := ker ϕ δ,u .
+
+LetĨ δ = u≥0Ĩ δ,u ⊂ S and observe thatĨ δ is an ideal.
+Proposition 2.2. If δ = [Y ] for a subvariety Y ⊂ X then I(Y ) ⊂Ĩ [Y ] .
+Proof. Since S <0 = 0, for any u > N + n 2 d we trivially haveĨ δ,u = S u . For u ≤ N + n 2 d, p ∈ I(Y ) u and any q ∈ S v we have pq ∈ I(Y ) N + n 2 d . Therefore, it will be sufficient to show that for any p ∈ I(Y ) N + n 2 d we have Y ω p = 0. Since ω p ∈ F n/2 H n dR (X) = i≤n/2 H n−i,i (X) we can write ω p = i≥n/2 (ω p ) i,n−i respecting the Hodge structure. Since δ = [Y ] is algebraic, δ ω p = Y (ω p ) n/2,n/2 . As computed in [CG80], the class (ω p ) n/2,n/2 admits a simple representation as aČeck cohomology class in PH n/2 (X, Ω n/2 X/k ). Let us write U j ⊂ X for the open locus where the j-th derivative f j := ∂f /∂x j does not vanish, and let ι j be the operator which contracts forms by ∂/∂x j . Given a tuple J = (j 0 , . . . , j q ) ∈ {0, . . . , n + 1} q+1 write U J = ∩ j∈J U j , ι J = ι jq • · · · • ι j 0 , Ω J = ι J Ω and f J = j∈J f j . We then have the following equivalence ofČeck cocycles (modulo coboundary):
+(2.4) (ω p ) n/2,n/2 ≡ p Ω J f J , U J |J|=n/2+1 .
+When p ∈ I(Y ), the form representing (ω p ) n/2,n/2 will pullback to zero on Y . Therefore Y (ω p ) n/2,n/2 = 0.
+
+
+First consequences
+Let S = k[x 0 , . . . , x n+1 ] be the coordinate ring of P n+1 k and Jac(f ) = (f 0 , . . . , f n+1 ), f i := ∂f ∂x i
+be the Jacobian ideal of f , R = S/ Jac(f ) and π : S → R the quotient map. We will write R u = π(S u ) and for each δ ∈ Hdg n/2 (X) write I δ = π(Ĩ δ ).
+
+Lemma 2.3. For any δ ∈ Hdg n/2 (X) we haveĨ δ = π −1 (I δ ).
+
+Proof. We need to show that Jac(f ) ⊂Ĩ δ . It will be sufficient to show that if p ∈ Jac(f )∩S N + n 2 d then ω p annihilates δ. The residue map res :
+S N +ℓd → F n−ℓ H n dR (X) can be factored into an isomorphism taking the form R n+ℓd ∼ → F n−ℓ H n dR (X)/F n−ℓ+1 H n dR (X) : p → (ω p ) n−ℓ,ℓ .
+Combine this observation with the fact that F n/2+1 H n dR (X) annihilates Hdg n/2 (X).
+
+For δ ∈ Hdg n/2 (X) write δ prim ∈ PH n/2 (X, Q) for the primitive part of δ.
+
+Lemma 2.4. For any δ, δ ′ ∈ Hdg n/2 (X) we have
+I δ = I δ ′ if Q δ prim = Q δ ′ prim .
+Proof. Since every form ω p annihilates the polarization h n/2 , we have I δ = I δ prim . On the other hand, the kernel of the linear form p → δ prim ω p depends only on the line spanned by the class δ prim .
+
+Suppose Y ⊂ X is a complete intersection of dimension n/2 in P n+1 k and write Y = Z(g 0 , . . . , g n/2 ). Assuming that d i = deg g i < d we can find homogeneous forms h 0 , . . . , h n/2 ∈ S such that f = g 0 h 0 + · · · + g n/2 h n/2 . Proposition 2.5 (Proposition 2.14 [Dan17]). With Y ⊂ X as above, we have
+I [Y ] = (π(g 0 ), . . . , π(g n/2 ), π(h 0 ), . . . , π(h n/2 )).
+Corollary 2.6. We haveĨ
+[Y ] = (g 0 , . . . , g n/2 , h 0 , . . . , h n/2 , f 0 , . . . , f n+1 ).
+Proof. This follows from Proposition 2.5 and Lemma 2.3.
+
+Corollary 2.7. If there exists an m ∈ N such that for all i,
+d i < d − m thenĨ [Y ],≤m = I(Y ) ≤m .
+Proof. Since deg h i = d − d i and deg f i = d − 1 the result follows from Corollary 2.6.
+
+Example 2.8. Suppose Y ⊂ X is an n 2 -plane and deg X ≥ 3. Then, we can recover the equations cutting out Y from its Hodge class, since Corollary 2.7 implies
+I(Y ) 1 =Ĩ [Y ],1 .
+Example 2.9. Suppose n = 2 and C ⊂ X ⊂ P 3 k is a smooth conic (d 1 = 1, d 2 = 2). If d ≥ 5 then by Corollary 2.7 the ideal cutting out C is generated byĨ [C],≤2 . However, if d = 4 then dimĨ [C],1 = 1 but dimĨ [C],2 = 6 although dim I(C) 2 = 5. The interference with the quadrics is predicted by Lemma 2.4: if H is the plane containing C then
+H ∩ X = C ∪ C ′ , where C ′ is a possibly singular conic with [C] prim = −[C ′ ] prim . Indeed, Proposition 2.5 implies I [C],2 = I(C) 2 + I(C ′ ) 2 .
+
+Perfect Hodge classes and the twisted cubic
+
+Lemma 2.4 gives a natural source for polynomials appearing inĨ δ . We distinguish the Hodge classes for which this is the only source.
+Definition 2.10. A Hodge class δ ∈ Hdg n/2 (X) is called perfect at level m if there exists Y 1 , . . . , Y s ⊂ X of codimension n/2 such that Q [Y i ] prim = Q δ prim and I δ,≤m = s i=1 π(I(Y i ) ≤m ). If I δ = s i=1 π(I(Y i ))
+then δ is perfect. Example 2.11. Hodge classes supported on a complete intersection variety Y = Z(g 0 , . . . , g n/2 ) with deg g i < d are perfect. In fact, the inclusion of the elements g i , h i ∈ I δ in Proposition 2.5 uses the following observation: If the answer to this question is negative, it would be beneficial to have a general principle to detect if a given effective algebraic class is perfect. As we demonstrate below, it would then be possible to determine if an algebraic subvariety representing a given perfect class can be reconstructed from its periods.
+Let Y i = Z(g 0 , . . . , g i−1 , h i , g i+1 , . . . , g n/2 ) ⊂ X and note that Y ∪ Y i = X ∩ Z(g 0 , . . . , g i−1 , g i+1 , . . . , g n/2 ). This implies that [Y ] prim = −[Y i ] prim .
+
+Twisted cubics in quartic surfaces
+
+We now consider the simplest non-trivial non-complete intersection: a twisted cubic T in a smooth quartic surface X ⊂ P 3 k . We prove below that T is perfect at level 2 if and only if I(T ) can be recovered fromĨ [T ]  Proof. Since I(T ) 1 = 0 and dim I(T ) 2 = 3 the "if" implication is immediate. We now assume that [T ] is perfect and computeĨ [T ],m for m = 1, 2.
+(i.e. dimĨ [T ],2 = 3).
+We begin with m = 1. IfĨ [T ],1 is non-zero then (by hypothesis) there exists a curve C ⊂ X lying in a plane Now we consider m = 2. If dimĨ [T ],2 > 3 then there exists a curve C ⊂ X, possibly with non-reduced components, lying in a quadric surface Q = Z(q) such that q does not vanish on T , q ∈Ĩ [T ],2 and Q [C] prim = Q [T ] prim . Note that we are not free to pick any q inĨ [T ],2 \ I(T ) 2 and so we may not assume Q is smooth. 1) or (4, 4), because the former would imply that C is contained in a plane and the latter would imply [C] prim = 0. Since both X and Q are smooth the curve C is a local complete intersection in both, therefore the dualizing sheaf ω C/k exists and can be computed by adjunction on either X or Q [Liu02, §6.4.2]. In particular, equating the two expressions for the degree of deg ω C/k by computing it on X and on Q respectively we obtain Case III: Q is the union of two distinct planes. This time C = C 1 + C 2 with C i 's lying in different planes and with C not planar. Since each C i is a plane curve of degree 1, 2 or 3 we can readily compute the possible range of values of ([C] 2 , deg(C)). None of these pairs give a primitive class proportional to [T ] prim .
+Z(h), h ∈Ĩ [T ],1 , such that Q [C] prim = Q [T ] prim . Since [C] prim = 0, [C] is either a line,Case I: Q is smooth. Now C ∈ Q ≃ P 1 × P 1 is of bidegree (a, b) for some 1 ≤ a ≤ b ≤ 4. Note (a, b) = (1,[C] 2 = b(a − 2) + a(b − 2). Since the degree of C is a + b we find [C] 2 prim = b(a − 2) + a(b − 2) − (a + b) 2 /4.
+Case IV: Q is a double plane. Now [C] must be the sum of components of H ∩ X for a plane H, but with multiplicities between 0, 1, 2. As we can always pass to 2[H ∩ X] − [C] without changing the span of the primitive part of [C], we can reduce to the planar case unless H ∩ X has at least three components and all three coefficients 0, 1, 2 must appear in their sum [C]. There are only three cases to consider and they are all eliminated as above.
+
+Remark 2.14. Sampling tens of thousands of quartics containing a twisted cubic, we observed that the class [T ] is perfect at level 2 on all of these examples. See Section 3.2.2.
+
+
+Twisted cubics in higher degree surfaces
+
+It is clear from Definition 2.1 that we can find more relevant equations as the degree of the of the surface increases. This suggests that it should be easier to reconstruct curves of fixed degree and genus as we view them in higher degree surfaces. This is also the nature of the result [GH83, Corollary 4.a.8]. We now observe this phenomenon with twisted cubics, giving a specific bound on the degree on the surface for reconstructability.
+
+Proposition 2.15. Let T ⊂ X be a twisted curve in a smooth surface X = Z(f ) ⊂ P 3 of degree d ≥ 5. The ideal of T can be reconstructed from its periods in X.
+
+Proof. We claimĨ [T ],2 = I T,2 . Suppose to the contrary that there is q ∈Ĩ [T ],2 \ I T,2 . Pick g ∈ Jac(f ) such that Z(g) ∩ Z(q) ∩ T = ∅. We set V = R/I T and note V ≃ C[t 0 , t 1 ] as T ≃ P 1 is projectively normal. The linear system W = q| T · V 3d−9 + g| T · V 0 ⊂ V 3d−3 has dimension 3d − 7 and no base locus. The lemma of Gieseker [Har80,p. 194
+] implies that either W · V s = V 3d−3+s or dim(W · V s ) = dim W + 2s = 3d − 7 + 2s. Therefore, if s ≥ 5 then W · V s = V 3d−3+s .
+On the other hand,Ĩ [T ],2d−4 = R 2d−4 , since the primitive part of [T ] is non-zero. Alternatively, R/Ĩ [T ] is Artinian-Gorenstein with socle at degree 2d − 4 [Vil, Remark 4]. Therefore, when s = 3(2d − 4) − 3d − 3 = 3d − 9 we must have W · V s = V 3d−3+s . Hence 3d − 9 < 5, which is a contradiction.
+
+Remark 2.16. This result and its proof was generously suggested to us by the anonymous referee. Any mistake in transcription is due to us.
+
+
+Implementation
+
+Let X = Z(f ) ⊂ P n+1 k be an even dimensional smooth hypersurface with k ⊂ C. For the code we have written we assume f to have rational coefficients, i.e. k = Q, although in principle algebraic coefficients would work. The examples in this section are computed using PeriodSuite 3 . We will now describe how the computation ofĨ δ,u is carried out.
+
+Throughout we use the grevlex monomial basis for the quotient R = S/ Jac(f ). The period computations in [Ser19] takes f as input and returns an approximation Q ∈ C s×s of the isomorphism R ⊗ C ∼ → PH n (X, Z) ⊗ C with respect to some basis γ 1 , . . . , γ s ∈ PH n (X, Z). Let π : S → R/ Jac(f ) denote the quotient map. The product S u × S v → S u+v ։ R u+v can be computed explicitly with respect to the grevlex monomial basis on R and monomial bases for S u , S v . We can compute the lattice of Hodge classes inside H n (X, Z) ≃ Z s+1 using these periods [LS19], provided sufficient precision is used. For a Hodge cycle δ,
+let v δ = (v δ,i ) s i=1 ∈ Z s such that δ prim = s i=1 v δ,i γ i .
+The approximation of the vector spaceĨ δ,u ⊂ S u now reduces to numerical linear algebra (Algorithm 3.1).
+
+In PeriodSuite the command PolynomialsVanishingOnHodgeCycle returnsĨ δ,u for given δ and u. The most expensive step is the computation of the approximation Q of the period isomorphism, everything else typically takes less than a second.
+
+
+Conics in quartic surfaces
+
+We will now demonstrate how the Picard number computations relying on approximate periods can be made rigorous in some instances. The proof of the following proposition can be Algorithm 3.1 Computing generators for the spaceĨ δ,u ∀i, j, r ij;k ← the k-th coordinate vector representing π(m i m ′ j ) ∈ R u+v 5:
+1: procedure PolynomialsVanishingOnHodgeCycle(f ,Q,v δ , u) 2: v ← N + n 2 deg f − u 3: {m i } ⊂ S u , {m ′ j } ⊂ S v monomialM i ← (r i,j;k ) j,k ⊲ Matrix representing the map m ′ j → π(m i m ′ j ) ∈ R u+v 6: M δ i ← M i · Q · v t δ ⊲ Column vector representing the map m ′ j → δ ω m i m ′ j 7: M ← (M δ i ) i ⊲ Matrix with rows M δ i 8:
+B ← a basis for the left kernel of M 9:
+return { i b i m i | (b i ) i ∈ B} 10: end procedure
+automated, therefore we give another example afterwards.
+
+Let us begin by recalling the maps ϕ δ,u following Definition 2.1 for a quartic X = Z(f ). Here the only non-zero maps are those that come from degrees u = 0, . . . , 4. For each u, the complementary degree is v = 4 − u and the maps are defined by
+ϕ δ,u : R u → R ∨ v ⊗ C p → q → δ ω pq ,
+where R = S/ Jac(f ) and δ ∈ H 2 (X, Z) is a Hodge class.
+
+In the proofs below, δ will be the class of a conic and u = 1. In light of Corollary 2.6 the kernel of ϕ δ,1 is spanned by the equation of the plane containing the conic representing δ.
+
+Proposition 3.1. The quartic surface X = Z(f ) ⊂ P 3 C defined by the polynomial f = x 4 + x 3 z − xy 3 + y 4 + z 4 + w 4 has Picard number 8. In fact, X contains 56 conics consisting of 28 coplanar bitangent pairs. The classes of these conics generate Pic(X).
+
+Proof. First, we show symbolically that X contains no lines. Anticipating the reconstruction step ahead we compute the periods of X to 5000 digits [Ser19]. We then find a rank 8 lattice Λ ⊂ H 2 (X, Z) ≃ Z 22 , together with a polarization h ∈ Λ; this lattice is the Picard group of X with high confidence [LS19]. There are 56 elements δ ∈ Λ such that δ 2 = −2 and h · δ = 2, these must be the classes of conics. For each class δ containing a conic, the numerical computation of I δ,1 is straightforward.
+
+We pick the class δ of one conic and denote by h = a 0 x 0 + a 1 x 1 + a 2 x 2 + a 3 x 3 a generator ofĨ δ,1 . Scaling h so that a 0 = 1, we observe a 3 = 0 and that a 1 minimally satisfies the following equation: We also express a 2 in terms of powers of a 1 using LLL, but we do not write this expression as it requires ∼ 4000 characters. Let K/Q be the field extension defined by the minimal polynomial of a 1 and express h as a linear form defined over K. Now, working over K (defined symbolically as an abstract field) we will prove that X ∩ Z(h) is a pair of conics. We used Magma [BCP97] to show that the singular subvariety S of X ∩ Z(h) is of degree 6 and that the reduced subvariety of S is a degree 2 irreducible point over K. Therefore, over C, the curve X ∩ Z(h) must contain two singular points with the Jacobian of the curve cutting each of them out with multiplicity three. This means the singularities can not be nodes or cusps and, by the degree-genus formula for plane curves, the curve can not be irreducible. Since X contains no lines, X ∩ Z(h) is a pair of conics bitangent to one another.
+250111a
+Each of the 28 embeddings of K into C will give another pair of conics, proving that we have at least 56 conics in X.
+
+We can now prove that X has Picard number 8. For B > 0 let Pic(X)| B = Z ξ ∈ Pic(X) | −ξ 2 prim < B . The lattice Λ ⊂ H 2 (X, Z) contains Pic(X)| B for some explicit B ≫ 10 1000 [LS19]. Therefore, we could not have missed the class of any conic in X. As we found 56 conics in X and 56 conic classes in Λ, all of the conic classes in Λ are truly in Pic(X). As Λ is integrally generated by these conic classes, we have Λ = Pic(X)| B , which implies rk Pic(X) ≥ rk Λ = 8.
+
+By computing the Zeta function of the reduction of X over F 101 we show rk Pic(X) ≤ 8 [AKR10; CHK19]. For this last step we used controlledreduction 4 [Cos15].
+
+Proposition 3.2. The quartic surface X = Z(5x 4 − 4x 2 zw + 8y 4 − 5z 4 + 4zw 3 ) ⊂ P 3 C has Picard number 14. In fact, X contains 102 conics and 4 lines whose classes generate Pic(X).
+
+Proof. The general outline of the proof follows that of Proposition 3.1. We will mention the peculiarities of this quartic. First, it is readily checked that X contains four coplanar lines. In particular, any plane containing a smooth conic of X will contain another smooth conic. The set of planes containing a conic in X break into three Galois orbits. The first orbit consists of 24 planes, each of the form Z(x + a 2 z + a 3 w) and containing a pair of bitangent conics. The second orbit also has 24 planes, but of the form Z(y + a 2 z + a 3 w) and containing a pair of transversal conics. The third orbit has size 3, elements of the form Z(z + a 3 w), 25a 3 3 + 4a 3 + 20, containing a pair of bitangent conics. The Zeta function for the reduction was computed over the prime 101.
+
+
+Twisted cubics in quartic surfaces revisited
+
+
+A single example
+
+Consider the quartic surface cut out by x 4 + x 3 z + y 4 + z 4 + w 4 . This has Picard number 18, contains 16 lines, 288 conics and 1536 twisted cubics. We computed theĨ δ,2 for the class δ for each of the twisted cubics and found dimĨ δ,2 = 3 in each case. We thus have a floating point representation of the coordinates ofĨ δ,2 ⊂ S 2 in the Grassmannian Gr(3, 10). As these coordinates must be algebraic numbers, we may once again reconstruct them exactly recovering I δ,2 and therefore I(T ).
+
+
+Many examples
+
+Now let T ⊂ X be any twisted cubic in a smooth quartic. By general considerations, the idealĨ δ gives rise to an Artinian-Gorenstein quotient S/Ĩ δ of socle degree 4 [Vil, Remark 4]. Upto translation of P 3 C we can put T into the standard form and randomly sample quartics X containing T , so that we know I ′ := Jac(X) + I(T ) but not I [T ] . It turns out that, in tens of thousands of random examples, codim I ′ 4 = 1. If g is the quartic form apolar to I ′ then I [T ] is the apolar ideal of g (using Macaulay's correspondance theorem for graded Artinian-Gorenstein algebras [Dol12, §1.3]). In each of our random examples we thus computed I [T ],2 and observed that dim I [T ],2 = 3. This point of view will be investigated in a future paper.
+
+
+Fields generated by periods
+
+Let X be a smooth projective variety defined over a subfield k of C and let k ⊂ C be the algebraic closure of k in C. Denote by X an the underlying complex analytic manifold of X. In the following, m ∈ N is an even number.
+
+Definition 4.1. A homology class δ ∈ H m (X an , Q) and its Poincaré dual are called algebraic if there exists subvarieties Z 1 , . . . , Z a ⊂ X of dimension m 2 such that δ is a rational linear combination of [Z i ].
+
+The de Rham cohomology can be defined purely algebraically [Gro66] giving rise to the kvector spaces H m dR (X/k) equipped with a canonical isomorphism H m dR (X/k) ⊗ k C ≃ H m (X an , C) for each m ≥ 0. For a field extension K/k we will write H m dR (X/K) for the algebraic de Rham cohomology of the base change of X to K; recall that there is a natural isomorphism H m dR (X/K) ≃ H m dR (X/k) ⊗ k K. For the general discussion on algebraic de Rham cohomology see Deligne's lecture notes [Del+82]. Our point of departure is the following fact.
+
+Proposition 4.2 (Proposition 1.5 [Del+82]). If δ ∈ H m (X, Q) is algebraic, then for every ω ∈ H m dR (X/k) the following period integrals are in k:
+(4.1) p ω (δ) := 1 (2πi) m 2 δ ω.
+Definition 4.3. Given an algebraic cycle δ = [Z] we will denote by k δ , and by k Z , the field spanned over k by the set of all period integrals p ω (δ).
+
+
+Fields of definition of algebraic cycles
+
+The field k δ is the smallest field containing k such that δ induces a cycle class in H 2n−m dR (X/k δ ). Therefore, if δ = [Z] then the field of definition of Z must contain k δ . It is possible that Z is defined over a transcendental extension of k, e.g., if Z is a transcendental fiber of a continuous family of algebraic cycles inside X.
+
+Proposition 4.4. For any algebraic cycle δ ∈ H m (X an , Z), there are subvarieties Z 1 , Z 2 , . . . , Z s ⊂ X of pure dimension m 2 defined over k δ and integers a 0 , . . . , a s , a 0 > 0 such that
+(4.2) a 0 δ = a 1 [Z 1 ] + a 2 [Z 2 ] + · · · + a s [Z s ].
+Proof. We may write δ = [Z] for an algebraic cycle Z on X C and arguing as in the proof of [Del+82, I.1.5] we may assume Z is defined over a finite extension k ′ of k. As noted earlier, k δ ⊂ k ′ is forced and we may assume k ′ /k δ is Galois. Let G be the Galois group Gal(k ′ /k δ ). We define the algebraic cycle (4.3)
+Z ′ := 1 |G| σ∈G σ(Z)
+which is invariant under G and therefore defined over k δ . As the cohomology class [Z] is defined over k δ it is fixed by G. Therefore, ∀σ ∈ G, Theorem 4.5. Let X be a smooth projective variety over k ⊂ C with H 1 (X, O X ) = 0, d 1 an integer annihilating torsion in H 2 (X an , Z) and d 2 an integer such that X has a rational point over a field extension k ′ /k of degree d 2 . For any divisor in Z on X C the following are true.
+
+1. The divisor d 1 d 2 Z is linearly equivalent to a divisor defined over k Z .
+
+2. If d 1 Z is effective then the family of divisors linearly equivalent to d 1 Z are parametrized by a Brauer-Severi variety defined over k Z .
+
+Proof. Let L = O X an (Z) be the line bundle corresponding to Z. Our hypothesis H 1 (X , O X ) = 0 implies that Pic(X/k) = Pic(X an ) ֒→ H 2 (X an , Z) so that L is defined over k. By Poincaré duality we have
+p ω (Z) = 1 (2πi) n−1 [Z] ω = 1 (2πi) n X an ω ∪ c 1 (L) = Tr(ω ∪ c 1 (L)),
+where c 1 (L) is 2πi times the topological Chern class of L, and in fact c 1 (L) ∈ H 2 dR (X/k). The cup product H 2n−2 (X/k) × H 2 (X/k) → H 2n (X/k) and the trace map Tr : H 2n (X/k) ∼ = k can be defined for X/k. The composition of these two maps is a non-degenerate k-bilinear map and, by our hypothesis on the periods of Z, Tr(·∪c 1 (L)) has values in k Z , thus c 1 (L) ∈ H 2 dR (X/k Z ). Since H 1 (X, O X ) = 0, the kernel of the Galois invariant map c 1 : Pic(X/k) → H 2 dR (X/k) is contained in the torsion subgroup of H 2 (X an , Z). Therefore, L d 1 ∈ Pic(X/k) Gal(k/k Z ) . This does not mean L d 1 is defined over k Z , see Remark 4.8. However, if d 1 Z is effective then the k-projective space |H 0 (X/k, L d 1 )| descends to a Brauer-Severi variety defined over k Z , see [BF04;GS06]. Item 2 is now proven.
+
+As for Item 1, the map Pic(X/k ′ ) → Pic(X/k) Gal(k/k ′ ) is surjective [CM96, Corollary 2.3]. Moreover, via [CM96, Proposition 2.2] the cokernel of Pic(X/k Z ) → Pic(X/k) Gal(k/k Z ) is annihilated by [k ′ : k Z ], which divides d 2 = [k ′ : k]. Therefore, (L d 1 ) d 2 is contained in Pic(X/k Z ). Any rational section of L d 1 d 2 will give a divisor defined over k Z linearly equivalent to d 1 d 2 Z.
+
+Remark 4.6. With X as in Theorem 4.5 and d 1 = 1, if Z ⊂ X an is an effective divisor isolated in its linear system then Z is defined over k Z even if X has no k Z points. In this case, we use the fact that a zero dimensional Brauer-Severi variety is a point.
+
+Remark 4.7. A smooth surface X in P 3 k fulfills the hypotheses of Theorem 4.5 with d 1 = 1 and d 2 = deg X: the first follows by Lefschetz hyperplane theorem and the latter by intersecting X with a line.
+
+Remark 4.8. Galois invariance of the isomorphism class of a line bundle does not imply that a line bundle in the isomorphism class can be defined over the expected base field. Take the curve X defined by x 2 + y 2 + z 2 in P 2 Q which has no Q points and therefore has no line bundles of degree 1. On the other hand, since Pic(X/k) ≃ Z, the isomorphism class of a line bundle depends only on the degree, therefore the isomorphism class of line bundles of degree 1 is fixed by the Galois action. The Brauer-Severi variety associated to this class is the curve X/Q itself.
+
+4.2 Bounds on the degree of the field extension k Z For a smooth algebraic variety X over k let Z be an algebraic cycle of dimension m 2 in X/k. In this section we will give bounds on the degree [k Z : k].
+
+Let ω 1 , ω 2 , . . . , ω b be a basis for the primitive cohomology PH m dR (X/k) and consider the period vector p(Z) := (p ω 1 (Z), p ω 2 (Z), · · · , p ω b (Z)) ∈ k b , where we used the notation and statement of Proposition 4.2. Let Λ Z ⊂ k b be the Z-module generated by the Galois conjugates of p(Z) and let λ Z = rk Λ Z . Our bounds rely on the following theorem.  Proof. Let K Z /k be the Galois closure of k Z in C and let G = Gal(K Z /k). Note that [k Z : k] divides [K Z : k] = |G| and any bound for the latter will bound the former.
+
+Let v 1 , v 2 , . . . , v λ Z ∈ K b Z be a Z-basis for the saturation of Λ Z . We thus get the following Galois representation: h : Gal(K Z /k) → GL(λ Z , Z), h(σ) · (v 1 , v 2 , . . . , v λ Z ) = (σ(v 1 ), σ(v 2 ), . . . , σ(v λ Z )) .
+
+It is easy to see that K Z is generated over k by all the entries of v i 's, therefore the representation h is faithful. Consequently, |G| = |h(G)| is bounded above by M (λ Z ) as a result of Theorem 4.9. The observation M (λ Z ) ≤ M (λ) finishes the proof.
+
+Lemma 4.11. Let X ⊂ P n+1 k be a smooth projective variety, ρ = rk Hdg m (X) and δ ∈ Hdg m (X) an effective Hodge cycle. Then the field extension k δ /k has degree at most M (ρ − 1).
+
+Proof. Let h be the hyperplane class on X and project Hdg m (X) to (h m ) ⊥ . The Galois orbit of the projection of δ has dimension at most ρ − 1. The primitive periods of δ and of its projection are the same. Now apply Lemma 4.10.
+
+Theorem 4.12. Let (X, d 1 , d 2 ) be as in Theorem 4.5 and let ρ be the Picard number of X. Then Pic(X) admits a Q-basis [Z i ], i = 1, 2, .., ρ, where each Z i is defined over an extension of k of degree at most M (ρ − 1). If d 1 = d 2 = 1 then a Z-basis of this form exists.
+
+Proof. Let Y 1 , . . . , Y ρ ∈ Pic(X C ) be a Q-basis. Using Theorem 4.5 we can find divisors Z 1 , . . . , Z ρ where Z i is defined over k Y i and [Z i ] = d 1 d 2 [Y i ]. By Lemma 4.11 we conclude [k Y i : k] ≤ M (ρ−1). If d 1 = d 2 = 1 then begin with an integral basis {Y i } ρ i=1 ⊂ Pic(X C ). Proposition 4.14. If X ⊂ P 3 k is a smooth surface of degree d with Picard number 2 then there exists a curve C ⊂ X defined over a field extension k ′ /k of degree at most 2d such that [C] generates Pic(X) together with the hyperplane class.
+
+Proof. Let v 1 , v 2 ∈ Pic(X) ≃ Z 2 be a basis and let h ∈ Pic(X) be the hyperplane class. Writing h = a 1 v 1 + a 2 v 2 we note gcd(a 1 , a 2 ) = 1 since h is indivisible. Take b 1 , b 2 ∈ Z such that b 1 a 1 + b 2 a 2 = 1 and let w = b 1 v 1 + b 2 v 2 so that h, w is a basis for Pic(X). By replacing w with w + ch for c ≫ 1 we may assume w is effective. Lemma 4.11 implies that the field k w is at most a quadratic extension of k. If X(k) = ∅ we can apply Theorem 4.5 for the existence of a curve C/k w representing w. Otherwise, intersecting X with a line we see that X admits a point over an extension of k of degree at most d.
+
+Proposition 2. 13 .
+13Let T be a twisted cubic in a smooth quartic surface X ⊂ P 3 k . The class [T ] is perfect at level 2 if and only ifĨ [T ],1 = 0 and dimĨ [T ],2 = 3.
+
+
+a (possibly singular) conic or an elliptic curve. The self intersection numbers of [C] in each case are −2, −2 and 0 respectively. Since [C] prim = [C] − d 4 h, where d is the degree of C, we have [C] 2 prim = −9/4, −3, −9/4 respectively. Whereas, [T ] 2 prim = −2 − 3 2 /4 = −17/4. Since a[T ] prim = b[C] prim for non-zero integers a, b the quotient [C] 2 prim /[T ] 2 prim ∈ {12/17, 9/17} must be the square of a rational number. As this is not the case, we concludeĨ [T ],1 = 0.
+
+
+As before, the quotient [C] 2 prim /[T ] 2 prim must be the square of a rational number. In the given range of possibilities of a, b this can only be realized if (a, b) = (1, 2) or (2, 3) and in both cases [C] 2 prim = −17/4 = [T ] 2 prim . As these primitive classes are proportional, we conclude [C] prim = ±[T ] prim and [C] = ±[T ] prim + a+b 4 h. Since C is contained in a quadric not containing T , the intersection number C · T must be an integer between 0 and 6. For (a, b) = (1, 2) or (2, 3) this is not the case. Therefore, no such C exists. Case II: Q is an irreducible cone. Pass to the desingularizationQ → Q and letC ⊂Q be the proper transform of C. This time we have deg ωC ≤ deg ω C = [C] 2 and we can compute the left hand side by adjunction onQ. The surfaceQ is a Hirzebruch surface of degree 2, we refer to [Har77, §V.2] for general properties of such surfaces. We have Pic(Q) = Z e, f where e 2 = −2, e · f = 1, f 2 = 0. Here e represents the class of the exceptional divisor E and f the class of the proper transform of a line in Q. Let us writec := [C] = ae + bf , where b equals the degree of C in P 3 k . SinceC has no component supported on E the relations e ·c, f ·c ≥ 0 imply b ≥ 2a ≥ 0.The class of a plane section is h = e + 2f and since C is a component of X ∩ Q, the class 4h −c must also be effective. These give the additional constraints a ≤ 4 and b ≤ 8. We may assume C is not planar, and since any curve of degree ≤ 2 in Q is planar we conclude b > 2. Furthermore, C = X ∩ Q thus b < 8. Moreover, if b = 7 then C differs from being the complete intersection X ∩ Q by the class of a line L. Thus [L] prim is proportional to [T ] prim in X, which is a contradiction. This ensures b < 7. Now deg ωC = −2(a 2 −ab+b) ≤ [C] 2 and deg C = b so that −2(a 2 −ab+b)−b 2 /4 ≤ [C] 2 prim < 0. We see that there are no pairs (a, b) in the specified range which allows for [C] 2 prim /[T ] 2 prim to be the square of a rational number and for [C] · [T ] ∈ {0, . . . , 6}.
+
+
+[σZ] = σ[Z] = [Z] and [Z ′ ] = [Z] in H m (X an , Q). To get the expression (4.2) in H m (X an , Z) clear denominators in (4.3) to get an identity modulo torsion. A sufficient multiple of this identity will kill the torsion, giving an equality. The statement of Proposition 4.4 is false if we require a 0 = 1, see Remark 4.8. What estimates can we put on the minimal possible a 0 ?We provide an answer in the setting of the following theorem.
+
+Theorem 4. 9 (
+9Minkowski [Min87;GL06]). The size of the largest finite group in GL(n,
+
+Lemma 4 . 10 .
+410For any integer λ ≥ λ Z , the degree [k Z : k] is bounded above by M (λ).
+
+Remark 4. 13 .
+13The values of M (n) for n = 1, . . . , 20 are listed below:
+
+
+Instituto de Matemática Pura e Aplicada, IMPA, Estrada Dona Castorina, 110, 22460-320, Rio de Janeiro, RJ, Brazil, www.impa.br/~hossein, hossein@impa.br 2 Max Planck Institute for Mathematics in the Sciences, MPI MiS, Inselstraße 22, Leipzig 04103, Germany www.emresertoz.com, emre@sertoz.com1) 
+
+(p, q) → 
+
+δ 
+
+ω pq , 
+
+1 
+
+
+Now apply Lemma 2.4. Question 2.12. Are all algebraic Hodge classes perfect?
+
+
+bases for S u and S v4: 
+
+
+available at https://github.com/emresertoz/PeriodSuite
+https://github.com/edgarcosta/controlledreduction
+AcknowledgementsWe are grateful to Pierre Deligne for his detailed comments on an earlier draft of this paper which shaped the present version. We also benefited from our conversations with Daniele Agostini, Moritz Firsching, Uwe Nagel, Frank Schreyer and Bernd Sturmfels. The second author would like to thank IMPA for additional funding and hospitality during his visit. We are indebted to the anonymous referee for giving valuable insight and contributing Proposition 2.15.
+Bounding Picard numbers of surfaces using p-adic cohomology. Timothy G Abbott, Kiran S Kedlaya, David Roe, Arithmetics, geometry, and coding theory. ParisSémin. Congr. Soc. Math. France21Timothy G. Abbott, Kiran S. Kedlaya, and David Roe. "Bounding Picard numbers of surfaces using p-adic cohomology." In: Arithmetics, geometry, and coding theory (AGCT 2005). Vol. 21. Sémin. Congr. Soc. Math. France, Paris, 2010, pp. 125-159.
+
+The Magma algebra system. I. The user language. Wieb Bosma, John Cannon, Catherine Playoust, Computational algebra and number theory. London24Wieb Bosma, John Cannon, and Catherine Playoust. "The Magma algebra system. I. The user language." In: J. Symbolic Comput. 24.3-4 (1997). Computational algebra and number theory (London, 1993), pp. 235-265. issn: 0747-7171.
+
+Rational divisors in rational divisor classes. N Bruin, E V Flynn, Algorithmic number theory. 6th international symposium. Burlington, VT, USASpringerANTS-VI. isbn: 3-540-22156-5/pbkN. Bruin and E. V. Flynn. "Rational divisors in rational divisor classes." English. In: Algorithmic number theory. 6th international symposium, ANTS-VI, Burlington, VT, USA, June 13-18, 2004. Proceedings. Berlin: Springer, 2004, pp. 132-139. isbn: 3-540-22156-5/pbk.
+
+Infinitesimal variations of Hodge structure and the global Torelli problem. James A Carlson, Phillip A Griffiths, Journées de Géometrie Algébrique d'Angers, Juillet 1979/Algebraic Geometry, Angers, 1979. Sijthoff & Noordhoff. Alphen aan den Rijn-Germantown, MdJames A. Carlson and Phillip A. Griffiths. "Infinitesimal variations of Hodge structure and the global Torelli problem." In: Journées de Géometrie Algébrique d'Angers, Juillet 1979/Algebraic Geometry, Angers, 1979. Sijthoff & Noordhoff, Alphen aan den Rijn-Germantown, Md., 1980, pp. 51-76.
+
+Zeta functions of nondegenerate hypersurfaces in toric varieties via controlled reduction in p-adic cohomology. Edgar Costa, David Harvey, Kiran S Kedlaya, Proceedings of the Thirteenth Algorithmic Number Theory Symposium. the Thirteenth Algorithmic Number Theory SymposiumMathematical Sciences PublishersEdgar Costa, David Harvey, and Kiran S. Kedlaya. "Zeta functions of nondegenerate hypersurfaces in toric varieties via controlled reduction in p-adic cohomology." In: Proceedings of the Thirteenth Algorithmic Number Theory Symposium. Mathematical Sciences Publishers, 2019, pp. 221-238.
+
+On large Picard groups and the Hasse principle for curves and K3 surfaces. Daniel Coray, Constantin Manoil, English. In: Acta Arith. 76issn: 0065-1036; 1730-6264/eDaniel Coray and Constantin Manoil. "On large Picard groups and the Hasse prin- ciple for curves and K3 surfaces." English. In: Acta Arith. 76.2 (1996), pp. 165-189. issn: 0065-1036; 1730-6264/e.
+
+Effective computations of Hasse-Weil zeta functions. Edgar Costa, Thesis (Ph.D.)-New York University. ProQuest LLC. Edgar Costa. Effective computations of Hasse-Weil zeta functions. Thesis (Ph.D.)- New York University. ProQuest LLC, Ann Arbor, MI, 2015, p. 78. isbn: 978-1321- 95392-3.
+
+Effective obstruction to lifting Tate classes from positive characteristic. Edgar Costa, Emre Can, Sertöz, arXiv:2003.11037Edgar Costa and Emre Can Sertöz. Effective obstruction to lifting Tate classes from positive characteristic. 2020. arXiv: 2003.11037.
+
+Noether-Lefschetz locus and a special case of the variational Hodge conjecture: using elementary techniques. Ananyo Dan, Analytic and algebraic geometry. Hindustan Book Agency. New DelhiAnanyo Dan. "Noether-Lefschetz locus and a special case of the variational Hodge conjecture: using elementary techniques." In: Analytic and algebraic geometry. Hin- dustan Book Agency, New Delhi, 2017, pp. 107-115.
+
+English. In: The millennium prize problems. P Deligne, AMSProvidence, RIThe Hodge conjectureP. Deligne. "The Hodge conjecture." English. In: The millennium prize problems. Providence, RI: American Mathematical Society (AMS);
+
+. M A Cambridge, isbn: 0-8218-3679-X/hbkClay Mathematics InstituteCambridge, MA: Clay Math- ematics Institute, 2006, pp. 45-53. isbn: 0-8218-3679-X/hbk.
+
+Pierre Deligne, ii+414. isbn: 3-540-11174-3Hodge cycles, motives, and Shimura varieties. BerlinSpringer-Verlag900Pierre Deligne et al. Hodge cycles, motives, and Shimura varieties. Vol. 900. Lec- ture Notes in Mathematics. Philosophical Studies Series in Philosophy, 20. Berlin: Springer-Verlag, 1982, pp. ii+414. isbn: 3-540-11174-3.
+
+Classical algebraic geometry. A modern view. Igor V Dolgachev, Cambridge University Press639CambridgeIgor V. Dolgachev. Classical algebraic geometry. A modern view. Cambridge Univer- sity Press, Cambridge, 2012, pp. xii+639.
+
+Infinitesimal variations of Hodge structure. II: An infinitesimal invariant of Hodge classes. Phillip Griffiths, Joe Harris, English. In: Compos. Math. 50issn: 0010-437X; 1570-5846/ePhillip Griffiths and Joe Harris. "Infinitesimal variations of Hodge structure. II: An infinitesimal invariant of Hodge classes." English. In: Compos. Math. 50 (1983), pp. 207-264. issn: 0010-437X; 1570-5846/e.
+
+Orders of finite groups of matrices. M Robert, Martin Guralnick, Lorenz, Groups, rings and algebras. Providence, RI420Robert M. Guralnick and Martin Lorenz. "Orders of finite groups of matrices." In: Groups, rings and algebras. Vol. 420. Contemp. Math. Amer. Math. Soc., Providence, RI, 2006, pp. 141-161.
+
+On the periods of certain rational integrals. I, II. Phillip A Griffiths, In: Ann. of Math. 2ibid.Phillip A. Griffiths. "On the periods of certain rational integrals. I, II." In: Ann. of Math. (2) 90 (1969), 460-495; ibid. (2) 90 (1969), pp. 496-541.
+
+On the de Rham cohomology of algebraic varieties. Alexander Grothendieck, In: Inst. HautesÉtudes Sci. Publ. Math. 29Alexander Grothendieck. "On the de Rham cohomology of algebraic varieties." In: Inst. HautesÉtudes Sci. Publ. Math. 29 (1966), pp. 95-103.
+
+Cambridge Studies in Advanced Mathematics. Philippe Gille, Tamás Szamuely, xii+343. isbn: 978-0-521-86103-8; 0-521-86103-9Central simple algebras and Galois cohomology. CambridgeCambridge University Press101Philippe Gille and Tamás Szamuely. Central simple algebras and Galois cohomology. Vol. 101. Cambridge Studies in Advanced Mathematics. Cambridge University Press, Cambridge, 2006, pp. xii+343. isbn: 978-0-521-86103-8; 0-521-86103-9.
+
+Algebraic geometry. Robin Hartshorne, Graduate Texts in Mathematics. 52496Springer-VerlagRobin Hartshorne. Algebraic geometry. Graduate Texts in Mathematics, No. 52. Springer-Verlag, New York-Heidelberg, 1977, pp. xvi+496.
+
+The genus of space curves. Joe Harris, English. In: Math. Ann. 249issn: 0025-5831; 1432-1807/eJoe Harris. "The genus of space curves." English. In: Math. Ann. 249 (1980), pp. 191- 204. issn: 0025-5831; 1432-1807/e.
+
+Translated from the French by Reinie Erné, Oxford Science Publications. Qing Liu, xvi+576. isbn: 0-19-850284-2Oxford University Press6OxfordAlgebraic geometry and arithmetic curvesQing Liu. Algebraic geometry and arithmetic curves. Vol. 6. Oxford Graduate Texts in Mathematics. Translated from the French by Reinie Erné, Oxford Science Publi- cations. Oxford University Press, Oxford, 2002, pp. xvi+576. isbn: 0-19-850284-2.
+
+A numerical transcendental method in algebraic geometry: computation of Picard groups and related invariants. Pierre Lairez, Emre Can, Sertöz, English. In: SIAM J. Appl. Algebra Geom. 3Pierre Lairez and Emre Can Sertöz. "A numerical transcendental method in algebraic geometry: computation of Picard groups and related invariants." English. In: SIAM J. Appl. Algebra Geom. 3.4 (2019), pp. 559-584. issn: 2470-6566/e.
+
+Zur Theorie der positiven quadratischen Formen. Hermann Minkowski, In: J. Reine Angew. Math. 101Hermann Minkowski. "Zur Theorie der positiven quadratischen Formen." In: J. Reine Angew. Math. 101 (1887), pp. 196-202. issn: 0075-4102.
+
+A Course in Hodge Theory: Periods of Algebraic cycles. Hossein Movasati, Roberto Villaflor Loyola, in preparationHossein Movasati and Roberto Villaflor Loyola. A Course in Hodge Theory: Periods of Algebraic cycles. in preparation. url: http://w3.impa.br/~hossein/myarticles/hodgetheoryII.p
+
+Computing periods of hypersurfaces. Emre Can, Sertöz, English. In: Math. Comput. 88issn: 0025-5718; 1088-6842/eEmre Can Sertöz. "Computing periods of hypersurfaces." English. In: Math. Comput. 88.320 (2019), pp. 2987-3022. issn: 0025-5718; 1088-6842/e.
+
+Periods of Complete Intersection Algebraic Cycles. Roberto Villaflor Loyola, arXiv:1812.03964math.AGRoberto Villaflor Loyola. "Periods of Complete Intersection Algebraic Cycles." In: (). arXiv: 1812.03964 [math.AG].
+
+Cambridge Studies in Advanced Mathematics. Translated from the French by Leila Schneps. Claire Voisin, x+351. isbn: 978-0-521- 71802-8II. English. 77Cambridge University PressHodge theory and complex algebraic geometryClaire Voisin. Hodge theory and complex algebraic geometry. II. English. Vol. 77. Cambridge Studies in Advanced Mathematics. Translated from the French by Leila Schneps. Cambridge University Press, Cambridge, 2007, pp. x+351. isbn: 978-0-521- 71802-8.

@@ -1,0 +1,271 @@
+
+Shape-based Automatic Detection of Pectoral Muscle Boundary in Mammograms
+Published online: 10 June 2015
+
+Chunxiao Chen 
+Gao Liu 
+Jing Wang 
+Gail Sudlow 
+Shape-based Automatic Detection of Pectoral Muscle Boundary in Mammograms
+Published online: 10 June 201510.1007/s40846-015-0043-6Received: 29 April 2014 / Accepted: 13 October 2014 /ORIGINAL ARTICLEPectoral muscleBoundary detectionShape- based maskMammogram
+The detection of the pectoral muscle boundary in the medio-lateral oblique view of mammograms is essential to improving the computer-aided diagnosis of breast cancer. In this study, a shape-based detection method is proposed for accurately extracting the boundary of the pectoral muscle in mammograms. A shape-based enhancement mask is applied to the mammogram and the initial boundary is then defined using morphological operators. The seed point is then detected on the initial boundary and the pectoral boundary is evolved from candidate points produced using a shape-based growth strategy. A cubic polynomial fitting function is implemented to obtain the final pectoral muscle boundary. The proposed method was applied to 322 mammograms from the mini Mammographic Image Analysis Society database. A 97.2 % acceptable rate from expert radiologists and assessment results based on the false positive rate, false negative rate, and Hausdorff distance demonstrate the robustness and effectiveness of the proposed shape-based detection method.
+
+Introduction
+
+The three most commonly diagnosed types of cancer among women in 2013 were breast, lung, and colorectal cancers, accounting for 51 % of estimated cancer cases in women, with breast cancer alone accounting for 29 % [1]. Breast cancer is the most common cause of cancer-related deaths, and early detection is the best defense against it [2]. Compared with other detection techniques, such as magnetic resonance imaging, nuclear medicine, and ultrasound, mammography has the advantages of low er cost, higher convenience, and higher spatial resolution. However, it is challenging for physicians to correctly and quickly interpret a large number of mammograms. Computerized mammographic analysis has been proposed to improve efficiency and avoid inter-observer discrepancies [3].
+
+In the computerized mammographic analysis, three anatomical landmarks, namely the breast border, nipple, and pectoral muscle, are first extracted automatically [4]. The present study mainly focuses on improving the accuracy of pectoral muscle extraction. The pectoral muscle, which is a predominantly dense region in most medio-lateral oblique (MLO) views, always appears as a high-intensity, triangular region across the upper posterior margin of the image and has texture characteristics similar to those of mammographic parenchyma, which can easily cause a high false positive (FP) rate and misdiagnosis of breast cancer. The pectoral edge is used as one of the axes in three-dimensional reconstructions from a large series of two-dimensional mammographic views [5]. However, the wide variability in size, intensity, shape, and position of the pectoral muscle due to the individual difference and patient positioning during image acquisition, together with the similarity between muscle and breast tissues, make pectoral muscle detection very challenging [6].
+
+In this study, shape-based detection is proposed to automatically segment the pectoral muscle boundary. A shape-based enhancement mask (SBEM) is first implemented to highlight the pectoral muscle boundary, and then the pectoral muscle boundary is evolved using a seed point and a shaped-based search strategy. The rest of this paper is organized as follows. Works related to pectoral muscle extraction are reviewed in Sect. 2. Section 3 described the proposed automatic detection method of the pectoral muscle boundary in mammograms. The experimental results and discussion are given in Sects. 4 and 5, respectively. Section 6 gives the conclusions.
+
+
+Related Works
+
+Several studies have proposed methods for pectoral muscle segmentation. On the assumption that the pectoral muscle boundary is approximate to a straight line at an angle of between 45°and 90°, the Hough transform was applied to extract the edge as a line [6]. The parenchymal pattern classification was applied to 615 oblique mammograms and 65 % of the results were consistent with the results of radiologists, but the performance of pectoral muscle identification was not reported. Kwok et al. [7] presented straight line estimation and iterative cliff detection methods to identify the pectoral muscle. The detection rate validated by two expert mammographic radiologists was 83.9 % for the mini Mammographic Image Analysis Society (mini-MIAS, http://peipa.essex.ac.uk/ipa/pix/mias/) database of 322 images. The Radon transform was applied to automatically detect the straight line approximating the edge of the pectoral muscle [8]. 540 MLO mammograms from the Medical Center of the Faculty of Medicine, University of São Paulo, were tested. 69.6 % of the detection results agreed with a radiologist's results. To solve the problem of detecting a non-linear pectoral muscle boundary, the Gabor wavelet filter was applied to enhance the pectoral muscle boundary for segmentation [9]. This approach overcomes the limitation of a straight-line representation, but often fails when the interface of the glandular tissue and the pectoral muscle is not very clear. For 84 MLO mammograms from the mini-MIAS database, the Gabor wavelet method achieved average FP and false negative (FN) rates of 0.58 and 5.77 %, respectively. Various methods based on the intensity differences between the breast tissue and the pectoral muscle have been proposed to extract the pectoral muscle boundary, such as the region growth technique [10], the intensity cliff detection algorithm [11], and the gradient-based texture analysis method [12]. However, to some extent, the validity of these methods is greatly affected by the intensity contrast between pectoral muscle and breast tissues. Two methods based on graph theory have been proposed for identifying the pectoral muscle [13]. For 84 MLO mammograms from the mini-MIAS database, a graph-pectoral-segment method based on adaptive pyramids (AP) obtained average FP and FN rates of 3.71 and 5.95 % and a method based on minimum spanning trees (MST) achieved average FP and FN rates of 2.55 and 11.68 %, respectively. The watershed transformation (WaT), a commonly used segmentation technique, has been applied to extract the pectoral muscle [14]. The mean FP and FN rates were 0.85 and 4.88 %, but oversegmentation was difficult to avoid. Additionally, various enhancement approaches for mammograms are commonly adopted prior to extracting the boundary of the pectoral muscle. Charkraborty [15] designed a weight function to highlight the boundary, and then utilized the local gradient to find the edge points; however, the FP pixel percentage was C4.22 %. A combination of adaptive histogram equalization and polynomial curvature estimation on the selected region of interest was implemented to enhance the contrast of mammograms, which makes the segmentation of very-low-contrast pectoral muscle areas possible; 96.56 % of the test results were acceptable [16]. Li [17] employed two features of the pectoral muscle, namely homogeneous texture and high-intensity deviation (HT-HID), to identify the initial pectoral muscle edge, and then used the Kalman filter to refine the ragged initial edge. The acceptable segmentation result rate was 90.06 % for the mini-MIAS database. The definition of acceptable segmentation result rate is given in the Results section.
+
+
+Methods
+
+The pectoral muscle has significant anatomical features, such as sharp intensity changes on the boundary, roughly triangular shape, and gradually narrowing from top to bottom [17]. Based on these characteristics, an SBEM and a boundary evolution strategy are proposed in this paper to automatically detect the pectoral muscle boundary, as shown in Fig. 1.
+
+
+Shape-based Enhancement Mask
+
+The pectoral muscle usually has an approximate direction and higher gray level intensity in mammogram. Based on the prior knowledge, an enhancement filter is commonly used to process mammograms to highlight the pectoral muscle. Zhou et al. [12] developed a gradient-based directional kernel (GDK) filter to enhance the linear texture structures on mammograms at approximately 45°from the top left to the bottom right and implemented it by convolving the image with an 11 9 11 mask with values of 1 and -1. However, the GDK filter is very sensitive to the ridge points and produces a lot of unwanted boundaries. To overcome these problems, a linear shape-based enhanced filter with several coefficients that considers the transition intensity changes around the pectoral muscle edge is proposed here. The filter is designed as:
+gðx; yÞ ¼ w s;t X M s¼0 X N t¼1
+ðIðx þ s; y À tÞ:
+À Iðx þ s; y þ tÞÞ þ w c Iðx; yÞð1Þ
+where Iðx; yÞ is the intensity of the pixel at point (x, y), (M ? 1) is the number of rows, N is the number of pixel pairs contributing to the weighted differentiation along the horizontal direction, and w s;t and w c are weight coefficients. The expression can be implemented by convolving a mammogram with a linear enhancement mask (Fig. 2).
+
+Considering that the pectoral muscle gradually narrows from top to bottom, the bottom coefficients of the mask are shifted to the left to highlight the structural characteristics, as shown in Fig. 3. Due to the pixel intensity gradually becoming stronger away from the left side of the boundary, in this mask, the coefficient w s;t increases with t to suppress unwanted tissues, and the diagonal coefficients enhance the structural characteristics of the pectoral muscle. The sum of the mask coefficients (excluding w c ) is zero. In the filtered image, the regions with homogenous intensities in the original image are suppressed and the boundary is emphasized. The coefficient w c , which represents the contribution of the center point, is often set in the range of 0-1 to avoid excessive influence on filter results while processing non-boundary regions with a high intensity value.
+
+
+Seed Point Selection
+
+Based on the characteristics of the pectoral muscle, Domingues [18] predicted two endpoints of the pectoral muscle and then computed the muscle contour using a shortest path technique. However, in many cases, the endpoint detection of the contour on the left column is difficult to precisely implement since the lower half of the pectoral muscle is often invaded by glandular tissues, which seriously affects the extraction of the shortest path. Here, a method for selecting the start point of the pectoral muscle on the boundary is proposed to facilitate obtaining the true boundary of the pectoral muscle. In order to avoid the confusion caused by glandular tissue, the start point (seed point) of the boundary is searched for only on the top part of the enhanced image. The start point search strategy is as follows:
+
+Step 1 Define P row pixels on the top part of the enhanced image as the search subimage.
+
+Step 2 Threshold the subimage, keeping Q largest values for each row.
+
+Step 3 Morphological operators with size of three are used to detect the edges in the subimage.
+
+Step 4 Define the initial boundary of the pectoral muscle. Edges with an angle of less than 90°a long the horizontal direction are selected, and the number of pixels of each edge is counted. The edge with the largest number of pixels is then defined as the initial boundary of the pectoral muscle. When two or more edges have almost the same number of pixels, the edge with the highest   average intensity value is defined as the initial boundary. Furthermore, if the average intensity values of these edges are similar, this pectoral muscle is considered as consisting of multiple layers and the edge on the right is defined as the initial boundary.
+
+Step 5 The top right point on the initial boundary is defined as the seed point for pectoral muscle boundary growth.
+
+
+Shape-based Growth Strategy
+
+The pectoral muscle boundary is often obtained by refining a straight line using intensity information [7,15]. However, the estimated straight line seriously affects the extraction accuracy of the pectoral muscle boundary. In this study, to get an accurate boundary of the pectoral muscle, a simple and convenient boundary detection method based on the start point is proposed to segment the pectoral muscle in a mammogram. Based on the characteristics of the pectoral muscle, a shape-based growth mask is designed as shown in Fig. 4, in which S and C represent the current seed point and candidate point, respectively. The number of candidates is W band and the row interval isK step . The proper selection of K step can reduce the effects of noise and fibroglandular tissues. Different from traditional region growth methods, most of the candidates are placed on the left side of the current seed point to match the shape of the pectoral muscle, which gradually narrows from top to bottom. The start point is defined as the first seed point. The candidate point with the maximum value is then selected as the next seed point. The process is iterated until the new seed point is close enough to the left side of the image. All seed points produced by the shape-based growth mask are fitted by a cubic polynomial function to create a boundary.
+
+
+Quantitative Evaluation
+
+In order to quantitatively evaluate the accuracy of the proposed method, the FP rate, FN rate, and Hausdorff distance [19] are used. FP pixels are defined as pixels in the detected pectoral region but not in the ground truth region.
+
+FN pixels are defined as pixels in the ground truth pectoral region but not in the detected region. The FP pixel rate, FN pixel rate, and total mismatched pixel rate are respectively computed as:
+FP pixel rate ¼ D [ R j jÀ R j j R j j Â 100 %ð2ÞFN pixel rate ¼ D [ R j jÀ D j j R j j Â 100 %ð3Þ
+Total mismatched pixel rate
+¼ 2 Ã D [ R j jÀ ð D j j þ R j jÞ R j j Â 100 %ð4Þ
+where D is the set of pixels in the detected pectoral muscle region and R is the set of pixels belonging to the ground truth pectoral muscle region.
+
+The Hausdorff distance is used to determine the similarity between identified point set and the ground truth set. It is defined as:
+H(A, B) = max((h(A, B), h(B, A)), h(A, B) ¼ max a2A min b2B a À b k kð5Þ
+where A is the set of detected-boundary points and B is the set of ground truth boundary points. Á k k is the Euclidean distance between points a and b.
+
+
+Results
+
+The proposed method of pectoral muscle segmentation was tested using the digitized mammograms from the mini-MIAS database. The mini-MIAS dataset contains 322 mammograms with a size of 1024 9 1024 pixels and 8 bits per pixel. Each mammogram was obtained from the MLO view and digitized with a spatial resolution of 200 lm. All mammograms were downsampled by a factor of 2, and flipped to make the pectoral muscle located on the top left side. The detection procedure of the pectoral muscle took approximately 0.3 s using a computer with a Pentium Dual-Core 2.6-GHz CPU and 4 GB of RAM in a Matlab 2012b environment. 322 mammograms were processed using the SBEM. Table 1 lists the parameters used in this study. Parametersw 0;1 and w 1;1 were set to 1, and w 1;2 and w 2;2 were set to 2 to increase the suppression of tissues away from the boundary. In order to keep the sum of coefficients (excluding w c ) at zero, w 0;3 and w 1;3 were set to zero in the shifted enhancement mask. Parameter w c represents the current pixel's intensity contribution. Normally, a larger value of w c leads to better highlighting of the pectoral muscle boundary. However, as a mammogram has multiple Fig. 4 Shape-based growth strategy layers and the intensities of the inside layers are much stronger than that of the outside layer (Fig. 5a), a shapebased mask sometimes cannot enhance the real edge of the pectoral muscle. Figures 5(b-d) show enhanced images with various values of w c , and Fig. 5(e-g) show the detected edges with P = 100, Q = 12, and various w c values. In order to effectively enhance the boundary of the outside layer, as a compromise, w c is generally set to 0.5. P and W band depend on the size and spatial resolution of the image. Q and K step are determined from experiments. The proper selection of K step can reduce the interference introduced by noise and fibro-glandular tissue.
+
+Some representative pectoral muscle detection results of MLO mammograms are shown in Fig. 6. To evaluate the quality of the pectoral muscle detection method, the boundaries of each image were manually drawn by the author, and checked by two radiologists individually. When differences existed, a consensus was reached after discussion. These manual contours were then used as the ground truth. The boundary extraction results were classified into three categories: successful, acceptable, and unacceptable. For successful results, the detected boundary was identical to the manual one. For acceptable results, more than half of the muscle boundary was correct, with and only limited discrepancy for the lower half part. All other results were unacceptable. Table 2 lists the detection results for the 322 mammograms from the mini-MIAS database. 97.2 % of the results were successful or acceptable. Furthermore, 84 mammograms used by Ferrari [9] were selected for quantitative evaluation. The mean FP and FN rates were 1.02 and 5.63 %, respectively, and the mean and standard deviation of the Hausdorff distance were 3.53 and 1.61, respectively. The FP, FN, and Hausorff distance values for various methods are compared in Table 3.
+
+
+Discussion
+
+In the proposed pectoral muscle detection method, the shape feature and local intensity information are needed as prior knowledge. The shape feature is that the pectoral muscle is a roughly triangular region occupying a corner of a mammogram with an approximate direction. The local information of the pectoral muscle is its relatively high gray level intensity and high gradient at the edge pixels. Based on these characteristics, the shape-based method combines the intensity-based approach and region growth technique for pectoral muscle detection.
+
+A mask with various coefficients was first designed to enhance the edges of the pectoral muscle. Compared with traditional enhancement filter masks, the shape-based mask not only considers the direction, but also takes into account transition intensity changes around the pectoral muscle edge. An accurate boundary of the pectoral muscle is still  difficult to identify in a mammogram since it is disrupted by other line structures. Therefore, a search method was proposed to define the start point in the top row of the pectoral muscle. A constraint growth strategy is then used to obtain the line.
+
+The horizontal pixels around the currently processed center are considered more in the SBEM with a 7 9 2 pixel kernel. Therefore, the pectoral muscles obscured by sticky tape can be well detected, as shown in Fig. 6a, since the intensity changes still exist in the horizontal orientation. Sometimes pectoral muscle has several layers and the inside lines can easily confuse the detection of the true edge. In the proposed method, the initial boundary is thus selected based on the prior knowledge of the pectoral muscle's relatively high gray intensity level and location. In the segmented initial boundaries acquired from a mammogram consisting of multiple layers, the average intensity value of each layer is Fig. 6 Pectoral muscle detection results of MLO mammograms a mdb002, b mdb123, c mdb110, d mdb050, e mdb225, f mdb053, g mdb288, h mdb151, i mdb240, j mdb223, and k mdb183 Data not provided in the publication are marked as NA calculated. If these average intensity values are roughly equal, the right layer is chosen as the initial boundary based on which start point is defined. Otherwise, the edge with the highest average intensity value is regarded as the initial boundary for finding the start point. Satisfactory results (Figs. 6(b, c) are obtained using this method. The proposed shape-based growth strategy has some strong advantages. The detection results are not affected by the size of the pectoral muscle (small (Fig. 6d) or large (Fig. 6e), since pectoral muscle boundary growth depends greatly on the start point and stops when the end condition is satisfied. The upper edge also extends smoothly to the left according to the candidates designed in the shape-based growth mask, which reduces the disturbance of the dense tissue on the lower half of the pectoral muscle, producing well segmented edges (Fig. 6f, g). Furthermore, the shape-based growth mask does not set a fixed shape of the edge for growth. The edge grows well from the start point whether the pectoral muscle edge is similar to a vertical line (Fig. 6h) or is a fuzzy texture with complex curvature (Fig. 6i). However, during the initial boundary detection using the proposed method, some cases fail when the pectoral muscle has more than two layers and the inner layers have higher intensities than that of the surface layer. For these cases, the inner line would be chosen as the initial edge. The extraction of the edge in Fig. 6(j) (mdb 223) is poor because the start point on the acquired initial boundary is on the second layer of the pectoral muscle. When the upper part of the pectoral muscle is covered by other tissues and no obvious start point exists, invalid results are often obtained (Fig. 6k) (mdb 183). Figure 7 compares the proposed method and existing methods. Because the subimages are different, the fields of view have some differences. Figure 7(a) displays failed detection of mdb061 processed by Kwok and Fig. 7(c) is the inaccurate detection of mdb053 published by Chakraborty respectively. Figures 7(b,d) show the correct edges obtained using the proposed method. Table 3 shows a performance comparison of the proposed shape-based method and methods based on the Hough transform [9], Gabor filter [9], AP [13], and HTID [17]. To some extent, the FP rate is more important than the FN rate. The shaped-based method has a good performance in terms of the mean FP rate (1.02) which is only higher than the Gabor filter result (0.58). But the detection result of the Gabor filter with both FP [ 10 % and FN [ 10 % is more than 20 %, which is much higher than the proposed method. Comparing with the AP method, the proposed method achieved better performance in mean FP and FN rates. And the percentage of detection results with high error term (5 % \ min(FP, FN) \ 10 % and max (FP, FN) [ 10 %) is also much lower than AP method. As for the Hausdorff distance, the proposed method obtains the lowest mean value (3.53 mm). These results indicate that the proposed shape-based method has great performance in the extraction of the pectoral muscle boundary. It is well known that algorithm performance is related to the mammogram dataset to some degree. Therefore, the method needs to be further verified using other datasets.
+
+
+Conclusion
+
+This study proposed an automatic method for the boundary detection of the pectoral muscle. Unlike existing methods, the proposed approach does not directly depend on region of interest or straight line detection. First, a special mask designed based on the pectoral muscle features is used to effectively enhance the boundary of mammograms. Then, an accurate start point of the boundary is determined. Based on the start point, a shape-based growth strategy is used to obtain the edge points of the pectoral muscle. Finally, a polynomial fitting function is used to determine the edge of the pectoral muscle. This method was tested on 322 digitized mammograms from the mini-MIAS database. In the future, the proposed method will be tested on mammograms from other databases, such as DDSM, to further prove its validity.
+
+Open Access This article is distributed under the terms of the Creative Commons Attribution 4.0 International License (http:// creativecommons.org/licenses/by/4.0/), which permits unrestricted use, distribution, and reproduction in any medium, provided you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons license, and indicate if changes were made. 
+
+Fig. 1
+1Illustration of pectoral muscle detection
+
+Fig. 2
+2Linear enhancement mask
+
+Fig. 3
+3Shape
+
+Fig. 5 a
+5Mammogram mdb065 and results of b-d gradient image and e-g edges.
+
+Fig. 7
+7Pectoral muscle edges obtained using various methods. a Failed detection of mdb061 by Kwok's method, b correct detection of mdb061 by proposed method, c inaccurate detection of mdb053 by Chakraborty's method, and d accurate detection of mdb053 by proposed method Shape-based Automatic Detection of Pectoral Muscle Boundary in Mammograms 321
+
+Table 1
+1Parameters used in pectoral muscle boundary detectionParameter 
+w 0;1 
+w 0;2 
+w 0;3 
+w 1;1 
+w 1;2 
+w 1;3 
+w c 
+P 
+Q 
+K step 
+W band 
+
+Value 
+1 
+2 
+0 
+1 
+2 
+0 
+0.5 
+100 
+12 
+2 
+6 
+
+
+
+Table 2
+2Classification results of boundary detection for mini-MIAS mammogramsCategory 
+Number of images 
+Percentage (%) 
+
+Successful 
+288 
+89.44 
+
+Acceptable 
+25 
+7.76 
+
+Unacceptable 
+9 
+2.80 
+
+Table 3 Pectoral muscle detection performance for various methods 
+
+Method 
+Hough 
+Gabor 
+AP 
+HT-HID 
+Proposed 
+
+FP (mean) 
+1.98 
+0.58 
+3.71 
+1.45 
+1.02 
+
+FN (mean) 
+25.19 
+5.77 
+5.95 
+5.52 
+5.63 
+
+FP \ 5 % and FN \ 5 % 
+11.90 % 
+53.57 % 
+59.52 % 
+57.14 % 
+58.33 % 
+
+min (FP, FN) \ %5 and 5 % \ max(FP, FN) \ 10 % 
+0 
+0 
+21.43 % 
+32.14 % 
+35.71 % 
+
+min (FP, FN) \ 5 % and max(FP, FN) [ 10 % 
+0 
+0 
+13.10 % 
+8.33 % 
+4.76 % 
+
+5 % \ FP \ 10 % and 5 % \ FN \ 10 % 
+9.52 % 
+26.19 % 
+0 
+0 
+0 
+
+5 % \ min(FP, FN) \ 10 % and max (FP, FN) [ 10 % 
+0 
+0 
+5.95 % 
+1.12 % 
+1.12 % 
+
+FP [ 10 % and FN [ 10 % 
+78.57 % 
+20.24 % 
+0 
+0 
+0 
+
+Hausdorff distance (mm) 
+7.08 ± 5.26 
+3.84 ± 1.73 
+NA 
+3.68 ± 1.50 
+3.53 ± 1.61 
+
+
+
+Global cancer facts & figures. AtlantaAmerican Cancer Society2nd ed.American Cancer Society. (2011). Global cancer facts & figures (2nd ed.). Atlanta: American Cancer Society.
+
+Cancer screening in the United States, 2013: a review of current American Cancer Society guidelines, current issues in cancer screening, and new guidance on cervical cancer screening and lung cancer screening. R A Smith, D Brooks, V Cokkinides, CA: A Cancer Journal. 63Smith, R. A., Brooks, D., & Cokkinides, V. (2013). Cancer screening in the United States, 2013: a review of current Amer- ican Cancer Society guidelines, current issues in cancer screen- ing, and new guidance on cervical cancer screening and lung cancer screening. CA: A Cancer Journal, 63, 88-105.
+
+Comparison of standard reading and computer aided detection (CAD) on anational proficiency test of screening mammography. S Ciatto, M R D Turco, G Risso, S Catarzi, European Journal of Radiology. 45Ciatto, S., Turco, M. R. D., Risso, G., & Catarzi, S. (2003). Comparison of standard reading and computer aided detection (CAD) on anational proficiency test of screening mammography. European Journal of Radiology, 45, 135-138.
+
+The use of texture analysis to delineate suspicious masses in mammography. R Gupta, P E Undrill, Physics of Medical Imaging. 40Gupta, R., & Undrill, P. E. (1995). The use of texture analysis to delineate suspicious masses in mammography. Physics of Medi- cal Imaging, 40, 835-855.
+
+Improvement of computerized mass detection on mammograms: Fusion of two-view information. S Paquerault, N Petrick, H P Chan, B Sahiner, M A Helvie, Medical Physics. 29Paquerault, S., Petrick, N., Chan, H. P., Sahiner, B., & Helvie, M. A. (2002). Improvement of computerized mass detection on mammograms: Fusion of two-view information. Medical Physics, 29, 238-247.
+
+Automated classification of parenchymal patterns in mammograms. N Karssemeijer, Physics in Medicine & Biology. 43Karssemeijer, N. (1998). Automated classification of parenchy- mal patterns in mammograms. Physics in Medicine & Biology, 43, 365-378.
+
+Automatic pectoral muscle segmentation on mediolateral oblique view mammograms. S M Kwok, R Chandrasekhar, Y Attikiouzel, M T Rickard, IEEE Transactions on Medical Imaging. 23Kwok, S. M., Chandrasekhar, R., Attikiouzel, Y., & Rickard, M. T. (2004). Automatic pectoral muscle segmentation on medio- lateral oblique view mammograms. IEEE Transactions on Med- ical Imaging, 23, 1129-1140.
+
+Radon-domain detection of the nipple and the pectoral muscle in mammograms. S K Kinoshita, P M Azevedo-Marques, R R Pereira, Jr, J A H Rodrigues, R M Rangayyan, Journal of Digital Imaging. 21Kinoshita, S. K., Azevedo-Marques, P. M., Pereira, R. R, Jr, Rodrigues, J. A. H., & Rangayyan, R. M. (2008). Radon-domain detection of the nipple and the pectoral muscle in mammograms. Journal of Digital Imaging, 21, 37-49.
+
+Automatic identification of the pectoral muscle in mammograms. R Ferrari, R M Rangayyan, J E L Desautels, IEEE Transactions on Medical Imaging. 23Ferrari, R., Rangayyan, R. M., & Desautels, J. E. L. (2004). Automatic identification of the pectoral muscle in mammograms. IEEE Transactions on Medical Imaging, 23, 232-245.
+
+Breast segmentation with pectoral muscle suppression on digital mammograms. R David, O Arnau, M Joan, P Marta, E Joan, Pattern Recognition and Image Analysis. 12David, R., Arnau, O., Joan, M., Marta, P., & Joan, E. (2005). Breast segmentation with pectoral muscle suppression on digital mammograms. Pattern Recognition and Image Analysis, 12, 471-478.
+
+Automatic assessment of mammographic positioning on the mediolateral oblique view. S M Kwok, R A Chandrasekhar, Y Attikiouzel, IEEE Transactions on Medical Imaging. 1Kwok, S. M., Chandrasekhar, R. A., & Attikiouzel, Y. (2004). Automatic assessment of mammographic positioning on the mediolateral oblique view. IEEE Transactions on Medical Imaging, 1, 151-154.
+
+Computerized image analysis: Texture-field orientation method for pectoral muscle identification on MLO-view mammograms. C Zhou, J Wei, H P Chan, Medical Physics. 37Zhou, C., Wei, J., & Chan, H. P. (2010). Computerized image analysis: Texture-field orientation method for pectoral muscle identification on MLO-view mammograms. Medical Physics, 37, 2289-2299.
+
+Two graph theory based methods for identifying the pectoral muscle in mammograms. F Ma, M Bajger, J P Slavotinek, M J Bottema, Pattern Recognition. 40Ma, F., Bajger, M., Slavotinek, J. P., & Bottema, M. J. (2007). Two graph theory based methods for identifying the pectoral muscle in mammograms. Pattern Recognition, 40, 2592-2602.
+
+Pectoral muscle identification in mammograms. K S Camilus, V K Govindan, P S Sathidevi, Applied Clinical Medical Physics. 12Camilus, K. S., Govindan, V. K., & Sathidevi, P. S. (2011). Pectoral muscle identification in mammograms. Applied Clinical Medical Physics, 12, 215-230.
+
+Automatic detection of pectoral muscle using average gradient and shape based feature. J Chakraborty, S Mukhopadhyay, V Singla, Journal of Digital Imaging. 25Chakraborty, J., Mukhopadhyay, S., & Singla, V. (2012). Auto- matic detection of pectoral muscle using average gradient and shape based feature. Journal of Digital Imaging, 25, 387-399.
+
+Robust automatic breast and pectoral muscle segmentation from scanned mammograms. M Mustra, M Grgic, Signal Process93Mustra, M., & Grgic, M. (2013). Robust automatic breast and pectoral muscle segmentation from scanned mammograms. Sig- nal Process, 93, 2817-2827.
+
+Pectoral muscle segmentation in mammograms based on homogenous texture and intensity deviation. Y Li, H Chen, Y Yang, Pattern Recognition. 46Li, Y., Chen, H., & Yang, Y. (2013). Pectoral muscle segmen- tation in mammograms based on homogenous texture and intensity deviation. Pattern Recognition, 46, 681-691.
+
+Pectoral muscle detection in mammograms based on the shortest path with end points learnt by SVMs. I Domingues, J S Cardoso, I Amaral, Annual International Conference of the IEEE Engineering in Medicine and Biology Society. Domingues I, Cardoso JS, Amaral I (2010) Pectoral muscle detection in mammograms based on the shortest path with end points learnt by SVMs. Annual International Conference of the IEEE Engineering in Medicine and Biology Society 3158-3161
+
+Comparing images using the Hausdorff distance. D P Huttenlocher, G A Klanderman, W J Rucklidge, IEEE Transactions on Pattern Analysis. 15Huttenlocher, D. P., Klanderman, G. A., & Rucklidge, W. J. (1993). Comparing images using the Hausdorff distance. IEEE Transactions on Pattern Analysis, 15, 850-863.

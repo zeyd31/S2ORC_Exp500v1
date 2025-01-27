@@ -1,0 +1,635 @@
+
+Computing the Line Index of Balance Using Integer Programming Optimisation
+26 Oct 2017
+
+Samin Aref 
+Andrew J Mason 
+Mark C Wilson 
+Samin Aref 
+Andrew J Mason 
+Mark C Wilson 
+
+Department of Computer Science
+Department of Engineering Science
+University of Auckland Auckland
+Private Bag 92019New Zealand
+
+
+Department of Computer Science
+University of Auckland
+University of Auckland
+
+
+Computing the Line Index of Balance Using Integer Programming Optimisation
+26 Oct 2017Chapter 1 1Integer programmingOptimisationFrustration indexBranch and boundSigned graphsStructural balance theory
+An important measure of a signed graph is the line index of balance which has several applications in many fields. However, this graph-theoretic measure was underused for decades because of the inherent complexity in its computation which is closely related to solving NP-hard graph optimisation problems like MAXCUT. We develop new quadratic and linear programming models to compute the line index of balance exactly. Using the Gurobi integer programming optimisation solver, we evaluate the line index of balance on real-world and synthetic datasets. The synthetic data involves Erdős-Rényi graphs, Barabási-Albert graphs, and specially structured random graphs. We also use well known datasets from the sociology literature, such as signed graphs inferred from students' choice and rejection as well as datasets from the biology literature including gene regulatory networks. The results show that exact values of the line index of balance in relatively large signed graphs can be efficiently computed using our suggested optimisation models. We find that most real-world social networks and some biological networks have small line index of balance which indicates that they are close to balanced.Mathematics Subject Classification (MSC 2010):05C22 15C22 90C09 90C11 90C90 90C35Reference format: Aref, S., Mason, A.J., Wilson, M.C.: Computing the line index of balance using integer programming optimisation. In: Graphs' optimization problems and their computational complexities, Springer(2018)
+
+Introduction
+
+Graphs with positive and negative edges are referred to as signed graphs [61] which are very useful in modeling the dual nature of interactions in various contexts. Graph-theoretic conditions [8] of the structural balance theory [25,30] define the notion of balance in signed graphs. If the vertex set of a signed graph can be partitioned into k ≤ 2 subsets such that each negative edge joins vertices belonging to different subsets, then the signed graph is balanced [8]. For graphs that are not balanced, a distance from balance (a measure of partial balance [4]) can be computed.
+
+Among various measures is the frustration index that indicates the minimum number of edges whose removal results in balance [1,26,59]. This number was originally proposed in oblique form and referred to as complexity by Abelson et al. [1]. One year later, Harary proposed the same idea much more clearly with the name line index of balance [26]. More than two decades later, Toulouse used the term frustration to discuss the minimum energy of an Ising spin glass model [57]. Zaslavsky has made a connection between the line index of balance and spin glass concepts and introduced the name frustration index [59]. We use both names, line index of balance and frustration index, interchangeably in this chapter.
+
+
+Literature review
+
+Except for a normalised version of the frustration index [4], measures of balance used in the literature [8,15,36,47,55] do not satisfy axiomatic properties [4]. Using cycles [8,47], triangles [36,55], Laplacian matrix eigenvalues [37], and closed-walks [15] to evaluate distance from balance has led to conflicting observations [15,16,39].
+
+Besides applications as a measure of balance, the frustration index is a key to frequently stated problems in several fields of research. In biology, optimal decomposition of biological networks into monotone subsystems is made possible by calculating the line index of balance [32]. In finance, portfolios whose underlying signed graph has negative edges and a frustration index of zero have a relatively low risk [28]. In physics, the line index of balance provides the minimum energy state of atomic magnets [5,33,54]. In international relations, alliance and antagonism between countries can be analysed using the line index of balance [12]. In chemistry, bipartite edge frustration indicates the stability of fullerene, a carbon allotrope [13].
+
+Detecting whether a graph is balanced can be solved in polynomial time [24,27,58]. However, calculating the line index of balance in general graphs is an NP-hard problem equivalent to the ground state calculation of an unstructured spin glass model [44]. Computation of the line index of balance can be reduced from the graph maximum cut (MAXCUT) problem, in the case of all negative edges, which is known to be NP-hard [31].
+
+Similar to MAXCUT for planar graphs [22], the line index of balance can be computed in polynomial time for planar graphs [34]. Other special cases of related problems can be found among the works of Hartmann and collaborators who have suggested efficient algorithms for computing ground state in 3-dimensional spin glass models [41] improving their previous contributions in 1-, 2-, and 3-dimensional [11,29,43] spin glass models. Recently, they have used a method for solving 0/1 optimisation models to compute the ground state of 3-dimensional models containing up to 268 3 nodes [21].
+
+A review of the literature shows 5 algorithms suggested for computing the line index of balance between 1963 and 2002. The first algorithm [18, pages 98-107] is developed specifically for complete graphs. It is a naive algorithm that requires explicit enumeration of all possible combinations of sign changes that may or may not lead to balance. With a run time exponential in the number of edges, this is clearly not practical for graphs with more than 8 nodes that require billions of cases to be checked. The second algorithm is an optimisation method suggested by [23]. This method is based on solving an unconstrained binary quadratic model. We will discuss a model of this type in Subsection 1.4.2 and other more efficient models later in this chapter. The third computation method is an iterative algorithm suggested in [24, algorithm 3, page 217]. The iterative algorithm is based on removing edges to eliminate negative cycles of the graph and only provides an upper bound on the line index of balance. A fourth method suggested by Harary and Kabell [27, page 136] is inefficient according to Bramsen [7] who in turn suggests an iterative algorithm with a run time that is exponential in the number of nodes. Using Bramsen's suggested method for a graph with 40 nodes requires checking trillions of cases to compute the line index of balance which is clearly impractical. Doreian and Mrvar have recently attempted computing the line index of balance using a polynomial time algorithm [12]. However, our computations on their data show that their solutions are not optimal and thus do not give the line index of balance.
+
+This review of literature shows that computing the line index of balance in general graphs lacks extensive and systematic investigation.
+
+
+Our contribution
+
+We provide an efficient method for computing the line index of balance in general graphs of the sizes found in many application areas. Starting with a quadratic programming model based on signed graph switching equivalences, we suggest several optimisation models. We use powerful mathematical programming solvers like Gurobi to solve the optimisation models.
+
+This chapter begins with the preliminaries in Section 1.3. Three mathematical programming models are developed in Section 1.4. The results on synthetic data are provided in Section 1.5. Numerical results on real social and biological networks are provided in Section 1.6 including graphs with up to 3215 edges. Section 1.7 summarises the key highlights for the research.
+
+
+Preliminaries
+
+
+Basic notation
+
+We consider undirected signed networks G = (V, E, σ). The set of nodes is denoted by V , with |V | = n. E is the set of edges that is partitioned into the set of positive edges E + and the set of negative edges E − with |E − | = m − , |E + | = m + , and |E| = m = m − + m + . The sign function, denoted by σ, is a mapping of edges to signs σ : E → {−1, +1} m . We represent the m undirected edges in G as ordered pairs of vertices E = {e 1 , e 2 , ..., e m } ⊆ {(i, j) | i, j ∈ V, i < j}, where a single edge e k between nodes i and j, i < j, is denoted by e k = (i, j), i < j. We denote the graph density by ρ = 2m/(n(n − 1)). The entries of the symmetric adjacency matrix A = (a ij ) are defined in (1.1).
+a ij = σ (i,j) if (i, j) ∈ E or (j, i) ∈ E 0 if (i, j) / ∈ E (1.1)
+The number of positive (negative) edges connected to the node i ∈ V is the positive (negative) degree of the node and is denoted by d + (i) (d − (i)). The net degree of a node is defined by d + (i) − d − (i).
+
+A walk of length k in G is a sequence of nodes v 0 , v 1 , ..., v k−1 , v k such that for each i = 1, 2, ..., k there is an edge between v i−1 and v i . If v 0 = v k , the sequence is a closed walk of length k. If the nodes in a closed walk are distinct except for the endpoints, it is a cycle of length k. The sign of a cycle is the product of the signs of its edges. A balanced graph is one with no negative cycles [8].
+
+
+Node colouring and frustration count
+
+For any signed graph G = (V, E, σ), we can partition V into two sets, denoted X ⊆ V andX = V \X. We think of X as specifying a colouring of the nodes, where each node i ∈ X is coloured black, and each node i ∈X is coloured white.
+
+We let x i denote the colour of node i ∈ V under X, where x i = 1 if i ∈ X and x i = 0 otherwise. We say that an edge (i, j) ∈ E is frustrated under X if either edge (i, j) is a positive edge ( (i, j) ∈ E + ) but nodes i and j have different colours (x i = x j ), or edge (i, j) is a negative edge ( (i, j) ∈ E − ) but nodes i and j share the same colour (x i = x j ). We define the frustration count f G (X) as the number of frustrated edges under X:
+f G (X) = (i,j)∈E f ij (X) where for (i, j) ∈ E: f ij (X) =          0, if x i = x j and (i, j) ∈ E + 1, if x i = x j and (i, j) ∈ E − 0, if x i = x j and (i, j) ∈ E − 1, if x i = x j and (i, j) ∈ E + . (1.2)
+The frustration index L(G) of a graph G can be found by finding a subset X * ⊆ V of G that minimises the frustration count f G (X), i.e., solving Eq. (1.3).
+L(G) = min X⊆V f G (X) (1.3)
+
+Minimal deletion set and switching function
+
+For each signed graph, there are sets of edges, called deletion sets, whose deletion results in a balanced graph. A minimal deletion set E * ⊆ E is a deletion set with a minimal size. The frustration index L(G) equals the number of members in a minimal deletion set: L(G) = |E * |. We define the switching function g operating over a set of vertices, called the switching set, X ⊆ V as follows in (1.4).
+σ g (i,j) = σ (i,j) if i, j ∈ X or i, j / ∈ X −σ (i,j) if (i ∈ X and j / ∈ X) or (i / ∈ X and j ∈ X) (1.4)
+The graph resulting from applying switching function g to signed graph G is called G's switching equivalence and denoted by G g . The switching equivalences of a graph have the same value of the frustration index, i.e. L(G g ) = L(G)∀g [60]. It is straightforward to prove that the frustration index is equal to the minimum number of negative edges in G g over all switching functions g. An immediate result is that any balanced graph can switch to an equivalent graph where all the edges are positive [60]. Moreover, in a switched graph with the minimal number of negative edges, called a negative minimal graph and denoted by G g * , all vertices have a non-negative net degree. In
+other words, if m − (G g ) = L(G) then every vertex i g in switched graph G g satisfies d − (i g ) ≤ d + (i g ).
+
+Upper bounds for the line index of balance
+
+An obvious upper bound for the line index of balance is L(G) ≤ m − which states the result that removing all negative edges gives a balanced graph.
+
+Recalling that acyclic signed graphs are balanced, the circuit rank of the graph can also be considered as an upper bound for the frustration index [19, p. 8]. Circuit rank, also known as the cyclomatic number, is the minimum number of edges whose removal results in an acyclic graph. Petersdorf [50] proves that among all sign functions for complete graphs with n nodes, assigning negative signs to all the edges, i.e. putting σ : E → {−1} m , gives the maximal value of the frustration index which equals (n − 1) 2 /4 . We denote these complete graphs with all-negative edges by K c n . Petersdorf's result is based on a conjecture by Abelson and Rosenberg [1] that is also proved in [56] and further discussed in [2].
+
+Akiyama et al. provide the results indicating that the frustration index of signed graphs with n nodes and m edges is bounded by m/2 [2]. They also show that the frustration index of signed graphs with n nodes is maximal in all complete graphs with no positive 3-cycles and is bounded by (n − 1) 2 /4 [2, Theorem 1]. This group of graphs also contains complete graphs with nodes that can be partitioned into two classes such that all positive edges connect nodes from different classes and all negative edges connect nodes belonging to the same class [56]. We denote these graphs by K d n . Akiyama et al. refer to these graphs as antibalanced [2] which is a term also discussed in [60]. It is easy to see that K c n and K d n are switching equivalences which leads to
+L(K d n ) = L(K c n ).
+
+Mathematical programming models
+
+In this section, we formulate three mathematical programming models in (1.5), (1.8), and (1.11) to calculate the frustration index by optimizing an objective function formed using integer variables.
+
+
+A quadratically constrained quadratic programming model
+
+We formulate a mathematical programming model in Eq. (1.5) to maximise Z 1 , the sum of entries of A g , the adjacency matrix of the graph switched by g, over different switching functions. Bearing in mind that the frustration index is the number of negative edges in the negative minimal graph,
+L(G) = m − (G g * )
+, then maximising Z 1 will effectively calculate the line index of balance. We use decision variables, y i ∈ {−1, 1} to define node colours. Then X = {i | y i = 1} gives the black-coloured nodes (alternatively nodes in the switching set). The restriction y i ∈ {−1, 1} for the variables is formulated by n quadratic constraints y 2 i = 1. Note that the switching set X = {i | y i = 1} creates the negative minimal graph with the adjacency matrix entries given by a ij y i y j . The model can be represented as Eq. (1.5) in the form of a continuous quadratically constrained quadratic programming (QCQP) model with n decision variables and n constraints.
+max yi Z 1 = i∈V j∈V a ij y i y j s.t. y 2 i = 1 ∀i ∈ V (1.5)
+Maximising i∈V j∈V a ij y i y j is equivalent to minimising m − (G g * ) = |{(i, j) ∈ E : a ij y i y j = −1}|. The optimal value of the objective function Z * 1 is equal to the sum of entries in the adjacency matrix of the negative minimal graph which can be represented by
+Z * 1 = 2m + (G g * ) − 2m − (G g * ) = 2m − 4L(G)
+. Therefore, the graph frustration index can be calculated by L(G) = (2m − Z * 1 )/4. While the model expressed in (1.5) is quite similar to the non-linear energy function minimization model used in [14,16,17,40] and the Hamiltonian of Ising spin glass models with ±1 interactions [54], the feasible region in model (1.5) is neither convex nor a second order cone. Therefore, the QCQP model in (1.5) only serves as an easy-to-understand optimisation model clarifying the node colouring (alternatively selecting nodes to switch) and how it relates to the line index of balance.
+
+
+An unconstrained binary quadratic programming model
+
+The optimisation model (1.5) can be converted into an unconstrained binary quadratic programming (UBQP) model (1.8) by changing the decision variables into binary variables
+y i = 2x i − 1 where x i ∈ {0, 1}.
+Note that the binary variables, x i , define the black-coloured nodes X = {i | x i = 1} (alternatively, nodes in the switching set). The optimal solution represents a subset X * ⊆ V of G that minimises the resulting frustration count. Furthermore, by substituting y i = 2x i − 1 into the objective function in (1.5) we get (1.6). The terms in the objective function can be modified as shown in (1.6)-(1.7) in order to directly represent L(G) in the objective function Z 2 .
+Z 1 = i∈V j∈V (4a ij x i x j − 2x i a ij − 2x j a ij + a ij ) = i∈V j∈V (4a ij x i x j − 4x i a ij ) + (2m − 4m − (G) ) (1.6) Z 2 = (2m − Z 1 )/4 (1.7)
+Note that the binary quadratic model in Eq. (1.8) has n decision variables and no constraints.
+min xi Z 2 = i∈V j∈V (a ij x i − a ij x i x j ) + m − (G) s.t. x i ∈ {0, 1} i ∈ V (1.8)
+The optimal value of the objective function in Eq. (1.8) is denoted by Z * 2 which represents the frustration index directly as shown in (1.9).
+Z * 2 = (2m − Z * 1 )/4 = (2m − (2m − 4L(G)))/4 = L(G) (1.9)
+The objective function in Eq. (1.8) can be interpreted as initially starting with m − (G) and then adding 1 for each positive frustrated edge (positive edge with different endpoint colours) and -1 for each negative edge that is not frustrated (negative edge with different endpoint colours). This adds up to the total number of frustrated edges.
+
+
+The linear programming model
+
+The linearised version of (1.8) is formulated in Eq. (1.11). The objective function of (1.8) is first modified as shown in Eq. (1.10) and then its nonlinear term x i x j is replaced by |E| additional binary variables x ij . The new decision variables x ij are defined for each edge (i, j) ∈ E and take value 1 whenever x i = x j = 1 and 0 otherwise. Note that d i = j∈V a ij is a constant that equals the net degree of node i.
+Z 2 = i∈V j∈V a ij x i − i∈V j∈V a ij x i x j + m − (G) = i∈V x i j∈V a ij − i∈V j∈V,j>i 2a ij x i x j + m − (G) = i∈V x i d i − i∈V j∈V,j>i 2a ij x i x j + m − (G) (1.10)
+The dependencies between the x ij and x i , x j values are taken into account by considering a constraint for each new variable. Therefore, the 0/1 linear model has n + m variables and m constraints as it follows in (1.11). min xi,xij
+Z 2 = i∈V d i x i − (i,j)∈E 2a ij x ij + m − (G) s.t. x ij ≤ (x i + x j )/2 ∀(i, j) ∈ E + x ij ≥ x i + x j − 1 ∀(i, j) ∈ E − x i ∈ {0, 1} i ∈ V x ij ∈ {0, 1} (i, j) ∈ E (1.11)
+
+Additional constraints for the linear programming model
+
+The structural properties of the model allow us to restrict the model by adding additional valid inequalities. Valid inequalities are utilised by our solver Gurobi as additional non-core constraints that are kept aside from the core constraints of the model. Upon violation by a solution, valid inequalities are efficiently pulled in to the model. Pulled-in valid inequalities cut away a part of the feasible space and restrict the model. Additional restrictions imposed on the model can often speed up the solver algorithm if they are valid and useful [35]. Properties of the optimal solution can be used to determine these additional constraints. Properties observed in negative minimal graphs include the nonnegativity of net degree of the nodes and negation states of the edges making a cycle. An obvious structural property of the nodes in the negative minimal graph, G g * , is that their net degrees are always non-negative, i.e., d
++ (i g * )−d − (i g * ) ≥ 0 ∀i ∈ V .
+Equivalently, a node i should be given a colour that minimises the number of frustrated edges connected to it. This can be proved by contradiction using the definition of the switching function (1.4).
+
+To see this, assume a node in the negative minimal graph has a negative degree. It follows that the negative edges connected to the node outnumber the positive edges. Therefore, switching the node decreases the total number of negative edges in the negative minimal graph which is a contradiction.
+
+This structural property can be formulated as constraints in the problem. A net-degree constraint can be added to the model for each node restricting all variables associated with the connected edges. These constraints are formulated using quadratic terms of x i variables. As x i represents the colour of a node, (1 − 2x i )(1 − 2x j ) takes value −1 if and only if the two endpoints of edge (i, j) ∈ E have different colours. Interpreting based on the concept of switching set, different values of x i variables associated with the two endpoints of edge (i, j) ∈ E mean that the edge should be negated in the process of transforming to the negative minimal graph. The linearised formulation of the net-degree constraints using x i and x ij variables is provided in (1.12).
+j:(i,j)∈E or (j,i)∈E a ij (1 − 2x i − 2x j + 4x ij ) ≥ 0 ∀i ∈ V (1.12)
+Another structural property we observe is related to the edges making a cycle. According to the definition of the switching function (1.4), switching one node negates all edges connected to that node. Because there are two edges connected to each node in a cycle, the negation states of edges making a cycle are not independent. To be more specific, the number of negated edges in each cycle of the graph must be even.
+
+As listing all cycles of a graph is computationally intensive, this structural property can be applied to cycles of a limited length. For instance, we may apply this structural property to the edge variables making triangles in the graph. This structural property can be formulated as valid inequalities in Eq. (1.13) in which T = {(i, j, k) ∈ V 3 | (i, j), (i, k), (j, k) ∈ E} contains ordered 3-tuples of nodes whose edges form a triangle. Note that, (x i + x j − 2x ij ) represents the negation state of the edges (i, j) ∈ E. The expression in Eq. (1.13) denotes the sum of negation states for the three edges (i, j), (i, k), (j, k) making a triangle.
+x i + x j − 2x ij + x i + x k − 2x ik + x j + x k − 2x jk = 0 or 2 ∀(i, j, k) ∈ T (1.13)
+Eq. (1.13) can be linearised to Eq. (1.14) as follows. Triangle constraints can be applied to the model as four constraints per triangle, restricting three edge variables and three node variables per triangle.
+x i + x jk ≥ x ij + x ik ∀(i, j, k) ∈ T x j + x ik ≥ x ij + x jk ∀(i, j, k) ∈ T x k + x ij ≥ x ik + x jk ∀(i, j, k) ∈ T 1 + x ij + x ik + x jk ≥ x i + x j + x k ∀(i, j, k) ∈ T (1.14)
+More restrictions can be imposed using the minimum of the two upper bounds discussed in 1.3.4. This is implemented as a constraint in Eq. (1.15).
+Z 2 ≤ min{m/2, m − } (1.15)
+In order to speed up the model in (1.11), we consider fixing a node colour to increase the root node objective function. We conjecture the best node variable to fix is the one associated with the highest unsigned node degree. This constraint is formulated in (1.16) which our experiments show speeds up the branch and bound algorithm by increasing the lower bound.
+x k = 1 k = arg max i∈V d i (1.16)
+The complete formulation of the 0/1 linear model with further restrictions on the feasible space includes the objective function and core constraints in Eq. (1.11) and valid inequalities in Eq. (1.12), Eq. (1.14), Eq. (1.15), and Eq. (1.16). The model has n + m binary variables, m core constraints, and n + 4|T | + 2 additional constraints. Table 1.1 provides a comparison of the three optimisation models based on their variables, constraints, and objective functions. In the next sections, we mainly focus on the 0/1 linear model solved in conjunction with the valid inequalities (additional constraints). 
+
+
+Numerical results in random graphs
+
+In this section, the frustration index of various random networks is computed by solving the 0/1 linear model (1.11) coupled with the additional constraints. We use Gurobi version 7 on a desktop computer with an Intel Corei5 4670 @ 3.40 GHz and 8.00 GB of RAM running 64-bit Microsoft Windows 7. The models were created using the Gurobi's Python interface.
+
+
+Performance of the 0/1 linear model on random graphs
+
+In this subsection we discuss the time performance of the branch and bound algorithms for solving the 0/1 linear model. In order to evaluate the performance of the 0/1 linear model (1.11) coupled with the additional constraints, we generate 10 decent-sized Erdős-Rényi random graphs [6] as test cases with various densities and percentages of negative edges. Results are provided in Table 1.2 in which B&B nodes stands for the number of branch and bound nodes explored by the solver. The results in Table 1.2 show that random test cases based on Erdős-Rényi graphs with 500-600 edges can be solved to optimality in a reasonable time. The branching process for these test cases explores various numbers of nodes ranging between 0 and 12384. These numbers also depend on the heuristics that the solver uses automatically and solving the test cases for a second time often leads to a different number of branch and bound nodes.
+
+
+Impact of negative edges on the frustration index
+
+In this subsection we use both Erdős-Rényi and Barabási-Albert random networks [6] as synthetic data for calculation of the line index of balance. In this analysis, we use the same randomly generated graphs with different numbers of negative edges assigned by a uniform random distribution as test cases over 50 runs per experiment setting. Figure 1.1 demonstrates the average and standard deviation of the line index of balance in these random signed networks with n = 15, m = 50. It is worth mentioning that we have observed similar results in other types of random graphs including small world, scale-free, and random regular graphs [6]. It can be observed that the maximum frustration index is still smaller than m/3 for all graphs. This shows a gap between the values of the line index of balance in random graphs and the theoretical upper bound of m/2. It is important to know whether this gap is proportional to graph size and density.
+
+
+Impact of graph size and density on the frustration index
+
+In order to investigate the impact of graph size and density, 4-regular random graphs with a constant fraction of randomly assigned negative edges are analysed averaging over 50 runs per experiment setting. The frustration index is computed for 4-regular random graphs with 25%, 50%, and 100% negative edges and compared with the upper bound m/2.  There are well studied signed social network datasets representing communities with positive and negative interactions and preferences. Read's dataset for New Guinean highland tribes [51] and Sampson's dataset for monastery interactions [53] which we denote by G1 and G2. We also use graphs inferred from datasets of students' choice and rejection denoted by G3 and G4 [38,46]. A further explanation on the details of inferring signed graphs from choice and rejection data can be found in [4]. Moreover, a larger signed network, denoted by G5, is inferred by [45] through implementing a stochastic degree sequence model on Fowler's data on Senate bill co-sponsorship [20].
+
+As well as the signed social network datasets, large scale biological networks can be analysed as signed graphs. There are four signed biological networks analysed by [10] and [32]. Graph G6 represents the gene regulatory network of Saccharomyces cerevisiae [9] and graph G7 is related to the gene regulatory network of Escherichia coli [52]. The Epidermal growth factor receptor pathway [49] is represented as graph G8. Graph G9 represents the molecular interaction map of a macrophage [48]. For more details on the four biological datasets, one may refer to [32].
+
+We use G r = (V, E, σ r ) to denote a reshuffled graph in which the sign function σ r is a random mapping of E to {−1, +1} m that preserves the number of negative edges. The reshuffling process preserves the underlying graph structure. The numerical results on the frustration index of our nine signed graphs and reshuffled versions of these graphs are shown in Table  1.3 where, for each graph G, the average and standard deviation of the line index of balance in 500 reshuffled graphs, denoted by L(G r ) and SD, are also provided for comparison. Although the signed networks G1 -G7 are not balanced, the relatively small values of L(G) suggest a low level of frustration in some of the networks. G1 -G7 exhibit a level of frustration lower than what is expected by chance, while the opposite is observed for G8 and G9.  (c) Fraternity preferences network (G3) of 17 boys living in a pseudo-dormitory inferred from ranking data of the last week in [46]. Minimal deletion set comprises 4 negative edges.  In order to be more precise in evaluating the relative levels of frustration in G1 -G9, we have implemented a very basic statistical analysis using Z scores, where Z = (L(G) − L(G r ))/SD. The Z scores, provided in the right column of Table 1.3, show how far the frustration index is from the values expected by chance. Negative values of the Z score can be interpreted as a lower level of frustration than the value resulting from a random allocation of signs. This comparison allows us to say that the level of frustration is very low for G5, G6, and G7, low for G1 and G2, and very high for G8 and G9.
+
+Various performance measures for the 0/1 linear model (1.11) coupled with the additional constraints for solving G1 -G9 are provided in Table 1 We compare the quality and solve time of our exact algorithm with that of recent heuristics and approximations implemented on the datasets. Table  1.5 provides a comparison of the 0/1 linear model (1.11) with other methods in the literature. Hüffner et al. have previously investigated frustration in G6 -G9 suggesting a data reduction scheme and an exact algorithm [31]. Their suggested data reduction algorithm can take more than 5 hours for G6, more than 15 hours for G8, and more than 1 day for G9 if the parameters are not perfectly tuned [31]. Their exact algorithm coupled with their data reduction scheme and heuristic speed-ups does not converge for G7 [31]. In addition to these solve time and convergence issues, their exact algorithm provides L(G8) = 210, L(G9) = 374, both of which are incorrect based on our results.
+
+Iacono et al. have investigated frustration in G6 -G9 [32]. Their heuristic algorithm provides upper and lower bounds for G6 -G9 with a 100%, 98.38%, 96.37% and 90.96% ratio of lower to upper bound respectively. Regarding solve time, they have only mentioned that their heuristic requires a fairly limited amount of time (a few minutes on an ordinary PC).
+
+While data reduction schemes [31] take up to 1 day for these datasets and heuristic algorithms [32] only provide bounds with up to 9% gap from optimality, our 0/1 linear model solves each of the 9 datasets to optimality in less than a minutes.
+
+
+Conclusion
+
+Although this study focuses on frustration index as a measure of balance in signed networks, the findings may well have a bearing on the applications of the line index of balance in the other disciplines discussed in Section 1.2. The present study suggested a novel method for computing a standard measures of partial balance that can be used for analysing dynamics of signed networks. It contributes additional evidence that suggests signed social networks and biological gene regulatory networks exhibit a relatively low level of frustration and thus high partial balance.
+
+This study has a number of important implications for future investigation. The optimisation model introduced can make network dynamics models more consistent with the theory [3]. To be more specific, many research studies on network dynamics use the number of balanced triads in the network as a criterion for transitioning towards balance using sequential sign change models. These models may result in stable states that are not balanced, like jammed states and glassy states [42]. This contradicts not only the instability of unbalanced states, but the fundamental assumption that networks gradually move towards balance. Deploying decrease in the frustration index as the criterion, the above-mentioned states might be avoided resulting in a more realistic simulation of signed network dynamics that is consistent with the underlying theory and the assumptions.
+
+Fig. 1 . 1 :
+11The frustration index in Erdős-Rényi (ER) networks with 15 nodes and 50 edges and Barabási-Albert (BA) networks with 15 nodes and 50 edges and various number of negative edges (colour online) Figure 1.1 shows similar increases in the line index of balance in the two graph classes as m − increases.
+
+Figure 1 .
+12 demonstrates the average and standard deviation of the frustration index where the degree of all nodes remains constant, but the density of the 4-regular graphs, ρ = 4/n − 1, decreases as n and m increase.
+
+Fig. 1 . 2 :
+12The frustration index in random 4-regular networks of different orders n and decreasing densities (colour online) An observation to derive from Figure 1.2 is the similar frustration index values obtained for networks of the same sizes, even if they have different percentages of negative edges. It can be concluded that starting with an allpositive graph, making the first quarter of graph edges negative increases the frustration index much more than making further edges negative. Another observation is that the gap between the frustration index values and the theoretical upper bound increases with increasing n.1.6 Numerical results in real signed networksIn this section, the frustration index is computed in nine real networks by solving the 0/1 linear model (1.11) using Gurobi version 7 on a desktop computer with an Intel Corei5 4670 @ 3.40 GHz and 8.00 GB of RAM running 64-bit Microsoft Windows 7.
+
+Figure 1 .
+13 shows how the small signed networks G1 -G4 can be made balanced by negating (or removing) the edges on the minimal deletion set. Dotted lines represent negative edges, solid lines represent positive edges, and frustrated edges are indicated by dotdash lines regardless of tribes network (G1), a signed network of 16 tribes of the Eastern Central Highlands of New Guinea[51]. Minimal deletion set comprises 7 negative edges.
+
+
+College preferences network (G4) of 17 girls at an Eastern college inferred from ranking data of house B in[38]. Minimal deletion set comprises 3 positive and 3 negative edges.
+
+Fig. 1 . 3 :
+13The frustrated edges represented by dotdash lines for four small signed networks inferred from the sociology datasets
+
+Table 1 .
+11: Comparison of the three optimisation modelsQCQP (1.5) 
+UBQP (1.8) 
+0/1 linear model (1.11) 
+Variables 
+n 
+n 
+n + m 
+Constraints 
+n 
+0 
+m 
+Variable type 
+continuous 
+binary 
+binary 
+Constraint type 
+quadratic 
+-
+linear 
+Objective 
+quadratic 
+quadratic 
+linear 
+
+
+Table 1 .
+12: Evaluation of the model in (1.11) based on random networksTestCase 
+n 
+m 
+m − 
+ρ 
+m − /m Z  *  
+B&B nodes time(s) 
+1 
+65 
+570 
+395 
+0.27 
+0.69 
+189 
+5133 
+65.4 
+2 
+68 
+500 
+410 
+0.22 
+0.82 
+162 
+4105 
+27.3 
+3 
+80 
+550 
+330 
+0.17 
+0.60 
+170 
+11652 
+153.3 
+4 
+50 
+520 
+385 
+0.42 
+0.74 
+185 
+901 
+22.4 
+5 
+53 
+560 
+240 
+0.41 
+0.43 
+193 
+292 
+13.5 
+6 
+50 
+510 
+335 
+0.42 
+0.66 
+178 
+573 
+13.8 
+7 
+59 
+590 
+590 
+0.34 
+1.00 
+213 
+1831 
+46.0 
+8 
+56 
+600 
+110 
+0.39 
+0.18 
+110 
+0 
+0.4 
+9 
+71 
+500 
+190 
+0.20 
+0.38 
+155 
+6305 
+77.7 
+10 
+80 
+550 
+450 
+0.17 
+0.82 
+173 
+12384 
+138.0 
+
+
+
+Table 1 . 3 :
+13The frustration index in various signed networksGraph 
+n 
+m 
+m − 
+L(G) 
+L(Gr) ± SD 
+Z score 
+G1 
+16 
+58 
+29 
+7 
+14.65 ± 1.38 
+-5.54 
+G2 
+18 
+49 
+12 
+5 
+9.71 ± 1.17 
+-4.03 
+G3 
+17 
+40 
+17 
+4 
+7.53 ± 1.24 
+-2.85 
+G4 
+17 
+36 
+16 
+6 
+6.48 ± 1.08 
+-0.45 
+G5 
+100 
+2461 
+1047 
+331 
+965.6 ± 9.08 
+-69.89 
+G6 
+690 
+1080 
+220 
+41 
+124.3 ± 4.97 
+-16.75 
+G7 
+1461 
+3215 
+1336 
+371 
+653.4 ± 7.71 
+-36.64 
+G8 
+329 
+779 
+264 
+193 
+148.96 ± 5.33 
+8.26 
+G9 
+678 
+1425 
+478 
+332 
+255.65 ± 8.51 
+8.98 
+
+
+
+
+.4. Table 1.4: Performance measures for the model in (1.11) based on real networksGraph 
+L(G) 
+Root node objective 
+B&B nodes 
+Solve time (s) 
+G1 
+7 
+4.5 
+0 
+0.03 
+G2 
+5 
+0 
+0 
+0.04 
+G3 
+4 
+2.5 
+0 
+0.02 
+G4 
+6 
+2 
+0 
+0.04 
+G5 
+331 
+36.5 
+0 
+78.67 
+G6 
+41 
+3 
+0 
+0.28 
+G7 
+371 
+21.5 
+1085 
+27.22 
+G8 
+193 
+17 
+457 
+0.72 
+G9 
+332 
+14.5 
+1061 
+1.92 
+
+
+
+Table 1 .
+15: Comparison of the solution and solve time against models in the literatureGraph 
+Hüffner et al. [31] 
+Iacono et al. [32] 
+0/1 linear model 
+
+Solution 
+
+G6 
+41 
+41 
+41 
+G7 
+Not converged 
+[365, 371] 
+371 
+G8 
+210 
+[186, 193] 
+193 
+G9 
+374 
+[302, 332] 
+332 
+
+Time 
+
+G6 
+60 s 
+A few minutes 
+0.28 s 
+G7 
+Not converged 
+A few minutes 
+27.22 s 
+G8 
+6480 s 
+A few minutes 
+0.72 s 
+G9 
+60 s 
+A few minutes 
+1.92 s 
+
+
+Computing the Line Index of Balance
+Computing the Line Index of Balance
+Computing the Line Index of Balance
+Computing the Line Index of Balance
+Computing the Line Index of Balance
+Computing the Line Index of Balance
+Computing the Line Index of Balance
+Computing the Line Index of Balance
+Acknowledgements The authors are grateful for the valuable comments of the anonymous reviewers that have improved this chapter.
+Symbolic psycho-logic: A model of attitudinal cognition. R P Abelson, M J Rosenberg, 10.1002/bs.3830030102Behavioral Science. 31Abelson, R.P., Rosenberg, M.J.: Symbolic psycho-logic: A model of attitudinal cogni- tion. Behavioral Science 3(1), 1-13 (1958). DOI 10.1002/bs.3830030102
+
+Balancing signed graphs. J Akiyama, D Avis, V Chvàtal, H Era, 10.1016/0166-218X(81)90001-9Discrete Applied Mathematics. 34Akiyama, J., Avis, D., Chvàtal, V., Era, H.: Balancing signed graphs. Discrete Applied Mathematics 3(4), 227-233 (1981). DOI 10.1016/0166-218X(81)90001-9
+
+Dynamics of social balance on networks. T Antal, P L Krapivsky, S Redner, Physical Review E. 723121Antal, T., Krapivsky, P.L., Redner, S.: Dynamics of social balance on networks. Phys- ical Review E 72(3), 036,121 (2005)
+
+S Aref, M C Wilson, arXiv:1509.04037Measuring partial balance in signed networks. Aref, S., Wilson, M.C.: Measuring partial balance in signed networks. arXiv:1509.04037 (2017)
+
+On the computational complexity of Ising spin glass models. F Barahona, Journal of Physics A: Mathematical and General. 15103241Barahona, F.: On the computational complexity of Ising spin glass models. Journal of Physics A: Mathematical and General 15(10), 3241 (1982)
+
+B Bollobás, Random Graphs, 2nd. Cambridge. Cambridge University PressBollobás, B.: Random Graphs, 2nd. Cambridge: Cambridge University Press (2001)
+
+Further algebraic results in the theory of balance. J Bramsen, Journal of Mathematical Sociology. 264Bramsen, J.: Further algebraic results in the theory of balance. Journal of Mathemat- ical Sociology 26(4), 309-319 (2002)
+
+Structural balance: a generalization of Heider's theory. D Cartwright, F Harary, Psychological Review. 635Cartwright, D., Harary, F.: Structural balance: a generalization of Heider's theory. Psychological Review 63(5), 277-293 (1956)
+
+Ypd, pombepd and wormpd: model organism volumes of the bioknowledge library, an integrated resource for protein information. M C Costanzo, M E Crawford, J E Hirschman, J E Kranz, P Olsen, L S Robertson, M S Skrzypek, B R Braun, K L Hopkins, P Kondu, C Lengieza, J E Lew-Smith, M Tillberg, J I Garrels, 10.1093/nar/29.1.75Nucleic Acids Research. 291Costanzo, M.C., Crawford, M.E., Hirschman, J.E., Kranz, J.E., Olsen, P., Robertson, L.S., Skrzypek, M.S., Braun, B.R., Hopkins, K.L., Kondu, P., Lengieza, C., Lew-Smith, J.E., Tillberg, M., Garrels, J.I.: Ypd, pombepd and wormpd: model organism volumes of the bioknowledge library, an integrated resource for protein information. Nucleic Acids Research 29(1), 75-79 (2001). DOI 10.1093/nar/29.1.75
+
+Algorithmic and complexity results for decompositions of biological networks into monotone subsystems. B Dasgupta, G A Enciso, E Sontag, Y Zhang, Biosystems. 901DasGupta, B., Enciso, G.A., Sontag, E., Zhang, Y.: Algorithmic and complexity re- sults for decompositions of biological networks into monotone subsystems. Biosystems 90(1), 161-178 (2007)
+
+Exact ground states of one-dimensional long-range random-field Ising magnets. T Dewenter, A K Hartmann, Physical Review B. 901207Dewenter, T., Hartmann, A.K.: Exact ground states of one-dimensional long-range random-field Ising magnets. Physical Review B 90(1), 014,207 (2014)
+
+Structural Balance and Signed International Relations. P Doreian, A Mrvar, Journal of Social Structure. 16Doreian, P., Mrvar, A.: Structural Balance and Signed International Relations. Journal of Social Structure 16, 1-49 (2015)
+
+Computing the bipartite edge frustration of fullerene graphs. T Doslic, D Vukicevic, 10.1016/j.dam.2006.12.003Discrete Applied Mathematics. 15510Doslic, T., Vukicevic, D.: Computing the bipartite edge frustration of fullerene graphs. Discrete Applied Mathematics 155(10), 1294-1301 (2007). DOI 10.1016/j.dam.2006. 12.003
+
+Mesoscopic analysis of online social networks: The role of negative ties. P Esmailian, S E Abtahi, M Jalili, Physical Review E. 904817Esmailian, P., Abtahi, S.E., Jalili, M.: Mesoscopic analysis of online social networks: The role of negative ties. Physical Review E 90(4), 042,817 (2014)
+
+Walk-based measure of balance in signed networks: Detecting lack of balance in social networks. E Estrada, M Benzi, Physical Review E. 904Estrada, E., Benzi, M.: Walk-based measure of balance in signed networks: Detecting lack of balance in social networks. Physical Review E 90(4), 1-10 (2014)
+
+Computing global structural balance in largescale signed social networks. G Facchetti, G Iacono, C Altafini, DOI10.1073/pnas.1109521108Proceedings of the National Academy of Sciences. 10852Facchetti, G., Iacono, G., Altafini, C.: Computing global structural balance in large- scale signed social networks. Proceedings of the National Academy of Sciences 108(52), 20,953-20,958 (2011). DOI 10.1073/pnas.1109521108
+
+Exploring the low-energy landscape of largescale signed social networks. G Facchetti, G Iacono, C Altafini, Physical Review E. 863116Facchetti, G., Iacono, G., Altafini, C.: Exploring the low-energy landscape of large- scale signed social networks. Physical Review E 86(3), 036,116 (2012)
+
+Applications of graph theory to group structure. C Flament, Prentice-HallFlament, C.: Applications of graph theory to group structure. Prentice-Hall (1963)
+
+Équilibre d'un graphe: quelques résultats algébriques. C Flament, Mathématiques et Sciences Humaines. 8Flament, C.:Équilibre d'un graphe: quelques résultats algébriques. Mathématiques et Sciences Humaines 8, 5-10 (1970)
+
+Legislative cosponsorship networks in the US House and Senate. J H Fowler, Social Networks. 284Fowler, J.H.: Legislative cosponsorship networks in the US House and Senate. Social Networks 28(4), 454-465 (2006)
+
+Revisiting the scaling of the specific heat of the three-dimensional random-field Ising model. N G Fytas, P E Theodorakis, A K Hartmann, The European Physical Journal B. 899200Fytas, N.G., Theodorakis, P.E., Hartmann, A.K.: Revisiting the scaling of the spe- cific heat of the three-dimensional random-field Ising model. The European Physical Journal B 89(9), 200 (2016)
+
+Finding a maximum cut of a planar graph in polynomial time. F Hadlock, DOI10.1137/0204019SIAM Journal on Computing. 43Hadlock, F.: Finding a maximum cut of a planar graph in polynomial time. SIAM Journal on Computing 4(3), 221-225 (1975). DOI 10.1137/0204019
+
+Pseudo-boolean remarks on balanced graphs. P L Hammer, Numerische Methoden bei Optimierungsaufgaben Band. 3SpringerHammer, P.L.: Pseudo-boolean remarks on balanced graphs. In: Numerische Methoden bei Optimierungsaufgaben Band 3, pp. 69-78. Springer (1977)
+
+Labelling algorithms for balance in signed graphs. P Hansen, Problmes Combinatoires et Theorie des GraphesHansen, P.: Labelling algorithms for balance in signed graphs. Problmes Combinatoires et Theorie des Graphes pp. 215-217 (1978)
+
+On the notion of balance of a signed graph. F Harary, The Michigan Mathematical Journal. 22Harary, F.: On the notion of balance of a signed graph. The Michigan Mathematical Journal 2(2), 143-146 (1953)
+
+On the measurement of structural balance. F Harary, 10.1002/bs.3830040405Behavioral Science. 44Harary, F.: On the measurement of structural balance. Behavioral Science 4(4), 316- 323 (1959). DOI 10.1002/bs.3830040405
+
+A simple algorithm to detect balance in signed graphs. F Harary, J A Kabell, Mathematical Social Sciences. 11Harary, F., Kabell, J.A.: A simple algorithm to detect balance in signed graphs. Math- ematical Social Sciences 1(1), 131-136 (1980)
+
+Signed graphs for portfolio analysis in risk management. F Harary, M H Lim, D C Wunsch, 10.1093/imaman/13.3.201IMA Journal of Management Mathematics. 133Harary, F., Lim, M.H., Wunsch, D.C.: Signed graphs for portfolio analysis in risk management. IMA Journal of Management Mathematics 13(3), 201-210 (2002). DOI 10.1093/imaman/13.3.201
+
+Ground states of two-dimensional Ising spin glasses: fast algorithms, recent developments and a ferromagnet-spin glass mixture. A K Hartmann, Journal of Statistical Physics. 1443Hartmann, A.K.: Ground states of two-dimensional Ising spin glasses: fast algorithms, recent developments and a ferromagnet-spin glass mixture. Journal of Statistical Physics 144(3), 519-540 (2011)
+
+Social perception and phenomenal causality. F Heider, Psychological Review. 516Heider, F.: Social perception and phenomenal causality. Psychological Review 51(6), 358-378 (1944)
+
+Separator-based data reduction for signed graph balancing. F Hüffner, N Betzler, R Niedermeier, Journal of Combinatorial Optimization. 204Hüffner, F., Betzler, N., Niedermeier, R.: Separator-based data reduction for signed graph balancing. Journal of Combinatorial Optimization 20(4), 335-360 (2010)
+
+Determining the distance to monotonicity of a biological network: a graph-theoretical approach. G Iacono, F Ramezani, N Soranzo, C Altafini, Systems Biology. 43IETIacono, G., Ramezani, F., Soranzo, N., Altafini, C.: Determining the distance to mono- tonicity of a biological network: a graph-theoretical approach. Systems Biology, IET 4(3), 223-235 (2010)
+
+Dimer Statistics and Phase Transitions. P W Kasteleyn, 10.1063/1.1703953Journal of Mathematical Physics. 42Kasteleyn, P.W.: Dimer Statistics and Phase Transitions. Journal of Mathematical Physics 4(2), 287-293 (1963). DOI 10.1063/1.1703953
+
+Studies on the balancing, the minimal balancing, and the minimum balancing processes for social groups with planar and nonplanar graph structures. O Katai, S Iwai, Journal of Mathematical Psychology. 182Katai, O., Iwai, S.: Studies on the balancing, the minimal balancing, and the minimum balancing processes for social groups with planar and nonplanar graph structures. Journal of Mathematical Psychology 18(2), 140-176 (1978)
+
+Practical guidelines for solving difficult mixed integer linear programs. E Klotz, A M Newman, 10.1016/j.sorms.2012.12.001Surveys in Operations Research and Management Science. 1812Klotz, E., Newman, A.M.: Practical guidelines for solving difficult mixed integer linear programs. Surveys in Operations Research and Management Science 18(12), 18 -32 (2013). DOI http://dx.doi.org/10.1016/j.sorms.2012.12.001
+
+J Kunegis, arXiv:1402.6865Applications of Structural Balance in Signed Social Networks. Kunegis, J.: Applications of Structural Balance in Signed Social Networks. arXiv:1402.6865 [physics] (2014)
+
+Spectral analysis of signed graphs for clustering, prediction and visualization. J Kunegis, S Schmidt, A Lommatzsch, J Lerner, E W De Luca, S Albayrak, 10.1137/1. 9781611972801.49Proceedings of the 2010 SIAM International Conference on Data Mining. S. Parthasarathy, B. Liu, B. Goethals, J. Pei, C. Kamaththe 2010 SIAM International Conference on Data MiningPhiladelphia, PA, USA10Kunegis, J., Schmidt, S., Lommatzsch, A., Lerner, J., De Luca, E.W., Albayrak, S.: Spectral analysis of signed graphs for clustering, prediction and visualization. In: S. Parthasarathy, B. Liu, B. Goethals, J. Pei, C. Kamath (eds.) Proceedings of the 2010 SIAM International Conference on Data Mining, vol. 10, pp. 559-570. Society for Industrial and Applied Mathematics, Philadelphia, PA, USA (2010). DOI 10.1137/1. 9781611972801.49
+
+T B Lemann, R L Solomon, Group characteristics as revealed in sociometric patterns and personality ratings. 15Lemann, T.B., Solomon, R.L.: Group characteristics as revealed in sociometric patterns and personality ratings. Sociometry 15, 7-90 (1952)
+
+Signed networks in social media. J Leskovec, D Huttenlocher, J Kleinberg, Proceedings of the SIGCHI Conference on Human Factors in Computing Systems. the SIGCHI Conference on Human Factors in Computing SystemsACMLeskovec, J., Huttenlocher, D., Kleinberg, J.: Signed networks in social media. In: Proceedings of the SIGCHI Conference on Human Factors in Computing Systems, pp. 1361-1370. ACM (2010)
+
+A memetic algorithm for computing and transforming structural balance in signed networks. L Ma, M Gong, H Du, B Shen, L Jiao, 10.1016/j.knosys.2015.05.006Knowledge-Based Systems. 85Ma, L., Gong, M., Du, H., Shen, B., Jiao, L.: A memetic algorithm for computing and transforming structural balance in signed networks. Knowledge-Based Systems 85, 196 -209 (2015). DOI http://dx.doi.org/10.1016/j.knosys.2015.05.006
+
+Matrix-power energy-landscape transformation for finding np-hard spin-glass ground states. M Manssen, A K Hartmann, Journal of Global Optimization. 611Manssen, M., Hartmann, A.K.: Matrix-power energy-landscape transformation for finding np-hard spin-glass ground states. Journal of Global Optimization 61(1), 183- 192 (2015)
+
+Energy landscape of social balance. S A Marvel, S H Strogatz, J M Kleinberg, Physical Review Letters. 10319701Marvel, S.A., Strogatz, S.H., Kleinberg, J.M.: Energy landscape of social balance. Physical Review Letters 103(19), 198,701 (2009)
+
+Information-theoretic approach to ground-state phase transitions for two-and three-dimensional frustrated spin systems. O Melchert, A Hartmann, Physical Review E. 872107Melchert, O., Hartmann, A.: Information-theoretic approach to ground-state phase transitions for two-and three-dimensional frustrated spin systems. Physical Review E 87(2), 022,107 (2013)
+
+The bethe lattice spin glass revisited. M Mézard, G Parisi, The European Physical Journal B-Condensed Matter and Complex Systems. 202Mézard, M., Parisi, G.: The bethe lattice spin glass revisited. The European Physical Journal B-Condensed Matter and Complex Systems 20(2), 217-233 (2001)
+
+The backbone of bipartite projections: Inferring relationships from coauthorship, co-sponsorship, co-attendance and other co-behaviors. Z Neal, Social Networks. 39Neal, Z.: The backbone of bipartite projections: Inferring relationships from co- authorship, co-sponsorship, co-attendance and other co-behaviors. Social Networks 39, 84-97 (2014)
+
+The General Nature of Peer Group Influence", pps. 2-16 in College Peer Groups. T Newcomb, E K Newcomb, Wilson, Holt, Rinehart and Winston.Aldine Publishing CoChicagoThe Acquaintance ProcessNewcomb, T.: The Acquaintance Process. New York: Holt, Rinehart and Win- ston.(1966)." The General Nature of Peer Group Influence", pps. 2-16 in College Peer Groups, edited by TM Newcomb and EK Wilson. Chicago: Aldine Publishing Co (1961)
+
+A derivation of a measure of relative balance for social structures and a characterization of extensive ratio systems. R Z Norman, F S Roberts, Journal of Mathematical Psychology. 91Norman, R.Z., Roberts, F.S.: A derivation of a measure of relative balance for social structures and a characterization of extensive ratio systems. Journal of Mathematical Psychology 9(1), 66-91 (1972)
+
+Molecular interaction map of a macrophage. K Oda, T Kimura, Y Matsuoka, A Funahashi, M Muramatsu, H Kitano, AfCS Research Reports. 214Oda, K., Kimura, T., Matsuoka, Y., Funahashi, A., Muramatsu, M., Kitano, H.: Molec- ular interaction map of a macrophage. AfCS Research Reports 2(14), 1-12 (2004)
+
+A comprehensive pathway map of epidermal growth factor receptor signaling. K Oda, Y Matsuoka, A Funahashi, H Kitano, Molecular Systems Biology. 11Oda, K., Matsuoka, Y., Funahashi, A., Kitano, H.: A comprehensive pathway map of epidermal growth factor receptor signaling. Molecular Systems Biology 1(1) (2005)
+
+Einige Bemerkungen ber vollstndige Bigraphen. M Petersdorf, Wiss. Z. Techn. Hochsch. Ilmenau. 12Petersdorf, M.: Einige Bemerkungen ber vollstndige Bigraphen, Wiss. Z. Techn. Hochsch. Ilmenau 12, 257-260 (1966)
+
+Cultures of the central highlands. K E Read, New Guinea. Southwestern Journal of Anthropology. 101Read, K.E.: Cultures of the central highlands, New Guinea. Southwestern Journal of Anthropology 10(1), 1-43 (1954)
+
+Regulondb (version 5.0): Escherichia coli k-12 transcriptional regulatory network, operon organization, and growth conditions. H Salgado, S Gama-Castro, M Peralta-Gil, E Diaz-Peredo, F Sánchez-Solano, A Santos-Zavaleta, I Martinez-Flores, V Jiménez-Jacinto, C Bonavides-Martinez, J Segura-Salazar, Nucleic Acids Research. 34suppl 1Salgado, H., Gama-Castro, S., Peralta-Gil, M., Diaz-Peredo, E., Sánchez-Solano, F., Santos-Zavaleta, A., Martinez-Flores, I., Jiménez-Jacinto, V., Bonavides-Martinez, C., Segura-Salazar, J., et al.: Regulondb (version 5.0): Escherichia coli k-12 transcriptional regulatory network, operon organization, and growth conditions. Nucleic Acids Re- search 34(suppl 1), D394-D397 (2006)
+
+A Novitiate in a Period of Change. An Experimental and Case Study of Social Relationships. S F Sampson, IthacaCornell UniversityPhD thesisSampson, S.F.: A Novitiate in a Period of Change. An Experimental and Case Study of Social Relationships (PhD thesis). Cornell University, Ithaca (1968)
+
+Solvable model of a spin-glass. D Sherrington, S Kirkpatrick, 10.1103/PhysRevLett.35.1792Physical Review Letters. 35Sherrington, D., Kirkpatrick, S.: Solvable model of a spin-glass. Physical Review Letters 35, 1792-1796 (1975). DOI 10.1103/PhysRevLett.35.1792
+
+A spectral algorithm for computing social balance. E Terzi, M Winkler, Algorithms and models for the web graph. SpringerTerzi, E., Winkler, M.: A spectral algorithm for computing social balance. In: Algo- rithms and models for the web graph, pp. 1-13. Springer (2011)
+
+Note sur une caractérisation des graphes dont le degré de déséquilibre est maximal. I Tomescu, Mathématiques et Sciences Humaines. 42Tomescu, I.: Note sur une caractérisation des graphes dont le degré de déséquilibre est maximal. Mathématiques et Sciences Humaines 42, 37-40 (1973)
+
+Theory of the frustration effect in spin glasses: I. Spin Glass Theory and Beyond: An Introduction to the Replica Method and Its Applications. G Toulouse, 999Toulouse, G.: Theory of the frustration effect in spin glasses: I. Spin Glass Theory and Beyond: An Introduction to the Replica Method and Its Applications 9, 99 (1987)
+
+T Zaslavsky, Signed graphs: To: T. Zaslavsky. 4248Discrete Applied MathematicsZaslavsky, T.: Signed graphs: To: T. Zaslavsky, Discrete Applied Mathematics 4 (1982) 47-74 Erratum. Discrete Applied Mathematics 5(2), 248 (1983)
+
+Balanced decompositions of a signed graph. T Zaslavsky, Journal of Combinatorial Theory, Series B. 431Zaslavsky, T.: Balanced decompositions of a signed graph. Journal of Combinatorial Theory, Series B 43(1), 1-13 (1987)
+
+Advances in discrete mathematics and applications. T Zaslavsky, Proceedings of the International Conference on Discrete Mathematics, ICDM-2008. the International Conference on Discrete Mathematics, ICDM-2008Mysore, IndiaRamanujan Mathematical Society13Matrices in the theory of signed simple graphsZaslavsky, T.: Matrices in the theory of signed simple graphs, Advances in discrete mathematics and applications. In: Proceedings of the International Conference on Discrete Mathematics, ICDM-2008, vol. 13, pp. 207-229. Ramanujan Mathematical Society, Mysore, India (2010)
+
+A Mathematical Bibliography of Signed and Gain Graphs and Allied Areas. T Zaslavsky, The Electronic Journal of Combinatorics. Zaslavsky, T.: A Mathematical Bibliography of Signed and Gain Graphs and Allied Areas. The Electronic Journal of Combinatorics (2012)

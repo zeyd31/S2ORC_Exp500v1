@@ -1,0 +1,355 @@
+
+ASSESSING NON-LINEAR MODELS FOR GALAXY CLUSTERING I: UNBIASED GROWTH FORECASTS FROM MULTIPOLE EXPANSION
+
+
+Katarina Markovič 
+Benjamin Bose 
+Alkistis Pourtsidou 
+
+Institute of Cosmology & Gravitation
+Dennis Sciama Building
+Departement de Physique Theorique
+University of Portsmouth
+Burnaby RoadPO1 3FXPortsmouthUK
+
+
+School of Physics and Astronomy
+Universite de Geneve
+24 quai Ernest Ansermet1211Geneve 4QueenSwitzerland
+
+
+Department of Physics & Astronomy
+Mary University of London
+Mile End RoadE1 4NSLondonUK
+
+
+University of the Western Cape
+7535Cape TownSouth Africa
+
+ASSESSING NON-LINEAR MODELS FOR GALAXY CLUSTERING I: UNBIASED GROWTH FORECASTS FROM MULTIPOLE EXPANSION
+Version January 28, 2022Version January 28, 2022 Preprint typeset using L A T E X style openjournal v. 09/06/15
+We assess the performance of the Taruya, Nishimichi and Saito (TNS) model for the halo redshift space power spectrum, focusing on utilising mildly non-linear scales to constrain the growth rate of structure f . Using simulations with volume and number density typical of forthcoming Stage IV galaxy surveys, we determine ranges of validity for the model at redshifts z = 0.5 and z = 1. We proceed to perform a Bayesian MCMC analysis utilising the monopole, quadrupole, and hexadecapole spectra, followed by an exploratory Fisher matrix analysis. As previously noted in other forecasts as well as in real data analyses, we find that including the hexadecapole can significantly improve the constraints. However, a restricted range of scales is required for the hexadecapole in order for the growth parameter estimation to remain unbiased, limiting the improvement. We consistently quantify these effects by employing the multipole expansion formalism in both our Fisher and MCMC forecasts.A way to attack this challenge is by using perturbation theory based models(Bernardeau et al. 2002;Kaiser 1987;Scoccimarro 2004) that can be easily extended to include non-standard theories of gravity and dark energy (see  Koyama 2016, 2017; Bose et al. 2018a,b, for example). These can be combined with phenomenological ingredients to model non-linear physics(Taruya et al. 2010;Senatore and Zaldarriaga 2014;de la Bella et al. 2017). Additionally, a model for the galaxy bias is required to relate the dark matter and galaxy distributions .An important factor, which is the main focus of this paper, is our ability to use these prescriptions to model non-linear structure formation in an unbiased manner, and how this affects the growth of structure parameter estimation with Stage IV surveys. dida.markovic@port.ac.uk benjamin.bose@unige.ch a.pourtsidou@qmul.ac.uk 1 www.euclid-ec.org 2 https://wfirst.gsfc.nasa.gov/ 3 www.desi.lbl.gov
+
+INTRODUCTION
+
+Forthcoming large-scale structure (LSS) surveys such as EUCLID 1 (Laureijs et al. 2011), WFIRST 2 , and the Dark Energy Spectroscopic Instrument (DESI) 3 , are promising to deliver exquisite cosmological measurements and test the laws of gravity with unprecedented precision. The standard cosmological model, ΛCDM, has been shown to provide an excellent fit to the data from a suite of CMB and LSS surveys (Ade et al. 2016;Anderson et al. 2013;Song et al. 2015;, assuming that General Relativity is the correct description of gravity across all scales. A plethora of modified gravity models have been proposed, motivated by the possibility of explaining the late time accelerated expansion of the Universe without the need of a cosmological constant (see Clifton et al. 2012, for a comprehensive review). Future LSS measurements with Stage IV spectroscopic galaxy surveys are aiming to measure the logarithmic growth rate of structure f , which strongly depends on cosmology and gravity (Guzzo et al. 2008). This will be achieved by probing the redshift space distortion (RSD) signature with the galaxy power spectrum or correlation function (Blake et al. 2011;Reid et al. 2012;Macaulay et al. 2013;Beutler et al. 2014;Gil-Marín et al. 2016a;Simpson et al. 2016).
+
+The volume and number of galaxies probed by Stage IV surveys are very large, meaning that these surveys will not be limited by statistical uncertainties, but rather by our ability to deal with systematic effects and theoretical uncertainties. The latter include non-linear effects on the redshift space galaxy clustering. In the case of RSD measurements, these have to be understood and modelled properly so that we can confidently utilise the data from mildly non-linear scales to improve the constraints on f .
+
+For this purpose, we consider the commonly used TNS model (Taruya et al. 2010). This model can reproduce the broadband power spectrum including RSD from simulations at linear and mildly non-linear scales Taruya et al. 2013;Ishikawa et al. 2014;Zheng and Song 2016;Gil-Marín et al. 2016a,b;Bose and Koyama 2016). The model is combined with the generalised bias prescription of McDonald and Roy (2009). This is very similar to what has been used in part of the BOSS survey data analysis . We use a set of COLA simulations (Tassev et al. 2013;Howlett et al. 2015;Valogiannis and Bean 2017; to determine a range of validity for the models at redshifts z = 0.5 and 1. We then perform a Bayesian MCMC analysis with the goal of assessing the constraining power of Stage IV-like surveys while also confirming the validity of the models across the range of scales we determined previously. Our focus is getting unbiased constraints on f using information from the first three multipoles: the monopole (P 0 ), quadrupole (P 2 ), and hexadecapole (P 4 ) of the power spectrum. We then move on to an exploratory Fisher matrix forecast analysis using the full anisotropic power spectrum, P (k, µ), in addition to the multipole expansion formalism. Our final estimates for the unbiased measurements on f are determined consistently from the MCMC and Fisher multipole expansion forecasts analyses. This paper is organised as follows: In section 2 we present the TNS-based biased tracer RSD model we assemble, and the fits to simulations to determine the fiducial nuisance parameters and model range of validity. In section 3 we perform a Bayesian MCMC analysis and present results, followed by a Fisher matrix analysis in section 4. We then present a comparison between Fisher and MCMC using the multipole expansion formalism. In section 5 we summarise our findings and conclude. Our Fisher matrix codes have been made publicly available at https://github.com/Alkistis/GC-Fish-nonlinear.
+
+
+TNS MODEL DESCRIPTION AND COMPARISON TO SIMULATIONS
+
+
+Model description
+
+The TNS model (Taruya et al. 2010) is based on standard Eulerian perturbation theory (SPT), which assumes that the background space-time is homogeneous and isotropic, and that we work within the Newtonian regime at mildly non-linear scales. These scales are far within the horizon but with δ, θ 1, where δ and θ are the density and velocity perturbations respectively. We also assume that gravity is described by general relativity. The explicit model is given by
+P S (TNS) (k, µ) =D FoG (µ 2 k 2 σ 2 v ) P g,δδ (k, b 1 , b 2 , N ) + 2µ 2 P g,δθ (k, b 1 , b 2 ) + µ 4 P θθ (k) + b 3 1 A(k, µ) + b 4 1 B(k, µ) + b 2 1 C(k, µ) ,(1)
+where f is the logarithmic growth rate, µ is the cosine of the angle between k and the line of sight and P g are the 1-loop galaxy power spectra with the bias model of McDonald and Roy (2009) implicitly included 4 , while the A, B and C terms are non-linear perturbative corrections arising from the transformation to redshift space. The terms in brackets are all constructed within SPT 5 , while the prefactor, D FoG , is phenomenological. Here we choose a Lorentzian form (Gil-Marin et al. 2012;Percival and White 2009;Taruya et al. 2010;Peacock and Dodds 1994)
+D Lor FoG (k 2 µ 2 σ 2 v ) = 1 1 + (k 2 µ 2 σ 2 v )/2 ,(2)
+where σ v is a redshift-dependent free parameter and represents the velocity dispersion of perturbations at cluster scales. We again refer the reader to ; Taruya et al. (2010) for the formulas for the perturbative components of the model, along with the explicit dependency on the independent free bias parameters {b 1 , b 2 , N }. As was done in , we ignore all other bias terms under the local Lagrangian assumption (Sheth et al. 2013;Chan et al. 2012;Saito et al. 2014;Baldauf et al. 2012).
+
+We emphasise again that this model is very similar that used in the recent BOSS analysis .
+
+We choose it to make use of its thorough validation with simulations and mock catalogues. It is also worth noting that it has shown robustness when considering alternative theories of gravity (for example Bose and Koyama 2016). However, we stress that there are key differences in our model. We choose a Lorentzian rather than a Gaussian damping factor in Equation 2 6 , we include the C(k, µ) term in Equation 1 and use SPT rather than RegPT (Taruya et al. 2012), the latter being the biggest difference. SPT is known to suffer from divergences in the loop expansion at low redshifts (see Carlson et al. 2009, for example), which the re-normalisation scheme of the RegPT approach addresses. Despite this, SPT clearly does well for z ≥ 1 (Carlson et al. 2009;Osato et al. 2018). Our work finds that it also works well for z = 0.5 given our derived goodness of fit to the data. This was also suggested in other works (Carlson et al. 2009;Vlah et al. 2015;. Further, in Bose et al. (2019a) the authors also show that SPT provides a better fit to the redshift space halo multipoles at both z = 0.5 and z = 1 than when using the RegPT prescription. Given these findings, it would be very interesting to repeat the BOSS data analysis with this variant of the TNS model.
+
+The full set of nuisance parameters in this model is therefore {σ v , b 1 , b 2 , N }. In our MCMC and Fisher matrix analyses we will vary these nuisance parameters along with the cosmological parameter of interest, the growth of structure f . Our chosen set of parameters is restricted. Perhaps most importantly, we do not include variations of the background "shape" parameters or the Alcock-Paczynski effect. There are two reasons for this. Firstly, our goal is to demonstrate the trade-off between our constraining power on f and the bias on its estimation as a function of the k-ranges used from the monopole, quadrupole, and hexadecapole spectra. We then wish to provide a consistent comparison between Fisher matrix and MCMC forecasts. This can be achieved without an extensive set of parameters. Secondly, varying extra parameters in the MCMC is computationally expensive, since all the model components have to be calculated for every sample. Using a restricted set mitigates this problem. However, optimising our code for speed is under development and we hope to present an analysis with all parameters of interest in future work. We also note that while it is customary to present constraints on (f σ 8 )(z), and indeed the BOSS analysis uses this parametrisation, other analyses have opted to present constraints on f alone, e.g. Blake et al. (2011). The reason for this choice in a real data analysis is to test if the Planck best-fit model also predicts the observed growth of structure by the galaxy survey.
+
+Finally, we note that great progress has been made since the TNS model was first proposed, in particular in relation to the relationship between bias and redshift space distortions (see Desjacques et al. (2018a) for a review). Despite this, the TNS model with this minimal bias model remains one of the simplest and most economical phenomenological models. For example, a fully consistent treatment of the halo power spectrum in redshift space discussed requires many more free parameters (Desjacques et al. 2018b).
+
+
+Comparison to Simulations
+
+This section is dedicated to determining a rough range of validity for Equation 1 as well as fiducial values for the nuisance parameters. To do this, we make use of a set of four Parallel COmoving Lagrangian Acceleration (PICOLA) simulations (Howlett et al. 2015;) of box length 1024 Mpc/h with 1024 3 dark matter particles and a starting redshift z ini = 49. These are all run within the same ΛCDM cosmology taken from WMAP9 (Hinshaw et al. 2013): Ω m = 0.281, Ω b = 0.046, h = 0.697, n s = 0.971 and σ 8 (z = 0) = 0.844.
+
+Halo catalogues from these simulations are constructed using the Friends-of-Friends algorithm with a linking length of 0.2-times the mean particle separation. The halo spectra are measured at redshifts of z = 0.5 and z = 1 and use all halos above a mass of M min = 4 × 10 12 M . This corresponds to a number density of n h = 1 × 10 −3 h 3 /Mpc 3 which is similar to that estimated for Stage IV surveys galaxy number density around the redshifts considered (Amendola et al. 2018).
+
+As is commonly done in real data analyses, the power spectrum is decomposed into its multipoles. The PICOLA multipoles are measured using the distant-observer approximation 7 and averaged over three line-of-sight directions. We further average over the four PICOLA simulations. We note here that (PI)COLA is an approximate method and should be validated against full N-body to ensure any comparisons to the measurements are meaningful. In Izard et al. (2016) comparisons of COLA with full N-body measurements are made, and sufficient agreement is found in the halo monopole and quadrupole. Furthermore, in Bose et al. (2019b), comparisons of COLA with full N-body are made for the halo monopole, quadrupole and hexadecapole using the same COLA code and simulation specifications used in this work. The authors find the COLA approach to be sufficiently accurate at the scales and redshifts considered here.
+
+On the theoretical side, the multipoles are expressed as
+P S (k) = 2 + 1 2 1 −1 dµP S (k, µ)P (µ),(3)
+where P (µ) denote the Legendre polynomials and P S (k, µ) is given by Equation 1. For our fitting analysis, we utilise only the monopole ( = 0) and quadrupole ( = 2) since they include most of the clustering information. The hexadecapole is later considered in section 3, where we perform an MCMC analysis on the PICOLA data.
+
+Our maximum scale in k (the model's range of validity) will be denoted as k max . To determine this we follow the following procedure: 1. We fix all cosmological parameters including the growth rate f and perform a least χ 2 fit to the PICOLA data by varying the model nuisance parameters 8 . In our χ 2 analysis we use all data bins from k min = 0.006 h/Mpc to k max , with k max being varied in the range 0.125 h/Mpc ≤ k max ≤ 0.3 h/Mpc.
+
+
+2.
+
+We take the 95% (2σ) confidence intervals (2∆χ 2 red ) on a χ 2 distribution with N dof degrees of freedom. Since N dof is large in our analysis the errors are approximately symmetric. 3. The criterion we use to calculate the final k max for the rest of the analysis is the maximum k-value which gives χ 2 red (k max ) − 2∆χ 2 red (k max ) ≤ 1. Roughly, this gives an indication of which range of scales the model is reliable at without biasing cosmological parameter estimates at the required 2σ level 9 . The reduced χ 2 statistic is given by
+χ 2 red (k max ) = 1 N dof kmax k=kmin , =0,2 P S ,data (k) − P S ,model (k) Cov −1 , (k) P S ,data (k) − P S ,model (k) ,(4)
+where Cov , is the Gaussian covariance matrix between the different multipoles and k min = 0.006 h/Mpc. The number of degrees of freedom N dof is given by N dof = 2 × N bins − N params , where N bins is the number of k−bins used in the summation and N params is the number of free parameters in the theoretical model. Here, N params = 4 for the TNS model of Equation 1. Finally, the bin-width we use is ∆k = 0.006 h/Mpc.
+
+We use linear theory for the covariance matrix between the multipoles (see Appendix C of Taruya et al. 2010, for details). This has been shown to reproduce N-body results up to k ≤ 0.3 h/Mpc at z = 1. A linear covariance also seems to work well at z = 0.5 up to k ≤ 0.2 h/Mpc at z = 0.5, as shown very recently in Sugiyama et al. (2019). We note that for analysing real data from Stage IV surveys validated analytical approximations will likely be used alongside numerical covariances constructed using mocks. In the covariance matrix we assume a number density of n h = 1 × 10 −3 h 3 /Mpc 3 and a survey volume 10 of V s = 4 Gpc 3 /h 3 .
+
+In Figure 1 we show the minimized χ 2 red (k max ) for z = 0.5 and z = 1 for the TNS model, with the associated 2σ error bars. We determine k max = 0.227 h/Mpc and k max = 0.276 h/Mpc at z = 0.5 and z = 1 respectively. The larger k max at z = 1 is expected due to less non-linear structure formation at higher redshifts. We summarise the best fit nuisance parameters and details of the fit in Table 1. We also plot the best fit TNS multipoles against the PICOLA data in Figure 2. In the bottom panels of Figure 2 we show the residuals, that is the difference in theoretical prediction to simulation measurement divided by the errors coming from the covariance matrix. Linear theory (Kaiser 1987) is also shown in green as a reference, where we use b 1 as measured from the simulations and the fiducial value of f . 
+
+
+MCMC ANALYSIS
+
+In this section we perform Bayesian MCMC analyses at redshifts z = 0.5 and 1. We model our log-likelihood using Equation 4, and vary the growth rate f and nuisance parameters of the TNS model outlined in section 2.
+
+Our approach has two purposes. The first is to check how biased the f estimates can be at our derived k max chosen in Table 1. The second is to provide estimates for the f constraints using our version of the TNS model and Stage IV-like specifications, and assess the improvement when adding the hexadecapole.
+
+Our results at z = 0.5 are shown in the top panel of Figure 3. We first utilise the monopole and quadrupole spectra (P 0 ,P 2 ) only at the range of scales determined in section 2. The Figure shows the TNS model's recovery of f at k max = 0.227 h/Mpc (red contours). We can see that the fiducial value is safely recovered with a 2σ criterion (same as in section 2), and we have also checked that using a higher k max the estimates become more biased.
+
+We then add the hexadecapole, P 4 . We find that the estimates of the growth rate f is biased if we take the hexadecapole up to the same k max found in Table 1. That is because the TNS model is not flexible enough to account for the hexadecapole at this range of scales. This has also been seen in the BOSS data analysis in . However, motivated by Figure 2, we can consider the hexadecapole up to a more conservative value, k max,4 = 0.129 h/Mpc, without biasing the f estimate (blue contours). This is again similar to what has been done in the BOSS data analysis in . Our MCMC estimates for the fractional error on f (z = 0.5) with this process are 3.6% using the monopole and quadrupole, and 3.2% when adding the hexadecapole with the restricted range of scales. We will refer to this case as P 0 + P 2 + P 4 | restricted throughout the paper.
+
+Our results at z = 1 are shown in the bottom panel of Figure 3. We follow a similar procedure as before, with k max = 0.276 h/Mpc for the monopole and quadrupole, and k max,4 = 0.05 h/Mpc for the hexadecapole in order for the f estimate to remain unbiased at our required 2σ level. We have checked that a higher k max,4 biases estimates of f . This k max,4 is lower than the one used at z = 0.5 which may seem counterintuitive. We can explain this in terms of the model's flexibility. At k max = 0.276 h/Mpc the model is already being severely tested and therefore it cannot account for P 4 to any higher k max,4 without becoming biased. Our MCMC estimates for the marginalised fractional error on f (z = 1) with this process are 3% using the monopole and quadrupole, and 2.6% when adding the hexadecapole with the restricted range of scales, P 0 + P 2 + P 4 | restricted .  Before moving on to the Fisher matrix analysis, it is useful to perform another set of MCMC analyses to get a sense of the tradeoff between bias and constraining power in f depending on k max . At redshift z = 0.5, in addition to the P 0 + P 2 + P 4 | restricted presented above we perform two additional MCMC analyses using the full P (k, µ) (equivalent to P 0 + P 2 + P 4 with equal k max for monopole, quadrupole, and hexadecapole). We first set k max = 0.227 h/Mpc, followed by a more conservative k max = 0.129 h/Mpc. The results are shown in Figure 4. For the full P (k, µ) with k max = 0.227 h/Mpc (red dashed line) we find f = 0.520 ± 0.013, a heavily biased estimate compared to the true value of f = 0.733 in the PICOLA simulations (thick black dashed-dot line). For the more conservative full P (k, µ) with k max = 0.129 h/Mpc (green dotted line) we see that the true f is within the 1σ contour, f = 0.698 ± 0.037. For the P 0 + P 2 + P 4 | restricted case, the estimate is unbiased at the 2σ level, f = 0.782 ± 0.025.
+
+
+FISHER MATRIX ANALYSIS
+
+In this section we are going to perform an exploratory Fisher matrix analysis to forecast constraints on f using the TNS model. Since we wish to compare the Fisher results with the ones from our MCMC analysis, we will use the Fisher matrix formalism written in terms of multipoles. This allows us to choose different ranges for the monopole, quadrupole, and hexadecapole spectra, to mimic the procedure followed in our MCMC analysis in the previous section. We will also perform a comparison between this method with the most commonly used full anisotropic power spectrum method. This allows us to quickly assess how the requirement for unbiased f estimates limits the improvement with respect to the case where the hexadecapole is added assuming the same k max as in the monopole and quadrupole analysis.
+
+
+Fisher matrix formalism using multipole expansion:
+
+Here we summarise the multipole expansion formalism for Fisher forecasts. We refer the reader to  for a comprehensive description. The authors of  use the TNS model equiped with a linear deterministic bias, noting that this assumption is idealistic and a more accurate prescription is essential for realistic forecasts. They then perform a Fisher matrix analysis to investigate the relative contributions of the different multipoles (P 0 , P 2 and P 4 ) if taken at the same k max , and compare with the full P (k, µ) formalism. Hence, an important distinction between the forecasts performed in this work and that of  is (i) our implementation of a non-linear bias prescription that corresponds to a more accurate theoretical template that could readily be applied to the data (ii) the use of different k max for the different multipoles to ensure unbiased forecasts and (iii) an MCMC analysis alongside the Fisher matrix analysis to consolidate our findings.
+
+In terms of multipoles, the Fisher matrix for a set of parameters {p} is given by (Fisher 1935;Tegmark 1997;)
+F ij = V s 4π 2 , kmax kmin dkk 2 ∂P S (k) ∂p i Cov (k) −1 ∂P S (k) ∂p j ,(5)
+with Cov being the reduced covariance matrix: at z = 0.5 and 1. The full P (k, µ) case is equivalent to taking P 0 , P 2 and P 4 to the same kmax. We also show P 0 + P 2 only, as well as the P 0 + P 2 + P 4 | restricted case. Note that we have used the MCMC means as the fiducial Fisher matrix parameter values, to allow for a direct comparison with the MCMC.
+Cov (k) = (2 + 1) (2 + 1) 2 × 1 −1 dµP S (µ)P S (µ) P (k, µ) + 1 n 2 .(6)
+Note that in our analysis, we promote k max → k max, in Equation 5, in order to be able to study the P 0 +P 2 +P 4 | restricted case. Also, since we want to mimic our assumptions in the MCMC analysis, we use linear covariance, which means that P (k, µ) in the brackets of Equation 6 is given by the linear formula (Kaiser 1987).
+
+Fisher matrix formalism using the full (2D) anisotropic power spectrum:
+
+Considering the full power spectrum signal in redshift space, the Fisher matrix becomes (Tegmark 1997;)
+F (2D) ij = V s 4π 2 1 −1 dµ kmax kmin dkk 2 ∂P (k, µ) S ∂p i P (k, µ) + 1 n −2 ∂P (k, µ) S ∂p j .(7)
+Using the Fisher matrix formalism, the forecasted errors on parameter p i , marginalised over all other parameters, are given by the square root of the diagonal of the inverse of the Fisher matrix as
+∆p i = (F −1 ) ii .(8)
+We are now ready to present our Fisher matrix analysis results. In Figure 5 we compare the full P (k, µ) Fisher matrix results 11 with the results using only P 0 and P 2 up to the k max determined in Table 1, and the ones found when adding the hexadecapole with the restricted range of scales in order for the f estimates to remain unbiased (P 0 + P 2 + P 4 | restricted ).
+
+In both redshifts, z = 0.5 and z = 1, it is clear that the full P (k, µ) treatment gives much better constraints on f . More specifically, using the full P (k, µ) formalism we find a 2.4% constraint on f compared to 3.8% in the P 0 + P 2 + P 4 | restricted case at z = 0.5. At z = 1, we find 1.4% compared to 2.9% in the P 0 + P 2 + P 4 | restricted case, a factor of ∼ 2 difference.
+
+
+Comparison between Fisher matrix and MCMC analysis
+
+We will now present the comparison between Fisher matrix and MCMC results, in the unbiased, P 0 +P 2 +P 4 | restricted case. For this purpose we will focus on comparing the (f, σ v ) contours, since σ v is the most correlated nuisance parameter with the cosmological parameter of interest f . We include the full range of comparison plots in Appendix A.
+
+The results are shown in Figure 6. At z = 0.5, we find remarkable agreement between Fisher and MCMC, demonstrating that the multipole expansion formalism method is both reliable and robust. At z = 1, we have plotted two Fisher ellipses: the dotted one, denoted by Fisher| deg , corresponds to the Fisher matrix results presented in Figure 5. We see Full P (k, µ) Fisher MCMC Fig. 6.-Fisher and MCMC comparison for the P 0 + P 2 + P 4 | restricted case. We also show the full P (k, µ) Fisher ellipses, but note these correspond to biased f estimates (see Figure 4). As described in the main text, the Fisher| deg contour (dotted line) at z = 1 corresponds to the Fisher matrix shown in the bottom panel of Figure 5, with a near perfect degeneracy between the (b 2 , N ) nuisance parameters. The Fisher contour (solid line) is the result after imposing a conservative prior on N that breaks the degeneracy just enough to mitigate the instability it induces. We emphasise that in both cases the final marginalised f constraints remain stable and in very good agreement with the MCMC.
+
+that the area of the (f, σ v ) ellipse is larger than the MCMC one. Inspecting Figure 5 at z = 1, we see that there is a near-perfect degeneracy between the (b 2 , N ) parameters 12 . We can quantify this using the correlation coefficient r given by
+r(p i , p j ) = (F −1 ) ij (F −1 ) ii (F −1 ) jj .(9)
+This characterises parameter degeneracies: r = 0 means p i and p j are uncorrelated, while r = ±1 means they are completely (anti)correlated. In the case we are concerned with at z = 1, we find r(b 2 , N ) = −0.999. This signals a possible instability in the Fisher matrix that might be responsible for the disagreement with the MCMC. To investigate this, we impose a conservative ∼ 50% prior on the N parameter and rerun the Fisher matrix analysis. This breaks the degeneracy just enough to mitigate the instability, and gives the excellent agreement shown with the solid black line. However, we emphasise that despite this instability, the marginalised constraint on f is in both cases (with and without the prior correction) in very good agreement with the MCMC. This is because it is the (f, σ v ) degeneracy that affects mostly the final, marginalised error on f . The careful reader will notice that there are some differences between the Fisher and MCMC results, especially regarding the improvement when including the hexadecapole at z = 0.5. This seems to give only marginal gains in the constraining power when considering the Fisher matrix, disagreeing with the improvement shown by the MCMC forecast. Given that the MCMC contours are not perfect Gaussian ellipses we would not expect perfect agreement with the Fisher ellipses. The disagreement is worse at z = 0.5 and the MCMC contours there also look less "Gaussian" than the ones at z = 1, so this is not very surprising. We note that similar subtleties have been seen before in Fisher and MCMC comparison studies, and we refer the interested reader to Wolz et al. (2012); Hawken et al. (2012). The final, marginalised f constraints from all methods we have used are summarised in Table 2.
+
+
+SUMMARY AND CONCLUSIONS
+
+In this paper we have assessed the performance of the commonly used TNS model in the context of Stage IV galaxy surveys, considering the multipoles of the redshift space halo power spectrum as our observable. We considered two redshifts, z = 0.5 and z = 1, and made use of PICOLA simulations to perform maximum likelihood, MCMC, and Fisher matrix analyses. Here we summarise our main results and conclude.
+
+We first determined the TNS model's ranges of validity using the monopole and quadrupole power spectra, which contain most of the cosmological information. We note that while this approach is appropriate for the purposes and limitations of this work, in an actual data analysis the bias on f needs to be evaluated directly as a function of k max . In Bose et al. (2019b), this point is investigated thoroughly by running a large number of MCMC analyses. In the MCMC analysis that followed, we varied the model's four nuisance parameters and the logarithmic growth rate, f . 12 A contributing factor to this could be the loop integral involving b 2 2 , that asymptotes to a constant at low k (Desjacques et al. 2018a).
+
+TABLE 2 Marginalised percent errors (at 1σ) on f from the MCMC and Fisher analyses at z = 0.5 and z = 1. We utilise the monopole and quadrupole up to the kmax given in Table 1, and the hexadecapole up to a conservative (restricted) k max,4 , as detailed in the main text. For comparison we show the results for the full P (k, µ) Fisher matrix case, and warn that this falsely small error corresponds to biased f estimates.
+
+Analysis z = 0.5 z = 1 MCMC: P 0 + P 2 3.6% 3.0% Fisher: P 0 + P 2 3.9% 3.1% MCMC: P 0 + P 2 + P 4 | restricted 3.2% 2.6% Fisher: P 0 + P 2 + P 4 | restricted 3.8% 2.9% Fisher: Full P (k, µ), biased 2.4% 1.4%
+
+The analysis using the k max from Table 1 shows a significant degeneracy between f and σ v that has also been found previously (Zheng et al. 2017;. The improvement on the TNS constraints at z = 1 is mainly due to the much higher k max at z = 1 compared to that at z = 0.5.
+
+To investigate the possible improvement by adding information from the hexadecapole, we performed two distinct MCMC analyses at z = 0.5 and 1. One excludes the hexadecapole using the range of validity found in section 2, and one includes it. It has been shown that adding the hexadecapole up to the same k max as the monopole and quadrupole biases the estimation of f (see also Figure 4). We followed what was done in the BOSS analysis in , and restricted its range to a maximum k max,4 = 0.129 h/Mpc for z = 0.5 and k max,4 = 0.05 h/Mpc for z = 1, so that the estimation of f remains unbiased at the required 2σ level. Our results are summarised in Table 2.
+
+The addition of the hexadecapole with a restricted k max improves the f constraints, but at a much lower level than using the full P (k, µ) method, which is equivalent to taking P 0 , P 2 and P 4 up to the same k max and leads to biased estimates of f .
+
+Finally, we performed a comprehensive Fisher matrix analysis to quickly explore the parameter space and test whether we can reproduce our MCMC analysis results. Using the multipole expansion formalism for the Fisher matrix we reached very good agreement with the MCMC, as shown in Table 2. We also compared the P 0 + P 2 + P 4 | restricted case with the full P (k, µ) case, showing that the former gives much more conservative error estimates (as well as avoiding bias in the estimate of f itself).
+
+It is useful to try and assess how our forecasted constraints on the growth rate, given the k max cuts, compare to current requirements for Stage IV surveys. We will refer to the Euclid-like forecasts for the growth rate f presented in Amendola et al. (2018) (see Table 4). At z = 1 with the same survey volume as we use, they find a fractional error on f of 1.4% in their pessimistic scenario, which has assumed a number density 16% lower than ours. Their adopted model is linear Kaiser multiplied by the BAO smearing function proposed in ). They use the full P (k, µ) with a k max ∼ 0.2 h/Mpc. Their set of redshift dependent parameters includes the growth rate f (z), the linear bias b(z), the residual shot noise P s , the angular diameter distance D A (z), and the Hubble rate H(z), but the latter two are not marginalised over. Instead, they are projected onto the set of parameters they depend on, which helps with the information on the background (shape) parameters they also vary. Since the models, parameter sets, forecasting method, and k max choices are different, it is very difficult to compare directly, but note that we find the same fractional error of 1.4% using the full P (k, µ), and a factor of 2 larger error using the hexadecapole cut needed to keep f (z) unbiased at the 2σ level.
+
+In summary, our study reinforces the need for accurate modelling of the non-linear redshift space power spectrum in light of upcoming Stage IV galaxy surveys. It also shows how reliable forecasts can be obtained if the forecast procedure closely follows what is being done in real data analyses. To our knowledge, a forecasting galaxy clustering analysis for Stage-IV surveys using an accurate theoretical template that can be readily applied to data, and the multipole expansion formalism with different, realistic k max limits informed by simulations, has not been performed in the literature. In addition, we stress that even if a fit to simulations is not available, one should still perform conservative forecasts using the multipole expansion formalism with different ranges for the different multipoles.
+
+That being said, the model considered here is partly phenomenological, and ideally one would want a fully perturbative model that consistently models bias and redshift space distortions, and under which one can obtain a handle on the modelling uncertainties in very general cosmological settings. Several studies have been performed in this direction recently (see, for example, Desjacques et al. 2018b,a;Ivanov and Sibiryakov 2018;Ding et al. 2018;Hand et al. 2017). In the next paper of this series (Bose et al. 2019a) we also push in this direction and perform an extensive investigation using other proposed models like the Effective Theory of Large Scale Structure (see, for example, Perko et al. 2016;de la Bella et al. 2018;Lewandowski et al. 2018), and compare their performance to the TNS model.
+
+
+ACKNOWLEDGMENTS
+
+We would like to thank the two anonymous referees for their very useful comments and suggestions that improved the quality of this manuscript. We are grateful to Hans Winther for providing the simulation data. We thank Florian Beutler for useful discussions.  
+
+4
+
+
+Fig. 1 .Fig. 2 .
+12-The minimised χ 2 red statistic as a function of kmax at z = 1 (top) and z = 0.5 (bottom) for the TNS model. The error bars shown are the 2σ confidence interval for the χ 2 red statistic with N dof degrees of freedom. The arrows indicate the kmax value we use in our fits. -The averaged halo monopole, quadrupole and hexadecapole of 4 PICOLA simulations (black points) with errors given by linear theory assuming a survey volume of V = 4 Gpc 3 /h 3 and a number density of n h = 1 × 10 −3 h 3 /Mpc 3 . The best fitting TNS model is shown as blue curves. The lower panels show the residuals with the data. The dashed lines indicate the 2σ region around the data. We have also plotted linear theory marked in green for reference.
+
+Fig. 3 .
+3-Top: MCMC results for the TNS model of Equation 1 at z = 0.5 with kmax = 0.227 h/Mpc for P 0 and P 2 and k max,4 = 0.129 h/Mpc for P 4 . Bottom: MCMC results for the TNS model of Equation 1 at z = 1 with kmax = 0.276 h/Mpc for P 0 and P 2 and k max,4 = 0.05 h/Mpc for P 4 . In both panels, the thick black dashed-dot line indicates the fiducial value of f in the PICOLA simulations. The thin grey dashed lines show the mean MCMC estimates for all parameters.
+
+Fig. 4 .
+4-MCMC comparison at z = 0.5. We show the P 0 + P 2 + P 4 | restricted case as well as the full P (k, µ) case for two different values of kmax, as detailed in the main text. The thick black dashed-dot line indicates the fiducial value of f in the PICOLA simulations. The plot demonstrates the tradeoff between bias and constraining power in f depending on the choice of kmax.
+
+Fig. 5 .
+5-Fisher matrix forecasts for the TNS model of Equation 1
+
+Fig. 7 .
+7APPENDIX FISHER AND MCMC COMPARISON FOR THE P 0 + P 2 + P 4 | RESTRICTED CASE -Complete Fisher and MCMC comparison plots for the P 0 + P 2 + P 4 | restricted case. Despite the deviations from the Gaussian shape in some of the MCMC contours, the final marginalised constraints on the cosmological parameter of interest f are in agreement.
+
+TABLE 1
+1Number of bins, kmax[h/Mpc], and fiducial parameters found by a least χ 2 fit to the PICOLA data.z 
+N bins kmax 
+b 1 
+b 2 
+N 
+σv 
+0.5 
+36 
+0.227 1.506 
+0.091 
+−272 8.99 
+1 
+44 
+0.276 1.897 −0.318 
+504 
+8.09 
+
+
+
+
+We acknowledge use of open source software(Jones et al. 01 ;Hunter 2007;Lewis et al. 2000;McKinney 2010;Van Der Walt et al. 2011). KM acknowledges support from the UK Science & Technology Facilities Council through grant ST/N000668/1 and from the UK Space Agency through grant ST/N00180X/1. BB acknowledges support from the Swiss National Science Foundation (SNSF) Professorship grant No.170547. AP is a UK Research and Innovation Future Leaders Fellow, grant MR/S016066/1, and also acknowledges support from the UK Science & Technology Facilities Council through grant ST/S000437/1. Numerical computations for this research were done on the Sciama High Performance Compute (HPC) cluster which is supported by the ICG, SEPNet, and the University of Portsmouth.
+We assume the local Lagrangian assumption and hence only first and second order bias are considered: b 1 and b 2 as well as a stochasticity term N .5  We refer the reader to andTaruya et al. (2010) for explicit expressions for the galaxy spectra and correction terms. 6 This functional form was shown to give a significantly better fit to COLA multipoles inBose et al. (2019a).
+That is, we assume the observer is located at a distance much greater then the box size (r 1024 Mpc/h), so we treat all the lines of sight as parallel to the chosen Cartesian axes of the simulation box. Next, we use an appropriate velocity component (vx, vy or vz) to disturb the position of a matter particle.8 This is done through a brute force search of parameter space using the code MG-Copter (Bose and Koyama 2016).
+This procedure is validated in section 3. 10 This volume corresponds to a survey with sky area A sky 16, 000 (14, 000) deg 2 and bin width ∆z = 0.2 (0.1) around z = 0.5 (1).
+We have checked that this is equivalent to using the multipole expansion formalism taking P 0 , P 2 , and P 4 up to the same kmax. This is expected since higher order multipoles carry little information(Hand et al. 2017).
+This paper was built using the Open Journal of Astrophysics L A T E X template. The OJA is a journal which provides fast and easy peer review for new papers in the astro-ph section of the arXiv, making the reviewing process simpler for authors and referees alike. Learn more at http://astro.theoj.org.
+
+. R Laureijs, EUCLIDarXiv:1110.3193[astro-ph.COR. Laureijs et al. (EUCLID), (2011), arXiv:1110.3193 [astro-ph.CO].
+
+. P A R Ade, Planck10.1051/0004-6361/201525830arXiv:1502.01589Astron. Astrophys. 594astro-ph.COP. A. R. Ade et al. (Planck), Astron. Astrophys. 594, A13 (2016), arXiv:1502.01589 [astro-ph.CO].
+
+. L Anderson, 10.1111/j.1365-2966.2012.22066.xarXiv:1203.6594Mon. Not. Roy. Astron. Soc. 4273435astro-ph.COL. Anderson et al., Mon. Not. Roy. Astron. Soc. 427, 3435 (2013), arXiv:1203.6594 [astro-ph.CO].
+
+. Y.-S Song, A Taruya, E Linder, K Koyama, C G Sabiu, G.-B Zhao, F Bernardeau, T Nishimichi, T Okumura, 10.1103/PhysRevD.92.043522arXiv:1507.01592Phys. Rev. 9243522astro-ph.COY.-S. Song, A. Taruya, E. Linder, K. Koyama, C. G. Sabiu, G.-B. Zhao, F. Bernardeau, T. Nishimichi, and T. Okumura, Phys. Rev. D92, 043522 (2015), arXiv:1507.01592 [astro-ph.CO].
+
+. F Beutler, BOSS10.1093/mnras/stw3298arXiv:1607.03150Mon. Not. Roy. Astron. Soc. 4662242astro-ph.COF. Beutler et al. (BOSS), Mon. Not. Roy. Astron. Soc. 466, 2242 (2017), arXiv:1607.03150 [astro-ph.CO].
+
+. T Clifton, P G Ferreira, A Padilla, C Skordis, 10.1016/j.physrep.2012.01.001arXiv:1106.2476Phys. Rept. 5131astro-ph.COT. Clifton, P. G. Ferreira, A. Padilla, and C. Skordis, Phys. Rept. 513, 1 (2012), arXiv:1106.2476 [astro-ph.CO].
+
+. L Guzzo, 10.1038/nature06555arXiv:0802.1944Nature. 451astro-phL. Guzzo et al., Nature 451, 541 (2008), arXiv:0802.1944 [astro-ph].
+
+. C Blake, 10.1111/j.1365-2966.2011.18903.xarXiv:1104.2948Mon. Not. Roy. Astron. Soc. 4152876astro-ph.COC. Blake et al., Mon. Not. Roy. Astron. Soc. 415, 2876 (2011), arXiv:1104.2948 [astro-ph.CO].
+
+. B A Reid, 10.1111/j.1365-2966.2012.21779.xarXiv:1203.6641Mon. Not. Roy. Astron. Soc. 4262719astro-ph.COB. A. Reid et al., Mon. Not. Roy. Astron. Soc. 426, 2719 (2012), arXiv:1203.6641 [astro-ph.CO].
+
+. E Macaulay, I K Wehus, H K Eriksen, 10.1103/PhysRevLett.111.161301arXiv:1303.6583Phys. Rev. Lett. 111161301astro-ph.COE. Macaulay, I. K. Wehus, and H. K. Eriksen, Phys. Rev. Lett. 111, 161301 (2013), arXiv:1303.6583 [astro-ph.CO].
+
+. F Beutler, BOSS10.1093/mnras/stu1051arXiv:1312.4611Mon. Not. Roy. Astron. Soc. 4431065astro-ph.COF. Beutler et al. (BOSS), Mon. Not. Roy. Astron. Soc. 443, 1065 (2014), arXiv:1312.4611 [astro-ph.CO].
+
+. H Gil-Marín, 10.1093/mnras/stw1096arXiv:1509.06386Mon. Not. Roy. Astron. Soc. 4604188astro-ph.COH. Gil-Marín et al., Mon. Not. Roy. Astron. Soc. 460, 4188 (2016a), arXiv:1509.06386 [astro-ph.CO].
+
+. F Simpson, C Blake, J A Peacock, I Baldry, J Bland-Hawthorn, A Heavens, C Heymans, J Loveday, P Norberg, 10.1103/PhysRevD.93.023525arXiv:1505.03865Phys. Rev. 9323525astro-ph.COF. Simpson, C. Blake, J. A. Peacock, I. Baldry, J. Bland-Hawthorn, A. Heavens, C. Heymans, J. Loveday, and P. Norberg, Phys. Rev. D93, 023525 (2016), arXiv:1505.03865 [astro-ph.CO].
+
+. F Bernardeau, S Colombi, E Gaztanaga, R Scoccimarro, 10.1016/S0370-1573(02)00135-7arXiv:astro-ph/0112551Phys. Rept. 367astro-phF. Bernardeau, S. Colombi, E. Gaztanaga, and R. Scoccimarro, Phys. Rept. 367, 1 (2002), arXiv:astro-ph/0112551 [astro-ph].
+
+. N Kaiser, Mon. Not. Roy. Astron. Soc. 2271N. Kaiser, Mon. Not. Roy. Astron. Soc. 227, 1 (1987).
+
+. R Scoccimarro, 10.1103/PhysRevD.70.083007arXiv:astro-ph/0407214Phys.Rev. 7083007astro-phR. Scoccimarro, Phys.Rev. D70, 083007 (2004), arXiv:astro-ph/0407214 [astro-ph].
+
+. B Bose, K Koyama, 10.1088/1475-7516/2016/08/032arXiv:1606.02520JCAP. 160832astro-ph.COB. Bose and K. Koyama, JCAP 1608, 032 (2016), arXiv:1606.02520 [astro-ph.CO].
+
+. B Bose, K Koyama, 10.1088/1475-7516/2017/08/029arXiv:1705.09181JCAP. 170829astro-ph.COB. Bose and K. Koyama, JCAP 1708, 029 (2017), arXiv:1705.09181 [astro-ph.CO].
+
+. B Bose, M Baldi, A Pourtsidou, 10.1088/1475-7516/2018/04/032arXiv:1711.10976astro-ph.COJCAP. 180432B. Bose, M. Baldi, and A. Pourtsidou, JCAP 1804, 032 (2018a), arXiv:1711.10976 [astro-ph.CO].
+
+. B Bose, K Koyama, M Lewandowski, F Vernizzi, H A Winther, 10.1088/1475-7516/2018/04/063arXiv:1802.01566JCAP. 180463astro-ph.COB. Bose, K. Koyama, M. Lewandowski, F. Vernizzi, and H. A. Winther, JCAP 1804, 063 (2018b), arXiv:1802.01566 [astro-ph.CO].
+
+. A Taruya, T Nishimichi, S Saito, 10.1103/PhysRevD.82.063522arXiv:1006.0699Phys.Rev. 8263522astro-ph.COA. Taruya, T. Nishimichi, and S. Saito, Phys.Rev. D82, 063522 (2010), arXiv:1006.0699 [astro-ph.CO].
+
+. L Senatore, M Zaldarriaga, arXiv:1409.1225[astro-ph.COL. Senatore and M. Zaldarriaga, (2014), arXiv:1409.1225 [astro-ph.CO].
+
+. L F De La Bella, D Regan, D Seery, S Hotchkiss, arXiv:1704.05309astro-ph.COL. F. de la Bella, D. Regan, D. Seery, and S. Hotchkiss, (2017), arXiv:1704.05309 [astro-ph.CO].
+
+. T Nishimichi, A Taruya, 10.1103/PhysRevD.84.043526arXiv:1106.4562astro-ph.COPhys. Rev. 8443526T. Nishimichi and A. Taruya, Phys. Rev. D84, 043526 (2011), arXiv:1106.4562 [astro-ph.CO].
+
+. A Taruya, T Nishimichi, F Bernardeau, 10.1103/PhysRevD.87.083509arXiv:1301.3624Phys. Rev. 8783509astro-ph.COA. Taruya, T. Nishimichi, and F. Bernardeau, Phys. Rev. D87, 083509 (2013), arXiv:1301.3624 [astro-ph.CO].
+
+. T Ishikawa, T Totani, T Nishimichi, R Takahashi, N Yoshida, M Tonegawa, 10.1093/mnras/stu1382arXiv:1308.6087Mon. Not. Roy. Astron. Soc. 443astro-ph.COT. Ishikawa, T. Totani, T. Nishimichi, R. Takahashi, N. Yoshida, and M. Tonegawa, Mon. Not. Roy. Astron. Soc. 443, 3359 (2014), arXiv:1308.6087 [astro-ph.CO].
+
+. Y Zheng, Y.-S Song, 10.1088/1475-7516/2016/08/050arXiv:1603.00101astro-ph.COJCAP. 160850Y. Zheng and Y.-S. Song, JCAP 1608, 050 (2016), arXiv:1603.00101 [astro-ph.CO].
+
+. H Gil-Marín, 10.1093/mnras/stw1264arXiv:1509.06373Mon. Not. Roy. Astron. Soc. 460astro-ph.COH. Gil-Marín et al., Mon. Not. Roy. Astron. Soc. 460, 4210 (2016b), arXiv:1509.06373 [astro-ph.CO].
+
+. B Bose, K Koyama, W A Hellwing, G.-B Zhao, H A Winther, 10.1103/PhysRevD.96.023519arXiv:1702.02348Phys. Rev. 9623519astro-ph.COB. Bose, K. Koyama, W. A. Hellwing, G.-B. Zhao, and H. A. Winther, Phys. Rev. D96, 023519 (2017), arXiv:1702.02348 [astro-ph.CO].
+
+. P Mcdonald, A Roy, 10.1088/1475-7516/2009/08/020arXiv:0902.0991JCAP. 090820astro-ph.COP. McDonald and A. Roy, JCAP 0908, 020 (2009), arXiv:0902.0991 [astro-ph.CO].
+
+. S Tassev, M Zaldarriaga, D Eisenstein, 10.1088/1475-7516/2013/06/036arXiv:1301.0322astro-ph.COJCAP. 130636S. Tassev, M. Zaldarriaga, and D. Eisenstein, JCAP 1306, 036 (2013), arXiv:1301.0322 [astro-ph.CO].
+
+. C Howlett, M Manera, W J , 10.1016/j.ascom.2015.07.003arXiv:1506.03737Astron. Comput. 12astro-ph.COC. Howlett, M. Manera, and W. J. Percival, Astron. Comput. 12, 109 (2015), arXiv:1506.03737 [astro-ph.CO].
+
+. G Valogiannis, R Bean, 10.1103/PhysRevD.95.103515arXiv:1612.06469astro-ph.COPhys. Rev. 95103515G. Valogiannis and R. Bean, Phys. Rev. D95, 103515 (2017), arXiv:1612.06469 [astro-ph.CO].
+
+. H A Winther, K Koyama, M Manera, B S Wright, G.-B Zhao, arXiv:1703.00879astro-ph.COH. A. Winther, K. Koyama, M. Manera, B. S. Wright, and G.-B. Zhao, (2017), arXiv:1703.00879 [astro-ph.CO].
+
+. H Gil-Marin, C Wagner, L Verde, C Porciani, R Jimenez, 10.1088/1475-7516/2012/11/029arXiv:1209.3771JCAP. 121129astro-ph.COH. Gil-Marin, C. Wagner, L. Verde, C. Porciani, and R. Jimenez, JCAP 1211, 029 (2012), arXiv:1209.3771 [astro-ph.CO].
+
+. W J Percival, M White, 10.1111/j.1365-2966.2008.14211.xarXiv:0808.0003Mon. Not. Roy. Astron. Soc. 393astro-phW. J. Percival and M. White, Mon. Not. Roy. Astron. Soc. 393, 297 (2009), arXiv:0808.0003 [astro-ph].
+
+. J A Peacock, S J Dodds, 10.1093/mnras/267.4.1020arXiv:astro-ph/9311057Mon. Not. Roy. Astron. Soc. 2671020astro-phJ. A. Peacock and S. J. Dodds, Mon. Not. Roy. Astron. Soc. 267, 1020 (1994), arXiv:astro-ph/9311057 [astro-ph].
+
+. R K Sheth, K C Chan, R Scoccimarro, 10.1103/PhysRevD.87.083002arXiv:1207.7117Phys. Rev. 8783002astro-ph.COR. K. Sheth, K. C. Chan, and R. Scoccimarro, Phys. Rev. D87, 083002 (2013), arXiv:1207.7117 [astro-ph.CO].
+
+. K C Chan, R Scoccimarro, R K Sheth, 10.1103/PhysRevD.85.083509arXiv:1201.3614Phys. Rev. 8583509astro-ph.COK. C. Chan, R. Scoccimarro, and R. K. Sheth, Phys. Rev. D85, 083509 (2012), arXiv:1201.3614 [astro-ph.CO].
+
+. S Saito, T Baldauf, Z Vlah, U Seljak, T Okumura, P Mcdonald, 10.1103/PhysRevD.90.123522arXiv:1405.1447Phys. Rev. 90123522astro-ph.COS. Saito, T. Baldauf, Z. Vlah, U. Seljak, T. Okumura, and P. McDonald, Phys. Rev. D90, 123522 (2014), arXiv:1405.1447 [astro-ph.CO].
+
+. T Baldauf, U Seljak, V Desjacques, P Mcdonald, 10.1103/PhysRevD.86.083540arXiv:1201.4827Phys. Rev. 8683540astro-ph.COT. Baldauf, U. Seljak, V. Desjacques, and P. McDonald, Phys. Rev. D86, 083540 (2012), arXiv:1201.4827 [astro-ph.CO].
+
+. B Bose, A Pourtsidou, K Markovic, F Beutler, arXiv:1905.05122astro-ph.COB. Bose, A. Pourtsidou, K. Markovic, and F. Beutler, (2019a), arXiv:1905.05122 [astro-ph.CO].
+
+. A Taruya, F Bernardeau, T Nishimichi, S Codis, 10.1103/PhysRevD.86.103528arXiv:1208.1191Phys. Rev. 86103528astro-ph.COA. Taruya, F. Bernardeau, T. Nishimichi, and S. Codis, Phys. Rev. D86, 103528 (2012), arXiv:1208.1191 [astro-ph.CO].
+
+. J Carlson, M White, N Padmanabhan, 10.1103/PhysRevD.80.043531arXiv:0905.0479Phys. Rev. 8043531astro-ph.COJ. Carlson, M. White, and N. Padmanabhan, Phys. Rev. D80, 043531 (2009), arXiv:0905.0479 [astro-ph.CO].
+
+. K Osato, T Nishimichi, F Bernardeau, A Taruya, arXiv:1810.10104astro-ph.COK. Osato, T. Nishimichi, F. Bernardeau, and A. Taruya, (2018), arXiv:1810.10104 [astro-ph.CO].
+
+. Z Vlah, U Seljak, T Baldauf, 10.1103/PhysRevD.91.023508arXiv:1410.1617Phys. Rev. 9123508astro-ph.COZ. Vlah, U. Seljak, and T. Baldauf, Phys. Rev. D91, 023508 (2015), arXiv:1410.1617 [astro-ph.CO].
+
+. V Desjacques, D Jeong, F Schmidt, 10.1016/j.physrep.2017.12.002arXiv:1611.09787Phys. Rept. 733astro-ph.COV. Desjacques, D. Jeong, and F. Schmidt, Phys. Rept. 733, 1 (2018a), arXiv:1611.09787 [astro-ph.CO].
+
+. V Desjacques, D Jeong, F Schmidt, 10.1088/1475-7516/2018/12/035arXiv:1806.04015astro-ph.COJCAP. 181235V. Desjacques, D. Jeong, and F. Schmidt, JCAP 1812, 035 (2018b), arXiv:1806.04015 [astro-ph.CO].
+
+. G Hinshaw, WMAP10.1088/0067-0049/208/2/19arXiv:1212.5226Astrophys. J. Suppl. 208astro-ph.COG. Hinshaw et al. (WMAP), Astrophys. J. Suppl. 208, 19 (2013), arXiv:1212.5226 [astro-ph.CO].
+
+. L Amendola, 10.1007/s41114-017-0010-3arXiv:1606.00180astro-ph.COLiving Rev. Rel. 21L. Amendola et al., Living Rev. Rel. 21, 2 (2018), arXiv:1606.00180 [astro-ph.CO].
+
+. A Izard, M Crocce, P Fosalba, 10.1093/mnras/stw797arXiv:1509.04685Mon. Not. Roy. Astron. Soc. 4592327astro-ph.COA. Izard, M. Crocce, and P. Fosalba, Mon. Not. Roy. Astron. Soc. 459, 2327 (2016), arXiv:1509.04685 [astro-ph.CO].
+
+. B Bose, K Koyama, H A Winther, arXiv:1905.05135astro-ph.COB. Bose, K. Koyama, and H. A. Winther, (2019b), arXiv:1905.05135 [astro-ph.CO].
+
+. N S Sugiyama, S Saito, F Beutler, H.-J Seo, arXiv:1908.06234astro-ph.CON. S. Sugiyama, S. Saito, F. Beutler, and H.-J. Seo, (2019), arXiv:1908.06234 [astro-ph.CO].
+
+. A Taruya, S Saito, T Nishimichi, 10.1103/PhysRevD.83.103527arXiv:1101.4723Phys. Rev. 83103527astro-ph.COA. Taruya, S. Saito, and T. Nishimichi, Phys. Rev. D83, 103527 (2011), arXiv:1101.4723 [astro-ph.CO].
+
+. R A Fisher, Journal of the royal statistical society. 9839R. A. Fisher, Journal of the royal statistical society 98, 39 (1935).
+
+. M Tegmark, 10.1103/PhysRevLett.79.3806arXiv:astro-ph/9706198Phys. Rev. Lett. 79astro-phM. Tegmark, Phys. Rev. Lett. 79, 3806 (1997), arXiv:astro-ph/9706198 [astro-ph].
+
+. H.-J Seo, D J Eisenstein, 10.1086/519549arXiv:astro-ph/0701079Astrophys. J. 665astro-phH.-J. Seo and D. J. Eisenstein, Astrophys. J. 665, 14 (2007), arXiv:astro-ph/0701079 [astro-ph].
+
+. N Hand, U Seljak, F Beutler, Z Vlah, 10.1088/1475-7516/2017/10/009arXiv:1706.02362JCAP. 17109astro-ph.CON. Hand, U. Seljak, F. Beutler, and Z. Vlah, JCAP 1710, 009 (2017), arXiv:1706.02362 [astro-ph.CO].
+
+. L Wolz, M Kilbinger, J Weller, T Giannantonio, 10.1088/1475-7516/2012/09/009arXiv:1205.3984JCAP. 12099astro-ph.COL. Wolz, M. Kilbinger, J. Weller, and T. Giannantonio, JCAP 1209, 009 (2012), arXiv:1205.3984 [astro-ph.CO].
+
+. A J Hawken, F B Abdalla, G Hutsi, O Lahav, 10.1111/j.1365-2966.2012.20540.xarXiv:1111.2544Mon. Not. Roy. Astron. Soc. 424astro-ph.COA. J. Hawken, F. B. Abdalla, G. Hutsi, and O. Lahav, Mon. Not. Roy. Astron. Soc. 424, 2 (2012), arXiv:1111.2544 [astro-ph.CO].
+
+. Y Zheng, P Zhang, M Oh, 10.1088/1475-7516/2017/05/030arXiv:1611.09075astro-ph.COJCAP. 170530Y. Zheng, P. Zhang, and M. Oh, JCAP 1705, 030 (2017), arXiv:1611.09075 [astro-ph.CO].
+
+. D J Eisenstein, H Seo, M J White, 10.1086/518755arXiv:astro-ph/0604361Astrophys. J. 664astro-phD. J. Eisenstein, H.-j. Seo, and M. J. White, Astrophys. J. 664, 660 (2007), arXiv:astro-ph/0604361 [astro-ph].
+
+. M M Ivanov, S Sibiryakov, 10.1088/1475-7516/2018/07/053arXiv:1804.05080astro-ph.COJCAP. 180753M. M. Ivanov and S. Sibiryakov, JCAP 1807, 053 (2018), arXiv:1804.05080 [astro-ph.CO].
+
+. Z Ding, H.-J Seo, Z Vlah, Y Feng, M Schmittfull, F Beutler, 10.1093/mnras/sty1413arXiv:1708.01297Mon. Not. Roy. Astron. Soc. 4791021astro-ph.COZ. Ding, H.-J. Seo, Z. Vlah, Y. Feng, M. Schmittfull, and F. Beutler, Mon. Not. Roy. Astron. Soc. 479, 1021 (2018), arXiv:1708.01297 [astro-ph.CO].
+
+. A Perko, L Senatore, E Jennings, R H Wechsler, arXiv:1610.09321astro-ph.COA. Perko, L. Senatore, E. Jennings, and R. H. Wechsler, (2016), arXiv:1610.09321 [astro-ph.CO].
+
+. L F De La Bella, D Regan, D Seery, D Parkinson, arXiv:1805.12394astro-ph.COL. F. de la Bella, D. Regan, D. Seery, and D. Parkinson, (2018), arXiv:1805.12394 [astro-ph.CO].
+
+. M Lewandowski, L Senatore, F Prada, C Zhao, C.-H Chuang, 10.1103/PhysRevD.97.063526arXiv:1512.06831Phys. Rev. 9763526astro-ph.COM. Lewandowski, L. Senatore, F. Prada, C. Zhao, and C.-H. Chuang, Phys. Rev. D97, 063526 (2018), arXiv:1512.06831 [astro-ph.CO].
+
+SciPy: Open source scientific tools for Python. E Jones, T Oliphant, P Peterson, E. Jones, T. Oliphant, P. Peterson, et al., "SciPy: Open source scientific tools for Python," (2001-).
+
+. J D Hunter, Computing In Science & Engineering. 990J. D. Hunter, Computing In Science & Engineering 9, 90 (2007).
+
+. A Lewis, A Challinor, A Lasenby, 10.1086/309179arXiv:astro-ph/9911177Astrophys. J. 538astro-phA. Lewis, A. Challinor, and A. Lasenby, Astrophys. J. 538, 473 (2000), arXiv:astro-ph/9911177 [astro-ph].
+
+W Mckinney, Proceedings of the 9th Python in Science Conference. S. van der Walt and J. Millmanthe 9th Python in Science ConferenceW. McKinney, in Proceedings of the 9th Python in Science Conference, edited by S. van der Walt and J. Millman (2010) pp. 51 -56.
+
+. S Van Der Walt, S C Colbert, G Varoquaux, arXiv:1102.1523ArXiv e-printsS. Van Der Walt, S. C. Colbert, and G. Varoquaux, ArXiv e-prints (2011), arXiv:1102.1523

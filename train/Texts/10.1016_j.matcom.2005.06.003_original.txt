@@ -1,0 +1,137 @@
+
+An aproximate threshold condition for non-autonomous system: an application to a vector-borne infection
+3 Jan 2005 February 9, 2008
+
+FABCoutinho 
+School of Medicine
+The University of São Paulo
+LIM 01/HCFMUSP Av. Dr. Arnaldo, 45501246-903São PauloCEP, SPBrazil
+
+MN; Burattini 
+School of Medicine
+The University of São Paulo
+LIM 01/HCFMUSP Av. Dr. Arnaldo, 45501246-903São PauloCEP, SPBrazil
+
+LF; Lopez 
+School of Medicine
+The University of São Paulo
+LIM 01/HCFMUSP Av. Dr. Arnaldo, 45501246-903São PauloCEP, SPBrazil
+
+London School of Hygiene and Tropical Medicine
+London University
+U.K
+
+Massad edmassad@usp.br 
+An aproximate threshold condition for non-autonomous system: an application to a vector-borne infection
+3 Jan 2005 February 9, 2008non-autonomous systemsstability analysisthresh- oldsdengueepidemics
+An non-autonomous system is proposed to model the seasonal pattern of dengue fever.We found that an approximate threshold condition for infection persistence describes all possible behavior of the system.As far as we know, the kind of analysis here proposed is entirely new. No precise mathematical theorems are demonstrated but we give enough numerical evidence to support the conclusions.
+
+Introduction
+
+In a previous paper [1], in which we tried to understand the phenomenon of dengue overwintering, we discovered an interesting threshold condition that allows the complete qualitative understanding of the behavior of a nonautonomous system.
+
+To motivate the reader we briefly describe the phenomenon we studied in [1].
+
+In subtropical regions dengue fever, a mosquito transmitted disease, shows a resurgent pattern with yearly epidemics, which starts typically in the months characterized by heavy rains and heat, peaking some three or four months after the beginning of the rainy season. In the dry months the number of cases drop essentially to zero due to the virtual disappearance of the vector. Since the infection reappears for some years in the same regions, it is natural to ask how the virus survives the dry season.
+
+In order to model those seasonal patterns of the disease, we proposed a non-autonomous system, described below.
+
+The model describes the dynamic of dengue in its three components of transmission, namely, human hosts, mosquitoes and their eggs (the latter includes the intermediate stages, like larvae and pupae). These populations, in turn, are divided into susceptible humans, denoted S H , infected humans, I H , recovered (and immune) humans, R H , total humans, N H = S H +I H +R H , susceptible mosquitoes, S M , infected and latent mosquitoes, L M , infected and infectious mosquitoes, I M , non-infected eggs, S E , and infected eggs, I E .
+
+The model's dynamics is described by the set of equations.
+dS H dt = −abI M S H N H − µ H S H + r H N H (1 − N H k H ) dI H dt = abI M S H N H − (µ H + α H + γ H )I H dR H dt = γ H I H − µ H R H dS M dt = p S (c S − d S sin (2πf t + π)) S E θ (c S − d S sin (2πf t + π)) −µ M S M − aS M I H N H dL M dt = aS M I H N H − e −µ M τ I aS M (t − τ I ) I H (t−τ I ) N H (t−τ I ) − µ M L M dI M dt = e −µ M τ I aS M (t − τ I ) I H (t−τ I ) N H (t−τ I ) − µ M I M + p I (c I − d I sin (2πf t + π)) I E θ (c I − d I sin (2πf t + π)) dS E dt = [r M S M + (1 − g) r M I M ] 1 − (S E +I E ) k E − µ E S E − p S (c S − d S sin (2πf t + π)) S E θ (c E − d E sin (2πf t + π)) dI E dt = gr M I M 1 − (S E +I E ) k E − µ E I E − p I (c I − d I sin (2πf t + π)) I E θ (c I − d I sin (2πf t + π))
+(1) Let us briefly describe some features of the model. We begin by describing the first three equations of the model. Susceptible humans grow at the rate
+r H N H (1 − N H k H ) − µ H S H ,
+where r H is the birth rate, µ H is the natural mortality and k H is the human carrying capacity. Note that we are assuming that close to the carrying capacity the human population growth is checked by a reduction in the birth rate. Alternatively the control of the population could be done by assuming an increase in the mortality rate, but the net result would be qualitatively the same. Those susceptible humans who acquire the infection do so at the rate abI M S H N H , where a is the average daily biting rates of mosquitoes and b is the fraction of infective bites inflicted by infectious mosquitoes I M . Infected humans, I H may either recover, with rate γ, or die from the disease, with rate (µ H + α H ). Recovered humans remain so for the rest of their lives.
+
+The fourth, fifth and sixth equations represent the susceptible, latent and infectious mosquitoes sub-populations, respectively. Susceptible mosquitoes varies in size with a time-dependent rate
+p S (c S − d S sin (2πf t + π)) S E θ (c S − d S sin (2πf t + π)) − µ M S M .
+The term µ M is the natural mortality rate of mosquitoes. The term p S S E is the fraction of eggs present at time t, and which survived the development through the intermediate stages (larvas and pupas). The time-dependent rate (c i − d i sin (2πf t + π)) θ (c i − d i sin (2πf t + π)) (i = S, I) simulates the seasonal variation in mosquitoes production from eggs, assumed different for infected and susceptible eggs, for generality. By varying c i and d i , (i = S, I), we can simulate the duration and severity of the winters (f = 1/365 days −1 and so it fixes one cycle per year). The Heaviside θ-function (a step function that is equal to zero when the argument is less than zero and one when the argument is greater or equal to zero)
+θ (c i − d i sin (2πf t + π)) prevents the term (c i − d i sin (2πf t + π)) θ (c i − d i sin (2πf t + π)) (i = S, I)
+from becoming negative. If c i is smaller than d i , then the winter is long and severe. On the other hand, if c i is greater than d i , then the winter is short and mild. Susceptible mosquitoes who acquire the infection do so at the rate aS M I H N H , where a is the average daily biting rates of mosquitoes, and became latent. A fraction of the latent mosquitoes survives the extrinsic incubation period with probability e −µ M τ I and become infectious. Therefore, the rate of mosquitos becoming infectious per unit time is
+e −µ M τ I aS M (t − τ I ) I H (t−τ I ) N H . The term p I (c I − d I sin (2πf t + π)) I E θ (c I − d I sin (2πf t + π))
+represent vertical transmission, that is, the rate by which infected eggs become infectious adults. Infected mosquitoes die at the same rate µ M as the susceptible ones.
+
+The seventh and eighth equations represent the dynamics of susceptible and infected eggs, respectively.
+
+In the seventh equation, the term
+[r M S M + (1 − g) r M I M ] 1 − (S E + I E ) k E
+represent the birth rate of susceptible eggs born from susceptible mosquitoes with rate
+r M S M 1 − (S E + I E ) k E
+and from a fraction (1 − g) of infected mosquitoes, with rate
+(1 − g) r M I M 1 − (S E + I E ) k E The term r M 1 − (S E +I E ) k E
+represents the density-dependent rate of eggs birth rate. Once again we choose a density dependence on birth rather than on death. Alternatively the control of the population could be done by assuming an increase in the mortality rate µ E , but the net result would be qualitatively the same. Finally, in the last equation the term
+gr M I M 1 − (S E + I E ) k E − µ E I E
+represents the rate by which infected eggs grow and the term
+p I (c I − d I sin (2πf t + π)) I E θ (c I − d I sin (2πf t + π)) ,
+as already mentioned, is the fraction of the hatched infected eggs which evolves to infectious adults.
+
+
+An approximated threshold condition
+
+In the first part of this section we deduce a threshold condition for epidemic. The intuition behind the procedures is discussed later on.
+
+In order to deduce the threshold condition for epidemic we replace the non-autonomous system (1) by a autonomous one, by regarding the time on the right side of the system (1) as a parameter and then carry out a local stability analysis. We linearize the second, the fifth, the sixth and eighth equations of the autonomous system around a small amount of disease i H , l M , i M and i E :
+di H dt = ab S H N H i M − (µ H + α H + γ H )i H dl M dt = a S M N H i H − µ M l M −e −µ M τ I a N M (t−τ I ) N H (t−τ I ) i H (t − τ I ) di M dt = e −µ M τ I a N M (t−τ I ) N H (t−τ I ) i H (t − τ I ) − µ M i M + p I (c I − d I sin (Φ)) i E θ (c I − d I sin (Φ)) di E dt = gr M 1 − (S E ) k E i M − µ E i E − p I (c I − d I sin (Φ)) i E θ (c I − d I sin (Φ))(2)
+where Φ = 2πf t + π.
+
+We then examine the stability of the trivial solution of system (2), that is, i E = 0, l M = 0, i H = 0 and i M = 0, as if the system were autonomous [2]. For this we assume the solutions:
+i H = c 1 exp (λt) l M = c 2 exp (λt) i M = c 3 exp (λt) i E = c 4 exp (λt)(3)
+drop the Heaviside θ−functions by assuming c I ≥ d I , and replace (3) into equation (2). The characteristic equation associated to system (2) is then obtained:
+−(λ + γ H + α H + µ H ) 0 ab S H (t) N H (t) 0 a S M N H − ae (−µ M τ ) × Nm(t−τ I ) N H (t−τ I ) e −λτ −(λ + µ M ) 0 0 ae (−µ M τ ) Nm(t−τ I ) N H (t−τ I ) e −λτ 0 −(λ + µ M ) p I (c I − d I sin Φ) 0 0 gr M 1 − S E k E −λ − µ E − p I (c I − d I sin (Φ))
+= 0 (4) If all the roots of equation (4) have negative real parts, then the equilibrium without disease is stable, that is, the origin is an atractor.. As shown in [4], the first root that crosses the imaginary axis do so through the real axis and this happens when
+R(t) = a (γ H +α H +µ H ) Nm(t−τ I ) N H (t−τ I ) a exp(−µ M τ )bc µ M S H (t) N H (t) + p I (c I −d I sin Φ)gr M 1− S E k E µ M (µ E +p I (c I −d I sin Φ)) > 1(5)
+Note that the first term in equation (5) is exactly the expression proposed in [3] for the so-called 'basic reproduction number'.
+
+The intuition behind the above procedure is the following. System (1) has 'no-mass', that is, it responds to perturbations instantaneously. Therefore, we can find the time t at which the stability of the trivial solution of system (2), that is, i E = 0, i H = 0 and i M = 0 becomes unstable. We have numerically checked that the time t at which the trivial solution (no-disease) of the autonomous system becomes unstable (R > 1) corresponds approximately to the moment at which the epidemic takes off, that is, when the epidemic in system (1) begins to increase as a result of the introduction of a small amount of disease at time t = 0.
+
+
+Qualitative analysis of the system's behaviors
+
+In this section we analyze qualitatively all the possible behaviors of the system when a small amount of disease is introduced into a previously uninfected population and when R(t) is in its minimum value (winter time). We do so by using R(t) as in equation (5) and by numerically simulating system (2) with parameters values as in table 1. Table 1 We analyze two epidemiological scenarios, one in which R(t), in the absence of infection, is most of the time above one, and another in which R(t) is most of the time below one. In the first case, if a small amount of infection is introduced we observe a pattern shown in figure 1. In the second case a small amount of infection introduced generates a pattern shown in figure 2.  In figure 1 the intensity of transmission is relatively low (a = 3.7 days −1 ) and we see a first peak followed by a succession of outbreaks forming a damped oscillation pattern and the disease disappears. In other words, after the first outbreak the infection transmission decreases to levels inferior to that of the previous cycle. As the system oscillates and the time interval during which R(t) is above the threshold for transmission is insufficient for keeping transmission, we have the pattern observed.
+
+In figure 2 the intensity of transmission is higher (a = 4.3 days −1 ) than that shown in figure 1 and, consequently the time interval during which the system is above the threshold is larger. In this case, the amplitude of the consecutive outbreaks increases until the fraction of immune individuals reaches a herd immunity threshold and the disease dies out in a damped oscillation pattern.
+
+We have numerically found that there is an increase in the amplitude of consecutive outbreaks with a = 4.3 days −1 , whenever the preceding period of time R(t) is above the threshold for transmission is greater than a certain time interval (about 190 days). Indeed, with a = 3.7 days −1 , as mentioned above, there is a first outbreak and the subsequent peaks formed a damped oscilation and the time interval R(t) is above the threshold for transmission is greater than 190 days only for the first peak.
+
+When we simulate the system with parameters that make R(t) < 1 the disease cannot invade the population and disappears exponentially.
+
+Those are the only three possible qualitative patterns generated by a small amount of disease introduced into an entirely susceptible population when R(t) is at its minimum value.
+
+Let us concentrate in the first two patterns, which can better be visualized in figures 3 and 4, where the threshold parameter R(t) is shown as function of time for each of the above cases.  Other interesting results are shown in figures 5 and 6, in which the time oscillation of the 'total amount of disease', d(t), defined as
+d(t) = (I H (t)) 2 + (L M (t)) 2 + (I M (t)) 2 + (I E (t)) 2(6)
+is plotted together with R(t), for both cases of low and high intensities of transmission. It can be noted from the figure, that the points in which R(t) crosses 1 corresponds, approximately, to maximums and minimums of the function d(t). Note also that, in both cases the peaks and troughs of d(t) occur slightly after R(t) crosses 1, decreasing and increasing, respectively, as if the system has a small 'inertia'. 
+
+
+Final comments
+
+This paper presents a novel, as far as we know, approach to analyze the response of a non-autonomous system to a perturbation. This is quantified by an approximate expression for the threshold condition that determines whether the system will amplify or reduce a small of disease introduced at time t. We should warn the reader that we have no mathematical proof of the correctness of the threshold expression here deduced but the numerical investigation presented above suggests that it is basically correct.
+
+A possible application exemplified in this paper is the case of dengue fever, in which a seasonal variation in the density of vector mosquitoes determines the intensity of transmission. In another paper we used a similar model to explain the question of overwintering, that is, how dengue fever survives through the winter´s dry and cold season.
+
+Finally, we think that the analysis proposed in this paper could be applied to other vector-borne infections and also to some directly transmitted diseases that show seasonality in the intensity of transmission.
+
+Captions for the Figures   Figure 1. Number of infected humans for the case of low intensity of transmission (a = 3.7 days −1 ). There is a first outbreak resulting from the introduction of a small amount of infection in a previously uninfected population followed by a pattern of damped oscillation until the disease disappear. Simulation begins at the peak of the winter. Figure 2. Number of infected humans for the case of high intensity of transmission (a = 4.3 days −1 ). After the first outbreak resulting from the introduction of a small amount of infection in a previously uninfected population there are subsequent outbreaks with larger amplitudes until herd immunity is achieved and the disease gradually disapears. Simulation begins also at the peak of the winter. Figure 3. The threshold R(t) in the case of low transmission (a = 3.7 days −1 ). Figure 4. The threshold R(t) in the case of high transmission (a = 4.3 days −1 ). Figure 5. The threshold R(t) and 'total amount of disease' d(t) in the case of low transmission (a = 3.7 days −1 ). The peaks and troughs of d(t) occur slightly after R(t) crosses 1. Figure 6. The threshold R(t) and 'total amount of disease' d(t) in the case of high transmission (a = 4.3 days −1 ). Again, the peaks and troughs of d(t) occur slightly after R(t) crosses 1. Table 1 
+
+Figure 1
+1Figure 1 Figure 2
+
+Figure 2
+2Figure 1 Figure 2
+
+Figure 3
+3Figure 3 Figure 4
+
+Figure 4
+4Figure 3 Figure 4
+
+Figure 5 Figure 6
+56Figure 5 Figure 6
+AcknowledgmentsThis work was supported by grants LIM01/HCFMUSP, CNPq, FAPESP and PRONEX.
+Threshold conditions for non-autonomous epidemic systems: Application to modelling Dengue overwintering. Coutinho, Fab; Burattini, Mn; Lopez, E Massad, Bulletin of Mathematical Biology. submittedCoutinho, FAB; Burattini,MN; Lopez, LF and Massad, E. (2004). Threshold conditions for non-autonomous epidemic systems: Applica- tion to modelling Dengue overwintering. Bulletin of Mathematical Biology (submitted).
+
+Introduction to the Theory of Differential Equations with Deviating Arguments. E L El&apos;sgol&apos;ts, Holden -Day Inc. San FranciscoEl'sgol'ts, E.L. 1966. Introduction to the Theory of Differential Equations with Deviating Arguments. Holden -Day Inc. San Francisco.
+
+The analysis of equilibrium in malaria. G Macdonald, Trop.Dis.Bull. 49Macdonald, G. 1952. The analysis of equilibrium in malaria. Trop.Dis.Bull. 49: 813-828.
+
+Threshold Conditions for Infection Persistence in Complex Host-Vectors Interactions. L F Lopez, F A B Coutinho, M N Burattini, E Massad, Comptes Rendus Biologies Académie des Sciences Paris. 325Lopez, L.F.; Coutinho, F.A. B.; Burattini, M.N. and Massad, E. Thresh- old Conditions for Infection Persistence in Complex Host-Vectors Interac- tions. 2002. Comptes Rendus Biologies Académie des Sciences Paris 325: 1073-1084.

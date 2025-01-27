@@ -1,0 +1,760 @@
+
+Towards the Simulation of Large Scale Protein-Ligand Interactions on NISQ-era Quantum Computers
+
+
+Fionn D Malone 
+Robert M Parrish 
+Alicia R Welden 
+Thomas Fox 
+Matthias Degroote 
+Elica Kyoseva 
+Nikolaj Moll 
+Raffaele Santagati 
+Michael Streif 
+
+Medicinal Chemistry, Boehringer Ingelheim Pharma GmbH & Co. KG
+QC Ware Corporation
+Birkendorfer Straße 6594301, 88397Palo Alto, Biberach an der RißCAUSA, Germany
+
+
+Ingelheim am Rhein
+Quantum Lab, Boehringer Ingelheim
+55218Germany
+
+Towards the Simulation of Large Scale Protein-Ligand Interactions on NISQ-era Quantum Computers
+1 2 pp p p v pp p p (Ê pp Ê p p − δ p p Ê pp ), pp p p S q p ṽ p p pq Γ pp p p Γ qq q q S p q S q p ṽ p q pq − E (1) pol S pq γ qq S qp γ pp ), (13) = T 1 + T 2 + T 3 + T 4 + T 5 (14) whereΓ pp p p = 2(Γ pp p p + Γ pp p p ), (15) operators. In the Jordan-Wigner representation used in this pa-per, the creation/annihilation operators are defined as, p ± = p =p−1 p =0Ẑ p (X p ∓ iŶ p )/2, (40) p ± = p =Nα−1 p =0Ẑ p p =p−1 p =0Ẑp
+We explore the use of symmetry-adapted perturbation theory (SAPT) as a simple and efficient means to compute interaction energies between large molecular systems with a hybrid method combing NISQ-era quantum and classical computers. From the one-and two-particle reduced density matrices of the monomer wavefunctions obtained by the variational quantum eigensolver (VQE), we compute SAPT contributions to the interaction energy [SAPT(VQE)]. At first order, this energy yields the electrostatic and exchange contributions for non-covalently bound systems. We empirically find from ideal statevector simulations that the SAPT(VQE) interaction energy components display orders of magnitude lower absolute errors than the corresponding VQE total energies. Therefore, even with coarsely optimized low-depth VQE wavefunctions, we still obtain sub kcal/mol accuracy in the SAPT interaction energies. In SAPT(VQE), the quantum requirements, such as qubit count and circuit depth, are lowered by performing computations on the separate molecular systems. Furthermore, active spaces allow for large systems containing thousands of orbitals to be reduced to a small enough orbital set to perform the quantum portions of the computations. We benchmark SAPT(VQE) (with the VQE component simulated by ideal state-vector simulators) against a handful of small multi-reference dimer systems and the iron center containing human cancer-relevant protein lysine-specific demethylase 5 (KDM5A).
+
+Quantum chemistry has emerged as one of the most promising areas where a practical quantum advantage from near term quantum computers could be demonstrated [1][2][3]. Identifying industrially relevant applications that can practically benefit from quantum simulations is, however, a complicated task [4,5]. On the one hand, existing classical algorithms have benefited from decades of development, benchmarking and optimization so demonstrating a computational advantage over these is challenging given limitations on current quantum hardware [6][7][8]. On the other hand, current noisy intermediate-scale quantum (NISQ) hardware [9] suffers from relatively poor gate fidelity so that the resulting physical properties can often be biased and far from exact without error mitigation [10]. Thus it is important to design quantum algorithms that minimize the quantum resources required.
+
+Coupled with these challenges is the problem of finding an industrially relevant application that can benefit from a quantum computer in the first place [11]. One such area that has been suggested as possibly benefiting from quantum computing is computer aided drug design (CADD) [12]. CADD has a long history and has many components ranging from high-level optimization problems such as structure search and conformational sampling down to * rob.parrish@qcware.com † nikolaj.moll@boehringer-ingelheim.com low-level quantum mechanical problems such as computing protein-ligand interaction energies, all of which could potentially benefit from a large scale quantum computer [13,14]. In this work we will focus on this final problem, namely computing the interaction energy and properties of large scale protein-ligand systems by approximately solving the electronic structure problem. To date, most quantum algorithms aimed at solving the electronic structure problem directly are general and have mostly been applied to small molecules in small basis sets. Of course, applications are limited by current quantum resources so that reaching chemical accuracy, defined as calculating energy differences in the complete basis set limit to within 1 kcal/mol accuracy, is difficult to achieve. Nevertheless, relatively minor attention has been paid to the entire workflow required to solve an industrially relevant problem in drug design. This often includes highly tailored approaches that require classical pre-and post-processing, molecular dynamics and structure relaxation, active space selection and finally computation of interaction energies and related quantities all for systems containing hundreds or thousands of atoms. Thus, it is important to isolate potential application areas now and codify these workflows with quantum algorithms in mind as the pace of hardware improvement accelerates.
+
+Conceptually, computing the interaction energy of a protein-ligand system is a straightforward task. One computes the ground state energy of the dimer and monomer systems separately and subtracts the two to determine the interaction energy. There are a number of issues with this approach, particularly when a quantum computer is involved. First, in finite Gaussian basis sets typically employed in quantum chemical computations, one has to account for basis set superposition error (BSSE) using the counterpoise correction [15]. This unnecessarily increases the qubit count requirements for the individual monomers and can potentially lead to convergence issues for hybrid quantum-classical algorithms like the variational quantum eigensolver (VQE) [16,17]. A more concerning problem for NISQ computers is resolving total energies of individual monomers (typically on the order of 1000s of kcal/mol) to sufficient precision to subtractively resolve binding energies which are typically on the order of 5 kcal/mol. This is a major issue for NISQ approaches which typically evaluate total energy expectation values statistically, carrying very high measurement cost penalty for high-precision expectation values. This is also an increasingly challenging problem for heuristic algorithms like the VQE which would require very deep circuits with thousands of parameters to achieve the required precision (note that precision and accuracy are the same concern in subtracting total energies unless strict relative error cancellation can be ensured, which is not clear with methods like VQE). This may be practically impossible with the current general algorithms and available hardware although we note alternatives to the VQE may help to overcome this issue [18].
+
+In this work we propose using symmetry adapted perturbation theory (SAPT) [19,20] to directly compute the interaction energy through direct expectation values rather than differences, which overcomes some of these problems. Firstly, in principle SAPT does not suffer from BSSE as it directly computes the interaction energy as a perturbation series in the intermolecular potential (note that SAPT still suffers from basis set incompleteness error, as with all second-quantized methods). Secondly, monomer-centered basis sets can be used which can afford additional savings if the geometry of the monomers is fixed across the dissociation path, potentially reducing the number of different quantum computations that have to be performed. Moreover, as SAPT directly computes the interaction energy as a sum of expectation values (rather than differences of large expectation values), it often exhibits favorable error cancellation for errors inherent to the chosen wavefunction ansatz. We show that this observation can significantly reduce the resource requirements for circuit depth with only very coarse VQE wavefunctions required for sub kcal/mol accuracy in the interaction energy components. Finally, SAPT offers a physically motivated breakdown of the interaction energy components into electrostatic, exchange, induction and dispersion contributions which can offer valuable insight for medicinal chemists when designing protein inhibitors [21].
+
+Beyond suggesting SAPT as a useful approach for NISQ quantum computers we outline an efficient active space formulation of SAPT that can be applied for protein-ligand interactions for systems containing heavy metal centers and thousands of atoms. Key to this implementation is the GPU accelerated classical pre-and postprocessing steps which practically help to run such simulations [22]. We will largely focus on the accurate qualitative description of systems with strong multi-reference character that can not easily be described by classical approaches and thus could offer a more transparent demonstration of a practical quantum advantage. In this paper we will only consider the first order contributions to the exchange energy leaving the second order terms, which require solving electronic response, for future work. We begin by outlining in detail the active space formulation for first-order SAPT that can be coupled to any quantum simulation that can produce one-and twoparticle reduced density matrices. Next we discuss the VQE ansatz used in this work, although the SAPT method itself is largely independent of the way in which the ground state properties are computed. Finally we benchmark our method using ideal quantum simulators and demonstrate a significant reduction in error found when poorly converged VQE wavefunctions are used for model multi-reference systems and for the human cancer relevant [23] lysine-specific demethylase 5 (KDM5A) protein with different ligand substitutions.
+
+
+I. METHODS
+
+In this section we will describe the classical implementation of the density matrix formulation of SAPT followed by how this implementation can be efficiently adapted for NISQ devices.
+
+
+A. Notation
+
+In this work we consider the interaction of two monomers A and B and will use the following notation for different real orbital types belonging to A and/or B
+
+• µ/ν -nonorthogonal atomic spatial orbital basis indices. Note that these could conceptually be either monomer-centered of dimer-centered bases as far as the theory is concerned. Unless otherwise noted, we use monomer-centered bases for all atomic spatial orbital bases encountered in practical test cases in this work.
+
+• p/q -orthogonal molecular spatial orbital basis indices.
+
+• i/j -orthogonal occupied spatial orbital basis indices.
+
+• t/u -orthogonal active spatial orbital basis indices.
+
+• a/b -orthogonal virtual spatial orbital basis indices.
+
+Repeated indices within a monomer will be denoted with primes, e.g., p, p , p , p . Summation over repeated indices is assumed throughout. When dealing with spinorbital quantities, we use the context specific notation of an "unbarred" orbital index to denote α and a "barred" orbital index to denote β, i.e., p † is an α spin-orbital creation operator on spatial orbital index p, whilep † is a β spin-orbital creation operator on spatial orbital index p.
+
+
+B. Symmetry Adapted Perturbation Theory
+
+Traditionally, the interaction energy between two monomers, E int , is calculated in the supermolecular approach as
+E int = E AB − E A − E B ,(1)
+where E AB is the ground state energy of the combined system and E A/B are the energies of the individual fragments, evaluated at the frozen geometry of the dimer system (i.e., no deformation energy contributions). In contrast, in SAPT, E int is instead evaluated through a perturbation series in the intermonomer interaction potential
+V = N A i=1 N B j=1ṽ (r i , r j ),(2)
+where N A/B is the number of electrons in monomer A or B, and v(r i , r j ) = 1
+|r i − r j | − 1 N B J∈B Z J 1 |R J − r i | − 1 N A I∈A Z I 1 |R I − r j | + 1 N A N B I∈A I∈B Z I Z J 1 |R I − R J | ,(3)
+describes the interaction of the electrons and nuclei in monomer A with the electrons and nuclei in monomer B (and vice versa). Symmetrized Rayleigh-Schrödinger perturbation theory yields a perturbation series for the interaction energy
+E int = E (1) pol + E (1) exch + E (2) pol + E (2) exch + . . .(4)
+where, E
+
+pol is the electrostatic energy, E
+
+pol is a sum of dispersion and induction energies, while E (n) exch account for exchange interactions.
+
+In order to evaluate the first two terms in the perturbation series in Eq. (4) one first needs to solve for the ground state wavefunction, |Ψ A , of the individual monomer Hamiltonian, here given for monomer Â
+H A = pp h pp Ê pp + 1 2 pp p p v pp p p (Ê pp Ê p p − δ p p Ê pp ),(5)
+where h pq and v pp p p = (pp |p p ) are the usual one-and two-electron integrals and
+E pp = p † p +p †p ,(6)
+is the singlet-adapted one-particle substitution operator.
+
+In the absence of the exact ground state monomer wavefunctions, the SAPT interaction energy is traditionally computed as a triple perturbation theory in the intramonomer fluctuation potentials (assuming a Møller-Plesset partitioning of the Hamiltonian). At the lowest order this gives rise to SAPT(HF) (or SAPT0), where each term is evaluated using Hartree-Fock density matrices [20]. Another popular approach is to use density functional theory SAPT(DFT) [24,25] to account for intramonomer electron correlation, but this approach is naturally limited by the performance of the chosen density functional [26].
+
+In this work we will assume that we can determine the exact (or at least very accurate) ground state properties of the individual monomers using a quantum computer. The first order SAPT expressions can then be evaluated using only the ground state unperturbed wavefunctions of the individual wavefunctions, i.e., |Ψ 0 = |Ψ A ⊗ |Ψ B . We will use the density matrix formulation of SAPT [27] systematized by Korona [28][29][30] and recently fully implemented for complete active space self consistent field (CASSCF) wavefunctions by Hapka and et al. [26] This formalism allows for the evaluation of the terms appearing in Eq. (4) using just the ground state one-and twoparticle reduced density matrices of the monomers with additional response terms for the second order terms. Detailed derivations of the density matrix formation of SAPT are given elsewhere and here we will focus on the efficient implementation in terms of optimized chemistry primitives on quantum computers.
+
+
+C. Density Matrix Formulation of SAPT
+
+The first order polarization energy is the electrostatic repulsion energy of monomer A and B, and is given by
+E (1) pol = Ψ A Ψ B |V |Ψ A Ψ B(7)
+=γ pp ṽ p q pqγqq (8) where,γ pp is the spin-summed one-particle reduced density matrixγ
+pp = Ψ A |p † p +p †p |Ψ A ,(9)
+and we have introduced the generalized two-electron repulsion integrals v p q pq =(pp |V |qq ) =(pp |qq )
++ 1 N A (V A |qq )S pp + 1 N B (pp |V B )S qq + V AB N A N B S pp S qq ,(10)
+where (pp |qq ) is a mixed two-electron electron repulsion integral between orbitals on monomer A and B, S pp = (p|p ) is an overlap integral and (V X |qq ) are matrix elements of the electron-ion potential of monomer X in the orbital basis of the other monomer. Similarly, the first order exchange energy is given as
+[27] E (1) exch = Ψ A Ψ B |V A|Ψ A Ψ B Ψ A Ψ B |AΨ A Ψ B − E (1) pol ,(11)
+where A is the antisymmetrizer operator. Using the S 2 approximation, and the density matrix formulation of SAPT [27], it can be shown that Eq. (11) can be written as
+E (1) exch = − 1 2 (γ pp γ qq ṽ q p pq (12) +γ pp Γ qq q q S p q ṽ q q pq +γ qq Γ pp p p S q p ṽ p p pq Γ pp p p Γ qq q q S p q S q p ṽ p q pq − E (1) pol S pq γ qq S qp γ pp ),(13)= T 1 + T 2 + T 3 + T 4 + T 5(14)
+whereΓ pp p p = 2(Γ pp p p + Γ pp p p ),
+
+is the spin-summed two-particle reduced density matrix, where throughout this work we assume the monomers have singlet ground states, and
+Γ pp p p = Ψ A |p †p †p p |Ψ A .(16)
+As can be seen from Eq. (8) and Eq. (14) the first order SAPT expressions require only the one-and two-particle density matrix to be evaluated.
+
+
+D. Efficient Active Space Implementation
+
+Given that NISQ-era devices are currently limited to tens of qubits (spin-orbitals) we will use an active space approach in order to tackle protein-ligand interactions. We will heavily leverage standard quantum chemistry primitives such as integral driven Coulomb and exchange matrix builds which exploit sparsity [31] and can efficiently be implemented on GPUs [32][33][34]. These considerations are important when simulating 100s of atoms and thousands of basis functions.
+
+In the active space approach we partition the oneelectron orbital set into N c core orbitals, N a active orbitals and N i virtual orbitals. This partitioning gives rise to modified monomer Hamiltonians given by (for example for monomer A)
+H A = tt σh tt a † tσ a t σ + σσ tt t t (tt |t t )a † tσ a † t σ a t σ a t σ ,(17)
+where the modified one-electron integralsh tt now include core-active space interactions
+h tt = h tt + ii (tt |ii ) − 1 2 (ti |it ) γ ii .(18)
+For large scale applications N c is typically large (100-1000) and Eq. (18) can be efficiently evaluated in the AO basish
+µµ = h µµ + 2J c µµ − K c µµ ,(19)
+before being transformed to the active space MO basis
+h tt = µµ C µthµµ C µ t(20)
+where C are the molecular orbital coefficients. In Eq. (19) we have introduced the usual (core) Coulomb and exchange matrices
+J c µµ ≡ J[γ c ] µµ = µ µ (µµ |µ µ )γ c µ µ (21) K c µµ ≡ K[γ c ] µµ = µ µ (µµ |µ µ )γ c µ µ ,(22)
+where the core density matrix is given by
+γ c µµ = i C µi C µ i .(23)
+Once the ground state in Eq. (17) has been found and the active space one-and two-particle density matrices have been formed the first order SAPT contributions can be calculated as a classical post processing step which can be implemented efficiently by considering the block structure of the one-and two-particle density matrices. Recall that in the MO basis we havē
+γ c =γ ii = 2δ ii (24) γ a = γ tt = γ tt (25) andΓ cc =Γ ii i i =γ ii γ ii − 1 2γ ii γ ii (26) Γ ac = Γ ti t i =Γ it i t =γ tt γ ii Γ it t i =Γ ti it = − 1 2γ tt γ ii (27) Γ aa =Γ tt t t =Γ tt t t ,(28)
+where again i and t are occupied (core) and active orbital indices respectively. All other blocks of the density matrices are zero. Not much is gained by exploiting this block structure for first order terms that contain the one-particle density matrix only. Thus, we evaluate them in the AO basis directly as
+E (1) pol = µµ γ µµ J [γ B ] µµ ,(29)
+where the generalized Coulomb (J) and exchange (K) matrices are analogues of Eqs. (21) and (22) with the standard electron repulsion integrals replaced with their generalized counterparts (see Eq. (10)) and the AO density matrices are given bȳ
+γ µµ = ii C µiγ c ii C µ i + tt C µtγ a tt C µ t .(30)
+Similarly, the first term in the exchange matrix is evaluated as
+T 1 = − 1 2 µµ γ µµ K [γ B ] µµ ,(31)
+while T 5 is a simple trace of a matrix product. The other three terms are a bit more complicated. For example, for T 2 , there will be in total six terms arising from the different combinations of core and active orbitals sets. Inserting the expressions for γ c and Γ cc , Γ ac from Eq. (28) we have
+T 2 [γ c A ,Γ ac B ] = 4γ uu S ij (ṽ ju iu − 1 2ṽ u j iu ) + S iu (ṽ u j ij − 1 2ṽ ju ij ) .(32)
+This can be simplified by using the definitions of the generalized Coulomb and exchange matrices defined earlier to be written as
+T 2 [γ c A ,Γ ac B ] = 4S ij C µi (J[γ a B ] µν − 1 2K [γ a B ] µν )C ν j +2γ uu S iu C µi (J[γ c B ] µν − 1 2K [γ c B ] µν )C ν u .(33)
+Similarly we have
+T 2 [γ a A ,Γ cc B ] =2γ tt S t j C µt J [γ c B ] µν − 1 2K [γ c B ] µν C ν j ,(34)
+and
+T 2 [γ a A ,Γ ac B ] = 2γ tt S t j C µt (J[γ a B ] µν − 1 2K [γ a B ] µν )C ν j +γ tt γ uu S t u C µt (J[γ c B ] µν − 1 2K [γ c B ] µν )C ν u .(35)
+Terms involving Γ aa typically cannot be simplified much, e.g.,
+T 2 [γ c A ,Γ aa B ] = 2Γ uu u u S iu ṽ u u iu .(36)
+To avoid the formation of the O(N 3 a N c ) generalized electron repulsion integrals we first form
+E µu = i C µi S iu(37)
+before forming the generalized MO-ERIs, so that
+T 2 [γ c A ,Γ aa B ] = 2Γ uu u u ṽ u u u u .
+Finally, we have
+T 2 [γ a A ,Γ aa B ] =γ tt Γ uu u u S t u ṽ u u tu ,
+which does not simplify further. Note that the generalized two-electron integrals only need to be constructed for the last two terms and require at most O(N 4 act ) storage. Although not a concern for the system sizes considered here, further reduction in computational cost and memory can be achieved through density fitting and related approaches [35] .
+
+T 3 is analogous to T 2 while T 4 is quite verbose and contains sixteen terms. Full expressions for these are given in Appendix A. The above expressions are completely general and do not depend on the method used to evaluate the one-and two-particle density matrices.
+
+
+E. Variational Quantum Eigensolver
+
+Up to this point we have assumed that the ground state one-and two-particle reduced density matrices of the monomers could be determined by some means. In this subsection we will give further details of the VQE algorithm used in this work. As described, SAPT is essentially a post processing step that relies only on the availability of the one-and two-particle reduced density matrices. Therefore, it is not tied to any particular quantum algorithm, however, in this work we will focus on using the VQE.
+
+In the SAPT(VQE) approach, one or both of the monomer active space wavefunctions are generated by VQE-type quantum circuits
+|Ψ A ≡ |Ω A |Φ c A ,(38)
+where |Ω A is the active space wavefunction generated by a quantum circuitÛ VQE from a starting state |Φ 0 A on a 2N c -qubit quantum computer, i.e.,
+|Ω A ≡Û VQE |Φ 0 A (39)
+and |Φ c A is the closed-shell core determinant. Note that with the VQE ansatz adopted for this paper, the active space wavefunction |Ω A will be taken to be real, and will be a definite eigenfunction of theN α ,N β , andŜ 2 operators.
+
+In the Jordan-Wigner representation used in this paper, the creation/annihilation operators are defined as,
+p ± = p =p−1 p =0Ẑ p (X p ∓ iŶ p )/2,(40)p ± = p =Nα−1 p =0Ẑ p p =p−1 p =0Ẑp (Xp ∓ iŶp)/2,(41)
+where p + = p † and p − = p and we order the Jordan-Wigner strings in α-then-β order.
+
+In this work we use a modified version of the unitary cluster Jastrow wavefunction [36] (k-uCJ) which takes the form (42) whereK (k) andT (k) are one-and two-body operators, and k is a parameter that controls the depth of the circuit and as a result its variational freedom. Our modified k-uCJ ansatz differs from Ref. 36 in the choice of two-body operator and we restrict ourselves to real antisymmetric matrices. For the one-body rotations we use spin-restricted orbital transformations,
+|Ψ 0 = k exp(−K (k) ) exp(T (k) ) exp(+K (k) )|Φ 0 ,K (k) ≡ pp κ (k) pp (p † p − p † p) + (p †p −p †p )(43)
+where κ
+(k) pp = −κ (k)
+p p is a real, antisymmetric M × M matrix of orbital rotation generators. The restricted orbital transformation operator is equivalent to a 1-particle spinrestricted orbital transformation via,
+U (k) pp ≡ exp(κ (k) ) pp(44)
+Note thatÛ (k) ∈ SO(M ). This spin-restricted orbital rotation can be efficiently implemented in quantum circuits via a fabric of Givens rotations [37]. For the two-particle operator we use a modified diagonal double-substitution operator,
+T (k) ≡ M −1 p=0 M −2 p =p mod 2 p+=2 τ (k) pp [(p + 1) † (p + 1) † p p − p †p † (p + 1)(p + 1)](45)
+which is similar to the unitary pair coupled-cluster generalized singles and doubles expression (k-UpCCGSD) [38]. We note that normally a pair coupled-cluster approximation for the two-body operator would render k-uCJ equivalent to k-UpCCGSD [36], however the variant used here has the advantage that it avoids non-local Jordan-Wigner strings and thus is closer to the quantum number preserving fabric circuit [39] or the fermionic SWAP network variant of k-UpCCGSD [40]. However, as our choice is not quite any of these ansatzes, for the remainder of this work we will name it k-muCJ for clarity, with the 'm' standing for modified. We stress again that the choice of VQE ansatz is largely irrelevant from a SAPT perspective and is not a major point in this paper. The diagonal doubles operator in Eq. (45) can be implemented as a product of four-qubit pair-exchange gates, P X (θ), which have the action,
+P X (θ) ≡                           1 1 1 c −s 1 1 1 1 1 1 1 1 +s c 1 1 1                          (46)
+in the four-qubit Hilbert space. Note that,
+|3 = |0011 and, |12 = |1100 ,(47)
+and recalling that α and β qubits are ordered in an interleaved fashion, we see the operator implements a Givens rotation implementing a partial double-substitution in the closed-shell space. The decomposition of Eq. (46) into more standard gates is given in Ref. 39. An example of one layer of the muCJ circuit ansatz is given in Fig. 1.
+
+With an ansatz of the form of Eq. (42) we can write the VQE objective function as
+E 0 (κ k pq , τ k pq ) ≡ Ψ 0 (κ k pq , τ k pq )|Ĥ|Ψ 0 (κ k pq , τ k pq )(48)= Φ 0 |Û † (κ k pq , τ k pq )ĤÛ (κ k pq , τ k pq )|Φ 0 . (49)
+The VQE algorithm then proceeds in hybrid form by using the quantum computer to evaluate Eq. (49) before the variational parameters {κ k pq , τ k pq } are updated using a classical optimization algorithm.
+
+To estimate the one-and two-particle reduced density matrices we write the expectation values in Eq. (9) and Eq. (16) in terms of the Jordan-Wigner strings. The
+G G PX PX G G G G G G G G G G PX PX G G G G G G G G G G G G G G G G PX PX G G G G G G G G G G G G G G G G G G G G FIG. 1.
+Single layer (k = 1) k-muCJ VQE entangler circuit used in this work sketched for M = 4 spatial orbitals or N = 8 qubits. Even (odd) qubits label α (β) spin-orbitals. The circuit consists of a single layer of orbital rotations which are implemented as a series of two-qubit Givens rotations, followed by a layer of diagonal double substituion operators implemented via the four-qubit pair-exchange gate given in Eq. (46), followed by another layer of orbital rotations. Note that for the spin restricted ansatz used here the angles in the Givens gate for α and β spin-orbitals is the same.
+
+number of measurements scales like O(N 4 a ) which can be reduced to an extent by accounting for symmetries in the one-and two-particle density matrices. Although not a focus of this paper, efficiently estimating density matrices is an active area of research and techniques exist to increase the parallelism of the measurements [41] and for error mitigation [42].
+
+
+II. RESULTS
+
+
+A. Computational Details
+
+For the idealized experiments presented here we use the L-BFGS-B algorithm provided by scipy [43] to optimize the VQE objective function and used the RHF state as the initial wavefunction. Classical SCF computations and integral generation was performed using Terachem [32][33][34] interfaced through Lightspeed [44]. The GPU accelerated ideal VQE simulations were implemented using the quasar/vulcan codes. Double factorization was used for evaluating the total energy of the VQE ansatz [45,46]. VMD [47] was used for visualizing molecular orbitals and molecular structures with the exception of the KDM5A system which used MOE [48].
+
+
+B. Multi Reference Benchmarks
+
+To assess the accuracy of SAPT(VQE) we will apply the method to investigate the intermolecular electrostatic and exchange energy to a selection of dimers from the S22 benchmark set [49]. We will modify these systems to ensure one of the monomers in question has some multi reference character that cannot be well described by SAPT(RHF). In all examples we will benchmark our results against classical SAPT(CASCI) that employs the same active space as the SAPT(VQE) computations.
+
+For our first test case we will investigate a benzenep-benzyne dimer arranged in the T-shape configuration visualized in Fig. 2 (a). This is a variation on the classic benzene dimer SAPT benchmark, except p-benzyne has a biradical ground state and thus benefits from a multireference approach. To describe p-benzyne we construct a (6e, 6o) active space from the HOMO-2 to LUMO+2 RHF/cc-pVDZ MOs and treat the benzene monomer at the RHF level of theory. Previous results suggest that pbenzyne represents a challenge for VQE with the number of parameters required to reach chemical accuracy being roughly half the number of configuration state functions in the exact solution [39]. Thus, it represents an interesting test case to see how errors from VQE propagate through to the resultant SAPT energy components.
+
+As can be seen from Fig. 2, the p-benzyne molecule does represent a challenge for the k-muCJ ansatz, with a k > 5 required to reach an error in the total energy below 1 kcal/mol. In contrast we see that the errors in the SAPT(VQE) electrostatic and exchange energies are 2-4 orders of magnitude smaller than the corresponding VQE total energy and that a shallow depth k = 1 VQE ansatz would be sufficient for sub kcal/mol accuracy in these terms. We see this holds across the dissociation curve, which is expected as the VQE solution is fixed when working in a monomer-centered basis set, which is another advantage of SAPT(VQE). It should be noted that the SAPT(RHF) binding energy for this dimer system is on the order of 2 kcal/mol for this basis set.
+
+For the next test case we investigate the ability of SAPT(VQE) to address intermolecular interactions involving bond dissociation in one of the monomers. We calculate the SAPT electrostatic and exchange energies for two interacting water molecules (displayed in Fig. 3 (a)), one in its equilibrium geometry and in the other we symmetrically stretch the two OH bonds towards dissociation. This is again a challenging case for VQE to capture a double bond breaking. We used the 6-31G basis set and chose a (6e, 6o) active space for water from HOMO-2 to LUMO+2. Again, we see in Fig. 3 that RHF qualitatively fails to capture either the total energy of the stretched water monomer or the SAPT energy components of the dimer system. On the other hand, while sizeable errors are present in the VQE total energy (>10 kcal/mol) in the stretched system for k = 1, we find sub 0.1 kcal/mol accuracy in the SAPT energy components.
+
+It is interesting to note that while the quality of the total energy necessarily improves when the circuit repetition factor (k) is increased (assuming a local minima is not arrived at during optimization), some non-monotonic behaviour is observed in the individual SAPT energy components. This is probably due to the difficulty in tightly converging the VQE total energy the log scale in these figures.
+
+These two examples provide strong evidence that SAPT(VQE) yields significantly lower absolute errors in the target interaction energy contributions vs. those of the corresponding monomer total energies. This helps to reduce the depth of circuits necessary to achieve accurate interaction energy components.
+
+
+C. Protein-Ligand Interactions
+
+For our final example we examine the ability of our implementation of SAPT(VQE) to tackle large proteinligand interactions, specifically lysine-specific demethylase 5A (KDM5A) depicted in Fig. 4 (a). KDM5A is believed to be relevant for human cancers [23] and contains a metal center [Fe(II)] which may pose a challenge for classical electronic structure theory methods. To make the problem tractable, we used a model system of the binding site which was cut out from the full binding domain of KDM5A and focuses on the immediate surrounding of metal ion and ligand. The detailed preparation of the model system is described in the Supporting Information. This final structures contained each 380 atoms and were studied with DFT using a 6-31G basis set and the B3LYP functional [53] using the Gaussian software package [54]. The ligand and all atoms in radius of 4.5Å of the ligand were further relaxed with the oxygen atoms of the water and the iron atom been keeping fixed. The structures have an electronic size of (1482e, 2214o). The  Fig. 4 (b). We computed the first order SAPT(VQE) energy contributions for 5 different inhibitors from Ref. [52] and shown in Fig. 4 (c) to assess how important multi-reference effects were for describing the interaction energy with this protein. We treated each of the ligands at the RHF level and KDM5A using VQE.
+
+
+protein-ligand system is visualized in
+
+To construct a potentially representative active space for KDM5A we used the AVAS procedure [55], and first built a relatively large space by including the 3d orbitals from the iron center, the oxygen 2p orbitals from the nearest two water molecules and the 2p orbitals from the neighbouring oxygen atom associated with the glutamic acid, as well as two 2p orbitals from the neighbouring nitrogen atoms from two neighbouring histidines. A representative Fe 3d-like orbital from this procedure is depicted in Fig. 4 (b). This leads to an active space size from the AVAS procedure of (36e, 27o), which would require a 54 qubit quantum computer, and is thus outside the reach of current simulators and hardware. To reduce the size of the active space we performed a loosely converged (ε = 1 × 10 −4 ) selected heat bath configuration interaction computation (SHCI) [56,57] in this active space. We then constructed a smaller active space using the SHCI natural orbitals (NOs), only keeping those NOs with occupation 0.02 ≤ n i ≤ 1.97. This leads to a smaller active space of (8e,8o), for the low-spin configuration, corresponding to a 16 qubits VQE simulation which is possible using simulators and within reach of current hardware. The natural orbital occupation structure and dominant single reference nature of SHCI ground state suggests that the KDM5A problem will not be challenging for VQE.
+
+In order to connect with experiment we score the ligands based on the difference of their interaction energy relative to a reference compound
+∆E int (x) = E int (x ref ) − E int (x)(50)
+where x are the ligand labels from Fig. 4 (c) and we choose x ref = 5 as the reference point as it is experimentally the most potent ligand from the subset of ligands taken from Ref. 52. We then compare this energy difference to differences in the experimental free energy of 
+∆∆G = ∆G(x ref ) − ∆G(x) = −RT log IC 50 (x ref ) IC 50 (x) ,(51)
+where R is the gas constant, the temperature T is taken to be room temperature and we took the IC 50 values from Ref. 52. Note that we are comparing two different quantities, namely the theoretical interaction energy difference and the experimental free energy of binding and thus we cannot necessarily expect any quantitative relationship. For example, the interaction energies ac-count for one leg of the thermodynamic cycle while the free energy of binding accounts for the the whole cycle. In addition, the number of water molecules surrounding the binding site may depend on the specific ligand being studied, with larger ligands replacing more water molecules. While neither of these effects was considered here it is interesting to see what relationship if any these numbers have to one another.
+
+The results of these computations are shown in Fig. 4 (d). To get some insight into the accuracy of existing approaches we first present supermolecular DFT(B3LYP), RHF and SAPT (2) (RHF) the results of which are shown in the upper panel of Fig. 4 (d). Note that here SAPT (2) (RHF) contains both first-and second-order SAPT energy contributions [22] and were performed in a dimer-centered basis set, this in contrast to the rest of the results in this paper which only considered the firstorder SAPT contributions in a monomer-centered basis. The DFT results are not counterpoise corrected but we found it unimportant for the present system. We find that supermolecular RHF incorrectly predicts ligand-4 to have the largest interaction energy suggesting that a more accurate method is required. This observation is confirmed by the SAPT(RHF) and supermolecular DFT results which correctly score ligand-5 as the most potent in this set.
+
+In the lower panel of Fig. 4 (d) we plot the first order interaction energy difference, ∆E (1) int computed through SAPT(RHF), SAPT(CASCI) and SAPT(VQE) all computed using a monomer-centered basis. The first thing we see is the excellent agreement between SAPT(CASCI) and SAPT(VQE) for each ligand considered. Note that we used the 1-muCJ ansatz for the VQE computations which offers further evidence of the error reduction capabilities of SAPT. Apart from this excellent agreement we also see that there is little difference between SAPT(RHF) and SAPT(CASCI). We found that the maximum difference between SAPT(CASCI) and SAPT(RHF) was roughly 1-2 kcal/mol, however this error nearly cancels when looking at the ∆E int and is thus not visible on the scale of the plot. Ultimately this is not surprising given that the problem was found to be not strongly correlated.
+
+Finally, we see that first order SAPT is not accurate enough to correctly score the respective ligands with the missing induction and dispersion components proving critical to achieving this. Indeed the first order interaction energy for compound 5 is positive and thus unbound at this level of theory. In particular, from the full SAPT (2) (RHF) energy decomposition (see Supplementary Information) we find that the induction components for compound 4 and compound 5 are similar in magnitude while the dispersion component for compound 5 is roughly 1.4 times that of compound 4. This large dispersion energy ensures that ligand 5 has the larger (absolute) interaction energy. Nevertheless, we see that SAPT(VQE) can potentially tackle industrially relevant drug design problems, particularly in cases where it is not known a-priori how strongly correlated the ground state is.
+
+
+III. CONCLUSION
+
+We described the theory and implementation of SAPT on a NISQ-era quantum computer, focusing on the efficient implementation and classical workflows necessary to tackle industrially relevant problems in drug design. We derived in detail the equations necessary for an active space formulation of SAPT(VQE) that requires only the one-and two-particle reduced density matrices measured on a quantum computer. The SAPT(VQE) components are computed as an efficient classical post-processing step. This classical post-processing step, written in terms of optimized quantum chemical primitives, was shown capable of simulating systems with hundreds of atoms and potentially 100s of basis functions in the active space.
+
+Beyond an efficient classical implementation, we found (through ideal VQE simulations) that SAPT naturally reduces the error incurred by approximately solving the Schrödinger equation on a quantum computer, which we attribute to the theory directly computing energy differences. This fact coupled with a monomer basis formulation will substantially reduce the resource requirements for computing binding energies of large protein-ligand interactions on NISQ-era quantum computers. In particular, sub-kcal/mol accuracy in the energy components for the electrostatic and exchange energies can be computed using coarse VQE wavefunctions, which otherwise exhibit gross errors (> 10 kcal/mol) in the total energy. Given the practical challenges associated with optimizing VQE wavefunctions on current hardware we believe SAPT may help to extend the scope of the method due to the apparent ability to use low depth VQE ansatzes like 1-uCJ. SAPT(VQE) appears to offer, then, a reduction in the quantum resources required compared to a simple supermolecular VQE for the computation of protein-ligand interaction energies. This reduction in qubit count and circuit depth naturally yields a lower precision requirement on the quantum circuit and thus has the potential to enable the simulation of larger systems on NISQ hardware than what is possible with supermolecular VQE implementations.
+
+In the future, it will be critical to determine how robust SAPT(VQE) is to noise channels either through modelling or real hardware experiments. Another important question will be how to reduce the measurement overhead of accumulating the one-and two-particle reduced density matrices, a tentative solution to which is sketched in Appendix B. A natural extension will be to determine the second-order SAPT terms that would allow for accurate interaction energies and induction and dispersion energy components to be computed. Other interesting questions are how to increase the quantitative accuracy of the method by including correlation out of the active space [18,59] and to gather more challenging drug-protein systems potentially containing multiple metal centers.
+
+
+CONFLICT OF INTEREST
+
+FDM, RMP, and ARW own stock/options in QC Ware Corp.
+
+
+Appendix A: Full Active Space SAPT Exchange Expressions
+
+In this appendix we give full expressions for the remaining exchange energy contributions (T 3 and T 4 ) not given in Section I D. For notational simplicity we will drop bars from γ and Γ under the understanding that all density matrices are spin-summed and remove the tildes from the generalized J and K matrices.
+
+T 3 is very similar to T 2 and we have
+T 3 =T 3 [γ c B , Γ ac A ] + T 3 [γ c B , Γ cc A ]+ T 3 [γ a B , Γ ac A ] + T 3 [γ c B , Γ aa A ]+ T 3 [γ a B , Γ aa A ],(A1)
+where
+T 3 [γ c B , Γ ac A ] = 4S ji C νj (J[γ a µµ ] νµ − 1 2 K[γ a µµ ] νµ )C µ i +2γ tt S jt C νj (J[γ c µµ ] νµ − 1 2 K[γ c µµ ] νµ )C µ t ,(A2)T 3 [γ c B , Γ cc A ] = 2γ uu S ui C νu J[γ c µµ ] − 1 2 K[γ c µµ ] C µ i ,(A3)T 3 [γ a B , Γ ac A ] = 2γ uu S u i C νu (J[γ a µµ ] νµ − 1 2 K[γ a µµ ] νµ )C µ i +γ uu γ tt S u t C νu (J[γ c µµ ] νµ − 1 2 K[γ c µµ ] νµ )C µ t ,(A4)T 3 [γ c B , Γ aa A ] = 2Γ tt t t ṽ t t tt ,(A5)
+and, lastly,
+T 3 [γ a B , Γ aa A ] = γ uu Γ tt t t S u t ṽ t t tu .(A6)
+For T 4 there are sixteen terms in total. First we have
+T 4 [Γ aa A , Γ aa B ] = Γ tt t t Γ uu u u S t u S t u ṽ tt uu ,(A7)
+which can't be simplified further. Next we have
+T 4 [Γ aa A , Γ ac B ] = Γ tt t t γ uu γ jj S t j S t j ṽ tt uu − 1 2 Γ tt t t γ uu γ jj S t j S t u ṽ tt uj + Γ tt t t γ uu γ jj S t u S t u ṽ tt jj − 1 2 Γ tt t t γ uu γ jj S t u S t j ṽ tt ju ,(A8)
+which can be written as
+T 4 [Γ aa A , Γ ac B ] = 2Γ tt t t S t j S t j J[γ uu ] tt − Γ tt t t γ uu S t u ṽ tt ut + Γ tt t t γ uu S t u S t u J[γ jj ] tt − Γ tt t t γ uu S t uṽtt t u . (A9) Similarly T 4 [Γ ac A , Γ aa B ] = γ tt γ ii Γ uu u u S i u S iu ṽ tt uu − 1 2 γ tt γ ii Γ uu u u S t u S iu ṽ ti uu + γ tt γ ii Γ uu u u S t u S tu ṽ ii uu − 1 2 γ tt γ ii Γ uu u u S i u S tu ṽ it uu ,(A10)
+which can be written as
+T 4 [Γ ac A , Γ aa B ] = 2Γ uu u u S iu S iu J[γ tt ] uu − γ tt Γ uu u u S t u ṽ tu uu + γ tt Γ uu u u S t u S tu J[γ ii ] uu − γ tt Γ uu u u S tu ṽ u t uu . (A11) Next T 4 [Γ aa A , Γ cc B ] = Γ tt t t γ jj γ j j S t j S t j ṽ tt jj − 1 2 Γ tt t t γ jj γ j j S t j S t j ṽ tt jj ,(A12)
+which can be written as
+T 4 [Γ aa A , Γ cc B ] = 2Γ tt t t S t j S t j J[γ jj ] tt − Γ tt t t ṽ tt t t ,(A13)
+and similarly
+T 4 [Γ cc A , Γ aa B ] = γ ii γ i i Γ uu u u S i u S i u ṽ ii uu − 1 2 γ ii γ i i Γ uu u u S i u S i u ṽ ii uu ,(A14)
+which can be written as
+T 4 [Γ cc A , Γ aa B ] = 2Γ uu u u S i u S i u J[γ ii ] uu − 2Γ uu u u ṽ u u uu .(A15)
+For the AC-AC contribution we get sixteen terms
+T 4 [Γ ac A , Γ ac B ] = γ tt γ ii γ uu γ jj S i j S ij ṽ tt uu − 1 2 γ tt γ ii γ uu γ jj S i j S iu ṽ tt uj + γ tt γ ii γ uu γ jj S i u S iu ṽ tt jj − 1 2 γ tt γ ii γ uu γ jj S i u S ij ṽ tt ju − 1 2 γ tt γ ii γ uu γ jj S t j S ij ṽ ti uu + 1 4 γ tt γ ii γ uu γ jj S t j S iu ṽ ti uj − 1 2 γ tt γ ii γ uu γ jj S t u S iu ṽ ti jj + 1 4 γ tt γ ii γ uu γ jj S t u S ij ṽ ti ju + γ tt γ ii γ uu γ jj S t j S tj ṽ ii uu − 1 2 γ tt γ ii γ uu γ jj S t j S tu ṽ ii uj + γ tt γ ii γ uu γ jj S t u S tu ṽ ii jj − 1 2 γ tt γ ii γ uu γ jj S t u S tj ṽ ii ju − 1 2 γ tt γ ii γ uu γ jj S i j S tj ṽ it uu + 1 4 γ tt γ ii γ uu γ jj S i j S tu ṽ it uj − 1 2 γ tt γ ii γ uu γ jj S i u S tu ṽ it jj + 1 4 γ tt γ ii γ uu γ jj S i u S tj ṽ it ju ,(A16)
+which can be simplified to
+T 4 [Γ ac A , Γ ac B ] = 4γ tt S ij S ij J[γ uu ] tt − 2γ uu S ij S iu J[γ tt ] uj + 2γ tt γ uu S iu S iu J[γ jj ] tt − 2γ uu S iu S ij J[γ tt ] ju − 2γ tt S t j S ij J[γ uu ] ti + γ uu S iu K[γ tt S t j ] iu − γ tt γ uu S t u S iu J[γ jj ] ti + S ij K[γ tt S t u γ uu ] ij + 4γ tt S t j S tj J[γ uu ] ii − γ tt γ uu S t j S tu J[γ ii ] uj + 2γ tt γ uu S t u S tu J[γ jj ] ii − γ tt γ uu S t u S tj J[γ ii ] ju − 2γ tt S ij S tj J[γ uu ] it + γ tt γ uu S tu K[S ij ] t u − γ tt γ uu S iu S tu J[γ jj ] it + γ tt S tj K[γ uu S iu ] t j .
+(A17)
+
+Next we have
+T 4 [Γ ac A , Γ cc B ] = γ tt γ ii γ jj γ j j S i j S ij ṽ tt jj − 1 2 γ tt γ ii γ jj γ j j S i j S ij ṽ tt jj − 1 2 γ tt γ ii γ jj γ j j S t j S ij ṽ ti jj + 1 4 γ tt γ ii γ jj γ j j S t j S ij ṽ ti jj + γ tt γ ii γ jj γ j j S t j S tj ṽ ii jj − 1 2 γ tt γ ii γ jj γ j j S t j S tj ṽ ii jj − 1 2 γ tt γ ii γ jj γ j j S i j S tj ṽ it jj + 1 4 γ tt γ ii γ jj γ j j S i j S tj ṽ it jj ,(A18)
+which can be written as
+T 4 [Γ ac A , Γ cc B ] = 8S ij S ij J[γ tt ] jj − 4S ij S ij J[γ tt ] jj − 2γ tt S t j S ij J[γ jj ] ti + 2S ij K[γ tt S t j ] ij + 4γ tt S t j S tj J[γ jj ] ii − 2γ tt S t j S tj J[γ ii ] jj − 2γ tt S ij S tj J[γ jj ] it + 2γ tt S tj K[S ij ] t j ,(A19)
+and similarly
+T 4 [Γ cc A , Γ ac B ] = γ ii γ i i γ uu γ jj S i j S i j ṽ ii uu − 1 2 γ ii γ i i γ uu γ jj S i j S i u ṽ ii uj + γ ii γ i i γ uu γ jj S i u S i u ṽ ii jj − 1 2 γ ii γ i i γ uu γ jj S i u S i j ṽ ii ju − 1 2 γ ii γ i i γ uu γ jj S i j S i j ṽ ii uu + 1 4 γ ii γ i i γ uu γ jj S i j S i u ṽ ii uj − 1 2 γ ii γ i i γ uu γ jj S i u S i u ṽ ii jj + 1 4 γ ii γ i i γ uu γ jj S i u S i j ṽ ii ju (A20) T 4 [Γ cc A , Γ ac B ] = 8S i j S i j J[γ uu ] ii − 2γ uu S i j S i u J[γ ii ] uj + 4γ uu S i u S i u J[γ jj ] ii − 2γ uu S i u S i j J[γ ii ] ju − 4S ij S i j J[γ uu ] ii + 2γ uu S i u K[S ij ] i u − 2γ uu S iu S i u J[γ jj ] ii + 2S i j K[γ uu S iu ] i j . (A21) Finally, we have T 4 [Γ cc A , Γ cc B ] = γ ii γ i i γ jj γ j j S i j S i j ṽ ii jj − 1 2 γ ii γ i i γ jj γ j j S i j S i j ṽ ii jj − 1 2 γ ii γ i i γ jj γ j j S i j S i j ṽ ii jj + 1 4 γ ii γ i i γ jj γ j j S i j S i j ṽ ii jj ,(A22)
+which can be written in terms of J and K matrices as was done for the SAPT(HF).
+
+
+Appendix B: Quantum-Classical Optimization for Electrostatic Energy
+
+When only monomer A is defined to be quantum, an interesting alternative approach exists to evaluating the one-particle density matrix on the quantum computer. We may first classically form the contributions from the nuclei of monomer A,
+E VQE elst,u ← A,B Z A Z B r AB + Aνν (A|νν )γ νν (B1)
+We then classically form the image of the electrostatic potential of monomer B in the atomic orbital basis of monomer A as,
+W µµ ≡ B (µµ |B) + J µµ [γ νν ](B2)
+We can form the monomer A core ↔ monomer B contributions classically as,
+E VQE elst,u ← µµ γ Core µµ W µµ (B3)
+We can then classically form the image of the electrostatic potential of monomer B in the active space molecular orbital basis of monomer A as,
+W tt ≡ µµ C µt W µµ C µ t (B4)
+We can then diagonalize the W tt operator to form,
+W tt = s U ts w s U t s (B5)
+where U ts is SO(N t ). In this "electrostatic potential natural orbital basis" the remaining monomer A active ↔ monomer B contributions can be evaluated by a single commuting group of simultaneous Z-basis measurements,
+E VQE elst,u ← µµ γ a µµ W µµ = tt γ a tt W tt (B6) = tt Ω A |t † t +t †t |Ω A W tt (B7) = s Ω A |V † (U ts ) s † s +s †s V (U ts )|Ω A w s (B8) = s w s − 1 2 s Ω A |V † (U ts ) [Z s + Zs]V (U ts )|Ω A w s (B9)
+This is in contrast to a naive implementation which would require O(N 2 ) circuit evaluations or an optimal method of N/2 circuits evaluations [41]. Similar ideas can be explored for the exchange expression. Given that its structure mirrors that of a total energy evaluation (a 4-index tensor contracted with the two-particle reduced density matrix) it seems possible that a double factorization [45,46] approach may be possible. These ideas will be explored at a later date. In Table I and Table II we present results for the benzene-p-benzyne dimer considered in the main text. All calculations were performed in the (monomer-centered) cc-pVDZ basis set and a gradient threshold of 1 × 10 −6 for the L-BFGS-B solver in scipy. For comparison in Fig. 1 we compare the SAPT(RHF) energy components in the monomer-centered and dimer-centered basis sets. We found that in the monomer-centered basis set the exchange energy became a small negative number which is likely a numerical artifact but was consistent across different codes.     Note unlike other calculations presented in this work, these results were computed using the density-fitting version of SAPT [1,2] implemented in the psi4 quantum chemistry package [3].
+
+
+II. DATA FOR H2O
+
+In Tables III to V we present RHF, CASCI and VQE SAPT results for the water dimer considered as a function of the stretched OH bond length in one of the monomers. We also provide for reference the total energy of the isolated water molecule undergoing the symmetric stretch. All calculations were performed in the (monomer-centered) 6-31g basis set and a gradient threshold of 1 × 10 −6 for the L-BFGS-B solver in scipy or with a maximum iteration of 1000 whichever occurred first. In cases when the maximum iteration was reached first we found the norm of the gradient to be ≈ 1 × 10 −5 . In order to obtain a relatively smooth potential energy curve we started from the stretched geometry with randomly chosen parameters. We then used these optimized parameters for the next more compressed geometry and so on. To check the dependence of the energies on the quality of the VQE solution we plot in Fig. 3 the VQE total energy, electrostatic and exchange energies as a function of the gradient threshold. We see that the errors are quite well converged around 1 × 10 −3 and the SAPT components are quite insensitive to how well optimized the wavefunction is. Finally in Fig. 4 we provide the xyz coordinates for the water dimer at R OH = 0.2397Å.     Convergence of errors (relative to CASCI) for the total energy, electrostatic and exchange energies when using the modified 1-uCJ ansatz as a function of the gradient threshold for the L-BFGS-B algorithm implemented in scipy (gtol). To obtain the data we first initialised the parameters randomly and fed the output parameters from one BFGS optimization at a larger threshold into the next optimization step with a smaller threshold. Below we provide further information about the preparation of the KDM5A structure studied in this work as well as raw energies. Note we provide the xyz files for these structures as attached supplemental files instead of reproducing their coordinates in this pdf.
+
+
+A. Cutout Preparation for KDM5A
+
+To make the protein tractable, we used a model system of the binding site which was cut out from the full binding domain of KDM5A. Starting from the Xray structure with ligand 5 cocrystallized (pdb code 6bh4), in the molecular modeling program MOE [4] the following preparation steps were performed: (1) remove all other small molecule ligands outside the binding site, keeping all Xray waters. (2) add missing side chains with the Prepare Structure module of MOE. (3) Replace the Mn2+ in the Xray structure with Fe3+. (4) bridge a one-amino-acid break in the protein chain by manually adding and minimizing an alanine residue A357 and cap the protein ends of a missing 9-residue loop with an ACE and NME, respectively. (5) add hydrogens with the Protonate3D module of MOE. (6) with the MOE module Quickprep perform a series of tethered minimizations with decreasing tether weights of 100, 50, 10, 5 kcal/mol, keeping all atoms further than 8 A from the ligand fixed, using a maximal gradient of 0.5 kcal/mol A −2 , and a flat well potential ± 0.25Åfrom the initial atom positions. With the protein structure thus prepared, we removed all protein and water residues further than 4.5 A away from the ligand and capped the C-and N-termini of the fragmented protein with NME or ACE. This was followed by additional manual pruning by removing amino acid residues, sidechain or backbone atoms, do not interact with the ligand or the Fe ion. Only three water molecules were retained -two interacting with the Fe ion, and one interacting with the southern nitrogen atom of the 6-membered aromatic ring of the ligand. The resulting protein model system consisted of 163 atoms, 88 of which were heavy atoms. Based on the Xray structure of ligand 5, we modelled the binding modes of ligands 4, 8, and 9, and 12. For ligands 8 and 9, a tethered minimization was necessary to resolve a few close contacts between ligand and protein; for ligand 12 with its significantly different hydrogen-bond characteristics, we re-ran Protonate 3D to optimize the hydrogen-bond network around the ligand.    Note a dimer centered basis set and the S ∞ exchange were employed which should be contrasted to other calculations presented in this work. The SAPT(RHF) method employed here is the 'SAPT(0.5)' method of Parrish et al. which approximates the dispersion energy [5].
+
+
+B. Energy Data
+
+FIG. 2 .
+2(a) T-shaped configuration of benzene-p-benzyne dimer with the center-to-center intermonomer distance labelled as R. (b) Absolute error in p-benzyne monomer VQE total energy compared to errors in the SAPT(VQE) electrostatic and exchange energies at R = 4.45Å intermonomer separation as a function of the circuit repetition factor k in the k-muCJ ansatz. (c)-(d) Absolute errors relative to SAPT(CASCI) in the electrostatic and exchange energies calculated using different monomer wavefunctions for p-benzyne as a function of the intermonomer separation.
+
+FIG. 3 .
+3(a) Geometry of the water dimer studied with the OH bond length of single monomer distance labelled as ROH. The intermonomer separation is fixed throughout. (b) Absolute error in the stretched water monomer VQE total energy as a function of ROH for different muCJ repetition factor k in the k-muCJ ansatz. (c)-(d) Absolute errors relative to SAPT(CASCI) in the electrostatic and exchange energies calculated as a function of ROH for different muCJ repetition factor k in the k-muCJ ansatz.
+
+FIG. 4 .
+4(a) KDM5A protein structure[50,51] (b) representative minimal active space molecular orbitals produced by the AVAS procedure, for the protein cutout described in the main text with ligand 5 colored as orange (c) 5 KDM5A inhibitors from Ref.[52], (d) Upper Panel: Interaction energy differences computed using the super molecular approach (DFT(B3YLP) and RHF) and SAPT(2)  (RHF) as a function of the difference in experimental free energies (see main text for definition). Lower Panel: First-order SAPT(VQE), SAPT(CASCI) and SAPT(RHF) first order interaction energy differences as a function of the differences in experimental free energies of binding.binding[58] 
+
+R
+(Å) SAPT(RHF) SAPT(CASCI) SAPT(1-uCJ) SAPT(5-uCJ) 3.950000 -0.
+
+FIG. 1 :
+1Comparison between monomer-centered (MC) and dimer-centered(DC) SAPT(RHF) energy components for the benzene-p-benzyne dimer.
+
+
+V: VQE electrostatic, exchange energies for the water dimer system as a function of the OH bond length in monomer 2 for different values of the k parameter in the k-uCJ ansatz. Also given is the total VQE energy of monomer 2 and the deviation of VQE from CASCI.
+
+
+FIG. 3: Convergence of errors (relative to CASCI) for the total energy, electrostatic and exchange energies when using the modified 1-uCJ ansatz as a function of the gradient threshold for the L-BFGS-B algorithm implemented in scipy (gtol). To obtain the data we first initialised the parameters randomly and fed the output parameters from one BFGS optimization at a larger threshold into the next optimization step with a smaller threshold.
+
+TABLE I :
+IFirst order E elst for benzene-p-benzyne dimer as a function of the center-to-center distance R (in angstrom) for different levels of SAPT. Energies are in Hartree.R SAPT(RHF) SAPT(CASCI) SAPT(1-uCJ) SAPT(5-uCJ) 
+3.950000 
+0.044729 
+0.046125 
+0.046124 
+0.046149 
+4.131818 
+0.023684 
+0.024907 
+0.024942 
+0.025003 
+4.313636 
+0.011746 
+0.012730 
+0.012727 
+0.012718 
+4.495455 
+0.005388 
+0.006068 
+0.006079 
+0.006039 
+4.677273 
+0.002230 
+0.002668 
+0.002682 
+0.002674 
+4.859091 
+0.000787 
+0.001053 
+0.001064 
+0.001045 
+5.040909 
+0.000196 
+0.000345 
+0.000357 
+0.000347 
+5.222727 
+-0.000008 
+0.000074 
+0.000080 
+0.000074 
+5.404545 
+-0.000055 
+-0.000012 
+-0.000009 
+-0.000012 
+5.586364 
+-0.000050 
+-0.000028 
+-0.000027 
+-0.000028 
+5.768182 
+-0.000034 
+-0.000023 
+-0.000022 
+-0.000023 
+5.950000 
+-0.000020 
+-0.000015 
+-0.000014 
+-0.000015 
+
+
+
+TABLE II :
+IIFirst order E exch for benzene-p-benzyne dimer as a function of the center-to-center distance R (in 
+angstrom) for different levels of SAPT. Energies are in Hartree. 
+
+
+
+
+FIG. 2: Coordinates for benzene and p-benzyne dimer given at a center-to-center distance of R = 4.45Å.C 
+-1.3940633 
+0.0000000 
+-2.0000000 
+C 
+-0.6970468 
+1.2072378 
+-2.0000000 
+C 
+0.6970468 
+1.2072378 
+-2.0000000 
+C 
+1.3940633 
+0.0000000 
+-2.0000000 
+C 
+0.6970468 
+-1.2072378 
+-2.0000000 
+C 
+-0.6970468 
+-1.2072378 
+-2.0000000 
+H 
+-2.4753995 
+0.0000000 
+-2.0000000 
+H 
+-1.2382321 
+2.1435655 
+-2.0000000 
+H 
+1.2382321 
+2.1435655 
+-2.0000000 
+H 
+2.4753995 
+0.0000000 
+-2.0000000 
+H 
+1.2382321 
+-2.1435655 
+-2.0000000 
+H 
+-1.2382321 
+-2.1435655 
+-2.0000000 
+--
+C 
+0.0000000 
+0.0000000 
+1.0590353 
+C 
+0.0000000 
+-1.2060084 
+1.7576742 
+C 
+0.0000000 
+-1.2071767 
+3.1515905 
+C 
+0.0000000 
+0.0000000 
+3.8485751 
+C 
+0.0000000 
+1.2071767 
+3.1515905 
+C 
+0.0000000 
+1.2060084 
+1.7576742 
+H 
+0.0000000 
+-2.1416387 
+1.2144217 
+H 
+0.0000000 
+-2.1435657 
+3.6929953 
+H 
+0.0000000 
+2.1435657 
+3.6929953 
+H 
+0.0000000 
+2.1416387 
+1.2144217 
+
+R 
+E elst 
+E exch 
+ERHF 
+0.2397 -0.009707 0.005482 -63.545181 
+0.5035 -0.014737 0.006620 -74.456288 
+0.7672 -0.016340 0.006510 -75.869444 
+1.0309 -0.016566 0.006208 -75.973944 
+1.2946 -0.015416 0.005953 -75.865638 
+1.5583 -0.013711 0.005811 -75.738337 
+1.8220 -0.012270 0.005758 -75.624465 
+2.0857 -0.011754 0.005843 -75.528585 
+2.3494 -0.010643 0.005758 -75.449977 
+2.6132 -0.010370 0.005778 -75.386652 
+
+
+
+TABLE III :
+IIIRHF electrostatic, exchange energies for the water dimer system as a function of the OH bond length in monomer 2 and the total RHF energy of monomer 2.R 
+E elst 
+E exch 
+0.239739 -0.009756 0.005559 
+0.503451 -0.014742 0.006671 
+0.767163 -0.016210 0.006515 
+1.030876 -0.015636 0.006245 
+1.294588 -0.012944 0.006107 
+1.558300 -0.009807 0.006103 
+1.822013 -0.007061 0.006195 
+2.085725 -0.005088 0.006305 
+2.349438 -0.004132 0.006369 
+2.613150 -0.003750 0.006391 
+
+
+
+TABLE IV :
+IVCASCI electrostatic and exchange energies for the water dimer system as a function of the OH bond length in monomer 2.
+
+
+FIG. 4: Coordinates for H 2 O dimer given with R OH = 0.2397 in the second monomer. III. DATA AND INFORMATION FOR KDM5A SYSTEMO -1.551007 -0.114520 
+0.000000 
+H -1.934259 
+0.762503 
+0.000000 
+H -0.599677 
+0.040712 
+0.000000 
+--
+O 
+1.350625 
+0.111469 
+0.000000 
+H 
+1.433068 -0.009834 -0.189640 
+H 
+1.433068 -0.009834 
+0.189640 
+
+
+
+TABLE VI :
+VIRHF, VQE and CASCI total energies for the relaxed protein and ligands considered in this work. Energies are in Hartree atomic units.Compound 
+E RHF 
+
+elst 
+
+E RHF 
+
+exch 
+
+E CASCI 
+
+elst 
+
+E CASCI 
+
+exch 
+
+E VQE 
+
+elst 
+
+E VQE 
+
+exch 
+
+4 
+-0.179402 0.129074 -0.180031 0.129294 -0.179813 0.129323 
+5 
+-0.177596 0.134383 -0.178216 0.134567 -0.178140 0.134560 
+8 
+-0.170699 0.137911 -0.171302 0.138117 -0.171266 0.138075 
+9 
+-0.155808 0.139853 -0.157447 0.140533 -0.156897 0.140413 
+12 
+-0.164345 0.138107 -0.164988 0.138316 -0.164799 0.138228 
+
+
+
+TABLE VII :
+VIIRHF, VQE and CASCI first order SAPT contributions for the relaxed protein and ligands considered in this work. Energies are in Hartree atomic units. Note monomer centered basis sets and the S 2 approximation for exchange were employed.Component Compound 4 Compound 5 
+E elst 
+-204.242 
+-208.646 
+E exch 
+203.780 
+226.393 
+E ind 
+-66.821 
+-68.796 
+E dis 
+-99.107 
+-138.142 
+E (1) (SAPT) 
+-0.462 
+17.747 
+E (2) (SAPT) 
+-165.928 
+-206.938 
+Eint(SAPT) 
+-166.390 
+-189.192 
+
+
+
+TABLE VIII :
+VIIIBreakdown of SAPT(RHF) contributions to total interaction energy. Energies are in milli-Hartree.
+ACKNOWLEDGMENTS QC Ware Corp. acknowledges generous funding from Boehringer Ingelheim for the undertaking of this project. We thank Clemens Utschig-Utschig and Christofer Tautermann for insightful discussions.
+. A Aspuru-Guzik, A D Dutoi, P J Love, M Head-Gordon, Science. 3091704A. Aspuru-Guzik, A. D. Dutoi, P. J. Love, and M. Head- Gordon, Science 309, 1704 (2005).
+
+. S Mcardle, S Endo, A Aspuru-Guzik, S C Benjamin, X Yuan, Rev. Mod. Phys. 9215003S. McArdle, S. Endo, A. Aspuru-Guzik, S. C. Benjamin, and X. Yuan, Rev. Mod. Phys. 92, 015003 (2020).
+
+. Y Cao, J Romero, J P Olson, M Degroote, P D Johnson, M Kieferová, I D Kivlichan, T Menke, B Peropadre, N P D Sawaya, S Sim, L Veis, A Aspuru-Guzik, Chemical Reviews. 11931469277Y. Cao, J. Romero, J. P. Olson, M. Degroote, P. D. John- son, M. Kieferová, I. D. Kivlichan, T. Menke, B. Per- opadre, N. P. D. Sawaya, S. Sim, L. Veis, and A. Aspuru- Guzik, Chemical Reviews 119, 10856 (2019), pMID: 31469277.
+
+. B Bauer, S Bravyi, M Motta, G K , -L Chan, Chem. Rev. 12012685B. Bauer, S. Bravyi, M. Motta, and G. K.-L. Chan, Chem. Rev. 120, 12685 (2020).
+
+. V Burg, G H Low, T Häner, D S Steiger, M Reiher, M Roetteler, M Troyer, Phys. Rev. Research. 333055V. von Burg, G. H. Low, T. Häner, D. S. Steiger, M. Rei- her, M. Roetteler, and M. Troyer, Phys. Rev. Research 3, 033055 (2021).
+
+Simons Collaboration on the Many-Electron Problem). M Motta, D M Ceperley, G K Chan, J A Gomez, E Gull, S Guo, C A Jiménez-Hoyos, T N Lan, J Li, F Ma, A J Millis, Phys. Rev. X. N. V. Prokof'ev, U. Ray, G. E. Scuseria, S. Sorella, E. M. Stoudenmire, Q. Sun, I. S. Tupitsyn, S. R. White, D. Zgid, and S. Zhang731059M. Motta, D. M. Ceperley, G. K.-L. Chan, J. A. Gomez, E. Gull, S. Guo, C. A. Jiménez-Hoyos, T. N. Lan, J. Li, F. Ma, A. J. Millis, N. V. Prokof'ev, U. Ray, G. E. Scuse- ria, S. Sorella, E. M. Stoudenmire, Q. Sun, I. S. Tupitsyn, S. R. White, D. Zgid, and S. Zhang (Simons Collabo- ration on the Many-Electron Problem), Phys. Rev. X 7, 031059 (2017).
+
+on the Many-Electron Problem). K T Williams, Simons CollaborationY Yao, Simons CollaborationJ Li, Simons CollaborationL Chen, Simons CollaborationH Shi, Simons CollaborationM Motta, Simons CollaborationC Niu, Simons CollaborationU Ray, Simons CollaborationS Guo, Simons CollaborationR J Anderson, Simons CollaborationJ Li, Simons CollaborationL N Tran, Simons CollaborationC.-N Yeh, Simons CollaborationB Mussard, Simons CollaborationS Sharma, Simons CollaborationF Bruneval, Simons CollaborationM Van Schilfgaarde, Simons CollaborationG H Booth, Simons CollaborationG K Chan, Simons CollaborationS Zhang, Simons CollaborationE Gull, Simons CollaborationD Zgid, Simons CollaborationA Millis, Simons CollaborationC J Umrigar, Simons CollaborationL K Wagner, Simons CollaborationPhys. Rev. X. 1011041K. T. Williams, Y. Yao, J. Li, L. Chen, H. Shi, M. Motta, C. Niu, U. Ray, S. Guo, R. J. Anderson, J. Li, L. N. Tran, C.-N. Yeh, B. Mussard, S. Sharma, F. Bruneval, M. van Schilfgaarde, G. H. Booth, G. K.-L. Chan, S. Zhang, E. Gull, D. Zgid, A. Millis, C. J. Umrigar, and L. K. Wagner (Simons Collaboration on the Many-Electron Problem), Phys. Rev. X 10, 011041 (2020).
+
+. J J Eriksen, T A Anderson, J E Deustua, K Ghanem, D Hait, M R Hoffmann, S Lee, D S Levine, I Magoulas, J Shen, N M Tubman, K B Whaley, E Xu, Y Yao, N Zhang, A Alavi, G K Chan, M Head-Gordon, W Liu, P Piecuch, S Sharma, S L Ten-No, C J Umrigar, J Gauss, J. Phys. Chem. Lett. 118922J. J. Eriksen, T. A. Anderson, J. E. Deustua, K. Ghanem, D. Hait, M. R. Hoffmann, S. Lee, D. S. Levine, I. Magoulas, J. Shen, N. M. Tubman, K. B. Whaley, E. Xu, Y. Yao, N. Zhang, A. Alavi, G. K.-L. Chan, M. Head-Gordon, W. Liu, P. Piecuch, S. Sharma, S. L. Ten-no, C. J. Umrigar, and J. Gauss, J. Phys. Chem. Lett. 11, 8922 (2020).
+
+. J , 279J. Preskill, Quantum 2, 79 (2018).
+
+. J Cohn, M Motta, R M Parrish, arXiv:2104.08957J. Cohn, M. Motta, and R. M. Parrish, (2021), arXiv:2104.08957.
+
+. V E Elfving, B W Broer, M Webber, J Gavartin, M D Halls, K Patrick Lorton, A D Bochevarov, arXiv:2009.12472v1V. E. Elfving, B. W. Broer, M. Webber, J. Gavartin, M. D. Halls, K. Patrick Lorton, and A. D. Bochevarov, (2020), arXiv:2009.12472v1.
+
+A Heifetz, Quantum mechanics in drug discovery. SpringerA. Heifetz, Quantum mechanics in drug discovery (Springer, 2020).
+
+. Y Cao, J Romero, A Aspuru-Guzik, IBM J. Res. Dev. 626Y. Cao, J. Romero, and A. Aspuru-Guzik, IBM J. Res. Dev. 62, 6 (2018).
+
+. C Outeiral, M Strahm, J Shi, G M Morris, S C Benjamin, C M Deane, Wiley Interdiscip. Rev. Comput. Mol. Sci. 111481C. Outeiral, M. Strahm, J. Shi, G. M. Morris, S. C. Ben- jamin, and C. M. Deane, Wiley Interdiscip. Rev. Com- put. Mol. Sci. 11, e1481 (2021).
+
+. S Boys, F Bernardi, Mol. Phys. 19553S. Boys and F. Bernardi, Mol. Phys. 19, 553 (1970).
+
+. A Peruzzo, J Mcclean, P Shadbolt, M.-H Yung, X.-Q , A. Peruzzo, J. McClean, P. Shadbolt, M.-H. Yung, X.-Q.
+
+. P J Zhou, A Love, J L Aspuru-Guzik, O&apos;brien, Nat. Commun. 511Zhou, P. J. Love, A. Aspuru-Guzik, and J. L. O'Brien, Nat. Commun. 2014 51 5, 1 (2014).
+
+. J R Mcclean, J Romero, R Babbush, A Aspuru-Guzik, New J. Phys. 1823023J. R. McClean, J. Romero, R. Babbush, and A. Aspuru- Guzik, New J. Phys. 18, 023023 (2016).
+
+. W J Huggins, B A O&apos;gorman, N C Rubin, D R Reichman, R Babbush, J Lee, arXiv:2106.16235W. J. Huggins, B. A. O'Gorman, N. C. Rubin, D. R. Reichman, R. Babbush, and J. Lee, (2021), arXiv:2106.16235.
+
+. B Jeziorski, M Bulski, L Piela, Int. J. Quantum Chem. 10281B. Jeziorski, M. Bulski, and L. Piela, Int. J. Quantum Chem. 10, 281 (1976).
+
+. B Jeziorski, R Moszynski, K Szalewicz, Chem. Rev. 941887B. Jeziorski, R. Moszynski, and K. Szalewicz, Chem. Rev. 94, 1887 (1994).
+
+. R M Parrish, T M Parker, C D Sherrill, J. Chem. Theory Comput. 104417R. M. Parrish, T. M. Parker, and C. D. Sherrill, J. Chem. Theory Comput. 10, 4417 (2014).
+
+. R M Parrish, K C Thompson, T J Martínez, J. Chem. Theory Comput. 141737R. M. Parrish, K. C. Thompson, and T. J. Martínez, J. Chem. Theory Comput. 14, 1737 (2018).
+
+. G.-J Yang, M.-H Zhu, X.-J Lu, Y.-J Liu, J.-F Lu, C.-H Leung, D.-L Ma, J Chen, J. Hematol. Oncol. 1G.-J. Yang, M.-H. Zhu, X.-J. Lu, Y.-J. Liu, J.-F. Lu, C.- H. Leung, D.-L. Ma, and J. Chen, J. Hematol. Oncol. 2021 141 14, 1 (2021).
+
+. H L Williams, C F Chabalowski, J. Phys. Chem. A. 105646H. L. Williams and C. F. Chabalowski, J. Phys. Chem. A 105, 646 (2000).
+
+. A J Misquitta, K Szalewicz, Chem. Phys. Lett. 357301A. J. Misquitta and K. Szalewicz, Chem. Phys. Lett. 357, 301 (2002).
+
+. M Hapka, M Przybytek, K Pernal, arXiv:2104.06891v1M. Hapka, M. Przybytek, and K. Pernal, (2021), arXiv:2104.06891v1.
+
+. R Moszynski, B Jeziorski, S Rybak, K Szalewicz, H L Williams, J. Chem. Phys. 1005080R. Moszynski, B. Jeziorski, S. Rybak, K. Szalewicz, and H. L. Williams, J. Chem. Phys. 100, 5080 (1994).
+
+. T Korona, J. Chem. Phys. 128224104T. Korona, J. Chem. Phys. 128, 224104 (2008).
+
+. T Korona, Phys. Chem. Chem. Phys. 106509T. Korona, Phys. Chem. Chem. Phys. 10, 6509 (2008).
+
+. T Korona, J. Chem. Theory Comput. 52663T. Korona, J. Chem. Theory Comput. 5, 2663 (2009).
+
+. J Almlöf, K Faegri, K Korsell, J. Comput. Chem. 3385J. Almlöf, K. Faegri, and K. Korsell, J. Comput. Chem. 3, 385 (1982).
+
+. I S Ufimtsev, T J Martínez, J. Chem. Theory Comput. 4222I. S. Ufimtsev and T. J. Martínez, J. Chem. Theory Com- put. 4, 222 (2008).
+
+. I S Ufimtsev, T J Martinez, J. Chem. Theory Comput. 51004I. S. Ufimtsev and T. J. Martinez, J. Chem. Theory Com- put. 5, 1004 (2009).
+
+. I S Ufimtsev, T J Martinez, J. Chem. Theory Comput. 52619I. S. Ufimtsev and T. J. Martinez, J. Chem. Theory Com- put. 5, 2619 (2009).
+
+. E G Hohenstein, C D Sherrill, J. Chem. Phys. 132184111E. G. Hohenstein and C. D. Sherrill, J. Chem. Phys. 132, 184111 (2010).
+
+. Y Matsuzawa, Y Kurashige, J. Chem. Theory Comput. 16944Y. Matsuzawa and Y. Kurashige, J. Chem. Theory Com- put. 16, 944 (2020).
+
+. I D Kivlichan, J Mcclean, N Wiebe, C Gidney, A Aspuru-Guzik, G K L Chan, R Babbush, Phys. Rev. Lett. 120110501I. D. Kivlichan, J. McClean, N. Wiebe, C. Gidney, A. Aspuru-Guzik, G. K.-L. Chan, and R. Babbush, Phys. Rev. Lett. 120, 110501 (2018).
+
+. J Lee, W J Huggins, M Head-Gordon, K B Whaley, J. Chem. Theory Comput. 15311J. Lee, W. J. Huggins, M. Head-Gordon, and K. B. Whaley, J. Chem. Theory Comput. 15, 311 (2018).
+
+. G.-L R Anselmetti, D Wierichs, C Gogolin, R M Parrish, arXiv:2104.05695arXiv preprintG.-L. R. Anselmetti, D. Wierichs, C. Gogolin, and R. M. Parrish, arXiv preprint arXiv:2104.05695 (2021).
+
+. B O&apos;gorman, W J Huggins, E G Rieffel, K B Whaley, arXiv:1905.05118arXiv preprintB. O'Gorman, W. J. Huggins, E. G. Rieffel, and K. B. Whaley, arXiv preprint arXiv:1905.05118 (2019).
+
+. A I Google, Collaborators, Science. 3691084Google AI and Collaborators, Science 369, 1084 (2020).
+
+. J Tilly, P V Sriluckshmy, A Patel, E Fontana, I Rungger, E Grant, R Anderson, J Tennyson, G H Booth, Phys. Rev. Research. 333230J. Tilly, P. V. Sriluckshmy, A. Patel, E. Fontana, I. Rung- ger, E. Grant, R. Anderson, J. Tennyson, and G. H. Booth, Phys. Rev. Research 3, 033230 (2021).
+
+. P Virtanen, R Gommers, T E Oliphant, M Haberland, T Reddy, D Cournapeau, E Burovski, P Peterson, W Weckesser, J Bright, Nat. Methods. 17261P. Virtanen, R. Gommers, T. E. Oliphant, M. Haber- land, T. Reddy, D. Cournapeau, E. Burovski, P. Peter- son, W. Weckesser, J. Bright, et al., Nat. Methods 17, 261 (2020).
+
+for details on how to obtain the source code. See https://github.com/robparrish/lightspeed for details on how to obtain the source code.
+
+M Motta, E Ye, J R Mcclean, Z Li, A J Minnich, R Babbush, G K , -L Chan, npj Quantum Inf. 2021 71. 71M. Motta, E. Ye, J. R. McClean, Z. Li, A. J. Minnich, R. Babbush, and G. K.-L. Chan, npj Quantum Inf. 2021 71 7, 1 (2021).
+
+W J Huggins, J R Mcclean, N C Rubin, Z Jiang, N Wiebe, K B Whaley, R Babbush, npj Quantum Inf. 2021 71. 71W. J. Huggins, J. R. McClean, N. C. Rubin, Z. Jiang, N. Wiebe, K. B. Whaley, and R. Babbush, npj Quantum Inf. 2021 71 7, 1 (2021).
+
+. W Humphrey, A Dalke, K Schulten, J. Mol. Graph. 1433W. Humphrey, A. Dalke, and K. Schulten, J. Mol. Graph. 14, 33 (1996).
+
+. S Vilar, G Cozza, S Moro, Curr. Top. Med. Chem. 81555S. Vilar, G. Cozza, and S. Moro, Curr. Top. Med. Chem. 8, 1555 (2008).
+
+. P Jurečka, J Šponer, J Černý, P Hobza, Phys. Chem. Chem. Phys. 81985P. Jurečka, J.Šponer, J.Černý, and P. Hobza, Phys. Chem. Chem. Phys. 8, 1985 (2006).
+
+. S S Labadie, P S Dragovich, R T Cummings, G Deshmukh, A Gustafson, N Han, J C Harmange, J R Kiefer, Y Li, J Liang, B M Liederer, Y Liu, W Manieri, W Mao, L Murray, D F Ortwine, P Trojer, E Vanderporten, M Vinogradova, L Wen, Bioorg. Med. Chem. Lett. 264492S. S. Labadie, P. S. Dragovich, R. T. Cummings, G. Deshmukh, A. Gustafson, N. Han, J. C. Harmange, J. R. Kiefer, Y. Li, J. Liang, B. M. Liederer, Y. Liu, W. Manieri, W. Mao, L. Murray, D. F. Ortwine, P. Tro- jer, E. VanderPorten, M. Vinogradova, and L. Wen, Bioorg. Med. Chem. Lett. 26, 4492 (2016).
+
+. H M Berman, J Westbrook, Z Feng, G Gilliland, T N Bhat, H Weissig, I N Shindyalov, P E Bourne, Nucleic Acids Res. 28235H. M. Berman, J. Westbrook, Z. Feng, G. Gilliland, T. N. Bhat, H. Weissig, I. N. Shindyalov, and P. E. Bourne, Nucleic Acids Res. 28, 235 (2000).
+
+. V S Gehling, S F Bellon, J.-C Harmange, Y Leblanc, F Poy, S Odate, S Buker, F Lan, S Arora, K E Williamson, P Sandy, R T Cummings, C M Bailey, L Bergeron, W Mao, A Gustafson, Y Liu, E Van-Derporten, J E Audia, P Trojer, B K Albrecht, Bioorg. Med. Chem. Lett. 264350V. S. Gehling, S. F. Bellon, J.-C. Harmange, Y. LeBlanc, F. Poy, S. Odate, S. Buker, F. Lan, S. Arora, K. E. Williamson, P. Sandy, R. T. Cummings, C. M. Bailey, L. Bergeron, W. Mao, A. Gustafson, Y. Liu, E. Van- derPorten, J. E. Audia, P. Trojer, and B. K. Albrecht, Bioorg. Med. Chem. Lett. 26, 4350 (2016).
+
+. A D Becke, J. Chem. Phys. 981372A. D. Becke, J. Chem. Phys. 98, 1372 (1993).
+
+. M J Frisch, G W Trucks, H B Schlegel, G E Scuseria, M A Robb, J R Cheeseman, G Scalmani, V Barone, B Mennucci, G A Petersson, H Nakatsuji, M Caricato, X Li, H P Hratchian, A F Izmaylov, J Bloino, G Zheng, J L Sonnenberg, M Hada, M Ehara, K Toyota, R Fukuda, J Hasegawa, M Ishida, T Nakajima, Y Honda, O Kitao, H Nakai, T Vreven, J A MontgomeryJr, J E Peralta, F Ogliaro, M Bearpark, J J Heyd, E Brothers, K N Kudin, V N Staroverov, T Keith, R Kobayashi, J Normand, K Raghavachari, A , Rendell, J. C. Burant, S. S. Iyengar, J. TomasiM. J. Frisch, G. W. Trucks, H. B. Schlegel, G. E. Scuseria, M. A. Robb, J. R. Cheeseman, G. Scalmani, V. Barone, B. Mennucci, G. A. Petersson, H. Nakatsuji, M. Cari- cato, X. Li, H. P. Hratchian, A. F. Izmaylov, J. Bloino, G. Zheng, J. L. Sonnenberg, M. Hada, M. Ehara, K. Toy- ota, R. Fukuda, J. Hasegawa, M. Ishida, T. Nakajima, Y. Honda, O. Kitao, H. Nakai, T. Vreven, J. A. Mont- gomery, Jr., J. E. Peralta, F. Ogliaro, M. Bearpark, J. J. Heyd, E. Brothers, K. N. Kudin, V. N. Staroverov, T. Keith, R. Kobayashi, J. Normand, K. Raghavachari, A. Rendell, J. C. Burant, S. S. Iyengar, J. Tomasi,
+
+. M Cossi, N Rega, J M Millam, M Klene, J E , M. Cossi, N. Rega, J. M. Millam, M. Klene, J. E.
+
+. J B Knox, V Cross, C Bakken, J Adamo, R Jaramillo, R E Gomperts, O Stratmann, A J Yazyev, R Austin, C Cammi, J W Pomelli, R L Ochterski, K Martin, V G Morokuma, G A Zakrzewski, P Voth, J J Salvador, S Dannenberg, A D Dapprich, O Daniels, J B Farkas, J V Foresman, J Ortiz, D J Cioslowski, Fox, gaussian Inc. Wallingford CTGaussian 09 Revision D.01," (2013Knox, J. B. Cross, V. Bakken, C. Adamo, J. Jaramillo, R. Gomperts, R. E. Stratmann, O. Yazyev, A. J. Austin, R. Cammi, C. Pomelli, J. W. Ochterski, R. L. Martin, K. Morokuma, V. G. Zakrzewski, G. A. Voth, P. Sal- vador, J. J. Dannenberg, S. Dapprich, A. D. Daniels, O. Farkas, J. B. Foresman, J. V. Ortiz, J. Cioslowski, and D. J. Fox, "Gaussian 09 Revision D.01," (2013), gaussian Inc. Wallingford CT.
+
+. E R Sayfutyarova, Q Sun, G K L Chan, G Knizia, J. Chem. Theory Comput. 134063E. R. Sayfutyarova, Q. Sun, G. K.-L. Chan, and G. Knizia, J. Chem. Theory Comput. 13, 4063 (2017).
+
+. A A Holmes, N M Tubman, C J Umrigar, J. Chem. Theory Comput. 123674A. A. Holmes, N. M. Tubman, and C. J. Umrigar, J. Chem. Theory Comput. 12, 3674 (2016).
+
+. S Sharma, A A Holmes, G Jeanmairet, A Alavi, C J Umrigar, J. Chem. Theory Comput. 131595S. Sharma, A. A. Holmes, G. Jeanmairet, A. Alavi, and C. J. Umrigar, J. Chem. Theory Comput. 13, 1595 (2017).
+
+. C Yung-Chi, W H Prusoff, Biochem. Pharmacol. 223099C. Yung-Chi and W. H. Prusoff, Biochem. Pharmacol. 22, 3099 (1973).
+
+. T Takeshita, N C Rubin, Z Jiang, E Lee, R Babbush, J R Mcclean, Phys. Rev. X. 1011004T. Takeshita, N. C. Rubin, Z. Jiang, E. Lee, R. Babbush, and J. R. McClean, Phys. Rev. X 10, 011004 (2020).
+
+Density fitting and Cholesky decomposition approximations in symmetry-adapted perturbation theory: Implementation and application to probe the nature of π-π interactions in linear acenes. E G Hohenstein, C D Sherrill, J. Chem. Phys. 132184111E. G. Hohenstein and C. D. Sherrill, Density fitting and Cholesky decomposition approximations in symmetry-adapted perturbation theory: Implementation and application to probe the nature of π-π interactions in linear acenes, J. Chem. Phys. 132, 184111 (2010).
+
+Large-scale symmetry-adapted perturbation theory computations via density fitting and Laplace transformation techniques: Investigating the fundamental forces of DNA-intercalator interactions. E G Hohenstein, R M Parrish, C D Sherrill, J M Turney, H F S Iii, J. Chem. Phys. 135174107E. G. Hohenstein, R. M. Parrish, C. D. Sherrill, J. M. Turney, and H. F. S. III, Large-scale symmetry-adapted perturbation theory computations via density fitting and Laplace transformation techniques: Investigating the fundamental forces of DNA-intercalator interactions, J. Chem. Phys. 135, 174107 (2011).
+
+Psi4: an open-source ab initio electronic structure program. J M Turney, A C Simmonett, R M Parrish, E G Hohenstein, F A Evangelista, J T Fermann, B J Mintz, L A Burns, J J Wilke, M L Abrams, N J Russ, M L Leininger, C L Janssen, E T Seidl, W D Allen, H F Schaefer, R A King, E F Valeev, C D Sherrill, T D Crawford, Wiley Interdiscip. Rev. Comput. Mol. Sci. 2556J. M. Turney, A. C. Simmonett, R. M. Parrish, E. G. Hohenstein, F. A. Evangelista, J. T. Fermann, B. J. Mintz, L. A. Burns, J. J. Wilke, M. L. Abrams, N. J. Russ, M. L. Leininger, C. L. Janssen, E. T. Seidl, W. D. Allen, H. F. Schaefer, R. A. King, E. F. Valeev, C. D. Sherrill, and T. D. Crawford, Psi4: an open-source ab initio electronic structure program, Wiley Interdiscip. Rev. Comput. Mol. Sci. 2, 556 (2012).
+
+Medicinal Chemistry and the Molecular Operating Environment (MOE): Application of QSAR and Molecular Docking to Drug Discovery. S Vilar, G Cozza, S Moro, Curr. Top. Med. Chem. 81555S. Vilar, G. Cozza, and S. Moro, Medicinal Chemistry and the Molecular Operating Environment (MOE): Application of QSAR and Molecular Docking to Drug Discovery, Curr. Top. Med. Chem. 8, 1555 (2008).
+
+Large-Scale Functional Group Symmetry-Adapted Perturbation Theory on Graphical Processing Units. R M Parrish, K C Thompson, T J Martínez, J. Chem. Theory Comput. 141737R. M. Parrish, K. C. Thompson, and T. J. Martínez, Large-Scale Functional Group Symmetry-Adapted Perturbation Theory on Graphical Processing Units, J. Chem. Theory Comput. 14, 1737 (2018).

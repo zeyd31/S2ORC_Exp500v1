@@ -1,0 +1,390 @@
+
+ACTIONS ON PERMUTATIONS AND UNIMODALITY OF DESCENT POLYNOMIALS
+23 Feb 2007
+
+Petter Brändén 
+ACTIONS ON PERMUTATIONS AND UNIMODALITY OF DESCENT POLYNOMIALS
+23 Feb 2007arXiv:math/0610185v4 [math.CO]
+We study a group action on permutations due to Foata and Strehl and use it to prove that the descent generating polynomial of certain sets of permutations has a nonnegative expansion in the basis {t i (1 + t) n−1−2i } m i=0 , m = ⌊(n − 1)/2⌋. This property implies symmetry and unimodality. We prove that the action is invariant under stack-sorting which strengthens recent unimodality results of Bóna. We prove that the generalized permutation patterns(13 2)and(2 31)are invariant under the action and use this to prove unimodality properties for a q-analog of the Eulerian numbers recently studied by Corteel, Postnikov, Steingrímsson and Williams.We also extend the action to linear extensions of sign-graded posets to give a new proof of the unimodality of the (P, ω)-Eulerian polynomials of sign-graded posets and a combinatorial interpretations (in terms of Stembridge's peak polynomials) of the corresponding coefficients when expanded in the above basis.Finally, we prove that the statistic defined as the number of vertices of even height in the unordered decreasing tree of a permutation has the same distribution as the number of descents on any set of permutations invariant under the action. When restricted to the set of stack-sortable permutations we recover a result of Kreweras.2000 Mathematics Subject Classification. 06A0, 05A05, 05E99,13F55.
+
+Introduction
+
+The n-th Eulerian polynomial, A n (t) = A n1 + A n2 t + · · · + A n(n−1) t n−1 , may be defined as the generating polynomial for the number of descents over the symmetric group S n , i.e., A n (t) = π∈Sn t des(π) , where des(π) = |{i : a i > a i+1 }| and where π : i → a i (1 ≤ i ≤ n) is identified with the word a 1 a 2 · · · a n in the distinct n letters a 1 , . . . , a n taken out of [n] := {1, 2, . . . , n}.
+
+In a series of papers [20,23,24] Foata and Strehl studied a group action on the symmetric group, S n , with the following properties. The number of orbits is the n-th tangent number or secant number, according as n is odd or even, and if an orbit, Orb(π), of a permutation π ∈ S n is enumerated according to the number of descents then σ∈Orb(π) t des(σ) = (2t) v(π) (1 + t) n−1−2 v(π) , (1.1) where v(π) = |{i : a i−1 > a i < a i+1 }|. From (1.1) it follows that A n (t) has nonnegative coefficients when expanded in the basis {t k (1 + t) n−1−2k } ⌊(n−1)/2⌋ k=0 , a result which can also be proven analytically [14,22]. This implies that the sequence {A ni } n−1 i=0 is symmetric and unimodal, i.e., that A ni = A n(n−1−i) , 1 ≤ i ≤ n − 1 and A n0 ≤ A n1 ≤ · · · ≤ A nc ≥ A n(c+1) ≥ · · · ≥ A n(n−1) ,
+
+where c = ⌊(n − 1)/2⌋. Indeed, {A ni } n−1 i=0 is a nonnegative sum of unimodal and symmetric sequences with the same center of symmetry.
+
+We will in this paper study a slightly modified version of the Foata-Strehl action and show that interesting subsets of S n are invariant under the action. In particular we show that the set of r-stack sortable permutations is invariant under the action which strengthens the recent result of Bóna [4,5] claiming that the corresponding descent generating polynomial is symmetric and unimodal.
+
+In Section 5 we prove that the generalized permutation patterns (13 2) and (2 31) are invariant under the modified Foata-Strehl action. This is used to prove unimodality properties for a q-analog of the Eulerian numbers recently studied by Corteel, Postnikov, Steingrímsson and Williams [17,18,36,42,51] and which appears as a translation of the polynomial enumerating the cells in the totally nonnegative part of a Grassmannian [36,51], and also in the stationary distribution of the ASEP model in statistical mechanics [17,18].
+
+We will in Section 6 define an action on the set of linear extensions of a signgraded poset, see Section 6 for relevant definitions. This enables us to give a combinatorial interpretation in terms of Stembridge's peak polynomials of the coefficients of the (P, ω)-Eulerian polynomials when expanded in the basis
+{t i (1 + t) d−2i } ⌊d/2⌋ i=0 , d = |P | − r − 1.
+In Section 7 we study the statistic π → veh(π) on permutations which is defined as the number of vertices of even height in the unordered increasing tree of π. We prove that veh has the same distribution as des on every subset of S n invariant under the action. This can be seen as a generalization of a result of Kreweras [32]. In Section 8.2 we also find a Mahonian partner for veh.
+
+Finally, in Section 10, we discuss further directions and open problems.
+
+
+The Action of Foata and Strehl
+
+Let π = a 1 a 2 · · · a n ∈ S n and let x ∈ [n]. We may write π as the concatenation π = w 1 w 2 xw 4 w 5 where w 2 is the maximal contiguous subword immediately to the left x whose letters are all smaller than x, and w 4 is the maximal contiguous subword immediately to the right of x whose letters are all smaller than x. This is the x-factorization of π. Define ϕ x (π) = w 1 w 4 xw 2 w 5 . Then ϕ x is an involution acting on S n and it is not hard to see that ϕ x and ϕ y commute for all x, y ∈ [n]. Hence for any subset S ⊆ [n] we may define the function ϕ S : S n → S n by
+ϕ S (π) = x∈S ϕ x (π).
+The group Z n 2 acts on S n via the functions ϕ S , S ⊆ [n]. This action was studied by Foata and Strehl in [20,23,24]. To be precise, Foata and Strehl defined the action as C • ϕ S • C, where C : S n → S n is the involution described by a 1 a 2 · · · a n → b 1 b 2 · · · b n , where b i = n + 1 − a i , 1 ≤ i ≤ n. Sometimes it is preferable to define the action on the decreasing binary tree of the permutation. The decreasing binary tree of a permutation of a finite subset of {1, 2, 3, . . .} is defined recursively as follows. The empty tree corresponds to the empty word. If π is non-empty then we may write π as the concatenation π = LmR where m and L and R are the subwords to the left and right of m respectively. The tree corresponding to π has a root labeled m and as left subtree the tree corresponding to L and as right subtree the tree corresponding to R. This describes a bijective correspondence between the set of decreasing binary trees with labels [n] and S n . It is not hard to see that the tree of ϕ x (π) is obtained by exchanging the subtrees rooted at x, if any. Another action on permutations with similar properties was studied by Hetyei and Reiner [30] and subsequently by Foata and Han [21].
+
+Let π = a 1 a 2 · · · a n be a permutation in S n and let a 0 = a n+1 = n + 1.
+If k ∈ [n] then a k is a valley if a k−1 > a k < a k+1 , peak if a k−1 < a k > a k+1 , double ascent if a k−1 < a k < a k+1 , and double descent if a k−1 > a k > a k+1
+. Let x ∈ [n] and let π = a 1 a 2 . . . a n ∈ S n . We make the following observation.
+
+• If x is a double descent then ϕ x (π) is obtained by inserting x between the first pair of letters a i , a i+1 to the right of x such that a i < x < a i+1 .
+
+• If x is a double ascent then ϕ x (π) is obtained by inserting x between the first pair of letters a i , a i+1 to the left of x such that a i > x > a i+1 . We modify the Foata-Strehl action in the following way. If x ∈ [n] then
+ϕ ′ x (π) = ϕ x (π) if
+x is a double ascent or double descent, π if x is a valley or a peak.
+
+The functions are easily visualized when a permutation is represented graphically. Let π = a 1 a 2 · · · a n ∈ S n and imagine marbles at coordinates (i, a i ), i = 0, 1, . . . , n+1 in the grid N×N. For i = 0, 1, . . . , n connect (i, a i ) and (i+1, a i+1 ) with a wire. Suppose that gravity acts on the marbles from above and suppose that x is not at an equilibrium. If we release x from the wire it will slide and stop when it has reached the same height again. The resulting permutation will be ϕ ′ x (π), see Fig. 1. The functions ϕ ′ x were studied by Shapiro, Woan and Getu unaware 1 that they are essentially the same as the functions defining the Foata-Strehl action.
+
+Again it is clear that the ϕ ′ x 's are involutions and that they commute. Hence, for any subset S ⊆ [n] we may define the function ϕ ′ S : S n → S n by
+ϕ ′ S (π) = x∈S ϕ ′ x (π).
+Hence the group Z n 2 acts on S n via the functions ϕ ′ S , S ⊆ [n]. Subsequently we will refer to this action as the modified Foata-Strehl action, or the MFS-action for short.
+
+
+Properties of the Modified Foata-Strehl Action
+
+For π ∈ S n let Orb(π) = {g(π) : g ∈ Z n 2 } be the orbit of π under the MFSaction. There is a unique element in Orb(π) which has no double descents and  which we denote byπ. The next theorem follows from the work in [24,46], but we prove it here for completeness.
+Theorem 3.1. Let π ∈ S n . Then σ∈Orb(π) t des(σ) = t des(π) (1 + t) n−1−2 des(π) = t peak(π) (1 + t) n−1−2 peak(π) ,
+where peak(π) = |{i : a i−1 < a i > a i+1 }|.
+
+Proof. If x is a double ascent in π then des(ϕ ′ x (π)) = des(π) + 1. It follows that
+σ∈Orb(π) t des(σ) = t des(π) (1 + t) a ,
+where a is the number of double ascents inπ. If we delete all double descents from π we get an alternating permutation
+n + 1 > b 1 < b 2 > b 3 < · · · > b n−a < n + 1,
+with the same number of descents. Hence n − a = 2 des(π) + 1. Clearly des(π) = peak(π) and the theorem follows.
+
+For a subset T of S n let W (T ; t) = π∈T t des(π) and W (T ; t) = π∈T t peak(π) .
+
+Corollary 3.2. Suppose that T ⊆ S n is invariant under the MFS-action. Then
+W (T ; t) = 2 −n+1 (1 + t) n−1 W (T ; 4t(1 + t) −2 ). Equivalently W (T ; t) = ⌊n/2⌋ i=0 b i (T )t i (1 + t) n−1−2i , where b i (T ) = 2 −n+1+2i |{π ∈ T : peak(π) = i}|
+Proof. It is enough to prove the theorem for an orbit of a permutation π ∈ S n . Since the number of peaks is constant on Orb(π) the equality follows from Theorem 3.1.
+
+Remark 3.3. If we want to prove "combinatorially" that the coefficients of W (T ; t) form a symmetric and unimodal sequence then we can construct an involution proving symmetry and an injection proving unimodality easily as follows.
+Define f : S n → S n by f = ϕ ′ [n]
+. Clearly f is an involution and restricts to any subset of S n invariant under the MFS-action. Moreover, des(f (π)) + des(π) = n − 1,
+(3.1)
+so f has the desired properties. The involution f was defined differently in [4]. To find an injection
+g j : {π ∈ T : des(π) = j} → {π ∈ T : des(π) = j + 1},
+for j = 1, 2, . . . , ⌊(n − 1)/2⌋ it suffices to find an injection from the set of subsets of cardinality k of [m] to the set of subsets of cardinality k + 1 of [m], for 1 ≤ k ≤ ⌊m/2⌋. This can done as in e.g. [38].
+
+
+Invariance Under Stack Sorting
+
+Much has been written on the combinatorics of the stack-sorting problem (cf. [6]) since it was introduced by Knuth [31]. The stack-sorting operator S can be defined recursively on permutations of finite subsets of {1, 2, . . .} as follows. If w is empty then S(w) = w and if w is non-empty write w as the concatenation w = LmR, where m is the greatest element of w and L and R are the subwords to the left and right of m respectively. Then S(w) = S(L)S(R)m.
+
+Let π = a 1 a 2 · · · a n ∈ S n . Recall that i ∈ [n − 1] is a descent in π if a i > a i+1 . If i is a descent in π we let r i (π) be the permutation obtained by inserting a i between the first pair of letters a j , a j+1 to the right of x such that a j < x < a j+1 (a n+1 = n + 1). The following theorem describes a new way of computing S(π).
+
+Theorem 4.1. Let i 1 < i 2 < · · · < i d be the descents in the permutation π = a 1 a 2 · · · a n . Then
+S(π) = r i d r i d−1 · · · r i1 (π). Proof. Let S ′ : S n → S n be defined by S ′ (π) = r i d r i d−1 · · · r i1 (π)
+. It is straightforward to check that S ′ satisfies the same recursion as S.
+
+From the above description of S we see that S(ϕ x (π)) = S(π), hence the following corollary.  Let r ∈ N. A permutation π ∈ S n is said to be r-stack sortable if S r (π) = 12 · · · n. Denote by S r n the set of r-stack sortable permutations in S n . By Corollary 4.2 we have that S r n is invariant under the MFS-action for all n, r ∈ N so Corollary 3.2 applies. 
+W (S r n ; t) = ⌊n/2⌋ i=0 b i (S r n )t i (1 + t) n−1−2i ,
+where b i (S r n ) = 2 −n+1+2i |{π ∈ S r n : peak(π) = i}|. An immediate consequence of Corollary 4.3 is the following theorem due to Bóna.
+
+Theorem 4.4 (Bóna [4,5]). For all n, r ∈ N, the coefficients of W (S r n ; t) form a symmetric and unimodal sequence.
+
+An open problem posed by Bóna [4] is to determine whether the polynomial W (S r n ; t) has the stronger property of having all zeros real for n, r ∈ N. This is known for r ≥ n − 1 because then W (S r n ; t) = A n (t) and the Eulerian polynomials are known to have all zeros real (cf. [29]), and for r = 1 as we then get the Narayana polynomials (4.1) which are known to have all zeros real by e.g. Malo's theorem (cf. [33]). In [11] we prove real-rootedness whenever r = 2 or r = n − 2. It is easy to see (cf. [9]) that if all zeros of p(t) = n i=0 a i t i are real and {a i } n i=0 is nonnegative and symmetric with center of symmetry d/2, then
+p(t) = ⌊d/2⌋ i=0 b i t i (1 + t) d−2i ,
+where b i , i = 0, . . . , ⌊d/2⌋ are nonnegative. Hence Corollary 4.3 can be seen as further evidence for a positive answer to Bóna's question.
+
+Knuth [31] proved that the 1-stack sortable permutations are exactly the permutations that avoid the pattern 231, i.e., permutations π = a 1 a 2 · · · a n such that a k < a j < a i for no 1 ≤ i < j < k ≤ n. The set of 231-avoiding permutations in S n is denoted by S n (231). Simion [39] proved that the n-th Narayana polynomial is the descent generating polynomial of S n (231), i.e.,
+W (S n (231); t) = n−1 k=0 1 n n k n k + 1 t k = ⌊n/2⌋ k=0 1 k + 1 2k k n − 1 2k t k (1 + t) n−1−2k , (4.1)
+where the second equality can be derived using hypergeometric formulas, see also [41]. Hence we have the following corollary.
+Corollary 4.5. Let n, k ∈ N. Then |{π ∈ S n (231) : peak(π) = k}| = 2 n−1−2k 1 k + 1 2k k n − 1 2k .
+
+A Refinement of the Eulerian Polynomials
+
+The statistic (2 31) : S n → S n is an instance of a generalized permutation pattern as introduced by Babson and Steingrímsson [2]. Let π = a 1 a 2 · · · a n ∈ S n . Then (2 31)(π) is the number of pairs 1 ≤ i < j ≤ n − 1 such that a j+1 < a i < a j . Similarly, let (13 2)(π) be the number of pairs 2 ≤ i < j ≤ n such that a i−1 < a j < a i . Proof. An alternative description of (2 31)(π), π = a 1 a 2 · · · a n is the number triples (a i , a j , a k ) such that 1 ≤ i < j < k ≤ n and a k < a i < a j , where (a j , a k ) is a pair of consecutive peak and valley. By consecutive we mean that there are no other peaks or valleys in between a j and a k . The number of such triples is invariant under the action since a j and a k cannot move and a i cannot move over the peak a j . A similar reasoning applies to (13 2).
+
+Define a (p, q)-refinement of the Eulerian polynomial by
+A n (p, q, t) = π∈Sn p (13 2)(π) q (2 31)(π) t des(π) .
+These polynomials (or at least A n (p, 1, t) and A n (1, q, t)) have been in focus in several recent papers [17,18,36,42,51]. A fascinating property of the polynomial A n (p, 1, t) is that it appears as a translation of the polynomial enumerating the cells in the totally nonnegative part of a Grassmannian [36,51], and also in the stationary distribution of the ASEP model in statistical mechanics [17,18].
+
+From Theorem 5.1 and Theorem 3.2 we get that
+A n (p, q, t) = ⌊(n−1)/2⌋ i=0 b n,i (p, q)t i (1 + t) n−1−2i , where b n,i (p, q) = 2 −n+1+2i
+π∈Sn peak(π)=i p (13 2)(π) q (2 31)(π) .
+
+(5.1)
+Proposition 5.2. Let n ∈ N. Then A n (p, q, t) = A n (q, p, t).
+Proof. Let f be as in Remark 3.3 and let R : S n → S n be defined by R(π) = a n · · · a 2 a 1 , if π = a 1 a 2 · · · a n .
+
+Let π ′ = R(f (π)). Then des(π ′ ), (13 2)(π ′ ), (2 31)(π ′ ) = des(π), (2 31)(π), (13 2)(π) , and the proposition follows.
+
+A further striking property of A n (p, q, t) is that
+A n (q, q 2 , q) = A n (q 2 , q, q) = [n] q [n − 1] q · · · [1] q ,
+where [k] q = 1 + q + q 2 + · · · + q k−1 . This is because the statistics S 1 = (13 2) + (13 2) + (2 31) + des and S 2 = (13 2) + (2 31) + (2 31) + des are Mahonian (see Section 8.2), a fact due to Simion and Stanton [40], see also [2].
+
+
+An Action on the Linear Extensions of a Sign-Graded Poset
+
+Recall that a labeled poset is a pair (P, ω) where P is a finite poset and ω : P → Z is an injection. The Jordan-Hölder set, L(P, ω), is the set of permutations π = a 1 a 2 · · · a p (p = |P |) of ω(P ) such that if x is smaller than y in P (x < P y), then ω(x) precedes ω(y) in π. The (P, ω)-Eulerian polynomial is defined by W (P, ω; t) = π∈L(P,ω) t des(π) .
+
+Hence the n-th Eulerian polynomial is the (P, ω)-Eulerian polynomial of an antichain of size n. The (P, ω)-Eulerian polynomials have been intensively studied since they were introduced by Stanley [47] in 1972. For example, the Neggers-Stanley conjecture which asserts that these polynomials always have real zeros has attracted widespread attention [1,3,8,9,10,13,26,34,35,45,49,50]. A labeled poset is naturally labeled if x < P y implies ω(x) < ω(y). Neggers [34] made the conjecture for naturally labeled posets in 1978 and Stanley formulated the conjecture in its general form in 1986. However, in [10], we found a family of counterexamples to the Neggers-Stanley conjecture and subsequently Stembridge [45] found counterexamples that are naturally labeled thus disproving Neggers original conjecture.
+
+Although the Neggers-Stanley conjecture is refuted many questions regarding the (P, ω)-Eulerian polynomials remain open. A question which is still open is whether the coefficients of W (P, ω; t) always form a unimodal sequence. It is easy to see that real-rootedness implies unimodality. This weaker property was recently established by Reiner and Welker [35] for a large and important class of posets, namely the class of naturally labeled and graded posets. A poset P is graded if every saturated chain in P has the same length. Prior to [35], Gasharov [26] proved unimodality for graded naturally labeled posets of rank at most 2. In [9] we proved unimodality for (P, ω)-Eulerian polynomials of labeled posets which we call sign-graded posets. The class of sign-graded posets contains the class of naturally labeled graded posets.
+
+If (P, ω) is a labeled poset we may associate signs to the edges of the Hassediagram, E(P ), of P as follows. Let ǫ : E(P ) → {−1, 1} be defined by
+ǫ(x, y) = 1 if ω(x) < ω(y), −1 if ω(x) > ω(y)
+It is not hard to prove that the (P, ω)-Eulerian polynomial only depends on ǫ, see [9]. A labeled poset (P, ω) is sign-graded if for every maximal chain x 1 < x 2 < · · · < x k in P , the sum of signs
+k i=1 ǫ(x i−1 , x i ),
+is the same. Note that this definition extends the notion of graded posets since if (P, ω) is naturally labeled then all signs are equal to one and the above sum is just the length of the chain. The common value, r, of the above sum is called the rank of (P, ω). One may associate a (generalized) rank function ρ : P → Z to a sign-graded poset by
+ρ(x) = k i=1 ǫ(x i−1 , x i ),
+where x 1 < x 2 < · · · < x k = x is any saturated chain from a minimal element to x. In [9] we prove the following theorem. Theorem 6.1 (Brändén [9]). Let (P, ω) be a sign-graded poset of rank r and let d = p − r − 1. Then
+W (P, ω; t) = ⌊d/2⌋ i=0 a i (P, ω)t i (1 + t) d−2i ,
+where a i (P, ω), i = 0, 1, . . . , ⌊d/2⌋ are nonnegative integers.
+
+From the proof of Theorem 6.1 in [9] it is not evident what the numbers a i (P, ω) count. We will now give an alternative proof of Theorem 6.1 by extending the MFS-action to L(P, ω). This will also give us an interpretation of the numbers a i (P, ω), i = 0, . . . , ⌊d/2⌋. If both (P, ω) and (P, λ) are sign-graded one can prove [9, Corollary 2.4] that up to a multiple of t the corresponding Eulerian polynomials are the same. Moreover, in [9] we prove that if (P, ω) is sign-graded then there exists a labeling µ of P such that (1) (P, µ) is sign-graded, (2) the rank function of (P, µ) has values in {0, 1}, (3) all elements of rank 0 have negative labels and (4) all elements of rank 1 have positive labels Such a labeling will be called canonical. Hence it is no restriction in assuming that the sign-graded poset is labeled canonically. Definition 6.2. Let (P, ω) be sign-graded with ω canonical. For x ∈ ω(P ) define a map ψ x : L(P, ω) → L(P, ω) as follows. Let π = a 1 a 2 · · · a p ∈ L(P, ω) and let a 0 = a p+1 = 0. • If x < 0 is a double descent let ψ x (π) be the permutation obtained by inserting x between the first pair of letters a i , a i+1 to the right of x such that a i < x < a i+1 . • If x < 0 is a double ascent let ψ x (π) be the permutation obtained by inserting x between the first pair of letters a i , a i+1 to the left of x such that a i > x > a i+1 . • If x > 0 is a double descent let ψ x (π) be the permutation obtained by inserting x between the first pair of letters a i , a i+1 to the left of x such that a i < x < a i+1 • If x > 0 is a double ascent ψ x (π) be the permutation obtained by inserting
+
+x between the first pair of letters a i , a i+1 to the right of x such that a i > x > a i+1 . • If x is a peak or a valley let ψ x (π) = π. See Fig. 3.
+
+It is not immediate that this definition makes sense, i.e., that the resulting permutation represents a linear extension of P . Suppose that x < 0 is a letter of π ∈ L(P, ω). Then x is a letter of a maximal contigous subword w of π whose letters are all negative. By construction ψ x will not move x outside of the word w. We claim that ω −1 (w) = {y ∈ P : ω(y) is a letter of w} is an anti-chain. Suppose that y 1 < P y 2 are elements in ω −1 (w). Then, since ρ(y 1 ) = ρ(y 2 ) = 0, there must be an element z ∈ P such that y 1 < P z < P y 2 , ρ(z) = 1 and ω(z) > 0. This means that ω(z) is between ω(y 1 ) and ω(y 2 ) in π, so ω(z) is a letter of w contrary to the assumption that all letters of w are negative.
+
+Since ω −1 (w) is an anti-chain and since ψ x does not move x outside ω −1 (w) we have that ψ x (π) ∈ L(P, ω). The case x > 0 is analogous.
+
+We may now define a Z P 2 -action on L(P, ω) by ψ S (π) = x∈S ψ ω(x) (π), S ⊆ P.
+
+Letπ be the unique permutation in Orb(π) such that 0π0 has no double descents. Theorem 6.3. Let (P, ω) be a sign-graded poset of rank r where ω is canonical and let π ∈ L(P, ω). Then
+σ∈Orb(π) t des(σ) = t des(π) (1 + t) p−r−1−2 des(π) .
+Moreover, if r = 0 then peak(·) is invariant under the Z P 2 -action and peak(π) = des(π) for all π ∈ L(P, ω).
+
+Proof. If x is a double ascent in 0π0 then des(ψ x (π)) = des(π) + 1. It follows that
+σ∈Orb(π) t des(σ) = t des(π) (1 + t) a
+where a is the number of double ascents in π. Suppose r = 0. Deleting all double ascents inπ results in an alternating permutation 0 > a 1 < a 2 > a 3 < · · · > a p−a < 0, with the same number of peaks/descents as π. Hence p − a = 2 peak(π) + 1.
+
+If r = 1, deleting all double ascents inπ results in an alternating permutation 0 > a 1 < a 2 > a 3 < · · · < a p−a > 0, with the same number of descents. Hence p − a − 2 = 2 des(π).
+
+Stembridge [44] developed a theory of "enriched P -partitions" in which the distribution of peaks in L(P, ω) and the polynomial, viz., W (P, ω; t) = π∈L(P,ω) t peak(π) , play a significant role. For a canonically labeled poset (P, ω) let (P ,ω) be any canonically labeled poset such thatP is obtained from P by adjoining a greatest element.
+
+Theorem 6.4. Let (P, ω) be a canonically labeled sign-graded poset of rank r. If
+r = 0 then W (P, ω; t) = 2 −p+1 (1 + t) p−1 W P, ω; 4t(1 + t) −2 .
+Equivalently, a i (P, ω) = 2 −p+1+2i |{π ∈ L(P, ω) : peak(π) = i}|.
+
+If r = 1 then
+W (P, ω; t) = 2 −p t −1 (1 + t) p W P ,ω; 4t(1 + t) −2 .
+Equivalently, a i (P, ω) = 2 −p+2+2i |{π ∈ L(P ,ω) : peak(π) = i + 1}|.
+
+Proof. Note that W (P ,ω; t) = t −r W (P, ω; t), so we may assume that r = 0. By Theorem 6.3 the proof follows just as the proof of Corollary 3.2. 
+
+
+Vertices Of Even Height
+
+To any permutation w of a finite subset of {1, 2, . . .} we may associate a decreasing unordered tree as follows. Let ∞ be a symbol which is greater than every letter in w. If w is empty then T (w; ∞) is the tree with a single vertex labeled ∞. Otherwise write w as w = m 1 w 1 m 2 w 2 · · · m k w k where m i are the left-to-right maxima of w. Then T (w; ∞) is the labeled tree with T (w i ; m i ) as subtrees of the root, see Fig. 4. Let veh(π) be the number of (non-root) vertices of even height in T (π; ∞). As Fig. 4 suggests veh(652419738) = |{1, 5, 7, 8}| = 4.
+
+We will here show that veh and des have the same distribution on any subset of S n invariant under the MFS-action. For π ∈ S n and x ∈ [n] let r π (x) be the number of right edges in the path from the root to x in the decreasing binary tree associated with π. It is plain to see that r π (x) + 1 is equal to the height of x as a vertex T (π; ∞). Let Odd(π) the set of all x ∈ [n] for which r π (x) is odd. Hence Odd(π) is the set of vertices of even height in T (π; ∞). Also, let Redge(π) be the set of vertices in the decreasing binary tree which are ends of right edges. Clearly, des(π) = | Redge(π)|. Define Ψ, Φ : S n → S n by
+Ψ(π) = x ϕ x (π) (x ∈ Odd(π)); Φ(π) = x ϕ x (π) (x ∈ Redge(π)).
+Theorem 7.1. The transformations Ψ and Φ are inverses of each other. Moreover, if π ∈ S n then Odd(π) = Redge(π ′ ) and Redge(π) = Odd(π ′′ ), where π ′ = Ψ(π) and π ′′ = Φ(π).
+
+Proof. Note that it is enough to prove the first equality since then
+Φ(Ψ(π)) = x ϕ x y ϕ y (π) x ∈ Redge(π ′ ), y ∈ Odd(π) = x ϕ x y ϕ y (π) x, y ∈ Odd(π) = π,
+because the involutions ϕ x commute.
+
+Let T and T ′ be the decreasing binary trees corresponding to π and π ′ , respectively. Suppose that x ∈ Odd(π) and let y be its father in T . If there is a right-edge between x and y in T then y / ∈ Odd(π), which means that there will also be a rightedge between x and y in T ′ , so that x ∈ Redge(π ′ ). If there is a left-edge between x and y in T then also y ∈ Odd(π) so that Ψ will turn this edge to a right-edge and hence x ∈ Redge(π ′ ).
+
+The fact that x / ∈ Odd(π) implies x / ∈ Redge(π) follows similarly.
+
+Note that Ψ and Φ restricts to bijections on all subsets of S n invariant under the "proper" Foata-Strehl action, but not on subsets invariant under the modified Foata-Strehl action. Define a transformation Ψ ′ : S n → S n by
+Ψ ′ (π) = x ϕ ′ x (π) (x ∈ Odd(π)).
+Theorem 7.2. Let T ⊆ S n be invariant under the modified Foata-Strehl action. Then Ψ ′ : T → T is a bijection and veh(π) = des(Ψ ′ (π)), π ∈ T.
+
+Proof. Since the involutions ϕ x commute we may write Ψ ′ as Ψ ′ = F • Ψ where F is defined by F (π) =
+
+x ϕ x (π) (x ∈ Redge(π), c(x) = 2), and where c(x) is the number children of x in the decreasing binary tree of π. Clearly, des(π) = des(F (π)) so it remains to prove that Ψ ′ is a bijection. Let f be defined as in Remark 3.3 and let π ∈ S n . Then since the involutions ϕ x commute we have
+f (Ψ ′ (π)) = y ϕ ′ y x ϕ ′ x (π) (y ∈ [n], x ∈ Odd(π)) = x ϕ ′ x (π) (x / ∈ Odd(π)).
+It follows that Ψ ′ can be defined recursively on the set of permutations of any finite subset of {1, 2, . . .} as follows. The empty word is mapped by Ψ ′ to itself, and if w = LnR where n is the greatest element of w and L and R are the words to the left and right of n respectively then
+Ψ ′ (w) = Ψ ′ (L)nf (Ψ ′ (R)),
+where f is as in Remark 3.3. From this recursive definition it is plain to see that Ψ ′ is bijective. To every unordered decreasing tree T (π; ∞) corresponding to a permutation π ∈ S n (231) there is a unique ordered unlabeled tree obtained by ordering the children of a vertex decreasingly from left to right and dropping the labels. Recall that a Dyck-path of length 2n is a lattice path in N 2 starting at the origon and ending at (2n, 0), using steps u = (1, 1) and d = (1, −1), and never going below the x-axis. If we traverse the ordered tree in pre-order and write a u every time we go down an edge and write a d every time we go up an edge we obtain a Dyck path. This describes a bijection between the set of Dyck path of length 2n and the set of ordered trees with n + 1 vertices (and by the above also between the set of Dyck path of length 2n and S n (231)). Note that a vertex of even height translates into an up-step of even height in the Dyck path, and a descent translates into a double up-step uu in the path. We have thus recovered the following classical result of Kreweras [32].
+
+Corollary 7.4. The statistics "up-steps at even height" and "double up-steps" have the same distribution over the set of Dyck paths of a given length.
+
+When restricted to S n (231) one may express veh as the following alternating sum of permutation patterns [12] veh(π) = d 1 (π) − 2d 2 (π) + 4d 3 (π) − · · · + (−2) n−2 d n−1 (π), where d i (π) is the number of decreasing subsequences of length i + 1 in π.
+
+
+A Mahonian Partner for Vertices of Even Height
+
+Recall that the descent set of a permutation π = a 1 a 2 · · · a n is defined by Des(π) = {i ∈ [n − 1] : a i > a i+1 } and that the major index of π as MAJ(π) = i∈Des(π) i.
+
+A statistic B : S n → N is said to be Mahonian if it has the same distribution as MAJ on S n , i.e.,
+π∈Sn q B(π) = [n] q [n − 1] q · · · [1] q ,
+where [k] q = 1 + q + · · · + q k−1 . A bi-statistic (A, B) is Euler-Mahonian if it has the same distribution as (des, MAJ) on S n . We will now redefine the statistic veh so that we can define a Mahonian partner for it. To every permutation π = a 1 a 2 · · · a n ∈ S n we associate an increasing unordered tree, T ′ (π), as follows. If b is a right-to-left minimum of π then b is a successor of the root, which is labeled 0. Otherwise b is the successor of the leftmost element a to the right of b which is smaller than b, see Fig. 5.
+
+Let n ∈ N. We (re-)define the statistic vertices of even height, veh ′ : S n → N, by letting veh ′ (π) be the number of (non-root) vertices in T ′ (π) of even height. Thus veh ′ (586317492) = |{3, 4, 8, 9}| = 4. We define the even vertex set, EV(π), as the set of indices 1 ≤ i ≤ n such that the vertex a i is of even height.
+
+The complement, π c , of a permutation π = a 1 a 2 · · · a n is the permutation b 1 b 2 · · · b n on the same letters as π such that a i < a j if and only if b i > b j for all 1 ≤ i < j ≤ n. We define a transformation Θ on permutations of any finite subset of {1, 2, . . .} recursively as follows. The empty permutation is mapped onto itself and if π is the If S ⊂ Z and k ∈ Z let S + k := {s + k : s ∈ S}.
+
+Theorem 8.1. Let n ∈ N. For all permutations π ∈ S n we have EV(Θ(π)) = Des(π).
+
+Proof. The proof is by induction over the length n = |π| of π. The case n = 0 is clear. Suppose that n > 0. Then we can write π ∈ S n as the concatenation σ1τ . Let k = |σ|. If 1 ≤ i ≤ k then clearly i ∈ EV(σ) if and only if i / ∈ EV(π). Hence EV(π) = [k] \ EV(σ) ∪ EV(τ ) + k + 1 and Des(π) = [k] \ Des(σ c ) ∪ Des(τ ) + k + 1 , since [n] \ Des(π) = {n} ∪ Des(π c ) for all π of length n. Using induction we get EV(Θ(π)) = EV Θ(σ c )1Θ(τ )
+= [k] \ EV(Θ(σ c )) ∪ EV(Θ(τ )) + k + 1 = [k] \ Des(σ c ) ∪ Des(τ ) + k + 1 = Des(π).
+It is desirable to find a bijection which is not defined recursively and which proves Theorem 8.1.
+
+We may now define a Mahonian partner for veh ′ . The statistic sum of indices of vertices even height, SIVEH : S n → N, is defined by SIVEH(π) = i∈EV(π) i. Corollary 8.2. For all n ∈ N the bistatistic (veh ′ , SIVEH) is Euler-Mahonian on S n .
+
+
+Gal's Conjecture on γ-Polynomials
+
+Recall that the h-polynomial of a simplicial complex ∆ of dimension d − 1 is the polynomial h ∆ (t) = h 0 (∆) + h 1 (∆)t + · · · + h d (∆)t d defined by the polynomial identity A simplicial complex ∆ is flag if the minimal non-faces of ∆ have cardinality two.
+d i=0 h i (∆)t i (1 + t) d−i = d i=0 f i−1 (∆)t i , where f i (∆), −1 ≤ i ≤ d −
+The following conjecture generalizes the Charney-Davis conjecture [15].
+
+Conjecture 9.1 (Gal [25]). If ∆ is a flag simplicial homology sphere of dimension d − 1, then γ i (∆) ≥ 0, 0 ≤ i ≤ ⌊d/2⌋.
+
+It is desirable to find a combinatorial, geometrical or ring-theoretical description of the numbers γ i (∆). In [35] Reiner and Welker associated to any graded naturally labeled poset (P, ω) a simplicial polytopal sphere, ∆ eq (P ), whose h-polynomial is the (P, ω)-Eulerian polynomial. Hence, Theorem 6.3 gives a combinatorial description of the γ-polynomial of ∆ eq (P ) and verifies Conjecture 9.1 for ∆ eq (P ).
+
+In [37] Postnikov, Reiner and Williams extended the MFS-action to give a combinatorial interpretation of the γ-polynomials of tree-associahedra which confirms Conjecture 9.1 in this case. Also, Chow [16] has given a combinatorial interpretation of the γ-polynomials of the Coxeter complexes of type B and D and confirming Conjecture 9.1 for these complexes.
+
+
+Further Directions and Open Problems
+
+Let I n be the set of involutions in S n and let I n (t) = π∈In t des(π) = n−1 k=0 I n,k t k .
+
+Brenti has conjectured that the sequence {I n,k } n−1 k=0 has no internal zeros and is log-concave, i.e., I 2 n,k ≥ I n,k+1 I n,k−1 , 1 ≤ k ≤ n − 2, see [19] where progress on this conjecture was made. Motivated by Brenti's conjecture Guo and Zeng [28] proved the weaker statement that {I n,k } n−1 k=0 is unimodal. Also, Strehl [48] proved symmetry for {I n,k } n−1 k=0 and the following conjecture was made in [28]. Conjecture 10.1 (Guo-Zeng [28]). Let n ∈ N. Then I n (t) = ⌊(n−1)/2⌋ i=0 a n,i t i (1 + t) n−1−2i , where a n,i ∈ N for 0 ≤ i ≤ ⌊(n − 1)/2⌋. Gessel [27] has conjectured a fascinating property of the joint distribution of descents and inverse descents. where c n (τ ; k, j) ∈ N for all k, j ∈ N.
+
+Symmetry properties imply that an expansion such as (10.1) with c n (τ ; k, j) ∈ Z, k, j ∈ N exists. Moreover, c n (τ ; k, j) only depends on the number of descents of τ . In light of Conjectures 10.1 and 10.2 there might be another Z n 2 -action on permutations which also behaves well with respect to the inverse permutation.
+
+Recall the definition of A n (p, q, t) of Section 5. The first nontrivial examples are A 3 (p, q, t) = (1 + t) 2 + (p + q)t A 4 (p, q, t) = (1 + t) 3 + (p + q)(p + q + 2)t(1 + t)
+
+A 5 (p, q, t) = (1 + t) 4 + (p + q) (p + q) 2 + 2(p + q) + 3) t(1 + t) 2 + (p + q) 2 (p 2 + pq + q 2 + 1)t 2 .
+
+Conjecture 10.3. Let b n,i (q) be defined by (5.1). Then (p + q) i | b n,i (p, q) for all 0 ≤ i ≤ ⌊(n − 1)/2⌋.
+
+Figure 1 .
+1Graphical representation of π = 573148926. The dotted lines indicates where the double ascents/descents move to.
+
+Corollary 4 . 2 .
+42If σ, τ ∈ S n are in the same orbit under the MFS-action then S(σ) = S(τ ).
+
+Figure 2 ..
+2Computing For all n, r ∈ N we have
+
+Theorem 5 . 1 .
+51The statistics (2 31) and (13 2) are constant on any orbit under the MFS-action.
+
+Figure 3 .
+3The
+
+Figure 4 .
+4The
+
+Corollary 7 . 3 .
+73Let n, r ∈ N. Then veh and des have the same distribution over S r n .
+
+Figure 5 .
+5The where m is the smallest letter in π, then Θ(π) = Θ(σ c )mΘ(τ ). It is clear that Θ restricted to the symmetric group is a bijection.
+
+
+1 is the number of faces of ∆ of dimension i. If ∆ is a simplicial homology sphere then the Cohen-Macaulay property and the Dehn-Sommerville equations imply that {h i (∆)} d i=0 is nonnegative and symmetric. Hence one may define the γ-polynomial of ∆, γ ∆(t) = ⌊d/2⌋ i=0 γ i (∆)t i , by h ∆ (t) = ⌊d/2⌋ i=0 γ i (∆)t i (1 + t) d−2i .
+
+Conjecture 10 . 2 (
+102Gessel [27]). Let τ ∈ S n . Thenπ∈Sn s des(π) t des(π −1 τ ) = k,j c n (τ ; k, j)(s + t) k (st) j (1 + st) n−k−1−2j ,(10.1)
+The present author was also unaware of this until it was pointed out by the referee.
+ACKNOWLEDGEMENTSThe author would like to thank the anonymous referee for helpful advice on the presentation of this paper, for pointing out the correct credit for the actions and for showing how the bijection Ψ ′ in Theorem 7.2 can be described non-recursively, as presented in Section 7.
+Athanasiadis, h * -vectors, Eulerian polynomials and stable polytopes of graphs, Electron. C A , J. Combin. 112R6, 13 pp. (electronicC. A. Athanasiadis, h * -vectors, Eulerian polynomials and stable polytopes of graphs, Elec- tron. J. Combin. 11 (2004/06), no. 2, R6, 13 pp. (electronic).
+
+Generalized permutation patterns and a classification of the Mahonian statistic. E Babson, E Steingrímsson, Sém. Lothar. Combin. 44ppE. Babson, E. Steingrímsson, Generalized permutation patterns and a classification of the Mahonian statistic, Sém. Lothar. Combin. B44b (2000), 18 pp.
+
+Chain polynomials of distributive lattices are 75% unimodal, Electron. A Björner, J D Farley, J. Combin. 12electronicA. Björner, J. D. Farley, Chain polynomials of distributive lattices are 75% unimodal, Elec- tron. J. Combin. 12 (2005), Note 4, 7 pp. (electronic).
+
+Symmetry and unimodality in t-stack sortable permutations. M Bóna, J. Combin. Theory Ser. A. 981M. Bóna, Symmetry and unimodality in t-stack sortable permutations, J. Combin. Theory Ser. A 98 (2002), no. 1, 201-209.
+
+Symmetry and unimodality in t-stack sortable permutations. M Bóna, Corrigendum , J. Combin. Theory Ser. A. 991M. Bóna, Corrigendum: "Symmetry and unimodality in t-stack sortable permutations", J. Combin. Theory Ser. A 99 (2002), no. 1, 191-194.
+
+A survey of stack-sorting disciplines. M Bóna, Electron. J. Combin. 92Article 1, 16 pp. (electronicM. Bóna, A survey of stack-sorting disciplines, Electron. J. Combin. 9 (2002/03), no. 2, Article 1, 16 pp. (electronic).
+
+Sorted and/or sortable permutations. M Bousquet-Melou, Discrete Math. 225M. Bousquet-Melou, Sorted and/or sortable permutations, Discrete Math. 225 (2000) 25-50.
+
+On operators on polynomials preserving real-rootedness and the Neggers-Stanley conjecture. P Brändén, J. Algebraic Combin. 202P. Brändén, On operators on polynomials preserving real-rootedness and the Neggers-Stanley conjecture, J. Algebraic Combin. 20 (2004), no. 2, 119-130.
+
+Sign-graded posets, unimodality of W -polynomials and the Charney-Davis conjecture. P Brändén, Electron. J. Combin. 1126R9, 15 pp. (electronicP. Brändén, Sign-graded posets, unimodality of W -polynomials and the Charney-Davis con- jecture, Electron. J. Combin. 11 (2004/06), no. 2, R9, 15 pp. (electronic).
+
+Counterexamples to the Neggers-Stanley conjecture. P Brändén, Electron. Res. Announc. Amer. Math. Soc. 10electronicP. Brändén, Counterexamples to the Neggers-Stanley conjecture, Electron. Res. Announc. Amer. Math. Soc. 10 (2004), 155-158 (electronic).
+
+On linear transformations preserving the Pólya frequency property. P Brändén, Trans. Amer. Math. Soc. 358P. Brändén, On linear transformations preserving the Pólya frequency property, Trans. Amer. Math. Soc. 358 (2006), 3697-3716.
+
+Catalan continued fractions and increasing subsequences in permutations. P Brändén, A Claesson, E Steingrímsson, Discrete Math. 258P. Brändén, A. Claesson, E. Steingrímsson, Catalan continued fractions and increasing sub- sequences in permutations, Discrete Math. 258 (2002), 275-287.
+
+Unimodal, log-concave and Pólya frequency sequences in combinatorics. F Brenti, Mem. Amer. Math. Soc. 81F. Brenti, Unimodal, log-concave and Pólya frequency sequences in combinatorics, Mem. Amer. Math. Soc. 81 (1989).
+
+Generalized Eulerian numbers: combinatorial applications. L Carlitz, R Scoville, J. Reine Angew. Math. 265L. Carlitz, R. Scoville, Generalized Eulerian numbers: combinatorial applications, J. Reine Angew. Math. 265 (1974), 110-137.
+
+The Euler characteristic of a nonpositively curved, piecewise Euclidean manifold. R Charney, M Davis, Pacific J. Math. 1711R. Charney and M. Davis, The Euler characteristic of a nonpositively curved, piecewise Euclidean manifold, Pacific J. Math. 171(1) (1995), 117-137.
+
+C. -O Chow, On certain combinatorial expansions of the Eulerian polynomials. preprintC. -O. Chow, On certain combinatorial expansions of the Eulerian polynomials, preprint.
+
+Crossings and alignments of permutations. S Corteel, Adv. Appl. Math. 38S. Corteel, Crossings and alignments of permutations, Adv. Appl. Math. 38 (2007), 149-163.
+
+Tableaux combinatorics for the asymmetric exclusion process. S Corteel, L Williams, Adv. Appl. Math. to appearS. Corteel, L. Williams, Tableaux combinatorics for the asymmetric exclusion process, Adv. Appl. Math., to appear.
+
+Permutation statistics on involutions. W M B Dukes, European J. Combin. 28W. M. B. Dukes, Permutation statistics on involutions, European J. Combin. 28 (2006), 186-198.
+
+D Foata, Groupes de réarrangements et nombres d'Euler. 275D. Foata, Groupes de réarrangements et nombres d'Euler, C. R. Acad. Sci. Paris Sr. A-B 275 (1972), 1147-1150.
+
+D Foata, G N Han, Arbres minimax et polynomes d'André. 27D. Foata, G. N. Han, Arbres minimax et polynomes d'André, Adv. Appl. Math. 27 (2001), 367-389.
+
+D Foata, M P Schützenberger, Théorie géométrique des polynômes eulériens. Berlin-New YorkSpringer-Verlag138D. Foata, M. P. Schützenberger, Théorie géométrique des polynômes eulériens, Lecture Notes in Mathematics, Vol. 138 Springer-Verlag, Berlin-New York 1970.
+
+Rearrangements of the symmetric group and enumerative properties of the tangent and secant numbers. D Foata, V Strehl, Math. Z. 137D. Foata, V. Strehl, Rearrangements of the symmetric group and enumerative properties of the tangent and secant numbers, Math. Z. 137 (1974), 257-264.
+
+Euler numbers and variations of permutations, Colloquio Internazionale sulle Teorie Combinatorie (Roma, 1973), Tomo I. D Foata, V Strehl, Atti dei Convegni Lincei. 17Accad. Naz. Lincei, RomeD. Foata, V. Strehl, Euler numbers and variations of permutations, Colloquio Internazionale sulle Teorie Combinatorie (Roma, 1973), Tomo I, 119-131. Atti dei Convegni Lincei, No. 17, Accad. Naz. Lincei, Rome, 1976.
+
+Real root conjecture fails for five-and higher-dimensional spheres. S R Gal, Discrete Comput. Geom. 342S. R. Gal, Real root conjecture fails for five-and higher-dimensional spheres, Discrete Com- put. Geom. 34 (2005), no. 2, 269-284.
+
+On the Neggers-Stanley conjecture and the Eulerian polynomials. V Gasharov, J. Combin. Theory Ser. A. 82V. Gasharov, On the Neggers-Stanley conjecture and the Eulerian polynomials, J. Combin. Theory Ser. A 82 (1998),134-146.
+
+. I M Gessel, Private communicationI. M. Gessel, Private communication, 2005.
+
+The Eulerian distribution on involutions is indeed unimodal. V J W Guo, J Zeng, J. Combin. Theory Ser. A. 113V. J. W. Guo, J. Zeng, The Eulerian distribution on involutions is indeed unimodal, J. Combin. Theory Ser. A 113 (2006), 1061-1071.
+
+Stirling behavior is asymptotically normal. L H Harper, Ann. Math. Statist. 38L. H. Harper, Stirling behavior is asymptotically normal, Ann. Math. Statist. 38 (1967), 410-414.
+
+Permutation trees and variation statistics. G Hetyei, E Reiner, Europ. J. Combin. 19G. Hetyei, E. Reiner, Permutation trees and variation statistics, Europ. J. Combin. 19 (1998), 847-866.
+
+D E Knuth, The art of computer programming. Reading, MassachusettsAddison-Wesley1Fundamental AlgorithmsD. E. Knuth, The art of computer programming, Vol 1, Fundamental Algorithms, Addison- Wesley, Reading, Massachusetts, 1973.
+
+Joint distribution of three descriptive parameters of bridges. G Kreweras, Lecture Notes in Mathematics. 1234SpringerG. Kreweras, Joint distribution of three descriptive parameters of bridges, Lecture Notes in Mathematics, Vol. 1234, Springer, Berlin, 1986.
+
+The Geometry of the zeros of a polynomial in a complex variable. M Marden, Math. Surveys. 3ppAmer. Math. SocM. Marden, The Geometry of the zeros of a polynomial in a complex variable, Math. Surveys Vol. 3, Amer. Math. Soc., New York, NY, 1949, 183 pp.
+
+Representations of finite partially ordered sets. J Neggers, J. Combin. Inform. System Sci. 3J. Neggers, Representations of finite partially ordered sets, J. Combin. Inform. System Sci. 3 (1978), 113-133.
+
+On the Charney-Davis and Neggers-Stanley conjectures. V Reiner, V Welker, J. Combin. Theory Ser. A. 1092V. Reiner, V. Welker, On the Charney-Davis and Neggers-Stanley conjectures, J. Combin. Theory Ser. A 109 (2005), no. 2, 247-280.
+
+Total positivity, Grassmannians, and networks, preprint math. A Postnikov, CO/0609764A. Postnikov, Total positivity, Grassmannians, and networks, preprint math.CO/0609764.
+
+Faces of generalized permutohedra, preprint math. A Postnikov, V Reiner, L Williams, CO/0609184A. Postnikov, V. Reiner, L. Williams, Faces of generalized permutohedra, preprint math.CO/0609184.
+
+Unimodality and the reflection principle. B E Sagan, Ars Combin. 48B. E. Sagan, Unimodality and the reflection principle, Ars Combin. 48 (1998), 65-72.
+
+Combinatorial statistics on non-crossing partitions. R Simion, J. Combin. Theory Ser. A. 66R. Simion, Combinatorial statistics on non-crossing partitions, J. Combin. Theory Ser. A 66 (1994), 270-301.
+
+Octabasic Laguerre polynomials and permutation statistics. R Simion, D Stanton, J. Comput. Appl. Math. 68R. Simion, D. Stanton, Octabasic Laguerre polynomials and permutation statistics, J. Com- put. Appl. Math. 68 (1996), 297-329.
+
+On the structure of the lattice of noncrossing partitions. R Simion, D Ullman, Discrete Math. 98R. Simion, D. Ullman, On the structure of the lattice of noncrossing partitions, Discrete Math. 98 (1991), 193-206.
+
+Permutation tableaux and permutation patterns. E Steingrímsson, L Williams, J. Combin. Theory Ser. A. 114E. Steingrímsson, L. Williams, Permutation tableaux and permutation patterns, J. Combin. Theory Ser. A 114 (2007), 211-234.
+
+Eulerian numbers, tableaux, and the Betti numbers of a toric variety. J R Stembridge, Discrete Math. 991-3J. R. Stembridge, Eulerian numbers, tableaux, and the Betti numbers of a toric variety, Discrete Math. 99 (1992), no. 1-3, 307-320.
+
+Enriched P -partitions. J R Stembridge, Trans. Amer. Math. Soc. 3492J. R. Stembridge, Enriched P -partitions, Trans. Amer. Math. Soc. 349 (1997), no. 2, 763- 788.
+
+Counterexamples to the poset conjectures of Neggers, Stanley, and Stembridge. J R Stembridge, Trans. Amer. Math. Soc. 359J. R. Stembridge, Counterexamples to the poset conjectures of Neggers, Stanley, and Stem- bridge, Trans. Amer. Math. Soc. 359 (2007), 1115-1128.
+
+Runs, slides and moments. L W Shapiro, W J Woan, S Getu, SIAM J. Algebraic Discrete Methods. 44L. W. Shapiro, W. J. Woan, S. Getu, Runs, slides and moments, SIAM J. Algebraic Discrete Methods 4 (1983), no. 4, 459-466.
+
+Ordered structures and partitions. R P Stanley, Mem. Amer. Math. Soc. 119R. P. Stanley, Ordered structures and partitions, Mem. Amer. Math. Soc. 119 (1972).
+
+Symmetric Eulerian distribution for involutions. V Strehl, Sém. Lothar. Combin. 1V. Strehl, Symmetric Eulerian distribution for involutions, Sém. Lothar. Combin. 1 (1981).
+
+Enumeration of functions from posets to chains. D G Wagner, European J. Combin. 13D. G. Wagner, Enumeration of functions from posets to chains, European J. Combin. 13 (1992), 313-324.
+
+Total positivity of Hadamard products. D G Wagner, J. Math. Anal. Appl. 1632D. G. Wagner, Total positivity of Hadamard products, J. Math. Anal. Appl. 163 (1992), no. 2, 459-483.
+
+Enumeration of totally positive Grassmann cells. L Williams, Advances in Math. 190L. Williams, Enumeration of totally positive Grassmann cells, Advances in Math. 190 (2005), 319-342.

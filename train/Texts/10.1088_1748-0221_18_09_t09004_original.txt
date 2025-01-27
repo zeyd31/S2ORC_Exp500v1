@@ -1,0 +1,170 @@
+
+A Method To Characterize Metalenses For Light Collection Applications
+23 Aug 2023
+
+T Contreras taylorcontreras@g.harvard.edu 
+Department of Physics
+University of Manchester
+M13 9PLManchesterUnited Kingdom
+
+Instituto de Física Corpuscular (IFIC)
+CSIC & Universitat de València
+Calle Catedrático José Beltrán
+
+
+A Martins 
+C Stanford 
+C O Escobar 
+R Guenette 
+M Stancari 
+J Martín-Albo 
+B Lawrence-Sanderson 
+Department of Physics
+University of Manchester
+M13 9PLManchesterUnited Kingdom
+
+Instituto de Física Corpuscular (IFIC)
+CSIC & Universitat de València
+Calle Catedrático José Beltrán
+
+
+A Para 
+Department of Physics
+University of Manchester
+M13 9PLManchesterUnited Kingdom
+
+Instituto de Física Corpuscular (IFIC)
+CSIC & Universitat de València
+Calle Catedrático José Beltrán
+
+
+A Kish 
+F Kellerer 
+
+Department of Physics
+Harvard University
+02138CambridgeMA
+
+
+U.S.A. Fermi National Accelerator Laboratory
+60510BataviaILU.S
+
+
+E-46980PaternaSpain
+
+A Method To Characterize Metalenses For Light Collection Applications
+23 Aug 2023Prepared for submission to JINST1Corresponding author.Large detector systems for particle and astroparticle physicsPhoton detectors for UV, visible and IR photons (vacuum) (photomultipliers, HPDs, others)Optical detector readout conceptsDark Matter detectors (WIMPs, axions, etc)Double-beta decay detectors
+Metalenses and metasurfaces are promising emerging technologies that could improve light collection in light collection detectors, concentrating light on small area photodetectors such as silicon photomultipliers. Here we present a detailed method to characterize metalenses to assess their efficiency at concentrating monochromatic light coming from a wide range of incidence angles, not taking into account their imaging quality.
+
+Motivation
+
+Light collection is essential for detectors in a wide range of applications. Future particle physics detectors looking for dark matter, studying neutrino interactions and oscillations, or searching for neutrinoless double beta decay, would significantly benefit from increased light collection to reach, and even enhance, their physics goals. Other applications for light collection detectors include medical physics like positron emission tomography, material science using photochemistry and mass spectroscopy, and photonics using non-linear optics.
+
+Metalenses, composed of dielectric nanostructures that focus light like a lens, shown in Figure  1a, are a novel and versatile technology that could greatly increase the efficiency of light collection in detectors while being small, practical, durable, radiopure, and cost-effective [1,2]. The nanostructures in a metalens can be made out of a variety of materials and shapes of subwavelength dimensions, allowing for a wide range of specific optical properties. These devices are compatible with mass manufacturable processes that are used in the chip industry, which enables their fabrication in large scales, making metalenses cost-effective compared to traditional lenses [3][4][5][6].
+
+With this versatility, metalenses could be paired with light detectors in many ways to improve light collection. In previous work, we demonstrated that metalenses can be an attractive solution to increase the light collection of small photon detectors by a factor of 7, despite using a nonoptimized metalens design [7]. The use of metalenses in large-scale detectors could provide a solution to increasing the light collection without increasing the number of photon detecting channels. Metalenses could also be paired with silicon photomulitpliers (SiPMs) or CMOS devices to improve the photon detection efficiency [8][9][10].
+
+Metalens development has mainly focused on imaging purposes [1,2,6,[11][12][13], where the attention was put on the quality of the images produced from fully illuminating the lenses rather than on the efficiencies of transmitting and focusing the light for different parameters. When investigating a metalens for high-efficiency light focusing, the characterization of the optical properties need to be done for parameters such as incident angle, distance from the lens, outgoing angle, and field of view. This is also essential to allow detailed simulations of the impact of metalenses in a large-scale detector. Figure 1: (a) A scanning electron microscope micrograph of a metalenses designed for 632 nm used for the characterization. The arrangement of nanopillars of different sizes (from 150 nm to 460 nm) can be seen. (b) A metalens mounted to be characterized. This metalens was fabricated with only a thin stripe across, for simplicity in characterization and fabrication, with the understanding that the metalens would be circularly symmetric.
+-1 - (a) (b)
+In this paper, we present a method to characterize metalenses for light collection, rather than image quality, for the development of metalenses for light collection detectors. By measuring the efficiency for a range of incident angles of light, position from the lens, and angles of outgoing light, simulations of specific detector geometries and light profiles can accurately estimate light collection improvements when incorporating metalenses into light detector designs. We begin this development with an optimized metalens designed for 632 nm light and compare it to the simulated response. This wavelength is easier to fabricate and to test this method of characterization, which can then be used with minimal changes for metalenses of other wavelengths in future studies.
+
+
+Description of the metalens used for the characterization
+
+The metalenses are made of fused silica nanoposts combining two design approaches, one for the low deflection angle region (phase map design approach) and one for the higher deflection angle region (supercell design approach), to optimize the efficiency in each region. The fabrication was performed using lift-off based electron-beam lithography [6].
+
+In the low deflection angle region (less than ≈20 • ), we used the conventional phase map design approach to modulate the transmitted field with a hyperbolic phase profile [6]. We designed 1200 nm tall nanoposts on silica with a unit cell size of 500 nm using the phase modulation design, as shown in Figure 2 (a). Figure 2 (b) shows the post array phase shift and transmittance as function of the post diameter used to encode the metalens phase profile. However, the phase map design has a small efficiency when it is used to steer light at higher deflection angles due to the excitation of higher order modes when the array symmetry is broken [14]. In other words, for high deflection angles (greater than ≈20 • ) the local approximation assumed in this design is no longer valid and the array phase shift of each post does not correspond to the phase shift it can provide in the metasurface or metalens. This is evident in the black dots shown in Figure 2 (d) that shows the deflection efficiency of beam steering metasurfaces designed using the phase control method of Figures 2 (a) and (b). Since the conventional nanopost period is fixed at 500 nm, only supercells with unit cells that are multiples of 500 nm were calculated. Note that the efficiency drops for deflection angles higher than 20 • , approximately. Such reduction of efficiency at high deflection angles would limit the numerical aperture (NA) -3 -and overall efficiency of our metalens. Thus, to avoid this issue, we used the supercell design approach with metagratings to steer light at high deflection angle regions [15]. The metagratings are optimized to maximize the deflection efficiency at a certain angle using more than one post per supercell or with a freeform shape [16]. Our design consists of two 1200 nm tall glass coupled nanoposts with rectangular cross-section, as shown in Figure 2 (c). We fixed the orthogonal period at 500 nm, which is subwavelength in air for a 632 nm excitation wavelength. The longer period, was chosen using the grating equation to diffract at an angle as shown in equation 2.1
+= 0 sin (2.1)
+We used a genetic algorithm to optimize the first order efficiency by varying the remaining geometrical parameters, shown in Figure 2 (c). We constrained the minimum gap between the posts at a minimum value of 50 nm and the minimum post size at 200 nm. All calculations were performed using the rigorous coupled wave analysis method (RCWA) [17,18]. The red dots in Figure 2 (d) show the resulting first order efficiency of the optimized structures using the supercell design approach with metagratings as a function of the deflection angle. The efficiency of the meta gratings remain higher than 65% for diffraction angles as high as 32 • , which corresponds to sin ≈ 0.5. On the contrary, the phase control design efficiency remains higher than 70% only for deflection angles smaller than 20 • and quickly reduces for higher deflection angles. It should be noted that, the design of metagratings is not practical for small deflection angles as their periods are inversely proportional to the sine of the deflection angle, according to equation 2.1. Therefore, in our metalens design we used the phase control design for deflection angles up to 20 • of deflection, corresponding to sin < 0.36, and the supercell design for deflection angles larger than 20 • , corresponding to 0.36 < sin < 0.75, resulting in a metalens optimized for efficient first order deflection across a wide range of deflection angles.
+
+The data presented here were taken with a rectangular metalens of 1.2 mm width and 13.7 mm length, with a focal length of 7 mm and a NA of 0.75, combining the two designs described and placed on a glass substrate. The optimized metalens was produced as a rectangle (shown in Figure 1b rather than a circular metalens to increase speed of prototype production and testing, and considering a symmetric response can be easily obtained in electron-beam and photolithographic processes. The width of the rectangular metalens was determined to completely enclose the width of the light beam, described in section 3. We simulated a 300 m Gaussian beam reaching a metalens on different positions. Our model can accurately simulate a large area metalens in a timely manner.
+
+
+Characterization methodology and experimental setup
+
+When studying the application of metalenses to particle physics detectors, which have a wide range of geometries and photon detection arrangements, it is important to have a detailed characterization of the optical components as a function of different incoming angles and distances between the lens and the photodetectors. This will provide the necessary optical parameters needed for detailed particle physics detector simulations.
+
+In order to fully characterize a metalens, we built an experimental setup capable of automatically moving a sensor, a metalens, and a light source linearly in addition to rotating the metalens to change -4 -the angle of incidence of the light on the metalens. The setup can be seen in Figure 3 and is illustrated in Figure 4.
+
+
+Figure 3:
+
+Experimental setup developed for the metalens characterization with the laser diode on the far right, followed by the two pinholes, with the metalens in the center and a power meter on the left. Arrows next to labels of the devices in the experiment demonstrate the direction the motors can move the given device. A 3 mm × 3 mm S13370 Hamamatsu VUV SiPM paired with a red 632 nm LED was used initially, as SiPMs can detect single photons and are often used in noble element detectors. The VUV SiPM has sensitivity up to 900 nm, thus could still be paired with the red LED.1 To compare the results, we also used a Thorlabs S120SV Power Meter paired with the 632 nm laser diode to provide sufficient power detectable by the power meter. The power meter and laser diode setup allowed us to get a smaller spot size on the metalens. We found the results comparable between the SiPM and power meter setup, and thus continued using the power meter setup as we optimized the metalens design due to the increases speed of data taking with the power meter. As such, data presented here was taken only with the power meter setup.
+
+The light source, at one end of a dark box, is coupled to two pinholes, 200 m and 400 m, 1https://hamamatsu.su/files/uploads/pdf/3_mppc/s13370_vuv4-mppc_b_(1).pdf -5 -to create a beam of light with a spot size of approximately 300 m on the metalens. The metalens then redirects, or focuses, light to the plane with the sensor paired with an adjustable slit shown in Figure 4. The slit allows for alignment of the system between the sensor center and the beam. The experimental setup includes PRUSA stepper motors connected to Thorlabs optics boards with 3D printed pieces for mounting.2 Three motors are assigned to linearly move the sensor, metalens, and light source, and one motor to rotate the metalens. Each motor is connected to its own easy driver, with all motors connected to one Arduino board. The stepper motors allow for fine-grained linear movement down to 0.1 mm and angle rotations down to 0.225 degrees. A Python-based software package was developed to easily control each motor, by using the PyFirmata 2https://www.prusa3d.com/ package to connect to the Arduino board. The developed software package includes automatic alignments of the system of sensor, metalens, and light source as well as the software for data taking. With this software, we are able to move all motors and measure the power from the power meter remotely. This allowed us to completely align the system automatically, by scanning across the lens to find the center of the metalens as well as the angle relative to the light beam. While aligning, continuously updating plots give a live view of the varying power of the power meter as it is moved perpendicular to the light beam.
+
+The slit is only used for alignment, as the slit cannot be placed close enough to the power meter such that it does not block the light reaching the power meter at higher deflection angles. The slit is left open after aligning and while taking data with the power meter. Thorlabs Optical Power Monitor monitors the power meter, and was used to measure the average power from the metalens-laser diode beam by averaging 15 power measurements found over 0.15 seconds.
+
+While taking data, the light source stayed in place, focused by the pinholes to approximately 300 m on the metalens, creating a diffraction pattern on a perpendicular plane to the lens. The power meter and metalens then move in small steps of 0.2 mm and 1mm, respectively, across this light pattern. The zeroth order of this pattern is the light going straight through the metalens. The first order is the desired angle in which the metalens is optimized, as shown in Figure 5 where the first order is the largest peak of each waveform, and the deflection angle is determined from the power meter position combined with the metalens offset relative to the light beam. A reference measurement, used to normalize the metalens output, was taken with the light going straight through the bare glass substrate.
+
+The orders were determined by their distance from the zeroth order, which is always centered at zero, shown in Figure 5. The peak position of the m-th diffraction order on the SiPM plane ( ) can be found by = 0 tan ( ( , ) + 0 ) (3.1)
+
+where 0 = 10 is the distance between the power meter and the metalens, 0 is the rotation angle of the metalens, r is the metalens offset and ( , ) is the diffraction angle, which for a focal length is given by [19] ( , ) = arcsin ( √︁ 2 + 2 − sin 0 ) (3.2)
+
+
+Results
+
+The response of the metalens for various diffraction orders can be seen in Figure 5a, with each line representing a different metalens offsets relative to the light beam. With the light beam centered on the metalens, we get only the zeroth order, shown in blue. As we move the metalens farther from the light beam, we can clearly see the 1st order that the metalens is optimized for as the largest peak, with the 0th and -1st order as small peaks. Figure 5b shows a light map of the metalens, where each horizontal slice represents a waveform like in Figure 5a. The black, blue, white, red and green lines mark the position of the -2,-1,0,1,2 orders, respectively, according to equation 3.1. The diffraction efficiency from a given order was found by taking the maximum of that order's peak, which represents the total power of that given order, and dividing by the maximum of -7 - the reference waveforms peak, which is the total incident power on the metalens. The reference waveform was taken using only the substrate used by the metalens. By finding the efficiency of a given order across the entire metalens, we can see the response of the metalens, shown in Figure 6b. The measured and simulated efficiencies match quite well, giving us confidence in the simulations to produce the metalens response. We then repeated these measurements with the metalens at different incident angles from the incoming light source, shown in Figure 7. The efficiency of the metalens decreases with increasing angle of incidence.
+
+
+Discussion
+
+The characterization described here provides a powerful method of measuring the efficiency of metalenses across the surface of the lens and as a function of light incidence angle. Combined with the focal length and NA, these provide the full set of optical parameters needed to fully simulate the response of these devices in a particle physics detector environment.
+
+With the use of stepper motors, we were able to fully automate the system to characterize the light collection as a function of angle of refraction, as well as angle of incoming light. Typical measurements in the metalens community fully illuminate the lens and measure the focusing efficiency, lacking the response measurements necessary to use metalenses in particle physics detectors. Our method provides a full, low cost, and local characterization of the metalens by using Figure 6: Light transmission efficiency measured (solid lines) and simulated (dashed lines) for the 0th (blue) and 1st (black) orders, in function of the metalens offset from the light source. The top axis relates this offset to the resulting deflection angle to the first order. The region marked by horizontal lines represents the area where the orders overlap, so no distinction can be made between orders. Top: Metalens is perpendicular to the light source. Bottom: Metalens is at a 20-degree angle relative to the light source.
+
+-9 - the stepper motors to take automated measurements of the angular and position response. We have demonstrated the effectiveness of this characterization, as the ease of data taking allowed us to quickly optimize a metalens design for 632 nm light, used in this setup. With this method, we found the measured and simulated efficiency matches quite well, giving us confidence in the simulations to produce the metalens response. This is another major step in using metalenses in light collecting detectors, which would require simulations to test the use of metalenses in specific environments, light profiles, and detector geometries. Future work includes measuring the efficiency with metalenses designed for UV, VUV and visible light, where this method for characterization can be used after replacing with the appropriate metalens and light source.
+
+Figure 2 :
+2(a) Phase map design based on 1200 nm tall silica nanoposts. The unit cell is fixed at 500 nm and the structure is designed to operate at 632 nm. The insets in (a) and (c) show SEM micrographs of some of the corresponding fabricated structures. The scale bar represents 1 m. (b) Transmission and relative phase shift of the nanoposts in (a) as function of their diameter. In the design, we constrained the minimum diameter to 150 nm. (c) Optimized silica-based metagrating structure, which uses a pair of coupled nanoposts. The inset shows a top view of the structure with the optimized parameters. The long period was fixed according to the diffraction equation for each deflection angle, and the small period was fixed at 500 nm in all cases. The operating wavelength is 632 nm. (d) Diffraction efficiency of the supercell design metagratings (red dots) and of beam steering metasurfaces designed with the phase map approach (black dots) shown in (a) and (b).
+
+Figure 4 :
+4Diagram of the experimental setup and power meter output for three different positions of the light source relative to the metalens. The light source (laser diode) is collimated by two pinholes forming a beam spot size of 300 m on the metalens, which focuses the light onto a photon detection device (power meter). An adjustable slit is in front of the photon detection device, which is used for alignments and left completely open for data taking. The light path is illustrated in red, where the 0th and 1st diffraction order of the metalens are shown.
+
+Figure 5 :
+5(a) Waveforms showing the light intensity seen by the power meter, with zero representing the power meter centered with the light source. Each waveform shows the response of the metalens when offset relative to the light beam spot (metalens and light beam centered in blue, metalens offset 2 mm from center in orange, 3 mm from center in green). The zeroth order, where the light goes straight through the lens, is at the 0 position, while the first order shifts based on the position of the light source on the metalens. (b) A light map of the entire data set. The first order (m= -1 , focusing) is clearly seen as the brightest band at an oblique angle, while the zeroth order is the vertical line. The m=+1 order (diverging) can be seen as the lighter tilted band. The overlay lines show the expected positions for the diffraction orders according to the grating equations 2.1.
+
+Figure 7 :
+7The light transmission efficiency of the 1st order as a function of the incidence angle. The colored lines show the four metalens offsets relative to the light source.
+Acknowledgments-10 -
+Metalenses: Versatile multifunctional photonic components. M Khorasaninejad, F Capasso, https:/www.science.org/doi/abs/10.1126/science.aam8100Science. 35863678100M. Khorasaninejad and F. Capasso, "Metalenses: Versatile multifunctional photonic components," Science, vol. 358, no. 6367, p. eaam8100, 2017. [Online]. Available: https://www.science.org/doi/abs/10.1126/science.aam8100
+
+High performance metalenses: numerical aperture, aberrations, chromaticity, and trade-offs. H Liang, A Martins, B.-H V Borges, J Zhou, E R Martins, J Li, T F Krauss, Optica. 612H. Liang, A. Martins, B.-H. V. Borges, J. Zhou, E. R. Martins, J. Li, and T. F. Krauss, "High performance metalenses: numerical aperture, aberrations, chromaticity, and trade-offs," Optica, vol. 6, no. 12, pp. 1461-1470, Dec 2019. [Online]. Available: https://opg.optica.org/optica/abstract.cfm?URI=optica-6-12-1461
+
+All-glass, mass-producible, large-diameter metalens at visible wavelength for 100 mm aperture optics and beyond. J.-S Park, S W D Lim, M Ossiander, Z Li, A Amirzhan, F Capasso, Conference on Lasers and Electro-Optics. Optica Publishing Group14J.-S. Park, S. W. D. Lim, M. Ossiander, Z. Li, A. Amirzhan, and F. Capasso, "All-glass, mass-producible, large-diameter metalens at visible wavelength for 100 mm aperture optics and beyond," in Conference on Lasers and Electro-Optics. Optica Publishing Group, 2022, p. AW4I.1. [Online]. Available: https://opg.optica.org/abstract.cfm?URI=CLEO_AT-2022-AW4I.1
+
+High-efficiency, 80 mm aperture metalens telescope. L Zhang, S Chang, X Chen, Y Ding, M T Rahman, Y Duan, M Stephen, X Ni, 10.1021/acs.nanolett.2c03561pMID: 36525639Nano Letters. 231L. Zhang, S. Chang, X. Chen, Y. Ding, M. T. Rahman, Y. Duan, M. Stephen, and X. Ni, "High-efficiency, 80 mm aperture metalens telescope," Nano Letters, vol. 23, no. 1, pp. 51-57, 2023, pMID: 36525639. [Online]. Available: https://doi.org/10.1021/acs.nanolett.2c03561
+
+Scalable manufacturing of high-index atomic layer-polymer hybrid metasurfaces for metaphotonics in the visible. J Kim, J Seong, W Kim, G.-Y Lee, S Kim, H Kim, S.-W Moon, D K Oh, Y Yang, J Park, J Jang, Y Kim, M Jeong, C Park, H Choi, G Jeon, K Lee, D H Yoon, N Park, B Lee, H Lee, J Rho, Nature Materials. 224J. Kim, J. Seong, W. Kim, G.-Y. Lee, S. Kim, H. Kim, S.-W. Moon, D. K. Oh, Y. Yang, J. Park, J. Jang, Y. Kim, M. Jeong, C. Park, H. Choi, G. Jeon, K.-i. Lee, D. H. Yoon, N. Park, B. Lee, H. Lee, and J. Rho, "Scalable manufacturing of high-index atomic layer-polymer hybrid metasurfaces for metaphotonics in the visible," Nature Materials, vol. 22, no. 4, pp. 474-481, 2023. [Online].
+
+. 10.1038/s41563-023-01485-5Available: https://doi.org/10.1038/s41563-023-01485-5
+
+All-glass, large metalens at visible wavelength using deep-ultraviolet projection lithography. J.-S Park, S Zhang, A She, W T Chen, P Lin, K M A Yousef, J.-X Cheng, F Capasso, 10.1021/acs.nanolett.9b03333pMID: 31726010Nano Letters. 1912J.-S. Park, S. Zhang, A. She, W. T. Chen, P. Lin, K. M. A. Yousef, J.-X. Cheng, and F. Capasso, "All-glass, large metalens at visible wavelength using deep-ultraviolet projection lithography," Nano Letters, vol. 19, no. 12, pp. 8673-8682, 2019, pMID: 31726010. [Online]. Available: https://doi.org/10.1021/acs.nanolett.9b03333
+
+Improving the light collection efficiency of silicon photomultipliers through the use of metalenses. A A Loya, Villalpando, Journal of Instrumentation. 151111021A. A. Loya Villalpando et al., "Improving the light collection efficiency of silicon photomultipliers through the use of metalenses," Journal of Instrumentation, vol. 15, no. 11, p. P11021, Nov. 2020.
+
+40 × 40 metalens array for improved silicon photomultiplier performance. S Uenoyama, R Ota, 10.1021/acsphotonics.1c00257ACS Photonics. 86S. Uenoyama and R. Ota, "40 × 40 metalens array for improved silicon photomultiplier performance," ACS Photonics, vol. 8, no. 6, pp. 1548-1555, 2021. [Online]. Available: https://doi.org/10.1021/acsphotonics.1c00257
+
+CMOS-compatible all-dielectric metalens for improving pixel photodetector arrays. E Mikheeva, J.-B Claude, M Salomoni, J Wenger, J Lumeau, R Abdeddaim, A Ficorella, A Gola, G Paternoster, M Paganoni, E Auffray, P Lecoq, S Enoch, 10.1063/5.0022162APL Photonics. 511116105E. Mikheeva, J.-B. Claude, M. Salomoni, J. Wenger, J. Lumeau, R. Abdeddaim, A. Ficorella, A. Gola, G. Paternoster, M. Paganoni, E. Auffray, P. Lecoq, and S. Enoch, "CMOS-compatible all-dielectric metalens for improving pixel photodetector arrays," APL Photonics, vol. 5, no. 11, p. 116105, 11 2020. [Online]. Available: https://doi.org/10.1063/5.0022162
+
+Design considerations for a new generation of sipms with unprecedented timing resolution. S Enoch, A Gola, P Lecoq, A Rivetti, 10.1088/1748-0221/16/02/P02019Journal of Instrumentation. 16022019S. Enoch, A. Gola, P. Lecoq, and A. Rivetti, "Design considerations for a new generation of sipms with unprecedented timing resolution," Journal of Instrumentation, vol. 16, no. 02, p. P02019, feb 2021. [Online]. Available: https://dx.doi.org/10.1088/1748-0221/16/02/P02019
+
+On metalenses with arbitrarily wide field of view. A Martins, K Li, J Li, H Liang, D Conteduca, B.-H V Borges, T F Krauss, E R Martins, 10.1021/acsphotonics.0c00479ACS Photonics. 78A. Martins, K. Li, J. Li, H. Liang, D. Conteduca, B.-H. V. Borges, T. F. Krauss, and E. R. Martins, "On metalenses with arbitrarily wide field of view," ACS Photonics, vol. 7, no. 8, pp. 2073-2079, 2020. [Online]. Available: https://doi.org/10.1021/acsphotonics.0c00479
+
+Metalenses at visible wavelengths: Diffraction-limited focusing and subwavelength resolution imaging. M Khorasaninejad, W T Chen, R C Devlin, J Oh, A Y Zhu, F Capasso, https:/www.science.org/doi/abs/10.1126/science.aaf6644Science. 3526290M. Khorasaninejad, W. T. Chen, R. C. Devlin, J. Oh, A. Y. Zhu, and F. Capasso, "Metalenses at visible wavelengths: Diffraction-limited focusing and subwavelength resolution imaging," Science, vol. 352, no. 6290, pp. 1190-1194, 2016. [Online]. Available: https://www.science.org/doi/abs/10.1126/science.aaf6644 -11 -
+
+Nano-optic endoscope for high-resolution optical coherence tomography in vivo. H Pahlevaninezhad, M Khorasaninejad, Y.-W Huang, Z Shi, L P Hariri, D C Adams, V Ding, A Zhu, C.-W Qiu, F Capasso, M J Suter, Nature Photonics. 129H. Pahlevaninezhad, M. Khorasaninejad, Y.-W. Huang, Z. Shi, L. P. Hariri, D. C. Adams, V. Ding, A. Zhu, C.-W. Qiu, F. Capasso, and M. J. Suter, "Nano-optic endoscope for high-resolution optical coherence tomography in vivo," Nature Photonics, vol. 12, no. 9, pp. 540-547, 2018. [Online].
+
+. 10.1038/s41566-018-0224-2Available: https://doi.org/10.1038/s41566-018-0224-2
+
+Metalenses at visible wavelengths: past, present, perspectives. P Lalanne, P Chavel, Laser & Photonics Reviews. 1131600295P. Lalanne and P. Chavel, "Metalenses at visible wavelengths: past, present, perspectives," Laser & Photonics Reviews, vol. 11, no. 3, p. 1600295, 2017.
+
+A metalens with a near-unity numerical aperture. R Paniagua-Domínguez, Y F Yu, E Khaidarov, S Choi, V Leong, R M Bakker, X Liang, Y H Fu, V Valuckas, L A Krivitsky, A I Kuznetsov, 10.1021/acs.nanolett.8b00368pMID: 29485885Nano Letters. 183R. Paniagua-Domínguez, Y. F. Yu, E. Khaidarov, S. Choi, V. Leong, R. M. Bakker, X. Liang, Y. H. Fu, V. Valuckas, L. A. Krivitsky, and A. I. Kuznetsov, "A metalens with a near-unity numerical aperture," Nano Letters, vol. 18, no. 3, pp. 2124-2132, 2018, pMID: 29485885. [Online]. Available: https://doi.org/10.1021/acs.nanolett.8b00368
+
+Freeform metasurface design based on topology optimization. J A Fan, MRS Bulletin. 45J. A. Fan, "Freeform metasurface design based on topology optimization," MRS Bulletin, vol. 45, pp. 196-201, 2020.
+
+Maxwell equations in fourier space: fast-converging formulation for diffraction by arbitrary shaped, periodic, anisotropic media. E Popov, M Nevière, J. Opt. Soc. Am. A. 1811E. Popov and M. Nevière, "Maxwell equations in fourier space: fast-converging formulation for diffraction by arbitrary shaped, periodic, anisotropic media," J. Opt. Soc. Am. A, vol. 18, no. 11, pp. 2886-2894, Nov 2001. [Online]. Available: https://opg.optica.org/josaa/abstract.cfm?URI=josaa-18-11-2886
+
+Scattering-matrix treatment of patterned multilayer photonic structures. D M Whittaker, I S Culshaw, https:/link.aps.org/doi/10.1103/PhysRevB.60.2610Phys. Rev. B. 60D. M. Whittaker and I. S. Culshaw, "Scattering-matrix treatment of patterned multilayer photonic structures," Phys. Rev. B, vol. 60, pp. 2610-2618, Jul 1999. [Online]. Available: https://link.aps.org/doi/10.1103/PhysRevB.60.2610
+
+Light propagation with phase discontinuities: Generalized laws of reflection and refraction. N Yu, P Genevet, M A Kats, F Aieta, J.-P Tetienne, F Capasso, Z Gaburro, https:/www.science.org/doi/abs/10.1126/science.1210713Science. 3346054N. Yu, P. Genevet, M. A. Kats, F. Aieta, J.-P. Tetienne, F. Capasso, and Z. Gaburro, "Light propagation with phase discontinuities: Generalized laws of reflection and refraction," Science, vol. 334, no. 6054, pp. 333-337, 2011. [Online]. Available: https://www.science.org/doi/abs/10.1126/science.1210713

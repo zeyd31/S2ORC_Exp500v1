@@ -1,0 +1,730 @@
+
+ALMOST SURE LOCAL WELLPOSEDNESS AND SCATTERING FOR THE ENERGY-CRITICAL CUBIC NONLINEAR SCHRÖDINGER EQUATION WITH SUPERCRITICAL DATA
+3 Nov 2021
+
+Martin Spitz 
+ALMOST SURE LOCAL WELLPOSEDNESS AND SCATTERING FOR THE ENERGY-CRITICAL CUBIC NONLINEAR SCHRÖDINGER EQUATION WITH SUPERCRITICAL DATA
+3 Nov 2021
+We study the cubic defocusing nonlinear Schrödinger equation on R 4 with supercritical initial data. For randomized initial data in H s (R 4 ), we prove almost sure local wellposedness for 1 7 < s < 1 and almost sure scattering for 5 7 < s < 1. The randomization is based on a unit-scale decomposition in frequency space, a decomposition in the angular variable, and -for the almost sure scattering result -an additional unit-scale decomposition in physical space. We employ new probabilistic estimates for the linear Schrödinger flow with randomized data, where we effectively combine the advantages of the different decompositions.
+
+Introduction and main results
+
+We consider the cubic defocusing nonlinear Schrödinger equation in four space dimensions, i.e. i∂ t u + ∆u = |u| 2 u on R × The purpose of this article is to investigate the local wellposedness as well as the long-time behavior of solutions of (1.1) with initial data below the scaling critical regularity, i.e. with f ∈ H s (R 4 ) with s < 1. We prove that (1.1) is almost surely locally wellposed for initial data f ∈ H s (R 4 ) with 1 7 < s < 1 which is randomized with respect to a certain decomposition both in frequency space and in the angular variable. Decomposing the initial data f ∈ H s (R 4 ) additionally in physical space, we show that randomizing with respect to the resulting decomposition leads to global scattering solutions of (1.1) almost surely for 5 7 < s < 1.
+
+The energy-critical defocusing nonlinear Schrödinger equation (NLS) was subject of extensive research, which culminated in [33] and [39] in four space dimensions, building on the fundamental work [17] in R 3 . In [33,39] it was shown that solutions of (1.1) in the energy space exist globally and scatter. More precisely, for every f ∈Ḣ 1 (R 4 ) there is a unique global solution u of (1.1) which scatters as t → ±∞ and satisfies ∇u L 3 t L 3
+
+x ≤ L(E(u 0 )), (1.2) where L : [0, ∞) → [0, ∞) is a non-decreasing function, see Theorem 1.1 and Lemma 3.6 in [33]. We refer to [17,33,39] and the references therein for the historical development and prior work on the energy-critical defocusing NLS. Below the scaling-critical exponent s c = 1, problem (1.1) is known to be illposed, see [15]. However, how generic is the ill behavior of (1.1) below the scaling critical regularity? Can one still identify large sets of initial data for which unique local solutions, global solutions, and scattering solutions exist? One way to investigate this question is to use randomization.
+
+1.1. Randomization. Starting from the seminal works [4,5] and [12,13], large interest in random dispersive partial differential equations and a vast body of literature has developed over the last years. Therefore, we restrict our discussion to results which are closest to this work.
+
+In [1,2] almost sure local wellposedness of the cubic NLS on R d with d ≥ 3 for suitably randomized initial data f ∈ H s (R d ) was shown, where 3 5 < s < 1 in the case d = 4. We also refer to [3,34] for improvements in the case of the cubic NLS on R 3 , to [6] for the energy-critical NLS on R 3 , and to [29] for the energy-critical NLS on R d with d = 5, 6. The regularity threshold for almost sure local wellposedness of the cubic NLS in R 4 was lowered in [20] to 1 3 < s < 1. As a consequence of the local theory, conditional global results and global results on sets with positive probability were provided in [1] and [6] for the energy-critical NLS. Apart from the small data results, the global theory is more delicate. The first advances in this direction were made for the wave equation. To be more precise, almost sure global existence for the defocusing energy-critical wave equation was shown in [31] for d = 4 and d = 5 and in [30] for d = 3.
+
+The first almost sure scattering result for an energy-critical dispersive equation (besides the small data theory) was given in [21] for the defocusing energy-critical wave equation in R 4 with initial data which is radially symmetric before the randomization. See also [20,Appendix A] for an improvement and [8] for the case d = 3. Building upon ideas from [21], almost sure scattering for the solutions of the defocusing energy-critical NLS in R 4 with randomized radially symmetric initial data from H s (R 4 ) was proven in [25] for 5 6 < s < 1 and then improved in [20] to 1 2 < s < 1. Very recently, almost sure scattering for randomized radially symmetric initial data was also established for the cubic defocusing NLS on R 3 in [14] and [34]. While the preceding almost sure scattering results all rely on the radial symmetry of the original data, the assumption of radial symmetry for the initial data before randomization was removed in [7] for the defocusing energy-critical wave equation in R 4 .
+
+The main motivation of this work is to prove almost sure scattering for the defocusing energy-critical NLS in R 4 without the radial symmetry assumption for the original initial data. As a byproduct, we improve the regularity threshold for almost sure local wellposedness of (1.1) to s > 1 7 . However, we point out that we use a different randomization technique than the aforementioned works.
+
+In fact, all the above references cited in the context of almost sure local and global wellposedness of the energy-critical wave equation and NLS on the full-space except [7] and [8] employ a Wiener randomization, i.e. a randomization based on a unit-scale decomposition of frequency space (see Subsection 1.2 below for details). Nevertheless, there are other approaches. Considering the wave equation on compact manifolds with supercritical scaling, a randomization with respect to the decomposition in an orthonormal basis of eigenfunctions of the Laplacian was used in [12,13]. Similar techniques were then also employed on the full-space, see e.g. [19,18,32] and references therein, before the Wiener randomization was introduced in [1,2] and [26] and proved to be very successful on R d . The Wiener randomization gives access to a unit-scale Bernstein estimate, improving the Strichartz estimates from the deterministic setting.
+
+More recently, a randomization with respect to a unit-scale decomposition in physical space was introduced in [27] (see Subsection 1.3 below for details) to improve almost surely the known uniqueness results for the final-state problem of the mass-subcritical NLS in L 2 . Roughly speaking, this randomization allows to employ the dispersive estimate for solutions of the linear Schrödinger equation although the data only belongs to L 2 . These techniques were further refined in [28].
+
+In [9] a randomization with respect to a decomposition in the angular variable was introduced (see Subsection 1.4 below for details). It was combined with a randomization in the radial variable and a Wiener randomization to show probabilistic global wellposedness of a wave maps type nonlinear wave equation for scaling supercritical data.
+
+The interplay of the physical-space randomization from [27] and the angular randomization from [9] was used in [36] to solve the final-state problem for the Zakharov system in R 3 almost surely.
+
+Combinations of different randomization techniques were not only used in [9] and [36]. In [7], where almost sure scattering for the defocusing energy-critical wave equation without the radial symmetry assumption was shown, the Wiener randomization was merged with the physical-space randomization to a microlocal randomization.
+
+For the defocusing energy-critical nonlinear Schrödinger equation, we further add the angular randomization to prove almost sure scattering without assuming that the original data is radially symmetric. To lower the regularity threshold for the probabilistic local wellposedness theory, it is enough to combine the Wiener randomization with the angular randomization.
+
+Before we give the precise formulation of our results, we provide the details of these randomization procedures.
+
+1.2. Unit scale decomposition in frequency space. We fix a non-negative bump function φ ∈ C ∞ c (R 4 ) such that φ(x) = 1 for |x| ≤ 1 and φ(x) = 0 for |x| ≥ 2. We set
+ψ j (ξ) = φ(ξ − j) m∈Z 4 φ(ξ − m)
+for all ξ ∈ R 4 and j ∈ Z 4 , which yields a smooth partition of unity {ψ j : j ∈ Z 4 }.
+
+Introducing the operators P j by
+P j f = F −1 (ψ jf ) (1.3)
+for all j ∈ Z 4 , wheref = F f denotes the Fourier transform of f , we thus obtain the decomposition
+f = j∈Z 4 P j f (1.4)
+for all f ∈ L 2 (R 4 ). Randomizing with respect to this unit scale decomposition in frequency space yields the Wiener randomization, see e.g. [1,2,26].
+
+1.3. Unit scale decomposition in physical space. To decompose a function in physical space, we employ the same partition of unity as above. However, in order to facilitate the distinction between the decomposition in frequency and in physical space, we use a different notation. Set
+ϕ i = ψ i (1.5) for all i ∈ Z 4 . We then get f = i∈Z 4 ϕ i f (1.6)
+for every f ∈ L 2 (R 4 ). The physical-space randomization means the randomization with respect to this decomposition, see [27,28,36].
+
+1.4. Decomposition in the angular variable with respect to a good frame. The last decomposition needs some preparation. We closely follow [9,36] in our presentation.
+
+Recall that the spherical harmonics of degree k, i.e. the restriction of the homogeneous harmonic polynomials of degree k to the sphere S 3 , are the eigenfunctions of the Laplacian on the sphere. The space E k consisting of these functions has dimension
+N k = k + 3 3 − k + 1 3 = (k + 1) 2 .
+We now fix an orthonormal frame
+{b k,l ∈ L 2 (S 3 ) : l ∈ {1, . . . , N k }, k ∈ N 0 } of L 2 (S 3 ), consisting of eigenfunctions of ∆ S 3 , such that there is a constant C > 0 with b k,l L q (S 3 ) ≤ C √ q if q < ∞, C log(k) if q = ∞ (1.7)
+for all l ∈ {1, . . . , N k }, k ∈ N, and q ∈ [2, ∞]. The existence of such a frame is a consequence of Théorème 6 and Proposition 3.2 in [10], see also [9, Theorem 1.1] and [11]. Following [9], we call an orthonormal basis {b k,l : l ∈ {1, . . . , N k }, k ∈ N 0 } as above a good frame. Now let f ∈ L 2 (R 4 ). We first rescale the Littlewood-Paley blocks to frequency 1 writing
+g M = (P M f )(M −1 ·) (1.8)
+for every M ∈ 2 Z , where P M denotes the standard Littlewood-Paley projector defined in Section 2 below. After transition to polar coordinates we expand the Fourier transform of g M in the good frame, i.e. we writê
+g M (ρθ) = ∞ k=0 N k l=1ĉ M k,l (ρ)b k,l (θ),(1.9)
+where every coefficientĉ M k,l is supported in ( 1 2 , 2). Theorem 3.10 in [37] thus yields
+g M (rθ) = ∞ k=0 N k l=1 a k r −1 b k,l (θ) ∞ 0ĉ M k,l (ρ)J k+1 (rρ)ρ 2 dρ,
+where a k = i k (2π) −2 and the Bessel function J µ is given by
+J µ (t) = ( t 2 ) µ Γ( 2µ+1 2 )Γ( 1 2 ) 1 −1 e its (1 − s 2 ) 2µ−1 2
+ds for all t > 0 and µ > − 1 2 . Moreover, Plancherel's theorem and (1.9) yield
+g M 2 L 2 (R 4 ) ∼ ∞ k=0 N k l=1 ĉ M k,l 2 L 2 (ρ 3 dρ) . (1.10)
+Scaling back to frequency M , we obtain the representation
+P M f (rθ) = g M (M rθ) = ∞ k=0 N k l=1 a k M −1 r −1 b k,l (θ) ∞ 0ĉ M k,l (ρ)J k+1 (M rρ)ρ 2 dρ
+(1.11) of P M f in polar coordinates. Randomizing with respect to this decomposition yields an angular randomization, see [9,36].
+
+1.5. Definition of the randomizations. Combining the angular decomposition in the good frame (1.11) with the unit-scale decomposition of frequency space from (1.4), we arrive at
+P M f = j∈Z 4 ∞ k=0 N k l=1 a k M −1 P j r −1 b k,l (θ) ∞ 0ĉ M k,l (ρ)J k+1 (M rρ)ρ 2 dρ .
+(1.12)
+
+For every M ∈ 2 Z let (X M j,k,l ) j∈Z 4 ,l∈{1,...,N k },k∈N0 be a sequence of independent, real-valued, mean-zero random variables on a probability space (Ω, A, P) such that there is a constant c > 0 with
+R e γx dµ M j,k,l (x) ≤ e cγ 2 (1.13)
+for all γ ∈ R, l ∈ {1, . . . , N k }, k ∈ N 0 , and j ∈ Z 4 , where µ M j,k,l denotes the corresponding distributions. A sequence of independent, mean-zero Gaussian random variables with uniformly bounded variances satisfies these assumptions, another class of examples is given by random variables whose distributions have compact support. 5 In view of (1.12), we then define the randomization f ω of f as
+f ω = M∈2 Z j∈Z 4 ∞ k=0 N k l=1 X M j,k,l (ω)a k M −1 P j r −1 b k,l (θ) ∞ 0ĉ M k,l (ρ)J k+1 (M rρ)ρ 2 dρ ,
+(1.14) which is understood as the limit in L 2 (Ω, L 2 (R 4 )). As we are interested in the scaling-supercritical regime of (1.1), it is important to note that this randomization does not lead to higher Sobolev regularity in general. In fact, if (Ω, A, P) is the product space of two probability spaces (Ω 1 , A 1 , P 1 ) and (Ω 2 , A 2 , P 2 ) and X M j,k,l (ω) = X j (ω 1 )X M k,l (ω 2 ) for all ω = (ω 1 , ω 2 ) ∈ Ω, where (X j ) j and (X M k,l ) M,k,l are independent and identically distributed Gaussian random variables on Ω 1 and Ω 2 respectively, then f / ∈ H s (R 4 ) implies f ω / ∈ H s (R 4 ) almost surely for every s > 0. To show this statement, one first uses the arguments from the proof of [12,Lemma B.1] in ω 2 and then employs an adaption of this proof in ω 1 .
+
+We next combine the randomization with respect to a unit-scale decomposition in frequency space and a decomposition with respect to a good frame with another unit-scale decomposition in physical space. To that purpose, we apply the decomposition (1.12) to ϕ i f for every i ∈ Z 4 and then sum over i. To fix the notation for later use, we repeat the details of the construction.
+
+Take f ∈ L 2 (R 4 ). For each i ∈ Z 4 and M ∈ 2 Z we first rescale P M (ϕ i f ) to unit frequency, i.e. we set
+g M i = (P M (ϕ i f ))(M −1 ·).
+Using polar coordinates, we developĝ M i in the good frame aŝ
+g M i (ρθ) = ∞ k=0 N k l=1ĉ M,i k,l (ρ)b k,l (θ)
+where eachĉ M,i k,l is supported in ( 1 2 , 2). Applying Theorem 3.10 from [37] again, we obtain the representation
+g M i (rθ) = ∞ k=0 N k l=1 a k r −1 b k,l (θ) ∞ 0ĉ M,i k,l (ρ)J k+1 (rρ)ρ 2 dρ with g M i 2 L 2 x ∼ ∞ k=0 N k l=1 ĉ M,i k,l 2 L 2 (ρ 3 dρ) .
+Rescaling to frequency M , recalling that (ϕ i ) i∈Z 4 is a partition of unity, and employing the unit-scale decomposition in frequency space, we obtain in analogy to (1.12)
+P M (ϕ i f ) = j∈Z 4 ∞ k=0 N k l=1 a k M −1 P j r −1 b k,l (θ) ∞ 0ĉ M,i k,l (ρ)J k+1 (M rρ)ρ 2 dρ ,(1.15
+)
+P M f = i,j∈Z 4 ∞ k=0 N k l=1 a k M −1 P j r −1 b k,l (θ) ∞ 0ĉ M,i k,l (ρ)J k+1 (M rρ)ρ 2 dρ .
+(1.16) 6 For every M ∈ 2 Z we take a sequence of independent, real-valued, mean-zero random variables (X M i,j,k,l ) i,j∈Z 4 ,l∈{1,...,N k },k∈N0 on a probability space (Ω, A, P) such that there exists a constant c > 0 with
+R e γx dµ M i,j,k,l (x) ≤ e cγ 2
+for all γ ∈ R, l ∈ {1, . . . , N k }, k ∈ N 0 , and i, j ∈ Z 4 , where µ M i,j,k,l is the distribution of X M i,j,k,l . Considering (1.16), we define the second randomization of f as
+fω = M∈2 Z i,j∈Z 4 ∞ k=0 N k l=1 X M i,j,k,l (ω)a k M −1 · P j r −1 b k,l (θ) ∞ 0ĉ M,i k,l (ρ)J k+1 (M rρ)ρ 2 dρ . (1.17)
+Again, this randomization does not imply higher Sobolev regularity in general: Assume that (Ω, A, P) is the product space of (Ω i , A i , P i ), i = 1, 2, 3, and that
+X M i,j,k,l (ω) = X j (ω 1 )X M k,l (ω 2 )X i (ω 3 ) for allω = (ω 1 , ω 2 , ω 3 ) ∈ Ω, where (X j ) j , (X M
+k,l ) M,k,l , and (X i ) i are independent and identically distributed Gaussian random variables on Ω 1 , Ω 2 , and Ω 3 , respectively. One can then show that for s > 0,
+i∈Z 4 X i (ω 3 )ϕ i f ∈ H s (R 4 )
+for all ω 3 from a subset of Ω 3 with positive measure implies that ϕ i f belongs to H s (R 4 ) for all i ∈ Z 4 . Applying adaptions of the proof of [12, Lemma B.1] successively in ω 3 , ω 2 , and ω 1 , we obtain that if f / ∈ H s (R 4 ), then fω / ∈ H s (R 4 ) almost surely for every s > 0.
+
+1.6. Main results. The first main result states that the energy-critical cubic NLS in four dimensions is almost surely locally wellposed for scaling-supercritical initial data from H s (R 4 ) with 1 7 < s < 1. As usual, the sign in front of the nonlinearity does not affect the local theory and the result applies to both the defocusing and the focusing equation. We refer to (2.5) below for the definition of the function space X(I) appearing in the theorem, which is a subspace of L 2 (I,Ḃ 1 4,2 (R 4 )).
+
+Theorem 1.1. Let 1 7 < s < 1. Take f ∈ H s (R 4 ) and let f ω denote the randomization of f defined in (1.14). Then for almost every ω ∈ Ω there is an open interval I containing 0 and a unique solution u ∈ e it∆ f ω + C(I,Ḣ 1 (R 4 )) ∩ X(I) of the cubic nonlinear Schrödinger equation
+i∂ t u + ∆u = ±|u| 2 u, u(0) = f ω . (1.18)
+For the proof we set u(t) = e it∆ f ω + v(t) and study the forced cubic NLS
+i∂ t v + ∆v = ±|F + v| 2 (F + v), v(0) = v 0 (1.19)
+for the nonlinear part v. We develop a suitable functional framework in which we prove local wellposedness for (1.19), which then implies Theorem 1.1 if the linear evolution e it∆ f ω almost surely fulfills the assumptions on the forcing F . For the latter, it is crucial to exploit that the randomization improves the space-time integrability of e it∆ f ω in various ways.
+
+For example, the Wiener randomization implies a unit-scale Bernstein inequality which allows to move from high spatial integrability to lower spatial integrability without losing derivatives. Combined with the standard deterministic Strichartz estimates, we obtain almost surely much better space-time integrability of the linear flow. This improvement was combined with the bilinear refinement of Strichartz estimates in [1,2] to prove almost sure local wellposedness of (1.18) with initial data from H s (R 4 ) with 3 5 < s < 1. The regularity threshold was lowered to 1 3 < s < 1 in [20] by the use of local smoothing estimates.
+
+In this work, we make use of a new mechanism to gain regularity for the nonlinear part of the equation. We show that, as in the case of the wave equation [9,36], the angular randomization gives access to Strichartz estimates with (almost) the same range of exponents as for the radial Schrödinger equation. In the Schrödinger case, however, we can choose space-time norms which gain derivatives by scaling. In fact, we can gain 3 7 − derivatives in that way. Using the optimal norms both for the homogeneous and the inhomogeneous estimate, we increase the regularity by 6 7 − derivatives. In contrast to [20], where maximal function estimates had to be employed, the combination of the Wiener and the angular randomization is so flexible that we do not lose any derivatives when closing the estimates. Although the local smoothing norms lead to a higher regularity gain, we thus obtain the lower threshold of 1 7 . Consequently, a key observation for the proof is the probabilistic estimate for e it∆ f ω with the randomization (1.14) in Proposition 3.4, where we show that we can exploit the advantages of the Wiener and the angular randomization simultaneously.
+
+We next come to our second main result which establishes almost sure scattering for solutions of (1.1) with randomized initial data from H s (R 4 ) with 5 7 < s < 1, where the randomization from (1.17) is applied. In particular, we do not assume that the initial data before the randomization is radially symmetric. 
+v ± ∈Ḣ 1 (R 4 ) such that lim t→±∞ u(t) − e it∆ (fω + v ± ) Ḣ1 = 0.
+For the proof of this result, we follow the same strategy as [21,25,20,7]. Starting from the local wellposedness theory of (1.19), we develop a perturbation theory in the corresponding functional framework, which yields a conditional scattering result: If the energy of v, i.e. E(v), is bounded on its maximal interval of existence, the solution exists globally and scatters both forward and backward in time. See Proposition 5.3 for the precise formulation. The proof of Theorem 1.2 thus reduces to the task of controlling the energy of v. We point out that the energy of v is not conserved as v is not a solution of the cubic NLS.
+
+To control the energy of v, we then estimate the energy increment ∂ t E(v(t)). The most difficult term we get with this approach is (∇F )(∇v)v 2
+L 1 t L 1
+x . If one only has the energy to estimate the factors involving v, one is led to control ∇F in
+L 1 t L ∞ x . 8
+In [25] and [20] this problem is overcome by not only invoking the energy to control v but also a Morawetz type inequality to avoid this L 1 t L ∞ x -estimate. Both the energy and the Morawetz term are then controlled by a double bootstrap argument. However, this approach led to place ∇F in spatially weighted spaces which in turn required to randomize radially symmetric data so that the linear flow satisfied the assumptions on F almost surely. This led to almost sure scattering for solutions of (1.1) with Wiener-randomized radially symmetric initial data from H s (R 4 ) with 5 6 < s < 1 in [25] and 1 2 < s < 1 in [20]. In order to get rid of the radial symmetry assumption, we indeed only use the energy to estimate the factors involving v in (∇F )(∇v)v 2
+L 1 t L 1 x , assuming that ∇F belongs to L 1 t L ∞ x .
+Hence, the key ingredient in the proof of Theorem 1.2 is to show that ∇e it∆ fω belongs to L 1 t L ∞ x almost surely. In fact, this is the only condition on F for which we need the randomization (1.17) in order that the linear flow of the randomized data satisfies it almost surely. For all other assumptions the randomization (1.14) would suffice.
+
+To estimate ∇e it∆ fω in L 1 t L ∞ x , we exploit that the randomization (1.17) yields the same improved decay of the linear flow as the pure physical-space randomization in [28,36] (see Proposition 3.6). On the other hand, we can still gain regularity for the linear flow as for the randomization (1.14) (see Proposition 3.4). However, we cannot exploit the different advantages simultaneously but we have to interpolate between the different effects, which leads to the regularity restriction s > 5 7 . Remark 1.3. In [7], almost sure scattering for the cubic nonlinear wave equation in R 4 without radial symmetry was shown using a randomization based on a unit-scale decomposition in physical and frequency space, i.e. (1.17) without the randomization in the angular variable. In contrast to the nonlinear wave equation, the energy of (1.1) does not control the time derivative of the solution and the (almost sure) regularizing effect of the linear Schrödinger flow we obtain from the randomization in the angular variable is an important component in the proof of the almost sure scattering result. On the other hand, using randomization (1.17) for the cubic defocusing nonlinear wave equation in R 4 , one can lower the regularity threshold for almost sure scattering from [7] with a much simpler proof, see [35].
+
+The rest of the paper is organized as follows. In Section 2 we fix some notation, introduce the functional framework for the forced equation (1.19), and collect several deterministic estimates which will be used in the following. The crucial probabilistic estimates for the linear Schrödinger flow with data randomized with the techniques introduced in this work are presented in Section 3. The almost sure local wellposedness theory is developed in Section 4. The perturbation theory and the conditional scattering result are derived in Section 5. In Section 6 we then prove the almost sure scattering result.
+
+
+Notation and preliminaries
+
+In this section we fix some notation, collect several deterministic estimates, and introduce the functional framework for the local wellposedness theory of the forced cubic NLS (1.19).
+
+
+Notation. We write
+A B if there is a constant C > 0 such that A ≤ CB and A ∼ B if A B and B A.
+Fix an even function η 0 ∈ C ∞ c (R) such that 0 ≤ η 0 ≤ 1, η 0 (x) = 1 for |x| ≤ 5 4 , and η 0 (x) = 0 for |x| ≥ 8 5 . For every dyadic number N ∈ 2 Z we define the symbols
+χ N (ξ) = η 0 (|ξ|/N ) − η 0 (2|ξ|/N ), χ ≤N (ξ) = η 0 (|ξ|/N )
+as well as the standard Littlewood-Paley projectors
+P N f = F −1 (χ Nf ), P ≤N f = F −1 (χ ≤Nf ),
+wheref = F f denotes the Fourier transform of f . We always use upper case letters (which represent a dyadic number) to indicate a Littlewood-Paley projector, while a lower case letter (representing an element of Z 4 ) refers to the operators introduced in (1.3). We further define the fattened Littlewood-Paley projectors
+P N = | log 2 (M/N )|≤4 P M .
+Let p, µ ∈ [1, ∞] and set L p (0, ∞) = L p ((0, ∞), r 3 dr). We will employ the spaces L p L µ (R 4 ), anisotropic in the radial and the angular variable, which are defined by the norms
+f L p r L µ θ = ∞ 0 S 3 |f (rθ)| µ dθ p µ r 3 dr 1 p with the usual adaptions in the case p = ∞ or µ = ∞. Let I ⊆ R be an interval. If X is a function space over R 4 with norm · X , we write · L q t X for the norm f L q t X = I f (t) q X dt 1 q
+of L q (I, X) without specifying the underlying interval I if it is clear from the context. If we want to highlight the time interval, we write f L q I X . We use the standard homogeneous Besov spaceḂ s p,2 (R 4 ) as well as the Besov-type spacesḂ s (p,µ),2 (R 4 ) andḂ s q,(p,µ),2 (I × R 4 ) defined by the norms f Ḃs
+p,2 = N ∈2 Z N 2s P N f 2 L p 1 2 , f Ḃs (p,µ),2 = N ∈2 Z N 2s P N f 2 L p r L µ θ 1 2 , g Ḃs q,(p,µ),2 = N ∈2 Z N 2s P N g 2 L q t L p r L µ θ 1 2 for s ∈ R. Finally, we setḂ s q,p,2 (I × R 4 ) =Ḃ s q,(p,p),2 (I × R 4 ) in the case µ = p.
+
+2.2.
+
+Deterministic estimates. We start by collecting the Strichartz estimates we will employ later. To that purpose we recall that in dimension d = 4 a pair (q, p)
+
+is
+Schrödinger admissible if 2 ≤ q, p ≤ ∞, 2 q + 4 p = 2.
+We then have the classical Strichartz estimates, see [24], where we denote the dual exponent of an integrability exponent p by p ′ .
+
+Lemma 2.1. Let I ⊆ R be an interval and t 0 ∈ I. Let (q, p), (q,p) be Schrödinger admissible.
+
+Then
+e it∆ f L q t L p x f L 2 , t t0 e i(t−s)∆ g(s) ds L q t L p x g Lq ′ t Lp ′ x .
+Besides the standard Strichartz estimates, we also use the ones in spherically averaged spaces. Therefore, we also consider the extended range
+2 ≤ q, p ≤ ∞, 1 q ≤ 7 2 1 2 − 1 p , (q, p) = 2, 14 5 (2.1)
+for exponent pairs (q, p). We obtain the following estimate.
+Lemma 2.2. Let I ⊆ R be an interval and t 0 ∈ I. Let (q, p) be Schrödinger admissible and (q,p) satisfy (2.1) with q >q ′ . Then t t0 e i(t−s)∆ P N g(s) ds L q t L p x N 2− 2 q − 4 p P N g Lq ′ t Lp ′ r L 2 θ for all N ∈ 2 Z .
+Proof. As (q,p) satisfies (2.1), Theorem 1.1 in [22] yields
+e it∆ P 0 f Lq t Lp r L 2 θ P 0 f L 2 (2.2)
+for every f ∈ L 2 (R 4 ). Applying Lemma 2.1 first and then the dual estimate of (2.2), we infer
+I e i(t−s)∆ P 0 g(s) ds L q t L p x I e −is∆ P 0 g(s) ds L 2 P 0 g Lq ′ t Lp ′ r L 2 θ .
+Employing the Christ-Kiselev lemma (see [16,38]) and rescaling to frequency N , the assertion follows.
+
+We next turn to a square function estimate which will be crucial in the proof of our probabilistic estimates in Section 3.
+Lemma 2.3. Let p, µ ∈ [2, ∞). Then for everyp ∈ [2, p] we have j∈Z 4 |P j f | 2 1 2 L p r L µ θ f Lp r L µ θ .
+Proof. We first assume that f is a Schwartz function. In the proof of Lemma 2.8 in [25] it was shown that
+j∈Z 4 |P j f | 2 1 2 (|ψ| * |f | 2 ) 1 2 , (2.3)
+whereψ is the inverse Fourier transform of the function ψ from Subsection 1.
+2. We definep ∈ [1, ∞) by 1 p = 1 − 2 1 p − 1 p .
+Applying Young's convolution estimate for spherically averaged spaces, see Lemma 3.2 in [23], we obtain 11 where we used that
+j∈Z 4 |P j f | 2 1 2 L p r L µ θ |ψ| * |f | 2 1 2 L p 2 r L µ 2 θ ψ 1 2 Lp r L ∞ θ |f | 2 1 2 Lp 2 r L µ 2 θ f Lp r L µ θ ,sup θ∈S 3 |ψ(rθ)| = sup |x|=r |ψ(x)| ≤ (1 + r 2 ) −3 sup |x|=r (1 + |x| 2 ) 3 |ψ(x)| (1 + r 2 ) −3
+for all r > 0 sinceψ is a Schwartz function. The assertion of the lemma then follows by approximation.
+
+2.3. Framework for the forced cubic nonlinear Schrödinger equation. In this subsection we introduce the functional setup in which we develop the local wellposedness and the perturbation theory for the forced cubic NLS (1.19). The involved norms depend on a fixed small parameter 0 < δ ≪ 1. In the proof of Theorem 1.1 it will be chosen in such a way that 1 7 + 6δ ≤ s, where 1 7 < s < 1 is the regularity parameter from that theorem. We further set ν = 16 7 δ. The norms are defined dyadically. Let I ⊆ R be an interval. For v N of spatial frequency N , i.e. having spatial Fourier support in
+A N := I × {ξ ∈ R 4 : N/2 < |ξ| < 2N }, we set v N XN (I) = N v N L 1 δ t L 2 1−δ x + N v N L 2 t L 4 x (2.4) for all N ∈ 2 Z . We then define v X(I) = N ∈2 Z P N v 2 XN (I) 1 2 . (2.5)
+For the right-hand sides we introduce the norms
+h N GN (I) = inf N h (1) N L 1 t L 2 x + N 4 7 +ν h (2) N L 2 1+2δ t L 14 9+δ r L 2 θ for all N ∈ 2 Z , where suppĥ N ⊆ A N and the infimum is taken over all h (1) N and h (2) N with h N = h (1) N + h (2) N and suppĥ (1) N , suppĥ (2) N ⊆ A N . We set h G(I) = N ∈2 Z P N h 2 GN (I) 1 2 .
+Note that we obtain
+e it∆ v 0 L ∞ IḢ 1 + e it∆ v 0 X(I) v 0 Ḣ1 (2.6)
+from Lemma 2.1 as ( 1 δ , 2 1−δ ) and (2,4) are Schrödinger admissible. Moreover, since
+( 2 1−2δ , 14 5−δ ) satisfies (2.1) and 2 − 2 2 1−2δ − 4 14 5−δ = − 3 7 + 16 7 δ = − 3 7 + ν, Lemma 2.1 and Lemma 2.2 imply t t0 e i(t−s)∆ h(s) ds L ∞ IḢ 1 + t t0 e i(t−s)∆ h(s) ds X(I) h G(I) . (2.7)
+Finally, we use the norms
+F N YN (I) = N 4 7 +ν N 4δ F N L 2 t L 14 5−δ r L 4 δ θ + N 4 7 +ν N 4δ F N L 2 t L 28 r L 4 δ θ + N 1 7 F N L 1 δ t L 14 5−δ x + N 1 7 F N L 1 δ t L 28 x (2.8) 12 for F N with suppF N ∈ A N and F Y (I) = N ∈2 Z P N F 2 YN (I) 1 2
+for the forcing term.
+
+
+Probabilistic estimates
+
+In this section we derive the improved space-time estimates for the linear Schrödinger flow with data randomized with respect to the decompositions in frequency space and the angular variable or in frequency space, the angular variable, and physical space.
+
+A crucial tool is the following large deviation estimate, which we formulate as in Lemma 3.1 in [12].
+Lemma 3.1. Let (X k ) k∈N be a sequence of independent, real-valued, mean-zero random variables on a probability space (Ω, A, P) with distributions (µ k ) k such that there is a constant c > 0 with R e γx dµ k (x) ≤ e cγ 2 for all γ ∈ R and k ∈ N. Then there is a constant C > 0 such that k∈N c k X k L β (Ω) ≤ C β k∈N |c k | 2 1 2
+for all (c k ) k∈N ∈ l 2 (N) and β ∈ [2, ∞).
+
+In the analysis of the randomization (1.17), we will also need Lemma 3.3 from [36] since the Littlewood-Paley operators do not commute with the physical-space randomization. In [36], it was formulated in three dimensions, but neither the statement nor the proof depend on the dimension. Similar estimates have previously appeared in [7,20]. 
+ϕ l P M (ϕ l ′ f ) L p + ϕ l P ≤2 0 (ϕ l ′ f ) L p D l − l ′ −D f L p , (3.1) P M (ϕ l P N f ) L p D M −D N −D f L p , (3.2) P M (ϕ l P ≤2 −5 M f ) L p D M −D f L p , (3.3)
+for all f ∈ L p (R 4 ), where the implicit constants are independent of M, N, l and l ′ .
+
+The estimates from the above lemma imply the following corollary, which is suitable for our applications. It is analogous to Corollary 3.4 in [36] where the case s = 1 was treated but we provide the details of the proof as we consider general regularities s here. 
+M s P M (ϕ l f ) l 2 M l 2 l L p ′ x f H s for all f ∈ H s (R 4 ).
+Proof. We first consider M ∈ 2 Z with M ≤ 2 4 . Using Bernstein's and Hölder's inequalities combined with | supp ϕ l | 1 for all l ∈ Z 4 , we infer
+M s P M (ϕ l f ) l 2 l L p ′ x M s M 4(1− 1 p ′ ) ϕ l f l 2 l L 1 x M s M 4 p ϕ l f l 2 l L 2 x M s M 4 p f L 2 . (3.4) Next fix M ∈ 2 Z with M ≥ 2 5 . We observe that P M (ϕ l f ) l 2 l L p ′ x ≤ P M (ϕ lPM f ) l 2 l L p ′ x + P M (ϕ l P ≤0 f ) l 2 l L p ′ x + N ∈2 N | log 2 (M/N )|≥5 P M (ϕ l P N f ) l 2 l L p ′ x .
+(3.5)
+
+For the first term on the right-hand side we estimate
+P M (ϕ lPM f ) l 2 l L p ′ x ϕ lPM f l 2 l L 2 x P M f L 2 x ,
+where we again used Hölder's inequality combined with | supp ϕ l | 1 for all l ∈ Z 4 . To treat the sum on the right-hand side of (3.5), we first setφ l = m∈Z 4 ,|m−l|≤4 ϕ m so thatφ l = 1 on the support of ϕ l for every l ∈ Z 4 . Applying Lemma 3.2, we obtain
+P M (ϕ l P N f ) L p ′ x ≤ l ′ ∈Z 4 P M (ϕ l P N (ϕ l ′ f )) L p ′ x l ′ ∈Z 4 P M (ϕ l P N (ϕ l ′ f )) 1 2 L p ′ x ϕ l P N (ϕ l ′ f ) 1 2 L p ′ x l ′ ∈Z 4 M −D N −D l − l ′ −20 φ l ′ f L p ′
+x for all N ∈ 2 N with | log 2 (M/N )| ≥ 5 and l ∈ Z 4 with a constant D > s. Exploiting that x − l l − l ′ for all x ∈ suppφ l ′ as well as | suppφ l ′ | 1 for all l ′ ∈ Z 4 , we get
+P M (ϕ l P N f ) L p ′ x l ′ ∈Z 4 M −D N −D l − l ′ −20 φ l ′ f L 2 x l ′ ∈Z 4 M −D N −D l − l ′ −10 x − l −10 f L 2 x M −D N −D x − l −10 f L 2 x .
+Taking the l 2 -norm in l and summing over N ∈ 2 N with log 2 (M/N ) ≥ 5, we arrive at
+N ∈2 N | log 2 (M/N )|≥5 P M (ϕ l P N f ) l 2 l L p ′ x M −D f L 2 x .
+Arguing in the same way for the second term on the right-hand side of (3.5), we get
+P M (ϕ l P ≤0 f ) l 2 l L p ′ x M −D f L 2
+x . Inserting these estimates in (3.5) and multiplying with M s , we conclude
+M s P M (ϕ l f ) l 2 l L p ′ x M s P M f L 2 x + M s M −D f L 2 x . (3.6) 14
+Finally, we take the l 2 -norm in (3.6) over M ∈ 2 Z with M ≥ 2 5 and the l 2 -norm in (3.4) over M ∈ 2 Z with M ≤ 2 4 , which yields the assertion of the corollary as D > s.
+
+We now turn to the improvements in space-time integrability of the linear Schrödinger flow with randomized data. We first consider the effect of the randomization with respect to the decomposition in frequency space and the angular variable. It allows us to move from high integrability spaces to spaces of lower integrability without losing regularity. Unlike the case of the pure Wiener randomization, the lower integrability threshold is not dictated by the Schrödinger admissibility condition, but by (2.1) as we can make use of Strichartz estimates in that range of exponents due to the additional randomization in the angular variable.
+
+In the deterministic setting, Strichartz estimates for the range (2.1) are obtained in spherically averaged spaces, i.e. in spaces with weaker angular integrability, see [22]. Exploiting that one can take an orthonormal basis of L 2 (S 3 ) consisting of spherical harmonics, these estimates reduce to uniform estimates for a family of Bessel functions. In fact, the Strichartz estimates in spherically averaged spaces are reduced to the estimate
+T k+1 2 (h) L q t L p r h L 2 r (3.7)
+uniformly in k, see (2.7) in [22], where the operators T k+1 2 are defined by
+T k+1 2 (h)(t, r) = r −1 ∞ 0 e −itρ 2 J k+1 (rρ)χ 2 0 (ρ)h(ρ)ρ 2 dρ (3.8)
+for all k ∈ N 0 and h ∈ L 2 (0, ∞). Due to the randomization in the angular variable, we can make use of estimate (3.7). In order to optimally exploit the advantages of the randomization in frequency space and the angular variable as described above, it is crucial that we do not rely on the unit-scale Bernstein inequality as it is typically done in the case of the Wiener randomization, but employ the square function estimate from Lemma 2.3 to move from high to low integrability spaces.
+
+Finally, we note that the additional randomization in physical space does not undermine the above advantages so that we obtain the same set of estimates for the linear Schrödinger flow with data randomized with respect to the decomposition in frequency space, the angular variable, and physical space. (i) Take f ∈ H s (R 4 ) and let f ω be its randomization from (1.14). Then there is a constant C > 0 such that
+∇ s ′ e it∆ f ω L β ωḂ s+ 2 q + 4 p 0 −2 q,(p,µ),2 ≤ C β ∇ s ′ f Ḣs for all β ∈ [1, ∞), p ∈ [p 0 , ∞)
+, and µ ∈ [2, ∞). (ii) Take f ∈ H s (R 4 ) and let fω be its randomization from (1.17). Then there is a constant C > 0 such that
+∇ s ′ e it∆ fω L β ωḂ s+ 2 q + 4 p 0 −2 q,(p,µ),2 ≤ C β f H s+s ′ for all β ∈ [1, ∞), p ∈ [p 0 , ∞), and µ ∈ [2, ∞).
+
+Proof.
+
+Since Ω is a probability space, it is enough to show the assertions for β ≥ max{q, p, µ} ≥ 2.
+
+(i) By definition and Minkowski's inequality, we have
+∇ s ′ e it∆ f ω L β ωḂ s+ 2 q + 4 p 0 −2 q,(p,µ),2 ∼ M∈2 Z M 2s ′ M 2(s+ 2 q + 4 p 0 −2) P M e it∆ f ω 2 L q t L p r L µ θ 1 2 L β ω M∈2 Z M 2s ′ M 2(s+ 2 q + 4 p 0 −2) P M e it∆ f ω 2 L β ω L q t L p r L µ θ 1 2 .
+Therefore, it is enough to prove
+M 2 q + 4 p 0 −2 P M e it∆ f ω L β ω L q t L p r L µ θ β P M f L 2 (3.9)
+for all M ∈ 2 Z with an implicit constant independent of M . We recall from the definition of f ω in (1.14) that
+f ω = M∈2 Z f M,ω ,
+where we use the notation
+f M,ω = j∈Z 4 ∞ k=0 N k l=1 X M j,k,l (ω)f M j,k,l , f M j,k,l = P j f M k,l , f M k,l (rθ) = a k M −1 r −1 b k,l (θ) ∞ 0ĉ M k,l (ρ)J k+1 (M rρ)ρ 2 dρ.
+Recall from Subsection 1.1 that the Fourier transform of f M j,k,l is supported in the annulus { M 2 < |ξ| < 2M }. In particular, we have
+P M e it∆ f ω = P M e it∆ (f M 2 ,ω + f M,ω + f 2M,ω ).
+Consequently, for (3.9) it is enough to prove
+M 2 q + 4 p 0 −2 e it∆ f M,ω L β ω L q t L p r L µ θ β P M f L 2 (3.10)
+for every M ∈ 2 Z . Applying Minkowski's inequality and Lemma 3.1, we obtain
+e it∆ f M,ω L β ω L q t L p r L µ θ β e it∆ f M j,k,l L q t L p r L µ θ l 2 j,k,l β P j e it∆ f M k,l l 2 k,l L q t L p r L µ θ l 2 j . (3.11)
+We next employ Lemma 2.3 with p 0 on the right-hand side which yields
+P j e it∆ f M k,l l 2 k,l L q t L p r L µ θ l 2 j e it∆ f M k,l l 2 k,l L q t L p 0 r L µ θ . (3.12)
+We thus obtain (3.10) from (3.11) and (3.12) if we show By scaling, (3.13) is equivalent to
+M 2 q + 4 p 0 −2 e it∆ f M k,l l 2 k,l L q t L p 0 r L µ θ P M f L 2 .e it∆ g M k,l l 2 k,l L q t L p 0 r L µ θ g M L 2 . (3.15)
+Since g M k,l has unit frequency and thus e it∆ g M k,l =P 2 0 e it∆ g M k,l , it is enough to show
+P 2 0 e it∆ g M k,l l 2 k,l L q t L p 0 r L µ θ g M L 2
+(3. 16) in order to prove (3.15). Theorem 3.10 in [37] and (3.14) imply that we have the representation
+(P 2 0 e it∆ g M k,l )(rθ) = a k r −1 b k,l (θ) ∞ 0 χ 2 0 (ρ)e −itρ 2ĉ M k,l (ρ)J k+1 (rρ)ρ 2 dρ = a k b k,l (θ)T k+1 2 (ĉ M k,l )(t, r)
+with T k+1 2 from (3.8). Employing property (1.7) of the good frame, estimate (3.7) for T k+1 2 , and (1.10), we infer
+P 2 0 e it∆ g M k,l l 2 k,l L q t L p 0 r L µ θ b k,l T k+1 2 (ĉ M k,l ) l 2 k,l L q t L p 0 r L µ θ T k+1 2 (ĉ M k,l ) l 2 k,l L q t L p 0 r ĉ M k,l l 2 k,l L 2 ρ ĉ M k,l l 2 k,l L 2 ρ g M L 2
+x , i.e. (3.16). In view of our reductions, we conclude the assertion of part (i).
+
+(ii) For the second part we first note that
+∇ s ′ (ϕ i f ) l 2 iḢ s ϕ i f l 2 i H s+s ′ f H s+s ′
+by Corollary 3.3. It is therefore enough to prove
+∇ s ′ e it∆ fω L β ωḂ s+ 2 q + 4 p 0 −2 q,(p,µ),2 β ∇ s ′ (ϕ i f ) l 2 iḢ s ,
+which follows in the same way as part (i).
+
+In view of the definition of the Y (I)-norm, we are particularly interested in the following estimates we obtain from the previous proposition. Note that choosing L 2 in time allows us to gain 3 7 − derivatives for the linear flow. Corollary 3.5. Let s ≥ 0, s ′ ∈ R, and 0 < δ ≪ 1. Take f ∈ H s (R 4 ) and let f ω and fω denote its randomization from (1.14) and (1.17), respectively.
+
+(i) There exists a constant C > 0 such that
+∇ s ′ e it∆ f ω L β ω L 2 tḂ s+ 3 7 − 2 7 δ (p,µ),2 + ∇ s ′ e it∆ f ω L β ωḂ s 1 δ ,(p,µ),2 ≤ C β ∇ s ′ f Ḣs for all p ∈ [ 14 5−δ , ∞),p ∈ [ 2 1−δ , ∞), µ ∈ [2, ∞), and β ∈ [1, ∞). (ii) There exists a constant C > 0 such that ∇ s ′ e it∆ fω L β ω L 2 tḂ s+ 3 7 − 2 7 δ (p,µ),2 + ∇ s ′ e it∆ fω L β ωḂ s 1 δ ,(p,µ),2 ≤ C β f H s+s ′ for all p ∈ [ 14 5−δ , ∞),p ∈ [ 2 1−δ , ∞), µ ∈ [2, ∞), and β ∈ [1, ∞).
+Proof. Note that L 2 (I,Ḃ We are now ready to provide the improvement in space-time integrability of the linear flow e it∆ fω with data randomized in frequency space, the angular variable and in physical space which originates in the unit-scale decomposition in physical space. We obtain the same set of estimates as for the pure physical-space randomization, see [36,28]. Hence, the additional randomization in frequency space and the angular variable does not impair the improvements of the physical-space randomization.
+Proposition 3.6. Let s ∈ R with s ≥ 0. Take q ∈ [1, ∞), p ∈ [2, ∞), and σ ≥ 0 such that 2 − 1 q − 4 p − σ > 0.
+Pick f ∈ H s (R 4 ) and let fω denote its randomization from (1.17). Then there exists a constant C > 0 such that
+t σ e it∆ fω L β ω L q [1,∞)Ḃ s p,2 ≤ C β f H s for all β ∈ [1, ∞).
+
+Proof.
+
+As Ω is a probability space, it is enough to show the assertion for β ≥ max{p, q} ≥ 2.
+
+We first recall from the definition of fω in (1.16) that
+fω = M∈2 Z f M,ω with f M,ω = i,j∈Z 4 ∞ k=0 N k l=1 X M i,j,k,l (ω)f M i,j,k,l ,f M i,j,k,l = P jf M i,k,l , f M i,k,l = a k M −1 r −1 b k,l (θ) ∞ 0ĉ M,i k,l (ρ)J k+1 (M rρ)ρ 2 dρ.
+We further recall from (1.15) that
+P M (ϕ i f ) = ∞ k=0 N k l=1f M i,k,l .
+Since the support of the Fourier transform of f M,ω is contained in { M 2 < |ξ| < 2M }, we first observe that
+t σ e it∆ fω L β ω L q [1,∞)Ḃ s p,2 M∈2 Z M 2s t σ e it∆ f M,ω 2 L p x 1 2 L β ω L q [1,∞)
+.
+
+
+Applying Minkowski's inequality and Lemma 3.1, we thus infer
+t σ e it∆ fω L β ω L q [1,∞)Ḃ s p,2 t σ M s e it∆ P jf M i,k,l L q [1,∞) l 2 M L p x l 2 i,j,k,l t σ M s e it∆ P jf M i,k,l L q [1,∞) l 2 M l 2 i L p x l 2 k,l l 2 j . (3.17)
+We next want to estimate the l 2 j -norm. In order to not lose the summability in l and k, we cannot simply apply Minkowski's inequality in p and Lemma 2.3. Instead, we note that by (2.3) and Young's inequality we have
+P j e it∆f M i,k,l L p x l 2 k,l l 2 j (|ψ| * |e it∆f M i,k,l | 2 ) 1 2 L p x l 2 k,l = |ψ| * e it∆f M i,k,l 2 l 2 k,l 1 2 L p 2 x 18 ψ 1 2 L 1 x e it∆f M i,k,l 2 l 2 k,l 1 2 L p 2 x e it∆f M i,k,l L p x l 2 k,l . (3.18)
+Using the definition ofĉ M,i k,l , Theorem 3.10 in [37], and rescaling, we further obtain the representation
+e it∆f M i,k,l (rθ) = a k M −1 r −1 ∞ 0 e −itM 2 ρ 2ĉ M,i k,l (ρ)J k+1 (M rρ)ρ 2 dρ · b k,l (θ) =: d M i,k,l (t, r) · b k,l (θ), e it∆ P M (ϕ i f )(rθ) = ∞ k=0 N k l=1 e it∆f M i,k,l (rθ) = ∞ k=0 N k l=1 d M i,k,l (t, r)b k,l (θ).
+In particular, (d M i,k,l (t, r)) k,l are the coefficients of e it∆ P M (ϕ i f )(r·) expanded in the orthonormal basis (b k,l ) k,l of L 2 (S 3 ). Parseval's identity thus yields
+d M i,k,l (t, r) l 2 k,l = e it∆ P M (ϕ i f )(r·) L 2 θ .
+Applying Minkowski's inequality, property (1.7) of the good frame, and Hölder's inequality on the sphere, we therefore derive
+e it∆f M i,k,l L p x l 2 k,l d M i,k,l · b k,l L p r l 2 k,l L p θ d M i,k,l L p r l 2 k,l e it∆ P M (ϕ i f ) L p r L 2 θ e it∆ P M (ϕ i f ) L p x . (3.19)
+The dispersive estimate further implies that
+e it∆ P M (ϕ i f ) L p x t −2+ 4 p P M (ϕ i f ) L p ′
+x for all t > 0. Combining this estimate with (3.19), (3.18), (3.17), and Corollary 3.3, we arrive at
+t σ e it∆ fω L β ω L q [1,∞)Ḃ s p,2 t σ t −2+ 4 p M s P M (ϕ i f ) L q [1,∞) l 2 M l 2 i L p ′ x = t −2+ 4 p +σ L q [1,∞) M s P M (ϕ i f ) l 2 M l 2 i L p ′ x f H s ,
+where we also used the assumption on q, p, and σ in the last step.
+
+While the randomization in frequency space and the angular variable worked together perfectly in Proposition 3.4, the advantages of the physical-space randomization cannot be used simultaneously in the same way. In order to make use of all the advantages, one thus has to interpolate between the different estimates. This allows us to derive the following estimate, which is the decisive ingredient in the proof of almost sure scattering in Section 6. Proposition 3.7. Let s > 5 7 . Take f ∈ H s (R 4 ) and let fω denote its randomization from (1.17). Then there is a constant C > 0 such that
+∇e it∆ fω L β ω L 1 t L ∞ x ≤ C β f H s for all β ∈ [1, ∞).
+Proof. We fix 0 < δ ≪ 1 such that 5 7 + 2δ < s and set η = 2δ. Note that
+∇e it∆ fω L β ω L 1 t L ∞ x ∇ δ ∇e it∆ fω L β ω L 1 t L 8 δ x e it∆ fω L β ω L 1 tḂ 1 8 δ ,2 + e it∆ fω L β ω L 1 tḂ 1+δ 8 δ ,2 , (3.20)
+where we used Sobolev's embedding in the first estimate. We split the time interval into R = (−∞, 1] ∪ (−1, 1) ∪ [1, ∞). Using Hölder's inequality and Corollary 3.5 (ii), we estimate on (−1, 1)
+e it∆ fω L β ω L 1 (−1,1)Ḃ 1+δ 8 δ ,2 e it∆ fω L β ω L 2 (−1,1)Ḃ 1+δ 8 δ ,2 e it∆ fω L β ω L 2 tḂ 4 7 + 9 7 δ+ 3 7 − 2 7 δ 8 δ ,2 β f H 4 7 + 9 7 δ β f H s . (3.21)
+For the estimate on [1, ∞), we first observe that Hölder's inequality implies 
+e it∆ fω Ḃ 1+δ 8 δ ,2 = N ∈2 Z N 2+2δ P N e it∆ fω 2 L 8 δ x 1 2 = N ∈2 Z (N 2+2δ+ 2 7 (1+ 3η 2−η ) P N e it∆ fω 2 L 8 δ x ) 2−η 3 (N 2+2δ− 4 7 P N e it∆ fω 2 L 8 δ x ) 1+η 3 1 2 ≤ N ∈2 Z (N 16 7 +2δ+ 6η 14−7η P N e it∆ fω 2 L 8 δ x 2−η 3 N ∈2 Z N 10 7 +2δ P N e it∆ fω 2 L 8 δ x1+ηβ f H s as 2 − 1 2 − δ 2 − 3 2 · 1 + δ 1 + η = 3 2 · η − δ 1 + η − δ 2 = 3 2 · δ 1 + 2δ − δ 2 > 0.
+In view of (3.22), we conclude that
+e it∆ fω L β ω L 1 [1,∞)Ḃ 1+δ 8 δ ,2 β f H s . (3.23) 20
+By time reversal, we also obtain (3.23) with [1, ∞) replaced by (−∞, 1]. In combination with (3.21), we thus arrive at
+e it∆ fω L β ω L 1 tḂ 1+δ 8 δ ,2 β f H s .
+Analogously, we infer
+e it∆ fω L β ω L 1 tḂ 1 8 δ ,2 β f H s ,
+which finishes the proof in view of (3.20).
+
+
+Almost sure local wellposedness
+
+In this section we prove the local wellposedness of the forced cubic NLS (1.19) in the functional framework of Subsection 2.3 for forcing terms F ∈ Y (R). We obtain e it∆ f ω ∈ Y (R) almost surely from Corollary 3.5 so that Theorem 1.1 is an immediate consequence.
+
+For the rest of this section, we fix 0 < δ ≪ 1 and set ν = 16 7 δ. The key ingredient in the proof of the local wellposedness theory is the following set of trilinear estimates, which arise from the cubic nonlinearity in the G(I)-norm. After frequency localizing the inputs and ordering them by the size of the frequency, we then place those trilinear terms where v appears at highest frequency in the L 1 t L 2 x -component of the G(I)-norm and estimate them by a combination of deterministic Strichartz estimates and Bernstein's inequality. If the forcing F appears at highest frequency, we place the corresponding trilinear terms in the L  
+N v 1 v 2 v 3 L 1 t L 2 x N N 1 N 3 N 2 2 3 v 1 XN 1 v 2 XN 2 v 3 XN 3 , (4.1) N v 1 v 2 F 3 L 1 t L 2 x N N 1 N 3 N 2 1−2δ v 1 XN 1 v 2 XN 2 F 3 YN 3 , (4.2) N v 1 F 2 v 3 L 1 t L 2 x N N 1 N 3 N 2 1 7 v 1 XN 1 F 2 YN 2 v 3 XN 3 , (4.3) N v 1 F 2 F 3 L 1 t L 2 x N N 1 N 3 N 2 4 7 +ν v 1 XN 1 F 2 YN 2 F 3 YN 3 , (4.4) N 4 7 +ν F 1 v 2 v 3 L 2 1+2δ t L 14 9+δ r L 2 θ N N 1 4 7 +ν N 3 N 2 δ F 1 YN 1 v 2 XN 2 v 3 XN 3 , (4.5) N 4 7 +ν F 1 v 2 F 3 L 2 1+2δ t L 14 9+δ r L 2 θ N N 1 4 7 +ν N 3 N 2 1 2 F 1 YN 1 v 2 XN 2 F 3 YN 3 , (4.6) N 4 7 +ν F 1 F 2 v 3 L 2 1+2δ t L 14 9+δ r L 2 θ N N 1 4 7 +ν N 3 N 2 1 7 F 1 YN 1 F 2 YN 2 v 3 XN 3 , (4.7) N 4 7 +ν F 1 F 2 F 3 L 2 1+2δ t L 14 9+δ r L 2 θ N N 1 4 7 +ν N 3 N 2 1 7 F 1 YN 1 F 2 YN 2 F 3 YN 3 (4.8) 21
+for all v j ∈ X Nj (I × R 4 ), F j ∈ Y Nj (I × R 4 ), and time intervals I ⊆ R, where all the space-time norms are taken over I × R 4 .
+
+Proof. We first note that by interpolation between the individual parts of the Y Nnorms and Hölder's inequality on the sphere, we obtain
+N 4 7 +ν j N j 4δ F j L 2 t L p r L µ θ F j YN j , N j 1 7 F j L 1 δ t L p x F j YN j (4.9)
+for all p ∈ [ 14 5−δ , 28], µ ∈ [1, 4 δ ], and j ∈ {1, 2, 3}. Interpolating between these two estimates next and using Hölder's inequality on the sphere again, we get
+N 4 7 +ν j N j 2δ F j L 2 1−2δ t L p r L µ θ F j YN j (4.10)
+for all p ∈ [ 14 5−δ , 28], µ ∈ [1, 1 δ ], and j ∈ {1, 2, 3}. All the estimates in the lemma follow from a combination of Hölder's inequality, Bernstein's inequality, estimates (4.9) and (4.10), and interpolation between
+L 1 δ t L 2 1−δ x and L 2 t L 4 x . For (4.1) we infer in this way N v 1 v 2 v 3 L 1 t L 2 x N v 1 L 2 t L 4 x v 2 L 3 t L 4 x v 3 L 6 t L ∞ x N N 1 N 3 N 2 2 3 N 1 v 1 L 2 t L 4 x N 2 v 2 L 3 t L 3 x N 3 v 3 L 6 t L 12 5 x N N 1 N 3 N 2 2 3 v 1 XN 1 v 2 XN 2 v 3 XN 3 .
+For (4.2) we find
+N v 1 v 2 F 3 L 1 t L 2 x N v 1 L 2 t L 4 x v 2 L 2 1−2δ t L 4 x F 3 L 1 δ t L ∞ x N N 1 N 1 v 1 L 2 t L 4 x N 2 v 2 L 2 1−2δ t L 4 1+2δ x N 3 N 2 1−2δ F 3 L 1 δ t L 4 1−2δ x N N 1 N 3 N 2 1−2δ v 1 XN 1 v 2 XN 2 F 3 YN 3 .
+To prove (4.3), we estimate
+N v 1 F 2 v 3 L 1 t L 2 x N v 1 L 2 1−2δ t L 4 1+2δ x F 2 L 2 t L 28 x v 3 L 1 δ t L 14 3−7δ x N N 1 N 1 v 1 L 2 1−2δ t L 4 1+2δ x N 4 7 +ν 2 F 2 L 2 t L 28 4+7ν x N 3 N 2 1 7 N 3 v 3 L 1 δ t L 2 1−δ x N N 1 N 3 N 2 1 7 v 1 XN 1 F 2 YN 2 v 3 XN 3 .
+
+Next we show (4.4). Here we infer
+N v 1 F 2 F 3 L 1 t L 2 x N v 1 L 2 1−2δ t L 4 1+2δ x F 2 L 2 t L 4 1−2δ x F 3 L 1 δ t L ∞ x N N 1 N 1 v 1 L 2 1−2δ t L 4 1+2δ x N 4 7 +ν 2 F 2 L 2 t L 4 1−2δ x N 3 N 2 4 7 +ν F 3 L 1 δ t L 7 1+4δ x N N 1 N 3 N 2 4 7 +ν v 1 XN 1 F 2 YN 2 F 3 YN 3 .
+To deduce (4.5), we estimate
+N 4 7 +ν F 1 v 2 v 3 L 2 1+2δ t L 14 9+δ r L 2 θ N 4 7 +ν F 1 L 2 1−2δ t L 7 1+11δ r L 2 3δ θ v 2 L 1 δ t L 4 1−3δ x v 3 L 1 δ t L 4 1−3δ x 22 N N 1 4 7 +ν N 4 7 +ν+2δ 1 F 1 L 2 1−2δ t L 7 1+11δ r L 2 3δ θ N 2 N 1 δ N 2 v 2 L 1 δ t L 2 1−δ x · N 3 N 1 δ N 3 v 3 L 1 δ t L 2 1−δ x N N 1 4 7 +ν N 3 N 2 δ F 1 YN 1 v 2 XN 2 v 3 XN 3 .
+Next, estimate (4.6) follows from
+N 4 7 +ν F 1 v 2 F 3 L 2 1+2δ t L 14 9+δ r L 2 θ N 4 7 +ν F 1 L 2 1−2δ t L 28 7+16δ r L 28 3+14δ θ v 2 L 1 δ t L 8 3−4δ x F 3 L 1 δ L 56 x N N 1 4 7 +ν N 4 7 +ν 1 F 1 L 2 1−2δ t L 28 7+16δ r L 28 3+14δ θ N 2 v 2 L 1 δ t L 2 1−δ x N 3 N 2 1 2 F 3 L 1 δ t L 7 x N N 1 4 7 +ν N 3 N 2 1 2 F 1 YN 1 v 2 XN 2 F 3 YN 3 .
+Continuing with (4.7), we obtain
+N 4 7 +ν F 1 F 2 v 3 L 2 1+2δ t L 14 9+δ r L 2 θ N 4 7 +ν F 1 L 2 1−2δ t L 14 5−δ r L 14 3−2δ θ F 2 L 1 δ t L 14 1+9δ x v 3 L 1 δ t L 14 3−7δ x N N 1 4 7 +ν N 4 7 +ν 1 F 1 L 2 1−2δ t L 14 5−δ r L 14 3−2δ θ N 1 7 2 F 2 L 1 δ t L 14 1+9δ x N 3 N 2 1 7 N 3 v 3 L 1 δ t L 2 1−δ x N N 1 4 7 +ν N 3 N 2 1 7 F 1 YN 1 F 2 YN 2 v 3 XN 3 .
+Finally, we infer (4.8) via
+N 4 7 +ν F 1 F 2 F 3 L 2 1+2δ t L 14 9+δ r L 2 θ N 4 7 +ν F 1 L 2 1−2δ t L 14 5−δ r L 14 3−2δ θ F 2 L 1 δ t L 7 2 x F 3 L 1 δ t L 7 δ x N N 1 4 7 +ν N 4 7 +ν 1 F 1 L 2 1−2δ t L 14 5−δ r L 14 3−2δ θ N 1 7 2 F 2 L 1 δ t L 7 2 x N 3 N 2 1 7 F 3 L 1 δ t L 28 1+4δ x N N 1 4 7 +ν N 3 N 2 1 7 F 1 YN 1 F 2 YN 2 F 3 YN 3 .
+The above set of trilinear estimates implies the following estimates for the nonlinearity of the forced cubic NLS in our functional framework. They are a key ingredient in the proofs of the local wellposedness theorem and the conditional scattering result for (1.19).
+Corollary 4.2. There is a constant C > 0 such that |v + F | 2 (v + F ) G(I) ≤ C( v 3 X(I) + F 3 Y (I) ), (4.11) |v 1 + F | 2 (v 1 + F ) − |v 2 + F | 2 (v 2 + F ) G(I) (4.12) ≤ C v 1 − v 2 X(I) ( v 1 2 X(I) + v 2 2 X(I) + F 2 Y (I) ), |u + w + F | 2 (u + w + F ) − |u| 2 u G(I) (4.13) ≤ C( F 3 Y (I) + w 3 X(I) + F Y (I) u 2 X(I) + w X(I) u 2 X(I) )
+for all u, v, v 1 , v 2 , w ∈ X(I), F ∈ Y (I), and time intervals I ⊆ R.
+
+Proof. All three estimates follow by applying dyadic decomposition and Lemma 4.1.
+
+The exponential gains in (4.1)-(4.8) allow us to close the estimates via Cauchy-Schwarz and Young's inequality for series.
+
+We next present the local wellposedness theory for the forced cubic NLS (1.19) in the functional framework from Subsection 2.3. We show that this problem has a unique solution provided the profile of the initial value and the forcing are sufficiently small. Moreover, we give a blow-up criterion in the X([t 0 , T + ))-norm, where T + denotes the maximal time of existence of the solution. In the case T + = ∞, we also prove that finite X([t 0 , T + ))-norm implies scattering.
+Theorem 4.3. Let I ⊆ R be a time interval, t 0 ∈ I, v 0 ∈Ḣ 1 (R 4 ), and F ∈ Y (R).
+There exists ε > 0 such that
+e i(t−t0)∆ v 0 X(I) + F Y (I) ≤ ε
+implies that there exists a unique solution v ∈ C(I,Ḣ 1 (R 4 )) ∩ X(I) of (1.19). It extends to a unique solution on the maximal interval of existence (T − , T + ). Moreover,
+(i) if T + < ∞, then v X([t0,T+)) = ∞, (ii) if T + = ∞ and v X([t0,T+)) < ∞, then the solution v scatters forward in time, i.e. there exists v + ∈Ḣ 1 (R 4 ) with lim t→∞ v(t) − e it∆ v + Ḣ1 = 0.
+The analogous statements are true for T − .
+
+Proof. Set
+B ε = {w ∈ X(I) : w X(I) ≤ 2ε}
+equipped with the metric d(w 1 , w 2 ) = w 1 − w 2 X(I) , where ε > 0 will be fixed below. We define the fixed point operator
+Φ(w)(t) = e i(t−t0)∆ v 0 ∓ i t t0 e i(t−s)∆ |F + w| 2 (F + w)(s) ds
+for all w ∈ B ε . Using (2.7) and Corollary 4.2, we infer
+Φ(w) X(I) ≤ e i(t−t0)∆ v 0 X(I) + |F + w| 2 (F + w) G(I) ≤ ε + C( F 3 Y (I) + w 3 X(I) ) ≤ ε + Cε 3 (4.14)
+and
+Φ(w 1 ) − Φ(w 2 ) X(I) ≤ C |F + w 1 | 2 (F + w 1 ) − |F + w 2 | 2 (F + w 2 ) G(I) ≤ C w 1 − w 2 X(I) ( w 1 2 X(I) + w 2 2 X(I) + F 2 Y (I) ) ≤ Cε 2 w 1 − w 2 X(I) (4.15)
+for all w, w 1 , w 2 ∈ B ε . Fixing the maximum C of the generic constants on the right-hand sides of (4.14) and (4.15), we set ε = ( 1 2C )
+1 2 . Consequently, Φ(w) X(I) ≤ 2ε, Φ(w 1 ) − Φ(w 2 ) X(I) ≤ 1 2 w 1 − w 2 X(I)
+for all w, w 1 , w 2 ∈ B ε , i.e. Φ is a contractive self-mapping on the complete metric space B ε . The Banach Fixed Point theorem thus yields a unique solution v of (1.19) in B ε . Since Φ(v) ∈ C(I,Ḣ 1 (R 4 )) by Strichartz estimates, we also have v ∈ C(I,Ḣ 1 (R 4 )). Uniqueness without size restriction follows from standard arguments and (4.15). We define the maximal existence times By standard arguments we can extend v to a unique maximal solution on (T − , T + ). We now turn to the proof of the blow-up condition. Let T + < ∞. Assume that v X([t0,T+)) < ∞. Take a sequence (t n ) n∈N in [t 0 , T + ) with t n → T + as n → ∞.
+
+Note that
+e i(t−tn)∆ v(t n ) = e it∆ v 0 ∓ i tn t0 e i(t−s)∆ |F + v| 2 (F + v)(s) ds = v(t) ± i t tn e i(t−s)∆ |F + v| 2 (F + v)(s) ds.
+We thus obtain from (2.7), Corollary 4.2, and the dominated convergence theorem
+e i(t−tn)∆ v(t n ) X([tn,T+)) ≤ v X([tn,T+)) + |F + v| 2 (F + v) G([tn,T+)) ≤ v X([tn,T+)) + C( F 3 Y ([tn,T+)) + v 3 X([tn,T+)) ) −→ 0
+as n → ∞. In particular, we find a time t ∈ [t 0 , T + ) such that
+e i(t−t)∆ v(t) X([t,T+)) + F Y ([t,T+)) ≤ ε 2 .
+The dominated convergence theorem therefore yields η > 0 with
+e i(t−t)∆ v(t) X([t,T++η)) + F Y ([t,T++η)) ≤ ε.
+Consequently, we can extend v to a solution on [t 0 , T + + η), which contradicts the definition of T + . We conclude that v X([t0,T+)) = ∞. It remains to prove the scattering part. Let T + = ∞ and v X([t0,T+)) < ∞. Employing Lemma 2.1, Lemma 2.2, and Corollary 4.2, we infer that
+v + = e −it0∆ v 0 ∓ i ∞ t0 e −is∆ |F + v| 2 (F + v)(s) ds belongs toḢ 1 (R 4 ). Then v(t) − e it∆ v + Ḣ1 ≤ ∞ t e i(t−s)∆ |F + v| 2 (F + v)(s) ds L ∞ ((t,∞),Ḣ 1 ) F 3 Y ((t,∞)) + v 3 X((t,∞)) −→ 0 as t → ∞ by the dominated convergence theorem.
+The assertions concerning T − are proven analogously.
+
+Theorem 1.1 now immediately follows from the local wellposedness theory of the forced cubic NLS. Proof of Theorem 1.1: Fix 0 < δ ≪ 1 such that 1 7 + 7δ ≤ s and set ν = 16 7 δ. Note that u is a solution of (1.18) if and only if the nonlinear part v(t) := u(t) − e it∆ f ω is a solution of (1.19) with F (t) = e it∆ f ω and v 0 = 0. 25 We next observe that
+F Y (R) ∼ ∇ 4δ F L 2 tḂ 4 7 +ν ( 14 5−δ , 4 δ ),2 + ∇ 4δ F L 2 tḂ 4 7 +ν (28, 4 δ ),2 + ∇ 1 7 F Ḃ0 1 δ , 14 5−δ ,2 + ∇ 1 7 F Ḃ0 1 δ ,28,2 .
+Applying Corollary 3.5 (i) with regularity parameters 1 7 + 18 7 δ and 4δ, we obtain ∇ 4δ e it∆ f ω
+L 2 tḂ 4 7 +ν ( 14 5−δ , 4 δ ),2 + ∇ 4δ e it∆ f ω L 2 tḂ 4 7 +ν (28, 4 δ ),2 β ∇ 4δ f Ḣ 1 7 + 18 7 δ β f H 1 7 +7δ β f H s ,
+while the same corollary with regularity parameters 0 and 1 7 yields
+∇ 1 7 e it∆ f ω Ḃ0 1 δ , 14 5−δ ,2 + ∇ 1 7 e it∆ f ω Ḃ0 1 δ ,28,2 β ∇ 1 7 f L 2 β f H s .
+Consequently, e it∆ f ω belongs to Y (R) for almost all ω ∈ Ω. The assertion of Theorem 1.1 thus follows from Theorem 4.3.
+
+
+Conditional scattering
+
+We now turn our attention to the long time behavior. Contrary to the local theory, the long time behavior of the cubic NLS depends on the sign in front of the nonlinearity. From now on, we only consider the defocusing cubic NLS
+i∂ t u + ∆u = |u| 2 u on R × R 4 , u(t 0 ) = u 0 ,(5.1)
+and correspondingly
+i∂ t v + ∆v = |F + v| 2 (F + v) on R × R 4 , v(t 0 ) = v 0 . (5.2)
+We now proceed as in [25] and [20] and develop a perturbation theory for (5.2), which eventually yields the conditional scattering result. We start with a lemma on short-time perturbations.
+
+Lemma 5.1. Let I ⊆ R be a time interval and t 0 ∈ I. Then there exist ε 0 , ζ 0 , η 0 > 0 with the following property.
+If u 0 , v 0 ∈Ḣ 1 (R 4 ) satisfy u 0 − v 0 Ḣ1 (R 4 ) ≤ ε 0 ,
+if u is a solution of (5.1) on I with u(t 0 ) = u 0 and u X(I) ≤ ζ for some ζ ∈ (0, ζ 0 ), and if F ∈ Y (I) satisfies F Y (I) ≤ η for some η ∈ (0, η 0 ), then there is a unique solution v ∈ C(I,Ḣ 1 (R 4 )) ∩ X(I) of (5.2) and a constant C ≥ 1 such that
+u − v L ∞ IḢ 1 x + u − v X(I) ≤ C( u 0 − v 0 Ḣ1 + η). (5.3)
+Proof. Due to the local wellposedness theory, it is enough to establish (5.3) as an a priori estimate. Set w = v − u. Then the function w satisfies
+i∂ t w + ∆w = |F + v| 2 (F + v) − |u| 2 u, w(t 0 ) = v 0 − u 0 . (5.4)
+Hence, (2.6), (2.7), and Corollary 4.2 imply
+w L ∞ IḢ 1 + w X(I) v 0 − u 0 Ḣ1 + |F + u + w| 2 (F + u + w) − |u| 2 u G(I) v 0 − u 0 Ḣ1 + F 3 Y (I) + w 3 X(I) + F Y (I) u 2 X(I) + w X(I) u 2 X(I) v 0 − u 0 Ḣ1 + η 3 + w 3 X(I) + ηζ 2 + ζ 2 w X(I) .
+For ζ 0 > 0 small enough, we thus obtain
+w L ∞ IḢ 1 + w X(I) v 0 − u 0 Ḣ1 + η + η 3 + w 3 X(I) .
+If ε 0 > 0 and η 0 > 0 are chosen small enough, a standard continuity argument yields the assertion.
+
+Due to the time divisibility of the X(I)-norm, we can derive a long-time perturbation result from the previous lemma.
+Lemma 5.2. Let I ⊆ R be a time interval, t 0 ∈ I, and v 0 ∈Ḣ 1 (R 4 ). Take A > 0. Suppose that the solution u of (5.1) with u(t 0 ) = v 0 satisfies u X(I) ≤ A.
+Then there exists η = η(A) > 0 and C = C(A) > 0 such that for every F ∈ Y (I) satisfying
+F Y (I) ≤ η
+there is a unique solution v ∈ C(I,Ḣ 1 (R 4 )) ∩ X(I) of (5.2) with v X(I) ≤ C(A).
+
+(5.5)
+
+Proof. It is again enough to prove (5.5) as an a priori estimate because of the local wellposedness theory. We further assume without loss of generality that t 0 = inf I. Let ζ 0 , ε 0 , η 0 and C 0 be the parameters and the constant from Lemma 5.1, respectively, and fix ζ ∈ (0, ζ 0 ). Then there exist n = n(A) and t 0 < t 1 < . . . < t n = T + such that u X(Ij) ≤ ζ (5.6) for all j ∈ {1, . . . , n}, where I j = (t j−1 , t j ). We define η = η(A) by
+η = min{ε 0 (2C 0 ) −n , η 0 }. We show inductively that v − u L ∞ (Ij ,Ḣ 1 ) + v − u X(Ij) ≤ (2C 0 ) j η (5.7)
+for all j ∈ {1, . . . , n}.
+
+For j = 1 this is an immediate consequence of Lemma 5.1. Now assume that we have shown (5.7) for a number j ∈ {1, . . . , n − 1}. Since (2C 0 ) j η ≤ ε 0 , we can apply
+Lemma 5.1 on I j+1 which yields v − u L ∞ (Ij+1,Ḣ 1 ) + v − u X(Ij+1) ≤ C 0 ( v(t j ) − u(t j ) Ḣ1 + η) ≤ C 0 ((2C 0 ) j η + η) ≤ (2C 0 ) j+1 η,
+i.e. (5.7) for j + 1. Setting C = (2C 0 ) n η + A thus finishes the proof.
+
+We now come to the conditional scattering result for (5.2). It states that given F ∈ Y (R), if the energy of the solution v remains bounded on the maximal interval of existence, then v exists globally and scatters. The key ingredient in the proof is that the deterministic theory for (5.1) with initial values inḢ 1 (R 4 ) provides a bound of a global scattering norm in terms of the energy of the initial value. In view of our perturbation theory, we can derive the conditional scattering result by comparing solutions of the forced equation with the global scattering ones of (5.1) withḢ 1 (R 4 )-initial data.
+Proposition 5.3. Let v 0 ∈Ḣ 1 (R 4 ) and F ∈ Y ([t 0 , ∞)).
+Let v denote the solution of (5.2) on its maximal interval of existence [t 0 , T + ). Assume that
+A = sup t∈[t0,T+) E(v(t)) < ∞.
+We then have v X([t0,T+)) < ∞. In particular, T + = ∞ and the solution scatters
+forward in time, i.e. there is v + ∈Ḣ 1 (R 4 ) such that lim t→∞ v(t) − e it∆ v + Ḣ1 = 0.
+In backward time the analogous statement is true.
+
+Proof. Recall that by the deterministic theory, see [33,39], for every u 0 ∈Ḣ 1 (R 4 ) the solution u of (5.1) with initial data u 0 exists on R and scatters. We claim that there is a non-decreasing function K : [0, ∞) → [0, ∞) such that for every initial data u 0 ∈Ḣ 1 (R 4 ) the global solution u of (5.1) satisfies u X(R) ≤ K(E(u 0 )). (5.8) To prove this claim, we note that by Theorem 1.1 and Lemma 3.6 in [33] there exists a non-decreasing function L : [0, ∞) → [0, ∞) such that
+∇u L 3 t L 3
+x ≤ L(E(u 0 )). Applying (2.6), (2.7), and Sobolev's inequality, we thus obtain
+u X(R) u 0 Ḣ1 + |u| 2 u G(R) E(u 0 ) 1 2 + N ∈2 Z N 2 P N (|u| 2 u) 2 L 1 t L 2 x 1 2 E(u 0 ) 1 2 + ∇(|u| 2 u) L 1 t L 2 x E(u 0 ) 1 2 + ∇u L 3 t L 3 x u 2 L 3 t L 12 x E(u 0 ) 1 2 + ∇u 3 L 3 t L 3 x E(u 0 ) 1 2 + L(E(u 0 )) 3 ,
+implying (5.8). Now take η = η(K(A)) > 0 from Lemma 5.2. Pick t 0 < t 1 < . . . < t n = T + such that
+F Y (Ij ) ≤ η
+for all j ∈ {1, . . . , n}, where I j = (t j−1 , t j ). Let u j be the unique global solution of (5.1) with initial data u(t j−1 ) = v(t j−1 ) for every j ∈ {1, . . . , n}. In particular, u exists on I j and satisfies
+u j X(Ij ) ≤ u j X(R) ≤ K(E(v(t j−1 ))) ≤ K(A)
+for every j, where we used (5.8) and the assumption. Since F Y (Ij ) ≤ η(K(A)), Lemma 5.2 yields v X(Ij) ≤ C(K(A)).
+Hence, v X([t0,T+)) ≤ n j=1 v X(Ij) ≤ nC(K(A)) < ∞.
+The other assertions of the proposition now follow from Theorem 4.3.
+
+
+Almost sure scattering
+
+We finally prove the almost sure scattering result for data randomized in frequency space, the angular variable, and physical space. We first formulate conditions on the forcing F which imply scattering for the forced equation
+Proposition 6.1. Let 0 < δ ≪ 1, t 0 ∈ R, v 0 ∈Ḣ 1 (R 4 ), and let F ∈ Y (R) be a solution of the linear Schrödinger equation with ∇F L 2 t L 14 5−δ x + ∇F L 2 t L 14 2+δ x + ∇F L 2 1−δ t L 14 5−δ x + ∇F L 1 t L ∞ x + F L ∞ t L 4 x < ∞,
+where all the space-time norms are taken over R × R 4 . Let v denote the unique solution of (5.2) with initial data v 0 on its maximal interval of existence (T − , T + ). Then
+sup t∈(T−,T+) E(v(t)) < ∞.
+In particular, (T − , T + ) = R and the solution v scatters both forward and backward in time, i.e. there exist v ± ∈Ḣ 1 (R 4 ) such that
+lim t→±∞ v(t) − e it∆ v ± Ḣ1 (R 4 ) = 0.
+Proof. We only show T + = ∞ and the scattering forward in time as the proof in the negative time direction works analogously.
+
+A computation as in [25] and [20] yields
+∂ t E(v(t)) = Re R 4 ∂ t v(−∆v + |v| 2 v) dx = − Re R 4 ∂ t v(|F + v| 2 (F + v) − |v| 2 v) dx,
+where we integrated by parts and used (5.2) after taking the time derivative. We can reformulate this identity as
+∂ t E(v(t)) = − 1 4 ∂ t R 4 (|F + v| 4 − |F | 4 − |v| 4 ) dx + Re R 4 ∂ t F (|F + v| 2 (F + v) − |F | 2 F ) dx = − 1 4 ∂ t R 4 (|F + v| 4 − |F | 4 − |v| 4 ) dx − Im R 4 ∇F · ∇[|F + v| 2 (F + v) − |F | 2 F ] dx,
+where we used that F satisfies ∂ t F = i∆F and integrated by parts again. Setting for all T 0 , T ∈ (T − , T + ) with T > T 0 . We fix such T 0 and T for a moment.
+
+Estimating the boundary terms first, we derive via Hölder's and Young's inequalities
+|F + v| 4 − |F | 4 − |v| 4 L ∞ t L 1 x ≤ C κ F 4 L ∞ t L 4 x + κ v 4 L ∞ t L 4 x ≤ C κ F 4 L ∞ t L 4
+x + κA T0 (T ) (6.2)
+
+for every κ > 0, where all the space-time norms are taken over (T 0 , T ) × R 4 . It remains to estimate the last summand on the right-hand side of (6.1). In the terms appearing there, we can estimate each factor in the same way as its complex conjugate so that we drop the complex conjugation for convenience. Consequently, the last summand on the right-hand side of (4.2) is controlled by
+(∇F ) 2 F v L 1 t L 1 x ≤ ∇F 2 L 2 1−δ t L 14 5−δ x F L 1 δ t L 28 1+4δ x v L ∞ t L 4 x ∇F 2 L 2 1−δ t L 14 5−δ x F Y (T0,T ) A T0 (T ), (∇F ) 2 v 2 L 1 t L 1 x ≤ ∇F L 2 t L 14 5−δ x ∇F L 2 t L 14 2+δ x v 2 L ∞ t L 4 x ≤ ∇F L 2 t L 14 5−δ x ∇F L 2 t L 14 2+δ x A T0 (T ),
+(∇F )(∇v)F 2 x ≤ ∇F
+L 1 t L 1 x ≤ ∇F L 2 t L 14 5−δ x ∇v L ∞ t L 2 x FL 2 t L 28 5+16δ x ∇v L ∞ t L 2 x F L 2 t L 14 1−8δ x v L ∞ t L 4 x ( ∇F L 2 t L 14 5−δ x + ∇F L 2 t L 14 2+δ x ) F Y (T0,T ) A T0 (T ), (∇F )(∇v)v 2 L 1 t L 1 x ≤ ∇F L 1 t L ∞ x ∇v L ∞ t L 2 x v 2 L ∞ t L 4 x ≤ ∇F L 1 t L ∞ x A T0 (T ),(6.3)
+where all space-time norms are taken over (T 0 , T ) × R 4 . In the derivation of the above estimates, we only used Hölder's inequality, the embeddingḂ 0 q,2 (R 4 ) ֒→ L q (R 4 ) (q ≥ 2) in combination with Minkowski's inequality, and (4.9) to estimate  . 30 We now fix the maximum C of the implicit constants appearing on the right-hand sides of (6.3) and pick κ ∈ (0, 1 4 ) such that 8C · κ < 1 2 .
+
+The assumptions and the dominated convergence theorem imply that there exist times t 0 < t 1 < . . . < t n < t n+1 = T + such that
+F Y (Ij ) + ∇F L 2 I j L 14 5−δ x + ∇F L 2 I j L 14 2+δ x + ∇F L 2 1−δ I j L 14 5−δ x + ∇F L 1 I j L ∞ x ≤ κ
+for all j ∈ {0, 1, . . . , n}, where I j = (t j , t j+1 ) for j ∈ {0, . . . , n}. Combining (6.1) with (6.2) and (6.3), we thus arrive at A tj (t j+1 ) ≤ 1 + E(v(t j )) + C κ F L ∞ I j L 4
+
+x + 8C · κA tj (t j+1 ), A tn (T ) ≤ 1 + E(v(t n )) + C κ F L ∞ In L 4
+
+x + 8C · κA tn (T ), implying
+A tj (t j+1 ) ≤ 2 + 2E(v(t j )) + 2C κ F L ∞ I j L 4 x , A tn (T ) ≤ 2 + 2E(v(t n )) + 2C κ F L ∞ In L 4
+x for all j ∈ {0, . . . , n − 1} and T ∈ (T 0 , T + ) by our choice of κ. Letting T → T + , we conclude A tn (t n+1 ) = A tn (T + ) ≤ 2 + 2E(v(t n )) + 2C κ F L ∞ In L 4
+
+x . By induction, we get A tj (t j+1 ) ≤ (2 j+2 − 2)(1 + C κ F L ∞ t L 4
+
+x ) + 2 j+1 E(v(t 0 )) for all j ∈ {0, . . . , n}. We thus arrive at sup t∈(t0,T+) E(v(t)) = max{A tj (t j+1 ) : j ∈ {0, . . . , n}} = (2 n+2 − 2)(1 + C κ F L ∞ t L 4
+
+x ) + 2 n+1 E(v(t 0 )) < ∞. Arguing analogously on (T − , t 0 ), we obtain sup t∈(T−,T+) E(v(t)) < ∞.
+
+The remaining assertions of the proposition now follow from Proposition 5.3.
+
+Similar to the proof of Theorem 1.1, Theorem 1.2 now immediately follows once we check that e it∆ fω satisfies the assumptions on the forcing from Proposition 6.1 almost surely. Proof of Theorem 1.2: Fix 0 < δ ≪ 1 such that 5 7 + 2δ ≤ s. Recall that u is a solution of (5.1) if and only if v(t) := u(t) − e it∆ fω solves (5.2) with forcing F (t) = e it∆ fω and initial data v 0 = 0.
+
+To check the assumptions of Proposition 6.1, we first note that analogous to the proof of Theorem 1.1, Corollary 3.5 (ii) implies e it∆ fω ∈ Y (R) for almost allω ∈ Ω.
+
+Since (2, 14 5−δ ) and ( 2 1−δ , 14 5−δ ) satisfy (2.1) and 14 2+δ ≥ 14 5−δ , we can apply Proposition 3.4 (ii) with (q, p 0 ) = (2, 14 5−δ ) and (q, p 0 ) = ( 2 1−δ , 14 5−δ ), respectively, to infer ∇e it∆ fω L β ω L 2 t L 
+∇e it∆ fω L β ω L 1 t L ∞ x β f H s (6.5)
+for all β ∈ [1, ∞). For the remaining L ∞ t L 4
+
+x -estimate, we exploit that e it∆ fω is a solution of the linear Schrödinger equation so that we obtain after applying Sobolev's embedding
+e it∆ fω L ∞ t L 4 x ∂ t 2δ e it∆ fω L 1 δ L 4 x ∇ 4δ e it∆ fω L 1 δ L 4 x e it∆ fω Y (R) .
+Combined with (6.4) and (6.5), we conclude that for almost everyω ∈ Ω, e it∆ fω belongs to Y (R) and satisfies the assumptions on the forcing F from Proposition 6.1. The assertion of Theorem 1.2 thus follows from Proposition 6.1.
+
+
+∈ H s (R 4 ). The equation is called defocusing because of the plus sign in front of |u| 2 u. With a minus sign in front of the nonlinearity, the corresponding equation is called focusing. The energy for sufficiently regular solutions of (1.1). Since the rescaling u(t, x) → λu(λ 2 t, λx) leaves both equation (1.1) and the energy invariant, problem (1.1) is called energycritical.
+
+Theorem 1 . 2 .
+12Let 5 7 < s < 1. Take f ∈ H s (R 4 ) and let fω denote the randomization of f from(1.17). Then for almost allω ∈ Ω there is a unique global solution u ∈ e it∆ fω + C(R,Ḣ 1 (R 4 )) ∩ X(R) which scatters both forward and backward in time, i.e., there exist
+
+Lemma 3. 2 .
+2Let 1 ≤ p < ∞, M, N ∈ 2 N with | log 2 M N | ≥ 5, l, l ′ ∈ Z 4, D > 0, and (ϕ l ) l∈Z 4 the partition of unity from (1.5). Then
+
+Corollary 3. 3 .
+3Let p ∈ [2, ∞), s ≥ 0, and (ϕ l ) l∈Z 4 be the partition of unity introduced in (1.5). We then have
+
+Proposition 3. 4 .
+4Let q, p 0 ∈ [2, ∞) such that (q, p 0 ) satisfies (2.1) and let s ≥ 0 and s ′ ∈ R.
+
+
+from (1.8) that g M = (P M f )(M −1 ·) and we also rescale f M k,l to unit frequency by setting g M k,l = f M k,l (M −1 ·), i.e. g M k,l (rθ) = a k r −1 b k,l (θ) ∞ 0ĉ M k,l (ρ)J k+1 (rρ)ρ 2 dρ. (3.14)
+
+
+(p,µ),2 (I × R 4 ) for any time interval I. Since (2, 14 5−δ ) and ( 1 δ , 2 1−δ ) both satisfy (2.1), the assertions follow from Proposition 3.4 applied with p 0 = 14 5−δ andp 0 = 2 1−δ .
+
+
+-component of the G(I)-norm, which gains 3 7 − derivatives. We then estimate the forcing part of highest frequency in a space which gains another3  7  − derivatives in the probabilistic setting.
+
+Lemma 4 . 1 .
+41Let N, N 1 , N 2 , N 3 ∈ 2 Z with N N 1 and N 3 ≤ N 2 ≤ N 1 . We then have
+
+T
++ = sup{T > t 0 : (1.19) has a solution on [t 0 , T ]}, T − = inf{T < t 0 : (1.19) has a solution on [T, t 0 ]}.
+
+A
+T0 (T ) = 1 + sup t∈[T0,T ]E(v(t)),29 we thus obtainA T0 (T ) ≤ 1 + E(v(T 0 )) + |F + v| 4 − |F | 4 − |v| 4 L ∞ (T 0 ,T ) L 1 x + ∇F · ∇[|F + v| 2 (F + v) − |F | 2 F ]
+
+
+for all β ∈ [1, ∞). Proposition 3.7 yields14 
+5−δ 
+x 
+
+e it∆ fω L β 
+
+ωḂ 
+1 
+2, 14 
+5−δ 
+,2 
+
+β f H 
+
+4 
+7 
++ 2 
+7 
+δ 
+
+β f H s , 
+
+31 
+
+∇e it∆ fω 
+
+L β 
+ω L 2 
+t L 
+
+14 
+2+δ 
+x 
+
+e it∆ fω L β 
+
+ωḂ 
+1 
+2, 14 
+2+δ 
+,2 
+
+β f H 
+
+4 
+7 
++ 2 
+7 
+δ 
+
+β f H s , 
+
+∇e it∆ fω 
+
+L β 
+ω L 
+
+2 
+1−δ 
+t 
+
+L 
+
+14 
+5−δ 
+x 
+
+e it∆ fω L β 
+
+ωḂ 
+1 
+2 
+1−δ 
+, 14 
+5−δ 
+,2 
+
+β f H 
+
+4 
+7 
++ 9 
+7 
+δ 
+
+β f H s 
+
+(6.4) 
+
+
+Acknowledgment. I want to thank Sebastian Herr for helpful discussions.
+On the probabilistic Cauchy theory of the cubic nonlinear Schrödinger equation on R d , d ≥ 3. Á Bényi, T Oh, O Pocovnicu, Trans. Amer. Math. Soc. Ser. B. 2Á. Bényi, T. Oh, and O. Pocovnicu. On the probabilistic Cauchy theory of the cubic nonlinear Schrödinger equation on R d , d ≥ 3. Trans. Amer. Math. Soc. Ser. B, 2:1-50, 2015.
+
+Wiener randomization on unbounded domains and an application to almost sure well-posedness of NLS. Á Bényi, T Oh, O Pocovnicu, Excurions in harmonic analysis. ChamBirkhäuser/Springer4Á. Bényi, T. Oh, and O. Pocovnicu. Wiener randomization on unbounded domains and an application to almost sure well-posedness of NLS. In Excurions in harmonic analysis, volume 4 of Appl. Numer. Harmon. Anal., pages 3-25. Birkhäuser/Springer, Cham, 2015.
+
+Higher order expansions for the probabilistic local Cauchy theory of the cubic nonlinear Schrödinger equation on R 3. Á Bényi, T Oh, O Pocovnicu, Trans. Amer. Math. Soc. Ser. B. 6Á. Bényi, T. Oh, and O. Pocovnicu. Higher order expansions for the probabilistic local Cauchy theory of the cubic nonlinear Schrödinger equation on R 3 . Trans. Amer. Math. Soc. Ser. B, 6:114-160, 2019.
+
+Periodic nonlinear Schrödinger equation and invariant measures. J Bourgain, Comm. Math. Phys. 166J. Bourgain. Periodic nonlinear Schrödinger equation and invariant measures. Comm. Math. Phys., 166:1-26, 1994.
+
+Invariant measures for the 2D-defocusing nonlinear Schrödinger equation. J Bourgain, Comm. Math. Phys. 176J. Bourgain. Invariant measures for the 2D-defocusing nonlinear Schrödinger equation. Comm. Math. Phys., 176:421-445, 1996.
+
+Almost sure local well-posedness for the supercritical quintic NLS. J Brereton, Tunis. J. Math. 1J. Brereton. Almost sure local well-posedness for the supercritical quintic NLS. Tunis. J. Math., 1:427-453, 2019.
+
+Almost sure scattering for the energy critical nonlinear wave equation. B Bringmann, arXiv:1812.10187Amer. J. Math. To appear inB. Bringmann. Almost sure scattering for the energy critical nonlinear wave equation. To appear in Amer. J. Math., arXiv:1812.10187.
+
+Almost-sure scattering for the radial energy-critical nonlinear wave equation in three dimensions. B Bringmann, Anal. PDE. 13B. Bringmann. Almost-sure scattering for the radial energy-critical nonlinear wave equation in three dimensions. Anal. PDE, 13:1011-1050, 2020.
+
+Randomization improved Strichartz estimates and global wellposedness for supercritical data. N Burq, J Krieger, arXiv:1902.06987Arxiv preprintN. Burq and J. Krieger. Randomization improved Strichartz estimates and global well- posedness for supercritical data. Arxiv preprint, arXiv:1902.06987.
+
+Injections de Sobolev probabilistes et applications. N Burq, G Lebeau, Ann. Sci.Éc. Norm. Supér. 464N. Burq and G. Lebeau. Injections de Sobolev probabilistes et applications. Ann. Sci.Éc. Norm. Supér. (4), 46:917-962, 2013.
+
+Probabilistic Sobolev embeddings, applications to eigenfunctions estimates. N Burq, G Lebeau, Geometric and spectral analysis. Providence, RIAmer. Math. Soc630N. Burq and G. Lebeau. Probabilistic Sobolev embeddings, applications to eigenfunctions estimates. In Geometric and spectral analysis, volume 630 of Contemp. Math., pages 307- 318. Amer. Math. Soc., Providence, RI, 2014.
+
+Random data Cauchy theory for supercritical wave equations I: local theory. N Burq, N Tzvetkov, Invent. Math. 173N. Burq and N. Tzvetkov. Random data Cauchy theory for supercritical wave equations I: local theory. Invent. Math., 173:449-475, 2008.
+
+Random data Cauchy theory for supercritical wave equations II: a global existence result. N Burq, N Tzvetkov, Invent. Math. 173N. Burq and N. Tzvetkov. Random data Cauchy theory for supercritical wave equations II: a global existence result. Invent. Math., 173:477-496, 2008.
+
+Scattering for the cubic Schrödinger equation in 3D with randomized radial initial data. N Camps, arXiv:2110.10752Arxiv preprintN. Camps. Scattering for the cubic Schrödinger equation in 3D with randomized radial initial data. Arxiv preprint, arXiv:2110.10752.
+
+Ill-posedness for nonlinear Schrödinger and wave equations. M Christ, J Colliander, T Tao, arXiv:math/0311048M. Christ, J. Colliander, and T. Tao. Ill-posedness for nonlinear Schrödinger and wave equa- tions. arXiv:math/0311048.
+
+Maximal functions associated to filtrations. M Christ, A Kiselev, J. Funct. Anal. 179M. Christ and A. Kiselev. Maximal functions associated to filtrations. J. Funct. Anal., 179:409-425, 2001.
+
+Global well-posedness and scattering for the energy-critical nonlinear Schrödinger equation in R 3. J Colliander, M Keel, G Staffilani, H Takaoka, T Tao, Ann. of Math. 1672J. Colliander, M. Keel, G. Staffilani, H. Takaoka, and T. Tao. Global well-posedness and scattering for the energy-critical nonlinear Schrödinger equation in R 3 . Ann. of Math. (2), 167:767-865, 2008.
+
+Large data low regularity scattering results for the wave equation on the Euclidean space. A.-S De Suzzoni, Comm. Partial Differential Equations. 381A.-S. de Suzzoni. Large data low regularity scattering results for the wave equation on the Euclidean space. Comm. Partial Differential Equations, 38(1):1-49, 2013.
+
+Two-dimensional nonlinear Schrödinger equation with random radial data. Y Deng, Anal. PDE. 55Y. Deng. Two-dimensional nonlinear Schrödinger equation with random radial data. Anal. PDE, 5(5):913-960, 2012.
+
+Almost sure local well-posedness and scattering for the 4D cubic nonlinear Schrödinger equation. B Dodson, J Lührmann, D Mendelson, Adv. Math. 347B. Dodson, J. Lührmann, and D. Mendelson. Almost sure local well-posedness and scattering for the 4D cubic nonlinear Schrödinger equation. Adv. Math., 347:619-676, 2019.
+
+Almost sure scattering for the 4D energy-critical defocusing nonlinear wave equation with radial data. B Dodson, J Lührmann, D Mendelson, Amer. J. Math. 142B. Dodson, J. Lührmann, and D. Mendelson. Almost sure scattering for the 4D energy-critical defocusing nonlinear wave equation with radial data. Amer. J. Math., 142:475-504, 2020.
+
+Sharp spherically averaged Strichartz estimates for the Schrödinger equation. Z Guo, Nonlinearity. 29Z. Guo. Sharp spherically averaged Strichartz estimates for the Schrödinger equation. Non- linearity, 29:1668-1686, 2016.
+
+Generalized Strichartz estimates and scattering for 3D Zakharov system. Z Guo, S Lee, K Nakanishi, C Wang, Comm. Math. Phys. 331Z. Guo, S. Lee, K. Nakanishi, and C. Wang. Generalized Strichartz estimates and scattering for 3D Zakharov system. Comm. Math. Phys., 331:239-259, 2014.
+
+Endpoint Strichartz estimates. M Keel, T Tao, Amer. J. Math. 120M. Keel and T. Tao. Endpoint Strichartz estimates. Amer. J. Math., 120:955-980, 1998.
+
+Almost sure scattering for the energy-critical NLS with radial data below H 1 (R 4 ). R Killip, J Murphy, M Visan, Comm. Partial Differential Equations. 441R. Killip, J. Murphy, and M. Visan. Almost sure scattering for the energy-critical NLS with radial data below H 1 (R 4 ). Comm. Partial Differential Equations, 44(1):51-71, 2019.
+
+Random data Cauchy theory for nonlinear wave equations of power-type on R 3. J Lührmann, D Mendelson, Comm. Partial Differential Equations. 39J. Lührmann and D. Mendelson. Random data Cauchy theory for nonlinear wave equations of power-type on R 3 . Comm. Partial Differential Equations, 39:2262-2283, 2014.
+
+Random data final-state problem for the mass-subcritical NLS in L 2. J Murphy, Proc. Amer. Math. Soc. 147J. Murphy. Random data final-state problem for the mass-subcritical NLS in L 2 . Proc. Amer. Math. Soc., 147:339-350, 2019.
+
+Randomized final-data problem for systems of nonlinear Schrödinger equations and the Gross-Pitaevskii equation. K Nakanishi, T Yamamoto, Math. Res. Lett. 26K. Nakanishi and T. Yamamoto. Randomized final-data problem for systems of nonlinear Schrödinger equations and the Gross-Pitaevskii equation. Math. Res. Lett., 26:253-279, 2019.
+
+On the probabilistic well-posedness of the nonlinear Schrödinger equations with non-algebraic nonlinearities. T Oh, M Okamoto, O Pocovnicu, Discrete Contin. Dyn. Syst. 39T. Oh, M. Okamoto, and O. Pocovnicu. On the probabilistic well-posedness of the nonlin- ear Schrödinger equations with non-algebraic nonlinearities. Discrete Contin. Dyn. Syst., 39:3479-3520, 2019.
+
+Probabilistic global well-posedness of the energy-critical defocusing quintic nonlinear wave equation on R 3. T Oh, O Pocovnicu, J. Math. Pures Appl. 105T. Oh and O. Pocovnicu. Probabilistic global well-posedness of the energy-critical defocusing quintic nonlinear wave equation on R 3 . J. Math. Pures Appl., 105:342-366, 2016.
+
+Almost sure global well-posedness for the energy-critical defocusing nonlinear wave equation on R d , d = 4 and 5. O Pocovnicu, J. Eur. Math. Soc. (JEMS). 19O. Pocovnicu. Almost sure global well-posedness for the energy-critical defocusing nonlinear wave equation on R d , d = 4 and 5. J. Eur. Math. Soc. (JEMS), 19:2521-2575, 2017.
+
+Probabilistic global well-posedness for the supercritical nonlinear harmonic oscillator. A Poiret, D Robert, L Thomann, Anal. PDE. 7A. Poiret, D. Robert, and L. Thomann. Probabilistic global well-posedness for the supercrit- ical nonlinear harmonic oscillator. Anal. PDE, 7:997-1026, 2014.
+
+Global well-posedness and scattering for the defocusing energycritical nonlinear Schrödinger equation in R 1+4. E Ryckman, M Visan, Amer. J. Math. 129E. Ryckman and M. Visan. Global well-posedness and scattering for the defocusing energy- critical nonlinear Schrödinger equation in R 1+4 . Amer. J. Math., 129:1-60, 2007.
+
+Almost sure well-posedness and scattering of the 3D cubic nonlinear Schrödinger equation. J Shen, A Soffer, Y Wu, arXiv:2110.11648Arxiv preprintJ. Shen, A. Soffer, and Y. Wu. Almost sure well-posedness and scattering of the 3D cubic nonlinear Schrödinger equation. Arxiv preprint, arXiv:2110.11648.
+
+On the almost sure scattering for the energy-critical cubic nonlinear wave equation with supercritical data. M Spitz, In preparationM. Spitz. On the almost sure scattering for the energy-critical cubic nonlinear wave equation with supercritical data. In preparation.
+
+Randomized final-state problem for the Zakharov system in dimension three. M Spitz, 10.1080/03605302.2021.1983595Comm. Partial Differential Equations. M. Spitz. Randomized final-state problem for the Zakharov system in dimension three. Comm. Partial Differential Equations, 2021. DOI: 10.1080/03605302.2021.1983595.
+
+Introduction to Fourier Analysis on Euclidean Spaces. E M Stein, G Weiss, Princeton University PressPrinceton, New JerseyE. M. Stein and G. Weiss. Introduction to Fourier Analysis on Euclidean Spaces. Princeton University Press, Princeton, New Jersey, 1971.
+
+Spherically averaged endpoint Strichartz estaimtes for the two-dimensional Schrödinger equation. T Tao, Comm. Partial Differential Equations. 25T. Tao. Spherically averaged endpoint Strichartz estaimtes for the two-dimensional Schrödinger equation. Comm. Partial Differential Equations, 25:1471-1485, 2000.
+
+Global well-posedness and scattering for the defocusing cubic nonlinear Schrödinger equation in four dimensions. M Visan, Int. Math. Res. Not. 20125M. Visan. Global well-posedness and scattering for the defocusing cubic nonlinear Schrödinger equation in four dimensions. Int. Math. Res. Not., 2012(5):1037-1067, 2012.
+
+. Spitz) Fakultät Für Mathematik, Postfach. 1033501Universität BielefeldSpitz) Fakultät für Mathematik, Universität Bielefeld, Postfach 10 01 31, 33501
+
+Germany Email address: mspitz@math.uni-bielefeld. Bielefeld, deBielefeld, Germany Email address: mspitz@math.uni-bielefeld.de

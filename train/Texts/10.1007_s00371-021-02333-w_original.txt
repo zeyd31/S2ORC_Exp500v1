@@ -1,0 +1,625 @@
+
+An effective and friendly tool for seed image analysis
+
+
+Loddo A · Di 
+Ruberto C 
+Vale A M P G · Ucchesu 
+M · Soares 
+J M · Bacchetta 
+G 
+Loddo A 
+Di Ruberto 
+C 
+Vale A M P G Escola 
+Agrícola De Jundiaí 
+Ucchesu M 
+Bacchetta G 
+J M Soares 
+Bacchetta G Hortus 
+Botanicus Karalitanus 
+
+Department of Mathematics and Computer Science
+Centro Conservazione Biodiversità (CCB)
+Dipartimento di Scienze della Vita e dell'Ambiente (DiSVA)
+EAJ), Universidade Federal do Rio Grande do Norte (UFRN
+Univer-sity of Cagliari
+via Ospedale 72, Rodovia RN 160, Km 03, Università degli Studi di Cagliari, Viale S. Ignazio da Laconi 1309124, 59280-000, 09123Cagliari, Macaíba (RN), CagliariCEPItaly., Brasil., Italy
+
+
+Universidade Federal do Rio Grande do Norte (UFRN)
+Università degli Studi di Cagliari
+Rodovia RN 160, Km 03, Viale S. Ignazio da Laconi 1159280-000, 09123Macaíba (RN), CagliariCEPBrasil., Italy
+
+An effective and friendly tool for seed image analysis
+Received: date / Accepted: dateThe Visual Computer manuscript No. (will be inserted by the editor)
+Image analysis is an essential field for several topics in the life sciences, such as biology or botany. In particular, the analysis of seeds (e.g. fossil research) can provide significant information on their evolution, the history of agriculture, plant domestication and knowledge of diets in ancient times.This work aims to present software that performs image analysis for feature extraction and classification from images containing seeds through a novel and unique framework. In detail, we propose two plugins ImageJ, one able to extract morphological, textual and colour features from seed images, and another to classify seeds into categories using the extracted features. The experimental results demonstrated the correctness and validity of both the extracted features and the classification
+
+Introduction
+
+Due to its wide range of applications, image analysis plays an important role in the field of life sciences. Image analysis and image processing methods have become essential for understanding various medical features or performing meaningful quantitative measurements on image objects. Haematology (Di Ruberto et al. (2020), Remeseiro et al. (2021)), biology (Campanile et al. (2019), Ahmad et al. (2021)), and botany (Bohl et al. (2015), Lo Bianco et al. (2017a, Hu et al. (2017)) are a few examples of application fields in this context. In particular, image analysis techniques have become more reliable with the development of fluorescence and high-resolution microscopes, gaining the interest of biologists. The ability to study in-depth the structural details of biological elements, such as organisms and their parts, can profoundly impact biological research. In fact, thanks to these advances, several works have been carried out in the field of plants, related to the characterisation of germplasm (Bacchetta et al. (2011), Frigau et al. (2020), Lo Bianco et al. (2015, Lo Bianco et al. (2017a), Lo Bianco et al. (2017b), the identification of plant seed materials unknown in archaeobotany (Bouby et al. (2013), Orrù et al. (2013), Terral et al. (2010), Sabato et al. (2015), Ucchesu et al. (2015), Ucchesu et al. (2016), Ucchesu et al. (2017)), or in agronomy to distinguish and group cultivars (Piras et al. (2016), Sarigu et al. (2017), Sau et al. (2018), Sau et al. (2019). According to Kamilaris and Prenafeta-Boldú (2018), image analysis is an important area of research in agriculture for image classification, anomaly or disease detection, and several related tasks. Plant science is the main subject of this work; more specifically, it concerns carpology, which is the discipline that studies the seeds and fruits of spermatophytes from both a morphological and structural point of view. This is of fundamental importance, for example, for palaeobotany, palaeoenvironmental studies and ecology applied to the remains of the past (palaeocarpology). The operators acquire the images through a digital camera or a flatbed scanner. Compared to the digital camera, the flatbed scanner offers the advantage of consistent illumination and a known image scale, commonly expressed in dots per inch (DPI), providing quality and speed of execution of the workflow (Lind (2012)). This work presents new software for extracting features from biological organisms, particularly their images and, specifically, seeds. Nowadays, one of the most used tools by biologists is certainly ImageJ (2021) (Landini (2008), Lind (2012)). It is defined as one of the standard image analysis software, as it is freely available, platformindependent and applicable by biological researchers to quantify laboratory tests. Compared to manual analysis, the use of seed image analysis techniques brings several advantages to the process: i) it speeds up the analysis process; ii) it minimises distortions created by natural light and microscopes; iii) it automatically identifies specific features; iv) it automatically classifies families or genera.
+
+To achieve these benefits, a classical image analysis process employs a four-step workflow: preprocessing, segmentation, feature extraction and classification (Gonzales and Woods (2018)), although, since the explosion of the AlexNet convolutional neural network (CNN) (Krizhevsky et al. (2012)), a new approach has emerged. CNN-based workflows, and deep learning workflows in general, do not use the traditional image analysis workflow because CNNs can extract features independently without explicitly using feature descriptors or dedicated feature extraction strategies. Regarding the traditional approach, image preprocessing techniques prepare the image before analysing it to eliminate possible distortions or unnecessary data or highlight and enhance some important features for further processing. Segmentation divides significant regions into sets of pixels with common characteristics such as colour, intensity or texture. The purpose of segmentation is to simplify and change the image representation into something more meaningful and easier to analyse. Extracting features from the regions of interest identified by segmentation is the next step. Features can be based on shape, structure or colour (Di Ruberto et al. (2015), Di Ruberto and Cinque (2009)). The final step is classification, i.e. the association of a label with the object under investigation using supervised or unsupervised machine learning methods.
+
+In this paper, we focus on feature extraction and classification steps from both traditional and CNN-based perspectives. In detail, our contribution is fivefold: i) we propose a new open-source tool for extracting features from seed images; ii) we propose a new open-source tool for feature classification based on four different models; iii) we compared the classification accuracy of four different models and different features combination; iv) we compared traditional classification models with some classical CNNs; v) we propose a unique framework to analyse seed images turned to be effective, fast and mostly easy to use for non-expert operators.
+
+Our work aims to classify single seeds belonging to the same family, where differences in colour, shape and texture may be much more imperceptible. We also want to highlight how traditional classification methods trained with handcrafted (HC) features can bring greater speed and accuracy close to CNNs in this task.
+
+The rest of the paper is organised as follows. Section 2 presents state of the art on plant science works, with a particular focus on seeds image analysis. Section 3 presents the dataset employed and introduces the ImageJ environment used to implement our proposed plugins. They are described in 4. The experimental evaluation and the used dataset are discussed in Section 5, and, finally, in Section 6 we give the conclusions of the work.
+
+
+Related works
+
+The analysis of seeds or leaves for different purposes is one of the possible processes of biological image analysis in the field of plant science. Both traditional (Campanile et al. (2019), Di Ruberto and Putzu (2014), Putzu et al. (2016)) and deep learning (Zhang et al. (2019), Loddo et al. (2021)) approaches have been widely exploited in this context. For example, the analysis of seed fossils can provide important information about their evolution, the origin of agriculture, the process of domestication and knowledge about diets in ancient times. Usually, such fossils are preserved through a carbonisation process to avoid a microbial attack. Regarding traditional approaches, in Ucchesu et al. (2016) Ucchesu et al. carried out several charring experiments to reproduce the same burning conditions as in archaeological contexts in order to compare some seeds present today in Sardinia, Italy, with presumed archaeological fossils and classify them as such. In Ucchesu et al. (2015) the authors performed a morphological comparison between archaeological seeds and recent wild seeds. This work showed that archaeological seeds have significantly similar characteristics to modern seeds. Sabato et al. in Sabato et al. (2015) analysed the genetic, morphological and colourimetric differences of 124 seed types of Cucumismelo, from 48 different countries. The morpho-colourimetric analysis revealed two subspecies of melons and also identified six different varieties. The work of Orrú et al. (Orrù et al. (2012)) is the first attempt to validate a morpho-colourimetric method by direct comparison with molecular data from germ plasma, showing that the 113 proposed characteristics are adequate to discriminate similar groups. Lo Bianco et al. (Lo Bianco et al. (2015)) identified 67 different Italian bean types (Phaseolusvulgaris L) using morphological traits. A total of 138 descriptors, including shape and texture, were extracted from each seed using image analysis techniques. Through linear discriminant analysis (LDA), the authors performed a comparative analysis to test the possibility of distinguishing between seeds from the same soil but grown with different agricultural practices. Initially, it was possible to discriminate three main seed categories with an accuracy of 99.1%. An automatic feature extraction scheme for plant species was proposed by Campanile et al. (2019), while Di Ruberto and Putzu (2014) and Putzu et al. (2016) implemented a leaf recognition system and a leaf detection system, respectively. The former is implemented with a Support Vector Machine (SVM) for plant classification based on leaf images' shape, colour, and texture characteristics. The latter can automatically detect the leaf of interest through a segmentation phase based on the extraction of saliency maps as a starting point for a region growing strategy.
+
+Regarding deep learning strategies, Hall et al. (2015) proposed a CNN to address leaf classification of different plant species, using a dataset of over 1,900 images divided into 32 species. Similarly, in Sladojevic et al. (2016), CaffeNet is used to identify leaf diseases in a database containing about 4,500 images, while Zhu et al. Zhu et al. (2021) aimed to recognise the appearance quality of carrots by training a Support Vector Machine classifier with deep features, with excellent results from the ResNet101 network.
+
+Deep learning is also used for identification and classification; in particular, AlexNet and GoogleNet are used to identify 14 crop species and 26 diseases in Mohanty et al. (2016), and LeNet is used for diseased banana leaves recognition in Amara et al. (2017). Junos et al. (2021) proposed a system for detecting loose palm fruits from images acquired under various natural con-ditions. It was based on an improved version of YOLOv3. They also made a new dataset of oil palm loose fruits acquired by an unmanned aerial vehicle (UAV) and a mobile camera. Gajjar et al. (2021) realised a comprehensive framework for real-time identification of diseases in a crop. They proposed a novel CNN architecture to identify and classify 20 different healthy and diseased leaves of 4 different plants. It achieved an accuracy of 96.88%, higher than the accuracy achieved by existing architectures. In Kussul et al. (2017), the research focused on the classification of wheat, maise, soybean, sunflower and sugar beet crops using CNNs produced by the authors. In Krogh Mortensen et al. (2016), the authors used a modified version of VGG16 to identify oilseed crops, radishes, barley, grass and weeds. Rebetez in Rebetez et al. (2016) classified various crop styles from drone images using CNN and HistNN (an RGB histogram). Gulzar et al. (2020) dealt with seed classification using CNN and transfer learning, although the authors addressed the problem of seeds belonging to different phyla or classes starting from a set of seeds. Przybylo et al. Przybylo and Jablonski (2019) focused on acorn classification based on the colour and image intensity of seed sections as a feature. The authors obtained an accuracy of 85%, which is comparable to a manual assessment of oak seed viability using a CNN strategy. Furthermore, they studied the impact of various image representations (colour, entropy, edges) and the architecture of the network and its parameters on the classification results. Finally, Loddo et al. (2021) realised and proposed a brand new CNN architecture for seed image classification and retrieval tasks, called SeedNet. It achieved 97.47% accuracy in the same dataset used in this study. However, as it can happen when using deep strategies, the running time was very high, especially if compared to traditional machine learning techniques. This work's contributions are an in-depth investigation of how HC features can improve classification results if several features, even heterogeneous ones, are fused together. For the purpose of this study, no feature selection schemes were investigated to preserve the original nature of the combined features. Feature fusion is a strategy deeply studied in machine learning related works. For example, Jing et al. (2014) proposed a saliency detection model using the integrated features obtained from a feature fusion method that combined local and global saliency measures during the saliency calculation process. Their experiments showed that this model performs better than the ones trained with noncombined features. Peng et al. (2015) realised a method for feature fusion of multimodal finger biometrics, in which linear discriminant multi-set canonical correla-tion analysis (LDMCCA) was adopted to combine multiple feature sets in a meaningful way. LDMCCA can preserve the intrinsic relationship within-class and betweenclass in unimodal features and distinctly express the discriminant correlation between multimodal features. In addition, it can further perform feature reduction alone on fused features. The LDMCCA approach significantly improves existing fusion approaches. Gad et al. (2019) proposed a connection between client and server based on an iris recognition system. The system obtained an accuracy of 99.86% with a high recognition speed, using a fusion of textural and statistical iris features.
+
+
+Material and Methods
+
+In this work, we exploited a local dataset 3.1. It contains heterogeneous seed images, both in number and characteristics and is publicly available on request. The dataset has been preprocessed as depicted in Sec. 4.1 and used for the classification of seeds families task.
+
+
+Dataset description
+
+For this study, we used an image database containing 3,386 samples of 120 plant species belonging to the Fabaceae family. We chose the Fabaceae family because it is one of the most influential families and shows significant variability in the size and colour of their seeds. All samples come from the basic collection of the Banca del Germoplasma della Sardegna (BG-SAR), University of Cagliari, Italy. During the acquisition, the operators arranged the seeds on the flat scanner, separating them to avoid overlapping. Then, the area occupied by the seeds was covered with a tray coated with a blue background for the digital image, as shown in Fig. 1. The acquisition process used a minimum resolution of 400 DPI, and the resulting image was saved in the Joint Photographic Experts Group (JPEG) format with a resolution of 2125 × 2834 (Vale et al. (2020)).
+
+For the classification task, we selected the more numerous species. Next, we applied a preprocessing procedure. In particular, the collectors acquired these seeds' images on different backgrounds of various shades of blue. Consequently, it helps us to find the best images to extract crops of single seeds to classify. Fig. 2 shows two sample images from the Fabaceae database.
+
+
+ImageJ platform
+
+ImageJ (ImageJ (2021)) is open-source software for digital image processing, designed initially by Wayne  Rasband from the National Institute of Health of the United States. It is written in Java language, and it runs as an online applet or offline with an installed Java Virtual Machine (JVM). The source code is publicly available and open to new contributions for the ImageJ community. ImageJ allows viewing, analysing, modifying, processing, saving, printing grayscale images (8-bit, 16-bit, and 32-bit) and colour images (8-bit and 24-bit); the supported formats are TIFF, JPEG, GIF, BMP, DI-COM, FITS, and RAW. It was designed with an open architecture extendable with two kinds of extension, Java plugins, and recordable macros. Most of the existing plugins already permit to face of some image processing and analysis issues. ImageJ allows the extraction of Region of Interest (ROI) pixel-wise or objectsegmented statistics. It is possible to measure distances and angles, generate and visualise intensity histograms and draw profile lines (between defined points). ImageJ supports many standard image processing transformations, such as logical and arithmetic operations between images, brightness and contrast adjustment, convolution, Fourier analysis, smoothing, contour detection, median filtering, and mathematical morphology Gonzales and Woods (2018). It is also possible to perform geometric transformations such as scaling, rotation, and reflection.
+
+The interface of ImageJ is straightforward and intuitive, even for people without advanced computer and image analysis skills. The software is condensed in its menu bar that contains all the options, as shown in Fig.  3.
+
+Basic operations, like file opening or simple editing options (File and Edit options) and more complex ones, such as segmentation operations, image enhancement, noise reduction, object counting, filtering, and other options ("Image," "Process," "Analyse" and "Plugins"), are accessible from the main menu. Moreover, the toolbar contains several options to select regions or shapes in the image. The status bar shows the current pixel's coordinates and values when the cursor is over the image. Simultaneously, whether a filter operation is performed on the image, the status bar displays the execution time and the processing speed in pixels/second. The progress bar, shown on the right-hand side of the status bar, shows the processing progress.
+
+ImageJ allows an extension of its functionalities by additional components, like plugins and macros. The plugins require Java language, while macros require Javalike language. Plugins are generally faster and more flexible; on the other hand, macros are simpler to write and debug, but they are heavier than plugins computationally. It is the main reason that led plugins to play a fundamental role in functionality extensions and Im-ageJ since it implements a large part of its functionality with internal plugins.
+
+
+ImageJ's logical structure
+
+ImageJ presents a very extensive and complex class diagram. IJ is the main class of the framework: any processing starts from it, and consequently, all the other classes extend it or are part of ij.* package. It takes an image in input and returns an object of the Image-Plus type, ready for its analysis. The created ImagePlus object contains an object of the abstract ImageProcessor class, which stores image data in 2D and provides methods for processing. The GenericDialog and Result-sTable classes respectively manage input and output data. The first one allows the user to specify preferences and select options via several checkboxes, text boxes, and lists, while the second one shows the output results in tabular form. Moreover, the ROI class permits processing image's objects. This class includes several parameters and methods and is often associated with an object of type ImageStatistics that consists of a series of measurements calculated on the ROI. The ROI class uses the classesPolygon Java and its subclasses to determine the points which constitute an area of interest. The Analyser class returns an object based on particular options that analyse the image. An object of type ParticleAnalyzer works in the same manner even though it analyses all the regions in an image one-byone rather than the whole image. The class Histogram provides an image histogram on a ROI. ChannelSplitter returns a vector containing three ImagePlus, each one corresponding to a single RGB (Red, Green, Blue) channels. In the next section, we detail our proposed plugin structure, based on the ParticleAnalyzer 's logical structure.
+
+
+A tool for seed image analysis
+
+ImageJ allows the realisation of new plugins, e.g., dealing with specific problems in the image analysis field or computing new features in different contexts. Among the state-of-the-art, different plugins already exist and can extract features from seeds images, even though they are general-purpose. One of them is Par-ticles8 Landini (2008), created by Gabriel Landini in 2005, with the last update in 2010. It provides the extraction of morphological features from binary images. Consequently, it does not provide the extraction of textural and colour features. To simplify the botanists' seed analysis procedures, we followed their indications, and we realised a brand new plugin exclusively with Im-ageJ classes without using any external plugins and increasing its extensibility. The proposed tool allows both the extraction and classification of features and can be used in many other application domains.
+
+
+A plugin for feature extraction from seeds image
+
+SeedsAnalyser is the plugin for feature extraction proposed in this work and needs a minimal number of user interactions. It aims to identify and analyse multiple seeds represented in a digital image. The input is a single image acquired with a quasi-uniform blue background. The plugin is also able to analyse all the images in a specific folder at the same time. Each image can present a blue background in a wide range of tones, varying from a very light blue to a very dark navy blue. After the acquisition, the image is preprocessed to correctly separate the regions of interest, namely the single seeds. It is possible to isolate the Blue value of the RGB images to get pure masks as the dataset backgrounds are all in various shades of blue (see Fig. 4), as indicated in our previous work Vale et al. (2020). Creating a single seed dataset from the original database is possible thanks to different backgrounds of various blue shades. It allowed finding the best images to work on and making the binary masks to extract the single seeds by an automatic thresholding procedure. During the acquisition, the seeds were well spaced from each other. Therefore the bounding box of each region allowed the creation of a single seed image for analysis quickly. From the Fabaceae dataset, we selected the images containing the most numerous samples per family for 23 different ones and nearly 2000 seeds. We discarded some families due to the low sharpness and too small size of the seeds. Fig. 4 and Fig. 5 show an original sample image with its derived binary mask and some seed images extracted from it, respectively.  Once the images have been preprocessed, i.e. segmented by automatic thresholding, and the unique image is ready to be analysed, the plugin requires the selection of some key parameters. They improve the research and detection of the regions of interest, specifically the minimum and maximum area size, measured in square pixels and, if wanted, a specific circularity of the objects, by default ranging from 0 to 1. Finally, the users can choose the features of interest from the "Feature" window, as shown in Fig. 6.
+
+SeedsAnalyser implements up to 64 features. In particular, 32 are morphological, 16 textural and 16 colour intensity values. It is crucial to notice that, among the texture features, Haralick's GLCM, which describes the pairwise arrangement of pixels with the same grey-level (Haralick et al. (1973)), was used in this study to extract information of local similarities. They all permit their computation with the typical four different degrees: 0°, 45°, 90°, 135°. More precisely, we extracted the following second-order statistics from GLCM: energy, contrast, correlation and homogeneity. ImageJ already contains a plugin that works in a way similar to Seeds Analyser, even though it only offers 18 features, and it does not have a multi-image workflow. To sum up, after the initial preprocessing step, our plugin can detect each single seed present in the original RGB image from which the user can select the morphological, textural and colour features to extract. Table 1 and Table 2 present the implemented morphological and textural features, respectively, and their relative descriptions, while Table 3 describes the computed features of the RGB and HSV colour spaces.
+
+
+A plugin for feature classification
+
+Up to now, we have obtained the features for each seed from SeedsAnalyser 4.1, and they can now be fed to the classification plugin, called SeedsClassifier. It offers four different classifiers, namely kNN, Naive Bayes, Random Forest and SVM. Weka Hall et al. (2009) includes all of them; therefore, they can be imported individually from their respective packages. All classifiers belong to their java class, where they implement the Classifier interface responsible for defining and realising the classification procedure. At the plugin's start, the user can choose whether to load an existing model or start a new training phase on new data. If the user chooses to proceed from scratch, i.e. also with the training phase, the user will be asked to enter the ARFF file's name with the training dataset. For practical reasons, this file must be located in the main folder of the framework. The predictions will be displayed in a window called Predictions. As we mentioned earlier, Seed-  Seed area (in pixels) Perimeter
+
+Length of the seed contour Feret
+
+Longest traceable diameter with two points of the seed's outline as endpoints, called Lenght Breath
+
+Length of longest traceable axis perpendicular to the Feret, also called Width AspRatio
+
+Feret/Breadth, also called eccentricity or rectangularity ratio ConvexArea
+
+Area of the convex polygon drawn between the external points of the region ConvexPerimeter
+
+Perimeter of the convex polygon RFactor Shape factor, defined as CovenxArea/(F eret × pi) ArEquivD
+
+Diameter of the circle with equivalent area of the region, defined as 4/π × Area PerEquivD Diameter of the circle having the same perimeter of the region, Area/π MinR and MaxR Radii of the inscribed and the enclosing circles centred at the center of mass AvgRadius
+
+Average length of the radii calculated starting from the center of mass VarianceRadius
+
+Variance of radii EquivEllAr
+
+Area of the ellipse having Feret and Breadth as axes Modification Ratio Shape measure, defined as (2 × M inR)/F eret
+
+
+Haralick Ratio
+
+Ratio between the average and the standard deviation of the radii ThinnessR Thinness Ratio, also called shape, given by P erimeter 2 /Area Roundness Measure of roundness, defined as 4 × Area/(π × F eret 2 ) Compactness
+
+Measure of compactness, expressed by 4/π × Area/F eret Solidity
+
+Measure of solidity, defined as Area/ConvexArea Convexity Measure of convexity, also called roughness, defined as ConvexP erimeter/P erimeter Concavity
+
+Measure of concavity, defined as ConvexArea -Area ArBBox
+
+Area of the bounding box containing the region Rectangularity
+
+Also called extent, defined as Area/ArBBox Sphericity Also called radius ratio, expressed by M inR/M axR Elongation
+
+Inverse of the circularity, defined as P erim 2 /(4 × π × Area) Bending Energy
+
+Defined as the sum of the squared curvature along the entire contour Jaggedness
+
+Measure representing if a seed is "serrated", defined as (2 × √ π × Area)/P erimeter Circularity Also called shape factor, obtained by 2 × π × Area/P erimeter 2 Endocarp
+
+Number of pixels forming the seed endocarp FBtoCM
+
+Distance between the intersection coordinates of seed length and width and center of mass   sClassifier plugin allows for the use of four classification algorithms. We now briefly describe how they operate and differ from each other. In general, Naive Bayes classifiers are probabilistic models that use Bayes' theorem with strict independence assumptions between the features. KNN uses the k closest training samples in the dataset as input and then uses a neighbour voting strategy to rank and classify new objects. Generally speaking, the larger k is, the more the noise associated with classification is reduced, but class recognition becomes more difficult. The Support Vector Machine (SVM) is a non-probabilistic binary linear classifier that categorises objects by mapping examples to points in space to maximise the width of the distance between categories. Finally, Random Forest is made up of many individual decision trees that work together to form an ensemble. Each tree predicts a class, and the class with the most votes is the model prediction. However, there is a need for each tree not to correlate with the others. This would jeopardise the classifier's final decision. In this way, the trees protect each other from their errors. Given our feature spaces' abundance and diversity, we choose these classifiers to ensure classification accuracy, flexibility, and data adaptation.
+
+
+Experimental results
+
+We now describe the experimentations conducted to verify the correctness of the features extracted from SeedsAnalyser using the classification plugin. We selected the images containing the most numerous samples per families from the Fabaceae database, for a total of 23 different ones: Amorpha, Anagyris, Anthyllis barba jovis, Anthyllis cytisoides, Astragalus glycyphyllos, Calicotome, Caragana, Ceratonia, Colutea, Cytisus purgans, Cytisus scoparius, Dorycnium pentaphyllum, Dorycnium rectum, Hedysarum coronarium, Lathyrus aphaca, Lathyrus ochrus, Medicago sativa, Melilotus officinalis, Pisum, Senna alexandrina, Spartium junceum, Trifolium, Vicia faba, for a total of 1988 seeds. A sample of each family is shown in Figure 7, while Table 4 reports the number of samples for each family.
+
+Setup As described in Sec. 4.1, we have implemented and extracted three categories of handcrafted features   from the seeds: morphological structure, texture information, and colour intensity values, for a total amount of 64 descriptors. Afterwards, we provided them as inputs to four different classification models, namely kNN, Naive Bayes, Random Forest, and Support Vector Machine, using our plugin SeedsClassifier, based on Weka package tool Hall et al. (2009).
+
+To ensure training set heterogeneity, we trained each classifier with 10-fold cross-validation, and for each case, we selected the model with the largest area under the ROC curve (AUC).
+
+
+Metrics
+
+The performance measures used to quantify each classification model's performance are specificity, sensitivity, and accuracy. The specificity (Spec) measures the proportion of negatives that are correctly identified (also called true negative rate). The sensitivity (Sen) measures the proportion of positives that are correctly identified (also called true positive rate). The third measure is the accuracy (Acc), defined as the correctly labelled instances' ratio to the whole pool of instances. The measures are defined as follows:
+Accuracy = T P + T F T P + T F + F P + F N ,(1)Specif icity = T N F P + T N ,(2)Sensitivity = T P T P + F N .(3)
+TP, FP, TN, FN indicates True Positives, False Positives, True Negatives, False Negatives, respectively.
+
+Moreover, as we face a multi-class imbalanced problem, we also applied three of the most common global metrics for multi-class imbalance learning to evaluate the classifier's performance Alejo et al. (2013). The used measures are the macro average geometric (MAvG), defined as the geometric average of the partial accuracy of each class, the mean F-measure (MFM) and the macro average arithmetic (MAvA) defined as the arithmetic average of the partial accuracies of each class.
+M AvG = ( J i=1 Acc i ) 1 J ,(4)M AvA = J i=1 Acc i J ,(5)M F M = J i=1 2( P recision·Sensitivity P recision+P recision ) J ,(6)
+with Precision defined as follows:
+
+P recision = T P T P + F P .
+
+Results We performed several experiments for each classifier. In particular, we tested the descriptors categories both alone and in combination with the others to understand if there is the best descriptor category for this task. Finally, we use the SeedsClassifier plugin to classify each category with the chosen classifiers.
+
+The table 5 shows all the classification results on the analysed dataset. In detail, the kNN classifier shows high results with colour features category alone, outperforming the remaining. Surprisingly, the combination of all categories does not reach the best metric results with this classifier. Random Forest classifier substantially confirms the trend brought by the colour feature category. It outperforms every other combination, even against the remaining classifiers. However, the combination of all categories produced excellent results with the Random Forest model. Naive Bayes and SVM classifiers produced satisfactory results using all categories, which result from the best solution for both classifiers. Contrary to kNN and Random Forest results, the colour category alone did not produce good results in these last two cases. To sum up, the Random Forest classifier produced the best performance and is the only one to exceed 90% both in metrics and in categories combination. It confirms its outstanding versatility in this twenty-three-class scenario. In summary, we can say that combining all the three feature categories produces excellent results in most cases and satisfactory on average. Fig. 8 shows that the Random Forest classifier obtained the best performances for all the descriptor categories considered, except for the morphological one, in which the SVM classifier outperforms the others. As regards the descriptors categories, Fig. 8 shows the relevance of the colour features in this context. Indeed, they, both alone and combined with morphological or textural, produced an increasing accuracy for all the classifiers tested. In some cases, they obtained values close or higher than the combination of all the features categories, as shown in Fig. 9.
+
+Finally, we performed several comparisons with deep learning-based approaches. In table 6 we report the performance results obtained using the best classical descriptors with the relative classification model and some different CNNs. As expected, CNNs achieved better performances than traditional methods. Nevertheless, they presented a much longer training time than that required by any approach based on traditional descriptors and machine learning models. With just a slight loss of accuracy, our tool establishes itself as the best solution for practical and immediate use of seed image analysis.
+
+
+Conclusions
+
+We presented a software that performs an image analysis by feature extraction and classification from images containing seeds through a brand new unique, and easy-to-use framework. In detail, we propose two ImageJ plugins, one able to extract morphological, textural and colour characteristics from images of seeds, and another one to classify the seeds into categories by using the extracted features. Moreover, we analysed and reported the performances of several categories of descriptors for seed images with four different classifiers, using an image database containing 3,386 samples of 120 plant families belonging to the Fabaceae family. In general, some aspects can strongly influence both the feature extraction and the classification phases. Foremost, the quality of the original images to process can produce some artefacts in the segmentation phase. Secondly, the preprocessing step, such as the background cleaning, the spacing of the seeds during the acquisition, and the size of the seeds present in the images, need to be verified to consider only valid regions. Finally, the dataset represented a class imbalance problem.
+
+The experiments carried out showed some interesting trends. The colour feature category alone produced the best results in every metric, either using kNN and Random Forest classifiers. However, apart from Naive Bayes and SVM results in which they were the best, the combination of all the three categories produced excellent results on average. Finally, the Random Forest was the only one to outrun 90% both in metrics and in categories combination, showing its excellent versatility. The comparison with deep learning-based approaches has shown how, although slightly decreasing the accuracy, all the classic methods based on machine learning and hand-crafted descriptors are much faster with acceptable performance. Therefore, the proposed tool lends itself to be used for quick and practical use of seed image analysis, especially because of its speediness both in training and testing.  As a future direction, thanks to the promising results obtained by the proposed tool, we aim to improve them further by investigating the possibility of using a feature selection step and optimising the parameters that characterise the chosen classifiers in the training phase. We also plan to consider neural network features extraction and compare them with the traditional ones. Finally, we would like to extend our approach to distinguish among seeds' genus and variety.
+
+
+Abbreviations
+
+The following abbreviations are used:  
+
+Fig. 1 :
+1Seeds acquisition on the flatbed scanner for the Fabaceae dataset.
+
+Fig. 2 :
+2Examples of seeds images present in the Fabaceae dataset.
+
+Fig. 3 :
+3ImageJ main interface.
+
+Fig. 4 :
+4Example of an image from the Fabaceae database and its derived binary mask.
+
+Fig. 5 :
+5Some examples of seed images extracted from the image ofFigure 4of the Fabaceae database.
+
+Fig. 6 :
+6Window for feature selection.
+
+
+Average of Red channel values StD Red Standard deviation of Red channel values SqrtMean Red Square root of the mean value for Red channel Mean Green (MG) Average of Green channel values StD Green Standard deviation of Green channel values SqrtMean Green Square root of the mean value for Green channel Mean Blue (MB) Average of Blue channel values StD Blue Standard deviation of Blue channel values SqrtMean Blue Square root of the mean value for Blue channel Mean RGB M R+M G+M B 3 Mean Hue Average tone of Hue channel StD Hue Standard deviation of Hue channel values Mean Sat Average tone of Saturation channel StD Sat Standard deviation of Saturation channel values Mean Val Average tone of Value channel StD Val Standard deviation of Value channel values
+
+Fig. 7 :
+7A sample of seed for each families present in the Fabaceae dataset.
+
+Fig. 8 :
+8Graphical representation of the classifiers performance, as a function of each feature category.
+
+Fig. 9 :
+9Graphical representation of the features performance, as a function of each classifier.
+
+Table 1 :
+1Morphological features from binary imageFeature 
+Description 
+Area 
+
+
+Table 2 :
+2Texture features from grayscale imageFeature 
+Description 
+Min and Max 
+Minimum and maximum gray value in the region 
+Mean 
+Average gray value in the region 
+StD 
+Intensity standard deviation as contrast measure 
+Median 
+Median of the gray values 
+Mode 
+Mode of the gray values 
+Skewness 
+Measure of the symmetry of the graylevel histogram around the average value 
+Kurtosis 
+Measure of the "tailedness" of the graylevel histogram 
+Intensity Sum Sum of the gray values of the region 
+Uniformity 
+Maximum when all the gray levels in the histogram are equal 
+Entropy 
+Measure of variability of grey level distribution 
+Smoothness R Measure of smoothness 
+Haralick 
+GLCM's computed second-order statistics (Energy, Contrast, Correlation, Homogeneity) 
+
+
+
+Table 3 :
+3Color features from RGB and HSV color spaces
+
+Table 4 :
+4Fabaceae dataset description.
+
+Table 5 :
+5Performance results attained using HC descriptors and traditional classifiers.Classifier 
+Descriptor 
+Acc 
+Spec 
+Sen 
+MAvG MFM MAvA 
+
+kNN 
+
+Morphological 
+20.95 23.18 17.10 
+9.94 
+18.59 
+23.18 
+Texture 
+16.41 20.52 16.97 
+10.91 
+16.36 
+20.52 
+Colour 
+80.54 76.59 74.70 
+74.72 
+75.15 
+76.59 
+Morphological+Texture 31.25 27.57 22.17 
+13.73 
+23.62 
+27.57 
+Morphological+Colour 
+45.13 41.63 33.47 
+27.08 
+35.34 
+41.63 
+Texture+Colour 
+68.61 62.33 58.44 
+57.74 
+59.73 
+62.33 
+All 
+71.68 69.54 63.02 
+65.60 
+65.17 
+69.54 
+
+Naive Bayes 
+
+Morphological 
+62.42 59.88 62.04 
+53.34 
+59.68 
+59.88 
+Texture 
+48.19 47.59 45.84 
+39.58 
+43.43 
+47.59 
+Colour 
+65.21 60.75 62.25 
+55.02 
+57.93 
+60.75 
+Morphological+Texture 76.81 73.00 75.10 
+68.51 
+72.89 
+73.00 
+Morphological+Colour 
+84.36 81.66 84.43 
+79.22 
+82.35 
+81.66 
+Texture+Colour 
+79.33 76.14 79.15 
+72.81 
+75.74 
+76.14 
+All 
+85.16 81.78 84.82 
+79.68 
+82.76 
+81.78 
+
+RF 
+
+Morphological 
+40.48 46.85 29.13 
+37.96 
+27.58 
+46.85 
+Texture 
+72.03 65.88 60.38 
+62.09 
+61.17 
+65.88 
+Colour 
+94.27 94.85 91.05 
+94.67 
+92.52 
+94.85 
+Morphological+Texture 89.64 90.67 81.96 
+90.09 
+83.79 
+90.67 
+Morphological+Colour 
+92.71 93.57 88.94 
+93.36 
+90.67 
+93.57 
+Texture+Colour 
+92.05 92.41 87.16 
+92.21 
+89.07 
+92.41 
+All 
+93.76 94.55 89.75 
+94.37 
+91.39 
+94.55 
+
+SVM 
+
+Morphological 
+79.83 80.26 71.33 
+79.46 
+73.23 
+80.26 
+Texture 
+29.09 46.28 21.13 
+34.11 
+16.91 
+46.28 
+Colour 
+78.74 75.28 67.83 
+72.42 
+67.88 
+75.28 
+Morphological+Texture 66.05 59.81 51.10 
+52.83 
+52.44 
+59.81 
+Morphological+Colour 
+83.60 83.10 76.70 
+81.65 
+78.88 
+83.10 
+Texture+Colour 
+84.51 84.99 77.73 
+84.15 
+78.81 
+84.99 
+All 
+85.66 83.85 78.88 
+82.56 
+80.58 
+83.85 
+
+
+
+Table 6 :
+6Results using the best classic descriptors and relative models and some CNNs. The results are sorted by the training time, indicated by the Time column. Gray-Level Co-Occurrence MatrixMethod 
+Acc 
+Spec 
+Sen 
+MAvG MFM MAvA 
+Time 
+
+kNN 
+80.54 76.59 74.70 
+74.72 
+75.15 
+76.59 
+8 sec 
+SVM 
+85.66 83.85 78.88 
+82.56 
+80.58 
+83.85 
+18 sec 
+Random Forest 94.27 94.85 91.05 
+94.67 
+92.52 
+94.85 
+29 sec 
+Naive Bayes 
+85.16 81.78 84.82 
+79.68 
+82.76 
+81.78 
+64 sec 
+SeedNet 
+97.47 99.88 96.81 
+96.60 
+96.98 
+96.81 
+12 min 
+ShuffleNet 
+96.46 95.90 94.37 
+95.57 
+94.55 
+95.90 
+18 min 
+GoogLeNet 
+95.45 95.06 93.47 
+94.67 
+93.16 
+95.06 
+21 min 
+SqueezeNet 
+95.96 95.75 94.71 
+95.13 
+94.84 
+95.75 
+23 min 
+MobileNetV2 
+93.94 93.16 91.51 
+92.67 
+91.85 
+93.16 
+33 min 
+ResNet50 
+96.46 94.44 94.98 
+96.15 
+95.20 
+96.44 
+34 min 
+AlexNet 
+93.43 91.08 91.36 
+90.15 
+90.51 
+91.08 
+74 min 
+VGG16 
+95.96 94.82 94.86 
+94.22 
+94.25 
+94.82 
+224 min 
+InceptionV3 
+96.46 95.99 94.81 
+95.74 
+95.02 
+95.99 
+290 min 
+
+DPI 
+Dots Per Inch 
+CNN 
+Convolutional Neural Network 
+HC 
+Handcrafted 
+Acc 
+Accuracy 
+Spe 
+Specificity 
+Sen 
+Sensitivity 
+MAvG Macro Average Geometric 
+MFM 
+Mean F-Measure 
+MAvA Macro Average Arithmetic 
+SVM 
+Support Vector Machine 
+KNN 
+K Nearest Neighbour 
+RF 
+Random Forest 
+GLCM 
+Conflict of interestThe authors declare that they have no conflict of interest.References
+A deep learning-based approach for banana leaf diseases classification. J Amara, B Bouaziz, A Algergawy, Lecture Notes in Informatics (LNI), Proceedings -Series of the Gesellschaft fur Informatik. GIAmara J, Bouaziz B, Algergawy A (2017) A deep learning-based approach for banana leaf diseases clas- sification. In: Lecture Notes in Informatics (LNI), Proceedings -Series of the Gesellschaft fur Informatik (GI)
+
+Seed image analysis provides evidence of taxonomical differentiation within the lavatera triloba aggregate (malvaceae). Flora -Morphology, Distribution. G Bacchetta, P E García, O Grillo, F Mascia, G Venora, Functional Ecology of Plants. 2065Bacchetta G, García PE, Grillo O, Mascia F, Venora G (2011) Seed image analysis provides evidence of tax- onomical differentiation within the lavatera triloba aggregate (malvaceae). Flora -Morphology, Distri- bution, Functional Ecology of Plants 206(5):468-472
+
+Modeling fruits and their internal structure using parametric 3gmap l-systems. E Bohl, O Terraz, D Ghazanfarpour, The Visual Computer. 316Bohl E, Terraz O, Ghazanfarpour D (2015) Modeling fruits and their internal structure using parametric 3gmap l-systems. The Visual Computer 31(6):819- 829
+
+Bioarchaeological insights into the process of domestication of grapevine (vitis vinifera l.) during roman times in southern france. L Bouby, I Figueiral, A Bouchette, N Rovira, S Ivorra, T Lacombe, T Pastor, S Picq, P Marinval, J F Terral, PLoS One. 8563195Bouby L, Figueiral I, Bouchette A, Rovira N, Ivorra S, Lacombe T, Pastor T, Picq S, Marinval P, Ter- ral JF (2013) Bioarchaeological insights into the pro- cess of domestication of grapevine (vitis vinifera l.) during roman times in southern france. PLoS One 8(5):e63195
+
+An open source plugin for image analysis in biology. G Campanile, Di Ruberto, C Loddo, A , 2019 IEEE 28th International Conference on Enabling Technologies: Infrastructure for Collaborative Enterprises (WETICE). Campanile G, Di Ruberto C, Loddo A (2019) An open source plugin for image analysis in biology. In: 2019 IEEE 28th International Conference on Enabling Technologies: Infrastructure for Collaborative Enter- prises (WETICE), pp 162-167
+
+Decomposition of twodimensional shapes for efficient retrieval. Di Ruberto, C Cinque, L , Image Vision Comput. 278Di Ruberto C, Cinque L (2009) Decomposition of two- dimensional shapes for efficient retrieval. Image Vi- sion Comput 27(8):1097-1107
+
+A fast leaf recognition algorithm based on svm classifier and high dimensional feature vector. Di Ruberto, C Putzu, L , 2014 International Conference on Computer Vision Theory and Applications (VISAPP). 1Di Ruberto C, Putzu L (2014) A fast leaf recognition algorithm based on svm classifier and high dimen- sional feature vector. In: 2014 International Confer- ence on Computer Vision Theory and Applications (VISAPP), vol 1, pp 601-609
+
+Comparison of statistical features for medical colour image classification. Di Ruberto, C Fodde, G Putzu, L , Nalpantidis L, Krüger V, Eklundh JO, Gasteratos ASpringer International PublishingChamComputer Vision SystemsDi Ruberto C, Fodde G, Putzu L (2015) Compari- son of statistical features for medical colour image classification. In: Nalpantidis L, Krüger V, Eklundh JO, Gasteratos A (eds) Computer Vision Systems, Springer International Publishing, Cham, pp 3-13
+
+Detection of red and white blood cells from microscopic blood images using a region proposal approach. Di Ruberto, C Loddo, A Putzu, L , Computers in Biology and Medicine. 116103530Di Ruberto C, Loddo A, Putzu L (2020) Detection of red and white blood cells from microscopic blood im- ages using a region proposal approach. Computers in Biology and Medicine 116:103530
+
+A statistical approach to the morphological classification of prunus sp. seeds. L Frigau, J Antoch, G Bacchetta, M Sarigu, M Ucchesu, C Z Alves, F Mola, Plant Biosystems -An International Journal Dealing with all Aspects of Plant Biology. 1546Frigau L, Antoch J, Bacchetta G, Sarigu M, Ucchesu M, Alves CZ, Mola F (2020) A statistical approach to the morphological classification of prunus sp. seeds. Plant Biosystems -An International Journal Dealing with all Aspects of Plant Biology 154(6):877-886
+
+Iot security based on iris verification using multi-algorithm feature level fusion scheme. R Gad, Abd El-Latif, A A Elseuofi, S Ibrahim, H M Elmezain, M Said, W , 2019 2nd international conference on computer applications & information security. IEEEIC-CAISGad R, Abd El-Latif AA, Elseuofi S, Ibrahim HM, Elmezain M, Said W (2019) Iot security based on iris verification using multi-algorithm feature level fusion scheme. In: 2019 2nd international conference on computer applications & information security (IC- CAIS), IEEE, pp 1-6
+
+Real-time detection and identification of plant leaf diseases using convolutional neural networks on an embedded platform. R Gajjar, N Gajjar, V J Thakor, N P Patel, S Ruparelia, The Visual Computer. Gajjar R, Gajjar N, Thakor VJ, Patel NP, Ruparelia S (2021) Real-time detection and identification of plant leaf diseases using convolutional neural networks on an embedded platform. The Visual Computer pp 1- 16
+
+Journaux L (2020) A convolution neural network-based seed classification system. R Gonzales, Y Woods R ; Pearson Gulzar, Y Hamid, A B Soomro, A A Alwan, Digital Image Processing. 12Gonzales R, Woods R (2018) Digital Image Processing. Pearson Gulzar Y, Hamid Y, Soomro AB, Alwan AA, Journaux L (2020) A convolution neural network-based seed classification system. Symmetry 12:1-18
+
+Evaluation of features for leaf classification in challenging conditions. D Hall, C Mccool, F Dayoub, N Sunderhauf, B Upcroft, 2015 IEEE Winter Conference on Applications of Computer Vision. Hall D, McCool C, Dayoub F, Sunderhauf N, Upcroft B (2015) Evaluation of features for leaf classification in challenging conditions. In: 2015 IEEE Winter Con- ference on Applications of Computer Vision, pp 797- 804
+
+The WEKA data mining software: an update. M Hall, E Frank, G Holmes, B Pfahringer, P Reutemann, I H Witten, SIGKDD Explorations. 111Hall M, Frank E, Holmes G, Pfahringer B, Reutemann P, Witten IH (2009) The WEKA data mining soft- ware: an update. SIGKDD Explorations 11(1):10-18
+
+Textural features for image classification. R M Haralick, K Shanmugam, I Dinstein, IEEE Transactions on Systems, Man, and Cybernetics SMC. 36Haralick RM, Shanmugam K, Dinstein I (1973) Tex- tural features for image classification. IEEE Trans- actions on Systems, Man, and Cybernetics SMC- 3(6):610-621
+
+Datadriven modeling and animation of outdoor trees through interactive approach. S Hu, Z Zhang, H Xie, T Igarashi, The Visual Computer. 336Hu S, Zhang Z, Xie H, Igarashi T (2017) Data- driven modeling and animation of outdoor trees through interactive approach. The Visual Computer 33(6):1017-1027
+
+. Imagej, 7ImageJ (2021) https://imagej.net/ImageJ, online; accessed 7 July 2021
+
+Saliency detection based on integrated features. H Jing, X He, Q Han, Abd El-Latif, A A Niu, X , Neurocomputing. 129Jing H, He X, Han Q, Abd El-Latif AA, Niu X (2014) Saliency detection based on integrated features. Neu- rocomputing 129:114-121
+
+Automatic detection of oil palm fruits from uav images using an improved yolo model. M H Junos, Asm Khairuddin, S Thannirmalai, M Dahari, The Visual Computer. Junos MH, Khairuddin ASM, Thannirmalai S, Dahari M (2021) Automatic detection of oil palm fruits from uav images using an improved yolo model. The Visual Computer pp 1-15
+
+Deep learning in agriculture: A survey. A Kamilaris, F X Prenafeta-Boldú, Computers and Electronics in Agriculture. 147Kamilaris A, Prenafeta-Boldú FX (2018) Deep learning in agriculture: A survey. Computers and Electronics in Agriculture 147:70 -90
+
+Imagenet classification with deep convolutional neural networks. A Krizhevsky, I Sutskever, Ge ; Hinton, P L Bartlett, Fcn Pereira, Cjc Burges, L Bottou, K Q Weinberger, Advances in Neural Information Processing Systems 25: 26th Annual Conference on Neural Information Processing Systems 2012. Proceedings of a meeting held. Lake Tahoe, Nevada, United StatesKrizhevsky A, Sutskever I, Hinton GE (2012) Ima- genet classification with deep convolutional neural networks. In: Bartlett PL, Pereira FCN, Burges CJC, Bottou L, Weinberger KQ (eds) Advances in Neu- ral Information Processing Systems 25: 26th Annual Conference on Neural Information Processing Sys- tems 2012. Proceedings of a meeting held December 3-6, 2012, Lake Tahoe, Nevada, United States, pp 1106-1114
+
+Semantic Segmentation of Mixed Crops using Deep Convolutional Neural Network. A Krogh Mortensen, M Dyrmann, H Karstoft, Nyholm Jørgensen, R Gislum, R , CIGR-AgEng conferenceKrogh Mortensen A, Dyrmann M, Karstoft H, Nyholm Jørgensen R, Gislum R (2016) Semantic Segmenta- tion of Mixed Crops using Deep Convolutional Neural Network. CIGR-AgEng conference
+
+Deep learning classification of land cover and crop types using remote sensing data. N Kussul, M Lavreniuk, S Skakun, A Shelestov, IEEE Geoscience and Remote Sensing Letters. 145Kussul N, Lavreniuk M, Skakun S, Shelestov A (2017) Deep learning classification of land cover and crop types using remote sensing data. IEEE Geoscience and Remote Sensing Letters 14(5):778-782
+
+Advanced shape analysis with imagej. G Landini, 2th ImageJ user and developer Conference. LuxembourgLandini G (2008) Advanced shape analysis with imagej. In: 2th ImageJ user and developer Conference, 7-8 November 2008, Luxembourg, pp 6-7
+
+Open source software for image processing and analysis: picture this with imagej. R Lind, Open Source Software in Life Science Research. Harland L, Forster MWoodhead PublishingLind R (2012) Open source software for image process- ing and analysis: picture this with imagej. In: Har- land L, Forster M (eds) Open Source Software in Life Science Research, Woodhead Publishing Series in Biomedicine, Woodhead Publishing, pp 131 -149
+
+Characterisation of italian bean landraces ('phaseolus vulgaris' l.) using seed image analysis and texture descriptors. M Lo Bianco, O Grillo, R Cremonini, M Sarigu, G Venora, Australian Journal of Crop Science. 9Lo Bianco M, Grillo O, Cremonini R, Sarigu M, Venora G (2015) Characterisation of italian bean landraces ('phaseolus vulgaris' l.) using seed image analysis and texture descriptors. Australian Journal of Crop Sci- ence 9:1022-1034
+
+Inter-and intraspecific diversity in cistus l. (cistaceae) seeds, analysed with computer vision techniques. M Lo Bianco, O Grillo, E Cañadas, G Venora, G Bacchetta, Plant Biology. 192Lo Bianco M, Grillo O, Cañadas E, Venora G, Bac- chetta G (2017a) Inter-and intraspecific diversity in cistus l. (cistaceae) seeds, analysed with computer vision techniques. Plant Biology 19(2):183-190
+
+Morpho-colorimetric characterisation of malva alliance taxa by seed image analysis. M Lo Bianco, O Grillo, Escobar Garcia, P Mascia, F Venora, G Bacchetta, G , Plant Biology. 191Lo Bianco M, Grillo O, Escobar Garcia P, Mascia F, Venora G, Bacchetta G (2017b) Morpho-colorimetric characterisation of malva alliance taxa by seed image analysis. Plant Biology 19(1):90-98
+
+A novel deep learning based approach for seed image classification and retrieval. A Loddo, M Loddo, Di Ruberto, C , Computers and Electronics in Agriculture. 187106269Loddo A, Loddo M, Di Ruberto C (2021) A novel deep learning based approach for seed image classification and retrieval. Computers and Electronics in Agricul- ture 187:106269
+
+Using deep learning for image-based plant disease detection. S P Mohanty, D P Hughes, M Salathé, Frontiers in Plant Science. 71419Mohanty SP, Hughes DP, Salathé M (2016) Using deep learning for image-based plant disease detec- tion. Frontiers in Plant Science 7:1419
+
+Computer vision as a method complementary to molecular analysis: Grapevine cultivar seeds case study. M Orrù, O Grillo, G Venora, G Bacchetta, Comptes Rendus Biologies. 3359Orrù M, Grillo O, Venora G, Bacchetta G (2012) Com- puter vision as a method complementary to molec- ular analysis: Grapevine cultivar seeds case study. Comptes Rendus Biologies 335(9):602 -615
+
+Morphological characterisation of vitis vinifera l. seeds by image analysis and comparison with archaeological remains. M Orrù, O Grillo, G Lovicu, G Venora, G Bacchetta, Vegetation History and Archaeobotany. 223Orrù M, Grillo O, Lovicu G, Venora G, Bacchetta G (2013) Morphological characterisation of vitis vinifera l. seeds by image analysis and comparison with archaeological remains. Vegetation History and Archaeobotany 22(3):231-242
+
+Linear discriminant multi-set canonical correlations analysis (ldmcca): an efficient approach for feature fusion of finger biometrics. J Peng, Q Li, Abd El-Latif, A A Niu, X , Multimedia Tools and Applications. 7413Peng J, Li Q, Abd El-Latif AA, Niu X (2015) Linear discriminant multi-set canonical correlations analysis (ldmcca): an efficient approach for feature fusion of finger biometrics. Multimedia Tools and Applications 74(13):4469-4486
+
+Effectiveness of a computer vision technique in the characterization of wild and farmed olives. F Piras, O Grillo, G Venora, G Lovicu, M Campus, G Bacchetta, Computers and Electronics in Agriculture. 122Piras F, Grillo O, Venora G, Lovicu G, Campus M, Bacchetta G (2016) Effectiveness of a computer vi- sion technique in the characterization of wild and farmed olives. Computers and Electronics in Agri- culture 122:86-93
+
+Using deep convolutional neural network for oak acorn viability recognition based on color images of their sections. J Przybylo, M Jablonski, Computers and Electronics in Agriculture. 156Przybylo J, Jablonski M (2019) Using deep convolu- tional neural network for oak acorn viability recog- nition based on color images of their sections. Com- puters and Electronics in Agriculture 156:490 -499
+
+A mobile application for leaf detection in complex background using saliency maps. L Putzu, C D Ruberto, G Fenu, Concepts for Intelligent Vision Systems -17th International Conference. Blanc-Talon J, Distante C, Philips W, Popescu DC, Scheunders PLecce, Italy10016ProceedingsPutzu L, Ruberto CD, Fenu G (2016) A mobile applica- tion for leaf detection in complex background using saliency maps. In: Blanc-Talon J, Distante C, Philips W, Popescu DC, Scheunders P (eds) Advanced Con- cepts for Intelligent Vision Systems -17th Interna- tional Conference, ACIVS 2016, Lecce, Italy, October 24-27, 2016, Proceedings, Lecture Notes in Computer Science, vol 10016, pp 570-581
+
+Augmenting a convolutional neural network with local histograms : a case study in crop classification from high-resolution uav imagery. J Rebetez, H F Satizábal, M Mota, D Noll, L Büchi, M Wendling, B Cannelle, A Perez-Uribe, S Burgos, Proceedings of ESANN 2016, European Symposium on artifical neural networks, Computational Intelligence and Machine Learning. ESANN 2016, European Symposium on artifical neural networks, Computational Intelligence and Machine LearningBruges, Belgium6pRebetez J, Satizábal HF, Mota M, Noll D, Büchi L, Wendling M, Cannelle B, Perez-Uribe A, Burgos S (2016) Augmenting a convolutional neural network with local histograms : a case study in crop classifi- cation from high-resolution uav imagery. Proceedings of ESANN 2016, European Symposium on artifical neural networks, Computational Intelligence and Ma- chine Learning, 27-29 April 2016, Bruges, Belgium p 6 p.
+
+Automatic classification of retinal blood vessels based on multilevel thresholding and graph propagation. B Remeseiro, A M Mendonça, A Campilho, The Visual Computer. 376Remeseiro B, Mendonça AM, Campilho A (2021) Auto- matic classification of retinal blood vessels based on multilevel thresholding and graph propagation. The Visual Computer 37(6):1247-1261
+
+Seeds morpho-colourimetric analysis as complementary method to molecular characterization of melon diversity. D Sabato, C Esteras, O Grillo, B Picó, G Bacchetta, Scientia Horticulturae. 192Sabato D, Esteras C, Grillo O, Picó B, Bacchetta G (2015) Seeds morpho-colourimetric analysis as com- plementary method to molecular characterization of melon diversity. Scientia Horticulturae 192:441-452
+
+Phenotypic identification of plum varieties (prunus domestica L.) by endocarps morpho-colorimetric and textural descriptors. M Sarigu, O Grillo, M L Bianco, M Ucchesu, G Hallewin, M C Loi, G Venora, G Bacchetta, Comput Electron Agric. 136Sarigu M, Grillo O, Bianco ML, Ucchesu M, d'Hallewin G, Loi MC, Venora G, Bacchetta G (2017) Pheno- typic identification of plum varieties (prunus domes- tica L.) by endocarps morpho-colorimetric and tex- tural descriptors. Comput Electron Agric 136:25-30
+
+Seed morphometry is suitable for apple-germplasm diversity-analyses. S Sau, M Ucchesu, L Dondini, P D Franceschi, G Hallewin, G Bacchetta, Comput Electron Agric. 151Sau S, Ucchesu M, Dondini L, Franceschi PD, d'Hallewin G, Bacchetta G (2018) Seed morphometry is suitable for apple-germplasm diversity-analyses. Comput Electron Agric 151:118-125
+
+Potential use of seed morpho-colourimetric analysis for sardinian apple cultivar characterisation. S Sau, M Ucchesu, G Hallewin, G Bacchetta, Comput Electron Agric. 162Sau S, Ucchesu M, d'Hallewin G, Bacchetta G (2019) Potential use of seed morpho-colourimetric analysis for sardinian apple cultivar characterisation. Comput Electron Agric 162:373-379
+
+Evolution and history of grapevine (vitis vinifera) under domestication: new morphometric perspectives to understand seed domestication syndrome and reveal origins of ancient european cultivars. S Sladojevic, M Arsenovic, A Anderla, D Culibrk, D Stefanovic, J F Terral, E Tabard, L Bouby, S Ivorra, T Pastor, I Figueiral, S Picq, J B Chevance, C Jung, L Fabre, Annals of botany. 1053Deep Neural Networks Based Recognition of Plant Diseases by Leaf Image Classification. Computational Intelligence and NeuroscienceSladojevic S, Arsenovic M, Anderla A, Culibrk D, Stefanovic D (2016) Deep Neural Networks Based Recognition of Plant Diseases by Leaf Image Classifi- cation. Computational Intelligence and Neuroscience Terral JF, Tabard E, Bouby L, Ivorra S, Pastor T, Figueiral I, Picq S, Chevance JB, Jung C, Fabre L, et al. (2010) Evolution and history of grapevine (vi- tis vinifera) under domestication: new morphometric perspectives to understand seed domestication syn- drome and reveal origins of ancient european culti- vars. Annals of botany 105(3):443-455
+
+Earliest evidence of a primitive cultivar of Vitis vinifera L. during the Bronze Age in Sardinia (Italy). M Ucchesu, M Orrù, O Grillo, G Venora, A Usai, P F Serreli, G Bacchetta, Vegetation History and Archaeobotany. 245Ucchesu M, Orrù M, Grillo O, Venora G, Usai A, Serreli PF, Bacchetta G (2015) Earliest evidence of a prim- itive cultivar of Vitis vinifera L. during the Bronze Age in Sardinia (Italy). Vegetation History and Ar- chaeobotany 24(5):587-600
+
+Predictive method for correct identification of archaeological charred grape seeds: Support for advances in knowledge of grape domestication process. M Ucchesu, M Orrù, O Grillo, G Venora, G Paglietti, A Ardu, G Bacchetta, PLoS ONE. 112Ucchesu M, Orrù M, Grillo O, Venora G, Paglietti G, Ardu A, Bacchetta G (2016) Predictive method for correct identification of archaeological charred grape seeds: Support for advances in knowledge of grape domestication process. PLoS ONE 11(2)
+
+First finds of prunus domestica l. in italy from the phoenician and punic periods (6th-2nd centuries bc). M Ucchesu, M Sarigu, Del Vais, C Sanna, I Hallewin, G Grillo, O Bacchetta, G , Vegetation History and Archaeobotany. 265Ucchesu M, Sarigu M, Del Vais C, Sanna I, d'Hallewin G, Grillo O, Bacchetta G (2017) First finds of prunus domestica l. in italy from the phoenician and punic periods (6th-2nd centuries bc). Vegetation History and Archaeobotany 26(5):539-549
+
+A new automatic approach to seed image analysis: From acquisition to segmentation. Ampg Vale, M Ucchesu, C D Ruberto, A Loddo, J M Soares, G Bacchetta, 6414Vale AMPG, Ucchesu M, Ruberto CD, Loddo A, Soares JM, Bacchetta G (2020) A new automatic approach to seed image analysis: From acquisition to segmen- tation. 2012.06414
+
+Example-based rapid generation of vegetation on terrain via cnnbased distribution learning. J Zhang, C Wang, C Li, H Qin, The Visual Computer. 356Zhang J, Wang C, Li C, Qin H (2019) Example-based rapid generation of vegetation on terrain via cnn- based distribution learning. The Visual Computer 35(6):1181-1191
+
+Recognition of carrot appearance quality based on deep feature and support vector machine. H Zhu, L Yang, J Fei, L Zhao, Z Han, Computers and Electronics in Agriculture. 186106185Zhu H, Yang L, Fei J, Zhao L, Han Z (2021) Recog- nition of carrot appearance quality based on deep feature and support vector machine. Computers and Electronics in Agriculture 186:106185

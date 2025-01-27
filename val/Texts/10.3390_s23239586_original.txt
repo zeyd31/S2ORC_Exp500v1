@@ -1,0 +1,179 @@
+
+N-Channel MOSFET Reliability Issue Induced by Visible/Near-Infrared Photons in Image Sensors †
+3 December 2023
+
+Chun-Hsien Liu 0009-0006-2841-3503
+Sheng-Di Lin sdlin@nycu.edu.tw 
+Di 
+
+Institute of Electronics
+National Yang Ming Chiao Tung University
+300HsinchuTaiwan
+
+
+International Workshop on Image Sensors and Systems (IWISS)
+2022, 12-13, 2022Hamamatsu, DecemberJapan
+
+N-Channel MOSFET Reliability Issue Induced by Visible/Near-Infrared Photons in Image Sensors †
+3 December 2023E77BBA64D5592A1D6D3B7E212D554F0B10.3390/s23239586Received: 26 October 2023 Revised: 1 December 2023 Accepted: 1 December 2023light-induced reliabilitytransistor degradationparasitic BJT actionCMOS image sensorsingle-photon avalanche diode (SPAD)
+Image sensors such as single-photon avalanched diode (SPAD) arrays typically adopt in-pixel quenching and readout circuits, and the under-illumination first-stage readout circuits often employs high-threshold input/output (I/O) or thick-oxide metal-oxide-semiconductor field-effect transistors (MOSFETs).We have observed reliability issues with high-threshold n-channel MOSFETs when they are exposed to strong visible light.The specific stress conditions have been applied to observe the drain current (I d ) variations as a function of gate voltage.The experimental results indicate that photo-induced hot electrons generate interface trap states, leading to I d degradation including increased off-state current (I off ) and decreased on-state current (I on ).The increased I off further activates parasitic bipolar junction transistors (BJT).This reliability issue can be avoided by forming an inversion layer in the channel under appropriate bias conditions or by reducing the incident photon energy.
+
+Introduction
+
+In imaging applications, to enhance image quality and resolution, the pursuit of larger arrays and smaller pixel pitch is a recognized trend.In-pixel circuit design is considered one of many suitable solutions to achieve this goal.In-pixel circuit with n-type metal-oxidesemiconductor field-effect transistors (NMOSFETs), such as in the four-transistor active pixel sensor (4T-APS) [1], are widely employed.In the front-end circuits of single-photon avalanche diodes (SPADs), similar approaches effectively reduce the spacing between pixels so the fill factor (FF) can be increased [2].To further enhance the FF of imaging sensor array with in-pixel circuits, the on-chip micro-lenses have been introduced to achieve a nearly 100% FF [3,4].However, the previous work showed that the micro-lenses could increase the energy density of incident light by at least 50%, which raised concerns about the reliability of devices and circuits when exposed to high-intensity light sources and/or strong ambient illumination [5].
+
+In the design of readout circuits for SPAD arrays, high-voltage-tolerant input/output (I/O) NMOSFETs are typically used to reach high excess bias voltage [6,7].In a few chips with similar design, we have observed that, after long exposure to a white-light lightemitting diode (LED), the digital signal processor (DSP) within the SPAD chip without bandpass filter was unable to extract signals from the front-end readout circuit and resulted in a system malfunction [8].In general, the circuit area in pixel region is optically shielded by the metal layer in CMOS technology to avoid optical damage, but the damage still occurred in these circuits with an optical shield.Surprisingly, with the same illumination condition, the packaged chip seemed much more vulnerable to optical damage compared to those that were unpackaged.We reckon that the circuits may be exposed to the light with a large/diverse incident angle and the multiple reflections in the package.While temporary functionality could somehow be restored by increasing the input signal amplitude, eventually, the instability problem of the front-end circuits for signal readout could not be resolved.This indicates that the photo-induced damage arises from a long term or even permanent mechanism.For the applications involving SPAD sensors, such as RGB image sensors, X-ray imaging, and radiometric temperature detection, the operational wavelengths are not limited to the near-infrared spectrum; they can extend into the visible or even shorter wavelengths.In these scenarios, the use of a long-pass filter in front of the SPAD sensor is not applicable.Therefore, in this present work, we investigate the impact of the light-induced reliability issues on NMOSFET under intense light exposure.The dependence of degradation on the device structure, the stress condition, the illumination method, and the incident photon energy are studied.A qualitative model to explain the NMOSFET degradation as well as the possible ways to mitigate this reliability issue are also presented.
+
+
+Experimental Methods and Results
+
+The devices were fabricated using the HEJIAN 0.11 µm high-voltage process.Two kinds of NMOSFETs were examined, including I/O and core devices.They have the same gate width of 4.0 µm and gate length of 0.45 µm.All devices are not optically shielded by the metal layer.The differences between the I/O and core devices are (1) the I/O devices have a thicker oxide layer than the core devices, and (2) there is no lightly doped drain (LDD) structure under the spacer at the source/drain for the I/O MOSFETs.In order to quantify the issue of light-induced reliability, we first measure the drain current (I d ) as a function of the gate voltage (V g ) in the dark after a period of stress.The stress tests involve different bias voltages and illumination modes.The stress condition for NMOSFET is set in common with a source amplifier, similar to that under which a SPAD readout circuit is operated.During the stress, we choose two electrical bias methods: DC bias (DC mode) and square-wave operation (AC mode).On the other hand, the optical stress also involves two testing modes: continuous wave (CW) and pulsed illumination.For the following experiments, a tungsten lamp is used as the light source for illumination.The light intensity is 3.6 klux measured by a lux meter (CHY-331) and the normalized intensity spectrum is shown in Figure 1a.
+
+still occurred in these circuits with an optical shield.Surprisingly, with the same illumination condition, the packaged chip seemed much more vulnerable to optical damage compared to those that were unpackaged.We reckon that the circuits may be exposed to the light with a large/diverse incident angle and the multiple reflections in the package.While temporary functionality could somehow be restored by increasing the input signal amplitude, eventually, the instability problem of the front-end circuits for signal readout could not be resolved.This indicates that the photo-induced damage arises from a long term or even permanent mechanism.For the applications involving SPAD sensors, such as RGB image sensors, X-ray imaging, and radiometric temperature detection, the operational wavelengths are not limited to the near-infrared spectrum; they can extend into the visible or even shorter wavelengths.In these scenarios, the use of a long-pass filter in front of the SPAD sensor is not applicable.Therefore, in this present work, we investigate the impact of the light-induced reliability issues on NMOSFET under intense light exposure.The dependence of degradation on the device structure, the stress condition, the illumination method, and the incident photon energy are studied.A qualitative model to explain the NMOSFET degradation as well as the possible ways to mitigate this reliability issue are also presented.
+
+
+Experimental Methods and Results
+
+The devices were fabricated using the HEJIAN 0.11 µm high-voltage process.Two kinds of NMOSFETs were examined, including I/O and core devices.They have the same gate width of 4.0 µm and gate length of 0.45 µm.All devices are not optically shielded by the metal layer.The differences between the I/O and core devices are (1) the I/O devices have a thicker oxide layer than the core devices, and (2) there is no lightly doped drain (LDD) structure under the spacer at the source/drain for the I/O MOSFETs.In order to quantify the issue of light-induced reliability, we first measure the drain current (Id) as a function of the gate voltage (Vg) in the dark after a period of stress.The stress tests involve different bias voltages and illumination modes.The stress condition for NMOSFET is set in common with a source amplifier, similar to that under which a SPAD readout circuit is operated.During the stress, we choose two electrical bias methods: DC bias (DC mode) and square-wave operation (AC mode).On the other hand, the optical stress also involves two testing modes: continuous wave (CW) and pulsed illumination.For the following experiments, a tungsten lamp is used as the light source for illumination.The light intensity is 3.6 klux measured by a lux meter (CHY-331) and the normalized intensity spectrum is shown in Figure 1a. Figure 1b shows the Id-Vg curves of two devices before and after the stress of 2000 times Id-Vg sweeps under CW illumination.Vg sweeps from 0.0 V to 1.5 V with a step of Figure 1b shows the I d -V g curves of two devices before and after the stress of 2000 times I d -V g sweeps under CW illumination.V g sweeps from 0.0 V to 1.5 V with a step of 10 mV and 50 mV for the I/O and core NMOSFETs, and the time for one sweep is about 3 s.For the I/O NMOSFET, its drain current clearly increases to about 1 mA after stress and exhibits no switching characteristics at all.In strong contrast, the core NMOSFET maintains the Sensors 2023, 23, 9586 3 of 7 same I d -V g curve after the same stress condition.It is obvious that I d degradation is only observed with the I/O NMOSFET.In order to elucidate the degradation mechanism, we have applied the following three stress conditions based on the aforementioned parameters:
+
+1.
+
+V g in DC mode under CW illumination.2.
+
+V g in DC mode under pulsed illumination.3.
+
+V g in AC mode under pulsed illumination.
+
+In order to clearly illustrate the differences before and after applying stress, the following experiments present the results by measuring the I d -V g curves with V g sweeping from 0.0 V to 3.0 V in 10 mV increments at V d = 1.5 V. Figure 2a illustrates the I d -V g curves of I/O NMOSFETs after the stress.The device is stressed for 100 s using stress condition 1 simply with fixed V g (DC mode).The V g is fixed at 3.0 V at the beginning, then decreased by a step of 0.1 V.The degradation appears in the I d -V g measurement for V g coming to 0.2 V as the off-state current (I off ) increases from ~20 pA to ~200 pA.In Figure 2b, with stress condition 2, the degradation occurs earlier at a larger V g of 0.6 V.By changing the illumination from CW into pulsed mode, the NMOSFET degradation occurs at a higher V g , and a much worse I off is obtained.
+
+2. Vg in DC mode under pulsed illumination.3. Vg in AC mode under pulsed illumination.
+
+In order to clearly illustrate the differences before and after applying stress, the following experiments present the results by measuring the Id-Vg curves with Vg sweeping from 0.0 V to 3.0 V in 10 mV increments at Vd = 1.5 V. Figure 2a illustrates the Id-Vg curves of I/O NMOSFETs after the stress.The device is stressed for 100 s using stress condition 1 simply with fixed Vg (DC mode).The Vg is fixed at 3.0 V at the beginning, then decreased by a step of 0.1 V.The degradation appears in the Id-Vg measurement for Vg coming to 0.2 V as the off-state current (Ioff) increases from ~20 pA to ~200 pA.In Figure 2b, with stress condition 2, the degradation occurs earlier at a larger Vg of 0.6 V.By changing the illumination from CW into pulsed mode, the NMOSFET degradation occurs at a higher Vg, and a much worse Ioff is obtained.
+
+For stress condition 3, when the gate voltage is operated in AC mode under pulsed illumination mode, the degradation of Id is the worst, as shown in Figure 2c.The pulsedmode illumination is a periodic on-and off-state with a frequency of about 1 kHz and duty cycle of 50% obtainable by turning on/off the lump power controller.The degradation starts as early as Vg = 2.5 V and is noticeably different from the previous two stress conditions.After the stress, Ioff gradually increases, while the on-state current (Ion) initially decreases, then increases, as shown in Figure 2d.The serious degradation of the drain current causes the NMOSFETs to lose its switching characteristics.Even worse, the leakage current leads to a very high static power consumption on the chip.After a week of idle time, we found that the degraded NMOSFETs are still unable to exhibit their normal Id−Vg curves, indicating that this degradation is not recoverable.For stress condition 3, when the gate voltage is operated in AC mode under pulsed illumination mode, the degradation of I d is the worst, as shown in Figure 2c.The pulsedmode illumination is a periodic on-and off-state with a frequency of about 1 kHz and duty cycle of 50% obtainable by turning on/off the lump power controller.The degradation starts as early as Vg = 2.5 V and is noticeably different from the previous two stress conditions.After the stress, Ioff gradually increases, while the on-state current (Io n ) initially decreases, then increases, as shown in Figure 2d.The serious degradation of the drain current causes the NMOSFETs to lose its switching characteristics.Even worse, the leakage current leads to a very high static power consumption on the chip.After a week of idle time, we found that the degraded NMOSFETs are still unable to exhibit their normal I d -V g curves, indicating that this degradation is not recoverable.
+
+
+Analysis and Discussion
+
+The degradation of I d may be attributed to an increase in surface trap density.Figure 3 illustrates the possible mechanism to be detailed in the following.When exposed to light, electron-hole pairs are generated, and higher-energy photons can potentially produce high-energy electrons.Although the drain electric field in NMOSFET is not sufficient to induce the hot carrier injection (HCI) effect, the high-energy electron-hole pairs are accelerated by the drain electric field, resulting in carriers with enough energy to cause damage to the chemical bonds at the Si/SiO 2 interface.The weak Si-H bonding could be broken by hot electrons, leading to the emergence of interface traps [9,10].This degradation mechanism appears to be valid only when the V g is significantly smaller than the drain voltage (V d ).This is because when V g is much smaller than V d , the NMOSFET enters the saturation region, and pinch-off occurs on the drain side.This exposes the interface oxide layer that is originally surrounded by the inverted n-channel, making it vulnerable to hot electron damage, as shown in Figure 3a.When NMOSFET is biased in the linear region, the strong electric field disappears, so the hot electrons stop damaging the SiO 2 /Si interface as shown in Figure 3b.For V g = 0 V, the hot electrons would not be attracted toward the gate, and therefore, no device degradation occurs, as shown in Figure 3c.Additionally, the high density of hot-electron-induced interface traps affects the overlap region of the drain and the gate, which could cause band bending and enhance I off due to the trap-assisted tunneling current [11].
+
+
+Analysis and Discussion
+
+The degradation of Id may be attributed to an increase in surface trap density.Figure 3 illustrates the possible mechanism to be detailed in the following.When exposed to light, electron-hole pairs are generated, and higher-energy photons can potentially produce high-energy electrons.Although the drain electric field in NMOSFET is not sufficient to induce the hot carrier injection (HCI) effect, the high-energy electron-hole pairs are accelerated by the drain electric field, resulting in carriers with enough energy to cause damage to the chemical bonds at the Si/SiO2 interface.The weak Si-H bonding could be broken by hot electrons, leading to the emergence of interface traps [9,10].This degradation mechanism appears to be valid only when the Vg is significantly smaller than the drain voltage (Vd).This is because when Vg is much smaller than Vd, the NMOSFET enters the saturation region, and pinch-off occurs on the drain side.This exposes the interface oxide layer that is originally surrounded by the inverted n-channel, making it vulnerable to hot electron damage, as shown in Figure 3a.When NMOSFET is biased in the linear region, the strong electric field disappears, so the hot electrons stop damaging the SiO2/Si interface as shown in Figure 3b.For Vg = 0 V, the hot electrons would not be attracted toward the gate, and therefore, no device degradation occurs, as shown in Figure 3c.Additionally, the high density of hot-electron-induced interface traps affects the overlap region of the drain and the gate, which could cause band bending and enhance Ioff due to the trap-assisted tunneling current [11].To understand why the pulsed illumination induces the degradation more easily compared to the CW one, we reckon that the continuous flow of the photo-current may play a protective role.The Id degradation in NMOSFET is due to the photon-induced hot electrons, but at the same time, they could also provide a form of protection.Under CW illumination, a stable photo-current flows from the drain to the substrate.This photo-current could protect the Si/SiO2 interface from the direct impact of the hot electrons.The continuous flow of photo-carriers generated by CW illumination could increase the probability of scattering and lead to a decrease in hot-electron energy, so the damage on the interface could be reduced.Consequently, the degradation phenomenon under CW mode is not very pronounced.As the illumination mode is switched from CW to pulsed mode, the continuous photo-current needs to be re-established at each on/off transition of the illumination, so the protection of the photo-current flow is significantly weakened.This is why a clear increase in the threshold for Id degradation is observed when the illumination is switched from CW to pulsed mode.
+
+As Ioff gradually increases, the parasitic resistance of the substrate, influenced by the body effect, provides a voltage at the substrate.Within the NMOSFET structure, there is To understand why the pulsed illumination induces the degradation more easily compared to the CW one, we reckon that the continuous flow of the photo-current may play a protective role.The I d degradation in NMOSFET is due to the photon-induced hot electrons, but at the same time, they could also provide a form of protection.Under CW illumination, a stable photo-current flows from the drain to the substrate.This photocurrent could protect the Si/SiO 2 interface from the direct impact of the hot electrons.The continuous flow of photo-carriers generated by CW illumination could increase the probability of scattering and lead to a decrease in hot-electron energy, so the damage on the interface could be reduced.Consequently, the degradation phenomenon under CW mode is not very pronounced.As the illumination mode is switched from CW to pulsed mode, the continuous photo-current needs to be re-established at each on/off transition of the illumination, so the protection of the photo-current flow is significantly weakened.This is why a clear increase in the threshold for I d degradation is observed when the illumination is switched from CW to pulsed mode.
+
+As I off gradually increases, the parasitic resistance of the substrate, influenced by the body effect, provides a voltage at the substrate.Within the NMOSFET structure, there is a parasitic bipolar junction transistor (BJT) located between the source, the body, and the drain, as sketched in Figure 4.When the parasitic diode between the substrate and source becomes forward-biased due to the substrate voltage, the parasitic BJT is activated, allowing a current to flow from the drain to the source.This new current path is not influenced by the gate voltage and accounts for the loss of switching characteristics, as seen in Figure 2c.
+
+a parasitic bipolar junction transistor (BJT) located between the source, the body, and the drain, as sketched in Figure 4.When the parasitic diode between the substrate and source becomes forward-biased due to the substrate voltage, the parasitic BJT is activated, allowing a current to flow from the drain to the source.This new current path is not influenced by the gate voltage and accounts for the loss of switching characteristics, as seen in Figure 2c.To generate hot electrons near the channel, the incident photon energy has to be high enough.To confirm that photon energy is one of the primary factors for causing the observed interface damage, the 700 nm and 900 nm long-pass filters (LPFs) are placed at the light source output to selectively filter incoming photon energy.Because the HEJIAN devices were all measured and damaged in the previous experiments, the following experiment used new devices as a replacement.The new devices of I/O NMOSFETs were fabricated using TSMC's 0.18 µm bipolar-CMOS-DMOS (BCD) process.The respective sizes in gate length and gate width are 4 µm and 0.6 µm.
+
+Figure 5a,b show the stress effect with the two LPFs using stress condition 1 for 30 min at Vg = 0.3 V and Vd = 1.5 V.The drain current during the stress is monitored, and it is clear that only the device in the experiment with 700 nm LPF exhibits an abrupt jump of Id at about 1150 s as shown in Figure 5a.The significant difference in Id-Vg before and after the stress can also be seen in Figure 5b.The NMOSFET using the 700 nm LPF exhibited severe Id degradation, while the ones using the 900 nm filter only occurred slight damage, with Id increasing to ~nA after the stress.This evidences that photon energy is a key factor influencing the Id degradation mechanism.
+
+Since an LPF determines the maximum energy photons that can pass through, when hot electrons are generated, their own energy combined with the acceleration provided by the vertical electric field within the structure meets the condition for causing interface damage, similar to the hot-electron injection effect.Therefore, shorter-wavelength photons can generate higher-energy hot electrons to induce the interface damage.In addition, the wavelength of photons decides the absorption depth.Note that the photons with shorter wavelengths have a shallower absorption depth, and a large number of electrons generated by these photons are close to the surface of the device, making them more likely to damage the surface oxide.To generate hot electrons near the channel, the incident photon energy has to be high enough.To confirm that photon energy is one of the primary factors for causing the observed interface damage, the 700 nm and 900 nm long-pass filters (LPFs) are placed at the light source output to selectively filter incoming photon energy.Because the HEJIAN devices were all measured and damaged in the previous experiments, the following experiment used new devices as a replacement.The new devices of I/O NMOSFETs were fabricated using TSMC's 0.18 µm bipolar-CMOS-DMOS (BCD) process.The respective sizes in gate length and gate width are 4 µm and 0.6 µm.
+
+Figure 5a,b show the stress effect with the two LPFs using stress condition 1 for 30 min at V g = 0.3 V and V d = 1.5 V.The drain current during the stress is monitored, and it is clear that only the device in the experiment with 700 nm LPF exhibits an abrupt jump of I d at about 1150 s as shown in Figure 5a.The significant difference in I d -V g before and after the stress can also be seen in Figure 5b.The NMOSFET using the 700 nm LPF exhibited severe I d degradation, while the ones using the 900 nm filter only occurred slight damage, with I d increasing to ~nA after the stress.This evidences that photon energy is a key factor influencing the I d degradation mechanism.Hot carriers can hit the Si/SiO2 interface, causing the breakage of Si-H bonds and an increase in surface defects.Interestingly, hydrogen ions, restricted by the bias voltage of Vg, are pushed back towards the interface.Therefore, in the early stages of damage, it is possible to observe the phenomenon of Si-H bonds breaking and re-forming.One of the cases spotted by us is shown in Figure 6.The monitored Id values under stress condition 2 at Vg = 0.4 V from 0 to 120 s are plotted.The RTS-like up-and-down Id has been observed in Figure 6, probably indicating a recovered interface damage.Among several measurements, we also found that these RTS-like Id behaviors become more seldom as Vg is low-
+I d (A) V g (V)
+before w/ 700-nm LPF before w/ 900-nm LPF after w/ 700-nm LPF after w/ 900-nm LPF Since an LPF determines the maximum energy photons that can pass through, when hot electrons are generated, their own energy combined with the acceleration provided by the vertical electric field within the structure meets the condition for causing interface damage, similar to the hot-electron injection effect.Therefore, shorter-wavelength photons can generate higher-energy hot electrons to induce the interface damage.In addition, the wavelength of photons decides the absorption depth.Note that the photons with shorter wavelengths have a shallower absorption depth, and a large number of electrons generated by these photons are close to the surface of the device, making them more likely to damage the surface oxide.
+
+Hot carriers can hit the Si/SiO 2 interface, causing the breakage of Si-H bonds and an increase in surface defects.Interestingly, hydrogen ions, restricted by the bias voltage of V g , are pushed back towards the interface.Therefore, in the early stages of damage, it is possible to observe the phenomenon of Si-H bonds breaking and re-forming.One of the cases spotted by us is shown in Figure 6.The monitored I d values under stress condition 2 at V g = 0.4 V from 0 to 120 s are plotted.The RTS-like up-and-down I d has been observed in Figure 6, probably indicating a recovered interface damage.Among several measurements, we also found that these RTS-like I d behaviors become more seldom as V g is lowered.This can be understood because at lower V g values, it is more difficult for the hydrogen ions to return to the interface for recombination.Consequently, we may observe recoverability in the early stages of degradation, but it eventually results in permanent damage.Hot carriers can hit the Si/SiO2 interface, causing the breakage of Si-H bonds and an increase in surface defects.Interestingly, hydrogen ions, restricted by the bias voltage of Vg, are pushed back towards the interface.Therefore, in the early stages of damage, it is possible to observe the phenomenon of Si-H bonds breaking and re-forming.One of the cases spotted by us is shown in Figure 6.The monitored Id values under stress condition 2 at Vg = 0.4 V from 0 to 120 s are plotted.The RTS-like up-and-down Id has been observed in Figure 6, probably indicating a recovered interface damage.Among several measurements, we also found that these RTS-like Id behaviors become more seldom as Vg is lowered.This can be understood because at lower Vg values, it is more difficult for the hydrogen ions to return to the interface for recombination.Consequently, we may observe recoverability in the early stages of degradation, but it eventually results in permanent damage.
+
+
+Conclusions
+
+We have presented the photon-induced reliability problems in NMOSFET using in SPADs or CMOS image sensors.Under the illumination of the light source, photons of high energy can be fully absorbed into surface and generate hot electrons that are accelerated by the vertical electric field and impact the Si/SiO2 interface.The damage induces
+
+
+Conclusions
+
+We have presented the photon-induced reliability problems in NMOSFET using in SPADs or CMOS image sensors.Under the illumination of the light source, photons of high energy can be fully absorbed into surface and generate hot electrons that are accelerated by the vertical electric field and impact the Si/SiO 2 interface.The damage induces high-density interface traps contributing to the increased I off .The enlarged I off then activates parasitic BJTs and creates a new current path from the source to the drain of the NMOSFET.The worst case occurs at sweeping V g and pulsed illumination and leads to a failure of NMOSFET on/off characteristics.In addition, the short-wavelength photons generate a large number of electrons on the surface due to their shallower absorption depth, significantly increasing the probability of damaging the interface.A 900 nm long-pass filter above the device can largely reduce the damage as the incident photon energy is lower and the surface absorption is also lower.Our work shows that by choosing low-V th transistors for circuit designs or using long-pass filters, the reliability issues associated with I d degradation in NMOSFET can be effectively mitigated.
+
+Figure 1 .
+1
+Figure 1.(a) Tungsten lamp spectrum measured by Ocean USB4000-UV-VIS-ES.(b) Id-Vg curves measured in darkness after and before stress sweeping Vg from 0 V to 1.5 V under CW illumination for I/O and core NMOSFETs.
+
+
+Figure 1 .
+1
+Figure 1.(a) Tungsten lamp spectrum measured by Ocean USB4000-UV-VIS-ES.(b) I d -V g curves measured in darkness after and before stress sweeping V g from 0 V to 1.5 V under CW illumination for I/O and core NMOSFETs.
+
+
+Figure 2 .
+2
+Figure 2. I d -V g curves in darkness before and after stress of (a) DC mode, (b) AC mode under CW illumination, and (c) AC mode under pulsed illumination.(d) On-and off-state current (I on ) versus V g in stress condition.
+
+
+Sensors 2023 , 8 Figure 2 .
+202382
+Figure 2. Id-Vg curves in darkness before and after stress of (a) DC mode, (b) AC mode under CW illumination, and (c) AC mode under pulsed illumination.(d) On-and off-state current (Ion) versus Vg in stress condition.
+
+
+Figure 3 .
+3
+Figure 3. Hot electrons damage mechanism in (a) saturation, (b) linear, and (c) cut-off states under illumination.
+
+
+Figure 3 .
+3
+Figure 3. Hot electrons damage mechanism in (a) saturation, (b) linear, and (c) cut-off states under illumination.
+
+
+Figure 4 .
+4
+Figure 4. Parasitic bipolar junction transistor (BJT) in NMOSFET.
+
+
+Figure 4 .
+4
+Figure 4. Parasitic bipolar junction transistor (BJT) in NMOSFET.
+
+
+Figure 5 .
+5
+Figure 5. (a) Drain current versus time under stress of DC mode under pulsed illumination and (b) Id−Vg curves in darkness before and after the stress with and without 700 nm and 900 nm long pass filter.
+
+
+Figure 5 .
+5
+Figure 5. (a) Drain current versus time under stress of DC mode under pulsed illumination and (b) I d -V g curves in darkness before and after the stress with and without 700 nm and 900 nm long pass filter.
+
+
+Figure 5 .
+5
+Figure 5. (a) Drain current versus time under stress of DC mode under pulsed illumination and (b)Id−Vg curves in darkness before and after the stress with and without 700 nm and 900 nm long pass filter.
+
+
+Figure 6 .
+6
+Figure 6.Monitored drain current as a function of the stress time under stress condition 2 at Vg = 0.4 V.
+
+
+Figure 6 .
+6
+Figure 6.Monitored drain current as a function of the stress time under stress condition 2 at Vg = 0.4 V.
+
+Sensors 2023, 23, x FOR PEER REVIEW
+Acknowledgments:We thank the National Science and Technology Council (NSTC) for the financial support.CHL thanks PixArt Imaging Inc. collaborators (T.-S.Tsai and R.-Y.He, etc.) for providing testing chip and their inspiring and fruitful discussions.The tape-out resources from Taiwan Semiconductor Research Institute (TSRI) are also appreciated.Data Availability Statement:The data that support the findings of this study are available from the corresponding author upon reasonable request.Funding: This research was funded by the National Science and Technology Council (NSTC) in Taiwan, grant number NSTC111-2221-E-A49-141-MY3.Institutional Review Board Statement: Not applicable.Sensors 2023, 23, 9586 7 of 7 Informed Consent Statement: Not applicable.Conflicts of Interest:The authors declare no conflict of interest.
+Comparison of passive and active pixel schemes for CMOS visible imagers. L Kozlowski, J Luo, W Kleinhans, T Liu, 10.1117/12.584474Proceedings of the Infrared Readout Electronics IV. the Infrared Readout Electronics IVOrlando, FL, USA13 April 1998
+
+Historical perspectives, state of art and research trends of SPAD arrays and their applications (Part II: SPAD arrays). I Cusini, D Berretta, E Conca, A Incoronato, F Madonini, A A Maurina, C Nonne, S Riccardo, F Villa, 10.3389/fphy.2022.906671Front. Phys. 2022, 10, 906671. [CrossRef
+
+Cylindrical microlensing for enhanced collection efficiency of small pixel SPAD arrays in single-molecule localisation microscopy. I Gyongy, A Davies, B Gallinet, M A W Dutton, R R Duncan, C Rickman, R K Henderson, P A Dalgarno, 10.1364/OE.26.002280Opt. Express. 262018
+
+Diffraction feature of microlens array with a small aperture size. S Park, J Park, H Choi, Y J Yun, K Choi, J Kim, 10.1117/12.772480Proceedings of the Emerging Lithographic Technologies XII. the Emerging Lithographic Technologies XIISan Jose, CA, USAFebruary 2008
+
+Ageing under illumination of MOS transistors for active pixel sensors (APS) applications. D Lopez, F Monsieur, S Ricq, J M Roux, F Balestra, 10.1109/IRWS.2008.4796081Proceedings of the IEEE International Integrated Reliability Workshop Final Report. the IEEE International Integrated Reliability Workshop Final ReportSouth Lake Tahoe, CA, USAOctober 2008
+
+A Low-noise CMOS SPAD pixel with 12.1 ps SPTR and 3 ns dead time. F Gramuglia, M.-L Wu, C Bruschini, A.-J Lee, E Charbon, 10.1109/JSTQE.2021.3088216IEEE J. Quantum Electron. 282022
+
+A high PDE backside-illuminated SPAD in 65/40 nm 3D IC CMOS pixel with cascaded passive quenching and active recharge. S Lindner, S Pellegrini, Y Henrion, B Rae, M Wolf, E Charbon, 10.1109/LED.2017.2755989IEEE Electron Device Lett. 382017
+
+Light-induced reliability issue of NMOS using in CMOS image sensor and single-photon avalanche diode. C H Liu, S D Lin, 46ITE Tech. Rep. 2022
+
+New evidence for defect creation by high optical excitation in glow discharge amorphous silicon. I Hirabayashi, K Morigaki, S T Nitta, 10.1143/JJAP.19.L357Jpn. J. Appl. Phys. 191980L357. [CrossRef
+
+Light-induced dangling bonds in hydrogenated amorphous silicon. H Dersch, J Stuke, J Beichler, 10.1063/1.92402Appl. Phys. Lett. 381981
+
+Interface trap induced thermionic and field emission current in off-state MOSFET's. T Wang, T E Chang, C Huang, 10.1109/IEDM.1994.383440Proceedings of the IEEE International Electron Devices Meeting. the IEEE International Electron Devices MeetingSan Francisco, CA, USADecember 1994
+
+Disclaimer/Publisher's Note: The statements, opinions and data contained in all publications are solely those of the individual author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to people or property resulting from any ideas, methods. instructions or products referred to in the content

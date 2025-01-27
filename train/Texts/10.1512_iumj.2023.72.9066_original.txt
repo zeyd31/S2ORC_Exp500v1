@@ -1,0 +1,480 @@
+
+CONTACT STRUCTURES AND BELTRAMI FIELDS ON THE TORUS AND THE SPHERE
+11 May 2023
+
+D Peralta-Salas 
+R Slobodeanu 
+CONTACT STRUCTURES AND BELTRAMI FIELDS ON THE TORUS AND THE SPHERE
+11 May 2023
+We show the existence of overtwisted contact structures on the (round) 3-sphere and the (flat) 3-torus for which the ambient metric is weakly compatible. Our proofs are based on the construction of S 1 -invariant nonvanishing curl eigenfields on S 3 and T 3 using suitable families of Jacobi polynomials and eigenfunctions of the Laplacian with contractible nodal sets, respectively. As a consequence, we show that the contact sphere theorem of Etnyre, Komendarczyk and Massot (2012) does not hold for weakly compatible metrics as it was suggested. Using ideas from the theory of harmonic maps, we also provide an alternative proof of a theorem of Gluck and Gu (2001) on the geometric rigidity of tight contact structures on the 3-sphere, i.e., any contact form in S 3 admitting a compatible metric that is the round one is isometric, up to a constant factor, to the standard (tight) contact form.
+
+Introduction
+
+Since 1889 when Eugenio Beltrami highlighted them in his paper "Considerations on Hydrodynamics", the divergence-free vector fields V aligned with their own curl, i.e.
+
+curl V = f V for some function f , have found far reaching applications in magnetohydrodynamics [37,41], and in the mathematical analysis of the Euler and Navier-Stokes equations [8]. Known also as force-free magnetic fields in solar physics, or helical flows in fluid mechanics, Beltrami fields are used to describe equilibria in magnetic relaxation processes [38], as building blocks to construct time-dependent solutions exhibiting dissipation [9] and vortex reconnections [14], or as special steady fluid flows with complex dynamics [16,17], able to provide us with insights about Lagrangian turbulence. We refer to [2,39], for a broader view on (topological) hydrodynamics and the role of Beltrami fields.
+
+On a Riemannian 3-manifold (M, g), the 1-form α that is dual (using the metric) to a Beltrami field V satisfies: (1) * dα = f α , δα = 0 , for some (say C ∞ ) function f : M → R, where * is the Hodge star operator and δ = * d * is the codifferential. From the first equation it follows that α ∧ dα = f |α| 2 vol g , so, in particular, if α and f are nowhere vanishing, then α ∧ dα = 0, condition well-known to geometers as defining a contact form on M . In this case we say that the contact structure defined by the kernel of α is associated with the Beltrami field V . Conversely, as proven in [22], for any contact form its associated Reeb field is a Beltrami field (with constant proportionality factor) with respect to some Riemannian metric on M . This correspondence gives rise to a fruitful interplay between contact geometry and hydrodynamics, with important benefits for both fields [23,6]. A major goal in contact topology is the understanding of overtwisted and tight contact structures, the former being defined in terms of the existence of an embedded disk which, along its boundary, is tangent to the contact planes. On closed oriented 3-manifolds the overtwisted contact structures are classified (up to contact isotopy) by the homotopy classes of their 2-plane fields [13]. In view of the contact-Beltrami correspondence mentioned above, it is then natural to ask which type of contact structures (tight or overtwisted) are associated with nonvanishing Beltrami fields on a given Riemannian 3-manifold (Question 7.4 in [34]), and which homotopy classes (of 2-plane fields associated to contact structures) can be represented by them. This turns out to be related to the compatibility between the metric and the contact structure, defined as (see [24]): Definition 1. Let (M, α) be a contact 3-manifold. A Riemannian metric g on M is called weakly compatible with the contact structure if there exists a positive function f on M such that * dα = f α (where * is computed using the metric g). If, in addition, |α| = 1 and f is a positive constant, then g is called compatible with the contact structure.
+
+We recall that the notion of compatible metric was first introduced in [7] by requiring that * dα = 2α and |α| = 1 (so f ≡ 2 above), and in this case we recover also the definition of associated metric, customarily used in contact geometry, see e.g. [5].
+
+We see from Definition 1 that if V is a nonvanishing curl eigenfield on a Riemannian manifold (M, g), i.e., curl V = λV for some constant λ = 0, (so a Beltrami field with constant proportionality factor), the metric g is weakly compatible with the contact structure defined by the dual 1-form α. If moreover |V | = 1, then g is compatible.
+
+The curl eigenfields define, on any closed 3-manifold, an L 2 -basis for the exact divergence-free vector fields (in particular, the spectrum of curl is discrete). However, it is widely open if there exist nonvanishing curl eigenfields on any (M, g), or even assuming their existence, it is not known with which contact structures (tight or overtwisted) and homotopy classes they are compatible. (The only general result [15] is that for a generic metric, the zero set of the curl eigenfields consists of hyperbolic points.) Partial results have been proved recently concerning geometric restrictions for the existence of compatible metrics: the Contact Sphere Theorem proved in [24] and, with improved pinching constant, in [25].
+
+Theorem 1 (Etnyre, Komendarczyk and Massot, 2012). Let (M, α) be a closed contact 3-manifold. If there exists a compatible metric g with pinched sectional curvature 0 < 4 9 k max < sec(g) ≤ k max , then the contact structure is tight and the manifold is covered by a 3-sphere.
+
+This remarkable result implies, in particular, that any curl eigenfield with constant norm on a Riemannian manifold with pinched sectional curvature defines a tight contact structure. It is then natural to ask if the same result holds for any nonvanishing curl eigenfield. In this direction, in [24,Remark 1.6] it was suggested that Theorem 1 might also hold for weakly compatible metrics: "it is reasonable to hope that such a theorem (the contact sphere theorem) holds for weakly compatible metrics, but possibly with weaker bounds".
+
+Our goal in this paper is to analyze the type of contact structures (tight or overtwisted, and homotopy classes) associated with nonvanishing curl eigenfields on S 3 (endowed with the round metric) and T 3 (endowed with the flat metric). This is tantamount to studying contact structures on S 3 or T 3 whose weakly compatible metrics are the canonical ones on these manifolds (actually, in this setting of curl eigenfields, the notion of weak compatibility is slightly stronger than in Definition 1 because the proportionality factor is constant). In what follows we will always assume that S 3 and T 3 are endowed with their canonical metrics.
+
+Our first main result concerns curl eigenfields on S 3 . We recall that the spectrum of curl is given by λ = ±(k + 2) where k is a nonnegative integer. It is well known that the Reeb field of the standard (resp. anti-standard) contact form on S 3 is a curl eigenfield with λ = 2 (resp. λ = −2). These fields are known as the Hopf and anti-Hopf fields, respectively (for details see Section 3). In fact, any curl eigenfield with the lowest eigenvalue λ = 2 (resp. λ = −2) is isometric (possibly up to a constant proportionality factor) to the Hopf (resp. anti-Hopf) field. The following theorem provides a partial answer to the problem of characterizing those contact structures (including their homotopy classes) associated with curl eigenfields on S 3 ; in the statement we use the concept of Hopf class, which is introduced in Section 3.
+
+Theorem 2. Any nonvanishing curl eigenfield on S 3 has even eigenvalue λ = 2m, m ∈ {±1, ±2, · · · }. Moreover, for each |m| ≥ 2 there exists a nonvanishing curl eigenfield V m whose associated contact structure is overtwisted. The homotopy classes of the corresponding contact plane fields have Hopf invariant
+Hopf invariant = sign(m)(−1) m+1 − 1 2 .
+The proof of this result is based on the construction of explicit S 1 -invariant nonvanishing curl eigenfields on S 3 using an ansatz introduced in [30] and suitable families of Jacobi polynomials. The characterization of the underlying contact structures is obtained using a criterion of Giroux [28] for tightness and explicit constructions of contact homotopies with model fields. This theorem shows, in particular, that there exist overtwisted contact structures associated with nonvanishing Beltrami fields on S 3 , thus establishing that Theorem 1 does not hold for weakly compatible metrics: Corollary 1. For each Hopf class 0 or −1, there exists an overtwisted contact structure on S 3 admitting a weakly adapted metric that is the round one.
+
+The topological rigidity of tight structures on S 3 (any tight contact structure is contact isotopic to the standard one) has a nice geometric rigidity counterpart, i.e., any constant norm Beltrami field on S 3 is isometric to the Hopf (or anti-Hopf) field [29,Theorem A]. We revisit this result by providing a completely new proof of the following statement: Proposition 1. Let V be a curl eigenfield on S 3 with |V | = 1. Then λ = ±2 and V is isometric to the Hopf (or anti-Hopf ) field.
+
+While in the proof of [29] one associates a distance-decreasing holomorphic map from S 2 to S 2 to the Beltrami field V , and then applies a Liouville-type theorem to show that there are no nontrivial maps of this type, in our proof we associate to V a map from S 3 to S 2 that turns out to be a submersive polynomial harmonic morphism and therefore isometrically related to the Hopf map by a standard classification result [12].
+
+Concerning the torus T 3 , we show that there exists a non-vanishing curl eigenfield with associated tight contact structure for each eigenvalue, and that for infinitely many eigenvalues there are curl eigenfields that are associated with overtwisted contact structures. The proof of the first part is based on a simple explicit construction, while the second part is more involved and is based on the construction of S 1invariant curl eigenfields using eigenfunctions of the Laplacian on T 2 with contractible nodal sets. In the statement, the terminology homotopically trivial field means that the field is homotopic (via nonvanishing fields) to the coordinate field ∂ x1 .
+
+Theorem 3. For each eigenvalue λ of the curl operator on T 3 , there exists a nonvanishing curl eigenfield V λ which is homotopically trivial and whose associated contact structure is tight. Moreover, all tight contactomorphic classes are realized this way. Furthermore, there exist infinitely many eigenvalues {λ ℓ } ℓ∈N * and corresponding eigenfields V ℓ such that, for each ℓ, the contact structure associated with V ℓ is overtwisted.
+
+The organization of this paper is as follows. Section 2 is divided in three subsections; Subsection 2.1 recalls some basic notions of contact geometry and in Subsection 2.2 we prove Proposition 3, which provides a criterion to show when two contact structures associated with curl eigenfields are contactomorphic; in Subsection 2.3 we prove two results that are instrumental to prove Theorem 3, i.e. Propositions 4 and 5, which establish some useful properties of the nodal sets of the eigenfunctions of the Laplacian on T 2 and S 2 . Theorem 2 and Proposition 1 on S 3 are proved in Sections 3 and 4, respectively, while the proof of Theorem 3 is presented in Section 5. Some examples and final considerations are provided in Section 6, including an application to the construction of planar open book decompositions.
+
+
+Notation and preliminary results
+
+The goal of this section is to introduce first (in Subsection 2.1) some notions of contact geometry that will be used without further mention in the next sections. In Subsection 2.2 we recall the classical contact-Beltrami correspondence and present a criterion to analyze when two contact structures associated with different curl eigenfields are contactomorphic (cf. Proposition 3). Finally, in Subsection 2.3 we prove two results on the eigenfunctions of the Laplacian in S 2 and T 2 , of interest in themselves, that will be key in Section 5 (cf. Propositions 4 and 5).
+
+2.1. Basics of contact geometry. Let M be a closed (oriented, smooth) 3-manifold. A contact form on M is a 1-form α such that α ∧ dα = 0. It is customary to assume that α ∧ dα > 0, i.e., α is a positive contact form and α ∧ dα defines a volume form on M (otherwise, the contact form is said to be negative). A 2-plane field ζ ⊂ T M is a (coorientable) contact structure on M if there is a contact form α such that ζ = ker α. Such a 2-plane field is a maximally non-integrable distribution on M , also called a contact distribution. The Reeb vector field R associated to a contact form is (uniquely) determined by the conditions α(R) = 1, i R dα = 0.
+
+A contact structure is called overtwisted if there exists an embedded disk which is tangent to the contact distribution along its boundary; if such an embedded disk does not exist, the contact structure is called tight.
+
+The following equivalence relations between two contact structures ζ 0 and ζ 1 (with defining contact forms α 0 and α 1 , respectively) are usually introduced in the literature:
+
+• Contactomorphic: if there is a diffeomorphism ϕ such that dϕ(ζ 1 ) = ζ 0 . In terms of the associated 1-forms: ϕ * α 0 = f α 1 , for some positive function f . • Contact homotopic: if there is a smooth family of contact structures ζ t , t ∈ [0, 1] connecting ζ 0 with ζ 1 . In terms of the associated 1-forms: there exists a 1-parameter family α t such that α t ∧ dα t = 0, for all t ∈ [0, 1].
+
+• Contact isotopic: if there is a smooth family of diffeomorphisms ϕ t , t ∈ [0, 1] with ϕ 0 = id and dϕ 1 (ζ 1 ) = ζ 0 . In terms of the associated 1-forms: ϕ * 1 α 0 = f α 1 , for some positive function f . • Homotopic through plane fields: if there is a smooth family of plane fields ζ t , t ∈ [0, 1] connecting ζ 0 with ζ 1 . In terms of the associated 1-forms: there exists a 1-parameter family of nondegenerate 1-forms α t (i.e. α t = 0 for all t ∈ [0, 1]). The homotopy through plane fields is equivalent (after fixing a global parallelism of M ) to the homotopy of the associated maps ϕ R : M → S 2 defined as ϕ R (p) := 1 |Rp| R p for any p ∈ M . Recall that R is the Reeb vector field associated with the contact form. The map ϕ R is called the Gauss map of the contact distribution. We recall that the Euler class e(ζ) ∈ H 2 (M ; Z) of a contact distribution ζ can be computed using the Gauss map ϕ R as e(ζ) = ϕ * R (e(T S 2 )). Besides the obvious implications "contact isotopic ⇒ contactomorphic" and "contact homotopic ⇒ homotopic through plane fields", let us recall two classical results that connect in a non obvious way the equivalence relations defined above:
+
+Theorem 4 (Gray stability). Contact homotopic ⇒ contact isotopic.
+
+Theorem 5 (Eliashberg classification [13]). For overtwisted contact structures, homotopic through plane fields ⇔ contact homotopic. In particular, the contact isotopy classes of overtwisted contact structures are indexed by the Hopf invariant of (the map ϕ R : M → S 2 associated to) the contact structure, which is an integer if M = S 3 .
+
+
+2.2.
+
+Beltrami fields and contact structures. The curl of a vector field V on a Riemannian 3-manifold (M, g) is defined as the unique vector field curl V that satisfies
+i curl V vol g = dα ,
+where vol g is the Riemannian volume form, and α is the dual 1-form of V (computed with the metric). The curl defines an essentially self-adjoint operator on the space of L 2 exact divergence-free vector fields on M (we recall that a field is exact if it is the curl of another field), and its spectrum is discrete. In particular, the eigenfields of curl, curl V = λV for some real λ = 0, form a basis of the aforementioned space. In terms of the dual 1-form, the eigenfield equation reads as * dα = λα . Curl eigenfields are Beltrami fields with constant proportionality factor (i.e., f = λ in Equation (1)). Most of the literature on Beltrami fields concerns curl eigenfields because they are more flexible and their global existence is much easier to establish (see [18] for an account on Beltrami fields with nonconstant proportionality factor).
+
+As noticed in Section 1, for the dual 1-form of a Beltrami field we have α ∧ dα = f |α| 2 vol g and therefore, if the field and the factor f are nonvanishing, α is a contact form on M and
+R := V |V | 2
+is the associated Reeb field. Conversely, given a contact form α on M with the associated Reeb vector field R, there exists [5] an endomorphism φ of T M and a Riemannian metric g such that, for any vector fields X, Y on M ,
+(2) φ 2 = −I + α ⊗ R , α(Y ) = g(R, Y ) , 1 2 dα(X, Y ) = g(X, φY )
+. For such a metric g, one can prove that 1 2 α ∧ dα = vol g and therefore * dα = 2α. Accordingly, the Reeb field of the given contact form is a (nonvanishing) Beltrami field (in fact, a curl eigenfield). This correspondence between Reeb and Beltrami fields was developed by Etnyre and Ghrist [22], and can be summarized as follows:
+
+Proposition 2. Let M be a Riemannian 3-manifold. Any nonvanishing Beltrami field on M with positive proportionality factor is, up to rescaling, the Reeb field for some contact form on M . Conversely, given a contact form α on M with associated Reeb field R, any nonzero rescaling of R is a (nonvanishing) curl eigenfield for some Riemannian metric on M (which is weakly compatible with the contact structure).
+
+The main result of this subsection provides a sufficient condition under which two contact structures associated with curl eigenfields (with the same eigenvalue) are contact homotopic (so they have the same Hopf invariant as 2-plane fields and are contact isotopic). This result is instrumental to find out whether a given Beltrami field is tight or overtwisted, by comparing it with the models that we will introduce in Sections 3 and 5. Specifically, Proposition 3 is used in Examples 2, 3 and 5 presented in Section 6 to characterize the contact structures associated with different Beltrami fields. In its statement we denote by C + and C − the sets of points where the curl eigenfields V and W are positively, resp. negatively, aligned.
+
+Remark 1. We observe that the sets C + and C − were already used in [10] to measure the "distance" in homotopy classes between two vector fields V and W . In particular, [10, Lemma 19] shows that if either C + or C − is empty, then V and W are homotopic (through nonvanishing fields). However, we do not use this result in our proof, which consists in finding an explicit contact homotopy between the associated contact forms (notice that the homotopy in [10] is not necessarily of contact type).
+
+Proposition 3. On a Riemannian 3-manifold (M, g), let V and W be nonvanishing curl eigenfields with the same eigenvalue λ = 0. Then, if either C + or C − is empty, the induced contact structures are contact homotopic. Moreover, there exists a positive constant c 0 that only depends on V and W (see Equation (3) below), such that the contact structure associated with the nonvanishing curl eigenfield V + cW is contact homotopic to the one induced by V provided that |c| < c 0 .
+
+Proof. We first assume that C − = ∅. Let α and β be the (nonvanishing) 1-forms dual to V and W , respectively. They satisfy the equations * dα = λα and * dβ = λβ. Now consider the homotopy α t := tα + (1 − t)β, t ∈ [0, 1], given by the linear interpolation between these 1-forms. It is straightforward to compute explicitly the 3-form α t ∧ dα t :
+α t ∧ dα t = (tα + (1 − t)β) ∧ (tλ * α + (1 − t)λ * β) = λ t 2 |α| 2 + (1 − t) 2 |β| 2 + 2t(1 − t) α, β vol g = λ |α| 2 − 2 α, β + |β| 2 t 2 + 2 α, β − |β| 2 t + |β| 2 vol g .
+Let us suppose that there is a point x ∈ M at which the above 3-form vanishes for some t ∈ [0, 1]. Then the quadratic polynomial in t that multiplies vol g in the above equation (evaluated at x), must have non-negative discriminant, which is equivalent to
+α, β 2 − |α| 2 |β| 2 ≥ 0 .
+The Cauchy-Schwarz inequality then implies that α(x) = θβ(x), for some constant θ > 0, due to our hypothesis C − = ∅. But then, at the point x,
+α t (x) ∧ dα t (x) = λ (θ − 1)t + 1 2 |β| 2 vol g ,
+and this can be zero only if θ = 1 and t = 1 1−θ / ∈ [0, 1], which is a contradiction. We conclude that α t is a contact form for all t ∈ [0, 1], as we wanted to prove. The case C + = ∅ is treated analogously by working with −β instead of β.
+
+To prove the second statement, we first assume that C := C + ∪ C − = ∅. We introduce the constant
+(3) 0 < c 0 := min x∈C |α|(x) |β|(x) .
+This constant is well defined because the set C is closed (and compact because of the compactness of M ). It is obvious that the 1-form α + cβ is nonvanishing if |c| < c 0 . Now consider the linear homotopy α t := α + ctβ, t ∈ [0, 1]. We have:
+α t ∧ dα t = (α + ctβ) ∧ (λ * α + ctλ * β) = λ c 2 t 2 |β| 2 + 2ct α, β + |α| 2 vol g .
+Suppose that this expression vanishes at some point x ∈ M , for some t ∈ [0, 1]. Then the quadratic polynomial in t that multiplies vol g in the above equation (evaluated at x) must have non-negative discriminant, which is again equivalent to α, β 2 − |α| 2 |β| 2 ≥ 0. By Cauchy-Schwarz inequality, α(x) = θβ(x), for some constant θ. But then, at the point x,
+α t (x) ∧ dα t (x) = λ ct + θ 2 |β| 2 vol g ,
+and this can be zero only if θ = −ct, so that |α|(x)/|β|(x) = |θ| = |c|t ≤ |c| < c 0 , which contradicts the definition of the constant c 0 . In the case that C = ∅, it is obvious that the fields V and V + cW (curl eigenfields with the same eigenvalue λ) are not aligned at any point, so the first part of the proposition implies that the induced contact structures are contact homotopic for any c ∈ R.
+
+Remark 2. The constant c 0 in Proposition 3 is precisely given by Equation (3).
+
+
+2.3.
+
+Eigenfunctions of the Laplacian on T 2 and S 2 . In this subsection we prove some properties of the nodal sets of the eigenfunctions of the Laplacian on T 2 = (R/2πZ) 2 and S 2 (unit sphere in R 3 ), both endowed with their canonical metrics. These results, which are of interest in themselves, will be instrumental in Section 5 to prove Theorem 3, and in Section 6.1.
+
+Eigenfunctions of the Laplacian on T 2 and S 2 arise when constructing S 1 -invariant curl eigenfields on T 3 and S 3 . Roughly speaking, one can obtain nonvanishing solutions to the Beltrami equation by "lifting", in a suitable way, generic eigenfunctions of the Laplacian on the quotient space of the S 1 -action. Using this construction and a criterion of Giroux [28], we can study the overtwistedness of the associated contact structures analyzing the nodal sets of the aforementioned eigenfunctions (specifically, their connectedness and contractibility). The connection between dividing sets on certain surfaces (including nodal sets of eigenfunctions) and contact geometry has also been exploited in [27,32,33,34,36].
+
+A function f is an eigenfunction of the Laplacian ∆ := div •∇ (also called the Laplace-Beltrami operator) if
+−∆f = Λf ,
+where Λ ≥ 0 is the corresponding eigenvalue. We shall denote by E Λ the vector space of eigenfunctions with eigenvalue Λ. It is well known that the spectrum of the Laplacian on S 2 and T 2 is given by
+{Λ = k(k + 1) : k ∈ N} and {Λ = |k| 2 : k ∈ Z 2 }, respectively.
+We recall that the nodal set N (f ) of an eigenfunction f is the set of points where f vanishes. A nodal set is regular if 0 is a regular value of f , i.e., ∇f does not vanish at any point of N (f ).
+
+Our first result in this subsection is that for any eigenvalue Λ > 0, the nodal set of a generic eigenfunction in S 2 or T 2 is regular (and nonempty because any nonconstant eigenfunction has zero mean). Given an integer r > 0, by generic we mean that there exists an open and dense set of eigenfunctions in E Λ (in the C r topology) that satisfies the aforementioned property. Since the result holds on any dimension n ≥ 2, we state it in its full generality: 
+F : N × R m → R , F (x, a) = a 1 f 1 (x) + · · · + a m f m (x) ,
+with x ∈ N and a = (a 1 , . . . , a m ) ∈ R m . Let us now check that F is transverse to X = {0}, that is ∇ x,a F does not vanish at the points (x, a) for which F (x, a) = 0. Here ∇ x,a denotes the gradient computed with respect to the variables x ∈ N and a ∈ R m . A straightforward computation shows that if ∇ x,a F | (x0,a0) = 0 then f 1 (x 0 ) = · · · = f m (x 0 ) = 0, i.e., all the eigenfunctions of the basis vanish at the same point x 0 ∈ N , and hence any Λ-eigenfunction.
+
+Let us now consider a new orthonormal basis of the eigenspace E Λ given by { f j } j=1,...,m , where
+f j := f j • g −1 ,
+with g ∈ Isom(N ) an isometry of N ; the fact that this is an orthonormal basis is obvious because an isometry preserves the eigenspaces of the Laplacian and the scalar product. At the point g · x 0 we have f 1 (g · x 0 ) = · · · = f m (g · x 0 ) = 0, and therefore any eigenfunction f ∈ E Λ vanishes at the point g · x 0 , i.e., f (g · x 0 ) = 0. Since, on S n or T n , the action · of the isometry group is transitive, it follows that any Λ-eigenfunction f vanishes on the whole N , which is a contradiction. Therefore F has no critical points in N × R m , so in particular it is transverse to X = {0}. By the parametric transversality theorem stated above, F a is transverse to X = {0} for almost all values of a ∈ R m , which is equivalent to the fact that the nodal set of F a is regular for almost all (and hence for a dense set of) values of a. As the condition of being regular is open in the C r topology (r ≥ 1), we conclude that there is an open and dense set of Λ-eigenfunctions whose nodal set is regular, as we wanted to show.
+
+The second main result of this subsection establishes the existence of eigenfunctions on T 2 with regular nodal sets having a contractible connected component. By a contractible component we mean that T 2 \N (f ) has a component diffeomorphic to a disk. The proof makes use of a remarkable inverse localization theorem proved in [19,20] which allows us to transplant the nodal set of a monochromatic wave in R 2 into the nodal set of an eigenfunction in T 2 with high eigenvalue. Proposition 5. There exists an infinite sequence of eigenvalues {Λ ℓ } ℓ∈N * and corresponding eigenfunctions f ℓ of the Laplacian on T 2 such that, for each ℓ, the nodal set of f ℓ is regular, disconnected, and contains a contractible connected component.
+
+Proof. Let (r, θ) denote the polar coordinates in R 2 . It is well known that the analytic function w := J 0 (r) is a solution of the Helmholtz equation ∆w + w = 0 in R 2 (i.e., a monochromatic wave). By definition, the nodal set of w consists of concentric circles of radii given by the zeros of the Bessel function J 0 : 0 < α 0 1 < α 0 2 < . . . . We denote the disk in R 2 of radius 10 by B; the function w has three components of its nodal set contained in B.
+
+For any positive integer r, any δ > 0, and any point p ∈ T 2 , the inverse localization theorem [20, Theorem 3.2] implies that there exists an infinite sequence of natural numbers {N ℓ } ℓ∈N * and eigenfunctions f ℓ of the Laplacian on T 2 with eigenvalue Λ ℓ := N 2 ℓ such that:
+(4) w(·) − f ℓ • Ψ · N ℓ C r (B) ≤ δ ,
+where Ψ −1 is a patch of normal geodesic coordinates Ψ −1 : B ρ → B ρ centered at p, from the ball B ρ ⊂ T 2 of radius ρ to the Euclidean ball B ρ of radius ρ.
+
+Since the nodal set of w is regular, Equation (4) and Thom's isotopy theorem imply that f ℓ has a nodal set with three components isotopic to three concentric circles in the ball of radius 10/N ℓ centered at p ∈ T 2 (the isotopy being close to the identity). Although this part of the nodal set of f ℓ is regular, it may happen that the whole nodal set of f ℓ contains some critical points.
+
+Accordingly, using Proposition 4, we can take a Λ ℓ -eigenfunction whose nodal set is regular as close to f ℓ as one wishes. Therefore one may assume that f ℓ is ε ℓ -close in the C r norm to an eigenfunction f ℓ whose nodal set is regular. Since we obviously have
+f ℓ • Ψ · N ℓ − f ℓ • Ψ · N ℓ C r (B) ≤ ε ℓ (using that N −j ℓ ≤ 1 if j ∈ {0, 1, · · · , r}), we conclude that: w − f ℓ • Ψ · N ℓ C r (B) ≤ w − f ℓ • Ψ · N ℓ C r (B) + f ℓ • Ψ · N ℓ − f ℓ • Ψ · N ℓ C r (B)
+≤ δ + ε ℓ < 3 2 δ by choosing ε ℓ < 1 2 δ. Therefore, if δ is small enough, Thom's isotopy theorem implies again that f ℓ has a nodal set with three components isotopic to three concentric circles in the ball of radius 10/N ℓ , thus completing the proof.
+
+3. Overtwisted Beltrami fields on S 3 : proof of Theorem 2
+
+For convenience, we shall describe the sphere S 3 as the set of points (z 1 , z 2 ) ∈ C 2 with |z 1 | 2 + |z 2 | 2 = 1. Denoting z j = x j + iy j , j ∈ {1, 2}, the Hopf coordinates are defined as (x 1 , y 1 , x 2 , y 2 ) = (cos s e iφ1 , sin s e iφ2 ), s ∈ [0, π/2], φ 1,2 ∈ [0, 2π). In these coordinates, the induced round metric on S 3 reads as g = ds 2 + cos 2 s dφ 2 1 + sin 2 s dφ 2 2 , and the unit (anti-)Hopf vector fields, dual to the (anti-)standard contact forms η and η ′ , respectively, are
+R = ∂ φ1 + ∂ φ2 , R ′ = ∂ φ1 − ∂ φ2 ,
+with η = cos 2 sdφ 1 + sin 2 sdφ 2 , η ′ = cos 2 s dφ 1 − sin 2 s dφ 2 .
+
+We choose the orientation on S 3 such that we have curl R = 2R and curl R ′ = −2R ′ . Therefore R, R ′ are (nonvanishing) curl eigenfields (with eigenvalue 2 and −2 respectively), and the induced contact structures are tight. In fact, notice that R and R ′ (and hence η and η ′ ) are related via an orientation reversing contactomorphism.
+
+It is well-known that the spectrum of the curl operator on S 3 is given by
+{λ = ±(k + 2), k ∈ N} .
+In what follows, let us focus on the positive part of the spectrum, the analysis of the negative part being completely analogous (see Remark 6 below).
+
+To write the components of a vector field on S 3 we shall use the standard (positively oriented) orthonormal global frame of Hopf vector fields {R, X 1 , X 2 }, where these fields have the explicit expressions
+R = −y 1 ∂ x1 + x 1 ∂ y1 − y 2 ∂ x2 + x 2 ∂ y2 , X 1 = −x 2 ∂ x1 + y 2 ∂ y1 + x 1 ∂ x2 − y 1 ∂ y2 , X 2 = −y 2 ∂ x1 − x 2 ∂ y1 + y 1 ∂ x2 + x 1 ∂ y2 .(5)
+Notice that X 1 and X 2 are given by the action of an isometry of S 3 on the field R (the isometries being given by φ 1 (x 1 , y 1 , x 2 , y 2 ) = (x 2 , −x 1 , y 1 , −y 2 ) and φ 2 (x 1 , y 1 , x 2 , y 2 ) = (y 1 , x 2 , −y 2 , x 1 )).
+
+Accordingly, an eigenfield V of curl with eigenvalue λ can be written as:
+V = f R + f 1 X 1 + f 2 X 2
+for some functions f, f 1 , f 2 . The following key result was proved in [40, Proposition 1] (see also [34]):
+Proposition 6.
+The functions f, f 1 , f 2 are eigenfunctions of the Laplacian on S 3 with eigenvalue λ(λ−2).
+
+Let us first prove the first claim in Theorem 2, i.e., that any nonvanishing curl eigenfield on S 3 has even eigenvalue. Lemma 1. Any curl eigenfield on S 3 with odd eigenvalue has a nonempty zero set.
+
+Proof. Let V be a curl eigenfield with odd eigenvalue λ. By Proposition 6, the components f, f 1 , f 2 of V are eigenfunctions of the Laplacian with eigenvalue λ(λ − 2). Therefore f, f 1 , f 2 are the restriction on S 3 of homogeneous harmonic polynomials on R 4 of degree λ − 2; the common degree of these polynomials is then odd by our hypothesis. Therefore, Borsuk-Ulam theorem [31] implies that f, f 1 , f 2 have a common zero, which is a zero of the Beltrami field V , as we wanted to prove.
+
+To prove the second part of Theorem 2, let us now construct an explicit nonvanishing curl eigenfield for every even eigenvalue λ ≥ 4. To achieve this we use the ansatz proposed in [30,Example 4.5] to construct steady Euler flows on S 3 :
+(6) V = F (cos 2 s)R + G(cos 2 s)R ′ ,
+where F : R → R and G : R → R are smooth functions that will be fixed later. A straightforward computation shows (see [30,Example 4.5]) that curl V is given by
+curl V = [(2z − 1)F ′ + 2F + G ′ ]R − [(2z − 1)G ′ + 2G + F ′ ]R ′ ,
+where we are using the notation z := cos 2 s. Using this expression, it then follows that a vector field on S 3 of the form (6) is a curl eigenfield with eigenvalue λ if and only if
+(7) (2z − 1)F ′ + 2F + G ′ = λF , (2z − 1)G ′ + 2G + F ′ = −λG .
+These equations imply that the function F is a solution of the following hypergeometric equation:
+4z(z − 1)F ′′ + 8(2z − 1)F ′ − (λ + 4)(λ − 2)F = 0 ,
+which admits the analytic solution (in terms of a hypergeometric function) F (z) = 2 F 1 (1 − λ 2 , 2 + λ 2 , 2; z); this is the unique solution (up to a constant factor) which is bounded at z = 0. The second component G is determined by F via the relation
+G(z) = 1 λ + 2 (4z(z − 1)F ′ (z) − (λ − 2)(2z − 1)F (z)) .
+After some easy computations, we eventually obtain, for even eigenvalue λ = 2m, m ≥ 2, the expressions (we introduce the subscript m to emphasize the dependence of the functions F and G with the eigenvalue)
+F m (z) = 2 F 1 (1 − m, 2 + m, 2; z) , G m (z) = m − 1 m + 1 2 F 1 (2 − m, 1 + m, 2; z) .
+These hypergeometric functions can be written in terms of two consecutive members of the family of orthogonal Jacobi polynomials {P In fact, these functions actually belong to a special class of Jacobi polynomials, known as ultraspherical or Gegenbauer polynomials 1 , and we have
+(9) F m (z) = P ( 3 2 ) m−1 (1 − 2z) P ( 3 2 ) m−1 (1) , G m (z) = m − 1 m + 1 · P ( 3 2 ) m−2 (1 − 2z) P ( 3 2 ) m−2 (1)
+.
+
+Accordingly, the zeros of F m and G m separate each other (or in other words, they interlace) and, in particular, F m and G m cannot have common zeros (see e.g. [1,Theorem 5.4.2]). Therefore, curl eigenfields of the form (6), associated to even eigenvalues, are nowhere vanishing. Indeed, on the complement of the Hopf link {s = 0} ∪ {s = π/2}, the vector fields R and R ′ are linearly independent, so V in (6) cannot be zero because the functions F m and G m do not vanish simultaneously. On the Hopf link, R and R ′ are collinear; a straightforward computation shows that
+V | s=0 = 2(−1) m+1 m + 1 ∂ φ1 V | s=π/2 = 2 m + 1 ∂ φ2 ,
+thus following that V does not vanish on the Hopf link either. Summarizing, we have constructed nonvanishing curl eigenfields of the form (6) (and coefficients given by (8)) with eigenvalues λ = 2m, m ≥ 2. As explained in Subsection 2.2, the dual 1-forms of these fields are contact forms, so for each (positive) even eigenvalue of curl on S 3 , there is a curl eigenfield that defines a contact structure. The following proposition shows that all these contact structures are overtwisted. The proof exploits the fact that these contact forms are S 1 -invariant (see also [34] for other applications of this idea in the context of curl eigenfields). Proof. To emphasize the dependence with the eigenvalue, let us denote the curl eigenfields by V m (curl V m = 2mV m ). They are Reeb fields (up to rescaling) for the contact forms on S 3 given by their dual 1-forms α m = V ♭ m . Moreover, these contact forms are S 1 -invariant with respect to the canonical S 1 -action on S 3 whose infinitesimal generator is the Hopf field R, that is:
+L R α m = 0, m ∈ {2, 3, 4, . . . } .
+The characteristic surface Γ R of the contact structure defined by the kernel of α m is defined [28] as Γ R := {p ∈ S 3 : R tangent to the contact distribution ker α m at p} .
+
+In our case, it can be described using the roots of a polynomial equation in the variable z = cos 2 s writing the condition R · V m = 0 (using the round metric) at a point p = (cos s e iφ1 , sin s e iφ2 ) ∈ S 3 , that is
+(10) F m (z) + (2z − 1)G m (z) = 0 .
+The zeros of this equation are given by different values of z ∈ (0, 1) (it is immediate to check that z = 0 and z = 1 are not solutions), and hence of the Hopf radius s, so they correspond to toroidal surfaces on S 3 . By Giroux characterization of tight S 1 -invariant contact structures [28,Proposition 4.1b], the contact structure α m on S 3 is tight if and only π(Γ R ) = ∅, where π : S 3 → S 2 is the Hopf fibration, seen as a circle bundle of Euler number −1, whose fibres are tangent to R. Lemma 2 below shows that Equation (10) has at least one solution, which corresponds to a torus s = s 0 , s 0 ∈ (0, 1), which is a component of the characteristic surface Γ R . Obviously, this torus projects onto a circle in S 2 through the Hopf fibration, so π(Γ R ) = ∅, thus proving that α m corresponds to an overtwisted contact structure on S 3 , for any m ∈ {2, 3, 4, . . . }, as we wanted to prove. Proof. Assume m ≥ 5. The function G m is, by definition, a polynomial of degree m − 2 ≥ 3. Since the zeros of the Jacobi polynomials lie in the interval [−1, 1], and are even or odd depending on the parity of m, it follows that G m has (at least) two consecutive zeros 0 ≤ z 1 < z 2 ≤ 1. Now, the polynomial P m (z) := F m (z) + (2z − 1)G m (z) evaluated at these points gives P m (z k ) = F m (z k ), k = 1, 2. Since the zeros of G m and F m interlace, we have that F m (z 1 )F m (z 2 ) < 0, which is equivalent to P m (z 1 )P m (z 2 ) < 0, thus showing that P m has a zero between z 1 and z 2 . The remaining cases are m = 2 (when P 2 (z) = 2 3 − 4 3 z), m = 3 (when P 3 (z) = 1 2 − 3z + 3z 2 ), and m = 4 (when P 4 (z) = 2 5 − 24 5 z + 12z 2 − 8z 3 ), for which the statement is obviously true. 1 To fix conventions, we take as definition [1, p. 302] of Gegenbauer polynomials P 
+1 − 2tx + t 2 ) −λ = ∞ n=0 P (λ)
+n (x)t n . This convention is also used in Wolfram Mathematica, the software we have used for checking our computations. Example 1. The nonvanishing curl eigenfields V m constructed above can be expressed in Hopf coordinates as follows (for m = 2, 3):
+V 2 = − 1
+3 (3 cos 2s − 1)∂ φ1 − 1 3 (3 cos 2s + 1)∂ φ2 , V 3 = ( 3 2 − 6 cos 2 s + 5 cos 4 s)∂ φ1 + ( 1 2 − 4 cos 2 s + 5 cos 4 s)∂ φ2 . In particular, R · V 2 = − 2 3 cos 2s and R · V 3 = 1 8 (3 cos 4s + 1) are the left hand sides of Equation (10), which describes the respective characteristic surfaces.
+
+To conclude the proof of Theorem 2, let us now show that the Hopf invariant of the overtwisted contact structures given by the 1-forms α m dual to V m , m ≥ 2, is −1 or 0, depending on whether the value of m is even or odd, respectively. We recall that this Hopf invariant is given by the Hopf invariant of the map ϕ m : S 3 → S 2 defined as follows. Write the vector field V m as V m = f R + f 1 X 1 + f 2 X 2 , with respect to the standard positively oriented orthonormal global frame {R, X 1 , X 2 } on S 3 . Then the map associated to (the contact structure defined by) V m is Instrumental to the proof of Proposition 8 below is the following lemma, which is standard, but we include a proof for the sake of completeness. Proof. For the Hopf field R the claim is obvious (the associated map ϕ R is a constant). The anti-Hopf field reads in terms of the global frame {R, X 1 , X 2 } as:
+ϕ m : S 3 → S 2 , ϕ m (p) = 1 f (p) 2 + f 1 (p) 2 + f 2 (p) 2 f (p), f 1 (p), f 2 (p) .R ′ = cos 2s R + sin 2s sin(φ 1 + φ 2 )X 1 − sin 2s cos(φ 1 + φ 2 )X 2 .
+Then the associated map is ϕ R ′ (cos s e iφ1 , sin s e iφ2 ) = cos 2s, sin 2s e i(φ1+φ2− π 2 ) .
+
+The orientation on S 3 is fixed by the requirement that {R, X 1 , X 2 } is a positive orthonormal frame (this is the usual convention in Contact Topology for which η ∧ dη > 0), so the volume form in Hopf coordinates reads as − sin s cos sds ∧ dφ 1 ∧ dφ 2 . The area form on S 2 is Ω = xdy ∧ dz + ydz ∧ dx + zdx ∧ dy, so it is easy to check that ϕ * R ′ Ω = −2d(cos 2 sdφ 1 − sin 2 sdφ 2 ) =: dA (so A = −2η ′ up to a closed 1-form). A straightforward application of Whitehead's formula gives
+Hopf invariant(ϕ) = 1 16π 2 S 3 A ∧ dA = −1 ,
+thus showing that the Hopf invariant of (the contact structure associated to) R ′ is −1. 
+Hopf invariant = H R (V m ) = (−1) m+1 − 1 2 .
+Proof. For each integer m ≥ 2, we consider the following smooth family of vector fields on S 3 , indexed by t ∈ [0, 1]:
+V t m = 1 m 2 P (1,1) m−1 (1 − t)P (1,1) m−1 ((t − 1) cos 2s)R + 1 (m + 1) 2 P (1,1) m (1 − t)P (1,1) m−2 ((t − 1) cos 2s)R ′ .
+We claim that From these claims we deduce that V m is homotopic (through nonvanishing vector fields) to either R or R ′ , depending on whether m is odd or even, respectively, so the associated map ϕ m has Hopf invariant 0 when m is odd and −1 when m is even (cf. Lemma 3), and the proposition follows.
+
+In order to prove the claim (i), let us recall that the vector fields R and R ′ are linearly independent at any point of S 3 except on the Hopf link, where we have that R = R ′ if s = 0 and R = −R ′ if s = π 2 . Accordingly, since consecutive Jacobi polynomials do not vanish at the same point, we have that away from the Hopf link, the vector field V t m is clearly nonvanishing for all m and t ∈ (0, 1), and on the Hopf link we have
+V t m = (−1) m−1 1 m 2 [P (1,1) m−1 (1 − t)] 2 − 1 (m + 1) 2 P (1,1) m (1 − t)P (1,1) m−2 (1 − t) R , at s = 0 , V t m = 1 m 2 [P (1,1) m−1 (1 − t)] 2 − 1 (m + 1) 2 P (1,1) m (1 − t)P (1,1) m−2 (1 − t) R , at s = π 2 .
+Let us now show that the field V t m on s = 0 and s = π/2 does not vanish for all t ∈ (0, 1). Indeed, using Turán's inequality [42], in terms of Jacobi polynomials, (11) [P
+(1,1) m−1 (w)] 2 > m 2 m 2 − 1 P (1,1) m (w)P (1,1) m−2 (w) > P (1,1) m (w)P (1,1) m−2 (w) , |w| < 1 ,
+it is immediate to check that Remark 4. An alternative way of computing the homotopy classes of the contact structures is via the associated map ϕ m between spheres. Writing the curl eigenfield V m in terms of the (positively oriented) orthonormal global frame {R, X 1 , X 2 }, i.e. V m = f R + f 1 X 1 + f 2 X 2 , the map ϕ m : S 3 → S 2 is of the following form: , and the Hopf invariant can be computed to be −1 using Whitehead's integral formula. In principle, the same procedure can be followed for higher eigenvalues, however the formulas become more and more cumbersome (which makes impossible in practice to evaluate the corresponding Whitehead's integral).
+1 m 2 [P (1,1) m−1 (1 − t)] 2 > 1 (m + 1) 2 P (1,1) m (1 − t)P (1,1) m−2 (1 − t) ,ϕ m (cos s e iφ1 , sin s e iφ2 ) = F m + cos 2s G m H m , sin 2s G m H m e i(φ1+φ2− π 2 ) , where H m := F 2 m + 2 cos 2s F m G m + G 2 m ,
+Remark 5. Using Turán's inequality (11) it is possible to show that, for consecutive even eigenvalues, λ = 2m and λ = 2m + 2, m ≥ 2, the curl eigenfields V m found above are collinear only at {s = π/2} (C + is one of the components of the Hopf link) and anti-collinear only at {s = 0} (C − is the other component of the Hopf link). Indeed the proportionality (for s ∈ (0, π/2)) between the curl eigenfields for λ = 2m and λ = 2m + 2, with coefficients F m , G m and F m+1 , G m+1 , respectively, translates into the requirement (13) should hold for some z ∈ (0, 1), which contradicts (11) (because m(m+2) (m+1) 2 < 1 for all m ≥ 2). Moreover, a straightforward computation shows that on s = π/2 the fields are
+that m(m + 1) (m − 1)(m + 2) F m (z) 2 = F m−1 (z)F m+1 (z) (12) ⇔ [P (1,1) m−1 (1 − 2z)] 2 = m(m + 2) (m + 1) 2 P (1,1) m (1 − 2z)P (1,1) m−2 (1 − 2z)V m = 2 m + 1 R , V m+1 = 2 m + 2 R ,
+and hence they are collinear, while on s = 0 they are given by
+V m = −2(−1) m m + 1 R , V m+1 = 2(−1) m m + 2 R ,
+so they are anti-collinear. Since Ref. [10,Lemma 23] implies that the linking number of the link formed by the collinear and anti-collinear curves C + , C − of the vector fields V m and V m+1 gives the distance in homotopy classes of both fields, we conclude that these homotopy classes are adjacent (because |link(C + , C − )| = 1), which is consistent with Proposition 8 (although it does not compute exactly the homotopy class). 
+V ′ m = G m R + F m R ′ ,
+where F m and G m are the same functions obtained in Equation (8). Arguing now exactly as in the proofs of Propositions 7 and 8, we conclude that the corresponding contact structures are overtwisted with Hopf class equal to −1 or 0 depending on whether m is odd or even, respectively. An alternative way of proceeding is noticing that the Hopf field R and the anti-Hopf field R ′ are related by the orientationreversing diffeomorphism (x 1 , y 1 , x 2 , y 2 ) → (x 1 , y 1 , x 2 , −y 2 ) restricted to S 3 .
+
+
+4.
+
+Beltrami fields with constant norm on S 3 : proof of Proposition 1
+
+In this section we provide a completely different proof of [29, Theorem A] (in the special case of curl eigenfields) claiming that the only contact forms on S 3 whose compatible metric is the round one are those whose Reeb field is isometric (up to a constant proportionality factor) to the Hopf field R (or the anti-Hopf field R ′ in the case we consider negative contact forms), cf. Proposition 1. All along this section we shall use the notation introduced in Section 3 without further mention.
+
+Let us first show that a curl eigenfield on S 3 with eigenvalue λ > 2 cannot have constant norm. Suppose the contrary, so let V be a constant norm vector field, which can be rescaled so that |V | = 1, with curl V = λV . Lemma 1 implies that λ is an even number ≥ 4. With respect to the standard orthonormal global frame, it decomposes as V = f R + f 1 X 1 + f 2 X 2 , so the associated map ϕ V : S 3 → S 2 is given by
+p ∈ S 3 → (f, f 1 , f 2 )(p) .
+As f, f 1 and f 2 are eigenfunctions of the Laplacian on S 3 with eigenvalue λ(λ − 2) ≥ 8 (cf. Proposition 6), it follows that ϕ V is an eigenmap [4, Example 3.3.18], i.e., it is a harmonic map with constant energy density |dϕ V | 2 = λ(λ − 2). Moreover, for a Beltrami field on S 3 we have
+V · ∇f = V · ∇(V · R) = ∇ V V · R + ∇ V R · V = 1 2 R · ∇(|V | 2 ) = 0 ,
+where in the third equality we have used the well known identity for Beltrami fields ∇ V V = 1 2 ∇(|V | 2 ), and that R is a Killing vector field and hence V · ∇ V R = 0. Arguing in the same way we obtain
+V · ∇f 1 = 1 2 X 1 · ∇(|V | 2 ) = 0 , V · ∇f 2 = 1 2 X 2 · ∇(|V | 2 ) = 0 .
+The components f, f 1 , f 2 are then first integrals of V , and therefore V ∈ ker dϕ V .
+
+Furthermore, ϕ V has geodesic fibres because ∇ V V = 0 (by the aforementioned identity).
+
+For any harmonic map ϕ : M → N between two Riemannian manifolds we have the Weitzenböck formula [11], in terms of a local orthonormal basis
+{e i } dim M i=1 : (14) 1 2 ∆|dϕ| 2 = |∇dϕ| 2 + i dϕ(Ric M e i ), dϕ(e i ) − i,j R N (dϕ(e i ), dϕ(e j ))dϕ(e j ), dϕ(e i ) ,
+which reads, in our case M = S 3 and N = S 2 , as:
+1 2 ∆|dϕ| 2 = |∇dϕ| 2 + 2|dϕ| 2 − 2|Λ 2 dϕ| 2 .
+Here Λ 2 dϕ = dϕ ∧ dϕ is the extension of the exterior derivative to 2-vectors. Its norm is the norm of the pullback (with ϕ) of the area form on S 2 .
+
+Applying this to the map ϕ V with |dϕ V | 2 = λ(λ − 2) > 0 yields
+0 = |∇dϕ V | 2 + 2λ(λ − 2) − 2|Λ 2 dϕ V | 2 ,
+and therefore
+2|Λ 2 dϕ V | 2 ≥ 2λ(λ − 2) > 0 ,
+which implies that dϕ V must have constant rank 2 (recall that the points where dϕ V has rank smaller than 2 correspond to zeros of the pullback of the area form on S 2 , and hence to zeros of |Λ 2 dϕ V | 2 ). This allows us to apply [3,Corollary 4] to deduce that ϕ V is a harmonic morphism and [12, Theorem 1] to deduce that ϕ V is isometrically equivalent to the Hopf fibration. Since V ∈ ker dϕ V , and |V | = 1, this easily implies that V is isometric to the Hopf field. Since isometries preserve curl eigenspaces, we would have that λ = 2, which contradicts our assumption that λ > 2.
+
+To finish the proof of Proposition 1, we observe that any curl eigenfield on S 3 with λ = 2 must have constant norm (as it is a linear combination with constant coefficients of the three vector fields R, X 1 , X 2 giving the standard frame). Moreover, normalizing so that |V | = 1, and noticing that the action of the isometry group of S 3 on the Hopf field R gives a 2-dimensional orbit diffeomorphic to S 2 (see e.g. [43, Lemma 1]), we conclude that any eigenfield with eigenvalue 2 is isometric to the Hopf field.
+
+Remark 7. An analogous proof holds for the case of negative eigenvalues λ ≤ −2. In this case the eigenvalue must be λ = −2 and the curl eigenfield is isometric to the anti-Hopf field R ′ .
+
+
+Nonvanishing Beltrami fields on T 3 : proof of Theorem 3
+
+In this section we consider the torus T 3 = R 3 /(2πZ) 3 endowed with the flat metric. Recall that the spectrum of the curl operator is given by
+{λ = ±|k| : k ∈ Z 3 } .
+It is easy to check that for any nonzero vector b ∈ R 3 , b ⊥ k, the vector field
+(15) V k = cos(k · x) b + 1 |k| sin(k · x) b × k
+is an eigenfield of curl with eigenvalue |k|. A straightforward computation shows that |V k | = |b| (constant norm), so V k is a nonvanishing curl eigenfield, and hence it induces a contact structure on T 3 . We first show that all these contact structures are tight, and the associated map ϕ k is homotopically trivial. We recall that the map ϕ k : T 3 → S 2 is defined as
+ϕ k (x) = 1 A(x) 2 + B(x) 2 + C(x) 2 A(x), B(x), C(x) , where V k = A∂ x1 + B∂ x2 + C∂ x3 in the standard coordinates x = (x 1 , x 2 , x 3 ) ∈ R 3 /(2πZ) 3 .
+Lemma 4. The map ϕ k is homotopically trivial (in fact, it is a harmonic map with constant energy density). Moreover, for all k ∈ Z 3 , the contact structures associated with the curl eigenfields V k are tight.
+
+Proof. It is obvious that k · V k = 0. It then follows that the image of the map ϕ k : T 3 → S 2 stays in the intersection of a plane with the 2-sphere, and therefore ϕ k (and the contact structure induced by V k ) is homotopically trivial. Moreover, since the components of the vector field V k are eigenfunctions of the Laplacian with eigenvalue |k| 2 , ϕ k is an eigenmap [4,Example 3.3.18], so harmonic with constant energy density. Let us denote by η k the contact form dual to V k . By definition, the flat metric is compatible with the contact structure η k on T 3 . Consider the obvious lift of η k to R 3 , which we will still denote by η k , and assume without loss of generality that |b| = 1. Of course, the frame {b × k/|k|, b, k/|k|} defines an orthonormal frame of R 3 . Now take an orthogonal transformation of R 3 that transforms this frame into the standard orthonormal frame {e 1 , e 2 , e 3 }. After this transformation, the 1-form η k reads as:
+cos(|k|x 3 )dx 2 + sin(|k|x 3 )dx 1 .
+Acting further with the diffeomorphism (x 1 , x 2 , |k|x 3 ) → (x 1 , x 2 , x 3 ) of R 3 , we obtain the 1-form
+cos x 3 dx 2 + sin x 3 dx 1 ,
+which is contactomorphic to the tight standard contact structure in R 3 ([26, Example 3.25]). Summarizing, we have shown that the contact structure defined by η k lifted to R 3 is contactomorphic to the tight standard contact structure, thus proving the universal tightness (and hence the tightness) of the contact structure η k in T 3 .
+
+The first part of Theorem 3 follows from Lemma 4 and the following observation. In the particular case that k = (0, 0, m), m ∈ Z, and b = (0, 1, 0), we find the following standard family of contact structures on T 3 . We write it in terms of the 1-forms dual to the vector fields V k :
+(16) η m = sin(mx 3 )dx 1 + cos(mx 3 )dx 2 , m ∈ Z ,
+which corresponds to the integer part of the curl spectrum (i.e. * dη m = mη m ). Of course, these contact forms η m are tight and homotopically trivial, but they belong to distinct contactomorphic classes (i.e., there is no contact diffeomorphism between (T 3 , ζ n ) and (T 3 , ζ m ) if n = m). In addition, any tight contact structure on T 3 is contactomorphic to one of these η m [44].
+
+Remark 8. We have not been able to classify the contactomorphic classes of the contact structures associated with all the curl eigenfields V k defined above. The following example settles a particular case with eigenvalue λ = √ 2. Consider the eigenfield V k with k = (1, 1, 0) and b = (0, 0, 1), actually its dual 1-form η:
+η := − 1 √ 2 sin(x 1 + x 2 )dx 1 + 1 √ 2 sin(x 1 + x 2 )dx 2 + cos(x 1 + x 2 )dx 3 . The pullback of η by the SL(3, Z) diffeomorphism Ψ(x 1 , x 2 , x 3 ) = (2x 1 − x 2 , −x 1 + x 2 , x 3 ) of T 3 is Ψ * η = √ 2 sin(x 1 )dx 2 + cos(x 1 )dx 3 − 3 √ 2 sin(x 1 )dx 1 .
+Consider now the homotopy
+α t := √ t + 1 sin(x 1 )dx 2 + cos(x 1 )dx 3 − 3t √ 2 sin(x 1 )dx 1 , t ∈ [0, 1]
+, which is a continuous path between Ψ * η and the eigenform sin(x 1 )dx 2 + cos(x 1 )dx 3 which is isometrically related to η 1 . Since
+α t ∧ dα t = √ t + 1dx 1 ∧ dx 2 ∧ dx 3 > 0 ,
+we conclude that η is contactomorphic to η 1 .
+
+To prove the second part of Theorem 3, following [34] we consider an S 1 -invariant ansatz for curl eigenfields on T 3 :
+(17) V = ∂f ∂x 2 ∂ x1 − ∂f ∂x 1 ∂ x2 + λf ∂ x3 ,
+where f ≡ f (x 1 , x 2 ) is a function on T 2 . It is straightforward to check that V is an eigenfield of curl with eigenvalue λ if and only if f is an eigenfunction of the Laplacian on T 2 with eigenvalue Λ = λ 2 (see also [34,Theorem 3.4]). If f ℓ , ℓ ∈ N * , is an eigenfunction of the Laplacian on T 2 with eigenvalue Λ ℓ and regular nodal set, the previous discussion implies that the vector field V ℓ of the form (17) (with f ≡ f ℓ ) is a nonvanishing curl eigenfield of eigenvalue λ ℓ := Λ 1/2 ℓ in T 3 . Assume also that the nodal set N ℓ of f ℓ is disconnected and T 2 \ N ℓ has a component diffeomorphic to a disk for all ℓ.
+
+The contact form η ℓ := V ♭ ℓ associated to V ℓ is S 1 -invariant with respect to the S 1 -action on T 3 whose infinitesimal generator is Z := ∂ x3 . Defining the characteristic surface Γ ℓ Z as Γ ℓ Z := {p ∈ T 3 : Z tangent to the contact distribution ker η ℓ at p} , Giroux characterization [28,Proposition 4.1a] implies that if T 2 \π(Γ ℓ Z ) has a component diffeomorphic to a disk, the contact structure defined by η ℓ is tight only if π(Γ ℓ Z ) is connected. Here π(x 1 , x 2 , x 3 ) = (x 1 , x 2 ) is the projection onto T 2 . It is obvious that the projection of the characteristic surface π(Γ ℓ Z ) is precisely the nodal set N ℓ of f ℓ , so by hypothesis, N ℓ is disconnected and T 2 \ N ℓ has a component diffeomorphic to a disk, thus implying that the contact structure defined by η ℓ is overtwisted for all ℓ. Since Proposition 5 establishes the existence of an infinite sequence of eigenvalues Λ ℓ and corresponding eigenfunctions f ℓ satisfying the required assumptions, Theorem 3 follows. 6. Examples and final remarks 6.1. Existence of overtwisted curl eigenfields on S 3 . As suggested to us by R. Komendarczyk (private communication), the existence of overtwisted contact structures on S 3 associated with nonvanishing curl eigenfields can be established using an S 1 -invariant ansatz akin to the one used in Section 5 for T 3 :
+(18) V = λf R + X 2 (f )X 1 − X 1 (f )X 2 ,
+where we recall that {R, X 1 , X 2 } is the orthonormal global frame of Hopf vector fields introduced in Section 3. Here we assume that the function f is a first integral of the Hopf field R. If f is an eigenfunction of the Laplacian on S 3 with eigenvalue λ(λ − 2) then V is an eigenfield of curl with eigenvalue λ. Let us elaborate on this. Indeed, following [34,Theorem 3.4] (see also [40,Equation (2.6)]), we notice that R is the infinitesimal generator of the fibers of S 3 as circle bundle over S 2 , with projection map π (the Hopf map). A function f is called basic if it is a first integral of R, i.e., R · ∇f = 0, which means that f = f • π for some function f on S 2 . As π : S 3 → S 2 1 2 is a Riemannian submersion, we have that ∆ S 3 f = (∆ S 2 f ) • π so f is an eigenfunction of the Laplacian on S 3 if and only if f is an eigenfunction of the Laplacian on S 2 1 2 (understood as the sphere of radius 1/2 in R 3 ). We observe that the spectrum of the Laplacian on S 2 1 2 is given by {4k(k + 1) : k ∈ N}, and hence it is of the form λ(λ − 2) (λ > 0) if and only if λ = 2 + 2k, so all the eigenfields we produce with this method have even eigenvalue. Notice also that the S 1 -invariance of the vector field (18) means that V is a basic vector field (i.e. [R, V ] = 0), so it projects down to a vector field on S 2 .
+
+If, in addition, the nodal set of the eigenfunction f : S 2 1 2 → R is non-empty and regular, which is the case for a generic eigenfunction, cf. Proposition 4 (the fact that the nodal set is non-empty is immediate because any eigenfunction with positive eigenvalue has zero mean), then the vector field V in (18) is nonvanishing and, since the projection of the characteristic surface π(Γ R ) (see the proof of Proposition 7 for its definition) coincides with the nodal set of f , the induced contact structure is overtwisted by Giroux's characterization of tight S 1 -invariant contact structures [28,Proposition 4.1b] in the particular case of S 3 .
+
+Summarizing, this construction gives for each even eigenvalue λ = 2m of the curl on S 3 a plethora of nonvanishing eigenfields that are associated with overtwisted contact structure. However, if we want to compute the corresponding homotopy classes, i.e., the Hopf invariant of the associated maps ϕ m as introduced before Lemma 3, we have to use concrete eigenfunctions f of the Laplacian on S 2 , as done in Section 3; in general, this is a difficult task.
+
+
+6.2.
+
+Other examples in S 3 and T 3 . The nonvanishing curl eigenfields constructed in Section 3 (and Subsection 6.1) for every even eigenvalue obviously do not exhaust all nonvanishing eigenfields on S 3 . The following shows an example, but it turns out to be contact homotopic to V 2 (the curl eigenfield constructed in Section 3 with eigenvalue 4). It would be interesting to know whether there exist nonvanishing curl eigenfields on S 3 associated with overtwisted contact structures with Hopf invariant different from 0 or −1.
+
+
+Example 2.
+
+In terms of the global orthonormal frame {R, X 1 , X 2 } introduced in Section 3, the vector field
+V = 1 2 (x 2 1 + 4x 1 x 2 − x 2 2 + 2(y 2 1 − y 2 2 ))R − (x 2 y 1 + x 1 y 2 )X 1 − (x 2 1 − x 2 2 + y 1 y 2 )X 2 ,(
+understood as the restriction to S 3 ) is a nonvanishing curl eigenfield with eigenvalue 4, and is neither of the form (6) nor (18). By direct inspection we find out that V and V 2 have only points where they are negatively aligned (i.e. C + = ∅). Then, by Proposition 3, we conclude that the contact structure induced by V is contact homotopic to the one induced by V 2 , which is overtwisted and of Hopf invariant −1.
+
+Using Proposition 3, we can also construct nonvanishing curl eigenfields on T 3 different from those presented in (15), but still associated with tight contact structures. It is interesting to compare this example with the following tightness criterion that can be deduced from [24, Theorem 1.5] along the same lines as [24, Theorem 1.9]: on the flat 3-torus, a non-vanishing curl eigenfield V is associated with a tight contact structure if d g := max T 3 |∇ ln |V || ∈ [0, π −1 ].
+
+Example 3. V = sin mx 3 dx 1 + cos mx 3 dx 2 and W = − sin mx 2 dx 1 + cos mx 2 dx 3 are nonvanishing Beltrami fields for the eigenvalue m ∈ N on T 3 . By direct inspection we find out that V and W have collinearity points and, since they have unit norm, the constant in (3) is c 0 = 1. By Proposition 3, the contact structure induced by the Beltrami field V + cW , for any |c| < 1, is contact homotopic to the one induced by V which is the m th standard tight contact structure in (16); compare with [22,Proposition 4.8]. Notice that V + cW is a (non-vanishing if |c| < 1) curl eigenfield of the form (17) after an obvious permutation of coordinates; in particular, the tightness of the induced contact structure can be equally proved using Giroux characterization [28,Proposition 4.1b]. We also remark that V + cW (and its dual 1form α) has non-constant norm and that d g := max T 3 |∇ ln |α|| = mc 1−c 2 may lie outside the aforementioned "tightness interval" [0, π −1 ], for each m ∈ N * and c ∈ (c 1 , 1) with c 1 appropriately chosen, depending on m.
+
+6.3. An application to planar open book decompositions. Recall [21] that any overtwisted contact structure on a closed 3-manifold is supported by a planar open book decomposition. As an explicit realization of this fact, we have the following result for V 2 and V 3 . An analogous computation of the corresponding planar open book decomposition is feasible (but tedious) for all V m , m ≥ 2. We observe that π of the second planar open book below is not a Milnor fibration. The contact structure associated with the nonvanishing curl eigenfield V = 2V 3 is supported by the open book π : S 3 \ B → S 1 , π(z 1 , z 2 ) = z 1 z 2 (z 1 − z 2 ) 2 |z 1 z 2 ||z 1 − z 2 | 2 with (oriented) binding B = {(z 1 , z 2 ) ∈ S 3 : z 1 z 2 (z 1 − z 2 ) = 0} = {s = 0; φ 1 = t} ∪ {s = π/4; φ 1 = φ 2 = −t} ∪ {s = π/2; φ 2 = t}, t ∈ [0, 2π).
+
+Proof. Using the explicit formula of V 2 presented in Example 1, it is easy to check that the vector field V is (positively) tangent to B and transverse to the pages of π − , thus proving the fact that the contact structure given by the dual 1-form α = V ♭ is supported by (or compatible with) the planar open book (π − , H − ). Indeed, α has the form: α = (3 cos 2 s − 2) cos 2 s dφ 1 + (3 cos 2 s − 1) sin 2 s dφ 2 , and for each φ ∈ S 1 , the φ-page of the open book π − can be parameterized using the coordinates (s, φ 1 ) as {(cos s e iφ1 , sin s e i(φ1−φ) ) : (s, φ 1 ) ∈ (0, π/2) × [0, 2π)} . A straightforward computation shows that dα restricted to the φ-page is dα| φ−page = −2 sin 2s ds ∧ dφ 1 , so taking into account that {−∂ s , ∂ φ1 − ∂ φ2 } is a positively oriented global frame on each page of the open book (notice that the outward vector field on the sphere is −∂ s , and ∂ φ1 − ∂ φ2 is a vector field positively aligned with the negative Hopf link on B), we conclude that dα| φ−page (−∂ s , ∂ φ1 − ∂ φ2 ) = 2 sin 2s > 0 . Therefore, dα restricts to an area form on the pages of the open book.
+
+Finally, we observe that α = dφ 1 on {s = 0} and α = −dφ 2 on s = π/2, so
+α| B (∂ φ1 − ∂ φ2 ) > 0 ,
+thus proving that the contact structure is positively transverse to B. These two conditions are precisely the definition of the compatibility between a contact structure and an open book, and the first part of the proposition follows. For the case of V , we can also use the explicit formula of V 3 in Example 1 to show that V is (positively) tangent to B and (positively) transverse to the pages of π, thus proving that the contact structure associated to V is supported by (or compatible with) the planar open book ( π, B). Indeed, V s=0 = ∂ φ1 , V s=π/2 = ∂ φ2 and V s=π/4 = − 1 2 ∂ φ1 − 1 2 ∂ φ2 so V is (positively) tangent to B. Moreover, noticing that the open book in coordinates (s, φ 1 , φ 2 ) takes the form π(cos se iφ1 , sin se iφ2 ) = e iΘ(s,φ1,φ2) with Θ(s, φ 1 , φ 2 ) := φ 1 + φ 2 − 2 arctan cos s sin φ 1 − sin s sin φ 2 cos s cos φ 1 − sin s cos φ 2 , and the integral curves of V for a point s ∈ (0, π/4) ∪ (π/4, π/2), φ 1 = φ 2 = 0, are given by φ 1 (t) = 3 2 − 6 cos 2 s + 5 cos 4 s t , φ 2 (t) = 1 2 − 4 cos 2 s + 5 cos 4 s t ,
+
+a straightforward computation shows that dΘ(s, φ 1 (t), φ 2 (t)) dt = cos 2 2s 1 − cos(t cos 2s) sin 2s > 0 , thus implying that V is positively transverse to the pages of the open book, as we wanted to prove.
+
+6.4. Nonvanishing Beltrami fields with nonconstant proportionality factor. Throughout this work we have considered nonvanishing curl eigenfields. In the following, we provide examples of Beltrami fields for which the proportionality factor is no longer constant. We shall see that they induce tight contact structures.
+
+Example 4. The following family (depending on two parameters k and ℓ) of nonvanishing, globally defined smooth vector fields on S 3 , V = 1 k 2 sin 2 s + ℓ 2 cos 2 s (ℓ∂ φ1 + k∂ φ2 ) , k, ℓ ∈ N , kℓ = 0 , are Beltrami fields with (nonvanishing, nonconstant) proportionality factor f (cos se iφ1 , sin se iφ2 ) = 2kℓ k 2 sin 2 s + ℓ 2 cos 2 s .
+
+Notice that f = 2kℓ|V | 2 . The induced contact structures are tight, as it can be checked using the contact homotopy α t = (1 + t(ℓ − 1)) cos 2 s dφ 1 + (1 + t(k − 1)) sin 2 s dφ 2 (1 + t(ℓ − 1)) 2 cos 2 s + (1 + t(k − 1)) 2 sin 2 s .
+
+between the 1-form V ♭ and the standard contact form η on S 3 (see Section 3).
+
+Example 5. Applying [24, Theorem 1.9] we can deduce that the following nonvanishing Beltrami field on T 3 (with nonconstant proportionality factor) induces a tight contact structure V = cos(F (x 3 ) − π 4 )∂ x1 + sin(F (x 3 ) − π 4 )∂ x2 , where F is any function such that F ′ is periodic and F ′ (x 3 ) < 0. It can be easily checked that curl V = f V with f (x 3 ) = −F ′ (x 3 ). In the particular case F (x 3 ) = −2x 3 + cos x 3 , the induced contact form α := V ♭ is contact homotopic to a unit length eigenfield of curl with eigenvalue 2, through the explicit homotopy:
+α t = 1 √ 2 cos(2x 3 − t cos x 3 ) − sin(2x 3 − t cos x 3 ) dx 1 − 1 √ 2 cos(2x 3 − t cos x 3 ) + sin(2x 3 − t cos x 3 ) dx 2 .
+This homotopy is contact because α t ∧ dα t = (2 + t sin x 3 )dx 1 ∧ dx 2 ∧ dx 3 .
+
+Therefore α = α 1 is contact isotopic to
+α 0 = −1 √ 2 η 2 + 1 √ 2 (cos 2x 3 dx 1 − sin 2x 3 dx 2 ) ,
+where η 2 is defined in (16). Since α 0 is the sum (up to a constant proportionality factor) of η 2 and a pointwise perpendicular curl eigenform with eigenvalue λ = 2, an easy application of Proposition 3 implies that it is contact homotopic to η 2 (α 0 and η 2 do not align at any point). In conclusion, the induced contact form α is in the second tight contactomorphic class. 
+
+Proposition 4 .
+4For each eigenvalue Λ > 0 of the Laplacian on the round sphere S n or on the flat torus T n , a generic eigenfunction in E Λ has a regular nodal set.Proof. We first recall the following parametric transversality theorem[35, Theorem 6.35]: let N and M be two smooth manifolds, X ⊂ M an embedded submanifold, and {F s } s∈S a smooth family of mapsF s : N → M with S a smooth manifold of parameters. If the map F : N × S → M , F (·, s) := F s (·), is transverse to X, then for almost every s ∈ S, the map F s : N → M is transverse to X. For our purposes consider N = S n or T n , S = E Λ ∼ = R m (where m is the multiplicity of the eigenvalue Λ), M = R and X = {0}. Let {f j } j=1,...,m be an orthonormal basis of E Λ and define:
+
+}
+m≥2 (cf. [1, Definition 2.5.1]), of degree m−1 and m−2, respectively, that is (8) F m (z) = 1 m P (1,1) m−1 (1 − 2z) , G m (z) = 1 m + 1 P (1,1) m−2 (1 − 2z) .
+
+Proposition 7 .
+7The contact structures associated with the curl eigenfields (6) with coefficients given by(8) are overtwisted.
+
+Lemma 2 .
+2Equation (10) has at least one solution z ∈ (0, 1).
+
+n
+) the coefficients of the generating function (
+
+Remark 3 .
+3Given a pair of nonvanishing vector fields X and V on S 3 , following [10] one can define a relative homotopy invariant H X (V ) ∈ Z, so that X and V are homotopic if and only if H X (V ) = 0, cf. [10,Lemma 10]. It is easy to check that the Hopf invariant of V as defined above coincides with H R (V ) (after fixing the global frame {R, X 1 , X 2 } on S 3 ).
+
+Lemma 3 .
+3The Hopf invariants of the Hopf and anti-Hopf fields are 0 and −1, respectively.
+
+Proposition 8 .
+8The homotopy classes of the contact structures associated to V m have Hopf invariant (or Dufraine's invariant H R (V m ), cf. Remark 3)
+
+
+(i) V t m does not vanish on S 3 , for any integer m ≥ 2 and any t ∈ [0, 1].(ii) V 0 m = V m . (iii)Up to a multiplicative constant, V 1 m is equal to the Hopf field R if m is odd, and to the anti-Hopf field R ′ if m is even.
+
+
+for all t ∈ (0, 1), and hence V t m does not vanish on the Hopf link. Claim (ii) is an immediate consequence of the identity [1] 1 − 2 cos 2 s = − cos 2s. Finally, to prove the claim (iii), we first write and only if m is even, since for Jacobi polynomials it is well known[1] that they have a definite parity, i.e., P
+
+Remark 6 (
+6Negative eigenvalues). For the case of negative eigenvalues λ ∈ {−2, −3, −4, . . . }, Lemma 1 also holds (i.e. if |λ| is odd, any curl eigenfield vanishes at some point). The construction presented in Equation (6) for λ = −2m, gives a curl eigenfield V ′ m of the form
+
+Proposition 9 .
+9The contact structure associated with the nonvanishing curl eigenfield V = − 3 2 V 2 is supported by the standard open bookπ − : S 3 \ B → S 1 , π − (z 1 , z 2 ) = z 1 z 2 |z 1 z 2 | with (oriented) binding B = H − = {(z 1 , z 2 ) ∈ S 3 : z 1 z 2 = 0} = {s = 0; φ 1 = t} ∪ {s = π/2; φ 2 = −t} (negative Hopf link).
+
+
+the functions F m and G m evaluated at cos 2 s. For example, for m = 2 we obtain ϕ m (cos s e iφ1 , sin s e iφ2 ) = −2 
+√ 
+2 cos 2s 
+√ 
+5 + 3 cos 4s 
+, 
+√ 
+2 sin 2s 
+√ 
+5 + 3 cos 4s 
+e i(φ1+φ2− π 
+
+2 ) 
+
+
+
+
+Instituto de Ciencias Matemáticas, Consejo Superior de Investigaciones Científicas, 28049 Madrid, Spain Email address: dperalta@icmat.es Faculty of Physics, University of Bucharest, P.O. Box Mg-11, RO-077125 Bucharest-Mȃgurele, Romania Email address: radualexandru.slobodeanu@g.unibuc.ro
+AcknowledgmentsThe authors are extremely grateful to John Etnyre, Rafal Komendarczyk and Patrick Massot for their very useful remarks and suggestions on a previous version of the manuscript. D.P.-S. was supported by the grants MTM PID2019-106715GB-C21 (MICINN) and Europa Excelencia EUR2019-103821 (MCIU). This work was partially supported by the ICMAT-Severo Ochoa grant CEX2019-000904-S.
+G E Andrews, R Askey, R Roy, Special functions. Cambridge University PressG.E. Andrews, R. Askey, R. Roy. Special functions. Cambridge University Press, 1999.
+
+Topological Methods in Hydrodynamics. V I Arnold, B Khesin, SpringerNew YorkV.I. Arnold, B. Khesin. Topological Methods in Hydrodynamics. Springer, New York, 1998.
+
+A Böchner technique for harmonic mappings from a 3-manifold to a surface. P Baird, Ann. Global Anal. Geom. 10P. Baird, A Böchner technique for harmonic mappings from a 3-manifold to a surface. Ann. Global Anal. Geom. 10 (1992) 63-72.
+
+Harmonic morphisms between Riemannian manifolds. P Baird, J C Wood, Oxford Univ. PressNew YorkP. Baird, J.C. Wood. Harmonic morphisms between Riemannian manifolds. Oxford Univ. Press, New York, 2003.
+
+Riemannian geometry of contact and symplectic manifolds. D E Blair, BirkhauserBaselD.E. Blair. Riemannian geometry of contact and symplectic manifolds. Birkhauser, Basel, 2010.
+
+Universality of Euler flows and flexibility of Reeb embeddings. R Cardona, E Miranda, D Peralta-Salas, F Presas, PreprintR. Cardona, E. Miranda, D. Peralta-Salas, F. Presas, Universality of Euler flows and flexibility of Reeb embeddings. Preprint, 2019.
+
+On Riemannian metrics adapted to three-dimensional contact manifolds. With an appendix by Alan Weinstein. S S Chern, R S Hamilton, Lecture Notes in Math. 1111SpringerS.S. Chern, R.S. Hamilton, On Riemannian metrics adapted to three-dimensional contact manifolds. With an appendix by Alan Weinstein. Lecture Notes in Math. 1111, Workshop Bonn 1984, 279-308, Springer, Berlin, 1985.
+
+The Beltrami spectrum for incompressible fluid flows. P Constantin, A Majda, Comm. Math. Phys. 115P. Constantin, A. Majda, The Beltrami spectrum for incompressible fluid flows. Comm. Math. Phys. 115 (1988) 435- 456.
+
+The Euler equations as a differential inclusion. C De Lellis, L Székelyhidi, Ann. of Math. 170C. De Lellis, L. Székelyhidi, The Euler equations as a differential inclusion. Ann. of Math. 170 (2009) 1417-1436.
+
+About homotopy classes of non-singular vector fields on the three-sphere. E Dufraine, Qual. Theor. Dyn. Sys. 3E. Dufraine, About homotopy classes of non-singular vector fields on the three-sphere. Qual. Theor. Dyn. Sys. 3 (2002) 361-376.
+
+Harmonic mappings of Riemannian manifolds. J Eells, J H Sampson, Amer. J. Math. 86J. Eells, J.H. Sampson, Harmonic mappings of Riemannian manifolds. Amer. J. Math. 86 (1964) 109-160.
+
+Polynomial harmonic morphisms between Euclidean spheres. J Eells, P Yiu, Proc. Amer. Math. Soc. 123J. Eells, P. Yiu, Polynomial harmonic morphisms between Euclidean spheres. Proc. Amer. Math. Soc. 123 (1995) 2921-2925.
+
+Classification of overtwisted contact structures on 3-manifolds. Y Eliashberg, Invent. Math. 98Y. Eliashberg, Classification of overtwisted contact structures on 3-manifolds. Invent. Math. 98 (1989) 623-637.
+
+Vortex reconnection in the three dimensional Navier-Stokes equations. A Enciso, R Lucà, D Peralta-Salas, Adv. Math. 309A. Enciso, R. Lucà, D. Peralta-Salas, Vortex reconnection in the three dimensional Navier-Stokes equations. Adv. Math. 309 (2017) 452-486.
+
+Nondegeneracy of the eigenvalues of the Hodge Laplacian for generic metrics on 3-manifolds. A Enciso, D Peralta-Salas, Trans. Amer. Math. Soc. 364A. Enciso, D. Peralta-Salas, Nondegeneracy of the eigenvalues of the Hodge Laplacian for generic metrics on 3- manifolds. Trans. Amer. Math. Soc. 364 (2012) 4207-4224.
+
+Knots and links in steady solutions of the Euler equation. A Enciso, D Peralta-Salas, Ann. of Math. 175A. Enciso, D. Peralta-Salas, Knots and links in steady solutions of the Euler equation. Ann. of Math. 175 (2012) 345-367.
+
+Existence of knotted vortex tubes in steady Euler flows. A Enciso, D Peralta-Salas, Acta Math. 214A. Enciso, D. Peralta-Salas, Existence of knotted vortex tubes in steady Euler flows. Acta Math. 214 (2015) 61-134.
+
+Beltrami fields with a nonconstant proportionality factor are rare. A Enciso, D Peralta-Salas, Arch. Rat. Mech. Anal. 220A. Enciso, D. Peralta-Salas, Beltrami fields with a nonconstant proportionality factor are rare. Arch. Rat. Mech. Anal. 220 (2016) 243-260.
+
+Knotted structures in high-energy Beltrami fields on the torus and the sphere. A Enciso, D Peralta-Salas, F Torres De Lizaur, Ann. Sci.Éc. Norm. Sup. 50A. Enciso, D. Peralta-Salas, F. Torres de Lizaur, Knotted structures in high-energy Beltrami fields on the torus and the sphere. Ann. Sci.Éc. Norm. Sup. 50 (2017) 995-1016.
+
+High-energy eigenfunctions of the Laplacian on the torus and the sphere with nodal sets of complicated topology. A Enciso, D Peralta-Salas, F Torres De Lizaur, Springer Proc. Math. & Stat. 346A. Enciso, D. Peralta-Salas, F. Torres de Lizaur, High-energy eigenfunctions of the Laplacian on the torus and the sphere with nodal sets of complicated topology. Springer Proc. Math. & Stat. 346 (2021) 245-261.
+
+Planar open book decompositions and contact structures. J B Etnyre, Int. Math. Res. Not. 79J.B. Etnyre, Planar open book decompositions and contact structures. Int. Math. Res. Not. 79 (2004) 4255-4267.
+
+Contact topology and hydrodynamics I. Beltrami fields and the Seifert conjecture. J B Etnyre, R Ghrist, Nonlinearity. 13J.B. Etnyre, R. Ghrist, Contact topology and hydrodynamics I. Beltrami fields and the Seifert conjecture. Nonlinearity 13 (2000) 441-458.
+
+. J Etnyre, R Ghrist, Contact topology and hydrodynamics III. Knotted orbits. Trans. Amer. Math. Soc. 352J. Etnyre, R. Ghrist, Contact topology and hydrodynamics III. Knotted orbits. Trans. Amer. Math. Soc. 352 (2000) 5781-5794.
+
+Tightness in contact metric 3-manifolds. J B Etnyre, R Komendarczyk, P Massot, Invent. Math. 188J.B. Etnyre, R. Komendarczyk, P. Massot, Tightness in contact metric 3-manifolds. Invent. Math. 188 (2012) 621-657.
+
+/4-pinched contact sphere theorem. J Ge, Y Huang, Asian J. Math. 1J. Ge, Y. Huang, 1/4-pinched contact sphere theorem. Asian J. Math. 20 (2016) 893-902.
+
+H Geiges, Handbook of differential geometry. IIContact geometryH. Geiges, Contact geometry, in Handbook of differential geometry, vol. II (2006): 315-382.
+
+Overtwisted energy-minimizing curl eigenfields. R Ghrist, R Komendarczyk, Nonlinearity. 19R. Ghrist, R. Komendarczyk, Overtwisted energy-minimizing curl eigenfields. Nonlinearity 19 (2006) 41-51.
+
+Structures de contact sur les variétés fibrées en cercles au dessus d'une surface. E Giroux, Comment. Math. Helv. 76E. Giroux, Structures de contact sur les variétés fibrées en cercles au dessus d'une surface. Comment. Math. Helv. 76 (2001) 218-262.
+
+Volume-preserving great circle flows on the 3-sphere. H Gluck, W Gu, Geom. Dedicata. 88H. Gluck, W. Gu, Volume-preserving great circle flows on the 3-sphere. Geom. Dedicata 88 (2001) 259-282.
+
+KAM theory and the 3D Euler equation. B Khesin, S Kuksin, D Peralta-Salas, Adv. Math. 267B. Khesin, S. Kuksin, D. Peralta-Salas, KAM theory and the 3D Euler equation. Adv. Math. 267 (2014) 498-522.
+
+An algebraic proof of the Borsuk-Ulam theorem for polynomial mappings. M Knebusch, Proc. Amer. Math. Soc. 84M. Knebusch, An algebraic proof of the Borsuk-Ulam theorem for polynomial mappings. Proc. Amer. Math. Soc. 84 (1982) 29-32.
+
+On the contact geometry of nodal sets. R Komendarczyk, Trans. Amer. Math. Soc. 358R. Komendarczyk, On the contact geometry of nodal sets. Trans. Amer. Math. Soc. 358 (2006) 2399-2413.
+
+Nodal sets and contact structures. R Komendarczyk, ProQuest LLC. Georgia Institute of Technology. ThesisR. Komendarczyk, Nodal sets and contact structures. ProQuest LLC, Ann Arbor, MI, 2006. Thesis (Ph.D.), Georgia Institute of Technology.
+
+Tight Beltrami fields with symmetry. R Komendarczyk, Geom. Dedicata. 134R. Komendarczyk, Tight Beltrami fields with symmetry. Geom. Dedicata 134 (2008) 217-238.
+
+Introduction to Smooth Manifolds. J M Lee, SpringerNew YorkJ.M. Lee. Introduction to Smooth Manifolds. Springer, New York, 2013.
+
+Dividing sets as nodal sets of an eigenfunction of the Laplacian. S Lisi, Algebr. Geom. Topol. 11S. Lisi, Dividing sets as nodal sets of an eigenfunction of the Laplacian. Algebr. Geom. Topol. 11 (2011) 1435-1443.
+
+Force-free magnetic fields: solutions, topology and applications. G E Marsh, World ScientificSingaporeG.E. Marsh, Force-free magnetic fields: solutions, topology and applications. World Scientific, Singapore, 1996.
+
+Magnetostatic equilibria and analogous Euler flows of arbitrarily complex topology I. H K Moffatt, J. Fluid Mech. 159H.K. Moffatt, Magnetostatic equilibria and analogous Euler flows of arbitrarily complex topology I. J. Fluid Mech. 159 (1985) 359-378.
+
+Selected topics on the topology of ideal fluid flows. D Peralta-Salas, Int. J. Geom. Meth. Mod. Phys. 131630012D. Peralta-Salas, Selected topics on the topology of ideal fluid flows. Int. J. Geom. Meth. Mod. Phys. 13 (2016) 1630012.
+
+Energy minimizing Beltrami fields on Sasakian 3-manifolds. D Peralta-Salas, R Slobodeanu, Int. Math. Res. Not. 2021D. Peralta-Salas, R. Slobodeanu, Energy minimizing Beltrami fields on Sasakian 3-manifolds. Int. Math. Res. Not. 2021 (2021) 6656-6690.
+
+Foundational electrodynamics and Beltrami vector fields. D Reed, Advanced Electromagnetism: Foundations, Theory and Applications. D. Reed, Foundational electrodynamics and Beltrami vector fields, in Advanced Electromagnetism: Foundations, The- ory and Applications, pp. 217-249 (1995).
+
+On an inequality of P. Turán concerning Legendre polynomials. G Szegö, Bull. Amer. Math. Soc. 54G. Szegö, On an inequality of P. Turán concerning Legendre polynomials. Bull. Amer. Math. Soc. 54 (1948) 401-405.
+
+Total bending of vector fields on the sphere S 3. G Wiegmink, Diff. Geom. Appl. 6G. Wiegmink, Total bending of vector fields on the sphere S 3 . Diff. Geom. Appl. 6 (1996) 219-236.
+
+The classification of tight contact structures on the 3-torus. K Yutaka, Comm. Anal. Geom. 5K. Yutaka, The classification of tight contact structures on the 3-torus. Comm. Anal. Geom. 5 (1997) 413-438.

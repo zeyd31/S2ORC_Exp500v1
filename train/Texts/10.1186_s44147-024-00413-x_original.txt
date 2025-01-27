@@ -1,0 +1,308 @@
+
+A design of power prediction algorithm based on health assessment optimized neural network
+
+
+Xin Xie 
+School of Electrical and Information Engineering
+Hunan Institute of Engineering
+411101XiangtanChina
+
+Feng Huang huangfeng@hnie.edu.cn 
+School of Electrical and Information Engineering
+Hunan Institute of Engineering
+411101XiangtanChina
+
+Chengjin He 
+School of Electrical and Information Engineering
+Hunan Institute of Engineering
+411101XiangtanChina
+
+Huaan Zhou 
+School of Electrical and Information Engineering
+Hunan Institute of Engineering
+411101XiangtanChina
+
+Feiyu Hu 
+Bin Zeng 
+School of Electrical and Information Engineering
+Hunan Institute of Engineering
+411101XiangtanChina
+
+Harbin Electric Corporation Wind Power Co., LTD
+411101XiangtanChina
+
+Lingxiang Huang 
+Harbin Electric Corporation Wind Power Co., LTD
+411101XiangtanChina
+
+A design of power prediction algorithm based on health assessment optimized neural network
+7246FA578AE9E4EDCE22F0BC0C67763210.1186/s44147-024-00413-xReceived: 6 November 2023 Accepted: 16 March 2024Wind power predictionHealth assessmentHealth matrixBP neural networkWhale swarm algorithmPrediction optimization
+Wind power prediction holds significant value for the stability of the electrical grid when wind power is connected to the grid.Using neural networks for wind power prediction may have some limitations, such as slow speed and low accuracy.This paper proposes to enhance the power prediction accuracy and speed by optimizing the neural network through health assessment wind turbines.Firstly, based on wind turbine actual operating data, a health assessment is conducted to obtain a health matrix of wind turbine.Then, by calculating the weights of the matrix, the power prediction strategy of the network is optimized.Following that, matrix approximation hyperparameters are utilized to expedite the optimization process.Finally, some tests are conducted on neural network power prediction, act as optimized back propagation (BP) neural network and whale swarm algorithm-support vector regression (WSA-SVR) neural networks are employed for wind power prediction.Results show noticeable optimization: after optimizing the BP network, power prediction accuracy increased by about 40%, and prediction speed rose by about 20%; after optimizing the WSA-SVR network, power prediction accuracy improved by 10%, and prediction speed surged by about 45%.Further analysis shows that this method can improve the accuracy and speed of most neural network wind power prediction algorithms.
+
+Introduction
+
+The fluctuation of wind energy may lead to the instability of wind electricity [1], affecting the operation of the electrical grid once connected.To ensure the safety of the electrical grid, it is essential to predict wind power and adjust it in a timely manner.Hunan Province in China has a requirement for grid connected voltage of wind farms, with a monthly compliance rate of 98% for voltage control curves.The accuracy of short-term wind power prediction should not be less than 83%, and the accuracy of ultra short-term power prediction should not be less than 87%.
+
+Early wind power predictions often employed some traditional methods such as numerical weather prediction (NWP), power curve graphs, and so on.Due to the low measurement accuracy and significant transmission delay of NWP, the power prediction accuracy of this method is not high.Power curve graphs, derived from turbine conditions, also see reduced power prediction accuracy when environmental changes affect wind turbine operation and actual power deviates from rated power [2,3].
+
+In fact, the impact of weather and terrain conditions in areas where the climate was changeable and the terrain was complex led to significant errors in NWP, resulting in a lot of forecasting errors.In recent years, with the development of artificial intelligence technology, many new neural network algorithms have emerged.To improve accuracy, neural networks are often used for data processing, such as power predictions.Neural networks can train network models using historical data to predict wind power.Compared to similar methods, its predictive performance is significantly improved.Moreira et al. [4] used artificial neural networks (ANN) to establish forecasting models for photovoltaic generation that improve the information exchange capabilities and consequently enhancing the forecasting determination.Zhu et al. [5] established forecasting models based on the support vector machines (SVM) and Kalman filtering method that showed some efficacy in handling noise in wind power data.Sompop and Nawinda [6] design a modification of multivariable gray prediction model and states and parameters are sequentially estimated by means of the traditional Kalman filtering.But issues like slow prediction speed and high data costs persist.Thus, finding efficient optimization methods to enhance the predictive performance of neural networks has become a research hotspot in recent years.
+
+Optimization algorithms can enhance network capabilities while improving prediction speed and accuracy.Wang et al. [7] proposed a short-term wind power prediction method combining variational mode decomposition (VMD) and hybrid kernel extreme learning machine (HKELM) which enhanced neuron communication capabilities to reduce optimization time and speed up predictions.Moreira et al. [8] explored how to use cluster analysis to select the ANNs and how to combine them in in the ensemble.Zhang et al. [9] improved Bayesian parameter optimization machine learning algorithms for wind turbine fault diagnosis.Shi et al. [10] proposed wind power operation uncertainty risk assessment based on sensitivity-layer hidden Markov model (HMM) which increased sampling tolerance to reduce data collection time, thereby increasing prediction speed.Yang et al. [11] designed a convolutional neural networks-bidirectional long short-term memory (CNN-BiLSTM) wind power prediction method which adjusted the network weight allocation method to reduce rounding errors and improve prediction accuracy.Korprasertsak and Leephakpreeda [12] designed a weighting method combine the predicted values of the autoregressive moving average model, the artificial neural network model, and the gray prediction model for the wind power generation.Ye et al. [13] established the wind power reference and loss prediction models based on XGBoost and Transformer algorithms to quantify theoretical output and power shortage in cold weather.They adopted seasonal models to reduce modeling errors, improving prediction accuracy.Chenniappan et al. [14] used the autoregressive integrated moving average (ARIMA) model for forecasting the future requirements of water supply.Lee and Park [15] forecasted housing submarkets trading volumes with the ARIMA model and the recurrent neural network (RNN).The trading volumes in adjacent areas are utilized as covariates and an ensemble prediction.They added a buffer module to improve gradient smoothness, ensuring predictive accuracy.Zhang et al. [16] adopted the temporal convolutional network for wind power prediction.Liu Ying,et al. [17] propose a knowledgeembedded graph neural network (K-GNN) model based on the general framework of multivariate time series graph neural network (MT-GNN) to predict the multivariate time series state data of wind turbines.Liu et al. [18] introduced attention mechanisms to reduce latency errors.However, currently, most optimization algorithms can only improve either accuracy or speed independently, and the outcomes are not ideal.
+
+This paper improves wind turbine power weight calculation methods and adjusts prediction strategies by employing health assessment to derive a wind turbine health matrix, thereby enhancing both the accuracy and speed of neural network predictions.
+
+The first part of the paper introduces the health assessment algorithm and analyzes neural network algorithms.In the third part, a new optimization scheme is introduced to optimize the hyperparameter of two neural networks, and the fourth part simulation tests the algorithms.
+
+
+Methods
+
+The concept of health assessment was proposed by Lars Landberg in 2011 [19].It leverages the characteristics of the statistical probability distribution of model outputs, transforming a two-dimensional multivariate probability density function into a health matrix.
+
+Wind speed and power generation efficiency are positively correlated.As wind speed decreases, the wind turbine rotates slower, resulting in lower power generation efficiency.Conversely, as wind speed increases, the wind turbine rotates faster, leading to higher power generation efficiency.By applying a multivariate Gaussian distribution model to compute power generation efficiency, we can derive the health matrix.The specific process is illustrated in Fig. 1:
+
+(1) Data collection: Collect data on wind speed, temperature, pressure, rotational speed, and power [20], among other metrics, via sensors and the SCADA system.(2) Data cleaning: Address missing values, anomalies, and noise in the data to enhance its reliability [21].
+
+To mitigate the order error of data at different magnitudes, a normalization process is first carried out.Given that some types of data can have negative values, the min-max normalization algorithm is as follows:
+
+where x i represents the current data, x min denotes the minimum data value, and x max represents the maximum data value.
+
+(3) Feature selection: From the cleaned data, select feature data to determine the dimensions of the health matrix [22], as well as the approximation hyperparameters for the neural network.
+
+(1) ẋi =
+
+x i − x min x max − x min (4) State classification: Based on the feature data, calculate the power generation efficiency and categorize the wind turbine statuses into categories such as normal, minor fault, and major fault [23].The power generation efficiency is defined as:
+
+where i is the feature identifier, ranging from 1 to n, μ is the mean vector, and Σ is the covariance matrix.
+
+(6) Matrix generation: Arrange the power generation efficiencies of the same status categories in order of value to form a matrix.Each matrix element represents the power generation efficiency of the wind turbine in that specific state [24].
+
+( Arrange the computed power generation efficiencies in order of feature to get the efficiency matrix Q n×1 .
+) f (x; µ, �) = 1 (2π ) i 2 |�| 1 2 exp[ 1 2 (x − µ) T � −1 (x − µ)]2
+By applying factor analysis to the measurement data, we can obtain the power feature correlation matrix V 1×n .After arranging it using Q T , multiplying Q with V yields the health matrix A, defined as:
+
+where n is the dimension of the health matrix, typically ranging from 6 to 12.When n exceeds 12, dimensionality reduction is required.
+
+The existing health assessment algorithm has two shortcomings:
+
+1. High data costs: To calculate power generation efficiency, various wind turbine data are required, increasing the cost of data collection, processing, and analysis [25].2. High complexity: To enhance assessment reliability, the feature selection module is introduced, increasing the algorithmic complexity [26].
+
+To reduce complexity, simplify the health matrix, and lower assessment costs, the factor analysis method is first used to simplify the feature selection module and reduce matrix complexity.Then, dimensionality reduction and decoupling are performed on the feature data to reduce data processing costs.
+
+
+Analysis of neural network algorithm
+
+There are shortcomings in the current optimization neural network algorithms: firstly, the improvement in prediction speed after optimization is not significant; secondly, there is not much change in accuracy after optimization.Li et al. [27] optimized the BP neural network for wind power prediction, enhancing the network's adaptability, nonlinear mapping, and parallel processing capabilities.However, the quality of power weight was not improved, resulting in limited enhancement in prediction accuracy.Heidari [28] used the optimized SVR network for photovoltaic power prediction, strengthening SVR's mutation handling capability.However, the optimization process was not improved, and the prediction speed remains slow.
+
+Power weight has a significant impact on BP's prediction accuracy [29].Using the health matrix to improve power weight calculation can enhance BP prediction accuracy.The prediction speed of SVR is significantly affected by parameter optimization [30].To accelerate the optimization process, WSA is introduced as SVR's optimization algorithm.
+
+WSA is a new group intelligence algorithm [31] which is used to solve the merit-seeking problem by imitating behaviors such as searching and hunting among whale populations using ultrasonic waves as information carrier.The position iterative formula of the whale swarm algorithm is:
+
+(3)
+A n×n = Q n×1 V 1×n (4) x t+1 i = x t i + β y t i − x t i β = rand 0, ρ 0 e −ηd X,Y
+where η is the ultrasonic attenuation factor; d xy is the distance between X and Y; ρ 0 represents the initial ultrasonic intensity; y t i indicates the position of whale y i at step t; x t i and x t+1 i are the position of whale x i at step t and t + 1, respectively; and β is a random number of [0, ρ 0 e −ηd X,Y ].
+
+The approximate hyperparameters of the health matrix are used as the starting value for WSA, accelerating the SVR optimization process and improving prediction speed.
+
+
+New optimization scheme
+
+Through health assessment, the health matrix is obtained.After calculating the improved power weight, the power is predicted using the neural network output.Without increasing data processing costs, the prediction error is reduced, and the accuracy and speed of network prediction are enhanced.
+
+The neural network optimization scheme is shown in Fig. 2.
+
+1. Health assessment: Based on feature data, perform health assessment to obtain the health matrix and neural network approximate hyperparameters.2. Power prediction: Using matrix approximate hyperparameters and speeding up the optimization process, the neural network is used for power prediction, obtaining the original predicted power.
+
+From Eqs. ( 2) and ( 3), we know that n features correspond to health matrix A n×n .Arrange the current time data according to the order of matrix Q into feature matrix B n×1 .
+
+Firstly, matrices A and B are multiplied to get the weight matrix C n×1 , i.e.:
+
+Then, the original predicted power P i is expanded into power matrix D 1×n .All ele- ments in D are the original predicted power P i .
+
+Next, matrices D and C are multiplied, the result is multiplied by the correction factor λ, and added to P i , obtaining the reconstructed predicted power P i , i.e.:
+
+where λ is related to the feature data and turbine operating conditions, with values ranging from 0.01 to 0.1.
+
+The optimization process of BP network is as follows:
+
+For the BP network, the hidden layer error can be represented as:
+
+where δ h represents the hidden layer error; δ o represents the estimated system error, a given value; f ′ is the derivative of the activation function; x is the hidden layer input; ω is the power weight, identical to the elements of weight matrix C; and Σ denotes summation over the output layer nodes.The update calculation of BP power weight is as follows:
+
+(5)
+C n×1 = A n×n B n×1(6)P i = • |D × C| + P i (7) δ h = f ′ (x) × �(ω × δ o ) (8) �ω = α × δ × x i
+where �ω represents the change in weight, α is the learning rate, δ is the error of the current node, and x i is the input of the current node.
+
+In Eq. ( 7), ω is calculated using the health matrix to reduce interference in ω, making the value of ω × δ o significantly reduced, lowering δ h , reducing prediction error, and enhancing BP prediction accuracy.
+
+Using the health matrix as x i , Eq. ( 8) can reduce the update calculation amount and accelerate weight convergence to obtain an approximate optimal learning rate.After optimization, the prediction time of the BP network is significantly reduced.
+
+The optimization process of SVR is as follows: Suppose the input of the ith data is x i , the output is y i , and the predicted value is f(x i ).Define the error variable e i to represent the gap between the value and the pre- dicted value, which is: During the optimization process, while minimizing the sum of squares of errors, limit each e i to not exceed the given threshold ε , resulting in Eqs.(10) and (11): wherein, ω is the power weight, the same as the elements of weight matrix C. T 1 is a regularization parameter, and ω T is the transpose of ω.The WSA algorithm is used to optimize T 1 .
+
+The calculation of SVR predicted values is:
+
+where α i is the Lagrangian multiplier, obtained by solving the Lagrangian function equa- tion of SVR; K (x i , x) represents the inner product kernel function; and e i is the error variable.
+
+The approximate regularization parameter of the health matrix allows WSA to start optimization near the global optimum, reducing the optimization time, accelerating the prediction process, and improving the prediction speed of SVR.
+
+
+Simulation tests and optimization analysis
+
+
+Error metrics
+
+Three types of error metrics are used: coefficient of determination (R 2 ), mean squared error (MSE), and mean absolute error (MAE), as given in Eqs.(13, 14, and 15): where y i is the actual value, y i is the predicted value, and y i is the average of the actual values.R 2 indicates prediction accuracy; the closer the value is to 1, the higher the prediction accuracy.MSE and MAE represent the degree of error dispersion; the smaller the value, the smaller the prediction error.
+
+
+Simulation tests
+
+Using Baidu KDD CUP 2022, test data set 1# unit for a total of 40 days [32].BP and WSA-SVR networks were selected for optimization testing.Data preprocessing uses forward and backward interpolation to ensure input data consistency.(9)
+e i = f (x i ) − y i (10) minimize : 0.5 × ω T × ω + T 1 × �e i (11) subject : |e i | ≤ ε, i = 1, 2, . . . , n (12) f (x i ) = �α i × K (x i , x) + e i (13) R 2 = 1 − n i=1 y i − y i 2 n i=1 y i − y i 2 (14) MSE = 1 n n i=1 y i − y i 2 (15) MAE = 1 n n i=1 y i − y i
+The BP network's pre-optimization and post-optimization prediction effects are shown in Figs. 3 and 4.
+
+The pre-prediction and post-optimization prediction effects of the WSA-SVR network are shown in Figs. 5 and 6.
+
+The comparison of prediction errors before and after optimization is shown in Table 1.
+
+From Table 1 and Figs. 3 and 4, it can be seen that after optimizing the BP network, the prediction accuracy increased by about 40%, and the prediction time was reduced by about 20%.From Table 1 and Figs. 5 and 6, after optimizing the WSA-SVR network, the prediction accuracy increased by about 10%, and the prediction time was reduced by about 45%.BP network's prediction accuracy noticeably improved.Simultaneously, using the matrix's approximate regularization parameter as the starting value for optimization can improve the optimization efficiency and reduce the prediction time of BP.
+
+Hyperparameter optimization accounts for about 70% of the total SVR prediction time [33].In the WSA-SVR optimization process, by passing the approximate regularization parameter of the health matrix to the WSA-SVR network and allowing WSA to start optimization from an approximate global optimum, the WSA-SVR prediction time can be reduced.After optimization, the accuracy of WSA-SVR significantly improved.
+
+
+Conclusions
+
+Here it employed health assessment to derive a wind turbine health matrix, thereby enhancing both the accuracy and speed of neural network predictions.The optimization algorithm designed based on health assessment can simultaneously improve the wind power prediction accuracy and speed of neural networks.Compared with existing optimization algorithms, the neural network optimization algorithm based on the health matrix has a smaller data cost and better prediction performance.From the principle and process of the algorithm, it can be concluded that it can improve the accuracy and speed of most neural network wind power prediction algorithms.
+
+Fig. 1
+1
+Fig. 1 Health assessment process diagram
+
+
+Fig. 2
+2
+Fig. 2 Neural network optimization scheme based on the health matrix
+
+
+Fig. 3 Fig. 4
+34
+Fig. 3 BP prediction effect without optimization
+
+
+
+
+
+
+
+
+
+
+
+Availability of data and materialsThe data underlying this article are available in A Dataset for Spatial Dynamic Wind Power Forecasting Challenge at KDD Cup 2022 at https:// arxiv.org/ abs/ 2208.04360.The models and code generated or used during the study will be shared on reasonable request to the corresponding author.FundingThis work was supported by the National Natural Science Foundation of China (grant number 62006075), Hunan Provincial Natural Science Foundation of China (grant number 2022JJ50014, 2022JJ50116), and Special Project for Construction of Changzhutan National Independent Innovation Demonstration Zone (grant number CG-ZDGS20221004), Postgraduate Scientific Research Innovation Project of Hunan Province (grant Number CX20231290).Results and discussionThe optimization algorithm significantly improved the lag of the prediction and the quality of the BP network's power weight.After optimization, theAuthors' contributionsFeng Huang is for the supervision and Xin Xie in charge of writing; Chengjin He and Huaan Zhou analyzed and interpreted the patient data regarding the hematological disease and the transplant.Feiyu Hu, Bin Zeng, and Lingxiang Huang performed the histological examination of the kidney.All authors read and approved the final manuscript.Publisher's NoteSpringer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+Analysis of the current status and development trend of wind power generation. W Yuepu, 2020
+
+. Power Equip Manage. 5011
+
+Discussion on the influencing factors of offshore wind farm site selection. Z Hui, L Yifei, X Lei, 2022
+
+. China Water Transp (Second Half of the Month). 2212
+
+Joint planning of offshore wind-storage with multiple uncertainties. Ge Xiaolin, Yisheng Xu, Yang Fu, Power Grid Technol. 152022. 1779
+
+Design of experiments using artificial neural network ensemble for photovoltaic generation forecasting. M O Moreira, P P Balestrassi, A P Paiva, P F Ribeiro, B D Bonatto, Renew Sustain Energy Rev. 1351104502021
+
+Improvement of multi-layer soil moisture prediction using support vector machines and ensemble Kalman filter coupled with remote sensing soil moisture datasets over an agriculture dominant basin in China. Z Qian, W Yushi, L Yulin, 2021
+
+. Hydrol Proc. 35414154
+
+Short-term forecasting of renewable energy consumption: augmentation of a modified grey model with a Kalman. S Moonchai, N Chutsagulprom, 2020
+
+. Appl Soft Comput J. 87105994
+
+Short-term wind power forecasting based on sparrow search algorithm optimized variational mode decomposition and hybrid kernel extreme learning machine. R Wang, X Xu, Lu J Chao, 10.13976/j.cnki.xk.2023.2281Information and Control. 52042023
+
+Design of experiments using artificial neural network ensemble for photovoltaic generation forecasting. M O Moreira, P P Balestrassi, A P Paiva, P F Ribeiro, B D Bonatto, Renew Sustain Energy Rev. 1351104502021
+
+Wind turbine fault diagnosis method based on OOB-BO-LightGBM. H Zhang, Z Shi, Y Shu, 2022J/OL
+
+. China Measurement & Test. 
+
+Wind turbine operation uncertainty risk assessment method based on sensitivity-layer HMM power prediction. H Shi, Li Yi, M Ding, F Gao, X Li, 2022J/OL
+
+. China Measurement & Test. 
+
+Short-term wind power prediction considering adjacent wind farm information and CNN-BiLSTM. Y Zimin, P Xiaosheng, X Yuhan, W Peijie, D Ruiqin, Z Binbin, 2023
+
+. South Power Grid Technol. 1702
+
+Robust short-term prediction of wind power generation under uncertainty via statistical interpretation of multiple forecasting models. N Korprasertsak, T Leephakpreeda, J]. Energy. 1802019
+
+Short-term wind power combined prediction under cold wave weather with small sample conditions. Lin Ye, Yilin Li, Ming P , Li Zhuo Xu, X L Jiazheng, 2023
+
+. China Electr Engine J. 4302
+
+Prediction of fault occurrences in smart city water distribution system using time-series forecasting algorithm. M Chenniappan, D Gnanavel, K P Gunasekaran, R R Rajalakshmi, A S Ramya, A A Stonier, G Peter, V Ganji, 2022
+
+. Math Probl Engine. 2022
+
+Forecasting trading volume in local housing markets through a time-series model and a deep learning algorithm. C Lee, K K Park, 2022
+
+. Eng Constr Archit Manag. 291
+
+Yingjie T (2022) Data-driven time-attention convolutional wind power prediction model. Z Haotian, Mi W , Jinguo Li, 
+
+. J Solar Energy. 4310
+
+Application of knowledge-embedded graph neural network in multielement state prediction of wind turbines. L Ying, L Yangguang, Q Shuhui, 2022
+
+. China Sci, Inform Sci. 5210
+
+Coordinated control strategy for active power of wind power cluster based on model. Y Liu, Y Li, Shuhui Qu, J Dong, J Wang, 2021
+
+. Proc CSEE. 4117
+
+Increasing certainty-combination methods for reliable probabilistic wind production forecasts. G Beatrice, Jonathan C , Jeremy P , Lars L , 2011
+
+. Europe's Premier Wind Energy Event-EWEA. 8
+
+Research on wind turbine fault warning method based on deep convolutional autoencoder. L Jiarui, Y Guotian, Y Xiyun, 2022
+
+. J Solar Energy. 4311
+
+Research on wind turbine blade icing fault prediction model. Z Wufei, L Shuaishuai, L Jiacheng, 2022
+
+. Agri Equip Vehicle Engine. 6009
+
+Biosecurity and antimicrobial use in broiler farms across nine European countries: toward identifying farm-specific options for reducing antimicrobial usage. P Mallioris, G Teunis, G Lagerweij, P Joosten, J Dewulf, J A Wagenaar, A Stegeman, L Mughini-Gras, 2023
+
+. Epidemiol Infect. 151e13
+
+Selection of piezoeloectric material and fiber volume fraction to maximize the electrical power produced by macro-fiber composite energy harvesters. M Mallouli, M Chouchane, 2023
+
+. J Compos Mater. 572
+
+Hybrid digital twins: a proof of concept for reinforced concrete beams. M Von Danwitz, Thank Kochmann, T Sahin, T Wimmer, J Braml, T Popp, A , PAMM. 221e2022001462023
+
+IoT-enabled WBAN and machine learning for speech emotion recognition in patients. D D Olatinwo, A Abu-Mahfouz, G Hancke, H Myburgh, Sensors. 23629482023
+
+Load prediction and analysis of wind turbine based on BP neural network and multi-factor weighting method. X U Yang, Cai Anmin, Z Linwei, L Weirong, L Cheng, L Shuiqing, Thermal Power Gen. 51082022
+
+Short-term interval photovoltaic power prediction based on CEEMDAN-GSA-LSTM and SVR. L Fen, S Ling, W Yawei, Q Aifang, M Nian, Z Jinbin, 2022J/OL
+
+. 10.16183/j.cnki.jsjtu.2022.511J Shanghai Jiao Tong University. 511
+
+Comparison of back propagation neural network with hybrid back propagation-wavelet network for breast cancer diagnosis based on statistical features extracted from thermographic images of women's breasts. M Heidari, 2023
+
+. J Model Engine. 2151
+
+Experimental investigation and SVR model to predict the mechanical properties of RAC by enhancing the characteristic of RCA using surface treatment method along with modified mixing approach. P K Singh, P Rajhans, 2023
+
+. Constr Build Mater. 393132032
+
+A hybrid SVR-BO model for predicting the soil thermal conductivity with uncertainty. K Q Li, Z Y Yin, L Yong, 2023
+
+. 10.1139/cgj-2023-0105Can Geotech J. 61258
+
+Whale swarm algorithm with the mechanism of identifying and escaping from extreme points for multimodal function optimization. B Zeng, X Li, L Gao, Y Zhang, H Dong, Neural Computing and Applications. 3292020
+
+SDWPF: a dataset for spatial dynamic wind power forecasting challenge at KDD Cup. J Zhou, X Lu, Y Xiao, J Lyu, Y Ma, D Dou, arXiv:2208.043602022. 2022arXiv preprint
+
+Research on water quality spatiotemporal forecasting model based on ST-BIGRU-SVR neural network. R Gai, J Yang, 10.2166/wst.2023.156Water Sci Technol. 8831562023

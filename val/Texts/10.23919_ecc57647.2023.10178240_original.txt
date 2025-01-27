@@ -1,0 +1,221 @@
+
+Distributed Stochastic Bandit Learning with Delayed Context Observation
+
+
+Jiabin Lin 
+Member, IEEEShana Moothedath 
+Distributed Stochastic Bandit Learning with Delayed Context Observation
+Index Terms-Bandit optimizationDistributed optimizationStochastic linear banditsMulti-Arm Bandit (MAB)
+We consider the problem where M agents collaboratively interact with an instance of a stochastic K-armed contextual bandit, where K M. The goal of the agents is to simultaneously minimize the cumulative regret over all the agents over a time horizon T . We consider a setting where the exact context is observed after a delay and at the time of choosing the action the agents are unaware of the context and only a distribution on the set of contexts is available. Such a situation arises in different applications where at the time of the decision the context needs to be predicted (e.g., weather forecasting or stock market prediction), and the context can be estimated once the reward is obtained. We propose an Upper Confidence Bound (UCB)-based distributed algorithm and prove that our algorithm achieves regret and communications bounds of O(d √ MT log 2 T ) and O(M 1.5 d 3 ), respectively, for linearly parametrized reward functions. We validated the performance of our algorithm via numerical simulations on synthetic data and real-world Movielens data.
+
+I. INTRODUCTION
+
+Sequential decision making is a common problem in many applications, including control and robotics [1,2], communications [3], and ecology [4]. Bandit algorithms provide a learning framework to model the sequential decision making problem where the learner interacts with the environment in several rounds and the goal of the learner is to choose the best action in each round to maximize the cumulative reward over a period of time [5]. A popular variant of bandit algorithms is contextual bandits. In the standard contextual bandit model, the learner observes a context/feature vector, chooses an action and receives a reward based on the context and the chosen action. One of the key challenge in bandits is to balance the trade-off between exploring new actions in the pursuit of finding the best action and exploiting the known actions [5,6].
+
+Recently, many papers studied MAB problems with multiple agents, where a set of agents/learners face the same MAB problem. Collaboration among multiple agents expedites the learning process in many applications that use contextual bandit algorithms, such as recommender systems, clinical trials, control and robotics, and cognitive radio [7,8,9]. However, often the contexts are noisy or represent predictive measures, e.g., weather prediction or stock market prediction. In such scenarios, the exact contexts are not available and learners only observe a distribution on the set of contexts. There are many applications where the actions/decisions are made based on a prediction/distribution and the exact contexts are observed after choosing an action (e.g., we decide whether to take an J. Lin  umbrella based on the weather forecast and we know if it rained later in the day). In such situations, the exact context is available to the learner after a delay and we refer to this MAB problem as contextual bandits with delay.
+
+Our goal in this paper is to propose a communication costeffective algorithm for distributed bandit learning with M agents and delayed context observation. Bandit learning with delayed contexts is more challenging due to the fact that the learner do not have access to the context information while choosing the action. In order to address this difficulty, we convert the problem using a feature mapping that is used in [10]for a single agent bandit problem. After modifying the problem, we add a new set of feature vectors such that the reward under this set of d-dimensional context feature vectors is an unbiased observation for the action selection. We propose a UCB-based distributed bandit algorithm with regret bound O(d √ MT log 2 (T )) for linearly parametrized reward functions; the order of our regret bound coincides with the regret bound of the distributed bandit algorithm in [8] ( [8] assumed the exact contexts are known). Our setting recovers the distributed bandit algorithm with known contexts in [8] when the context distribution is a Dirac delta distribution.
+
+We note that there is a straightforward communication protocol for distributed bandit learning is immediate sharing where each agent shares every new sample immediately with the other agents as noted in [8]. While the agents can achieve near-optimal regret under this protocol, the amount of communication data is directly proportional to the total size of gathered samples, rendering the problem non-scalable over large time horizons. To minimize the communication cost while retaining optimum regret, we use the observation in [11] and execute synchronization between agents only when the extra information accessible to the agents is significant when compared to the last synchronization. This paper makes the following contributions.
+
+• We model a distributed stochastic linear bandits (LBs) problem where M agents collaborate to minimize their total regret under the coordination of a central server when the contexts are observed with a delay and are unknown while choosing the action. We refer to this problem as the distributed LBs with delayed contexts. • We present a UCB-based algorithm that achieves a O(d √ MT log 2 T ) high probability regret bound for distributed LBs with delayed contexts.
+
+• We validated the performance of our approach via numerical simulations on synthetic data and on the real world Movielens data. The rest of the paper is organized as follows. In Section II we present the notations and the problem formulation. In Section III we present the related work. In Section IV we present the algorithm and regret analysis. In Section V we present the simulation results and in Section VI we present the conclusion.
+
+
+II. PROBLEM SETTING AND NOTATIONS
+
+
+A. Notations
+
+The norm of a vector z ∈ R d with respect to a matrix V ∈ R d×d is defined as z V := √ z V z and |z| for a vector z denotes element-wise absolute values. Further, denotes matrix or vector transpose and ·, · denotes inner product. For an integer N, we define [N] := {1, 2, . . . , N}.
+
+
+B. Problem Setting: Distributed Linear Stochastic Bandits with Context Distribution
+
+In this section, we first specify the standard linear bandit problem below and then explain the distributed stochastic bandit setting studied in this paper. Let X be the action set, C be the context set, and the environment is defined by a fixed and unknown reward function y : X × C → R. In linear bandit setting, at any time t ∈ N, the agent observes a context c t ∈ C and has to choose an action x t ∈ X . Each context-action pair (x, c), x ∈ X and c ∈ C, is associated with a feature vector φ x,c ∈ R d , i.e., φ x t ,c t = φ (x t , c t ). Upon selection of an action x t , the agent observes a reward y t ∈ R
+y t := θ , φ x t ,c t + η t ,(1)
+where θ ∈ R d is the unknown reward parameter, θ , φ x t ,c t = r(x t , c t ) is the expected reward for action x t at time t, i.e., r(x t , c t ) = E[y t ], and η t is σ −subGaussian, additive noise. The goal is to choose optimal actions x t for all t ∈ T such that the cumulative reward, ∑ T t=1 y t , is maximized. This is equivalent to minimizing the cumulative (pseudo)-regret denoted as
+R T = T ∑ t=1 θ , φ t x t ,c t − T ∑ t=1 θ , φ t x t ,c t .(2)
+Here x t is the optimal/best action for context c t and x t is the action chosen by the agent for context c t . In this work, we consider a distributed stochastic linear bandit setting with context distribution and unknown contexts. The communication network consists of a server and a set of M agents, and the agents can communicate with the server by sending and receiving packets. We assume that the communication between the server and the agents have zero latency. We consider a setting where the context at time t, c t is unobservable rather only a distribution of the context denoted as µ t is observed by the agents. At round t, the environment chooses a distribution µ t ∈ P(C) over the context set and samples a context realization c t ∼ µ t . The agents observe only µ t and not c t and each agent selects an action, say action chosen by agent i is x t,i , and receive reward y t,i , where y t,i = θ , φ x t,i ,c t + η t,i . Our aim is to learn an optimal mapping/policy P(C) → X of contexts to actions such that the cumulative reward, ∑ M i=1 ∑ T t=1 y t,i is maximized. Formally, our aim is to minimize the cumulative regret
+R(T ) = M ∑ i=1 T ∑ t=1 θ , φ x t,i ,c t − M ∑ i=1 T ∑ t=1 θ , φ x t,i ,c t .(3)
+Here, x t = arg max x∈X E c∼µ t [r x,c ] is the best action provided we know µ t , but not c t , and T is the total number of rounds. Consider the set I = {(1, 2, · · · , T ) × (1, 2, · · · , M)} = {I 1 , I 2 , . . . , I MT }, which is the set of all possible (t, i) pairs for t ∈ [T ] and i ∈ [M]. For I j−1 = (t, i) ∈ I, we have i = j − 1 mod M, t = j − 1/M , and we define F j−1 := (x s,q , µ s , y s,q ) {(s,q):(s<t)∨(s=t∧q<i)} . We note that in (3), we compete with the best possible mapping π : P(C) → X from the observed context distribution to actions, that maximizes the expected reward
+∑ M i=1 ∑ T t=1 E c t ∼µ t [r π (µ t ),c t |F j−1 , µ t ],
+where F j−1 is the filtration that contains all information available at the end of round j − 1.
+
+Our goal is to develop a distributed multi-armed bandit algorithm with the least possible communication cost to solve this problem. We define the communication cost of a protocol as the number of integers or real numbers communicated between the server and the agents [8]. We make the standard assumptions on the additive noise η t and the unknown parameter θ [10,12].
+Assumption 1. Each element η t of the noise sequence {η t } ∞ t=1 is conditionally σ −subgaussian, i.e., for all λ ∈ R, E[e λ η t |F j−1 , µ t ] exp(λ 2 σ 2 /2). Assumption 2. There exist constants S, D 0 such that θ 2 S, φ x,c t 2 D, and φ x,c t θ ∈ [0, 1]
+, for all t and all x ∈ X .
+
+
+III. RELATED WORK
+
+MAB algorithms are well studied and various solution methods were suggested, for a survey see [5] and [6]. Our work deals with the class of linear contextual MABs with unknown contexts. Linear contextual bandit problems with context-dependent uncertainty are studied in [10,13,14,15]. In [14], a scenario was explored in which contexts are disturbed by noise and the goal is to compete with the optimal policy that can access the undisturbed feature vector. Reference [10] studied a setting in which only a distribution on the context is known, as opposed to the exact context, and the goal is to pick the optimal action according to the distribution function. The model in [10] is closely related to ours, and the primary distinction is that while [10] considered a single-agent MAB problem we study a multi-agent MAB problem. In our initial work [15] we studied a single-agent conservative contextual MAB problem where the contexts are unknown and the learner is constrained to satisfy certain performance criteria.
+
+Multiple-player MAB has gained more attention recently [16]. One class of problem study distributed MABs with collisions, where the reward for an arm reduces or is set to zero if a player chooses that action in [3,17,18,19]. In the following work of [18], [20] investigated a context in which regret rises as a result of agent communication. A collisionbased approach is associated with problems in cognitive radio networks, where the goal is to learn through action collisions rather than communication. This is in stark contrast to the setting considered in our work. In [8], agents face the same bandit model and communicate with a central server by sending and acquiring information in order to learn concurrently and collaboratively. Our model is similar to the time-varying action set case considered in [8]. In our scenario, however, contexts are observed after a delay, whereas in [8] the contexts are observed before choosing the action.
+
+
+IV. DISTRIBUTED UCB FOR LINEAR STOCHASTIC BANDITS WITH CONTEXT OBSERVATION A. Proposed Algorithm and Guarantee
+
+In this section, we present our algorithm and regret bound for the setting where the actual context c t (e.g., actual weather measurements) is observable to the agents after they choose their actions. We note that with the context observation the agents have {(x s,i , c s , y s,i )} t s=1 available to them while estimatingθ t,i although not for selecting the action. The pseudocode of our algorithm is given in Algorithm 1.
+
+Given the distribution µ t , we first construct the feature
+vectors Ψ t = {ψ x,µ t : x ∈ X }, where {ψ x,µ t := E c∼µ t [φ x,c ]} is the expected feature vector of action x under µ t .
+Each feature ψ x,µ t corresponds to exactly one action x ∈ X and Ψ t denotes the feature context set at time t. Algorithm 1 is based on the optimism in the face of uncertainty principle, where at each time t ∈ [T ], each agent i ∈ [M] maintains a confidence set B t,i ⊆ R d that contains the unknown parameter vector θ with high probability. Each agent then chooses an optimistic estimatẽ θ t,i = arg max θ ∈B t,i (max x∈X ψ x,µ t θ ) and chooses an action
+x t,i = arg max x∈X ψ x,µ tθ t,i . Equivalently the agent chooses the pair (x t,i ,θ t,i ) ∈ arg max (x,θ )∈X ×B t,i ψ x,µ t θ which jointly maximizes the reward.
+The agents now play their respective optimistic actions, x t,i 's, and receive rewards y t,i 's and utilize the reward observations and the now observable context to update their individual confidence set.
+
+We note that while choosing the action the agents are unaware of the context and hence the decisions are made using ψ rather than φ (line 9). In line 10 y t,i is a noisy observation of φ x t,i ,c t θ and the algorithm expects the reward ψ x t,i ,µ t θ . To address this, we construct a feature set Ψ t in such a way that y t,i is an unbiased observation for the action choice ψ t , similar to the technique in [10] for single agent bandits. After the actions are chosen, the agents receive the respective rewards and the contexts are observable now. Hence in the estimation we utilize the information about the context. We
+denote ∑ t φ x t,i ,µ t φ x t,i ,µ t and ∑ t φ x t,i ,µ t y t,i for each agent i ∈ [M]
+as W t,i and U t,i , respectively. We construct the confidence set B t,i using W t,i and U t,i as
+B t,i = θ ∈ R d : θ t,i − θ V t,i β t,i ,(4)where β t,i = β t,i (σ , δ ) = σ 2 log det(V t,i ) 1/2 det(λ I) −1/2 δ + λ 1/2 S, V t,i = λ I +W t,i ,θ t,i = V −1 t,i U t,
+i . The agents in our protocol share their local estimates with the central server during the synchronization step. The synchronizations are done at specific time instants. We refer to the timesteps between the two synchronizations as epochs. The epochs are designed based on the observation in [11] that the change in the determinant of V t is a good indicator of learning progress. Based on this observation, we only synchronize when agent i finds that the log-determinant of V t,i has changed more than a constant factor since the last synchronization, and this reduces the communication cost of the algorithm. 
+Set Ψ t = {ψ x,µ t : x ∈ X } where {ψ x,µ t := E c∼µ t [φ x,c ]} 6:
+for Agent i = 1, 2, . . . , M, do 7:
+V t,i = λ I +W syn +W t,i ,θ t,i = V −1 t,i (U syn +U t,i ) 8:
+Construct the confidence ellipsoid B t,i using V t,i andθ t,i 9: 
+(x t,i ,θ t,i ) = arg max (x,θ )∈X ×B t,i ψ x,µ t ,Update W t,i = W t,i + φ x t,i ,µ t φ x t,i ,µ t ,U t,i = U t,i + φ x t,i ,µ t y t,i 12: V t,i = λ I +W syn +W t,i 13: if log(det(V t,i )/det(V last )) · (t − t last ) B then 14:
+Send a synchronization signal to server to start a communication round 15: end if 16: Synchronization round: 17: if a communication round is started then 18: All agents i ∈ [M] send W t,i and U t,i to server 19:
+Server computes W syn = W syn +∑ M i=1 W t,i ,U syn = U syn + ∑ M i=1 U t,i 20:
+All agents receive W syn ,U syn from the server 21: Set W t,i = 0,U t,i = 0,t last = t, for all i, V last = λ I +W syn 
+R(T ) 4β T MT d log(MT )(1+log(MT ))+4(β T +1) 2MT log 3 δ .
+Further, for δ = 1 M 2 T , Algorithm 1 achieves a regret of
+O(d √ MT log 2 (T )) with O(M 1.5 d 3 ) communication cost.
+Proof. See Section IV-B.
+
+The significance of Theorem 4.1 is that it allows us to use a smaller scaling β t,i for the confidence set, which indeed affects the action chosen by the algorithm. It is known that in practice β t,i has a large impact on the amount of the exploration, and a tighter choice of β t,i can result in a significant reduction of the regret bound [10], which we validate through the experiments.  Proof. The proof follows using Theorem 2 in [11] and union bound over all agents.
+
+For a positive definite matrix V ∈ R d×d , we have the following result from [11].
+Proposition 4.3 (Lemma 11, [11]). Let {X t } ∞ t=1 be a sequence in R d ,V is a d × d positive definite matrix and define V t = V + ∑ t s=1 X s X s . We have that log det V n det(V ) n ∑ t=1 X t 2 V −1 t−1 .
+Further, if X t 2 L for all t, then
+n ∑ t=1 min 1, X t 2 V −1 t−1 2 log det V n − log det(V ) 2 d log trace(V ) + nL 2 /d − log det(V ) .
+The lemma below proves a bound on the per-step regret of the protocol. 
+= θ , φ x t,i ,c t − φ x t,i ,c t with β t,i = β t,i (σ , δ ) is bounded by r t,i 2β t,i ( φ x t,i ,c t V −1 t,i + S j ) + D j where D j = θ , φ x t,i ,c t − φ x t,i ,c t − ψ x t,i ,µ t + ψ x t,i ,µ t and S j = ψ x t,i ,µ t V −1 t,i − φ x t,i ,c t V −1 t,i .
+Proof. Let us assume that θ ∈ B t,i . Then we have
+r t,i = θ , φ x t,i ,c t − θ , φ x t,i ,c t = θ , ψ x t,i ,µ t + θ , φ x t,i ,c t − ψ x t,i ,µ t − θ , ψ x t,i ,µ t − θ , φ x t,i ,c t − ψ x t,i ,µ t θ t,i , ψ x t,i ,µ t − θ , ψ x t,i ,µ t + θ , φ x t,i ,c t − φ x t,i ,c t − ψ x t,i ,µ t + ψ x t,i ,µ t = θ t,i −θ t,i , ψ x t,i ,µ t + θ t,i − θ , ψ x t,i ,µ t + θ , φ x t,i ,c t − φ x t,i ,c t − ψ x t,i ,µ t + ψ x t,i ,µ t θ t,i −θ t,i ψ x t,i ,µ t + θ t,i − θ ψ x t,i ,µ t + D j V −1/2 t,i θ t,i −θ t,i V t,i V 1/2 t,i ψ x t,i ,µ t V −1 t,i + V −1/2 t,i θ t,i − θ V t,i V 1/2 t,i ψ x t,i ,µ t V −1 t,i + D j V −1/2 t,i V t,i θ t,i −θ t,i V t,i V 1/2 t,i V −1 t,i ψ x t,i ,µ t V −1 t,i + V −1/2 t,i V t,i θ t,i − θ V t,i V 1/2 t,i V −1 t,i ψ x t,i ,µ t V −1 t,i + D j = ( θ t,i −θ t,i V t,i + θ t,i − θ V t,i ) ψ x t,i ,µ t V −1 t,i + D j 2β t,i ψ x t,i ,µ t V −1 t,i + D j (5) = 2β t,i ( φ x t,i ,c t V −1 t,i + ψ x t,i ,µ t V −1 t,i − φ x t,i ,c t V −1 t,i ) + D j 2β t,i ( φ x t,i ,c t V −1 t,i + S j ) + D j .(6)
+Eq. (5) follows from Lemma 4.2, where θ t,i − θ V t,i 2 log( det(V t,i ) 1/2 det(λ I) −1/2 δ ) + λ 1/2 = β t,i .
+
+Below we present the Azuma-Hoeffdings inequality. 
+P [M n − M 0 > b] exp − b 2 2nQ 2 . Lemma 4.6. D j := θ , φ x t,i ,c t − φ x t,i ,c t − ψ x t,i ,µ t + ψ x t,i ,µ t is a martingale difference sequence with D j 4 and ∑ j D j is a martingale. Further, ∑ j D j is bounded w.p. at least 1 − δ as ∑ j D j 4 2n log 1 δ . Proof. Recall that for D j = θ , φ x t,i ,c t − φ x t,i ,c t − ψ x t,i ,µ t + ψ x t,i ,µ t , I j = (t, i) with i = j − 1 mod M, t = j − 1/M , and F j−1 = (x s,q , µ s , y s,q ) {(s,q):(s<t)∨(s=t∧q<i)} . Thus we have E ct ∼µt [D j | F j−1 , µ t , x t,i ] = E ct ∼µt [ θ , φ x t,i ,ct − φ x t,i ,ct − ψ x t,i ,µt + ψ x t,i ,µt | F j−1 , µ t , x t,i ] = E ct ∼µt [ θ , φ x t,i ,ct | F j−1 , µ t , x t,i ] − E ct ∼µt [ θ , φ x t,i ,ct | F j−1 , µ t , x t,i ] − E ct ∼µt [ θ , ψ x t,i ,µt | F j−1 , µ t , x t,i ] + E ct ∼µt [ θ , ψ x t,i ,µt | F j−1 , µ t , x t,i ] = θ , ψ x t,i ,µt − θ , ψ x t,i ,µt − θ , ψ x t,i ,µt + θ , ψ x t,i ,µt = 0. (7)
+Eq. (7) follows from ψ x t,i ,µ t = E c t ∼µ t φ x t,i ,c t | F j−1 , µ t , x t,i . Therefore D j is a martingale difference sequence with D j 4 and ∑ MT j=1 D j is a martingale. Using Proposition 4.5 with Q = 4 ∑ j D j 4 2n log 1 δ .
+
+Below we prove ∑ j∈[MT ] S j is a supermartingale. 
+Lemma 4.7. Let S j = ψ x t,i ,µ t V −1 t,i − φ x t,i ,c t V −1 t,i . Then, ∑ MT j=1 S j is a supermartingale with |S j | = 2λ −1/2 . Further, ∑ j S j is bounded with probability at least 1 − δ as ∑ j S j 2λ −1/2 2n log 1 δ . Proof. Recall that S j = ψ x t,i ,µ t V −1 t,i − φ x t,i ,c t V −1 t,i , I j = (t, i) with i = jE c t ∼µ t [S j | F j−1 , µ t , x t,i ] = E c t ∼µ t [ ψ x t,i ,µ t V −1 t,i − φ x t,i ,ct V −1 t,i | F j−1 , µ t , x t,i ] = E c t ∼µ t [ ψ x t,i ,µ t V −1 j | F j−1 , µ t , x t,i ] − E c t ∼µ t [ φ x t,i ,ct V −1 t,i | F j−1 , µ t , x t,i ] ψ x t,i ,µ t V −1 t,i − ψ x t,i ,µ t V −1 t,i = 0 (8) Eq. (8) follows from ψ x t,i ,µ t = E c t ∼µ t [φ x t,i ,c t | F j−1 , µ t , x t,i ], and ψ x t,i ,µ t V −1 t,i = E c t ∼µ t [φ x t,i ,c t | F j−1 , µ t , x t,i ] V −1 t,i E c t ∼µ t [ φ x t,i ,c t V −1 t,i | F j−1 , µ t , x t,i ] since ϕ
+
+(E[X]) E[ϕ(x)] by Jensen's inequality.
+|S j | = | ψ x t,i ,µ t V −1 t,i − φ x t,i ,c t V −1 t,i | | ψ x t,i ,µ t V −1 t,i | + | φ x t,i ,c t V −1 t,i | |E c t ∼µ t [ φ x t,i ,c t V −1 j | F j−1 , µ t , x t,i ]| + |λ −1/2 | (9) |λ −1/2 | + |λ −1/2 | = 2λ −1/2 Eq. (9) follows from ψ x t,i ,µ t = E c t ∼µ t [φ x t,i ,c t | F j−1 , µ t , x t,i ] and φ x t,i ,c t V −1 t,i = φ x t,i ,c t V −1/2 t,i V −1/2 t,i φ x t,i ,c t = φ x t,i ,c t V −1/2 t,i φ x t,i ,c t V −1/2 t,i = φ x t,i ,c t (λ I + ∑ t, i φ x t,i ,c t φ x t,i ,c t ) −1/2 φ x t,i ,c t (λ I) −1/2 λ −1/2 .(10)
+Eq. (10) follows from V −1
+t,i V −1 t−1,i . Therefore ∑ MT j=1 S j is a supermartingale with |S j | = 2λ −1/2 . Now from Proposition 4.5 we have ∑ j S j 2λ −1/2 2n log 1 δ .
+Consider an arbitrary epoch in Algorithm 1, say the p th epoch. Let E p be the set of all (t, i) pairs in epoch p and V p be the V last in epoch p. Then we know
+det(V p ) det(V p−1 ) = 1 + ∑ (t,i)∈A p ψ x t,i ,µ t 2 V −1 t−1,i . Assume ∑ (t,i)∈A p ψ x t,i ,µ t 2 V −1 t−1,i 1. Then we have 1 det(V p ) det(V p−1 ) 2.(11)
+All the epochs that satisfy (11) are referred to as the good epochs. Similarly, all the epochs that do not satisfy (11) are referred to as the bad epochs. Our approach to prove Theorem 4.1 is to prove bounds for good epochs and bad epochs separately as described below. Let us denote the number of timesteps that belong to good epochs as T g and the number of timesteps that belong to bad epochs as T b . Let us denote the cumulative regret in all good epochs until time T as R g (T ) and the cumulative regret in all bad epochs until time T as R b (T ). We present bounds for R g (T ) and R b (T ) separately and then use those bounds to prove Theorem 4.1. Our approach uses similar argument in Theorem 4 in [11].
+
+Theorem 4.8. The cumulative regret of all good epochs in Algorithm 1 with expected feature set Ψ t and β t,i = β t,i (σ , δ /3) is bounded at time T with probability at least 1 − Mδ by
+R g (T ) 4β T MT g d log(MT ) + 4(β T + 1) 2MT g log 3 δ .
+Proof. To bound the cumulative regret of good epochs we use Theorem 4 in [11]. Assume that the MT pulls are all made by one agent in a round-robin fashion (i.e., the agent takes x 1,1 , x 1,2 , . . . , x 1,M , x 2,1 , . . . , x 2,M , . . . , x T,1 , . . . , x T,M ). We define V t,i := λ I + ∑ {(p,q):(p<t)∨(p=t∧q<i)} x p,q x p,q . Thus V t,i denotes V t,i the imaginary agent calculates when the agent gets to x t,i . Since x t,i is in a good epoch (say the p-th epoch), we have
+1 det( V t,i ) det(V t,i ) det(V p ) det(V p−1 ) 2(12)
+Eq. (12) uses det(V t,i ) det(V p−1 ) and the fact that for good epochs det( V t,i ) = det(V p ). Thus from Lemma 4.4 we have
+r t,i 2β t,i φ x t,i ,c t V −1 t,i φ x t,i ,c t + 2β t,i S j + D j = 2β t,i φ x t,i ,c t V −1 t,i φ x t,i ,c t φ x t,i ,c t V −1 t,i φ x t,i ,c t φ x t,i ,c t V −1 t,i φ x t,i ,c t + 2β t,i S j + D j = 2β t,i φ x t,i ,c t V −1 t,i φ x t,i ,c t · det( V t,i ) det(V t,i ) + 2β t,i S j + D j 2β t,i 2φ x t,i ,c t V −1 t,i φ x t,i ,c t + 2β t,i S j + D j(13)
+The last three steps follow from x Ax
+
+x Bx det(A) det(B) and (12). We now use the argument for the single agent regret bound and prove regret bound for the good epochs. Recall that E p denotes the set of (t, i) pairs that belong to epoch p, P g denotes the set of good epochs, and A g denotes the set of all j ∈ [MT ] that belong to good epochs. Using Proposition 4.3, we bound
+R g (T ) − ∑ p∈P g ∑ (t,i)∈E p j:I j =(t,i) 2β t,i S j + D j = ∑ p∈P good ∑ (t,i)∈E p j:I j =(t,i) r t,i − 2β t,i S j − D j = ∑ p∈P g ∑ (t,i)∈E p j:I j =(t,i) r t,i − 2β t,i S j − D j 2 MT g ∑ p∈P g ∑ (t,i)∈E p j:I j =(t,i) r t,i − 2β t,i S j − D j 2 (14) 2β T 2MT g ∑ p∈P g ∑ (t,i)∈E p min( φ x t,i ,c t 2 V −1 t,i , 1) (15) 2β T 2MT g ∑ p∈P g ∑ (t,i)∈E p min( φ x t,i ,c t 2 V −1 t−1,i , 1)(16)2β T 2MT g ∑ p∈P g log det(V p ) det(V p−1 )(17)2β T 2MT g log det(V P ) det(V 0 ) 4β T MT g d log(MT )(18)
+In the inequalities above, (14) uses (15) follows from (13), (16) follows from V −1 t,i V −1 i,t−1 , and (17) follows from Proposition 4.3. Finally, (18) follows from log( det(V P ) det(V 0 ) ) d log(MT ) 2 . Now from Lemma 4.7 (λ = 1) and Lemma 4.6 with n = MT g and after applying a union bound, we can rewrite (18) as below with β t,i = β t,i (σ , δ /3)
+(∑ n i=1 z i ) 2 n ∑ n i=1 z 2 i for z i ∈ R,R g (T ) 4β T MT g d log(MT ) + 4(β T + 1) 2MT g log 3 δ .
+Theorem 4.9. The cumulative regret of all bad epochs in Algorithm 1 with expected feature set Ψ t and β t,i = β t,i (σ , δ /3) is bounded at time T with probability at least 1 − Mδ by
+R b (T ) 4d log(MT )(β T M √ B) + 4(β T + 1) 2MT b log 3 δ .
+Proof. Let p be a bad epoch. Assume that a bad epoch starts at time step t 0 and that the length of the epoch is n. Then agent i proceeds as V t 0 ,i , . . . ,V t 0 +n,i . Using Lemma 4.4 regret in this epoch, denoted as R p , satisfies
+R p − ∑ (t,i)∈E p , j:I j =(t,i) β t,i S j − ∑ j:I j =(t,i) &(t,i)∈E p D j 2β T M ∑ i=1 t 0 +n ∑ t=t 0 min{ φ x t,i ,c t V −1 t,i , 1} = 2β T M ∑ i=1 ( t 0 +n ∑ t=t 0 min{ φ x t,i ,c t V −1 t,i , 1}) 2 β T M ∑ i=1 n t 0 +n ∑ t=t 0 min{ φ x t,i ,c t 2 V −1 t,i , 1} 2β T M ∑ i=1 n t 0 +n ∑ t=t 0 min{ φ x t,i ,c t 2 V −1 t−1,i , 1} 2β T M ∑ i=1 n log det(V t 0 +n,i ) det(V last ) 2β T M √ B(19)
+The last three steps in the inequalities above follow
+from (∑ n i=1 z i ) 2 n ∑ n i=1 z 2 i , V −1 t,i V −1 i,t−1 , Proposition 4.3
+, and the fact that all agents in the bad epochs satisfy n log(det(V t 0 +n,i )/det(V last )) < B. We know the number of bad epochs is at most R = d log(MT ) 2 . Thus from Lemma 4.6 with n = MT b and Lemma 4.7 (λ = 1) and after applying a union bound, we can rewrite (19) 
+with β t,i = β t,i (σ , δ /3) as R b (T ) 2β T M √ B R + 4(β T + 1) 2MT b log 3 δ 4d log(MT ) β T M √ B + 4(β T + 1) 2MT b log 3 δ .
+Proof of Theorem 4.1. Using Theorem 4.8 and Theorem 4.9 and following similar steps as in the proof of Theorem 4.1 along with B = ( T log MT dM ) and T > M we get
+R(T ) = R g (T ) + R b (T ) 4β T MT g d log(MT ) + 4(β T + 1) 2MT g log 3 δ + 4d log(MT ) β T M √ B + 4(β T + 1) 2MT b log 3 δ = 4β T MT d log(MT ) + 4d log(MT ) β T M √ B + 4(β T + 1) 2MT log 3 δ . Let us choose B = ( T log MT dM ), then R(T ) 4β T MT d log(MT )(1 + log(MT )) + 4(β T + 1) 2MT log 3 δ = O(d √ MT log(MT )) + O(d √ MT log 2 (MT )).
+
+The last step uses
+β T = O d log( T δ ) with δ = 1/M 2 T . Since T > M, we have R(T ) = O(d √ MT log(T )) + O(d √ MT log 2 (T )) = O(d √ MT log 2 (T )).
+Communication: The communication cost for our algorithm follows the approach in [8]. We present it here for completeness. Recall R = O(d log(MT )). Let α = BT R . This implies that there could be at most T /α = T R B epochs that contains more than α time steps. Consider epochs p and p + 1. If the p-th epoch contains less than α time steps, we get
+log( det(V p+1 ) det(V p ) )(t p+1 − t p ) > B log( det(V p+1 ) det(V p ) ) > B t p+1 − t p > B α .
+Further,
+P−1 ∑ p=0 log( det(V p+1 ) det(V p ) ) = log det(V P ) det(V 0 ) R
+As a result, there could be at most R B/α = Rα B = T R B epochs with less than α time steps. Therefore, the total number of epochs is at most  (delayed) with the DisLinUCB algorithm in [8] (the variant in which the actual context is observable, i.e., exact) in Figure 1a and Figure 1c for the synthetic data and the movielens data, respectively. As expected exact outperforms the other two variants, and observed (the variant which utilizes the context information for estimation but not for choosing the actions) outperforms delayed. Figure 1b compares the cumulative regret for different number of agents for synthetic data, we chose M = 1, 3, 5. For M = 1 our algorithm simplifies to the algorithm in [10].
+T α + Rα B = T R B + T R B = O( T R B )
+
+V. SIMULATION RESULTS
+
+We evaluated the performance of our algorithm via numerical experiments using synthetic data and a real-world Movielens dataset. All the experiments were done in Python. We compared two variants of the problem, based on the observation of the agents. (i) Exact in which the agents know the context, i.e., the agents observe the actual context before selecting the action (which is the distributed bandit setting considered in [8]). (ii) Delayed in which the contexts are hidden at the time of selection actions, however, observed afterward (studied in [10] for single-agent setting). Synthetic data: In this dataset we generated the data by setting K = 10, d = 3. We ensured that the suboptimal reward gap and norm of φ x,c 2 are in [0.2, 0.4] and [0.5, 1], respectively. Each point in the plot was averaged over 20 independent trials. We present the plots showing variations of the cumulative regret with respect to the execution time for synthetic data for different variants in Figure 1a and for different numbers of agents in Figure 1b. Our experimental results given in Figure 1a shows that the exact setting outperforms the delayed setting, as expected since the agents observe the actual contexts. We varied the number of agents as M = 1, 3, 5 and compared the results as shown in Figure 1b. We ran for 500 time-period and 20 independent trails. Movielens data: We used MovieLens data to evaluate the performance of our algorithm. For the rating matrix R = [r x,c ] ∈ R 943×1682 of the data, we first obtained a non-negative matrix factorization R = W H, where W ∈ R 943×6 , H ∈ R 6×1682 [21]. Each row of W , {W j } j∈[943] , represents a context and each column of H, {H k } k∈ [1682] , represents an action. The feature vector for a given context W j ∈ R 6 and action H k ∈ R 6 is given by the diagonal of the matrix W j H k . Hence the feature vector is of dimension 6 and θ = [1, 1, 1, 1, 1, 1]. We chose 100 actions randomly from the action set. We present the plots showing the variation of the cumulative regret with respect to the execution time for the MovieLens data for different settings in Figure 1c. The reward r(x t , c t ) is bounded above by 1, and the observation noise η i is set as Gaussian with zero mean and standard deviation 10 −3 . In this experiment, as expected, the exact setting outperforms the delayed setting. We ran for a time-period of 1000 and the plots are shown in Figure 1c.
+
+
+VI. CONCLUSION
+
+In this work, we studied distributed stochastic multi-arm contextual bandit problem when the contexts are observed after a delay and only a distribution on the contexts is available at the time of decision. In our distributed setting, M agents face the same MAB problem and work collaboratively to choose optimal actions to minimize the total cumulative regret. We leveraged the feature vector transformation in [10] and proposed a UCBbased algorithm and proved regret and communications bounds as O(d √ MT log 2 T ) and O(M 1.5 d 3 ), respectively, for linearly parametrized reward functions. To validate the performance of our approach we performed numerical simulations on synthetic data and on Movielens data set. As a part of our future work, we plan investigate the fully-decentralized setting of the problem in which the agents are allowed to communicate only with their neighboring agents defined by a communication network.
+
+
+Initialization: B = ( T log MT dM ), λ = 1, W syn = 0,U syn = 0,W t,i = 0,U t,i = 0,t last = 0,V last = λ I, for all i = 1, 2, . . . , M 2: for t = 1, 2, . . . ,
+
+
+The cumulative regret of Algorithm 1 with expected feature set Ψ t and β t,i = β t,i (σ , δ /3) is bounded at time T with probability (w. p.) at least 1 − Mδ by
+
+Lemma 4. 2 .
+2For any δ > 0 w.p. 1 − Mδ , θ always lies in the constructed B t,i for all t and i.
+
+Lemma 4 . 4 .
+44In Algorithm 1, with probability 1 − δ , the single step pseudo-regret r t,i
+
+Proposition 4. 5 .
+5(Azuma-Hoeffdings) Let M j be a martingale on a filtration F j with almost surely bounded increments M j − M j−1 < Q. Then
+
+
+− 1 mod M, t = j − 1/M , and F j−1 := (x s,q , µ s , y s,q ) {(s,q):(s<t)∨(s=t∧q<i)} . Thus we have
+
+
+By selecting B = ( T log MT dM ) and R = O(d log MT )), the righthand-side is O(M 0.5 d). The agents communicate only at the end of each epoch, when each agent sends O(d 2 ) numbers to the server, and then receives O(d 2 ) numbers from the server. Therefore, in each epoch, communication cost is O(Md 2 ). Hence, total communication cost is O(M 1.5 d 3 ).
+
+Figure 1 :
+1Cumulative regret R(T ) versus time T for synthetic data and the movielens data. We compare the performance of our algorithm
+
+
+and S. Moothedath are with the Department of Electrical and Computer Engineering, Iowa State University, Ames, IA 50011, USA. {jiabin, mshana}@iastate.edu.
+
+Autonomous mobile acoustic relay positioning as a multi-armed bandit with switching costs. M Y Cheung, J Leighton, F S Hover, IEEE/RSJ International Conference on Intelligent Robots and Systems. M. Y. Cheung, J. Leighton, and F. S. Hover, "Autonomous mobile acoustic relay positioning as a multi-armed bandit with switching costs," in IEEE/RSJ International Confer- ence on Intelligent Robots and Systems, 2013, pp. 3368- 3373.
+
+Surveillance in an abruptly changing world via multiarmed bandits. V Srivastava, P Reverdy, N E Leonard, IEEE Conference on Decision and Control (CDC). V. Srivastava, P. Reverdy, and N. E. Leonard, "Surveil- lance in an abruptly changing world via multiarmed bandits," in IEEE Conference on Decision and Control (CDC), 2014, pp. 692-697.
+
+Distributed algorithms for learning and cognitive medium access with logarithmic regret. A Anandkumar, N Michael, A K Tang, A Swami, IEEE Journal on Selected Areas in Communications. 294A. Anandkumar, N. Michael, A. K. Tang, and A. Swami, "Distributed algorithms for learning and cognitive medium access with logarithmic regret," IEEE Journal on Selected Areas in Communications, vol. 29, no. 4, pp. 731-745, 2011.
+
+On optimal foraging and multi-armed bandits. V Srivastava, P Reverdy, N E Leonard, Annual Allerton Conference on Communication, Control, and Computing. AllertonV. Srivastava, P. Reverdy, and N. E. Leonard, "On optimal foraging and multi-armed bandits," in Annual Allerton Conference on Communication, Control, and Computing (Allerton), 2013, pp. 494-499.
+
+Regret analysis of stochastic and nonstochastic multi-armed bandit problems. S Bubeck, N Cesa-Bianchi, arXiv:1204.5721arXiv preprintS. Bubeck and N. Cesa-Bianchi, "Regret analysis of stochastic and nonstochastic multi-armed bandit problems," arXiv preprint arXiv:1204.5721, 2012.
+
+T Lattimore, C Szepesvári, Bandit algorithms. Cambridge University PressT. Lattimore and C. Szepesvári, Bandit algorithms. Cam- bridge University Press, 2020.
+
+Federated linear contextual bandits. R Huang, W Wu, J Yang, C Shen, Advances in Neural Information Processing Systems. 34R. Huang, W. Wu, J. Yang, and C. Shen, "Federated linear contextual bandits," Advances in Neural Information Processing Systems, vol. 34, 2021.
+
+Distributed bandit learning: Near-optimal regret with efficient communication. Y Wang, J Hu, X Chen, L Wang, arXiv:1904.06309arXiv preprintY. Wang, J. Hu, X. Chen, and L. Wang, "Distributed bandit learning: Near-optimal regret with efficient com- munication," arXiv preprint arXiv:1904.06309, 2019.
+
+Distributed cooperative decision making in multi-agent multiarmed bandits. P Landgren, V Srivastava, N E Leonard, Automatica. 125109445P. Landgren, V. Srivastava, and N. E. Leonard, "Dis- tributed cooperative decision making in multi-agent multi- armed bandits," Automatica, vol. 125, p. 109445, 2021.
+
+Stochastic bandits with context distributions. J Kirschner, A Krause, Advances in Neural Information Processing Systems. 32J. Kirschner and A. Krause, "Stochastic bandits with context distributions," Advances in Neural Information Processing Systems, vol. 32, pp. 14 113-14 122, 2019.
+
+Improved algorithms for linear stochastic bandits. Y Abbasi-Yadkori, D Pál, C Szepesvári, Advances in Neural Information Processing Systems. 24Y. Abbasi-Yadkori, D. Pál, and C. Szepesvári, "Improved algorithms for linear stochastic bandits," Advances in Neural Information Processing Systems, vol. 24, pp. 2312- 2320, 2011.
+
+Conservative contextual linear bandits. A Kazerouni, M Ghavamzadeh, Y Abbasi-Yadkori, B Van Roy, Advances in Neural Information Processing Systems. A. Kazerouni, M. Ghavamzadeh, Y. Abbasi-Yadkori, and B. Van Roy, "Conservative contextual linear bandits," Advances in Neural Information Processing Systems, 2017.
+
+Profilebased bandit with unknown profiles. S Lamprier, T Gisselbrecht, P Gallinari, The Journal of Machine Learning Research. 191S. Lamprier, T. Gisselbrecht, and P. Gallinari, "Profile- based bandit with unknown profiles," The Journal of Machine Learning Research, vol. 19, no. 1, pp. 2060- 2099, 2018.
+
+Contextual multi-armed bandits under feature uncertainty. S.-Y Yun, J H Nam, S Mo, J Shin, arXiv:1703.01347arXiv preprintS.-Y. Yun, J. H. Nam, S. Mo, and J. Shin, "Contextual multi-armed bandits under feature uncertainty," arXiv preprint arXiv:1703.01347, 2017.
+
+Stochastic conservative contextual linear bandits. J Lin, X Y Lee, T Jubery, S Moothedath, S Sarkar, B Ganapathysubramanian, 2022J. Lin, X. Y. Lee, T. Jubery, S. Moothedath, S. Sarkar, and B. Ganapathysubramanian, "Stochastic conservative contextual linear bandits," IEEE Conference on Decision and Control (CDC), 2022.
+
+Distributed bandit online convex optimization with time-varying coupled inequality constraints. X Yi, X Li, T Yang, L Xie, T Chai, K H Johansson, IEEE Transactions on Automatic Control. 6610X. Yi, X. Li, T. Yang, L. Xie, T. Chai, and K. H. Johansson, "Distributed bandit online convex optimization with time-varying coupled inequality constraints," IEEE Transactions on Automatic Control, vol. 66, no. 10, pp. 4620-4635, 2020.
+
+Distributed multi-player bandits-a game of thrones approach. I Bistritz, A Leshem, Advances in Neural Information Processing Systems. 31I. Bistritz and A. Leshem, "Distributed multi-player bandits-a game of thrones approach," Advances in Neural Information Processing Systems, vol. 31, 2018.
+
+Decentralized learning for multiplayer multiarmed bandits. D Kalathil, N Nayyar, R Jain, IEEE Transactions on Information Theory. 604D. Kalathil, N. Nayyar, and R. Jain, "Decentralized learning for multiplayer multiarmed bandits," IEEE Trans- actions on Information Theory, vol. 60, no. 4, pp. 2331- 2345, 2014.
+
+Multi-player bandits-a musical chairs approach. J Rosenski, O Shamir, L Szlak, International Conference on Machine Learning. PMLRJ. Rosenski, O. Shamir, and L. Szlak, "Multi-player bandits-a musical chairs approach," in International Conference on Machine Learning. PMLR, 2016, pp. 155-163.
+
+On regret-optimal learning in decentralized multiplayer multiarmed bandits. N Nayyar, D Kalathil, R Jain, -TCNS). IEEE5N. Nayyar, D. Kalathil, and R. Jain, "On regret-optimal learning in decentralized multiplayer multiarmed bandits," IEEE Transactions on Control of Network Systems (IEEE- TCNS), vol. 5, no. 1, pp. 597-606, 2016.
+
+Stochastic linear bandits robust to adversarial attacks. I Bogunovic, A Losalka, A Krause, J Scarlett, International Conference on Artificial Intelligence and Statistics. PMLR, 2021. I. Bogunovic, A. Losalka, A. Krause, and J. Scarlett, "Stochastic linear bandits robust to adversarial attacks," in International Conference on Artificial Intelligence and Statistics. PMLR, 2021, pp. 991-999.

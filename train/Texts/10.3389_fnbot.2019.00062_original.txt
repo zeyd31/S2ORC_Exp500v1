@@ -1,0 +1,457 @@
+
+A Quick Turn of Foot: Rigid Foot-Ground Contact Models for Human Motion Prediction
+published: 07 August 2019 Published: 07 August 2019
+
+Shinya Aoi 
+Matthew Millard matthew.millard@ziti.uni-heidelberg.de 
+Matthew Millard 
+Katja Mombaur 
+
+Advanced Institute of Science and Technology (KAIST)
+Optimization in Robotics and Biomechanics
+Institute of Computer Engineering
+Kyoto University
+Japan Seungbum KooKorea, South Korea
+
+
+Heidelberg University
+HeidelbergGermany
+
+A Quick Turn of Foot: Rigid Foot-Ground Contact Models for Human Motion Prediction
+published: 07 August 2019 Published: 07 August 201910.3389/fnbot.2019.00062Received: 31 March 2019 Accepted: 17 July 2019ORIGINAL RESEARCH Frontiers in Neurorobotics | www.frontiersin.org 1 August 2019 | Volume 13 | Article 62 Edited by: Benjamin J. Fregly, Rice University, United States Reviewed by: *Correspondence: Citation: Millard M and Mombaur K (2019) A Quick Turn of Foot: Rigid Foot-Ground Contact Models for Human Motion Prediction. Front. Neurorobot. 13:62.foot contactmusculoskeletal modelmotion predictionoptimal controlmultibody dynamics
+Computer simulation can be used to predict human walking motions as a tool of basic science, device design, and for surgical planning. One the challenges of predicting human walking is accurately synthesizing both the movements and ground forces of the stance foot. Though the foot is commonly modeled as a viscoelastic element, rigid foot-ground contact models offer some advantages: fitting is reduced to a geometric problem, and the numerical stiffness of the equations of motion is similar in both swing and stance. In this work, we evaluate two rigid-foot ground contact models: the ellipse-foot (a single-segment foot), and the double-circle foot (a two-segment foot). To evaluate the foot models we use three different comparisons to experimental data: first we compare how accurately the kinematics of the ankle frame fit those of the model when it is forced to track the measured center-of-pressure (CoP) kinematics; second, we compare how each foot affects how accuracy of a sagittal plane gait model that tracks a subjects walking motion; and third, we assess how each model affects a walking motion prediction. For the prediction problem we consider a unique cost function that includes terms related to both muscular effort and foot-ground impacts. Although the ellipse-foot is superior to the double-circle foot in terms of fit and the accuracy of the tracking OCP solution, the predictive simulation reveals that the ellipse-foot is capable of producing large force transients due to its geometry: when the ankle quickly traverses its u-shaped trajectory, the body is accelerated the body upwards, and large ground forces result. In contrast, the two-segment double-circle foot produces ground forces that are of a similar magnitude to the experimental subject because the additional forefoot segment plastically contacts the ground, arresting its motion, similar to a human foot.
+
+INTRODUCTION
+
+Understanding the relationships between force and movement in the musculoskeletal system is key to correcting movement pathology. Though it is possible to study muscle movement in-vivo (Fukunaga et al., 2001;Ishikawa et al., 2003;Maganaris, 2003;Reeves and Narici, 2003) measuring muscle force in-vivo is not possible without invasive surgery. Currently the only way to study the motion and forces of the human musculoskeletal system is to use mathematical models and computer methods to predict quantities that cannot easily be measured.
+
+The mathematics of optimal control can be used to predict the movements of a model Schultz and Mombaur, 2010;Mordatch et al., 2013). Casting human motion prediction as an optimal control problem (OCP) requires four components: a musculoskeletal model, a cost function, problem-specific constraints, and a method to solve for the vector of state and muscle force waveforms that simultaneously satisfy the equations of motion and minimize the cost function. While the underlying mathematics of multibody dynamics and optimal control is well-developed, many tissues and structures of the body are challenging to model. Though the human body contains many mechanically complex structures, it has proven particularly difficult to formulate models of foot ground contact that are both accurate and well-suited for the prediction of walking. Inaccuracies in the model of foot ground contact affect the rest of the body because the foot forms the only boundary between the body and the ground during typical walking. The shape that a foot model makes during walking determines how ground forces are transformed into ankle torques and vice-versa. Though impressive movement predictions have been realized without an accurate foot shape (Van den Bogert et al., 2012;Mordatch et al., 2013;Koelewijn et al., 2018), differences in foot shape ultimately affect the ankle kinematics, and CoP progression. Accurately fitting the loaded shape of a foot model to experimental data is challenging because the optical markers placed on the skin of the foot move on the order of a centimeter with respect to the underlying bones (Fuller et al., 1997). Both the fitting and the simulation of viscoelastic foot models is made difficult by the widely varying stiffness of human foot pads (Aerts et al., 1995) which are compliant at initial contact (∼20 N/mm) and rapidly stiffen with load (1,445 N/mm at 1 body weight). Although the literature contains some excellent examples of fitted viscoelastic foot models (Halloran et al., 2010;Pàmies-Vilà et al., 2014;McPhee, 2014, 2015;Millard and Kecskeméthy, 2015;Jackson et al., 2016;Brown and McPhee, 2018), rigid footground contact models are an attractive alternative: the fitting process is strictly dependent on geometry, and the numerical stiffness of the model does not change appreciably from swing to stance. A reduction in the numerical stiffness of the model is attractive because this makes the resulting optimization problem less sensitive and therefore easier to solve.
+
+Although rigid-foot ground contact models are common in the passive dynamic walking literature (McGeer, 1990;Collins and Ruina, 2005) few rigid foot-ground models exist in the musculoskeletal modeling literature. Hansen et al. (2004) and Srinivasan et al. (2008) modeled the lower leg and foot in twodimensions (2D) as a single rigid body that rolls on the ground using a rigid cylinder-plane contact pair. While this approach can accurately replicate the motion of the entire lower stance leg, for many applications it is not acceptable to fix the ankle joint. Although the foot has been modeled using point contacts for sprinting motions (Kleesattel and Mombaur, 2018), point contacts do not capture the rolling motion of the foot during walking (García-Vallejo et al., 2016). The foot has been modeled as a single convex cam (Ren et al., 2010;Römer, 2018;Römer et al., 2018) which contacts the ground at a single point and rolls-without-slipping across the ground plane. Ren et al. (2010)'s planar foot model closely matched the ankle position of the 12 subjects they tested (≈1 cm on average), with the largest errors appearing during heel strike (≈2.5 cm) and toe-off (≈1.5 cm). It is worth noting that a certain amount of kinematic error is expected during heel-contact and toe-off since a rigid foot ground contact model does not capture the compression of heel (Gefen et al., 2001) and forefoot pads (Cavanagh, 1999). Felis and Mombaur (2016) developed a 3D rigid foot-ground contact model using a sphere and a planar triangle to represent the heel and forefoot, respectively, but did not fit the model to experimental data. Though there are good examples of rigid foot ground contact models that interact through the ground using a single curved shape (Ren et al., 2010;Römer, 2018;Römer et al., 2018), there are no examples of fitted rigid contact models that treat the hind and forefoot separately.
+
+Unfortunately a foot model that fits kinematic data isolation does not necessarily translate into a walking prediction that produces human-like foot ground forces. Optimal walking solutions in the literature typically have ground force profiles that deviate from experimental data, sometimes dramatically, at heel contact Geyer and Herr, 2010;Dorn et al., 2015) where differences between two and three times body weight are typical. Large simulated heel contact forces often arise from pairing a musculoskeletal model with a viscoelastic foot and using a problem formulation that inherently does not adjust its walking pattern in response to large contact forces. Another common problem, in which an obvious solution is not clear, are ground forces that have an appropriate magnitude but a shape that differs from experimental data (Anderson and Pandy, 2001;Ren et al., 2007;Geyer and Herr, 2010;Sreenivasa et al., 2017). To make an improvement in prediction accuracy it is necessary to distinguish error that is caused by the model of the foot from error caused by other sources.
+
+In this work we model and evaluate two planar foot-ground contact models using three different methods in an effort to identify differences with experimental data that are caused by the foot model. The first of the rigid foot-ground contact models we consider is similar to existing works in the literature because it interacts with the ground through a single curved segment (Ren et al., 2010;Römer, 2018;Römer et al., 2018). In contrast, the second foot-ground contact model has separate contact shapes for the heel and forefoot. As is typical, we evaluate how well the kinematics of each foot model track the stance kinematics of a subject's foot in isolation. In addition, we consider how well each foot model performs as part of a whole body gait model: first, when the gait model is used as part of an optimal-control problem (OCP) to track experimental data; and second, in an OCP that predicts motion. The musculoskeletal model and foot models are described in section 2 while the detailed evaluation procedure used to assess the foot models is described in section 3. The results of the work appear in section 4 and a discussion of the results in section 5.
+
+
+MODEL
+
+We model the human body as a planar floating base rigid-body system ( Figure 1A) which interacts with the ground through one of two different rigid foot ground contact models ( Figure 1B). FIGURE 1 | The human body is modeled using a 9 DoF rigid body model in which the hip, knee, and ankle are actuated by pairs of extensor and flexor MTGs (A). The two sagittal plane models are identical except for the foot-ground contact model. In one case foot-ground contact is modeled as a kinematic constraint between an ellipse and a plane, in the other between a pair of circles and a plane (B).
+
+Foot ground interaction is modeled using contact and rolling constraints between an ellipse and a plane, and also between a pair of circles and a plane. The human body models used to test each foot are identical and have seven segments, nine degrees-offreedom (DoF), and are driven by six pairs of agonist-antagonist muscle-torque-generators (MTGs).
+
+The differential-algebraic equations (DAEs) governing this system are described as
+M(q)q + c(q,q) = τ + G(q,q) T λ (1) g V (q,q) = 0(2)
+where q,q, andq are the generalized positions, velocities, and accelerations of the model; M(q) is the mass matrix, and c(q,q) is the vector of Coriolis, centripetal, and gravitational forces. The kinematic constraints between the foot and the ground are in the vector g V (q,q), while the generalized forces these constraints apply to the system are contained in the term G(q,q) T λ where G(q,q) is the Jacobian of the constraint equations g V (q,q) with respect toq and λ is a vector of Lagrange multipliers. The foot ground constraints, g V (q,q), are described at the velocity level, index-reduced, and applied at the acceleration level. Throughout this work we indicate position vectors using r, direction vectors with e, frames with K (which are composed of a position vector to the origin and a rotation matrix), points using letters, linear velocity with v, and angular velocities with ω.
+
+Forces are denoted using f while functions are indicated with f and appear with an argument. Subscripts are used with direction vectors and frames to provide additional information, while a more elaborate system is used with kinematic vectors: the origin of the vector appears in the left subscript, the termination in the right subscript, and the frame the vector is resolved into (if necessary) is indicated in the left superscript. Thus A r H means the position vector that begins at point A and terminates at point H but is not yet resolved into any particular frame since the left superscript is blank.
+
+The constraints between the ellipse and the plane are applied at the point-of-closest approach (n S ) and are described at the velocity-level using a contact constraint
+(v A + ω A × ( A r E + r S (φ)e φ )) T e Z = 0(3)
+and a rolling constraint
+(v A + ω A × ( A r E + r S (φ)e φ )) T e X = 0(4)
+where v A is the linear velocity of the origin of the ankle frame K A , ω A is angular velocity of K A , A r E is the vector from K A to the center of the ellipse, e φ the direction vector that points to n S , and r S (φ) is the radius of the ellipse at the polar angle φ. Since there is no closed form equation for the point of closest approach between an ellipse and a plane, we numerically solve for φ using first the bisection method, and finally Newton's method to polish the root to high accuracy. The parameters of the ellipse-foot (p E ) are defined by the offset of the ellipse from the ankle ( A r E ), its relative orientation to the angle frame ( A θ E ), and the lengths of the major and minor axes of the ellipse (r X and r Y ). The double circle foot contact model uses one of three different sets of constraint equations depending on which circle is in contact with the ground. During heel contact the constraint equations are
+(v A + ω A × ( A r H − r H e Z )) T e Z = 0(5)(v A + ω A × ( A r H − r H e Z )) T e X = 0(6)
+where r H is the radius of the heel circle. During forefoot contact the constraint equations are given by
+(v A + ω A × ( A r F − r F e Z )) T e Z = 0 (7) (v A + ω A × ( A r F − r F e Z )) T e X = 0(8)
+where r F is the radius of the forefoot contact. These equations are nearly identical to the constraints used for the ellipse, but without the extra computational expense incurred in computing the point of closest approach. To ensure that the foot is not over-constrained when both circles touch the ground, we apply the contact and rolling constraints of one circle, while the other is constrained with just a contact constraint. The parameters of the double-circle foot (p C ) are defined by the offset of each circle from the ankle ( A r H and A r F ), and the radius of each circle (r H and r F ). The model is actuated by six pairs of agonist-antagonist MTGs each of which model groups of extensors and flexors that cross the hip, knee, and ankle. The torque τ M developed by a single MTG resembles that of a rigid-tendon Hill-type muscle model (Zajac, 1988;Millard et al., 2013) and is given by
+τ M = ±τ M o (a f A (θ )f V (ω))(9)
+where τ M o is the maximum active isometric torque of the MTG, a represents the chemical activation of the MTG, f A (θ ) is the active-torque-angle characteristic, f V (ω) is the torque-angularvelocity curve, and the sign is set to be consistent with the anatomy of the muscle group and the generalized coordinates used to describe the model. The parameters (τ M o ) and curves [f A (θ ) and f V (ω)] that define the flexors and extensors of the hip, knee, and ankle are fitted to the data of Anderson et al. (2007) and Jackson (2010). Please see Millard et al. (2017) for a more detailed description of the formulation and parameters of the MTGs. Since walking does not typically stretch the leg muscles appreciably (Arnold and Delp, 2011), we ignore the passive forces developed by the parallel element.
+
+Although it is conventional to describe activation dynamics using an ordinary differential equation with a discontinuity, this formulation is not compatible with gradient-based optimal control methods which require C 2 continuity. Here we describe activation dynamics using a C 2 approximatioṅ
+a = e − a 1 2 (τ A + τ D )(10)
+where e is the excitation signal, a is the activation of the muscle. The activation τ A and deactivation τ D time constants are 15 and 50ms, respectively (Thelen, 2003). At each leg joint the net torque is given by
+τ i = τ MF i + τ ME i − βω i .(11)
+where F and E designate the joint's flexors and extensors, and β is light passive damping introduced by the musculature and tissue surrounding the joint. The damping coefficient is defined as
+β = η τ MF o + τ ME o ω MF max + ω ME max(12)
+so that the amount of damping is proportional to the strength the musculature, the scaling factor η, and inversely proportional to the maximum angular velocity of the musculature. We use a value of 2.0 for η which results in damping coefficients which range between 2.7 and 7.3 Nms/rad.
+
+We use the open-source dynamics library Rigid Body Dynamics Library 1 (RBDL), an implementation of Featherstone's 1 https://github.com/ORB-HD/rbdl-orb order-n dynamics methods (Featherstone, 2014), developed by Felis (2016), to solve the forward dynamics of our model. To simulate the MTGs, we use RBDL's muscle model library developed by Millard et al. (2017).
+
+
+EVALUATION PROCEDURE
+
+As is typical, we first evaluate each foot model in isolation by considering how accurately each tracks the kinematics of the ankle and CoP of a subject's foot. Next, we pair each candidate foot model with a musculoskeletal model and solve a tracking OCP to determine if the experimental subject's gait is in the solution space of each foot model. Finally, we solve a prediction OCP to examine how well each foot performs when it is not guided by experimental data and is free to move.
+
+
+Experimental Data
+
+The experimental data used in this study comes from a walking trial recorded in an experiment described in Millard et al. (2017). Briefly, the motions and ground forces of a 35year old male subject (mass 81.7 kg and height of 1.72 m) wearing light hiking shoes were recorded during level walking. OptoTrack IRED markers clusters were used to track the 3dimensional (3D) movements of 14 body segments (head, upper-torso, mid-back, pelvis, thighs, shanks, feet, upperarms, and lower arms) while Kistler force plates (Kistler GmbH, Germany) were used to measure ground forces. The recordings were conducted at Vrije Universiteit Amsterdam according to the guidelines of the Declaration of Helsinki 2013, approved by the ethics committee in Faculteit der Gedrags-en Bewegingswetenschappen (Faculty of Behavioral and Movement Sciences), and with written and informed consent from the subject. Mass and inertia properties were computed using Zatsiorsky's regression equations (Zatsiorsky, 2002) while the geometry of the human model is extracted using digitized bony landmarks from the experimental subject.
+
+
+Foot Model Fitting
+
+As is typical in the literature, first we will fit the foot model in isolation before proceeding to use it with the whole body model. Since the force plates very accurately record the CoP trajectory, we have elected to fit the foot model by precisely matching the recorded CoP kinematics (experimental quantities are denoted with EXP ) and then measuring the error between the position and orientation of the K A and the K EXP A frame (Figure 2). Prior to fitting the foot model, the data used for fitting was segmented to only include samples in which the normal contact force was >5% of the peak recorded ground force (928N). To fit the model foot, it was initially posed at the same orientation as the subject's foot had at toe-off (at time sample n) and offset so that the contact point of the model r P,n coincided with the recorded CoP r EXP P,n . Next, the model foot was rolled without slipping backwards until the foot contact point of the model matched the recorded CoP, a process which continued until the time of heel strike was reached (at time sample 1). We elected to pose the model in the toe-off position and roll it backwards because this made it easier for us to FIGURE 2 | The error in the geometry of each foot model is fitted by posing the foot model so that its contact point and foot orientation matches the subject's at toe-off. Next the foot model is rolled backwards (without slipping) so that it's contact point matches the subject's recorded CoP. This process is continued until heel strike. The geometric error of the foot model is the weighted sum of position and orientation errors between the model's ankle frame and the subject's ankle frame.
+
+manually find a good set of initial parameters prior to beginning the optimization.
+
+The geometric parameters of each foot model (p E and p C ) are fitted by minimizing the cost function
+min 1 i=n (f EXP P,i ) T e Z max((f EXP P ) T e Z ) (w r (r A,i − r EXP A,i ) 2 + w α (α A,i − α EXP A,i ) 2 ),(13)
+where the vectors r A and α A are the origin and orientation of the ankle frame, and f EXP P,i is ith experimentally recorded ground reaction force vector. The cost of each sample i, is weighted by the normalized magnitude of the contact force so that the final fit is closest when the ground forces are highest. The weights w r and w α are set to (1/0.01) 2 and (1/( 1 4 π)) 2 so that distances on the order of 1 cm and 1 4 π, which we consider to be large errors in this context, result in an error value of 1. We did not allow all parameters to vary but fixed the total length of the foot model to be 30.5 cm, which is 0.5 cm longer than the light hiking shoes worn by the subject. This extra constraint is added to prevent the optimization routine from converging on an unrealistically short foot. Though a shorter foot may fit the kinematics of this test best, it causes problems when the subject's CoP is followed in the tracking OCP problem (described in section 3.4).
+
+The resulting prediction problem for the ellipse-foot has only four optimization variables (the center and orientation of the ellipse and the radius of the minor axis) while the double-circle foot has five parameters (the radius of both circles, the center location of the forefoot circle, and the height of the center of the hind-foot circle). In each case the least squares problem is initialized using manually and then solved using a Nelder-Mead simplex method (Nelder and Mead, 1965;Lagarias et al., 1998) to a tolerance of 10 −6 (MATLABR2018a). Each model is evaluated based on the how closely the ankle frame of the model tracks the subject's ankle movements.
+
+
+Walking as an Optimal Control Problem
+
+In this work we use two different types of OCPs: a tracking problem which tries to follow experimental data, and a prediction problem that tries to minimize a cost function. Both of these OCPs define walking using the same mathematical framework, and differ only in the cost function used and a few constraints. Here we describe how walking is defined as optimal control problem in general before proceeding to describe the specific differences between the tracking and prediction OCPs.
+
+An OCP has the objective of identifying the vector of state x(·) trajectories, control u(·) trajectories, and constant parameters p, that minimize the sum of the Lagrange φ L and Mayer M terms in the cost function across n p distinct phases min x(·),u(·),ν
+n p −1 j=0 ν j+1 ν j φ L j (x(t), u(t), p)dt + n p −1 j=0 M j (x(t), u(t), p)(14)
+where j iterates sequentially across the phases that begin at time ν j and terminate at time ν j+1 . In addition to minimizing the cost function, the state trajectories must satisfy the state derivatives and impact state transitionṡ
+x(t) = f j (t, x(t), u(t), p),(15)x(t + j ) = c j (x(t − j )), for t ∈ [ν j−1 , ν j ],(16)
+j = 1, ..., n p , ν 0 = 0, ν n p = T.
+
+which take the form of the DAEs in Equations (1, 2), and activation dynamics of the MTGs in Equation (10). In this work, state transitions from foot impacts cause discrete changes in the generalized velocities of the model but affect no other states.
+
+The state vector, x = (q,q, a), of the musculoskeletal model has 30 states, 18 of which correspond to generalized positions and velocities while the additional 12 come from the vector of muscle activations. The vector of control signals, u(·), is composed of the twelve excitation signals that affect the activation dynamics of the MTGs as described in Equation (10). The vector of generalized forces has 6 non-zero elements, τ = (0, 0, 0, τ 4 , τ 5 , τ 6 , τ 7 , τ 8 , τ 9 ), corresponding to torques that the MTGs and passive damping apply to each joint. The leading three entries in τ are zero because there are no generalized forces acting between the inertial frame and the pelvis. The number of kinematic constraints applied to the model ranges between 2 and 6 depending on the foot-model being simulated and the constraint set that is active.
+
+We formulate walking as a multi-phase OCP that has four phases for the ellipse-foot (Figure 3A), and seven phases with the double-circle foot ( Figure 3B). To distinguish between the FIGURE 3 | We model walking as a multi-phase process. The ellipse-foot results in a four-phase definition of walking (A), while the double-circle foot (with its separate hind and forefoot contacts) results in a 7 phase definition of walking (B). For brevity we refer to the ellipse model with an "e", the double circle model with a "c", double stance with (DS), and single-stance with (SS). Black chevrons indicate an impact occurs. An "*" indicates that the phase is instantaneous.
+
+various phases and foot model we introduce a number of short forms: ellipse-foot (e), double-circle foot (c), double-stance (DS), single-stance (SS), and instantaneous phases are marked with an "*." Walking using the ellipse-foot consists of two continuous phases and two instantaneous phases:
+
+• 1e*. DSa occurs when the left foot touches the ground; • 2e. DSb: is a double stance phase; • 3e. SSa: is a continuous single-stance phase that begins when the right foot's ground force goes to zero; • 4e. DSa: is identical to 1e* but with the left and right legs mirrored.
+
+The double-circle foot requires four continuous phases and three instantaneous phases to describe walking:
+
+• 1c*. DSa: occurs when the left heel circle touches the ground; • 2c. DSb: a double-stance phase between the right forefoot and left heel; • 3c*. DSc: occurs when the left forefoot touches the ground; • 4c. DSd: a double-stance phase between the right forefoot, left heel, and left forefoot; • 5c. SSa: a single-stance phase with left heel and forefoot on the ground; • 6c. SSb: a single-stance phase with the left forefoot on the ground; • 7c*. DSa: is identical to 1c* but with the left and right legs mirrored.
+
+In both cases the foot-ground impulse are stored in the vector . Note that these specific phase descriptions match the experimental subject's gait, but there are many other possible phase descriptions for the double-circle foot. We use continuous constraints
+0 ≤ g j (t, x(t), u(t), p) for t ∈ [ν j−1 , ν j ](17)
+on state and control bounds, as well as using phase specific constraints. The bounds on q are set to be at least ±1 m and (for the linear coordinates) and ±1 radian (for the angular coordinates) larger than the experimental measurements (except in knee extension where 0.1 radian of hyper-extension is permitted). Similarly the bounds onq are set to be at least ±1 m/s and ±1 rad./s larger than the experimental measurements. The vectors a(·) and u(·) are constrained to be between zero and one. Phases which begin with an impact include equality constraints at the position level so that the respective foot-ground constraints begin on the constraint manifold. During swing phases an inequality constraint is used to ensure that the swing foot does not touch the ground. All ground forces and impulses are constrained act unilaterally and have tangential components that are limited by the coefficient of friction which we assume to be 0.8. To ensure that the final solution represents periodic and symmetric walking we apply periodicity constraints so that the joint angles, activations, and ground forces of the right leg (left leg) in the initial phase match the corresponding values of the left leg (right leg) in the final phase. At the velocity level we apply periodicity constraints to the linear and angular velocity of the pelvis.
+
+
+Least-Squares Tracking Problem
+
+To determine if the subject's gait is within the solution space of the model we form a least-squares OCP to track the subject's data. As previously noted, not all of the experimental measurements are of equal accuracy: while the CoP and ground forces are very accuracy measured by the force plates, the kinematic data is subject to error on the order of a centimeter or two due to skin artifact (Fuller et al., 1997). To make the best use of the data, we have formulated a tracking (indicated by T where appropriate) problem which has a Lagrange φ L T and Mayer M T terms of 
+φ L T = 9 i=3 w θ ,i (θ i − θ EXP i ) 2 + w ω,i (ω i − ω EXP i ) 2 + w P (r P − r EXP P ) 2 + w F (f P − f EXP P ) 2 + 10 −3 n u i=0 u 2 i + a 2 i(18)
+where n u and n are the number of control signals and the number of impulses respectively. This cost function is applied across all phases of the problem. Note that the Lagrange term is an integrated quantity, as such all of the experimental data is interpolated as a function of time prior to evaluating and numerically integrating (Equation 18). The Lagrange term is formulated so that the angles and angular velocities of the pelvis and leg joints (indices for θ 3 − θ 9 illustrated in Figure 1) are tracked along with the CoP , and ground forces. The weighting terms on the angles w θ ,i , and angular velocities w ω,i are set to 1 π/4 and 0.1 π/4 , respectively with the exception of the ankle joint which is set to 1 100 of these nominal values: kinematic error that the foot introduces will be most readily observed at the ankle. The weighting terms w P and w F associated with the normal components are normalized with respect to maximum recorded contact forces. In addition, we have introduced three regularization terms: the sum of squared control signals u 2 and activations a 2 in the Lagrange term, and the sum of squared ground impulses 2 in the Mayer term. The coefficient on the regularization terms has been chosen so that the terms have a similar magnitude. Here we evaluate the Lagrange term only at the shooting nodes (making this a discrete least-squares problem).
+
+
+Minimization Prediction Problem
+
+Inspired by the experimental work of Hoyt and Taylor (1981) and later Farley and Taylor (1991), we formulate a prediction (indicated with a P ) cost function in with a Lagrange term on muscle activation
+φ L P = n u i=0 a 2 i(20)
+and a Mayer term that includes foot-ground impacts
+M P = w n i=0 2 i .(21)
+Here w is set to 10 −2 , a value which found in our preliminary simulations to be sufficient to reduce the ground force discontinuities introduced by ground impacts to levels consistent with the experimental data. So that the physical demands placed on the foot models are comparable to the subject data, in addition, we introduce two constraints: that the average forward velocity of the solution is identical to the subject's (1.01 m/s), and that the step length of the model matches that of the subject (0.61 m). Note that this problem formulation, while useful for our purposes, cannot be used to predict human walking in general because we have explicitly included a desired forward velocity and step length.
+
+
+Numerical Solution Method
+
+To solve the tracking and prediction OCPs specified we use a direct multiple shooting method described by Bock and Pitt (1984) and implemented in the software package MUSCOD-II developed by Leineweber et al. (2003). In a direct approach, the infinite-dimensional space of control functions u(·) is discretized in time using functions which provide only local support. Here we use piece-wise linear functions to describe the excitation signals to the MTGs. State parameterization is performed by the multiple shooting technique which transforms the OCP, together with the control discretization, from an infinite dimensional problem into a finite dimensional problem which is then solved iteratively using a sequential-quadraticprogramming (SQP) solver that has been tailored to exploit the structure of the problem. We initialize the problem with a rough initial solution: positions and velocities are initialized using a linear interpolation of the experimental positions which are then polished to satisfy the foot ground constraints, activations are set to 0.01, control signals are set to 0.025. The initial solution does not satisfy the OCP constraints and is not a feasible motion. The OCPs using the ellipse and double circle foot models are discretized using 25 and 31 shooting nodes and control intervals, respectively. Each shooting interval is integrated using the Runge-Kutta-Fehlberg method with an absolute and relative tolerance of 10 −8 . Note that, in contrast to direct-collocation (Von Stryk, 1993), the dynamics of the system are simulated using a variablestep integrator over the entire duration of the simulation. To reduce the drift of the foot-ground constraints, we use Baumgarte stabilization (Baumgarte, 1972) applied to the contact constraint position and velocity errors, and to the rolling constraint velocity errors. The OCPs are run until the Karush-Kuhn-Tucker condition is satisfied to a tolerance of 10 −5 . Each problem required between 20 and 50 min of processing time on an Intel i7-3630QM CPU with a clock speed of 2.40 GHz.
+
+
+RESULTS
+
+When forced to track the recorded CoP, both the fitted ellipsefoot and the double-circle foot produce ankle trajectories that differ from the subject's on the order of one centimeter, but have maximum errors that exceed this desired limit as shown in Table 1. Though the fitting process restricted the length of the foot models to have a realistic length, the height of the 
+
+
+Ellipse
+
+Circle-circle  As noted in section 3.2, the heel segment is placed so that the length of the foot is 30.5 cm, while all other parameters are free to vary. Note that A α E is the rotation from K A to K E . Please see Figure 1 for a graphical depiction of the remaining parameters.
+ε(t) µ(|ε(t)| 2 ) ± σ (|ε(t)| 2 ) r A − r EXP A 1.1 ± 1.1 cm 0.7 ± 0.9 cm α A − α EXP A 4.7 • ± 3.1 • 7.1 • ± 2.8 • ε(t) max(|ε(t)| 2 ) r A − r
+foot model shapes does exceed the size of a shoe particularly at the forefoot of the double-circle foot as shown by the parameter value for r F shown in Table 2. The double-circle foot offers a slightly better tracking of the subject's ankle position while the ellipse-foot is slightly superior in its reproduction of the orientation of the ankle frame. The ankle trajectory (Figures 4, 5) traced by the two different foot models show that the highest errors occur during heel contact: it is during this period that the rigid approximation to the foot is worst because the heel pad and shoe are compressing. Further, the ankle trajectory of the two models displays a characteristic difference: the ellipse foot produces a u-shaped ankle trajectory (marked with a "*" in Figure 4) while the double circle produces a v-shaped trajectory due to the forefoot circle plastically contacting the ground. The solution of the tracking OCP shows that the ellipsefoot is able to reproduce the orientation of the subject's foot (Figure 6A), and ankle angle ( Figure 6D) with better accuracy than the double-circle foot as the summary statistics show in Table 3. Both tracking OCPs had difficulty reproducing the subject's knee angle (Figure 6E) between near 75% of the stance phase, because the foot models fail to capture the shape of the FIGURE 4 | When the ellipse-foot is constrained to track the CoP (illustrated with the butterfly plots for reference) from the subject's data it is able to closely reproduce the subject's foot movements during mid-stance and for most of toe-off. The initial kinematics of the foot during heel contact are not well-captured. The continuous rolling motion of the foot forces the ankle frame through a smoothened cusp which is annotated with an "*". Note that the dots which appear on each line would coincide if the foot model perfectly fit the subject's foot movements.
+
+FIGURE 5 | The double-circle foot is able to capture the subjects ankle kinematics during initial heel contact better than the ellipse-foot, though it has difficulty tracking the points between heel contact and mid-stance. During mid-stance both the heel and forefoot contacts touch the ground which fixes the ankle at the same location. Note that the dots which appear on each line would coincide if the foot model perfectly fit the subject's foot movements.
+
+foot at the transition between mid-stance and toe-off. The hip angle is tracked with comparable accuracy by both foot models ( Figure 6F and Table 3). Though the double-circle foot tracks the CoP more accurately than the ellipse-foot ( Figure 6B and Table 3), the ground forces produced by the double-circle foot exhibit oscillations that are present to a lesser degree in the ellipse-foot (Figure 6C).
+
+The solutions of the prediction OCP from each model deviates from the subject's data in general as shown in Table 4, but in FIGURE 6 | A comparison between the tracking OCP solutions from the ellipse-foot and double-circle foot models and the subject's data. Transitions between phases are indicated using a circle mark, while the labels for the continuous phases (described in section 3.3) appear at the top (ellipse-foot in red) and bottom (double-circle foot in blue) of each plot. Note that the ankle angle (D) [and thus orientation of the foot (A)] is weakly tracked because kinematic errors at this joint are scaled to be 1 100 the value of other tracked quantities. The ellipse-foot uniformly tracks the subject's data with a higher degree of accuracy than the double-circle foot. Both models have difficulty tracking the subject's knee angle at 75% stance (E), and the subject's ground forces near 25% and 75% of stance. During heel-only contact the double-circle foot is not able to track the subject's CoP movements (B), but closely follows the subject's CoP trajectory thereafter. Due to ground impacts both models have ground forces that begin the stance phase with finite values. The double-circle foot has an additional discontinuity in both the CoP profile (B) and ground force profile (C) when the forefoot strikes the ground. The forefoot strike completely arrests the angular velocity of the double-circle foot (see the flat line in phases 4c and 5c in A) while the ellipse-foot continuously rotates during stance. Both solutions are able to closely follow the subject's hip angle trajectory (F). different ways as observed at the kinematics of the hip, knee and ankle (Figures 7D-F). These large differences underscore how influential the shape of the foot is on the gait of the model because everything else about the two problems is identical except for the foot model. Another difference of note is observed in the ground forces produced by the ellipse-foot model: the normal and tangential forces exhibit a transient that is about 13 ms in duration that departs from the recorded ground forces by 6582.7 N and 2137.0 N (marked with a "*" Figure 7C), respectively. The nature of the transient is not numerical (the largest Baumgarte forces are 10.6 N), nor due to an impact, but due to an interaction between the motion of the model and the single curved foot segment: at precisely this moment the ankle of the ellipse-foot is at the bottom-most part of the u-shaped trajectory it traces (marked with a "*" in Figure 4). The ellipse-foot rotates the ankle quickly (hitting the upper bound 14.6 rad s ) through the ushaped trajectory accelerating the ankle frame upwards. Since the knee is nearly straight at this time the entire mass of the torso is also accelerated upwards. The brief, but rapid, acceleration of the ankle frame of the ellipse-foot results in a brief, but large, spike in the simulated ground reaction forces. To confirm this suspicion we re-ran the prediction OCP with but limited the angular velocity (from 14.6 rad s to 3.96 rad s ) of the ankle joint until the peak contact forces were comparable to those of the double-circle foot (1,444 N vs. 1,219 N). Though this extra constraint reduced the unrealistic ground forces, the constraint itself represents a departure from reality because the subject's ankle rotated at a greater velocity (4.41 rad s > 3.96 rad s ) during the experiment. In contrast, the plastic impact of the forefoot circle arrests the motion of the double-circle foot effectively preventing the force transient produced by the ellipse-foot. Please see the accompanying Supplementary Material section for videos, additional plots, and code for both the models and the OCPs. 3 | The average and maximum errors between the subject's stance foot and that of the tracking solution show that the ellipse-foot results in a better replication of the subject's gait than the double-circle foot, particularly at the ankle.
+
+
+Ellipse
+
+Circle-circle  
+ε(t) µ(|ε(t)| 2 ) ± σ (|ε(t)| 2 ) α A − α EXP A 3.6 • ± 2.6 • 5.4 • ± 2.1 • r P − r EXP P 1.5 ± 1.6 cm 0.8 ± 1.0 cm (f P − f EXP P ) T e X 30.0 ± 17.5 N 29.2 ± 23.7 N (f P − f EXP P ) T e Z 46.8 ± 38.1 N 69.6 ± 58.9 N θ A − θ EXP A 3.1 • ± 2.1 • 7.3 • ± 2.1 • θ K − θ EXP K 1.6 • ± 1.7 • 2.2 • ± 1.8 • θ H − θ EXP H 2.9 • ± 2.5 • 3.0 • ± 1.5 • ε(t) max(|ε(t)| 2 ) α A − α
+
+DISCUSSION
+
+While there are many applications for computerized gait prediction, few applications are possible without an accurate model of foot-ground contact. Though much attention has been given to modeling the foot it has proven difficult to simultaneously achieve realistic foot-ground contact kinematics and simulated ground forces. In this work we evaluated two rigid foot-ground contact models in terms of how well each replicated the kinematics of the stance foot and how each affected a tracking OCP and a prediction OCP. The multiple layers of evaluation proved useful. Although the ellipse foot model is better able to fit the kinematics of the stance foot in the least squares OCP, the prediction OCP illustrates that, because this foot model continuously rolls at a single contact point, it is capable of producing enormous contact forces due to the curve it forces the ankle through. This result has a larger implication: the accuracy displayed by a foot-ground contact model during an isolated fitting, or a tracking OCP , does not necessarily generalize to a prediction OCP. In addition, to our knowledge, this is the first work in the literature which solves two prediction OCPs that are identical in every respect except for the model of foot ground contact. The differing predictions of the ellipse-foot and doublecircle foot models confirm a long held suspicion that the model of foot-ground contact has a large influence on the optimal motion of the model. The transient present in the prediction OCP of the ellipse-foot indicates that foot models consisting of a single roll-over shape (Ren et al., 2007;Römer, 2018;Römer et al., 2018) should be treated with some caution. Although the transient we observed with the ellipse-foot does not appear in the work of Ren et al. (2007) there are a few reasons why this might be true. First, Ren et al. (2007) did not allow the feet to move freely during double stance, but constrained the CoP trajectory and ground forces under each foot to follow prescribed linear function. Constraining the movements reduces the magnitude of the simulated ground forces as clearly shown by the tracking solution ( Figure 6C) and the prediction OCP with the constrained ankle angular velocity. While the constrained solutions produce more realistic results, this is an undesirable option: it is not clear what the constraint should be ahead of time. The second reason why Ren et al. (2007) may not have observed this transient is because they sampled system dynamics discretely during the solution process: the transient could have been skipped between grid points. Due to the brief nature of the transient, if the model is being simulated using a grid of time points (as is typical of direct-collocation) it is important that a final high-resolution integration be performed to ensure that the results have not been unduly affected.
+
+The optimal control solutions of Römer (2018) also have ground forces which are free of transients (personal communication, ground forces are not reported in the thesis) likely because of differences in the problem formulation and solution method. We have used a forward-dynamics problem formulation which allows the optimization routine to manipulate the generalized forces but then integrates the dynamics of the system forward in time. Römer (2018) made use of a hybrid-zero-dynamic (HZD) approach developed by Westervelt et al. (2007) which uses a mixture of an inverse-and forwarddynamic problem formulation: all of the joints of the model are constrained to follow polynomial functions of the whole-body FIGURE 7 | A comparison between the prediction OCP solutions from the ellipse-foot and double-circle foot models and the subject's data. As in Figure 6, phase transitions are marked with a circle, continuous phase labels appear at the top (ellipse-foot in red) and bottom (double-circle foot in blue) of each plot. Though both solutions differ from the subject's data, both solutions also differ from each other: the shape of the foot has a large influence on the kinematics of the ankle (D), knee (E), and hip (F) of the stance leg. In one regard the solutions of the ellipse-foot and double-circle foot are similar: in both cases the model keeps its weight on its heel until the last moments of the stance phase (B). Note that the double-circle foot produces ground forces that are similar in magnitude to the tracking problem while the ellipse-foot produces a large transient ground force (C) shortly after contact within the continuous phase 2e. This transient is not due to an impact, nor constraint stabilization, but instead due to an interaction between the walking motion and the ellipse-foot model. As with the tracking solution, the angular velocity of the double-circle foot is arrested between phases 4c and 5c by the forefoot contact while the ellipse-foot continuously rotates during stance (A). Finally note that phase 4c, while of brief duration in the tracking solution, is of zero duration in the prediction solution. lean angle; the entire system is reduced to a single DoF which is integrated forward in time. The force transient we observed required a rapid change in the angular velocity of a foot, a rapid change which cannot be described using the polynomials employed by Römer (2018).
+
+The inevitable discrepancies that arise between predicted motions and typical human movement can be illustrative of gaps between our understanding of the mechanics of the body, and how these structures coordinated during movement. Both models resulted in tracking OCP solutions in which the ankle angles which differed from the subject's at heel contact, and the knee angle departed from the subject's near 75% of the stance phase. The most likely explanation for both of these problems is that the shapes we used to represent the foot are a poor match at heel contact and near the transition from mid-stance to toe-off. The large increase in error between the prediction OCP and the experimental data show some obvious directions for improvement. In both cases, the model kept its weight close to its hind foot ( Figure 7B) before rapidly pushing-off. This trajectory results in a large error between the simulations and the experimental data of the orientation of the foot ( Figure 7A) and the CoP trajectory ( Figure 7B). The departure in CoP trajectory is likely due to the fact that the MTGs we used in this work have rigid tendons which do not offer the cost savings that a elastic tendon can when it is loaded slowly and allowed to recoil rapidly. The rapid force oscillations present during the stance phase of the double-circle foot prediction OCP solution, while within the limits of the activation model, are not present in experimental recordings of human walking ( Figure 7C). We suspect that these oscillations may be due to the fact that a Hill-model does a poor job of capturing the stiffness and damping properties of actively lengthened muscle (Kirsch et al., 1994). These force oscillations would appear larger with the double-circle foot during heel and forefoot contact because it is constrained from moving and thus perfectly transmits the wrench applied to the ankle to the ground. The ellipse-foot, in contrast, is always free to rotate about its contact point and would move, attenuating the observed ground force oscillation.
+
+
+CONCLUSIONS
+
+Single segment rigid foot ground contact models are an attractive means to model the foot but should be treated with caution: under the right circumstances these foot models can produce large transient forces if the ankle rapidly moves through a ushaped trajectory after heel contact. In contrast, we did not observe the same transient using the two-segment rigid foot model because the plastic impact of the forefoot arrests the motion of the ankle through its v-shaped trajectory. Although the two-segmented rigid foot model results in an OCP with substantially more phases than a single segment foot, the twosegmented foot has a benefit: it does not require special treatment and may be a closer mechanical analog to the human foot. Finally, though we treated the foot as a rigid object the ground forces of the prediction OCP are relatively smooth due to the inclusion of the impulses in the cost function. Though the inclusion of the impulse term improved our simulation results, the experimental work of Hoyt and Taylor (1981) and later Farley and Taylor (1991) suggests that terms for both muscular effort and ground contact terms should appear in cost functions used to predict legged locomotion.
+
+
+DATA AVAILABILITY
+
+All datasets analyzed for this study are included in the manuscript and the Supplementary Files.
+
+
+ETHICS STATEMENT
+
+The recordings were conducted according to the guidelines of the Declaration of Helsinki 2013 and approved by the ethics committee of Faculteit der Gedrags-en Bewegingswetenschappen (Faculty of Behavioral and Movement Sciences) at Vrije Universiteit.
+
+
+AUTHOR CONTRIBUTIONS
+
+MM worked with KM to develop the proposal that funded this work. MM undertook the work and the writing. KM provided critical review during the preparation of the manuscript.
+
+TABLE 1 |
+1The position (r A − r EXP A ) and orientation (α A − α EXP A ) errors between the ankle frame of each respective foot model and experimental data of a subject's foot during the stance phase.
+
+TABLE 2 |
+2The parameters of each foot model which best fit the subject's data are listed below.Ellipse foot 
+
+A 
+
+A r E 
+(4.30, −8.11) 
+
+A α E 
+0 
+
+r X 
+15.25 
+
+r Y 
+4.03 
+
+Double circle foot 
+
+A 
+
+A r H 
+(−6.19, −6.64) 
+
+r H 
+4.87 
+
+A 
+
+A r F 
+(11.97, −6.56) 
+
+r F 
+7.46 
+
+
+
+TABLE
+
+
+TABLE 4 |
+4The difference between the results of the prediction OCP of each model's stance leg and that of the subject show that, when free to vary, the final gait is quite different from that of the subject.Ellipse 
+Circle-circle 
+
+ε(t) 
+µ(|ε(t)| 2 ) ± σ (|ε(t)| 2 ) 
+
+α A − α EXP 
+
+A 
+
+9.9 • ± 5.8 • 
+10.7 • ± 7.7 • 
+
+r P − r EXP 
+
+P 
+
+5.8 ± 5.0 cm 
+4.1 ± 2.8 cm 
+
+(f P − f EXP 
+P ) T e X 
+102.2 ± 212.1 N 
+40.2 ± 27.5 N 
+
+(f P − f EXP 
+P ) T e Z 
+290.1 ± 666.2 N 
+105.4 ± 102.9 N 
+
+θ A − θ EXP 
+
+A 
+
+8.2 • ± 4.3 • 
+12.8 • ± 4.2 • 
+
+θ K − θ EXP 
+
+K 
+
+14.6 • ± 6.3 • 
+7.5 • ± 3.7 • 
+
+θ H − θ EXP 
+
+H 
+
+8.5 • ± 4.1 • 
+4.2 • ± 2.4 • 
+
+ε(t) 
+max(|ε(t)| 2 ) 
+
+α A − α EXP 
+
+A 
+
+17.0 • 
+22.9 • 
+
+r P − r EXP 
+
+P 
+
+16.3 cm 
+12.7 cm 
+
+(f P − f EXP 
+P ) T e X 
+2137.0 N 
+144.6 N 
+
+(f P − f EXP 
+P ) T e Z 
+6582.7 N 
+595.6 N 
+
+θ A − θ EXP 
+
+A 
+
+19.4 • 
+20.7 • 
+
+θ K − θ EXP 
+
+K 
+
+21.9 • 
+17.7 • 
+
+θ H − θ EXP 
+
+H 
+
+15.0 • 
+9.6 • 
+
+Although the kinematics of the stance ankle from the ellipse-foot model more closely follow 
+the subject than the double-circle foot, the ellipse-foot has a large force transient (see 
+section 4 for details) due to its mechanics. Though the ground forces created by the 
+double-circle foot model differ from the subject, these errors are relatively small when 
+compared to similar works in the literature. 
+
+
+August 2019 | Volume 13 | Article 62
+Frontiers in Neurorobotics | www.frontiersin.org
+FUNDINGWe gratefully acknowledge the financial support from the Deutsche Forschungsgemeinschaft through grant no. MI 2109/1-1. In addition, we are grateful for the financial support for open access publishing provided by the Deutsche Forschungsgemeinschaft within the funding program Open Access Publishing, by the Baden-Württemberg Ministry of Science, Research and the Arts and by Ruprecht-Karls-Universität Heidelberg.ACKNOWLEDGMENTSThe authors would like to thank Dr. Gert Faber and Axel Koopman at the Vrije Universiteit for their help collecting the experimental data used in this work. We also wish thank the Simulation and Optimization research group of the IWR at Heidelberg University for allowing us to work with the optimal control code MUSCOD-II.SUPPLEMENTARY MATERIALThe Supplementary Material for this article can be found online at: https://www.frontiersin.org/articles/10.3389/fnbot.2019.00062/full#supplementary-materialPlease see the supplemental data for videos, data, and code. The data is accompanied by scripts that can be used to generate the tables and plots that appear in the results section. In addition, the scripts can also generate plots that show activation profiles, constraint error profiles, Baumgarte stabilization forces, and the phase of each OCP.
+Optimality principles for model-based prediction of human gait. M Ackermann, Van Den, A Bogert, 10.1016/j.jbiomech.2009.12.012J. Biomech. 43Ackermann, M., and van den Bogert, A. (2010). Optimality principles for model-based prediction of human gait. J. Biomech. 43, 1055-1060. doi: 10.1016/j.jbiomech.2009.12.012
+
+The mechanical properties of the human heel pad: a paradox resolved. P Aerts, R Kerr, D Clercq, D Ilsley, Alexander , R , 10.1016/0021-9290(95)00009-7J. Biomech. 28Aerts, P., Kerr, R., Clercq, D., Ilsley, D., and Alexander, R. (1995). The mechanical properties of the human heel pad: a paradox resolved. J. Biomech. 28, 1299- 1308. doi: 10.1016/0021-9290(95)00009-7
+
+Maximum voluntary joint torque as a function of joint angle and angular velocity: model development and application to the lower limb. D E Anderson, M L Madigan, M A Nussbaum, 10.1016/j.jbiomech.2007.03.022J. Biomech. 40Anderson, D. E., Madigan, M. L., and Nussbaum, M. A. (2007). Maximum voluntary joint torque as a function of joint angle and angular velocity: model development and application to the lower limb. J. Biomech. 40, 3105-3113. doi: 10.1016/j.jbiomech.2007.03.022
+
+Dynamic optimization of human walking. F C Anderson, M G Pandy, 10.1115/1.1392310ASME J. Biomech. Eng. 123Anderson, F. C., and Pandy, M. G. (2001). Dynamic optimization of human walking. ASME J. Biomech. Eng. 123, 381-390. doi: 10.1115/1.1392310
+
+Fibre operating lengths of human lower limb muscles during walking. E M Arnold, S L Delp, 10.1098/rstb.2010.0345Philos. Trans. R. Soc. B Biol. Sci. 366Arnold, E. M., and Delp, S. L. (2011). Fibre operating lengths of human lower limb muscles during walking. Philos. Trans. R. Soc. B Biol. Sci. 366, 1530-1539. doi: 10.1098/rstb.2010.0345
+
+Stabilization of constraints and integrals of motion in dynamical systems. J Baumgarte, 10.1016/0045-7825(72)90018-7Comput. Methods Appl. Mech. Eng. 1Baumgarte, J. (1972). Stabilization of constraints and integrals of motion in dynamical systems. Comput. Methods Appl. Mech. Eng. 1, 1-16. doi: 10.1016/0045-7825(72)90018-7
+
+A multiple shooting algorithm for direct solution of optimal control problems. H Bock, K Pitt, 10.1016/S1474-6670(17)61205-9IFAC Proc. 1717Bock, H., and Pitt, K. (1984). A multiple shooting algorithm for direct solution of optimal control problems. IFAC Proc. Vol. 17, 1603-1608. doi: 10.1016/S1474-6670(17)61205-9
+
+A 3D ellipsoidal volumetric foot-ground contact model for forward dynamics. P Brown, J Mcphee, 10.1007/s11044-017-9605-4Multibody Syst. Dyn. 42Brown, P., and McPhee, J. (2018). A 3D ellipsoidal volumetric foot-ground contact model for forward dynamics. Multibody Syst. Dyn. 42, 447-467. doi: 10.1007/s11044-017-9605-4
+
+Plantar soft tissue thickness during ground contact in walking. P Cavanagh, 10.1016/S0021-9290(99)00028-7J. Biomech. 32Cavanagh, P. (1999). Plantar soft tissue thickness during ground contact in walking. J. Biomech. 32, 623-628. doi: 10.1016/S0021-9290(99) 00028-7
+
+A bipedal walking robot with efficient and human-like gait. S H Collins, A Ruina, Proceedings of the 2005 IEEE International Conference on Robotics and Automation. the 2005 IEEE International Conference on Robotics and AutomationBarcelonaIEEECollins, S. H., and Ruina, A. (2005). "A bipedal walking robot with efficient and human-like gait, " in Proceedings of the 2005 IEEE International Conference on Robotics and Automation (Barcelona: IEEE), 1983-1988.
+
+Predictive simulation generates human adaptations during loaded and inclined walking. T W Dorn, J M Wang, J L Hicks, S L Delp, 10.1371/journal.pone.0121407PLoS ONE. 10121407Dorn, T. W., Wang, J. M., Hicks, J. L., and Delp, S. L. (2015). Predictive simulation generates human adaptations during loaded and inclined walking. PLoS ONE 10:e121407. doi: 10.1371/journal.pone.0121407
+
+A mechanical trigger for the trot-gallop transition in horses. C T Farley, C R Taylor, 10.1126/science.1857965Science. 253Farley, C. T., and Taylor, C. R. (1991). A mechanical trigger for the trot-gallop transition in horses. Science 253, 306-308. doi: 10.1126/science.1857965
+
+Rigid Body Dynamics Algorithms. R Featherstone, SpringerNew York, NYFeatherstone, R. (2014). Rigid Body Dynamics Algorithms. New York, NY: Springer.
+
+RBDL: an efficient rigid-body dynamics library using recursive algorithms. M L Felis, 10.1007/s10514-016-9574-0Auton. Robots. 41Felis, M. L. (2016). RBDL: an efficient rigid-body dynamics library using recursive algorithms. Auton. Robots 41, 495-511. doi: 10.1007/s10514-016-9574-0
+
+Synthesis of full-body 3-d human gait using optimal control methods. M L Felis, K Mombaur, 2016 IEEE International Conference on Robotics and Automation (ICRA). StockholmIEEEFelis, M. L., and Mombaur, K. (2016). "Synthesis of full-body 3-d human gait using optimal control methods, " in 2016 IEEE International Conference on Robotics and Automation (ICRA) (Stockholm: IEEE), 1560-1566.
+
+In vivo behaviour of human muscle tendon during walking. T Fukunaga, K Kubo, Y Kawakami, S Fukashiro, H Kanehisa, C Maganaris, 10.1098/rspb.2000.1361Proc. R. Soc. Lond. Ser. B Biol. Sci. 268Fukunaga, T., Kubo, K., Kawakami, Y., Fukashiro, S., Kanehisa, H., and Maganaris, C. (2001). In vivo behaviour of human muscle tendon during walking. Proc. R. Soc. Lond. Ser. B Biol. Sci. 268, 229-233. doi: 10.1098/rspb.2000.1361
+
+Dynamical analysis and design of active orthoses for spinal cord injured subjects by aesthetic and energetic optimization. J Fuller, L.-J Liu, M Murphy, R Mann, D ; -X García-Vallejo, J Font-Llagunes, W Schiehlen, 10.1007/s11071-015-2507-1doi: 10.1007/s11071-015-2507-1Hum. Mov. Sci. 16Nonlin. Dyn.Fuller, J., Liu, L.-J., Murphy, M., and Mann, R. (1997). A comparison of lower- extremity skeletal kinematics measured using skin-and pin-mounted markers. Hum. Mov. Sci. 16, 219-242. doi: 10.1016/S0167-9457(96)00053-X García-Vallejo, D., Font-Llagunes, J., and Schiehlen, W. (2016). Dynamical analysis and design of active orthoses for spinal cord injured subjects by aesthetic and energetic optimization. Nonlin. Dyn. 84, 559-581. doi: 10.1007/s11071-015-2507-1
+
+In-vivo biomechanical behavior of the human heel pad during the stance phase of gait. A Gefen, M Megido-Ravid, Y Itzchak, 10.1016/S0021-9290(01)00143-9J. Biomech. 34Gefen, A., Megido-Ravid, M., and Itzchak, Y. (2001). In-vivo biomechanical behavior of the human heel pad during the stance phase of gait. J. Biomech. 34, 1661-1665. doi: 10.1016/S0021-9290(01)00143-9
+
+A muscle-reflex model that encodes principles of legged mechanics produces human walking dynamics and muscle activities. H Geyer, H Herr, 10.1109/TNSRE.2010.2047592IEEE Trans. Neural Syst. Rehabil. Eng. 18Geyer, H., and Herr, H. (2010). A muscle-reflex model that encodes principles of legged mechanics produces human walking dynamics and muscle activities. IEEE Trans. Neural Syst. Rehabil. Eng. 18, 263-273. doi: 10.1109/TNSRE.2010.2047592
+
+Concurrent musculoskeletal dynamics and finite element analysis predicts altered gait patterns to reduce foot tissue loading. J Halloran, M Ackermann, A Erdemir, Van Den, A Bogert, 10.1016/j.jbiomech.2010.05.036J. Biomech. 43Halloran, J., Ackermann, M., Erdemir, A., and Van den Bogert, A. (2010). Concurrent musculoskeletal dynamics and finite element analysis predicts altered gait patterns to reduce foot tissue loading. J. Biomech. 43, 2810-2815. doi: 10.1016/j.jbiomech.2010.05.036
+
+Roll-over shapes of human locomotor systems: effects of walking speed. A H Hansen, D S Childress, E H Knox, 10.1016/j.clinbiomech.2003.12.001J. Clin. Biomech. 19Hansen, A. H., Childress, D. S., and Knox, E. H. (2004). Roll-over shapes of human locomotor systems: effects of walking speed. J. Clin. Biomech. 19, 407-414. doi: 10.1016/j.clinbiomech.2003.12.001
+
+Gait and the energetics of locomotion in horses. D F Hoyt, C R Taylor, 10.1038/292239a0Nature. 292239Hoyt, D. F., and Taylor, C. R. (1981). Gait and the energetics of locomotion in horses. Nature 292:239. doi: 10.1038/292239a0
+
+Behaviour of vastus lateralis muscle-tendon during high intensity SSC exercises in vivo. M Ishikawa, T Finni, P V Komi, 10.1046/j.1365-201X.2003.01149.xActa Physiol. Scand. 178Ishikawa, M., Finni, T., and Komi, P. V. (2003). Behaviour of vastus lateralis muscle-tendon during high intensity SSC exercises in vivo. Acta Physiol. Scand. 178, 205-213. doi: 10.1046/j.1365-201X.2003.01149.x
+
+Development of a subjectspecific foot-ground contact model for walking. J N Jackson, C J Hass, B J Fregly, 10.1115/1.4034060J. Biomech. Eng. 13891002Jackson, J. N., Hass, C. J., and Fregly, B. J. (2016). Development of a subject- specific foot-ground contact model for walking. J. Biomech. Eng. 138:091002. doi: 10.1115/1.4034060
+
+The mechanics of the table contact phase of gymnastics vaulting. M Jackson, LeicestershireLoughborough UniversityPh.D. thesisJackson, M. (2010). The mechanics of the table contact phase of gymnastics vaulting (Ph.D. thesis). Leicestershire: Loughborough University.
+
+Muscle stiffness during transient and continuous movements of cat muscle: perturbation characteristics and physiological relevance. R F Kirsch, D Boskov, W Z Rymer, 10.1109/10.310091IEEE Trans. Biomed. Eng. 41Kirsch, R. F., Boskov, D., and Rymer, W. Z. (1994). Muscle stiffness during transient and continuous movements of cat muscle: perturbation characteristics and physiological relevance. IEEE Trans. Biomed. Eng. 41, 758- 770. doi: 10.1109/10.310091
+
+Inverse optimal control based enhancement of sprinting motion analysis with and without running-specific prostheses. A Kleesattel, K Mombaur, 2018 7th IEEE International Conference on Biomedical Robotics and Biomechatronics (Biorob). EnschedeIEEEKleesattel, A., and Mombaur, K. (2018). "Inverse optimal control based enhancement of sprinting motion analysis with and without running-specific prostheses, " in 2018 7th IEEE International Conference on Biomedical Robotics and Biomechatronics (Biorob) (Enschede: IEEE), 556-562.
+
+A metabolic energy expenditure model with a continuous first derivative and its application to predictive simulations of gait. A D Koelewijn, E Dorschky, Van Den, A J Bogert, 10.1080/10255842.2018.1490954Comput. Methods Biomech. Biomed. Eng. 21Koelewijn, A. D., Dorschky, E., and van den Bogert, A. J. (2018). A metabolic energy expenditure model with a continuous first derivative and its application to predictive simulations of gait. Comput. Methods Biomech. Biomed. Eng. 21, 521-531. doi: 10.1080/10255842.2018.1490954
+
+Convergence properties of the nelder-mead simplex method in low dimensions. J Lagarias, J Reeds, M Wright, Wright , P , 10.1137/S1052623496303470SIAM J. Optim. 9Lagarias, J., Reeds, J., Wright, M., and Wright, P. (1998). Convergence properties of the nelder-mead simplex method in low dimensions. SIAM J. Optim. 9, 112-147. doi: 10.1137/S1052623496303470
+
+An efficient multiple shooting based reduced SQP strategy for large-scale dynamic process optimization: Part II: software aspects and applications. D Leineweber, A Schäfer, H Bock, J Schlöder, 10.1016/S0098-1354(02)00195-3Comput. Chem. Eng. 27Leineweber, D., Schäfer, A., Bock, H., and Schlöder, J. (2003). An efficient multiple shooting based reduced SQP strategy for large-scale dynamic process optimization: Part II: software aspects and applications. Comput. Chem. Eng. 27, 167-174. doi: 10.1016/S0098-1354(02)00195-3
+
+Force-length characteristics of the in vivo human gastrocnemius muscle. C Maganaris, 10.1002/ca.10064Clin. Anat. 16Maganaris, C. (2003). Force-length characteristics of the in vivo human gastrocnemius muscle. Clin. Anat. 16, 215-223. doi: 10.1002/ca.10064
+
+Passive dynamic walking. T Mcgeer, 10.1177/027836499000900206I. J. Robot. Res. 9McGeer, T. (1990). Passive dynamic walking. I. J. Robot. Res. 9, 62-82. doi: 10.1177/027836499000900206
+
+A 3D foot-ground model using disk contacts. M Millard, A Kecskeméthy, Interdisciplinary Applications of Kinematics. K. Andrés and G. F. FranciscoLimaSpringerMillard, M., and Kecskeméthy, A. (2015). "A 3D foot-ground model using disk contacts, " in Interdisciplinary Applications of Kinematics, eds K. Andrés and G. F. Francisco (Lima: Springer), 161-169.
+
+Predicting the motions and forces of wearable robotic systems using optimal control. M Millard, M Sreenivasa, K Mombaur, 10.3389/frobt.2017.00041Front. Robot. AI. 441Millard, M., Sreenivasa, M., and Mombaur, K. (2017). Predicting the motions and forces of wearable robotic systems using optimal control. Front. Robot. AI 4:41. doi: 10.3389/frobt.2017.00041
+
+Flexing computational muscle: modeling and simulation of musculotendon dynamics. M Millard, T Uchida, A Seth, S Delp, 10.1115/1.4023390J. Biomech. Eng. 13521005Millard, M., Uchida, T., Seth, A., and Delp, S. (2013). Flexing computational muscle: modeling and simulation of musculotendon dynamics. J. Biomech. Eng. 135:021005. doi: 10.1115/1.4023390
+
+Animating human lower limbs using contact-invariant optimization. I Mordatch, J Wang, E Todorov, V Koltun, 10.1145/2508363.2508365ACM Trans. Graph. 328Mordatch, I., Wang, J., Todorov, E., and Koltun, V. (2013). Animating human lower limbs using contact-invariant optimization. ACM Trans. Graph. 32, 203:1-203:8. doi: 10.1145/2508363.2508365
+
+A simplex method for function minimization. J A Nelder, Mead , R , 10.1093/comjnl/7.4.308Comput. J. 7Nelder, J. A., and Mead, R. (1965). A simplex method for function minimization. Comput. J. 7, 308-313. doi: 10.1093/comjnl/7.4.308
+
+Parameter identification method for a three-dimensional foot-ground contact model. R Pàmies-Vilà, J M Font-Llagunes, U Lugrís, J Cuadrado, 10.1016/j.mechmachtheory.2014.01.010Mech. Mach. Theory. 75Pàmies-Vilà, R., Font-Llagunes, J. M., Lugrís, U., and Cuadrado, J. (2014). Parameter identification method for a three-dimensional foot-ground contact model. Mech. Mach. Theory 75, 107-116. doi: 10.1016/j.mechmachtheory.2014.01.010
+
+Behavior of human muscle fascicles during shortening and lengthening contractions in vivo. N D Reeves, M V Narici, 10.1152/japplphysiol.01046.2002J. Appl. Physiol. 95Reeves, N. D., and Narici, M. V. (2003). Behavior of human muscle fascicles during shortening and lengthening contractions in vivo. J. Appl. Physiol. 95, 1090-1096. doi: 10.1152/japplphysiol.01046.2002
+
+A generic analytical foot rollover model for predicting translational ankle kinematics in gait simulation studies. L Ren, D Howard, L Ren, C Nester, L Tian, 10.1016/j.jbiomech.2009.09.027J. Biomech. 43Ren, L., Howard, D., Ren, L., Nester, C., and Tian, L. (2010). A generic analytical foot rollover model for predicting translational ankle kinematics in gait simulation studies. J. Biomech. 43, 194-202. doi: 10.1016/j.jbiomech.2009.09.027
+
+Predictive modelling of human walking over a complete gait cycle. L Ren, R K Jones, D Howard, 10.1016/j.jbiomech.2006.07.017J. Biomech. 40Ren, L., Jones, R. K., and Howard, D. (2007). Predictive modelling of human walking over a complete gait cycle. J. Biomech. 40, 1567-1574. doi: 10.1016/j.jbiomech.2006.07.017
+
+Über den Einfluss der Fußgeometrie auf die Energieefizienz beim zweibeinigen Gehen. U Römer, Karlsruhe Institut für Technologie. Karlsruhe, GermanyKiT Scientific PublishingPh.D. thesisRömer, U. (2018). Über den Einfluss der Fußgeometrie auf die Energieefizienz beim zweibeinigen Gehen (Ph.D. thesis), Karlsruhe Institut für Technologie, KiT Scientific Publishing, Karlsruhe, Germany.
+
+Explicit analytical solutions for two-dimensional contact detection problems between almost arbitrary geometries and straight or circular counterparts. U Römer, A Fidlin, W Seemann, 10.1016/j.mechmachtheory.2018.05.018Mech. Mach. Theory. 128Römer, U., Fidlin, A., and Seemann, W. (2018). Explicit analytical solutions for two-dimensional contact detection problems between almost arbitrary geometries and straight or circular counterparts. Mech. Mach. Theory 128, 205-224. doi: 10.1016/j.mechmachtheory.2018.05.018
+
+Modeling and optimal control of human-like running. G Schultz, K Mombaur, 10.1109/TMECH.2009.2035112IEEE/ASME Trans. Mechatron. 15Schultz, G., and Mombaur, K. (2010). Modeling and optimal control of human-like running. IEEE/ASME Trans. Mechatron. 15, 783-792. doi: 10.1109/TMECH.2009.2035112
+
+Forward dynamic optimization of human gait simulations: a global parameterization approach. M Shourijeh, J Mcphee, 10.1115/1.4026266J. Comput. Nonlin. Dyn. 931018Shourijeh, M., and McPhee, J. (2014). Forward dynamic optimization of human gait simulations: a global parameterization approach. J. Comput. Nonlin. Dyn. 9:031018. doi: 10.1115/1.4026266
+
+Foot-ground contact modeling within human gait simulations: from kelvin-voigt to hyper-volumetric models. M Shourijeh, J Mcphee, 10.1007/s11044-015-9467-6Multibody Syst. Dyn. 35Shourijeh, M., and McPhee, J. (2015). Foot-ground contact modeling within human gait simulations: from kelvin-voigt to hyper-volumetric models. Multibody Syst. Dyn. 35, 393-407. doi: 10.1007/s11044-015-9467-6
+
+Optimal control based stiffness identification of an ankle-foot orthosis using a predictive walking model. M Sreenivasa, M Millard, M Felis, K Mombaur, S I Wolf, 10.3389/fncom.2017.00023Front. Comput. Neurosci. 1123Sreenivasa, M., Millard, M., Felis, M., Mombaur, K., and Wolf, S. I. (2017). Optimal control based stiffness identification of an ankle-foot orthosis using a predictive walking model. Front. Comput. Neurosci. 11:23. doi: 10.3389/fncom.2017.00023
+
+Low-dimensional sagittal plane model of normal human walking. S Srinivasan, I A Raptis, E R Westervelt, 10.1115/1.2970058ASME J. Biomech. Eng. 13051017Srinivasan, S., Raptis, I. A., and Westervelt, E. R. (2008). Low-dimensional sagittal plane model of normal human walking. ASME J. Biomech. Eng. 130:051017. doi: 10.1115/1.2970058
+
+Adjustment of muscle mechanics model parameters to simulate dynamic contractions in older adults. D G Thelen, 10.1115/1.1531112J. Biomech. Eng. 125Thelen, D. G. (2003). Adjustment of muscle mechanics model parameters to simulate dynamic contractions in older adults. J. Biomech. Eng. 125, 70-77. doi: 10.1115/1.1531112
+
+Predictive musculoskeletal simulation using optimal control: effects of added limb mass on energy cost and kinematics of walking and running. A J Van Den Bogert, M Hupperets, H Schlarb, B Krabbe, 10.1177/1754337112440644Proc. Instit. Mech. Eng. Part P. 226Van den Bogert, A. J., Hupperets, M., Schlarb, H., and Krabbe, B. (2012). Predictive musculoskeletal simulation using optimal control: effects of added limb mass on energy cost and kinematics of walking and running. Proc. Instit. Mech. Eng. Part P 226, 123-133. doi: 10.1177/1754337112440644
+
+Numerical solution of optimal control problems by direct collocation. Von Stryk, O , R. Bulirsch, A. Miele, J. Stoer, and K. WellSpringerBaselVon Stryk, O. (1993). "Numerical solution of optimal control problems by direct collocation, " in Optimal Control, eds R. Bulirsch, A. Miele, J. Stoer, and K. Well (Basel: Springer;
+
+. Birkhäuser Basel, Birkhäuser Basel), 129-143.
+
+. E Westervelt, J Grizzle, C Chevallereau, J Choi, Morris , B , Feedback Control of Dynamic Bipedal Robot Locomotion. 28CRC PressWestervelt, E., Grizzle, J., Chevallereau, C., Choi, J., and Morris, B. (2007). Feedback Control of Dynamic Bipedal Robot Locomotion, Vol. 28. Boca Raton, FL: CRC Press.
+
+Muscle and tendon: properties, models, scaling, and application to biomechanics and motor control. F Zajac, Crit. Rev. Biomed. Eng. 17Zajac, F. (1988). Muscle and tendon: properties, models, scaling, and application to biomechanics and motor control. Crit. Rev. Biomed. Eng. 17, 359-411.
+
+Kinetics of Human Motion. V Zatsiorsky, Human KineticsChampaign, ILZatsiorsky, V. (2002). Kinetics of Human Motion. Champaign, IL: Human Kinetics.

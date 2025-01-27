@@ -1,0 +1,644 @@
+
+Linear Time Encoding of LDPC Codes
+October 15, 2008
+
+Jin Lu j.lu@sun.com 
+Fellow, IEEEJosé M F Moura moura@ece.cmu.edu 
+
+Sun Microsystems 1, StorageTek Drive80026LouisvilleCO
+
+
+Department of Electrical and Computer Engineering
+Carnegie Mellon University
+15213PittsburghPA
+
+Linear Time Encoding of LDPC Codes
+October 15, 200896866E6B7B99513332C998F3DA1EF13BarXiv:0810.2781v1[cs.IT]LDPC codeslinear complexity encodingpseudo-treeencoding stopping setTanner graphs
+In this paper, we propose a linear complexity encoding method for arbitrary LDPC codes.We start from a simple graph-based encoding method "label-and-decide."We prove that the "label-anddecide" method is applicable to Tanner graphs with a hierarchical structure-pseudo-trees-and that the resulting encoding complexity is linear with the code block length.Next, we define a second type of Tanner graphs-the encoding stopping set.The encoding stopping set is encoded in linear complexity by a revised label-and-decide algorithm-the "label-decide-recompute." Finally, we prove that any Tanner graph can be partitioned into encoding stopping sets and pseudo-trees.By encoding each encoding stopping set or pseudo-tree sequentially, we develop a linear complexity encoding method for general LDPC codes where the encoding complexity is proved to be less than 4 • M • (k − 1), where M is the number of independent rows in the parity check matrix and k represents the mean row weight of the parity check matrix.
+
+I. INTRODUCTION
+
+Low Density Parity Check (LDPC) codes [1] are excellent error correcting codes with performance close to the Shannon Capacity [2].The key weakness of LDPC codes is their apparently high encoding complexity.The conventional way to encode LDPC codes is to multiply the data words − → s by the code generator matrix G, i.e., the code words are − → x = G • − → s .Though the parity-check matrix H for LDPC codes is sparse, the associated generator matrix G is not.The encoding complexity of LDPC codes is O(n 2 ) where n is the block length of the LDPC code.For moderate to high code block length n, this quadratic behavior is very significant and it severely affects the application of LDPC codes.For example, LDPC codes have advantages over turbo codes [3] in almost every aspect except that LDPC codes have O(n 2 ) encoding complexity, while turbo codes have O(n) encoding complexity.It is highly desirable to reduce the O(n 2 ) encoding complexity of LDPC codes.
+
+Several authors have addressed the issue of speeding encoding of LDPC codes and, largely speaking, they follow three different paths.The first path designs efficient encoding methods for particular types of LDPC codes.We list a few typical representers.Reference [4] proposes a linear complexity encoding method for cycle codes-LDPC codes with column weight 2. Reference [5] presents an efficient encoder for quasi-cyclic LDPC codes.In [6], an efficient encoding approach is proposed for Reed-Solomon-type array codes.Reference [7] shows that there exists a linear time encoder for turbo-structured LDPC codes.Reference [8] constructs LDPC codes based on finite geometries and proves that this type of structured LDPC codes can be encoded in linear time.In [9], [11], two families of irregular LDPC Codes with cyclic structure and low encoding complexity are designed.In addition, an approximately lower triangular ensemble of LDPC Codes [10] was proposed to facilitate almost linear complexity encoding.The above low complexity encoders are only applicable to a small subset of LDPC codes, and some of the LDPC codes discussed above have performance loss when compared to randomly constructed LDPC codes.The second path borrows the decoder architecture and encodes LDPC codes iteratively on their Tanner graphs [12], [13].The iterative LDPC encoding algorithm is easy to implement.However, there is no guarantee that iterative encoding will successfully get the codeword.In particular, the iterative encoding method will get trapped at the stopping set.The third path utilizes the sparseness of the parity check matrix to design a low complexity encoder.In [14], the authors present an algorithm named "greedy search" that reduces the coefficient of the quadratic term.This encoding method is relatively efficient.Its computation complexity and matrix storage need to be further reduced for most practical applications.
+
+In this paper, we develop an exact linear complexity encoding method for arbitrary LDPC codes.We start from two particular Tanner graph structures-"pseudo-tree" and "encoding stopping set"-and prove that both the pseudo-tree and the encoding stopping set LDPC codes can be encoded in linear time.Next, we prove that any LDPC code with maximum column weight three can be decomposed into pseudo-trees and encoding stopping sets.Therefore, LDPC codes with maximum column weight three can be encoded in linear time and the encoding complexity is no more than 2 • M • (k − 1) where M denotes the number of independent rows of the parity check matrix and k represents the average row weight.Finally, we extend the O(n) complexity encoder to LDPC codes with arbitrary row weight distributions and column weight distributions.
+
+For arbitrary LDPC codes, we achieve O(n) encoding complexity, not exceeding 4 • M • (k − 1).
+
+The remaining of the paper is organized as follows.In Section II, we introduce relevant definitions and notation.Section III proposes a simple encoding algorithm "label-and-decide" that directly encodes an LDPC code on its Tanner graph.Section IV presents a particular type of Tanner graph with multi-layers-"pseudo-tree" and proves that any pseudo-tree can be encoded successfully in linear time by the label-and-decide algorithm.Section V studies the complement of the pseudo-tree-"encoding stopping set."Section VI proves that the encoding stopping set can also be encoded in linear time by an encoding method named "label-deciderecompute."Section VII demonstrates that any LDPC code with column weight at most three can be decomposed into pseudo-trees and encoding stopping sets.By encoding each pseudo-tree or encoding stopping set sequentially using the label-and-decide or the label-decide-recompute algorithms, we achieve linear complexity encoding for LDPC codes with maximum column weight three.Finally, we extend in this Section this linear time encoding method to LDPC codes with arbitrary column weight distributions and row weight distributions.Section VIII concludes the paper.
+
+
+II. NOTATION
+
+LDPC codes.LDPC codes can be described by their parity-check matrix or their associated Tanner graph [15].In the Tanner graph, each bit becomes a bit node and each parity-check October 15, 2008 DRAFT constraint becomes a check node.If a bit is involved in a parity-check constraint, there is an edge connecting the bit node and the corresponding check node.The degree of a check node in a Tanner graph is equivalent to the number of one's in the corresponding row of the parity check matrix, or, in another words, the row weight of the corresponding row.We will use the term "degree of a check node" and "row weight" interchangeably in this paper.Similarly, the degree of a bit node in a Tanner graph is equivalent to the column weight of the corresponding column of the parity check matrix, and we will interchangeably use the term "degree of a bit node" and "column weight" in this paper.The LDPC codes discussed in this paper may be irregular, i.e., different columns of the parity check matrix have different column weights and different rows of the parity check matrix have different row weights.The parity check matrix of an LDPC code may not be of full rank.If a row in the parity check matrix can be written as the binary sums of some other rows in the parity check matrix, this row is said to be dependent on the other rows.Otherwise, it is an independent row.
+
+Arithmetic over the binary field.We represent by "⊕" the summation over the binary field, i.e., an XOR operation.For example, 0⊕1 = mod (0+1 , 2) = 1.Similarly, we have 0⊕0 = 0,
+1 ⊕ 0 = 1, 1 ⊕ 1 = 0.
+In addition, we have the following equation −x = x in the binary field.
+
+
+Generalized parity check equation. A conventional parity check equation is shown in (1).
+
+The right-hand side of the parity check equation is always 0.
+x 1 ⊕ x 2 ⊕ . . . ⊕ x k = 0(1)
+In this paper, we define the generalized parity check equation, as shown in (2)
+x 1 ⊕ x 2 ⊕ . . . ⊕ x k = b(2)
+On the right-hand side of equation ( 2), b is a constant that can be either 0 or 1.
+
+Let C be a standard parity check equation.If the values of some of the bits in the left-hand side of C are already known, then C can be equivalently rewritten as a generalized parity check equation.For example, if the values of the bits x p+1 , x p+2 , . . ., x k are known, we move these bits from the left-hand side of equation ( 1) to its right-hand side and rewrite it as follows.
+x 1 ⊕ x 2 ⊕ . . . ⊕ x p = x p+1 ⊕ x p+2 ⊕ . . . ⊕ x k = b(3)
+Let C 1 , C 2 , . .., C p be p generalized parity check equations, as shown in ( 4)
+C 1 : x 1,1 ⊕ x 1,2 ⊕ . . . x 1,a 1 = b 1 C 2 : x 2,1 ⊕ x 2,2 ⊕ . . . x 2,a 2 = b 2 . . . . . . . . . . . . C p : x p,1 ⊕ x p,2 ⊕ . . . x p,ap = b p(4)
+We say C 1 , C 2 , . .., C p are dependent on each other if the corresponding homogeneous equations in ( 5) are dependent on each other.
+x 1,1 ⊕ x 1,2 ⊕ . . . x 1,a 1 = 0 x 2,1 ⊕ x 2,2 ⊕ . . . x 2,a 2 = 0 . . . . . . . . . . . . x p,1 ⊕ x p,2 ⊕ . . . x p,ap = 0(5)
+From equations ( 4) and ( 5), we derive that
+b 1 ⊕ b 2 ⊕ . . . ⊕ b p = 0(6)
+when the p generalized parity check equations C
+edges are in G, but not in G i , 1 ≤ i ≤ k.
+
+III. "LABEL-AND-DECIDE" ENCODING ALGORITHM
+
+Initially, Tanner graphs [15] were developed to explain the decoding process for LDPC codes; in fact, they can be used for the encoding of LDPC codes as well [12].To encode an LDPC code using its Tanner graph, we identify information bits and parity bits through a labeling process on the graph.After determining the information bits and the parity bits, we start by assigning numerical values to the bit nodes labeled as information bits and then in a second step, calculate October 15, 2008 DRAFT the missing values of the parity bits sequentially.This encoding approach is named label-anddecide.It is described in Algorithm 1.
+
+Algorithm 1 Label-and-decide algorithm Preprocessing (carry out only once):
+
+Label every bit node either as information bit or parity bit on the Tanner graph.
+
+Encoding:
+F lag ← 0;
+Get the values of all the bits labeled as information bits;
+
+while there are parity bits undetermined do if there exists one undetermined parity bit x that can be uniquely computed from the values of the information bits and the already determined parity bits then Compute the value of x.
+
+
+end if
+
+Example. Figure 1 shows on the left an LDPC code whose Tanner graph is a tree.Initially, all its bit nodes are unlabeled.First, we randomly pick bit nodes x 1 , x 2 , and x 3 to be information bits.According to the parity check equation C 1 , the value of bit x 4 depends on the values of the bits x 1 , x 2 , and x 3 such that x 4 = x 1 ⊕ x 2 ⊕ x 3 .Therefore, x 4 should be labeled as a parity bit.
+
+Similarly, we label bits x 5 , x 6 , x 8 , x 9 as information bits and label bits x 7 , x 10 as parity bits.We represent information bits by solid circles and parity bits by empty circles.The labeling result is shown on the right in Figure 1.
+
+By the above labeling process, we decide the systematic component of the code word − → x = (x 1 x 2 x 3 x 4 x 5 x 6 x 7 x 8 x 9 x 10 ) to be − → s = (x 1 x 2 x 3 x 5 x 6 x 8 x 9 ) and the parity component to be − → p = (x 4 x 7 x 10 ).The label-and-decide encoding on the code in Figure 1 then has the following steps:
+
+Step 1. Get the values of the information bits x 1 , x 2 , x 3 , x 5 , x 6 , x 8 , and x 9 from the encoder input;
+
+Step 2. Compute the parity bit x 4 from the parity check equation C 1 :
+x 4 = x 1 ⊕ x 2 ⊕ x 3 ;
+Step 3. Compute the parity bit x 7 from the parity check equation C 2 : x 7 = x 4 ⊕ x 5 ⊕ x 6 ; compute the parity bit x 10 from the parity check equation C 3 :
+x 10 = x 4 ⊕ x 8 ⊕ x 9 .
+In fact, any tree code (whose Tanner graph is cycle-free) can be encoded in linear complexity by the label-and-decide algorithm.We will prove this fact in Corollary 2 in Section V. Further, the label-and-decide algorithm can be used to encode a particular type of Tanner graphs with cycles, i.e., the pseudo-tree we propose in the next section.
+
+
+IV. PSEUDO-TREE
+
+A pseudo-tree is a connected Tanner graph that satisfies the following conditions (A1) through (A4).
+
+(A1) It is composed of 2P + 1 tiers where P is a positive integer.We number these tiers from 1 to 2P + 1, starting from the top.The (2i − 1)-th tier (i = 1, 2, . . .P + 1) contains only bit nodes, while the (2i)-th tier (i = 1, 2, . . .P ) contains only check nodes.
+
+October 15, 2008 DRAFT (A2) Each bit node in the first tier has degree one and is connected to one and only one check node in the second tier.
+
+(A3) For each check node C α in the (2i)-th tier, where i can take any value from 1 to P , there is one and only one bit node x α in the (2i − 1)-th tier (immediate upper tier) that connects to C α , and there are no other bit nodes in the upper tiers that connect to C α .We call x α the parent of C α and C α the child of x α .
+
+(A4) For each bit node x β in the (2i − 1)-th tier, where i can take any value from 2 to P , there is at most one check node C β in the (2i)-th tier (immediate lower tier) that connects to x β , and there are no other check nodes in the lower tiers that connect to x β .
+
+For example, Figure 2 shows a pseudo-tree with seven tiers.It contains many cycles.Each check node C i in the pseudo-tree is connected to a unique bit node in the immediate upper tier, while each bit node x i in the pseudo-tree may connect to multiple check nodes in the upper tiers.
+
+An important characteristic of a pseudo-tree is that it can be encoded in linear complexity by the label-and-decide algorithm.This is proved in the following lemma.
+
+Lemma 1 Any LDPC code whose Tanner graph is a pseudo-tree is linear time encodable.
+
+Proof : Let a pseudo-tree contain 2P + 1 tiers, N bit nodes, and M check nodes.Condition (A3) guarantees that each check node is connected to one and only one parent bit node in the immediate upper tier.Condition (A4) guarantees that different check nodes are connected to different parent bit nodes.Therefore, there are M parent bit nodes for the check nodes.We label these M parent bit nodes as parity bits and the other N − M bit nodes as information bits.
+
+The inputs of the encoder provide the values for all the information bits.The task of the encoder is to compute the values for all the parity bits.Let x α be an arbitrary parity bit in the  For LDPC codes with uniform row weight k, the encoding complexity is O(M(k − 2)).The October 15, 2008 DRAFT above analysis shows that the encoding process is accomplished in linear time.This completes the proof. 2
+(2i−
+We look at an example.We encode the pseudo-tree in Figure 2 as follows:
+
+Step 1. Determine the values of all the information bits x 14 , x 15 , x 16 , x 10 , x 12 , x 13 , x 5 , x 7 , and x 8 ;
+
+Step 2. Compute the parity bit x 11 from the parity check equation C 7 : x 11 = x 14 ⊕ x 15 ⊕ x 16 ;
+
+Step 3. Compute the parity bit x 6 from the parity check equation C 5 :
+x 6 = x 10 ⊕ x 15 ⊕ x 11 ⊕ x 13 ;
+compute the parity bit x 9 from the parity check equation C 6 :
+x 9 = x 11 ⊕ x 12 ⊕ x 16 ⊕ x 13 ;
+Step 4. Compute the parity bits x 1 , x 2 , x 3 , and x 4 in the first tier by the parity check equations
+C 1 , C 2 , C 3
+, and C 4 respectively:
+x 1 = x 10 ⊕ x 5 ⊕ x 7 , x 2 = x 5 ⊕ x 6 ⊕ x 12 ⊕ x 9 , x 3 = x 5 ⊕ x 7 ⊕ x 11 ⊕ x 14 ⊕ x 8 , x 4 = x 6 ⊕ x 8 ⊕ x 10 ⊕ x 9 ⊕ x 13 .
+The above encoding process requires only 21 XOR operations.
+
+
+V. ENCODING STOPPING SET
+
+An encoding stopping set in a Tanner graph is a connected subgraph such that:
+
+(B1) If a check node C is in an encoding stopping set, then all its associated bit nodes and the edges that are incident on C are also in the encoding stopping set.
+
+(B2) Any bit node in an encoding stopping set is connected to at least two check nodes in the encoding stopping set.
+
+(B3) All the check nodes included in an encoding stopping set are independent of each other, i.e., any parity check equation can not be represented as the binary sums of other parity check equations.
+
+The number of check nodes in an encoding stopping set is called its size.If a connected Tanner graph satisfies conditions (B1) and (B2) but not condition (B3), we call this Tanner graph a pseudo encoding stopping set.For example, the Tanner graph shown in Figure 3 is not an encoding stopping set but a pseudo encoding stopping set since it satisfies conditions (B1) and (B2) but not condition (B3).The Tanner graph shown in Figure 4 is an encoding stopping set.Its size is 9. Every bit node in this encoding stopping set has degree greater than or equal to 2, and every check node is independent of each other.Please note that the "encoding stopping set" defined in this paper is different from the "stopping set" defined in [16].Stopping sets are used for the finite-length analysis of LDPC codes on the binary erasure channel, while encoding stopping sets are used here to develop efficient encoding methods for LDPC codes.From the above definitions of pseudo-tree and encoding stopping set, we have the following lemma.
+
+Lemma 2 Any pseudo-tree or union of pseudo-trees does not contain encoding stopping sets.
+
+The proof of Lemma 2 is straightforward.We omit it here.
+
+We will show next that the label-and-decide algorithm can not successfully encode encoding stopping sets.
+
+
+Theorem 1 An encoding stopping set can not be encoded successfully by the label-and-decide
+
+algorithm.
+
+Proof : Let E ∫ be an encoding stopping set and suppose E ∫ can be encoded successfully by the label-and-decide algorithm.Let x α be the last parity bit being determined during the encoding process.Since E ∫ is an encoding stopping set, x α is connected to at least two check nodes C β and C γ by condition (B2).Further, by condition (B3), all the check nodes in E ∫ , including C β and C γ , are independent of each other.Hence, for certain encoder inputs, C β and C γ provide different values for the parity bit x α .This contradicts the fact that every parity bit can be uniquely determined successfully by the label-and-decide algorithm.Hence, the label-and-decide algorithm can not encode an encoding stopping set.This completes the proof. 2
+
+Conversely, if a Tanner graph does not contain any encoding stopping set, there must exist a linear complexity encoder for the corresponding code.Proof : We first delete all redundant check nodes (i.e., dependent on other check nodes) from the Tanner graph G. Next, we restrict our attention to the case that G is a connected graph.We will show that G can be equivalently transformed into a pseudo-tree if it is free of any encoding stopping set.Since G does not contain any encoding stopping set, G itself is not an encoding stopping set.Hence, there exist some degree-one bit nodes in G.We generate a multi-layer graph T and place those degree-one bit nodes in the first tier of T .Next, the check nodes that connect to the degree-one bit nodes in the first tier of T are placed in the second tier of T .
+
+Notice that there exist at least one bit node x α in G\T such that x α connects to at most one check node in G\T .This statement is true.Otherwise, G\T becomes an encoding stopping set, which contradicts the fact that G does not contain any encoding stopping set.We pick all the bit nodes in G\T that connect to at most one check node in G\T and place them in the third tier of T .Correspondingly, those check nodes in G\T that connect to the bit nodes in the third tier of T are placed in the fourth tier of T .Each time we find bit nodes in G\T that connect to at most one check node in G\T , we place those bit nodes in a new tier 2s + 1 of T and place the check nodes connecting to those bit nodes in the following new tier 2s + 2 of T .We continue finding such bit nodes and increasing tiers till all the nodes in G are included in T .Up to now, the multi-layer structure constructed so far satisfies the conditions (A1), (A2), and (A4).
+
+Condition (A3) may fail to be satisfied.For example, as shown on the left in Figure 5, the check node C 4 in tier 4 is connected to two bit nodes x 6 and x 7 in tier 3, which contradicts condition (A3).To satisfy condition (A3), we further adjust the positions of the bit nodes.If a check node in tier 2i is connected to k bit nodes in the upper tiers of T , we pick one bit node in tier 2i − 1 from these k bit nodes and leave its position unchanged.Next, we drag the other k − 1 bit nodes from their initial positions in tier 2i − 1 to the (2i + 1)-th tier.To illustrate, let us focus on Figure 5 again.We drag the bit node x 7 from tier 3 to tier 5 and drag the bit node x 1 from tier 1 to tier 3. The newly formed graph is shown on the right in Figure 5, which follows condition (A3).By tuning the positions of the bit nodes in this way, the resulting hierarchical graph satisfies conditions (A1) to (A4).In this way, we transform G into a pseudo-tree.By Lemma 1, a pseudo-tree is linear time encodable.Therefore, the encoding
+complexity of G is O(M)
+where M denotes the number of independent check nodes contained in G.
+
+We now prove the case that G is a disjoint graph.Let G contain p connected subgraphs:
+G 1 , G 2 , .
+. ., G p .By the above analysis, the complexity of encoding
+G i is O(M i ), i = 1, 2, . . . , p,
+where M i denotes the number of independent check nodes contained in
+G i . Since G = G 1 ∪ G 2 ∪ . . . ∪ G p , then the encoding complexity of G is p i=1 O(M i ) = O( p i=1 M i ) = O(M)
+where M is the number of independent check nodes in G.This completes the proof.
+
+2
+
+From Theorem 2, we easily derive the following corollaries.
+
+Corollary 1 If a Tanner graph does not contain any encoding stopping set, then it can be represented by a union of pseudo-trees.
+
+The proof of Corollary 1 can be found in the proof of Theorem 2.
+
+
+Corollary 2
+
+The label-and-decide algorithm can encode any tree LDPC codes (whose Tanner graphs are cycle-free) with linear complexity.
+
+Proof : Let T be the Tanner graph of a tree LDPC code and S be an arbitrary subgraph of T .
+
+Since the Tanner graph T is a tree, its subgraph S is either a tree or a union of trees.Therefore, the graph S contains at least one bit leaf node with degree one.Since the graph S contains a degree-one bit node, S can not be an encoding stopping set.Since no subgraph of T is an encoding stopping set, by Theorem 2, the tree code T can be encoded in linear complexity by the label-and-decide algorithm.This completes the proof.the bottom to the top, as shown in Figure 6.We notice that if i > j, then there exists at least one bit that is contained in C i but not in C j .Assume the Tanner graph of the code contains an encoding stopping set E ∫ that contains check nodes C i 1 , C i 2 , . .., C ip .Let q = max(i 1 , i 2 , . . ., i p ).
+
+There exists at least one bit node x q in E ∫ that only connects to C q .This contradicts the fact that every bit node in an encoding stopping set is connected to at least two check nodes in the encoding stopping set.Hence, E ∫ is not an encoding stopping set.Since the Tanner graph of the LDPC code does not contain any encoding stopping set, by Theorem 2 it is linear time encodable.This completes the proof. 2
+
+Theorems 1 and 2 show that encoding stopping sets prevent the application of the label-anddecide algorithm.However, we will show in the next section that encoding stopping sets can also be encoded in linear complexity.
+
+
+VI. LINEAR COMPLEXITY ENCODING APPROACH FOR ENCODING STOPPING SETS
+
+Let E ∫ be an encoding stopping set.We say E ∫ is a k-fold-constraint encoding stopping set if the following two conditions hold.The key check nodes C α and C β indicate that two bits x γ and x δ that were previously labeled as information bits are actually parity bits, and their values are determined by C α and C β .We call the two bits x γ and x δ reevaluated bits.The bits x γ and x δ satisfy the following three conditions.
+△x γ = − C α = C α △x γ ⊕ △x δ = − C β = C β(7)
+If x δ is contained in both C α and C β , and x γ is only contained in C α , we derive the following equations.
+△x γ ⊕ △x δ = − C α = C α △x δ = − C β = C β(8)
+If x γ is only contained in C α and x δ is only contained in C β , we have the following equations.
+△x γ = − C α = C α △x δ = − C β = C β(9)
+From equations ( 7) to ( 9), we can get the correct values of x γ and x δ .In the third step, we recompute those parity bits that are affected by the new values of x γ and x δ .This encoding method is named label-decide-recompute and is described in Algorithm 2.
+
+Next, we analyze the computation complexity of the label-decide-recompute algorithm when encoding a 2-fold-constraint encoding stopping set.Every check node except for the two key check nodes C α and C β are computed at most twice in the label-decide-recompute encoding (label-and-decide step and recompute step) while the two key check nodes C α and C β need to be computed only once.In addition, we need one extra XOR operation to compute the two reevaluated bits x γ and x δ by equations ( 7) to (9).Hence, the encoding complexity of the labeldecide-recompute algorithm is less than or equal to 2 Using Algorithm 8 to pick two information bits x γ and x δ that satisfy conditions (D1) to (D3).
+• M −2 i=1 (k i − 2) + (k α − 1) + (k β − 1) + 1 where k i , 1 ≤ i ≤ M − 2,
+Determine the parity bits x p 1 , x p 2 , . .., x ps that are affected by the values of x γ and x δ ;
+
+
+Encoding:
+
+Fill the values of the information bits except for x γ and x δ ;
+
+Assign x γ = 0 and x δ = 0; time.The pre-processing (determining key check nodes, reevaluated bits, and parity bits affected by the reevaluated bits) is done offline and does not count towards encoder complexity.We look at an example.Figure 4 shows a 2-fold-constraint encoding stopping set E ∫ .After deleting the two check nodes C 8 and C 9 , E ∫ becomes the pseudo-tree shown in Figure 2. In addition, the value of the bit node x 5 affects C 8 and the value of the bit node x 8 affects C 9 .
+Encode E ∫ \{C α , C β }
+Hence, the two bits x 5 and x 8 are reevaluated bits.We use the label-decide-recompute algorithm to encode E ∫ as follows.
+
+Step 1. Assign x 5 = 0 and x 8 = 0. Encode the pseudo-tree part following the procedures on page 10.
+
+Step 2. Compute the values of the key check nodes C 8 and C 9 , e.g., C 8 = x 1 ⊕ x 2 ⊕ x 3 ⊕ x 4 and
+C 9 = x 1 ⊕ x 2 ⊕ x 8 ⊕ x 16 .
+Step 3a.If C 8 = 0 and C 9 = 0, stop encoding and output the codeword [x 1 x 2 . . .x 16 ].
+
+Step For example, if the correct value of x γ is different from its original value x 0 γ , we simply flip the values of those parity bits that are affected by x γ .We name the above encoding method label-decide-flip and describe it in Algorithm 3. The encoding complexity of Algorithm 3 is M • (k − 1) XOR operations plus two vector flipping operations.We, again, look at an example.
+
+The 2-fold-constraint encoding stopping set shown in Figure 4 can be encoded by Algorithm 3 as follows.
+
+Step 1. Assign x 5 = 0 and x 8 = 0. Encode the pseudo-tree part following the procedures on page 10.
+
+Step 2. Compute the values of the parity check equations C 8 and C 9 , e.g.,
+C 8 = x 1 ⊕ x 2 ⊕ x 3 ⊕ x 4 and C 9 = x 1 ⊕ x 2 ⊕ x 8 ⊕ x 16 .
+Step 3a.If C 8 = 0 and C 9 = 0, stop encoding and output the codeword [x 1 x 2 . . .Using Algorithm 8 to pick two information bits x γ and x δ that satisfy conditions (D1) to (D3).
+
+Determine the parity bits x u 1 , x u 2 , . .., x ur that are affected by the value of x γ and group x u 1 , Determine the parity bits x q 1 , x q 2 , . .., x qt that are affected by the value of x γ ⊕ x δ and group
+x u 2 , . . ., x ur in a vector − → X γ = [x u 1 x u 2 . . .x q 1 , x q 2 , . . ., x qt in a vector − → X ǫ = [x q 1 x q 2 . . . x qt ].
+
+Encoding:
+
+Fill the values of the information bits except for x γ and x δ ;
+
+Assign x γ = 0 and x δ = 0;  7) to (9);
+Encode E ∫ \{C α , C β }if x γ = 1 then Flip the vector − → X γ . end if if x δ = 1 then Flip the vector − → X δ . end if if x γ ⊕ x δ = 1 then Flip the vector − → X ǫ .
+
+end if end if
+
+Output the encoding result.
+
+
+Encoding:
+
+Fill the values of the information bits except for x * .
+
+Assign x * = 0.
+
+Encode E ∫ \C * using Algorithm 1, compute the values of the M − 1 parity bits.
+
+Verify the parity check equation C * .
+
+if the parity check equation C * is not satisfied then
+
+x * ← 1.Output the encoding result.
+
+
+VII. LINEAR COMPLEXITY ENCODING FOR GENERAL LDPC CODES
+
+In this section, we propose a linear complexity encoding method for general LDPC codes.We will show that any Tanner graph can be decomposed into pseudo-trees and encoding stopping sets that are 1-fold-constraint or 2-fold-constraint.By encoding each pseudo-tree or encoding stopping set using Algorithm 1 or Algorithm 2, we achieve linear time encoding for arbitrary LDPC codes.
+
+To proceed, we provide the following definition.Given a Tanner graph G and its subgraph S, we call the bit nodes in G but not in S the outsider nodes of S. For example, Figure 7 shows a  We start from LDPC codes with maximum column weight 3 by proving the following lemma.
+
+Lemma 3 Assume the maximum bit node degree of a Tanner graph G is three, then one of the following statements must be true.
+
+(E1) There are no pseudo encoding stopping sets or encoding stopping sets in G.
+
+(E2) There exists a pseudo encoding stopping set in G.All the bit nodes in the pseudo encoding stopping set have uniform degree 2.
+
+(E3) There exists a 1-fold-constraint or a 2-fold-constraint encoding stopping set in G.
+
+Proof : We only need to prove either condition (E2), or condition (E3), is true if G contains a pseudo encoding stopping set, or an encoding stopping set, respectively.We prove this statement by constructing a subgraph S from the Tanner graph G. Initially S is empty.We pick a check node C 1 from G that contains the smallest number of bit nodes.Next, we add C 1 and all the bit nodes contained in C 1 to S. We keep adding check nodes and their associated bit nodes to S till S contains a pseudo encoding stopping set or an encoding stopping set.Each time we add a check node to S, we always pick the check node that contains the fewest outsider nodes of S.
+
+If S contains an encoding stopping set, we also add all the check nodes in G\S that contain zero outsider nodes to S. Next, we discuss two different cases.
+
+S contains an encoding stopping set.Assume S contains k check nodes and the j-th added check node C j is the last check node that introduces outsider nodes to S. We will show that k − j ≤ 2. Assume C j adds p outsider nodes x j 1 , x j 2 , . .., x jp to S. We will prove that the (j + 1)-th added check node C j+1 connects to all the p bit nodes x j 1 , x j 2 , . .., x jp .If C j+1
+
+does not connect to all the p bit nodes, then C j+1 contains a smaller number of outsider nodes than C j and should be added earlier than C j since we always pick the check node that contains the smallest number of outsider nodes and add it first to S. This contradicts the fact that C j+1 is added to S after C j .Therefore, C j+1 should connect to all the p bit nodes x j 1 , x j 2 , . .., x jp .
+
+Similarly, C j+2 , . .., C k connect to all the p bit nodes x j 1 , x j 2 , . .., x jp .Since any bit node can connect to at most three check nodes, it follows that k − j ≤ 2, which means at most two check nodes are added to S after C j .Notice that S does not contain any encoding stopping set before adding C j+1 .Hence, the encoding stopping set in S is either a 1-fold-constraint encoding stopping set or a 2-fold-constraint encoding stopping set.Condition (E2) is satisfied.
+
+S is a pseudo encoding stopping set.It follows that the binary sum of all the check nodes in S is zero.So, the degree of every bit node in S is an even number.Since the maximum bit node degree is three, the degree of each bit node in S is two.Condition (E3) is satisfied.
+
+This completes the proof. 2
+
+We detail the method of determining a pseudo encoding stopping set or an encoding stopping set in Algorithm 5. while F lag = 0 and G = S do Find a check node C i in G\S that contains the smallest number of outsider nodes of S.
+
+Add C i and all its associated outsider nodes to S.
+
+if C i does not introduce new bit nodes to S then
+A ← S.
+while there exists a bit node x of degree one in A do
+
+Delete the degree-one bit node x and the check node connecting to x from A.
+
+end while if A = φ then S does not contain any pseudo encoding stopping set or encoding stopping set.
+
+else
+F lag ← 1. end if end if i = i + 1.
+end while if F lag = 1 then if all the bit nodes in A are of degree 2 then
+
+The subgraph A is a pseudo encoding stopping set.
+
+
+else
+
+The subgraph A is an encoding stopping set.
+
+
+end if
+
+Output A.
+
+
+else
+
+The Tanner graph G does not contain pseudo encoding stopping sets or encoding stopping sets.
+
+
+end if
+
+October 15, 2008 DRAFT check node from G 1 and G 1 becomes a pseudo-tree.If G 1 is an encoding stopping set, it is either a 1-fold-constraint or a 2-fold-constraint encoding stopping set by Lemma 3.
+
+Next, we look at the subgraph G\G 1 .We first transform the parity check equations in G\G 1 into generalized parity check equations by moving the bits contained in G 1 from the left-hand side of the equation to the right-hand side of the equation.Let a parity check equation C contain k bit nodes x 1 , x 2 , . .., x k where the bits x q+1 , . .., x k are also in G 1 , then the parity check equation C can be rewritten as
+x 1 ⊕ x 2 ⊕ . . . ⊕ x k = 0 =⇒ x 1 ⊕ x 2 ⊕ . . . ⊕ x q = x q+1 ⊕ x q+2 ⊕ . . . ⊕ x k = b(10)
+In equation (10)
+
+we derive that
+b 1 ⊕ b 2 ⊕ . . . ⊕ b m = 0(12)
+Hence, we can replace any generalized parity check equation in (11) by the new parity check equation (12).From the above analysis, we can delete any check node from G 2 to make G 2 a pseudo-tree.To maintain the code structure, we also generate a new check node C * that represents the parity check equation (12).Since the parity check equation ( 12 By continuing to find pseudo-tree or encoding stopping sets in this way, we reach the stage
+
+where
+G\{G 1 ∪ G 2 ∪ . . . ∪ G i } = φ or G\{G 1 ∪ G 2 ∪ . . . ∪ G i }p i=1 (2 • M i • (k i − 1)) = 2 • M • (k − 1)
+where k denotes the average number of bits contained in each independent check node of G.This completes the proof.
+
+2
+
+We summarize the algorithm of decomposing a Tanner graph with maximum bit node degree 3 into pseudo-trees and encoding stopping sets in Algorithm 6 and the algorithm to encode such LDPC codes in Algorithm 7.
+
+Next, we extend the linear time encoding method described in Theorem 3 to LDPC codes October 15, 2008 DRAFT Algorithm 6 Decompose a Tanner graph G with maximum bit node degree 3 into 1-foldconstraint encoding stopping sets, 2-fold-constraint encoding stopping sets, and pseudo-trees.
+
+Find a pseudo encoding stopping set or an encoding stopping set G 1 from G using Algorithm 5.
+G = G\G 1 .
+if G 1 is a pseudo encoding stopping set then Delete a check node in G 1 .G 1 becomes a pseudo-tree.
+end if i = 1.
+while there exists a pseudo encoding stopping set or an encoding stopping set in G do Find a pseudo encoding stopping set or an encoding stopping set G i+1 from G using
+Algorithm 5. Assume G i+1 contain m check nodes C 1 , C 2 , . . . , C m . G = G\G i+1 if G i+1 is a pseudo encoding stopping set then G i+1 = G i+1 \C m . G i+1 becomes a pseudo-tree. Generate a new check node C * = C 1 ⊕ C 2 ⊕ . . . ⊕ C m .
+Add C * to G i and regenerate pseudo-trees and encoding stopping sets in G i ∪ C * .
+end if i = i + 1.
+end while
+G i+1 = G.
+Output a sequence of subgraphs G 1 , G 2 , . .., G p where G i , 1 ≤ i ≤ p, is either a pseudo-tree or an encoding stopping set (1-fold-constraint or 2-fold-constraint.)
+
+with arbitrary column weight and row weight.if G i is a pseudo-tree then Encode G i using Algorithm 1.
+
+else Encode G i using Algorithm 2.
+
+
+end if end for
+
+Output the encoded codeword.The N bit nodes have degrees j 1 , j 2 , . .., j N , respectively.Among the N bit nodes in C, there are s bit nodes whose degrees are greater than 3 and their degrees are j 1 , j 2 , . .., j s .This LDPC code can be equivalently transformed into another LDPC code C ′ with maximum column weight 3. The new code C ′ has M + ( s i=1 j i − 3s) check nodes and N + ( s i=1 j i − 3s) bit nodes.By Theorem 3, the LDPC code C ′ can be encoded in linear time and the encoding complexity is less than 2
+• M ′ • (k ′ − 1)
+. where M ′ is the number of independent check nodes in C ′ and k ′ is the average degree of independent check nodes in C ′ .Since there October 15, 2008 DRAFT are s i=1 j i − 3s auxiliary check nodes in C ′ that have degree 2, we derive that
+2 • M ′ • (k ′ − 1) = 2 • M • (k − 1) + s i=1 j i − 3s • (2 − 1) < 2 • M • (k − 1) + N i=1 j i − N < 2 • M • (k − 1) + M i=1 k i − M = 4 • M • (k − 1)(13)
+Therefore, the overall computation cost of encoding C ′ is less than 4
+• M • (k − 1). As the LDPC code C is equivalent to the LDPC code C ′ , the complexity of encoding C is less than 4•M •(k−1).
+This completes the proof.
+
+Let's look at an example.The parity check matrix of a (13,26) LDPC code with column weight 3 is shown in (14).Assume the values of the 13 information bits are 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, and 1.We apply the proposed linear complexity encoding method to encode this code.
+H =                                  
+1 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 1 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 1 1 0 1 0 0 0 1 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 1 1 0 0 0 0 1 0 1 0 0 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 1 1 0 1 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 1 1 1 0 1 0 1 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 1 1 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 1 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 1 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 1 1 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0
+                                 (14)
+Preprocessing.We construct an encoding stopping set from (14) using Algorithm 5. We start from an empty graph S and add check nodes and their associated bit nodes to S. Each time we add a check node, we always pick the check node that contains the smallest number of outsider nodes of S. After adding 7 check nodes, the resulting graph is a pseudo-tree, as shown in Figure 11.When 9 check nodes are considered, we get the 2-fold-constraint encoding stopping set E 1 shown in Figure 12.The bits x 9 , x 13 , x 22 , x 23 , x 5 , x 16 , x 4 , x 12 , x 17 are information bits.The two check nodes C 10 and C 12 are key check nodes, and the two bit nodes x 1 and x 18 are reevaluated bits.
+
+After finding the encoding stopping set E 1 , the remaining Tanner graph of the code can be constructed to be a 2-fold-constraint encoding stopping set E 2 , as shown in Figure 13.Therefore, the LDPC code can be partitioned into two encoding stopping sets E 1 and E 2 that are shown in
+
+
+Encoding.
+
+Encode E 1 :
+
+Step 1. Fill the values of the information bits, i.e., [x 9 x 13 x 22 x 23 x 5 x 16 x 4 x 12 x 17 ] = [0 1 1 1 0 1 1 0 0].Assign x 1 = 0 and x 18 = 0.
+
+Step 2. Encode the pseudo-tree shown in Figure 11.Compute the parity bits x 21 , x 14 , x 8 , x 7 , x 10 ,
+
+x 24 , x 2 as follows.
+
+x 21 = x 1 ⊕ x 9 ⊕ x 13 ⊕ x 22 ⊕ x 23 = 1
+
+x 14 = x 9 ⊕ x 13 ⊕ x 5 ⊕ x 16 ⊕ x 18 = 0 Step 4. Since C 10 = 1 and C 12 = 1, the correct values of x 1 and x 18 are x 1 = C 10 = 1 and
+
+x 18 = C 12 = 1.
+
+Step 5. Recompute the parity bits x 21 , x 14 , x 8 , and x 10 based on the new values of x 1 and x 18 .We derive that x 21 = 0, x 14 = 1, x 8 = 0, x 10 = 1.
+
+Encode E 2 :
+
+Step 6. Fill the values of the information bits, i.e., [x 11 x 15 x 19 x 25 ] = [1 0 1 1].Assign x 3 = 0 and x 6 = 0.
+
+Step 7. Compute the parity bits x 20 , x 26 as follows.
+
+x 20 = x 3 ⊕ x 6 ⊕ x 11 ⊕ x 15 ⊕ x 19 = 0
+x 26 = x 3 ⊕ x 6 ⊕ x 11 ⊕ x 19 ⊕ x 25 ⊕ x 24 = 1
+Notice that the value of the parity bit x 26 is based on the value of the bit x 24 in E 1 .
+
+Step
+
+
+VIII. CONCLUSION
+
+This paper proposes a linear complexity encoding method for general LDPC codes by analyzing and encoding their Tanner graphs.We show that two particular types of Tanner graphspseudo-trees and encoding stopping sets can be encoded in linear time.Then, we prove that any Tanner graph can be decomposed into pseudo-trees and encoding stopping sets.By encoding the pseudo-trees and encoding stopping sets in a sequential order, we achieve linear complexity encoding for arbitrary LDPC codes.The proposed method can be applied to a wide range of codes; it is not limited to LDPC codes.It is applicable to both regular LDPC codes and irregular LDPC codes.It is also good for both "low density" parity check nodes and "medium-to-high density" parity check nodes.In fact, the proposed linear time encoding method is applicable to any type of block codes.It removes the problem of high encoding complexity for all long block codes that historically are commonly encoded by matrix multiplication.
+
+elseF lag ← 1 ,
+1
+exit the while loop.
+
+
+Fig. 1 .
+1
+Fig. 1.Left: A Tanner graph.Right: Labeling bit nodes on the Tanner graph shown on the left.
+
+
+Fig. 2 .
+2
+Fig. 2. A pseudo-tree.
+
+
+Fig. 3 .
+3
+Fig. 3.A pseudo encoding stopping set.
+
+
+Theorem 2
+2
+If a Tanner graph G does not contain any encoding stopping set, then it can be encoded in linear time by the label-and-decide algorithm.
+
+
+Fig. 4 .
+4
+Fig. 4.An encoding stopping set whose proper subgraph is a pseudo-tree shown in Figure 2.
+
+
+Fig. 5 .
+5
+Fig. 5. Left: A multi-layer structure but not a pseudo-tree.(Note that C4 has two parents x6 and x7 and C1 has two parents x1 and x2.) Right: The pseudo-tree that evolves from the multi-layer structure shown on the left.
+
+
+Fig. 6 .
+6
+Fig. 6.A parity check matrix in upper triangular form.
+
+
+
+
+stopping set.We encode E ∫ in three steps.In the first step, we encode E ∫ \{C α , C β } using the label-and-decide algorithm according to Theorem 2. During encoding, M − 2 bit nodes are labeled as parity bits and the remaining bit nodes are labeled as information bits.In the second step, we verify the two key check nodes C α and C β based on the bit values acquired in Step 1.
+
+
+(
+
+D1) x γ is constrained by the parity check equation C α .(D2) x δ is constrained by the parity check equation C β .(D3) x γ and x δ are not both contained in C α and C β .Since C α , C β , and the other check nodes in E ∫ are independent of each other, there must exist bit nodes x γ and x δ that satisfy conditions (D1) to (D3).An algorithm for finding reevaluated bits x γ and x δ from a 2-fold-constraint encoding stopping set is presented in Appendix A. Notice that the work load to find the two key check nodes and the two reevaluated bits is a preprocessing step that is carried out only once.Assume in step 1 that x γ and x δ are randomly assigned initial values x 0 γ and x 0 δ , respectively.If the parity check equations C α and C β are both satisfied, the initial values x 0 γ and x 0 δ are the correct values for x γ and x δ .If C α , or C β , or both, are not satisfied, we need to recompute the values of x γ and x δ from the values of the key check nodes C α and C β .Let △x γ = x γ − x 0 γ and △x δ = x δ − x 0 δ where x γ and x δ are the correct values of x γ and x δ , respectively, and let C α and C β be the values of the key check nodes C α and C β , respectively.If x γ is contained in both C α and C β , and x δ is only contained in C β , we derive the following equations.
+
+
+
+
+are the degrees of the check nodes other than C α , C β and k α , k β are the degrees of the check nodes C α and C β , respectively.The encoding complexity of the label-decide-recompute algorithm can be further simplified to be less than 2 • M • (k − 1) where M is the number of check nodes in the encoding stopping set and k is the average number of bit nodes contained in each check node in the encoding stopping set.This shows that the label-decide-recompute algorithm encodes any 2-fold-constraint encoding stopping set in linear Algorithm 2 Label-decide-recompute algorithm for a 2-fold-constraint encoding stopping set E ∫ of size M Preprocessing (carry out only once): Find two check nodes C α and C β such that E ∫ \{C α , C β } does not contain any encoding stopping set;
+
+
+
+
+using Algorithm 1. Compute the values of the M − 2 parity bits; Compute the values C α and C β of the key check nodes C α and C β , respectively; if C α = 0 or C β = 0 then Recompute the values of x γ and x δ from C α and C β by equations (7) to (9); for i = 1 to s do Recompute the value of the parity bit x p i based on the new values of x γ and x δ ;
+
+
+8 and x 8 =Algorithm 3
+883
+x 16 ].Step 3b.If C 8 = 1 or C 9 = 1, recompute the values of x 5 and x 8 as the following: x 5 = C C 9 where C 8 and C 9 are the values of the parity check equations C 8 and C 9 , respectively.Ifx 5 = 1, flip the vector [x 1 x 2 x 3 ] to be [∼ x 1 ∼ x 2 ∼ x 3 ].If x 8 = 1, flip the vector [x 3 x 4 ].If x 5 ⊕ x 8 = 1, flip the vector [x 4 ].Output the codeword [x 1 x 2 . . .x 16 ].It is easy to revise Algorithm 2 and Algorithm 3 to encode a 1-fold-constraint encoding stopping set.For example, Algorithm 4 shows the label-decide-recompute algorithm for a 1-Label-decide-flip algorithm for a 2-fold-constraint encoding stopping set E ∫ of size M Preprocessing (carry out only once):Find two check nodes C α and C β such that E ∫ \{C α , C β } does not contain any encoding stopping set;
+
+
+using Algorithm 1 .
+1
+Compute the values of the M − 2 parity bits; Compute the values C α and C β of the parity check equations C α and C β , respectively; if C α = 0 or C β = 0 then Recompute the values of x γ and x δ from C α and C β by equations (
+
+
+for i = 1
+1
+to s do Recompute the value of the parity bit x p i based on the new value of x * ;
+
+
+
+
+graph G and its subgraph S. Since in Figure7the two bit nodes x 1 and x 2 are in G but not in S, x 1 and x 2 are outsider nodes of S. The check node C 2 contains two outsider nodes of S, i.e., is connected to two outsider nodes.The check node C 1 contains zero outsider nodes of S.
+
+
+Fig. 7 .
+7
+Fig. 7. Outsider nodes.
+
+
+Theorem 3 Algorithm 5
+35
+Let G be the Tanner graph of an LDPC code.If the maximum bit node degree of G is three, then the LDPC code can be encoded in linear time and the encoding complexity is less than 2 • M • (k − 1) where M is the number of independent check nodes in G and k is the average number of bit nodes contained in each check node.Proof : If the Tanner graph G does not contain any encoding stopping set, then the corresponding LDPC code can be encoded in linear time by Theorem 2. Therefore, we only need to prove Theorem 3 for the case that G contains encoding stopping sets.Since the maximum bit node degree of G is three, by Lemma 3 there exists a pseudo encoding stopping set or an encoding stopping set G 1 in G.If G 1 is a pseudo encoding stopping set, we simply delete a redundant Find a pseudo encoding stopping set or an encoding stopping set (1-fold-constraint or 2-fold-constraint) from a Tanner graph G with maximum bit node degree 3. S = φ.F lag ← 0. i = 1.
+
+
+
+
+) only contains bits in G 1 , we add the new check node C * to G 1 and regenerate encoding stopping sets or pseudo-trees in the graph G 1 ∪ C * .Generally, we can find a pseudo encoding stopping set or an encoding stopping set G i+1 from the subgraph G\{G 1 ∪ G 2 ∪ . . .∪ G i }.If G i+1 is an encoding stopping set, G i+1 is either a 1fold-constraint or a 2-fold-constraint encoding stopping set by Lemma 3. If G i+1 is a pseudo encoding stopping set, we operate in three steps.In the first step, we sum up all the generalized parity check equations in G i+1 to generate a new parity check equation C * .In the second step, we delete one check node from G i+1 to make G i+1 a pseudo-tree.In the third step, we add the new check node C * to G i and regenerate pseudo-tree or encoding stopping sets in G i ∪ C * .Notice that the new parity check equation C * in (12) does not incur extra cost to compute variables b 1 , b 2 , . .., b m since these variables have already been computed in those generalized parity check equations in G i+1 , as shown in (11).Practically, we can compute these variables b 1 , b 2 , . .., b m only once and store them.Later, we can apply the stored values b 1 , b 2 , . .., b m to both equation (12) and equation (11).Hence, the new parity check equation C * only needs m − 1 additional XOR operations to compute the summation of b 1 , b 2 , . .., b m .Since the cost of encoding the pseudo-tree G i+1 is (m − 1) • (k − 2) where k is the average degree of the remaining m − 1 check nodes in G i+1 , the overall cost of encoding G i+1 and the new parity check equation C * is (m − 1) • (k − 1).
+
+
+Theorem 4
+4
+Any LDPC code C with arbitrary column weight distribution and row weight distribution can be encoded in linear time, and the encoding complexity is less than 4 • M • (k − 1) where M is the number of independent check nodes in C and k is the average degree of check nodes.Proof : We first show that an LDPC code with arbitrary column weight distribution and row October 15, 2008 DRAFT Algorithm 7 linear complexity encoding algorithm for LDPC codes with maximum bit node degree 3 Preprocessing (carry out only once): Apply Algorithm 6 to decompose the Tanner graph G of the code into p subgraphs G 1 , G 2 , . .., G p where G i , i = 1, 2, . . ., p, is either a pseudo-tree or a 1-fold-constraint encoding stopping set or a 2-fold-constraint encoding stopping set.Encoding: for i = 1 to p do Compute the constants on the right-hand side of the generalized parity check equations of G i based on the already known bit values of G 1 , G 2 , . .., G i−1 .
+
+
+Fig. 8 .Figure 8 .
+88
+Fig. 8. Transform a bit node of degree 4 into two bit nodes of degree 3 and an auxiliary check node.
+
+
+Fig. 9 .
+9
+Fig. 9. Transform a bit node of degree 5 into three bit nodes of degree 3 and two auxiliary check nodes.
+
+
+Fig. 10 .
+10
+Fig. 10.Transform a bit node of degree k into k − 2 bit nodes of degree 3 and k − 3 auxiliary check node.
+
+
+Figure 13 .
+13
+Figure 13.The bits x 11 , x 15 , x 19 , x 25 in the encoding stopping set E 2 are information bits.The two check nodes C 3 and C 5 are key check nodes of E 2 , and the two bit nodes x 3 and x 6 are reevaluated bits of E 2 .
+
+
+x 8 = 1 x 7 = 1 Step 3 .
+81713
+x 23 ⊕ x 16 ⊕ x 18 ⊕ x 4 ⊕ x 12 = x 13 ⊕ x 23 ⊕ x 5 ⊕ x 12 ⊕ x 17 = 0 x 10 = x 1 ⊕ x 22 ⊕ x 5 ⊕ x 4 ⊕ x 17 = 0 x 24 = x 21 ⊕ x 14 ⊕ x 8 ⊕ x 7 ⊕ x 10 = 0 x 2 = x 22 ⊕ x 24 ⊕ x 16 ⊕ x 7 ⊕ x 4 =Compute the values of the parity check equations C 10 and C 12 .C 10 = x 2 ⊕ x 9 ⊕ x 10 ⊕ x 12 ⊕ x 14 ⊕ x 18 = 1, and C 12 = x 1 ⊕ x 2 ⊕ x 8 ⊕ x 17 ⊕ x 21 = 1.
+
+
+8 . 1 .
+81
+Compute the values of the parity check equations C 3 and C 5 .C 3 = x 3 ⊕ x 20 ⊕ x 11 ⊕ x 15 ⊕x 26 ⊕ x 25 = 1, andC 5 = x 6 ⊕ x 20 ⊕ x 15 ⊕ x 19 ⊕ x 26 ⊕ x 25 = 1.Step 9. Since C 3 = 1 and C 5 = 1, the correct values of x 3 and x 6 arex 3 = C 3 = 1 and x 6 = C 5 =The encoded codeword is [x 9 x 13 x 22 x 23 x 5 x 16 x 4 x 12 x 17 x 1 x 18 x 21 x 14 x 8 x 7 x 10 x 24 x 2 x 11 x 15 x 19 x 25 x 3 x 6 x 20 x 26 ]
+
+
+Fig. 11 .
+11
+Fig.11.A pseudo-tree built from the LDPC code described in(14).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+is the parent bit node of the check node C 6 .From the parity check equation C
+1)-th tier. By conditions (A3) and (A4), there is only one check node C α in the lowertiers that connects to x α . The value of x α is uniquely determined by the parity check equationrepresented by C α . According to condition (A3), all the bit nodes constrained by C α exceptfor x α are in tiers below the (2i − 1)-th tier. Therefore, the value of x α depends only on thevalues of the bit nodes below the (2i − 1)-th tier. For example, as shown in Figure 2, paritybit x 9
+October 15, 2008he value of x 9 is computed from the values of x 11 , x 12 , x 16 , and x 13 , which are locatedOctober 15, 2008DRAFT
+
+
+
+
+∫ have uniform degree two.It follows that the binary sum of all the parity check equations in E ∫ is a vector of 0's.Then, at least one check node in E ∫ is dependent on the other check nodes.This contradicts condition (B3) that all the check nodes in an encoding stopping set are independent of each other.Hence, a cycle code does not contain any encoding stopping set.By Theorem 2, a cycle code is linear time encodable by the label-and-decide algorithm.This completes the proof.
+
+[4]orollary 3 A regular LDPC code with column weight 2 (cycle code) can be encoded in linear complexity by the label-and-decide algorithm.Proof : We prove Corollary 3 by showing that a cycle code does not contain any encoding stopping set.Assume the cycle code contains an encoding stopping set E ∫ .By the definition of cycle code and condition (B2), all the bit nodes in E 2An alternative proof can be found in[4].October 15, 2008  DRAFT
+
+
+
+
+(C1) There exist k check nodes C 1 , C 2 , ..., C k in E ∫ such that E ∫ \{C 1 , C 2 , ..., C k } does not contain any encoding stopping set.We call the k check nodes C 1 , C 2 , ..., C k key check nodes.(C2)Foranyk− 1 check nodes C 1 , C 2 , ..., C k−1 in E ∫ , E ∫ \{C 1 , C 2 , ..., C k−1 } contains an encoding stopping set.The notation E ∫ \{C 1 , C 2 , ..., C k } denotes the remaining graph after deleting check nodes C 1 , C 2 , ..., C k from E ∫ .Figure4shows a 2-fold-constraint encoding stopping set.After deleting the two key check nodes C 8 and C 9 from this encoding stopping set, the Tanner graph turns into a pseudo-tree, see Figure2.We will focus on 1-fold-constraint and 2-fold-constraint encoding stopping sets in this paper, since we will show later that all types of LDPC codes can be decomposed into 1-fold or 2-fold constraint encoding stopping sets and pseudo-trees.
+
+Let us first look at a 2-fold-constraint encoding stopping set E ∫ of size M.By definition, there exist two key check nodes C α and C β in E ∫ such that E ∫ \{C α , C β } does not contain any encoding
+
+
+
+
+3b.If C 8 = 1 or C 9 = 1, recompute the values of x 5 and x 8 as follows: x 5 = C 8 and x 8 = C 9 , where C 8 and C 9 are the values of the parity check equations C 8 and C 9 , respectively.Recompute the parity bits x 1 , x 2 , x 3 , and x 4 based on the new values of x 5 and x 8 .Output the codeword [x 1 x 2 . ..x 16 ].The label-decide-recompute algorithm can be further simplified.We restudy the third step of the label-decide-recompute method.Assume p 1 , p 2 , . .., p m are the parity bits whose values need to be updated.In order to get the new values of the parity bits p 1 , p 2 , . .., p m , we need to recompute those parity check equations that relate to p 1 , p 2 , . .., p m .In fact, instead of recomputing the parity check equations relating to p 1 , p 2 , . .., p m , we can directly flip the values of the parity bits p 1 , p 2 , . .., p m since in the binary field the value of a bit is either 0 or 1.
+
+
+
+
+x ur ].Determine the parity bits x p 1 , x p 2 , . .., x ps that are affected by the value of x δ and group x p 1 , x p 2 , . .., x ps in a vector − → X δ = [x p 1 x p 2 . . .x ps ].
+
+
+
+
+October 15, 2008 DRAFT fold-constraint encoding stopping set.The encoding complexity of Algorithm 4 is less than 2 • M • (k − 1) where M is the number of check nodes in the encoding stopping set and k is the average number of bit nodes contained in each check node in the encoding stopping set.Find a check node C * such that E ∫ \C * does not contain any encoding stopping set.Pick an information bit x * that is constrained by the parity check equation C * .Determine the parity bits x p 1 , x p 2 , . .., x ps that are affected by x * .
+Algorithm 4 Label-decide-recompute algorithm for a 1-fold-constraint encoding stopping set E ∫of size MPreprocessing (carry out only once):
+
+
+
+, b becomes a constant after we encode G 1 and get the values of all the bits in G 1 .Since the maximum bit node degree of G\G 1 is less than or equal to three, we, again, find a pseudo encoding stopping set or an encoding stopping set G 2 from G\G 1 .If G 2 is an encoding stopping set, G 2 is either a 1-fold-constraint or a 2-fold-constraint encoding stopping set by Lemma 3. If G 2 is a pseudo encoding stopping set and we assume G 2 contains the following m generalized parity check equations, x 1,1 ⊕ x 1,2 ⊕ . . .x 1,a 1 = b 1 ⊕ x m,2 ⊕ . . .x m,am = b m
+x 2,1 ⊕ x 2,2 ⊕ . . . x 2,a 2 = b 2. . .. . .. . .. . .x m,1
+
+
+
+does not contain pseudo encoding stopping sets or encoding stopping sets.By the above analysis, we decompose the Tanner graph G into a sequence of p subgraphs G 1 , G 2 , . .., G p where G i , 1 ≤ i ≤ p, is either a 1-fold-constraint encoding stopping set, a 2-fold-constraint encoding stopping set, or a pseudo-tree.If G i is a 1-fold-constraint or a 2fold-constraint encoding stopping set, we apply Algorithm 2 or Algorithm 4 to encode G i and the resulting encoding complexity is less than 2 • M i • (k i − 1) where M i denotes the number of independent check nodes in G i and k i denotes the average number of bit nodes contained in each check node in G i .If G i is a pseudo-tree, we apply Algorithm 1 to encode G i and the corresponding encoding complexity is less than M i •(k i −1).The overall computation complexity of encoding G is linear on the number of independent check nodes M in G and is bounded by
+
+October 15, 2008 DRAFT
+Algorithm 8 Finding reevaluated bits x γ and x δ in a 2-fold-constraint encoding stopping set Represent the two key check equations C α and C β as functions of the information bits only.Assume C α is associated with q information bits x α 1 , x α 2 , . .., x αq and C β is associated withF lag ← 0.Choose the reevaluated bit x γ to be x γ = x α i .exit the for loop.end if end for if F lag = 1 thenChoose the reevaluated bit x δ to be x δ = x βp .elseChoose the reevaluated bit x γ to be x γ = x αq .Choose the reevaluated bit x δ to be x δ = x β i .exit the for loop.end if end for end ifOutput the two chosen reevaluated bits x γ and x δ .
+Low-Density Parity Check Codes. R G Gallager, 1963MIT PressCambridge, MA
+
+Good error-correcting codes based on very sparse matrices. D J C Mackay, IEEE Trans. Inform. Theory. 452March 1999
+
+Near Shannon limit error-correcting coding: Turbo codes. G Berrou, A Glavieux, P Thitimajshima, Proc. 1993 International Conf. Comm. 1993 International Conf. CommGeneva, SwitzerlandMay, 1993
+
+Efficient encoding of cycle codes: a graphical approach. J Lu, M F José, H Moura, Zhang, Proc. of 37th Asilomar Conference on Signals, Systems, and Computers. of 37th Asilomar Conference on Signals, Systems, and ComputersPACIFIC GROVE, CANov. 9-12, 2003
+
+An encoding stopping set developed from the LDPC code described in. Fig. 12
+
+Efficient encoding of quasi-cyclic low-density parity-check codes. Z Li, L Chen, L Zeng, S Lin, W H Fong, IEEE Trans. Comm. 541Jan. 2006
+
+Efficient encoding and minimum distance bounds of Reed-Solomon-type array codes. T Mittelholzer, Proc. of ISIT 2002. of ISIT 2002Lausanne, Switzerland2002282
+
+TS-LDPC codes: Turbo-structured codes with large girth. J Lu, M F José, Moura, IEEE Trans. Inform. Theory. 533Mar. 2007
+
+Low-density parity-check codes based on finite geometries: a rediscovery and new results. Y Kou, S Lin, M P C Fossorier, IEEE Trans. Inform. Theory. 477Nov. 2001
+
+A Family of irregular LDPC codes with low encoding complexity. S J Johnson, S R Weller, IEEE Comm. Letters. 72Feb. 2003
+
+Approximately lower triangular ensembles of LDPC codes with linear encoding complexity. S Freundlich, D Burshtein, S Litsyn, IEEE Trans. Inform. Theory. 534Apr. 2007
+
+Design of efficiently encodable moderate-length high-rate irregular LDPC codes. M Yang, W E Ryan, Y Li, IEEE Trans. Comm. 524Apr. 2004
+
+Iterative encoding of low-density parity-check codes. D Haley, A Grant, J Buetefuer, Proc. of IEEE Globecom. of IEEE GlobecomTaipei, Taiwan2002. Nov. 20022
+
+Two encoding stopping sets developed from the LDPC code described in. Fig. 13
+
+High rate reversible LDPC codes. D Haley, A Grant, Proc. of 5th Australian Communications Theory Workshop. of 5th Australian Communications Theory WorkshopNewcastle, AustraliaFeb. 2004
+
+Efficient encoding of low-density parity-check codes. T J Richardson, R L Urbanke, IEEE Trans. Inform. Theory. 472Feb. 2001
+
+A recursive approach to low complexity codes. R M Tanner, IEEE Trans. Inform. Theory. 275Sep. 1981
+
+Finite-length analysis of low-density parity-check codes on the binary erasure channel. C Di, D Proietti, E Telatar, T Richardson, R Urbanke, IEEE Trans. Inform. Theory. 486June 2002. October 15. 2008

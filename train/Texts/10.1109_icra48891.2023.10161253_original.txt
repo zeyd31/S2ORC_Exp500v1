@@ -1,0 +1,345 @@
+
+Resilient Terrain Navigation with a 5 DOF Metal Detector Drone
+
+
+Patrick Pfreundschuh 
+Rik Bähnemann 
+Tim Kazik 
+Thomas Mantel 
+Roland Siegwart 
+Olov Andersson 
+Resilient Terrain Navigation with a 5 DOF Metal Detector Drone
+
+Micro aerial vehicles (MAVs) hold the potential for performing autonomous and contactless land surveys for the detection of landmines and explosive remnants of war (ERW). Metal detectors are the standard detection tool but must be operated close to and parallel to the terrain. A successful combination of MAVs with metal detectors has not been presented yet, as it requires advanced flight capabilities. To this end, we present an autonomous system to survey challenging undulated terrain using a metal detector mounted on a 5 DOF MAV. Based on an online estimate of the terrain, our recedinghorizon planner efficiently covers the area, aligning the detector to the surface while considering the kinematic and visibility constraints of the platform. As the survey requires resilient and accurate localization in diverse terrain, we also propose a factor graph-based online fusion of GNSS, IMU, and LiDAR measurements. We validate the robustness of the solution to individual sensor degeneracy by flying under the canopy of trees and over featureless fields. A simulated ablation study shows that the proposed planner reduces coverage duration and improves trajectory smoothness. Real-world flight experiments showcase autonomous mapping of buried metallic objects in undulated and obstructed terrain.
+
+I. INTRODUCTION
+
+Worldwide, landmines and ERW caused more than 7000 casualties in 2020. Member states of the Mine Ban Treaty reported that approximately 12 000 km 2 are contaminated, making vast areas uninhabitable [1]. Reducing suspected hazardous areas is challenging, as those areas are inaccessible. Additionally, detecting and mapping potential contamination requires expert training. As land clearance is expensive, it should be limited to minimal confirmed hazardous areas [2].
+
+Recently, MAVs with various sensors have been investigated to accelerate land release. Drones can access any terrain without putting a person at risk and automatically collect geo-referenced data. In contrast to ground-based platforms, MAVs can inspect a surface contactless, relaxing traversability limitations [3] and eliminating the risk of accidental detonations. The essential sensor for humanitarian demining is the metal detector.
+
+However, implementing a metal detector on a drone has failed so far because of the advanced flight capabilities necessary to perform practical surveys. Detection performance highly depends on the sensor head alignment with the soil surface [4]. Thus, the drone needs to maintain distance while aligning the sensor parallel with the surface. This requires a customized mechanical platform concept This work was supported by Armasuisse W+T, Urs Endress Foundation's Project FindMine, a Wallenberg Foundation and WASP Postdoctoral Scholarship, and Swiss National Science Foundation's NCCR DFab P3.
+
+Authors are with Autonomous Systems Lab, ETH Zurich, e-mail:
+
+{patripfr, brik, tkazik, mantelt, rsiegwart, nandersson}@ethz.ch and online perception to navigate resiliently in unknown, obstructed, undulated, outdoor terrain. This work tackles this challenging surface tracking problem with a novel flying metal detector design. The system consists of a 5 DOF drone with a rigidly attached sensor. The drone can maneuver in all three translational directions and independently change its heading and pitch to align the sensor with the surface (Fig. 1). Simply aligning the sensor according to the surface normal is not ideal, as small changes in the normal can cause large motions of the platform as illustrated in Fig. 6. As this is inefficient, we propose a new local trajectory planner that trades off optimal alignment with minimal turning efforts and collision avoidance.
+
+During the survey, the system maps the terrain with Li-DAR. Precise surface tracking and complete coverage require accurate, smooth localization to keep the sensor close to the ground without touching it. The margins for inaccuracies are small, as they could result in a crash or invalid survey results, but ERW are often close to natural or human-made structures that cause GNSS outages or in feature-less areas which cause LiDAR inertial odometry (LIO) drift. We thus fuse these complementary modalities for resilient localization.
+
+The main contributions of our work are:
+
+• An autonomous system for a flying metal detector based on a 5 DOF MAV. • A receding-horizon trajectory planner that optimizes terrain alignment in real-time while considering drone maneuverability and online map updates. • Online factor graph GNSS, IMU, and LiDAR localization that is resilient to individual sensor degeneracy.
+
+We show in simulation that our receding-horizon planning reduces coverage duration while maintaining sensor alignment. Real-world experiments show autonomous surveying of undulated and obstructed terrain and consistent localization even under the loss of GNSS or drift in LIO.
+
+
+II. RELATED WORK
+
+
+A. Flying Robotic ERW Detection
+
+Several works towards ERW detection using aerial platforms exist. Some systems use ground penetrating radars [5]- [7] or cameras [8]. While these sensors can survey large areas from relatively far distances, standardization, and target detection are still being investigated. Yoon et al. [9] use a magnetometer but require special data processing to detect small objects. The most accepted sensor for deminers is the metal detector. Due to the limited sensing range of metal detectors, the sensor head must remain close and parallel to the surface for a strong sensor response [4]. Underactuated MAVs have coupled translational and rotational dynamics, which makes surface alignment challenging. The Mine Kafon Drone [10] proposed to solve this by mounting the metal detector on a gimbal but has not reported results yet. Our 5 DOF MAV with a rigidly mounted metal detector avoids the necessity of a gimbal as the vehicle pose directly controls the sensor orientation. Furthermore, our system is the first to perceive the environment online and avoid obstacles.
+
+
+B. Resilient Online State Estimation with GNSS and LIO
+
+Both loosely-and tightly-coupled sensor fusion leverage the complementary nature of GNSS and LIO. The authors in [11] present a loosely-coupled approach that deploys a dualfactor graph to fuse the different modalities. In contrast, [12] uses an extended Kalman filter (EKF) to perform a tightlycoupled fusion of LiDAR, inertial, and GNSS measurements. LIO-SAM [13] uses a factor graph [14] to tightly fuse IMU and GNSS with scan-matching LIO. These approaches assume that the transformation between the local odometry and the GNSS frame is directly measured using a second GNSS receiver [11] or estimated in advance [12], [13] with an external pipeline that requires an initialization motion. Inspired by visual-inertial GNSS fusion [15]- [17], we formulate this transformation as an extrinsic online calibration. In contrast to the LIO-GNSS fusion frameworks above, we fuse the GNSS measurements into the odometry frame without requiring prior knowledge about the heading offset between the reference frames. Additionally, we define it as a transformation that varies over time to compensate for drift accumulating from LIO over periods of GNSS dropouts.
+
+
+C. Trajectory Planning on Surfaces
+
+Finding the optimal flight trajectory for surface coverage in unknown 3D environments under visibility constraints is a challenging planning problem. Since the exact solution is computationally intractable, this work assumes a given coverage path for a region of interest. We then attempt to find a 5 DOF flight trajectory that accurately tracks the terrain surface to ensure good alignment for ERW detection, while, in real-time, considering terrain visibility, speed, smoothness, and avoiding collisions. Earlier work addresses either planning on manifolds without considering coverage or coverage planning that either does not consider MAV kinematics or runs only offline. Manifold planning approaches include [18], which uses a model-predictive control approach, and [19], which proposes a reactive planner based on Riemannian motion policies. Visibility constraints are also included in [20] but do not consider coverage or run in real-time. On the other hand, [21] proposes a belief-space approach to optimize the coverage of free-flight MAV trajectories, but it is vulnerable to local minima and does not run onboard. Finally, [22] plans coverage patterns high above 3D terrain for remote sensing but does not consider MAV kinematics or appear suitable for real-time flight.
+
+III. PLATFORM SETUP We built our system on top of a tricopter from Voliro AG. The platform, shown in Fig. 2, has fully actuated front propellers, allowing position control independent of the body pitch angle. The additional actuation also improves stable flight near surfaces where disturbances from propeller wash occur. We equipped the platform with an Ouster OS0-128 LiDAR with a 90°vertical field of view (FOV), allowing it to observe close terrain. The rear-facing FOV is partially obscured by the body. We also use an u-blox ZED-F9P multi-band RTK-GNSS receiver. A Bosch BMI085 IMU provides inertial measurements. Finally, a Garret ACE300i metal detector with 0.25 m major axis length is rigidly attached at the front. A custom microcontroller interface captures the digital output from the metal detector and sends it to the vehicle's onboard computer. The software stack runs on a single-board PC with an AMD 4800U x86 CPU.
+
+
+IV. RESILIENT GNSS, IMU AND LIDAR FUSION
+
+This section describes our GNSS and LIO fusion. Existing approaches [11]- [13] fuse the odometry into the GNSS frame, which requires prior knowledge of the yaw between the two reference frames. Our system directly operates in the LIO frame and estimates the alignment between the coordinate frames online. Thus our system is immediately deployable without prior initialization motion or sensing.
+
+
+A. Notation and Problem Definition
+
+We define a fixed gravity-aligned odometry frame O with origin at the initial pose of the IMU. The GNSS receiver measures position with respect to an east-north-up gravityaligned inertial frame I, with origin at the position of the first measurement. The IMU frame serves as the robot body frame B. The detector frame D is placed in the center of the metal detector and aligned with the two axes of its elliptical coil. We define the robot's state as
+x = [R OB , O p B , O v B , B b a , B b g ],
+where R ∈ SO(3) and p ∈ R 3 represent the body orientation and position. v B ∈ R 3 is its linear velocity, while b a ∈ R 3 and b g ∈ R 3 indicate the accelerometer and gyro biases of the IMU. The transformation from the inertial to the odometry frame is T OI ∈ SE (3). The relative position B p P between the GNSS receiver and the IMU is known. t i , t j , t k are IMU, LiDAR, and GNSS measurements timestamps.
+
+Given the set of LIO estimates, GNSS, and IMU measurements, the objective is to calculate the maximum a posteriori estimate for a set of states and extrinsics. We formulate this inference problem using the factor graph depicted in Fig. 3. We use a fixed window-length incremental smoothing and mapping (iSAM2) [23] solver to optimize the factor graph. In the following section, we present the individual factors.
+
+
+B. IMU Factor
+
+Pre-integrated IMU factors summarize the IMU measurements between two nodes into a single factor [24]. We introduce nodes at GNSS and LiDAR timestamps, which arrive at a lower frequency. The IMU integration additionally serves as a high-frequency state estimate for the flight controller [25]. Initially, the vehicle is static to estimate an initial value for the IMU biases and gravity alignment.
+
+
+C. Odometry Factor
+
+As a LIO pipeline, we use FAST-LIO2 [26], which operates on points directly. Raw points are favorable in environments with little geometric structure, as they can represent subtle features of the scene. FAST-LIO2 estimates a 6 DOF pose T j OB at each t j . We extract the relative transformation for the odometry factor as
+∆T j,j+1 = (T j OB ) −1 T j+1 OB .
+We base the covariance estimation on the constraints of the registration problem, similar to [27], instead of assuming a fixed covariance as in [11], [13]. It computes as
+Σ pos = H pos = (J T pos J pos ) −1 , Σ rot = H rot = (J T rot J rot ) −1 ,
+where J pos and J rot correspond to the translational and rotational components of the measurement Jacobian in [26]. A tuning constant scales the covariance magnitude.
+
+
+D. Position Factor
+
+The GNSS receiver measures the position with respect to the inertial frame I. The measurement influences the odometry via the extrinsics T OI . The extrinsics' translation, roll, and pitch are directly observable, while yaw is only observable after the platform has moved sufficiently. We treat this transformation as a variable estimated in the factor graph. Position factors update the state and the extrinsics and use the covariance provided by the GNSS receiver. Their measurement model is
+I p P = (T OI ) −1 · T OB · B p P .
+We initialize the extrinsics with a high covariance on the yaw. Until the covariance of the yaw of the extrinsics is below a threshold, we artificially increase the GNSS measurement covariance. Hence, the GNSS measurements have negligible impact on the state during heading estimation. Once the covariance of the extrinsic yaw estimate decreases, the GNSS measurements increase their impact on the state.
+
+
+V. TRAJECTORY PLANNER FOR SURFACE TRACKING
+
+The metal detector head has to be parallel to the ground surface to ensure reliable detection of buried objects. A fundamental part of the planning algorithm is an accurate local terrain representation. We use the 2.5D grid map framework [28] to fuse the LiDAR measurements into a map. The map also provides surface normals for alignment and a signed distance field (SDF) for collision avoidance. Second, we assume a 2D boustrophedon coverage path [29] given to serve as a global reference. The goal of the trajectory planner is to align the metal detector to the surface while safely tracking the reference.
+
+Theoretically, our actuated 5 DOF drone can align with any surface by a combination of yaw ψ(t) and pitch θ(t). However, alternating surface normals result in many inefficient heading changes over uneven terrain, as seen in Fig. 6. Furthermore, uncontrolled yaw can cause the LiDAR to miss the terrain on the path ahead. Therefore, we need to plan a trajectory over position and orientation, (p(t), R(t)), that minimizes control effort (i.e. turning) to ensure smooth and efficient trajectories that satisfy ground alignment constraints, the kinematic limits for the MAV, and LiDAR visibility constraints to prevent flying into unobserved space.
+
+To transform this complex optimization problem into a real-time solution, we first show how to simplify it for a 5 DOF MAV without obstacles before adding collision avoidance. Since the translational dynamics of the vectored thrust MAV are fast [30] compared to the maximum speed of 1 m/s allowed for reliable detection with a metal detector [31], we can assume that the coverage path can be tracked in position and just optimize rotations along the path.
+
+At each discrete time step t n , we solve a receding-horizon trajectory planning problem over the next h meters of the coverage path, which can be formalized as a trajectory optimization problem starting at t n ,
+min R(·) J = t h t n c(Ṙ(t)) dt (1) subj. toṘ(t) <Ṙ max , (kinematic limits) α(t) < α max , (surface alignment) |∆ψ L (t)| < ∆ψ Lmax , (forward visibility) R(t n ) =R t n , (current orientation) R(t) ∈ SO(3), ∀t ∈ [t n , t h ],
+where t h is the time at h meter into the path and ∆ψ L (t) is the angle between the planned heading and reference path direction as shown in Fig. 4. Finally, α(t) is the ground alignment error defined as the shortest angle between the surface normal and the z axis of the detector frame shown in Fig. 5a. Since the platform does not roll, the alignment error for a given yaw ψ is only a function of pitch θ, α(θ) = cos −1 ( O n · (R OD (θ) · D z D )).
+
+(
+
+Following the proof in Appendix I, we can determine the optimal pitch θ * that minimizes α for any candidate yaw, θ * (ψ) = tan −1 n x cos(ψ) + n y sin(ψ) n z .
+
+Fixing roll and minimizing the alignment error with an optimal pitch reduces the trajectory optimization problem in (1) to just solving for the optimal yaw trajectory ψ(·) * instead of the full rotation. Finally, aiming for a smooth trajectory in terms of yaw, we define the cost function to minimize yaw changes c(Ṙ(t)) =ψ(t).
+
+
+A. Approximate Solution via Graph Search
+
+At each discrete planner iteration t n , we find an approximate solution to the planning problem in (1) by incrementally constructing a state lattice [32], and finding the minimum cost trajectory via graph search. The lattice is constructed 
+O p l D = [x l ref , y l ref , z l ref ] T + d · O n.(4)
+Here d is the desired distance to the surface, O n ∈ R 3 is the surface normal, and z ref is the surface elevation. We then sample yaw angles, as illustrated in Fig. 4, with a resolution of 3°to create a candidate tuple ( O p l D , ψ l j ). We attempt to connect each tuple to all feasible tuples in the previous step t l−1 , checking that the motion satisfies the constraints in (1), as well as checking collisions and traversability. The feasible yaw states and collision-free connections define a multitree G = {V, E}, as shown in Fig. 4. Nodes V l at layer l represent the lattice states at the planning step t l , and connect to V l−1 through edges
+E(v) = {e(v, v )} v ∈N (v)
+. The cost along each edge is the change in yaw c(v, v ) = |ψ v − ψ v |. The minimum cost path through the lattice is efficiently found via a breadthfirst graph search. At each planning iteration, we only sample nodes for the new layer and reuse the previous tree.
+
+
+B. Visibility Constraint
+
+Our planner only allows paths through previously observed space to ensure a collision-free mission. To incentivize mapping of the area ahead, we modify the graph search to prioritize yaw candidates that enable the LiDAR to observe the next coverage path lane. To do so, we first solve the optimization problem (1) under the additional constraint
+|∆ψ N (t h )| < e max (exploration constraint)
+where ψ N is the direction that points towards the next lane, as seen in Fig. 4. This constraint is relaxed if no feasible solution with an exploration state was found, which can be efficiently implemented in the graph search approach by just checking the last layer in the search tree.
+
+
+C. Collision Avoidance
+
+Obstacles such as large rocks, trees, or poles may block parts of the coverage path. We identify traversable areas using a threshold on the slope of the terrain. Our algorithm pushes the path position out of the obstacle, as shown in Fig. 6. Irregular, mostly flat simulated terrain. Top: The naive Aligned-1 approach results in inefficient turning. Bottom: With the proposed planner, the system translates along the lane with only slight changes to its yaw. Fig. 5b. For all infeasible reference positions p j in [t n , t h ], we iteratively sample avoidance positions orthogonal from the coverage path until the position is feasible. Solely shifting nodes keeps the graph structure intact. Using the graph search approximation above, we then plan a trajectory over this collision-free (sub-optimal) path.
+
+
+VI. EXPERIMENTAL RESULTS
+
+In the following section, we first analyze the proposed planning approach quantitatively in a simulation environment. We then conduct real-world flight experiments to evaluate the sensor fusion. Finally, we validate the complete system by autonomously detecting metallic objects in the ground. We provide additional visualizations online 1 .
+
+
+A. Trajectory Planner for Surface Tracking
+
+To evaluate our planner, we simulate the drone using a Gazebo model with the same dimensions, LiDAR sensor, and controller as the real platform. We deploy the system in a scaled-down model of a crater landscape [33] that exhibits different types of irregular terrain that we are interested in for ERW surveys. The 25 × 10m 2 survey area starts in a primarily flat but irregular terrain (see Fig. 6), followed by a curved slope, and ends in an irregular, undulated area.
+
+In addition to the proposed planner, we simulate three baseline approaches as an ablation study. The first baseline approach (Aligned-1) is a greedy surface tracker that only samples the two orientations that align perfectly with the surface at the next step, i.e., at h = 0.3 m. The second baseline (Aligned-6) evaluates the optimal orientation for the next 6 steps. The same planning horizon as our proposed planner allows evaluating the performance gain from our planning strategy independent of its ability to look ahead. The third baseline (Fixed Attitude) is roughly equivalent to an underactuated quadcopter that ignores the slope and simply follows the terrain with a fixed height offset. We simulate this using the 5 DOF MAV but set ψ = θ = 0 and mount the metal detector in the middle of the platform. Note that this will result in improved results compared to a quadcopter, as the platform can translate without pitching. All approaches use ground truth odometry. We list the used parameters in Tab. I and present the results in Tab. II.
+
+To calculate alignment quality, we find the best-observed alignment α min over all poses on the flight trajectory for each cell, and calculate the average over all cells, denoted as α min . Given the translational velocity constraint, the Fixed 1 https://youtu.be/lv8ManXzV84  Attitude method is a lower limit on how fast the area can be covered. Our approach only takes 3.6% longer compared to this, while it covers the area in 10.6% less time than Aligned-6 and has a much smoother trajectory in terms of yaw, as visible in Fig. 6. On average, the yaw change between subsequent target poses ∆ψt n is decreased by 23.9°compared to Aligned-6. As expected, our approach has a higher alignment deviation than the Aligned approaches. However, its 95th percentile stays below the intended limit of 7.5°, which is accurate enough to enable reliable inspection. It is worth noting that extending the planning horizon from Aligned-1 to Aligned-6 only marginally improves performance. Therefore, we conclude that the increased performance in our approach mostly stems from the proposed yaw sampling strategy. As the Fixed Attitude baseline does not track the orientation of the surface, the metal detector is not aligned in uneven areas, resulting in α 95th min = 24.29°, which is insufficient for reliable detection. Note that this result is a lower bound for a regular quadcopter, and would become even worse for more inclined areas. In contrast to our approach, all compared approaches traversed unobserved terrain multiple times.
+
+
+B. Resilient GNSS-IMU-LiDAR Localization
+
+To evaluate the proposed sensor fusion approach's robustness to degeneracy, we deployed our system in an outdoor environment that contains both a GNSS-denied area and an area with severe LIO drift. LIO measurements arrive at 20 Hz. RTK-GNSS measurements arrive at 5 Hz. We use a window length of 5 s. A pilot steered the platform in  position control mode to trigger LIO and GNSS failure cases within one experiment. The controller uses the state estimation presented in Sec. IV. After takeoff, the extrinsics T OI converge after approximately 3.5 m. The drone flies through a dense tree canopy which causes RTK-GNSS loss, and later traverses flat grassland, which causes FAST-LIO2 to drift. The platform was started and landed in the same position with an accuracy of approximately 0.15 m.
+
+As visualized in Fig. 7, the proposed approach retains a locally consistent state estimate while traversing through the RTK-GNSS-denied area that remains smooth upon signal recovery. FAST-LIO2 deviates 4.2 m from the RTK-GNSS trajectory where the point cloud registration is underconstrained. Since we calculate the LIO covariance based on the geometric structure, our approach implicitly handles the degeneracy and follows the RTK-GNSS trajectory. The distance between takeoff and landing position of our approach is 0.18 m. This is within our landing accuracy, while the final distance estimated by FAST-LIO2 is 1.52 m.
+
+
+C. Autonomous Search for Buried Metallic Objects
+
+We evaluate the complete system in two real-world experiments. As metallic targets, we used gas cartridges with a diameter of 0.1 m. They were buried in the ground to be leveled with the surface to facilitate inspection of the results. To integrate the detector signal, we identify measured cells in the grid map by ray tracing from the sensor's bounding points and center to the map.
+
+In the first experiment, we deploy the system in an undulated terrain covered by grass with a main slope of around 20°and steeper local inclinations along multiple axes. We placed 9 metallic targets. The platform covered an area of 5.5 × 4m 2 in 317 s. As illustrated in Fig. 1, the planner generates trajectories that enable the sensor head to track the surface orientation. Additionally, despite the terrain steepness, the drone avoids collisions with any part of the body. We visualize the average sensor response per cell in Fig. 1. The 9 metallic objects are clearly visible. The lateral distance between the objects matches the actual distance of 1.65 m by visual inspection of the 2D detection map.
+
+Due to the sensor's working principle, the patches with high-intensity are larger than the actual objects. One mea-surement represents the whole area under the sensor head. Thus, even a tiny object can cause measurements of the size of the metal detector. The sensor used in this work does not expose raw signals and performs a calibration that the manufacturer does not specify. Thus, we observed that the sensitivity increased during the experiments. For future use, we propose to use a sensor that reports raw signals to avoid inconsistent sensitivity levels.
+
+We performed a second experiment in an environment with a main slope of around 8°, which falls off slightly to both sides. A metal pole is present in the survey area. We placed 9 metallic targets. The platform covered an area of 7 × 3.5m 2 in 373 s. The planner identifies the obstacle and maneuvers around it while maintaining the sensor aligned to the surface, as shown in Fig. 8. 8 metallic targets are visible in the generated map. The missed target was in an area close to the pole, which the flying detector avoided.
+
+
+VII. CONCLUSION
+
+We presented a complete system for metal detection with a 5 DOF MAV capable of navigating in GNSS-denied and LIO degenerate environments while adjusting its coverage trajectory based on terrain, visibility, and obstacles. The platform's maneuverability shows superior surface tracking over an underactuated MAV. The proposed receding-horizon planner shows good terrain perception and reduces coverage time over compared approaches. Real-world experiments showcase that the system can autonomously survey challenging undulated terrain for ERW detection. Visualizing the metal detector response on the terrain map combined with the GNSS reference allows easy re-localization in hazardous areas for demining. In future work, the obstacle avoidance strategy, although sufficient in our experiments, could benefit from integration in a coverage re-planning layer. We also believe our resilient surface navigation holds promise for other surface tracking applications such as spraying, close-up imaging, or non-destructive testing.
+
+
+APPENDIX
+
+We search θ that minimizes the alignment error α given ψ:
+θ * cand = arg min θ α(θ) = arg max θ f (θ) (5) f (θ) = O n · (R OD (θ, ψ) · D z D ) Roll ! =0
+= sin(θ) (n x cos(ψ) + n y sin(ψ)) a + cos(θ)n z
+
+We find the critical point as:
+
+f (θ c ) = cos(θ c )a − sin(θ c )n z ! = 0 ⇔ θ c = tan −1 ( a n z ) = tan −1 n x cos(ψ) + n y sin(ψ) n z
+
+f (θ) = − sin(θ)a − cos(θ)n z ! < 0 cos(θ)>0 θ ∈ (−π,π) ⇔ − tan(θ)a < n 2 z
+
+Inserting (7) into (8) yields: − tan(tan −1 ( a n z ))a = −a 2 /n z < n z nz>0 ⇔ −a 2 < n 2 z
+
+Since f (θ c ) = 0 and f (θ c ) < 0 we find θ * cand = θ c
+
+Fig. 1 .
+1Top: Metal detector signals visualized on a 2.5D terrain map. Colored cells were covered by the sensor. Brighter colors correspond to stronger signal responses from buried objects. Bottom left: Top-down 2D detection map. Bottom right: The system in action on undulated terrain.
+
+Fig. 2 .
+2The Voliro-T tricopter with a custom payload for autonomous navigation and metal detection.
+
+Fig. 4 .
+4Top: Illustration of the reduced planning problem. A state lattice is constructed from yaw samples along the path, which have to satisfy sensor visibility constraints (light green) of ± 120°around the direction of flight. Dark green samples are preferred as they ensure visibility of the next lane. Bottom: Illustration of the multitree. The shortest path is indicated in light green, but as solutions in the preferred sector exist, our algorithm selects the shortest path that ends in a preferred state, as shown in dark green.
+
+Fig. 5 .
+5Left: Illustration of the axes and angles to compute the optimal pitch angle. The grey square represents a surface cell. The red circle is the metal detector. Right: A grey obstacle invalidates the initial sample. We incrementally generate avoidance samples in the two perpendicular directions to the lane direction until a feasible trajectory is found. by discretizing the 2D coverage path into reference positions. Given one discrete sample (x l ref , y l ref ), we calculate the 3D position using the current terrain map,
+
+Fig. 7 .
+7Odometry plot. Top detail: The FAST-LIO2 trajectory is not closed due to accumulated drift. Start and end point of the proposed approach match. Bottom detail: Our approach estimates a consistent trajectory during RTK-GNSS loss and remains smooth upon recovery.
+
+Fig. 8 .
+8Top: Metal detector signals visualized on a terrain map. Colored cells were covered by the sensor. Bottom left: 2D detection map. Bottom right: The system avoids the obstacle while maintaining detector alignment.
+
+
+IMU factors, while extrinsic nodes are connected through identity factors. GNSS factors connect state and extrinsics nodes.State 
+Node 
+Extrinsics 
+Node 
+IMU 
+Factor 
+Odometry 
+Factor 
+
+GNSS 
+Factor 
+Identity 
+Factor 
+
+Fig. 3. 
+The factor graph design. State nodes are connected through 
+odometry and 
+
+TABLE I
+IPARAMETERS USED FOR THE PRESENTED EXPERIMENTSSimulation Real-World 
+
+Lane spacing 
+0.2 m 
+h 
+1.8 m 
+vmax 
+1 m/s 
+0.6 m/s 
+Sample spacing 
+0.3 m 
+αmax 
+7.5°ωmax 
+60°/s 
+30°/s 
+Grid cell size 
+0.15 m 
+∆ψ Lmax 
+120°d 
+0.15 m 
+0.18 m 
+
+
+
+TABLE II PLANNER
+IIPERFORMANCE IN SIMULATION. MEAN, STANDARD DEVIATION AND 95TH PERCENTILE ARE INDICATED BY , σ AND 95TH .Method 
+Duration [s] 
+∆ψtn ± σ [ • ] 
+∆θt n ± σ [ • ] α min [ • ] α 95th 
+min [ • ] 
+Fixed Attitude 
+2132 
+0.0 ± 0.0 
+0.0 ± 0.0 
+11.38 
+24.29 
+Aligned-1 
+2502 
+31.28 ± 65.06 
+2.70 ± 2.55 
+1.76 
+4.15 
+Aligned-6 
+2469 
+28.07 ± 58.15 
+2.68 ± 2.56 
+1.74 
+4.14 
+Proposed 
+2208 
+4.17 ± 17.17 
+2.94 ± 3.64 
+3.41 
+7.25 
+
+
+
+International Campaign to Ban Landmines. Landmine Monitor 2021International Campaign to Ban Landmines, "Landmine Monitor 2021," 2021.
+
+United Nations Mine Action Service (UNMAS), "IMAS 07.11 -Land Release. United Nations Mine Action Service (UNMAS), "IMAS 07.11 -Land Release," 2019.
+
+Terrain traversability analysis for off-road robots using time-of-flight 3d sensing. H Balta, G De Cubber, D Doroftei, Y Baudoin, H Sahli, 7th IARP International Workshop on Robotics for Risky Environment-Extreme Robotics. Saint-Petersburg, RussiaH. Balta, G. De Cubber, D. Doroftei, Y. Baudoin, and H. Sahli, "Terrain traversability analysis for off-road robots using time-of-flight 3d sensing," in 7th IARP International Workshop on Robotics for Risky Environment-Extreme Robotics, Saint-Petersburg, Russia, 2013.
+
+Humanitarian Mine Action -Test and evaluation -Metal Detectors. European Committee for StandardizationEuropean Committee for Standardization, "Humanitarian Mine Action -Test and evaluation -Metal Detectors," 2003.
+
+Under the Sand: Navigation and Localization of a Micro Aerial Vehicle for Landmine Detection with Ground-Penetrating Synthetic Aperture Radar. R Bähnemann, N Lawrance, L Streichenberg, J J Chung, M Pantic, A Grathwohl, C Waldschmidt, R Siegwart, Field Robotics. 21R. Bähnemann, N. Lawrance, L. Streichenberg, J. J. Chung, M. Pantic, A. Grathwohl, C. Waldschmidt, and R. Siegwart, "Under the Sand: Navigation and Localization of a Micro Aerial Vehicle for Landmine Detection with Ground-Penetrating Synthetic Aperture Radar," Field Robotics, vol. 2, no. 1, pp. 1028-1067, Mar. 2022.
+
+Unmanned aerial vehicle-based ground-penetrating radar systems: A review. Y A Lopez, M Garcia-Fernandez, G Alvarez-Narciandi, F L , -H Andres, IEEE Geoscience and Remote Sensing Magazine. Y. A. Lopez, M. Garcia-Fernandez, G. Alvarez-Narciandi, and F. L.- H. Andres, "Unmanned aerial vehicle-based ground-penetrating radar systems: A review," IEEE Geoscience and Remote Sensing Magazine, 2022.
+
+On drone ground penetrating radar for landmine detection. D Sipos, P Planinsic, D Gleich, 2017 First International Conference on Landmine: Detection, Clearance and Legislations (LDCL. D. Sipos, P. Planinsic, and D. Gleich, "On drone ground penetrating radar for landmine detection," in 2017 First International Conference on Landmine: Detection, Clearance and Legislations (LDCL), 2017, pp. 1-4.
+
+Applying deep learning to automate uav-based detection of scatterable landmines. J Baur, G Steinberg, A Nikulin, K Chiu, T S De Smet, Remote Sensing. 125859J. Baur, G. Steinberg, A. Nikulin, K. Chiu, and T. S. de Smet, "Applying deep learning to automate uav-based detection of scatterable landmines," Remote Sensing, vol. 12, no. 5, p. 859, 2020.
+
+Application of a Drone Magnetometer System to Military Mine Detection in the Demilitarized Zone. L.-S Yoo, J.-H Lee, Y.-K Lee, S.-K Jung, Y Choi, Sensors. 2193175Multidisciplinary Digital Publishing InstituteL.-S. Yoo, J.-H. Lee, Y.-K. Lee, S.-K. Jung, and Y. Choi, "Application of a Drone Magnetometer System to Military Mine Detection in the Demilitarized Zone," Sensors, vol. 21, no. 9, p. 3175, Jan. 2021, number: 9 Publisher: Multidisciplinary Digital Publishing Institute.
+
+Mine Kafon. M Hassani, M. Hassani. Mine Kafon. (2022, August 30).
+
+Graph-based Multi-sensor Fusion for Consistent Localization of Autonomous Construction Robots. J Nubert, S Khattak, M Hutter, 2022 International Conference on Robotics and Automation (ICRA). 10J. Nubert, S. Khattak, and M. Hutter, "Graph-based Multi-sensor Fu- sion for Consistent Localization of Autonomous Construction Robots," in 2022 International Conference on Robotics and Automation (ICRA), May 2022, pp. 10 048-10 054.
+
+GIL: a tightly coupled GNSS PPP/INS/LiDAR method for precise vehicle navigation. X Li, H Wang, S Li, S Feng, X Wang, J Liao, Satellite Navigation. 2126X. Li, H. Wang, S. Li, S. Feng, X. Wang, and J. Liao, "GIL: a tightly coupled GNSS PPP/INS/LiDAR method for precise vehicle navigation," Satellite Navigation, vol. 2, no. 1, p. 26, Nov. 2021.
+
+Lio-sam: Tightly-coupled lidar inertial odometry via smoothing and mapping. T Shan, B Englot, D Meyers, W Wang, C Ratti, D Rus, 2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). T. Shan, B. Englot, D. Meyers, W. Wang, C. Ratti, and D. Rus, "Lio-sam: Tightly-coupled lidar inertial odometry via smoothing and mapping," in 2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2020, pp. 5135-5142.
+
+. F Dellaert, M Kaess, F. Dellaert and M. Kaess, 2017.
+
+GOMSF: Graph-Optimization Based Multi-Sensor Fusion for robust UAV Pose estimation. R Mascaro, L Teixeira, T Hinzmann, R Siegwart, M Chli, 2018 IEEE International Conference on Robotics and Automation (ICRA). R. Mascaro, L. Teixeira, T. Hinzmann, R. Siegwart, and M. Chli, "GOMSF: Graph-Optimization Based Multi-Sensor Fusion for robust UAV Pose estimation," in 2018 IEEE International Conference on Robotics and Automation (ICRA), May 2018, pp. 1421-1428, iSSN: 2577-087X.
+
+Visual-Inertial SLAM with Tightly-Coupled Dropout-Tolerant GPS Fusion. S Boche, X Zuo, S Schaefer, S Leutenegger, arXiv:2208.00709csS. Boche, X. Zuo, S. Schaefer, and S. Leutenegger, "Visual-Inertial SLAM with Tightly-Coupled Dropout-Tolerant GPS Fusion," Aug. 2022, arXiv:2208.00709 [cs].
+
+Intermittent GPSaided VIO: Online Initialization and Calibration. W Lee, K Eckenhoff, P Geneva, G Huang, 2020 IEEE International Conference on Robotics and Automation (ICRA). W. Lee, K. Eckenhoff, P. Geneva, and G. Huang, "Intermittent GPS- aided VIO: Online Initialization and Calibration," in 2020 IEEE International Conference on Robotics and Automation (ICRA), May 2020, pp. 5724-5731, iSSN: 2577-087X.
+
+Model predictive control for trajectory tracking on differentiable manifolds. G Lu, W Xu, F Zhang, arXiv:2106.15233arXiv preprintG. Lu, W. Xu, and F. Zhang, "Model predictive control for trajectory tracking on differentiable manifolds," arXiv preprint arXiv:2106.15233, 2021.
+
+Mesh manifold based riemannian motion planning for omnidirectional micro aerial vehicles. M Pantic, L Ott, C Cadena, R Siegwart, J Nieto, IEEE Robotics and Automation Letters. 63M. Pantic, L. Ott, C. Cadena, R. Siegwart, and J. Nieto, "Mesh manifold based riemannian motion planning for omnidirectional micro aerial vehicles," IEEE Robotics and Automation Letters, vol. 6, no. 3, pp. 4790-4797, 2021.
+
+Trajectory optimization on manifolds with applications to quadrotor systems. M Watterson, S Liu, K Sun, T Smith, V Kumar, The International Journal of Robotics Research. 392-3M. Watterson, S. Liu, K. Sun, T. Smith, and V. Kumar, "Trajectory optimization on manifolds with applications to quadrotor systems," The International Journal of Robotics Research, vol. 39, no. 2-3, pp. 303-320, 2020.
+
+C-opt: Coverage-aware trajectory optimization under uncertainty. B Davis, I Karamouzas, S J Guy, IEEE Robotics and Automation Letters. 12B. Davis, I. Karamouzas, and S. J. Guy, "C-opt: Coverage-aware trajectory optimization under uncertainty," IEEE Robotics and Automa- tion Letters, vol. 1, no. 2, pp. 1020-1027, 2016.
+
+Three-dimensional uas trajectory optimization for remote sensing in an irregular terrain environment. Y Choi, Y Choi, S Briceno, D N Mavris, 2018 International Conference on Unmanned Aircraft Systems (ICUAS). IEEEY. Choi, Y. Choi, S. Briceno, and D. N. Mavris, "Three-dimensional uas trajectory optimization for remote sensing in an irregular terrain environment," in 2018 International Conference on Unmanned Aircraft Systems (ICUAS). IEEE, 2018, pp. 1101-1108.
+
+isam2: Incremental smoothing and mapping with fluid relinearization and incremental variable reordering. M Kaess, H Johannsson, R Roberts, V Ila, J Leonard, F Dellaert, 2011 IEEE International Conference on Robotics and Automation. M. Kaess, H. Johannsson, R. Roberts, V. Ila, J. Leonard, and F. Dellaert, "isam2: Incremental smoothing and mapping with fluid relinearization and incremental variable reordering," in 2011 IEEE International Conference on Robotics and Automation, 2011, pp. 3281-3288.
+
+On-manifold preintegration for real-time visual-inertial odometry. C Forster, L Carlone, F Dellaert, D Scaramuzza, IEEE Transactions on Robotics. 331C. Forster, L. Carlone, F. Dellaert, and D. Scaramuzza, "On-manifold preintegration for real-time visual-inertial odometry," IEEE Transac- tions on Robotics, vol. 33, no. 1, pp. 1-21, 2017.
+
+Information fusion in navigation systems via factor graph based incremental smoothing. V Indelman, S Williams, M Kaess, F Dellaert, Robotics and Autonomous Systems. 618V. Indelman, S. Williams, M. Kaess, and F. Dellaert, "Information fusion in navigation systems via factor graph based incremental smoothing," Robotics and Autonomous Systems, vol. 61, no. 8, pp. 721-738, 2013.
+
+Fast-lio2: Fast direct lidarinertial odometry. W Xu, Y Cai, D He, J Lin, F Zhang, IEEE Transactions on Robotics. 384W. Xu, Y. Cai, D. He, J. Lin, and F. Zhang, "Fast-lio2: Fast direct lidar- inertial odometry," IEEE Transactions on Robotics, vol. 38, no. 4, pp. 2053-2073, 2022.
+
+On degeneracy of optimizationbased state estimation problems. J Zhang, M Kaess, S Singh, 2016 IEEE International Conference on Robotics and Automation (ICRA). J. Zhang, M. Kaess, and S. Singh, "On degeneracy of optimization- based state estimation problems," in 2016 IEEE International Confer- ence on Robotics and Automation (ICRA), 2016, pp. 809-816.
+
+Probabilistic terrain mapping for mobile robots with uncertain localization. P Fankhauser, M Bloesch, M Hutter, IEEE Robotics and Automation Letters (RA-L). 34P. Fankhauser, M. Bloesch, and M. Hutter, "Probabilistic terrain mapping for mobile robots with uncertain localization," IEEE Robotics and Automation Letters (RA-L), vol. 3, no. 4, pp. 3019-3026, 2018.
+
+Revisiting boustrophedon coverage path planning as a generalized traveling salesman problem. R Bähnemann, N Lawrance, J J Chung, M Pantic, R Siegwart, J Nieto, Field and Service Robotics: Results of the 12th International Conference. SpringerR. Bähnemann, N. Lawrance, J. J. Chung, M. Pantic, R. Siegwart, and J. Nieto, "Revisiting boustrophedon coverage path planning as a generalized traveling salesman problem," in Field and Service Robotics: Results of the 12th International Conference. Springer, 2021, pp. 277-290.
+
+Dry coupled ultrasonic non-destructive evaluation using an over-actuated unmanned aerial vehicle. R Watson, M Kamel, D Zhang, G Dobie, C Macleod, S G Pierce, J Nieto, IEEE Transactions on Automation Science and Engineering. 194R. Watson, M. Kamel, D. Zhang, G. Dobie, C. MacLeod, S. G. Pierce, and J. Nieto, "Dry coupled ultrasonic non-destructive evaluation using an over-actuated unmanned aerial vehicle," IEEE Transactions on Automation Science and Engineering, vol. 19, no. 4, pp. 2874-2889, 2021.
+
+Ace 300i owner's manual. Garrett Electronics Inc. Garrett Electronics Inc. (2016) Ace 300i owner's manual.
+
+Differentially constrained mobile robot motion planning in state lattices. M Pivtoraiko, R A Knepper, A Kelly, Journal of Field Robotics. 263M. Pivtoraiko, R. A. Knepper, and A. Kelly, "Differentially constrained mobile robot motion planning in state lattices," Journal of Field Robotics, vol. 26, no. 3, pp. 308-333, 2009.
+
+. R Jaumann, D A Williams, D L Buczkowski, R A Yingst, F Preusker, H Hiesinger, N Schmedemann, T Kneissl, J B Vincent, D T Blewett, B J Buratti, U Carsenty, B W Denevi, M C D Sanctis, W B Garry, H U Keller, E Kersten, K Krohn, J.-Y Li, S Marchi, K D Matz, T B Mccord, H Y Mcsween, S C Mest, D W Mittlefehldt, S Mottola, A Nathues, G Neukum, D P O&apos;brien, C M Pieters, T H Prettyman, C A Raymond, T Roatsch, C T , R. Jaumann, D. A. Williams, D. L. Buczkowski, R. A. Yingst, F. Preusker, H. Hiesinger, N. Schmedemann, T. Kneissl, J. B. Vincent, D. T. Blewett, B. J. Buratti, U. Carsenty, B. W. Denevi, M. C. D. Sanctis, W. B. Garry, H. U. Keller, E. Kersten, K. Krohn, J.-Y. Li, S. Marchi, K. D. Matz, T. B. McCord, H. Y. McSween, S. C. Mest, D. W. Mittlefehldt, S. Mottola, A. Nathues, G. Neukum, D. P. O'Brien, C. M. Pieters, T. H. Prettyman, C. A. Raymond, T. Roatsch, C. T.
+
+Vesta's shape and morphology. P Russell, B E Schenk, F Schmidt, K Scholten, M V Stephan, P Sykes, R Tricarico, M T Wagner, H Zuber, Sierks, Science. 3366082Russell, P. Schenk, B. E. Schmidt, F. Scholten, K. Stephan, M. V. Sykes, P. Tricarico, R. Wagner, M. T. Zuber, and H. Sierks, "Vesta's shape and morphology," Science, vol. 336, no. 6082, pp. 687-690, 2012.

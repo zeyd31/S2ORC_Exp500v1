@@ -1,0 +1,184 @@
+
+Quantum computation of molecular response properties
+10 Jan 2020
+
+Xiaoxia Cai 
+Wei-Hai Fang 
+Zhendong Li 
+Heng Fan 
+
+Ministry of Education
+College of Chemistry
+Institute of Physics
+Key Laboratory of Theoretical and Computational Photochemistry
+Beijing Normal University
+100875BeijingChina
+
+
+Chinese Academy of Sciences
+100190BeijingChina
+
+Quantum computation of molecular response properties
+10 Jan 2020
+Accurately predicting response properties of molecules such as the dynamic polarizability and hyperpolarizability using quantum mechanics has been a long-standing challenge with widespread applications in material and drug design. Classical simulation techniques in quantum chemistry are hampered by the exponential growth of the many-electron Hilbert space as the system size increases. Building upon the quantum linear system algorithm [Harrow et al., Phys. Rev. Lett.  103, 150502 (2009)], we describe an algorithm for computing molecular response functions in the frequency domain on quantum computers, which scales polynomially in the system size instead of the dimension of the exponentially large Hilbert space, and hence achieves an exponential speedup over existing classical algorithms.
+
+Introduction.-How molecules response upon the action of external fields determines the properties of materials. For weak external fields, the response is fully characterized by the linear and nonlinear response functions[1, 2], such as the polarizability tensor α ij (ω) and hyperpolarizability β ijk (ω 1 , ω 2 ) (i, j, k ∈ {x, y, z}). The dynamic polarizability α ij (ω) describes how the dipole moment of a molecule responses to an oscillating electric field to the leading order, and can be linked to the photoabsorption cross section, while the firstorder hyperpolarizability describes nonlinear response processes such as second-harmonic generation in nonlinear optical materials. Besides, these response functions are also the key to understand intermolecular interactions. Notably, the van der Waals C 6 coefficients, which are of paramount importance in quantifying the dispersion interaction between drug molecules and proteins in drug design, can be computed from dynamic polarizabilities at imaginary frequencies via the Casimir-Polder integral [3].
+
+Developing reliable quantum mechanical methods for accurately predicting molecular response properties has been one of the major challenges in quantum chemistry [4].
+
+The full configuration interaction (FCI) [5], also known as the exact diagonalization method, represents the most accurate method within a molecular orbital basis set, however, is limited to small molecular systems due to the exponential growth of the many-electron Hilbert space as the system size increases. Over the past decades, a plethora of approximate methods along with efficient algorithms have been developed [2,4]. Unfortunately, approximations adopted in these methods in order to describe the correlation among electrons efficiently, such as the meanfield [5] or density functional approximation [6], can sometimes fail miserably. In particular, the strong electron correlation [7], which is the root for many fascinating phenomena in materials such as high-temperature superconductivity, cannot be accurately accounted for by these approximate methods. A satisfactory classi-cal simulation method for predicting molecular response properties, which works in all regime of electron correlation, is still lacking.
+
+Initially advocated by Feynman [8], quantum computation shows a great promise for solving interacting fermion problems in physics and chemistry [9][10][11][12][13][14][15]. The quantum phase estimation algorithm (PEA) [16] was applied to obtain the ground state energies of molecules with an exponential speedup over the classical FCI [17]. It also allows to compute molecular static properties via energy derivatives [18,19]. While PEA has only been realized for two-electron systems [20][21][22][23] due to the requirement of long circuit depth, the variational quantum eigensolver (VQE) [24,25] is more suitable for the Noisy Intermediate Scale Quantum (NISQ) [26] devices, although its advantage over classical simulation techniques in quantum chemistry is still an open question and being actively explored. Nevertheless, VQE has been experimentally demonstrated on various platforms for small molecules such as H 2 , HeH + , LiH and BeH 2 [23,24,[27][28][29]. In view of such progresses on the ground state problem, it is a natural question to ask whether computing molecular response properties, as the next logical step after computing the ground state, will also benefit from quantum computation.
+
+In this Letter, we propose an algorithm for computing molecular response properties on quantum computers. The essential step is to convert the most demanding part into a linear system of equations, which can be solved using the quantum algorithm invented by Harrow, Hassidim, and Lloyd (HHL) [30]. By utilizing the specialities of the molecular response problem, we show that the assumptions in the HHL algorithm for its exponential efficiency over classical algorithms, including efficient input preparation, Hamiltonian simulation, and readout, can all be met. As a result, the runtime complexity of the proposed algorithm is polynomial in the molecular system size, instead of the dimension of the exponentially large many-electron Hilbert space. Therefore, it is shown that an exponential speedup can be achieved compared with the standard FCI-based approach not only for computing the ground state of molecules, but also for computing molecular response properties, which has a direct impact on designing new materials, drugs and catalysts.
+
+Theory.-For concreteness, we consider the calculation of the polarizability α zz (ω) for a molecule under a monochromatic electric field with optical frequency ω in the z-direction. Extensions to off-diagonal components of the polarizability tensor as well as nonlinear response properties are straightforward and will be briefly discussed later.
+
+Suppose initially without external fields, a molecule with N electrons is in the ground state |Ψ 0 of the second quantized electronic HamiltonianĤ 0 , expressed in an orthonormal molecular spin-orbital basis {ψ p } K p=1 (K is proportional to the system size N ) aŝ
+H 0 = K p,q=1 h pq a † p a q + 1 2 K p,q,r,s=1 h pqrs a † p a † q a s a r , (1) where a ( †) p
+represents the fermionic annihilation (creation) operator, and h pq (h pqrs ) represent the oneelectron (two-electron) integrals. The dynamic electric field in the dipole approximation is associated with the perturbation operator
+z = K p,q=1 z pq a † p a q ,(2)
+where z pq ψ p |z|ψ q represent the dipole-moment integrals. By the time-dependent perturbation theory, the frequency-dependent polarizability α zz (ω) can be expressed in a sum-over-state (SOS) form[1]
+α zz (ω) = n>0 Ψ 0 |ẑ|Ψ n Ψ n |ẑ|Ψ 0 ω n0 − (ω + iγ) + Ψ 0 |ẑ|Ψ n Ψ n |ẑ|Ψ 0 ω n0 + (ω + iγ)(3)
+with γ > 0 being a phenomenological damping parameter, which physically is associated with the inverse lifetime of excited states. Computing α zz (ω) allows to access useful information of molecules such as the transition dipole moments Ψ 0 |ẑ|Ψ n between the ground state |Ψ 0 and the n-th excited state |Ψ n , as well as the associated excitation energy ω n0 E n − E 0 . Moreover, the imaginary part of α zz (ω) is related with the photoabsorption cross section σ zz (ω) = 4πω c ℑα(ω) for visible/ultraviolet/X-ray absorption spectra, which is of great interest for materials.
+
+In the standard FCI-based approach [31,32] for computing α zz (ω), Eq. (3) is reformulated as
+α zz (ω) = Ψ 0 |ẑ|Ψ(ω) + Ψ 0 |ẑ|Ψ(−ω)(4)
+where the frequency-dependent response wavefunctions |Ψ(±ω) are obtained by solving the response equationŝ
+Q[Ĥ 0 − E 0 ∓ (ω + iγ)]Q|Ψ(±ω) =Qẑ|Ψ 0(5)
+with the projectorQ = 1 − |Ψ 0 Ψ 0 |, in the full manyelectron Hilbert space, and hence avoids the need for explicit summation over all excited states in the SOS form (3). The computational complexity of solving Eq. (5) using an iterative method for linear systems of equations on classical computers scales polynomially in the dimension of the N -electron Hilbert space D. For the molecular problem withĤ 0 (1), D is exponential in N , e.g., D = K N with K = 2N for the half-filling case. Therefore, like solving the ground-state eigenvalue problem, viz.,Ĥ 0 |Ψ 0 = E 0 |Ψ 0 , this FCI-based approach scales exponentially in the system size N , and is practically limited to very small molecules (ca. N 16 assuming K = 2N ) in routine quantum chemistry applications.
+
+Just as PEA and VQE have been applied to the ground state problem, we attempt to utilize the advantage of quantum algorithms for linear systems of equations [30,[33][34][35][36], which may lead to an exponential speedup for computing molecular response properties compared with the classical FCI-based method. However, while PEA can be applied readily to the ground state problem, both Eqs. (4) and (5) are not in a form that is amenable to compute on quantum computers directly, due to the asymmetric form of each term in Eq. (4) and the involvement of the projectorQ. To resolve these two problems, we introduce the notation
+A(±ω) Ĥ 0 − E 0 ∓ (ω + iγ)
+for brevity and rewrite the first part of α zz (ω) (4) as
+Ψ 0 |ẑ|Ψ(ω) = Ψ 0 |ẑ[QÂ(ω)Q] −1ẑ |Ψ 0 = Ψ 0 |ẑQÂ −1 (ω)Qẑ|Ψ 0 = Ψ 0 |ẑ[Â † (ω)] −1QÂ † (ω)QÂ −1 (ω)ẑ|Ψ 0 (6)
+by using the properties that [Q,Â(ω)] = [Q,Ĥ 0 ] = 0 andÂ(ω) is invertible for γ > 0. Eq. (6) suggests to introduce a state |Z(ω) , which satisfies an equation similar to Eq. (5) but without the projectorQ
+A(ω)|Z(ω) =ẑ|Ψ 0 .(7)
+In fact, we have |Ψ(ω) =Q|Z(ω) , and hence Eq. (6) can be recast into a symmetric form
+Ψ 0 |ẑ|Ψ(ω) = Z(ω)|Â † (ω)|Z(ω) +(ω − iγ)| Z(ω)|Ψ 0 | 2 .(8)
+Now the explicit dependence on the projectorQ, which makes the design of a quantum algorithm difficult, has been removed from both the response equation (7) and the expression for the polarizability (8). Its effect is only reflected in the second term of Eq. (8). Likewise, the second part of α zz (ω) (4) can be expressed in a similar symmetric form
+Ψ 0 |ẑ|Ψ(−ω) = Z(−ω)|Â † (−ω)|Z(−ω) −(ω − iγ)| Z(−ω)|Ψ 0 | 2 .(9)
+More explicitly, we can separate α zz (ω) into real and imaginary parts α zz (ω) = ℜα zz (ω) + iℑα zz (ω),
+ℜα zz (ω) = Z(ω)|Ĥ 0 − E 0 |Z(ω) , + Z(−ω)|Ĥ 0 − E 0 |Z(−ω) − ω γ ℑα zz (ω) ℑα zz (ω) = γ( Z(ω)|Z(ω) − | Z(ω)|Ψ 0 | 2 − Z(−ω)|Z(−ω) + | Z(−ω)|Ψ 0 | 2 ),(10)
+where the symmetry relations ℜα zz (−ω) = ℜα zz (ω) and ℑα zz (−ω) = −ℑα zz (ω) are obvious. Building upon Eqs. (7) and (8), we are ready to present a quantum algorithm for computing α zz (ω).
+
+Algorithm.-Our algorithm assumes that the ground state problem has been solved, namely, the groundstate wavefunction |Ψ 0 and its associated energy E 0 are available either by PEA or VQE. The central step is to solve the response equation (7), when expressed in the full many-electron Hilbert space as a linear system of equation with dimension D, on quantum computers using the HHL algorithm [30]. In practices, sinceÂ(ω) is non-Hermitian, |Z(ω) can be solved either by
+0Â(ω) A † (ω) 0 0 |Z(ω) = ẑ|Ψ 0 0 ,(11)
+as suggested in the original work [30] or by the following equivalent equation
+A † (ω)Â(ω)|Z(ω) =Â † (ω)ẑ|Ψ 0(12)
+with a Hermitian matrix on the left hand side (LHS) of the same dimension as Eq. (7) at the cost of increasing the condition number. For a linear system of equations Ax = b, where A is a Hermitian matrix of dimension D with an eigendecomposition A = UΛU † , the HHL algorithm [30] essentially prepares a solution following the sequence x = UΛ −1 U † b. The transformation to the eigenbasis of A and the backtransformation are executed by PEA, which requires the implementation of the time evolution under e iAt , while the realization of the nonunitary operation Λ −1 is through controlled rotations with the help of ancilla qubits. The runtime complexity of the HHL algorithm is O(log(D)s 2 κ 2 /ǫ) [30], where ǫ is the desired precision, s is the sparsity parameter specifying the maximal number of nonzero entries per row in A, and κ is the condition number of A, that is, κ = |λ max |/|λ min |, which is the ratio between the maximal and minimal eigenvalues by moduli of A. The real advantage of the HHL algorithm over classical algorithms crucially depends on the efficiency of four major steps [30,37]: (1) preparation of b on quantum computers, (2) Hamiltonian simulation e iAt , (3) dependence of κ on D, and (4) readout of the output quantum state |x = A −1 |b / A −1 |b encoding the solution x. Any slowdown in one of the steps could kill the exponential speedup promised by the HHL algorithm. Here, we show how an exponential speedup can be achieved for computing molecular response properties step-by-step by utilizing the specialities of the problem.
+
+Step 1: Provided |Ψ 0 is available, the stateẑ|Ψ 0 on the right hand side (RHS) of Eq. (11) orÂ † (ω)ẑ|Ψ 0 in Eq. (12) can be prepared with a cost of poly(N ) using the linear combination of unitaries (LCU) algorithm [38,39]. This is because both the one-body perturbationẑ (2) and the HamiltonianĤ 0 (1) inÂ(ω) can be expressed as a sum of poly(N ) Pauli terms P µ , e.g.,
+z = µ z µ P µ , P † µ = P µ = P −1 µ ,(13)
+through a fermion-to-qubit mapping such as the Jordan-Wigner transformation [40] or the Bravyi-Kitaev transformation [41,42].
+
+Step 2: Given the RHS of Eq. (11) (or Eq. (12)) on quantum computers, the HHL algorithm is applied to prepare the state |Z(ω) . For the molecular system withĤ 0 (1), it is known that the Hamiltonian simulation can be accomplished efficiently in poly(N ), just as in applying PEA to the molecular ground state problem [10,11,17]. BecauseĤ 0 involves at most twobody Coulomb interactions, the sparsity parameter s is only quartic in N . Thus, the most crucial part for the runtime complexity of the HHL algorithm is the condition number κ. On one hand, sinceĤ 0 can be written as a sum over O(N 4 ) Pauli termsĤ 0 = µ h µ P µ , as for z in Eq. (13), |λ max | ofĤ 0 (andÂ(ω)) is bounded by a system-dependent constant max µ |h µ | times N 4 . Assuming we consider the scaling with respect to the variation of the system size for systems of the same kind, such as the hydrogen chains of different sizes in the same molecular orbital basis set, then max µ |h µ | is independent of N , such that |λ max | is of poly(N ). On the other hand, the operatorĤ 0 − E 0 − ω becomes singular whenever the frequency ω matches the excitation energy ω n0 , such that in the worst case |λ min | ofÂ † (ω)Â(ω) in Eq. (12) is γ 2 , and for Eq. (11) |λ min | equals γ. In practice, the parameter γ is a fixed input parameter for spectral resolution, which determines the half width at half maximum (HWHM) of ℑα(ω) (10). Thus, the condition numbers κ for the coefficient matrices in Eqs. (11) and (12) are polynomial in the system size N instead of the dimension of the Hilbert space D, which is exponential in N . This concludes that the runtime complexity of the HHL algorithm for preparing a normalized solution state |x = |Z(ω) / Z(ω)|Z(ω) from either Eq. (11) or (12) is poly(N ).
+
+Step 3: After applying the HHL algorithm to Eq. (11) or (12), α zz (ω) can be computed from |x using Eq. (9) in poly(N ), without accessing its individual entry. This is achieved by first noting that the norm of |Z(ω) required in Eq. (9) can be computed using Eq. (7) as Z(ω)|Z(ω) = Ψ 0 |ẑẑ|Ψ 0 / x|Â † (ω)Â(ω)|x , (14) which only requires the measurements of Ψ 0 |ẑẑ|Ψ 0 and x|Â † (ω)Â(ω)|x . Then, the first term in Eq. (9) involving Z(ω)|Ĥ 0 |Z(ω) can be obtained from the measurement x|Ĥ 0 |x in the same way as obtaining the energy in VQE [24,25], while the second term | Z(ω)|Ψ 0 | 2 can be computed from | x|Ψ 0 | 2 by SWAP test [43,44]. Therefore, the necessary information for computing α zz (ω) from the output state |x of the HHL algorithm can be accessed through x|Ĥ 2 0 |x , x|Ĥ 0 |x and | x|Ψ 0 | 2 with a cost of poly(N ).
+
+Using the above procedure, we show that the dynamic polarizability tensor α zz (ω) of molecules can be computed on quantum computers with poly(N ) runtime complexity, achieving an exponential speedup compared with the classical FCI-based approach. This becomes possible due to the specialities of the molecular response problem, such that all the limitations of the HHL algorithm can be overcome in this application: the RHS of Eq. (7) can always be efficiently prepared given |Ψ 0 , e iĤ0t can be efficiently simulated due to the sparse structure ofĤ 0 (1) as has been utilized in PEA for molecules, the condition numbers κ for matrices in Eqs. (11) and (12) are polynomial in N , and finally only partial information of the solution is required for computing α zz (ω). Therefore, the molecular response problem is an ideal application of the HHL algorithm [30]. The same conclusion also applies to its improved variants [33][34][35].
+
+Discussion.-The above quantum algorithm can be generalized to compute different response properties. For off-diagonal components of α ij (ω), such as α xz (ω) containing a form of Ψ 0 |x[QÂ(ω)Q] −1ẑ |Ψ 0 , a symmetric expression can be derived by using the polarization identity, which needs four symmetric terms Ψ 0 |(x ± (i)ẑ) † [QÂ(ω)Q] −1 (x ± (i)ẑ)|Ψ 0 and each of them can be determined using the same algorithm for α zz (ω). Compared with the alternative strategy, which obtains the correlation functions in the time domain [13] through time evolution on quantum computers and then performs a classical Fourier transform to the frequency domain, the present algorithm allows to obtain response properties in the frequency domain for specified frequencies. This can have certain advantages in applications such as the simulation of X-ray spectroscopy [45], where only a small high-energy window of the absorption spectra is of interest. Besides, it is easily extended to compute other response properties, such as the polarizability on the imaginary axis required for the evaluation of C 6 coefficients[3] as well as nonlinear response properties, using the same idea of first deriving a symmetric expression for the target property by introducing appropriate auxiliary states, and then determining these states by solving response equations using the HHL algorithm. An increasingly important nonlinear response functions for probing elementary excitations in complex correlated electron systems is the resonant inelastic X-ray scattering (RIXS) amplitudes [46], given by the Kramers-Heisenberg equation [47] as
+F f 0 zz (ω) = n>0 Ψ f |ẑ|Ψ n Ψ n |ẑ|Ψ 0 ω n0 − (ω + iγ) + Ψ f |ẑ|Ψ n Ψ n |ẑ|Ψ 0 ω n0 + (ω ′ + iγ)(15)
+where ω ′ = ω − ω f 0 and |Ψ f represents the final state involved in the inelastic scattering process. Eq. (15) takes a similar form as Eq.
+
+(3) for α zz (ω), except for the leftmost bra states replaced by |Ψ f and ω in the denominator of the second term in Eq. (3) replaced by ω ′ . Thus, a similar strategy can be designed to compute |F f 0 zz (ω)| 2 for the scattering cross section [46]. Lastly, although in this work we mainly focus on the demonstration of quantum advantage for computing molecular response properties using the HHL algorithm [30] or the improved variants [33][34][35], the response equation (7) can alternatively be solved with variational hybrid quantum-classical algorithms [48,49] by designing an appropriate wavefunction ansatz for |Z(ω) . This is in a similar spirit of VQE for the ground state problem, and will be more easily realized on nearterm NISQ devices.
+
+In summary, we presented a general quantum algorithm for computing molecular response properties with an exponential speedup compared with the classical FCI-based algorithm in quantum chemistry. The crucial component is the use of the HHL algorithm as a subroutine to solve the response equation. By using the specialities of the molecular response problem, the limitations of the HHL algorithm such as the preparation of input and readout can be naturally overcome, resulting in a runtime complexity polynomial in the molecular system size. Our work provides a new evidence that quantum chemistry is among the first fields that will benefit from quantum computations. Enabling accurate and efficient predictions of molecular response properties on quantum computers will potentially open up many new applications of quantum computations in material science and drug discovery in the near future.
+
+The author (Z.L.) acknowledges Garnet Kin-Lic Chan and Jiajun Ren for critically reading the manuscript and helpful comments. We thank Zi-Yong Ge, Zheng-An Wang, and Kai Xu for discussions. This work was supported by the National Natural Science Foundation of China ( 
+
+
+Grants No. 21973003) and the Beijing Normal University Startup Package. * zhendongli@bnu.edu.cn [1] R. W. Boyd, Nonlinear optics (Elsevier, 2003). [2] P. Norman, K. Ruud, and T. Saue, Principles and practices of molecular properties: Theory, modeling, and simulations (John Wiley & Sons, 2018). [3] H. B. Casimir and D. Polder, Physical Review 73, 360 (1948).
+
+. T Helgaker, S Coriani, P Jørgensen, K Kristensen, J Olsen, K Ruud, Chemical Reviews. 112543T. Helgaker, S. Coriani, P. Jørgensen, K. Kristensen, J. Olsen, and K. Ruud, Chemical Reviews 112, 543 (2012).
+
+Modern quantum chemistry: introduction to advanced electronic structure theory. A Szabo, N S Ostlund, Courier CorporationA. Szabo and N. S. Ostlund, Modern quantum chem- istry: introduction to advanced electronic structure the- ory (Courier Corporation, 2012).
+
+. A J Cohen, P Mori-Sánchez, W Yang, Science. 321792A. J. Cohen, P. Mori-Sánchez, and W. Yang, Science 321, 792 (2008).
+
+. P R Kent, G Kotliar, Science. 361348P. R. Kent and G. Kotliar, Science 361, 348 (2018).
+
+. R P Feynman, International Journal of Theoretical Physics. 21467R. P. Feynman, International Journal of Theoretical Physics 21, 467 (1982).
+
+. S Lloyd, Science. 2731073S. Lloyd, Science 273, 1073 (1996).
+
+. D S Abrams, S Lloyd, Physical Review Letters. 792586D. S. Abrams and S. Lloyd, Physical Review Letters 79, 2586 (1997).
+
+. D S Abrams, S Lloyd, Physical Review Letters. 835162D. S. Abrams and S. Lloyd, Physical Review Letters 83, 5162 (1999).
+
+. G Ortiz, J E Gubernatis, E Knill, R Laflamme, Physical Review A. 6422319G. Ortiz, J. E. Gubernatis, E. Knill, and R. Laflamme, Physical Review A 64, 022319 (2001).
+
+. R Somma, G Ortiz, J E Gubernatis, E Knill, R Laflamme, Physical Review A. 6542323R. Somma, G. Ortiz, J. E. Gubernatis, E. Knill, and R. Laflamme, Physical Review A 65, 042323 (2002).
+
+. I M Georgescu, S Ashhab, F Nori, Reviews of Modern Physics. 86153I. M. Georgescu, S. Ashhab, and F. Nori, Reviews of Modern Physics 86, 153 (2014).
+
+. Y Cao, J Romero, J P Olson, M Degroote, P D Johnson, M Kieferová, I D Kivlichan, T Menke, B Peropadre, N P Sawaya, Chemical Reviews. 11910856Y. Cao, J. Romero, J. P. Olson, M. Degroote, P. D. Johnson, M. Kieferová, I. D. Kivlichan, T. Menke, B. Peropadre, N. P. Sawaya, et al., Chemical Reviews 119, 10856 (2019).
+
+. A Y Kitaev, quant-ph/9511026arXiv preprintA. Y. Kitaev, arXiv preprint quant-ph/9511026 (1995).
+
+. A Aspuru-Guzik, A D Dutoi, P J Love, M Head-Gordon, Science. 3091704A. Aspuru-Guzik, A. D. Dutoi, P. J. Love, and M. Head-Gordon, Science 309, 1704 (2005).
+
+. I Kassal, A Aspuru-Guzik, The Journal of Chemical Physics. 131224102I. Kassal and A. Aspuru-Guzik, The Journal of Chemi- cal Physics 131, 224102 (2009).
+
+. T O&apos;brien, B Senjean, R Sagastizabal, X Bonet-Monroig, A Dutkiewicz, F Buda, L Dicarlo, L Visscher, arXiv:1905.03742arXiv preprintT. O'Brien, B. Senjean, R. Sagastizabal, X. Bonet- Monroig, A. Dutkiewicz, F. Buda, L. DiCarlo, and L. Visscher, arXiv preprint arXiv:1905.03742 (2019).
+
+. B P Lanyon, J D Whitfield, G G Gillett, M E Goggin, M P Almeida, I Kassal, J D Biamonte, M Mohseni, B J Powell, M Barbieri, Nature Chemistry. 2106B. P. Lanyon, J. D. Whitfield, G. G. Gillett, M. E. Goggin, M. P. Almeida, I. Kassal, J. D. Biamonte, M. Mohseni, B. J. Powell, M. Barbieri, et al., Nature Chemistry 2, 106 (2010).
+
+. J Du, N Xu, X Peng, P Wang, S Wu, D Lu, Physical Review Letters. 10430502J. Du, N. Xu, X. Peng, P. Wang, S. Wu, and D. Lu, Physical Review Letters 104, 030502 (2010).
+
+. Y Wang, F Dolde, J Biamonte, R Babbush, V Bergholm, S Yang, I Jakobi, P Neumann, A Aspuru-Guzik, J D Whitfield, ACS Nano. 97769Y. Wang, F. Dolde, J. Biamonte, R. Babbush, V. Bergholm, S. Yang, I. Jakobi, P. Neumann, A. Aspuru-Guzik, J. D. Whitfield, et al., ACS Nano 9, 7769 (2015).
+
+. P J O&apos;malley, R Babbush, I D Kivlichan, J Romero, J R Mcclean, R Barends, J Kelly, P Roushan, A Tranter, N Ding, Physical Review X. 631007P. J. O'Malley, R. Babbush, I. D. Kivlichan, J. Romero, J. R. McClean, R. Barends, J. Kelly, P. Roushan, A. Tranter, N. Ding, et al., Physical Review X 6, 031007 (2016).
+
+. A Peruzzo, J Mcclean, P Shadbolt, M.-H Yung, X.-Q Zhou, P J Love, A Aspuru-Guzik, J L Obrien, Nature Communications. 54213A. Peruzzo, J. McClean, P. Shadbolt, M.-H. Yung, X.- Q. Zhou, P. J. Love, A. Aspuru-Guzik, and J. L. Obrien, Nature Communications 5, 4213 (2014).
+
+. J R Mcclean, J Romero, R Babbush, A Aspuru-Guzik, New Journal of Physics. 1823023J. R. McClean, J. Romero, R. Babbush, and A. Aspuru- Guzik, New Journal of Physics 18, 023023 (2016).
+
+. J , 279J. Preskill, Quantum 2, 79 (2018).
+
+. Y Shen, X Zhang, S Zhang, J.-N Zhang, M.-H Yung, K Kim, Physical Review A. 9520501Y. Shen, X. Zhang, S. Zhang, J.-N. Zhang, M.-H. Yung, and K. Kim, Physical Review A 95, 020501 (2017).
+
+. A Kandala, A Mezzacapo, K Temme, M Takita, M Brink, J M Chow, J M Gambetta, Nature. 549242A. Kandala, A. Mezzacapo, K. Temme, M. Takita, M. Brink, J. M. Chow, and J. M. Gambetta, Nature 549, 242 (2017).
+
+. C Hempel, C Maier, J Romero, J Mcclean, T Monz, H Shen, P Jurcevic, B P Lanyon, P Love, R Babbush, Physical Review X. 831022C. Hempel, C. Maier, J. Romero, J. McClean, T. Monz, H. Shen, P. Jurcevic, B. P. Lanyon, P. Love, R. Bab- bush, et al., Physical Review X 8, 031022 (2018).
+
+. A W Harrow, A Hassidim, S Lloyd, Physical Review Letters. 103150502A. W. Harrow, A. Hassidim, and S. Lloyd, Physical Review Letters 103, 150502 (2009).
+
+. J Olsen, P Jørgensen, The Journal of Chemical Physics. 823235J. Olsen and P. Jørgensen, The Journal of Chemical Physics 82, 3235 (1985).
+
+. H Koch, R J Harrison, The Journal of Chemical Physics. 957479H. Koch and R. J. Harrison, The Journal of Chemical Physics 95, 7479 (1991).
+
+. A Ambainis, arXiv:1010.4458A. Ambainis, arXiv:1010.4458 (2010).
+
+. B D Clader, B C Jacobs, C R Sprouse, Physical Review Letters. 110250504B. D. Clader, B. C. Jacobs, and C. R. Sprouse, Physical Review Letters 110, 250504 (2013).
+
+. A M Childs, R Kothari, R D Somma, SIAM Journal on Computing. 461920A. M. Childs, R. Kothari, and R. D. Somma, SIAM Journal on Computing 46, 1920 (2017).
+
+. L Wossnig, Z Zhao, A Prakash, Physical Review Letters. 12050502L. Wossnig, Z. Zhao, and A. Prakash, Physical Review Letters 120, 050502 (2018).
+
+. S Aaronson, Nature Physics. 11291S. Aaronson, Nature Physics 11, 291 (2015).
+
+. A M Childs, N Wiebe, Quantum Info, Comput. 12901A. M. Childs and N. Wiebe, Quantum Info. Comput. 12, 901 (2012).
+
+. D W Berry, A M Childs, R Cleve, R Kothari, R D Somma, Physical Review Letters. 11490502D. W. Berry, A. M. Childs, R. Cleve, R. Kothari, and R. D. Somma, Physical Review Letters 114, 090502 (2015).
+
+. P Jordan, E Wigner, Z. Phys. 4714P. Jordan and E. Wigner, Z. Phys 47, 14 (1928).
+
+. S B Bravyi, A Y Kitaev, Annals of Physics. 298210S. B. Bravyi and A. Y. Kitaev, Annals of Physics 298, 210 (2002).
+
+. J T Seeley, M J Richard, P J Love, The Journal of Chemical Physics. 137224109J. T. Seeley, M. J. Richard, and P. J. Love, The Journal of Chemical Physics 137, 224109 (2012).
+
+. H Buhrman, R Cleve, J Watrous, R. De Wolf, Physical Review Letters. 87167902H. Buhrman, R. Cleve, J. Watrous, and R. De Wolf, Physical Review Letters 87, 167902 (2001).
+
+. J C Garcia-Escartin, P Chamorro-Posada, Physical Review A. 8752330J. C. Garcia-Escartin and P. Chamorro-Posada, Physi- cal Review A 87, 052330 (2013).
+
+. P Norman, A Dreuw, Chemical Reviews. 1187208P. Norman and A. Dreuw, Chemical Reviews 118, 7208 (2018).
+
+. L J Ament, M Van, T P Veenendaal, J P Devereaux, J Hill, Van Den, Brink, Reviews of Modern Physics. 83705L. J. Ament, M. Van Veenendaal, T. P. Devereaux, J. P. Hill, and J. Van Den Brink, Reviews of Modern Physics 83, 705 (2011).
+
+. H A Kramers, W Heisenberg, Zeitschrift für Physik A Hadrons and Nuclei. 31681H. A. Kramers and W. Heisenberg, Zeitschrift für Physik A Hadrons and Nuclei 31, 681 (1925).
+
+. X Xu, J Sun, S Endo, Y Li, S C Benjamin, X Yuan, arXiv:1909.03898arXiv preprintX. Xu, J. Sun, S. Endo, Y. Li, S. C. Benjamin, and X. Yuan, arXiv preprint arXiv:1909.03898 (2019).
+
+. C Bravo-Prieto, R Larose, M Cerezo, Y Subasi, L Cincio, P J Coles, arXiv:1909.05820arXiv preprintC. Bravo-Prieto, R. LaRose, M. Cerezo, Y. Sub- asi, L. Cincio, and P. J. Coles, arXiv preprint arXiv:1909.05820 (2019).

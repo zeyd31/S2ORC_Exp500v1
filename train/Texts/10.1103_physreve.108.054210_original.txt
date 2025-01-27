@@ -1,0 +1,419 @@
+
+Spectral crossovers in non-Hermitian spin chains : comparison with random matrix theory
+October 17, 2023
+
+Ayana Sarkar 
+Sunidhi Sen sensunidhi96@gmail.com 
+Santosh Kumar 
+
+Department of Physics
+Shiv Nadar Institution of Eminence
+
+
+
+Gautam Buddha Nagar
+Uttar Pradesh-201314India
+
+Spectral crossovers in non-Hermitian spin chains : comparison with random matrix theory
+October 17, 2023D6F57E153C8D12BAE3343D21B8DE012AarXiv:2302.01423v3[quant-ph]
+We present a systematic investigation of the short-range spectral fluctuation properties of three non-Hermitian spin chain Hamiltonians using complex spacing ratios (CSR).Specifically, we focus on the non-Hermitian variants of the standard one-dimensional anisotropic XY model having intrinsic rotation-time (RT ) symmetry that has been explored analytically by Zhang and Song [Phys.Rev. A 87, 012114 (2013)].The corresponding Hermitian counterpart is also exactly solvable and has been widely employed as a toy model in several condensed matter physics problems.We show that the presence of a random field along the x-direction together with the one along z-direction facilitates integrability and RT -symmetry breaking leads to the emergence of quantum chaotic behaviour.This is evidenced by a spectral crossover closely resembling the transition from Poissonian to Ginibre Unitary Ensemble (GinUE) statistics of random matrix theory.Additionally, we consider two phenomenological random matrix models in this paper to examine 1D-Poisson to GinUE and 2D-Poisson to GinUE crossovers and the associated signatures in CSR.Here 1D and 2D Poisson correspond to real and complex uncorrelated levels, respectively.These crossovers reasonably capture spectral fluctuations observed in the spin-chain systems within a certain range of parameters.
+
+I. INTRODUCTION
+
+Non-Hermitian hamiltonians possessing complex eigenvalues arise in a wide variety of systems, including those with dissipation, such as the dissipative kicked rotor, open quantum systems like boundary-driven spin chains with spin injection and ejection terms, and gain-loss Hamiltonians commonly encountered in quantum optics.Among non-Hermitian hamiltonians, a subclass is formed by those which possess the constraint of Parity-Time (PT ) or the more general Rotation-Time (RT ) symmetry and can exhibit real spectra.These hamiltonians have received a lot of attention since real eigenvalues guarantee unitary time evolution leading to conservation of probability amplitude which is fundamental to describing a quantum theory useful in physical interpretation of natural phenomena.The subject of PT -symmetric quantum mechanics has been deeply enriched by the seminal works of Bender, Mostafazadeh and others [1][2][3][4][5][6][7][8][9][10][11][12], who have established it as an extension of the conventional or Hermitian quantum mechanics.
+
+Mathematically, the linear parity operator P performs spatial reflection and has the effect p → −p and x → −x, whereas the anti-linear time-reversal operator T has the effect of transforming p → −p, x → x and i → −i.The joint action of PT together is basically a reflection i.e.PT = (PT ) −1 .Bender and his co-workers have established an extensive collection of non-Hermitian PTsymmetric Hamiltonians in their research.In general, it has been shown that the reality of quantum spectrum is an outcome of unbroken PT symmetry.A hamiltonian is called PT symmetric if its eigenfunctions are simultaneously eigenfunctions of the PT operator, and in such cases PT symmetry is not spontaneously broken.Many examples of non-Hermitian hamiltonians possessing PT symmetry have been discussed in the Refs.[1,2,4,5,[13][14][15][16][17][18][19][20][21][22][23][24][25][26].Beyond complex hamiltonians with PT symmetry and possessing real spectra, one comes across hamiltonians which are RT -symmetric.It has been demonstrated in Ref. [27] that RT symmetry is a superset, i.e. a more general notion compared to PT symmetry, such that a wide class of hamiltonians may be identified that have properties similar to that of PT -symmetric systems, despite not being explicitly PT -symmetric (PT symmetry is only a special class of RT symmetry).
+
+In numerous scenarios, non-Hermiticity can be imparted to a system without necessitating its openness in terms of interaction with an external bath or environment.One approach, for instance, involves introducing external imaginary fields to establish PT symmetry and achieve a real spectrum.Several popular Hermitian spin chain models have been modified to include imaginary interactions, resulting in the emergence of complex spectra in general.For instance, the quantum Ising model in presence of a magnetic field in the z-direction as well as an imaginary field in the x-direction has been studied analytically in Ref. [28].Therein the authors examine various symmetries of the system and study the spin system in the light of perturbation theory, providing some exact results for magnetization along the z and x directions.This modified Ising model is the discretized lattice version of the Yang-Lee model considered by von Gehlen in Refs.[29,30].In fact the Yang-Lee zeros have recently been observed by measuring the quantum coherence of a probe spin coupled to an Isingtype spin bath.The quantum evolution of the probe spin introduces a complex phase factor which effectively realizes an imaginary magnetic field.It also substantiates that imaginary magnetic fields are not unnatural and are indeed experimentally accomplishable [31].The classical Heisenberg spin chain with PT symmetry has been studied under the action of Slonczewski spintransfer torque modeled by applying an imaginary magnetic field [32].Interestingly this correlation between the imaginary magnetic field on spin dynamics and Slonczewski spin-transfer torque allows an experimental verification of the PT symmetry-breaking phase transition in some spin chains [33,34].Exact solutions using the Bethe ansatz technique have been provided for an XXZ spin chain in the presence of an imaginary magnetic field at the boundary in Ref. [35].Such exact solutions are also available for the one-dimensional dissipative Hubbard model with two-body loss [36].Giorgi in Ref. [37] has studied spontaneous PT -symmetry breaking in an exactly solvable non-Hermitian dimerized chain where non-Hermiticity is introduced via a staggered magnetic field.In Ref. [38] a PT -symmetric non-Hermitian version of a quantum network, originally proposed in Refs.[39,40], has been studied in the context of quantum state transfer.Besides the above examples, non-Hermiticity may also arise from PT -symmetric on-site imaginary potentials in tight-binding models and strongly correlated systems [41][42][43][44][45][46][47][48][49][50][51][52].Additionally, some authors have used the PT -symmetric nature of non-Hermitian hamiltonians to produce efficient algorithms to compute their spectra with arbitrarily high precision [53,54].Studies of RTsymmetric bosonic and fermionic systems have been conducted in diverse capacities, encompassing exactly solvable models, quantum batteries, detection of exceptional points through dynamics, and the identification of unbroken phases using quantum-information-related techniques, in Refs.[27,[55][56][57][58][59].Some authors have focused on solvable fermionic spin chains.For example, in Refs.[55,56], Zhang and Song have analytically studied and identified exceptional points and regions of broken as well as unbroken symmetries in an one-dimensional anisotropic non-Hermitian XY model in transverse magnetic field (z-direction) having intrinsic RT -symmetry, with respect to certain parameters.
+
+Despite such extensive analytical explorations, non-Hermitian spin chains of the aforementioned nature have received relatively little attention within the context of random matrix theory (RMT) and quantum chaos.In addition to other objectives, our aim in this paper is to contribute in this direction by studying the short-range fluctuation properties of the anisotropic XY model in a transverse magnetic field (z-direction) having intrinsic RT -symmetry, as introduced by Zhang and Song in Ref. [55].In particular, we examine the spectral fluctuations using the statistics of complex spacing ratios (CSR), which constitutes a relatively new metric to deal with complex spectra.Along with the original model, we consider a modification in this hamiltonian by adding a longitudinal magnetic field along the x-direction, which breaks its RT -invariant nature.On addition of this field, an integrability to quantum-chaotic transition is observed, portrayed by a symmetry crossover from Poisson to Ginibre Unitary Ensemble (GinUE)-resembling statistics of RMT.We also examine another modification of this spin chain by making the transverse field imaginary, while maintaining the longitudinal magnetic field, and find that the agreement with GinUE improves.These are the some of the key highlights of this work.Furthermore, we consider phenomenological random matrix models to study 1D-Poisson to GinUE and 2D-Poisson to GinUE crossovers.By 1D and 2D Poisson we mean real and complex uncorrelated levels, respectively.This kind of parameter-dependent spectral crossover in Hermitian systems, especially across symmetry classes like Poisson, Gaussian orthogonal ensemble (GOE), Gaussian unitary ensemble (GUE), and Gaussian symplectic ensemble (GSE) have been observed and exhaustively studied in several many body quantum systems such as spin chains, lattice models, periodically driven systems, gas of interacting particles etc [60][61][62][63][64][65][66][67][68][69][70][71][72][73][74][75].However, when it comes to non-Hermitian systems, there have been fewer studies related to parameter-dependent Poisson and GinUE-like behavior, as well as spectral transitions [76,77].With this in mind, in this study, we investigate the integrability-to-quantum-chaotic crossovers in non-Hermitian spin chain systems, which are characterized by the Poisson to GinUE transition within RMT.
+
+The organisation of this paper is as follows.This introduction section is followed by Sec.II wherein the complex spacing ratios and related concepts have been reviewed.We define and examine the interpolating random matrix models in Sec.III, followed by a discussion of investigated spin Hamiltonians in Sec.IV.Section V contains the simulation outcomes for the spin-chain Hamiltonians and their comparison with RMT results.We conclude with a summary of our key observations along with possible future directions in Sec.VI.
+
+
+II. COMPLEX SPACING RATIOS
+
+The distribution of complex spacing ratios, introduced in Ref. [76], has come up as a reliable measure for distinguishing the integrable-versus-chaotic fluctuation properties of complex spectra and has found abundant use in recent works of non-hermitian physics [76][77][78][79][80].It may be defined for both real and complex spectra unlike other popular ratio distributions like the traditional spacing ratios [81][82][83][84] and the nearest-neighbor (NN) or nextnearest-neighbor (NNN) ratios [85] which are useful only in the case of real spectra.We briefly recapitulate the techniques involved in finding CSR for completeness of this paper.
+
+Let {x 1 , x 2 , • • • , x N } denote real or complex eigenvalues.For each eigenvalue x, let x NN denote its nearest neighbor and x NNN its next-nearest neighbour, which are identified on the basis of distances in real or complex plane.The CSR are then defined as,
+z k = x NN k − x k x NNN k − x k ; k = 1, ..., N.(1)
+When the spectrum is real, z ≡ r with −1 ≤ r ≤ 1.On the other hand for complex spectra, z = re iθ , where 0 ≤ r ≤ 1 and −π ≤ θ < π.Besides the probability density function ρ(r, θ) for the CSR, it is useful to consider the radial P r (r) = π −π dθ rρ(r, θ) and the angular P θ (θ) = 1 0 dr rρ(r, θ) marginal density functions.Furthermore, it is instructive to look at the averages associated with these quantities, viz., ⟨r⟩ and ⟨cos θ⟩.The average quantity ⟨r⟩ and ⟨r⟩ has been frequently used along with the distribution of normal spacing ratios in several crossover-related studies [84,[86][87][88][89][90][91][92].These single number signatures are useful, for example, to estimate the parameter value at which a symmetry crossover takes place from one symmetry class to other in a physical system.
+
+For uncorrelated levels in the complex plane, associated with (2D) Poissonian spectral fluctuations, a flat distribution in the unit circle is observed for the CSR such that ρ(z) = (1/π)Θ(1 − |z|).Consequently, in this case, the radial and angular distributions are given by P r (r) = 2rΘ(1 − r), and P θ (θ) = 1/2π, respectively.These then lead to ⟨r⟩ = 2/3 and ⟨cos θ⟩ = 0. On the contrary, quantum chaotic behaviour is inferred from an overlap with the Ginibre unitary statistics of RMT, featured by cubic level repulsion, ρ GinUE ∝ r 3 as r → 0, along with a dip in the ratio density at the centre and at small angles.In Ref. [76], among other things, the authors have obtained the analytical expression for CSR density in GinUE case in terms of an (N − 1)-fold integral.They found that Wigner-like surmise obtained from the N = 3 case are not universal in nature and does not approximate large-N behaviour due to boundary effects.To resolve this issue, they introduced the Toric Unitary Ensemble (TUE) which can be viewed as a two-dimensional analogue of the circular ensemble.For TUE also, they obtained an (N − 1)-fold expression for the CSR density and demonstrated that small N cases of this ensemble are universal and capable of approximating the large-N behavior of GinUE.For our analyses, along with large GinUE-matrices simulation data, we use their N = 5 result, which is denoted using TUE 5 .The averages obtained using TUE 5 are ⟨r⟩ = 0.7315 and ⟨cos θ⟩ = −0.1938.The same averages evaluated using large size (∼ 10 4 ) GinUE matrices are ⟨r⟩ = 0.7381 and ⟨cos θ⟩ = −0.2405.As noted in Ref. [76], the convergence of ⟨cos θ⟩ computed from the TUE surmises is much slower than that of ⟨r⟩.We should also remark that very recently series-expansion-based approximate formulas have been derived for the GinUE CSR distribution in Ref. [80].
+
+It is known that the non-Hermitian Ginibre ensembles exhibit cubic level repulsion irrespective of the symme-try class, i.e. orthogonal or unitary, or even symplectic [94][95][96].This is unlike their Hermitian counterparts, where very distinct level repulsion behavior is observed depending on the symmetry class.As far as GinOE is concerned, it is known that it possesses real eigenvalues along with complex-conjugate pairs, and that the expected fraction of real eigenvalues for large-dimensions is given by 2/(N π) [97].These eigenvalues have noticeable effects on the CSR, resulting in heightened values in the radial and angular marginal densities near r = 1 and θ = −π (or π), respectively, compared to the GinUE results.However, as N is increased, these deviations tend to diminish.Moreover, in a GinOE-GinUE crossover model, even for a tiny perturbation from GinOE towards GinUE limit gets rid of these deviations.This difficulty is compounded, particularly in datasets derived from physical models, where substantial statistical noise may be present.As a result, attempting to investigate a GinOEto-GinUE crossover using CSR is not viable.
+
+
+III. PHENOMENOLOGICAL MATRIX MODELS FOR POISSON-GINUE AND GINOE-GINUE CROSSOVERS
+
+For a system undergoing a transition from one symmetry class to another, one often examines the associated effects on the spectral fluctuations, which are commonly assessed by the distribution of nearest neighbour spacings or their ratios.In this context, for Hermitian systems, there already exist known interpolating formulas (either phenomenological or derived from smalldimension random matrix models) for the distribution of spacings between consecutive eigenvalues, as well as the associated ratios.These formulas cover various cases such as Poisson-GOE crossover, Poisson to semi-Poisson crossover, and the transitions among GOE, GUE, and GSE.[84,[90][91][92][93]. On the other hand, transitional models or crossover ensembles have remained far less explored in non-Hermitian systems and non-Hermitian RMT.A few examples can be found in Refs.[98][99][100][101].In this section we consider phenomenological interpolating random matrix ensembles based on two cases of the following matrix model,
+H α = H 0 + αV √ 1 + α 2 . (2)
+Here H 0 is an "initial" random matrix for the crossovers detailed below.The "final" N -dimensional random matrix V is taken from GinUE, i.e. its matrix elements are complex, independent and identically distributed (iid) Gaussian variables with zero-mean and unit-variance for both real and imaginary parts.The parameter α facilitates the crossover with α = 0 yielding the initial ensemble and α → ∞ leading to GinUE.For the matrix H 0 , we consider the following two choices, corresponding to which we refer the above crossover model as matrix model 1 and 2 (MM1 and MM2):
+
+MM1: H 0 is chosen as an N -dimensional diagonal matrix with iid zero-mean and unit-variance real Gaussians, MM2: H 0 is chosen as an N -dimensional diagonal matrix with iid complex Gaussians zero-mean and unit-variance for both real and imaginary parts.
+
+We study the CSR density and the associated radial and angular marginals for the above crossover matrix models by varying the interpolation parameter α.For each matrix model, we show the results for N = 256 and 2000 with ensemble comprising 1500 and 250 matrices, respectively.For MM1, which governs 1D-Poisson to GinUE transition, the results are presented in Figs. 1  and 2. The CSR density has been shown in the complex plane in the first columns, and the marginal densities for radial and angular distributions obtained from the simulation are depicted using histogram in the second and third columns, respectively.The black solid and red dashed lines shown with these histograms correspond to Poisson and TUE 5 analytical CSR results, respectively.Additionally, we show blue solid lines which are based on the simulation of large (∼ 10 4 ) GinUE matrices which, in the case of angular distribution, differ appreciably from TUE 5 result towards θ = ±π.The stark differences between the top rows (a-c) and the others in these two figures is due to the eigenvalues having very small imaginary parts in the former case.This is the reason behind the accumulation of CSR in the vicinity of the real line noted for α = 0.001 in the N = 256 case and α = 0.0002 in the N = 2000 case.With increasing α, the eigenvalues gradually spread in the unit disc and approaches GinUE statistics.
+
+For MM2, which facilitates 2D-Poisson to GinUE crossover, we show similarly the plots in Figs. 3 and 4. The crossover is observed in the CSR density as well as the marginals in these figures as α is increased beyond zero.Moreover, it is instructive to examine the α = 0 limit.We find that in Fig. 3, for relatively smaller matrix dimension, N = 256, the radial distribution P r (r) matches closely with the expected Poissonian analytical result.However, the angular distribution shows elevated density near θ = 0 and deviate from the expected uniform behavior.Increasing the matrix dimension alleviates this deviation, as can be seen in Fig. 4, where we have considered N = 2000.
+
+
+IV. INVESTIGATED HAMILTONIAN MODELS
+
+The XY spin-chain system in the presence of a transverse magnetic field (field along z-direction) may be represented as,
+H (XY ) = L j=1 J x σ (x) j σ (x) j+1 + J y σ (y) j σ (y) j+1 + λσ (z) j ,(3)
+where J x , J y ∈ R are the coupling constants while λ ∈ R is the strength of the magnetic field along the z-direction.The operators σ (x,y,z) act on a C 2 ⊗L dimensional  Hilbert space, L being the chain length.In terms of Pauli matrices (σ (x,y,z) ) and identity matrices (I) these are given by, σ (x,y,z) j = I ⊗ I ⊗ .... ⊗ σ (x,y,z) ⊗ ... ⊗ I ⊗ I.The Pauli matrix part, therefore, acts on the jth site of the chain while the identity operators act on the rest of the sites.Periodic boundary condition is imposed so that σ
+(x,y,z) N +1 = σ (x,y,z) 1
+. The coupling constants for the Heisenberg terms may be modified to render them complex, leading to a non-Hermitian variant of the above Hamiltonian, as given below [55],
+H 1 = L j=1 1 + iγ 2 σ (x) j σ (x) j+1 + 1 − iγ 2 σ (y) j σ (y) j+1 + λσ (z) j
+.
+
+(4) The parameter γ ∈ R in this model controls the extent of non-Hermiticity.It is to be noted that while [R, H 1 ] ̸ = 0 and [T , H 1 ] ̸ = 0, we have [RT , H 1 ] = 0.However, due to the antilinear nature of T and hence of the RT operator, the last relation does not guarantee existence of simultaneous eigenstates of both H 1 and RT [7,15].In case every eigenstate of H 1 does happen to be an eigenstate of the RT operator, it is said that the RT symmetry of H 1 is unbroken.On the other hand, if some of the eigenstates of H 1 are not simultaneously eigenstates of the RT operator, one concludes that the RT -symmetry of H 1 is broken.To remind ourselves, the operator R is the linear rotation operator and has the effect of rotating each spin by an angle of π/2 about the z-axis,
+R ≡ exp   − iπ 4 L j=1 σ (z) j   = L j=1 1 √ 2 I − iσ (z) j .(5)
+This amounts to an action, (σ
+(x) j , σ (y) j , σ (z) j ) → (σ (y) j , −σ (x) j , σ (z) j
+).On the other hand, the antilinear time-reversal operator T has the action T iT = −i.A hamiltonian symmetric with respect to an anti-linear operator such as T , shows eigenvalues which are either real or appear in complex conjugate pairs [6,7].When acting on the Pauli matrices, T acts as a complex conjugation such that (σ
+(x) j , σ (y) j , σ (z) j ) → (σ (x) j , −σ (y) j , σ (z) j ).
+In Ref. [55], the authors have exactly solved this spin-chain model using the techniques of Jordan-Wigner, Fourier and Boguliobov transformations extended to complex versions.Based on the exact results, exceptional points separating broken-unbroken regions of RT symmetry have also been identified.The spectra of the Hamiltonian in Eq. ( 4) possesses, respectively, real and complex eigenvalues corresponding to broken and unbroken RT -symmetric phases, which in turn are decided by the parameter γ.Therefore, in the above model RT symmetry plays the same role as PT symmetry does in the generally studied PT -symmetric pseudo-Hermitian systems showing real spectrum [1,2].
+
+Two limiting cases of this hamiltonian are of particular importance to emphasize the above points.Firstly, when γ = 0, the above hamiltonian reduces to the ordinary XY model with an external magnetic field in the z direction, the J x = J y = 1/2 case of Eq. ( 3),
+H 0 = 1 2 L j=1 σ (x) j σ (x) j+1 + σ (y) j σ (y) j+1 + 2λσ (z) j . (6)
+H 0 is left unchanged under the action of R and T separately as well us under their joint action.This is unlike H 1 which remains invariant only under the joint action of R and T .The Hamiltonian H 0 has a full real spectrum and all its eigenstates are shared by the RT operator.
+
+In the other limiting case of H 1 when γ ≫ λ and 1, H 1 reduces to
+H im = iγ 2 L j=1 σ (x) j σ (x) j+1 − σ (y) j σ (y) j+1 ,(7)
+which displays a fully imaginary spectrum.Any eigenstate of H im corresponding to a non-zero eigenvalue is not an eigenstate of the RT operator.We consider the following modification of H 1 by introducing an additional magnetic field along the x-direction,
+H 2 = L j=1 1 + iγ 2 σ (x) j σ (x) j+1 + 1 − iγ 2 σ (y) j σ (y) j+1 +λσ (z) j + λ 1 σ (x) j .(8)
+The introduction of this perturbative longitudinal field makes H 1 non-integrable on proper tuning of the system parameters like γ, λ and λ 1 .It also breaks the RT invariance of the system.Especially, when the xfield is random and the z-field is varied manually we see particularly distinct signatures of integrability-breaking portrayed by a transition from Poisson to GinUE statistics and can be compared with the matrix models of section III.Upon inspection, we also find that the general trend of the numerical results remain the same if instead of the field along x-direction, we introduce a field along the y-direction.
+
+Another variant of the above model is one where the z-field is rendered imaginary, viz.,
+H 3 = L j=1 1 + iγ 2 σ (x) j σ (x) j+1 + 1 − iγ 2 σ (y) j σ (y) j+1 +iλσ (z) j + λ 1 σ (x) j .(9)
+The significance of such imaginary fields has already been discussed in Section I.In the present context, this field makes the complex eigenvalues having a significant imaginary part even when γ is small, since now the paramater λ also contributes to complex eigenvalues.This resulting effect can be seen in the density of the CSR, which is nonvanishing over the whole unit disc even for small γ values.
+
+In the two previous hamiltonians, H 1 and H 2 , this was not the case since γ was the only non-hermiticity inducing parameter.For this hamiltonian also, the transition from integrable to non-integrable behavior is expected to be captured by the matrix model 2 of section III.
+
+In the following section, we examine the spectral fluctuations of the three hamiltonians H 1 , H 2 , and H 3 by varying parameters controlling non-hermiticity and strengths of the magnetic fields.For each case, one out of the set of available parameters is changed manually, while the others are chosen to be zero-mean, unitvariance Gaussian random numbers (∼ N (0, 1)).As far as the random nature of magnetic field is concerned, in real systems, it could be due to external sources producing a resultant magnetic field which is spatially inhomogeneous, leading to spin-glass like random energy landscape [102][103][104], or rapidly varying in time over the timescale of a typical magnetic measurement.For example, in Refs.[105][106][107][108][109] many-body spin systems have been realized using trapped ions with laser driven interactions.The site-dependent static disorder has been mimicked using Stark shifts by laser beams focused to individual ions [107,108].Moreover, by temporally modulating the ac-Stark shifts, employing an arbitrary-wave-form generator with a switching time much faster than all other relevant timescales, time-dependent on site-energies have been engineered [108].
+
+Interestingly, in the context of RMT investigations, the local spectral fluctuations are independent of such details and can exhibit signatures of integrability or chaos irrespective of the source of randomness.In particular, since CSR is a measure for short range spectral correlations, universal RMT behaviour is typically expected.Long range correlations, on the other hand, often depend on system specific details and deviate from RMT statistics.Indeed, while the impact of distinct sources of randomness can be different on the system, by tuning the corresponding strengths one can achieve desired level of symmetry breaking which, in turn, can lead to chaos.As a consequence, quantum spin chains in external random magnetic field have been the subject of investigation in several studies focusing on the spectral fluctuations and the associated symmetry crossovers, especially in the case of Hermitian quantum-spin chains [60][61][62][63][64][65][66][67][68][69][70][71][72][73].
+
+
+V. EMPIRICAL RESULTS : DISCUSSION
+
+In this section, we discuss the results of short-range spectral fluctuation properties of the above discussed non-Hermitian spin chain models using the complex spacing ratios, in which quantum chaotic behaviour can be identified via its vanishing density at the origin and a suppression of the same at small angles.This suppression at small angles is seen in the angular marginal distribution P θ (θ) and the slightly undulatory nature of the radial marginal distribution P r (r) associated with the cubic level repulsion distinctive of the Ginibre ensembles.One of our key observations is the Poisson-to-GinUE like spectral transition for certain range of parameters in H 2 and H 3 , which we study for chain lengths L = 6 and 8. Through our numerical experiments, we identify parameter values for which these spin systems show spectral fluctuations quite similar to a transition from Poisson to GinUE statistics.
+
+The plots presented in this section contain results of density of CSR in the complex plane, and the marginal densities P r (r) and P θ (θ) for the three Hamiltonians H 1 , H 2 , and H 3 generated by varying parameters controlling non-hermiticity and strengths of the magnetic fields.These numerical results are then compared with analytical results for Poisson and N = 5 TUE (TUE 5 ) represented with black solid and red dashed lines in the plots.We also plot the results from the matrix model simulation of N = 10 4 GinUE matrices with a blue solid line.As mentioned earlier, one out of the set of system parameters is manually varied, while the others are taken from the Gaussian distribution ∼ N (0, 1).We consider the entire spectrum of eigenvalues for generating these results.The overall size of the Hamiltonian matrices corresponding to L = 6 and L = 8 sized spin chains are 64 and 256, respectively.Ensembles comprising 4000 and 1500 matrices are considered respectively for these two sizes for both the chain lengths and various statistical properties of the energy spectra are examined.For H 2 and H 3 , Poisson-to-GinUE like transition is quite apparent.In fact, even moderate chain lengths, like L = 6, lead to results quite close to GinUE on properly adjusting the system parameters.Moreover, in general, a rich variety of spectral-fluctuations behaviour is observed for the three hamiltonians as system parameters are varied.Detailed discussions of the results for each of them can be found in the following subsections.
+
+
+A. Plots for H1
+
+Here we examine the spectral fluctuations of the Hamiltonian H 1 .In Fig. 5 the CSR for L = 6 spin-chain length of this model is inspected with the variation of γ, while λ is taken from the Gaussian distribution N (0, 1).In Fig. 5(a), at γ = 0.01, majority of the eigenvalues are real within the numerical precision considered and are of the form ±x.Only a few eigenvalues have noticeable imaginary parts but even those are very small.As a consequence, the CSR density is nonzero only on and in the vicinity of the real line.In Fig. 5(b), for γ = 0.3, along with the nonzero density along the real line, a faint pattern appears inside the unit circle.This becomes more pronounced for γ = 2 in Fig. 5(c) where a bow-arrow like structure is observed.On inspection of the eigenvalues for this particular case, a number of interesting patterns in the eigenvalues are observed.Along with the real eigenvalues of the form ±x, complex eigenvalues of the form ±(x ± iy) are observed.These patterns in the eigenvalues affect the CSR distribution which involves doubly-degenerate real as well as complex-conjugate ratios.We should remark here that in some works related to the study of many-body localization transition in non-Hermitian models, this crossover from real to complex eigenvalues and the suppression of imaginary parts of complex eigenvalues for general non-Hermitian hamiltonians having time-reversal symmetry has been discussed as a signature of many-body localization [110].In Fig. 6, CSR density plots along with marginal densities P r (r) and P θ (θ) are plotted, but now with λ manually varied and γ taken as Gaussian random numbers from N (0, 1).The density plots show some resemblance to Poisson-like statistics in all three cases of λ, viz., 0.01 in (a)-(c), 0.5 in (d)-(f) and 1 in (g)-(i).In the CSR plot in the complex plane, as shown in the panels (a), (d) and (g), there is an enhanced density around the origin, which becomes more concentrated and hence brighter as λ increases.In Figs. 6 (c), (f) and (i), the P θ (θ) plot shows uneven surface due to these regions.Compared to P θ (θ), P r (r) is closer to (2D) Poisson-statistics behavior, as is observed in the panels (b), (e), and (h).However, if λ is increased further the results start showing deviation from the Poisson statistics.In the context of RT symmetry, for γ value fixed around zero, H 1 is mostly in the RTpreserved phase which results in most of the eigenvalues being real, as in the case of Fig. 5. On the other hand, the variation in γ caused due to sampling from Gaussian distribution, along with particular choices of λ, results in RT -broken phase of H 1 , and hence majority of the eigenvalues are complex which result in the plots observed in Fig. 6.
+
+Besides the plots, in Table I, we provide a list of single number signatures ⟨r⟩ and −⟨cos θ⟩ for various values of λ and γ.Along with the marginal distributions, these averages help in stipulating the nature of the distribution and how close it is to being Poisson or GinUE.For H 1 , these averages when γ is varied and λ is Gaussian has to be analysed rather carefully because neither of the them are close to (2D) Poisson values for γ =0.01.However when γ is increased to 0.3 and 2, ⟨r⟩ gets closer to 0.67, but even then −⟨cos θ⟩ values are not that close to zero.Also on careful examination of the density of CSR plots, we see that their behaviour is in-fact closer to 1D-Poisson case for smaller value of γ which when increased leads to the remarkably different bow-arrow like structure already discussed above.Also for H 1 we see that negative values of −⟨cos θ⟩ arise in most cases, for variation of both γ and λ.In fact, the only non-negative value for H 1 , L = 6 arises for γ = 0.01.Such negative values of −⟨cos θ⟩ have also appeared in Ref. [76] for spin models with bulk dephasing.For the variation of λ when γ is Gaussian, the spectral statistics somewhat close-to-Poisson, evident from the radial marginal density and ⟨r⟩.However the angular marginal density and ⟨cos θ⟩ still show deviation from the uniform distribution expected for the Poisson.However this distribution is expected to get flattened out as the Hamiltonian matrix dimension is increased.
+
+
+B. Plots for H2
+
+We now examine the variation in spectral fluctuations for H 2 depending on system parameters γ, λ, and λ 1 .These are shown in Figs. 7, 8, 9 for L = 6, and in Figs.10,11,12 for L = 8.In each case one of the parameter is manually varied, while the remaining two are taken from Gaussian distribution N (0, 1).
+
+In Fig. 7, CSR density in the complex plane and the marginals P r (r), P θ (θ) are studied for three values of γ, viz., 0.01, 0.5 and 3.For γ = 0.01, like Fig. 5 (a), the spectra exhibits only a limited proportion of complex eigenvalues characterized by small imaginary parts which reflects in the ratio density spreading on the real line.This is more pronounced on the negative real axis and almost disappears at the origin.For γ = 0.5 in Figs.7(d)-(f), the quantum chaotic behaviour in the density plot is somewhat implied from the vanishing density at the origin and at small angles.However, neither P r (r) nor P θ (θ) is close to analytical results.In Fig. 7(f) slight dip at small angles is noticed.As the value of γ is further increased, ratio density gets localized at random regions within the unit circle.The marginal densities P r (r) and P θ (θ) also show statistics quite distinct from both Pois-  In Fig. 8, we vary λ and examine its impact on the CSR.For λ = 0.001, which corresponds to weak z-field, close-to-Poisson like statistics is observed for the CSR density in Fig. 8 (a) and a slight dip is noticed in P θ (θ) in Fig. 8 (c).However, P r (r) shown in Fig. 8 (b) matches Poisson statistics closely.The suppression of CSR density at small angles and origin as in Fig. 8 (d), results from an increase in λ to 0.9 and causes clear transi-tion from almost-Poisson to GinUE-like statistics.In this case, both radial and angular marginal densities in Figs. 8 (e) and 8 (f) exhibit resemblance to GinUE results.As λ is increased further, there is an increase in the density at smaller angles within the angular distribution, as depicted in Fig. 8 (i).This trend aligns with the accumulation of the CSR at small angles compared to the remaining parts of the unit disk, as can be seen in Fig. 8 (g).Intriguingly, this behavior stands in direct contrast to that observed in GinUE.However in general, for the case of H 2 , it is possible to achieve the best overlap to RMT statistics by carefully tuning λ while the other two parameters are chosen from a random distribution.
+
+For H 2 , changes in λ 1 in Fig. 9 does not show much overlap to GinUE results and vary quite significantly from RMT statistics except for the case of λ = 0.5, where suppression of small angles is somewhat noticeable from the density of CSR and the angular marginal distribution plot.
+
+In Figs.10,11,12, which portray the above three cases for spin chain length L = 8, we find that for adequate values of the crossover parameters, it is possible to approach the exact results of GinUE more closely, due to the increased hamiltonian matrix dimensions.In Fig. 10, for very small values of γ (e.g., 0.01), the ratios again assemble near the real line but eventually spreads across the unit disk, as can be seen in the plot for γ = 2.1.This feature is common in all cases of γ variation which indicates that this parameter leads to a transition from real to complex eigenvalues.As previously discussed, this kind of transition from real to complex eigenvalues have been indicated in other non-Hermitian spin chains models and in our MM1 which captures interpolation between 1D-Poisson and GinUE statistics.Coming back to the present case, GinUE-like behavior can be seen for γ = 2.1, whereas for H 2 , L = 6, the GinUE-like features were not prominent.As γ is increased further, CSR gets localized at certain regions of the unit circle, which is quite different from either Poisson or GinUE behaviour.In Fig. 11, where we examine the impact of variation of the parameter λ, Poisson-like characteristics are noticeably prominent for λ = 0.01, although a suppression for small angles is seen in P θ (θ).For λ = 1.2, GinUE correspondence is well evident.The plots in Fig. 12, based on the variation of λ 1 , show trend similar to that in Fig. 9, however in the former case of L = 8, GinUE-like behaviour is much stronger.Overall, we find that quantum chaotic features for H 2 are much more pronounced when the parameter λ is varied while the others are chosen to be random numbers.
+
+The results for H 2 can be well approximated by MM1, which interpolates between 1D-Poisson and the GinUE symmetry classes, when γ is varied manually as discussed above.This can be seen by comparing the plots in Figs. 1  and 2 of the matrix model with the spin chain simulation in Figs.7 and 10.When λ and λ 1 are varied, the remaining plots of H 2 for both L = 6 and L = 8 show closer overlap to MM2 results in Figs. 3 and 4, which capture 2D-Poisson to GinUE crossover.
+
+The single number signatures for L = 6 and 8 of this chain are given in Tables II and III.We see that for various values of γ, λ, λ 1 , ⟨r⟩ is closest to the GinUE value of (∼ 0.74) for L = 8, Values as close as 0.704 (λ 1 = 0.5), 0.714 (γ = 2.1) and 0.715 (λ = 1.2) is observed.Similar to H 1 , negative values of for −⟨cos θ⟩ also appears for H 2 , L = 6, in the cases of λ = 0.001, 3 and λ 1 = 4 these negative values also appear.However further ex- ploration is needed to understand this behaviour in the context of our spin chains.In general, erratic behavior which is neither Poissonian nor GinUE is exhibited if any of the system parameters γ, λ and λ 1 are increased over a certain value depending on the system size.
+
+
+C. Plots for H3
+
+For H 3 , we inspect the spectral properties for a chain length of L = 8 in Figs. 13, 14 and 15.In Fig. 13, for γ = 0.01, the distribution of CSR is quite distinct compared to the other spin chains or the matrix models.Due to the imaginary transverse field, not only do we have a significant number of complex eigenvalues, but the presence of complex-conjugate pairs gives rise to the bowarrow like structure embedded in the unit circle of the density of CSR plot.We also see increased brightness along the real line suggesting the presence of real eigen- The ratio density at the centre, vanishes to some extent in (d).This is also seen in the P θ (θ) vs θ plot in (f) which also shows slight suppression of small angles.For γ = 3 in (g) the results of density plots show areas of elevated brightness on the disc but the corresponding marginals show features very similar to the previous one.quite close to GinUE (cf.⟨r⟩ ∼ 0.711 for γ = 2.2, 0.707 for λ = 1.2 and 0.705 for λ 1 = 0.5).Negative values for −⟨cos θ⟩ are also observed for λ and λ 1 variation in this case.
+
+
+VI. SUMMARY
+
+In this paper we have studied the short range spectral fluctuation properties of three non-Hermitian spin chain models using complex spacing ratios, their marginal densities and the corresponding single number signatures.Although studies of integrability breaking and symmetry crossovers due to disorder, defects or random Zeeman fields are very common in Hermitian spin chain literature, they are more or less scarce for non-hermitian spin chains especially in the context of RMT.The key aspects considered in this paper can be summarised in the following three points.
+
+Firstly, in these spin chains non-hermiticity has been rendered by the addition of complex coupling constants and imaginary random fields.Therefore they are not "open" in the usual sense, since there is no direct interaction with the environment (which may be a larger spin system) such as in boundary driven spin chains.In fact it can be thought that the dissipative nature of these spin chains have been manifested through the imaginary system parameters.Secondly, the symmetry properties of these hamiltonians, the breaking of which makes them undergo symmetry class transitions, makes them compelling case studies in the milieu of RMT.For example, the anisotropic nonhermitian XY model with transverse field, i.e.H 1 has been shown to be RT symmetric due to its construction in Ref. [55] which plays the same role as PT -symmetry in other pseudo-hermitian spin chain models.We have modified H 1 by the addition of an extra random longitudinal field in the case of H 2 and for H 3 , the z-field has been made imaginary keeping the perturbative lon-gitudinal x-field intact.These modifications lead to the breaking of their RT invariance which is turn facilitates integrability breaking and a transition from Poisson to GinUE-resembling statistics of RMT is observed on fine tuning of system parameters.The single number signatures are also quite close to GinUE (∼ 0.74) in several cases discussed previously.It is expected that these signatures of non-integrability and overlap with RMT improve further with increasing system dimension.One of the constraints in examining larger system dimensions in cases like this is the ever-increasing Hilbert space for full space diagonalization which requires greater computational resources and time.Despite this, a more thorough exploration is one of our future ventures.Thirdly, we also provide simulation results for phenomenological matrix models of 1D and 2D Poisson to GinUE crossovers which in most scenarios approximate the spectral transitions shown by these spin chains rather well.These kind of interpolating models are already well known for Poisson-GOE and Poisson-semi-Poisson distributions.The first matrix model capturing 1D-Poisson to GinUE crossover is particularly interesting in the context of real to complex eigenvalue-kind of transitions which have been discussed in the context of many-body localization transition in non-Hermitian systems.This transition has previously been used as a diagnostic tool to understand many-body localization in hard-core boson models [110].It will be of interest to see whether this same diagnostic can be used to understand ergodicity and many-body localization in our spin chain models.Lastly an intriguing but challenging problem would be to deduce analytical results for CSR in crossover matrix models of the kind considered in this paper.
+
+FIG. 1 .FIG. 2 .FIG. 3 .
+123
+FIG. 1. Plots of CSR density in the complex plane along with radial and angular marginals for 1D-Poissonian to GinUE crossover in MM1 for 1500 matrices of size N = 256.
+
+
+FIG. 4 .
+4
+FIG. 4. Plots for MM2, similar to Fig. 3, for an ensemble of 250 matrices of dimension N = 2000.
+
+
+FIG. 5 .FIG. 6 .
+56
+FIG.5.Plots of CSR density in the complex plane for L = 6 of H1.The parameter λ is a random variate from the Gaussian distribution N (0, 1), while γ is manually assigned the values 0.01, 0.3 and 2 in (a), (b) and (c).For lower values of γ the densities are distributed on the real axis but they spread in the unit circle eventually as the value is increased and the eigenvalues acquire significant imaginary parts.
+
+
+FIG. 7 .
+7
+FIG. 7. Plots of CSR density and the associated marginals for L = 6 of H2.The parameter γ is varied manually while λ, λ1 are random variates from the Gaussian distribution N (0, 1).We have γ = 0.01 in (a)-(c)(top row), 0.5 in (d)-(f) (middle row) and 3 for (g)-(i) (bottom row).The plots (d)-(f) show subtle signatures of TUE5 denoted by the red line.The ratio density at the centre, vanishes to some extent in (d).This is also seen in the P θ (θ) vs θ plot in (f) which also shows slight suppression of small angles.For γ = 3 in (g) the results of density plots show areas of elevated brightness on the disc but the corresponding marginals show features very similar to the previous one.
+
+
+FIG. 8 .FIG. 9 .
+89
+FIG. 8. Plots of CSR and its marginal densities for H2 with the variation of λ, with γ and λ1 ∈ N [0, 1].Poisson-like behaviour featured by a flat distribution of the ratio density in the unit circle and uniform radial and angular distributions is observed for λ = 0.001, in (a)-(c) (top row).As the value of λ is increased, large-N GinUE behaviour is observed for λ = 0.9 in (d)-(f) (middle row).Pr(r) shows slight undulation, a distinguishing feature in the TUE case.P θ (θ) on other hand shows a strong suppression of small angles.On the contrary for λ = 3 in (g)-(i) (bottom row) accumulation of CSR at small angles is observed.
+
+
+FIG. 10 .
+10
+FIG. 10.Similar to Fig. 7 but with L = 8 in this case.Due to larger chain size, the suppression of small angles is much more prominent and persists till broader range of values compared to L = 6 case.Especially for γ = 2.1 in (d)-(f), TUE5 features are very prominent.
+
+
+FIG. 11 .FIG. 12 .
+1112
+FIG. 11.Here λ is varied for L = 8 of H2.Poisson-like features are very prominent for λ = 0.01 in (a)-(c) in the top row and when λ is increased to 1.2 in (d)-(f) (bottom row) the features are very close to the analytical results for TUE5.
+
+
+FIG. 13 .
+13
+FIG. 13.Same plots for Fig. 7 but for L = 8 case of the H3 hamiltonian.γ = 0.01 in (a)-(c) and 2.2 in (d)-(f).Close-to-GinUE behaviour is observed for γ = 2.2, also evident from the marginal distributions which are close to TUE5 results plotted with the red dashed line.For γ = 0.01, results distinct from either Poisson or GinUE-like statistics is observed from a bow-arrow like structure embedded in the unit circle for the density of CSR.The corresponding radial and angular show noticeable deviation from the uniform distribution of the Poisson statistics.
+
+
+FIG. 14 .
+14
+FIG.14.In this plot λ is varied for L = 8 case of H3.Poisson-like behaviour is observed for λ = 0.01 with some deviations in the case of the angular distribution while TUE5-like behaviour is observed for λ = 1.2, also evident from the angular marginal distributions but in this case the radial distribution varies slightly from the analytical results.
+
+
+FIG. 15 .
+15
+FIG.15.In this case λ1 is varied for L = 8 case of H3.For λ1 = 0.01, Poisson-like statistics is observed with some deviations near the origin for the angular marginal distribution while the radial distribution matches the analytical results very well.For λ1 = 0.5 in (d)-(f), subtle expressions of TUE5 statistics is noted with some deviations for the radial distribution.
+
+ACKNOWLEDGMENTSAS acknowledges the research fellowship from DST-INSPIRE (IF170612), Govt of India and expresses gratitude to Prof. Manas Kulkarni with whom she had fruitful discussions on the subject while participating in the program -Statistical Physics of Complex Systems at ICTS, Bangalore (code: ICTS/SPCS2022/12).SK acknowledges the support provided by SERB, DST, Govt. of India (Grant No. CRG/2022/001751).
+. C M Bender, S Boettcher, Phys. Rev. Lett. 8052431998
+
+. C M Bender, S Boettcher, P N Meisinger, J. Math. Phys. 4022011999
+
+. P Dorey, C Dunning, R Tateo, J. Phys. A: Math. Gen. 3456792001. 2001
+
+. C M Bender, D C Brody, H F Jones, Phys. Rev. Lett. 892704012002
+
+. C M Bender, D C Brody, H F Jones, Am. J. Phys. 711110952003
+
+. A Fring, Phil. Trans. R. Soc. A. 371201200462013
+
+C M Bender, PT symmetry: In quantum and classical physics. LondonWorld Scientific2019
+
+. A Mostafazadeh, J. Math. Phys. 4339442002
+
+. A Mostafazadeh, J. Math. Phys. 432052002
+
+. A Mostafazadeh, A Batal, J. Phys. A:Math. Gen. 37116452004
+
+. A Mostafazadeh, J. Phys. A: Math. Gen. 3670812003
+
+. H F Jones, J. Phys. A: Math. Gen. 3817412005
+
+. N Hatano, D R Nelson, Phys. Rev. Lett. 775701996
+
+. Phys. Rev. B. 5686511997
+
+. D R Nelson, N M Shnerb, Phys. Rev. E. 5813831998
+
+. C M Bender, Rep. Prog. Phys. 709472007
+
+. T T Wu, Phys. Rev. 11513901959
+
+. T Hollowood, Nucl. Phys. B. 3845231992
+
+. M E Fisher, Phys. Rev. Lett. 4016101978
+
+. J L Cardy, Phys. Rev. Lett. 5413451985
+
+. J L Cardy, G Mussardo, Phys. Lett. 2252751989
+
+. A B Zamolodchikov, Nucl. Phys. B. 3486191991
+
+. R Brower, M Furman, M Moshe, Phys. Lett. 762131978
+
+. B Harms, S Jones, C.-I Tan, Nucl. Phys. 1713921980
+
+. Phys. Lett. B. 912911980
+
+. U Guenther, F Stefani, M Znojil, J. Math. Phys. 46635042005
+
+. U Guenther, B F Samsonov, F Stefani, J. Phys. A: Math. Theor. 40F1692007
+
+. C F M Faria, A Fring, Laser Physics. 174242007
+
+. E Lange, G Chimczak, A Kowalewska-Kud Laszyk, K Bartkiewicz, Sci. Rep. 1019906. 2020
+
+. O A Castro-Alvaredo, A Fring, J.Phys.A. 424652112009
+
+. G Von Gehlen, J. Phys. A. 2453711991
+
+. G Von Gehlen, Int. J. Mod. Phys. B. 835071994
+
+. X Peng, H Zhou, B.-B Wei, J Cui, J Du, R.-B Liu, Phys. Rev. Lett. 114106012015
+
+. A Galda, V M Vinokur, Phys. Rev. B. 972014112018
+
+. C F Pai, Appl. Phys. Lett. 1011224042012
+
+. L Liu, C F Pai, Y Li, H W Tseng, D C Ralph, R A Buhrman, Science. 3365552012
+
+. B Buca, C Booker, M Medenjak, D Jaksch, New. J. Phys. 221230402020
+
+. M Nakagawa, N Kawakami, M Ueda, Phys. Rev. Lett. 1261104042021
+
+. G L Giorgi, Phys. Rev. B. 82524042010
+
+. X Z Zhang, L Jin, Z Song, Phys. Rev. A. 85121062012
+
+. M Christandl, N Datta, A Ekert, A J Landahl, Phys. Rev. Lett. 921879022004
+
+. M Christandl, N Datta, T C Dorlas, A Ekert, A Kay, A J Landahl, Phys. Rev. A. 71323122005
+
+. O Bendix, R Fleischmann, T Kottos, B Shapiro, Phys. Rev. Lett. 103304022009
+
+. Y N Joglekar, D Scott, M Babbey, A Saxena, Phys. Rev. A. 82301032010
+
+. L Jin, Z Song, Phys. Rev. A. 80121112009. 2010. 2011. 2012
+
+. M Znojil, J. Phys.A:Math. Theor. 402920022007. 2008
+
+. Phys. Rev.A. 82521132010
+
+. J. Phys. A: Math. Theor. 44753022011
+
+. S Longhi, Phys. Rev. B. 801951182009. 2010
+
+. Phys. Rev. A. 82411062010. 2010Phys. Rev. B
+
+. Y N Joglekar, A Saxena, Phys. Rev. A. 83501012011
+
+. D D Scott, Y N Joglekar, 20118350102
+
+. C Korff, R Weston, J. Phys. A: Math. Theor. 4088452007
+
+. H Zhong, W Hai, G Lu, Z Li, Phys. Rev. A. 84134102011
+
+. L B Drissi, E H Saidi, M Bousmina, J. Math. Phys. 52223062011
+
+. Ö Yesiltas, J. Phys. A: Math. Theor. 443053052011
+
+. F Bagarello, M Znojil, J. Phys. A: Math. Theor. 444153052011
+
+. W H Hu, L Jin, Y Li, Z Song, Phys. Rev. A. 86421102012
+
+. J H Noble, M Lubasch, U D Jentschura, Eur. Phys. J. Plus. 128932013
+
+. J H Noble, M Lubasch, J Stevens, U D Jentschura, Comp. Phys. Comm. 2213042017
+
+. X Z Zhang, Z Song, Phys. Rev. B. 87121142013
+
+. X Z Zhang, Z Song, Phys. Rev. A. 88421082013
+
+. L G C Lakkaraju, A Sen, Phys. Rev. A. 104522222021
+
+T K Konar, L G C Lakkaraju, arXiv:2203.09497A. Sen(De). 2022
+
+K Das Agarwal, T K Konar, L G C Lakkaraju, arXiv:2212.12403A. Sen(De). 2022
+
+. D A Rabson, B N Narozhny, A J Millis, Phys. Rev. B. 69544032004
+
+. R Modak, S Mukherjee, New J. Phys. 16930162014
+
+. Y Avishai, J Richert, R Berkovits, Phys. Rev. B. 66524162002
+
+. K Kudo, T Deguchi, Phys. Rev. B. 691324042004
+
+. M Serbyn, J E Moore, Phys. Rev. B. 93R414242016
+
+. R Modak, S Mukerjee, S Ramaswamy, Phys. Rev. B. 90751522014
+
+. N Regnault, R Nandkishore, Phys. Rev. B. 931042032016
+
+. D J Luitz, N Laflorencie, F Alet, Phys. Rev. B. 91811032015
+
+. M Znidaric, T Prosen, P Prelovsek, Phys. Rev. B. 77644262008
+
+. F Schweiner, J Main, G Wunner, Phys. Rev. E. 95622052017
+
+. F Schweiner, J Main, G Wunner, Phys. Rev. Lett. 118464012017
+
+. F Schweiner, J Laturner, J Main, G Wunner, Phys. Rev. E. 96522172017
+
+. D Kundu, S Kumar, S Sen Gupta, Phys. Rev. B. 105142052022
+
+. D Kundu, S Kumar, S Sen Gupta, Phys. Rev. B. 107942052023
+
+. V A Yurovsky, Phys. Rev. Lett. 130204042023
+
+. V A Yurovsky, arXiv:2301.06065v12023
+
+. L Sá, P Ribeiro, T Prosen, Phys. Rev. X. 10210192020
+
+. S Ghosh, S Gupta, M Kulkarni, Phys. Rev. B. 1061342022022
+
+. A M García-García, L Sá, J J M Verbaarschot, Phys. Rev. X. 122210402022
+
+. L Sá, A M García-García, Phys. Rev. D. 1052260052022
+
+. I G Dusa, T Wettig, Phys. Rev. E. 105441442022
+
+. V Oganesyan, D A Huse, Phys. Rev. B. 751551112007
+
+. Y Y Atas, E Bogomolny, O Giraud, G Roux, Phys. Rev. Lett. 110841012013
+
+. Y Y Atas, E Bogomolny, O Giraud, P Vivo, E Vivo, J. Phys. A: Math. Theor. 463552042013
+
+. A Sarkar, M Kothiyal, S Kumar, Phys. Rev. E. 101122162020
+
+. S C L Srivastava, A Lakshminarayan, S Tomsovic, A Bäcker, J. Phys. A. 52251012018
+
+. U T Bhosale, S H Tekur, M S Santhanam, Phys. Rev. E. 98521332018
+
+. O Giraud, N Macé, E Vernier, F Alet, Phys. Rev. X. 12110062022
+
+. Q Wang, M Robnik, Phys. Rev. E. 107542132023
+
+. J De Marco, L Tolle, C.-M Halati, A Sheikhan, A M Läuchli, C Kollath, Phys. Rev. Research. 4331192022
+
+. N D Chavda, V K B Kota, Phys. Lett. A. 37730092013
+
+. N D Chavda, H N Deota, V K B Kota, Phys. Lett. A. 378412014
+
+. K Roy, Euro. Phys. Lett. 118460032017
+
+M L Mehta, Random Matrices. Elsevier20043rd ed.
+
+. R Grobe, F Haake, Phys. Rev. Lett. 6228931989
+
+. G Akemann, M Kieburg, A Mielke, T Prosen, Phys. Rev. Lett. 1232541012019
+
+. R Hamazaki, K Kawabata, N Kura, M Ueda, Phys. Rev. Res. 2232862020
+
+. A Edelman, E Kostlan, M Shub, J. Am. Math. Soc. 72471994
+
+Sommers. Y V Fyodorov, B A Khoruzhenko, H.-J , Phys. Rev. Lett. 795571997
+
+S.-S Byun, M Ebke, Random Matrices: Theory and Applications. 2023122250047
+
+. G Akemann, M Duits, L D Molag, J. Math. Phys. 64235032023
+
+. S.-S Byun, P J Forrester, arXiv:2211.162232022arXiv preprint
+
+. K Binder, A P Young, Rev. Mod. Phys. 588011986
+
+M Mézard, G Parisi, M A Virasoro, Spin Glass Theory and Beyond. SingaporeWorld Scientific1987
+
+. B Georgeot, D L Shepelyansky, Phys. Rev. Lett. 81231998
+
+. P Jurcevic, B P Lanyon, P Hauke, C Hempel, P Zoller, R Blatt, C F Roos, Nature. 5112022014
+
+. P Jurcevic, P Hauke, C Maier, C Hempel, B P Lanyon, R Blatt, C F Roos, Phys. Rev. Lett. 1151005012015
+
+. J Smith, A Lee, P Richerme, B Neyenhuis, P W Hess, P Hauke, M Heyl, D A Huse, C Monroe, Nat. Phys. 129072016
+
+. C Maier, T Brydges, P Jurcevic, N Trautmann, C Hempel, B P Lanyon, P Hauke, R Blatt, C F Roos, Phys. Rev. Lett. 122505012019
+
+. N Sauerwein, F Orsi, P Uhrich, S Bandyopadhyay, F Mattiotti, T Cantat-Moltrecht, G Pupillo, P Hauke, J.-P Brantut, Nat. Phys. 1911282023
+
+. R Hamazaki, K Kawabata, M Ueda, Phys. Rev. Lett. 123906032019

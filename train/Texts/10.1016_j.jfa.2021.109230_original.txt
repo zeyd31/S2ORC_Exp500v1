@@ -1,0 +1,682 @@
+
+ROUNDNESS PROPERTIES OF BANACH SPACES
+May 2021
+
+Alireza Amini-Harandi 
+Ian Doust 
+Gavin Robertson 
+ROUNDNESS PROPERTIES OF BANACH SPACES
+May 2021
+The maximal roundness of a metric space is a quantity that arose in the study of embeddings and renormings. In the setting of Banach spaces, it was shown by Enflo that roundness takes on a much simpler form. In this paper we provide simple computations of the roundness of many standard Banach spaces, such as ℓ p , the Lebesgue-Bochner spaces ℓ p (ℓ q ) and the Schatten ideals S p . We also introduce a property that is dual to that of roundness, which we call coroundness, and make explicit the relation of these properties to the geometric concepts of smoothness and convexity of Banach spaces. Building off the work of Enflo, we are then able to provide multiple non-trivial equivalent conditions for a Banach space to possess maximal roundness greater than 1. Using these conditions, we are able to conclude that certain Orlicz spaces possess non-trivial values of roundness and coroundness. Finally, we also use these conditions to provide an explicit example of a 2-dimensional Banach space whose maximal roundness is not equal to that of its dual.2010 Mathematics Subject Classification. 46B20.
+
+Introduction
+
+The concept of roundness of a metric space was first introduced by Enflo in the 1960s in his papers on the infinite dimensional version of Hilbert's 5th problem. In particular, he used roundness to deal with the remaining cases of the result that no infinite dimensional L p space is uniformly homeomorphic to any L q space (with 1 ≤ p, q and p = q) [22,8,9]. However, this use of roundness in the setting of uniform homeomorphisms is rather misleading about the nature of roundness, since it is actually an isometric invariant of metric spaces rather than a uniform one. It should be noted that roundness was an important precursor to several later concepts, including Rademacher type and cotype of Banach spaces and generalised roundness of metric spaces. In fact, in the setting of Banach spaces roundness is actually a special case of Rademacher type (see Remark 4.2). Enflo's use of roundness in the uniform setting can then be explained by a celebrated rigidity theorem of Ribe [28], which shows that Rademacher type of Banach spaces is invariant under uniform homeomorphisms (even though roundness is not).
+
+The definition of roundness as given by Enflo in [8] is as follows.
+
+Definition 1.1. A metric space (X, d) has roundness p ≥ 1, denoted p ∈ r(X, d), if whenever a 1 , a 2 , b 1 , b 2 are in X we have
+d(a 1 , a 2 ) p + d(b 1 , b 2 ) p ≤ 1≤i,j≤2 d(a i , b j ) p .
+A crucial result is that in the case of a Banach space (X, · ), the above definition takes on a particularly simple form. Enflo [10] showed that (i) p ∈ r(X, . ) if and only if
+x + y p + x − y p ≤ 2( x p + y p )
+for all x, y ∈ X, (ii) p ∈ r(X, . ) implies p 1 ∈ r(X, . ) for all 1 ≤ p 1 ≤ p.
+
+We remark that the second property above does not hold in general for arbitrary metric spaces (see [10]). For a Banach space however, by this second property it follows that the study of roundness of the space space really boils down to a study of its maximal roundness.
+
+That is, the roundness properties of a Banach space are entirely determined by the quantity mr(X) = sup{p : p ∈ r(X, · )}.
+
+Let us now note some basic properties of mr(X). Firstly, if X is a Banach space, then 1 ≤ mr(X) ≤ 2. Secondly, if X and Y are Banach spaces and X embeds isometrically in Y then mr(Y ) ≤ mr(X). It is also not too hard to see that mr(X) = 2 if and only if X is a Hilbert space (see [3]). Harder is a classification of those spaces for which one obtains the other extreme value mr(X) = 1 (see Section 5 for a classification of such spaces).
+
+Enflo's work surrounding the infinite dimensional version of Hilbert's 5th problem made it clear that the property of having mr(X) > 1 was a desirable one. Indeed, many of the important structure theorems involving roundness only apply in the case that the space in question has roundness strictly greater than one. For example, if a locally bounded topological linear space is uniformly homeomorphic to a Banach space with roundness greater than one, then it is a normable space (see [11] for this and some related results). However, since the property of having mr(X) > 1 was sufficient for many of these theorems, the question of how one may explicitly compute the precise value of mr(X) for a given Banach space did not really feature in Enflo's work.
+
+Following the results of Enflo on the roundness of Banach spaces, the concept of roundness has been studied for other special classes of metric spaces. In [20] Lafont and Prassidis studied the roundness of two different classes of metric spaces. The first class that they studied was that of geodesic manifolds, where they were able to provide a connection between the topological properties of the space and the values of roundness of the space. For example, they proved that all geodesic spaces of roundness 2 are contractible, and that every compact Riemannian manifold with roundness greater than 1 must be simply connected. The second class of metric spaces that they studied was that of Cayley graphs of finitely generated groups. Here they were able to provide connections between the algebraic properties of the group with roundness properties of the Cayley graph. For example, they proved that if every Cayley graph of a group has roundness greater than 1 then the group must be a torsion group with every element of order 2, 3, 5 or 7. In [15] Horak, LaRose, Moore, Rooney and Rosenthal studied the more general case of roundness properties of finite connected graphs.
+
+Here they were able to explicitly compute the roundness of certain families of graphs, such as the cycles C n . They were also able to show that in this setting certain restrictions on the roundness of all finite connected graphs prevailed. For example, no finite connected graph can have roundness strictly between log 2 (3) and 2.
+
+It is worthwhile to note that a theory that runs parallel to the theory of roundness, and which heavily motivates many of the ideas and questions pursued in this paper, is the theory of generalised roundness. For the sake of completeness, we state the definition of generalised roundness here, as originally defined by Enflo in [9]. Definition 1.2. A metric space (X, d) has generalised roundness p ≥ 0, denoted p ∈ gr(X, d), if whenever a 1 , . . . , a n , b 1 , . . . , b n are in X and n ≥ 2 we have
+1≤i,j≤n d(a i , a j ) p + d(b i , b j ) p ≤ 2 1≤i,j≤n d(a i , b j ) p .
+By taking n = 2 in the above definition it is easy to see that for p ≥ 1 if a metric space has generalised roundness p then it also has roundness p. In recent years, the concept of generalised roundness of metric spaces has been the subject of a large amount of research activity (see for example [6,7,13,21,25,29,30]). One of the main reasons for this is perhaps the significant embedding implications that generalised roundness carries with it, the main theorem in this area being that a metric space (X, d) has generalised roundness p if and only if (X, d p/2 ) isometrically embeds in a Hilbert space (see [13] for a proof of this result). A nontrivial fact is that, just as for roundness of Banach spaces, the theory of generalised roundness of metric spaces boils down to the computation of the maximal generalised roundness of a space, denoted by mgr(X) = sup{p ≥ 0 : p ∈ gr(X, d)}.
+
+The computation of mgr(X) for any particular space is challenging, and has only been done for a rather small collection of spaces. Even for finite metric spaces the problem is usually analytically intractable. However, Sánchez in [30] provided a formula for mgr(X) that allowed for the numerical computation of mgr(X) for an arbitrary finite metric space.
+
+Let us briefly describe this formula now. Suppose that X = {x 0 , x 1 , . . . , x n } is a finite
+metric space, with distance matrix D = (d(x i , x j )) n i,j=0 . For p > 0, let D p denote the 'p- distance matrix', (d(x i , x j ) p ) n i,j=0
+. Also, let ½ denote the column vector in R n+1 all of whose coordinates are 1, and let ·, · denote the standard inner product on R n+1 . Sánchez [30] showed that if mgr(X) < ∞ then
+mgr(X) = min{p > 0 : det(D p ) = 0 or D −1 p ½, ½ = 0}.
+For several special families of metric spaces, such as the bipartite graphs K m,n , this formula even allows for a precise (algebraic) computation of the maximal generalised roundness of the space (see [30]). As such, since the conception of this formula, the state of knowledge pertaining to the maximal generalised roundness of finite metric spaces has improved. For explicit results obtained using this formula, see [6,13,25]. A related formula is given in [29].
+
+In this article, the class of metric spaces whose roundness properties we will study is that of Banach spaces. The main motivating question for much of the work below is the question of how one may actually compute the quantity mr(X) for a given Banach space. However, as was the case with the maximal generalised roundness of metric spaces (at least, before the above formula of Sánchez), this is in general an extremely difficult task. Of course, for certain Banach spaces such as L p spaces and other similar spaces, a computation of mr(X) can be achieved through classical inequalities such as Minkowski's Inequality and Clarkson's Inequalities and so on. However, in the grand scheme of things the list of Banach spaces for which such an approach is feasible is extremely short. Even for 2-dimensional Banach spaces, the task of determining whether or not a space has a given value of roundness may be impossible (see for example the 2-dimensional Banach spaces in Section 6). In fact, even proving that mr(X) > 1 is in general an extremely difficult task. Thus, it seems that the best that one can hope for is perhaps a formula analogous to that of Sánchez' formula in the setting of roundness of Banach spaces. In this article, we take the first steps towards this goal, and focus on developing a systematic approach to determining whether or not mr(X) > 1 for a given Banach space.
+
+1.1. Overview of the article. In Section 2 we introduce a geometric function related to the theory of roundness, and derive many of its basic properties. In doing so, we obtain new simple proofs of many of the known elementary properties of roundness. In fact, this section makes it apparent that the theory of roundness of Banach spaces is really just a small part of the theory of these geometric functions.
+
+As stated earlier, the computation of the maximal roundness of certain spaces is accessible through classical inequalities. Even so, there does not seem to be a unified approach to this task for many of these standard spaces. To address this problem we introduce a number of new concepts. The first, which is suggested by Clarkson's inequalities for L p spaces, is a variant we call Clarkson roundness. Using this we give a complete listing of the maximal roundness for all the Lebesgue-Bochner spaces ℓ p (ℓ q ) and the Schatten ideals S p , extending the known results for L p spaces. This is the content of Section 3.
+
+In Section 4 we introduce a second new concept, a property that is dual to that of roundness, which we call coroundness. It turns out that the roundness and coroundness of a Banach space greatly affect its geometry. We will show, for example, that if a Banach space X has maximal roundness greater than 1 then it is uniformly smooth, and if it has finite minimal coroundness then it is uniformly convex.
+
+Expanding upon results of Enflo concerning the maximal roundness of a Banach space, in Section 5 we focus on the problem of characterising those spaces for which mr(X) = 1. Here we provide multiple new characterisations of when mr(X) = 1 in terms of many other Banach space properties such as p-uniform smoothness and the modulus of uniform smoothness.
+
+Finally, in Section 6 we employ the results of the previous section to provide new and interesting examples of Banach spaces that possess non-trivial values of roundness and coroundness. We are able to provide two explicit Orlicz spaces (both different from L p spaces), one having non-trivial roundness and the other having non-trivial coroundness. For all the standard spaces for which the maximal roundness is known, it is noticeable that the space and its dual have the same maximal roundness. The final example in Section 6 is a 2-dimensional Banach space for which the methods of the previous section allow us to conclude that the maximal roundness of this space is not equal to that of its dual.
+
+
+Notation.
+
+In what follows, X is always assumed to be a real Banach space. If X is a Banach space then B X = {x ∈ X : x ≤ 1} will be used to denote the closed unit ball in X, and S X = {x ∈ X : x = 1} the unit sphere.
+
+If p > 1 then p ′ will be used to denote the conjugate index satisfying 1 p + 1 p ′ = 1 (we will also at times use the convention that if p = 1 then p ′ = ∞ and vice versa).
+
+If f, g are real-valued functions defined on some subset of R then for a ∈ R we will say that f = O(g) as t → a to mean that there exists some ǫ > 0 and C > 0 such that |f (t)| ≤ C|g(t)| for all t ∈ (a − ǫ, a + ǫ) ∩ domain(f ) ∩ domain(g). If h is also a real-valued function defined on some subset of R then we will say that f = g + O(h) as t → a to mean that f − g = O(h) as t → a. Finally, we will say that f = Θ(g) as t → a if both f = O(g) as t → a and g = O(f ) as t → a.
+
+
+The modulus of roundness
+
+To fully understand the linear theory of roundness, it is helpful to consider a certain geometric function that we associate with each Banach space. The function we consider resembles generalized von Neumann-Jordan constants such as C N J (X), as seen in [4] and [32]. For our purposes however, it is more useful to consider slightly different scalings of these functions.
+
+Definition 2.1. Let (X, · X ) be a Banach space. We define the modulus of roundness of X to be the function ν X : [1, ∞) → R given by
+ν X (p) = sup x + y p + x − y p x p + y p : x, y ∈ X not both zero .
+It is not too hard to see that for any 1 ≤ p < ∞ one has that
+(2.1) max{2, 2 p−1 } ≤ ν X (p) ≤ 2 p .
+Other immediate consequences of the definition of ν X are the following.
+
+• ν X (1) = 2 for any Banach space X.
+
+• p ∈ r(X, · ) ⇐⇒ ν X (p) ≤ 2 ⇐⇒ ν(p) = 2.
+
+• mr(X) = sup{p : ν X (p) = 2}.
+
+• ν X (2) = 2 C N J (X) (see [3]).
+
+In fact, it is also immediate from the definition of ν X that ν X (p) = 2 p−1 C (p) N J (X) (see [4] and [32] for the definition of C (p) N J (X)). As is noted in, for example, [18], it is often helpful to consider such functions in terms of the norm of a suitable operator. For 1 ≤ p ≤ ∞, let ℓ p 2 (X) be X × X with the norm (x, y) p = x p + y p 1/p (where for p = ∞ we mean (x, y) ∞ = max( x , y )). Also, define T X : X × X → X × X to have the operator matrix
+T X = I X I X I X −I X
+where here I X denotes the identity operator on X. That is, if (x, y) ∈ X × X then T (x, y) = (x + y, x − y). In this notation it is easy to see that
+ν X (p) = T X p ℓ p 2 (X)→ℓ p
+That is, ν X (p) 1/p is precisely the operator norm of T X , when T X is viewed as an operator T X : ℓ p 2 (X) → ℓ p 2 (X). The fact that ℓ p 2 (X) * = ℓ p ′ 2 (X * ) and T * X = T X * allows one to conclude the following duality result pertaining to the modulus of roundness.
+
+Lemma 2.2. Let X be a Banach space. Then for all p > 1
+ν X (p) 1/p = ν X * (p ′ ) 1/p ′ .
+Proof. This follows from the fact that both T X and its adjoint T * X = T X * have the same norm. Using this one simply calculates that
+ν X (p) 1/p = T X ℓ p 2 (X)→ℓ p 2 (X) = T X * ℓ p ′ 2 (X * )→ℓ p ′ 2 (X * ) = ν X * (p ′ ) 1/p ′ .
+Note in particular that by applying Lemma 2.2 twice, one finds that it is always the case that ν X * * = ν X .
+
+Another benefit of the operator theoretic reformulation of the modulus of roundness is that it allows one to conclude certain non-trivial log-convexity properties about it.
+Proposition 2.3. Let X be a Banach space. Also, suppose that 1 ≤ p 0 , p 1 , p < ∞ and 0 < θ < 1 with 1 p = 1 − θ p 0 + θ p 1 .
+Then
+ν X (p) 1/p ≤ ν X (p 0 ) 1/p 0 1−θ ν X (p 1 ) 1/p 1 θ .
+Proof. We just make use of the fact that for p ≥ 1 one has that
+ν X (p) 1/p = T X ℓ p 2 (X)→ℓ p 2 (X) .
+Since the spaces ℓ p 2 (X) for 1 ≤ p < ∞ form an interpolation scale, the desired inequality now follows from standard results in interpolation theory (see for example [1], Theorem
+
+
+5.2.3).
+
+In particular, this gives the following.
+
+Corollary 2.4. Let X be a Banach space. Then the function ν X is continuous on [1, ∞), and differentiable almost everywhere in that range. Furthermore, ν X has a constant value of Proof. The inequality in Proposition 2.3 is equivalent to the statement that the function p → ν X (1/p) p is log-convex, and hence this function is also convex. Since convex functions are continuous and differentiable almost everywhere, it follows from this that ν X is also continuous and differentible almost everywhere on [1, ∞). For the next part, suppose that 1 < q < p < ∞. Then we may apply Proposition 2.3 withp 0 = 1,p 1 = p,p = q and
+θ = p(q − 1)/q(p − 1). Since ν X (1) = 2 this gives that ν X (q) ≤ 2 p−q p−1 ν X (p) q−1 p−1 .
+So, if we now assume further that mr(X) ≤ q < p < ∞ then ν X (p) > 2 and so
+ν X (q) ≤ 2 p−q p−1 ν X (p) q−1 p−1 < ν X (p) p−q p−1 × ν X (p) q−1 p−1 = ν X (p).
+That is, ν X is strictly increasing on [mr(X), ∞).
+
+Formulas for ν X for the ℓ p spaces are essentially due to Kato [16].
+
+Example 2.5. Let H be a Hilbert space (of dimension at least 2). Then Theorem 1 of [16] shows that ν H (p) = max{2, 2 p−1 }. Example 2.6. Let X = ℓ p , and first suppose that 1 ≤ p ≤ 2. Then
+ν X (q) =          2, 1 ≤ q ≤ p, 2 q/p , p ≤ q ≤ p ′ , 2 q−1 , p ′ ≤ q < ∞. Now suppose that X = ℓ p where 2 ≤ p ≤ ∞. Then ν X (q) =          2, 1 ≤ q ≤ p ′ , 2 q/p ′ , p ′ ≤ q ≤ p, 2 q−1 , p ≤ q < ∞.
+
+Clarkson roundness and the roundness of standard spaces
+
+In order to calculate the maximal roundness of the Lebesgue-Bochner spaces ℓ p (ℓ q ) and
+
+the Schatten spaces S p it is convenient to define a second, stronger version of roundness, whose definition is motivated by Clarkson's inequalities for L p spaces (see for example [2], page 119).
+
+Definition 3.1. For 1 < p ≤ 2 we shall say that a Banach space X has Clarkson roundness p if
+x + y p ′ + x − y p ′ ≤ 2 x p + y p p ′ −1
+for all x, y ∈ X.
+
+Remark 3.2. The above inequality can be rearranged to read as
+x + y p ′ + x − y p ′ 1/p ′ ≤ 2 1/p ′ x p + y p 1/p
+for all x, y ∈ X. Using the operator theoretic notation from Section 2 it is then clear that a
+
+Banach space X has Clarkson roundness p if and only if
+T X ℓ p 2 (X)→ℓ p ′ 2 (X) ≤ 2 1/p ′ .
+Such inequalities have been studied previously. See for example [14], where they were referred to as (p, p ′ )-Clarkson inequalities.
+
+There is a simple relationship between roundness and Clarkson roundness.
+Lemma 3.3. Suppose that 1 < p ≤ 2.
+Then if X has Clarkson roundness p it also has roundness p.
+
+Proof. We make use of the following elementary inequality.
+If 1 ≤ r < s < ∞ and a, b ≥ 0 then (a s + b s ) 1/s ≤ (a r + b r ) 1/r ≤ 2 1/r−1/s (a s + b s ) 1/s .
+Since p ≤ p ′ , for any x, y ∈ X this gives that
+x + y p + x − y p ≤ 2 1−p/p ′ ( x + y p ′ + x − y p ′ ) p/p ′ = 2 1−p/p ′ ( x + y p ′ + x − y p ′ ) p−1 ≤ 2 1−p/p ′ × 2 p/p ′ ( x p + y p ) (p ′ −1)(p−1) = 2( x p + y p )
+where this last equality follows from the fact that (p ′ − 1)(p − 1) = 1.
+
+Theorem 3.4. Let (Ω, A, µ) be a measure space and let X be a Banach space. Then, (i) If 1 < p ≤ 2 and X has Clarkson roundness q ≤ p, the Lebesuge-Bochner space L p (Ω, A, µ; X) has Clarkson roundness q.
+
+(ii) If 2 ≤ p < ∞ and X has Clarkson roundness q ≤ p ′ , the Lebesgue-Bochner space L p (Ω, A, µ; X) has Clarkson roundness q.
+
+Proof. We begin by recognising some helpful identities. Namely that
+f q p = Ω f (t) p dµ(t) q/p = f q p/q
+where here f denotes the pointwise norm of a function f : Ω → X and . p denotes the norm in L p (Ω, A, µ; X). Similarly, by swapping q to q ′ we also have
+f q ′ p = f q ′ p/q ′ .
+Note that for p and q in either case described in the statement of the theorem we have that p/q ′ ≤ 1 and p/q ≥ 1. Hence, for all f, g ∈ L p (Ω, A, µ; X),
+f + g q ′ p + f − g q ′ p = f + g q ′ p/q ′ + f − g q ′ p/q ′ ≤ f + g q ′ + f − g q ′ p/q ′ ≤ 2 ( f q + g q ) q ′ −1 p/q ′ = 2 f q + g q p/q q ′ −1 ≤ 2 f q p/q + g q p/q q ′ −1 = 2( f q p + g q p ) q ′ −1
+where the first inequality follows from the reverse Minkowski inequality since p/q ′ ≤ 1, the second inequality comes from the fact that X has Clarkson roundness q and the last inequality follows from the usual Minkowski inequality since p/q ≥ 1.
+
+To make use of the above theorem, we first note the Clarkson roundness of R. A proof of the following proposition can be found on page 118 of [2].
+
+Proposition 3.5. The Banach space R has Clarkson roundness p for all 1 < p ≤ 2.
+
+Corollary 3.6. Let 1 ≤ p < ∞. Then ℓ p has maximal roundness min(p, p ′ ).
+
+Proof. Suppose that 1 < p < ∞. By Proposition 3.5, an application of Theorem 3.4 with X = R shows that ℓ p has Clarkson roundness min(p, p ′ ). Hence by Lemma 3.3 ℓ p also has roundness min(p, p ′ ). At this point we note that this is also trivially true for p = 1. To see that this is in fact the maximal roundness, one need only look to the bounds given by taking first x = (1, 0, 0, 0, . . . , ), y = (0, 1, 0, 0, . . . , ) ∈ ℓ p and secondly x = (1, 1, 0, 0, . . . , ), y =
+(1, −1, 0, 0, . . . , ) ∈ ℓ p .
+A second application of Theorem 3.4 with X = ℓ q gives the following.
+
+Corollary 3.7. Let 1 ≤ p, q < ∞. Then ℓ p (ℓ q ) has maximal roundness min(p, p ′ , q, q ′ ).
+
+Proof. Firstly, if either p or q is 1, then ℓ p (ℓ q ) contains an isometric copy of ℓ 1 , so that the maximal roundness of ℓ p (ℓ q ) must be 1. Otherwise 1 < p, q < ∞. Then, as in the proof of Corollary 3.6, since ℓ q has Clarkson roundness min(q, q ′ ), an application of Theorem 3.4
+
+shows that ℓ p (ℓ q ) has Clarkson roundness min(p, p ′ , q, q ′ ). Again, Lemma 3.3 shows that it also has roundness min(p, p ′ , q, q ′ ). To see that this is the maximal roundness, note that ℓ p (ℓ q ) contains isometric copies of both ℓ p and ℓ q .
+
+It is known that the Schatten p-trace class S p also satisfies Clarkson's Inequalities (see [24]). More precisely, in our terminology we have the following theorem.
+
+Theorem 3.8. If 1 < p < ∞, then S p has Clarkson roundness min(p, p ′ ).
+
+Thus, Lemma 3.3 together with the fact that S p contains an isometric copy of ℓ p allows us to compute the maximal roundess of S p . This result was first proved in [21].
+
+Corollary 3.9. If 1 ≤ p < ∞, then the maximal roundess of S p is min(p, p ′ ).
+
+
+Duality, smoothness and convexity
+
+We now introduce the natural dual property of roundness. Note that this property appears at least implicitly in [17] (see also [19,31]).
+
+Definition 4.1. For 2 ≤ p < ∞ we shall say that a Banach space X has coroundness p if
+x + y p + x − y p ≤ 2 p−1 x p + y p for all x, y ∈ X.
+While X has roundness p if and only if ν X (p) = 2 we have that X has coroundness p if and only if ν X (p) = 2 p−1 . That is, both roundness and coroundness correspond to the situation where ν X takes on its minimum possible value for the given value of p. 
+K > 0 such that 1 0 n i=1 r i (t)x i p dt ≤ K n i=1 x i p
+for all x 1 , . . . , x n ∈ X and n ≥ 1, where r i (t) are the Rademacher functions, that is, r i (t) = sgn(sin(2 i πt)). The smallest constant K > 0 for which the above inequalities hold is denoted by T p (X).
+Let 2 ≤ q < ∞. A Banach space X is said to be of Rademacher cotype q if there exists some K > 0 such that n i=1 x i q ≤ K 1 0 n i=1 r i (t)x i q dt
+for all x 1 , . . . , x n ∈ X and n ≥ 1. The smallest constant K > 0 for which the above inequalities hold is denoted by C q (X).
+
+It follows from Theorems 2.2 and 2.4 in [17] that if 1 ≤ p ≤ 2 and 2 ≤ q < ∞ then a
+
+Banach space X has Rademacher type p if and only if it has type p with T p (X) = 1 and
+
+Rademacher cotype q if and only if it has cotype q with C q (X) = 1. That is, roundness and coroundness are simply special cases of Rademacher type and cotype. Figure 1. Roundness, coroundness and ν X (p).
+p 2 1 2 mr(X) mc(X) 2 p−1 2 p ν X (p)
+We now show that coroundness is in fact a property that is dual to roundness. In what follows, by convention we will say that every Banach space has coroundness ∞. Proof. For p = 1, ∞ the statement is trivial. Hence we may assume that 1 < p < ∞. In this case, the result follows from Lemma 2.2. Indeed, if ν X (p) = 2 then
+ν X * (p ′ ) = ν X (p) p ′ /p = 2 p ′ −1 .
+The other implications are proved similarly.
+
+Corollary 4.4. If 2 ≤ p ≤ p 1 ≤ ∞ and X has coroundness p then X also has coroundness p 1 .
+
+Proof. Use duality via Proposition 4.3, together with the fact that if X has roundness q where 1 ≤ q 1 ≤ q, then X also has roundness q 1 .
+
+It now makes sense to speak of the minimal coroundness that a Banach space may possess.
+
+We will denote this by mc(X) = inf{p : ν X (p) = 2 p−1 } (where by convention we set mc(X) = ∞ if this infimum is taken over the empty set). Note that 2 ≤ mc(X) ≤ ∞. Clearly if X embeds isometrically in Y then mc(Y ) ≥ mc(X). With this notation, Proposition 4.3 gives the following.
+
+Corollary 4.5. The maximal roundness and minimal coroundness of a Banach space X and its dual space X * satisfy mr(X) = mc(X * ) ′ and mc(X) = mr(X * ) ′ . In particular, mr(X) = mr(X * * ) and mc(X) = mc(X * * ).
+
+Remark 4.6. In light of the above corollary it is a very natural question to ask whether or not one has mr(X) = mr(X * ) or mc(X) = mc(X * ) for all Banach spaces. In fact, when X is ℓ p , S p or ℓ p (ℓ q ) the results of Sections 3 and 4 show that these relations do indeed hold in these cases. However, it turns out that these relations do not hold in general. In fact, Enflo in [10] states without proof that it is possible to construct a 2-dimensional Banach space whose maximal roundness is not equal to that of its dual. We shall exhibit an explicit example of such a space in Section 6 below.
+
+The following well known geometric properties and functions (see for example [23], Chapter 1 Section e) are intimately related to the study of roundness and coroundness of a Banach space.
+
+Definition 4.7. Let X be a Banach space.
+
+(i) X is said to be uniformly smooth if for all ǫ > 0 there exists some δ > 0 such that if
+
+x, y ∈ X with x = 1 and y ≤ δ then
+
+x + y + x − y ≤ 2 + ǫ y .
+
+(ii) X is said to be uniformly convex if for all ǫ > 0 there exists some δ > 0 such that if
+
+x, y ∈ X with x − y ≥ ǫ then
+x + y 2 ≤ 1 − δ.
+(iii) The modulus of uniform smoothness of X is the function ρ X : [0, ∞) → R defined by
+ρ X (t) = sup 1 2 ( x + y + x − y ) − 1 : x = 1, y = t .
+(iv) The modulus of uniform convexity of X is the function δ X : [0, 2] → [0, 1] defined by
+δ X (ǫ) = inf 1 − x + y 2 : x = y = 1, x − y ≥ ǫ .
+We refer the reader to [23] for the following facts about uniformly smooth and uniformly convex spaces. (iii) if X is uniformly smooth or uniformly convex then it is reflexive.
+
+(iv) X is uniformly smooth if and only if X * is uniformly convex. Also, by reflexivity, X is uniformly convex if and only if X * is uniformly smooth.
+
+It is now possible to demonstrate that roundness is a smoothness property and that its dual property coroundess is a convexity property.
+
+Theorem 4.9. Let X be a Banach space.
+
+(i) If mr(X) > 1 then X is uniformly smooth.
+
+(ii) If mc(X) < ∞ then X is uniformly convex.
+
+Proof. We begin by proving the second statement. So, suppose that X has coroundness p for some 2 ≤ p < ∞. Then if x, y ∈ X and 0 < ǫ < 2 with x = y = 1 and x − y ≥ ǫ we have that
+x + y p + x − y p ≤ 2 p−1 ( x p + y p ) = 2 p so that x + y 2 ≤ (1 − (ǫ/2) p ) 1/p .
+Hence by taking δ = 1 − (1 − (ǫ/2) p ) 1/p > 0 we see that X is uniformly convex, which proves the second statement.
+
+To prove the first statement, note that if mr(X) > 1 then Corollary 4.5 implies that mc(X * ) < ∞. By what was just proved this implies that X * is uniformly convex. But then by Theorem 4.8(iv) we have that X is uniformly smooth.
+
+Together with Theorem 4.8(iii) this gives the following.
+
+Corollary 4.10. If mr(X) > 1 or mc(X) < ∞ then X is reflexive.
+
+Finally, we finish this section by noting that it is easy to compute the coroundness of all of those spaces whose roundness was computed in the previous section, by means of duality.
+
+Corollary 4.11. Let 1 ≤ p < ∞. Then ℓ p has minimal coroundness max(p, p ′ ).
+
+Corollary 4.12. Let 1 ≤ p, q < ∞. Then ℓ p (ℓ q ) has minimal coroundness max(p, p ′ , q, q ′ ).
+
+Corollary 4.13. Let 1 ≤ p < ∞. Then S p has minimal coroundness max(p, p ′ ).
+
+
+Characterisations of spaces with non-trivial roundness
+
+As stated earlier, a Banach space X has mr(X) = 2 if and only if it is a Hilbert space. In this section we will focus on characterising those spaces whose maximal roundness is at the other extreme, that is, spaces for which mr(X) = 1. Actually, it turns out that it is easier to write down conditions which are equivalent to having mr(X) > 1 instead, and so this is what we will do.
+
+Our starting point is a result of Enflo [11] which relates the study of roundness to the study of p-uniform smoothness, of which we now recall the definition (see for example [19]).
+
+Definition 5.1. Let X be a Banach space and 1 ≤ p ≤ 2. Then X is said to be p-uniformly smooth if there exists K > 0 such that
+x + y p + x − y p ≤ 2( x p + Ky p )
+for all x, y ∈ X.
+
+By taking K = 1 above, it is clear that if a Banach space has roundness p then it is also p-uniformly smooth. Enflo's result is the following.
+
+
+Lemma 5.2 ([11, Proposition 2])
+
+. Let X be a Banach space. Then mr(X) > 1 if and only if X is p-uniformly smooth, for some p > 1.
+
+Let X be a Banach space, and let ρ X be the modulus of uniform smoothness of X. As in [23], say that ρ X is of power type p ≥ 1 if there exists some C > 0 such that ρ X (t) ≤ Ct p for all t ≥ 0. It is known that for 1 ≤ p ≤ 2, a Banach space X is p-uniformly smooth if and only if ρ X is of power type p (see for example [19]). This fact together with Enflo's result gives the following characterisation of when mr(X) > 1.
+
+Theorem 5.3. Let X be a Banach space. Then mr(X) > 1 if and only if ρ X is of power type p, for some p > 1.
+
+Remark 5.4. It is possible to use duality to translate the above results to the coroundness setting. For 2 ≤ q < ∞, a Banach space X is said to be q-uniformly convex if there exists K > 0 such that
+x + y p + x − y p ≥ 2( x p + Ky p )
+for all x, y ∈ X (see for example [19]). Letting δ X denote the modulus of uniform convexity of X, we say that δ X is of power type q ≥ 2 if there exists some C > 0 such that δ X (ǫ) ≥ Cǫ q for all ǫ ∈ [0, 2). If q ≥ 2 then X is q-uniformly convex if and only if δ X is of power type q.
+
+Similarly, ρ X * is of power type p > 1 if and only if δ X is of power type p ′ < ∞ (see [23]).
+
+Since by Corollary 4.5 we know that mr(X * ) > 1 if and only if mc(X) < ∞, Theorem 5.3 also gives the following characterisation of those spaces which possess finite coroundness: A
+
+Banach space X has mc(X) < ∞ if and only if X is q-uniformly convex for some q ≥ 2 if and only if δ X is of power type q for some q ≥ 2.
+
+Remark 5.5. Theorem 5.3 can be regarded as an isometric characterisation of those spaces for which mr(X) > 1. However, a classical theorem of Pisier [27] states that a Banach space X admits an equivalent renorming such that ρ X is of power type p, for some p > 1, if and only if X is super-reflexive. In this way, one obtains the following isomorphic characterisation of those spaces for which mr(X) > 1: A Banach space X is isomorphic to a Banach space Y with mr(Y ) > 1 if and only if X is super-reflexive. Similarly of course, we find that a
+
+Banach space X is isomorphic to a Banach space Y with mc(Y ) < ∞ if and only if X is super-reflexive. In particular, a Banach space X is isomorphic to a Banach space Y with mr(Y ) > 1 if and only if X is isomorphic to a Banach space Z with mc(Z) < ∞.
+
+For many of the results to follow, it will be helpful to use the notions of Fréchet differentiability and support maps in Banach spaces. For more on these concepts, see [5].
+
+Definition 5.6. Let X be a Banach space. We will say that X is uniformly Fréchet differentiable if the limits lim t→0
+
+x + ty − x t exist uniformly for all x, y ∈ S X . Definition 5.7. Let X be a Banach space. A support map on X is a map from X − {0} to X * − {0}, say x → f x , such that the following two conditions hold.
+
+(i) For each x ∈ S X , the functional f x has norm one and it norms x in the sense that f x (x) = x = 1.
+
+(ii) For each x = 0 and λ > 0 we have that f λx = λf x .
+
+The relationship between Fréchet differentiability and support maps is explained by the following result (for a proof, see Theorem 1 on page 36 of [5], say).
+
+Theorem 5.8. Let X be a Banach space. If X is uniformly smooth then there is a unique support map on X. Furthermore, X is uniformly Fréchet differentiable and if x → f x denotes the unique support map on X then one has that
+lim t→0 x + ty − x t = f x (y)
+for all x, y ∈ S X . Theorem 5.3 allows us to say the following about uniform Frechet differentiability and non-trivial roundness.
+
+Proposition 5.9. Let X be a Banach space and let x → f x be a support map on X. Suppose that there exists some p > 1 such that
+x + ty = 1 + f x (y)t + O(t p )
+as t → 0, where this O(t p ) holds uniformly over all x, y ∈ S X . Then ρ X is of power type p > 1 and consequently mr(X) > 1.
+
+Proof. By assumption, there exists C > 0 and 0 < t 0 ≤ 1 such that if x, y ∈ S X and −t 0 ≤ t ≤ t 0 then
+x + ty − (1 + f x (y)t) ≤ Ct p .
+Hence, for such x, y, t one has that
+x + ty = x + ty = x + ty − (1 + f x (y)t) + (1 + f x (y)t) ≤ x + ty − (1 + f x (y)t) + |1 + f x (y)t| ≤ Ct p + |1 + f x (y)t|.
+Also, note that since f x = 1 one has that |f x (y)t| ≤ f x y |t| ≤ 1. Hence
+x + ty ≤ Ct p + |1 + f x (y)t| = Ct p + 1 + f x (y)t.
+Similarly, one can show that
+x − ty ≤ Ct p + 1 + f x (−y)t = Ct p + 1 − f x (y)t.
+Thus, if x, y ∈ S X and 0 ≤ t ≤ t 0 one has that
+1 2 ( x + ty + x − ty ) − 1 ≤ 1 2 (Ct p + 1 + f x (y)t + Ct p + 1 − f x (y)t) − 1 = Ct p .
+Hence ρ X (t) ≤ Ct p , for all 0 ≤ t ≤ t 0 , which shows that ρ X is of power type p. The fact that mr(X) > 1 now follows from Theorem 5.3.
+
+Our next aim is to provide a necessary condition for mr(X) to be greater than 1. We require a number of preliminary lemmas. Lemma 5.11. Suppose that ρ X is of power type p, for some p > 1. Then there exists M > 0 such that
+δ −1 X * (ǫ) ≤ Mǫ 1/p ′ for all 0 ≤ ǫ ≤ 1.
+Proof. By duality (see [23]), we have that δ X * is of power type p ′ . That is, there exists M 0 > 0 such that δ X * (ǫ) ≥ M 0 ǫ p ′ for all 0 ≤ ǫ ≤ 2. By Theorem 4.8(ii) this implies that X * is uniformly convex and hence by Lemma 5.10 we have that the inverse function 2] exists. Putting this all together we find that for all 0 ≤ ǫ ≤ 1 we have that Suppose that X * is uniformly convex. Then any support map x → f x on X is uniformly continuous on S X . More precisely, for any 0 < ǫ ≤ 2
+δ −1 X * : [0, 1] → [0,ǫ = δ X * (δ −1 X * (ǫ)) ≥ M 0 δ −1 X * (ǫ) p ′ . Rearranging we find that δ −1 X * (ǫ) ≤ M −1/p ′ 0 ǫ 1/p ′and x, y ∈ S X , if x − y < 2δ X * (ǫ) then f x − f y < ǫ.
+Lemma 5.13. Let X be a Banach space, and let x → f x be any support map on X. Suppose that ρ X is of power type p, for some p > 1. Then
+x + ty = 1 + f x (y)t + O(t 1+1/p ′ ) as t → 0, where this O(t 1+1/p ′ ) holds uniformly over x, y ∈ S X .
+Proof. It is proved on page 21 of [5] that for t ∈ (0, 1/2) and x, y ∈ S X , one has that
+f x (y) ≤ x + ty − x t ≤ f x+ty (y) x + ty and hence that x + ty − x t − f x (y) ≤ f x+ty (y) x + ty − f x (y) .
+In fact, by setting t ′ = −t and y ′ = −y it follows that the above inequality actually holds for all t ∈ (−1/2, 1/2) − {0} and x, y ∈ S X . Hence, for all t ∈ (−1/2, 1/2) − {0} and x, y ∈ S X , the basic properties of the support map imply that
+x + ty − x t −f x (y) ≤ f x+ty (y) x + ty −f x (y) = |(f x+ty/ x+ty −f x )(y)| ≤ f x+ty/ x+ty −f x .
+Now, for t ∈ (−1/2, 1/2) − {0} and x, y ∈ S X we note that the triangle inequality implies that
+x + ty x + ty − x ≤ x + ty x + ty − (x + ty) + (x + ty) − x = x + ty 1 x + ty − 1 + |t| ≤ (1 + |t|) 1 x + ty − 1 + |t| ≤ 3 2 1 x + ty − 1 + |t|.
+We claim that if t ∈ (−1/2, 1/2) − {0} and x, y ∈ S X then 1 x + ty − 1 ≤ 2|t|.
+
+In this case the triangle inequality clearly implies that 0 < 1 − |t| ≤ x + ty ≤ 1 + |t|.
+
+Then, since the function h(α) = 1/α − 1 is decreasing for α > 0 this implies that
+1 x + ty − 1 ≤ max(|h(1 − |t|)|, |h(1 + |t|)|) = max |t| 1 − |t| , |t| 1 + |t| .
+Since 0 ≤ |t| ≤ 1/2 one finds that
+|t| 1 − |t| ≤ |t| 1 − 1/2 = 2|t| and |t| 1 + |t| ≤ |t| 1 + 0 = |t|.
+Putting this all together gives that if t ∈ (−1/2, 1/2) − {0} and x, y ∈ S X then 
+1 x + ty − 1 ≤ max(2|t|, |t|) =δ −1 X * (ǫ) ≤ Mǫ 1/p ′ for all 0 ≤ ǫ ≤ 1.
+Hence if we now further assume that t ∈ (−1/4, 1/4) − {0} and x, y ∈ S X then 0 ≤ 4|t| ≤ 1 and so
+x + ty x + ty − x ≤ 4|t| = δ X * (δ −1 X * (4|t|)) < 2δ X * (δ −1 X * (4|t|))
+and so Lemma 5.12 implies that (since both (x + ty)/ x + ty and x are in S X )
+f x+ty/ x+ty − f x ≤ δ −1 X * (4|t|) ≤ M(4|t|) 1/p ′ = (4 1/p ′ M)|t| 1/p ′ .
+Thus, if t ∈ (−1/4, 1/4) − {0} and x, y ∈ S X then
+x + ty − x t − f x (y) ≤ (4 1/p ′ M)|t| 1/p ′
+which after multiplying both sides by |t| reads as (since x = 1)
+x + ty − 1 − f x (y)t ≤ (4 1/p ′ M)|t| 1+1/p ′ .
+Since the constant M does not depend on the choice of x, y ∈ S X this proves the result.
+
+We now have the following characterisation of when ρ X is of power type p, for some p > 1.
+
+Theorem 5.14. Let X be a Banach space and let x → f x be a support map on X. Then the following are equivalent.
+
+(i) ρ X is of power type p, for some p > 1.
+
+(ii) There exists some r > 1 such that
+x + ty = 1 + f x (y)t + O(t r )
+as t → 0, where this O(t r ) holds uniformly over all x, y ∈ S X .
+
+Proof. The fact that (i) implies (ii) follows from Lemma 5.13 by taking r = 1 + 1/p ′ > 1.
+
+The fact that (ii) implies (i) is was already proved in Proposition 5.9.
+
+Finally, we summarise all of our characterisations of when mr(X) > 1.
+
+Corollary 5.15. Let X be a Banach space, and let x → f x be a support map on X. Then the following are equivalent in pairs.
+
+(i) X has non-trivial maximal roundness (i.e. mr(X) > 1).
+
+(ii) ρ X is of power type p, for some p > 1.
+
+(iii) X is s-uniformly smooth, for some s > 1.
+
+(iv) There exists some r > 1 such that
+x + ty = 1 + f x (y)t + O(t r )
+as t → 0, where this O(t r ) holds uniformly over all x, y ∈ S X .
+
+(v) X * has non-trivial minimal coroundness (i.e. mc(X * ) < ∞).
+
+(vi) δ X * is of power type q, for some q ≥ 2.
+
+(vii) X * is w-uniformly convex, for some w ≥ 2.
+
+Proof. The equivalence of (i),(ii) and (iii) is simply the content of Lemma 5.2 and Theorem 5.3. Theorem 5.14 gives the equivalence of (ii) and (iv). Finally, Remark 5.4 shows that (v), (vi) and (vii) are equivalent, and that each of these is equivalent to (ii).
+
+
+Further Examples
+
+In this section we aim to give some further examples of Banach spaces that possess nontrivial roundness or coroundness. Unlike the spaces that we encountered in Section 3, here we shall deal with spaces for which a precise calculation of their maximal roundness or minimal coroundness is more or less infeasible. Instead, we shall seek to employ the results of the previous section so that we may still conclude non-trivial information about the values of roundness and coroundness that these spaces possess.
+
+For our first two examples, we will be looking at particular examples of Orlicz sequence spaces, which in some sense are a generalisation of ℓ p . Let us recall the necessary definitions here. For more on Orlicz spaces, the reader is referred to [23]. . . ) such that ∞ n=1 Φ(|x n |/k) < ∞ for some k > 0. When equipped with the Luxemburg norm · Φ defined by
+x Φ = inf k > 0 : ∞ n=1 Φ(|x n |/k) ≤ 1
+the space (ℓ Φ , · Φ ) becomes a Banach space, which we shall refer to as the Orlicz sequence space generated by Φ.
+
+It is often useful to deal only with Orlicz functions that satisfy the following growth rate condition.
+
+Definition 6.2. Let Φ : [0, ∞) → R be an Orlicz function. Then Φ is said to satisfy the ∆ 2 condition at 0 if there exist t 0 , C > 0 such that Φ(2t) ≤ CΦ(t), for all 0 ≤ t ≤ t 0 .
+
+If Φ is an Orlicz function that is differentiable in an interval of the form (0, t 0 ), for some t 0 > 0, there is a simple way to test whether or not Φ satisfies the ∆ 2 condition at 0.
+
+Namely, in this case Φ satisfies the ∆ 2 condition at 0 if and only if (see the comments after Proposition 4.a.5 in [23])
+(6.1) lim sup t→0 tΦ ′ (t) Φ(t) < ∞.
+Another notion that we will require when dealing with Orlicz sequence spaces is the notion of equivalence of functions. Suppose that A ⊆ R and that f, g : A → R. We will say that f and g are equivalent if there exist k, K > 0 such that
+K −1 g(k −1 t) ≤ f (t) ≤ Kg(kt)
+for all t ∈ A. If A contains an interval of the form [0, t 0 ], for some t 0 > 0, we will say that f and g are equivalent at 0 if there exists k, K > 0 and 0 < t 1 ≤ t 0 such that
+K −1 g(k −1 t) ≤ f (t) ≤ Kg(kt)
+for all 0 ≤ t ≤ t 1 .
+
+For our first example, we will give provide an Orlicz sequence space (that is different from ℓ p ) that possesses non-trivial roundness. To do so we will use the following result when estimating the modulus of uniform smoothness of an Orlicz space. This result is really a combination of Proposition 19 and Lemma 20 from [12]. for all t ≥ 0. Then Φ is an Orlicz function equivalent to Ψ. Moreover, for X = ℓ Φ , there exists C > 0 such that if t ∈ (0, 1] then the modulus of uniform smoothness of X satisfies
+ρ X (t) ≤ Ct 2 sup t≤u≤1 0<v≤1 Φ(uv) u 2 Φ(v) .
+Example 6.4. (An Orlicz space with non-trivial roundness). Here we will consider an Orlicz space that is essentially derived from the function t p (1 + | log(t)|). However, there are quite a few technical obstacles that one must overcome to produce a usable estimate for the modulus of uniform smoothness of a given Orlicz space. Of course, the main tool that we will use to do so is Theorem 6.3.
+
+So, let us fix 1 < p < 2. It can be checked using elementary calculus that there exists 
+t 0 ∈ (0, 1) such that if we define Ψ 0 : [0, 1] → R by Ψ 0 (t) = t p | log(t 0 t)| + (1 − 1/p)t p ,Ψ(t) =    Ψ 0 (t), 0 ≤ t ≤ 1, Ψ 0 (1) + (t − 1)Ψ ′ 0 (1), 1 ≤ t < ∞, where here Ψ ′ 0
+(1) denotes the derivative of Ψ 0 at t = 1. We now claim that Ψ satisfies the ∆ 2 condition at 0. Indeed, one has that lim sup
+t→0 tΨ ′ (t) Ψ(t) = lim t→0 p| log(t 0 t)| + p − 2 | log(t 0 t)| + 1 − 1/p = p.
+By (6.1), this is sufficient to conclude that Ψ satisfies the ∆ 2 condition at 0.
+
+Next we compute Φ, as given in Theorem 6.3. If t ∈ [0, 1], elementary integration techniques show that
+Φ(t) = c p t p (1 + | log(t 0 t)|)
+where c p = (1 + | log(t 0 )|) −1 . Thus by Theorem 6.3, for X = ℓ Φ and t ∈ [0, 1] one has that (note that here we will be using the fact that 1 < p < 2)
+ρ X (t) ≤ Ct 2 sup t≤u≤1 0<v≤1 Φ(uv) u 2 Φ(v) = Ct 2 sup t≤u≤1 0<v≤1 u p−2 1 + | log(u)| | log(t 0 v)| + 1 = Ct 2 × t p−2 (1 + c p | log(t)|) = Ct p (1 + c p | log(t)|).
+But it is easily checked that (by using L'Hôpital's rule for example) if 0 < q < p then
+lim t→0 Ct p (1 + c p | log(t)|) t q = 0.
+Hence, ρ X is of power type q, for all 0 < q < p. By Theorem 5.3, since p > 1 this is sufficient to conclude that mr(X) = mr(ℓ Φ ) > 1.
+
+For our second example, we will provide an Orlicz sequence space (again, different from ℓ p ) that possesses non-trivial coroundness. This time of course, we will require estimates pertaining to the modulus of uniform convexity of Orlicz spaces. The result that we shall use here is the following one (which can be found in the remarks after Lemma 1.e.8 in [23] say).
+
+Theorem 6.5. Let Φ be an Orlicz function and let X = ℓ Φ . Suppose that the following conditions hold:
+(1) Φ is super-multiplicative. That is, there exists c > 0 such that Φ(st) ≥ c Φ(s)Φ(t),
+for all 0 ≤ s, t ≤ 1.
+
+(2) Φ(t 1/2 ) is equivalent to a convex function.
+
+Then δ X , the modulus of uniform convexity of X, is equivalent to Φ at 0. That is, there exist k, K > 0 and t 0 > 0 such that
+K −1 Φ(k −1 t) ≤ δ X (t) ≤ KΦ(kt) for all 0 ≤ t ≤ t 0 .
+Example 6.6. (An Orlicz space with non-trivial coroundness). For our second example, we will take p ≥ 2 and define the Orlicz function Φ : [0, ∞) → R by
+Φ(t) =    t p 1+| log(t)| , 0 ≤ t ≤ 1, t 2p , 1 < t < ∞.
+One can check that Φ(t 1/2 ) is convex on [0, ∞).
+
+We now show that Φ is super-multiplicative, in the sense given in Theorem 6.5. So, take 0 ≤ s, t ≤ 1. We claim that Φ(st) ≥ Φ(s)Φ(t). Indeed, one has that
+Φ(st) ≥ Φ(s)Φ(t) ⇐⇒ s p t p 1 + | log(st)| ≥ s p 1 + | log(s)| t p 1 + | log(t)| ⇐⇒ (1 + | log(s)|)(1 + | log(t)|) ≥ 1 + | log(st)|.
+However, this last inequality is true since 1 + | log(st)| = 1 + | log(s) + log(t)| ≤ 1 + | log(s)| + | log(t)| ≤ 1 + | log(s)| + | log(t)| + | log(s)|| log(t)| = (1 + | log(s)|)(1 + | log(t)|) and so the claim is proved. Hence, by Theorem 6.5 there exist k, K > 0 and t 0 > 0 such that
+K −1 Φ(k −1 t) ≤ δ X (t) ≤ KΦ(kt) for all 0 ≤ t ≤ t 0 . Now, lim t→0 Φ(t) t q =    ∞, p < q < ∞, 0, q = p.
+But due to the equivalence of Φ and δ X at 0 this also means that
+lim t→0 δ X (t) t q =    ∞, p < q < ∞, 0, q = p.
+Hence δ X is of power type q for precisely those q such that p < q < ∞. Consequently, by
+
+Remark 5.4 we may conclude that mc(X) < ∞.
+
+Of course, arguing as above Theorem 6.5 gives the following sufficient conditions on Φ for the Orlicz space ℓ Φ to have non-trivial coroundness.
+
+Corollary 6.7. Let Φ be an Orlicz function and let X = ℓ Φ . Suppose that the following conditions hold:
+(1) Φ is super-multiplicative. That is, there exists c > 0 such that Φ(st) ≥ c Φ(s)Φ(t),
+for all 0 ≤ s, t ≤ 1.
+
+(2) Φ(t 1/2 ) is equivalent to a convex function.
+
+(3) Φ is of power type q, for some q ≥ 2. That is, there exist C > 0 and t 0 > 0 such that
+Φ(t) ≥ Ct q , for all 0 ≤ t ≤ t 0 .
+Then mc(X) < ∞.
+
+We now move onto our final example. As mentioned in Remark 4.6, Enflo in [10] claimed without proof that it should be possible to construct a Banach space X whose maximal roundness was different from that of its dual. Moreover, he claimed that this should also be possible with dim(X) = 2. Here we confirm Enflo's claim, by explicitly providing a 2-dimensional Banach space and using the results from Section 5 to prove that mr(X) = mr(X * ). To this end, let R = R 2 and equip R with the norm
+(x 1 , x 2 ) R =    |x 2 |, |x 2 | ≥ |x 1 |, x 2 1 +x 2 2 2|x 1 | , otherwise.
+It is a simple matter to check that this formula does indeed define a norm on R = R 2 . We shall refer to the space (R, · R ) as the racetrack space. It is straightforward to verify that the dual space R * has dual norm given by
+(x 1 , x 2 ) R * = x 2 1 + x 2 2 + |x 1 |.
+A picture of the unit spheres of the racetrack space and its dual, S R and S R * respectively, is shown in Figure 2.
+
+From these pictures, one is led to suspect that R is uniformly smooth but not uniformly convex, and that R * is uniformly convex but not uniformly smooth. Indeed, this turns out to be the case and we shall prove this by computing the asymptotic behaviour of the modulus of uniform smoothness of both R and R * . We start with the easier of the two computations.
+
+Proposition 6.8. Let ρ R * denote the modulus of uniform smoothness of the dual of the racetrack space. Then ρ R * (t) = Θ(t), as t → 0.
+
+Proof. Note that by the Triangle Inequality one trivially has that ρ R * (t) ≤ t, for all 0 ≤ t ≤ 1.
+
+Now, keeping 0 ≤ t ≤ 1 let us set x = (0, 1) and y = (t/2, 0). Using the formula for · R * it is readily checked that x R * = 1 and y R * = t. Hence
+ρ R * (t) ≥ 1 2 ( x + y R * + x − y R * ) − 1 = t 2 4 + 1 + t 2 − 1 ≥ 1 + t 2 − 1 = t 2 which completes the proof.
+Next, we have the much more tedious analogous computation for R. For this computation, we will use the following elementary inequality.
+Lemma 6.9. Let 0 < a ≤ z ≤ b. Then z 2 + a 2 2z ≤ b 2 + a 2 2b .
+Proposition 6.10. Let ρ R be the modulus of uniform smoothness of the racetrack space. Then ρ R (t) = Θ(t 2 ), as t → 0. More precisely, if 0 ≤ t ≤ 1/6 then
+(1 + t 2 ) 1/2 − 1 ≤ ρ R (t) ≤ 18t 2 .
+Proof. First, let us comment on the lower bound. This is due to a result of Nordlander [26] who showed that if X is any Banach space of dimension at least 2 then
+(1 + t 2 ) 1/2 − 1 ≤ ρ X (t)
+for all 0 ≤ t ≤ 1. Note that lim t→0
+
+(1 + t 2 ) 1/2 − 1 t 2 = 1 2 which shows that (1 + t 2 ) 1/2 − 1 = Θ(t 2 ), as t → 0. Now we turn our attention to the upper bound. Let
+L = {(s, 1) ∈ R 2 : −1 ≤ s ≤ 1} and let C = {(cos θ + 1, sin θ) ∈ R 2 : −π/2 ≤ θ ≤ π/2}.
+Since the unit sphere of R is given by S R = L ∪ C ∪ (−L) ∪ (−C), by symmetry one has that if t = 0 then
+ρ X (t) = sup 1 2 ( x + y + x − y ) − 1 : x, y/t ∈ L ∪ C .
+Also, let us put
+S 1 = {(x 1 , x 2 ) ∈ R 2 : |x 2 | ≥ |x 1 |}
+and S 2 = R 2 \ S 1 . We now consider four cases, depending on whether x and y/t are in L or C. Also, for the remainder of the proof, we shall assume that 0 < t ≤ 1/6.
+
+
+Case 1.
+
+Suppose that x, y/t ∈ L. That is, x = (s, 1) for some −1 ≤ s ≤ 1 and y = (tr, t) for some −1 ≤ r ≤ 1. Then
+
+x + y = (s + tr, 1 + t), x − y = (s − tr, 1 − t).
+
+Note that it is not possible to have x + y ∈ S 2 so there are only two cases to check.
+
+(1a) Suppose that x + y, x − y ∈ S 1 . Then
+1 2 ( x + y R + x − y R ) − 1 = 1 2 (|1 + t| + |1 − t|) − 1 = 1 2 ((1 + t) + (1 − t)) − 1 = 0.
+(1b) Suppose that x + y ∈ S 1 and x − y ∈ S 2 . This means that |1 + t| ≥ |s + tr|, |s − tr| > |1 − t|.
+
+In particular, the Triangle Inequality implies that |1 − t| ≤ |s − tr| ≤ |s| + |r|t ≤ 1 + t.
+
+Hence, applying Lemma 6.9 with a = |1 − t| = 1 − t, z = |s − tr|, b = |1 + t| = 1 + t we have
+that 1 2 ( x + y R + x − y R ) − 1 = 1 2 |1 + t| + (s − tr) 2 + (1 − t) 2 2|s − tr| − 1 ≤ 1 2 1 + t + (1 + t) 2 + (1 − t) 2 2(1 + t) − 1 = t 2 1 + t .
+Since 0 < t ≤ 1/6, this implies that
+1 2 ( x + y R + x − y R ) − 1 ≤ t 2 1 + 0 = t 2 .
+Case 2. Suppose that x ∈ L and y/t ∈ C. That is, x = (s, 1) for some −1 ≤ s ≤ 1 and y = (t cos θ + t, t sin θ) for some −π/2 ≤ θ ≤ π/2. Then
+x + y = (s + t cos θ + t, 1 + t sin θ), x − y = (s − t cos θ − t, 1 − t sin θ).
+It is easy to check that since 0 < t ≤ 1/6 one cannot have both x + y and x − y ∈ S 2 , so there are only three cases to check.
+
+(2a) Suppose that x + y, x − y ∈ S 1 . Then 1 2
+
+( x+y R + x−y R )−1 = 1 2 (|1+t sin θ|+|1−t sin θ|)−1 = 1 2 ((1+t sin θ)+(1−t sin θ))−1 = 0.
+
+(2b) Suppose that x + y ∈ S 1 and x − y ∈ S 2 . This means that |1 + t sin θ| ≥ |s + t cos θ + t|, |s − t cos θ − t| > |1 − t sin θ|.
+
+In particular, the Triangle Inequality implies that 1 − t sin θ = |1 − t sin θ| ≤ |s − t cos θ − t| ≤ |s + t cos θ + t| + 2|t cos θ + t| ≤ |1 + t sin θ| + 2|t cos θ + t|
+= 1 + αt
+where here α = sin θ + 2 cos θ + 2. Hence, applying Lemma 6.9 with a = |1 − t sin θ| = 1 − t sin θ, z = |s − t cos θ − t|, b = 1 + αt we have that
+1 2 ( x + y R + x − y R ) − 1 = 1 2 |1 + t sin θ| + (s − t cos θ − t) 2 + (1 − t sin θ) 2
+2|s − t cos θ − t| − 1 ≤ 1 2 1 + t sin θ + (1 + αt) 2 + (1 − t sin θ) 2 2(1 + αt) − 1 = (α 2 + sin 2 θ + 2α sin θ)t 2 4(1 + αt) .
+
+Now, note that since −π/2 ≤ θ ≤ π/2 one has that 0 ≤ α = sin θ + 2 cos θ + 2 ≤ 1 + 2 + 2 = 5.
+Hence 1 2 ( x + y R + x − y R ) − 1 ≤ (5 2 + 1 + 2 × 5 × 1)t 2 4 = 9t 2 .
+(2c) Suppose that x + y ∈ S 2 and x − y ∈ S 1 . One may follow a similar argument to the above to show that again
+1 2 ( x + y R + x − y R ) − 1 ≤ 9t 2 .
+Case 3. Suppose that x ∈ C and y/t ∈ L. That is, x = (cos θ + 1, sin θ) for some −π/2 ≤ θ ≤ π/2 and y = (tr, t) for some −1 ≤ r ≤ 1. Then
+
+x + y = (cos θ + 1 + tr, sin θ + t), x − y = (cos θ + 1 − tr, sin θ − t).
+
+(3a) Suppose that x + y, x − y ∈ S 1 . Since 0 < t ≤ 1/6, it is not hard to check that this is only possible for θ = ±π/2. If θ = π/2 the fact that x + y, x − y ∈ S 1 implies that one must have r = 1, and if θ = −π/2 the fact that x + y, x − y ∈ S 1 implies that r = −1. But for (θ, r) = (π/2, 1) and (θ, r) = (−π/2, −1) it is easily checked that 1 2 ( x + y R + x − y R ) − 1 = 0.
+
+(3b) Suppose that x + y ∈ S 1 and x − y ∈ S 2 . This means that | sin θ + t| ≥ | cos θ + 1 + tr|, | cos θ + 1 − tr| > | sin θ − t|.
+
+In particular, since 0 < t ≤ 1/6, −1 ≤ r ≤ 1 and −π/2 ≤ θ ≤ π/2, the first of these inequalities implies that either θ ≥ 0 or θ = −π/2 and r = −1. But in the latter case we would have x − y / ∈ S 2 . Hence we may assume from now on that θ ≥ 0. In this case, note that | sin θ − t| ≤ | cos θ + 1 − tr| ≤ | cos θ + t + tr| + 2t|r| ≤ | sin θ + t| + 2t ≤ 1 + 3t.
+
+Also, since θ ≥ 0, we have that (sin θ − t) 2 ≤ (1 − t) 2 . Hence, applying Lemma 6.9 with a = | sin θ − t|, z = | cos θ + 1 − tr|, b = 1 + 3t we have that 1 2 ( x + y R + x − y R ) − 1 = 1 2 | sin θ + t| + (cos θ + t − tr) 2 + (sin θ − t) 2 2| cos θ + 1 − tr| − 1 ≤ 1 2 1 + t + (1 + 3t) 2 + (1 − t) 2 2(1 + 3t) − 1 = 4t 2 1 + 3t ≤ 4t 2 1 + 3 × 0 = 4t 2 .
+
+(3c) Suppose that x + y ∈ S 2 and x − y ∈ S 1 . One may follow a similar argument to the above to show that again
+1 2 ( x + y R + x − y R ) − 1 ≤ 4t 2 .
+(3d) Suppose that x + y, x − y ∈ S 2 . This means that | cos θ + 1 + tr| > | sin θ + t|, | cos θ + 1 − tr| > | sin θ − t|.
+Hence 1 2 ( x + y R + x − y R ) − 1 = 1 2
+(cos θ + 1 + tr) 2 + (sin θ + t) 2 2| cos θ + 1 + tr| + (cos θ + 1 − tr) 2 + (sin θ − t) 2 2| cos θ + 1 − tr| − 1 = 1 2 (cos θ + 1 + tr) 2 + (sin θ + t) 2 2(cos θ + 1 + tr) + (cos θ + 1 − tr) 2 + (sin θ − t) 2 2(cos θ + 1 − tr) − 1 = (r(r − r cos θ − 2 sin θ) + cos θ + 1)t 2 2((cos θ + 1) 2 − t 2 r 2 ) ≤ ((1 + 1 + 2) + 1 + 1)t 2 2(1 2 − t 2 )
+= 3t 2 1 − t 2 ≤ 3t 2 1 − (1/6) 2 = 108 35 t 2 .
+Case 4. Suppose that x, y/t ∈ C. That is, x = (cos θ + 1, sin θ) for some −π/2 ≤ θ ≤ π/2 and y = (t cos φ + t, t sin φ) for some −π/2 ≤ φ ≤ π/2. Then x + y = (cos θ + 1 + t cos φ + t, sin θ + t sin φ), x − y = (cos θ + 1 − t cos φ − t, sin θ − t sin φ).
+
+Note that it is not possible to have both x + y ∈ S 1 and x − y ∈ S 2 so there are only three cases to check.
+
+(4a) Suppose that x + y, x − y ∈ S 1 . It is easy to check that it must be the case that (θ, φ) = (π/2, π/2) or (θ, φ) = (−π/2, −π/2). However, in both these cases ≤ (2 × 5 + 5 2 + 1)t 2 + 0 + 0 4 × 1/2 + 0 = 18t 2 .
+
+Similarly, it can be shown that if −1 ≤ sin θ ≤ −1/2 then
+1 2 ( x + y R + x − y R ) − 1 ≤ 18t 2
+(4c) Suppose that x + y, x − y ∈ S 2 . This means that | cos θ + 1 + t cos φ + t| > | sin θ + t sin φ|, | cos θ + 1 − t cos φ − t| > | sin θ − t sin φ|.
+Hence 1 2 ( x + y R + x − y R ) − 1 = 1 2
+(cos θ + t cos φ + 1 + t) 2 + (sin θ + t sin φ) 2 2| cos θ + t cos φ + 1 + t|
++ (cos θ − t cos φ + 1 − t) 2 + (sin θ − t sin φ) 2 2| cos θ − t cos φ + 1 − t| − 1 = 1 2
+(cos θ + t cos φ + 1 + t) 2 + (sin θ + t sin φ) 2 2(cos θ + t cos φ + 1 + t) + (cos θ − t cos φ + 1 − t) 2 + (sin θ − t sin φ) 2 2(cos θ − t cos φ + 1 − t) − 1 = (−(cos θ + 1)(cos φ + 1) 2 + (cos θ + 1) sin 2 θ + 2(cos φ + 1) 2 − 2 sin θ sin φ(cos θ + 1))t 2 2((cos θ + 1) 2 − t 2 (cos φ + 1) 2 )
+≤ (0 + 2 × 1 2 + 2 × 2 2 + 2 × 2)t 2 2(1 2 − 2 2 × t 2 ) = 5t 2 1 − 4t 2 ≤ 5t 2 1 − 4 × (1/6) 2 = 63 8 t 2 .
+By Theorem 5.3, the above two propositions allow us to conclude the following about the maximal roundness of R and R * .
+
+Corollary 6.11. Let R be the racetrack space. Then mr(R) > 1 and mr(R * ) = 1. In particular, mr(R) = mr(R * ).
+
+Remark 6.12. Finally, we remark that the above example can also be used to show that the minimal coroundness of a space is not always equal to the minimal coroundness of its dual. Indeed, in light of the above corollary, an application of Proposition 4.3 shows that mc(R) = ∞ and mc(R * ) < ∞, and hence mc(R) = mc(R * ).
+
+Proposition 4. 3 .
+3If 1 ≤ p ≤ ∞ then X has roundness p if and only if X * has coroundness p ′ . Also, X has coroundness p if and only if X * has roundness p ′ .
+
+Theorem 4. 8 .
+8Let X be a Banach space. Then (i) X is uniformly smooth if and only if lim t→0 + ρ X (t)/t = 0.(ii) X is uniformly convex if and only if δ X (ǫ) > 0 for all ǫ ∈ (0, 2).
+
+Lemma 5 .
+510 (see[23, Lemma 1.e.8]). If X is uniformly convex, then δ X : [0, 2] → [0, 1] is strictly increasing and continuous with δ X (0) = 0 and δ X (2) = 1. Consequently δ X has an inverse function δ −1 X : [0, 1] → [0, 2].
+
+.
+for all 0 ≤ ǫ ≤ 1 and so the result follows by taking M = M Lemma 5.12 (see [5, Theorem 1, page 36]).
+
+Definition 6. 1 .
+1An Orlicz function Φ : [0, ∞) → R is a continuous strictly increasing and convex function such that Φ(0) = 0 and lim t→∞ Φ(t) = ∞. To any Orlicz function Φ we associate the space ℓ Φ of all sequences of real numbers x = (x 1 , x 2 , .
+
+Theorem 6. 3 .
+3Let Ψ : [0, ∞) → R be an Orlicz function that satisfies the ∆ 2 condition at 0. Define Φ : [0, ∞) → R by
+
+then Ψ 0
+0is strictly increasing and convex on the interval [0, 1]. It is now possible to define the Orlicz function Ψ : [0, ∞) → R by
+
+Figure 2 .
+2The unit spheres of the racetrack space and its dual.
+
+
+Remark 4.2. Roundness and coroundness are intimately related to the concepts of Rademacher type and cotype. To detail this relation, let us recall the definitions of Rademacher type and cotype. Let 1 ≤ p ≤ 2. A Banach space X is said to be of Rademacher type p if there exists some
+ (X)  .
+on [1, mr(X)] and is strictly increasing on [mr(X), ∞).
+AcknowledgmentsThe first author was partially supported by the grant from IPM (No. 96470412). The work of the third author was supported by the Research Training Program of the Department of Education and Training of the Australian Government.
+Interpolation spaces. An introduction. J Bergh, J Löfström, Springer-Verlag207Berlin-New YorkJ. Bergh and J. Löfström, Interpolation spaces. An introduction, Springer-Verlag, Berlin-New York. (1976) x + 207 pp.
+
+N L Carothers, A Short Course on Banach Space Theory. CambridgeCambridge University Press184N. L. Carothers, A Short Course on Banach Space Theory, Cambridge University Press, Cambridge. (2005) xii + 184 pp.
+
+The von Neumann-Jordan constant for the Lebesgue spaces. J A Clarkson, Ann. of Math. 38J. A. Clarkson, The von Neumann-Jordan constant for the Lebesgue spaces, Ann. of Math. 38 (1937) 114-115.
+
+Generalized von Neumann-Jordan constant and its relationship to the fixed point property. Y Cui, W Huang, H Hudzik, R Kaczmarek, Fixed Point Theory Appl. Y. Cui, W. Huang, H. Hudzik and R. Kaczmarek, Generalized von Neumann-Jordan constant and its relationship to the fixed point property, Fixed Point Theory Appl. (2015) 2015:40 11 pp.
+
+Geometry of Banach spaces-selected topics. J Diestel, Springer-Verlag282Berlin-New YorkJ. Diestel, Geometry of Banach spaces-selected topics, Springer-Verlag, Berlin-New York. (1975) xi + 282 pp.
+
+Distance matrices of subsets of the Hamming cube. I Doust, G Robertson, A Stoneham, A Weston, Indag. Math. 32I. Doust, G. Robertson, A. Stoneham and A. Weston, Distance matrices of subsets of the Hamming cube, Indag. Math. 32 (2021) 646-657.
+
+Enhanced negative type for finite metric trees. I Doust, A Weston, J. Funct. Anal. 254I. Doust and A. Weston, Enhanced negative type for finite metric trees, J. Funct. Anal. 254 (2008) 2336-2364.
+
+On the nonexistence of uniform homeomorphisms between L p -spaces. P Enflo, Ark. Mat. 8P. Enflo, On the nonexistence of uniform homeomorphisms between L p -spaces, Ark. Mat. 8 (1969) 103-105.
+
+On a problem of Smirnov. P Enflo, Ark. Mat. 8P. Enflo, On a problem of Smirnov, Ark. Mat. 8 (1969) 107-109.
+
+Uniform structures and square roots in topological groups, II. P Enflo, Israel J. Math. 8P. Enflo, Uniform structures and square roots in topological groups, II, Israel J. Math. 8 (1970) 253-272.
+
+On infinite-dimensional topological groups, Séminaire sur la Géométrie des Espaces de Banach. P Enflo, Exp. No. 10-11, 11 pp.,École Polytech. PalaiseauP. Enflo, On infinite-dimensional topological groups, Séminaire sur la Géométrie des Espaces de Banach (1977-1978), Exp. No. 10-11, 11 pp.,École Polytech., Palaiseau, 1978.
+
+On the moduli of convexity and smoothness. T Figiel, Studia Math. 56T. Figiel, On the moduli of convexity and smoothness, Studia Math. 56 (1976) 121-155.
+
+Roundness properties of ultrametric spaces. T Faver, K Kochalski, M Murugan, H Verheggen, E Wesson, A Weston, Glasg. Math. J. 56T. Faver, K. Kochalski, M. Murugan, H. Verheggen, E. Wesson and A. Weston, Roundness properties of ultrametric spaces, Glasg. Math. J. 56 (2014) 519-535.
+
+Generalized Clarkson's inequalities for Lebesgue-Bochner spaces. K Hashimoto, M Kato, Y Takahashi, Bull. Kyushu Inst. Tech. Math. Natur. Sci. 43K. Hashimoto, M. Kato, and Y. Takahashi, Generalized Clarkson's inequalities for Lebesgue-Bochner spaces, Bull. Kyushu Inst. Tech. Math. Natur. Sci. 43 (1996) 15-25.
+
+Roundness properties of graphs. M Horak, E Larose, J Moore, M Rooney, H Rosenthal, M. Horak, E. LaRose, J. Moore, M. Rooney and H. Rosenthal, Roundness properties of graphs, Involve. 3 (2010) 67-91.
+
+Generalized Clarkson's inequalities and the norms of the Littlewood matrices. M Kato, Math. Nachr. 114M. Kato, Generalized Clarkson's inequalities and the norms of the Littlewood matrices, Math. Nachr. 114 (1983) 163-170.
+
+Type, cotype constants and Clarkson's inequalities for Banach spaces. M Kato, Y Takahashi, Math. Nachr. 186M. Kato and Y. Takahashi, Type, cotype constants and Clarkson's inequalities for Banach spaces, Math. Nachr. 186 (1997) 187-196.
+
+Von Neumann-Jordan constant for Lebesgue-Bochner spaces. M Kato, Y Takahashi, J. Inequal. Appl. 2M. Kato amd Y. Takahashi, Von Neumann-Jordan constant for Lebesgue-Bochner spaces, J. Inequal. Appl. 2 (1998) 89-97.
+
+On strong random Clarkson inequality and strong Rademacher type. M Kato, Y Takahashi, Y Yamada, Bull. Kyushu Inst. Technol. Pure Appl. Math. 51M. Kato, Y. Takahashi and Y. Yamada, On strong random Clarkson inequality and strong Rademacher type, Bull. Kyushu Inst. Technol. Pure Appl. Math. 51 (2004) 1-15.
+
+Roundness properties of groups. J.-F Lafont, S Prassidis, Geom. Dedicata. 117J.-F. Lafont and S. Prassidis, Roundness properties of groups, Geom. Dedicata. 117 (2006) 137-160.
+
+Generalized roundness and negative type. C Lennard, A Tonge, A Weston, Michigan Math. J. 44C. Lennard, A. Tonge and A. Weston, Generalized roundness and negative type, Michigan Math. J. 44 (1997) 37-45.
+
+On nonlinear projections in Banach spaces. J Lindenstrauss, Michigan Math. J. 11J. Lindenstrauss, On nonlinear projections in Banach spaces, Michigan Math. J. 11 (1964) 263-287.
+
+Classical Banach spaces. J Lindenstrauss, L Tzafriri, Springer-VerlagIIBerlin-New YorkJ. Lindenstrauss and L. Tzafriri, Classical Banach spaces. II, Springer-Verlag, Berlin-New York. (1979) x + 243 pp.
+
+. C A Mccarthy, Israel J. Math. 5C. A. McCarthy, c p , Israel J. Math. 5 (1967) 249-271.
+
+Supremal p-negative type of vertex transitive graphs. M Murugan, J. Math. Anal. Appl. 391M. Murugan, Supremal p-negative type of vertex transitive graphs, J. Math. Anal. Appl. 391 (2012) 376-381.
+
+The modulus of convexity in normed linear spaces. G Nordlander, Ark. Mat. 4G. Nordlander, The modulus of convexity in normed linear spaces, Ark. Mat. 4 (1960) 15-17.
+
+Martingales with values in uniformly convex spaces. G Pisier, Israel J. Math. 20G. Pisier, Martingales with values in uniformly convex spaces, Israel J. Math. 20 (1975) 326-350.
+
+On uniformly homeomorphic normed spaces. M Ribe, Ark. Mat. IIM. Ribe, On uniformly homeomorphic normed spaces. II, Ark. Mat. 16 (1978) 1-9.
+
+The maximal generalised roundness of finite metric spaces. G Robertson, Proc. Amer. Math. Soc. 149G. Robertson, The maximal generalised roundness of finite metric spaces, Proc. Amer. Math. Soc. 149 (2021) 407-411.
+
+On the supremal p-negative type of finite metric spaces. S Sánchez, J. Math. Anal. Appl. 389S. Sánchez, On the supremal p-negative type of finite metric spaces, J. Math. Anal. Appl. 389 (2012) 98-107.
+
+On sharp uniform convexity, smoothness, and strong type, cotype inequalities. Y Takahashi, K Hashimoto, M Kato, J. Nonlinear Convex Anal. 3Y. Takahashi, K. Hashimoto and M. Kato, On sharp uniform convexity, smoothness, and strong type, cotype inequalities, J. Nonlinear Convex Anal. 3 (2002) 267-281.
+
+An extension of a simply inequality between von Neumann-Jordan and James constants in Banach spaces. C Yang, F H Wang, Acta Math. Sin. (Engl. Ser.). 33C. Yang and F. H. Wang, An extension of a simply inequality between von Neumann-Jordan and James constants in Banach spaces, Acta Math. Sin. (Engl. Ser.). 33 (2017) 1287-1296.

@@ -1,0 +1,241 @@
+
+The response of small SQUID pickup loops to magnetic fields
+13 Jul 2016
+
+John R Kirtley jkirtley@stanford.edu 
+Lisa Paulius 
+Physics Department
+Western Michigan University
+49008-5252KalamazooMichigan
+
+Aaron J Rosenberg 
+Johanna C Palmstrom 
+Daniel Schiessl 
+Dept. of Physics
+Attocube Systems AG
+Königinstraße 11a80539MunichGermany
+
+Cornell University
+14853Cornell, IthacaNew York
+
+Colin L Jermain 
+Jonathan Gibbons 
+Connor M Holland 
+Y.-K.-K Fung 
+Dept. of Physics
+IBM Research Division
+T.J. Watson Research Center
+10598Yorktown HeightsNew York
+
+University of Colorado Denver
+80217-3364, 01035Denver, OcteVue, HadleyColorado, Massachusetts
+
+Martin E Huber 
+Mark B Ketchen 
+Daniel C Ralph 
+Dept. of Physics
+Cornell University
+14853Cornell, IthacaNew York
+
+Kavli Institute at Cornell
+14853IthacaNew York
+
+Gerald W Gibson Jr
+Dept. of Physics
+IBM Research Division
+T.J. Watson Research Center
+10598Yorktown HeightsNew York
+
+University of Colorado Denver
+80217-3364, 01035Denver, OcteVue, HadleyColorado, Massachusetts
+
+Kathryn A Moler 
+
+Dept. of Applied Physics
+Stanford University
+94305-4045StanfordCalifornia
+
+The response of small SQUID pickup loops to magnetic fields
+13 Jul 2016
+In the past, magnetic images acquired using scanning Superconducting Quantum Interference Device (SQUID) microscopy have been interpreted using simple models for the sensor point spread function. However, more complicated modeling is needed when the characteristic dimensions of the field sensitive areas in these sensors become comparable to the London penetration depth. In this paper we calculate the response of SQUIDs with deep sub-micron pickup loops to different sources of magnetic fields by solving coupled London's and Maxwell's equations using the full sensor geometry. Tests of these calculations using various field sources are in reasonable agreement with experiments. These calculations allow us to more accurately interpret sub-micron spatial resolution data obtained using scanning SQUID microscopy. arXiv:1607.03950v1 [cond-mat.supr-con]
+
+Introduction
+
+The ultimate spatial resolution in SQUID microscopy has improved by about two orders of magnitude, from tens of microns to tenths of microns, over the last few decades [1,2,3,4,5,6,7,8]. While this improvement in spatial resolution provides experimental opportunities, it also introduces new challenges for interpretation. For example, one is often interested in determining the absolute magnitude of the magnetic moments, electrical currents, or magnetic susceptibilities of the sample from the measured magnetic flux. This determination becomes increasingly difficult as the size of the sensor becomes comparable to the characteristic superconducting lengths. Modeling of SQUID response to magnetic fields has often relied on simplified models, such as assuming that the SQUID or the SQUID pickup loop captures all magnetic flux within a circle with an effective radius, sometimes adding an additional term for redirection of flux from the SQUID leads [9]. Previous work has described effects that arise when the dimensions of the SQUID become comparable to the coherence length [10]. In this paper we described a method for calculating a SQUID's response when its dimensions become comparable to the London penetration depth. This method solves coupled London's and Maxwell's equations, taking into account the full geometry of the field sensitive region. Although in this paper we apply and test this method using large SQUIDs with small integrated pickup loops, the basic technique could also be readily used for small SQUIDs.
+
+
+Description of the calculation
+
+Our calculations use a method developed by Brandt [11]. We summarize this method here for completeness. The behavior of the three-dimensional super-current density j in a magnetic field H is described by London's second equation:
+∇ × j = − H/λ 2 ,(1)
+where λ is the London penetration depth. For a two-dimensional film of thickness d in the xy plane we integrate over z to obtain
+∇ × J = − H/Λ,(2)
+where J is the two-dimensional super-current density and Λ ≡ λ 2 /d is the Pearl length. Brandt defines a stream function g(x, y) such that
+J = −ẑ × ∇g =x ∂g ∂y −ŷ ∂g ∂x .(3)
+With this definition one can write London's second equation as
+H z (x, y) = Λ∇ 2 g(x, y)(4)
+In addition, the stream function g(x, y) can be thought of as a density of current dipoles. Then the total z-component of the field in the plane of a 2-d superconductor can be written as
+H z ( r) = H a ( r) + S d 2 r Q( r, r )g( r ),(5)
+where H a ( r) is the externally applied field, and
+Q( r, r ) = lim z→0 2z 2 − ρ 2 4π(z 2 + ρ 2 ) 5/2 ,(6)
+with ρ = | r − r |. Writing Eq. 5 and 6 as discrete sums:
+H z (r i ) = H a (r i ) + j Q ij w j g(r j ),(7)
+where w j is a weighting factor with the dimensions of an area, and
+Q i =j = −1 4π| r i − r j | 3 ≡ −q ij .(8)
+Q ij is highly divergent for small values of ρ. Brandt handles this by noting that the total flux through the plane z = 0 from any dipole source is zero in the absence of an externally applied field. Then for any r i in the superconductor
+0 = d 2 r Q( r i − r ) = j Q ij w j + S d 2 r Q( r i − r ).(9)
+The discrete sum in Eq. 9 is over the area inside the superconductor and the integral is over the area (S) outside the superconductor. But the integral can be written as
+S d 2 r Q( r i − r ) = S d 2 r −1 4π| r i − r | 3 ≡ −C( r i ) = dφ 4πR i (φ) ,(10)
+where the last integral is over the angle φ between a fixed axis and a vector between the point r i and a point on the periphery, and R i (φ) is the length of this vector. Returning to discrete sum notation,
+Q ij = (δ ij − 1)q ij + δ ij ( l =i q il w l + C i )/w j(11)
+Eliminating H z from equation's 4 and 7 results in
+H a (r i ) = − j (Q ij w j − Λ∇ 2 ij )g(r j )(12)
+Inverting Eq. 12 results in the solution for the stream function:
+g( r i ) = − j K Λ ij H a ( r j ),(13)
+with
+K Λ ij = (Q ij w j − Λ∇ 2 ij ) −1(14)
+The calculation strategy is then to first calculate the K Λ ij matrix given the geometry and Pearl length Λ from Eq.'s 10, 11, and 14 (in that order), calculate the stream function from Eq. 13, and then calculate the total field anywhere in the same plane for a given source field from Eq. 7. The field for any position with z = 0 is given by the discrete form of Eq.s 5 and 6.
+
+As pointed out by Brandt, it seems to work reasonably well to replace a detailed (and time consuming) calculation of C i from Eq. 10 with the analytical expression for a rectangular area |x| ≤ a, |y| ≤ b which encloses the superconducting shapes of interest:
+C(x, y) = 1 4π p,q [(a − px) −2 + (b − qy) −2 ] 1/2(15)
+with p, q = ±1. We used Delaunay triangulation [12] to tile our surfaces, and used a simplified version of a prescription by Bobenko and Springborn [13] to construct the Laplacian operator:
+∇ 2 i,j = 1 w N i j=1 (δ i,j − δ i,i )(16)
+where the sum is over the N i nearest neighbors of the i th vertex, and w = ab/N v , with ab the enclosing area (see Eq. 15) and N v the number of vertices in the triangulation. Eq. 16 holds exactly for a square lattice, and seems to work well for a triangular lattice with sufficiently dense vertices.
+
+Finally, Brandt provides a prescription for including externally applied currents. Assume for the moment that there is a delta function current I at the inner edge of a superconducting shape with a hole in it. This is equivalent to applying an effective field
+H eff a = −I j in hole (Q ij w j − Λ∇ 2 ij )(17)
+The supercurrents generated in response to this field are described by the stream function
+g( r i ) = − j in film K Λ ij H eff a ( r j ) r i in film = I r i in hole (18) = 0 r i outside film
+The fields generated by the current are then calculated from Eq. 7 as before.
+
+For multiple films we start from the film closest to the source, calculate its response to a source field, used the sum of the response field and the original source field as the source for the next closest film, etc. In principle one could also calculate the response of the full multiple-film structure self-consistently, but this procedure is very time consuming, converges slowly, and the results are close to the one we describe here for our geometry. Each film is taken to be two dimensional, with a z position given by the average z position of the film, but with the full geometry in the xy plane.
+
+We tested our program for several cases for which analytical expressions are available. For example, the self-inductance L of a circular superconducting disk with inside diameter d is known to approach L = µ 0 d as the outside diameter becomes large and the Pearl length Λ → 0 [14]. Our calculation gives L = 4.95 pH for a circular disk with Pearl length Λ = 1 nm, R in = 2 µm and R out = 50 µm. This is to be compared with µ 0 d = 5.02 pH. Similarly the mutual inductance between two co-planar, concentric, narrow circular wires can be calculated analytically. We calculate the mutual inductance between a larger ring with Pearl length 1 nm, inside radius 9.9 µm and outside radius 10 µm, and a smaller ring with inside radius 3.9 µm and outside radius 4 µm, to be 1.47×10 3 Φ 0 /A, where Φ 0 = h/2e is the superconducting flux quantum. This is to be compared with 1.40×10 3 Φ 0 /A calculated analytically using the geometric mean values r eff = (r 2 in + r 2 out )/2 for the two ring radiuses. Our results are also in good agreement with those reported by Brandt [11] in test cases with longer Pearl lengths.
+(b) (c) 4 o (a) A' A A' BE W1 W2 250μm 2μm SiO 2 Si RIE I M F.C. (d) 0.5μm Shield Shield Pickup loop Field coil A A'
+
+SQUID susceptometer pickup loop/field coil geometry
+
+We test our calculations using results from our recently developed scanning SQUID susceptometers [15,16,17] with sub-micron spatial resolution [18]. Briefly, these SQUIDs were fabricated using a planarized Nb-Al 2 O 3 -Nb trilayer process with two additional niobium wiring levels. Each SQUID had two resistively shunted junctions, with two pickup loops integrated in a gradiometric configuration through superconducting coaxial leads. Each pickup loop was surrounded by a 1-turn field coil. The layout of the full 2 mm × 2 mm chip is shown in Fig. 1a relevance to the present paper. This area is displayed for our smallest pickup loops in Figure 1(b). In this case the pickup loop was composed from the first wiring level (W1) as a square 180 o bend with 0.2 micron linewidths and spacings. The pickup loop leads were shielded from below by the base electrode (BE) and above by the second wiring level (W2). Figure 1(c) shows a cross-section through the layout along the dashed line labelled A − A in Fig. 1(b). The 10 µm deep etch labelled RIE in Fig. 1 
+
+
+Applications of the calculations to experiment
+
+The resolution of a given SQUID susceptometer at a particular spacing from the field source depends on the type of source. For example, the fields from a dipole fall off like 1/r 3 , those from a monopole source, such as a superconducting vortex, fall off like 1/r 2 , and those from a current source fall off like 1/r. We have compared our calculations with experiments for all three types of field sources, as well as with measurements of the mutual inductance between the pickup loop and the field coil in our susceptometers, and susceptibility measurements of a superconducting pillar. All of the experimental data and calculations in this paper were for the 0.2 µm inside diameter pickup loop susceptometers with the pickup loop/field coil geometry displayed in Fig. 1, assuming a London penetration depth for all superconducting films of λ=0.08 µm. The Pearl length Λ for each film was calculated as Λ = λ 2 /d, where d was the film thickness. A source of systematic error in our measurements is the spacing between the surface of the susceptometer and the sample surface. We determined the z-piezo voltage required to keep the susceptometer in contact with the sample surface by feeding back on a deflection of the capacitance between the cantilever to which the susceptometer is attached and the sample mount. Typically for a height series we took an initial scan in feedback mode to determine the contact z-position, and then backed off from contact by multiples of a fixed amount for successive scans, each scan taking 15-20 minutes. This procedure helped to reduce errors from piezo hysteresis and creep. The z-piezo displacement was calibrated by imaging a step of known height in topography in feedback mode. We estimate our uncertainties in the z-position to be approximately 0.1 µm.
+
+
+Field coil/pickup loop mutual inductance
+
+One test of the quality of a susceptometer is to measure the mutual inductances between the field coil/pickup loop pairs. For example, if there is a short between the first and second wiring level in the coaxes leading to the pickup loops, the susceptometer critical current will modulate as expected using the modulation coil, but will have very small mutual inductance between one or both of the field coils and the SQUID. In addition, this mutual inductance can be used to normalize estimates of, for example, the London penetration depth or Pearl length of a superconducting sample from scanning SQUID susceptibility measurements [9]. Figure 2 displays the z-component of the magnetic fields generated by current through the field coil, at the level of the pickup loop, calculated using the procedure outlined in Sec. 2, using the geometry described in Sec. 3. The mutual inductance between the field coil and the pickup loop, obtained by integrating the flux through the geometric centers of the pickup loop, is calculated to be M = 58.3 pH. This is about 15% lower than the measured value of 69±7 pH for these devices. It is not clear what the source of this discrepancy is. We speculate that the effective areas of the pickup loops are slightly (15%, or 7% in linear dimensions) larger than laid out because of the etching process, or that it is more appropriate to integrate over a larger region than given by the geometric centers of the pickup loop to determine the flux through the SQUID. Such an underestimate of the pickup loop area would lead to fit values for the spacing between sensor and sample that are too small, as appears to be the case for the vortex measurements in Section 4.3.  The dots in Figure 4 display cross-sections through the dashed lines in the magnetometry images of Fig. 3. The solid lines are fits to the data, assuming the nanoparticle is a point dipole source oriented in-plane, using the angle relative to the horizontal axis (15 o ), total moment |m| and the sample-susceptometer spacing z fit as fitting parameters. The moment |m| which gives the best global fit is |m| = 1.7 ± 0.6 × 10 6 µ B . Figure 4(b) displays the best fit values for z fit , keeping the moment fixed at |m| = 1.7 × 10 6 µ B , as a function of the experimental spacing z exp . These fits are consistent with the dashed line z fit = z exp , which would be expected if the misalignment angle between the SQUID and sample was such that, as intended, the top surface of W 2 directly above the pickup loop was in contact with the nanoparticle at z exp = 0.
+
+
+Dipole source
+
+
+Monopole source
+
+Another test of our modeling is the imaging of superconducting vortices. Figure 5 displays calculations of the fields at the level of the pickup loop from a point source magnetic monopole with total flux Φ = Φ 0 = h/2e, the superconducting flux quantum, for scans perpendicular (upper row) and parallel (lower row) to the leads. One can see from these images that the vortex fields are "focused" by Meissner screening when the pickup loop center is directly above the vortex, and that the vortex fields are redirected away from the field coil by the W 1 shield, and from the pickup loop by the W 2 shield. Figure 6 displays magnetometry images of a superconducting vortex trapped in a 0.4 µm thick Nb film, imaged at 4.2K at a series of spacings between the surface of the susceptometer and the surface of the sample. As this spacing decreases, the vortex image becomes more intense and more sharply defined, until when the SQUID tip is in direct contact with the sample surface the vortex is pushed in the slow scan (horizontal) direction [19]. The dots in Figure 7(a) display cross-sections in the horizontal direction through the vortex images of Fig. 6. Successive curves are offset by 0.02 Φ 0 for clarity. The solid lines in Fig. 7(a) are fits to this data assuming the vortex is a point monopole source with total flux Φ 0 , with the spacing between the sample and susceptometer surfaces z fit as a fitting parameter. Figure 7(b) displays the best fits for z fit plotted vs. the experimental spacing z exp , assuming the SQUID is in contact with the sample just when the vortex starts moving. As can be seen in Fig. 7(b) the fit values z fit are slightly below the dashed line z fit = z exp . This is surprising, since the fields above the surface of a superconductor of a vortex are well approximated by a point monopole source a distance λ below the surface [20]. This implies that z fit should be larger than z exp by about λ = 0.08µm for niobium. We believe that this discrepancy may be the result of our modeling using too small a value for the effective area of the pickup loop, as discussed in Sec. 4.1. Figure 8(a) illustrates the geometry we used for testing the response of our susceptometer to a line of current. The sample was a thin strip of Pt 0.8 µm wide, carrying a sinusoidally varying current with amplitude 1 mA at 500 Hz. The pickup loop leads were parallel to the current carrying strip, and perpendicular to the scan direction. The measurements were taken with the susceptometer in contact with the sample in feedback mode. The solid line in Fig. 8(b)    calculations as described in Sec. 2, assuming the susceptometer was in contact with the sample, with no adjustable parameters. Although the agreement between experiment and calculation is reasonably good for the magnitude of the response, the cross-section is smeared relative to experiment, perhaps because of the finite width of the Pt strip.
+
+
+Current source
+
+
+Susceptibility
+
+Finally, Figure 9(a) shows a susceptibility image of a 6 µm square pillar, composed of a stack of alternating SiO 2 and Nb layers 0.7 µm tall. The top-most layer is Nb 0.2 µm thick. This pillar is part of the fill used to make the surface flat on average to facilitate the chemical-mechanical polishing steps in producing our scanning SQUID susceptometers [18]. The image was taken at 4.2 K using a 1 mA amplitude, 500 Hz sinusoidally varying current through the field coil. The colormap scale on this image is labeled in units of the normalized change in susceptibility ∆Φ/IΦ 0 . The solid line in Fig. 9(b) displays a cross-section along the dashed line in Fig. 9(a). The open circles are calculations following Sec. 2 with the spacing between the surfaces of the sample and susceptometer z fit as a fitting parameter. The best fit was for z fit = 0.8 µm. The calculation produces a positive overshoot to the susceptibility larger than is observed experimentally, and the spacing z exp is larger than expected from the sample geometry and other results. We speculate that this discrepancy may be due to the 3-dimensional nature of the Nb/SiO 2 pillar. Nevertheless, the calculations reproduce the width of the susceptibility transition, about 1 µm from the 10% to 90% points.
+
+
+Conclusions
+
+In conclusion, we have introduced a method for calculating the response of a deep submicron pickup loop scanning SQUID susceptometer to external fields by solving coupled London's and Maxwell's equations. The results of this calculation agree reasonably well with experiments using a SQUID susceptometer with a deep sub-micron sized pickup loop for various sources of magnetic field. These calculations should provide a useful tool for interpreting scanning SQUID microscopy data with sub-micron spatial resolution.
+
+Figure 1 .
+1Layout of the scanning SQUID susceptometers used to test our calculations. (a) Layout of the full chip. The bonding pads for the bias, modulation, and field coils are labelled I, M and F.C. respectively. (b) Pickup-loop/field coil region. A 10 µm deep etch region is labelled RIE. (c) Cross-section through the plane A − A indicated by the dashed line in (b). The region labelled Si is the silicon substrate, BE is the base electrode of the Nb-Al 2 O 3 -Nb trilayer, SiO 2 is the interlayer insulator, W 1 is the first wiring level, and W 2 is the second wiring level. (d) Three-dimensional view. The pickup loop, field coil, and shields are labelled.
+
+
+(b) is 3 µm from the center of the pickup loop, and approximately 120 µm from the diced corner of the full chip. This means that without further processing the susceptometer must be aligned to an angle less than 5 o for the etched edge to touch the sample first, and when this angle is less than 4 o the top surface of the W 2 pickup loop shield touches first. At all angles less than 4 o the spacing between the top of the pickup loop and the surface of the sample is about 0.33 µm.
+
+Figure 2 .
+2Calculation of the pickup loop/ field coil mutual inductance. The colormap represents the calculated z-component of the magnetic field, divided by the current, in units of µm −1 . Overlaid on the image is the layout of the susceptometer, with the base electrode (BE) in white, the first wiring level (W1) in black, and the second wiring level (W2) in red. Integrating the field over the pickup loop area yields M=58.3 pH. The measured value was 69±7 pH.
+
+Figure 3 .
+3SQUID magnetometry images of a magnetic nanoparticle as a function of spacing between the susceptometer and sample surfaces. Each image is of an area 2 µm× 2 µm. The colormap scales are in units of 10 −4 Φ 0 .
+
+Figure 3
+3displays scanning SQUID magnetometry images from a CoFeB(4)/Pt(4) magnetic nanoparticle, where the numbers in parentheses are thicknesses in nm. We believe this nanoparticle was smaller than the ≈0.5 µm resolution of our susceptometer.
+
+Figure 4 .
+4Fits of the calculations of Sec. 2 to cross-sections along the dashed lines of Fig. 3, using the total nanoparticle moment |m| and the susceptometer surface to sample surface spacing z exp as fitting parameters. (a) The dots are cross sections through the data, and the solid lines are fits assuming an in-plane dipole moment oriented at -15 o to the horizontal axis, with a global fit moment |m|=1.7×10 6 µ B , with the experimental spacings z exp as labeled. Each successive curve is offset vertically by 4×10 −4 Φ 0 for clarity. (b) Plots of the fit values z fit vs. spacings z exp . The dashed line represents z fit = z exp .
+
+Figure 5 .
+5Calculated response of our smallest pickup loop susceptometer to a superconducting vortex, with the upper surface of the sensor (W 2) in contact with the sample surface. The total magnetic fields are calculated at the level of the pickup loop. The vortex center was spaced by -1 µm, -0.5 µm, 0 µm, 0.5 µm and 1 µm from the center of the pickup loop along a line perpendicular (top row) or parallel (bottom row) to the pickup loop leads.
+
+Figure 6 .
+6Scanning SQUID magnetometry images of a superconducting vortex trapped in a 0.4 µm thick Nb film, for various spacings between the sample and susceptometer. Each image is of an area 4 µm by 4 µm. The colormap scales are in units of the superconducting flux quantum Φ 0 = h/2e. When the sensor comes into contact with the Nb surface the vortex moves in the slow scan (horizontal) direction. The pickup loop leads were oriented vertically. The negative number label z=-0.08 microns in the lower right image implies that the cantilever to which the SQUID is attached is bending.
+
+Figure 7 .Figure 8 .
+78(a) The dots are cross-sections in the horizontal direction (perpendicular to the pickup loop leads) of the vortex magnetometry images of Fig. 6. The lines are fits to the calculations of Sec. 2 with the spacing z fit between the upper surface of the sensor and the sample surface as a fitting parameter. (b) Plots of the fit spacing z fit vs. the experimental spacing z exp . The dashed line represents z exp = z fit . (a) Schematic of current induced magnetometry imaging of currents in a thin wire. (b) The solid line is a current induced magnetometry cross-section, with the SQUID sensor in contact with the sample, of a 0.8 µm wide current carrying strip. The open circles are the calculations of Sec. 2, assuming the sensor is in contact with the sample surface.
+
+Figure 9 .
+9(a) Susceptibility image of a 6 µm wide square niobium pillar. The colormap scale is in units of Φ 0 /A. (b) The solid line is a cross-section along the dashed line inFig. 9(a). The open circles are the calculations of Sec.2, with a fit value for the spacing between the susceptometer and sample surfaces of 0.8 µm.
+
+
+. Since the bodies of our SQUIDs are well shielded by superconducting coaxes, only the region including the pickup loop and field coil is of Layer name Material Thickness (nm)Table 1. Layers composing the pickup loop/field coil region of our susceptometers. In order of deposition are the base electrode (BE), the first insulating layer (I1), the first wiring level (W1), the second insulating layer (I2), and the second wiring level (W2).BE 
+Nb 
+160 
+I1 
+SiO 2 
+150 
+W1 
+Nb 
+100 
+I2 
+SiO 2 
+130 
+W2 
+Nb 
+200 
+
+
+
+
+plots the SQUID response. The open symbols are the
+
+A device for experimental observation of flux vortices trapped in superconducting thin films. F P Rogers, Cambridge, MassachusettsMassachusetts Institute of TechnologyMaster's thesisF. P. Rogers. A device for experimental observation of flux vortices trapped in superconducting thin films. Master's thesis, Massachusetts Institute of Technology, Cambridge, Massachusetts, 1983.
+
+Design and implementation of a scanning SQUID microscope. Applied Superconductivity. L N Vu, D J Van Harlingen, IEEE Transactions on. 31L.N. Vu and D.J. Van Harlingen. Design and implementation of a scanning SQUID microscope. Applied Superconductivity, IEEE Transactions on, 3(1):1918-1921, Mar 1993.
+
+Magnetic microscopy using a liquid nitrogen cooled YBa 2 Cu 3 O 7 superconducting quantum interference device. R C Black, A Mathai, F C Wellstood, E Dantsker, A H Miklich, D T Nemeth, J J Kingston, J Clarke, Applied Physics Letters. 6217R. C. Black, A. Mathai, F. C. Wellstood, E. Dantsker, A. H. Miklich, D. T. Nemeth, J. J. Kingston, and J. Clarke. Magnetic microscopy using a liquid nitrogen cooled YBa 2 Cu 3 O 7 superconducting quantum interference device. Applied Physics Letters, 62(17):2128-2130, 1993.
+
+High-resolution scanning SQUID microscope. J R Kirtley, M B Ketchen, K G Stawiasz, J Z Sun, W J Gallagher, S H Blanton, S J Wind, Applied Physics Letters. 669J. R. Kirtley, M. B. Ketchen, K. G. Stawiasz, J. Z. Sun, W. J. Gallagher, S. H. Blanton, and S. J. Wind. High-resolution scanning SQUID microscope. Applied Physics Letters, 66(9):1138-1140, 1995.
+
+Scanning µ-superconduction quantum interference device force microscope. C Veauvy, D Hasselbach, K Mailly, Rev. Sci. Instrum. 733825C. Veauvy and D. Hasselbach, K .and Mailly. Scanning µ-superconduction quantum interference device force microscope. Rev. Sci. Instrum., 73:3825, 2002.
+
+NanoSQUIDs based on niobium constrictions. A G P Troeman, H Derking, B Borger, J Pleikies, D Veldhuis, H Hilgenkamp, Nano Letters. 77A. G. P. Troeman, H. Derking, B. Borger, J. Pleikies, D. Veldhuis, and H. Hilgenkamp. NanoSQUIDs based on niobium constrictions. Nano Letters, 7(7):2152-2156, 2007.
+
+Self-aligned nanoscale SQUID on a tip. A Finkler, Y Segev, Y Myasoedov, M L Rappaport, L Ne?eman, D Vasyukov, E Zeldov, M E Huber, J Martin, A Yacoby, Nano Letters. 329A. Finkler, Y. Segev, Y. Myasoedov, M.L. Rappaport, L. Ne?eman, D. Vasyukov, E. Zeldov, M.E. Huber, J. Martin, and A. Yacoby. Self-aligned nanoscale SQUID on a tip. Nano Letters, page 329, 2010.
+
+A scanning superconducting quantum interference device with single electron spin sensitivity. Denis Vasyukov, Yonathan Anahory, Lior Embon, Dorri Halbertal, Jo Cuppens, Lior Neeman, Amit Finkler, Yehonathan Segev, Yuri Myasoedov, L Michael, Rappaport, Nature nanotechnology. 89Denis Vasyukov, Yonathan Anahory, Lior Embon, Dorri Halbertal, Jo Cuppens, Lior Neeman, Amit Finkler, Yehonathan Segev, Yuri Myasoedov, Michael L Rappaport, et al. A scanning superconducting quantum interference device with single electron spin sensitivity. Nature nanotechnology, 8(9):639-644, 2013.
+
+Scanning SQUID susceptometry of a paramagnetic superconductor. J R Kirtley, B Kalisky, J A Bert, C Bell, M Kim, Y Hikita, H Y Hwang, J H Ngai, Y Segal, F J Walker, Physical Review B. 8522224518J.R. Kirtley, B. Kalisky, J.A. Bert, C. Bell, M. Kim, Y. Hikita, H.Y. Hwang, J.H. Ngai, Y. Segal, F.J. Walker, et al. Scanning SQUID susceptometry of a paramagnetic superconductor. Physical Review B, 85(22):224518, 2012.
+
+Micro-superconducting quantum interference device characteristics. K Hasselbach, D Mailly, J R Kirtley, J. Appl. Phys. 91K. Hasselbach, D. Mailly, and J. R. Kirtley. Micro-superconducting quantum interference device characteristics. J. Appl. Phys., 91:4432-4437, 2002.
+
+Thin superconductors and SQUIDs in perpendicular magnetic field. E H Brandt, Phys. Rev. B. 7224529E. H. Brandt. Thin superconductors and SQUIDs in perpendicular magnetic field. Phys. Rev. B, 72:024529, 2005.
+
+Sur la sphere vide. Boris Delaunay, Otdelenie Matematicheskii i Estestvennyka Nauk. 7Izv. Akad. Nauk SSSRBoris Delaunay. Sur la sphere vide. Izv. Akad. Nauk SSSR, Otdelenie Matematicheskii i Estestvennyka Nauk, 7(793-800):1-2, 1934.
+
+A discrete Laplace-Beltrami operator for simplicial surfaces. ArXiv:math/0503219v3. A I Bobenko, B A Springborn, A. I. Bobenko and B. A. Springborn. A discrete Laplace-Beltrami operator for simplicial surfaces. ArXiv:math/0503219v3, 2006.
+
+DC SQUID flux focuser. B Mark, W J Ketchen, A W Gallagher, S Kleinsasser, John R Murphy, Clem, International Business Machines Corp. Ames Lab., IA (USATechnical reportMark B. Ketchen, W.J. Gallagher, A.W. Kleinsasser, S. Murphy, and John R. Clem. DC SQUID flux focuser. Technical report, International Business Machines Corp., Yorktown Heights, NY (USA). Thomas J. Watson Research Center; Ames Lab., IA (USA), 1985.
+
+Design, fabrication, and performance of integrated miniature SQUID susceptometers. M B Ketchen, D D Awschalom, W J Gallagher, A W Kleinsasser, R L Sandstrom, J R Rozen, B Bumble, IEEE Trans. Mag. 252M. B. Ketchen, D. D. Awschalom, W. J. Gallagher, A. W. Kleinsasser, R. L. Sandstrom, J. R. Rozen, and B. Bumble. Design, fabrication, and performance of integrated miniature SQUID susceptometers. IEEE Trans. Mag., 25(2):1212-1215, 1989.
+
+Scanning superconducting quantum interference device susceptometry. Brian W Gardner, Janice C Wynn, G Per, Eric W J Björnsson, Kathryn A Straver, John R Moler, Mark B Kirtley, Ketchen, Review of Scientific Instruments. 725Brian W. Gardner, Janice C. Wynn, Per G. Björnsson, Eric W. J. Straver, Kathryn A. Moler, John R. Kirtley, and Mark B. Ketchen. Scanning superconducting quantum interference device susceptometry. Review of Scientific Instruments, 72(5):2361-2364, 2001.
+
+Gradiometric micro-SQUID susceptometer for scanning measurements of mesoscopic samples. Martin E Huber, Nicholas C Koshnick, Hendrik Bluhm, Leonard J Archuleta, Tommy Azua, G Per, Brian W Björnsson, Sean T Gardner, Erik A Halloran, Kathryn A Lucero, Moler, Review of Scientific Instruments. 79553704Martin E. Huber, Nicholas C. Koshnick, Hendrik Bluhm, Leonard J. Archuleta, Tommy Azua, Per G. Björnsson, Brian W. Gardner, Sean T. Halloran, Erik A. Lucero, and Kathryn A. Moler. Gradiometric micro-SQUID susceptometer for scanning measurements of mesoscopic samples. Review of Scientific Instruments, 79(5):053704, 2008.
+
+Scanning squid susceptometers with sub-micron spatial resolution. John R Kirtley, Lisa Paulius, Aaron J Rosenberg, Johanna C Palmstrom, Connor M Holland, Eric M Spanton, Daniel Schiessl, Colin L Jermain, Jonathan Gibbons, Y.-K.-K Fung, arXiv:1605.09483arXiv preprintJohn R. Kirtley, Lisa Paulius, Aaron J. Rosenberg, Johanna C. Palmstrom, Connor M. Holland, Eric M. Spanton, Daniel Schiessl, Colin L. Jermain, Jonathan Gibbons, Y.-K.-K. Fung, et al. Scanning squid susceptometers with sub-micron spatial resolution. arXiv preprint arXiv:1605.09483, 2016.
+
+Eylon Persky, Yiftach Frenkel, and Beena Kalisky. Mechanical Control of Individual Superconducting Vortices. A Kremen, Shai Wissberg, Noam Haham, Nano Letters. 163A. Kremen, Shai Wissberg, Noam Haham, Eylon Persky, Yiftach Frenkel, and Beena Kalisky. Mechanical Control of Individual Superconducting Vortices. Nano Letters, 16(3):1626-1630, 2016.
+
+Structure of superconductive vortices near a metal-air interface. Judea Pearl, Journal of Applied Physics. 3711Judea Pearl. Structure of superconductive vortices near a metal-air interface. Journal of Applied Physics, 37(11):4139-4141, 1966.

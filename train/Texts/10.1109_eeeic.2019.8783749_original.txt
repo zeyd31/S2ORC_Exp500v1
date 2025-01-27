@@ -1,0 +1,193 @@
+
+Markov Chain Modelling-Based Approach to Reserve Electric Vehicles in Parking Lots for Distribution System Energy Management
+
+
+Marjan Yazdani 
+Abouzar Estebsari 
+Department of Energy
+Politecnico di Torino
+Italy
+
+Motahhareh Estebsari 
+Department of Electronics and Telecommunications
+Politecnico di Torino
+Italy
+
+Roozbeh Rajabi 
+Faculty of Electrical and Computer Engineering
+Qom University of Technology
+Iran
+
+
+NPO Torino Srl
+TurinItaly
+
+Markov Chain Modelling-Based Approach to Reserve Electric Vehicles in Parking Lots for Distribution System Energy Management
+Index Terms-distribution systemselectric vehicleMarkov Chainphotovoltaic generationvehicle-to-grid
+Integration of renewable energy resources in distribution networks with intermittent behaviour increases the challenge of power balance in transmission systems. To mitigate the undesired impacts, transmission operator involves distribution operators to get local contribution from their flexible resources. In this paper, we address the flexibility offered by some electric car sharing agents which can serve some reserve capacity to distribution system. A Markov Chain modelling based approach is proposed to support system operator to properly estimate the number of electric vehicles required to be booked in advance as reserve. Underestimation would result in imperfect demand correction, and overestimation would imply extra costs. Using a realistic case under a near future scenario of high PV integration and EV accommodation, we demonstrate the contribution of our approach to this problem of planning or scheduling. Obtained results quantifies the performance of the proposed method in terms of average energy difference based on number of EVs. The results can be used as a basis to decide the appropriate number of EV reservations.
+
+I. INTRODUCTION
+
+In traditional power systems, where distribution networks are more passive, forecasting methods could greatly and sufficiently support transmission system operation and planning, through predicting aggregated amount of consumption at the substation levels. Nowadays integration of many small-scale distributed energy resources to distribution systems (DS) makes these network more active [1], [2], [3]. Meanwhile exploiting clean energy with lower operational cost is attracting interest, hence most of new installation of distributed energy resources are renewable.
+
+From capability of control and dispatching perspective, there are mainly two categories of renewables: Variable Renewable Energy (VRE), and controllable Renewable Energy. VRE is non-dispatchable energy source because of its fluctuating nature such as wind and solar power. In the contrary, controllable resources are dispatchable such as hydroelectricity and biomass which may be ramped up or down to match demand.
+
+The main challenges of integrating renewable energy come from the variable type (wind and solar power) with its limited predictability characteristics. The variability in electrical power systems has been always an important issue in supply-demand balancing, but what makes it crucial nowadays is due to the variability on supply side rather than only on demand side, and the uncertainty of the available resources.
+
+The VRE has some characteristics which give it the potential to impact power systems. The first property of a VRE is its variability which is derived from variations of the wind speed and levels of solar irradiation for power generation from wind and solar as the main VRE resources. In this regard, even if consumption behaviour of customers in the grid could be captured and forecasted with high accuracy, but prediction of aggregated amount of net consumption (i.e. the difference between total load and total distributed generations), in case of high VRE penetration is quite challenging [4], [5], [6].
+
+Ignoring the impacts of VREs could bring even some emerging threats to the transmission systems (TS) which may make system operator decide to shed some loads to save the whole system from frequency or voltage collapse [7]. A general solution to this management challenge in transmission system is to get some contribution from distribution system operator (DSO) to mitigate the undesired impacts of VREs [8], [9]. DSO should ensure a scheduled or definite trajectory of power exchange at the primary substation level with its upstream transmission system. This objective can be achieved by either curtailing some loads or generators, or using flexible resources like storage units in the network [10], [11]. The former would result in higher cost, customer dissatisfaction, and environmental issues with respect to the latter choice, however the lather choice is efficient if there is adequate low cost flexibility in the system [12].
+
+As lowering the cost of flexibility is important, installation of distributed bulk storage units may not be the best choice. Instead, getting contribution of available plug-in electric vehicles (EV) to system energy management could waive or reduce initial investment or installation costs.
+
+There are a lot of discussions in literature about the impacts of EVs on system control and management as well their contribution as power reserve [13], [14], [15], [16], [17]. However, the main duty of these devices is transportation, and the way these EVs are involved in ancillary services or power balance is similar to demand response approaches.
+
+In this paper, we describe a context in which EVs contribute to energy management in the same way the utilityowned stationary storage units are utilized; this means the contribution could be guaranteed, hence DSO can safely alleviate the out-of-schedule power demand or supply at the primary substation (i.e. coupling point of distribution and transmission networks).
+
+In this context, we assume DSO makes contracts with some aggregators or car sharing companies who own and manage some parking lots (PL) in the network. The car sharing company may do some analysis to estimate some information like the number of available cars in each PL at each time-slot of the day, the state of the charge (SOC) of the batteries of the cars, number of reserved/booked cars by drivers, etc. Based on such information, it could offer some sort of power reserve to DSO.
+
+In our paper, we address the scheduling challenge of such flexibility from DSO perspective. We provide a mathematical tool to DSO to estimate how many cars to book in advance for satisfying the scheduled profile of power exchange with transmission network. In case of power deficit or surplus with respect to the scheduled profile, DSO will use the batteries of the booked cars. Of course underestimation would result in imperfect demand correction, and overestimation would imply extra costs.
+
+The methodology proposed in this paper is based on Markov Chain modelling. Charging and discharging of EVs are described as stochastic processes. State of EVs's charge is modelled based on discrete time Markov Chain. It follows a chain of linked events, in which what happens in the next state depends only on the current state of the system. Using this approach, a metric can be obtained to correlate the number of EVs to be reserved, and the average energy difference between the scheduled and real power exchange at the primary substation. This metric gives an insight to network planner or scheduler (e.g. DSO) to recover some level unscheduled power exchange between Ts and DS, by reserving a certain number of EVs in parking lots.
+
+The rest of this paper contains the following discussions: the methodology of our proposed solution will be introduced in Section II. To demonstrate the performance of the new solution, we applied it to a realistic case of an urban distribution network accommodating several parking lots of EVs under high PV penetration scenario. The experiments and the results are briefly demonstrated in Section III. The paper will be concluded with some short remarks in Section IV.
+
+
+II. METHODOLOGY
+
+In this section, proposed methodology is discussed. The proposed model is based on developing a Discrete Time Markov Chain (DTMC) for capturing the proper number of required EVs for reserve. Firstly, Markov Chain modelling is described, then the discussed problem is formulated, and a metric is proposed to o correlate the number of EVs to  be reserved and the average energy difference between the scheduled and real power exchange at the primary substation. This metric is defined to support determination of appropriate number of EVs to be booked, in cost-benefit analyses. Finally, the procedure of applying the proposed method is summarized.
+" # " " " $ " % $ # $ " $ $ $ % & # & " & $ & % $' # $' " $' $ $' % .
+
+A. Markov Chain
+
+Markov models are statistical models in which we assume Markov property or memorylessness. Two main models in this area are Markov chain and Markov Random Field (MRF) that has been applied in various applications [18], [19]. The Markov chain model is a well known tool to analyze the behavior of the modeled system. The Markov chain model is based on states and transition probabilities [20]. This model satisfies Markov property in the sense that each state only depends on the previous state. Eq. (1) expresses this property in terms of conditional probabilities.
+P (T m |T 1 , T 2 , ..., T m−1 ) = P (T m |T m−1 )(1)
+In Fig. 1 Markov chain model for our discussed problem has been illustrated. T n m represents the state of available EVs used for providing flexibility at m th time interval of the day (i.e. m hour after midnight), where n indicates the number of fully charged EVs. Transition probability matrix of the first time interval (i.e. from hour 00.00 to hour 01.00) is formed as follows: (3) where T rP r t is the transition probability matrix that is defined in Eq. (2) for t = 1. The size of this probability matrix is 24 * (N + 1) * 24 * (N + 1). The stationary distribution is formulated in the following equation.
+T rP r 1 =       π l = [π 1 l , π 2 l , . . . , π k l , . . . , π N l ] 1×N(4)
+where π k l is the probability of availability of k fully charged units when the state changes (i → j).
+
+
+B. Problem Formulation
+
+The objective of DSO in operation is to minimize the energy difference between the real and the scheduled cases , while in scheduling phase or planning, the goal is to be able to cover this energy difference (i.e. ∆E). In the following equation, this energy difference has been normalized.
+∆S = ∆E E u (5)
+where E u is the energy capacity of each unit. In this paper, he histograms of ∆S (see Fig. 5 for an example) are used to obtain transition probabilities of Eq. 2.
+
+
+C. Average Energy Difference between Actual and Scheduled Demand
+
+There are many criteria to evaluate the energy efficiency of power grids. These criteria can be categorized into economic, environmental, technical, feasibility and energy metrics [21]. Here a metric based on energy difference of actual and scheduled demand has been defined as follows:
+|∆E avg | = l k |∆E| × π k l (6)
+where π k l is the probability of being in the specific state. This metric has been used as a metric to evaluate the performance of the proposed scheme.
+
+
+D. Proposed Method
+
+Having actual and scheduled demand as input data we can use the proposed model to investigate the performance of the method in terms of the energy difference metric. Algorithm 1 shows the pseudocode of the proposed method. 
+
+
+III. EXPERIMENTS AND RESULTS
+
+In this section used dataset is described in III-A, and will be followed by some results of study.
+
+
+A. Dataset
+
+The case study used for demonstration is a realistic network based on a portion of an urban distribution system in Northwest of Italy, city of Turin. The topology of this network is presented in Fig. 2. This is a medium voltage (MV) system with 3 transformers at the primary substation, 5 MV feeders, and 53 secondary substations. 43 substations supply low voltage grids with mainly residential loads. In order to stress the impact of VREs, we create a future scenario of smart grids where a high penetration of PV generation exists. In this scenario, most of the residential buildings in this urban area install roof-top PV panels [22]. There are 8 parking lots with charging columns directly supplied by the MV network.
+
+The historic data used for PV production is generated as follow: the amount of produced energy by the PV panels were computed by the online NRELs PVWatts Calculator [23]. It allows choosing several parameters in order to give a reasonable estimate of the energy production. For this test, the panel DC system size is set 1 kW with a standard module type, fixed array type, and DC to AC size ratio of 1.1 for the city of Turin. Hourly data of PV production for one year can be obtained for this panel size. Then, we made an assumption of different potential of PV production at 43 substations to scale up the calculated profile proportionally. Fig. 3 plots maximum production of PV panels under each secondary substations. The loads in this network are mostly residential with a daily profile represented in Fig. 4 for all 43 substations.
+
+Each parking lots (PLs) in our case study can serve up to 20 plug-in EVs by the charging columns. The EVs considered for the car sharing company of our scenario has battery capacity of 30 kWh. As described previously, the main objective of using EVs is green transportation. Each of these EVs can drive up to 150 km if they are fully charged. This is beyond distances normally needed for urban paths, therefore in our case study, when we address EVs for providing energy contribution (charge/discharge), they are assumed to have State-Of-Charge (SOC) in the range between 40% and 90%. This is to guarantee a minimum stored energy for the DSO or user, and also to limit the battery ageing effect.
+
+
+B. Results
+
+Following Algorithm 1, firstly to obtain the scheduled demand of the whole distribution system, we used a linear regression method to forecast the PV production of a typical day. Then, we use this data together with the residential load profiles presented in Fig. 4 to run a daily power flow from which we achieve the net demand of the system at the primary substation level. The actual demand is the difference between the daily consumption and the calculated PV production from PVWatts.
+
+Then, the ∆S is calculated, and the corresponding histograms for all 24 transitions are obtained. Fig. 5 illustrates one example of such histograms for the state transition from hour 17.00 to 18.00.
+
+The transition probability matrices are then formed to be used for calculating the stationary probabilities Eq. (4).
+
+By considering different number of total booked EVs from 5 to 50, the average energy difference metric is calculated using Eq. 6.
+
+The results plotted in Fig. 6 demonstrates that increasing number of booked EVs could reduce the difference between the average scheduled and actual energy at the primary substation. This trend seems logical, however the quantification offered by our proposed metric can be used in cost-benefit analysis tools to make decision to withstand some level of ∆E for sake of EV reservation cost.
+
+
+IV. CONCLUSION
+
+Contribution of distribution systems to power system energy management is becoming crucial since more and more variable renewable energy resources are being integrated into the distribution networks. In this paper, we addressed the real time energy balance in distribution systems using available plugin EVs as low cost flexible resources. In order to properly estimate the required capacity reserve and book EVs of some private car sharing companies, we proposed a metric which is based on Markov Chain approaches to quantitatively correlate the number of sufficient required cars with the amount of extra power demanded from upstream grid. The solution is applied to a realistic case, and the results provide a basis for decision makers to perform cost-benefit analysis and reserve appropriate number of EVs for reserve.
+
+Fig. 1 .
+1Markov Chain model for EV units contribution to DSO.
+
+Fig
+k,l indicates the probability of availability of l fully charged units at time j if there were k fully charged units at time i. The overall transition probability matrix regarding
+
+Algorithm 1 Fig. 2 .
+12The proposed method algorithm Data: Actual and scheduled demand Result: Average energy difference metric • Calculate ∆S using Eq. (5) • Making histogram of ∆S • Claculate transition propability matrix of Eq. (2) • Calculate stationary probabilities of Eq. (4) • Calculate average energy difference metric in Eq. (6) Topology of case study grid with resources.
+
+Fig. 3 .Fig. 4 .
+34Maximum power generation of PV panels under each substation [kW]. Daily consumption of loads aggregated at 43 substations [kW].
+
+Fig. 5 .Fig. 6 .
+56Histogram of state transition from 17.00 to 18.00 -∆S [kWh]. Total energy difference versus total number of available fully charged EVs.
+
+
+. .. . . 
+
+. . . 
+
+. . . 
+
+. . . 
+. . . 
+. . . 
+. . . 
+
+
+
+Impact of large wind penetration on power system operation. S Kincic, M Papic, IEEE Transactions on Sustainable Energy. S. Kincic and M. Papic, "Impact of large wind penetration on power system operation," IEEE Transactions on Sustainable Energy, pp. 1-1, 2018.
+
+An improved fault location method for distribution networks exploiting emerging lv smart meters. A Estebsari, E Pons, E Bompard, A Bahmanyar, S Jamali, 2016 IEEE Workshop on Environmental, Energy, and Structural Monitoring Systems (EESMS). A. Estebsari, E. Pons, E. Bompard, A. Bahmanyar, and S. Jamali, "An improved fault location method for distribution networks exploiting emerging lv smart meters," in 2016 IEEE Workshop on Environmental, Energy, and Structural Monitoring Systems (EESMS), June 2016, pp. 1-6.
+
+A novel equivalent model of active distribution networks based on lstm. C Zheng, S Wang, Y Liu, C Liu, W Xie, C Fang, S Liu, IEEE Transactions on Neural Networks and Learning Systems. C. Zheng, S. Wang, Y. Liu, C. Liu, W. Xie, C. Fang, and S. Liu, "A novel equivalent model of active distribution networks based on lstm," IEEE Transactions on Neural Networks and Learning Systems, pp. 1-14, 2019.
+
+Impacts of wind power forecast errors on the real-time balancing need: a nordic case study. J Miettinen, H Holttinen, IET Renewable Power Generation. 132J. Miettinen and H. Holttinen, "Impacts of wind power forecast errors on the real-time balancing need: a nordic case study," IET Renewable Power Generation, vol. 13, no. 2, pp. 227-233, 2019.
+
+A nonparametric bayesian framework for short-term wind power probabilistic forecast. W Xie, P Zhang, R Chen, Z Zhou, IEEE Transactions on Power Systems. 341W. Xie, P. Zhang, R. Chen, and Z. Zhou, "A nonparametric bayesian framework for short-term wind power probabilistic forecast," IEEE Transactions on Power Systems, vol. 34, no. 1, pp. 371-379, Jan 2019.
+
+Distribution feeder-level day-ahead peak load forecasting methods and comparative study. T Chen, J M Lehr, O Lavrova, M Martnez-Ramn, IET Generation, Transmission Distribution. 1213T. Chen, J. M. Lehr, O. Lavrova, and M. Martnez-Ramn, "Distribution feeder-level day-ahead peak load forecasting methods and comparative study," IET Generation, Transmission Distribution, vol. 12, no. 13, pp. 3270-3278, 2018.
+
+Techno-economic impacts of automatic undervoltage load shedding under emergency. A Estebsari, E Pons, T Huang, E Bompard, Electric Power Systems Research. 131A. Estebsari, E. Pons, T. Huang, and E. Bompard, "Techno-economic impacts of automatic undervoltage load shedding under emergency," Electric Power Systems Research, vol. 131, pp. 168-177, 2016.
+
+Generalized master-slavesplitting method and application to transmission-distribution coordinated energy management. Z Li, H Sun, Q Guo, J Wang, G Liu, IEEE Transactions on Power Systems. Z. Li, H. Sun, Q. Guo, J. Wang, and G. Liu, "Generalized master-slave- splitting method and application to transmission-distribution coordinated energy management," IEEE Transactions on Power Systems, pp. 1-1, 2018.
+
+Multi-site european framework for real-time co-simulation of power systems. M Stevic, A Estebsari, S Vogel, E Pons, E Bompard, M Masera, A Monti, IET Generation, Transmission Distribution. 1117M. Stevic, A. Estebsari, S. Vogel, E. Pons, E. Bompard, M. Masera, and A. Monti, "Multi-site european framework for real-time co-simulation of power systems," IET Generation, Transmission Distribution, vol. 11, no. 17, pp. 4126-4135, 2017.
+
+Enhancing distribution system resilience with mobile energy storage and microgrids. J Kim, Y Dvorkin, IEEE Transactions on Smart Grid. J. Kim and Y. Dvorkin, "Enhancing distribution system resilience with mobile energy storage and microgrids," IEEE Transactions on Smart Grid, pp. 1-1, 2018.
+
+Assessing increased flexibility of energy storage and demand response to accommodate a high penetration of renewable energy sources. A Nikoobakht, J Aghaei, M Shafie-Khah, J P S Catalo, IEEE Transactions on Sustainable Energy. A. Nikoobakht, J. Aghaei, M. Shafie-khah, and J. P. S. Catalo, "Assessing increased flexibility of energy storage and demand response to accommodate a high penetration of renewable energy sources," IEEE Transactions on Sustainable Energy, pp. 1-1, 2018.
+
+A review of power system flexibility with high penetration of renewables. B Mohandes, M S Moursi, N D Hatziargyriou, S El Khatib, IEEE Transactions on Power Systems. B. Mohandes, M. S. El Moursi, N. D. Hatziargyriou, and S. El Khatib, "A review of power system flexibility with high penetration of renewables," IEEE Transactions on Power Systems, pp. 1-1, 2019.
+
+An ev charging demand model for the distribution system using traffic property. Y Xia, B Hu, K Xie, J Tang, H Tai, IEEE Access. Y. Xia, B. Hu, K. Xie, J. Tang, and H. Tai, "An ev charging demand model for the distribution system using traffic property," IEEE Access, pp. 1-1, 2019.
+
+Distribution system services provided by electric vehicles: Recent status, challenges, and future prospects. N B Arias, S Hashemi, P B Andersen, C Trholt, R Romero, IEEE Transactions on Intelligent Transportation Systems. N. B. Arias, S. Hashemi, P. B. Andersen, C. Trholt, and R. Romero, "Distribution system services provided by electric vehicles: Recent status, challenges, and future prospects," IEEE Transactions on Intelligent Transportation Systems, pp. 1-20, 2019.
+
+A multi-site real-time cosimulation platform for the testing of control strategies of distributed storage and v2g in distribution networks. E Bompard, A Monti, A Tenconi, A Estebsari, T Huang, E Pons, M Stevic, S Vaschetto, S Vogel, 2016 18th European Conference on Power Electronics and Applications (EPE'16 ECCE Europe). E. Bompard, A. Monti, A. Tenconi, A. Estebsari, T. Huang, E. Pons, M. Stevic, S. Vaschetto, and S. Vogel, "A multi-site real-time co- simulation platform for the testing of control strategies of distributed storage and v2g in distribution networks," in 2016 18th European Conference on Power Electronics and Applications (EPE'16 ECCE Europe), Sep. 2016, pp. 1-9.
+
+Grid frequency support from v2g aggregators and hvdc links in presence of nonsynchronous units. S Debbarma, R Shrivastwa, IEEE Systems Journal. S. Debbarma and R. Shrivastwa, "Grid frequency support from v2g aggregators and hvdc links in presence of nonsynchronous units," IEEE Systems Journal, pp. 1-10, 2018.
+
+Integrated pv charging of ev fleet based on energy prices, v2g, and offer of reserves. G R Chandra Mouli, M Kefayati, R Baldick, P Bauer, IEEE Transactions on Smart Grid. 102G. R. Chandra Mouli, M. Kefayati, R. Baldick, and P. Bauer, "Integrated pv charging of ev fleet based on energy prices, v2g, and offer of reserves," IEEE Transactions on Smart Grid, vol. 10, no. 2, pp. 1313- 1325, March 2019.
+
+A novel approach for spectral-spatial classification of hyperspectral data based on svm-mrf method. M Khodadadzadeh, R Rajabi, H Ghassemian, 2011 IEEE International Geoscience and Remote Sensing Symposium. M. Khodadadzadeh, R. Rajabi, and H. Ghassemian, "A novel approach for spectral-spatial classification of hyperspectral data based on svm-mrf method," in 2011 IEEE International Geoscience and Remote Sensing Symposium, July 2011, pp. 1890-1893.
+
+Development of a markov-chain-based solar generation model for smart micro-grid energy management system. R Haji Mahdizadeh Zargar, M H Moghaddam, IEEE Transactions on Sustainable Energy. R. Haji Mahdizadeh Zargar and M. H. Yaghmaee Moghaddam, "Development of a markov-chain-based solar generation model for smart micro-grid energy management system," IEEE Transactions on Sustainable Energy, pp. 1-1, 2019.
+
+Cascading failures in interdependent infrastructures: An interdependent markov-chain approach. M Rahnamay-Naeini, M M Hayat, IEEE Transactions on Smart Grid. 74M. Rahnamay-Naeini and M. M. Hayat, "Cascading failures in interdependent infrastructures: An interdependent markov-chain approach," IEEE Transactions on Smart Grid, vol. 7, no. 4, pp. 1997- 2006, July 2016.
+
+Active distribution grids: A matlab-simulink tool for energy performance analysis. E Ciancamerla, M Minichino, M C Falvo, L Martirano, 2016 AEIT International Annual Conference (AEIT). E. Ciancamerla, M. Minichino, M. C. Falvo, and L. Martirano, "Active distribution grids: A matlab-simulink tool for energy performance analysis," in 2016 AEIT International Annual Conference (AEIT), Oct 2016, pp. 1-5.
+
+A flexible distributed infrastructure for realtime cosimulations in smart grids. L Bottaccioli, A Estebsari, E Pons, E Bompard, E Macii, E Patti, A Acquaviva, IEEE Transactions on Industrial Informatics. 136L. Bottaccioli, A. Estebsari, E. Pons, E. Bompard, E. Macii, E. Patti, and A. Acquaviva, "A flexible distributed infrastructure for real- time cosimulations in smart grids," IEEE Transactions on Industrial Informatics, vol. 13, no. 6, pp. 3265-3274, Dec 2017.
+
+Nrel's pvwatts calculator. "Nrel's pvwatts calculator," , https://pvwatts.nrel.gov.

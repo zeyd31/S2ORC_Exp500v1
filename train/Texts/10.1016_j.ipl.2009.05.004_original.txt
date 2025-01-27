@@ -1,0 +1,53 @@
+
+An Ω(n log n) lower bound for computing the sum of even-ranked elements
+23 Mar 2009 March 23, 2009
+
+Marc Mörig 
+Dieter Rautenbach 
+Michiel Smid 
+Jan Tusch 
+An Ω(n log n) lower bound for computing the sum of even-ranked elements
+23 Mar 2009 March 23, 2009This solves an open problem posed by Michael Shamos at the Cana-dian Conference on Computational Geometry in 2008.
+Given a sequence A of 2n real numbers, the EvenRankSum problem asks for the sum of the n values that are at the even positions in the sorted order of the elements in A. We prove that, in the algebraic computation-tree model, this problem has time complexity Θ(n log n).This solves an open problem posed by Michael Shamos at the Canadian Conference on Computational Geometry in 2008.
+
+Introduction
+
+Let A = (a 1 , a 2 , . . . , a 2n ) be a sequence of 2n real numbers. We define the even-rank-sum of A to be the sum of the n values that are at the even positions in the sorted order of the elements in A. Formally, let π be a permutation of {1, 2, . . . , 2n} that sorts the sequence A in non-decreasing order; thus, a π(1) ≤ a π(2) ≤ . . . ≤ a π(2n) . Then the even-rank-sum of the sequence A is the real number a π(2) + a π(4) + a π(6) + . . . + a π(2n) . * Faculty of Computer Science, University of Magdeburg, Magdeburg, Germany. † Faculty of Mathematics and Natural Sciences, Ilmenau University of Technology, Ilmenau, Germany.
+
+‡ School of Computer Science, Carleton University, Ottawa, Ontario, Canada. Research supported by NSERC.
+
+Observe that any permutation π that sorts the sequence A in non-decreasing order gives rise to the same even-rank-sum. We consider the following problem:
+
+EvenRankSum: Given a sequence A of 2n real numbers, compute the evenrank-sum of A. We prove Theorem 1 by presenting an O(n)-time reduction of MinGap to EvenRankSum. The former problem is defined as follows. Let X = (x 1 , x 2 , . . . , x n ) be a sequence of n real numbers, and let π be a permutation of {1, 2, . . . , n} such that x π(1) ≤ x π(2) ≤ . . . ≤ x π(n) . For each 1 ≤ i < n, we define the difference x π(i+1) − x π(i) to be a gap in the sequence X.
+
+MinGap: Given a sequence X = (x 1 , x 2 , . . . , x n ) of n real numbers and a real number g > 0, decide if each of the n − 1 gaps in X is at least g.
+
+Since in the algebraic computation-tree model, MinGap has an Ω(n log n) lower bound (see [2,Section 8.4]), our reduction will prove Theorem 1.
+
+
+The proof of Theorem 1
+
+We now show how to reduce, in O(n) time, MinGap to EvenRankSum.
+
+Let A be an arbitrary algorithm that solves EvenRankSum. We show how to use algorithm A to solve MinGap. Let n ≥ 2 be an integer and consider a sequence X = (x 1 , x 2 , . . . , x n ) of n real numbers and a real number g > 0. The algorithm for solving MinGap makes the following three steps:
+
+Step 1: Compute S = n i=1 x i and, for i = 1, 2, . . . , n, compute a 2i−1 = x i and a 2i = x i + g.
+
+Step 2: Run algorithm A on the sequence (a 1 , a 2 , . . . , a 2n ), and let R be the output, i.e., R is the even-rank-sum of this sequence.
+
+Step 3: If R = S + ng, then return YES. Otherwise, return NO.
+
+It is clear that the running time of this algorithm is O(n) plus the running time of A. Thus, it remains to show that the algorithm correctly solves MinGap. That is, we have to show that the minimum gap G of X is at least g if and only if R = S + ng. This is an immediate consequence of the following lemma:
+Lemma 1 Let x 1 , x 2 , .
+. . , x n and g be real numbers such that x 1 ≤ x 2 ≤ . . . ≤ x n and g > 0. Let (a 1 , a 2 , . . . , a 2n ) = (x 1 , x 1 + g, x 2 , x 2 + g, . . . , x n , x n + g) and let π be a permutation of {1, . . . , 2n} such that
+b 1 ≤ b 2 ≤ . . . ≤ b 2n with b i = a π(i) for 1 ≤ i ≤ 2n. If R = n i=1 b 2i , U = n i=1 b 2i−1 , and G = min{x i+1 − x i | 1 ≤ i ≤ n − 1}, then R − U ≤ ng with equality if and only if G ≥ g. Proof. Since x 1 , x 1 + g, x 2 , x 2 + g, . . . , x i , x i + g ≤ x i + g, we have x i + g ≥ b 2i for 1 ≤ i ≤ n. Since x i , x i + g, x i+1 , x i+1 + g, . . . , x n , x n + g ≥ x i , we have x i ≤ b 2i−1 for 1 ≤ i ≤ n. Hence b 2i − b 2i−1 ≤ (x i + g) − x i = g for 1 ≤ i ≤ n which implies R − U ≤ ng.
+If G ≥ g, then clearly R − U = ng. Conversely, if R − U = ng, then b 2i − b 2i−1 = g for 1 ≤ i ≤ n. In view of the above, this implies that x i + g = b 2i and x i = b 2i−1 for 1 ≤ i ≤ n. Since x i+1 = b 2i+1 ≥ b 2i = x i + g for 1 ≤ i ≤ n − 1, we obtain G ≥ g.
+
+We complete the proof of Theorem 1 by observing that R + U = 2S + ng and by Lemma 1 we have G ≥ g if and only if R = U + ng = S + ng.
+
+
+By using an O(n log n)-time sorting algorithm, this problem can be solved in O(n log n) time. In the Open Problem Session at the Canadian Conference on Computational Geometry in 2008, Michael Shamos posed the problem of proving an Ω(n log n) lower bound on the time complexity of EvenRankSum in the algebraic computation-tree model. (See [1, 2] for a description of this model.) In this paper, we present such a proof: Theorem 1 In the algebraic computation-tree model, the time complexity of EvenRankSum is Θ(n log n).
+
+Lower bounds for algebraic computation trees. M Ben-Or, Proceedings of the 15th ACM Symposium on the Theory of Computing. the 15th ACM Symposium on the Theory of ComputingM. Ben-Or. Lower bounds for algebraic computation trees. In Proceedings of the 15th ACM Symposium on the Theory of Computing, pages 80-86, 1983.
+
+Computational Geometry: An Introduction. F P Preparata, M I Shamos, Springer-VerlagBerlinF. P. Preparata and M. I. Shamos. Computational Geometry: An Intro- duction. Springer-Verlag, Berlin, 1988.

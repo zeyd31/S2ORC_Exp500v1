@@ -1,0 +1,592 @@
+
+Effects of non-equilibrated topological charge distributions on pseudoscalar meson masses and decay constants
+arXiv:1707.05430v2 [hep-lat] 8 Mar 2018
+
+C Bernard 
+D Toussaint 
+
+Department of Physics
+Physics Department
+Washington University
+63130St. LouisMOUSA
+
+
+University of Arizona Tucson
+85721AZUSA
+
+Effects of non-equilibrated topological charge distributions on pseudoscalar meson masses and decay constants
+arXiv:1707.05430v2 [hep-lat] 8 Mar 2018(Dated: March 9, 2018)(MILC Collaboration) 1
+We study the effects of failure to equilibrate the squared topological charge Q 2 on lattice calculations of pseudoscalar masses and decay constants. The analysis is based on chiral perturbation theory calculations of the dependence of these quantities on the QCD vacuum angle θ. For the light-light partially quenched case, we rederive the known chiral perturbation theory results of Aoki and Fukaya, but using the nonperturbatively-valid chiral theory worked out by Golterman, Sharpe and Singleton, and by Sharpe and Shoresh. We then extend these calculations to heavy-light mesons. Results when staggered taste-violations are important are also presented. The derived Q 2 dependence is compared to that of simulations using the MILC collaboration's ensembles of lattices with four flavors of HISQ dynamical quarks. We find agreement, albeit with large statistical errors. These results can be used to correct for the leading effects of unequilibrated Q 2 , or to make estimates of the systematic error coming from the failure to equilibrate Q 2 . In an appendix, we show that the partially quenched chiral theory may be extended beyond a lower bound on valence masses discovered by Sharpe and Shoresh. Subtleties occurring when a sea-quark mass vanishes are discussed in another appendix.
+
+I. INTRODUCTION
+
+In continuum QCD the topological charge Q cannot change in a continuous evolution of the gluon fields. Thus we expect that lattice QCD simulations using approximately continuous evolution algorithms should see very slow evolution of the topological charge, since changing the topological charge involves a tunneling where some of the plaquettes or other loops in the gauge action pass through large values. This expected slow evolution of the topological charge has been observed and studied in Refs [1][2][3][4][5]. Since the rate at which the topological charge Q changes in a lattice simulation falls off quickly as the lattice spacing decreases, modern QCD simulations are reaching a regime where the distribution of Q cannot be accurately sampled in a simulation with practical length. When this is the case, physical quantities will suffer a systematic error, and we need to either correct for this error or account for it in our error budgets.
+
+Here, we use the MILC collaboration's ensembles of lattices with a one-loop Symanzik and tadpole improved gauge action and four flavors of highly improved staggered quarks (HISQ) to study the errors induced by an insufficiently sampled Q distribution. We first demonstrate the expected slow evolution of topological charge as the lattice spacing decreases.
+
+We proceed to calculate, in chiral perturbation theory ( χ PT), the dependence of the light-light and heavy-light pseudoscalar masses and decay constants on the QCD vacuum angle θ, which is related to their dependence on the average Q 2 in the lattice simulation [6].
+
+The unitary case (valence and sea quark masses identical) for light-light mesons is treated first, mainly to introduce the methods and set the notation; the results already appear in Ref. [6], or may be obtained by straightforward generalization of that calculation. We then discuss light-light partially quenched case, which has also been treated by Aoki and Fukaya [7] using partially quenched chiral perturbation theory (PQ χ PT) with the the replica method [8]. Because the vacuum state changes in the presence of θ, it could in principle be important to use a nonperturbatively valid method for the partially quenched theory. Rather than the replica method [8], which has not been justified nonperturbatively, we therefore employ the approach to PQ χ PT introduced by Golterman, Sharpe, and Singleton [9] and Sharpe and Shoresh [10]. A potential sticking point, however, is the bound on the values of valence and sea quark masses found by Sharpe and Shoresh. When this bound is violated, the PQ χ PT approach of Refs. [9,10] appears to break down. We are able to show (Appendix B) that the bound is actually spurious, and the chiral theory continues to be valid when the bound is violated. Once the partially quenched light-light case is analyzed, it is not difficult to generalize it to the heavy-light case, or to include the leading discretization effects coming from staggered taste violations. The details of the partially quenched light-light and heavylight calculations constitute the majority of this paper.
+
+Once the χ PT predictions are in hand, they are compared to the HISQ simulation data.
+
+Although the statistical errors are large, we find good qualitative agreement between predictions and data. We discuss how to use this information to correct for the difference between the average of the squared topological charge in a simulation, Q 2 sample , and the correct average Q 2 .
+
+The remainder of this paper is organized as follows. In section II, we discuss the evolution of topological charge in our simulations. The connection between the dependence of physical quantities on the topological charge in fixed volume, and their dependence on θ in infinite volume, is reviewed in section III. Sections IV and V present the dependence of the mass and decay constants of light-quark pseudoscalar mesons in the unitary and partially quenched cases, respectively. In section VI, the calculation is extended to heavy-light pseudoscalar mesons. We briefly describe the inclusion of staggered taste-violating effects in Sec. VII, and give the results for the light-light and heavy-light cases. Finally, in section VIII, we use the correlation between Q 2 and masses and decay constants in our simulations to estimate the derivatives with respect to θ, compare them to χ PT, and discuss how simulation results might be adjusted. A brief conclusion summarizes our main results.
+
+There are three appendices: Appendix A discusses subtleties that occur when one or more sea-quark mass vanishes. Appendix B investigates the Sharpe-Shoresh bound [10] on quark masses in the partially quenched chiral theory. A brief discussion of decoupling issues in the current context is presented in Appendix C.
+
+A preliminary report of this work, which did not yet include results for heavy-light mesons or taste violations, was presented at Lattice 2016 [11].
+
+
+II. EVOLUTION OF THE TOPOLOGICAL CHARGE IN LATTICE SIMULA-TIONS
+
+The ensembles we study have lattice spacings ranging from 0.09 fm to 0.03 fm, and light sea quark masses (m l ) at either one fifth of the strange quark mass (m s ) or approximately the physical light quark mass, which is approximately m s /27. See Refs. [12,13] for the parameters of the ensembles and the details of their generation. We measured the topological charge on these ensembles using the procedure described in Ref. [14]. This procedure consists of three HYP smearings of the lattice [15] followed by an integration of the correlator of an improved topological density operator [16]. In addition to the tests described in Ref. [14], there is a recent study comparing many methods of measuring the topological charge, finding generally good consistency among the methods [17]. fm we see that the simulation has only covered a small range of Q 2 . The operator we use to measure Q is noisy enough, and the volume of the lattices large enough, that we do not see plateaus at integer values of Q in Fig. 1, or, for that matter, in histograms of the topological charge.
+
+For each lattice spacing, the local structure of the time evolution is similar for the m l = m s /5 ensemble and the physical m l ensemble -Q typically changes by about the same amount in each time unit. However, in the m l = m s /5 ensembles Q ranges over larger values, and so it takes longer to random walk over this range, leading to a longer autocorrelation time. This is as expected, since the gauge action controls the tunneling rate for Q, so the average squared change in Q per unit volume per unit simulation time is approximately independent of the light quark mass. However, the fermion determinant suppresses the average Q 2 , and the topological susceptibility, Q 2 /V , is approximately proportional to m l . Figure 2 shows the autocorrelation of the squared topological charge for four different lattice spacings, We use Q 2 rather than Q because it is Q 2 that controls the effects on masses and decay constants (and all other CP conserving correlators). In this graph we see the expected increase of the autocorrelation times as the lattice spacing decreases, and also that the autocorrelations are smaller for the physical quark mass ensembles (octagons) than for the We define ∆Q as the change in Q over molecular dynamics time ∆t. Figure 3 shows the tunneling rate per volume, (∆Q) 2 / (V ∆t) with octagons, where the blue symbols are for the m s /5 ensembles and the red for the physical m l ensembles. The tunneling rate does not depend strongly on the quark mass, but decreases as expected as the lattice spacing gets small. (In the cases where there are two blue octagons, there were two sub-ensembles with a different molecular dynamics trajectory lengths.) The crosses in Fig. 3 show the topological susceptibility, Q 2 /V . Here we see the expected strong dependence on light quark mass.
+A(∆) = Q 2 (t)Q 2 (t + ∆) − Q 2 (t) 2 Q 4 (t) .(1)
+The small error bar on the 0.03 fm point is unrealistic -it simply reflects the fact that Q is basically stuck near this value in this simulation. 
+
+
+III. QUANTITIES AT FIXED Q
+
+In this section, we outline the relation between the behavior of physical quantities at fixed topological charge and their dependence on the vacuum angle θ. The discussion relies heavily on that in Ref. [6]. For nonzero θ, the partition function is
+Z(θ) = DADΨDΨ exp(−S[A,Ψ, Ψ]) exp(−iθQ[A]).(2)
+The topological susceptibility χ T is defined by [18][19][20] 
+χ T ≡ − 1 V 1 Z ∂ 2 Z ∂θ 2 θ=0 = 1 V Q 2 .(3)
+We assume that both the time extent T of our system and the 3-dimensional volume V 3 are large, so the 4-dimensional volume V = T V 3 is also large. The partition function is then dominated by the vacuum energy density 0 (θ),
+Z(θ) ≈ C exp(−V 0 (θ)),(4)0 = 1 2 χ T θ 2 + γθ 4 + · · · ,(5)
+where C is a constant. The fact that χ T is the coefficient of the quadratic term follows from Eq. (3). Parity symmetry (or, more precisely, extended parity -see below) implies that only even powers of θ appear in Eq. (5).
+
+Quantities evaluated at fixed Q can be found by Fourier transforming
+Z Q = 1 2π π −π dθ exp(iθQ)Z(θ),(6)G Q = O 1 O 2 ...O n Q = 1 Z Q 1 2π π −π dθ exp(iθQ)Z(θ)G(θ),(7)
+with
+G(θ) = O 1 O 2 ...O n θ .
+Since V is large, we can do the θ integrals by the saddle point method. Using Eqs. (4) and (5), the saddle occurs at
+θ s = i Q χ T V + O Q 3 V 3 .(8)
+This gives
+G Q = G(θ s ) + 1 2χ T V ∂ 2 G ∂θ 2 θ=θs + ...,(9)
+which in turn implies [6,21] 
+B Q,V = B + 1 2χ T V B 1 − Q 2 χ T V + O 1 (χ T V ) 2 ,(10)
+where B is the mass M or the decay constant f , and the primes here and below indicate derivatives with respect to θ evaluated at θ = 0. The terms B and −(B /2)(Q/χ T V ) 2 on the right hand side of Eq. (10) come from expanding G(θ s ) in Eq. (9), while the term B /(2χ T V ) comes from the term proportional to ∂ 2 G/∂θ 2 . By Eq. (3), the correction to B vanishes when averaged over Q. Equations (7), (9) and (10) are valid under the assumption
+Q ∼ √ χ T V , i.e., a "typical" value in a random-walk of Q around Q = 0 with Q 2 = χ T V .
+Here and below we use the fact that B = 0. This is true for any parity-conserving quantity, since, although parity symmetry is broken at the QCD level by the θ term, what we can call extended parity is preserved. In extended parity, we take θ → −θ along with a normal parity transformation. This means that a matrix element that does not violate parity at θ = 0 must be even in θ, and therefore its first derivative at θ = 0 vanishes. For masses and decay constants, the χ PT results will confirm this.
+
+
+IV. CHIRAL PERTURBATION THEORY: UNITARY CASE
+
+The quantity B (B = M or f ) appearing in Eq. (10) is physical and therefore has dependence on the 3-dimensional volume V 3 = L 3 that is exponentially suppressed, ∝ exp(−M π L).
+
+This is in contrast with the quantity at fixed Q, B| Q,V , which has power-law dependence on 1/V . We may thus get a handle on topological effects by calculating B in infinite-volume χ PT. For now, we ignore possible discretization errors and consider χ PT in the continuum only. Corrections due to discretization effects for staggered quarks are calculated in Sec. VII.
+
+For two dynamical flavors, a first calculation of M in χ PT for full (unitary) QCD in infinite volume and the continuum appears in Ref. [6].
+
+In the presence of a vacuum angle θ, the leading order (LO) Euclidean chiral Lagrangian
+is L χ = f 2 8 tr(∂ µ Σ∂ µ Σ † ) − B 0 f 2 4 tr(M * A Σ + M A Σ † ),(11)
+where the normalization is such that f ≈ 130 MeV, and where M A ≡ e iθ/N M, with N the number of flavors and M the mass matrix in the absence of θ. Complex conjugation is denoted by * . We always take M to be diagonal in this paper. The change from M to M A is effected by an anomalous (flavor-singlet) chiral transformation, which simultaneously removes the iθQ from the Euclidean gauge action. See Appendix A for more discussion of the phases in the mass matrix.
+
+In order to set out notation and make various points that will be useful later, we examine both the two-flavor and the three-flavor unitary cases in detail. We emphasize that none of the results in this section are new to the literature; while Ref. [6] does not discuss decay constants or the N = 3 case, those results can easily be obtained as limits of the general partially quenched results given in Ref. [7].
+
+
+A. Two flavors
+
+We consider N = 2 case with nondegenerate quark masses m u = m d . With θ = 0, Σ can have a nontrivial vacuum expectation value, Σ . When the quark masses are nondegenerate, an argument for arbitrary N by Gasser and Leutwyler [22] shows that Σ must be diagonal. 1 The intuitive reason for this is that only the diagonal elements of Σ enter into the potential energy, which has an overall negative sign in Eq. (11). Since Σ is unitary, off-diagonal elements would reduce the absolute size of the diagonal elements and result in a higher potential energy.
+
+We therefore let
+Σ =   e iα 0 0 e −iα   ,(12)
+where the diagonal elements are constrained by det Σ = 1. The potential energy term we need to minimize is then
+V = − B 0 f 2 2 m u cos(α − θ/2) + m d cos(α + θ/2) .(13)
+Differentiating with respect to α gives the condition
+m u sin(α − θ/2) + m d sin(α + θ/2) = 0,(14)
+with the solution
+tan(α) = r tan(θ/2), r ≡ m u − m d m u + m d .(15)
+We can now expand the potential energy to quadratic order to find the pion mass. The meson field Φ, which characterizes fluctuations around the vacuum expectation value, is defined most conveniently by
+Σ = s e 2iΦ/f s, s ≡ Σ(16)Σ † = s † e −2iΦ/f s † .(17)
+The field Φ may be written as usual in terms of individual meson fields as
+Φ =   π 0 / √ 2 π + π − −π 0 / √ 2   .(18)
+The definition of Φ in Eq. (16) is convenient for two reasons. First of all, it transforms normally under extended parity (usual parity plus θ → −θ):
+Φ → −Φ,(19)s → s † ,(20)Σ → Σ † .(21)
+This means that the fields π ± , π 0 have the usual interpretation as pion fields. (Note that Eq. (20) follows from the fact that α → −α when θ → −θ.) The chiral Lagrangian, Eq. (11), is easily seen to be invariant under extended parity, as expected. Secondly, with the definition Eq. (16), the kinetic energy term in Eq. (11) takes the same form in terms of Φ as is does in the standard case when Σ = I. This means that there is no wave function renormalization at leading order, which simplifies calculations. An alternative definition,
+Σ = e iΦ/f Σ e iΦ/f ,(22)
+also leads to Eqs. (19) and (21)  Expanding to quadratic order in Φ, we find, for the charged pion mass,
+M 2 π (θ) = M 2 π (0) cos θ 2 1 + r 2 tan 2 θ 2 ,(23)
+where M 2 π (0) = B 0 (m u + m d ). Equation (23) agrees with Ref. [6], Eq. (4.15). For the decay constant we need the axial current A ij µ in χ PT that corresponds to the QCD currentq j γ µ γ 5 q i , where i, j are flavor indices. With the definitions of Ref. [22],
+A ij µ = i f 2 4 ∂ µ ΣΣ † + Σ † ∂ µ Σ ij .(24)
+Note that the axial current comes from the kinetic energy term in the chiral Lagrangian, and its form in terms of Σ is unaffected by a nonzero θ. For f π , we need A 12 µ . Plugging in Eq. (16), gives, to leading order,
+A 12 µ = −f cos(α)∂ µ π + .(25)
+With Eq. (15), this implies
+f π (θ) = f cos(α) = f π (0) cos(α) = f π (0) 1 + r 2 tan 2 (θ/2) .(26)
+Note that f π is independent of θ in the degenerate case, r = 0. To apply Eq. (10), we need the second derivative of M π or f π at θ = 0. From Eqs. (23) and (26), we obtain
+M π = M π (0) r 2 − 1 8 = −M π (0) m u m d 2(m u + m d ) 2 ,(27)f π = −f π (0) r 2 4 = −f π (0) (m u − m d ) 2 4(m u + m d ) 2 .(28)
+As expected, the first derivatives, M π and f π , vanish. Note that f π does not vanish when one mass (m u , say) goes to zero. This seems to contradict the expectation that the theory is θ-independent when one quark mass vanishes. However, the θ-independence does not apply to quantities, such as f π , that depend on external currents. We explain this in more detail in Appendix A.
+
+
+B. Three flavors
+
+For N = 3, we will work in the limit m u = m d ≡ m, but m = m s in general. Since isospin is preserved, we can assume
+Σ =      e iα 0 0 0 e iα 0 0 0 e −2iα      .(29)
+The potential energy term is then
+V = − B 0 f 2 2 2m cos(α − θ/3) + m s cos(2α + θ/3) .(30)
+Differentiating with respect to α gives the condition 2m sin(α − θ/3) + 2m s sin(2α + θ/3) = 0.
+
+Although Eq. (31) does not have a simple analytic solution, we really only need derivatives of quantities at θ = 0, which can all be calculated by implicit differentiation. Note first that the solution for Σ is invariant under θ → −θ, α → −α, so the solution α(θ) has only odd powers of θ. In particular, the second derivative of α(θ) at θ = 0 vanishes: α = 0. We then write a physical quantity W (θ) as W (α(θ), θ), where the second argument is the explicit θ-dependence, and the first is the dependence through α. Using α = 0, we have
+W ≡ d 2 W dθ 2 θ=0 = ∂ 2 W ∂α 2 (α ) 2 + 2 ∂ 2 W ∂α∂θ α + ∂ 2 W ∂θ 2 ,(32)
+where all derivatives on the right-hand side are to be evaluated at θ = 0 (which implies α = 0). Thus, all we need from the solution to Eq. (31) is α , which is easily calculated to be α = m − m s 3(m + 2m s )
+
+.
+
+We now merely need to find the masses and decay constants as functions of α and θ.
+
+Expanding the potential energy term in Eq. (11) to quadratic order in the now 3 × 3 meson matrix Φ, we find
+M 2 π = B 0 2m cos(α − θ/3) , M 2 K = B 0 m cos(α − θ/3) + m s cos(2α + θ/3) .(34)
+Similarly, using Eq. (16) and expanding Eq. (24) to linear order in Φ gives
+f π = f, f K = f cos(3α/2).(35)
+Using Eq. (32) now gives
+M π = −M π (0) m 2 s 2(m + 2m s ) 2 ,(36)M K = −M K (0) mm s 2(m + 2m s ) 2 ,(37)f π = 0,(38)f K = −f K (0) (m s − m) 2 4(m + 2m s ) 2 .(39)
+Like f π in the two-flavor case, f K does not vanish when one of the masses goes to zero; see Appendix A for an explanation.
+
+
+V. PARTIALLY QUENCHED χ PT
+
+Since most of our lattice data is partially quenched, we need to extend the calculation of M and f to partially quenched χ PT (PQ χ PT). This was done by Aoki and Fukaya [7] using the replica method to remove the determinant of the valence quarks. However, the required calculation is nonperturbative, at least on its face, since the vacuum state changes in the presence of θ. The replica method is only justified perturbatively, so a nonperturbatively safe method is preferable. The Lagrangian approach of Ref. [23], which introduces ghost (bosonic) quarks to cancel the valence quark determinant, is also only valid perturbatively, since it ignores the requirement that the bosonic path integral be convergent.
+
+The nonperturbatively correct version of PQ χ PT has been worked out by Golterman, Sharpe, and Singleton [9] and Sharpe and Shoresh [10]. The nonperturbative problems of the Lagrangian approach are fixed by taking into account the convergence requirement.
+
+In terms of Σ, the chiral Lagrangian is
+L χ,P Q = f 2 8 str(∂ µ Σ∂ µ Σ −1 ) − B 0 f 2 4 str(MΣ + MΣ −1 ) ,(40)
+with str the supertrace. The main difference from the standard perturbative version of PQ χ PT [23] is that Σ is not unitary, which is why Σ −1 appears instead of Σ † in Eq. (40).
+
+For definiteness, we work with three sea quarks (N = 3) and two valence quarks (N v = 2), and take the isospin limit in the sea: m u = m d ≡ m, but m = m s in general. The valence
+
+quarks are x and y with masses m x and m y , respectively. Corresponding ghost quarksx and y with masses m x and m y are included to cancel the valence-quark determinant. The chiral field Σ and the quark mass matrix M are then 7 × 7 matrices. The mass matrix is given by
+M = diag(m, m, m s , m x , m y , m x , m y ),(41)
+where the quarks are ordered: sea, valence, ghost.
+
+In expanding Σ in terms of pseudoscalar meson fields, it is useful to separate out a special diagonal meson field, , which is a linear combination of flavor-neutral quark-antiquark and ghost-antighost mesons. We write
+Σ = exp(2iΦ/f ),(42)Φ = Φ + i T 6 ,(43)Φ =   φ η η † iφ   ,(44)
+where φ is the quark-antiquark block (both sea and valence),φ is the ghost-antighost block, and η and η † are the quark-antighost and ghost-antiquark blocks, respectively. The diagonal generator 2 T 6 is non-anomalous (straceless), and is given by
+T 6 = 2 15 diag(1, 1, 1, 1, 1, 5/2, 5/2).(45)
+Both φ andφ are Hermitian and traceless. The factor of i in the ghost-antighost (φ) block in Eq. (44) comes ultimately from the careful consideration of the true symmetries of the theory with ghosts. These are more complicated than those assumed in Ref. [23] because of the necessity of keeping the ghost (bosonic) path integrals convergent in a nonperturbative treatment. At the chiral level, the integrals over the independent real fields inφ run from −∞ to ∞, and the factor of i multiplyingφ in Eq. (44), in combination with the supertrace, guarantees that the action for these fields is positive definite, so the kinetic and mass terms have the proper sign for convergence of the path integral. There is no problem with the convergence of the φ and η, η † integrals because the former are over a compact region (they are angles), and the latter are Grassmann variables.
+
+In Eq. (43), we have followed the prescription of Sharpe and Shoresh [10] and have included a factor of i with the field multiplying T 6 . Because str(T 2 6 ) < 0, the i is necessary in order for the kinetic energy of to be positive. In other words, is "ghost-like," rather than "quark-like." Likeφ, should be integrated along the entire real axis. Note that the only other linearly independent diagonal generator to span the quark-antiquark and ghost-antighost blocks is
+T 7 = 1 √ 3 I = 1 √ 3 diag(1, 1, 1, 1, 1, 1, 1),(46)
+with I the identity matrix. Since T 7 is anomalous (str(T 7 ) = √ 3), the corresponding meson (called Φ 0 , or less precisely, η ) is heavy and is integrated out of the chiral theory.
+
+When including the θ angle, the most natural approach would be to remove the θFF term by making an anomalous rotation using T 7 as generator. At the chiral level, this would put a factor of exp(−iθ/3) in front of the str(MΣ) term in Eq. (40), and a factor of exp(iθ/3) in front of the str(MΣ −1 ) term. In other words, all quarks (sea and valence) and all ghosts would get the same θ phase. However, it is convenient to make an additional non-anomalous rotation with the generator
+t = diag(0, 0, 0, 1, 1, 1, 1),(47)
+which is a linear combination of T 6 and a generator in the quark-antiquark block, namely diag(1, 1, 1, −3/2, −3/2, 0, 0). This allows us to remove the θ-dependent phase from all mass terms of valence and ghost quarks, which makes the algebra somewhat simpler and has further advantages for the heavy-light case discussed in Sec. VI. The partially quenched chiral Lagrangian in the presence of θ is then
+L χ,P Q,θ = f 2 8 str(∂ µ Σ∂ µ Σ −1 ) − B 0 f 2 4 str(M * B Σ + M B Σ −1 ) ,(48)
+where
+M B ≡ diag(e iθ/3 m, e iθ/3 m, e iθ/3 m s , m x , m y , m x , m y ).(49)
+In Appendix A, several choices for the mass matrix in the presence of θ are discussed; we include the subscript B on M B for consistency with notation introduced there.
+
+In the unitary theory, the absolute minimum of the potential energy term determines the vacuum state Σ . Here, the potential energy V is complex. Reference [9] argues that we The problem of solving V = 0 is simplified by noting that, as in the unitary theory, Σ is diagonal. This can be proved by following the unitary-theory argument in Ref. [22]. For the case when all masses are nondegenerate, the argument goes through with only trivial modifications. Degeneracies among sea quarks, or between valence and sea quarks, also present no problem because Σ is a unitary matrix with c-number entries in these blocks, and can be diagonalized exactly as in the unitary theory. However, degeneracy between valence and ghost quarks must be considered because such degeneracies are built into the partially quenched theory. These degeneracies are different than those among quarks since the graded structure of the group is crucial. It is plausible that the block of Σ corresponding to the degenerate mass pair can be diagonalized by a vector similarity transformation, Σ →
+U ΣU −1 , where U is an element of the graded symmetry group SL(N + N v |N v ) (i.e., SL(5|2)
+here). Such a transformation leaves the Lagrangian, including the mass (potential energy) term, unchanged. We have checked the diagonalization explicitly for the crucial 2-fold degeneracy of quark and ghost, and believe it must also be true if there is a higher degeneracy (e.g., m x = m y also), but have not proved it.
+
+Following Eqs. (42) through (44), we therefore parameterize Σ as
+Σ = exp i diag(α + δ + i , α + δ + i , −2α + δ + i , β − 3δ/2 + i , −β − 3δ/2 + i , 5i /2 − iγ, 5i /2 + iγ) ,(50)
+where we have ensured that the exponent is straceless, and have used isospin symmetry (m u = m d ≡ m) to require that the first two entries along the diagonal be equal. We have chosen simpler normalization for the angles in Eq. (50) than we would need to use for the corresponding meson fields.
+
+Since we will deform the contour for the ghost-antighost fields, the variables γ and may be complex. For convenience we define ≡ iˆ , γ = iγ, where it will turn out thatγ andˆ are in fact real at the saddle point. With this definition, the potential energy is
+V = − B 0 f 2 2 2m cos(θ/3 − α − δ +ˆ ) + m s cos(θ/3 + 2α − δ +ˆ ) + +m x cos(3δ/2 − β +ˆ ) + m y cos(3δ/2 + β +ˆ ) + −m x cos(5ˆ /2 −γ) − m y cos(5ˆ /2 +γ) .(51)
+From the requirement that V is stationary at the saddle point with respect to α, β,γ, δ and , respectively, we obtain the equations:
+m sin(θ/3 − α − δ +ˆ ) − m s sin(θ/3 + 2α − δ +ˆ ) = 0,(52)m x sin(3δ/2 − β +ˆ ) − m y sin(3δ/2 + β +ˆ ) = 0,(53)m x sin(5ˆ /2 −γ) − m y sin(γ + 5ˆ /2) = 0,(54)2m sin(θ/3 − α − δ +ˆ ) + m s sin(θ/3 + 2α − δ +ˆ ) + − 3 2 m x sin(3δ/2 − β +ˆ ) − 3 2 m y sin(3δ/2 + β +ˆ ) = 0,(55)2m sin(θ/3 − α − δ +ˆ ) + m s sin(θ/3 + 2α − δ +ˆ ) + +m x sin(3δ/2 − β +ˆ ) + m y sin(3δ/2 + β +ˆ ) + − 5 2 m x sin(5ˆ /2 −γ) − 5 2 m y sin(γ + 5ˆ /2) = 0.(56)
+In the case θ = 0, we have the standard perturbative solution: α = β =γ = δ =ˆ = 0, so Σ = I. If the valence masses m x and m y are not too small, it is easy to check that this saddle point is the correct one to use because Re(V ) increases monotonically away from the saddle on the original contours, on which and γ are real. However, Sharpe and Shoresh [10] found a lower bound on the valence masses, below which the real part of the squared-mass matrix of the ghost-like neutral fields is not positive definite. When the valence masses violate the bound, Re(V ) decreases away from the saddle in a real direction on one of the contours. At first glance, this suggests that the perturbative vacuum is not the correct one in this case. We discuss the issue in detail in Appendix B, and show that the monotonic increase away from the perturbative saddle point is restored after one or more of the neutral quark-antiquark integrals are performed. This means that we may freely violate the Sharpe-Shoresh bound, and the perturbative vacuum is the correct one for any nonzero values of the valence-quark masses.
+
+For θ not too far from 0, we expect that the proper saddle point is then the nearby one,
+
+where the magnitudes of the arguments of all the sine functions are less than π/2. If this were not true, it would invalidate the analysis that led to Eq. (10), since we assumed a smooth dependence on θ. Nevertheless, to be sure our analysis is correct nonperturbatively, we will check this assumption below. 
+Σ = exp i diag(α, α, −2α, β − 5δ/2, −β − 5δ/2, β − 5δ/2, −β − 5δ/2) .(57)
+This has two required features of a partially quenched theory: (1) the sea-quark sector is unaffected by the presence of valence quarks and ghosts, and (2) the vacuum expectation values ofqq andḡg are equal for corresponding quark (q) and ghost (g).
+
+Plugging the results forˆ andγ into the saddle point equations, Eqs. (52) through (56), then determines the remaining variables, α, β and δ. It is not necessary to obtain a closedform solution. As in the unitary 3-flavor case, we only need α , β and δ , the derivatives of these angles with respect to θ at θ = 0. By differentiating the saddle point equations and solving, we find
+α = m − m s 3(m + 2m s ) ,(58)β = m x − m y 2m x m y · mm s m + 2m s =γ ,(59)δ = m x + m y 5m x m y · mm s m + 2m s =ˆ .(60)
+As expected, the angle governing the sea-quark vacuum expectation value, α, obeys the same equation as in the unitary QCD case, Eq. (33).
+
+Before proceeding, we should check that the saddle we have found is the proper one to use. At the saddle point,ˆ andγ (the imaginary parts of and γ) are equal to δ and β respectively, which are comparable to θ and hence small angles. If the Sharpe-Shoresh bound is satisfied, the steepest descent directions, in which Re(V ) increases most rapidly away from the saddle point, are the real directions for and γ. As we continue the contours for and γ in these directions, Re(V ) increases exponentially, dominated by one or both of the ghost terms that grow like cosh(Re(5 /2 ± γ)). Far from the saddle point, it is then straightforward to see that we can bend the contours back to the real axis while keeping Re(V ) large, i.e., much larger than at the saddle point. We have therefore found a proper saddle point and contours. Appendix B argues that the saddle and contours are still the correct ones when the Sharpe-Shoresh bound is violated.
+
+Using Eqs. (58) through (60) to calculate the valence-meson mass and decay constant as in Sec. IV B, we find:
+M xy = −M xy (0) m 2 m 2 s (m + 2m s ) 2 1 2m x m y ,(61)f xy = −f xy (0) m 2 m 2 s (m + 2m s ) 2 (m x − m y ) 2 4m 2 x m 2 y .(62)
+The results for the unitary pion and kaon, Eqs. (36), (37), (38) and (39) The results in Eqs. (61) and (62) agree with those computed by Aoki and Fukaya [7], who used the replica method for the partially quenched theory. Because the replica method has not been nonperturbatively justified, the methods of Ref. [9,10] seem preferable to us here, since the ground state of the theory is changing. The agreement of the two methods suggests, though, that this particular problem is essentially perturbative. This makes sense because we in the end we only need derivatives of quantities at θ = 0 -so the dependence on the θ is required only in an infinitesimal neighborhood of the perturbative vacuum. It has been a surprise to us that the more vexing nonperturbative issue in our analysis arises from the Sharpe-Shoresh bound, which already affects the θ = 0 case.
+
+
+VI. HEAVY-LIGHT MESONS
+
+We now add a heavy quark Q to the theory. It is useful to consider the heavy quark in a partially-quenched context: let its valence mass be m Q and its sea mass be m Q,sea .
+
+In the presence of a nonzero θ, we put the θ-dependence into the sea-quark (but not the valence-quark) mass matrix, as in M B , Eq. (49). As both m Q and m Q,sea get large, the heavy sea quark decouples, and we are left with a theory of light sea-quarks only. The valence heavy quark of course does not decouple, since it can appear in external states, but it carries no θ-dependent phases. Note that it does not make any physical difference how the θ-dependence is put into initial sea-quark mass matrix, i.e., whether or not the heavy sea-quark mass carries θ-dependence. The end result after m Q,sea → ∞ is always the same as if we had started with a theory of only light sea quarks. However the decoupling is indeed more subtle when the heavy sea-quark carries θ-dependence -we cannot simply delete the heavy sea-quark terms from the Lagrangian. See Appendix C for a discussion of how decoupling works in that case.
+
+The leading-order heavy-meson chiral Lagrangian is then exactly the standard one [25]:
+L χ,HL = −i sTr(HHv· ← D) + g π sTr(HHγ µ γ 5 A µ ) ,(63)
+where H is the heavy-light meson field, composed of a pseudoscalar meson P and a vector meson P * :
+H a = 1 + / v 2 γ µ P * µa + iγ 5 P a ,(64)
+with v the meson's velocity, and a the flavor index of the light quark. In Eq. (63), ← D is the covariant derivative (acting to the left), sTr is a trace over Dirac indices and a supertrace over flavor indices, 3 and A µ is the light-quark axial current,
+A µ = i 2 σ † ∂ µ σ − σ∂ µ σ † ,(65)σ ≡ √ Σ .(66)
+The leading-order left-handed current that destroys a heavy-light meson with light flavor b is [25] 
+j µ,b L = κ 2 tr D γ µ (1 − γ 5 ) H σ † λ (b) ,(67)
+where κ is a low-energy constant, tr D is a trace over Dirac indices only, and λ (b) is a constant column vector that fixes the flavor of the light quark: (λ (b) ) a = δ ab . For the decay constant, we need the heavy-light axial current
+j µ,b 5 = 1 2 j µ,b R − j µ,b L = κ 4 tr D γ µ (1 + γ 5 ) H σ − tr D γ µ (1 − γ 5 ) H σ † λ (b) ,(68)
+where the right-handed current j µ,b R can be found from the left-handed current using parity (H → γ 0 Hγ 0 , σ → σ † ). We obtain the decay constant, or more precisely
+Φ ≡ f √ M , from the relation 0|j µ,a 5 |P a = −iv µ Φ a (no sum on a),(69)
+which implies Φ a = κ to leading order when θ = 0.
+
+When θ = 0, it affects Φ through the expectation value of σ in Eq. (68): σ = Σ = I.
+
+Using Eq. (57) for Σ gives
+Φ x (θ) = Φ x (θ = 0) cos β 2 − 5δ 4 ,(70)
+for light valence quark x. Equations (59) and (60) then imply
+Φ x = −Φ x (0) m 2 m 2 s (m + 2m s ) 2 1 4m 2 x .(71)
+This smoothly connects to the light quark result for f xy , Eq. (62), in the limit m y → ∞. 
+M + ≡ 1 2 (σM * B σ + σ † M B σ † ),(72)
+where M B is the light-quark mass matrix given in Eq. (49)), λ 1 and λ 1 are new LECs, and B 0 (often omitted in definitions of λ 1 , λ 1 ) is the light-quark LEC from Eq. (11). The dependence of the heavy-light meson mass M on the light valence mass is proportional to λ 1 , while the sea-quark mass dependence comes from λ 1 .
+
+Plugging in σ to Eqs. (73) and (72), and adding on the heavy-light mass in the chiral limit, M 0 , which has been omitted from Eq. (63), gives
+M x (θ) = M 0 + 2λ 1 B 0 m x cos β − 5 2 δ + +2λ 1 B 0 2m cos(α − θ/3) + m s cos(2α + θ/3) .(74)
+From Eqs. (58), (59) and (60), we then obtain
+M x = −2B 0 λ 1 m 2 m 2 s (m + 2m s ) 2 1 m x − 2B 0 λ 1 mm s m + 2m s .(75)
+Note that fractional changes in M x with topology will be quite small (except in the limit when m x m), because M x is dominated by the M 0 term, which is independent of θ. As 
+
+
+VII. STAGGERED CORRECTIONS
+
+It is not difficult to include the leading discretization corrections from taste violations with rooted staggered quarks. Each flavor becomes a staggered field with 4 tastes, and sea quarks are also replicated n r times. Rooting is accomplished by taking n r → 1/4 at the end of the calculation [28,29].
+
+We assume that the exact shift symmetry of staggered quarks [30] does not get spontaneously broken when θ becomes nonzero. At the level of the chiral theory, shift symmetry corresponds to the discrete taste symmetry [29] Σ → ξ µ Σξ µ (no sum on µ),
+
+where ξ µ (µ = 1, · · · , 4) is any of the generators of the taste algebra. This symmetry is enough to guarantee that Σ has trivial dependence on taste:
+Σ = Σ R ⊗ ξ I ,(77)
+where Σ R is a "reduced" diagonal matrix in flavor and replica space only, and ξ I is the 4 × 4 identity matrix in taste space.
+
+The determination of Σ R in the 2+1 flavor case is then is very similar to the calculation of Σ in Sec. V. In analogy with Eq. (50) we parameterize Σ R by Σ R = exp i diag(α + δ/n r + i /n r , · · · , α + δ/n r + i /n r , · · · , −2α + δ/n r + i /n r , · · · ,
+β − 3δ/2 + i , −β − 3δ/2 + i , 5i /2 − iγ, 5i /2 + iγ) ,(78)
+where · · · stands for the replication of the preceding entry n r − 1 times, and the explicit factors of 1/n r compared with Eq. (50) are necessary here for the stracelesness of the exponent.
+
+Aside from the replication of the sea quark flavors, the main difference with the continuum calculation is the presence of the taste-violating contribution to the potential, a 2 V [31,32].
+
+Dependence on θ arises in some terms in a 2 V both explicitly, though the anomalous chiral rotation that removes the θFF term (see Appendix A), and implicitly, though the expectation value of Σ. However, because of the simple taste structure of Σ , the contributions of a 2 V combine with those of the quark mass term and produce terms proportional to squared taste-singlet meson masses. In direct correspondence with Eqs. (58) through (60), we find
+α = M 2 π,I − M 2 S,I 12n r (M 2 π,I + 2M 2 S,I ) ,(79)β = M 2 X,I − M 2 Y,I 8n r M 2 X,I M 2 Y,I · M 2 π,I M 2 S,I M 2 π,I + 2M 2 S,I =γ ≡ −iγ ,(80)δ = M 2 X,I + M 2 Y,I 20n r M 2 X,I M 2 Y,I · M 2 π,I M 2 S,I M 2 π,I + 2M 2 S,I =ˆ ≡ −i ,(81)
+where the taste-singlet meson masses are given by
+M 2 π,I = 2B 0 m + a 2 ∆ I ,(82)M 2 S,I = 2B 0 m s + a 2 ∆ I ,(83)M 2 X,I = 2B 0 m x + a 2 ∆ I ,(84)M 2 Y,I = 2B 0 m y + a 2 ∆ I .(85)
+Here a 2 ∆ I is the splitting of the taste-singlet mesons from the corresponding pseudo-Goldstone (taste-ξ 5 ) mesons. Note that Eqs. (79) through (81) reduce to Eqs. (58) through (60) after taking the continuum limit and the rooting limit (n r → 1/4).
+
+We may then find the θ dependence of the valence xy meson mass and decay constant by following at tree level the staggered θ = 0 calculations of Refs. [32,33]. We choose taste 
+(M 2 X,I − M 2 Y,I ) 2 4M 4 X,I M 4 Y,I ,(87)
+where all quantities on the right-hand sides are evaluated at θ = 0. The subscript 5 indicates taste ξ 5 . The masses of these pseudo-Goldstone mesons are
+M 2 xy,5 = B 0 (m x + m y ),(88)M 2 X,5 = 2B 0 m x ,(89)M 2 Y,5 = 2B 0 m y .(90)
+Note that the partially quenched singularities as m x or m y go to zero are now cut off at nonzero lattice spacing by the taste-singlet splitting.
+
+Paralleling what occurs for the vacuum angles, the f xy,5 result corresponds precisely to the continuum result, Eq. (62), with the simple replacement of each quark mass by the squared mass of the associated taste-singlet meson. The same simple correspondence between the leading order continuum and staggered results also occurs for the topological susceptibility [34]. For the meson mass, however, the direct correspondence would occur only for the θ dependence of the taste-singlet mass. The taste-ξ 5 squared mass gets an explicit factor of each valence quark mass, which appear without the singlet splitting a 2 ∆ I , thereby producing the M 2 X,5 and M 2 Y,5 terms in Eq. (86). The M xy,5 term in the denominator arises simply from the fact that we give M xy,5 and not (M 2 xy,5 ) . It is straightforward to extend these calculations to heavy-light systems. In the heavylight chiral Lagrangian, staggered discretization effects appear only at NLO [35]. This is contrast to the light-light Lagrangian, where the taste-violating potential a 2 V is LO in the usual power counting m q ∼ a 2 , where m q is a generic light-quark mass. For Φ, whose θdependence starts at LO, this means that the result for Φ x (θ) in terms of the angles β and 
+
+where the subscript 5 indicates a taste-ξ 5 meson.
+
+The calculation is a bit more complicated for the heavy-light meson mass because θdependence first appears at NLO. At this order, there are also a large number of a 2 terms in the heavy-light chiral Lagrangian, which are catalogued in Ref. [35], and appear in the terms L A1 2,a 2 , L B1 2,a 2 , L A2 2,a 2 , and L B2 2,a 2 defined there. Although the majority of these terms do not contribute to θ-dependence, there are ten terms that do, both explicitly and implicitly, as in the light-light potential a 2 V discussed above. Unlike what happens in the light-light case, however, the a 2 terms do not combine with the quark-mass terms to form taste-singlet light-light meson masses, because the heavy-light LECs are independent of the light-light ones. We find 
+
+Here ∆ val HL is a linear combination of the LECs K A1 1,3 , K A1 1,4 , K A2 1,2 , K A2 1,3 , K A2 1,7 , K A2 1,8 , K B2 1,1 , and K B2 1,2 from Ref. [35] (divided by λ 1 ), and ∆ sea HL is a linear combination of the LECs K A1 2,3 and K A1 2,4 (divided by λ 1 ). We have not bothered to work out the coefficients in these linear combinations since the relations are unlikely to be useful, but it is straightforward to find them if they are ever needed. One can easily check that Eqs. (91) and (92) reduce to Eqs. (71) and (75), respectively, in the continuum limit.
+
+There are also other, "generic," discretization effects with staggered quarks that have nothing to do with the (partial) violation of chiral symmetry that results in taste splittings.
+
+Such generic effects are of order α s a 2 in a tree-level improved staggered action; the twostage smearing in the HISQ action further suppresses these effects by a numerical factor.
+
+Analyses of various physical quantities in HISQ simulations typically give sub-percent generic discretization errors for the range of lattice spacings (a < ∼ 0.09 fm) considered here. For example, f K /f π varies from its continuum limit by about 0.3% over these lattice spacings [13,36].
+
+
+VIII. COMPARISON TO SIMULATION RESULTS
+
+The calculation of meson masses and decay constants on the HISQ ensembles is described in Ref. [36]. To find the dependence on the topological charge, we use the results of a single-elimination jackknife analysis of these quantities together with the time histories of topological charge shown above. To estimate B we rearrange Eq. 10, using < Q 2 >= χ t V , as  Our statistical errors on the heavy-light masses and decay constants are much larger than on the light quark quantities, so we are unable to test our data against the chiral perturbation theory for the heavy-light quantities.
+B Q,V = B + 1 2 < Q 2 > B − 1 2 < Q 2 > 2 B Q 2 ,(93)
+Knowing the dependence of masses and decay constants on the average Q 2 , we can correct our simulation results to account for the difference of the average in our simulation, Q 2 sample , and the correct Q 2 . To estimate this correct Q 2 we use the lowest order  staggered χ PT result [34] χ T = f 2 π 4(2/M 2 π,I + 1/M 2 S,I )
+
+where the taste-singlet masses M 2 π,I and M 2 S,I are given in Eqs. (82) and (83). The χ PT results are shown in Fig. 3. In computing the χ PT form for the ensembles with a > 0.042 fm, we used measured values for the taste singlet pion and ss pseudoscalar masses on each ensemble. For the 0.042 fm physical quark-mass ensemble we estimated taste breaking effects by scaling the taste splittings from the 0.06 fm physical quark-mass ensemble, and for the 0.042 and 0.03 fm, m s /5 ensembles, where we expect the taste-breaking effect to be negligible (and certainly not measurable with our statistics), we used the Goldstone pseudoscalar masses. For large a, the deviation from the lowest-order χ PT result is due to lattice artifacts, probably mostly higher-order taste-breaking effects, but for a = 0.042 and 0.03 fm we expect the χ PT results to be pretty good.
+
+
+TABLE I. Examples of topological adjustments for pseudoscalar masses and decay constants
+
+in the 0.042 fm HISQ ensembles. Each field contains the unshifted value for the quantity, its statistical error in parentheses, and the topology adjustment in square brackets. These quantities are evaluated at valence masses equal to the sea quark masses, which have small tuning errors. For the heavy-light masses we used B 0 = 3.4 GeV, λ 1 = 0.232 (GeV) −1 and λ 1 = 0.042 (GeV) −1 [27].
+
+Note that since the Q 2 in the second line is the Q 2 averaged over our sample, there is no statistical error associated with it. For examples of the size of this effect in our simulations, we look at the two ensembles with a ≈ 0.042 fm. For example, to adjust the decay constants, rearrange Eq. (10) as
+m l = m s /5 m l = physical Q 2 sample /Q 2f corrected = f sample − 1 2χ T V f 1 − Q 2 sample χ T V .
+(96) Table I shows the size of the topology adjustment for selected quantities, together with the central value and statistical errors. The sign of the adjustment differs between the two ensembles because, as can be seen in Fig. 3, the difference between the sample average Q 2 and the chiral perturbation theory prediction is different in the two cases. The effects are larger in the ensemble with m l /m s = 0.2, since these lattices have much smaller volume and partial quenching divergences. It is amusing to note that for the physical quark mass ensemble the topology adjustment for f K /f π is a factor of ∼ 6 smaller than the "conventional" finite size effects from pions propagating around the periodic lattice, estimated in NLO staggered χ PT, of 0.0009. (Conventional finite size effects on the heavy quark quantities are quite small.)
+
+We note that this strategy is in the same spirit as our treatment of conventional finite size effects. We use χ PT to estimate the effects and correct our results, and estimates of the effects of higher order χ PT and/or uncertainties in the χ PT parameters should be included in the systematic error budget.
+
+
+IX. CONCLUSIONS
+
+Our key χ PT results are given in Eqs. (61)  We wish to thank Maarten Golterman, Andreas Kronfeld, and our colleagues in the MILC Collaboration for helpful discussions, and, in addition, our MILC colleagues for developing the computer codes used in the project, and for generation of the lattice ensembles used here. We also thank Javad Komijani for pointing out an error in an earlier version of the heavy-light analysis. We are grateful to Maarten Golterman for a critical reading of this manuscript and many helpful suggestions for its improvement. Finally, we thank the referee for suggesting we include a study of the staggered discretization corrections.
+
+Appendix A: Vanishing sea-quark mass
+
+The usual expectation is that all θ-dependence should disappear when one (or more) seaquark masses vanish. Indeed that is the reason that a zero value for the up-quark mass would solve the strong CP problem [38]. However, we will see in this appendix that the absence of θ-dependence is in general true only for spectral quantities in QCD, i.e., quantities that are entirely determined by the QCD Lagrangian. While the second derivatives with respect to θ should vanish for all meson masses in the limit of a vanishing sea-quark mass, this is not necessarily true for decay constants, which depend on external (axial) currents. In particular, the results for decay constants in unitary theories, Eqs. (28) and (39) To understand what is going on, it is helpful to look in detail at the chiral transformations that have (implicitly) been used to put the Lagrangian in various convenient forms. We work here in the partially-quenched context so that the results will apply to all the calculations described above. Under a chiral transformation,
+Σ → LΣR −1 , Σ −1 → RΣ −1 L −1 .(A1)
+The axial current transforms as
+A ij µ = i f 2 4 ∂ µ ΣΣ −1 + Σ −1 ∂ µ Σ ij → i f 2 4 L∂ µ ΣΣ −1 L −1 + RΣ −1 ∂ µ ΣR −1 ij .(A2)
+In the partially-quenched Lagrangian, the chiral transformation is equivalent to leaving Σ unchanged and transforming the mass matrix as:
+M → L −1 MR, M * → R −1 M * L.(A3)
+Note that this is the inverse of the fake (spurion) transformation on M that would leave the Lagrangian invariant.
+
+The first chiral transformation we consider (call it "A") is the anomalous, flavor-singlet one that removes the θFF term from the QCD Lagrangian, and puts a uniform phase in the mass matrix, as in Eq. (11).
+R A = L −1 A = exp( iθ 6 I), M → M A ≡ exp( iθ 3 )M. (A4)
+where I is the identity matrix given in Eq. (46), and we have specialized to N = 3 and N v = 2. All axial currents are invariant under this flavor-singlet transformation.
+
+The second chiral transformation ("B"), is the one that removes the θ-dependence from the valence-and ghost-quark masses. This is the non-anomalous transformation We can now turn to the question of θ-dependence when a sea-quark mass vanishes. For definiteness in our N = 3 example, let us take m s → 0. The trick here is to make a third chiral transformation ("C") that is non-anomalous and puts all θ-dependence into the m s term in the quark mass matrix: respectively, Eqs. (37) and (36), which again vanish in the m s → 0 limit.
+R B = L −1 B = exp( −iθ 6 t),(A5)R C = L −1 C = exp( −iθ 6 λ), [λ ≡ diag(1, 1, −2, 0, 0, 0, 0)],(A6)
+Transformation C does not affect the valence-valence axial current, so f xy , Eq. (62), also vanishes as m s → 0. However, this is not true of the full-theory f K , Eq. (39). In this case, the axial current A 13 µ is changed by the transformation. Indeed, all θ-dependence in the limit m s → 0 comes from the current, and we find f K (θ) = f cos(θ/2). This gives the nonvanishing result f K = −f K (0)/4 in this limit, in agreement with Eq. (39).
+
+We can similarly check the m → 0 limit. In this case, we should put the θ-dependence equally into the up-and down-quark entries of the mass matrix, so as not to spoil isospin invariance, which was assumed in the calculations of Sec. V. We then find f K (θ) = f cos(θ/4) in this limit, giving f K = −f K (0)/16, in agreement with the limit of Eq. (39). Further, M K and M π should vanish in this limit, in agreement with Eqs. (37) and (36). (For M π , we need to use the fact that M π itself vanishes in the limit.)
+
+Finally, a note of warning: The various limits of vanishing quark mass are subtle, and it is easy to go astray. This is already clear in the full theory from the fact that the limits m → 0 and m s → 0 do not commute for f K , Eq. (39). Another interesting example is the limit m x → 0 for a valence mass, with sea masses and other valence masses held fixed. We expect a partially-quenched singularity in this case, and Eq. (61) shows this for the spectral quantity M xy . However, we can also make a plausible-sounding argument that M xy should vanish in this limit! Starting from case B, suppose we make a non-anomalous transformation ("D") where we preserve quark-ghost symmetry explicitly in the mass matrix.
+R D = L −1 D = exp( −iθ 6λ ), [λ ≡ diag(1, 1, 1, −3, 0, 0, 0)],(A8)
+One may still wonder whether we can accept that there is a discontinuity at m x = 0 and simply set m x = 0 from the start. This is not allowed, however, because the ghost integral needs a non-zero mass term for convergence. The ghost-like field , however, presents problems. Because it is a linear combination of quark-antiquark and ghost-antighost fields, there is a competition in its mass term between ghost masses, which give positive terms, and quark masses, which give negative terms. Each ghost term always wins over the corresponding valence term, because has more support in the ghost sector than in the valence sector. In contrast, the competition with the sea masses can go either way. For low enough valence and ghost masses compared to sea masses, the real part of the mass term will become negative, putting into doubt the convergence of the path integral, or at least the validity of the perturbative vacuum at = 0. This leads to the Sharpe-Shoresh lower bound [10] on the valence masses. Because can mix with the neutral component ofφ, corresponding for example to the parameter γ in Eq. (50), Ref. [10] requires that the full neutral ghost and ghost-like mass matrix be positive definite, resulting in the bound
+N v χ −1 v (N v χ v + N χ) < (N + N v ) 2 ,(B1)
+where χ and χ v are the average sea-quark mass and average valence-quark mass, respectively, and χ −1 v is the average inverse valence-quark mass. Sharpe and Shoresh suspect that this is some kind of artifact of the chiral theory, since the underlying partially quenched QCD has no apparent problem at or below this bound. Nor is there any evidence from the calculation of standard perturbative quantities within partially quenched χ PT, or their comparison with simulations, that things go wrong when the bound is violated. Nevertheless, since much of the simulation data that we analyze violates this bound, the apparent lack of convergence of the chiral theory is disconcerting. We certainly cannot claim our chiral results to be nonperturbatively correct in the region where the bound is violated unless we can show that the bound itself is not actually an obstacle to using the theory around the standard vacuum.
+
+We work primarily in the case θ = 0; nonzero but small θ does not present any significant additional problems. We also start by considering a simpler theory than that of Sec. V, with N = 2, N v = 1 and degenerate sea-quark masses. After showing in this simple model that violation of the Sharpe-Shoresh bound does not lead to any problem with convergence or with the perturbative vacuum, we will be able to use a shortcut to arrive at a similar conclusion for the case of interest, N = 3 and N v = 2 with nondegenerate valence and sea masses. We can easily generalize from there to arbitrary N with arbitrary sea-quark masses. We will not attempt to prove the result for arbitrary N v > 2, but will argue that it is probably true in that case too.
+
+In the neutral sector of the N = 2, N v = 1 model, there are 3 mesons, π, δ, and , with the meson field Φ of Eq. (42) given by
+Φ = 1 √ 6 diag √ 3π + δ + i , − √ 3π + δ + i , −2δ + i , 3i ,(B2)
+where entries are ordered sea, valence, ghost. The quark mass matrix is M = diag(m, m, m x , m x ).
+
+Expanding the Lagrangian in momentum space to quadratic order in these fields, we find
+L quad = 1 2 (p 2 + M 2 π ) π 2 + 1 2 (p 2 + M 2 δ ) δ 2 + 1 2 (p 2 + M 2 ) 2 + iαδ ,(B3)
+where
+M 2 π = B 0 (2m), M 2 δ = B 0 4 3 m x + 2 3 m , M 2 = B 0 8 3 m x − 2 3 m , α = B 0 2 3 m − 2 3 m x .(B4)
+We see that M 2 is only positive for m x > m/4, which is precisely the Sharpe-Shoresh lower bound for this case. However, there is also an imaginary (hence not Hermitian) mixing term between and δ. (There is no mixing with π in this model because of the exact sea-quark isospin symmetry.)
+
+The -δ mixing term has an important effect: If we treat it as an iterated 2-point interaction, it generates the expected double poles for neutral particles in a partially-quenched theory. In other words, it plays the role that the anomalous Φ 0 mass term plays in the case where the limit of infinite Φ 0 mass is postponed until after the computation of the neutral propagators. Note that the poles (whether single or double) of a partially-quenched neutral propagator occur at the squared-masses either of physical sea-sea neutral mesons, or of unmixed valence-valence meson masses, which here would be proportional to m x . All these squared-masses are positive (for nonzero quark masses), which suggests that the apparent problem of M 2 < 0 can be avoided if we treat the mixing term iαδ on the same footing as the other mass terms. We can accomplish this by performing the path integral over δ before the integral. The δ integral is convergent since M 2 δ > 0. By completing the square, we may integrate over δ in the partition function
+Z = Dπ D Dδ e − d 4 x L quad(B5)
+and obtain
+Z = Dπ D e − 1 2 d 4 x((p 2 +M 2 π )π 2 +F (p,M ,M δ ,α) 2 ) ,(B6)
+where
+F (p, m , m δ , α) = p 2 + M 2 + α 2 p 2 + M 2 δ = (p 2 + M 2 X ) 2 p 2 + M 2 δ ,(B7)M 2 X ≡ B 0 (2m x ). (B8)
+Here M X is the mass of the valencexx meson. Note that F is positive definite, so the integral converges, independent of whether m x is above or below the Sharpe-Shoresh lower bound.
+
+The propagator, G = F −1 has a characteristic double pole at M 2 X :
+G = p 2 + M 2 δ (p 2 + M 2 X ) 2 = 1 3 2 p 2 + M 2 X + p 2 + M 2 π (p 2 + M 2 X ) 2 ,(B9)
+where the second form will simplify the comparison to more complicated cases. We can also obtain this result for G by iterating the iαδ term in Eq. (B3) or by returning to the theory with Φ 0 included, iterating the Φ 0 mass term, and then taking the mass to infinity.
+
+Repeating the derivation of Eq. (B6) with sources for the δ and fields allows us to find the δ propagator G δδ and the mixed propagator G δ , which of course also agree with the results found using the other methods.
+
+We have thus obtained a convergent path integral by integrating over δ first. In the presence of nonzero, but small, θ, these results change only slightly. The saddle point is now at π = 0, δ = δ 0 , = iδ 0 , where δ 0 is of order θ. 
+M 2 X = 2B 0 m 2 x − m 2 sin 2 (θ/2), M 2 δ = B 0 2 3 m cos(θ/2) + 4 3 m 2 x − m 2 sin 2 (θ/2) .(B10)
+We may restrict ourselves to infinitesimal θ values in order to find the derivatives with respect to θ at θ = 0. The quadratic action of therefore remains positive definite for any nonzero quark masses. On the other hand, for θ small but finite, a new singularity would develop for very small but nonzero m x < m sin(θ/2). We do not concern ourselves further with this interesting, but to us irrelevant, singularity.
+
+We now turn to the case discussed in Sec. V: N = 3 (masses m u = m d = m, m s ) and N v = 2 (masses m x , m y ). In this case, there are two neutral ghost-type fields, corresponding to and γ in Eq. (50), and three neutral quark-type fields that they may mix with, corresponding to α, β, and δ. Because the algebra involved in doing the convergent integrals over α, β, and δ is rather messy, we resort to a short cut. As noted in the discussion of the toy model above, Gaussian integration (with possible linear terms) is equivalent to perturbation theory.
+
+Hence we can simply find the -, γ-γ and -γ propagators using perturbation theory, and deduce the positivity of the -γ quadratic action from the propagator matrix.
+
+The easiest way to obtain the needed propagators is to restore the anomalous Φ 0 field (mass m 0 ) and use the diagonal basis for neutral fields, Φ = diag(U, D, S, X, Y,X,Ỹ ).
+
+Quark-line connected and disconnected propagators among the diagonal-basis fields are the standard ones of PQ χ PT, and the limit m 0 → ∞ may be taken. We then just need to write and γ as linear combinations of the diagonal-basis fields, and take the corresponding linear combinations of the propagators. With
+= −i 2 15 U + D + S + X + Y + 5 2X + 5 2Ỹ ,(B11)γ = −i 1 2 −X +Ỹ ,(B12)
+M 2 X = 2B 0 m x , M 2 Y = 2B 0 m y , M 2 π = 2B 0 m,
+M 2 S = 2B 0 m s , M 2 η = B 0 (2m/3 + 4m s /3),(B13)1 (p 2 + M 2 Y ) 2 − 1 (p 2 + M 2 X ) 2 .
+We write the -γ propagator matrix as
+G =   G G γ G γ G γγ   (B15)
+Then the -γ quadratic action matrix, after integrating out all the neutral quark-antiquark fields that have quadratic interactions with , 5 must be G −1 . Because G and G −1 are real symmetric matrices, they are diagonalizable. This means that if one of them is positive definite, the other must be too. So we need only prove that G is positive definite. We can do that by showing that its eigenvalues are both positive, which simply requires tr(G) > 0 and det(G) > 0. From Eq. (B14), tr(G) is clearly positive. After some algebra, we find det(G) = 1 5(p 2 + M 2 X )(p 2 + M 2 Y ) 3 + (p 2 + M 2 π )(p 2 + M 2 S ) p 2 + M 2
+η 1 p 2 + M 2 X + 1 p 2 + M 2 Y ,(B16)
+which is also positive.
+
+Thus, the quadratic action of the neutral ghost-antighost fields in the N = 3, N v = 2 case is positive definite after integration of the neutral quark-antiquark fields at quadratic order. As in the N = 2, N v = 1 case, it also true that here that the quadratic ghost-antighost integrals may be considered to be cut off at large field values by higher terms in the full action.
+
+The cutoff terms, which come from contributions to the potential from the ghost-ghost block, grow like m x cosh ( 10/3 − √ 2 γ)/f +m y cosh ( 10/3 + √ 2 γ)/f and dominate the negative quark-quark contributions in all real directions of the -γ plane. So, once again, the path integral around the trivial vacuum to quadratic order is absolutely convergent. The order of integration has no effect, except in the practical sense that integrating the neutral quark-antiquark fields first is much easier. 5 No such fields have quadratic interactions with γ For small but nonzero θ the analysis follows the procedure described above for N = 2,
+
+N v = 1. The saddle point occurs at imaginary values of the neutral ghost-antighost fields.
+
+We expand around the saddle point in the real directions of these fields. Compared to the θ = 0 case, the quadratic terms are changed slightly by cosines of linear combinations of θ and the saddle-point angles, which can make small differences in the meson masses, as in and (2) a replacement of the factor (p 2 + M 2 π )(p 2 + M 2 S )/p 2 + M 2 η ) in each equation with the corresponding sea-meson factor that multiplies the disconnected neutral propagator in the given theory. Since this factor "goes along for the ride" in all the manipulations that led to Eqs. (B14) and (B16), the quadratic action in the ghost-ghost sector will remain positive definite.
+
+Since N v = 2 is the most useful case for analyzing simulations, we have not tried very hard to generalize to the more complicated cases with N v > 2. There are however some indications that the quadratic action of the ghost-antighost sector remains positive definite after integration of the neutral quark-antiquark fields. First of all, it is clear that G > 0, since the sum of two valence-mass poles in Eq. (B14) will just be replaced by the sum of N v valence mass poles (and again the relative normalization of single and double pole terms may change). We can see this change explicitly by comparing with the N v = 1 case, Eq. (B9).
+
+Second, when the valence masses are degenerate, does not interact in the quadratic action with any other ghost-type fields (which themselves have positive masses and do not interact with the neutral quark-type fields). Therefore the positivity of G is all we need for positivity of G. Any nonpositivity in the nondegenerate case would have to come from large effects of interactions with the other ghost-type fields. Such effects can occur before integration over the quark-type fields, as in the Sharpe-Shoresh bound. In that case M 2 can be positive but small, and then interactions can generate a negative eigenvalue in the complete ghost-type mass matrix. However, this seems less likely to occur after integration over the quark-type fields. Based on our N v = 2 example in Eq. (B14), it looks difficult to choose masses such that G is small, but interaction terms (such as G γ ) get large enough to change the sign of an eigenvalue. In any case it is clear that positivity will be guaranteed in some neighborhood of the degenerate point. The decay constant results trivially agree with decoupling, since they vanish in both cases for degenerate light quarks.
+
+For a more robust check of decoupling, we look at the case of arbitrary N ≥ 3 quarks, with k < N light degenerate quarks of mass m and N − k degenerate heavy quarks of mass m h . In the first instance, we proceed exactly as in Secs. IV A and IV B, starting with a factor of e iθ/N multiplying all quark masses, both light and heavy, as in Eq. (11). Let Σ be given by a generalization of Eq. (29), with exp(iα) in the first k diagonal entries, and exp(−ikα/(N − k)) in the last N − k diagonal entries. Following the same steps as before, we obtain
+α = m − m h N m + N km h /(N − k) .(C1)
+As always, the decay constant for the degenerate quarks vanishes, while the mass obeys
+M π = − M π (0) 2 m 2 h (N − k)m + km h 2 .(C2)
+Alternatively, following the discussion in Appendix A, we may make a non-anomalous transformation at the start, so that we have a factor of e iθ/k multiplying the light quark masses only. The vacuum expectation value Σ has the same form in terms of α as above, but now
+α = m km + k 2 m h /(N − k)
+.
+
+Figure 1
+1shows the time histories of Q/V 1/2 in our simulations, where V is the lattice volume in fm 4 , and there are periodic boundary conditions on the gauge field in all four directions. In this plot the blue lines are for ensembles with light sea quark mass one fifth of the strange quark mass, and the red lines are for ensembles with physical light quark mass. The increasing autocorrelation time of Q as a decreases is obvious, and at a = 0.03
+
+FIG. 2 .
+2Autocorrelations of the squared topological charge, where A(∆) is defined in Eq. 1. For each lattice spacing, the crosses are the ensemble with m l = m s /5 and the octagons the ensemble with m l at its physical value, ≈ m s /27. m l = m s /5 ensembles (crosses).
+
+FIG. 3 .
+3Average topological susceptibility Q 2 /V (crosses) and tunneling rate per unit volume (∆Q) 2 / (V ∆t) (octagons) versus lattice spacing. Red and blue points are results for ensembles with m l = m s /5 and m l approximately physical, respectively. Similarly, the magenta and green squares are the lowest order chiral perturbation theory predictions for the susceptibility at m l = m s /5 and m l at its physical value, ≈ m s /27. The leading-order χ PT results shown include staggered corrections and are taken from Eq. (95) below.
+
+
+should therefore find a saddle point of | exp(−V )| = exp(−Re(V )) (deforming theφ and contours as needed), not a minimum. One issue that arises in the saddle point analysis is how to choose the proper saddle point when the complex saddle-point equation, V = 0 has multiple solutions, as it does here. Fortunately, Ref. [24] (referred to by Ref. [9]) gives a prescription for finding the unique useful saddle point for an analytic function like V : Find (1), a point that is a solution of V = 0, and (2), a deformation of the contour that goes through the point in the direction of steepest descent of | exp(−V )| (steepest ascent of Re(V )) and satisfies the requirement that the point has the highest value of | exp(−V )| of any place on the deformed contour. There is at most one saddle point that satisfies these conditions, so once we find one such point, we are guaranteed to have found the unique solution, which determines Σ .
+
+
+With the arguments bounded by assumption, two sine functions are equal if and only if their arguments are equal. Subtracting Eq. (55) from Eq. (56) to eliminate terms with m and m s and then using Eqs. (53) and (54) to eliminate terms with m x or m y then implieŝ = δ andγ = β. The saddle point value Σ simplifies to
+
+
+, can be obtained from Eqs. (61) and (62) in the appropriate limits: m x = m y = m for the pion and m x = m, m y = m s for the kaon. Equations (61) and (62) have singular limits when m x or m y or both go to zero at fixed sea quark masses. (For f xy one has to keep m x = m y if both go to zero to get a nonzero result.) Such mass singularities are typical for partially quenched theory, but this is the only case we know of where they appear at tree level. On the other hand, the results vanish when either sea-quark mass goes to zero, as explained in Appendix A.
+
+(
+Note that the factor of √ M difference between Φ and f is not important here, since M has small θ dependence.) At leading order, the heavy-light meson mass is independent of θ, and has been removed from L χ,HL , as usual. However θ dependence can enter through the (NLO) light-quark mass contributions to the Lagrangian, L χ,HL,m = 2λ 1 B 0 sTr(HHM + ) + 2λ 1 B 0 sTr(HH)sTr(M + ),
+
+
+in the light-light partially quenched case, our results for both masses, Eq. (75), and decay constants, Eq. (71), vanish when either sea-quark mass goes to zero, consistent with the discussion in Appendix A. To apply Eq. (75) to lattice data, we need the LECs λ 1 , λ 1 and B 0 . From the flavor splittings of B or D mesons, we can extract λ 1 ≈ 0.2 (GeV) −1 (see, for example, Ref. [26]). A more detailed analysis of the heavy-light lattice data from the Fermilab/MILC Collaboration [27] gives λ 1 = 0.232(2) (GeV) −1 , where the error is statistical only. The same analysis implies λ 1 = 0.042(4) (GeV) −1 ; the error is again statistical. The smallness of λ 1 is not surprising, since it is suppressed by large-N c counting. Because in addition the λ 1 term does not blow up as m x → 0, unlike the λ 1 term, its effects are negligible at the currently available statistical precision. To obtain B 0 we can use, for example, M 2 xy = B 0 (m x + m y ), where M xy is the mass of the light pseudoscalar meson made ofx and y. The result for the mass in Eq. (75) does not join smoothly onto the corresponding lightlight formula, Eq. (61). As m y gets heavy, M xy falls like 1/ √ m y , where we have used M xy (0) = B 0 (m x + m y ). However the heavy-light M x is independent of the heavy-quark mass. The difference can be traced to the simple fact that light-light and heavy-light meson masses have different dependence on the masses of their valence quarks. It is still true, though, that in both cases M /M vanishes in the limit of infinitely heavy quark mass.
+
+ξ 5
+5for the meson to correspond with the choice made in the simulations. We obtain,
+
+
+δ, Eq. (70), remains valid. We just must use the staggered values for β and δ , Eqs.(80)and(81), to find Φ x .
+
+
+M x,5 = −λ 1 M 4 π,I M 4 S,I (M 2 π,I + 2M 2 S,I ) 2 (M 2 X,5 + a 2 ∆ val HL ) M 4 X,I + −λ 1 2(M 2 π,5 + a 2 ∆ sea HL )M 4 S,I + (M 2 S,5 + a 2 ∆ sea HL )M 4
+
+
+This lets us find B by fitting B Q,V to a constant plus quadratic in Q. In fact what is available is a list of single elimination jackknife averages for B -that is, values for B obtained by omitting one lattice from the analysis. We can effectively "undo" the jackknife usingB j − B = − (N − 1) B j − B(94)where B = 1 N i B i is the full sample average and B j = 1 N −1 i =j B i is the j'th jackknife sample. In practice we simply fit the jackknife averages, and supply the factor of −(N − 1) later. To estimate the error on B we assign an error equal to the error in our sample average B to each data point, which results in a fit with χ 2 ≈ N , and then use the error on the fit parameters found in the standard way. (This actually neglects the part of the variance of B coming from its dependence on Q 2 , but in practice this turns out to be a small part of the variance.) Although the results are barely statistically significant, they are consistent with the χ PT predictions. Statistically significant signals are found in the m l = m s /5 ensembles, since these have much smaller physical volumes than the physical light quark mass ensembles. The effects that we observe, in Eq. (10), all have an overall factor of 1/V , even if the parenthesized factor 1 − Q 2 χ T V covers a range of order one. For example, in the a ≈ 0.06 fm ensembles the m l = m s /5 lattices have a volume of 180 (fm) 4 , while the physical m l lattices have a volume of 1920 (fm) 4 . Also, Eq. (62) shows that the derivatives of the masses and decay constants have a partially quenched divergence when m x or m y goes to zero with m l fixed, and for the m l = m s /5 ensembles we have used valence quark masses smaller than m l , in some cases as small as the physical m l .
+
+Figure 4 shows
+4∂ 2 M ∂θ 2 for the m s /5 ensembles for degenerate valence quark masses, m x = m y . The black line in the figure is the PQ χ PT prediction in Eq. (61), which we emphasize is a prediction with no free parameters. Obviously the statistical errors are large, but they are consistent with the prediction, and the divergence at small valence quark mass is clearly seen. The green and red lines in this figure show the PQ χ PT prediction including the tastebreaking effects, Eq. 86. To calculate these effects we need to know the taste splitting ∆ I in Eqs. (82) through (85), which is expected to be proportional to α 2 s . Since α s changes significantly over this range of lattice spacings, we simply use the values of ∆ I computed directly from M 2 I −M 2 5 at a = 0.09 fm and a = 0.06 fm. We do not have a direct measurement of taste breaking on the 0.042 fm ensemble, but we expect the result there to be very close to the continuum result, as is clear from the fact that a = 0.06 fm (red) curve is already barely distinguishable from the continuum (black) curve.Since ∂ 2 F ∂θ 2 vanishes for degenerate valence quarks, we plot this quantity along different lines inFig. 5. The left panel shows ∂ 2 F ∂θ 2 as a function of one valence quark mass, m x , with the other fixed at the strange quark mass, together with the χ PT prediction. The right panel shows ∂ 2 F ∂θ 2 along lines where m y is held fixed at the lightest valence quark mass available in each ensemble. The vanishing of ∂ 2 F ∂θ 2 when the valence quarks are degenerate is particularly striking in this plot. In the left panel, with m y = m s , the black line shows theFIG. 4. ∂ 2 M ∂θ 2 on ensembles with m l = m s /5 as a function of m x , with m y = m = m x . The black line is the PQ χ PT prediction at a = 0, or without taste breaking effects (no free parameters). The green and red lines show the PQ χ PT prediction including taste breaking, Eq. 86, for the 0.09 and 0.06 fm ensembles. The black square marks the unitary point, with valence quark mass equal to the sea quark mass. continuum result, without taste breaking, and the green and red lines the results for 0.09 and 0.06 fm including the taste breaking. In the right panel, since each of these three ensembles had a different lightest valence mass, the colored dotted lines show the prediction without including taste breaking for each of the three ensembles. Because one of the valence quark masses, m y , is held fixed at its lightest values in the right hand panel, the effects of taste violation are large for all values of m x . As a fraction of the continuum value, the staggered effects in this graph do not decrease as much as might be expected when a changes from 0.09 fm to 0.06 fm because the relative size of a 2 ∆ I and 2B 0 m y in M Y,I in Eqs. (85) and (87) is what matters, and m y has changed from m s /10 to m s /20.
+
+FIG. 5 .
+5FIG. 5.
+
+∂ 2 F
+2∂θ 2 on ensembles with m l = m s /5. The left panel shows ∂ 2 F ∂θ 2 as a function of one valence quark mass, m x along the line m y = m s . The black line is the PQ χ PT prediction (no free parameters), which vanishes for degenerate quarks. The red (a = 0.06 fm) and green (a = 0.09 fm) lines include the effects of taste breaking from Eq. 87. The right panel shows the quantity with m y fixed to the smallest available value. The dotted lines are PQ χ PT predictions ignoring taste breaking, or at a = 0; there are three separate lines because the smallest valence quark mass is different in each ensemble: 0.1 m s , 0.05 m s and 0.037 m s for the 0.09, 0.06 and 0.042 fm ensembles respectively. Again, the solid red and green lines include the effects of taste breaking from Eq. 87.
+
+
+and (62) for partially quenched light-light meson masses and decay constants, and in Eqs. (75) and (71) for the corresponding quantities for heavy-light mesons. In the light-light case, these results reproduce those of Aoki and Fukaya [7], but are now computed within a nonperturbatively-justified partially quenched chiral theory. Results with the leading staggered discretization effects included are given in Eqs. (86), (87), (91) and (92). The results can be compared with simulation data for the quantities as a function of topological charge Q using Eq. (10). We have done this in Figs. 4 and 5; there are large statistical errors but the qualitative agreement is good. Discretization effects are generally quite small at the fine lattice spacings where these results are likely to be used. For very light valence-quark masses in comparison to sea-quark masses, however, the staggered taste splitting cuts off the partially quenched singularity and can thus be numerically important. One can also use the results in conjunction with Eq. (96) to adjust quantities for incorrect sampling of Q, as discussed at the end of Sec. VIII. The corrections in the cases we have looked at are very small (much less than the statistical errors) for our physical-mass ensemble at a ≈ 0.042. For the ensemble with m l = m s /5 at the same lattice spacing, however, the corrections are often statistically significant, with the largest (∼ 5 times the statistical sigma) occurring for f K /f π , which has very small statistical errors. Both the smaller volume of this ensemble and the partial quenching divergences play a role here. In view of the fact that the corrections are calculated only to leading order in χ PT, one should take a relatively large fraction of the correction as the associated systematic error. Nevertheless, our analysis suggests that it will be possible to satisfactorily control the systematic errors due to non-equilibrated topological charge distributions, even at rather small lattice spacings. Leadership Computing Facility, the Blue Waters sustained-petascale computing project, the National Institute for Computational Science, the National Center for Atmospheric Research, the Texas Advanced Computing Center, and Big Red II+ at Indiana University. USQCD resources are acquired and operated through funding from the Office of Science of the U.S. Department of Energy. The National Energy Research Scientific Computing Center is a DOE Office of Science User Facility supported by the Office of Science of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231. An award of computer time was provided by the Innovative and Novel Computational Impact on Theory and Experiment (INCITE) program. This research used resources of the Argonne Leadership Computing Facility, which is a DOE Office of Science User Facility supported under Contract DE-AC02-06CH11357. The Blue Waters sustained-petascale computing project is supported by the National Science Foundation (awards OCI-0725070 and ACI-1238993) and the State of Illinois. Blue Waters is a joint effort of the University of Illinois at Urbana-Champaign and its National Center for Supercomputing Applications. This work is also part of the "Lattice QCD on Blue Waters" and "High Energy Physics on Blue Waters" PRAC allocations supported by the National Science Foundation (award numbers 0832315 and 1615006). This work used the Extreme Science and Engineering Discovery Environment (XSEDE), which is supported by National Science Foundation grant number ACI-1548562 [37]. Allocations under the Teragrid and XSEDE programs included resources at the National Institute for Computational Sciences (NICS) at the Oak Ridge National Laboratory Computer Center, The Texas Advanced Computing Center and the National Center for Atmospheric Research, all under NSF teragrid allocation TG-MCA93S002. Computer time at the National Center for Atmospheric Research was provided by NSF MRI Grant CNS-0421498, NSF MRI Grant CNS-0420873, NSF MRI Grant CNS-0420985, NSF sponsorship of the National Center for Atmospheric Research, the University of Colorado, and a grant from the IBM Shared University Research (SUR) program. Computing at Indiana University is supported by Lilly Endowment, Inc., through its support for the Indiana University Pervasive Technology Institute.
+
+
+, do not vanish when one sea-quark mass goes to zero. On the other hand, as long as the valence masses remain nonzero, derivatives of the partially-quenched decay constant, Eq. (62), do vanish in this limit.
+
+
+with t given in Eq. (47). Transformation B produces the mass matrix M B given in Eq. (49) and used in the calculations of Sec. V. It leaves valence-valence currents (or sea-sea currents) unchanged, so f xy in Eq. (62) is correct for the axial current defined as usual, with no θdependence. It is straightforward to check that we get the same answer for f xy using mass matrix M A , Eq. (A4), instead of M B . As a further check, we may calculate the θ-dependence of the (strange) sea-valence decay constant, f sx . In this case it is crucial to include the nontrivial θ-dependence of the axial current induced by transformation B via Eq. (A2). Once this is done, the results in the A and B cases agree, and agree with the result for f xy , Eq. (62), when m x = m s . The meson mass is of course insensitive to the currents, so there are no subtleties in the calculation, and the results in cases A and B are again identical.
+
+M
+B → M C = diag(m, m, e iθ m s , m x , m y , m x , m y ). (A7) Now all θ-dependence disappears for spectral quantities in the limit m s → 0. The valencevalence meson mass provides an example: M xy in Eq. (61) vanishes in this limit, for any (fixed, nonzero) values of the other masses. It is important not to take a valence mass to zero before m s → 0; the limits are not interchangeable because of the PQ singularities. We can, however, put m x = m s , m y = m or m x = m y = m to get the full theory M K or M π ,
+
+M
+B → M D = diag(m, m, m s , e iθ m x , m y , m x , m y ). (A9)Now all θ-dependence, for spectral quantities, is in the valence-quark x term in M D , so shouldn't M xy vanish in the m x → 0 limit?The problem with this argument is that the partially-quenched singularity is so strong as m x → 0 that it overwhelms the reduction in spectral quantities coming directly from the e iθ m x term in the quark mass matrix. Keeping m x = 0 and repeating the calculational steps in Sec. V, we in fact reproduce Eq. (61) for M xy . This is not unexpected because we have simply made a non-anomalous chiral transformation, which should not affect physical quantities. Indeed, if we are careful about the phase introduced in the axial current by transformation D, we also reproduce f xy in Eq. (62). Further, despite the apparent breaking of quark-ghost symmetry by M D , it is still true that Σ xx = Σ xx , just as in the cases
+
+4
+4Appendix B: Convergence of the neutral ghost-antighost integrals The bosonic path integrals over the fieldφ for ghost-antighost mesons, Eq. (44), and the field for the "ghost-like" neutral meson, Eqs. (43) and (45), must be convergent in order for PQ χ PT to be nonperturbatively well-defined. Further, in order for the perturbative vacuum defined byφ = 0, = 0 to be the correct one, it seems that Re(V ) should have a minimum at this point for real and Hermitianφ. These conditions apparently require that the real part of the Lagrangian, expanded to quadratic order in the fields, should be positive definite. Indeed, the factors of i in Eqs. (43) and (44) are inserted to ensure thatφ and have positive kinetic energy terms for p 2 = 0. The same factor of i also guaranties that the real part of the mass term ofφ is positive definite as long as no valence masses vanish.
+
+For m 2
+2> 0 the steepest descent directions from the saddle point are the real directions for all three fields, and we keep those directions even when m 2 < 0. Expanding around the saddle, there are of course no linear terms in the fields, and the quadratic terms are changed slightly by cosines of the angles θ and δ 0 . The end result is that Eqs. (B6) and (B7) are still valid, but with redefined values:
+
+
+Eq. (B10). The theory therefore remains positive except possibly for very small values of the valence masses of ordermθ (wherem is the average sea-quark mass). Such possibilities do not pose any difficulties for our analysis in the body of this paper, since we only need to consider infinitesimal θ values to find the derivatives at θ = 0. It is quite easy to generalize our results to an arbitrary number N ≥ 2 of sea-quark flavors, and arbitrary sea-quark masses. The only changes in Eqs. (B14) and (B16) will be (1) an adjustment of the relative normalization of the single pole and double pole terms)
+
+
+take one quark mass to infinity and look at a meson made of light quarks, the decoupling paradigm implies that the meson should be unaffected by the heavy quark. The results in Secs. IV A and IV B give an example of this. Taking m s → ∞ in the pion mass of Eq. (36), gives M π = −M π (0)/8. This agrees with the result for the degenerate (m u = m d ) pion in N = 2, Eq. (27). The agreement is nontrivial, since the light-light part of the chiral Lagrangian starts with different θ-dependence in the two cases: exp(iθ/3) versus exp(iθ/2).
+
+
+FIG. 1.Topological charge time histories for various lattice spacings; note that the vertical scale decreases as the lattice spacing decreases (top to bottom). Blue lines are for ensembles with light sea quark mass one fifth of the strange quark mass, and the red lines are for ensembles with light sea quark mass at its physical value, ≈ m s /27. Notice the narrower distributions and shorter autocorrelation times for physical quark mass ensembles. Breaks in the traces separate multiple runs at the same couplings. The second short blue trace at a = 0.0425 fm is from a run with three times longer molecular dynamics trajectories than the main run.
+
+
+The path integral, as given by Eq. (B5), is however only conditionally convergent for m x < m/4. The integral of the absolute value is not convergent, since the imaginary mixing term is lost and the integral is then divergent. Alternatively, it is clear that the result is ill defined for m x < m/4 if the integral in Eq. (B5) is performed first. The lack of absolute convergence of Eq. (B5) suggests that the partially quenched chiral theory for m x < m/4 is a delicate object for which the usual manipulations of perturbation theory are suspect and must be checked carefully. This suggestion is however incorrect! The reason is that the exponent in Eq. (B5) is only the quadratic action, and not the full action. With the full action, the integral is convergent even if it is performed first. That is because the ghost-ghost component of Φ in Eq. (B2) gives rise to a term in the potential that goes like +m x cosh( √ 6 /f ), which dominates for large | /f | over the negative term −(2m + m x ) cosh( 2/3 /f ) for all nonzero values of m x and m. Thus if we make the quadratic approximation of Eqs. (B3) and (B5), we should consider the integral as cut off at large but finite | |. (We might, for example, add a term λ 4 to the Lagrangian, where λ is small and positive.) In that case the full path integral is absolutely convergent, and byFubini's theorem[39] the order of integration does not affect the answer. It is true, though, that the simplest way to evaluate the partition function is by first integrating over δ. Indeed, we do not know how to show that the final result even has a limit when λ → 0, except by the use of Fubini's theorem.
+If there are degeneracies, then Σ can be put in diagonal form by making a vector (flavor) rotation that leaves the chiral Lagrangian unchanged.
+We follow the notation of Ref.[10] in naming the diagonal generators.
+The supertrace is used because the theory is partially quenched. In most cases, however, the difference between trace and supertrace is irrelevant for the heavy-light part of the Lagrangian, since closed heavylight meson loops are forbidden anyway.
+We thank Maarten Golterman for this point.
+ACKNOWLEDGEMENTSComputations for this work were carried out with resources provided by the USQCD Collaboration, the National Energy Research Scientific Computing Center, the Argonnewe find G = 1 10
+if we had only (degenerate) light quarks. 6 Thus, no matter how the problem is set up, the heavy quarks decouple when m h → ∞. The result in that limit is the same as it would be if the heavy quarks were not there at all. Note, however. I E , that the decoupling is subtle: solving the problem with the heavy quarks present and then taking, i.e., if we had only (degenerate) light quarks. 6 Thus, no matter how the problem is set up, the heavy quarks decouple when m h → ∞. The result in that limit is the same as it would be if the heavy quarks were not there at all. Note, however, that the decoupling is subtle: solving the problem with the heavy quarks present and then taking
+
+. L Debbio, H Panagopoulos, P Rossi, E Vicari, hep-th/0111090Phys. Rev. D. 659JHEPL. Del Debbio, H. Panagopoulos, P. Rossi and E. Vicari, Phys. Rev. D 65, 021501 (2001) and JHEP 0201, 009 (2002) [hep-th/0111090];
+
+. L Debbio, H Panagopoulos, E Vicari, hep-th/0204125JHEP. 020844L. Del Debbio, H. Panagopoulos and E. Vicari, JHEP 0208, 044 (2002) [hep-th/0204125].
+
+Erratum. M Lüscher, arXiv:1006.4518arXiv:1009.5877JHEP. 100815PoS. hep-latM. Lüscher, JHEP 1008, 071 (2010) Erratum: [JHEP 1403, 092 (2014)] [arXiv:1006.4518 [hep-lat]] and PoS LATTICE 2010, 015 (2010) [arXiv:1009.5877 [hep-lat]];
+
+. M Lüscher, S Schaefer, arXiv:1105.4749JHEP. 110736hep-latM. Lüscher and S. Schaefer, JHEP 1107, 036 (2011) [arXiv:1105.4749 [hep-lat]].
+
+. A Bazavov, MILC CollaborationarXiv:1003.5695Phys. Rev. D. 81114501A. Bazavov et al. [MILC Collaboration], Phys. Rev. D 81, 114501 (2010), [arXiv:1003.5695].
+
+. S Schaefer, R Sommer, F Virotta, arXiv 1009.5228Nucl. Phys. B. 845S. Schaefer, R. Sommer and F. Virotta, Nucl. Phys. B 845, (2011) 93, [arXiv 1009.5228].
+
+. G Mcglynn, R D Mawhinney, Phys. Rev. D. 9014503arXiv 1403.2761G. McGlynn and R.D. Mawhinney, Phys. Rev. D 90, 014503 (2014), [arXiv 1403.2761].
+
+. R Brower, S Chandrasekharan, J W Negele, U J Wiese, hep-lat/0302005Phys. Lett. B. 56064R. Brower, S. Chandrasekharan, J. W. Negele and U. J. Wiese, Phys. Lett. B 560, 64 (2003) [hep-lat/0302005].
+
+. S Aoki, H Fukaya, arXiv:0906.4852Phys. Rev. D. 8134022hep-latS. Aoki and H. Fukaya, Phys. Rev. D 81, 034022 (2010) [arXiv:0906.4852 [hep-lat]].
+
+. P H Damgaard, K Splittorff, arXiv:hep-lat/0003017Phys. Rev. D. 6254509P. H. Damgaard and K. Splittorff, Phys. Rev. D 62, 054509 (2000) [arXiv:hep-lat/0003017].
+
+. M Golterman, S Sharpe, R Singleton, Jr , hep- lat/0501015Phys. Rev. D. 7194503M. Golterman, S. Sharpe and R. Singleton, Jr., Phys. Rev. D 71, 094503 (2005) [hep- lat/0501015].
+
+. S Sharpe, N Shoresh, hep-lat/0108003Phys. Rev. D. 64114510S. Sharpe and N. Shoresh, Phys. Rev. D 64, 114510 (2001) [hep-lat/0108003].
+
+. C Bernard, D Toussaint, arXiv:1611.04522PoS. 2016189C. Bernard and D. Toussaint, PoS (LATTICE2016), 189 (2016), [arXiv:1611.04522].
+
+In that case we must immediately put α = 0 because nonzero α is inconsistent with the dual requirements of flavor symmetry and det(Σ) = 1. In that case we must immediately put α = 0 because nonzero α is inconsistent with the dual requirements of flavor symmetry and det(Σ) = 1.
+
+. A Bazavov, MILC CollaborationarXiv:1212.4768Phys. Rev. D. 87554505hep-latA. Bazavov et al. [MILC Collaboration], Phys. Rev. D 87, no. 5, 054505 (2013) [arXiv:1212.4768 [hep-lat]].
+
+. A Bazavov, arXiv:1712.09262hep-latA. Bazavov et al., arXiv:1712.09262 [hep-lat].
+
+. A Bazavov, arXiv:1003.5695Phys. Rev. D. 81114501A. Bazavov et al., Phys. Rev. D 81, 114501 (2010), [arXiv:1003.5695].
+
+. A Hasenfratz, F Knechtli, arXiv:hep-lat/9806026Phys. Rev. D. 6434504A. Hasenfratz and F. Knechtli, Phys. Rev. D 64, 034504 (2001) [arXiv:hep-lat/9806026].
+
+. T A Degrand, A Hasenfratz, T G Kovacs, arXiv:hep-lat/9705009Nucl. Phys. 505417T.A. DeGrand, A. Hasenfratz and T.G. Kovacs, Nucl. Phys. B505, 417 (1997), [arXiv:hep- lat/9705009];
+
+. A Hasenfratz, C Nieter, arXiv:hep-lat/0103029Phys. Lett. 439366A. Hasenfratz and C. Nieter, Phys. Lett. B439, 366 (2001) [arXiv:hep- lat/0103029].
+
+. C , arXiv:1708.00696C. Alexandrou et al., [arXiv:1708.00696].
+
+. E Witten, Nucl. Phys. B. 156269E. Witten, Nucl. Phys. B 156, 269 (1979).
+
+. G Veneziano, Nucl. Phys. B. 159213G. Veneziano, Nucl. Phys. B 159, 213 (1979).
+
+. H Leutwyler, A V Smilga, Phys. Rev. D. 465607H. Leutwyler and A.V. Smilga, Phys. Rev. D 46, 5607 (1992).
+
+. S Aoki, H Fukaya, S Hashimoto, T Onogi, arXiv:0707.0396Phys. Rev. D. 7654508S. Aoki, H. Fukaya, S. Hashimoto and T. Onogi, Phys. Rev. D 76, 054508 (2007) [arXiv:0707.0396].
+
+. J Gasser, H Leutwyler, Nucl. Phys. B. 250465J. Gasser and H. Leutwyler, Nucl. Phys. B 250, 465 (1985).
+
+. C W Bernard, M F L Golterman, hep-lat/9306005Phys. Rev. D. 49486C. W. Bernard and M. F. L. Golterman, Phys. Rev. D 49, 486 (1994) [hep-lat/9306005].
+
+. N G De Bruijn, Asymptotic Methods in Analysis. DoverN.G. de Bruijn, Asymptotic Methods in Analysis, Dover (1981).
+
+See, A Example, M Manohar, Wise, Heavy Quark Physics. Cambridge University PressSee, for example, A. Manohar and M. Wise, Heavy Quark Physics, Cambridge University Press (2000).
+
+. A Bazavov, Fermilab Lattice ; MILC CollaborationsarXiv:1112.3051Phys. Rev. D. 85114506hep-latA. Bazavov et al. [Fermilab Lattice and MILC Collaborations], Phys. Rev. D 85, 114506 (2012) [arXiv:1112.3051 [hep-lat]].
+
+. J Komijani, EPJ Web of Conferences. J. Komijani, talk presented at Lattice 2017, to be published by EPJ Web of Conferences;
+
+. A Bazavov, Fermilab Lattice ; MILC Collaborationsin preparationA. Bazavov et al. [Fermilab Lattice and MILC Collaborations], in preparation.
+
+. C Aubin, C Bernard, hep-lat/0308036Nucl. Phys. Proc. Suppl. 129C. Aubin and C. Bernard, Nucl. Phys. Proc. Suppl. 129, 182 (2004) [hep-lat/0308036];
+
+. C Bernard, hep-lat/0603011Phys. Rev. D. 73114503C. Bernard, Phys. Rev. D 73, 114503 (2006) [hep-lat/0603011].
+
+. C Bernard, M Golterman, Y Shamir, arXiv:0712.2560Phys. Rev. D. 7774505hep-lat. and references thereinC. Bernard, M. Golterman and Y. Shamir, Phys. Rev. D 77, 074505 (2008) [arXiv:0712.2560 [hep-lat]], and references therein.
+
+. C Van Den Doel, J Smit, Nucl. Phys. B. 228122C. van den Doel and J. Smit, Nucl. Phys. B 228, 122 (1983);
+
+. M F L Golterman, J Smit, Nucl. Phys. B. 24561M. F. L. Golterman and J. Smit, Nucl. Phys. B 245, 61 (1984).
+
+. W.-J Lee, S R Sharpe, arXiv:hep-lat/9905023Phys. Rev. D. 60114503W.-J. Lee and S. R. Sharpe, Phys. Rev. D 60, 114503 (1999) [arXiv:hep-lat/9905023].
+
+. C Aubin, C Bernard, arXiv:hep-lat/0304014Phys. Rev. D. 6834014C. Aubin and C. Bernard, Phys. Rev. D 68, 034014 (2003) [arXiv:hep-lat/0304014].
+
+. C Aubin, C Bernard, arXiv:hep-lat/0306026Phys. Rev. D. 6874011C. Aubin and C. Bernard, Phys. Rev. D 68, 074011 (2003) [arXiv:hep-lat/0306026].
+
+. B Billeter, C E Detar, J Osborn, hep-lat/0406032Phys. Rev. D. 7077502B. Billeter, C. E. Detar and J. Osborn, Phys. Rev. D 70, 077502 (2004) [hep-lat/0406032].
+
+. C Bernard, J Komijani, arXiv:1309.4533Phys. Rev. D. 88994017hep-latC. Bernard and J. Komijani, Phys. Rev. D 88, no. 9, 094017 (2013) [arXiv:1309.4533 [hep-lat]]
+
+. A Bazavov, arXiv:1407.3772Phys. Rev. D. 9074509A. Bazavov et al., Phys. Rev. D 90, 074509 (2014), [arXiv:1407.3772].
+
+. J Towns, Computing in Science and Engineering. 1662J. Towns et al., Computing in Science and Engineering 16, 62 (2014).
+
+. G Hooft, Phys. Rev. Lett. 373432Phys. Rev. DG. 't Hooft, Phys. Rev. Lett. 37, 8 (1976), and Phys. Rev. D 14, 3432 (1976);
+
+. R Jackiw, C Rebbi, Phys. Rev. Lett. 37172R. Jackiw and C. Rebbi, Phys. Rev. Lett. 37, 172 (1976);
+
+. C Callan, R Dashen, D Gross, Phys, Lett, C. Callan, R. Dashen, and D. Gross, Phys. Lett.
+
+. 63B. 33463B, 334 (1976);
+
+. D B Kaplan, A V Manohar, Phys. Rev. Lett. 562004D.B. Kaplan and A.V. Manohar, Phys. Rev. Lett. 56, 2004 (1986).
+
+See, for instance, the Wikipedia article on Fubini's theorem. See, for instance, the Wikipedia article on Fubini's theorem, https://en.wikipedia.org/wiki/Fubini's theorem.

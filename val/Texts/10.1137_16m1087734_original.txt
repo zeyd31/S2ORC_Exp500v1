@@ -1,0 +1,345 @@
+
+GREEDY APPROACHES TO SYMMETRIC ORTHOGONAL TENSOR DECOMPOSITION
+
+
+Cun Mu 
+Daniel Hsu 
+Donald Goldfarb 
+GREEDY APPROACHES TO SYMMETRIC ORTHOGONAL TENSOR DECOMPOSITION
+tensor decompositionrank-1 tensor approximationorthogonally decomposable tensorperturbation analysis AMS subject classifications 15A1815A6949M2762H25
+Finding the symmetric and orthogonal decomposition (SOD) of a tensor is a recurring problem in signal processing, machine learning and statistics. In this paper, we review, establish and compare the perturbation bounds for two natural types of incremental rank-one approximation approaches. Numerical experiments and open questions are also presented and discussed.
+
+Introduction.
+
+A p-way n-dimensional tensor T , namely T ∈ p R n := R n×n×···×n , is called symmetrically orthogonally decomposable (SOD) [1,2] (a.k.a. odeco in [3]) if it can be expressed as a linear combination over the real field of symmetric p-th powers of n vectors that generate an orthonormal basis of R n . Mathematically, T is SOD if there exist λ = [λ 1 , λ 2 , . . . , λ n ] ∈ R n and an orthogonal matrix V = [v 1 , v 2 , . . . , v n ] ∈ R n×n such that
+T = λ 1 v ⊗p 1 + λ 2 v ⊗p 2 + · · · + λ n v ⊗p n , (1.1)
+where v ⊗p , the symmetric p-th power of the vector v, denotes a p-way n-dimensional [n] is called the symmetric orthogonal decomposition (also abbreviated as SOD) of T with individual λ i and v i , respectively, called an eigenvalue and eigenvector of T . 1 The gist of our paper is to find the SOD of T (potentially with perturbations), a recurring problem arising in different contexts including higher-order statistical estimation [4], independent component analysis [5,6], and parameter estimation for latent variable models [7], just to name a few.
+tensor with (v ⊗p ) i1i2···in = v i1 v i2 · · · v in . The decomposition {(λ i , v i )} i∈
+From the expression (1.1), it is quite tempting to find (λ i , v i ) one by one in a greedy manner using proper deflation procedures. Specifically, one first approximates T by the best rank-one tensor,
+(λ , v ) ∈ arg min λ∈R, v =1 T − λ · v ⊗p F . (1.2)
+After that, to find the next pair, one modifies the optimization problem (1.2) to exclude the found eigenpair (λ , v ). We next review two natural deflation proceduresresidual deflation [8] and constrained deflation [9]-which incorporate the information of (λ , v ) into an optimization framework by altering, respectively, the objective and the feasible set of problem (1.2).
+
+Residual deflation. In residual deflation, the rank-one approximation is subtracted from the original tensor, i.e., T ← T − λ · (v ) ⊗p , and then finds the best rankone approximation to the deflated tensor by solving (1.2) again. The complete scheme, referred to as Successive Rank-One Approximation with Residual Deflation (SROAwRD), is described in Algorithm 1.
+
+
+Algorithm 1 Successive Rank-One Approximation with Residual Deflation (SROAwRD)
+
+input a symmetric p-way tensor T ∈ p R n . 1: initialize T 0 ← T 2: for k = 1 to n do 3:
+(λ k ,v k ) ∈ arg min λ∈R, v =1 T k−1 − λv ⊗p F . 4: T k ← T k−1 −λ kv ⊗p k . 5: end for 6: return {(λ k ,v k )} n k=1 .
+Constrained deflation. In constrained deflation, one restricts v to be nearly orthogonal to ±v by solving problem (1.2) with the additional linear constraints −θ ≤ v , v ≤ θ, where θ > 0 is a prescribed parameter. The complete scheme, referred to as Successive Rank-One Approximation with Constrained Deflation (SROAwCD), is described in Algorithm 2. At the k-th iteration, rather than deflating the original tensor T by subtracting from it the sum of the (k −1) rank-one tensorsλ 1v ⊗p 1 ,λ 2v ⊗p 2 , · · · ,λ k−1v ⊗p k−1 as the SROAwRD method does, the SROAwCD method imposes the near-orthogonality constraints | v,v i | ≤ θ for i = 1, 2, . . . , k − 1.
+
+Algorithm 2 Successive Rank-One Approximation with Constrained Deflation (SROAwCD) input a symmetric p-way tensor T ∈ p R n , parameter θ > 0. 1: initializev 0 ← 0 2: for k = 1 to n do 3:
+
+Solve the following optimization problem:
+(λ k ,v k ) ∈ arg min λ∈R,v∈R n T − λv ⊗p F (1.3) s.t. v = 1 − θ ≤ v,v i ≤ θ, i = 0, 1, 2, . . . , k − 1 4: end for 5: return {(λ k ,v k )} n k=1 .
+It is not hard to prove that given the SOD tensor T = i∈[n] λ i v ⊗p i as the input, both SROAwRD and SROAwCD methods are capable of finding the eigenpairs {(λ i , v i )} i∈[n] exactly. In this paper, we focus on the more challenging case of tensors that are only close to being SOD. Specifically: Problem 1. Suppose the SOD tensor T = i∈[n] λ i v ⊗p i , and that the perturbed SOD tensor T is provided as input to the SROAwRD and SROAwCD methods. Characterize the discrepancy between {(λ i , v i )} i∈[n] and the components {(λ i ,v i )} i∈ [n] found by these methods.
+
+In this paper, we provide positive answers to Problem 1. The characterization for SROAwRD was done in our previous paper [1]; we review the results in Section 3. The charaterization for SROAwCD is the main contribution of the present paper. These results can be regarded as higher order generalizations of the Davis-Kahan perturbation result [10] for matrix eigen-eigenvalue decomposition, and is not only of mathematical interest but also crucial to applications in signal processing, machine learning and statistics [4,5,6,7], where the common interest is to find the underlying eigenpairs {(λ i , v i )} but the tensor collected is subject to inevitable perturbations arising from sampling errors, noisy measurements, model specification, numerical errors and so on.
+
+Organization. The rest of the paper is organized as follows. In Section 2, we introduce notation relevant to this paper. In Section 3, we review theoretically what is known about the SROAwRD method. In Section 4, we provide a perturbation analysis for the SROAwCD method.
+
+
+Notation.
+
+In this section, we introduce some tensor notation needed in our paper, largely borrowed from [11].
+
+Symmetric tensor. A real p-way n-dimensional tensor A ∈ p R n := R n×n×···×n ,
+A = A i1,i2,...,ip , A i1,i2,...,ip ∈ R, 1 ≤ i 1 , i 2 , . . . , i p ≤ n,
+is called symmetric if its entries are invariant under any permutation of their indices, i.e. for any i 1 , i 2 , . . . , i p ∈ [n] := {1, 2, . . . n},
+A i1,i2,...,ip = A i π(1) ,i π(2) ,...,i π(p)
+for every permutation mapping π of [p]. Multilinear map. In addition to being considered as a multi-way array, a tensor A ∈ p R n can also be interpreted as a multilinear map in the following sense: for any matrices V i ∈ R n×mi for i ∈ [p], we define A(V 1 , V 2 , . . . , V p ) as a tensor in R m1×m2×···×mp whose (i 1 , i 2 , . . . , i p )-th entry is A j1,j2,...,jp (V 1 ) j1i1 (V 2 ) j2i2 · · · (V p ) jpip .
+(A(V 1 , V 2 , . . . , V p )) i1,
+The following two special cases are quite frequently used in the paper:
+V i = x ∈ R n for all i ∈ [p]: Ax ⊗p := A(x, x, . . . , x)
+, which defines a homogeneous polynomial of degree p.
+V i = x ∈ R n for all i ∈ [p − 1], and V p = I ∈ R n×n : Ax ⊗p−1 := A(x, . . . , x, I) ∈ R n .
+For a symmetric tensor A ∈ p R n , the differentiation result ∇ x (Ax ⊗p ) = p · Ax ⊗p−1 can be established.
+
+Inner product. For any tensors A, B ∈ p R n , the inner product between them is naturally defined as
+A, B := i1,i2,...,ip∈[n]
+A i1,i2,...,ip B i1,i2,...,ip .
+
+Tensor norms. Two tensor norms will be used in the paper. For a tensor A ∈ p R n , its Frobenius norm is A F := A, A , and its operator norm A , is defined as max xi =1 A(x 1 , x 2 , . . . , x p ). It is also well-known that for symmetric tensors A, A can be equivalently defined as max x =1 |Ax ⊗p | (see, e.g., [12,13]).
+
+3. Review on SROAwRD. Algorithm 1 is intensively studied in the tensor community, though most papers [14,8,15,16,17,18,12,13,19,20,21,22,7,23,24] focus on the numerical aspects of how to solve the best tensor rank-one approximation (1.2). Regarding theoretical guarantees for the symmetric and orthogonal decomposition, Zhang and Golub [8] first prove that SROAwRD outputs the exact symmetric and orthogonal decomposition if the input tensor is symmetric and orthogonally decomposable:
+Proposition 3.1. [8, Theorem 3.2] Let T ∈ p R n be a symmetric tensor with orthogonal decomposition T = i∈[n] λ i v ⊗p i , where λ i = 0 and {v 1 , v 2 , . . . , v n } forms an orthonormal basis of R n . Let {(λ i ,v i )} i∈[n]
+be the output of Algorithm 1 with input T . Then T = i∈[n]λ iv ⊗p i , and moreover there exists a permutation π of [n] such that for each j ∈ [n], min |λ π(j) −λ j |, |λ π(j) +λ j | = 0,
+min v π(j) −v j , v π(j) +v j = 0.
+The perturbation analysis is recently addressed in [1]:
+Theorem 3.2. [1, Theorem 3.1]
+There exists a positive constant c such that the following holds. Let T :
+= T + E ∈ p R n , where the ground truth tensor T is symmetric with orthogonal decomposition T = i∈[n] λ i v ⊗p i , {v 1 , v 2 , .
+. . , v n } forms an orthonormal basis of R n , λ i = 0 and the perturbation tensor E is symmetric with operator norm ε := E . Assume ε ≤ c · λ min /n 1/(p−1) , where λ min := min i∈[n] |λ i |.
+Let {(λ i ,v i )} i∈[n]
+be the output of Algorithm 1 with input T . Then there exists a permutation π over [n] such that for each j ∈ [n]:
+min |λ π(j) −λ j |, |λ π(j) +λ j | ≤ 2ε, min v π(j) −v j , v π(j) +v j ≤ 20ε/ λ π(j) .
+Theorem 3.2 generalizes Proposition 3.1, and provides perturbation bounds for the SROAwRD method. Specifically, when the operator norm of the perturbation tensor vanishes, i.e. ε = 0, Theorem 3.2 is reduced to Proposition 3.1; when ε is small enough (i.e. ε = O(1/n 1/(p−1) )), the SROAwRD method is able to robustly recover the eigenpairs {(λ i , v i )} i∈[n] of the underlying symmetric and orthogonal decomposable tensor T .
+
+In Theorem 3.2, ε is required to be at most on the order of 1/n 1/(p−1) , which decreases with increasing tensor size. It is interesting to explore whether or not this dimensional dependency is essential:
+
+Open Question 1. Can we provide a better analysis for the SROAwRD method to remove the dimensional dependance on the noise level? Or can we design a concrete example to corroborate the necessity of this dimensional dependency?
+
+The existence of the dimensional dependency, at least for the current proof in Mu et. al. [1], can be briefly explained as follows. At the end of the k-th iteration, we subtract the rank-one tensorλ kv ⊗p k from T k−1 . Since (λ k ,v k ) only approximates the underlying truth, this deflation procedure introduces additional errors into T k . Although [1] has made substantial efforts to reduce the accumulative effect from sequential deflation steps, the perturbation error ε still needs to depend on the iteration number in order to control the perturbation bounds of the eigenvalue and eigenvector, and we tend to believe that the dimensional dependency in Theorem 3.2 is necessary.
+
+In contrast, the SROAwCD method, instead of changing the objective, imposes additional constraints, which force the next eigenvectorv k to be nearly orthogonal to {v 1 ,v 2 , . . . ,v k−1 }. As the SROAwCD method alters the search space rather than the objective in the optimization, there is hope that the requirement on the noise level might be dimension-free. In the next section, we will confirm this intuition.
+
+
+SROAwCD.
+
+In this section, we establish the first perturbation bounds that have been given for the SROAwCD method for tensor SOD. The main result can be stated as follows:
+Theorem 4.1. Let T := T + E ∈ p R n , where T is a symmetric tensor with orthogonal decomposition T = n i=1 λ i v ⊗p i , {v 1 , v 2 , . . . , v n } is an orthonormal basis of R n , λ i = 0 for all i ∈ [n]
+, and E is a symmetric tensor with operator norm ε := E . Assume 0 < θ ≤ 1/(2κ) and ε ≤ θ 2 λ min /12.5, where κ := λ max /λ min ,
+λ min := min i∈[n] |λ i | and λ max := max i∈[n] |λ i |. Let {(λ i ,v i )} i∈[n] be the output of Algorithm 2 for input ( T , θ). Then there exists a permutation π of [n] such that for all j ∈ [n], min |λ π(j) −λ j |, |λ π(j) +λ j | ≤ ε, (4.1) min v π(j) −v j , v π(j) +v j ≤ (6.2 + 4κ)ε/|λ π(j) |. (4.2)
+Theorem 4.1 guarantees that for an appropriately chosen θ, the SROAwCD method can approximately recover {(λ i , v i )} i∈[n] whenever the perturbation error ε is small. A few remarks immediately come to find. First, Theorem 4.1 specifies the choice of the parameter θ, which depends on the ratio of the largest to smallest eigenvalues of T in absolute value. In subsection 4.2, we will see this dependency is necessary through numerical studies. Second, in contrast to the SROAwRD method, Theorem 4.1 does not require the noise level to be dependent on the tensor size. This could be a potential advantage for the SROAwCD method.
+
+The rest of this section is organized as follows. In subsection 4.1, we provide the proof for Theorem 4.1. In subsection 4.2, we present numerical experiments to corroborate Theorem 4.1. In subsection 4.3, we discuss issues related to determining the maximum spectral ratio κ defined in Theorem 4.1.
+
+4.1. Proof of Theorem 4.1. We will prove Theorem 4.1 by induction. For the base case, we need the perturbation result regarding the best rank-one tensor approximation, which is proven in [1] and can be regarded as a generalization of its matrix counterpart [25,10]. In the following, we restate this result [1, Theorem 2.2] with a minor variation:
+Lemma 4.2. Let T := T + E ∈ p R n , where T is a symmetric tensor with orthogonal decomposition T = n i=1 λ i v ⊗p i , {v 1 , v 2 , . . . , v n } is an orthonormal basis of R n , λ i = 0 for all i ∈ [n]
+, and E is a symmetric tensor with operator norm ε := E .
+Let (λ,v) ∈ arg min λ∈R, v =1 T − λv ⊗p F . Then there exist j ∈ [n] such that min |λ j −λ|, |λ j +λ| ≤ ε, and min v j −v , v j +v ≤ 10 ε |λ j | + ε λ j 2 .
+Now we are ready to prove our main Theorem 4.1.
+
+Proof. Without loss of generality, we assume p ≥ 3 is odd, and λ i > 0 for all i ∈ [n] (as we can always flip the signs of the v i s to ensure this). Then problem (1.3) can be equivalently written aŝ
+v k ∈ arg max v∈R n T v ⊗p s.t. v = 1, and | v,v i | ≤ θ ∀ i ∈ [k − 1], (4.3) andλ k = Tv ⊗p k .
+To prove the theorem, it suffices to prove that the following property holds for each k ∈ [n]: there is a permutation π of [n] such that for every j ∈ [k],
+|λ π(j) −λ j | ≤ ε and v π(j) −v j ≤ (6.2 + 4κ)ε λ π(j) . ( * )
+We will prove ( * ) by induction.
+
+For the base case k = 1, Lemma 4.2 implies that there exists a j ∈ [n] satisfying
+|λ 1 − λ j | ≤ ε, and v 1 − v j ≤ 10 ε λ j 1 + ε λ j ≤ 10.2ε λ j ≤ (6.2 + 4κ) ε λ j ,
+where we have used the fact that ε/λ j ≤ ε/λ min ≤ θ 2 /12.5 ≤ 1/50. Next we assume the induction hypothesis ( * ) is true for k ∈ [n − 1], and prove that there exists an l ∈ [n]\ {π(j) : j ∈ [k]} that satisfies
+|λ k+1 − λ l | ≤ ε, and v k+1 − v l ≤ (6.2 + 4κ)ε λ π(l) . (4.4)
+Denotex :=v k+1 andλ :=λ k+1 . Then based on (4.3), one haŝ
+x ∈ arg max v∈R n T v ⊗p s.t. v = 1, | v i , v | ≤ θ ∀i ∈ [k], (4.5) andλ = Tx ⊗p . Since {v i } i∈[n]
+forms an orthonormal basis, we may writex =
+i∈[n] x i v i . Without loss of generality, we renumber λ π(i) , v π(i) i∈[k] to {(λ i , v i )} i∈[k] and renumber {(λ i , v i )} i∈[n]\{π(i)|i∈[k]} to {(λ i , v i )} i∈[n]\[k]
+, respectively, to satisfy
+λ 1 |x 1 | p−2 ≥ λ 2 |x 2 | p−2 ≥ . . . ≥ λ k |x k | p−2 , and (4.6) λ k+1 |x k+1 | p−2 ≥ λ k+2 |x k+2 | p−2 ≥ . . . ≥ λ n |x n | p−2 .
+In the following, we will show that l = k + 1 is indeed the index satisfying (4.4). The idea of the rest of the proof is as follows. We first provide lower and upper bounds forλ = Tx ⊗p , based on which, we are able to show that |λ − λ l | = O(ε) and 1 − | v, v l | = O(ε). However, Theorem 4.1 requires 1 − | v, v l | = O(ε 2 ). To close this gap, we characterize the optimality condition of (4.5), use of which enables us to sharpen the upper bound of 1 − | v, v l |.
+
+We first consider the lower bound forλ by finding a v that is feasible for (4.5).
+For each (i, j) ∈ [n]\[k] × [k], one has | v i ,v j | = | v i ,v j − v π(j) | ≤ v j − v π(j) (4.7) ≤ (6.2 + 4κ)ε λ π(j) ≤ (6.2 + 4κ)θ 2¨λ min 12.5¨λ min = (6.2 + 4κ)θ 12.5 · θ = 6.2 + 4κ 25κ θ < θ,
+where we have used the Cauchy-Schwarz inequality, and the facts π(j) ∈ [k], v i , v π(j) = 0, ε ≤ θ 2 λ min /12.5 and θ ≤ 1/(2κ). Hence, {v i } i∈[n]\[k] are all feasible to problem (4.5) and then we can naturally achieve a lower bound forλ, aŝ
+λ = Tx ⊗p ≥ max i∈[n]\[k] T v ⊗p i ≥ max i∈[n]\[k] λ i − ε ≥ λ k+1 − ε. (4.8)
+Regarding the upper bound forλ, one haŝ
+λ = Tx ⊗p = (T + E)x ⊗p = n i=1 λ i v ⊗p i + E x ⊗p = k i=1 λ i x p i + n i=k+1 λ i x p i + Ex ⊗p ≤ k i=1 λ i |x i | p−2 x 2 i + n i=k+1 λ i |x i | p−2 x 2 i + Ex ⊗p ≤ max{λ 1 |x 1 | p−2 , λ k+1 |x k+1 | p−2 } + ε, (4.9)
+where the last line is due to the assumptions made in (4.6), x = 1 and ε = E .
+
+Combining (4.8) and (4.9), we have
+λ k+1 − ε ≤ max i∈[n]\[k] λ i − ε ≤λ ≤ max{λ 1 |x 1 | p−2 , λ k+1 |x k+1 | p−2 } + ε. (4.10)
+Also note that
+λ 1 |x 1 | p−2 + ε (4.11) ≤ λ 1 |x 1 | + ε = λ 1 | x, v 1 | + ε = λ 1 | x,v π −1 (1) + x, v 1 −v π −1 (1) | + ε ≤ λ 1 | x,v π −1 (1) | + λ 1 v 1 −v π −1 (1) + ε ≤ λ 1 θ + λ 1 (6.2 + 4κ)ε λ 1 + ε ≤ λ 1 2κ + 6.2ε + 4κε + ε ≤ λ min 2 + λ min 12.5 + 7.2ε < λ min − ε ≤ λ k+1 − ε,
+where we have used the facts that θ ≤ 1/(2κ), ε ≤ θ 2 λ min /12.5 ≤ λ min /50, and 4κε ≤ 4 · λ maẍλ min · θ 2¨λ min 12.5 ≤ ¡ 4 · λ max 12.5 · ¡ 4κ 2 ≤ λ min 12.5 .
+
+Therefore, in order to satisfy (4.10), we must have
+max{λ 1 |x 1 | p−2 , λ k+1 |x k+1 | p−2 } = λ k+1 |x k+1 | p−2 , (4.12)
+which simplifies (4.10) to
+λ k+1 − ε ≤ max i∈[n]\[k] λ i − ε ≤λ ≤ λ k+1 |x k+1 | p−2 + ε. (4.13)
+Based on (4.13), we have that
+λ k+1 ≥ max i∈[n]\[k]
+λ i − 2ε, |λ k+1 −λ| ≤ ε, and (4.14)
+|x k+1 | ≥ |x k+1 | p−2 ≥ λ k+1 − 2ε λ k+1 = 1 − 2ε λ k+1 .
+Thus, we have achieved the eigenvalue perturbation bound (4.1) promised in the theorem. Next, we will sharpen the eigenvector perturbation bound by exploiting the optimality conditions for problem (4.5).
+
+The key observation is that, at the pointx, the constraint | v i ,x | ≤ θ is not active. To see this, for any i ∈ [k],
+| v i ,x | (4.15) = | v π(i) ,x + v i − v π(i) ,x | ≤ |x π(i) | + v i − v π(i) ≤ |x π(i) | + (6.2 + 4κ)ε/λ min ≤ 1 − x 2
+k+1 + (6.2 + 4κ)θ 2 /12.5 ≤ 4ε/λ min + (6.2 + 4κ)θ/12.5 · θ ≤ 4θ 2 12.5 + 3.1 12.5 + 2 12.5 · θ < θ,
+
+where the last line is due to (4.14) and the fact that κθ ≤ 1/2 and ε ≤ θ 2 λ min /12.5. Therefore, only the equality constraint is active and will be involved in the optimality conditions at the pointx. Consider the Lagrangian function at the pointx,
+L(x, λ) = Tx ⊗p − pλ 2 x 2 − 1 ,
+where λ ∈ R corresponds to the (scaled) Lagrange multiplier for the equality constraint on the norm ofx, which we have squared. Since the linear independent constraint qualification [26, Section 12.3] can be easily verified, by the first-order optimality conditions (a.k.a. KKT condition), there exists aλ ∈ R such that
+1 p ∇L x,λ = Tx ⊗p−1 −λx = 0.
+Moreover, as x = 1,λ =λ x,x = Tx ⊗p =λ. Thus, we havê
+λx = Tx ⊗p−1 = λ k+1 x p−1 k+1 v k+1 + i =k+1 λ i x p−1 i v i + Ex ⊗p−1 .
+Consider the quantity
+λ k+1 (x − v k+1 ) (4.16) = (λ k+1 −λ)x + (λx − λ k+1 v k+1 ) = (λ k+1 −λ)x + λ k+1 (x p−1 k+1 − 1)v k+1 + i =k+1 λ i x p−1 i v i + Ex ⊗p−1 ≤|λ k+1 −λ| + λ k+1 |x p−1 k+1 − 1| + i =k+1 λ i x p−1 i v i + Ex ⊗p−1 .
+Thanks to the intermediate result (4.14), we have
+|λ k+1 −λ| ≤ ε, Ex ⊗p−1 ≤ ε, and (4.17) λ k+1 |x p−1 k+1 − 1| = λ k+1 1 − |x k+1 | · |x k+1 | p−2 ≤ λ k+1 1 − 1 − 2 ε λ k+1 2 ≤ 4ε. Moreover, for the term i =k+1 λ i x p−1 i v i , we can derive that i =k+1 λ i x p−1 i v i =   i =k+1 λ 2 i x 2p−2 i   1/2 ≤ max λ 1 |x 1 | p−2 , λ k+2 |x k+2 | p−2 i =k+1 x 2 i ≤ 4κε (4.18)
+The last line holds due to (4.6) and for j ∈ {1, k + 2},
+λ j |x j | p−2 i =k+1 x 2 i ≤ λ j 1 − x 2 k+1 · 1 − x 2 k+1 = λ j (1 − x 2 k+1 ) ≤ 4λ j ε λ k+1 ≤ 4κε, (4.19)
+where we have used i∈[n] x 2 i = 1 and (4.14). Therefore, by substituting (4.17) and (4.18) into (4.16), one has
+λ k+1 (x − v k+1 ) ≤ (6 + 4κ)ε,
+which leads to the desired bound x − v k+1 ≤ (6.2 + 4κ)ε/λ k+1 .
+
+By mathematical induction, we complete the proof.
+
+
+Numerical Experiments.
+
+In this subsection, we present three sets of numerical experiments to corroborate our theoretical findings in Theorem 4 regarding the SROAwCD method. We solve the main subproblem (1.3) via the general polynomial solver GloptiPoly 3 [27], which is a global solver based on the Sum-of-Squares (SOS) framework [28,29,30,31,32]. 10.2ε · max j∈ [5] min i∈ [5] v j ± e i Experiment 1. In this experiment, we will synthetically verify the perturbation bounds stated in Theorem 4. We generate nearly symmetric orthogonally decomposable tensor T = T + E ∈ R 5×5×5 in the following manner. The underlying symmetric orthogonally decomposable tensor T is set as the diagonal tensor with all diagonal entries equal to 300, i.e., T = 5 i=1 300 · e ⊗3 i , and the perturbation tensors E are produced by symmetrizing a randomly generated 5 × 5 × 5 tensor whose entries follow standard normal distribution independently. We set θ to be 1/(2κ) = 1/2 (as suggested in Theorem 4.1). 1000 random instances are tested. Figure 1 plots the histogram of perturbations in both eigenvalue and eigenvector. As depicted in Figure  1, both types of perturbations are well controlled by the bounds provided in Theorem 4. Experiment 2. In Theorem 4, the parameter θ is suggested to be set to 1/(2κ). In this experiment, we compare the performance of SROAwCD with θ = 1/(2κ) = 1/2 and θ = 0 based on the criterion
+T − 5 i=1λ iv ⊗3 i F . (4.20)
+The tensors are generated in the same way as in the first experiment. Among all the 1000 random cases, the SROAwCD method with θ = 1/2 consistently outperforms the one with θ = 0. This makes intuitive sense. As (λ k ,v k ) only approximate the underlying truth, setting θ = 0, which forces strict orthogonality, tends to introduce additional errors into the problem. Experiment 3. In Theorem 4, the parameter θ is suggested to be set to 1/(2κ), which depends on κ. In this experiment, we will demonstrate the necessity of this  which deviate greatly from the underlying eigenvalues and eigenvectors of T . Next, we apply the SROAwCD method again with θ = 1/(2κ) = 1/20 and the output is as follows:λ = (1000.00, 100.00, 100.00, 100.00, 100.00) , and v 1 = (1.00, 0.00, 0.00, 0.00, 0.00) v 2 = (0.00, 0.00, 1.00, 0.00, 0.00) v 3 = (0.00, 1.00, 0.00, 0.00, 0.00) v 4 = (0.00, 0.00, 0.00, 0.00, 1.00) v 5 = (0.00, 0.00, 0.00, 1.00, 0.00) , which exactly recovers (up to a permutation) the underlying eigenvalues and eigenvectors of T .
+
+
+4.3.
+
+Determination of the maximum spectral ratio κ. As suggested by Theorem 4.1, to choose a proper θ for the SROAwCD method, we need a rough estimate for κ. This is not much of a problem, especially for applications in statistics and machine learning, due to several reasons. First, in many problems, we know the maximum spectral ratio κ in advance. For example, if we apply independent component analysis [5,6] to the dictionary learning model considered in [33,34], it is known that κ = 1. Moreover, we can always pick the most favorable estimates for κ using cross validation [35, Section 7.10] based on the prediction errors. Furthermore, as a supplement, we can modify Algorithm 2 to allow the algorithm to determine the appropriate θ at each step through adaptive learning. We present the analysis of this modification in the appendix.
+
+
+Conclusion.
+
+In this paper, we are concerned with finding the (approximate) symmetric and orthogonal decomposition of a nearly symmetric and decomposable (SOD) tensor. Two natural incremental rank-one approximation approaches, the SROAwRD and the SROAwCD methods, have been considered. We first reviewed the existing perturbation bounds for the SROAwRD method. Then we established the first perturbation results for the SROAwCD method that have been given, and discussed issues and potential advantages of this approach. Numerical results were also presented to corroborate our theoretical findings.
+
+We hope our discussion can also shed light on the numerical side. In the SROAwRD method, the main computational bottleneck is the tensor best rank-one approximation problem (1.2), to which a large amount of attention from a numerical optimization point of view has been paid and for which many efficient numerical methods (e.g. [14,8,15,16,17,18,12,13,19,20,21,22]) have been successfully proposed. In the SROAwCD method, the main computational concern is problem (1.3), which is similar to but slightly more complicated than problem (1.2) with additional linear inequalities. Though general-purpose polynomial solvers based on the sum-of-squares framework [28,29,30,31,32,27,36] can be utilized (as we did in the subsection 4.2), more efficient and scalable methods (e.g. projected gradient method [26], semidefinite programming relaxations [20,21,23]), specifically tailored to the structure of (1.3), may be anticipated. This is definitely a promising future research direction.
+
+
+Algorithm 3 Adaptive Successive Rank-One Approximation with Constrained Deflation (AdaSROAwCD)
+
+input symmetric tensor T ∈ p R n . 1: initialize θ ← 1/2 and v 0 ← 0 2: for k = 1 to n do 3:
+
+Solve the following optimization problem:
+(λ k ,v k ) ∈ arg min λ∈R,v∈R n T − λv ⊗p F (A.1) s.t. v = 1 | v,v i | ≤ θ, i ∈ [k − 1]
+to obtain (λ k ,v k ).
+
+
+4:
+
+
+5:
+
+while there exists one θ k ← θ 10: end for 11: 
+i ∈ [k − 1] such that | v k ,v i | ≥ min{λ k /1.35λ i ,return {(θ k ,λ k ,v k )} k∈[n] .
+and there exists a permutation π of [n] such that for each j ∈ [n] min |λ π(j) −λ j |, |λ π(j) +λ j | ≤ ε, min v π(j) −v j , v π(j) +v j ≤ (6.2 + 4κ)ε/|λ π(j) |.
+
+Remark 1. The condition in line 5 of Algorithm 3 consists of two components, which are desired properties mainly inspired by the proof of Theorem 4.1. The first desired inequality | v k ,v i | <λ k /1.35λ i would allow us to establish properties similar to (4.12). The second desired inequality | v k ,v i | < θ would help us make use of the optimality condition to sharpen the perturbation bounds for the eigenvectors. The constants chosen in Algorithm 3 and Theorem A.1, mainly for illustrative purposes, might be better optimized.
+
+Proof. Similar to the proof for Theorem 4.1, without loss of generality, we assume p ≥ 3 is odd, and λ i > 0 for all i ∈ [n]. Then problem (A.1) can be equivalently written asv
+k ∈ arg max v∈R n T v ⊗p s.t. v = 1, and | v,v i | ≤ θ ∀ i ∈ [k − 1], (A.2)
+andλ k = Tv ⊗p k . Our proof is by induction. The base case regarding (θ 1 ,λ 1 ,v 1 ) is the same as the base case in the proof of Theorem 4.1.
+
+We now make the induction hypothesis that for some k ∈ [n − 1], {(θ i ,λ i ,v i )} i∈[k] satisfies 1/2 = θ 1 ≥ θ 2 ≥ · · · ≥ θ k > 0.96/2κ, and there exists a permutation π of [n] such that
+|λ π(j) −λ j | ≤ ε, v π(j) −v j ≤ (6.2 + 4κ)ε/λ π(j) , ∀j ∈ [k].
+Then we are left to prove that 0.96/2κ < θ k+1 ≤ θ k , (A. 3) and there exists an l ∈ [n]\ {π(j) : j ∈ [k]} that satisfies
+|λ k+1 − λ l | ≤ ε, and v k+1 − v l ≤ (6.2 + 4κ)ε λ π(l) . (A.4)
+To prove that θ k+1 > 0.96 2κ , we show that whenever θ ∈ ( 0.96 2κ , 1 2κ ], the condition for the while loop in line 5 of Algorithm 3 will always be satisfied, so θ can never be reduced to any value below 0.96 2κ . Consider θ ∈ ( 0.96 2κ , 1 2κ ], and denotê
+x ∈ arg max v∈R n T v ⊗p s.t. v = 1, and | v,v i | ≤ θ ∀ i ∈ [k]
+, (A.5) andλ = Tx ⊗p . As θ ≤ 1/2κ and ε ≤ λ min /70κ 2 ≤ 0.96 2 λmin 4·12.5·κ 2 ≤ θ 2 λ min /12.5, results from Theorem 4.1 and its proof can be directly borrowed. Based on (4.7), we know that for any i ∈ {π(j) | j ∈ [n]\[k]}, v i is feasible to problem (A.5). Then it can be easily verified thatλ
+≥ max i∈{π(j) | j∈[n]\[k]} (T + E)v ⊗p i ≥ λ min − ε. (A.6)
+Moreover, for any i ∈ [k],
+λ i ≤ max v =1 T v ⊗p + max v =1 Ev ⊗p = λ max + ε. (A.7)
+Using (A.6) and (A.7), we obtain that for each i ∈ [k],
+λ 1.35λ i ≥ λ min − ε 1.35(λ max + ε) ≥ λ min − λ min /70κ 2 1.35(λ max + λ min /70κ 2 ) ≥ 69/70 · λ min 1.35 · 71/70 · λ max > 1 2κ ≥ θ (A.8)
+Based on (4.15), we also know that for all i ∈ [k],
+| v i ,x | < θ. (A.9)
+So, the combination of (A.8) and (A.9) leads to
+| v i ,x | < θ = min θ,λ 1.35λ i , ∀i ∈ [k], (A.10)
+which implies thatx satisfies the condition in the while loop. Therefore, as we argued previously, we must have θ k+1 > 0.96 2κ . So θ k+1 is either in ( 0.96 2κ , 1 2κ ] or in ( 1 2κ , 1 2 ]. For the first case, i.e. θ k+1 ∈ ( 0.96 2κ , 1 2κ ], we can directly establish the result by using the argument for the induction hypothesis ( * ) in the proof of Theorem 4.1.
+
+Hence in the following, we only focus on the second case where θ k+1 ∈ ( 1 2κ , 1 2 ]. Denotex = i∈ [n] x i v i :=v k+1 andλ :=λ k+1 . Without loss of generality, we renumber λ π(i) , v π(i i∈[k] to {(λ i , v i )} i∈[k] and renumber {(λ i , v i )} i∈[n]\{π(i)|i∈[k]} to {(λ i , v i )} i∈[n]\[k] , respectively, to satisfy λ 1 |x 1 | p−2 ≥ λ 2 |x 2 | p−2 ≥ . . . ≥ λ k |x k | p−2 , and (A.11) λ k+1 |x k+1 | p−2 ≥ λ k+2 |x k+2 | p−2 ≥ . . . ≥ λ n |x n | p−2 .
+
+In the following, we will show that l = k + 1 is the index satisfying (A.4). Based on (A.2),
+
+x ∈ arg min v∈R n T v ⊗p subject to v = 1, | v i , v | ≤ θ k+1 for any i ∈ [k], (A.12) andλ = Tx ⊗p . We now boundλ from below and above. We first consider the lower bound by finding a v that is feasible for (A.12). For any (i, j) ∈ [n]\[k] × [k], one has
+| v i ,v j | = | v i , v π(j) +v j − v π(j) | = | v i , v π(j) + v i ,v j − v π(j) | = | v i ,v j − v π(j) |
+≤ v j − v π(j) ≤ (6.2 + 4κ)ε/λ π(j) ≤ (6.2 + 4κ)λ min /(70κ 2 λ min ) < 1 2κ ≤ θ k . λ i − ε ≥ λ k+1 − ε. as in (4.9).
+
+Combining (A.13) and (A.14), we have 15) Also note that
+λ k+1 − ε ≤ max i∈[n]\[k] λ i − ε ≤λ ≤ max{λ 1 |x 1 | p−2 , λ k+1 |x k+1 | p−2 } + ε. (A.λ 1 |x 1 | p−2 + ε ≤ λ 1 |x 1 | + ε ≤ λ 1 | x, v 1 | + ε = λ 1 | x,v π −1 (1) + x, v 1 −v π −1 (1) | + ε ≤ λ 1 | x,v π −1 (1) | + λ 1 v 1 −v π −1 (1) + ε ≤ λ 1λ
+1.35λ π −1 (1) + (6.2 + 4κ)λ 1 ε/λ 1 + ε <λ.
+
+Here, we have used ε ≤λ 69 , due to ε ≤ λmin 70 andλ ≥ λ min − ε. Therefore, in order to satisfy (A.15), we must have λ k+1 |x k+1 | p−2 = max{λ 1 |x 1 | p−2 , λ k+1 |x k+1 | p−2 }, (A. 16 λ i − 2ε, |λ k+1 −λ| ≤ ε, and
+|x k+1 | ≥ |x k+1 | p−2 ≥ λ k+1 − 2ε λ k+1 = 1 − 2ε λ k+1 .
+The eigenvector perturbation bound can be sharpened by exploiting the optimality condition of problem (A.12) as what we did in the proof of Theorem 4.1. As explicitly required in the algorithm, the constraint | v i ,x | ≤ θ k is not active for any i ∈ [k] at the pointx. Then by the optimality condition, we again havê λx =Tx ⊗p−1 .
+
+By applying exactly the same argument as in the proof of Theorem 4.1, we can obtain λ k+1 (x − v k+1 ) ≤ (6.2 + 4κ)ε, which leads to x − v k+1 ≤ (6.2 + 4κ)ε/λ k+1 .
+
+By mathematical induction, we have completed the proof.
+
+Fig. 1 .
+1Histograms for the eigenvalue and eigenvector perturbations in the first experiment. The left figure plots the histogram of the (normalized) eigenvalue perturbations. All perturbations in the eigenvalues are upper bounded by 1, which is consistent with Theorem 4. The right figure plots the histogram of the (normalized) eigenvector perturbations. All perturbations in the eigenvectors are upper bounded by 1, which is also consistent with Theorem 4
+
+Fig. 2 .
+2Performance comparison for the SROAwCD method with θ = 1/2 and θ = 0 in the second experiment. As plotted in the left figure, with respect to the criterion (4.20), the SROAwCD method with θ = 1/2 outperforms the one with θ = 0 for all randomly generated cases. The right figure is the boxplot of the differences in (4.20) between the two approaches. dependency. We consider the SOD tensor T = 1000·e ⊗3 1 + 5 i=2 100·e ⊗3 i with E = 0. We first apply the SROAwCD method with θ = 1/2. The output is as follows: λ = (1000.00, 189.95, 189.95, 189.95, 189.95)
+
++
+E x ⊗p ≤ max{λ 1 |x 1 | p−2 , λ k+1 |x k+1 | p−2 } + ε, (A.14)
+
+
+i2,...,ip := j1,j2,...,jp∈[n]
+
+
+Hence, {v i } i∈[n]\[k]are all feasible to problem (A.12) and then we can easily achieve a lower bound forλ, aŝλ = Tx ⊗p ≥ max i∈[n]\[k]T v ⊗p 
+
+i 
+
+≥ max 
+
+i∈[n]\[k] 
+
+
+
+
+) which simplifies (A.15) toλ k+1 − ε ≤ max i∈[n]\[k] λ i − ε ≤λ ≤ λ k+1 |x k+1 | p−2 + ε. (A.17) Hence, λ k+1 ≥ max i∈[n]\[k]
+Acknowledgements.We are grateful to the associate editor Tamara G. Kolda and two anonymous reviewers for their helpful suggestions and comments that substantially improved the paper.Appendix A. Adaptive SROAwCD. In this section, we provide a modification to the SROAwCD method that adaptively learns an appropriate θ at each step based on the information collected so far. The complete algorithm is described in Algorithm 3. Note that we initially set θ as 1/2 (which is the largest value allowed in Theorem 4.1), and gradually reduce it by checking certain conditions., and E is a symmetric tensor with operator norm ε := E . Assume ε ≤ λ min /70κ 2 , where κ := λ max /λ min , λ min := min i∈[n] |λ i | and λ max := max i∈[n] |λ i |. Then Algorithm 3 terminates in a finite number of steps and its output {(θ i ,λ i ,v i )} i∈[n] satisfies:1/2 = θ 1 ≥ θ 2 ≥ · · · ≥ θ n > 0.96/2κ,
+Successive rank-one approximations for nearly orthogonally decomposable symmetric tensors. C Mu, D Hsu, D Goldfarb, 10.1137/15M1010890SIAM J. Matrix Anal. A. 364C. Mu, D. Hsu, and D. Goldfarb, "Successive rank-one approximations for nearly orthogonally decomposable symmetric tensors," SIAM J. Matrix Anal. A., vol. 36, no. 4, pp. 1638-1659, 2015, doi: 10.1137/15M1010890.
+
+Orthogonal tensor decompositions via two-mode higher-order svd (hosvd). M Wang, Y S Song, arXiv:1612.03839arXiv preprintM. Wang and Y. S. Song, "Orthogonal tensor decompositions via two-mode higher-order svd (hosvd)," arXiv preprint arXiv:1612.03839, 2016.
+
+Orthogonal decomposition of symmetric tensors. E Robeva, 10.1137/140989340SIAM J. Matrix Anal. A. 371E. Robeva, "Orthogonal decomposition of symmetric tensors," SIAM J. Matrix Anal. A., vol. 37, no. 1, pp. 86-102, 2016, doi:10.1137/140989340.
+
+Tensor Methods in Statistics. P Mccullagh, Chapman and HallP. McCullagh, Tensor Methods in Statistics. Chapman and Hall, 1987.
+
+Independent component analysis, a new concept?. P Comon, 10.1016/0165-1684(94Signal Processing. 363P. Comon, "Independent component analysis, a new concept?," Signal Processing, vol. 36, no. 3, pp. 287-314, 1994, doi:10.1016/0165-1684(94)90029-9.
+
+Handbook of Blind Source Separation: Independent component analysis and applications. P Comon, C Jutten, Academic pressP. Comon and C. Jutten, Handbook of Blind Source Separation: Independent component anal- ysis and applications. Academic press, 2010.
+
+Tensor decompositions for learning latent variable models. A Anandkumar, R Ge, D Hsu, S M Kakade, M Telgarsky, J. Mach. Learn. Res. 15A. Anandkumar, R. Ge, D. Hsu, S. M. Kakade, and M. Telgarsky, "Tensor decompositions for learning latent variable models," J. Mach. Learn. Res., vol. 15, pp. 2773-2832, 2014.
+
+Rank-one approximation to high order tensors. T Zhang, G Golub, 10.1137/S0895479801387413SIAM J. Matrix Anal. A. 232T. Zhang and G. Golub, "Rank-one approximation to high order tensors," SIAM J. Matrix Anal. A., vol. 23, no. 2, pp. 534-550, 2001, doi: 10.1137/S0895479801387413.
+
+Orthogonal tensor decompositions. T G Kolda, 10.1137/S0895479800368354SIAM J. Matrix Anal. A. 231T. G. Kolda, "Orthogonal tensor decompositions," SIAM J. Matrix Anal. A., vol. 23, no. 1, pp. 243-255, 2001, doi:10.1137/S0895479800368354.
+
+The rotation of eigenvectors by a perturbation. III. C Davis, W Kahan, 10.1137/0707001SIAM J. Numer. Anal. 71C. Davis and W. Kahan, "The rotation of eigenvectors by a perturbation. III," SIAM J. Numer. Anal., vol. 7, no. 1, pp. 1-46, 1970, doi:10.1137/0707001.
+
+Singular values and eigenvalues of tensors: a variational approach. L.-H Lim, Proceedings of the IEEE International Workshop on Computational Advances in Multi-Sensor Adaptive Processing. the IEEE International Workshop on Computational Advances in Multi-Sensor Adaptive Processing1L.-H. Lim, "Singular values and eigenvalues of tensors: a variational approach," Proceedings of the IEEE International Workshop on Computational Advances in Multi-Sensor Adaptive Processing, vol. 1, pp. 129-132, 2005.
+
+Maximum block improvement and polynomial optimization. B Chen, S He, Z Li, S Zhang, 10.1137/110834524SIAM J. OPTIM. 221B. Chen, S. He, Z. Li, and S. Zhang, "Maximum block improvement and polynomial optimiza- tion," SIAM J. OPTIM., vol. 22, no. 1, pp. 87-107, 2012, doi: 10.1137/110834524.
+
+The best rank-1 approximation of a symmetric tensor and related spherical optimization problems. X Zhang, C Ling, L Qi, 10.1137/110835335SIAM J. Matrix Anal. A. 333X. Zhang, C. Ling, and L. Qi, "The best rank-1 approximation of a symmetric tensor and related spherical optimization problems," SIAM J. Matrix Anal. A., vol. 33, no. 3, pp. 806-821, 2012, doi: 10.1137/110835335.
+
+Rn) approximation of higher-order tensors. L De Lathauwer, B De Moor, J Vandewalle, 10.1137/S0895479898346995SIAM J. Matrix Anal. A. 212On the best rank-1 and rank-(R 1L. De Lathauwer, B. De Moor, and J. Vandewalle, "On the best rank-1 and rank- (R 1 , R 2 , . . . , Rn) approximation of higher-order tensors," SIAM J. Matrix Anal. A., vol. 21, no. 4, pp. 1324-1342, 2000, doi: 10.1137/S0895479898346995.
+
+On the best rank-1 approximation of higher-order supersymmetric tensors. E Kofidis, P A Regalia, 10.1137/S0895479801387413SIAM J. Matrix Anal. A. 233E. Kofidis and P. A. Regalia, "On the best rank-1 approximation of higher-order super- symmetric tensors," SIAM J. Matrix Anal. A., vol. 23, no. 3, pp. 863-884, 2002, doi: 10.1137/S0895479801387413.
+
+On the successive supersymmetric rank-1 decomposition of higher-order supersymmetric tensors. Y Wang, L Qi, 10.1002/nla.537Numer. Linear Algebra Appl. 146Y. Wang and L. Qi, "On the successive supersymmetric rank-1 decomposition of higher-order supersymmetric tensors," Numer. Linear Algebra Appl., vol. 14, no. 6, pp. 503-519, 2007, doi: 10.1002/nla.537.
+
+Shifted power method for computing tensor eigenpairs. T G Kolda, J R Mayo, 10.1137/100801482SIAM J. Matrix Anal. A. 324T. G. Kolda and J. R. Mayo, "Shifted power method for computing tensor eigenpairs," SIAM J. Matrix Anal. A., vol. 32, no. 4, pp. 1095-1124, 2011, doi: 10.1137/100801482.
+
+An unconstrained optimization approach for finding real eigenvalues of even order symmetric tensors. L Han, 10.3934/naco.2013.3.583Numer. Algebra Contr. Optim. 33L. Han, "An unconstrained optimization approach for finding real eigenvalues of even order symmetric tensors," Numer. Algebra Contr. Optim., vol. 3, no. 3, pp. 583-599, 2013, doi: 10.3934/naco.2013.3.583.
+
+A sequential subspace projection method for extreme Z-eigenvalues of supersymmetric tensors. C Hao, C Cui, Y Dai, 10.1002/nla.1949Numer. Linear Algebra Appl. C. Hao, C. Cui, and Y. Dai, "A sequential subspace projection method for extreme Z-eigenvalues of supersymmetric tensors," Numer. Linear Algebra Appl., 2014, doi: 10.1002/nla.1949.
+
+Tensor principal component analysis via convex optimization. B Jiang, S Ma, S Zhang, 10.1007/s10107-014-0774-0Math. Prog. B. Jiang, S. Ma, and S. Zhang, "Tensor principal component analysis via convex optimization," Math. Prog., pp. 1-35, 2014, doi: 10.1007/s10107-014-0774-0.
+
+Semidefinite relaxations for best rank-1 tensor approximations. J Nie, L Wang, 10.1137/130935112SIAM J. Matrix Anal. A. 353J. Nie and L. Wang, "Semidefinite relaxations for best rank-1 tensor approximations," SIAM J. Matrix Anal. A., vol. 35, no. 3, pp. 1155-1179, 2014, doi: 10.1137/130935112.
+
+Properties and methods for finding the best rank-one approximation to higher-order tensors. Y Yang, Q Yang, L Qi, 10.1007/s10589-013-9617-9Comput. Optim. Appl. 581Y. Yang, Q. Yang, and L. Qi, "Properties and methods for finding the best rank-one approxi- mation to higher-order tensors," Comput. Optim. Appl., vol. 58, no. 1, pp. 105-132, 2014, doi: 10.1007/s10589-013-9617-9.
+
+A note on semidefinite programming relaxations for polynomial optimization over a single sphere. J Hu, B Jiang, X Liu, Z Wen, 10.1007/s11425-016-0301-5Sci. China Math. 598J. Hu, B. Jiang, X. Liu, and Z. Wen, "A note on semidefinite programming relaxations for polynomial optimization over a single sphere," Sci. China Math., vol. 59, no. 8, pp. 1543- 1560, 2016, doi: 10.1007/s11425-016-0301-5.
+
+A finite algorithm to compute rank-1 tensor approximations. A P Silva, P Comon, A L F De Almeida, IEEE Signal Processing Letters. 237A. P. da Silva, P. Comon, and A. L. F. de Almeida, "A finite algorithm to compute rank-1 tensor approximations," IEEE Signal Processing Letters, vol. 23, no. 7, pp. 959-963, 2016.
+
+Das asymptotische verteilungsgesetz der eigenwerte linearer partieller differentialgleichungen (mit einer anwendung auf die theorie der hohlraumstrahlung). H , 10.1007/BF01456804Math. Annal. 714H. Weyl, "Das asymptotische verteilungsgesetz der eigenwerte linearer partieller differential- gleichungen (mit einer anwendung auf die theorie der hohlraumstrahlung)," Math. Annal., vol. 71, no. 4, pp. 441-479, 1912, doi: 10.1007/BF01456804.
+
+. S J Wright, J , Numerical optimization. 2SpringerS. J. Wright and J. Nocedal, Numerical optimization, vol. 2. Springer New York, 1999.
+
+Gloptipoly 3: moments, optimization and semidefinite programming. D Henrion, J B Lasserre, J Löfberg, 10.1080/10556780802699201Optim. Method Softw. 244-5D. Henrion, J. B. Lasserre, and J. Löfberg, "Gloptipoly 3: moments, optimization and semidef- inite programming," Optim. Method Softw., vol. 24, no. 4-5, pp. 761-779, 2009, doi: 10.1080/10556780802699201.
+
+An approach to obtaining global extremums in polynomial mathematical programming problems. N Z Shor, Cybernetics. 235N. Z. Shor, "An approach to obtaining global extremums in polynomial mathematical program- ming problems," Cybernetics, vol. 23, no. 5, pp. 695-700, 1987.
+
+Squared functional systems and optimization problems. Y Nesterov, Springerin High performance optimizationY. Nesterov, "Squared functional systems and optimization problems," in High performance optimization, pp. 405-440, Springer, 2000.
+
+Structured semidefinite programs and semialgebraic geometry methods in robustness and optimization. P A Parrilo, California Institute of TechnologyPhD thesisP. A. Parrilo, Structured semidefinite programs and semialgebraic geometry methods in robust- ness and optimization. PhD thesis, California Institute of Technology, 2000.
+
+Global optimization with polynomials and the problem of moments. J B Lasserre, 10.1137/S1052623400366802SIAM J. OPTIM. 113J. B. Lasserre, "Global optimization with polynomials and the problem of moments," SIAM J. OPTIM., vol. 11, no. 3, pp. 796-817, 2001, doi: 10.1137/S1052623400366802.
+
+Semidefinite programming relaxations for semialgebraic problems. P A Parrilo, 10.1007/s10107-003-0387-5Math. Prog. 962P. A. Parrilo, "Semidefinite programming relaxations for semialgebraic problems," Math. Prog., vol. 96, no. 2, pp. 293-320, 2003, doi: 10.1007/s10107-003-0387-5.
+
+Exact recovery of sparsely-used dictionaries. D A Spielman, H Wang, J Wright, COLT. D. A. Spielman, H. Wang, and J. Wright, "Exact recovery of sparsely-used dictionaries.," in COLT, 2012.
+
+Complete dictionary recovery over the sphere. J Sun, Q Qu, J Wright, Sampling Theory and Applications (SampTA), 2015 International Conference on. IEEEJ. Sun, Q. Qu, and J. Wright, "Complete dictionary recovery over the sphere," in Sampling The- ory and Applications (SampTA), 2015 International Conference on, pp. 407-410, IEEE, 2015.
+
+J Friedman, T Hastie, R Tibshirani, The elements of statistical learning. BerlinSpringer series in statistics Springer1J. Friedman, T. Hastie, and R. Tibshirani, The elements of statistical learning, vol. 1. Springer series in statistics Springer, Berlin, 2001.
+
+A Papachristodoulou, J Anderson, G Valmorbida, S Prajna, P Seiler, P A Parrilo, SOSTOOLS: Sum of squares optimization toolbox for MATLAB. A. Papachristodoulou, J. Anderson, G. Valmorbida, S. Prajna, P. Seiler, and P. A. Parrilo, SOSTOOLS: Sum of squares optimization toolbox for MATLAB. http://arxiv.org/abs/ 1310.4716, 2013.

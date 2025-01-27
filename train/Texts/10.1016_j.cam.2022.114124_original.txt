@@ -1,0 +1,405 @@
+
+Symmetries of discrete curves and point clouds via trigonometric interpolation
+August 11, 2021
+
+Michal Bizzarri 
+Miroslav Lávička 
+Jan Vršek 
+Symmetries of discrete curves and point clouds via trigonometric interpolation
+August 11, 2021
+We formulate a simple algorithm for computing global exact symmetries of closed discrete curves in plane. The method is based on a suitable trigonometric interpolation of vertices of the given polyline and consequent computation of the symmetry group of the obtained trigonometric curve. The algorithm exploits the fact that the introduced unique assigning of the trigonometric curve to each closed discrete curve commutes with isometries. For understandable reasons, an essential part of the paper is devoted to determining rotational and axial symmetries of trigonometric curves. We also show that the formulated approach can be easily applied on nonorganized clouds of points. A functionality of the designed detection method is presented on several examples.
+
+Introduction and motivation
+
+Symmetries have always been an indisputable phenomenon in the real world, considered often as an aspect of perfection, balance and harmony. Being symmetric is a potentially very useful feature which many real shapes exhibit, and thus symmetries in the natural world have significantly inspired people to incorporate them when producing tools, buildings or artwork. However, investigation of symmetries has also become a powerful and effective tool of theoretical research in various disciplines. For instance, the notion of symmetry is a basic concept in Felix Klein's Erlangen Program devoted to the characterization of classes of geometry based on the underlying symmetry groups, see [18]. Nowadays, symmetry detection belongs among standard problems in geometry, computer graphics, computer vision, geometric modelling, pattern recognition etc. It is very important for many applications to know how to detect symmetries in geometrical models and a number of subsequent algorithms is based on this.
+
+Let us recall that an object possesses a symmetry if there is a geometric transformation that maps this object onto itself, i.e., the object is invariant under this transformation. Symmetry is global, when it concerns the whole object or local, when only part of the object has this property. Symmetry can also be defined according to the type of transformation used (reflectional, rotational, central, . . . ). Symmetry can be exact (strong) or approximate (weak) with a given tolerance. Especially in many applications the considered geometric shapes are only approximate models of real objects (described often in a floating point representation) and therefore the symmetries are not perfect but only approximate. To develop symmetry detection methods, able to work with artificial as well as real-life data is a challenge, regardless whether the research is just theoretical or it concentrates on a certain application area.
+
+In this paper we will focus on global exact symmetries of investigated objects, in particular of planar curves. This research area has recently (or relatively recently) experienced a renaissance in geometric modelling and related disciplines and we can find many papers focused on the detection and computation of symmetries or equivalences of curves given implicitly or by their (most often) rational parameterization. We recall e.g. [12,19], or recent series of papers [2,3,4,5]. In [15], the authors present a method more general than the previous ones as they study general affine and projective equivalences in an arbitrary space dimension. The problem of deterministically computing the symmetries of a given planar algebraic curve, implicitly defined, and the problem of deterministically checking whether or not two implicitly given, planar algebraic curves are similar, i.e., equal up to a similarity transformation, was investigated in [6]. Projective equivalence of special algebraic varieties, including projective (and other) equivalences of rational curves were studied and presented in [11]. A simple algorithm for an approximate reconstruction of an inexact planar curve which is assumed to be a perturbation of some unknown planar curve with symmetry was formulated in [10]. Exact and approximate similarities of non-necessarily rational planar, parameterized curves, using centers of gravity and inertia tensors were studied in [8].
+
+Another problem is detection of symmetries of objects in 2D or 3D which are represented discretely as sets of points. So the goal is to find the symmetry transformation (if any) under which a certain point set is (exactly or approximately) mapped onto itself. This problem is addressed mainly by computer scientists as they typically process set of points or meshes. It is interesting that some approaches suggest to compute first an implicit equation associated to the given set and then to apply mathematical methods formulated for algebraic curves and surfaces, see e.g. [22], [23]. We recall once more that methods for detecting symmetries of point sets and objects have been widely studied in computer graphics, computer vision and pattern recognition. For the sake of brevity we recall at least some algorithms for detecting exact global symmetries from this point of view, see [24,9,1]. Of course, much more papers are devoted to approximate symmetries as the mentioned scientific disciplines work mainly with real-world, i.e., non-perfect, data.
+
+In this paper, we continue with our previous research on symmetries of geometric shapes form the mathematical point of view, i.e., we are mainly interested in objects described by equations. On the other hand, we must admit that motivation for our approach originated in computer graphics. We have noticed that the iterative process of Laplacian smoothing of polygonal mesh used for removing rough features of input shapes preserves symmetries of the original non-smoothed object. And this is only a small step to signal processing, discrete Fourier transform and thus also to trigonometric curves. We show that trigonometric interpolation makes perfect sense when one wants to determine exact global symmetries of closed discrete curves, as the symmetries of trigonometric curves can be easily and directly determined from their trigonometric parameterization without any need to switch to their implicit or rational description. A special role is played by the so called higher cycloid curves considered as generalizations of standard cycloids.
+
+The structure of the paper is the following. Section 2 provides some general results, including some background on isometries and symmetries, trigonometric curves and trigonometric interpolation, to be used later in the paper. Symmetry computation of trigonometric curves is addressed in Section 3, first for rotations including central symmetries, then for the axial symmetries. The next Section 4 is devoted to the application on discrete curves in plane. By unique assigning to each discrete curve a certain trigonometric parameterization we transform the problem of computing symmetries of discrete curves to the previous case. In Section 5 we show that the formulated approach can be immediately used also for unorganized clouds of points. Our conclusions and some lines for future research are presented in Section 6.
+
+
+Preliminaries
+
+
+Isometries and symmetries
+
+An isometry of the plane R 2 is a mapping X R 2 3 R 2 which preserves distances. It can be always written in the form
+x U 3 A ¡ x C b;(1)
+where A P O@PA is an orthogonal matrix and b P R 2 . The group of isometries in R 2 will be denoted by sso @R 2 A. The isometries preserving also the orientation of the plane are called direct isometries and it holds det@AA a I in this case. For det@AA a I we speak about indirect isometries.
+
+Identity, translation and rotation are examples of direct isometries, whereas reflection (i.e., axial symmetry) belongs among indirect isometries. Two point sets X; X H & R 2 are isometric (or congruent ) if there exists P sso @R 2 A such that X H a @XA. Furthermore, X is said to possess a symmetry if there exists a non-identical isometry such that X a @XA. The group of symmetries of X will be denoted by ym @XA. The subgroup of orientation-preserving (i.e., direct) symmetries is called the proper symmetry group.
+
+It is well known that any finite subgroup of sso @R 2 A falls into the following classes: cyclic groups Hence, to determine such a symmetry group it is sufficient to find:
+
+1. the center of symmetry (barycenter), 2. the rotation angle 2 m (where m a I corresponds to the object without any rotational symmetry), 3. the direction of one symmetry axis (if the m-gon is non-oriented, i.e., the symmetry group D m ).
+
+The strategy used in the next sections for determining symmetries is based on application of a suitable operator © which commutes with isometries. Then the unique assigning of some object to a given geometric shape X via © enables to study symmetries of ©@XA instead of symmetries of X. This is formalized in the following lemma. Of course, it is essential to find © wisely in order to simplify the situation, i.e., ym @©@XAA must be easier to determine than direct computing ym @XA.
+
+Lemma 1. Let be given & @R 2 A, where @R 2 A is the set of all subsets of R 2 , and © X 3 @R 2 A such that for all X P and for all P sso @R 2 A it holds ©@@XAA a @©@XAA;
+
+(2) then ym @XA & ym @©@XAA.
+
+Proof. Let P ym @XA, then @©@XAA a ©@@XAA a ©@XA. Example 2. We recall [6] where is a set of real planar algebraic curves and the mapping © is the Laplace operator ¡. As known this operator commutes with isometries. This property was used in the referred paper for finding symmetries of an algebraic curve, say f, via the chain of symmetry groups ym @fA & ym @¡fA & ym @¡ 2 fA & ¡ ¡ ¡ & ym @¡`fA a ym@hA;
+
+where ym @hA is finite and easier to determine.
+
+Example 3. In this paper, we are interested in discrete curves, see Section 4. So we mention also a discrete analogy of ¡. Consider a closed planar polyline X formed by a sequence of ordered points v 0 ; v 1 ; : : : ; v n a v 0 connected with line segments.
+
+A discrete Laplacian operator is a map associating to each v i the vector  
+L@v i A a v i I P @v i 1 C v i+1 A;(4)
+Next, a smoothing operator is defined as S a I L; (6) where P @H; IA, i.e., each vertex v i is replaced by the affine combination @I Av i C 2 @v i 1 Cv i+1 A.
+
+The smoothing operator commutes with the affine (and thus also Euclidean) transformations and thus we arrive to the conclusion that it holds ym @XA & ym @S@XAA, cf. Fig. 1.
+
+
+Remark 4.
+
+In fact, the content of Example 3 was our first step to the topic of this paper. We have noticed that the procedure of smoothing used in computer graphics for removing rough features of a given shape exhibits the property that it preserves symmetries of the original non-smoothed version. And from the Laplacian smoothing and its analysis is a short way to signal processing and discrete Fourier transform and thus to trigonometric curves, see [14] and the following sections. 
+
+
+Trigonometric curves
+
+By a trigonometric curve in R 2 we understand a real curve possessing a parameterization in the form
+p@tA a N k=0 ¢ a k os@ktA C b k sin@ktA £ a a 0 C N k=1 ¢ a k os@ktA C b k sin@ktA £ a a 0 C N k=1 p k @tA; (7)
+where a k ; b k P R 2 and at least one of a N ; b N is non-zero, i.e., the coordinates are given by trigonometric polynomials of degree at most N (truncated Fourier series). In short we will call N the trigonometric degree of p@tA. If the gd of all k P fH; : : : ; Ng for which a k T a H or b k T a H is one then p@tA is called primitive (otherwise it can be reparameterized to obtain a primitive trigonometric curve). Notice that p k @tA, where t P H; P, is a parameterization of a k-times traced ellipse. It can be shown that (7) parameterizes an algebraic irreducible curve of degree at most 2N and thus one can apply a suitable tool from algebraic geometry to get useful information about these shapes. For more details about properties of trigonometric curves see e.g. [25,16,20]. Some examples of trigonometric curves are shown in Fig. 2.
+
+We recall that special instances of trigonometric curves also appear in the literature under the name higher cycloid curves or cycloids of Nth stage, see e.g. [25]. They belong among kinematic curves generated by the trace of a fixed point on a circle that rolls without slipping around another circle that rolls without slipping around further circle etc. (i.e., they are generalizations of well knowns hypo-/epicycloids). The condition on (7) being a higher cycloid curve has the form @b k1 ; b k2 A a k @ a k2 ; a k1 A; where k P f I; CIg; (8) i.e., considered a k ; b k as vectors in R 2 then they are perpendicular. Thus for p k we arrive at p k a @a k1 ; a k2 A os@ktA C k @ a k2 ; a k1 A sin@ktA:
+
+For the sake of simplicity, we naturally identify R 2 with C and then (9) can be rewritten as p k a @a k1 os@ktA k a k2 sin@ktA; a k2 os@ktAC k a k1 sin@ktAA a @a k1 Ca k2 iA¡os@ k ktACi sin@ k ktA:
+
+When setting os@ k ktACi sin@ k ktA a e kkti and a k1 Ca k2 i a k e ki we obtain the parameterization of the higher cycloid curve in the form p@tA a a 0 C N k=1 k e (kkt+ k)i ; (11) where k P R !0 are the radii of the circles, k P H; PA are the "phase shifts" and k P f I;CIg determine the orientation of the parameterization p k , Wunderlich discussed a lot of geometric properties of higher cycloids, e.g., he proved the generalization of Euler's theorem: Every higher cycloid of Nth stage can be generated in N different ways by rolling of two higher cycloids of stage N I. Wunderlich also used higher cycloids for curve approximation of planar curves, see [17]. Some examples of higher cycloid curves are shown in Fig. 2 (the last two instances).
+
+
+Periodic data and trigonometric interpolation
+
+For later use we shortly recall the trigonometric interpolation problem as a very useful method for periodic data processing. For the sake of brevity we do not go into details and mention only the computational part of this problem -the readers more interested in this topic are kindly referred e.g. to [13,26,21]. The connection to the determination of the symmetries of discrete curves will be discussed in Section 4.
+
+Let be given a set of n ordered data @t j ; x j A that is periodic. In addition, we assume that ft j g are rescaled such that they lie in the interval H; PA, i.e., we have H t 0 < t 1 < : : : < t n 1 < P: (12) Our goal is to construct a trigonometric interpolation of these data, i.e., to find an interpolant in the form
+p@tA a N k=0 ¢ a k os@ktA C b k sin@ktA £ a a 0 C N k=1 ¢ a k os@ktA C b k sin@ktA £ ;(13)
+where a k ; b k P R, going through @t j ; x j A. In other words it is necessary to determine PN C I real coefficients from n input points. The existence of solution is guaranteed by the condition n PN C I. Specially, for n a PN C I the interpolant is determined uniquely. If we have even number of input data, say n a PN, we arrive at one one-parametric solution. Then an additional requirement that the term sin@NtA vanishes is often considered, which also results in the unique solution. The interpolation trigonometric polynomial has in this separate case the form p@tA a a 0 C N 1 k=1 ¢ a k os@ktA C b k sin@ktA £ C a N os@NxA:
+
+For non-uniformly spaced data @t j ; x j A one can just solve the associated system of linear equations.
+
+However when the nodes are uniformly spaced, i.e., t j a j P n ; j a H; : : : ; n I: (15) we obtain for odd number of input data n a PN C I the closed-form expressions a 0 a n 1 j=0 x j n ; a k a P n n 1 j=0
+
+x j os@kt j A; k a I; : : : ; N; b k a P n n 1 j=0
+
+x j sin@kt j A; k a H; I; : : : ; N:
+
+The coefficients a k ; b k are called discrete Fourier coefficients.
+
+For even number of input data n a PN and assuming that the term sin@NtA vanishes, the coefficients are computed as a 0 a n 1 j=0 x j n ; a N a n 1 j=0 x j os@Nt j A n ; a k a P x j sin@kt j A; k a H; I; : : : ; N:
+
+
+Symmetries of trigonometric curves
+
+First we would like to emphasize that any trigonometric curve C is algebraic and thus it has a finite group of symmetries unless it is a circle or a line. In addition, these curves are also rational which suggests to apply for detecting their equivalences (including symmetries) approaches formulated for general rational curves. In this context we recall that special properties of rational parameterizations of trigonometric curves were exploited e.g. in [7] for formulating a computational method for determining affine equivalences of trigonometric curves. As our plan leads to a different goal (symmetries of discrete curves via trigonometric interpolation) we formulate a simple algorithm for determining symmetries of trigonometric curves directly from their trigonometric parameterizations.
+
+Let us recall that there are infinitely many trigonometric parameterizations of the curve C, when one exists. However Theorem 4.6 from [16] says that these parameterizations are 'essentially' the same. For subsequent use we recall this theorem; for its proof the readers are kindly referred to the original source.
+
+Theorem 5. A trigonometric parameterization of a curve is unique up to a linear parameter change.
+
+If P sso @R 2 A is a symmetry of a curve with trigonometric parameterization p@tA then by Theorem 5 there exists a linear reparameterization t U 3 t C , ; P R, such that @p@tAA a p@t C A:
+
+Corollaries of this observation will allow us to determine the group of symmetries of any trigonometric curve easily. Proof. If c a o is the origin, then the rotation is a linear map an thus @ p k @tAA a @p k @tAA. In particular, (18) implies that @a 0 A a a 0 and thus a 0 a o. The statement with general center is an immediate consequence.
+
+In the same way we can prove an analogous lemma dealing with axial symmetries.
+
+Lemma 7. Let a trigonometric curve parameterized by p@tA possesses an axial symmetry with axis L. Then a 0 P L.
+
+For the sake of simplicity we will assume in what follows that a 0 a o and thus in order to determine the symmetries of the curve it is enough to find the rotation angle and/or the direction of the axis. Let us start with the rotational symmetries.  Proof. By (18) we have 2 m @p@tAA a p@t C A. Since 2 m is a linear orientation preserving mapping then must equal to I. Applying the rotation m times we arrive at the original curve, i.e., p@tA a p@t C mA. As p@tA is P-periodic we can conclude that m a Pd. Remark 9. In the case m a P, the curve is centrally symmetric. If the center is at the point o then Lemma 8 says that p@tA a p@t C A. Moreover, this identity must hold for every p k @tA a a k os@ktA C b k sin@ktA which implies p k @tA a H for all even k. A particular example of a centrally symmetric trigonometric curve is shown in Fig. 2 (second from the left).
+
+Since a general ellipse does not possess an m-fold rotational symmetry for m > P, the requirement for the existence of such a symmetry of the whole curve p@tA forces each ellipse p k @tA to become a circle. In this case it is possible to write p@tA (centered at o) in the form p@tA a N k=1 k e (kkt+ k)i ; (20) see (11).
+
+By Lemma 8 the curve parameterized by p@tA has an m-fold rotational symmetry if and only if e 2i m ¡ p k @tA a p k t C Pd m for all k: (21) Combining (20) with (21) we arrive at k e 2i m ¡ e (kkt+ k)i a k e (kk(t+ 2d m )+ k)i (22) which yields P m @I k ¡ k ¡ dA H mod P: (23) This forces some p k 's to disappear. In particular the only non-zero frequencies occur when k ¡ k ¡ d I is divisible by m. Let us formulate this as a lemma.  (20), where the only non-zero terms k are those fulfilling the condition k ¡ k ¡ d a j ¡ m C I for some j P Z.
+
+Remark 11. We recall that (20) are higher cycloid curves, cf. Section 2.2. They are nonsymmetric in general, and Lemma 10 is a condition for their rotational symmetry.
+
+Based on Lemma 10 we define @m; dA-sequence # m;d X N 3 @f I; IgA associating f¦Ig to k if m divides ¦kd I and Y otherwise. We can observe that the following properties hold for all k P N:
+
+• # m;d @kA a Y whenever gd@m; dA T a I (in particular # m;0 @kA a Y), • # m;d+m @kA a # m;d @kA, • # m; d @kA a # m;d @kA, • # m;d @kA a # m;d @k C mA. Especially for m a I; P we arrive at # 1;d @kA a f¦Ig, # 2;1 @PkA a Y and # 2;1 @Pk C IA a f¦Ig. Let be given two sequences ; X N 3 @f I; IgA. We define if and only if for all k P N it holds @kA @kA: (24) Next, we assign to given parameterization (20) a sequence by the formula p @kA a V X f k g if k T a H;
+Y otherwise:(25)
+The parameterized curve possesses an m-fold rotational symmetry if and only if there exists d P Z such that p # m;d . Among these sequences we are looking for the one with the maximal m.
+
+Such sequence is called the maximal @m; dA-sequence associated to p@tA. Let us emphasize that if two trigonometric parameterizations are related by a reparameterization q@tA a p@¦t C A then q a ¦ p . Remark 12. Both considered types of sequences # m;d and p are infinite. Especially, # m;d is m-periodic whose elements repeat over and over. For the sake of simplicity we will write it down by just stating the period, i.e., the listing will end with the element # m;d @mA. As concerns the sequence p then the last non-zero element is p @NA, where N is the trigonometric degree of the curve, and all the following elements are Y. Hence our convention is that its listing will end with the element p @NA.  Fig. 3. Notice that since # 7;i a # 7;7 i for i a I; P; Q, the curves with sequence # 7;i are related to those with sequence # 7;7 i by the reparameterization t U 3 t and thus they describe the same curves.
+
+
+Remark 14.
+
+We emphasize the importance of finding the maximal @m; dA-sequence associated to the given trigonometric curve. For instance, if the sequence is of the form p a @fIg; Y; Y; Y; f IgA; then it holds p # 3;1 a @fIg; f Ig;Y; : : :A. However, the maximal sequence which is to be found is # 6;1 a @fIg; Y; Y; Y; f Ig; Y; : : :A and hence the curve possesses rotational symmetries of 6-gon. Now let us move to reflections. We can formulate a lemma analogous to Lemma 8.
+
+Lemma 15. Let ! L X R 2 3 R 2 be a reflection across a line L. Then it is a symmetry of p@tA iff there exists a constant t 0 such that ! L @p@t 0 C tAA a p@t 0 tA: (26) By Lemma 7 we already know one point on the axis L. Hence it remains to determine its direction, or equivalently we need to find the point p@t 0 A. Assume first that t 0 a H and the axis L is identical to the x-axis, then by Lemma 15 we can write ! L @p k @tAA a p k @ tA for all k:
+
+Since p k @tA a a k os@ktA C b k sin@ktA and ! L X x; y U 3 x; y we arrive at the conditions a k a @a k1 ; HA and b k a @H; b k2 A. Geometrically, this says that all the ellipses p k @tA are equally aligned with respect to their axes and in addition they are coherently parameterized, which means that Remark 17. Recall that the Rytz axis construction is an elementary method from descriptive geometry that can be used to find the axes and the vertices of an ellipse (in our case p k ) starting from its two conjugated half-diameters (in our case determined by a k ; b k ). Based on this construction the parameter value corresponding to the vertex is computed via the formula t k;0 a I Pk rot
+a k ¡ a k b k ¡ b k Pa k ¡ b k :(28)
+The remaining vertices of p k @tA are obtained for the parameter values ft k;0 C 2k jg, j a I; P; Q. If there exists non-empty intersection of these sets for all non-zero p k 's then this value is the sought t 0 .
+
+Example 18. Consider a trigonometric curve given by the following parameterization p@tA a sin@tA C P sin@PtA C os@tA; P sin@tA P os@tA os@PtA:
+
+It is a sum of two ellipses p 1 @tA a I; P os@tA C I; P sin@tA nd p 2 @tA a H; I os@PtA C P; H sin@PtA: Of course, when an ellipse becomes a circle then any line through the center is its axis and we have infinitely many candidates for the vertex. Hence if the parameterization p@tA consists of some circles and at least one ellipse then it is most reasonable to ignore the circles, find the tentative axis and the parameter t 0 for this simplified parameterization and finally test whether the found symmetry is the symmetry of the original curve or not.
+
+The above discussed simplification does not help when all the p k 's are circles. In this case we must determine the parameter values t 0 such that all p k @t 0 A are linearly dependent. Motivated by the notion from astronomy, we will call this straight-line configuration of three or more points a syzygy, see Fig. 5.
+p@t 1 0 A p 1 @tA p 2 @tA C p 1 @t 1 0 A o p@tA p@t 1 0 A p@t 2 0 A p@t 3 0 A p 1 @tA p 2 @tA C p 1 @t 1 0 A p 2 @tA C p 1 @t 2 0 A p 2 @tA C p 1 @t 3 0 A o p@tA
+Consider the simplest example p@tA a k1 e i(k 1 k1t+ k 1 ) C k2 e i(k 2 k2t+ k 2 ) , where gd@k 1 ; k 2 A a I. Then the condition that p k1 @tA and p k2 @tA are linearly dependent can be rewritten as k1 k 1 t C k1 a k2 k 2 t C k2 C j
+
+for some j P Z, i.e., we arrive at t 0 a k2 k1 k1 k 1 k2 k 2 C j k1 k 1 k2 k 2 :
+
+There exist k1 k 1 k2 k 2 possibilities for choosing t 0 providing different axis, see Fig. 5 , left. If p@tA contains more than two circles then the possible values of t 0 must be found as the common values arising from all the pairs of the circles p k @tA.
+
+Example 19. Consider a deltoid (a hypocycloid known also as a tricuspoid curve) given by the trigonometric parameterization p@tA a Pos t C os@PtA;P sint sin@PtA; or p@tA a Pe ti C e 2ti :
+
+It follows from (30) that we have three possible choices for t 0 , in particular t 0 a Q j; j a H; I; P;
+
+and thus there exist three potential syzygy configurations, see Fig. 5, right. The cycloidal curve (cardioid) possessing one axis of symmetry is shown in see Fig. 5, left.
+
+Remark 20. We can return to the situations where p k 's are ellipses and also in this case we will refer to the configuration guaranteeing the existence of the symmetry axis (given by a suitable value t 0 , cf. Lemma 16) as a syzygy. We recall that for ellipses in this configuration not only all p k @t 0 A are linearly dependent but in addition they are vertices for all p k 's which are ellipses.
+
+Finally, let us summarize the results of this section in a decision tree, see Diagram 6.
+
+Wk such that p k is an ellipse?
+
+Do all p 2k 's vanish? Find the maximal @m; dA-sequence.
+
+W a syzygy configuration? W a syzygy configuration? W a syzygy configuration? 
+D 2 C 2 D 1 C 1 D m C m
+
+Application to the symmetries of discrete curves
+
+By a discrete curve in R 2 we understand a closed polyline defined by the set of its vertices v 0 ; v 1 ; : : : ; v n a v 0 . If C is the discrete curve then its symmetry P ym @CA is the isometry of R 2 such that @CA a C and @V A a V , where V is the ordered set of its vertices. Notice that if any three consecutive vertices are not collinear (which can always be ensured by removing the middle vertex) then the latter condition is fulfilled automatically.
+
+In what follows we will replace the discrete curve by a suitable trigonometric curve such that the conditions of Lemma 1 are satisfied in order to detect the symmetries of C. A natural candidate is the trigonometric curve interpolating the vertices v i . Let us fix the uniform distribution of parameter t j a 2 n j, j a H; : : : ; n I. Then for odd n we obtain the unique interpolant p@tA, see Section 2.2 and (16). However when n is even then there exists a one-parametric set of solutions, see again Section 2.2. Because of the choice of the uniformly spaced t j , we have sin@Nt j A a H and thus b N , where N a n 2 , is the free parameter. Following the convention from Section 2.2 we set b N a H and compute the coefficients of the interpolant p@tA via (17). In both cases let T C denote the curve parameterized by p@tA. For later use it is essential to prove that the curve parameterized by p@tA does not depend on the choice of the first vertex being interpolated and neither on the orientation.
+
+Lemma 21. Let be given a trigonometric curve C, then T C is well defined.
+
+Proof. We start with the odd case. Let p@tA be the interpolant corresponding to the ordered vertex set v 0 ; v 1 ; : : : and let q@tA be another interpolant associated to the shifted vertex set v i ; v i+1 ; : : :.
+
+Then p@t C 2i n A interpolates the shifted vertex in the sense that p@t j A a v i+j . Because of the uniqueness of the interpolants we see that q@tA is a reparameterization of p@tA and thus they define the same curve T C . The argument for the change of the orientation is the same. For n being even, we have to realize first that because of the uniform distribution of t it holds os N t C Pi n ! a os n P t C Pi n ! a os@Nt C iA a @ IA i 1 os@NtA:
+
+Hence, the type of the trigonometric parameterization (distinguished by the property b N a H) is preserved by this reparameteriation. The next argumentation is analogous to the odd case, i.e.,
+
+we again obtain the same parameterizations p t C 2i n ¡ and q@tA. Corollary 22. Let C be a discrete curve then ym @CA & ym @T C A.
+
+Proof. It follows from Lemma 21 and Lemma 1.
+
+It can happen that ym @T C A is strictly bigger then ym @CA, see Fig. 7, left. In general, both groups are finite, and thus comparable, unless the curve T C is a straight line or a circle. Since we assume in what follows that the vertices v i are not collinear and the curve T C interpolates them, this can never be a straight line.
+
+Lemma 23. T C is a circle if and only if the discrete curve C is a regular n-gon.
+
+Proof. If C is a regular n-gon then the circle clearly interpolates the vertices. Because of the uniqueness of the interpolant the curve T C is forced to be a circle. Conversely if T C is a circle then the uniform distribution of the parameter implies that the points v i form the consecutive vertices of a regular n-gon.
+
+Fortunately if T C is not a circle or a straight line then ym @T C A is finite and thus ym @CA can be identified with a subgroup of sso @R 2 A. The whole method for determining symmetries of closed discrete curves is summarized in Algorithm 1.
+
+Algorithm 1 Symmetries of closed discrete curves.
+
+
+INPUT:
+
+A discrete curve C given by the ordered set of its vertices V a fv 0 ; : : : ; v n 1 g.
+
+
+1:
+
+Compute the trigonometric interpolant p@tA of C via (16) or (17), which parameterizes T C .
+
+
+2:
+
+Determine ym @T C A via the decision tree presented in Diagram 6. 3: Include into the set ym @CA only such P ym @T C A that satisfy @CA a C (and @V A a V ).
+
+OUTPUT: ym @CA.
+
+Remark 24. It remains to comment on how to decide which symmetries from ym @T C A to choose to ym @CA, i.e., how to perform Step 3 of the algorithm. We will use the following simple test as the set of vertices V is ordered. First we identify v j such that @v 1 A a v j . If such v j does not exist then is not a symmetry of C. In the affirmative case we continue to compare the next vertices and their images, i.e., to include into ym @CA it has to hold either @v 2 A a v j+1 ; @v 3 A a v j+2 ; @v 4 A a v j+3 ; : : : for direct isometries, or @v 2 A a v j 1 ; @v 3 A a v j 2 ; @v 4 A a v j 3 ; : : : for indirect isometries (all indices are considered modulo n).
+
+Example 25. Consider four discrete curves K 1 , K 2 , K 3 and K 4 . Following the steps of Algorithm 1 we interpolate their vertices by the trigonometric curves T K1 , T K2 , T K3 and T K4 and then determine their symmetry groups.  The parameterizations of T K1 and T K2 contain p k 's which are ellipses and moreover among them there are terms of even degree only in the case of T K1 . In addition, since in both cases there exist syzygy configurations we conclude that T K1 and T K2 possess the symmetry groups D 1 and D 2 , respectively, see Fig. 8. Finally, it is verified that ym @K 1 A a ym @T K1 A and ym @K 2 A a ym @T K2 A.
+
+The curves T K3 and T K4 are higher cycloids with the associated sequences Hence we have arrived at rotational symmetries of a regular 5-and 3-gon, respectively.
+
+In the first case there does not exist any syzygy configuration, whereas in the second one we find three such configurations. Hence we conclude that the symmetry groups are C 5 and D 3 , respectively, see Fig. 9. Finally, it is confirmed that the discrete curves K 3 and K 4 have the same symmetry groups. 
+
+This is a way how to deal with curves of manageable degrees. Nevertheless one has to be aware of a possible growth of the symmetry group when the filtering process is applied, see Fig. 10 right: Curve T C with maximal trigonometric degree 20 and ym @T C A $ a D 3 , ym @T 10 C A $ a D 3 , ym @T 14 C A $ a D 9 , and ym @T 16 C A $ a O@PA.
+
+
+Clouds of points
+
+The previous section was devoted to discrete curves determined by their vertices, i.e., by ordered sets of points. In what follows we address the problem where input data in plane is unorganized. Since these data might not be suitable for interpolation by a curve, or the interpolation can lead to loosing symmetries, see Fig. 7 (right), we use an alternative approach based on the construction of the convex hull. By this we can efficiently solve the problem when symmetries of unorganized finite sets of points are to be find.
+
+Lemma 27. Consider as the set of all finite subsets of R 2 and © as the map assigning to each set X its convex hull gr@XA. Then ym @XA & ym @gr@XAA.
+
+Proof. Clearly, the convex hull is the affine, and thus also Euclidean invariant, so by Lemma 1 the property holds.
+
+The boundary of the convex hull of a finite set is a discrete curve. In addition, it obviously holds Lemma 28. Let P be a polygon in plane and @ P be its boundary. Then ym @PA & ym @@ P A. 
+
+Hence, we assign to the unorganized finite set of points the boundary of its convex hull and then we determine all symmetries of this closed discrete curve by the previously presented methods.
+
+Let us emphasize again that the obtained symmetry group ym @T @ CH(X) A can be strictly larger then the sought group ym @XA. However, in this case we cannot apply the approach discussed in Remark 24, which is suitable for ordered point sets only. Instead, we determine the Hausdorff distance between two finite sets X; Y given by the formula H @X; Y A a mx xPX fmin yPY fkxykgg:
+
+Then P ym @T @ CH(X) A belongs to ym @XA if and only if H @X; @XAA a H.  Example 29. Consider three point clouds X 1 ; X 2 and X 3 . We determine their convex hulls gr@X i A with the boundaries @ gr@X i A being closed discrete curves and then interpolate their vertices by the trigonometric curves T @ CH(Xi) . The interpolant T @ CH(X1) possesses the symmetry group D 4 , however the original point cloud X 1 has only C 4 , see Fig. 11. The trigonometric curve T @ CH(X2) has the symmetry group D 2 , whereas the symmetry group of the point cloud X 2 is only D 1 , see Fig. 12. Finally, both T @ CH(X3) and X 3 have the same symmetry group C 7 , see Fig. 13.
+
+Example 30. As our final example we consider a discrete curve C. First, employing Algorithm 1 we conclude that C has the symmetry group C 5 , see Fig. 14 (left). Second, we treat C via its vertices as a point cloud X, see Fig. 14 (right), and compute the symmetry group ym @XA. Since this symmetry group can be bigger, in general, it is always necessary to apply the confirmation step, see Remark 24. Nonetheless, in this particular example the symmetry group of the point cloud is also C 5 .
+
+
+Summary
+
+In this paper we have presented a novel, efficient method to compute the symmetries of planar trigonometric curves. The axial and rotational symmetries were determined directly from their trigonometric parameterizations. The whole algorithm was summarized in a decision tree. Based on this a simple method for computing global exact symmetries of closed discrete curves in plane was formulated. Taking advantage of the fact that trigonometric interpolation of a given ordered set of point commutes with isometries, the studied problem dealing with discrete curves was transformed to determining symmetry groups of trigonometric curves. After a suitable modification we also applied the formulated approach on unorganized clouds of points. It is natural to wonder  if the method can be suitably reformulated for 3D data. This is a question that we would like to investigate in the future. In addition we would like to extend the method for perturbed input data and approximate symmetries in our further research.
+
+
+C m consisting of all rotations about the same center by multiples of the angle 2 m ; and dihedral groups D m consisting of all the rotations in C m together with all reflections in m axes that go through the same point, the center. Especially, C 1 is the trivial group containing only the identity; D 1 is the group containing the identity and one reflection; C 2 is the symmetry group of the letter 'S' consisting of the identity and one central symmetry; D 2 is the symmetry group of a rectangle which is not a square containing the identity, one central symmetry and two reflections with perpendicular axes. And for m ! Q we have the symmetry groups (D m ) or the proper symmetry groups (C m ) of some non-oriented or oriented regular m-gon, respectively.
+
+Figure 1 :
+1Laplace smoothing and preservation of symmetries. From left to right: The original polyline and the polylines after Laplace smoothing w.r.t. IH, IHH and IHHH step. All the polylines are symmetric w.r.t. the red axis.
+
+Figure 2 :
+2Examples of trigonometric curves. From left to right: a generic non-symmetric trigonometric curve (all p k 's are ellipses), a trigonometric curve with a central symmetry (all p k 's are ellipses), a non-symmetric higher cycloid curve, and a higher cycloid curve with rotational and axial symmetries.
+
+Lemma 6 .
+6Let a trigonometric curve parameterized by p@tA possesses a rotational symmetry with center c. Then c a a 0 .
+
+Lemma 8 .
+8Let 2 m X R 2 3 R 2 be the rotation around the origin by the angle 2 m . Then it is a symmetry of p@tA iff there exists d P Z such that
+
+Lemma 10 .
+10Let p@tA be a primitive trigonometric curve. Then it possesses an m-fold rotational symmetry (m > P) with the center c if and only if a 0 a c and there exists an integer d such that p@tA can be written in the form
+
+Figure 3 :
+3Examples of rotationally symmetric curves with maximal sequences (from left to right) # 7;1 , # 7;2 and # 7;3 .
+
+
+Then it makes sense to write for instance fIg; f Ig; Y; Y; f Ig ¡ fIg; f Ig; Y; : : : ¡ a # 3;1 : Example 13. Set m a U then there exist Q different non-trivial types of @U; dA-sequences. Since all of them are U-periodic, they are determined by their first 7 terms, in particular # 7;1 a @fIg;Y; Y; Y; Y; f Ig; Y; : : :A; # 7;2 a @Y; Y; f Ig; fIg; Y; Y; Y; : : :A; # 7;3 a @Y; f Ig; Y; Y; fIg; Y; Y; : : :A: Some particular instances of curves with these maximal @m; dA-sequences are depicted in
+
+Figure 4 :
+4p k @HA is for all of them a vertex lying on the symmetry axis. Let us summarize this in Left: Symmetric trigonometric curve p w.r.t. axis L X y a H. Right: Its decomposition into two ellipses p 1 and p 2 . The conjugated half-diameters a 1 , b 1 and a 2 , b 2 of p 1 and p 2 , respectively, together with the vertices p 1 @t 0 A and p 2 @t 0 A determining the axis of symmetry are shown.Lemma 16. Let p@tA be a primitive trigonometric curve. Then it possesses a reflectional symmetry with axis L if and only if the line L passes through the point a 0 and there exists t 0 P H; PA such that for all k the point p k @t 0 A is the vertex of the ellipse and if p k @t 0 A a 0 T a o then it is the direction of L.
+
+
+From (28), all vertices of p 1 @tA occur at the following values of the parameter¨ 4 to the same line (axis of symmetry) but with the opposite directional vector.
+
+Figure 5 :
+5The syzygy of the points on the circles p k corresponds to the directions of the axes (framed) of symmetry. A generic configuration (non-syzygy) is also shown in light gray. Left: A cycloidal curve (cardioid) with one symmetry axis. Right: A cuspidal curve (deltoid) with three axes of symmetry.
+
+Figure 7 :
+7Increasing and decreasing symmetries. Left: A discrete curve C with ym @CA $ a C 4 and the associated curve T C with the bigger symmetry group D 4 . Right: The given set of points with the symmetry group D 4 and the interpolating discrete curve with the symmetry group D 1 .
+
+Figure 8 :
+8Left: Discrete curve (gray) with the axial symmetry D 1 and trigonometric interpolant (blue) of their vertices (possessing the same symmetry). Right: Discrete curve (gray) with the symmetry group D 2 and the corresponding trigonometric interpolant (blue) with the same symmetry group. The first three ellipses p 1 ; p 2 ; p 3 / p 1 ; p 3 ; p 5 (green) and the axis/axes of symmetry (red) are also shown.
+
+Figure 9 :
+9Discrete curves (gray) with the symmetry groups C 5 and D 3 (red), and the trigonometric interpolants (blue) of their vertices with the same symmetry groups.
+
+
+TK 3 a @fIg; Y; Y; f Ig;Y; fIg; Y; Y; f Ig;Y; fIg; Y; Y; f Ig; Y; fIg; Y; Y; f Ig; Y; fIg; Y; Y; f Ig; Y; fIg; YA # 5;1 a @fIg;Y; Y; f Ig;Y; : : :A ; and TK 4 a @fIg; f Ig; Y; fIg; f Ig; Y; fIg; f Ig; Y; fIg; f Ig; Y; fIg; f Ig; Y; fIg; f Ig;Y; fIg; f Ig; Y; fIg; f Ig; Y; fIg; f Ig; Y; fIg; f Ig; Y; fIgA # 3;1 a @fIg; f Ig;Y; : : :A :
+
+Figure 10 :
+10The sequence of filtered curves demonstrating the growth of symmetry. From left to
+
+Figure 11 :
+11Detection of symmetries of a point cloud. From left to right: The point cloud (with the symmetry group C 4 ), its convex hull and the trigonometric interpolant of the vertices of the convex hull having the symmetry group D 4 .
+
+Figure 12 :
+12Detection of symmetries of a point cloud (with the symmetry group D 1 ). From left to right: The point cloud, its convex hull, the trigonometric interpolant of the vertices of the convex hull having the symmetry group D 2 .
+
+Figure 13 :
+13Detection of symmetries of a point cloud (with the symmetry group C 7 ). From left to right: The point cloud, its convex hull, the trigonometric interpolant of the vertices of the convex hull also having the symmetry group C 7 .
+
+Figure 14 :
+14Detection of symmetries of a discrete curve using both presented method. Left: We use the method for discrete curves. Right: The method for point clouds is employed. We emphasize that both method yields the symmetry group C 5 .
+
+
+This is a linear operator which can be represented by the circular matrixL a 
+
+H 
+
+f 
+f 
+f 
+f 
+f 
+d 
+
+I 1 
+
+2 
+
+H : : : : : : H 1 
+
+2 
+1 
+2 
+
+I 1 
+
+2 
+
+H : : : : : : H 
+
+. . . 
+. . . 
+. . . 
+. . . 
+. . . 
+. . . 
+. . . 
+
+
+
+
+Remark 26. The curve T C might possess too high degree with regard to practical purposes and further computations. Then it is advisable to work with suitable alternative curves instead. These curves can be obtained via filtering high harmonics of the original parameterization. Write TC for the filtered curve parameterized by a 0 C N k =1 p k @tA, i.e., the last`terms of p@tA are omitted.Analogously to Corollary 22 it can be shown that it holds ym @T C A & ym @T 1 C A & ym @T 2 C A & ¡ ¡ ¡ & ym @TCA:
+
+
+Let be given a finite subset X of R 2 . Then combination of Lemmas 27, 28 and Corollary 22 yields the following chain ym @XA & ym @gr@XAA & ym @@ gr@XAA & ym @T @ CH(X) A:
+AcknowledgmentsThe authors were supported by the grant 21-08009K of the Grant Agency of the Czech Republic.
+Symmetry detection in 3D chain coded discrete curves and trees. W Aguilar, E Bribiesca, Pattern Recognit. 48Aguilar, W., and Bribiesca, E. Symmetry detection in 3D chain coded discrete curves and trees. Pattern Recognit. 48, 4 (2015), 1420-1439.
+
+Efficient detection of symmetries of polynomially parametrized curves. J G Alcázar, Journal of Computational and Applied Mathematics. 255Alcázar, J. G. Efficient detection of symmetries of polynomially parametrized curves. Journal of Computational and Applied Mathematics 255 (2014), 715 -724.
+
+Detecting similarity of rational plane curves. J G Alcázar, C Hermoso, G Muntingh, Journal of Computational and Applied Mathematics. 269Alcázar, J. G., Hermoso, C., and Muntingh, G. Detecting similarity of rational plane curves. Journal of Computational and Applied Mathematics 269 (2014), 1 -13.
+
+Detecting symmetries of rational plane and space curves. J G Alcázar, C Hermoso, G Muntingh, Computer Aided Geometric Design. 31Alcázar, J. G., Hermoso, C., and Muntingh, G. Detecting symmetries of rational plane and space curves. Computer Aided Geometric Design 31, 3 (2014), 199 -209.
+
+Similarity detection of rational space curves. J G Alcázar, C Hermoso, G Muntingh, 41th International Symposium on Symbolic and Algebraic Computation (ISSAC'16). 85Alcázar, J. G., Hermoso, C., and Muntingh, G. Similarity detection of rational space curves. Journal of Symbolic Computation 85 (2018), 4 -24. 41th International Symposium on Symbolic and Algebraic Computation (ISSAC'16).
+
+Symmetries and similarities of planar algebraic curves using harmonic polynomials. J G Alcázar, M Lávička, J Vršek, Journal of Computational and Applied Mathematics. 357Alcázar, J. G., Lávička, M., and Vršek, J. Symmetries and similarities of planar alge- braic curves using harmonic polynomials. Journal of Computational and Applied Mathe- matics 357 (sep 2019), 302-318.
+
+Affine equivalences of trigonometric curves. J G Alcázar, E Quintero, Acta Applicandae Mathematicae. 170Alcázar, J. G., and Quintero, E. Affine equivalences of trigonometric curves. Acta Applicandae Mathematicae 170 (2020), 691-708.
+
+Exact and approximate similarities of non-necessarily rational planar, parametrized curves, using centers of gravity and inertia tensors. J G Alcázar, E Quintero, International Journal of Algebra and Computation. 31Alcázar, J. G., and Quintero, E. Exact and approximate similarities of non-necessarily rational planar, parametrized curves, using centers of gravity and inertia tensors. Interna- tional Journal of Algebra and Computation 31, 4 (2021), 581-603.
+
+Congruence, similarity, and symmetries of geometric objects. H Alt, K Mehlhorn, H Wagener, E Welzl, Third ACM Symposium on Computational Geometry. Waterloo, Ont3Alt, H., Mehlhorn, K., Wagener, H., and Welzl, E. Congruence, similarity, and symmetries of geometric objects. vol. 3. 1988, pp. 237-256. Third ACM Symposium on Computational Geometry (Waterloo, Ont., 1987).
+
+Approximate symmetries of planar algebraic curves with inexact input. M Bizzarri, M Lávička, J Vršek, Computer Aided Geometric Design. 76101794Bizzarri, M., Lávička, M., and Vršek, J. Approximate symmetries of planar algebraic curves with inexact input. Computer Aided Geometric Design 76 (2020), 101794.
+
+Computing projective equivalences of special algebraic varieties. M Bizzarri, M Lávička, J Vršek, Journal of Computational and Applied Mathematics. 367112438Bizzarri, M., Lávička, M., and Vršek, J. Computing projective equivalences of special algebraic varieties. Journal of Computational and Applied Mathematics 367 (2020), 15. Id/No 112438.
+
+Testing congruence and symmetry for general 3-dimensional objects. P Brass, C Knauer, Geometry -EWCG'02Computational Geometry. 27ComputationalBrass, P., and Knauer, C. Testing congruence and symmetry for general 3-dimensional ob- jects. Computational Geometry 27, 1 (2004), 3 -11. Computational Geometry -EWCG'02.
+
+Trigonometric polynomial interpolation of images. T Briand, Image Processing on Line. 9Briand, T. Trigonometric polynomial interpolation of images. Image Processing on Line 9 (2019), 291-316.
+
+A Sampler of Useful Computational Tools for Applied Geometry. D Cohen-Or, C Greif, T Ju, N J Mitra, A Shamir, O Sorkine-Hornung, H R Zhang, Computer Graphics, and Image Processing. USA1st ed. A. K. Peters, Ltd.Cohen-Or, D., Greif, C., Ju, T., Mitra, N. J., Shamir, A., Sorkine-Hornung, O., and Zhang, H. R. A Sampler of Useful Computational Tools for Applied Geometry, Computer Graphics, and Image Processing, 1st ed. A. K. Peters, Ltd., USA, 2015.
+
+Projective and affine symmetries and equivalences of rational curves in arbitrary dimension. M Hauer, B Jüttler, Journal of Symbolic Computation. 87Hauer, M., and Jüttler, B. Projective and affine symmetries and equivalences of rational curves in arbitrary dimension. Journal of Symbolic Computation 87 (2018), 68 -86.
+
+Algorithms for trigonometric curves (simplification, implicitization, parameterization). H Hong, J Schicho, Journal of Symbolic Computation. 26Hong, H., and Schicho, J. Algorithms for trigonometric curves (simplification, impliciti- zation, parameterization). Journal of Symbolic Computation 26, 3 (1998), 279-300.
+
+The kinematic work of W. Wunderlich. M Husty, International Symposium on History of Machines and Mechanisms. M. CeccarelliDordrecht; NetherlandsSpringerHusty, M. The kinematic work of W. Wunderlich. In International Symposium on History of Machines and Mechanisms (Dordrecht, 2004), M. Ceccarelli, Ed., Springer Netherlands, pp. 169-178.
+
+Vergleichende betrachtungen ueber neuere geometrische forschungen. F Klein, Mathematische Annalen. 43Klein, F. Vergleichende betrachtungen ueber neuere geometrische forschungen. Mathema- tische Annalen, 43 (1893), 63-100.
+
+Rotations, translations and symmetry detection for complexified curves. P Lebmeir, J Richter-Gebert, Classical Techniques for Applied Geometry. 25Computer Aided Geometric DesignLebmeir, P., and Richter-Gebert, J. Rotations, translations and symmetry detection for complexified curves. Computer Aided Geometric Design 25, 9 (2008), 707 -719. Classical Techniques for Applied Geometry.
+
+A cyclic basis for closed curve and surface modeling. Á Róth, I Juhász, J Schicho, M Hoffmann, Computer Aided Geometric Design. 26Róth, Á., Juhász, I., Schicho, J., and Hoffmann, M. A cyclic basis for closed curve and surface modeling. Computer Aided Geometric Design 26, 5 (2009), 528-546.
+
+Introduction to numerical analysis. J Stoer, R Bulirsch, Springer Science & Business Media12Stoer, J., and Bulirsch, R. Introduction to numerical analysis, vol. 12. Springer Science & Business Media, 2013.
+
+A new complex basis for implicit polynomial curves and its simple exploitation for pose estimation and invariant recognition. J P Tarel, D B Cooper, Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition. the IEEE Computer Society Conference on Computer Vision and Pattern RecognitionIEEE Computer SocietyCVPR '98Tarel, J. P., and Cooper, D. B. A new complex basis for implicit polynomial curves and its simple exploitation for pose estimation and invariant recognition. In Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition (1998), CVPR '98, IEEE Computer Society, pp. 111-1.
+
+The complex representation of algebraic curves and its simple exploitation for pose estimation and invariant recognition. J.-P Tarel, D B Cooper, IEEE Trans. Pattern Anal. Mach. Intell. 227Tarel, J.-P., and Cooper, D. B. The complex representation of algebraic curves and its simple exploitation for pose estimation and invariant recognition. IEEE Trans. Pattern Anal. Mach. Intell. 22, 7 (July 2000), 663-674.
+
+Optimal algorithms for symmetry detection in two and three dimensions. J D Wolter, T C Woo, R A Volz, Visual Computer. 1Wolter, J. D., Woo, T. C., and Volz, R. A. Optimal algorithms for symmetry detection in two and three dimensions. Visual Computer 1, 1 (1985), 37-48.
+
+Higher cycloid curves. W Wunderlich, Osterr. Ing. Arch. 1Wunderlich, W. Higher cycloid curves. Osterr. Ing. Arch 1 (1947), 277-296.
+
+Trigonometric series. A Zygmund, Cambridge University PressI3rd edZygmund, A. Trigonometric series. Vol. I, II, 3rd ed. Cambridge University Press, 2002.

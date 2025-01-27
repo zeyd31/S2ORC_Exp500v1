@@ -1,0 +1,567 @@
+
+Towards Effective Collaborative Learning in Long-Tailed Recognition
+
+
+Zhengzhuo Xu 
+Zenghao Chai 
+Chengyin Xu 
+Chun Yuan 
+Senior Member, IEEEHaiqin Yang 
+Towards Effective Collaborative Learning in Long-Tailed Recognition
+1Index Terms-Image ClassificationLong Tail RecognitionCollaborative LearningKnowledge Distillation
+Real-world data usually suffers from severe class imbalance and long-tailed distributions, where minority classes are significantly underrepresented compared to the majority ones. Recent research prefers to utilize multi-expert architectures to mitigate the model uncertainty on the minority, where collaborative learning is employed to aggregate the knowledge of experts, i.e., online distillation. In this paper, we observe that the knowledge transfer between experts is imbalanced in terms of class distribution, which results in limited performance improvement of the minority classes. To address it, we propose a re-weighted distillation loss by comparing two classifiers' predictions, which are supervised by online distillation and label annotations, respectively. We also emphasize that feature-level distillation will significantly improve model performance and increase feature robustness. Finally, we propose an Effective Collaborative Learning (ECL) framework that integrates a contrastive proxy task branch to further improve feature quality. Quantitative and qualitative experiments on four standard datasets demonstrate that ECL achieves state-of-the-art performance and the detailed ablation studies manifest the effectiveness of each component in ECL.
+
+I. INTRODUCTION
+
+R ECENT advancements in computer vision, e.g., visual recognition [1], video analysis [2] and person re-ID [3], [4], heavily rely on the large-scale, high-quality, and balanced datasets, such as ImageNet [5], COCO [6] and Place [7], which require laborious collections and careful annotations. Regrettably, collecting rare instances entails gathering more dominant samples because real-world data naturally exhibits imbalanced distributions w.r.t. its categories. Hence, datasets typically follow a long-tailed distribution, with only a few labels having a majority of the samples, while most labels are associated with limited instances. In Long Tail Recognition (LTR), the minority classes (tail) are always overwhelmed by the majority classes (head), resulting in low performance for the tail. As a result, the models trained on the long-tailed dataset show great uncertainty, where the outputs for few-shot classes vary remarkably, despite the same training settings.
+
+Most existing work addresses the LTR issue by improving the feature representations of tail classes or re-balancing the contribution of different classes. However, some intuitive approaches like over-sampling the tail [8] or under-sampling the head [9] result in severe robustness problems especially in tail classes. Although some well-designed approaches enrich tail samples in more elegant ways, such as through feature combinations [10], [11], [12] or pseudo sample generation [13], [9], [14], the problem of model preference towards head classes remains unresolved. To calibrate the label distribution gap between the train and test dataset, the Balanced Cross-entropy (BC) loss is proposed based on Bayesian Theory, which compensates the model bias by label frequency on standard softmax Cross-Entropy (CE) loss [15], [16], [17], [11]. Based on the effective BC loss, Multi-Expert (ME) [18], [19], [20] framework is proposed to further address model uncertainty on the tail classes. For example, NCL [20] trains several expert networks in parallel and aggregates each expert's knowledge in a nested collaborative manner, i.e., online Knowledge Distillation (KD) on the logit level (see Fig. 1a), where we refer to each network as an expert. However, our experimental observations indicate that the transfer knowledge (distillation logit value) is not balanced w.r.t. class in vanilla collaborative learning (see Sec. IV). The tail samples are always under-represented during the distillation process, which damages the balanced knowledge transfer. Such imbalance leads the online distillation to boost the head performance while suppressing the transfer of tail knowledge. Consequently, the tail remains unimproved compared to the single expert baseline. Recent research [21] suggests that the KD-trained classifier is more confident for the overrepresented samples than the label-trained one because the arXiv:2305.03378v1 [cs.CV] 5 May 2023 distillation tends to learn more generalized context knowledge compared to label supervision, which mainly provides contentinvariant knowledge. Inspired by it, we propose a novel reweighted distillation loss by comparing the predictions of two different classifiers. Moreover, we propose to perform additional collaborative distillation at the feature level, which significantly boosts model performance and feature robustness. We further incorporate a contrastive proxy task with a parallel branch to improve feature representations. As a result, we propose a novel Effective Collaborative Learning (ECL) framework to improve vanilla NCL, which distinguishes from previous ME frameworks in two aspects:
+
+Single expert training. We propose the Balanced Knowledge Transfer (BKT) module to conduct balanced knowledge distillation. Following the feature encoder, we add an extra reference classifier parallel to the original classifier. The reference classifier is only supervised by the BC loss and is not involved in the expert collaboration, allowing it to only focus on the content-invariant knowledge. We compare the predictions of two classifiers to estimate whether the input samples are overconfident or not and re-weight the KD loss to assign the underrepresented samples with larger weights (Fig. 1b). For each expert, we introduce a siamese branch to conduct Contrastive Proxy Task (CPT) and update parameters in a momentumbased moving average scheme [22]. The CPT is designed to increase the feature similarity of an image's two views to facilitate model discriminative ability. Note that we will discard the additional reference classifier and siamese branch during the inference phase to keep the consistent architecture with previous ME approaches.
+
+Expert knowledge aggregation. In the proposed ECL, each expert is collaboratively learned with others. Note that the knowledge is transferred not only on the logit level but also on the feature level (see Fig. 1b), which facilitates stable representation learning. Our Feature Level Distillation (FLD) is a simple yet effective improvement that encourages all experts to extract well-represented features. We also present in-depth analysis to investigate how FLD influences the model performance qualitatively and quantitatively (see Sec. VI).
+
+With the above observations, insights, and techniques, we build our final ECL (Fig. 1b&3), which contains three key components, namely the balanced knowledge transfer module, feature level distillation, and contrastive proxy task. Extensive experiments in four benchmarks justify the superiority of ECL. In summary, our contributions are as follows: 1) We pinpoint the imbalance of transfer knowledge in previous collaborative learning methods and propose a balanced knowledge distillation loss to tackle it. 2) We propose to conduct knowledge distillation on both feature and logit levels, which significantly enhances model performance and robustness. 3) We propose the ECL framework to collaboratively train multiple experts to overcome the head preference and tail uncertainty in long-tailed recognition. 4) We present extensive experiments and demonstrate ECL achieves state-of-the-art performance on CIFAR10/100-LT, ImageNet-LT, and iNaturalist 2018 datasets.
+
+This paper is organized as follows: Sec. II provides a brief overview of related work. In Sec. III, we introduce the relevant concepts and baselines. We discuss our motivation based on experimental observations in Sec. IV and provide a detailed design in Sec. V. Sec. VI demonstrates the effectiveness of ECL through extensive experiments and ablation studies. Finally, Sec. VII concludes our work.
+
+1. We pinpoint the imbalance of transfer knowledge in previous collaborative learning methods and propose a balanced knowledge distillation loss to tackle it. 2. We propose to conduct knowledge distillation on both feature and logit levels, which significantly enhances model performance and robustness. 3. We propose the ECL framework to collaboratively train multiple experts to overcome the head preference and tail uncertainty in long-tailed recognition. 4. We present extensive experiments and demonstrate ECL achieves state-ofthe-art performance on CIFAR10/100-LT, ImageNet-LT, and iNaturalist 2018 datasets.
+
+
+II. RELATED WORK
+
+Feature-wise Rebalance Learning. To avoid damaging model generalization severely from simply over/under-sampling the tail/head classes [23], [24], [9], recent advances resort combination of the head to enrich the feature of tail samples [13], [9], [25] or increase the tail frequency implicitly [10], [26], [11], [14]. The two-stage methods [27], [24], [28] decouple feature learning from downstream tasks (e.g., classification) to reduce the bias on the classifier. Several methods [29], [22], [30] also leverage self-supervised learning to eliminate the influence of imbalanced distribution. SSP [31] and HybirdSC [32] demonstrated that self-supervised or semi-supervised training can boost performance through larger train epochs and GPU memory. Recent state-of-the-art [33], [32], [34], [35] introduces fixed or learnable proxy to overcome performance degradation due to the absence of label supervision. Reweight-wise Learning. To mitigate the inherent statistical bias in LTR, researchers have designed meticulous loss to learn larger margins among different classes [27], [16], [17], [15], [11], [36], [37], [38] or assign various weights for different classes based on the label frequencies [39], [40], [41], [28], [42]. In particular, the simple yet effective BC loss [16], [15], [17], [11] has been widely adopted by stateof-the-art [20], [33], [35], [43]. Unfortunately, BC loss is not always compatible with the above feature-wise methods for the inconsistency of the statistical label frequency. Multi-expert Learning. To tackle the tail uncertainty [44], [19], the multi-expert framework is increasingly valued, which typically contains two components, i.e., single expert training and experts knowledge aggregation [8], [45], [18], [19], [43]. BBN [8] trains two experts with instance sampling and inverse sampling, respectively, and aggregates their knowledge in a cumulative weighting manner. LFME [18] trains multiple experts with different instance groups and weights the logits from different experts as the final output. RIDE [19] enlarges the KL divergence to train experts and cascades all the experts via decision gates for inference. TADE [43] trains experts by BC loss with different assumed statistical prior and weights each expert's output, which is obtained via post-hoc contrastive training. Another feasible expert aggregation manner is knowledge distillation [46]. DiVE [47] shows the effectiveness of distillation in the LTR. SSD [48] trains expert backbone by self-distillation learning and classifier through balanced sampling. CBD [44] trains different teachers by various data augmentations and random seeds. Then, it trains students with balance sampling and knowledge from the above teachers. NCL [20] trains experts in a nested manner and adopts online inter-distillation with each other to reduce the tail uncertainty. However, these methods mainly conduct logit-level distillation while ignoring the imbalance of transfer knowledge.
+
+
+III. PRELIMINARIES
+
+A. Task Definition.
+Given an N -sample dataset D = {(x i , y i )} N i=1
+from C classes, where x i ∈ X denotes the i-th instance with its label, y i ∈ Y := {y 1 , . . . , y C }. We assume the dataset D is long-tailed distributed and denote each category as C i and its instance number as n i = |C i |. Furthermore, we consider a base classification model M := {F θ , W φ }. It contains a learnable feature encoder F θ and a classifier W φ , parameterized by θ, φ, respectively. Given an input image x, the encoder extracts the feature representation v := F θ (x) ∈ R d . Then, the classifier (typically fully connected layers) outputs the logits z := W φ (v) ∈ R C . We assume K experts in the collaborative learning framework with the same architecture M and denote the k-th expert as
+E k := {F θ k , W φ k }.
+
+B. Balanced Cross-entropy Loss.
+
+Balanced Cross-entropy (BC) loss is effective and widely adopted in LTR tasks [16], [15], [17], [11], [20], [35]. It compensates the statistical bias via logits adjustment on standard Cross-Entropy (CE) loss. Consider the expert E k is supervised by CE loss with standard softmax:
+L CE = − log (p(y i |x; θ k , φ k )) = log   1 + yj =yi e zy j −zy i   .
+(1) Here, we denote the label distribution prior of train/test data as p s (y)/p t (y) respectively. Based on the Bayesian theory, the posterior is proportional to prior times likelihood, where the likelihood p s (x|y) maximization is equal to the model parameters (i.e., θ, φ) learning. Typically, the posterior p t (y|x) is equivalent to likelihood p s (x|y) between train and test set when p s (y) ≡ p t (y). However, if we take the statistical distribution of label y as its prior p(y), we can derive the following bias from the mismatch of p s (y) and p t (y):
+p t (y|x) = p s (x|y) · p s (x) p s (y) · p t (y) p t (x) ∝ p s (x|y) · p t (y) p s (y) = pt(y) ps(y) · e zy i j pt(yj )
+ps(yj ) · e zy j = e zy i −(log(ps(yi))−log(pt(yi))) j e zy j −(log(ps(yj ))−log(pt(yj ))) , where p s (x) and p t (x) are regular terms (i.e., normal distribution). Here, we get statistical bias of class y i as log p s (y i ) − log p t (y i ). Combining Eq. 1 and Eq. 2, we compensate for it in CE loss with a hyper-parameter τ as follows:
+L BC = − log e zy i +τ ·(log(ps(yi))−log(pt(yi)))
+j e zy j +τ ·(log(ps(yj ))−log(pt(yj ))) .
+
+(3)
+
+
+C. Nested Collaborative Learning
+
+To reduce the great uncertainty in long-tailed learning, Li et al. [20] propose Nested Collaborative Learning (NCL) to learn multiple experts parallelly and aggregate the expert knowledge via nested online distillation on the logit-level (see Fig. 1a). The NCL performs online inter-distillation on both partial and full views, while incorporating an instance discrimination task as well. All experts adopt the same BC loss and hyperparameter settings. It contributes to complementary expert learning and achieves state-of-the-art performance whether by using a single expert or an ensemble. Our ECL is motivated by the experimental observations on it, which will be elaborated in the following section.
+
+
+IV. MOTIVATION
+
+Our motivation stems from the following inspiring observations 1: The transfer knowledge during online distillation is imbalanced w.r.t. classes in vanilla nested collaborative learning. 2: The optimal hyper-parameter of Eq. 3 for each expert is not consistent, which hinders performance improvement.
+
+For multi-expert collaborative learning approaches, the expert knowledge aggregation typically conduct at the logit level. For observation 1, we demonstrate that previous distillation at logit level ( Fig. 1) is ineffective. In Fig. 2a  weight and thus result in fewer predictions. Similar observations also occur when training with balanced datasets, where the imbalance correlates to both label and context [21]. While NCL eliminates the model preference by compensating the label frequency with BC loss, the content imbalance remains unsolved. In this paper, we propose a balanced distillation loss to manage the label and context distribution simultaneously. Fig. 2b shows that our proposal ameliorates the transfer knowledge imbalance and model prediction preference remarkably.
+Image q x Image k x Expert i from E j logits prior bias ! ℒ "# ℒ "# ℒ $%&_() ℒ $%&_() ℒ (*+ x
+For observation 2, we conduct an in-depth analysis by implementing the BC loss of NCL in a post-hoc manner [16], [17], [11] as a softmax variation (Eq. 4). On the CIFAR100-LT (γ = 100), the best performance achieves at τ ≈ 1 (1.2, 1.3 or others) instead of theoretical τ = 1. It suggests that the statistical bias learned by each expert is inaccurate and inconsistent, which can be amplified and distorted further if we conduct knowledge aggregation on the logit level. As a comparison, label distribution seldom affects feature-level distillation because it only works on the logit-level [24]. Hence, we conduct feature level distillation to overcome this inconsistency. We resort optimization-related diagnostic tools (e.g., average feature distance among experts and normalized loss landscapes [49]) to further explore the feature distillation mechanism, and present the visualized results in Sec. VI.
+p(y i |x; θ, φ) = e zy i −τ ·(log(ps(yi))−log(pt(yi)))
+j e zy j −τ ·(log(ps(yj ))−log(pt(yj ))) .
+
+V. METHODOLOGY In this section, we first propose a novel transfer module to rebalance the knowledge of each expert. Then we design a novel knowledge aggregation pipeline to manage the featurewise collaboration and eliminate the statistical bias among multi-experts. We also leverage the unsupervised instance discrimination proxy to further boost the feature representation. Finally, we describe how to adjust the model for inference.
+
+
+A. Balanced Knowledge Transfer
+
+As discussed in Sec. IV, the imbalance is two-fold. While BC loss manages to eliminate the label imbalance by leveraging the distribution gap, it is challenging to eliminate the implicit context prior, which is not identically distributed with the labels. Hence, we try to alleviate this issue from another perspective. In Fig. 3, we propose the balanced knowledge transfer (BKT) module to tackle the imbalance issue when transferring the logit-level knowledge (Fig. 2).
+
+The proposed BKT is based on the experimental observations that the classifier supervised by knowledge distillation is more confident for the over-represented samples than the ones supervised by labels [46], [21]. We attempt to identify underrepresented samples by comparing the predictions gap between two classifiers. Specifically, for the balanced distillation, we propose an extra reference head W r φ , which is only supervised by the BC loss and parallel to the vanilla classification head W c φ . With more soft supervision given by the KD loss, cls head W c φ learns more context equivariance knowledge compared to the ref head W r φ , which only focuses on the context invariance knowledge (i.e., class labels). Therefore, BKT automatically identifies whether a sample is under-represented by comparing the decisions from the two heads:
+y r i = exp z r yi /σ r yj ∈C exp z r yj /σ r ,ŷ c i = exp z c yi /σ c yj ∈C exp z c yj /σ c ,(5)
+where z r /z c is the logits given by ref W r φ /cls W c φ respectively and σ is corresponding standard deviation for normalization. Then, we re-weight the KD loss for each sample as follows:
+w xi = H(ŷ r i , y i )/H(ŷ c i , y i ) = yj ∈C 1(y j = y i ) logŷ c j yj ∈C 1(y j = y i ) logŷ r j ,(6)
+where H is the corresponding cross-entropy. With Eq. 6, we assign the under-represented samples (cls head is less confident than the ref head) with a large weight and the overrepresented samples (cls head is more confident than the ref head) with a small weight.
+
+
+B. Balanced Online Distillation
+
+Following NCL [20], we employ the online distillation framework to learn multiple experts collaboratively. On the logit level, we implement the re-weighted KD loss between each expert pair and the total loss will be:
+L logit kd = k q =k xiŵ xi · τ 2 · KL(ς( z k,c i τ )||ς( z q,c i τ )) N · K · (K − 1) ,(7)
+where ς indicates softmax, τ is the temperature factor and KL(p||q) = i p i · log(p i /q i ). z k,c i is the logits given by the cls head W c φ of expert k andŵ xi is given by Eq. 6. Different from previous methods, we pinpoint that the distillation on the feature level will capture more robust knowledge in the LTR tasks, which can be formulated as follows:
+L feature kd = k q =k xi τ 2 · KL(ς( v k i τ )||ς( v q i τ )) K(K − 1)
+. (8) Experimentally, the online distillation on feature level shows significant effectiveness compared to logit level. we will present in-depth investigations on the reason for its performance and generalization in Sec. VI.
+
+
+C. Contrastive Proxy Task
+
+To learn more generalized features, we follow [22] to adopt a contrastive proxy task in MoCo v2 manner. As Fig. 3 shows, an extra MoCo encoder is employed to perform instance discrimination, in which parameters are updated in a momentum-based moving average scheme to provide negative samples. For the feature v k i given by expert k MoCo head, we denote the normalized embedding of its copy image with different augmentations asṽ k i . For more negative pairs, a dynamic queue Q k is employed to record historical feature representations to save GPU memory. The info-NCE loss is adopted to increase the feature similarity of the same image while reducing the feature similarity of different images pairs, which is computed as:
+L con = − k log exp v k T iṽ k i /τ ṽ k j ∈{Q k ∪v k T i } exp v k T iṽ k j /τ .(9)
+
+D. Model Training
+
+Based on the above designs, we propose our final ECL in the multi-expert architecture, as Fig. 1&3 shows. To train the whole model, we leverage the classification loss L sup , distillation loss L kd , and contrastive loss L con for supervision. Formally, L sup compute the all experts BC loss between the predicted logits and the ground-truth labels for ref & cls head:
+L sup = 1 K k L ref BC + L cls BC(10)
+L kd estimate the KL divergence on logit & feature level, while L con is used for the contrastive proxy task. Finally, the overall loss is formulated as:
+L all = L sup + α(L logit kd + L feature kd ) + βL con ,(11)
+where α and β are the hyperparameters to balance the contribution of collaborative and contrastive learning.
+
+
+E. Model Inference
+
+Note that the MoCo branch and ref head W r φ are only designed for effective model training. Therefore, in the inference phase, we only preserve the feature encoder F θ and cls head W φ to keep consistent model size with previous work. In addition, we can achieve higher performance by averaging the output logits from all experts as an ensemble model. In this case, our model size will be the same as the previous NCL.
+
+
+VI. EXPERIMENT
+
+
+A. Datasets
+
+CIFAR-10/100-LT. CIFAR-10/100 [54] have 10/100 classes with 60, 000 images in 32 × 32 resolution. We follow [39], [27] to sample the train set of each class with exponential functions to create the long-tailed versions while remaining the validation set uniformly distributed. The imbalance factor γ indicates the skewness of the dataset, which is the ratio between the most and the least frequent classes. We employ γ = [10, 50, 100, 200] for comprehensive comparisons.
+
+ImageNet-LT is the subset of the large-scale balanced ImageNet-1k [5], widely used in classification and localization tasks. The train data in ImageNet-LT are sampled through Pareto distribution with power value α = 6. It contains 115.8K images from 1, 000 classes. The most/least class number is 1, 280/5 respectively (γ = 256). we utilize the balanced validation set constructed by [39] for fair comparisons.
+
+iNaturalist 2018 [55] is the large-scale real-world LTR dataset. With over 437.5K images and 8, 142 classes (γ = 500), it suffers from severe label long-tailed distribution and fine-grained challenges. We follow [27] to utilize the official splits of training and validation sets in our experiments.
+
+
+B. Evaluation Metrics
+
+Top-1 Acc. In LTR, the model is trained in an imbalanced dataset while evaluated in a balanced test set. Therefore, we adopt the common evaluation protocol Top-1 Acc. to estimate the model performance of each category.
+
+Group Acc. In LTR, we focus more on the tail performance. Therefore, we follow [43] to group the test data into Manyshot (> 100), Medium-shot (20 ∼ 100), and Few-shot (< 20) according to the corresponding sample number w.r.t. different classes in the train set, and evaluate the accuracy of these groups separately.
+
+Loss-Acc Landscapes. To investigate the feature-level distillation, we visualize the loss/accuracy landscapes of different models [49]. More specifically, we perturb the model weights by varying degrees through a series of Gaussian noises. The noise level is normalized to the l 2 -norm of each filter to represent the effects of different weight amplitudes.
+
+Class-wise Average Feature Distance. On the balanced test dataset, a well-trained encoder should map the input images into a distinguishable feature space. To evaluate the feature similarity, For class y i , we calculate the class-wise average l 2 I: Top-1 accuracy (%) on CIFAR-10/100-LT with ResNet32 backbone. γ: imbalance factor. Results are sorted according to method category. RW: re-weight wise methods. FW: feature improvement wise methods. ME: multi-expert frameworks. Underline: the best performance in each group. Bold: the best performance overall. We report the performance from original papers and reproduce results for unavailable settings according to their official repos. distance between the outputs from two experts for all features (A yi ). Here, we calculate the distance between expert m and n as follows:
+D m,n i = 1 ||A yi || · vt∈Ay i ||v m t − v n t || 2 .(12)
+The smaller D i indicates that the experts learn stable feature representations w.r.t. class y i , making it easier to finetune model heads on the downstream tasks.
+
+Expected Calibration Error. Calibration indicates the model prediction reflects the actual likelihood of accuracy [59]. Let p i be the confidence of the image x i , and divide dataset D into several bin B with size m according to the value ofp i . Then, the reliability diagrams are proposed to visualize the model calibration by measuring the distance to the ideal i∈Bm 1(ŷ = y i ) ≡ i∈Bm 1(ŷ = y i ) for all m ∈ {1, ..., M }. The Expected Calibration Error (ECE) is proposed to quantitatively measure classifiers' calibration:
+ECE = 1 |D| M m=1 i∈Bm |1(ŷ = y i ) −p i |.(13)
+
+C. Implementation Details
+
+For CIFAR-LT, we follow LTR-WD [42] to set weight decay 5e − 3 for ResNet-32 and use stochastic gradient descent with momentum 0.9. All models are trained for 200 epochs with the learning rate 0.01 and mini-batch 64. The learning scheduler is Cosine Annealing [60] with an ending rate of 0. Further, Cutout [61] and AutoAug [62] are used to compensate for origin data augmentation strategies [63]. We adopt the MoCo augmentation [22] for better image views in the contrastive branch. For large-scale datasets, we follow LTR-WD [42] to set weight decay 5e − 4/1e − 4 for ImageNet-LT/iNaturalist 2018 and train 180/90 epochs, respectively. We replace AutoAug with RandAug [64] while keeping other settings consistent with CIFAR-LT. Finally, we adopt horizontal flips as the post-hoc augmentation for better performance.
+
+Following previous work [22], [33], [20], we set temperature factor τ = 1 and keep all MoCo hyper-parameters consistent with NCL. For the hyper-parameters setting of ECL, we set K = 3 experts, α = 0.6 and β = 1.0 by default. Results are averaged from 5 (CIFAR-LT) or 3 (large-scale datasets) random seeds.
+
+
+D. Competing Methods
+
+Baselines. The vanilla baseline (CE) conducts plain training with standard cross-entropy loss [39]. The common networks are ResNet-32 (CIFAR-10/100-LT), ResNet-50 [63] (ImageNet-LT, iNaturalist 2018) and ResNeXt-50 [65]   (ImageNet-LT). In addition, to align with previous works that contain some additional proposal-independent tricks implicitly, we adopt the same settings with NCL for all our reproduced results for fair comparisons.
+
+Feature-wise methods modify the feature sampling or learning manners to cope with long-tailed datasets. M2m [13] generates pseudo samples for training and optimizing. CAM [9] and CMO [14] enrich the training samples via feature combination. DiVE [47] adopts knowledge distillation and takes the teacher feature as an additional training sample for the student model. Recent state-of-the-art [34], [33], [35] adopts contrastive frameworks to improve representation learning.
+
+Re-weight methods focus on label weighting [39], [50], [27], [28] or logits adjusting [16], [17], [15], [11], [52], [53], [38] based on standard cross entropy loss. In addition, some methods [24], [51], [42] are also effective by directly adjusting the classifier's weight. (a) CE [39] (b) NCL [20] (c) ECL (d) CE [39] (e) NCL [20] (f) ECL Multi-expert methods have shown powerful generalization in LTR and can be classified into two categories. 1) Each expert learn different aspects of knowledge w.r.t. specific classes and then aggregates together [18], [8], [19], [45], [32]. 2) Each expert learns the same knowledge w.r.t. class to reduces the uncertainty on minority classes [43], [48], [20]. Note that our ECL belongs to the latter.
+
+
+E. Comparison with state-of-the-art
+
+We conduct comprehensive comparisons on CIFAR-LT (see Tab. I) and large-scale datasets (see Tab. II). For comparing methods, we report the performance in their original papers and reproduce the missing settings through their official code repositories. For contrastive approaches [33], [20], we keep the training epochs consistent with ours for fair comparisons. We group previous methods into 3 categories as discussed in Sec. II. ECL adopts RW (BC loss), FW (feature distillation), and ME (multi-expert architecture). Note that we report the ensemble results for all ME methods.
+
+As illustrated in Tab. I-II, ECL outperforms previous approaches remarkably on all CIFAR-LT settings, ImageNet-LT, and iNaturalist 2018. Compared to state-of-the-art performance, ECL improves the NCL by 2.1% (CIFAR100-LT, γ = 100), 1.1% (ImageNet-LT), and 0.9% (iNaturalist 2018) respectively. Compared to two-stage methods like MiS-LAS [28] and GCL [38], our ECL outperforms them in an end-to-end manner. Although we train the model in the multiexpert framework, we can adopt a single expert for evaluation without extra computation and memory consumption. We will discuss the single expert performance in Sec. VI-F.
+
+
+F. Further Analysis
+
+Ablation study of ECL. We elaborately design three main modules to compound ECL, namely the Balanced Knowledge Transfer module (BKT), Feature Level Distillation (FLD), and Contrastive Proxy Task (CPT). We conduct extensive ablation experiments on CIFAR100-LT (γ = 100) to demonstrate the contribution of each component. As Tab. III shows, our proposals are complementary to the performance, and FLD contributes the primary parts. As discussed in Sec. IV (observation 2), FLD promotes more robust feature learning without the toxicity from prior label bias. Like NCL [20] and PaCo [33], the CPT consistently improves model performance without inference burden. In addition, the BKT module consistently improves logit level distillation, allowing machine domain knowledge to be transferred with unbiased weight.
+
+Effect of expert number K. We conducted experiments to explore the influence of expert number K. As Fig. 4 shows, the model performance improves consistently with larger K. When K = 1, the model is equal to the baseline with CPT without collaborative learning. When K = 2, the performance improves significantly, which firmly manifests the effectiveness of BKT and FLD. However, when K ≥ 3, the single expert is difficult to get further improvement, especially on few-shot accuracy. Hence, we set K = 3 to trade off the computational overhead and model performance.
+
+Hyper-parameters analysis. In the final loss (Eq. 11), we trade off the collaborative learning with α and contrastive learning with β. Fig. 5 is designed to search for the optimal value on CIFAR100-LT (γ = 100). In Fig. 5a, we set β = 1   by default. When α = 0, the model is degraded to the baseline with CPT. Top-1 Acc. increases rapidly when we add distillation loss (α > 0). The best trade-off between distillation and classification loss achieves at α = 0.6. In Fig. 5b, we set α = 0.6 by default. The best performance is achieved when β ∼ 1, which shows a balance between classification and instance discrimination.
+
+Feature representation quality. In Tab. III, we notice that the feature level distillation is crucial in ECL. To delve into its mechanism, we conduct visualization experiments on CIFAR10-LT and CIFAR100-LT (γ = 100) in Fig. 6. Specifically, we utilize t-SNE [66] to map the K-dimensional features into 2D distribution for visualization. Fig. 6a & 6d show that the baseline cannot achieve satisfactory clustering results where few-shot categories are coupled together. The poor inter-class distance prevents further performance gains of the classifier. Note that collaborative learning (NCL) remarkably alleviates this issue as shown in Fig. 6b & 6e. Our ECL further contributes to more compact intra-class distributions and enlarges the inter-class distance (Fig. 6c & 6f), which demonstrates that ECL provides higher quality features. In addition, we visualize the feature distance among each expert and summarize the average distance w.r.t. class index, which is sorted by instances number. As Fig. 7 shows, all ex-CE CB [39] GCL [38] NCL [20] ECL Fig. 9: Reliability diagrams on ImageNet-LT with 15 bins. We select ResNet50 models trained via plain CE, CB, GCL, NCL, and our ECL. The prediction probabilities of our ECL indicate optimal expected costs in Bayesian decision scenarios.
+
+(a) CE [39] (b) CB [39] (c) BS [15] (d) GCL [38] (e) NCL [20] (f) ECL perts extract similar features of many-shot samples. However, the feature representations present differentiated distribution in few-shot samples. Our ECL alleviates this problem remarkably via feature-level distillation, yielding its better classification performance.
+
+Loss/Accuracy landscapes. To validate the model robustness, we adopt the tool in [49] to visualize the loss/accuracy landscapes of models with/without feature level distillation.
+
+We conduct experiments on CIFAR10-LT (γ = 100) based on our ECL. As described in Sec. VI-B, we perturb the model weights by a series of Gaussian noises with varying degrees. As Fig. 8 shows, it turns out that the loss/accuracy landscapes become much flatter if we adopt the feature level distillation on ECL. This observation demonstrates that the distillation operation help models to extract more robust representations to overcome the random noise perturbation.
+
+Model calibration. In Fig. 9, we present the reliability diagrams with 15 bins on the ImageNet-LT. For all models in comparison, the accuracy bars are below the ideal y = x red line, which indicates that the models are all overconfident in their predictions. Compared to baseline CE, all methods alleviate the overconfidence issue and promote model calibration to some extent. Compared to NCL, ECL further reduces ECE, which demonstrates our success in regulating all classes. We present more detailed comparisons to the stateof-the-art on the best single model and ensembles in Tab. IV. Our ECL consistently outperforms the NCL in either single and ensemble views, and the single expert of ECL achieves comparable performance with the NCL ensemble.
+
+Do long-tail problems get alleviated? One of the primary goals of LTR is to improve performance in few-shot categories. Hence, we plot the confusion matrices on CIFAR100-LT. For better visualizations, we adopt logarithmic operations for all matrix values. In Fig. 10, the baseline (10a) prefers to train a trivial predictor, which simplifies images as many-shot labels to minimize the error rate. Several recent methods (10b-10e) alleviate such issues to some extent. Compared to them, our proposal (10f) shows the best accuracy (diagonal) and a more balanced misclassification distribution (non-diagonal). It firmly demonstrates our superiority in erasing the bias in LTR and our success in regularizing the few-shot classes.
+
+
+VII. CONCLUSION
+
+This paper systematically analyzes the multi-expert framework in the long tail visual recognition, which trains several experts collaboratively to overcome the model preference for the majority and the high uncertainty on the minority. We point out that there is imbalanced knowledge transfer among experts' distillation, which leads to the inconspicuous improvement of collaborative learning on tail performance. A balanced distillation loss is proposed to improve the efficiency of collaborative learning by comparing two classifiers' predictions, which are supervised by different signals. Furthermore, we claim that distillation at the feature level will greatly improve the feature quality and model performance. To learn representations more thoroughly, we integrate a contrastive proxy task and finally propose an effective collaborative learning framework, which helps the model extract robust features and learn meticulous distinguishing ability. We conduct both quantitative and qualitative experiments on four standard datasets to verify the superiority and effectiveness of ECL. Extensive experiments and visualizations demonstrate that ECL achieves state-of-the-art performance with better feature representations.
+
+Fig. 1 :
+1The illustration of collaborative learning in the multiexpert framework. F: feature encoder. W: classification head. Different from previous work, we re-balance the distillation and conduct online distillation on both feature and logit levels.
+
+Fig. 2 :
+2Average distillation logits value and prediction distribution w.r.t. classes. We conduct an evaluation of vanilla NCL and proposed ECL on CIFAR100-LT (γ = 100). The class index is ranked according to the training instance number.
+
+Fig. 3 :
+3The single expert architecture and corresponding training pipeline. Online distillation is performed at both the featurelevel and logit-level. Auxiliary modules like ref head, MoCo encoder & head will be discarded during the inference phase.
+
+Fig. 4 :Fig. 5 :
+45Comparison of different expert number K on CIFAT100-LT (γ = 100). The ensemble performance is computed based on the averaging logits of all experts. We report Top-1/Few-shot Acc and show that a larger expert number K brings higher model performance. We set K = 3 to leverage the performance and training memory consumption. Hyper-parameter analysis of α and β on CIFAR100-LT (γ = 100). We fix β = 1 in subfigure (a) and α = 0.6 in subfigure (b). α = 0 means no collaborative learning in our ECL, which results in poor Top-1 Acc performance.
+
+Fig. 6 :
+6Visualized t-SNE results of ResNet32 on CIFAR10-LT (a-c) and CIFAR100-LT (d-e). The scatters of the same color indicate the same categories. Our ECL shows better intra-class and inter-class distance to disentangle different categories.
+
+Fig. 7 :
+7The class-wise feature l 2 distance between each expert pair on CIFAR10-LT. The red/blue points indicate NCL and ECL. ECL effectively reduces the differences between different experts on the feature of the same images.
+
+Fig. 8 :
+8The loss/accuracy landscapes of ECL without (a) or with (b) feature level distillation. All plots contain 5 landscapes with 5 randomly generated directions.
+
+Fig. 10 :
+10Visualized log-confusion matrix on CIFAR100-LT (γ = 100). x-axis: ground truth. y-axis: predicted label. The deeper color indicates larger values. ECL shows the best class accuracy and the most balanced misclassification distribution.
+
+
+, we visualize the logit-level transfer knowledge (i.e., distilled logits value) and model prediction numbers w.r.t. class of vanilla collaborative learning and ours. The tail classes present lower knowledgeMoCo head q 
+ref head 
+cls head 
+
+MoCo feature 
+logits 
+
+Encoder 
+
+MoCo Encoder 
+
+Balanced logits 
+distillation 
+logits 
+
+feature 
+
+MoCo head k 
+
+feature 
+
+feature 
+
+transforms 
+
+transforms 
+
+Pair Image Input 
+
+
+
+TABLE
+
+
+TABLE II :
+IITop-1 accuracy (%) on ImageNet-LT & iNaturalist 2018. Results are sorted by publication time. R-50: ResNet-50. RX-50: ResNeXt-50. Our ECL consistently outperforms state-of-the-art by a large margin.Method 
+ImageNet-LT 
+iNaturalist2018 
+
+R-50 
+RX-50 
+R-50 
+
+CE [39] 
+38.9 
+44.4 
+60.9 
+OLTR [56] 
+40.4 
+-
+63.9 
+CB [39] 
+40.9 
+-
+63.5 
+LDAM+DRW [27] 
+45.8 
+-
+68.0 
+BBN [8] 
+48.3 
+49.3 
+66.3 
+NCM [24] 
+44.3 
+47.3 
+63.1 
+c-RT [24] 
+47.3 
+49.6 
+65.2 
+τ -Norm [24] 
+46.7 
+49.4 
+65.6 
+LWS [24] 
+47.7 
+49.7 
+65.9 
+BS [15] 
+53.0 
+-
+66.4 
+RIDE (4 Expert) [19] 
+55.4 
+56.8 
+72.6 
+DisAlign [57] 
+52.9 
+53.4 
+70.6 
+DiVE [47] 
+53.1 
+-
+71.7 
+SSD (2 Expert) [48] 
+-
+56.0 
+71.5 
+ACE (4 Expert) [45] 
+54.7 
+56.6 
+72.9 
+PaCo [33] 
+56.1 
+57.2 
+72.2 
+TSC [34] 
+52.4 
+-
+69.7 
+RIDE+CMO (4 Expert) [14] 
+56.2 
+-
+72.8 
+BCL [35] 
+56.0 
+57.1 
+71.8 
+CKT [58] 
+-
+54.2 
+-
+GCL [38] 
+53.7 
+54.9 
+72.0 
+NCL (3 Expert) [20] 
+59.5 
+60.5 
+74.9 
+ECL (3 Expert) 
+60.6 
+61.7 
+75.8 
+
+
+
+TABLE III :
+IIIAblation study of ECL. We report ResNet32 on 
+CIFAR100-LT (γ = 100) and ResNet50 on ImageNet-LT. 
+BKT: balanced knowledge transfer module. FLD: feature level 
+distillation. CPT: contrastive proxy task. 
+
+BKT FLD 
+CPT CIFAR100-LT 
+∆ 
+ImageNet-LT 
+∆ 
+
+-
+-
+-
+52.2 
+-
+55.1 
+-
+-
+-
+53.7 
++ 1.5 
+56.4 
++ 1.3 
+-
+-
+54.7 
++ 2.5 
+58.9 
++ 3.8 
+-
+-
+54.2 
++ 2.0 
+57.6 
++ 2.5 
+-
+54.9 
++ 2.7 
+57.9 
++ 2.8 
+-
+55.8 
++ 3.6 
+59.9 
++ 4.8 
+56.3 
++ 4.1 
+60.6 
++ 5.5 
+
+
+
+TABLE IV :
+IVPerformance comparison with NCL in detail.Dataset 
+CIFAR100-LT 
+ImageNet-LT 
+
+Metric 
+Acc ↑ 
+ECE ↓ 
+Acc ↑ 
+ECE ↓ 
+
+NCL [20] 
+Single 
+53.6 
+5.11 
+57.7 
+3.80 
+ECL 
+55.1 (+1.5) 2.33 (-2.78) 59.3 (+1.6) 1.96 (-1.84) 
+
+NCL [20] Ensamble 
+54.4 
+4.62 
+59.5 
+2.92 
+ECL 
+56.3 (+1.9) 1.82 (-2.80) 60.6 (+1.1) 1.33 (-1.59) 
+
+
+
+Forestdet: Largevocabulary long-tailed object detection and instance segmentation. J Wu, L Song, Q Zhang, M Yang, J Yuan, IEEE Transactions on Multimedia. 24J. Wu, L. Song, Q. Zhang, M. Yang, and J. Yuan, "Forestdet: Large- vocabulary long-tailed object detection and instance segmentation," IEEE Transactions on Multimedia, vol. 24, pp. 3693-3705, 2021.
+
+An imbalance compensation framework for background subtraction. X Zhang, C Zhu, H Wu, Z Liu, Y Xu, IEEE Transactions on Multimedia. 1911X. Zhang, C. Zhu, H. Wu, Z. Liu, and Y. Xu, "An imbalance compen- sation framework for background subtraction," IEEE Transactions on Multimedia, vol. 19, no. 11, pp. 2425-2438, 2017.
+
+Ltreid: Factorizable feature generation with independent components for long-tailed person reidentification. P Wang, Z Zhao, F Su, H Meng, IEEE Transactions on Multimedia. P. Wang, Z. Zhao, F. Su, and H. Meng, "Ltreid: Factorizable feature generation with independent components for long-tailed person re- identification," IEEE Transactions on Multimedia, 2022.
+
+Improving pedestrian detection from a long-tailed domain perspective. M Ding, S Zhang, J Yang, Proceedings of the 29th ACM International Conference on Multimedia. the 29th ACM International Conference on MultimediaM. Ding, S. Zhang, and J. Yang, "Improving pedestrian detection from a long-tailed domain perspective," in Proceedings of the 29th ACM International Conference on Multimedia, 2021, pp. 2918-2926.
+
+ImageNet Large Scale Visual Recognition Challenge. O Russakovsky, J Deng, H Su, J Krause, S Satheesh, S Ma, Z Huang, A Karpathy, A Khosla, M Bernstein, A C Berg, L Fei-Fei, IJCV. 1153O. Russakovsky, J. Deng, H. Su, J. Krause, S. Satheesh, S. Ma, Z. Huang, A. Karpathy, A. Khosla, M. Bernstein, A. C. Berg, and L. Fei- Fei, "ImageNet Large Scale Visual Recognition Challenge," IJCV, vol. 115, no. 3, pp. 211-252, 2015.
+
+Microsoft coco: Common objects in context. T.-Y Lin, M Maire, S Belongie, J Hays, P Perona, D Ramanan, P Dollár, C L Zitnick, ECCV. SpringerT.-Y. Lin, M. Maire, S. Belongie, J. Hays, P. Perona, D. Ramanan, P. Dollár, and C. L. Zitnick, "Microsoft coco: Common objects in context," in ECCV. Springer, 2014, pp. 740-755.
+
+Places: A 10 million image database for scene recognition. B Zhou, A Lapedriza, A Khosla, A Oliva, A Torralba, IEEE TPAMI. B. Zhou, A. Lapedriza, A. Khosla, A. Oliva, and A. Torralba, "Places: A 10 million image database for scene recognition," IEEE TPAMI, 2017.
+
+Bbn: Bilateral-branch network with cumulative learning for long-tailed visual recognition. B Zhou, Q Cui, X.-S Wei, Z.-M Chen, CVPR. B. Zhou, Q. Cui, X.-S. Wei, and Z.-M. Chen, "Bbn: Bilateral-branch network with cumulative learning for long-tailed visual recognition," in CVPR, 2020, pp. 9719-9728.
+
+Bag of tricks for long-tailed visual recognition with deep convolutional neural networks. Y Zhang, X.-S Wei, B Zhou, J Wu, AAAI. Y. Zhang, X.-S. Wei, B. Zhou, and J. Wu, "Bag of tricks for long-tailed visual recognition with deep convolutional neural networks," in AAAI, 2021, pp. 3447-3455.
+
+Dynamic mixup for multilabel long-tailed food ingredient recognition. J Gao, J Chen, H Fu, Y.-G Jiang, IEEE Transactions on Multimedia. J. Gao, J. Chen, H. Fu, and Y.-G. Jiang, "Dynamic mixup for multi- label long-tailed food ingredient recognition," IEEE Transactions on Multimedia, 2022.
+
+Towards calibrated model for longtailed visual recognition from prior perspective. Z Xu, Z Chai, C Yuan, NeurIPS. 34Z. Xu, Z. Chai, C. Yuan et al., "Towards calibrated model for long- tailed visual recognition from prior perspective," NeurIPS, vol. 34, pp. 7139-7152, 2021.
+
+Feature space augmentation for long-tailed data. P Chu, X Bian, S Liu, H Ling, ECCV. SpringerP. Chu, X. Bian, S. Liu, and H. Ling, "Feature space augmentation for long-tailed data," in ECCV. Springer, 2020, pp. 694-710.
+
+M2m: Imbalanced classification via major-to-minor translation. J Kim, J Jeong, J Shin, CVPR. 905J. Kim, J. Jeong, J. Shin et al., "M2m: Imbalanced classification via major-to-minor translation," in CVPR, 2020, pp. 13 896-13 905.
+
+The majority can help the minority: Context-rich minority oversampling for long-tailed classification. S Park, Y Hong, B Heo, S Yun, J Y Choi, CVPR. S. Park, Y. Hong, B. Heo, S. Yun, and J. Y. Choi, "The majority can help the minority: Context-rich minority oversampling for long-tailed classification," in CVPR, 2022, pp. 6887-6896.
+
+Balanced meta-softmax for long-tailed visual recognition. J Ren, C Yu, X Ma, H Zhao, S Yi, NeurIPS. 33J. Ren, C. Yu, X. Ma, H. Zhao, S. Yi et al., "Balanced meta-softmax for long-tailed visual recognition," NeurIPS, vol. 33, pp. 4175-4186, 2020.
+
+Long-tail learning via logit adjustment. A K Menon, S Jayasumana, A S Rawat, H Jain, A Veit, S Kumar, ICLR. A. K. Menon, S. Jayasumana, A. S. Rawat, H. Jain, A. Veit, and S. Kumar, "Long-tail learning via logit adjustment," in ICLR, 2021.
+
+Disentangling label distribution for long-tailed visual recognition. Y Hong, S Han, K Choi, S Seo, B Kim, B Chang, CVPR. Computer Vision Foundation / IEEE, 2021. Y. Hong, S. Han, K. Choi, S. Seo, B. Kim, and B. Chang, "Disen- tangling label distribution for long-tailed visual recognition," in CVPR. Computer Vision Foundation / IEEE, 2021, pp. 6626-6636.
+
+Learning from multiple experts: Selfpaced knowledge distillation for long-tailed classification. L Xiang, G Ding, J Han, ECCV. SpringerL. Xiang, G. Ding, J. Han et al., "Learning from multiple experts: Self- paced knowledge distillation for long-tailed classification," in ECCV. Springer, 2020, pp. 247-263.
+
+Long-tailed recognition by routing diverse distribution-aware experts. X Wang, L Lian, Z Miao, Z Liu, S Yu, ICLR. X. Wang, L. Lian, Z. Miao, Z. Liu, and S. Yu, "Long-tailed recognition by routing diverse distribution-aware experts," in ICLR, 2021.
+
+Nested collaborative learning for long-tailed visual recognition. J Li, Z Tan, J Wan, Z Lei, G Guo, CVPR. J. Li, Z. Tan, J. Wan, Z. Lei, and G. Guo, "Nested collaborative learning for long-tailed visual recognition," in CVPR, 2022, pp. 6949-6958.
+
+Respecting transfer gap in knowledge distillation. Y Niu, L Chen, C Zhou, H Zhang, NeurIPSY. Niu, L. Chen, C. Zhou, and H. Zhang, "Respecting transfer gap in knowledge distillation," in NeurIPS, 2022.
+
+Momentum contrast for unsupervised visual representation learning. K He, H Fan, Y Wu, S Xie, R Girshick, CVPR. K. He, H. Fan, Y. Wu, S. Xie, and R. Girshick, "Momentum contrast for unsupervised visual representation learning," in CVPR, 2020, pp. 9729-9738.
+
+Borderline-smote: A new oversampling method in imbalanced data sets learning," in ICIC, ser. H Han, W Wang, B Mao, Lecture Notes in Computer Science. 3644SpringerH. Han, W. Wang, B. Mao et al., "Borderline-smote: A new over- sampling method in imbalanced data sets learning," in ICIC, ser. Lecture Notes in Computer Science, vol. 3644. Springer, 2005, pp. 878-887.
+
+Decoupling representation and classifier for long-tailed recognition. B Kang, S Xie, M Rohrbach, Z Yan, A Gordo, J Feng, Y Kalantidis, ICLR. B. Kang, S. Xie, M. Rohrbach, Z. Yan, A. Gordo, J. Feng, and Y. Kalantidis, "Decoupling representation and classifier for long-tailed recognition," in ICLR, 2020.
+
+RSG: A simple but effective module for learning imbalanced datasets. J Wang, T Lukasiewicz, X Hu, J Cai, Z Xu, CVPR. Computer Vision Foundation / IEEE, 2021. J. Wang, T. Lukasiewicz, X. Hu, J. Cai, and Z. Xu, "RSG: A simple but effective module for learning imbalanced datasets," in CVPR. Computer Vision Foundation / IEEE, 2021, pp. 3784-3793.
+
+Annealing genetic gan for imbalanced web data learning. J Hao, C Wang, G Yang, Z Gao, J Zhang, H Zhang, IEEE Transactions on Multimedia. 24J. Hao, C. Wang, G. Yang, Z. Gao, J. Zhang, and H. Zhang, "Annealing genetic gan for imbalanced web data learning," IEEE Transactions on Multimedia, vol. 24, pp. 1164-1174, 2021.
+
+Learning imbalanced datasets with label-distribution-aware margin loss. K Cao, C Wei, A Gaidon, N Arechiga, T Ma, NeurIPS. 32K. Cao, C. Wei, A. Gaidon, N. Arechiga, and T. Ma, "Learning imbalanced datasets with label-distribution-aware margin loss," NeurIPS, vol. 32, 2019.
+
+Improving calibration for longtailed recognition. Z Zhong, J Cui, S Liu, J Jia, CVPR. Computer Vision Foundation / IEEE, 2021. Z. Zhong, J. Cui, S. Liu, and J. Jia, "Improving calibration for long- tailed recognition," in CVPR. Computer Vision Foundation / IEEE, 2021, pp. 16 489-16 498.
+
+A simple framework for contrastive learning of visual representations. T Chen, S Kornblith, M Norouzi, G Hinton, ICML. PMLR, 2020. T. Chen, S. Kornblith, M. Norouzi, and G. Hinton, "A simple framework for contrastive learning of visual representations," in ICML. PMLR, 2020, pp. 1597-1607.
+
+. Z Tao, X Liu, Y Xia, X Wang, L Yang, X Huang, T.-S , Z. Tao, X. Liu, Y. Xia, X. Wang, L. Yang, X. Huang, and T.-S.
+
+Self-supervised learning for multimedia recommendation. Chua, IEEE Transactions on Multimedia. Chua, "Self-supervised learning for multimedia recommendation," IEEE Transactions on Multimedia, 2022.
+
+Rethinking the value of labels for improving class-imbalanced learning. Y Yang, Z Xu, NeurIPS. 33Y. Yang, Z. Xu et al., "Rethinking the value of labels for improving class-imbalanced learning," NeurIPS, vol. 33, pp. 19 290-19 301, 2020.
+
+Contrastive learning based hybrid networks for long-tailed image classification. P Wang, K Han, X.-S Wei, L Zhang, L Wang, CVPR. P. Wang, K. Han, X.-S. Wei, L. Zhang, and L. Wang, "Contrastive learning based hybrid networks for long-tailed image classification," in CVPR, 2021, pp. 943-952.
+
+. J Cui, Z Zhong, S Liu, B Yu, J Jia, Parametric contrastive learning," in ICCV, 2021J. Cui, Z. Zhong, S. Liu, B. Yu, and J. Jia, "Parametric contrastive learning," in ICCV, 2021, pp. 715-724.
+
+Targeted supervised contrastive learning for long-tailed recognition. T Li, P Cao, Y Yuan, L Fan, Y Yang, R S Feris, P Indyk, D Katabi, CVPR. T. Li, P. Cao, Y. Yuan, L. Fan, Y. Yang, R. S. Feris, P. Indyk, and D. Katabi, "Targeted supervised contrastive learning for long-tailed recognition," in CVPR, 2022, pp. 6918-6928.
+
+Balanced contrastive learning for long-tailed visual recognition. J Zhu, Z Wang, J Chen, Y.-P P Chen, Y.-G Jiang, CVPR. J. Zhu, Z. Wang, J. Chen, Y.-P. P. Chen, and Y.-G. Jiang, "Balanced contrastive learning for long-tailed visual recognition," in CVPR, 2022, pp. 6908-6917.
+
+Rethinking class-balanced methods for long-tailed visual recognition from a domain adaptation perspective. M A Jamal, M Brown, M.-H Yang, L Wang, B Gong, CVPR. M. A. Jamal, M. Brown, M.-H. Yang, L. Wang, and B. Gong, "Re- thinking class-balanced methods for long-tailed visual recognition from a domain adaptation perspective," in CVPR, 2020, pp. 7610-7619.
+
+Imbalanced sourcefree domain adaptation. X Li, J Li, L Zhu, G Wang, Z Huang, Proceedings of the 29th ACM International Conference on Multimedia. the 29th ACM International Conference on MultimediaX. Li, J. Li, L. Zhu, G. Wang, and Z. Huang, "Imbalanced source- free domain adaptation," in Proceedings of the 29th ACM International Conference on Multimedia, 2021, pp. 3330-3339.
+
+Long-tailed visual recognition via gaussian clouded logit adjustment. M Li, Y Cheung, Y Lu, CVPR. M. Li, Y.-m. Cheung, Y. Lu et al., "Long-tailed visual recognition via gaussian clouded logit adjustment," in CVPR, 2022, pp. 6929-6938.
+
+Class-balanced loss based on effective number of samples. Y Cui, M Jia, T.-Y Lin, Y Song, S Belongie, CVPR. Y. Cui, M. Jia, T.-Y. Lin, Y. Song, and S. Belongie, "Class-balanced loss based on effective number of samples," in CVPR, 2019, pp. 9268-9277.
+
+Long-tailed distribution adaptation. Z Peng, W Huang, Z Guo, X Zhang, J Jiao, Q Ye, Proceedings of the 29th ACM International Conference on Multimedia. the 29th ACM International Conference on MultimediaZ. Peng, W. Huang, Z. Guo, X. Zhang, J. Jiao, and Q. Ye, "Long-tailed distribution adaptation," in Proceedings of the 29th ACM International Conference on Multimedia, 2021, pp. 3275-3282.
+
+An equalized margin loss for face recognition. J Sun, W Yang, J.-H Xue, Q Liao, IEEE Transactions on Multimedia. 2211J. Sun, W. Yang, J.-H. Xue, and Q. Liao, "An equalized margin loss for face recognition," IEEE Transactions on Multimedia, vol. 22, no. 11, pp. 2833-2843, 2020.
+
+Long-tailed recognition via weight balancing. S Alshammari, Y.-X Wang, D Ramanan, S Kong, CVPR. S. Alshammari, Y.-X. Wang, D. Ramanan, and S. Kong, "Long-tailed recognition via weight balancing," in CVPR, 2022, pp. 6897-6907.
+
+Self-supervised aggregation of diverse experts for test-agnostic long-tailed recognition. Y Zhang, B Hooi, L Hong, J Feng, NeurIPS. 3590Y. Zhang, B. Hooi, L. Hong, and J. Feng, "Self-supervised aggregation of diverse experts for test-agnostic long-tailed recognition," NeurIPS, vol. 35, pp. 34 077-34 090, 2022.
+
+Class-balanced distillation for long-tailed visual recognition. A Iscen, A Araujo, B Gong, C Schmid, BMVC. BMVA Press165A. Iscen, A. Araujo, B. Gong, and C. Schmid, "Class-balanced distilla- tion for long-tailed visual recognition," in BMVC. BMVA Press, 2021, p. 165.
+
+Ace: Ally complementary experts for solving long-tailed recognition in one-shot. J Cai, Y Wang, J.-N Hwang, ICCV. J. Cai, Y. Wang, J.-N. Hwang et al., "Ace: Ally complementary experts for solving long-tailed recognition in one-shot," in ICCV, 2021, pp. 112- 121.
+
+Distilling the knowledge in a neural network. G Hinton, O Vinyals, J Dean, arXiv:1503.025312arXiv preprintG. Hinton, O. Vinyals, J. Dean et al., "Distilling the knowledge in a neural network," arXiv preprint arXiv:1503.02531, vol. 2, no. 7, 2015.
+
+Distilling virtual examples for longtailed recognition. Y.-Y He, J Wu, X.-S Wei, ICCV. Y.-Y. He, J. Wu, X.-S. Wei et al., "Distilling virtual examples for long- tailed recognition," in ICCV, 2021, pp. 235-244.
+
+Self supervision to distillation for longtailed visual recognition. T Li, L Wang, G Wu, ICCV. T. Li, L. Wang, and G. Wu, "Self supervision to distillation for long- tailed visual recognition," in ICCV, 2021, pp. 630-639.
+
+Visualizing the loss landscape of neural nets. H Li, Z Xu, G Taylor, C Studer, T Goldstein, NeurIPSH. Li, Z. Xu, G. Taylor, C. Studer, and T. Goldstein, "Visualizing the loss landscape of neural nets," in NeurIPS, 2018.
+
+Focal loss for dense object detection. T.-Y Lin, P Goyal, R Girshick, K He, P Dollár, T.-Y. Lin, P. Goyal, R. Girshick, K. He, and P. Dollár, "Focal loss for dense object detection," in ICCV, 2017, pp. 2980-2988.
+
+Long-tailed classification by keeping the good and removing the bad momentum causal effect. K Tang, J Huang, H Zhang, NeurIPS. 33K. Tang, J. Huang, and H. Zhang, "Long-tailed classification by keeping the good and removing the bad momentum causal effect," NeurIPS, vol. 33, pp. 1513-1524, 2020.
+
+Distributional robustness loss for longtail learning. D Samuel, G Chechik, ICCV. D. Samuel, G. Chechik et al., "Distributional robustness loss for long- tail learning," in ICCV, 2021, pp. 9495-9504.
+
+A re-balancing strategy for class-imbalanced classification based on instance difficulty. S Yu, J Guo, R Zhang, Y Fan, Z Wang, X Cheng, CVPR. S. Yu, J. Guo, R. Zhang, Y. Fan, Z. Wang, and X. Cheng, "A re-balancing strategy for class-imbalanced classification based on instance difficulty," in CVPR, 2022, pp. 70-79.
+
+Learning multiple layers of features from tiny images. A Krizhevsky, G Hinton, A. Krizhevsky, G. Hinton et al., "Learning multiple layers of features from tiny images," 2009.
+
+The inaturalist species classification and detection dataset. G Van Horn, O Mac Aodha, Y Song, Y Cui, C Sun, A Shepard, H Adam, P Perona, S Belongie, in CVPR. G. Van Horn, O. Mac Aodha, Y. Song, Y. Cui, C. Sun, A. Shepard, H. Adam, P. Perona, and S. Belongie, "The inaturalist species classifi- cation and detection dataset," in CVPR, 2018, pp. 8769-8778.
+
+Large-scale long-tailed recognition in an open world. Z Liu, Z Miao, X Zhan, J Wang, B Gong, S X Yu, CVPR. Z. Liu, Z. Miao, X. Zhan, J. Wang, B. Gong, and S. X. Yu, "Large-scale long-tailed recognition in an open world," in CVPR, 2019.
+
+Distribution alignment: A unified framework for long-tail visual recognition. S Zhang, Z Li, S Yan, X He, J Sun, CVPR. S. Zhang, Z. Li, S. Yan, X. He, and J. Sun, "Distribution alignment: A unified framework for long-tail visual recognition." in CVPR, 2021.
+
+Long-tail recognition via compositional knowledge transfer. S Parisot, P M Esperança, S Mcdonagh, T J Madarasz, Y Yang, Z Li, CVPR. S. Parisot, P. M. Esperança, S. McDonagh, T. J. Madarasz, Y. Yang, and Z. Li, "Long-tail recognition via compositional knowledge transfer," in CVPR, 2022, pp. 6939-6948.
+
+Pitfalls of indomain uncertainty estimation and ensembling in deep learning. A Ashukha, A Lyzhov, D Molchanov, D Vetrov, ICLR. A. Ashukha, A. Lyzhov, D. Molchanov, and D. Vetrov, "Pitfalls of in- domain uncertainty estimation and ensembling in deep learning," in ICLR, 2020.
+
+SGDR: Stochastic gradient descent with warm restarts. I Loshchilov, F Hutter, ICLR. I. Loshchilov and F. Hutter, "SGDR: Stochastic gradient descent with warm restarts," in ICLR, 2017.
+
+Improved regularization of convolutional neural networks with cutout. T Devries, G W Taylor, arXiv:1708.04552arXiv preprintT. DeVries, G. W. Taylor et al., "Improved regularization of convolu- tional neural networks with cutout," arXiv preprint arXiv:1708.04552, 2017.
+
+Scale-aware automatic augmentation for object detection. Y Chen, Y Li, T Kong, L Qi, R Chu, L Li, J Jia, CVPR. Y. Chen, Y. Li, T. Kong, L. Qi, R. Chu, L. Li, and J. Jia, "Scale-aware automatic augmentation for object detection," in CVPR, 2021.
+
+Deep residual learning for image recognition. K He, X Zhang, S Ren, J Sun, CVPR. K. He, X. Zhang, S. Ren, and J. Sun, "Deep residual learning for image recognition," in CVPR, 2016, pp. 770-778.
+
+Randaugment: Practical automated data augmentation with a reduced search space. E D Cubuk, B Zoph, J Shlens, Q V Le, CVPR workshops, 2020. E. D. Cubuk, B. Zoph, J. Shlens, and Q. V. Le, "Randaugment: Practical automated data augmentation with a reduced search space," in CVPR workshops, 2020, pp. 702-703.
+
+Aggregated residual transformations for deep neural networks. S Xie, R Girshick, P Dollár, Z Tu, K He, S. Xie, R. Girshick, P. Dollár, Z. Tu, and K. He, "Aggregated residual transformations for deep neural networks," in CVPR, 2017, pp. 1492- 1500.
+
+Visualizing data using t-sne. L Van Der Maaten, G Hinton, Journal of machine learning research. 911L. Van der Maaten and G. Hinton, "Visualizing data using t-sne," Journal of machine learning research, vol. 9, no. 11, 2008.

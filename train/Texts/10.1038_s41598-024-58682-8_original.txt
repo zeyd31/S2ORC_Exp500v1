@@ -1,0 +1,431 @@
+
+Predicting 2-year neurodevelopmental outcomes in preterm infants using multimodal structural brain magnetic resonance imaging with local connectivity
+
+
+Yong Hun Jang 
+Department of Translational Medicine
+Hanyang University Graduate School of Biomedical Science and Engineering
+SeoulRepublic of Korea
+
+Jusung Ham 
+Department of Communication Sciences and Disorders
+University of Iowa
+52242Iowa CityIAUSA
+
+Payam Hosseinzadeh Kasani 
+Department of Pediatrics
+Hanyang University Hospital
+Hanyang University College of Medicine
+Wangsimni-ro, Seongdong-gu222-1, 04763SeoulRepublic of Korea
+
+Hyuna Kim 
+Department of Translational Medicine
+Hanyang University Graduate School of Biomedical Science and Engineering
+SeoulRepublic of Korea
+
+Joo Young Lee 
+Department of Translational Medicine
+Hanyang University Graduate School of Biomedical Science and Engineering
+SeoulRepublic of Korea
+
+Gang Yi Lee 
+Tae Hwan Han 
+Department of Translational Medicine
+Hanyang University Graduate School of Biomedical Science and Engineering
+SeoulRepublic of Korea
+
+Division of Neurology
+
+
+Department of Pediatrics
+Hanyang University Hospital
+Hanyang University College of Medicine
+SeoulRepublic of Korea
+
+Bung-Nyun Kim 
+Division of Children and Adolescent Psychiatry
+Department of Psychiatry
+Seoul National University Hospital
+SeoulRepublic of Korea
+
+Hyun Ju Lee 
+Department of Pediatrics
+Hanyang University Hospital
+Hanyang University College of Medicine
+Wangsimni-ro, Seongdong-gu222-1, 04763SeoulRepublic of Korea
+
+Hanyang Institute of Bioscience and Biotechnology
+Hanyang University
+SeoulRepublic of Korea
+
+Predicting 2-year neurodevelopmental outcomes in preterm infants using multimodal structural brain magnetic resonance imaging with local connectivity
+C26C80DE704571618908E7E5B18A8F3710.1038/s41598-024-58682-8Received: 18 January 2024; Accepted: 2 April 2024
+The neurodevelopmental outcomes of preterm infants can be stratified based on the level of prematurity.We explored brain structural networks in extremely preterm (EP; < 28 weeks of gestation) and very-to-late (V-LP; ≥ 28 and < 37 weeks of gestation) preterm infants at term-equivalent age to predict 2-year neurodevelopmental outcomes.Using MRI and diffusion MRI on 62 EP and 131 V-LP infants, we built a multimodal feature set for volumetric and structural network analysis.We employed linear and nonlinear machine learning models to predict the Bayley Scales of Infant and Toddler Development, Third Edition (BSID-III) scores, assessing predictive accuracy and feature importance.Our findings revealed that models incorporating local connectivity features demonstrated high predictive performance for BSID-III subsets in preterm infants.Specifically, for cognitive scores in preterm (variance explained, 17%) and V-LP infants (variance explained, 17%), and for motor scores in EP infants (variance explained, 15%), models with local connectivity features outperformed others.Additionally, a model using only local connectivity features effectively predicted language scores in preterm infants (variance explained, 15%).This study underscores the value of multimodal feature sets, particularly local connectivity, in predicting neurodevelopmental outcomes, highlighting the utility of machine learning in understanding microstructural changes and their implications for early intervention.AbbreviationsBSID-III Bayley scales of infant and toddler development, third edition EP Extremely preterm GA Gestational age GNA Graphical network analysis MRI Magnetic resonance imaging RF Random forest RMSE Root mean squared error STG Superior temporal gyrus
+
+Results
+
+
+Demographics and clinical characteristics
+
+The neonatal intensive care unit neonatal and maternal data, clinical information derived during follow-up, and Bayley Scales of Infant and Toddler Development, Third Edition (BSID-III) subscale results are presented in Table 1.The 193 preterm infants who participated in the study were divided into EP (n = 62) and VLP (n = 131) groups.
+
+
+Local connectivity features with net effect on BSID-III subtests
+
+Table 2 shows GNA results for partial relationship to BSID-III subtests score with WM integrity indices, and factors that directly affect BSID-III scores include positive (+) or negative (−) correlations (Table 2):
+
+
+Machine learning performance of multimodal feature sets
+
+Using multimodal feature sets, we determined the best performing linear and nonlinear models (Table 3; Fig. 1).Regarding the cognitive scores, the preterm (root mean squared error [RMSE], 13.352; variance explained, 17% on ElasticNet) and V-LP (RMSE, 11.205; variance explained, 17% on ElasticNet) groups exhibited the highest predictive performance for models that included local connectivity features.In the EP group, the RF model, including volumetric and global network feature sets, demonstrated the highest predictive performance (RMSE, 15.402; variance explained, 13%).The subgroup that included local connectivity features for motor scores demonstrated the highest predictive performance (EP group: RMSE, 11.363; variance explained, 15% on XGBoost; V-LP group: RMSE, 13.698; variance explained, 10% on RF).Regarding language scores, the preterm group demonstrated a high-performing prediction that included only local connectivity features (Preterm: RMSE, 11.792; variance explained, 15% on XGBoost).However, the other models exhibited relatively low-performance predictions (EP: RMSE, 11.674; variance explained, 3% on XGBoost; V-LP: RMSE, 12.425; variance explained, 6% on ElasticNet).
+
+
+Feature importance within the best performing model in each BSID-III subset
+
+The top ten features that were important for prediction were selected, and the quota for each feature set is shown in Fig. 2. Each BSID-III subset showed a different feature importance, depending on the group.In terms of cognitive and language scores, local connectivity and volume predictors had the highest proportions, whereas in motor scores, clinical variables and volume predictors (e.g., cerebellum) had the highest proportions.
+
+We presented the brain lobe distribution of the local connectivity predictors (Fig. 3) and frequencies of the top 10 predictors from the best-performing models for all BSID-III subsets (Table 4).The feature importance frequency of the brain regions in the local connectivity was ranked by the left superior temporal gyrus (STG), thalamus, and inferior frontal gyrus (opercular), and the remaining regions were counted once or twice.
+
+
+Discussion
+
+To the best of our knowledge, the present study is the first to apply linear and nonlinear machine learning methods to predict 2-year neurodevelopmental outcomes in preterm infants, utilizing a comprehensive set of multi-modal features.The predictive performance demonstrated notable improvement when considering multimodal feature sets compared to single-feature sets, with a primary contribution to performance enhancement observed from local connectivity sets.Feature importance in the best-performing models differed, depending on neurodevelopmental subsets, and was primarily ranked in the left STG and thalamus.
+
+Differences in core WM developmental patterns in the EP and V-LP groups suggest that the affected brain regions may differ depending on the degree of prematurity at birth 12 .Preterm groups in this study might not have shared a common etiology, as indicated by differences in WM development patterns, depending on GA. Between 24 and 28 weeks of gestation, thalamocortical afferent axons developed in the frontal, temporal, and occipital areas, and initial synaptic connections and spatial reorganization in the frontal and occipital regions occurred under the influence of sensory-sensitive cortical development 45,46 .In contrast, after 28 weeks of gestation, myelination became prominent, along with astrocyte and oligodendrocyte production, and the sensory-driven  development of long-range association fibers of the thalamocortical, somatosensory, visual, and auditory processes occurred 47,48 .
+
+Although the majority of preterm infants performed within the normal range of general cognitive functions [49][50][51][52] , previous studies have shown that prediction performance is poor for 2-year-olds with EP who perform at levels 1-2 standard deviation below the expected cognitive function 49,53,54 .Similarly, the significant difference in cognitive scores between EP (93.92 ± 13.91) and V-LP (102.53 ± 13.83) groups may cause performance differences in predicting cognitive outcomes.This suggests that the influence of prematurity level and latent variables early in the EP may cause simultaneous changes in local connectivity and increase collinearity between variables.In this case, global connectivity variables that have been proven in studies comparing pre-and full-term infants at term-equivalent ages may be effective for prediction 21,22,55 .
+
+The emergence of cognitive function is largely influenced by the development of specific subnetworks rather than the development of the whole brain 56 .Differential brain regions identified in this study that predicted cognitive outcomes included the left cuneus, lingual, superior occipital gyrus, and putamen, which are consistent with the regions identified in previous studies 57,58 .They may be responsible for a series of cognitive processes in early brain development, such as the primary processing of visual, and somatosensory information for cognitive 59,60 and sensory association for higher-order cognitive developments 61 .
+
+Predictors with significant partial correlations with motor outcomes were identified in the thalamus, cerebellum, and frontotemporal regions.The identified predictors shared key biomarkers found in previous neurodevelopmental prediction studies.The thalamus has been identified as an important feature of the preterm subgroup, suggesting that the relationship between the thalamus and motor outcomes may be stratified according to GA 62 .Thalamic development is linearly related to the degree of prematurity 12,63 , which could weaken the thalamocortical connections and lead to the disruption of connections within key brain structures in preterm infants 26,55 .Moreover, a study by Kline et al. showed that the thalamic volume was associated with motor outcomes at 2 years of age 64 , and further correlated with motor function at 7 and 11 years of age 65,66 , suggesting that early thalamic development may have effects that persist throughout childhood and adulthood.Additionally, the feature importance in the left insula and frontal and temporal brain regions may reflect the involvement of the high-level cerebellothalamic pathway in motor development 67 .The left superior frontal gyrus contains part of the premotor cortex and is an important predictor of motor outcomes 33 .Moreover, the insula is partially involved in controlling sustained intentional movements 68 , and the temporal pole is known to play a role in controlling visuomotor movements 69 , suggesting its potential as a key marker for later functional development.www.nature.com/scientificreports/
+
+The preterm subgroup exhibited the lowest predictive performance and unreliable feature importance in predicting language scores.These results may be due to the lack of a cohort; therefore, the relationships between multivariate variables and language scores were no longer stratified.Moreover, language performance is more sensitive to potential environmental factors that cannot be completely explained by imaging 70 , and our study may not have considered complex clinical factors derived from the EP group.Nevertheless, the left STG identified in the preterm group was closely related to the language score, again highlighting the importance of this variable as single predictors.A previous study that examined the relationship between language ability at 2 years of age, and local connectivity in preterm infants showed that the left STG was negatively correlated with language scores, suggesting that the left STG is a key region for language development and has microstructural vulnerability 71 .
+
+Although this study attempted to follow the quality assessment criteria provided in recent reviews on predicting pediatric development (Supplementary Table 1) 72 , the most prominent limitation of the current study is the limited amount of data.Generalization to other datasets might be limited due to the lack of external crossvalidation.Also, the implementation of a more complex predictive model such as a non-linear SVM or artificial neural network was not possible because of the limited amount of data and poor interpretability of such models.Therefore, the complex relationships between multiple features and predictive value may not be fully represented in the model.A future collaboration between multiple sites can overcome the hurdle of a small sample size.Dependencies among global network metrics exhibiting similar patterns have been identified (Supplementary Fig. 1), which may potentially impact the model's predictive power and should be interpreted with caution 73 .Future research may perform analyses that limit collinearity among metrics while accommodating the inherent biological complexity within each network metric and measuring the uniqueness of network structures 74,75 .Quantification of the structural connectome should be performed with the cerebellum because structural connections within the cerebellum may be important for WM connections around the thalamus.The importance of the local connectivity was primarily identified in the left hemisphere.Given that early brain lateralization is a multivariate trait influenced by a variety of factors, such as stress and the external environment [76][77][78] .Future studies could utilize lateralization indices in predictive models.
+
+In conclusion, we found that the prediction performance and feature importance differed, depending on the preterm group for the BSID-III.Additionally, the STG and thalamus are important markers for predicting motor and language development.Machine learning approaches that leverage brain connectivity can improve individual risk stratification by improving our understanding of how alterations in the brain microstructure affect neurodevelopment.
+
+
+Methods
+
+
+Study populations
+
+The participants of the present study included preterm infants born at < 37 weeks GA who were admitted to the neonatal intensive care unit of the Hanyang University Hospital and participated in a follow-up project at the Hanyang Inclusive Clinic for Developmental Disorders between 2017 and 2021.Of 218 eligible preterm infants using the BSID-III 79 , eight preterm infants with brain injury, one with hypothermia, and one with metabolic abnormalities were excluded from image processing.Fifteen of 208 participants were excluded from the WM analysis because of motion artifacts and poor image quality.Similarly, 38 patients were excluded from the volumetric analysis.A total of 193 participants in a WM analysis and 170 in a volumetric analysis were recruited with suitable MRI data obtained at near-term age (postmenstrual age, 35-44 weeks) without congenital brain abnormalities, congenital infections, cystic periventricular leukomalacia, diffuse ventriculomegaly, evidence of genetic disorders, focal abnormalities, intraventricular hemorrhage (IVH, grades II-IV), or punctate WM injury.
+
+The Institutional Review Board of the Hanyang University Hospital approved the study protocol, and informed consent was obtained from infant's parents prior to participation in present study.All procedures were performed in compliance with the principles of the Declaration of Helsinki.
+
+All the preterm infants were assessed at corrected ages between 18 and 24 months by certified examiners for cognitive, motor, and socioemotional development using the BSID-III, with subtests scaled based on age at test.For statistical analysis, preterm groups were divided based on GA 28 weeks (28 < EP; 28 ≥ V-LP).
+
+
+Clinical data collection
+
+Detailed information on clinical data was gathered through a systematic and prospective chart review.Clinical variables adopted in this study have useful biological premises and potential associations with later neurodevelopment, and variables that have been validated with improved variance explained in previous papers predicting 2-year neurodevelopmental scores in preterm infants were selected 80 .The present study followed nine predefined clinical factors (GA, postmenstrual age, male sex, maternal education, small gestational age [SGA], IVH, 5-min Apgar score, and bronchopulmonary dysplasia) from the PENUT dataset that are expected to be associated with long-term outcomes 80 .Maternal education level was based on the years of schooling and categorized by educational level.
+
+
+MRI acquisition
+
+Individual preterm infants were scanned at near-term age (postmenstrual age [PMA], 35-44 weeks) using wholebody 3 T magnetic resonance imaging (MRI) scanner (Philips, Achieva, 16-channel phase-array head coil, Best, Netherlands) during natural sleep, using a blanket to preserve body temperature.An experienced pediatrician monitored the pulse oximeter during the MRI to determine the heart and respiratory rates of each infant.Singleshot spin-echo three-dimensional echo planar images were obtained using diffusion tensor imaging (DTI).Parameters of the DTI were b-value = 800 s/mm 2 , echo time = 75 ms, repetition time = 4,800 ms, flip angle = 90°, field of view = 120 × 120 mm, number of electrostatic gradient directions = 32, voxel sizes = 1.56 × 1.56 mm 2 , slice thickness = 2 mm, number of averages = 2, total acquisition time = 6 min 17 s, and water-fat shift = 4.68 Hz/ pixel.The slices were axially parallel to the anterior-posterior commissure line with a 40-50 slices covering the entire hemisphere and brainstem.Estimates of motion artifacts of diffusion-weighted images were calculated for individual participants, including absolute and relative volume-to-volume motion and percentage of outliers using the EDDY QC tool 81 in the FMRIB Software Library (FSL, https:// fsl.fmrib.ox.ac.uk/ fsl/ fslwi ki) 82 .Additionally, structural T2-weighted images were acquired for volumetric analysis and to exclude white matter (WM) abnormalities.The parameters for T2-weighted image were echo time = 90 ms, repetition time = 4,800 ms, flip angle = 90°, field of view = 180 × 180 mm 2 , voxel sizes = 0.5 × 0.5 mm 2 , slice thickness = 3 mm, number of averages = 1, total acquisition time = 6 min 30 s, and water-fat shift = 4.68 Hz/pixel.
+
+
+Image preprocessing
+
+Imaging data were preprocessed using an eddy correction tool for eddy current distortions, and motion artifacts 83 .A nondiffusion-weighted image (b0 image) was extracted from the raw image, including the skull and nonbrain tissues.To remove the effect of low-frequency intensity inhomogeneity on the b0 diffusion data, the bias field estimated using N4 bias field correction in advanced normalization tools (ANTs) 84 .Subsequently, the principal eigenvalues of the diffusion tensor model were computed by simple least-squares fitting of the diffusion-weighted volume.Fractional anisotropy (FA), mean diffusivity (MD), axial diffusivity (AD), and radial diffusivity (RD) were calculated using tensor-eigenvalues.Quality control of the preprocessed images was performed via visual inspection by two independent reviewers.All procedures were performed using FSL.
+
+
+Network construction
+
+A 12-parameter affine transformation and the nonlinear symmetric normalization algorithm from ANTs were employed to transform the individual b0 images into T2-weighted images from the University of North Carolina (UNC) neonate atlas 85 , and vice versa.Inverse transformations were used to warp the automated anatomical labeling atlas from the UNC space to the native space.Discrete labeling values were preserved using nearest-neighbor www.nature.com/scientificreports/interpolation, which is a family of sinc-based methods.Using this procedure, we obtained 90 brain regions (each representing a node in the network) for the underlying structural network of each participant (Supplementary Table 2).Whole-brain fiber tracking using probabilistic tractography was performed for each neonate using FSL.First, to prepare for probabilistic tracking, BEDPOSTX 86 was used to model the direction of the crossing fiber, and partial volume effects were corrected for thick slices (BEDPOSTX arguments: fiber 3 and Rician for uniform noise levels).Probabilistic tractography was then performed on individual diffusion images using PROBTRACKX 87 .The network matrix, assigned through the connectivity probabilities between brain regions i and j, was calculated as the total proportion of fibers sampled from all voxels in brain region i reaching all voxels in brain region j (PROBRACKX arguments are sample tracts per seed voxel: 5,000; step length: 0.5 mm; curvature threshold: 0.2; and fractional anisotropic volumes: 0.01).
+
+Probabilistic tractography depends on the seeding point; therefore, the probability from i to j can differ from the probability from j to i. Therefore, we defined the unidirectional connection probability P ij between regions i and j and created a 90 × 90 symmetric matrix after averaging these two probabilities.Moreover, we performed pair-wise Pearson correlation for all 4,005 connections with nonzero probability values for all the participants and set r = 0.7 as the threshold to remove spurious connections with a small probability of connection.The weighted (W) network edges were calculated as W ij = P ij .
+
+
+Global and local network analysis
+
+Prior to brain network quantification, a sparsity threshold of 0.25 (i.e., which is the ratio of the number of actual edges to the maximum possible number of edges in a structural network) 85 , was applied to individual networks to remove the weakest connections subject to experimental noise 88 .The specific threshold selection procedure followed that of our previous network study 23 .Global and local network properties were analyzed using the Brain Connectivity Toolbox 89 and GRETNA software (http:// www.nitrc.org/ proje cts/ gretna/) 90 .
+
+Graph metrics were used to quantify brain global (global efficiency, E glob ; local efficiency, E loc ; modularity, Q; small-worldness, S; normalized clustering coefficient, C p ; normalized shortest path length, L p ) 89 and local (betweenness centrality, BC; degree centrality, DC; nodal clustering coefficient, NC p ; nodal shortest path length, NL p ; nodal efficiency, L e ; nodal local efficiency, NL e ) 91,92 connectivity.Global metrics were computed for 1,000 random networks with conserved number of nodes, number of edges, and degree distribution at predefined sparsity thresholds 23 .Local network metrics were used as indicators of neonatal and children brain development, and employed to elucidate clinical implications 23,[93][94][95][96] .Details of the described graph-theoretical measures can be found in supplementary text 1.
+
+
+WM integrity analysis
+
+We aligned the Johns Hopkins University (JHU) neonatal, probabilistic, WM pathway atlas to the FA images of individual diffusion spaces using a nonlinear symmetric normalization algorithm in the ANTs to compute the mean FA, MD, AD, and RD values for specific WM pathways 97 .This atlas provides 27 major WM pathways in a population-averaged neonatal template.
+
+
+Volumetric analysis
+
+To extract neonatal volumetric features, we used the morphologically adaptive neonatal tissue segmentation toolbox (MANTiS) to segment and measure neonatal brain tissue from T2-weighted images 98 .Additionally, MANTiS extends the existing approach to tissue classification implemented in Statistical Parametric Mapping software to neonates, combining template adaptation and topological filtering and segmenting the neonatal brain into eight tissue classes: gray matter, WM, deep gray matter, hippocampus, amygdala, cerebellum, and brainstem.These volumetric values were corrected by dividing them by the total brain volume without cerebrospinal fluid.
+
+
+Local connectivity feature
+
+Local connectivity features are inherently complex and high-dimensional and are difficult to describe linearly.This may have caused overfitting because there were more variables than the sample size.GNA is a useful technique for determining conditional effects between a set of observed variables.Additionally, GNA can identify collinear variables and provide estimates of the most transparent relationships among variables through nonlinear relationship modeling.Recently, this methodological approach has provided support for follow-up studies, and has the potential to improve clinical care by identifying variables independently associated with clinical and maternal characteristics and neurodevelopmental outcomes in preterm infants 80 .
+
+We employed GNA to identify the net effect of individual variables on each BSID-III subtest.Four WM integrity indices for 27 Johns Hopkins University pathway atlas and 6 local network properties for 90 brain regions were used to determine whether each of the candidate predictors showed a partial effect, even after considering the clinical characteristics.This analysis uses the method described by Williams and Rast to identify significant correlations with a single variable by forming a matrix of precision for relationships between variables, considering relationships with all other variables 99 .A precision matrix was constructed using the maximum likelihood estimation method, and the Fisher Z-transformation (95% confidence intervals) was performed to establish a network with significant relationships between variables 99 .connectivity features (feature set D, n = 5).The prediction model uses 15 combinations of prediction sets for all possible combinations.Linear (ElasticNet) and nonlinear regression (RF; XGBoost) analyses for predicting cognitive, language, and motor scores were performed using the presented combination of feature sets.However, GA and postmenstrual age were included in all feature set combinations.All of these regressors were implemented using Python's scikit learning library (https:// github.com/ scikit-learn/ scikit-learn) 100,101 except for XGBoost 102 .A randomized hyperparameter optimization was performed with fivefold cross-validation to identify high-performance models with reduced computational costs.The predictive power of the regression models was evaluated by calculating the RMSE on the held-out test set.Randomly selected 30% of the data were used as the held-out test set.We also plotted actual BSID-III scores against predicted scores for all feature set combinations of all the regression models.
+
+
+Linear and nonlinear models: using multimodal feature sets
+
+
+Feature importance
+
+In ElasticNet, feature importance was calculated by penalizing the coefficients in the form of absolute values through the combination of L1 and L2 regulation.In the RF, feature importance was by evaluating the extent to which each feature reduced impurity.Additionally, XGBoost computes feature importance by averaging the information gains from all decision trees into which a particular predictor is split.
+
+Figure 1 .
+1
+Figure 1.Scatter plot for best predictive model within BSID-III subset.Feature set (A) Local connectivity features; (B) Clinical characteristic features; (C) Volumetric features; (D) Global connectivity features.Abbreviations: EP, extremely preterm; V-LP, very-to-late preterm; BSID-III, Bayley Scales of Infant and Toddler Development, Third Edition.
+
+
+Figure 2 .
+2
+Figure 2. (A) Number of importance features in the best performing model in each BSID-III subset frequencies range between 1 and 10. (B) Feature importance for the best performing model in all preterm groups.For all brain region abbreviations, see table S2 in the supplementary materials.EP, extremely preterm; V-LP, veryto-late preterm; Freq, Frequencies; BC, betweenness centrality; NL p , nodal shortest path length; DC, degree centrality; N e , local efficiency; GE, global efficiency; BSID-III, Bayley Scales of Infant and Toddler Development, Third Edition.
+
+
+Figure 3 .
+3
+Figure 3. Visualization of the hemispheric distribution of predictors presented by the best performing feature set.Each brain region is represented by a color assigned to its brain lobe.For all brain region abbreviations, see tableS2in the supplementary materials.These images were created using BrainNet Viewer (version 1.7)44 .
+
+
+
+
+https://doi.org/10.1038/s41598-024-58682-8www.nature.com/scientificreports/
+
+
+
+
+https://doi.org/10.1038/s41598-024-58682-8
+
+
+Four
+
+predictor sets were identified.Each predictor group comprised local connectivity features (feature set A), clinical characteristic features (feature set B, n = 12), volumetric features (feature set C, n = 8), and global Vol:.(1234567890)Scientific Reports | (2024) 14:9331 | https://doi.org/10.1038/s41598-024-58682-8
+
+
+Table 1 .
+1
+Clinical and maternal characteristics of preterm infants.Data are presented as the mean ± SD or number (%).EP, extremely preterm; V-LP, very-to-late preterm; SD, standard deviation; N/A, not applicable; IVH, interventricular hemorrhage; BPD, bronchopulmonary dysplasia; BSID-III, Bayley Scales of Infant and Toddler Development, Third Edition.
+Preterm (n = 193) EP (n = 62)V-LP (n = 131) p-value (EP vs. V-LP)Demographics and maternal characteristicsGestational age, mean (SD)29.87 (3.55)25.65 (1.4)31.23 (2.74)< 0.001Postmenstrual age, mean (SD)37.8 (2.16)38.34 (2)37.56 (2.38)< 0.027Birth weight (g), mean (SD)1355 (594)872 (195)1583 (583)< 0.001Small for gestational age, n (%)28 (15)9 (15)19 (14)1Male sex, n (%)85 (44)28 (45)57 (44)0.952Maternal age, mean (SD)33.69 (4.13)33.75 (4.81)33.66 (3.77)< 0.896Maternal education, n (%)< 6 years2 (1)1 (1.6)1 (1)1< 12 years37 (19)13 (21)24 (18)0.07< 16 years123 (64)45 (73)78 (60)0.003> 16 years8 (4)1 (1.6)7 (5.3)0.034Unknown or not reported23 (12)2 (3.2)21 (16)N/AClinical characteristics5 Apgar, mean (SD)5.1 (1.81)6.79 (1.63)6.23 (1.62)< 0.001IVH, n (%)52 (27)21 (34)31 (24)0.187< IVH grade II, n (%)7 (13)4 (19)3 (18)0.302BPD, n (%)106 (55)59 (95)47 (36)< 0.001BPD moderate/severe, n (%)10 (9)8 (14)2 (4)0.003Follow-up characteristicsMean (SD) BSID-III ScoresCognitive99.77 (14.43)93.92 (13.91) 102.53 (13.83)< 0.001Language93.35 (13.08)86.82 (13.08) 94.96 (12.23)< 0.001Motor100.6 (15.51)95 (13.64)103.25 (15.63)< 0.001
+
+Table 2 .
+2
+Local
+connectivity features with partial correlation with each BSID-III subscale score extractedfrom graphical network analysis. Plus and minus symbols indicate positive and negative partial correlations,respectively. For all brain region abbreviations, see table S2 in the supplementary materials. FA, fractionalanisotropy; MD, mean diffusivity; RD, radial diffusivity; AD, axial diffusivity; BC, betweenness centrality; DC,degree centrality; NC p , nodal clustering coefficient; NL p , nodal shortest path length; N e , local efficiency; NL e ,nodal local efficiency; PVMT, white matter pathway connecting primary and secondary visual cortex to middletemporal area.
+
+Table 3 .
+3
+Highest predictive models and best performing feature sets.Feature set A: Local connectivity
+Preterm ElasticNet (Feature set A, C, and D)13.352 17CognitiveEPRF (Feature set C and D)15.402 13V-LPElasticNet (Feature set A, B, and D)11.205 17Preterm ElasticNet (Feature set C)12.996 13MotorEPXGBoost (Feature set A, C, and D)11.363 15V-LPRF (Feature set A and B)13.698 10Preterm XGBoost (Feature set A)11.792 15LanguageEPXGBoost (Feature set B and C)11.674 3
+features; B: Clinical characteristic features; C: Volumetric features; D: Global connectivity features.EP, extremely preterm; V-LP, very-to-late preterm; RF, random forest; BSID-III, Bayley Scales of Infant and Toddler Development, Third Edition; RMSE, root mean squared error.BSID-III Group Top prediction model (predictor sets) RMSE Variance explained (%) V-LP ElasticNet (Feature set A, C, and D) 12.425 6 Vol.:(0123456789) Scientific Reports | (2024) 14:9331 | https://doi.org/10.1038/s41598-024-58682-8
+
+
+Table 4 .
+4
+Frequencies of feature importance within nine best performing models.For all brain region abbreviations, see table S2 in the supplementary materials.EP, extremely preterm; V-LP, very-to-late preterm; BSID-III, Bayley Scales of Infant and Toddler Development, Third Edition.
+SetCount Region (Hemisphere) BSID-III subset Group4STG (L)Language MotorPreterm and V-LP EP and V-LP3THA (L)MotorEP and V-LP3IFGoperc (L)MotorEP and V-LPLocal connectivity
+Scientific Reports | (2024) 14:9331 | https://doi.org/10.1038/s41598-024-58682-8
+Vol:.(1234567890) Scientific Reports | (2024) 14:9331 | https://doi.org/10.1038/s41598-024-58682-8www.nature.com/scientificreports/Acknowledgements This work was supported by the National Research Foundation of Korea grants funded by the Korean Government MSIT (grant numbers NRF-2023-R1A2C2006038 and 2020-M3E5D9080787).Data analysis: Clinical characteristicsThe demographics of preterm subgroups were statistically compared using SPSS 27.0 (SPSS.Chicago, IL) software.We utilized the Student's t-test and chi-square analysis to compare clinical characteristics between preterm subgroups.Data availabilityThe datasets generated during and/or analyzed during the current study are not publicly available due to inability to share personal information according to research ethics but are available from the corresponding author on reasonable request.Correspondence and requests for materials should be addressed to YHJ (ryanjang93@ hanyang.ac.kr) or HJL (blesslee77@hanmail.net).Author contributionsCompeting interestsThe authors declare no competing interests.
+Neurodevelopmental outcome after extreme prematurity: A review of the literature. I T Jarjour, 10.1016/j.pediatrneurol.2014.10.027Pediatr. Neurol. 522015
+
+Preterm birth-associated neurodevelopmental impairment estimates at regional and global levels for 2010. H Blencowe, 10.1038/pr.2013.204Pediatr. Res. 7412013Suppl
+
+Neurodevelopmental outcomes at 4 to 8 years of children born at 22 to 25 weeks' gestational age: A meta-analysis. G P Moore, B Lemyre, N Barrowman, T Daboval, 10.1001/jamapediatrics.2013.2395JAMA Pediatr. 1672013
+
+Neurodevelopmental outcome in extremely preterm infants at 2.5 years after active perinatal care in Sweden. F Serenius, 10.1001/jama.2013.3786Jama. 3092013
+
+Neurodevelopmental outcome at 2 years for preterm children born at 22 to 34 weeks' gestation in France in 2011: EPIPAGE-2 cohort study. V Pierrat, 10.1136/bmj.j3448Bmj. 35834482017
+
+Survival and neurodevelopmental outcomes among periviable infants. N Younge, 10.1056/NEJMoa1605566N. Engl. J. Med. 3762017
+
+Early neurodevelopmental outcomes of extremely preterm infants. E E Rogers, S R Hintz, 10.1053/j.semperi.2016.09.002Seminars in perinatology. 201640
+
+Neurodevelopmental outcomes of extremely preterm infants. B R Vohr, Clin. Perinatol. 412014
+
+Neurodevelopmental outcomes of moderate-to-late preterm infants. Y S Nam, J S Heo, J H Byeon, E H Lee, Neonatal Med. 272020
+
+Late preterm infants: Near term but still in a critical developmental time period. A Kugelman, A A Colin, 10.1542/peds.2013-1131Pediatrics. 1322013
+
+Long-term outcomes of moderately preterm, late preterm, and early term infants. B Vohr, 10.1016/j.clp.2013.07.006Clin. Perinatol. 402013
+
+The influence of preterm birth on the developing thalamocortical connectome. G Ball, 10.1016/j.cortex.2012.07.006Cortex. 492013
+
+Imaging biomarkers of outcome in the developing preterm brain. L R Ment, D Hirtz, P S Hüppi, 10.1016/s1474-4422(09)70257-1Lancet Neurol. 8092009
+
+Altered cortical microstructure in preterm infants at term-equivalent age relative to term-born neonates. W Wang, 10.1093/cercor/bhac091Cerebral Cortex. 332022
+
+Development of cortical morphology evaluated with longitudinal MR brain images of preterm infants. P Moeskops, 10.1371/journal.pone.0131552PLoS One. 1052e0131552. 2015
+
+Preterm birth alters the development of cortical microstructure and morphology at term-equivalent age. R Dimitrova, 10.1016/j.neuroimage.2021.118488Neuroimage. 243118488. 2021
+
+The encephalopathy of prematurity-brain injury and impaired brain development inextricably intertwined. J J Volpe, 10.1016/j.spen.2009.09.005Semin. Pediatr. Neurol. 162009
+
+White matter growth as a mechanism of cognitive development in children. D J Mabbott, M Noseworthy, E Bouffet, S Laughlin, C Rockel, 10.1016/j.neuroimage.2006.07.024Neuroimage. 332006
+
+Maturation of white matter is associated with the development of cognitive functions during childhood. Z Nagy, H Westerberg, T Klingberg, 10.1162/0898929041920441J. Cogn. Neurosci. 169204412004
+
+Cerebral white matter maturation patterns in preterm infants: An MRI T2 relaxation anisotropy and diffusion tensor imaging study. M J Knight, A Smith-Collins, S Newell, M Denbow, R A Kauppinen, 10.1111/jon.12486J. Neuroimaging. 282018
+
+Preterm birth leads to impaired rich-club organization and fronto-paralimbic/limbic structural connectivity in newborns. J Sa De Almeida, 10.1016/j.neuroimage.2020.117440Neuroimage. 2251174402021
+
+Accelerated small-world property of structural brain networks in preterm infants at termequivalent age. J Y Lee, H K Park, H J Lee, 10.1159/000493087Neonatology. 11530872019
+
+Altered development of structural MRI connectome hubs at near-term age in very and moderately preterm infants. Y H Jang, 10.1093/cercor/bhac438Cereb. Cortex. 332023
+
+Machine-learning to characterise neonatal functional connectivity in the preterm brain. G Ball, 10.1016/j.neuroimage.2015.08.055Neuroimage. 1242016
+
+Structural brain connectivity in school-age preterm infants provides evidence for impaired networks relevant for higher order cognitive skills and social cognition. E Fischi-Gómez, 10.1093/cercor/bhu073Cereb. Cortex. 252015
+
+Thalamocortical connectivity predicts cognition in children born preterm. G Ball, 10.1093/cercor/bhu331Cereb. Cortex. 252015
+
+Early diagnosis and early intervention in cerebral palsy. M Hadders-Algra, 10.3389/fneur.2014.00185Front. Neurol. 51852014
+
+Development and nationwide implementation of a postdischarge responsive parenting intervention program for very preterm born children: The TOP program. M Jeukens-Visser, 10.1002/imhj.21902Infant Ment. Health J. 422021
+
+Language function following preterm birth: prediction using machine learning. E Valavani, 10.1038/s41390-021-01779-xPediatr. Res. 922022
+
+Prediction of cognitive and motor development in preterm children using exhaustive feature selection and cross-validation of near-term white matter microstructure. K Schadl, 10.1016/j.nicl.2017.11.023Neuroimage Clin. 172018
+
+Machine learning for understanding and predicting neurodevelopmental outcomes in premature infants: A systematic review. S Baker, Y Kandasamy, 10.1038/s41390-022-02120-wPediatr. Res. 932023
+
+Deep multimodal learning from MRI and clinical data for early prediction of neurodevelopmental deficits in very preterm infants. L He, 10.3389/fnins.2021.753033Front. Neurosci. 157530332021
+
+J Kawahara, 10.1016/j.neuroimage.2016.09.046Convolutional neural networks for brain networks; Towards predicting neurodevelopment. 2017146
+
+Predicting motor outcome in preterm infants from very early brain diffusion MRI using a deep learning convolutional neural network (CNN) model. S Saha, 10.1016/j.neuroimage.2020.116807Neuroimage. 2151168072020
+
+Cognitive outcomes of children born extremely or very preterm since the 1990s and associated risk factors: A meta-analysis and meta-regression. E S Twilhaar, 10.1001/jamapediatrics.2017.5323JAMA Pediatr. 1722018
+
+Antenatal corticosteroids for accelerating fetal lung maturation for women at risk of preterm birth. D Roberts, J Brown, N Medley, S R Dalziel, 10.1002/14651858.CD004454.pub3Cochrane Database Syst. Rev. 332017
+
+Association of socioeconomic status and brain injury with neurodevelopmental outcomes of very preterm children. I Benavente-Fernández, 10.1001/jamanetworkopen.2019.2914JAMA Netw. Open. 22019
+
+Structural network analysis of brain development in young preterm neonates. C J Brown, 10.1016/j.neuroimage.2014.07.030Neuroimage. 1012014
+
+Predicting developmental outcomes in premature infants by term equivalent MRI: Systematic review and meta-analysis. J Van't Hooft, 10.1186/s13643-015-0058-7Syst. Rev. 4712015
+
+Prediction of neurodevelopmental outcome after preterm birth. B Latal, 10.1016/j.pediatrneurol.2009.01.008Pediatr. Neurol. 402009
+
+Predicting the outcomes of preterm neonates beyond the neonatal intensive care unit: What are we missing?. C J Crilly, S Haneuse, J S Litt, 10.1038/s41390-020-0968-5Pediatr. Res. 892021
+
+Multi-modal, multi-measure, and multi-class discrimination of ADHD with hierarchical feature extraction and extreme learning machine using structural and functional brain MRI. M N I Qureshi, J Oh, B Min, H J Jo, B Lee, 10.3389/fnhum.2017.00157Front. Hum. Neurosci. 111572017
+
+Classification of preschoolers with low-functioning autism spectrum disorder using multimodal MRI data. J I Kim, 10.1007/s10803-021-05368-zJ. Autism Dev. Disord. 532023
+
+BrainNet Viewer: A network visualization tool for human brain connectomics. M Xia, J Wang, Y He, 10.1371/journal.pone.0068910PLoS One. 8102013
+
+Development of structural and functional connectivity. Brain mapping: An encyclopedic reference. J Dubois, I Kostovic, M Judas, 20152
+
+Neural histology and neurogenesis of the human fetal and infant brain. I Kostović, G Sedmak, M Judaš, 10.1016/j.neuroimage.2018.12.043Neuroimage. 188432018. 2019
+
+Structural, immunocytochemical, and MR imaging properties of periventricular crossroads of growing cortical pathways in preterm infants. M Judas, AJNR Am. J. Neuroradiol. 262005
+
+Early history of subplate and interstitial neurons: From Theodor Meynert (1867) to the discovery of the subplate zone. M Judaš, G Sedmak, M Pletikos, 10.1111/j.1469-7580.2010.01283.xJ. Anat. 2171974. 2010
+
+Predictive value of the Bayley scales of infant development on development of very preterm/very low birth weight children: A meta-analysis. E S Luttikhuizen Dos Santos, J F De Kieviet, M Königs, R M Van Elburg, J Oosterlaan, 10.1016/j.earlhumdev.2013.03.008Early Hum. Dev. 892013
+
+Developmental risks and protective factors for influencing cognitive outcome at 5 1/2 years of age in very-lowbirthweight children. B Böhm, 10.1017/s001216220100247xDev. Med. Child Neurol. 442002
+
+Basic information processing abilities at 11 years account for deficits in IQ associated with preterm birth. S A Rose, J F Feldman, J J Jankowski, R Van Rossem, 10.1016/j.intell.2011.03.003Intelligence. 392011
+
+Cognitive trajectories from infancy to early adulthood following birth before 26 weeks of gestation: A prospective, population-based cohort study. L Linsell, 10.1136/archdischild-2017-313414Arch. Dis. Child. 1032018
+
+The stability of the diagnosis of developmental disability between ages 2 and 8 in a geographic cohort of very preterm children born in 1997. G Roberts, P J Anderson, L W Doyle, 10.1136/adc.2009.160283Arch. Dis. Child. 952010
+
+Developmental assessments in preterm children: A meta-analysis. H S Wong, S Santhakumaran, F M Cowan, N Modi, 10.1542/peds.2016-0251Pediatrics. 2016
+
+Rich-club organization of the newborn human brain. G Ball, 10.1073/pnas.1324118111Proc. Natl. Acad. Sci. U. S. A. 1112014
+
+Changes in structural and functional connectivity among resting-state networks across the human lifespan. R F Betzel, 10.1016/j.neuroimage.2014.07.067Neuroimage. 1022014Pt 2
+
+Early prediction of cognitive deficit in very preterm infants using brain structural connectome with transfer learning enhanced deep convolutional neural networks. M Chen, 10.3389/fnins.2020.00858Front. Neurosci. 148582020
+
+Cognitive flexibility in 12-month-old preterm and term infants is associated with neurobehavioural development in 18-month-olds. Y Shinya, 10.1038/s41598-021-04194-8Sci. Rep. 122022
+
+Association and dissociation of visual functions in a case of bilateral occipital lobe infarction. E Pöppel, R Brinkmann, D Von Cramon, W Singer, 10.1007/bf00367348Arch. Psychiatr. Nervenkr. 1970225673481978
+
+Maintaining internal representations: The role of the human superior parietal lobe. D M Wolpert, S J Goodbody, M Husain, 10.1038/2245Nat. Neurosci. 11998
+
+Adolescence as a neurobiological critical period for the development of higher-order cognition. B Larsen, B Luna, 10.1016/j.neubiorev.2018.09.00509. 005Neurosci. Biobehav. Rev. 942018. 2018
+
+Abnormal cerebral structure is present at term in premature infants. T E Inder, S K Warfield, H Wang, P S Hüppi, J J Volpe, 10.1542/peds.2004-0326Pediatrics. 1152005
+
+Abnormal deep grey matter development following preterm birth detected using deformation-based morphometry. J P Boardman, 10.1016/j.neuroimage.2006.03.029Neuroimage. 322006
+
+Automated brain morphometric biomarkers from MRI at term predict motor development in very preterm infants. J E Kline, V Sita Priyanka Illapani, L He, N A Parikh, 10.1016/j.nicl.2020.102475Neuroimage Clin. 281024752020
+
+Neonatal basal ganglia and thalamic volumes: Very preterm birth and 7-year neurodevelopmental outcomes. W Y Loh, 10.1038/pr.2017.161Pediatr. Res. 822017
+
+The motor profile of preterm infants at 11 y of age. S Setänen, L Lehtonen, R Parkkola, J Matomäki, L Haataja, 10.1038/pr.2016.90Pediatr. Res. 802016
+
+Cerebello-thalamic synapses and motor adaptation. T D Aumann, 10.1080/147342202753203104Cerebellum. 12002
+
+Structure and function of the human insula. L Q Uddin, J S Nomi, B Hébert-Seropian, J Ghaziri, O Boucher, 10.1097/wnp.0000000000000377J. Clin. Neurophysiol. 343772017
+
+Visuomotor coordination and motor representation by human temporal lobe neurons. A Tankus, I Fried, 10.1162/jocn_a_00160J. Cogn. Neurosci. 241602012
+
+Neonatal pain, parenting stress and interaction, in relation to cognitive and motor development at 8 and 18 months in preterm infants. R E Grunau, 10.1016/j.pain.2009.02.014Pain. 1432009
+
+Language development at 2 years is correlated to brain microstructure in the left superior temporal gyrus at term equivalent age: A diffusion tensor imaging study. A Aeby, 10.1016/j.neuroimage.2013.03.076Neuroimage. 782013
+
+Machine learning prediction models for neurodevelopmental outcome after preterm birth: A scoping review and new machine learning evaluation framework. M R Van Boven, Pediatrics. 150e20210560522022
+
+Strong intercorrelations among global graph-theoretic indices of structural connectivity in the human brain. J W Madole, 10.1016/j.neuroimage.2023.120160Neuroimage. 275120160. 2023
+
+Hierarchical complexity of the adult human structural connectome. K Smith, 10.1016/j.neuroimage.2019.02.028Neuroimage. 1912019
+
+Hierarchical complexity of the macro-scale neonatal brain. M Blesa, 10.1093/cercor/bhaa345Cereb. Cortex. 312021
+
+Human subcortical brain asymmetries in 15,847 people worldwide reveal effects of age and sex. T Guadalupe, 10.1007/s11682-016-9629-zBrain Imaging Behav. 112017
+
+Mapping cortical brain asymmetry in 17,141 healthy individuals worldwide via the ENIGMA Consortium. X Z Kong, 10.1073/pnas.1718418115Proc. Natl. Acad. Sci. U. S. A. 1152018
+
+Cerebral asymmetry: A quantitative, multifactorial, and plastic brain phenotype. M E Rentería, 10.1017/thg.2012.13Twin Res. Hum. Genet. 152012
+
+L G Weiss, T Oakland, G P Aylward, Bayley, III Clinical Use and Interpretation. Academic Press2010
+
+Predicting 2-year neurodevelopmental outcomes in extremely preterm infants using graphical network and machine learning approaches. S E Juul, 10.1016/j.eclinm.2022.101782EClinicalMedicine. 561017822023
+
+Automated quality control for within and between studies diffusion MRI data using a non-parametric framework for movement and distortion correction. M Bastiani, 10.1016/j.neuroimage.2018.09.07309. 073Neuroimage. 1842018. 2019
+
+. M Jenkinson, C F Beckmann, T E Behrens, M W Woolrich, S M Smith, Fsl, 10.1016/j.neuroimage.2011.09.015Neuroimage. 622012
+
+An integrated approach to correction for off-resonance effects and subject movement in diffusion MR imaging. J L R Andersson, S N Sotiropoulos, 10.1016/j.neuroimage.2015.10.019Neuroimage. 125192015. 2016
+
+Advanced normalization tools (ANTS). B B Avants, N Tustison, G Song, Insight J. 22009
+
+Graph analysis and modularity of brain functional connectivity networks: Searching for the optimal threshold. C Bordier, C Nicolini, A Bifone, 10.3389/fnins.2017.00441Front. Neurosci. 114412017
+
+Accelerating fibre orientation estimation from diffusion weighted magnetic resonance imaging using GPUs. M Hernández, 10.1371/journal.pone.0061892PLoS One. 892e61892. 2013
+
+Using GPUs to accelerate computational diffusion MRI: From microstructure estimation to tractography and connectomes. M Hernandez-Fernandez, 10.1016/j.neuroimage.2018.12.015Neuroimage. 188152018. 2019
+
+Brain networks in schizophrenia. M P Van Den Heuvel, A Fornito, 10.1007/s11065-014-9248-7Neuropsychol. Rev. 242014
+
+Complex network measures of brain connectivity: Uses and interpretations. M Rubinov, O Sporns, 10.1016/j.neuroimage.2009.10.003Neuroimage. 5232009. 2010
+
+GRETNA: A graph theoretical network analysis toolbox for imaging connectomics. J Wang, 10.3389/fnhum.2015.00386Front. Hum. Neurosci. 93862015
+
+Graph theory methods for the analysis of neural connectivity patterns. Neuroscience databases: A practical guide. O Sporns, 2003
+
+Network hubs in the human brain. M P Van Den Heuvel, O Sporns, 10.1016/j.tics.2013.09.012Trends Cogn. Sci. 172013
+
+Brain network characterization of high-risk preterm-born school-age children. E Fischi-Gomez, 10.1016/j.nicl.2016.02.001Neuroimage Clin. 112016
+
+White matter maturation reshapes structural connectivity in the late developing human brain. P Hagmann, 10.1073/pnas.1009073107Proc. Natl. Acad. Sci. U. S. A. 1077310719067-19072. 2010
+
+Altered asymmetries of the structural networks comprising the fronto-limbic brain circuitry of preterm infants. J Y Lee, 10.1038/s41598-020-79446-0Sci. Rep. 111318. 2021
+
+The neonatal connectome during preterm brain development. M P Van Den Heuvel, 10.1093/cercor/bhu095Cereb. Cortex. 252015
+
+Atlas-based whole brain white matter analysis using large deformation diffeomorphic metric mapping: Application to normal elderly and Alzheimer's disease participants. K Oishi, 10.1016/j.neuroimage.2009.01.002Neuroimage. 462009
+
+Neonatal brain tissue classification with morphological adaptation and unified segmentation. R J Beare, 10.3389/fninf.2016.00012Front. Neuroinform. 10122016
+
+Back to the basics: Rethinking partial correlation network methodology. D R Williams, P Rast, 10.1111/bmsp.12173Br. J. Math. Stat. Psychol. 732020
+
+. Scientific Reports, | , 10.1038/s41598-024-58682-82024149331
+
+Machine learning for neuroimaging with scikit-learn. A Abraham, 10.3389/fninf.2014.00014Front. Neuroinform. 8142014
+
+Scikit-learn: Machine learning in Python. F Pedregosa, J. Mach. Learn. Res. 122011
+
+T Chen, C Guestrin, Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining. the 22nd acm sigkdd international conference on knowledge discovery and data mining

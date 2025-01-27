@@ -1,0 +1,350 @@
+
+On the homogenization of a new class of locally periodic microstructures in linear elasticity with residual stress
+10 Jun 2016
+
+Brian Seguin 
+On the homogenization of a new class of locally periodic microstructures in linear elasticity with residual stress
+10 Jun 2016homogenizationelasticitymicrostructureresidual stress AMS subject classification: 35B2735Q7474Q15
+Many biological and engineering materials have nonperiodic microstructures for which classical periodic homogenization results do not apply. Certain nonperiodic microstructures may be approximated by locally periodic microstructures for which homogenization techniques are available. Motivated by the consideration that such materials are often anisotropic and can posses residual stresses, a broad class of locally periodic microstructures is considered and the resulting effective macroscopic equations are derived. The effective residual stress and effective elasticity tensor are determined by solving unit cell problems at each point in the domain. However, it is found that for a certain class of locally periodic microstructures, solving the unit cell problems at only one point in the domain completely determines the effective elasticity tensor.
+
+Introduction
+
+A great deal of work has been done on the homogenization of materials with periodic microstructure. See, for example, the books by Cioranescu and Donato [10], Oleinik, Shomaev, and Yosifian [25], Jikov, Kozlov and Oleinik [18], Mei and Vernescu [20], Bensoussan, Lions and Papanicolaou [4], and the references therein. For periodic microstructure, the effective properties of the material, often called the effective or macroscopic coefficients, are determined by solving unit cell problems. From the early years of homogenization theory, results were also known for nonperiodic microstructures. See, for example, the works of Spagnolo [31], Murat [21], and Tartar [32]. However, these results do not provide a way of computing the effective coefficients.
+
+One of the avenues of research in the field of homogenization is to broaden the class of microstructures in which the effective coefficients can be explicitly calculated. This is often accomplished by considering microstructures that can be related to a periodic structure. Depending on how the structure compares to a periodic one results in different avenues of generalization. Microstructures that are uniformly close to a periodic structure are called almost periodic, see for example [8,3], while microstructures that can be approximated locally by periodic structures are called locally periodic. In this work we focus on the later type of microstructure. Briane [5,7,6] was interested in microstructures that are diffeomorphic to a periodic structure. Using H-convergence , Briane found that such microstructures could be approximated by locally periodic microstructures, which consist of patches of periodic structure and the periodicity in nearby patches are closely related. In the homogenized limit of such structures, both the size of the patches and the period of the microstructure within each patch goes to zero, but the periods go to zero more rapidly. The resulting effective coefficients are found by solving a unit cell problems at each point in the domain. As Shkoller [30] points out, this is not computationally feasible, but it is possible to approximate the effective coefficients by solving only a finite number of unit cell problems. Motivated by Briane's work, Alexandre [1] introduced θ-2 convergence, which is analogous to the notion of two-scale convergence first introduced by Nguetseng [23] and further developed by Allaire [2], and is well-suited for smoothly transformed periodic structures. A further generalization, under the name of scale convergence, was accomplished by Mascarenhas and Toader [19] using Young measures. Looking back at Briane's work, Ptashnyk [26] considered a broader class of locally periodic microstructures which are not necessarily obtained by transforming a periodic structure with a smooth function. To homogenize such microstructures, Ptashnyk introduced the concept of locally periodic two-scale convergence. She [27] also developed an unfolding operator associated with this type of two-scale convergence which is analogous to the unfolding operator conceived by Cioranescu, Damlamian and Griso [9] for classical two-scale convergence.
+
+Motivated by the types of microstructures appearing in biomaterials that are the composite of anisotropic constituents, here a broad class of locally periodic microstructures is considered. Many biological materials posses microstructures that are not periodic so that the classical homogenization results do not apply. However, they often have a structure that is approximately locally periodic. See, for example, [11,12,14,15,17,22,28,29]. A common type of microstructure in biomaterials, as well as engineering applications, is fibrous in nature in that the material can be modeled as a matrix embedded with fibers. If the orientation of the fibers varies smoothly within the material, then the fibrous microstructure is not periodic, but can be approximated by a locally periodic microstructure. Such structures were explicitly considered in [7,26]. However, when the matrix and the fibers are not isotropic, the approach taken by previous authors does not accurately reflect the fibrous microstructure. The reason for this is that the orientation of the anisotropy of the fibers were not changed as the orientation of the fibers changed.
+
+A specific example of a nonperiodic microstructure in nature where this issue appears involves plant cell walls [12], which can be modeled as an isotropic matrix, composed mainly of polysaccharides and water, embedded with cellulose microfibrils that are anisotropic [11]. The anisotropy of the fibrils are aligned with the axis of the microfibril and, hence, when the orientation of the fibrils changes, the orientation of the anisotropies changes as well.
+
+In this work, using Ptashnyk's [26] locally periodic two-scale convergence, we consider the homogenized limit of a material with a locally periodic microstructure in which the anisotropy in each patch of the microstructure is transformed. This is done in the context of linear elasticity. First we establish the result in the case where the anisotropy and the periodicity are transformed independently. However, the case in which the anisotropy and periodicity change according to the same transformation is discussed in detail. It is found that in this situation the resulting homogenized material is materially uniform but, in general, inhomogeneous. 1 It is also found that in this case only six unit cell problems are needed to completely determine the effective elasticity tensor. This homogenized tensor is still spatially dependent, but its values at different points are related to each other through the transformation that describes how the orientation of the microstructure changes from point to point. A sketch of how to homogenize a material with a nonperiodic microstructure by approximating it with a material that has a locally locally periodic microstructure is also presented. The transformation of the periodicity within each patch of a locally periodic microstructure is achieved by transforming a representative unit cell. When the anisotropy is transformed as well, this is akin to changing the reference configuration for the constitutive law. When the new reference configuration is related to the original one through a transformation that is not orthogonal, residual stresses appear. The analysis below allows for such affects. In the homogenized limit, a nonconstant effective residual stress term is present. Perhaps surprisingly, a unit cell problem must be solved to determine this stress. In contrast to the effective elasticity tensor, even in the case when the anisotropy and the periodicity are changed by the same transformation, a unit cell problem must be solved at each point in the domain to determine the effective residual stress.
+
+In Section 2 we motivate the form of the constitutive law appearing in the equation we homogenize and give the precise definition of a locally periodic microstructure. Section 3 recalls Ptashnyk's [26] locally periodic two-scale convergence and lists the results that will be used later. The main homogenization result is established in Section 4. Finally, in Section 5, the results are discussed and several special cases are considered.
+
+
+Locally periodic microstructure
+
+To motivate the types of locally periodic microstructures considered here, we begin by discussing an elastic constitutive law relative to a reference configuration that is stress free. This law is then formulated relative to a new reference configuration that is obtained from the original by a transformation that is close to orthogonal. The resulting constitutive law is then linearized.
+
+We work in R n with arbitrary dimension n, however the most physically interesting cases are n = 2, 3. Let Lin denote the set of linear mappings from R n to R n and Sym those elements of Lin that are symmetric. Since fourth-order tensors can be viewed as linear mappings from Lin to Lin, the space of all fourth-order tensors will be denoted by Lin(Lin).
+
+Consider an elastic material with reference configuration Y , where Y is a parallelepiped in R n , whose constitutive law is
+S(y) =Ŝ(C, y) for all y ∈ Y,(1)
+where C = (1 + ∇u) ⊤ (1 + ∇u) is the right Cauchy-Green strain tensor, u is the displacement, and S is the second Piola stress. Assume thatŜ(1, y) = 0 for all y ∈ Y so that the reference configuration Y is stress free. Let h(y) = Hy +x be a transformation of Y , with H ∈ Lin invertible andx ∈ R n fixed. The constitutive law (1) relative to h(Y ) is given by 2
+S(x) = HŜ(H ⊤ CH, H −1 (x −x))H ⊤ for all x ∈ h(Y ).(2)
+where C is the right Cauchy-Green tensor relative to the new configuration. Given a small positive ε, assume that the displacement gradient is of order ε and that H differs from an orthogonal linear mapping by a term of order 1 so that
+C = 1 + ∇u + ∇u ⊤ + o(ε),(3)1 = H ⊤ H + o(1).(4)
+Setting
+C(y) = 2∇ CŜ (1, y) for all y ∈ Y,(5)
+for any x ∈ h(Y ) we have
+S(x) = HŜ(H ⊤ H, H −1 (x −x))H ⊤ + H∇ CŜ (H ⊤ H, H −1 (x −x))[H ⊤ (C − 1)H]H ⊤ + o(ε) (6) = HŜ(H ⊤ H, H −1 (x −x))H ⊤ + HC(H −1 (x −x))[H ⊤ EH]H ⊤ + o(ε),(7)
+where E = 1 2 (∇u + ∇u ⊤ ). Thus, the linearized constitutive law reads
+S(x) = HŜ(H ⊤ H, H −1 (x −x))H ⊤ + HC(H −1 (x −x))[H ⊤ EH]H ⊤ .(8)
+The second term on the right-hand side (8) depends linearly on the strain E and is the stress due to the deformation relative to the configuration h(Y ). The first term on the right-hand side remains when the strain is zero and, hence, is a residual stress. In the case where H is orthogonal, the residual stress vanishes. WhileŜ is only defined on Y , it can be extend to all of R n so that it is Y -periodic. When this is done, (8) is h(Y )-periodic. We want to consider a material whose microstructure consists of patches of periodic structure such that nearby patches are similar. For example, one patch could have periodic structure of the form (8) while a nearby patch will have structure of the form (8) with H replaced by a transformation that is close to H. This is the idea behind a locally periodic microstructure.
+
+To make this idea precise, begin by considering an open subset Ω of R n that is bounded with Lipschitz boundary, and assume that Y has unit volume. The set Ω will be the elastic material with locally periodic microstructure. Consider a fixed ε > 0 (no relation to the ε used for the linearization) and r ∈ (0, 1). For k ∈ Z n , set Ω ε k = (0, ε r ) n + ε r k. Let I ε be the unique subset of Z n such that
+Ω ε k ∩ Ω = ∅ for all k ∈ I ε and Ω ⊂ k∈I ε Ω ε k .(9)
+Each Ω ε k , for k ∈ I ε , is a patch of Ω in which the microstructure will be periodic. While the size of Ω ε k is of order ε r , the periodicity within Ω ε k will be on the order of ε. Consider a function H : R n −→ Lin with H(x) invertible for all x ∈ R n . We shall use the notation H
+x = H(x) and Y x = H x (Y ) for x ∈ R n .
+The function H will describe how the unit cell Y is transformed so as to define the periodic structure within each patch Ω ε k . To specify the microstructure, for each k ∈ I ε choose x ε k ,x ε k ∈ Ω ε k arbitrarily. Motivated by (8), define the stress in Ω ε k by
+S(x) =Ŝ r (H x ε k , H −1 x ε k (x −x ε k )/ε) +Ŝ(C(H −1 x ε k (x −x ε k )/ε), H x ε k )E for all x ∈ Ω ε k(10)
+where for any A ∈ Lin(Lin), A, E ∈ Lin, and y ∈ Y ,
+S r (A, y) = AŜ(A ⊤ A, y)A ⊤ ,(11)S(A, A)E = A(A[A ⊤ EA])A ⊤ .(12)
+Notice that the stress defined in (10) is εY x ε k -periodic sinceŜ and C are Y -periodic. Set
+S ε r (x) = k∈I εŜ r (H x ε k , H −1 x ε k (x −x ε k )/ε)χ Ω ε k (x)(13)
+and
+C ε (x) = k∈I εŜ (C(H −1 x ε k (x −x ε k )/ε), H x ε k )χ Ω ε k (x).(14)
+With these definitions the stress at any x ∈ Ω is given by
+S(x) =Ŝ ε r (x) + C ε (x)E.(15)
+This equation defines a constitutive law for an elastic material that has patches of periodic microstructure. Figure 1 depicts the domain Ω broken into patches of order ε r that have a periodic structure of order ε. Consider the displacement problem in elastostatics:
+   div(S ε r + C ε ∇u ε ) + b = 0 in Ω, u ε = u • on ∂Ω,(16)
+where u • is a given boundary displacement and b is a body force. It is known that in the limit as ε goes to zero, materials with locally periodic microstructure approximate materials with nonperiodic microstructure that are common in biological materials such as muscles [15] and plant tissues [14]. Such connections were made by Briane [6] and Ptashnyk [26]. The locally periodic microstructure described above is different from those considered before in the works for Briane 3 [6] and Ptashnyk [26]. In these works the stress is given by (15) withŜ ε r = 0 and C ε is given by
+C ε (x) = k∈I εŜ (C(H −1 x ε k (x −x ε k )/ε), 1)χ Ω ε k (x).(17)
+This can be interpreted as saying that the unit cell Y is transformed when the microstructure in each patch is considered but the alignment of the anisotropy of C is not changed in each patch. This differs from the stress determined by (13) and (14) in which in each patch of the material the unit cell and the anisotropy are transformed according to H. This suggests a general class of locally periodic microstructures whose constitutive law is of the form (15) with
+S ε r (x) = k∈I εŜ r (K x ε k , H −1 x ε k (x −x ε k )/ε)χ Ω ε k (x),(18)C ε (x) = k∈I εŜ (C(H −1 x ε k (x −x ε k )/ε), K x ε k )χ Ω ε k (x),(19)
+where K : Ω → Lin. In this locally periodic microstructure, H determines how the unit cell is transformed in the different patches within Ω and K determines how the anisotropy of C is transformed in the different patches and determines if there is any residual stress. When H = K, this reduces to the microstructure initially considered above and when K = 1 this becomes the microstructure considered by Briane [6,7] and Ptashnyk [26]. However, the case H = K as well as the case H = 1 and K = 1 describe novel microstructures. The different effects associated with the different choices of H and K on the unit cell Y are depicted in Figure 2.
+
+The precise assumptions necessary to homogenize (16) and the derivation of the homogenized equation appear in Section 4. To take the limit as ε goes to zero in (16) we use locally periodic two-scale convergence, which is described in the next section.
+
+
+Locally periodic two-scale convergence
+
+Unless stated otherwise, the results in this section are taken from the work of Ptashnyk [26] and are stated here for easy reference. Let Ω be a bounded Lipschitz domain and Y a parallelepiped in R n . Fix a finite-dimensional inner-product space V. The choices V equals R n , V = Lin, and Lin(Lin) will be utilized. Consider C(Ω, C per (Y, V)), the set of all continuous functions ψ : Ω × R n −→ V that are Y -periodic in their second argument. Fix a C 1 function H : R n −→ Lin with H(x) invertible for all x ∈ R n . We shall use the notation
+H x = H(x) and Y x = H x (Y ) for x ∈ R n . For ψ ∈ C(Ω, C per (Y, V)), define ψ H (x, y) = ψ(x, H −1 x y) for all (x, y) ∈ Ω × R n .(20)
+This notation will also be used even if ψ is independent of x. Notice that for each x ∈ Ω,
+ψ H (x, ·) is Y x -periodic. The space of all mappings of the form ψ H for ψ ∈ C(Ω, C per (Y, V)) is denoted by C(Ω, C per (Y H , V)). Conversely, given φ ∈ C(Ω, C per (Y H , V)), the correspond- ing mapping in C(Ω, C per (Y, V)) will be denoted by φ H −1 . The spaces L 2 (Ω, C per (Y H , V)), L 2 (Ω, L 2 per (Y H , V)), C(Ω, L 2 per (Y H , V))
+, etc. are defined in a similar way and are Banach spaces with the expected norm. For example, Consider ψ ∈ C(Ω, C per (Y H , V)). The locally periodic approximation L ε ψ of ψ is defined as
+φ L 2 (Ω,Cper(Y H ,V)) = Ω sup y∈Yx |φ(x, y)| 2 dx 1/2 . (21) (a) (b) (c) (d) (e)(L ε ψ)(x) = k∈I ε ψ H −1 (x, H −1 x ε k (x −x ε k )/ε)χ Ω ε k (x) for all x ∈ Ω,(22)
+where, recall, x ε k andx ε k are arbitrary points in Ω ε k . We also require the approximation
+(L ε 0 ψ)(x) = k∈I ε ψ H −1 (x ε k , H −1 x ε k (x −x ε k )/ε)χ Ω ε k (x) for all x ∈ Ω.(23)
+Notice that both of the approximations L ε ψ and L ε 0 ψ are, in general, discontinuous. To introduce a continuous approximation, fix ρ ∈ (r, 1) and for each k
+∈ I ε let φ Ω ε k ∈ C ∞ c (Ω, R) be an approximation of χ Ω ε k such that k∈I ε |φ Ω ε k − χ Ω ε k | L 2 (R n ) → 0 as ε → 0 (24) ∇φ Ω ε k L ∞ (R n ) ≤ Cε −ρ .(25)
+For the construction of φ Ω ε k see Briane [6]. Define the smooth approximation of ψ by
+(L ε ρ ψ)(x) = k∈I ε ψ H −1 (x, H −1 x ε k (x −x ε k )/ε)φ Ω ε k (x) for all x ∈ Ω.(26)
+The approximations L ε ψ, L ε 0 ψ, and L ε ρ ψ can also be defined for ψ in L 2 (Ω, C per (Y H , V)) or C(Ω, L 2 per (Y H , V)). The approximations satisfy the following convergence results.
+Proposition 3.1. For ψ ∈ L p (Ω, C per (Y H , V)) ∪ C(Ω, L p per (Y H , V)), 1 ≤ p < ∞, we have lim ε→0 Ω |(L ε ψ)(x)| p dx = Ω − Yx |ψ(x, y)| p dydx (27) lim ε→0 Ω |(L ε 0 ψ)(x)| p dx = Ω − Yx |ψ(x, y)| p dydx.(28)
+and
+for ψ ∈ L 1 (Ω, C per (Y H , V)) ∪ C(Ω, L 1 per (Y H , V)) we have lim ε→0 Ω (L ε ψ)(x) dx = Ω − Yx ψ(x, y) dydx (29) lim ε→0 Ω (L ε 0 ψ)(x) dx = Ω − Yx ψ(x, y) dydx.(30)
+The symbol − denotes the average integral. Notice that in the above proposition, ψ is continuous in at least one of its arguments.
+
+Definition 3.2. A family of functions u ε ∈ L 2 (Ω, V) converges locally periodic two-scale to u ∈ L 2 (Ω,
+L 2 (Y H , V)) as ε → 0 if for all ψ ∈ L 2 (Ω, C per (Y H , V)) lim ε→0 Ω u ε (x) · (L ε ψ)(x) dx = Ω Yx u(x, y) · ψ(x, y) dydx.(31)
+Using a density argument, it can be shown that W 1,∞ 0
+
+(Ω, C ∞ per (Y H , V)) can be used as the space of test functions in the above definition instead of L 2 (Ω, C per (Y H , V)).
+
+The following results are analogous to the compactness results for the classical two-scale convergence of Nguetseng [23] and Allaire [2]. Theorem 3.4. If u ε is a bounded sequence in H 1 (Ω, V) that converges weakly to u ∈ H 1 (Ω, V), then the sequence converges locally periodic two-scale to u and there is a subsequence of ∇u ε , also denoted by ∇u ε , and aû ∈ L 2 (Ω, W per (Y H , V)) such that ∇u ε → ∇u + ∇ yû locally periodic two-scale as ε → 0.
+
+The next result concerns the product of two sequences that converge locally periodic two-scale. As with the previous compactness results, this one has an analog for two-scale convergence.
+
+Lemma 3.5. If u ε is a sequence in L 2 (Ω, V) that converges locally periodic two-scale to u ∈ L 2 (Ω, L 2 (Y H , V)) such that
+lim ε→0 u ε 2 L 2 (Ω,V) = Ω − Yx |u(x, y)| 2 dydx,(32)
+then for any sequence v ε in L 2 (Ω, V) that converges locally periodic two-scale to v ∈ L 2 (Ω,
+L 2 (Y H , V)) we have u ε v ε → − Yx u(·, y)v(·, y) dy in D ′ (Ω) as ε → 0.
+The following results, while not in Ptashnyk [26], simplify later arguments.
+Proposition 3.6. For φ ∈ L 2 (Ω, C per (Y H , V)) ∪ C(Ω, L 2 per (Y H , V)), we have L ε φ → φ locally periodic two-scale as ε → 0.(33)
+Proof. For any ψ ∈ W 1,∞ 0
+
+(Ω, C ∞ per (Y H , V)), by Proposition 3.1 we have
+lim ε→0 Ω (L ε φ) · (L ε ψ)(x) dx = lim ε→0 Ω L ε (φ · ψ)(x) dx = Ω − Yx φ(x, y) · ψ(x, y) dydx. (34)
+Thus, by Definition 3.2, (33) holds.
+
+Proposition 3.7.
+
+If v ε converges locally periodic two-scale, then (31) holds for all ψ ∈ C(Ω, L ∞ per (Y H , V)). Proof. For any ψ ∈ C(Ω, L ∞ per (Y H , V)), by Proposition 3.6, L ε ψ locally periodic two-scale converges to ψ. Moreover, by Proposition 3.1, (32) holds with u ε replaced by L ε ψ. Thus we can apply Lemma 3.5 to obtain
+lim ε→0 Ω v ε (x) · (L ε ψ)(x) dx = Ω − Yx v(x, y) · ψ(x, y) dydx.(35)Proposition 3.8. For all ψ ∈ C(Ω, L ∞ per (Y H , V)), we have lim ε→0 L ε ψ − L ε 0 ψ L 2 (Ω) = 0.(36)
+Proof. By the definition of L ε and L ε 0 ,
+L ε ψ − L ε 0 ψ 2 L 2 (Ω) = k∈I ε Ω ε k ∩Ω |ψ H −1 (x, H −1 x ε k (x −x ε k )/ε) − ψ H −1 (x ε k , H −1 x ε k (x −x ε k )/ε)| 2 dx. (37) Since ψ H −1 ∈ C(Ω, L ∞ per (Y, V))
+and Ω is compact, the family of functions x → ψ H −1 (x, y), indexed by y ∈ Y , is equi-uniformly continuous. Thus, given ξ > 0 there is an δ > 0 such that
+if |x 1 − x 2 | < δ, then |ψ H −1 (x 1 , y) − ψ H −1 (x 2 , y)| < ξ for a.e. y ∈ Y.(38)
+Consider ε small enough so that if x 1 , x 2 ∈ Ω ε k , then |x 1 − x 2 | < δ. It follows that for such ε,
+L ε ψ − L ε 0 ψ 2 L 2 (Ω) ≤ k∈I ε Ω ε k ∩Ω ξ dx = ξ|Ω|.(39)
+This proves the desired limit.
+
+Combining Propositions 3.7 and 3.8 we obtain the next result.
+
+
+Corollary 3.9.
+
+If v ε converges locally periodic two-scale and v ε L 2 (Ω) is bounded uniformly in ε, then for all ψ ∈ C(Ω,
+L ∞ per (Y H , V)) lim ε→0 Ω v ε (x) · (L ε 0 ψ)(x) dx = Ω Yx v(x, y) · ψ(x, y) dydx.(40)
+
+Homogenization result
+
+In this section we formulate the precise assumptions necessary to homogenize the elasticity equation (16). The resulting macroscipic equation involves a macroscopic residual stress and elasticity tensor which are determined by solving unit cell probelms.
+
+Let Ω be an open, bounded, Lipschitz domain and Y a parallelepiped with unit volume. We make the following assumptions.
+
+
+Assumptions
+
+1. H, K ∈ C 1 (Ω, Lin) and H(x) is invertible for all x ∈ Ω 2.Ŝ r ∈ C 1 (Lin, L ∞ per (Y, Lin)) 3.Ŝ ∈ C 1 (Lin(Lin) × Lin, Lin(Lin)) 4. C ∈ L ∞ per (Y, Lin(Lin)) 5. if T ∈ Lin(Lin) is either C(y) orŜ(C(y), K x ) for a.e. y ∈ Y and x ∈ Ω, then T satisfies the following conditions: (a) there is a α > 0 (independent of y and x) such that α|E| 2 ≤ E · TE for all E ∈ Sym
+(b) A · TB = A · T 1 2 (B + B ⊤ ) = 1 2 (A + A ⊤ ) · TB for all A, B ∈ Lin (c) D · TE = E · TD for all D, E ∈ Sym 6. b ∈ L 2 (Ω, R n ) and u • ∈ L 2 (∂Ω, R n )
+Notice it is not assumed thatŜ r andŜ are of the form (11) and (12), respectively. The following result follows from the Lax-Milgrim theorem using standard arguments and, hence, the proof is omitted. Proposition 4.1. For every ε > 0, define S ε r and C ε according to (18) and (19), respectively. Under Assumptions 1-6, the displacement problem (16) has a unique solution in H 1 (Ω, R n ). Moreover, the solution u ε is bounded in H 1 (Ω, R n ) independent of ε.
+
+For the remainder of the paper,ȳ will denote a typical element of Y while y will denote a typical element of Y x = H x (Y ) where x ∈ Ω. With this convention, ∇ȳ denotes the gradient with respect to a variable in Y and ∇ y denotes the gradient with respect to a variable in Y x . We are now in a position to state the main result. in Ω,
+u = u • on ∂Ω,(41)
+where for x ∈ Ω,
+S rhom (x) = − Y Ŝ r (K x ,ȳ) +Ŝ(C(ȳ), K x )[H −⊤ x ∇ȳŵ 0 (x,ȳ)H −1 x ] dȳ (42) C hom (x)E = − YŜ (C(ȳ), K x ) E + H −⊤ x ∇ȳw E (x,ȳ)H −1 x dȳ for all E ∈ Sym (43) andŵ 0 (x, ·) ∈ W per (Y, R n ) is the unique solution of divȳ H −1 x Ŝ r (K x , ·) +Ŝ(C(·), K x ) H −⊤ x ∇ȳŵ 0 (x, ·)H −1 x H −⊤ x = 0 in Y(44)
+and
+w E (x, ·) ∈ W per (Y, R n ) is the unique solution of divȳ H −1 xŜ (C(·), K x ) E + H −⊤ x ∇ȳw E (x, ·)H −1 x H −⊤ x = 0 in Y.(45)
+Proof. From Proposition 4.1, u ε is bounded in the H 1 -norm independent of ε. It follows from Theorem 3.4 that there is a u ∈ H 1 (Ω, R n ) andû ∈ L 2 (Ω, W per (Y H , R n )) such that along a subsequence (still denoted by u ε ) ∇u ε → ∇u + ∇ yû locally periodic two-scale as ε → 0.
+
+Notice that, using the notation (20),
+S ε r = L ε 0 (S rH ) and C ε = L ε 0 (C H ) where S r (x,ȳ) =Ŝ r (K x ,ȳ) and C(x,ȳ) =Ŝ(C(ȳ), K x ) for all (x,ȳ) ∈ Ω × Y.(47)
+
+Multiply (16) by the test function
+v = v 0 + εL ε ρ (ψv 1 H ), where v 0 ∈ C ∞ 0 (Ω, R n ), v 1 ∈ C ∞
+per (Y, R n ), and ψ ∈ C ∞ 0 (Ω, R), integrate over Ω and integrate by parts to obtain
+Ω L ε 0 (S rH ) + L ε 0 (C H )∇u ε · ∇v 0 + ε∇ L ε ρ (ψv 1 H ) dv + Ω b · v 0 + εL ε ρ (ψv 1 H ) dv = 0.
+(48) We want to compute the limit of (48) as ε goes to zero. This will be done by considering each term individually. Begin by expanding the first term in (48) to obtain
+Ω L ε 0 (S rH ) · ∇v 0 dv + ε Ω L ε 0 (S rH ) · ∇ L ε ρ (ψv 1 H ) dv + Ω L ε 0 (C H )∇u ε · ∇v 0 dv + ε Ω L ε 0 (C H )∇u ε · ∇ L ε ρ (ψv 1 H ) dv. (49)
+Looking at the first term in (49) and using Proposition 3.6 we have
+Ω L ε 0 (S rH ) · ∇v 0 dv → Ω − Yx S rH (x, y) · ∇v 0 (x) dydx(50)
+as ε goes to zero. Using Assumption 5(c), Corollary 3.9, and the fact that v 0 is independent of ε, one finds that
+Ω L ε 0 (C H )∇u ε · ∇v 0 dv = Ω ∇u ε · L ε 0 (C H )∇v 0 dv → Ω − Yx ∇u(x) + ∇ yû (x, y) · C H (x, y)∇v 0 (x) dydx = Ω − Yx C H (x, y) ∇u(x) + ∇ yû (x, y) · ∇v 0 (x) dydx (51)
+as ε goes to zero. Before the third term in (49) is considered, notice that by the chain and product rules
+ε∇(L ε ρ (ψv 1 H ))(x) = k∈I ε εv 1 (H −1 x ε k (x −x ε k )/ε) ⊗ ∇ψ(x)φ Ω ε k (x) + ψ(x)∇v 1 (H −1 x ε k (x −x ε k )/ε)H −1 x ε k φ Ω ε k (x) + εψ(x)v 1 (H −1 x ε k (x −x ε k )/ε) ⊗ ∇φ Ω ε k (x) . (52) Defining A ε 1 (x) = k∈I ε v 1 (H −1 x ε k (x −x ε k )/ε) ⊗ ∇ψ(x)φ Ω ε k (x),(53)A ε 2 (x) = k∈I ε ψ(x)∇v 1 (H −1 x ε k (x −x ε k )/ε)H −1 x ε k φ Ω ε k (x),(54)A ε 3 (x) = k∈I ε ψ(x)v 1 (H −1 x ε k (x −x ε k )/ε) ⊗ ∇φ Ω ε k (x),(55)
+for x ∈ Ω, we can write
+ε Ω L ε 0 (S rH ) · ∇(L ε ρ (ψ H v 1 )) dv = ε Ω L ε 0 (S rH ) · A ε 1 dv + Ω L ε 0 (S rH ) · A ε 2 dv + ε Ω L ε 0 (S rH ) · A ε 3 dv. (56)
+Since v 1 and ψ are bounded in L ∞ and φ Ω ε k satisfies (24) and (25), A ε 1 is bounded in L 2 independent of ε and A ε 3 is bounded in L 2 by a constant times ε −ρ . Thus, since L ε 0 (S rH ) is bounded in L ∞ independent of ε and ρ < 1, the first and third terms on the right-hand side of (56) go to zero as ε goes to zero. For the middle term on the right-hand side of (56), first notice that by the chain rule ∇v 1 (H −1
+x ε k (x −x ε k )/ε)H −1 x ε k = ∇ y v 1 H (x ε k , (x −x ε k )/ε).
+Using this fact and the definition of L ε 0 , see (23), A ε 2 can be written as
+A ε 2 (x) = k∈I ε ψ(x)∇ y v 1 H (x ε k , (x −x ε k )/ε)ψ Ω ε k (x) (57) = L ε 0 (∇ y v 1 H ψ)(x) + k∈I ε ∇ y v 1 H (x ε k , (x −x ε k )/ε) ψ(x)φ Ω ε k (x) − ψ(x ε k )χ Ω ε k (x) . (58)
+The second term in (58) goes to zero in L 2 as ε goes to zero by (24) and since ψ is smooth. Thus, by Proposition 3.1 we obtain
+lim ε→0 Ω L ε 0 (S rH ) · A ε 2 dv = lim ε→0 Ω L ε 0 (S rH ) · L ε 0 (∇ y v 1 H ψ) dv (59) = Ω − Yx S rH (x, y) · ∇ y v 1 H (x, y)ψ(x) dydx.(60)
+Computing the limit of the fourth term in (49) is similar to computing the limit of the third term. Thus, from the arguments in the previous paragraph and Corollary 3.9 we find that
+lim ε→0 ε Ω L ε 0 (C H )∇u ε · ∇(L ε ρ (ψv 1 H )) dv = lim ε→0 Ω L ε 0 (C H )∇u ε · A ε 2 dv (61) = lim ε→0 Ω L ε 0 (C H )∇u ε · L ε 0 (∇ y v 1 H ψ) dv (62) = lim ε→0 Ω ∇u ε · L ε 0 (C H ∇ y v 1 H ψ) dv (63) = Ω − Yx C H (x, y) ∇u(x) + ∇ yû (x, y) · ∇ y v 1 H (x, y)ψ(x) dydx. (64)
+Finally, to deal with the last term on the left-hand side of (48) we use the fact that L ε ρ (ψ H v 1 ) is bounded in L 2 independent of ε to find that
+ε Ω b · L ε ρ (ψv 1 H ) dv → 0 as ε → 0.(65)
+Putting the results of the last five paragraphs together we find that the limit of (48) as ε goes to zero is
+Ω − Yx S rH (x, y) + C H (x, y)[∇u(x) + ∇ yû (x, y)] · ∇v 0 (x) + ψ(x)∇ y v 1 H (x, y) dydx + Ω b(x) · v 0 (x) dx = 0. (66)
+Using the change of variables y = H xȳ results in
+Ω − Y S rH (x,ȳ)+C(x,ȳ) ∇u(x)+∇ȳû(x, H xȳ )H −1 x ·[∇v 0 (x)+ψ(x)∇v 1 (ȳ)H −1 x ] dȳdx + Ω b(x) · v 0 (x) dx = 0. (67)
+Consider the case where v 0 = 0 and use the fact that ψ ∈ C ∞ 0 (Ω, R) was arbitrary to conclude from (67) that
+− Y S rH (x,ȳ) + C(x,ȳ) ∇u(x) + ∇ȳû(x, H xȳ )H −1 x · ∇v 1 (ȳ)H −1 x dȳ = 0 for a.e. x ∈ Ω. (68) Fix x ∈ Ω. For each v 1 ∈ C ∞ per (Y, R n ) we can define v ∈ C ∞ per (Y, R n ) by v = H −⊤ x v 1 . Thus,(68)
+can be written as
+− Y H −1 x S r (x,ȳ) + C(x,ȳ) ∇u(x) + ∇ȳû(x, H xȳ )H −1 x H −⊤ x · ∇v(ȳ) dȳ = 0.(69)Given E ∈ Lin, letŵ E (x, ·) ∈ W per (Y, R n ) be the unique solution of divȳ H −1 x S r (x, ·) + C(x, ·) E + H −⊤ x ∇ȳŵ E (x, ·)H −1 x H −⊤ x = 0 in Y.(70)
+The existance of a unique solution to this unit cell problem, as well as all of the other unit cell problems such as (44) 
+
+Moreover, because of the structure of (70),ŵ E is an affine function of E. In particular, w E is of the formŵ
+E =ŵ 0 + w E(72)
+whereŵ 0 (x, ·) ∈ W per (Y, R n ) is the unique solution of (44), which is (70) with E = 0, and w E (x, ·) ∈ W per (Y, R n ) is the unique solution of (45). The function w E (x, ·) depends linearly on the symmetric part of E. Going back to (67), now consider the case where ψ = 0 and use (71) to obtain
+Ω − Y S r (x,ȳ) + C(x,ȳ) ∇u(x) + H −⊤ x ∇ȳŵ E (x,ȳ)H −1 x · ∇v 0 (x) dȳdx + Ω b(x) · v 0 (x) dx = 0. (73)
+Motivated by this equation, define S rhom by (42) and C hom by (43) so that (73) can be written as
+Ω (S rhom + C hom ∇u) · ∇v 0 dv + Ω b · v 0 dv = 0.(74)
+Since this holds for all v 0 ∈ C ∞ 0 (Ω, R n ), u is the weak solution of (41). Using the same arguments as in the classical periodic microstructure case, see for example Cioranescu and Donato [10] or Oleinik, Shomeav and Yosifian [25], it can be shown that the effective elasticity tensor (43) satisfies the properties mentioned in Assumption 5(a)-(c). It then follows from the Lax-Milgram theorem that (41) has a unique solution and, hence, the entire sequence u ε converges to u, not just a subsequence.
+
+Locally periodic microstructure can be used to approximate nonperiodic microstructures. To see how this cane be done, consider L, M : Ω → Lin with L of class C 2 and M of class C 1 such that L x is invertible at each x ∈ Ω. Moreover, assume that the linear mapping
+u → L −1 x u + ∇(L −1 ) x [u]x(75)
+is invertible. The functions L and M can be used to defined an elastic material with nonperiodic microstructure. Consider the elastic material with residual stress S ε rnp and elasticity tensor C ε np defined at x ∈ Ω by
+S ε rnp (x) =Ŝ r (M x , L −1 x x/ε) (76) C ε np (x) =Ŝ(C(L −1 x x/ε), M x ).(77)
+To construct the locally periodic approximation, begin by fixing r ∈ (1/2, 1) and for each k ∈ I ε choose x k ∈ Ω ε k arbitrarily. It follows from a Taylor series expansion about x ε k that for all x ∈ Ω ε k L −1
+x x/ε = L −1 x ε k x ε k /ε + L −1 x ε k (x − x ε k )/ε + ∇(L −1 ) x ε k [x − x ε k ]x ε k /ε + O(ε 2r−1 ).(78)
+Define H x to be the inverse of the linear mapping in (75) so that
+L −1 x x/ε = L −1 x ε k x ε k /ε + H −1 x ε k (x − x ε k )/ε + O(ε 2r−1 ).(79)
+Next, by the periodicity ofŜ r and C, we can findx ε k ∈ Ω ε k such that all x ∈ Ω ε k S r (M x , L −1
+x ε k x ε k /ε + H −1 x ε k (x − x ε k )/ε) =Ŝ r (M x , H −1 x ε k (x −x ε k )/ε) (80) C(L −1 x ε k x ε k /ε + H −1 x ε k (x − x ε k )/ε) = C(H −1 x ε k (x −x ε k )/ε).(81)
+Motivated by the above discussion, consider the locally periodic microstructure defined by
+S ε r (x) = k∈I εŜ r (K x ε k , H −1 x ε k (x −x ε k )/ε)χ Ω ε k (x),(82)C ε (x) = k∈I εŜ (C(H −1 x ε k (x −x ε k )/ε), K x ε k )χ Ω ε k (x),(83)
+where K = M and H is the inverse of the linear mapping defined in (75). Assuming 1/2 < r < 1 and using (79), (82), and (83) it can be shown that
+S ε r − S ε rnp L 2 (Ω) + C ε − C ε np L 2 (Ω) → 0 as ε → 0.(84)
+This fact allows for the arguments in Theorem 4.2 to be used to show that the solutions u ε of the system
+   div(S ε rnp + C ε np ∇u ε ) + b = 0 in Ω, u ε = u • on ∂Ω,(85)
+converge to the function u that satisfies (41) with S rhom and C home given by (42) and (43), respectively. Notice that when M = L in the nonperiodic structure, the locally periodic approximation does not satisfy K = H.
+
+
+Interpretation of results and special cases
+
+Several comments about Theorem 4.2 are warranted. We see from (43) that the effective elasticity tensor C hom it is not constant. This is contrary to the classical case when the microstructure is periodic. Since the effective elasticity tensor C hom depend on x ∈ Ω, it may initially appear that the unit cell problem (45) must be solved at each x. From a theoretical standpoint, this is not a problem. However, to calculate the effective elasticity tensor numerically, solving (45) at each x is tantamount to solving a system of linear equations at each point in a mesh. Clearly this is infeasible. A more sensible strategy is to compute the effective elasticity tensor at a few points in the domain and use these values to define a piecewise constant elasticity tensor that approximates (43). This kind of approach was studied by Shkoller [30]. However, this method is problematic if H and K have large gradients. Since the solution of (45), and hence C hom , only depend on x through K x and H x , another strategy is available. Rather than solving (45) for different values of x, it can be solved for different values of K and H and the resulting effective elasticity tensor can be calculated using (43). To obtain the effective elasticity tensor for values of K and H not explicitly considered, an interpolation can be used. This same method can be applied to the effective residual stress since the solution of (44) only depends on x through K x and H x as well.
+
+Interestingly, the effective residual stress S rhom (x) given in (42) is not solely given by the average ofŜ r (K x , ·) over the unit cell Y , as one might conjecture. Rather, it is given by this average plus an additional term involving the elasticity tensor C and a supplemental functionŵ 0 that is found by solving the unit cell problem (44). Motivated by the form ofŜ r given in (11) and the fact that Y was a stress-free configuration, let us supposê S r (Q, ·) = 0 when Q is orthogonal. In this case, if K x is orthogonal it follows from the structure of (44) thatŵ 0 (x, ·) = 0 and, hence, S rhom (x) = 0. Put more succinctly, when K x is orthogonal, the effective residual stress vanishes at x. There is another case in which the effective residual stress is irrelevant. When H and K are constant the microstructure is periodic. In this case, the effective residual stress is independent of x and, hence, constant. Thus, the divergence of S rhom is zero so it plays no role in the macroscopic equation (41). This means that the consideration of residual stresses is only interesting when nonperiodic microstructures are considered, not in the classical periodic case.
+
+Next consider when S ε r and C ε are specified by (11) and (12), so that the formula for the macroscopic elasticity tensor C hom (43) and the unit cell problem (45) are given by
+C hom (x)E = − Y K x C(ȳ) K ⊤ x EK x + K ⊤ x H −⊤ x ∇ȳw E (x,ȳ)H −1 x K x K ⊤ x dȳ(86)
+and
+divȳ H −1 x K x C K ⊤ x EK x + H −⊤ x K ⊤ x ∇ȳw E (x, ·)K x H −1 x K ⊤ x H −⊤ x = 0 in Y.(87)
+The formula for the effective residual stress and the unit cell problem (44) for these choices of S ε r and C ε are similar and, hence, are not explicitly written. See Figure 3(a) for an example of a nonperiodic microstructure that can be approximated by a locally periodic microstructure in which H = K. Several special cases are of particular interest.
+
+
+K = 1
+
+In this case (86) and (87) become
+C hom (x)E = − Y C(ȳ) E + H −⊤ x ∇ȳw E (x,ȳ)H −1 x dȳ(88)
+and divȳ H −1
+x C E + H −⊤ x ∇ȳw E (x, ·)H −1 x H −⊤ x = 1 in Y.(89)
+Since 1 is orthogonal, the effective residual stress S r vanishes. Since K describes how the alignment of the anisotropy of C change from patch to patch, in the case K = 1, the alignment of the anisotropy does not change. See Figure 3(b). For a particular choice of H this case was considered by Ptashnyk [26]. The above analysis could also of been carried out for the Poisson equation rather than the equation of elasticity. An analysis of a microstructure similar to this was carried out by Briane [6] when H is given by the gradient of a function.
+
+
+H = 1
+
+Under this assumption (86) and (87) become Figure 3: A depiction of several microstructures that can be approximated by locally periodic microstructures for different choices of H and K. These microstructures consist of two materials: an isotropic matrix and anisotropic spheres. The parallel lines in the spheres represent the orientation of the anisotropy within the spheres. The grid lines are present to help visualize how far the microstructure deviates from being periodic. (a) This microstructure can be approximated by a locally periodic microstructure in which H and K are not equal. Notice that the alignment between the parallel lines within each sphere and the reference lines differs from sphere to sphere. (b) This microstructure depicts the K = 1 case and is similar to the kinds of microstructure considered by Ptashnyk [26] and Briane [6]. Notice that the alignment of the lines within the spheres is always vertical, indicating that the anisotropy of the spheres is not changing. (c) This microstructure is approximated by a locally periodic microstructure with H = 1. For this kind of microstructure, the alignment of the anisotropy changes but the arrangement of the spheres is periodic. (d) Here the case H = K is depicted. The the parallel lines within each sphere are aligned with the reference lines in every sphere.
+C hom (x)E = − Y K x C(ȳ) K ⊤ x EK x + K ⊤ x ∇ȳw E (x,ȳ)K x K ⊤ x dȳ (90) (a) (b) (d) (c)and divȳ K x C K ⊤ x EK x + K ⊤ x ∇ȳw E (x, ·)K x K ⊤ x = 1 in Y.(91)
+Here C hom gives the elasticity tensor of a material whose elastic properties on the microscale are being transformed by K but the orientation of the unit cell remains unchanged throughout the microstructure. See Figure 3(c).
+
+
+H = K
+
+Perhaps the most interesting case is when H = K. See Figure 3(d) for a depiction of a nonperiodic microstructure that can be approximated by a locally periodic microstructure corresponding to H = K. Under this assumption, (87) becomes
+divȳ C K ⊤ x EK x + ∇ȳw E (x, ·) = 0 in Y.(92)
+If, for any E ∈ Lin,w E ∈ W per (Y, R n ) is the unique solution of
+divȳ C E + ∇ȳw E = 0 in Y,(93)
+then the solution of (92) must have the form
+w E (x,ȳ) =w K ⊤ x EKx (ȳ) for a.e. x ∈ Ω,ȳ ∈ Y.(94)
+Usingw, the effective elasticity tensor (86) can be written as
+C hom (x)E = − Y K x C(ȳ) K ⊤ x EK x + ∇ȳw K ⊤ x EKx (ȳ) K ⊤ x dȳ.(95)
+This macroscopic elasticity tensor is obtained by solving the unit cell problem (93) which does not depend on x ∈ Ω. Moreover, notice that for all x 1 , x 2 ∈ Ω, if we set M(x 1 , x 2 ) = K −1 x 1 K x 2 , then C hom (x 2 )E = M(x 1 , x 2 )C hom (x 1 ) M(x 1 , x 2 ) ⊤ EM(x 1 , x 2 ) M(x 1 , x 2 ) ⊤ for all E ∈ Lin .
+
+(96) Thus, knowing the macroscopic elasticity tensor at any one point determines the elasticity tensor at any other point. Once the unit cell problem (93) is solved and the average in (95) is computed at one point, (96) can be used to find the effective elasticity tensor at all other points. Hence, unlike the other previously considered cases where theoretically an infinite number of unit cell problems have to be solved to determine the effective elasticity tensor, here the unit cell problem (95) only has to be solved six times, once for each element of a basis for Sym, to completely determine C hom .
+
+The situation involving the residual stress is not the same. As has already been mentioned, the solution of (44) only depends on x through the values H x and K x . Motivated by this, letŵ 0 (K, ·) ∈ W per (Y, R n ) be the unique solution of divȳ Ŝ (K ⊤ K, ·) + C∇ȳŵ 0 (K, ·) = 0 (97) so that the effective residual stress is given by
+S rhom (x) = − Y K x Ŝ (K ⊤ x K x ,ȳ) + C(ȳ)∇ȳŵ 0 (K x ,ȳ) K ⊤ x dȳ.(98)
+It is not possible to relate the residual stress at different points in a way that is analogous for C hom in (96), and so (97) must be solved for different values of K to obtain S rhom (x) for different values of x. If we set
+T hom (E, x) =Ŝ hom (x) + C hom (x)E,(99)
+then from (96) and (98) it follows thatT hom satisfieŝ
+T hom (E, x 1 ) = M(x 1 , x 2 )T hom M(x 1 , x 2 ) ⊤ EM(x 1 , x 2 ), x 2 M(x 1 , x 2 ) ⊤(100)
+for all x 1 , x 2 ∈ Ω. This says that in the homogenized limit, the material is materially uniform with M being the material uniformity and K being a uniform reference. Moreover, if K is the gradient of a function, then the material is also homogeneous. However, in general, the material is inhomogeneous. For a detailed discussion of material uniformity and inhomogeneity see, for example, Epstein and Elżanowski [13], Noll [24], or Wang [33]. As mentioned in the introduction, microstructures appearing in nature often can be approximated by locally periodic microstructures in which H = K. Such materials have anisotropic components that make up their microstructure. As the orientation of the microstructure changes from point to point, the orientation of the anisotropies changes as well. A prime example of such a microstructure occurs in plant cell walls in which the anisotropic fibrils change their orientation throughout the thickness of the cell wall.
+
+Figure 1 :
+1A depiction of a domain Ω with locally periodic microstructure. This domain Ω is divided into 12 patches, each of which have slightly different periodic structure.
+
+Figure 2 :
+2A depiction of the unit cell Y and various transformations of it. The parallel lines within each unit cell represent the orientation of the anisotropy of the elastic properties of the unit cell. (a) A depiction of the original, untransformed unit cell Y . (b) A depiction of a transformed unit cell with the elasticity properties untransformed. This corresponds to the case where K = 1. (c) A depiction of an untransformed unit cell in which the elastic properties are transformed. This results when H = 1. (d) A depiction of a transformed unit cell with transformed elastic properties in which the two transformations differ. This occurs for generic H and K. (e) A depiction of a transformed unit cell with transformed elastic properties in which the two transformations are the same-that is, H = K.
+
+Theorem 3. 3 .
+3If u ε is a bounded sequence in L 2 (Ω, V), then there is a subsequence, also denoted by u ε , and a u ∈ L 2 (Ω, L 2 per (Y H , V)) such that u ε → u locally periodic two-scale as ε → 0.Let W per (Y, V) denote the set of equivalence classes of H 1 per (Y, V) where two functions are equivalent if they differ by a constant vector in V.
+
+Theorem 4. 2 .
+2Under Assumptions 1-6, the solutions u ε of (16) converge weakly in H 1 (Ω, R n ) to a function u which is the unique solution of   div(S rhom + C hom ∇u) + b = 0
+
+
+and (45), follow from the Assumptions and the Lax-Milgram theorem. Notice that x acts as a parameter in these equations. It follows thatû in (69) is of the formû (x, H xȳ ) = H −⊤ xŵ ∇u(x) (x,ȳ) for a.e. x ∈ Ω,ȳ ∈ Y.
+For a detailed discussion of materially uniformity and inhomogeneity, see Noll[24], Epstein and Elżanowski[13], or Wang[33].
+See, for example, Gurtin, Fried and Anand[16].
+Briane did not consider an elastic microstructure. Rather, he was looking at the diffusion equation. However, the main difference between the microstructure described here and that considered by Briane still holds.
+
+Homogenisation and θ-2 convergence. R Alexandre, Proceedings of the Royal Society of Edinburgh. 127Alexandre, R. Homogenisation and θ-2 convergence. Proceedings of the Royal Society of Edinburgh 127A (1997), 441-455.
+
+Homogenization and two-scale convergence. G Allaire, SIAM Journal of Mathematics and Analysis. 23Allaire, G. Homogenization and two-scale convergence. SIAM Journal of Mathematics and Analysis 23 (1992), 1482-1518.
+
+Multiscale young measures in almost periodic homogenization and applications. Archive for Rational Mechanics and. L Ambrosio, H Frid, Analysis. 192Ambrosio, L., and Frid, H. Multiscale young measures in almost periodic homoge- nization and applications. Archive for Rational Mechanics and Analysis 192 (2009), 37-85.
+
+Asymptotic Analysis for Periodic Structures. A Bensoussan, J L Lions, G Papanicolaou, American Mathematical SocietyBensoussan, A., Lions, J. L., and Papanicolaou, G. Asymptotic Analysis for Periodic Structures. American Mathematical Society, 1978.
+
+Homogenénéisation de matériaux fibrés et multi-couches, thése. M Briane, Université Paris-VIBriane, M. Homogenénéisation de matériaux fibrés et multi-couches, thése. Université Paris-VI (1990).
+
+Homogenization of a non-periodic material. M Briane, Journal de Mathematiques Pures et Appliquees. 9Briane, M. Homogenization of a non-periodic material. Journal de Mathematiques Pures et Appliquees 9 (1994), 37-66.
+
+Three models of nonperiodic fibrous materials obtained by homogenization. M Briane, ESAIM: Mathematical Modelling and Numerical Analysis -Modélisation Mathématique et Analyse Numérique. 27Briane, M. Three models of nonperiodic fibrous materials obtained by homogenization. ESAIM: Mathematical Modelling and Numerical Analysis -Modélisation Mathématique et Analyse Numérique 27 (1994), 759-775.
+
+The two-scale convergence method applied to besicovitch spaces. J Casado-Diaz, I Gayte, Proceedings for the Royal Society of London A. 458Casado-Diaz, J., and Gayte, I. The two-scale convergence method applied to besicov- itch spaces. Proceedings for the Royal Society of London A 458 (2002), 2925-2946.
+
+The periodic unfolding method in homogenization. D Cioranescu, A Damlamian, G Griso, SIAM Journal of Mathematics and Analysis. 40Cioranescu, D., Damlamian, A., and Griso, G. The periodic unfolding method in homogenization. SIAM Journal of Mathematics and Analysis 40 (2008), 1585-1620.
+
+An Introduction to Homogenization. D Cioranescu, P Donato, Oxford University PressCioranescu, D., and Donato, P. An Introduction to Homogenization. Oxford University Press, 1999.
+
+Anisotropic elastic properties of cellulose measured using inelastic x-ray scattering. I Diddens, B Murphy, M Krisch, M Müller, Macromolecules. 41Diddens, I., Murphy, B., Krisch, M., and Müller, M. Anisotropic elastic properties of cellulose measured using inelastic x-ray scattering. Macromolecules 41 (2008), 9755- 9759.
+
+How the deposition of cellulose microfibrils builds cell wall architecture. A M C Emons, B M Mulder, Trends in Plant Science. 5Emons, A. M. C., and Mulder, B. M. How the deposition of cellulose microfibrils builds cell wall architecture. Trends in Plant Science 5 (2000), 35-40.
+
+Material Inhomogeneities and their Evolution. M Epstein, M Elżanowski, SpringerEpstein, M., and Elżanowski, M. Material Inhomogeneities and their Evolution. Springer, 2007.
+
+Influence of structural principles on the mechanics of a biological fiber-based composite material with hierarchical organization: the exoskeleton of the lobster Homarus americanus. H O Fabritius, C Sachs, P R Triguero, Raabe , D , Advanced Materials. 21Fabritius, H. O., Sachs, C., Triguero, P. R., and Raabe, D. Influence of structural principles on the mechanics of a biological fiber-based composite material with hier- archical organization: the exoskeleton of the lobster Homarus americanus. Advanced Materials 21 (2009), 391-400.
+
+Viscoelastic and anisotropic mechanical properties of in vivo muscle tissue assessed by supersonic shear imaging. J L Gennisson, T Deffieux, E Macé, G Montaldo, M Fink, M Tanter, Ultrasound in Medicine & Biology. 36Gennisson, J. L., Deffieux, T., Macé, E., Montaldo, G., Fink, M., and Tanter, M. Viscoelastic and anisotropic mechanical properties of in vivo muscle tissue assessed by supersonic shear imaging. Ultrasound in Medicine & Biology 36, 5 (2010), 789-801.
+
+The Mechanics and Thermodynamics of Continua. M E Gurtin, E Fried, Anand , L , Cambridge University PressGurtin, M. E., Fried, E., and Anand, L. The Mechanics and Thermodynamics of Continua. Cambridge University Press, 2009.
+
+Microstructures and mechanical properties of fiber cells from Echinocactus grusonii cactus spine. F Huang, H Qiu, W Guo, Science China Technological Sciences. 57Huang, F., Qiu, H., and Guo, W. Microstructures and mechanical properties of fiber cells from Echinocactus grusonii cactus spine. Science China Technological Sciences 57 (2014), 706-72.
+
+Homogenization of Differential Operators and Integral Functionals. V V Jikov, S M Kozlov, O A Oleinik, Springer-VerlagJikov, V. V., Kozlov, S. M., and Oleinik, O. A. Homogenization of Differential Oper- ators and Integral Functionals. Springer-Verlag, 1994.
+
+Scale convergence in homogenization. M L Mascarenhas, A M Toader, Numerical Functional Analysis and Optimization. 22Mascarenhas, M. L., and Toader, A. M. Scale convergence in homogenization. Numer- ical Functional Analysis and Optimization 22 (2001), 127-158.
+
+Homogenization Methods for Multiscale Mechanics. C C Mei, B Vernescu, World ScientificMei, C. C., and Vernescu, B. Homogenization Methods for Multiscale Mechanics. World Scientific, 2010.
+
+Compacitè per compensation. F Murat, Annali della Scuola Normale Superiore di Pisa. 5Murat, F. Compacitè per compensation. Annali della Scuola Normale Superiore di Pisa 5 (1978), 489-507.
+
+Self-assembly mechanisms in plant cell wall components. Y K Murugesan, D Pasini, A D Rey, Journal of Renewable Materials. 3Murugesan, Y. K., Pasini, D., and Rey, A. D. Self-assembly mechanisms in plant cell wall components. Journal of Renewable Materials 3 (2015), 56-72.
+
+A general convergence result for a functional related to the theory of homogenization. G Nguetseng, SIAM Journal of Mathematics and Analysis. 20Nguetseng, G. A general convergence result for a functional related to the theory of homogenization. SIAM Journal of Mathematics and Analysis 20 (1989), 608-623.
+
+Materially uniform simple bodies with inhomogeneities. Archive for Rational Mechanics and. W Noll, Analysis. 27Noll, W. Materially uniform simple bodies with inhomogeneities. Archive for Rational Mechanics and Analysis 27 (1967), 1-32.
+
+Mathematical Problems in Elasticity and Homogenization. O A Oleinik, A S Shomaev, G A Yosifian, North-HollandOleinik, O. A., Shomaev, A. S., and Yosifian, G. A. Mathematical Problems in Elasticity and Homogenization. North-Holland, 1992.
+
+Two-scale convergence and locally periodic microstructures and homogenization of plywood structures. M Ptashnyk, SIAM Journal on Multiscale Modeling and Simulation. 11Ptashnyk, M. Two-scale convergence and locally periodic microstructures and homog- enization of plywood structures. SIAM Journal on Multiscale Modeling and Simulation 11 (2013), 92-117.
+
+Locally periodic unfolding method and two-scale convergence on surfaces of locally periodic microstructures. M Ptashnyk, SIAM Journal on Multiscale Modeling and Simulation. 13Ptashnyk, M. Locally periodic unfolding method and two-scale convergence on sur- faces of locally periodic microstructures. SIAM Journal on Multiscale Modeling and Simulation 13, 3 (2015), 1061-1105.
+
+Microstructure and crystallographic texture of the chitinprotein network in the biological composite material of the exoskeleton of the lobster Homarus americanus. D Raabe, P Romano, C Sachs, H Fabritius, A Al-Sawalmih, S B Yi, G Servos, H G Hartwig, Materials Science and Engineering A. 421Raabe, D., Romano, P., Sachs, C., Fabritius, H., Al-Sawalmih, A., Yi, S. B., Servos, G., and Hartwig, H. G. Microstructure and crystallographic texture of the chitin- protein network in the biological composite material of the exoskeleton of the lobster Homarus americanus. Materials Science and Engineering A 421 (2006), 143-153.
+
+Seed microstructure and genetic variation of characters in selected grass-pea mutants (Lathyrus sativus l.). W Rybiński, W Błaszczak, J Formal, International Agrophysics. 20Rybiński, W., Błaszczak, W., and Formal, J. Seed microstructure and genetic vari- ation of characters in selected grass-pea mutants (Lathyrus sativus l.). International Agrophysics 20 (2006), 317-326.
+
+An approximate homogenization scheme for nonperiodic materials. S Shkoller, Computers & Mathematics with Applications. 33Shkoller, S. An approximate homogenization scheme for nonperiodic materials. Com- puters & Mathematics with Applications 33 (1997), 15-34.
+
+Sul limite delle soluzioni di problemi di cauchy relativi all'equazione del calore. S Spagnolo, Annali della Scuola Normale Superiore di Pisa. 21Spagnolo, S. Sul limite delle soluzioni di problemi di cauchy relativi all'equazione del calore. Annali della Scuola Normale Superiore di Pisa 21 (1967), 657-699.
+
+Probèmes d'homogénéisation dans les équations aux dérivées partielles. (Cours Peccot. L Tartar, Collège de FranceTartar, L. Probèmes d'homogénéisation dans les équations aux dérivées partielles. (Cours Peccot, Collège de France) (1977).
+
+On the geometric structure of simple bodies, a mathematical foundation for the theory of continuous distributions of dislocations. C C Wang, Archive for Rational Mechanics and Analysis. 27Wang, C. C. On the geometric structure of simple bodies, a mathematical founda- tion for the theory of continuous distributions of dislocations. Archive for Rational Mechanics and Analysis 27 (1967), 33-94.

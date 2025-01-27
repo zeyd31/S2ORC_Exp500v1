@@ -1,0 +1,275 @@
+
+Distributed Online Generalized Nash Equilibrium Tracking for Prosumer Energy Trading Games
+
+
+Yongkai Xie 
+Zhaojian Wang 
+John Z F Pang 
+Bo Yang 
+Xinping Guan 
+Distributed Online Generalized Nash Equilibrium Tracking for Prosumer Energy Trading Games
+1Index Terms-Generalized Nash equilibriumonline optimiza- tiontime-varying gameP2P energy trading market
+With the proliferation of distributed generations, traditional passive consumers in distribution networks are evolving into "prosumers", which can both produce and consume energy. Energy trading with the main grid or between prosumers is inevitable if the energy surplus and shortage exist. To this end, this paper investigates the peer-to-peer (P2P) energy trading market, which is formulated as a generalized Nash game. We first prove the existence and uniqueness of the generalized Nash equilibrium (GNE). Then, an distributed online algorithm is proposed to track the GNE in the time-varying environment. Its regret is proved to be bounded by a sublinear function of learning time, which indicates that the online algorithm has an acceptable accuracy in practice. Finally, numerical results with six microgrids validate the performance of the algorithm.
+
+I. INTRODUCTION
+
+The explosive growth of distributed generation in distribution networks together with the advancement of communication and control technology at the consumer level have gradually transformed the traditionally passive consumers into "prosumers", which can both produce and consume energy [1]. Then, energy trading with the main grid or between prosumers is inevitable since energy surplus and shortage are bound to exist [2]. In this situation, the peer-to-peer (P2P) market, which operates in a distributed manner, is more popular due to the ever-increasing number of prosumers, in which the various prosumers can be self-organized to operate economically and reliably under a given market mechanism [3]. In addition, the increasing penetration and an aggravating volatility of renewable generation calls for online market clearing methods. In this paper, we intend to investigate the distributed online energy trading market for prosumers.
+
+For such P2P energy trading markets, they are usually formulated as generalized Nash games, where each prosumer maximizes its profit with coupling constraints, e.g., global power balance [1], [2], [4]- [7]. Then, clearing the resulting P2P market corresponds to finding the generalized Nash equilibrium (GNE) of the energy trading game. For example, in [1], the energy sharing game among prosumers is formulated with full information, and [2] further designs a fully distributed algorithm based on Nesterov's methods to seek the GNE with only partial-decision information. In [4], a P2P energy market is formulated as a generalized Nash game, where the prosumers who share payments are mutually coupled and influenced. Following this, [5] and [6] further consider systemlevel grid constraints. Lastly, in [7], a P2P energy market of prosumers is formulated as a generalized aggregative game with global coupling constraints. The aforementioned works have made great progress in the distributed GNE seeking for the P2P energy trading market. However, they usually focus on only one time section and provide offline solutions to solve the game. Due to the volatility of renewable generations and the complexity of load profiles, both current and future operation status changes much more over time, requiring much faster algorithms, i.e., online GNE tracking.
+
+In this paper, we formulate a P2P energy trading market among prosumers in the distribution network and propose a distributed online algorithm to track the GNE of the market. The major contributions are as follows.
+
+• A P2P energy trading market is modeled as a generalized Nash game with both individual and coupled time-varying constraints. Moreover, we prove the uniqueness of the GNE of this market at any time section. • A novel distributed online algorithm is proposed to track the GNE, where each prosumer can make decisions only using local variables and neighboring information. This reduces the communication burden and makes it easier to implement in practice. • We prove a sublinear regret bound, i.e., that the regret of the online algorithm can be bounded by a sublinear function of learning time, indicating that the online algorithm suffers minimal "loss in hindsight".
+
+The rest of this paper is organized as follows. In Section II, the P2P energy trading game is formulated. Section III introduces and analyzes the performance of a distributed online algorithm to track the GNE of the game in a time-varying environment. Numerical results are presented in Section IV to verify the effectiveness of our algorithm. Finally, Section V concludes the paper.
+
+Notations: In this paper, R n + is the n-dimensional (nonpositive) Euclidean space. For a column vector x ∈ R n (matrix A m×n ∈ R m×n ), its transpose is denoted by x T (A T ). For a matrix A, [A] i,j stands for the entry in the i-th row and j-th column of A. For vectors x, y ∈ R n , x T y = x, y is the inner product of x, y, while ⊗ represents the Kronecker product.
+x = √
+x T x is the Euclidean norm. The identity matrix with dimension n is denoted by I n . Sometimes, we also omit n to represent the identity matrix with the proper dimension. 0 n , 1 n are all zero and all one vectors with dimension n, respectively. The Cartesian product of the sets Ω i , i = 1, · · · , n is denoted by n i=1 Ω i . Given a collection of y i for i in a certain set Y , the vector composed of y i is defined as y = col(y i ) := (y 1 , y 2 , · · · , y n ) T . The projection of x onto a set Ω is defined as P Ω (x) := arg min y∈Ω x − y .
+
+
+II. PROBLEM FORMULATION
+
+
+A. Network model
+
+We consider a distribution network with a group of prosumers, denoted by the set N = {1, 2, ..., N }. For each prosumer, its load demand can be satisfied by its own generation and trading with the main grid or its neighboring prosumers. The trading edge is denoted by E ⊆ N × N . For a prosumer i, the set of its neighbors is denoted by
+N i = {N 1 1 , . . . , N Ni 1 } with |N i | = N i .
+If j ∈ N i , prosumers i and j can trade and communicate directly. Otherwise, direct trading and communication are not allowed. Then, the trading network is modeled as an undirected graph G = (N , E). The adjacency matrix of G is denoted by W with elements w i,j . If j ∈ N i , the weight w i,j satisfies w i,j = w j,i > 0. Otherwise, w i,j = w j,i = 0. The Laplacian matrix of the communication graph is denoted by L and we have 1 T L = 0, where 1 is an all-one vector. Moreover, the graph G is assumed to be connected. For the weights, we have the following assumption, which implies that every row sum of W is identical. 
+
+
+B. Prosumer model
+
+The scenario is that each prosumer is equipped with dispatchable generation, a non-dispatchable load, and an energy storage system (ESS). To maintain power balance, it can generate electricity, charge or discharge from the ESS, and/or trade with the main grid or neighboring prosumers. In this paper, we focus on the time horizon T = {1, 2, ..., T }. Here, we will introduce them in detail.
+
+Dispatchable generation: The power generated by dispatchable generation units of prosumer i at time t, denoted by p g i (t), is limited by
+p mg i (t) 2(8)
+where c mg t is a time-varying cost coefficient, since the energy production varies along the time period according to the energy demand and the availability of distributed energy sources. Then the cost assigned to prosumer i is
+f mg i (p mg (t)) = p mg i (t) i∈N p mg i (t) C t (p mg (t)) = c mg t p mg i (t) i∈N p mg i (t)(9)
+Moreover, the total power exchanged with the main grid is limited, i.e.,
+p mg,min ≤ i∈N p mg i (t) ≤ p mg,max , ∀t ∈ T(10)
+Trading with neighbors: The trading cost with neighboring prosumers of prosumer i is
+f tr i p tr i,j (t) = j∈Ni a tr p tr i,j (t) 2 + d tr i,j p tr i,j (t)(11)
+where p tr i,j (t) is the power purchased from prosumer j at time t, d tr i,j = d tr j,i > 0 is the price and a tr is a small positive constant, which represents the tax cost incurred by using the energy sharing platform.
+
+Disregarding loss on the power lines, the sum of the trading power of prosumer i and j at time t should be 0.
+p tr i,j (t) + p tr j,i (t) = 0, ∀(i, j) ∈ E, t ∈ T(12)
+Furthermore, trade between prosumers is limited by
+p tr,min i,j ≤ p tr i,j (t) ≤ p tr,max i,j , ∀(i, j) ∈ E, t ∈ T(13)
+where p tr,min i,j ≤ 0 and p tr,max i,j ≥ 0 are the minimum and maximum tradeable power between prosumers i and j. Denote by p l i (t) the undispatchable load demand, and the local power balance for each prosumer i is
+p g i (t) − p c i (t) + p d i (t) + p mg i (t) + j∈Ni p tr i,j (t) = p l i (t)(14)
+
+C. Energy trading game
+
+Before giving the game model, we first simplify notations. The decision variable of prosumer i is denoted by
+x i (t) := col p g i (t), p c i (t), p d i (t), p mg i (t), p tr i,j (t) ∈ R ni where n i = 4 + N i and i∈N n i = n.
+Define a sparse matrix E i , where the rows of E i correspond to every trading edge in E one by one. Let the k-th row of E i corresponds to (I k , J k ) in E, then the elements [E i ] k,l of E i are assigned as follows.
+[E i ] k,l =    1, If {I k , J k } = i, N l i and I k < J k . −1, If {I k , J k } = i, N l i and I k > J k . 0,
+Otherwise.
+
+Let
+A i =   0 m×3 −1 0 T Ni 1 0 T Ni 0 i∈N Ni E i   b i = − p mg,min N p mg,min N 0 T i∈N Ni T g i (x i (t)) = A i x i (t) − b i , ∀i ∈ N , t ∈ T
+where m = 2 + i∈N N i . Then coupling constraints (10) and (12) can be reformulated as
+j∈N g i (x i (t)) ≤ 0(15)
+In (15), the sparse matrix E i is designed to address the equality constraint (12) by transforming it into two equivalent inequality constraints.
+
+Similarly, let
+G i = 1 −1 1 1 1 T Ni
+Then equality constraint (14) can be reformulated as
+G i x i (t) − p l i (t) = 0, ∀i ∈ N , t ∈ T(16)
+Moreover, the domain set of x i (t) is denoted by
+χ i = {x i (t)|x i (t) satisfies (1), (3), (4), (5), (6), (13)} Ω i = χ i ∩ {x i (t)|x i (t) satisfies (16)} X = i∈N Ω i ∩ {x(t)|x(t) satisfies (15)}
+where χ i is the set of all of the local inequality constraints, Ω i considers the reformulated power balance constraint of (14), while X includes coupling constraints. In the energy trading game, each prosumer intends to minimize its cost while maintaining the global power balance. The optimization problem of each prosumer is
+min xi(t) J i,t (x i (t), x −i (t)) = f g i (p g i (t)) + f es i p c i (t), p d i (t) + f mg i (p mg (t)) + f tr i p tr i,j (t) (17a) s.t. x i (t) ∈ X i (x −i (t)) (17b) where x −i (t) := col (x 1 (t), ..., x i−1 (t), x i+1 (t), ..., x N (t)) and X i (x −i (t)) := {x i (t) ∈ Ω i |(x i (t), x −i (t)) ∈ X}.
+In summary, the energy trading game is represented as
+• Player: all prosumers, denoted by N = {1, 2, ..., N }. • Strategy: decision variable x i . • Payoff: the disutility function J i,t (x i (t), x −i (t)
+). Due to the global coupling constraints (15), it is a generalized Nash game. The corresponding GNE is defined as (17), we have following assumptions.
+x * i (t) ∈ arg min J i,t x i (t), x * −i (t) , s.t. x i (t) ∈ X i x * −i (t) Regarding the game
+Assumption 2. χ i is a non-empty, compact and convex set. (17) is feasible.
+Assumption 3. Given any x −i (t), problem
+Since the constraints of problem (17) are all affine, the commonly assumed Slater's condition is simplified to only require feasibility, and therefore Assumption 3 suffice.
+
+
+D. Uniqueness of the GNE
+The pseudo-gradient of {J i,t } i∈N is defined as F t (x) = col ({∇ xi J i,t (x i , x −i )}) = col                        2a g i p g i + b g i 2a c i p c i 2a d i p d i c mg t 2p mg i + j∈N ,j =i p mg j col 2a tr p tr i,j + d tr i,j j∈Ni                       (18)
+Define a g = min i∈N a g i , a g = max i∈N a g i , with a c , a c , a d , a d defined similarly. In addition, c mg = min t∈T c mg t , c mg = max t∈T c mg t . Then, we can prove that the pseudo-gradient is strongly monotone and Lipschitz continuous. Lemma 1. For ∀t ∈ T , the pseudo-gradient F t (x) has following properties:
+1) F t (x) is strongly monotone with parameter 0 < η ≤ min 2a g , 2a c , 2a d , c mg , 2a tr , i.e., F t (x)−F t (y), x− y ≥ η||x − y|| 2 2 ; 2) F t (x) is θ−Lipschitz continuous, i.e., F t (x) − F t (y) 2 ≤ θ||x − y|| 2 with θ ≥ max 2a g , 2a c , 2a d , N c mg , 2a tr .
+Proof. For 1), taking any two variables x 1 , x 2 , then
+F t (x 1 ) − F t (x 2 ), x 1 − x 2 = i∈N 2a g i p g,1 i − p g,2 i 2 2 + i∈N 2a c i p c,1 i − p c,2 i 2 2 + i∈N 2a d i p d,1 i − p d,2 i 2 2 + c mg t h T Hh + i∈N j∈Ni 2a tr p tr,1 i,j − p tr,2 i,j 2 2(19)
+where h = col p mg,1
+i − p mg,2 i and H = I N + 1 N ×N . Since the minimal eigenvalue of H is 1, we have h T Hh ≥ i∈N p mg,1 i − p mg,2 i 2 2 . Then F t (x 1 ) − F t (x 2 ), x 1 − x 2 ≥ η x 1 − x 2 2 2 with 0 < η ≤ min 2a g , 2a c , 2a d , c mg , 2a tr . Therefore, F t (x) is strongly monotone with parameter η.
+Similarly, the second assertion could be obtained, which is omitted due to the space limit.
+
+A GNE with the same Lagrangian multipliers for all the agents is called variational GNE (v-GNE) [10], which has the economic interpretation of no price discrimination [11]. For ∀t ∈ T , every solution x * (t) ∈ X to the following variational inequality is a v-GNE of game (17).
+F t (x * (t)), x − x * (t) ≤ 0, ∀x ∈ X(20)
+Theorem 1. For the generalized Nash game (17), there exists a unique v-GNE.
+
+Proof. Following [12], since J i,t (x i (t), x −i (t)) is differentiable and convex with respect to x i (t) for any x −i (t), if Assumption 2 and 3 hold, the v-GNE of (17) exists. Moreover, by the strong monotonicity of F t (x), the uniqueness of v-GNE is guaranteed.
+
+
+III. ONLINE ALGORITHM
+
+In this section, we first propose an online distributed algorithm based on a consensus algorithm and primal-dual strategy to solve the problem (17). Then, we prove that the regret of the proposed algorithm is bounded by a sublinear function of the learning time.
+
+
+A. Algorithm design
+
+Recalling the objective function (17a), f mg i (p mg (t)) is associated with decisions of all of the other prosumers. To solve game (17), full information is needed, i.e., one prosumer needs to communicate with all of the other prosumers. However, this is difficult to realize in practice due to communication limits. This section designs a distributed algorithm with only partial-decision information, where the prosumers only need to exchange information with its neighbors. To this end, we endow each prosumer with an auxiliary variablex i (t) that provides an estimate of the decisions of other prosumers at time t. Moreover,x i j (t) represents prosumer i's estimate of
+j's decision andx i −i (t) = col x i j (t) j∈Ni . Clearly, we havex i i (t) = x i (t)
+. Firstly, note that the Lagrangian of problem (17) is
+L i,t (x i (t), λ i (t), µ i (t); x −i (t)) = J i,t (x i (t), x −i (t)) + λ T i (t) i∈N g i (x i (t)) + µ i (t)(G i x i (t) − p l i (t)) (21)
+where λ i (t) and µ i (t) are Lagrange multipliers. The iterative process of x i (t),x i −i (t) and dual variables (λ i (t), µ i (t)) is shown in Algorithm 1, where 0 < ρ(t) < 1 is a stepsize or the so-called learning rate, which decreases over t, and c = 1 w0 . The update for x i (t) in Algorithm 1 employs the projected primal-dual gradient decomposition method combined with the consensus approach [13]- [15]. The update ofx i −i (t) can be regarded as a discrete-time integration for the consensus error of the local estimation [16]. At each sampling time t,
+prosumer i gets ∇ xi J i,t (x i (t), x −i (t)) by using x i (t),x i −i (t)
+
+Algorithm 1 Online Algorithm for P2P Energy Trading
+
+Initialization:
+x i (0) ∈ χ i ,x i −i (0) ∈ R n−ni , λ i (0) = 0, µ i (0) = 0 for t = 1 to T do x i (t + 1) = (1 − ρ(t))x i (t) + ρ(t)P χi x i (t) − ρ(t)[∇ xi J i,t (x i (t),x i −i (t)) + ρ(t)(A T i λ i (t) + G T i µ i (t)) +c j∈Ni (x i (t) −x j i (t))] (22a) x i −i (t + 1) =x i −i (t) − cρ(t) j∈Ni w i,j x i −i (t) −x j −i (t) (22b) λ i (t + 1) = P R m + (1 − ρ(t)) j∈Ni∪{i} w ij w 0 λ j (t) + ρ(t) [A i (2x i (t + 1) − x i (t)) − b i ] (22c) µ i (t + 1) = (1 − ρ(t)) µ i (t) + ρ(t) G i (2x i (t + 1) − x i (t)) − p l i (t) (22d) end for
+and updates x i (t + 1) with (22a). Meanwhile, the estimation x i −i (t + 1) is updated by communication with neighboring prosumers by (22b). Then, dual variables (λ i (t), µ i (t)) are updated using the latest updated local information x i (t + 1) with (22c) and (22d), respectively. Remark 1. Algorithm 1 is fully distributed with only partialdecision information. Each prosumer makes a decision only based on local information and communication with its neighbors, which is easy to implement in practice. Compared with the existing work [17] only considering the time-varying objective function, we further include the time-varying constraints. Moreover, compared with the algorithm in [18], the update is much simpler without the need of solving an optimization problem at each iteration, which reduces the computation cost.
+
+
+B. Regret analysis
+
+In this subsection, we will prove that the regret of Algorithm 1 is bounded by a sublinear function of the learning time. First, we give some notations. Under Assump-
+tion 2, x i , g i (x i ) , ∇ xi J i,t (x i , x −i ) , ∇ xi g i (x i ) and G i x i − p l i (t) are bounded.
+Then, for ∀i ∈ N and ∀t ∈ T , we define
+κ 1 = sup xi∈χi x i , κ 2 = sup xi∈χi g i (x i ) κ 3 = sup xi∈χi ∇ xi J i,t (x i , x −i ) , κ 4 = sup xi∈χi ∇ xi g i (x i ) κ 5 = sup xi∈χi G i x i − p l i (t) , κ 6 = max i∈N sup xi =1 G i x i
+We use the dynamic regret to evaluate the performance of the online algorithm, which is defined as follows. where x * (t) = col(x * i (t)) is the v-GNE of (17) at time t. An online algorithm is generally considered to perform well if the regret increases sublinearly [18], [19], i.e.,
+R i (T ) = T t=1 J i,t x i (t), x * −i (t) − J i,t (x * (t))(23)lim T →∞ R i (T ) T = 0, ∀i ∈ N(24)
+However, it would be impossible to keep the regret (23) increasing sublinearly if the v-GNE sequence {x * (0), x * (1), . . . , x * (N )} of (17) fluctuates drastically. Therefore, motivated by [20] and [21], we adopt the following accumulation to describe the difficulty of tracking the v-GNE sequence:
+Φ T = T t=0 x * (t + 1) − x * (t)(25)
+Sublinear regret is only possible when Φ T is small. The next result shows that by implementing decreasing ρ(t), the regret of Algorithm 1 is bounded by Φ T and T t=1 ρ(t).
+
+Theorem 2. Suppose that Assumption 1 and 2 hold, for ∀i ∈ N , the regret of Algorithm 1 is bounded by
+R i (T ) ≤ O T Φ T + 1 ρ 2 (T ) + T t=1 ρ(t)(26)
+The proof of Theorem 2 is given in the appendix.
+
+Remark 2. From Theorem 2, we can get the sublinearly bounded dynamic regrets of Algorithm 1. To this end, take ρ(t) = K (at+b) α with a, b > 0, 0 < K ≤ 1 and 0 < α < 1 2 . If Φ T is sublinear with T 1− α 2 , then R i (T ) is sublinear with T . Note that the sublinearity of Φ T is a general assumption, which is widely adopted in online optimization and online game [17], [18], [21]. In the P2P energy market, it mainly limits the fluctuation of the undispatchable load demand, which results in a GNE sequence with limited deviation.
+
+
+IV. CASE STUDIES
+
+In this section, numerical simulation on a case with six prosumers (microgrids) is introduced to verify the effectiveness of the proposed algorithm. Each prosumer communicates and trades with its neighboring prosumers via a connected graph G, which is shown in Fig. 1. The adjacency matrix W is set to be w i,j = w j,i = 1 Ni+1 and j∈N w i,j = 1 for ∀i ∈ N . The time interval is set to be ∆t = 1 min and T = 1440, which indicates that the optimization period is 24 hours. The learning rate is set to be 0.   We assume that prosumer 1, 3, 4, and 6 are equipped with PVs and p l i (t) of these prosumers is equal to the difference between their loads and PV generations, while p l i (t) of prosumer 2 and 5 only have a load demand. The minute-sampled profile of PV generation is obtained from [22], which is collected in Utah, from the U.S.. We use the data on 16th September 2013. Since each prosumer is located in the same area, we assume that the photovoltaic generation curves of different prosumers are the same, but with different amplitudes. The profiles of the daily power consumption of each prosumer are from [23]. Fig. 2 depicts the load and PV generation of prosumer 1 from 6:00 am to 6:00 pm. Fig. 3 shows the trajectories of the average regrets of each prosumer from 6:00 am to 6:00 pm. We set t = 0 at 6:00 am here and therefore the length of the learning period is 720. As shown in Fig. 3, R i (t)/t, i ∈ N approximately decays to zero after t = 120 (i.e., after two hours). The downtrend of the logarithm of R i (t)/t, i ∈ N also validates this property, which is consistent with the result in Theorem 2.
+
+
+V. CONCLUSION
+
+In this paper, we propose a distributed online algorithm to track the GNE of the P2P energy trading game in a timevarying environment. We prove that by an appropriate choice of the decreasing learning rate, the regret of the proposed algorithm is bounded by a sublinear function of learning time. Simulation results with six prosumers verify the effectiveness of the proposed algorithm. In future work, we may focus on the effect of communication delay on the performance of online algorithms. APPENDIX PROOF OF THEOREM 2 We start with a lemma.
+Lemma 2. If Assumption 1 holds, we have 0 < ε < 1, where ε = max t∈T ,si>0 {|1 − cρ(t)s i |} with 0 = s 1 ≤ s 2 ≤ · · · ≤ s N as N eigenvalues of L. Proof. Let d * = max i∈N j∈N w i,j . By Assumption 1, d * = w 0 . From [24, pp. 31], since s N is the maximal eigenvalue of L, we have d * ≤ s N ≤ 2d * . Therefore, w 0 ≤ s N ≤ 2w 0 . Recall 0 < ρ(t) < 1 and c = 1 w0 , we have −1 < 1 − cρ(t)s N < 1. Thus, for ∀ t ∈ T and s i > 0, we have −1 < 1 − cρ(t)s N ≤ 1 − cρ(t)s i < 1. Thus, 0 < ε < 1.
+
+The estimation error of prosumer i is defined as
+e i (t) = col e 1 i (t), . . . , e N i (t) with e j i (t) =x j i (t) − x i (t).
+Based on Lemma 2, we now present the bound of e i (t).
+
+Lemma 3. Under Assumption 1 and 2, for ∀i ∈ N and 2 ≤ t ≤ T , we have
+||e i (t)|| ≤ ε t−1 ||e i (1)|| + 2 √ N κ 1 t−2 k=0 ε k ρ(t − k − 1)
+Proof. By (22b), we have
+e j i (t + 1) =x j i (t + 1) − x i (t + 1) =x j i (t) − cρ(t) k∈Nj w i,j x j i (t) −x k i (t) − x i (t + 1) =x j i (t) − x i (t) − (x i (t + 1) − x i (t)) − cρ(t) k∈Nj w i,j x j i (t) − x i (t) − x k i (t) − x i (t) = e j i (t) − cρ(t) k∈Nj w i,j e j i (t) − e k i (t) − (x i (t + 1) − x i (t))(27)Let ∆x i (t) = x i (t + 1) − x i (t), then e i (t + 1) =e i (t) − cρ(t) (L ⊗ I) e i (t) − (1 N ⊗ I) ∆x i (t)
+By (22a) and the definition of κ 1 , we have ∆x i (t) ≤ 2κ 1 ρ(t). Thus, by Lemma 2, we have
+e i (t + 1) ≤ ε e i (t) + 2 √ N κ 1 ρ(t), ∀i ∈ N(28)
+Based on the recursion relation (28), we have
+||e i (t)|| ≤ ε t−1 ||e i (1)|| + 2 √ N κ 1 t−2 k=0 ε k ρ(t − k − 1)
+This completes the proof.
+
+Note that 0 < ε < 1 and ρ(t) is decreasing with lim Then, a result on the bounds of the dual variables could be obtained.
+
+Lemma 4. Under Assumption 2, for ∀i ∈ N and ∀t ∈ T ,
+ρ(t) λ i (t) ≤ 3 √ N κ 2 (29a) ρ(t) µ i (t) ≤ 3 √ N κ 5 (29b)
+Proof of Lemma 4 is similar to that of lemma 1 in [17], which is omitted here due to the space limit. The next lemma provides an upper bound of the accumulated error between the v-GNE x * (t) and x(t) obtained from Algorithm 1.
+
+Lemma 5. Under Assumption 2, the accumulated error between x * (t) and x(t) is upper bounded, i.e.,
+T t=1 x(t) − x * (t) 2 ≤ 2κ 1 η T t=1 1 ρ 2 (t) i∈N x * i (t + 1) − x * i (t) + π 1 2η T t=1 ρ(t) + π 2 T t=1 i∈N e i (t) + π 3 T t=1 ρ(t) i∈N e i (t) 2 + 1 2η T t=1 1 ρ 2 (t) i∈N x i (t) − x * i (t) 2 − i∈N x i (t + 1) − x * i , (t + 1) 2 (30) where π 1 = N (δ λ + δ µ ) 2 + 4N (κ 1 + κ 3 ) (δ λ + δ µ ) + 4N κ 2 3 π 2 = 2 √ N (c + θ) [2κ 1 + 2κ 3 + δ λ + δ µ ] π 3 = N c 2 + √ N c + √ N cθ 2 + θ 2 with δ λ = κ 4 3 √ N κ 2 + ϑ λ , δ µ = κ 6 3 √ N κ 5 + ϑ µ , ϑ λ = sup i∈N ,t∈T λ * i (t) and ϑ µ = sup i∈N ,t∈T µ * i (t) .
+Proof. Similar to (29) to (32) in [17], by (22a) and the definition of κ 1 , we have the following two results.
+i∈N x i (t + 1) − x * i (t + 1) 2 ≤ i∈N x i (t + 1) − x * i (t) 2 + 4κ 1 i∈N x * i (t + 1) − x * i (t) (31) i∈N x i (t + 1) − x * i (t) 2 ≤ (1 − ρ(t)) i∈N x i (t) − x * i (t) 2 + ρ(t) i∈N P χi (ξ 1 i (t)) − P χi (ξ 2 i (t)) 2 (32) where ξ 1 i (t) = x i (t) − ρ(t) ∇ xi J i,t (x i (t)) +ρ(t) A T i λ i (t) + G T i µ i (t) + c j∈Ni x i (t) −x j i (t) ξ 2 i (t) = x * i (t) − ρ(t) [∇ xi J i,t (x * (t)) +ρ(t) A T i λ * i (t) + G T i µ * i (t) For simplification, denote φ 1 i = x i (t) − x * i (t), φ 2 i = ∇ xi J i,t (x i (t)) − ∇ xi J i,t (x * (t)) φ 3 i = A T i λ i (t) − A T i λ * i (t), φ 4 i = G T i µ i (t) − G T i µ * i (t) φ 5 i = c j∈Ni x i (t) −x j i (t) ,
+and use ρ to replace ρ(t) in the remaining proof. By the nonexpansive property of projection, we have
+P χi (ξ 1 i (t)) − P χi (ξ 2 i (t)) 2 ≤ ξ 1 i (t) − ξ 2 i (t) 2 = φ 1 i 2 + ρ 2 φ 2 i 2 + ρ 4 φ 3 i 2 + φ 4 i 2 + ρ 2 φ 5 i 2 − 2ρ φ 1 i , φ 2 i − 2ρ 2 φ 1 i , φ 3 i − 2ρ 2 φ 1 i , φ 4 i − 2ρ φ 1 i , φ 5 i + 2ρ 3 φ 2 i , φ 3 i + 2ρ 3 φ 2 i , φ 4 i + 2ρ 2 φ 2 i , φ 5 i + 2ρ 4 φ 3 i , φ 4 i + 2ρ 3 φ 3 i , φ 5 i + 2ρ 3 φ 4 i , φ 5 i(33)
+Before continuing the proof, results on the bounds of the norm of φ 1 i , φ 2 i , · · · , φ 5 i are given.
+φ 1 i ≤ x i (t) + x * i (t) ≤ 2κ 1 (34) φ 2 i = φ 2,1 i + φ 2,2 i ≤ φ 2,1 i + 2κ 3 (35) where φ 2,1 i = ∇ xi J i,t (x i (t)) − ∇ xi J i,t (x(t)) and φ 2,2 i = ∇ xi J i,t (x(t)) − ∇ xi J i,t (x * (t)). √ ρ φ 3 i ≤ A T i ( √ ρλ i (t)) + √ ρ A T i λ * i (t) ≤ 3 √ N κ 2 κ 4 + κ 4 ϑ λ = δ λ(36)
+where the second inequality holds based on Lemma 4 and the fact that ρ < 1. Similarly, we have
+√ ρ φ 4 i ≤ δ µ(37)
+By the definition of e j i (t) and e i (t), we have
+φ 5 i = c j∈Ni e j i (t) ≤ c j∈Ni e j i (t) ≤ c √ N e i (t)(38)
+Thus, the sum of quadratic items in (33) is upper bounded by
+ρ 2 φ 2 i 2 + ρ 4 φ 3 i 2 + φ 4 i 2 + ρ 2 φ 5 i 2 ≤ ρ 2 φ 2,1 i 2 + 4κ 3 φ 2,1 i + 4κ 2 3 + ρ 3 δ 2 λ + δ 2 µ + N c 2 ρ 2 e i (t) 2(39)
+Note that other items in (33) are also upper bounded, i.e.,
+− 2ρ φ 1 i , φ 2 i ≤ 2ρ φ 1 i φ 2,1 i − 2ρ φ 1 i , φ 2,2 i ≤ 4ρκ 1 φ 2,1 i − 2ρ φ 1 i , φ 2,2 i (40a) − 2ρ 2 φ 1 i , φ 3 i − 2ρ 2 φ 1 i , φ 4 i ≤ 2ρ 3 2 φ 1 i √ ρ φ 3 i + √ ρ φ 4 i ≤ 4κ 1 ρ 3 2 (δ λ + δ µ ) (40b) − 2ρ φ 1 i , φ 5 i ≤ 2ρ φ 1 i φ 5 i ≤ 4c √ N κ 1 ρ e i (t) (40c)
+Similarly, we have
+2ρ 3 φ 2 i , φ 3 i ≤ 2δ λ ρ 2 φ 2,1 i + 2κ 3 (41a) 2ρ 3 φ 2 i , φ 4 i ≤ 2δ µ ρ 2 φ 2,1 i + 2κ 3 (41b) 2ρ 2 φ 2 i , φ 5 i ≤ 2c √ N ρ 2 e i (t) φ 2,1 i + 2κ 3 (41c) 2ρ 4 φ 3 i , φ 4 i ≤ 2δ λ δ µ ρ 3 (41d) 2ρ 3 φ 3 i , φ 5 i ≤ 2c √ N δ λ ρ 2 e i (t) (41e) 2ρ 3 φ 4 i , φ 5 i ≤ 2c √ N δ µ ρ 2 e i (t) (41f)
+Substituting (39), (40), (41) into (32), we have i∈N
+x i (t + 1) − x * i (t) 2 ≤ i∈N x i (t) − x * i (t) 2 + N (δ λ + δ µ ) 2 ρ 4 + 4N κ 3 (δ λ + δ µ + κ 3 ) ρ 3 + 4N κ 1 (δ λ + δ µ ) ρ 5 2 + 2 √ N cρ 2 [2κ 1 + (2κ 3 + δ λ + δ µ ) ρ] i∈N e i (t) + N c 2 ρ 3 i∈N e i (t) 2 − 2ρ 2 φ 1 i , φ 2,2 i + ρ 3 i∈N φ 2,1 i 2 + 2ρ 2 [2κ 1 + (2κ 3 + δ λ + δ µ ) ρ] i∈N φ 2,1 i + 2 √ N cρ 3 i∈N e i (t) φ 2,1 i(42)
+Then, by Lemma 1, results on the upper bounds of the last four items in (42) are given as follows.
+
+Due to the Lipschitz continuity of F t (x), we have 
+i∈N φ 2,1 i ≤ θ i∈N x i (t) − x(t) ≤θ i∈N x i (t) − x(t) 2 ≤ θ N i∈N x i (t) − x(t) 2 =θ N i∈N e i (t) 2 ≤ θ √ N i∈N e i (t)(43)
+Moreover, since F t (x) is η−strongly monotone, we have
+− i∈N φ 1 i , φ 2,2 i = − x(t) − x * (t), F t (x(t)) − F t (x * (t)) ≤ −η x(t) − x * (t) 2(46)
+Substituting (43) ∼ (46) into (42), we have
+i∈N x i (t + 1) − x * i (t) 2 ≤ i∈N x i (t) − x * i (t) 2 − 2ηρ 2 x(t) − x * (t) 2 + π 1 ρ 5 2 + π 2 ρ 2 i∈N e i (t) + π 3 ρ 3 i∈N e i (t) 2(47)
+Substituting (47) into (31) yields (30).
+
+Finally, we can prove Theorem 2.
+
+Proof. Following [17], by Lemma 3, we have T t=1 i∈N
+e i (t) ≤ O T t=1 ρ(t) (48a)
+Assumption 1 .
+1The weight w i,i > 0 and j∈N w i,j = w 0 > 0 for all i ∈ N .
+
+Fig. 1 .
+1Communication and trading graph G for the case study.
+
+Fig. 2 .
+2Load and PV generation of prosumer 1.
+
+Fig. 3 .
+3The trajectories of the average regrets of each prosumer. Note log-scale on y-axis for the inlayfigure.
+
+
+we have lim t→∞ ε t−1 = 0 and lim t→∞ t−2 k=0 ε k ρ(t−k−1). Thus, lim t→∞ ||e i (t)|| = 0, and it implies the estimation will converge to the actual value.
+
+An energy sharing game with generalized demand bidding: Model and properties. Y Chen, S Mei, F Zhou, S H Low, W Wei, F Liu, IEEE Trans. Smart Grid. 113Y. Chen, S. Mei, F. Zhou, S. H. Low, W. Wei, and F. Liu, "An energy sharing game with generalized demand bidding: Model and properties," IEEE Trans. Smart Grid, vol. 11, no. 3, pp. 2055-2066, 2019.
+
+Distributed generalized nash equilibrium seeking for energy sharing games in prosumers. Z Wang, F Liu, Z Ma, Y Chen, M Jia, W Wei, Q Wu, IEEE Trans. Power Syst. 365Z. Wang, F. Liu, Z. Ma, Y. Chen, M. Jia, W. Wei, and Q. Wu, "Distributed generalized nash equilibrium seeking for energy sharing games in prosumers," IEEE Trans. Power Syst., vol. 36, no. 5, pp. 3973- 3986, 2021.
+
+Using peer-to-peer energy-trading platforms to incentivize prosumers to form federated power plants. T Morstyn, N Farrell, S J Darby, M D Mcculloch, Nature Energy. 32T. Morstyn, N. Farrell, S. J. Darby, and M. D. Mcculloch, "Using peer-to-peer energy-trading platforms to incentivize prosumers to form federated power plants," Nature Energy, vol. 3, no. 2, p. 94-101, 2018.
+
+A new and fair peerto-peer energy sharing framework for energy buildings. S Cui, Y.-W Wang, Y Shi, J.-W Xiao, IEEE Trans. Smart Grid. 115S. Cui, Y.-W. Wang, Y. Shi, and J.-W. Xiao, "A new and fair peer- to-peer energy sharing framework for energy buildings," IEEE Trans. Smart Grid, vol. 11, no. 5, pp. 3817-3826, 2020.
+
+A rational decentralized generalized nash equilibrium seeking for energy markets. L Nespoli, M Salani, V Medici, 2018 International Conference on Smart Energy Systems and Technologies (SEST). L. Nespoli, M. Salani, and V. Medici, "A rational decentralized general- ized nash equilibrium seeking for energy markets," in 2018 International Conference on Smart Energy Systems and Technologies (SEST), 2018, pp. 1-6.
+
+An energy sharing mechanism achieving the same flexibility as centralized dispatch. Y Chen, W Wei, H Wang, Q Zhou, J P S Catalão, IEEE Trans. Smart Grid. 124Y. Chen, W. Wei, H. Wang, Q. Zhou, and J. P. S. Catalão, "An energy sharing mechanism achieving the same flexibility as centralized dispatch," IEEE Trans. Smart Grid, vol. 12, no. 4, pp. 3379-3389, 2021.
+
+Operationally-safe peer-to-peer energy trading in distribution grids: A game-theoretic market-clearing mechanism. G Belgioioso, W Ananduta, S Grammatico, C Ocampo-Martinez, IEEE Trans. Smart Grid. 134G. Belgioioso, W. Ananduta, S. Grammatico, and C. Ocampo-Martinez, "Operationally-safe peer-to-peer energy trading in distribution grids: A game-theoretic market-clearing mechanism," IEEE Trans. Smart Grid, vol. 13, no. 4, pp. 2897-2907, 2022.
+
+Hierarchical distributed model predictive control of interconnected microgrids. C A Hans, P Braun, J Raisch, L Grüne, C Reincke-Collon, IEEE Trans. Sustainable Energy. 101C. A. Hans, P. Braun, J. Raisch, L. Grüne, and C. Reincke-Collon, "Hierarchical distributed model predictive control of interconnected microgrids," IEEE Trans. Sustainable Energy, vol. 10, no. 1, pp. 407- 416, 2019.
+
+Demand-side management via distributed energy generation and storage optimization. I Atzeni, L G Ordóñez, G Scutari, D P Palomar, J R Fonollosa, IEEE Trans. Smart Grid. 42I. Atzeni, L. G. Ordóñez, G. Scutari, D. P. Palomar, and J. R. Fonollosa, "Demand-side management via distributed energy generation and stor- age optimization," IEEE Trans. Smart Grid, vol. 4, no. 2, pp. 866-876, 2013.
+
+Generalized Nash equilibrium problems. F Facchinei, C Kanzow, Annals of Oper. Res. 1751F. Facchinei and C. Kanzow, "Generalized Nash equilibrium problems," Annals of Oper. Res., vol. 175, no. 1, pp. 177-211, 2010.
+
+On the variational equilibrium as a refinement of the generalized nash equilibrium. A Kulkarni, U Shanbhag, Automatica. 481A. Kulkarni and U. Shanbhag, "On the variational equilibrium as a refinement of the generalized nash equilibrium," Automatica, vol. 48, no. 1, pp. 45-55, 2012.
+
+Nash equilibria: The variational approach. F Facchinei, J.-S Pang, Convex Optimization in Signal Processing and Communications. F. Facchinei and J.-S. Pang, "Nash equilibria: The variational approach," Convex Optimization in Signal Processing and Communications, pp. 443-449, 2010.
+
+Distributed frequency control with operational constraints, part II: Network power balance. Z Wang, F Liu, S H Low, C Zhao, S Mei, IEEE Trans. Smart Grid. 101Z. Wang, F. Liu, S. H. Low, C. Zhao, and S. Mei, "Distributed frequency control with operational constraints, part II: Network power balance," IEEE Trans. Smart Grid, vol. 10, no. 1, pp. 53-64, Jan 2019.
+
+Distributed optimal frequency control considering a nonlinear network-preserving model. Z Wang, F Liu, J Z Pang, S H Low, S Mei, IEEE Trans. Power Syst. 341Z. Wang, F. Liu, J. Z. Pang, S. H. Low, and S. Mei, "Distributed optimal frequency control considering a nonlinear network-preserving model," IEEE Trans. Power Syst., vol. 34, no. 1, pp. 76-86, 2019.
+
+Distributed load-side control: Coping with variation of renewable generations. Z Wang, S Mei, F Liu, S H Low, P Yang, Automatica. 109108556Z. Wang, S. Mei, F. Liu, S. H. Low, and P. Yang, "Distributed load-side control: Coping with variation of renewable generations," Automatica, vol. 109, p. 108556, 2019.
+
+Distributed gne seeking under partial-decision information over networks via a doubly-augmented operator splitting approach. L , IEEE Trans. Autom. Control. 654L. Pavel, "Distributed gne seeking under partial-decision information over networks via a doubly-augmented operator splitting approach," IEEE Trans. Autom. Control, vol. 65, no. 4, pp. 1584-1597, 2020.
+
+Online distributed algorithms for seeking generalized nash equilibria in dynamic environments. K Lu, G Li, L Wang, IEEE Trans. Autom. Control. 665K. Lu, G. Li, and L. Wang, "Online distributed algorithms for seeking generalized nash equilibria in dynamic environments," IEEE Trans. Autom. Control, vol. 66, no. 5, pp. 2289-2296, 2021.
+
+Decentralized Online Learning for Noncooperative Games in Dynamic Environments. M Meng, X Li, Y Hong, J Chen, L Wang, arXiv:2105.06200arXiv e-printsM. Meng, X. Li, Y. Hong, J. Chen, and L. Wang, "Decentralized Online Learning for Noncooperative Games in Dynamic Environments," arXiv e-prints, p. arXiv:2105.06200, May 2021.
+
+Distributed online optimization in dynamic environments using mirror descent. S Shahrampour, A Jadbabaie, IEEE Trans. Autom. Control. 633S. Shahrampour and A. Jadbabaie, "Distributed online optimization in dynamic environments using mirror descent," IEEE Trans. Autom. Control, vol. 63, no. 3, pp. 714-725, 2018.
+
+Online convex optimization in dynamic environments. E C Hall, R M Willett, IEEE J. Sel. Top. Signal Process. 94E. C. Hall and R. M. Willett, "Online convex optimization in dynamic environments," IEEE J. Sel. Top. Signal Process., vol. 9, no. 4, pp. 647- 662, 2015.
+
+Online distributed optimization with strongly pseudoconvex-sum cost functions. K Lu, G Jing, L Wang, IEEE Trans. Autom. Control. 651K. Lu, G. Jing, and L. Wang, "Online distributed optimization with strongly pseudoconvex-sum cost functions," IEEE Trans. Autom. Con- trol, vol. 65, no. 1, pp. 426-433, 2021.
+
+Solrmap utah geological survey. Nrel, NREL. (2018) Solrmap utah geological survey. https://midcdmz.nrel. gov/usep cedar/.
+
+Individual household electric power consumption data set. Uci, UCI. (2012) Individual household electric power consumption data set. https://archive.ics.uci.edu/ml/datasets/individual+household+ electric+power+consumption.
+
+Graph Theoretic Methods for Multiagent Networks. M Mesbahi, M Egerstedt, Princeton University PressPrincetonM. Mesbahi and M. Egerstedt, Graph Theoretic Methods for Multiagent Networks. Princeton: Princeton University Press, 2010.

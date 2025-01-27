@@ -1,0 +1,538 @@
+
+Validation of differential gene expression algorithms: Application comparing fold-change estimation to hypothesis testing
+
+
+Corey M Yanofsky 
+David R Bickel 
+Validation of differential gene expression algorithms: Application comparing fold-change estimation to hypothesis testing
+M E T H O D O L O G Y A R T I C L E Open Access
+Background: Sustained research on the problem of determining which genes are differentially expressed on the basis of microarray data has yielded a plethora of statistical algorithms, each justified by theory, simulation, or ad hoc validation and yet differing in practical results from equally justified algorithms. Recently, a concordance method that measures agreement among gene lists have been introduced to assess various aspects of differential gene expression detection. This method has the advantage of basing its assessment solely on the results of real data analyses, but as it requires examining gene lists of given sizes, it may be unstable. Results: Two methodologies for assessing predictive error are described: a cross-validation method and a posterior predictive method. As a nonparametric method of estimating prediction error from observed expression levels, cross validation provides an empirical approach to assessing algorithms for detecting differential gene expression that is fully justified for large numbers of biological replicates. Because it leverages the knowledge that only a small portion of genes are differentially expressed, the posterior predictive method is expected to provide more reliable estimates of algorithm performance, allaying concerns about limited biological replication. In practice, the posterior predictive method can assess when its approximations are valid and when they are inaccurate. Under conditions in which its approximations are valid, it corroborates the results of cross validation. Both comparison methodologies are applicable to both single-channel and dual-channel microarrays. For the data sets considered, estimating prediction error by cross validation demonstrates that empirical Bayes methods based on hierarchical models tend to outperform algorithms based on selecting genes by their fold changes or by non-hierarchical model-selection criteria. (The latter two approaches have comparable performance.) The posterior predictive assessment corroborates these findings. Conclusions: Algorithms for detecting differential gene expression may be compared by estimating each algorithm's error in predicting expression ratios, whether such ratios are defined across microarray channels or between two independent groups. According to two distinct estimators of prediction error, algorithms using hierarchical models outperform the other algorithms of the study. The fact that fold-change shrinkage performed as well as conventional model selection criteria calls for investigating algorithms that combine the strengths of significance testing and fold-change estimation.
+
+Background
+
+Continual invention of new microarray data analysis algorithms for the identification of which genes express differently across two groups calls for objectively comparing the performance of existing algorithms [1]. While there have been thorough empirical comparisons between supervised learning methods of classifying microarrays [2], comparisons between methods of detecting differential gene expression have tended to depend heavily on either theory or simulation and thus on strong underlying assumptions [3,4]. More empirical alternatives include the use of biologically-derived prior information regarding which experiments are more likely to contain differentially expressed genes [5] and the use of spike-in data sets [4,6,7]. The latter can represent equivalently expressed genes better than simulations, but the artificial spike-in levels do not necessarily correspond to levels of differentially expression across conditions of biological interest.
+
+An early report of the MicroArray Quality Control (MAQC) project [8] may mark a turning point in the methodology of comparing of statistical methods designed to identify differential gene expression on the basis of microarray observations. The critical advantage of this "concordance" (percentage of overlapping genes) method is its validation entirely on the basis of the microarray data without resorting to spiking in known quantities of analytes or to prior information from other types of experiments; it is thus applicable to any microarray data set with sufficient replication. Validation by nonmicroarray information such as RT-PCR measurements of gene expression or public pathway/functional information on genes does have great value in overcoming shortcomings in microarray platforms [9]. For that very reason, however, such validation has markedly less value in judging the performance of statistical methods of detecting differential gene expression. For example, the inability of RT-PCR to validate a microarray prediction of differential gene expression might indicate a problem with the statistical assumptions used to make the prediction, but it may instead refect a problem with cross hybridization due to the microarray platform. Participants in the MAQC project avoided such confounding between microarray platform effects and statistical method effects by quantifying the degree of overlap between gene lists produced by an algorithm on the basis of two independent data sets [8]. Although a significant step forward, this way of comparing algorithms, like that of [10], requires examining gene lists of given sizes, which is why Chen et al. [11] consider the concordance to be too unstable for use as an algorithm performance criterion.
+
+Without depending on arbitrarily selected numbers of genes, the platform-algorithm confounding may be overcome by cross validation, which instead uses a test set of microarrays to validate predictions made on the basis of a separate training set of microarrays, while maintaining the empirical nature of the concordance method. Like concordance, cross validation does not incorporate knowledge that only a small portion of genes are differentially expressed. Encoding this information when appropriate into a hierarchical model enables a more reliable assessment of the performance of differential expression detection algorithms if only a few biological replicates are available. These methods are explained in Section 2 and illustrated in Section 3; implications are discussed in Section 4.
+
+
+Methods
+
+If a gene is known to be differentially expressed at a certain level on average, then that level would predict future measurements of gene expression better than would making such predictions on the assumption that there is on average no differential expression. Likewise, if a gene is known to be equivalently expressed, then using an expression level of 0 or an expression ratio of 1 would predict future measurements better than making such predictions on the assumption that there is some differential expression. Thus, a method of selecting genes as differentially expressed may be judged by estimating its ability to predict future measurements of gene expression. This estimation may be carried out by a process of cross validation: the microarrays are divided between a training set used to determine which genes the method considers differentially expressed and a test set used to estimate how well such results would agree with future measurements.
+
+The strategy of assessing gene selection algorithms by estimated prediction error may be more precisely specified in mathematical notation. Let x i,j denote the logarithm of the measured expression intensity or ratio of intensities of the ith of m genes in the jth of n biological replicates of the control or reference group; each value of x i,j may represent an average over technically replicated microarrays;
+x i = (x i,1 ,x i,2 , ..., x i,n ); x = (x 1 , x 2 , ..., x m ) T . Likewise, 
+x i j , denotes the logarithm of the measured expression intensity or ratio of intensities of the ith gene in the jth of n' biological replicates of the treatment or perturbation group; 
+           x x xx x i i i in m T x x x ( ,, , ); ( , , , ) , , , 1 2 1equivalently expressed if E(  X i -X i ) = 0 or differentially expressed if E(  X i -X i ) ≠ 0.
+In hypothesis testing parlance, the null hypothesis associated with the ith gene is
+H i : E(  X i -X i ) = 0.
+
+Gene selection algorithms
+
+A gene selection algorithm a returns π a (H i | x', x), an estimate of the posterior probability that the ith gene is equivalently expressed; it follows that 1 -π a (H i | x', x) is the algorithm's probability that the gene is differentially expressed across the perturbation and reference groups. Many algorithms [12][13][14][15][16][17][18][19][20][21] give π a (H i | x', x) directly as a local false discovery rate estimate [22,23], whereas traditional false discovery rate estimates and other non-Bayesian algorithms in effect assign π a (H i | x', x) a value of either 0 or 1, depending on whether or not a gene is considered differentially expressed at a given threshold. 
+  x x p | | , ).  x x (7b)
+Whereas the empirical Bayes algorithms provide approximations to a posterior probability of a hierarchical Bayesian class of models, we included comparisons to the posterior probability π Bayes factor (H i | x', x) under a non-hierarchical set of models. The data densities under the non-hierarchical models are based on the same assumptions as those of standard linear regression: unconstrained data means under the alternative hypothesis (differential expression) and, for each gene, normal IID noise and equal variance within each group in the unpaired case. Let  H i represent the hypothesis of differential expression (in contrast to H i , which was defined as the hypothesis of equivalent expression). The posterior odds of differential expression under these models are
+ i P H i P H i P d d H i P d d H i , ( ) ( ) ( , | ) ( , | ) , Bayes factor      x x x x(8)
+where P (dx', dx| h) is the prior predictive density or integrated likelihood under hypothesis h. The left-hand side of equation (8) is the posterior odds of equivalent expression to differential expression; on the right-hand side, the first factor is the prior odds of equivalent expression to differential expression, and the second factor is known as the Bayes factor. Since we take P (H i ) = P(  H i ) = 1/2, our posterior odds is equal to the Bayes factor; thus putting equal prior mass on each hypothesis does not share the conservatism of the above empirical Bayes algorithms. Additional file 1 gives the analytical derivation of the resulting posterior probability, which may be expressed in terms of some additional notation. Define
+k n k k n n n x x SSR x x i i i H i j i j j n i 1 2 3 2 2 2 1 1 1 2 1             ; ; ( ) ; ( ) , ,            ; (( ) ( )) , , SSR x x x x H i j i j i i j n i  2 1(9)
+if n = n' and  x i j , is paired with x i,j , or k n n n n k n n k n n nn n n nn x x
+SSR i i i H 1 2 3 2 2 1 2                   ; ; ( )  i i x nx i n x i n n x nx i n x i n n i j j n i j                             , , 1 2                 j n H i j i j n i j i j n SSR x x x x i 1 2 2 1 2 1  ( ) ( ) , ,(10)
+if  X i and X i are independent. Then the posterior probability is given by  
+
+
+Bayes factor
+
+Bayes factor
+( | , ) , , H i i    x x 1 1 (11)   i k i SSR H i k k SSR H i k ,Bayes factor   1 2 3 2 3 ( ) ( ) . (12)
+We also applied two "information criteria" used in model selection to estimate the posterior probability; the information criteria were applied to the same linear regression framework used in the above Bayes factor computation. In model selection terminology, each criterion selects either model H i or model  H i (that is, equivalent expression or differential expression, respectively) for the ith gene, but we instead averaged the estimates corresponding to the two models for each gene as follows. We first applied the Bayesian Information Criterion (BIC) [30]. Up to a factor of -1/2 and a constant term, the BIC approximates the logarithm of the prior predictive probability density given a statistical model and a sufficiently diffuse proper prior distribution under the given model without requiring specification of such a prior. With a prior mass on each model considered, the BIC leads to an approximation of a posterior probability that is less conservative than that of the above Bayes factor.
+
+The general formula for the BIC under a model with normal errors is
+BIC         N SSR N k N log log ,(13)
+where N is the number of data points and k is the number of parameters in the model. For paired data, N = n; under H i the only parameter is the data variance, giving k = 1, while under  H i the model includes both the data mean and data variance, giving k = 2. Therefore the BIC for each hypothesis is
+BIC ( ) log log ,   H n SSR H i n n i           2 (14) BIC ( ) log log , H n SSR H i n n i          (15)
+with SSR h as defined in (9). For independent data, N = n+ n'; under H i the model includes a single mean log-expression level and the data variance, giving k = 2, while under  H i the model includes two distinct mean log-expression levels (one for the treatment group and one for the control group) and the data variance, giving k = 3. Therefore the BIC for each hypothesis is
+BIC ( ) ( )log log( ),   H n n SSR H i n n n n i                 3 (16) BIC ( ) ( )log log( ), H n n SSR H i n n n n i                 2(17)
+with SSR h as defined in (10). Since we again use P (H i ) = P (  H i ), the BIC approximation of the posterior odds (ω i , BIC ) is equal to its approximation of Bayes factors corresponding to a wide class of priors on the model parameters. Transformed from the logarithmic scale to the probability scale [31], the result is an equation of the same form as (11),
+  BIC BIC ( | , ) , , H i i    x x 1 1 (18)  i H i H i , exp ( ) exp ( ) . BIC BIC BIC                1 2 1 2 (19)
+The second information criterion we assessed was the Akaike Information Criterion corrected for small samples (AIC c ). While -AIC c /2 plus a constant term is in general only an approximately unbiased estimator of the expected Kullback-Leibler distance between the model/hypothesis and the unknown true data generating distribution [32], it is exactly unbiased for linear regression models with normal errors [33], a class that includes the present non-hierarchical models. Under the name of Akaike weights, it and other AlC-like criteria have been used to generate predictions that take model uncertainty into account in a manner exactly analogous to Bayesian model averaging [32], giving rise to an equation of the same form as (18).
+
+The general formula for the AIC c under a model with normal errors is
+AIC c           N SSR N kN N k log , 2 1(20)
+The particular values of N and k for paired and independent data under  H i and H i are the same as those given above for the BIC. For paired data, the AIC c values of the hypotheses or models are
+AIC c ( ) log ,   H i n SSR H i n n n            4 3 (21) AIC c ( ) log . H i n SSR H i n n n            2 2(22)
+with SSR h as defined in (9); for independent data, the AIC c values are
+AIC c ( ) ( )log ( ) ,   H i n n SSR H i n n n n n n                   6 4 (23) AIC c ( ) ( )log ( ) , H i n n SSR H i n n n n n n                   4 3(24)
+with SSR h as defined in (10). Transforming from the logarithmic scale yields the effective probability
+  AIC c AIC c ( | , ) , , H i i    x x 1 1 (25) Where  i H i H i , exp ( ) exp ( ) AIC c AIC c AIC c                1 2 1 2 
+is the ratio of Akaike weights. These algorithms were chosen as representatives of various classes of possible approaches. Whereas the fold-change-dependent algorithms represent algorithms that take no account of the data variance, the information criterion algorithms and the non-hierarchical Bayesian algorithm represent algorithms that do take data variance into account but do not share information across genes. The local FDR algorithms based on classical p-values share information across genes for the purpose of determining false discovery rates, thus accounting for multiple comparisons, but do not share information for estimating data variance. Algorithms employing the moderated t-statistic share information across genes to account for multiple comparisons and also to estimate data variance.
+
+
+Methods of assessing gene selection algorithms
+
+Each of the next subsections describes a different method of quantifying the performance of gene selection algorithms. The first, cross validation, has the advantage that it is an unbiased estimator of squared prediction error (defined below) without assuming any parametric model. The second, the computation of posterior predictive loss, takes advantage of the knowledge that gene expression is approximately lognormal and that relatively few genes will have substantial differential expression, the vast majority being equivalently expressed for all practical purposes. The two methods will differ in results; if nearly all genes have only negligible differential expression, the latter is deemed more reliable except in the case of extensive biological replication since the former achieves low bias by admitting a high variance of performance estimates.
+
+
+Cross validation
+
+Algorithm α's best prediction of future values of  X i -X i is the posterior expected degree of expression, 
+E posterior ( ) ( | , )( ) ( ( | , ))( , ,        X X H H i new i new i i     x x x x 0 1   x x i i ,The term (| |)   x x i i
+is the best estimator of the degree of expression conditional on definite knowledge that gene i is differentially expressed; it is multiplied by (1 -π a (H i |x', x)), the posterior probability of differential expression. (The other product in the posterior expectation corresponds to equivalent expression, and is therefore identically zero.) The posterior expected degree of expression has been compared to a method of correcting estimates for gene selection bias [34]. For a new observation of gene i, the squared prediction error is,
+   , , , [( ) ( ( | , ))( , )] . i i new i new i i i X X H          E 1 2 X X X X(27)
+The squared prediction error does not directly target the question of which genes are differentially expressed; instead, it addresses the question of what the value of the next observation will be. However, good performance of one algorithm relative to another on either of these questions implies good performance on the other, as can be seen by considering that in general the mean squared prediction error is the sum of an algorithm's squared predictive bias and the data variance. The squared predictive bias term summarizes the ability of an algorithm to correctly distinguish differentially expressed genes from equivalently expressed genes. It is more fexible than the 0/1 loss in that it penalizes algorithms not just for being wrong, but for how wrong they are. The data variance sets the scale for "wrongness", in that for one algorithm to appear significantly worse than another, its squared predictive bias must dominate the data variance term.
+
+Under the "all nulls false" reference algorithm, the best prediction of future values of  X i -X i for all genes
+is the maximum likelihood estimator (| |)   x x i i
+. Other algorithms make gains over this reference by correctly assigning equivalently expressed genes, thereby avoiding the contribution of the variance of the MLE to the squared prediction error. Under the "all nulls true" reference algorithm, the best prediction of future values of  X i -X i for all genes is 0. Other algorithms make gains over this reference by correctly assigning differentially expressed genes, thereby avoiding the contribution of the squared bias (that is, [E (  X i -X i )] 2 ) to the squared prediction error.
+
+The squared prediction error criterion therefore quantifies the relative costs of false positives and false negatives in terms of the bias-variance trade-off. To estimate the squared prediction error, we used leave-one-out cross validation,ˆ| , , , ,
+( ) ( ) ,( ) ,(    i i j i j i j j i j i n x x H x x                   1 1 x x j j j n )               2 1 (28) if n = n' and  x i j , is paired with x i,j or | , , , , ( ) ( ) ,( )    i i j i j i j j i j nn x x H x x                     1 1 x x i i j j j n n ,( ) , ,                 2 1(29)
+if  X i and X i are independent, where (-j) means the jth replicate is omitted:
+              x ( ) , ,, , , , , j jj n m m j m j x x x x x x x 1 1 1 1 1 1 1 1 1                        1  x m n , , (30a) x ( ) , ,, , , , , ,        j j j n m m j m j m n x x x x x x x x 1 1 1 1 1 1 1 1 1 1                    , (30b)         x nx x n i j i i j ,( ) , ( )/( ) 1 , a n d x n x x n i j i i j ,( ) , ( )/( )    1 .
+For example, suppose that  x i j , is paired with x i,,j and the data for gene i were 
+
+x i = (0,1,1) and x i = (2,0,-2). For 
+j from 1 to 3, ( ) ( , , ) , ( ) , , , ( ) , ( )          x x x x i j i j i j i j(H i |    x ( ) j , x (-j) )
+.) The individual terms in the sum in equation 28 are (-2 -0.95 -2) 2 , (1 -0.78 -0.5) 2 , and (3 -0.39 -(-0.5)) 2 , and their mean is 8.6. If the given data were independent instead of paired, the calculation would involve each of the 9 subsets obtained by leaving out one perturbation data point and one control data point.
+
+We considered measuring error relative to always predicting that  X i -X i = 0 on a gene-wise basis using the ratioˆˆ, 
+
+with two measures of central tendency,  (33) (The half-sample mode (HSM) [35] is a fast, robust estimator of the mode that is suitable as for asymmetric distributions. It is implemented as the hsm function in the modeest package of R.) We also considered an absolute error criterion,
+
+; absolute error base model
+       i i m i i m 1 1(34)
+this measure is relative to a base model such as the "all nulls true" model or the "all nulls false" model because we expect only the relative performances of the estimators to be meaningful. We found that the relative error mean essentially reproduced the absolute error relative to the "all nulls true" model, and the relative error mode often evaluated estimators as not practically different from the "all nulls true" benchmark. Therefore, we show only the results for the absolute error measure.
+
+The use of cross-validation for estimation of classification error, appropriate for the problem of categorizing samples or microarrays given known classifications for use in the training and test sets, differs from the use cross-validation for estimation of squared prediction error, appropriate for the distinct problem of determining which genes are differentially expressed without knowledge of which genes are differentially expressed for use in the training and test sets. Jeffery et al. [36] used a cross-validation approach to estimate the predictive error of a variety of gene selection algorithms, but with microarray classification error rather than equations (32)-(34) as the performance criterion. Such classification error depends not only on the gene selection algorithm, but also on the particular classifier for which that algorithm selects features. Since our interest lies strictly in identifying differentially expressed genes, our methods instead quantify performance in terms of predicting new measurements. We have also addressed the problem using estimation error in place of prediction error [37].
+
+
+Posterior predictive expected squared error
+
+The local FDR shrinkage algorithm can be used to define an estimator's posterior predictive expected squared error. In general, the posterior predictive expected squared error is 
+          X X X X i new i new i i new   2 i i new i i new i new X X , ,, , ) var (),           2 posterior(35)
+where  X i new  
+      X X H X i new i new i i new x x X X H H X X H i new i i n e wi n e w , ,, | ))( ( | , ) ) |          1    x x posterior  ,     X X H X i new i new i i   x x n new i new i i new i new X H H X X       , ,, | ))( ( | , )) var | 1   x x posterior   H H H X X i i inew i new              ( | , )( ( | , )) | , x x x x 1 E posterior   H       2 .
+We use the local FDR estimator with t-statistics and theoretical null distribution as our gold standard model for the computation of π a (H i |x',x); this model will be accurate under the reasonable assumption that few genes are differentially expressed at appreciable levels.
+
+To fully express the posterior predictive loss, we must define the posterior predictive distribution for  X new -X new under both the null and alternative hypotheses for both paired and non-paired data. Conditional on each hypothesis, we use improper prior distributions for convenience. Strictly speaking, this is inconsistent with our choice of π a (H i | x', x), an empirical Bayes approximation to a posterior probability; under a full Bayesian analysis, posterior probabilities of hypotheses can only be computed under proper priors for the parameters conditional on each hypothesis, as in the Bayes factor algorithm of equation (11). Our choice of π a (H i | x',x) enables sharing information across genes to give a sensible empirical Bayes posterior probability for the hypotheses but otherwise relies on the same assumptions as our conditional prior distributions.
+
+For paired data under the null hypotheses,  X new -X new has a normal sampling distribution with zero mean and sampling variance estimated from the data. Under the usual improper prior for the sampling variance (that is, π prior (s 2 )∝ s -2 ), the posterior distribution for the sampling variance is a scaled-inverse-c 2 distribution with degrees of freedom n and scale 1
+2 1 n x x j j j n ( )     .
+The posterior predictive density is the expectation of the sampling density with respect to the posterior distribution of the sampling variance, where N (·|·,·) is the normal distribution parameterized in terms of mean and variance, and t v (· |c,s 2 ) is a shifted, scaled version of the t distribution with v degrees of freedom, center c, and scale factor s. (That is, if Y is distributed as t v (·|c, s 2 ), then (Yc)/s is distributed as the usual t v distribution.)
+    posterior posterior N ( | ) ( |, ) ( )      X X H x x d new new new new 0 2 2    2 0 2 0 1          ,( | )
+For paired data under the alternative hypothesis,  X new -X new has a normal sampling distribution with both mean and sampling variance estimated from the data. It can be shown that under the usual improper joint prior for mean μ (μ = E(X' -X)) and the sampling variance (that is, π prior (μ, s 2 ) ∝ s -2 ), the posterior predictive distribution for  X new -X new is, For non-paired data under the null hypothesis, if the treatment and control data are modeled as having distinct sampling variances (consistent with the assumptions used to specify π α (H i | x', x)) then the posterior predictive distribution is
+ posterior post           X X H t x x x x s new new n new new | ( | , ) , var  1 2 e erior        X X H n n s new new | ,  1 3 2 where ( ) ( ) ( ) n s x x x x j j j n                1 2 2 1 2 , i.e.,    posterior poste N ( |) |, ()            X X H x x new new new new 0 2 2 0 r rior     2 2 2 2 0 ,( ) ( ) ,       d d
+where (s') 2 and s 2 are the sampling variance for treatment and control data respectively. This integral is intractable because π posterior (s 2 , (s') 2 )has a non-standard form (see Additional file 1). We estimated it by drawing samples from π posterior (s 2 , (s') 2 ) using Markov chain Monte Carlo (MCMC) [38] 
+ ( ( ) ,         k k K 2 1
+where the subscript k indicates the k th MCMC draw of parameter values (after suitable burn-in) and K is the total number of draws. In the present case, the MCMC algorithm we use is an inherently multi-chain procedure; we used 10 chains. We used a burn-in of 20 samples per chain, followed by 100 samples per chain, for a total of K = 1000 samples. For each gene in a randomly chosen subset of genes from the complete data set, a contour plot of the posterior density was superimposed on a scatter plot of the MCMC draws of parameter values. The scatter plots visually conformed to the contours of the posterior densities, verifying that the MCMC draws of parameter values provided a good approximation to the posterior distributions.
+
+For non-paired data under the alternative hypothesis,  X new and X new each have a normal sampling distribution with both mean and sampling variance estimated from the data. It can be shown that under the usual improper joint prior for the individual means and sampling variances, the posterior predictive distributions for  X new and X new are To summarize gene-wise posterior predictive expected squared error over all genes in a data set, we considered quantities analogous to the relative errors and absolute errors of equations (32)- (34), with gene-wise posterior predictive expected squared errors replacing cross-validation-derived prediction errors. Again, we found that the relative error mean essentially replicated the results of the absolute error relative to the "all nulls true" benchmark; relative error mode evaluated the performance of all estimators as identical to the "all nulls true" benchmark. Therefore, we show only the results for the absolute error measure for posterior predictive expected squared error.
+ posterior ( | ) , ( )                  X H t x x x j x j n n new n new  1 2 1 1                   , ( | ) , ( )  posterior X H t x x x j x j
+
+Results
+
+To illustrate the proposed methods of quantifying the performance of gene selection algorithms, we applied them to two example data sets, one relevant to agriculture and the other to medicine. Since this study is limited to the evaluation of high-level algorithms of detecting differentially expression, we did not consider multiple pre-processing schemes. The agricultural data sets were processed as described in [39]; the medical data sets were pre-processed according to the specifications of the chip manufacturer [8].
+
+
+Agricultural data
+
+Dual-channel microarrays were used to measure in tomatoes the expression ratios (mutant/wild type) of m = 13,440 genes at the breaker stage of ripening and at 3 and 10 days thereafter [39]. Each of the later two stages has six biological replicates (n = 6), but one of the biological replicates is missing at the breaker stage of ripening (n = 5). The next subsection compares algorithms of determining which genes are differentially expressed between mutant and wild type at each point in time, whereas Subsection 3.2 uses the same data to instead compare algorithms of determining which genes are differentially expressed between one point in time and another point in time.
+
+
+Pairing across microarray channels
+
+In order to determine the genes for which expected values of logarithms of mutant-to-wild-type ratios differ from 0, let  x i j , be the expression level of the mutant sample with mRNA hybridized to the same microarray as that of a wild type sample with expression level x i,j at 0, 3, or 10 days after the breaker stage.
+
+Then 
+
+x i j ,x i,j is the logarithm of the observed ratio for the ith gene and jth microarray. Due to this dependence structure, paired (1-sample) t-tests and Wilcoxon signed-rank tests were used to obtain p-values, and equation (34) was used to estimate prediction error. We measured absolute error relative to the local FDR using the t-statistic and the theoretical null (labelled "t stat. with locfdr") because this model had the best or near-best performance in seven out of the nine data sets considered in this paper. Thus, its use as the base model facilitated the plotting of multiple data sets in a single figure; this same model was used as the base model for all subsequent figure. The estimated prediction errors for all algorithms mentioned above are displayed as Figure   Two independent groups In order to determine which genes differ in mutant-towild-type ratios between different periods of time after the breaker stage, let  x i j , and x i,j denote the logarithms of ratios observed at two different points in time for gene i and for microarrays j' and j. Since the measurement errors of observations made at one time point are independent of those made at the other time point, 2sample t-tests and Wilcoxon rank-sum tests were used to obtain p-values, and equation (34) was used to average estimated prediction error (Figure 3). Figure 4 shows, for each non-paired tomato data set, the total posterior predictive expected squared error (equation (35)) for each estimator relative to that of the gold standard model.
+
+
+Biomedical data
+
+MAQC researchers [8] measured gene expression responses to a rat liver treatment on four different platforms: Applied Biosystems, Affymetrix, Agilent, and GE Healthcare. Each data set has six treatment biological   of estimator performance by posterior predictive expected squared error for the paired tomato data sets. Total posterior predictive squared error (defined by equation (34)) relative to that of the gold standard model (the local-FDR mean expression estimator calculated using t-statistics and the theoretical null, labeled "t stat. with locfdr" in the figure) for 0, 3, and 10 day tomato data sets. Algorithm definitions are the same as those of Figure 1. Results for the 3 day and 10 day tomato data sets with the "all nulls true" estimator are greater than 1.1 and are not plotted.
+
+replicates and six control biological replicates. As in Subsection 3.1.2, observations in the treatment group are not paired with those of the control group. The Applied Biosystems data set (m = 26,857 genes) and the two Affymetrix data sets (m = 31, 099 genes each) were used to assess gene selection criteria on the basis of prediction error ( Figure 5). Figure 6 shows, for each MAQC data set, the total posterior predictive expected squared error (equation (35)) for each estimator relative to that of the gold standard model.
+
+
+Discussion
+
+
+Fold change versus testing
+
+Fold change performs about as well as simple (non-hierarchical) model selection criteria except when it is penalized by the imposition of a hard threshold. Algorithms based on hard thresholds for fold change are outperformed by shrinkage fold-change and by all other nontrivial algorithms that are not restricted by arbitrary thresholds: Tables 1 and 2 show that hard-threshold algorithms are never ranked in the top four by either cross validation or posterior predictive expected loss. While the best local-FDR-based methods outperform shrinkage fold-change, as can be seen in Figures 1, 2, 3, 4, 5 and 6, shrinkage fold change has performance comparable to simple model selection criteria as represented by the Bayes factor, BIC, and AIC c methods.   Herein we examined only algorithms that fall into one of two distinct categories:
+
+1. The shrinkage and hard-threshold fold-change algorithms are based on estimated fold change without regard for statistical significance or estimates of variance. 2. All other algorithms of the present study compute levels of significance without regard for fold change estimates. (We converted the results of these algorithms into predictions for the sole purpose of comparing the predictive performance of different algorithms.)
+
+Since these categories represent opposite extremes, their algorithms might be outperformed by those that instead employ both fold-change information and variance/significance information. Our observation that fold change performs as well as simple model-selection criteria suggests consideration of less extreme algorithms that combine the advantages of the ones studied herein. Investigators reported that the estimation of fold-change following a non-stringent significance filter performs better than does either type of algorithm alone [8,40], and [37] have recently demonstrated that further improvement is possible by smoothly shrinking estimates of fold change according to statistical significance levels.
+
+Adjusting fold-change estimates according to significance levels is not the only way to combine the two types of information. A complementary strategy instead adjusts significance levels according to foldchange thresholds. In fact, the seemingly inferior Total posterior predictive squared error relative to that of the gold standard model (the local-FDR mean expression estimator calculated using t-statistics and the theoretical null, labeled "t stat. with locfdr" in the figure) for Applied Biosystems, Affymetrix 1, and Affymetrix 2 data sets of the rat toxicogenomics subset of the MAQC study. Error definitions are the same as those of Figure 2. Algorithm definitions are the same as those of Figure 1. Results for the Applied Biosystems data set with the "all nulls true" estimator and for the both Affymetrix data sets with the local FDR estimator with empirical null (based on both Wilcoxon statistics and t statistics), the fold change shrinkage estimator, all fold change hard threshold estimators, the "all nulls true" estimator, and the "all nulls false" estimator are greater than 1.023 and are not plotted.  performance of statistical methods that do not make use of fold-change estimates has been explained in terms of a distinction between statistical and biological significance [41], which would call for the incorporation of the lowest fold change considered biologically relevant into the statistical hypotheses under consideration. Recent statistical methods designed to find genes expressed at biologically important levels include those utilizing false discovery rates [42,43], empirical and full Bayesian analyses [44][45][46], and the likelihood paradigm of measuring the strength of statistical evidence [47].
+
+
+Corroboration of cross validation by posterior predictive expected loss
+
+In general, cross-validation is subject to high variance when sample sizes are small. If each of the features had independent data of finite variance, the central limit theorem would nonetheless guarantee a small variance in the overall measure of performance (34). In the present case, however, due to gene-gene interactions, the numerator and denominator of the overall measure of performance are sums of positively correlated quantities.
+
+To address this concern, we performed an additional assessment of the differential-expression-detection algorithms using posterior predictive expected squared error methodology.
+
+The posterior predictive expected squared error requires the choice of a particular gold standard model, a Bayesian model consisting of a family of sampling distributions refecting knowledge about the biological system and a prior distribution. Here, we based our posterior predictive expected squared error on the implicit Bayesian model approximated by the local-FDR mean expression estimator calculated using t-statistics and the theoretical null distribution. The key assumption of the model is that few genes are differentially expressed at any notable level; the model also assumes that gene expression ratios are lognormally distributed. The model accommodates unequal variances for nonpaired data using conventional improper priors under each hypothesis since we have little prior information about the specific parameter values. (As such priors are arbitrary and carry their own information, a more thorough Bayesian analysis would require a study of the sensitivity of results to the choice of prior.) Naturally, the model's corresponding estimator had the lowest posterior predictive expected squared error, but provided the assumptions encoded in the model hold, the posterior predictive expected squared error will nonetheless be a good way to rank the performance of the estimators.
+
+The fitting of the gold-standard model generated estimates for the proportions of equivalently expressed genes, allowing the verification of the assumption that most genes were equivalently expressed. For the 0 days, 3 days, and 10 days data sets, the estimated proportion of equivalently expressed genes were 0.91, 0.89, and 0.73, respectively; for the 10 days vs. 3 days, 10 days vs. 0 days, and 3 days vs. 0 days data sets, they were 0.83, 0.83, and 1.00, respectively; and for the Applied Biosystems, Affymetrix 1, and Affymetrix 2 data sets, they were 0.62, 0.59, and 0.60, respectively. The six tomato data sets have relatively high proportions, showing that these data sets more closely satisfy the assumption of a proportion close to 1. Therefore, the local-FDR-based rankings for the estimators in these data sets should be accurate. The MAQC data sets have lower proportions, indicating that the model assumption is a poor approximation. It is not surprising that the MAQC data sets have many differentially expressed genes, as they are derived from liver tissue treated with a potent toxin.
+
+As noted before, the cross-validation performance measure ranks the gold standard model highly for the tomato data sets, that is, for the data sets that we expect good estimation from the gold standard model. Furthermore, a careful inspection of Figures 1, K2, K3 and K4 revealed that the rankings of the estimators according to the posterior predictive assessment and the cross-validation assessment largely agreed. (Some notable exceptions were the AIC c , which was rated highly by posterior predictive expected loss but poorly by crossvalidation for the 0 days and 3 days data sets (Figures 1-2), and the moderated t-statistic with limma, which was rated highly by cross-validation but poorly by posterior predictive expected loss for the 0 days, 3 days, 10 days vs. 3 days, and 3 days vs. 0 days data sets (Figures 1, K2, K3 and K4).) In addition, the cross-validation performance measure does not rank the gold standard model as highly for the Affymetrix data sets; the gold standard model itself has determined that its assumption of a high proportion of equivalently expressed genes fails for precisely those data sets. (The Applied Biosystems data set is unusual in that its median gene variance was roughly five times larger than the median gene variances of the other data sets. As a result, there is little power to distinguish between estimators: the gold standard model estimator, the Bayes Factor estimator, and the AIC c estimator are essentially tied for best performance ( Figure 5) These observations suggest that the crossvalidation methodology was able to accurately rank estimators even though the number of biological replicates was small.
+
+
+Conclusion
+
+The posterior predictive methodology helped to confirm that the cross-validation methodology was effective for measuring estimators' relative performances. The results support the use of local-FDR-based statistical algorithms over both conventional model-select ion criteria and over algorithms based only on fold change. In particular, the estimator based on the local FDR calculated using tstatistics and the theoretical null had the overall best performance when the proportion of equivalently expressed genes was high. As a second choice, the estimator based on the local FDR calculated using moderated t-statistics also performed quite well. Tables 1 and  2 show that it was ranked in the top four for eight data sets out of nine, including all three MAQC data sets.
+
+The fact that fold-change shrinkage performed as well as conventional model selection criteria calls for investigating algorithms that combine the strengths of significance testing and fold-change estimation.
+
+Additional file 1: This file contains a heuristic overview and detailed derivation of our Bayes factor approach to calculating probabilities of differential expression. Click here for file [ http://www.biomedcentral.com/content/supplementary/1471-2105-11-63-S1.DOC ]
+
+
+, and using the fold change shrinkage calcula-tion of equation 2, 1 -π a (H i |    x ( ) j ,x (-j) ) = (0.95, 0.78,0.39). (Note that the FDR estimation algorithms require all the other genes' data to calculate π a
+
+,
+and X i,new are random variables for new observations,ˆ,   i is algorithm a's point prediction for  X i new , -X i,new , and E posterior and var posterior are the expectation and variance with respect to the posterior distribution. The effective posterior distribution that leads to estimators of the form (26
+
+
+s 2 is the usual unbiased variance estimator.
+
+Figure 1
+1Assessment of estimator performance by cross validation for the paired tomato data sets. Average estimated prediction error, defined by equation(34) and based on cross validation, at the breaker stage of ripening (squares), 3 days after ripening (diamonds) and 10 days after ripening (triangles). The values of a displayed correspond to the gene selection algorithms of equations (1)-(7).
+
+Figure 2
+2Figure 2 Assessment of estimator performance by posterior predictive expected squared error for the paired tomato data sets. Total posterior predictive squared error (defined by equation (34)) relative to that of the gold standard model (the local-FDR mean expression estimator calculated using t-statistics and the theoretical null, labeled "t stat. with locfdr" in the figure) for 0, 3, and 10 day tomato data sets. Algorithm definitions are the same as those of Figure 1. Results for the 3 day and 10 day tomato data sets with the "all nulls true" estimator are greater than 1.1 and are not plotted.
+
+
+Figure 2 Assessment of estimator performance by posterior predictive expected squared error for the paired tomato data sets. Total posterior predictive squared error (defined by equation (34)) relative to that of the gold standard model (the local-FDR mean expression estimator calculated using t-statistics and the theoretical null, labeled "t stat. with locfdr" in the figure) for 0, 3, and 10 day tomato data sets. Algorithm definitions are the same as those of Figure 1. Results for the 3 day and 10 day tomato data sets with the "all nulls true" estimator are greater than 1.1 and are not plotted.
+
+Figure 3
+3Assessment of estimator performance by cross validation for the non-paired tomato data sets. Average estimated prediction error for the comparing expression at 10 days to 0 days, 10 days to 3 days, and 3 days to 0 days after the breaker stage of ripening. Error and algorithm definitions are the same as those ofFigure 1.
+
+Figure 4
+4Assessment of estimator performance by posterior predictive expected squared error for the non-paired tomato data sets. Total posterior predictive squared error relative to that of the gold standard model (the local-FDR mean expression estimator calculated using t-statistics and the theoretical null, labeled "t stat. with locfdr" in the figure) for 0 days vs. 3 days, 0 days vs. 10 days, and 3 days vs. 10 days tomato data sets. Error definitions are the same as those ofFigure 2. Algorithm definitions are the same as those ofFigure 1.
+
+Figure 5
+5Assessment of estimator performance by cross validation for the MAQC data sets. Average estimated prediction error for the Applied Biosystems, Affymetrix 1, and Affymetrix 2 data sets of the rat toxicogenomics subset of the MAQC study. Error and algorithm definitions are the same as those ofFigure 1. Results for both Affymetrix data sets with the "fold change > 4" hard threshold estimator, the "all nulls true" estimator, and the local FDR estimator based on t statistics and the empirical null are greater than 1.7 and are not plotted.
+
+Figure 6
+6Assessment of estimator performance by posterior predictive expected squared error for the MAQC data sets.
+
+
+). (26) 
+
+Yanofsky and Bickel BMC Bioinformatics 2010, 11:63 
+http://www.biomedcentral.com/1471-2105/11/63 
+
+
+
+,which has variance, 
+
+var 
+( 
+) 
+( | , )(var 
+( 
+
+, 
+, 
+, 
+posterior 
+posterior 
+
+
+
+
+and then calculating the MCMC average,var 
+( 
+| ) 
+var( 
+| ) 
+
+posterior 
+
+  
+  
+
+ 
+ 
+
+ 
+
+ 
+
+X 
+X 
+H 
+K 
+X 
+X 
+H 
+
+K 
+
+n e w 
+n e w 
+n e w 
+n e w 
+k 
+
+K 
+
+k 
+
+ 
+1 
+
+1 
+
+1 
+
+2 
+
+
+
+Table 1
+1Number of tomato data sets for which each estimator ranked in the top four.algorithm 
+cross validation 
+posterior 
+
+predictive 
+expected loss 
+
+Wilcoxon stat. with emp. null 
+3 
+2 
+
+t stat. with emp. null 
+1 
+1 
+
+Wilcoxon stat. with locfdr 
+1 
+1 
+
+t stat. with locfdr 
+6 
+6 
+
+moderated t stat. with locfdr 
+5 
+5 
+
+moderated t stat. with limma 
+3 
+1 
+
+fold change shrinkage 
+1 
+1 
+
+Bayes factor 
+2 
+1 
+
+BIC 
+0 
+0 
+
+AICc 
+1 
+5 
+
+fold change > 1.41 
+0 
+0 
+
+fold change > 1 
+0 
+0 
+
+fold change > 2 
+0 
+0 
+
+all nulls true 
+1 
+1 
+
+all nulls false 
+0 
+0 
+
+
+
+Table 2
+2Number of MAQC data sets for which each estimator ranked in the top four.algorithm 
+cross validation 
+posterior 
+
+predictive 
+expected loss 
+
+Wilcoxon stat. with emp. null 
+0 
+0 
+
+t stat. with emp. null 
+0 
+0 
+
+Wilcoxon stat. with locfdr 
+0 
+0 
+
+t stat. with locfdr 
+1 
+3 
+
+moderated t stat. with locfdr 
+3 
+3 
+
+moderated t stat. with limma 
+2 
+0 
+
+fold change shrinkage 
+0 
+0 
+
+Bayes factor 
+3 
+0 
+
+BIC 
+2 
+3 
+
+AICc 
+1 
+3 
+
+fold change > 1.41 
+0 
+0 
+
+fold change > 1 
+0 
+0 
+
+fold change > 2 
+0 
+0 
+
+all nulls true 
+0 
+0 
+
+all nulls false 
+0 
+0 
+
+
+t stat. with emp. null emp. null
+Yanofsky and Bickel BMC Bioinformatics 2010, 11:63 http://www.biomedcentral.com/1471-2105/11/63 Page 7 of 14
+Yanofsky and Bickel BMC Bioinformatics 2010, 11:63 http://www.biomedcentral.com/1471-2105/11/63 Page 8 of 14
+AcknowledgementsWe thank Pei-Chun Hsieh for preparing the biomedical data for analysis, Xuemei Tang for providing the fruit development microarray data, and the reviewers for many helpful suggestions. The Biobase package of Bioconductor [[48]] facilitated management of the expression data. This work was partially supported by the Canada Foundation for Innovation, the Ministry of Research and Innovation of Ontario, and the Faculty of Medicine of the University of Ottawa.Authors' contributions CMY selected the Bayes factor algorithm, implemented the Bayes factor, BIC, and AIC c algorithms, and implemented the posterior predictive expected squared loss assessment. DRB conceived the study, selected the data sets, and applied the fold change and empirical Bayes algorithms. Each author made substantial contributions to writing the paper. Both authors read and approved the final manuscript.
+Microarray data analysis: From disarray to consolidation and consensus. D B Allison, X Cui, G P Page, M Sabripour, Nature Reviews Genetics. 7Allison DB, Cui X, Page GP, Sabripour M: Microarray data analysis: From disarray to consolidation and consensus. Nature Reviews Genetics 2006, 7:55-65.
+
+Comparison of discrimination methods for the classification of tumors using gene expression data. S Dudoit, J Fridlyand, T P Speed, Journal of the American Statistical Association. 97457Dudoit S, Fridlyand J, Speed TP: Comparison of discrimination methods for the classification of tumors using gene expression data. Journal of the American Statistical Association 2002, 97(457):77-86.
+
+A comparison of methods to control Type I errors in microarray studies. J Chen, Laan Van Der, Mj, M T Smith, A E Hubbard, Statistical Applications in Genetics and Molecular Biology. 628Chen J, Laan van der MJ, Smith MT, Hubbard AE: A comparison of methods to control Type I errors in microarray studies. Statistical Applications in Genetics and Molecular Biology 2007, 6:28.
+
+Comparison of small n statistical tests of differential expression applied to microarrays. C Murie, O Woody, A Y Lee, R Nadon, BMC bioinformatics. 1045Murie C, Woody O, Lee AY, Nadon R: Comparison of small n statistical tests of differential expression applied to microarrays. BMC bioinformatics 2009, 10:45.
+
+Significance testing for small microarray experiments. C Kooperberg, A Aragaki, A D Strand, J M Olson, Statistics in medicine. 2415Kooperberg C, Aragaki A, Strand AD, Olson JM: Significance testing for small microarray experiments. Statistics in medicine 2005, 24(15):2281-2298.
+
+of the Toxicogenomics Research Consortium CM: Empirical evaluation of data transformations and ranking statistics for microarray analysis. L X Qin, K F Kerr, Nucleic acids research. 3218Qin LX, Kerr KF, of the Toxicogenomics Research Consortium CM: Empirical evaluation of data transformations and ranking statistics for microarray analysis. Nucleic acids research 2004, 32(18):5471-5479.
+
+Consolidated strategy for the analysis of microarray spike-in data. M N Mccall, R A Irizarry, Nucleic acids research. 36178McCall MN, Irizarry RA: Consolidated strategy for the analysis of microarray spike-in data. Nucleic acids research 2008, 36(17):el08.
+
+Rat toxicogenomic study reveals analytical consistency across microarray platforms. L Guo, E K Lobenhofer, C Wang, R Shippy, S C Harris, L Zhang, N Mei, T Chen, D Herman, F M Goodsaid, P Hurban, K L Phillips, J Xu, X Deng, Y A Sun, W Tong, Y P Dragan, L Shi, Nat Biotech. 249Guo L, Lobenhofer EK, Wang C, Shippy R, Harris SC, Zhang L, Mei N, Chen T, Herman D, Goodsaid FM, Hurban P, Phillips KL, Xu J, Deng X, Sun YA, Tong W, Dragan YP, Shi L: Rat toxicogenomic study reveals analytical consistency across microarray platforms. Nat Biotech 2006, 24(9):1162-1169.
+
+Confirming microarray data -Is it really necessary?. J C Rockett, G M Hellmann, Genomics. 834Rockett JC, Hellmann GM: Confirming microarray data -Is it really necessary?. Genomics 2004, 83(4):541-549.
+
+Selecting differentially expressed genes from microarray experiments. M S Pepe, G Longton, G L Anderson, M Schummer, Biometrics. 59Pepe MS, Longton G, Anderson GL, Schummer M: Selecting differentially expressed genes from microarray experiments. Biometrics 2003, 59:133-142.
+
+Reproducibility of microarray data: A further analysis of microarray quality control (MAQC) data. J J Chen, H M Hsueh, R R Delongchamp, C J Lin, C A Tsai, BMC Bioinformatics. 8Chen JJ, Hsueh HM, Delongchamp RR, Lin CJ, Tsai CA: Reproducibility of microarray data: A further analysis of microarray quality control (MAQC) data. BMC Bioinformatics 2007, 8.
+
+Robin S: Determination of the differentially expressed genes in microarray experiments using local FDR. J Aubert, A Bar-Hen, J J Daudin, BMC Bioinformatics. 5125Aubert J, Bar-Hen A, Daudin JJ, Robin S: Determination of the differentially expressed genes in microarray experiments using local FDR. BMC Bioinformatics 2004, 5:125.
+
+Correction: Determination of the differentially expressed genes in microarray experiments using local FDR (BMC Bioinformatics). J Aubert, A Bar-Hen, J J Daudin, S Robin, BMC Bioinformatics. 642Aubert J, Bar-Hen A, Daudin JJ, Robin S: Correction: Determination of the differentially expressed genes in microarray experiments using local FDR (BMC Bioinformatics). BMC Bioinformatics 2005, 6:42.
+
+Mixture models for detecting differentially expressed genes in microarrays. Lbt Jones, R Bean, G J Mclachlan, Jxi Zhu, International journal of neural systems. 165Jones LBT, Bean R, McLachlan GJ, Zhu JXI: Mixture models for detecting differentially expressed genes in microarrays. International journal of neural systems 2006, 16(5):353-362.
+
+A mixture model for estimating the local false discovery rate in DNA microarray analysis. J G Liao, Y Lin, Z E Selvanayagam, W J Shih, Bioinformatics. 2016Liao JG, Lin Y, Selvanayagam ZE, Shih WJ: A mixture model for estimating the local false discovery rate in DNA microarray analysis. Bioinformatics 2004, 20(16):2694-2701.
+
+Using mixture models to detect differentially expressed genes. G J Mclachlan, R W Bean, Lbt Jones, J X Zhu, Australian Journal of Experimental Agriculture. 457-8McLachlan GJ, Bean RW, Jones LBT, Zhu JX: Using mixture models to detect differentially expressed genes. Australian Journal of Experimental Agriculture 2005, 45(7-8):859-866.
+
+Y Pawitan, All Likelihood: Statistical Modeling and Inference Using Likelihood Oxford. Clarendon PressPawitan Y: All Likelihood: Statistical Modeling and Inference Using Likelihood Oxford: Clarendon Press 2001.
+
+Multidimensional local false discovery rate for microarray studies. A Ploner, S Calza, A Gusnanto, Y Pawitan, Bioinformatics. 225Ploner A, Calza S, Gusnanto A, Pawitan Y: Multidimensional local false discovery rate for microarray studies. Bioinformatics 2006, 22(5):556-565.
+
+Estimating the occurrence of false positives and false negatives in microarray studies by approximating and partitioning the empirical distribution of p-values. S Pounds, S W Morris, Bioinformatics. 1910Pounds S, Morris SW: Estimating the occurrence of false positives and false negatives in microarray studies by approximating and partitioning the empirical distribution of p-values. Bioinformatics 2003, 19(10):1236-1242.
+
+A stochastic downhill search algorithm for estimating the local false discovery rate. S Scheid, R Spang, IEEE/ACM Transactions on Computational Biology and Bioinformatics. 13Scheid S, Spang R: A stochastic downhill search algorithm for estimating the local false discovery rate. IEEE/ACM Transactions on Computational Biology and Bioinformatics 2004, 1(3):98-108.
+
+Twilight; a Bioconductor package for estimating the local false discovery rate. S Scheid, R Spang, Bioinformatics. 2112Scheid S, Spang R: Twilight; a Bioconductor package for estimating the local false discovery rate. Bioinformatics 2005, 21(12):2921-2922.
+
+Empirical Bayes Analysis of a Microarray Experiment. B Efron, R Tibshirani, J D Storey, V Tusher, Am Stat Assoc. 96456Efron B, Tibshirani R, Storey JD, Tusher V: Empirical Bayes Analysis of a Microarray Experiment. Am Stat Assoc 2001, 96(456):1151-1160.
+
+C Genovese, L Wasserman, Bayesian Statistics 7: Proceedings of the Seventh Valencia International Meeting. Oxford University PressBayesian and frequentist multiple testing OxfordGenovese C, Wasserman L: Bayesian Statistics 7: Proceedings of the Seventh Valencia International Meeting, June 2-62002, Bayesian and frequentist multiple testing Oxford: Oxford University Press 2003, 145-161.
+
+D Bates, J Chambers, P Dalgaard, S Falcon, R Gentleman, K Hornik, S Lacus, R Ihaka, F Leisch, T Lumley, M Maechler, D Murdoch, P Murrell, M Plummer, B Ripley, D Sarkar, D T Lang, L Tierney, S Urbanek, R: A Language and Environment for Statistical Computing. Vienna, AustriaBates D, Chambers J, Dalgaard P, Falcon S, Gentleman R, Hornik K, lacus S, Ihaka R, Leisch F, Lumley T, Maechler M, Murdoch D, Murrell P, Plummer M, Ripley B, Sarkar D, Lang DT, Tierney L, Urbanek S: R: A Language and Environment for Statistical Computing. Vienna, Austria 2009.
+
+Linear models and empirical Bayes methods for assessing differential expression in microarray experiments. G K Smyth, Statistical Applications in Genetics and Molecular Biology. 33Smyth GK: Linear models and empirical Bayes methods for assessing differential expression in microarray experiments. Statistical Applications in Genetics and Molecular Biology 2004, 3:Article 3.
+
+Large-Scale Simultaneous Hypothesis Testing: The Choice of a Null Hypothesis. B Efron, Journal of the American Statistical Association. 99465Efron B: Large-Scale Simultaneous Hypothesis Testing: The Choice of a Null Hypothesis. Journal of the American Statistical Association 2004, 99(465):96-104.
+
+Efron B: Size, power and false discovery rates. Annals of Statistics. 35Efron B: Size, power and false discovery rates. Annals of Statistics 2007, 35:1351-1377.
+
+HighProbability determines which alternative hypotheses are sufficiently probable: Genomic applications include detection of differential gene expression. D R Bickel, q-bio/0402049Bickel DR: HighProbability determines which alternative hypotheses are sufficiently probable: Genomic applications include detection of differential gene expression. arXiv 2004, q-bio/0402049..
+
+Error-rate and decision-theoretic methods of multiple testing: Which genes have high objective probabilities of differential expression. D R Bickel, Statistical Applications in Genetics and Molecular Biology. 38Bickel DR: Error-rate and decision-theoretic methods of multiple testing: Which genes have high objective probabilities of differential expression?. Statistical Applications in Genetics and Molecular Biology 2004, 3:8.
+
+Estimating the Dimension of a Model. G Schwarz, The Annals of Statistics. 62Schwarz G: Estimating the Dimension of a Model. The Annals of Statistics 1978, 6(2):461-464.
+
+. Yanofsky, Bickel, Bioinformatics, 11Yanofsky and Bickel BMC Bioinformatics 2010, 11:63 http://www.biomedcentral.com/1471-2105/11/63
+
+Scales of Evidence for Model Selection: Fisher versus Jeffreys. B Efron, A Gous, R E Kass, G S Datta, P Lahiri, Lecture Notes-Monograph Series. 38Efron B, Gous A, Kass RE, Datta GS, Lahiri P: Scales of Evidence for Model Selection: Fisher versus Jeffreys. Lecture Notes-Monograph Series 2001, 38(Model Selection):208-256.
+
+K P Burnham, D Anderson, Model Selection and Multi-Model Inference. New York, NYSpringerBurnham KP, Anderson D: Model Selection and Multi-Model Inference New York, NY: Springer 2002.
+
+Regression and Time Series Model Selection in Small Samples. C M Hurvich, C L Tsai, Biometrika. 762Hurvich CM, Tsai CL: Regression and Time Series Model Selection in Small Samples. Biometrika 1989, 76(2):297-307.
+
+Correcting the estimated level of differential expression for gene selection bias: Application to a microarray study. D R Bickel, Statistical Applications in Genetics and Molecular Biology. 710Bickel DR: Correcting the estimated level of differential expression for gene selection bias: Application to a microarray study. Statistical Applications in Genetics and Molecular Biology 2008, 7:10.
+
+On a fast, robust estimator of the mode: comparisons to other robust estimators with applications. D R Bickel, R Frhwirth, Computational Statistics and Data Analysis. 50Bickel DR, Frhwirth R: On a fast, robust estimator of the mode: comparisons to other robust estimators with applications. Computational Statistics and Data Analysis 2006, 50:3500-3530.
+
+Comparison and evaluation of methods for generating differentially expressed gene lists from microarray data. I B Jeffery, D G Higgins, A C Culhane, BMC Bioinformatics. 7359Jeffery IB, Higgins DG, Culhane AC: Comparison and evaluation of methods for generating differentially expressed gene lists from microarray data. BMC Bioinformatics 2006, 7:359.
+
+Shrinkage estimation of gene expression fold change as an alternative to testing hypotheses of equivalent expression. Z Montazeri, C M Yanofsky, D R Bickel, COBRA Preprint Series. 60Ottawa Institute of Systems BiologyTechnical ReportArticleMontazeri Z, Yanofsky CM, Bickel DR: Shrinkage estimation of gene expression fold change as an alternative to testing hypotheses of equivalent expression. Technical Report, Ottawa Institute of Systems Biology, COBRA Preprint Series, Article 60, available at tinyurl.com/mwhnj2 2009.
+
+Ter Braak CJF: A Markov Chain Monte Carlo version of the genetic algorithm Differential Evolution: easy Bayesian computing for real parameter spaces. Statistics and Computing. 163Ter Braak CJF: A Markov Chain Monte Carlo version of the genetic algorithm Differential Evolution: easy Bayesian computing for real parameter spaces. Statistics and Computing 2006, 16(3):239-249.
+
+Transcriptome and selected metabolite analyses reveal multiple points of ethylene control during tomato fruit development. R Alba, P Payton, Z Fei, R Mcquinn, Debbie P Martin, G B Tanksley, S D Giovannoni, J J , Plant Cell. 1711Alba R, Payton P, Fei Z, McQuinn R, Debbie P, Martin GB, Tanksley SD, Giovannoni JJ: Transcriptome and selected metabolite analyses reveal multiple points of ethylene control during tomato fruit development. Plant Cell 2005, 17(11):2954-2965.
+
+The balance of reproducibility, sensitivity, and specificity of lists of differentially expressed genes in microarray studies. L Shi, W D Jones, R V Jensen, S C Harris, R G Perkins, F M Goodsaid, L Guo, L J Croner, C Boysen, H Fang, F Qian, S Amur, W Bao, C C Barbacioru, V Bertholet, X M Cao, T M Chu, P J Collins, X H Fan, F W Frueh, J C Fuscoe, X Guo, J Han, D Herman, H Hong, E S Kawasaki, Q Z Li, Y Luo, Y Ma, N Mei, R L Peterson, R K Puri, R Shippy, Z Su, Y A Sun, H Sun, B Thorn, Y Turpaz, C Wang, S J Wang, J A Warrington, J C Willey, J Wu, Q Xie, L Zhang, L Zhang, S Zhong, R D Wolfinger, W Tong, BMC Bioinformatics. 99Shi L, Jones WD, Jensen RV, Harris SC, Perkins RG, Goodsaid FM, Guo L, Croner LJ, Boysen C, Fang H, Qian F, Amur S, Bao W, Barbacioru CC, Bertholet V, Cao XM, Chu TM, Collins PJ, Fan XH, Frueh FW, Fuscoe JC, Guo X, Han J, Herman D, Hong H, Kawasaki ES, Li QZ, Luo Y, Ma Y, Mei N, Peterson RL, Puri RK, Shippy R, Su Z, Sun YA, Sun H, Thorn B, Turpaz Y, Wang C, Wang SJ, Warrington JA, Willey JC, Wu J, Xie Q, Zhang L, Zhang L, Zhong S, Wolfinger RD, Tong W: The balance of reproducibility, sensitivity, and specificity of lists of differentially expressed genes in microarray studies. BMC Bioinformatics 2008, 9(SUPPL 9).
+
+Selection of differentially expressed genes in microarray data analysis. J J Chen, S J Wang, C A Tsai, C J Lin, Pharmacogenomics Journal. 73Chen JJ, Wang SJ, Tsai CA, Lin CJ: Selection of differentially expressed genes in microarray data analysis. Pharmacogenomics Journal 2007, 7(3):212-220.
+
+Degrees of differential gene expression: Detecting biologically significant expression differences and estimating their magnitudes. D R Bickel, Bioinformatics. 20Bickel DR: Degrees of differential gene expression: Detecting biologically significant expression differences and estimating their magnitudes. Bioinformatics (Oxford, England) 2004, 20:682-688.
+
+Estimating the false discovery rate using nonparametric deconvolution. Wiel Van De, M A Kim, K I , Biometrics. 633Wiel Van De MA, Kim KI: Estimating the false discovery rate using nonparametric deconvolution. Biometrics 2007, 63(3):806-815.
+
+Bayesian modeling of differential gene expression. A Lewin, S Richardson, C Marshall, A Glazier, T Aitman, Biometrics. 62Lewin A, Richardson S, Marshall C, Glazier A, Aitman T: Bayesian modeling of differential gene expression. Biometrics 2006, 62:1-9.
+
+Tail posterior probability for inference in pairwise and multiclass gene expression data. N Bochkina, S Richardson, Biometrics. 634Bochkina N, Richardson S: Tail posterior probability for inference in pairwise and multiclass gene expression data. Biometrics 2007, 63(4):1117-1125.
+
+Testing significance relative to a fold-change threshold is a TREAT. D J Mccarthy, G K Smyth, Bioinformatics. 256McCarthy DJ, Smyth GK: Testing significance relative to a fold-change threshold is a TREAT. Bioinformatics 2009, 25(6):765-771.
+
+The strength of statistical evidence for composite hypotheses with an application to multiple comparisons. D R Bickel, COBRA Preprint Series. 49Ottawa Institute of Systems BiologyTechnical ReportArticleBickel DR: The strength of statistical evidence for composite hypotheses with an application to multiple comparisons. Technical Report, Ottawa Institute of Systems Biology, COBRA Preprint Series, Article 49, available at tinyurl.com/7yaysp 2008.
+
+R C Gentleman, V J Carey, D M Bates, B Bolstad, M Dettling, S Dudoit, B Ellis, L Gautier, Y Ge, J Gentry, K Hornik, T Hothorn, W Huber, S Lacus, R Irizarry, F Leisch, C Li, M Maechler, A J Rossini, G Sawitzki, C Smith, G Smyth, L Tierney, Jyh Yang, J Zhang, 10.1186/1471-2105-11-63Bioconductor: Open software development for computational biology and bioinformatics. 580Gentleman RC, Carey VJ, Bates DM, Bolstad B, Dettling M, Dudoit S, Ellis B, Gautier L, Ge Y, Gentry J, Hornik K, Hothorn T, Huber W, lacus S, Irizarry R, Leisch F, Li C, Maechler M, Rossini AJ, Sawitzki G, Smith C, Smyth G, Tierney L, Yang JYH, Zhang J: Bioconductor: Open software development for computational biology and bioinformatics. Genome Biology 2004, 5: R80. doi:10.1186/1471-2105-11-63
+
+Submit your next manuscript to BioMed Central and take full advantage of: • Convenient online submission • Thorough peer review • No space constraints or color figure charges • Immediate publication on acceptance • Inclusion in PubMed, CAS, Scopus and Google Scholar • Research which is freely available for redistribution. BMC Bioinformatics. 1163Cite this article as: Yanofsky and Bickel: Validation of differential gene expression algorithms: Application comparing fold-change estimation to hypothesis testing. Submit your manuscript at www.biomedcentral.com/submitCite this article as: Yanofsky and Bickel: Validation of differential gene expression algorithms: Application comparing fold-change estimation to hypothesis testing. BMC Bioinformatics 2010 11:63. Submit your next manuscript to BioMed Central and take full advantage of: • Convenient online submission • Thorough peer review • No space constraints or color figure charges • Immediate publication on acceptance • Inclusion in PubMed, CAS, Scopus and Google Scholar • Research which is freely available for redistribution Submit your manuscript at www.biomedcentral.com/submit

@@ -1,0 +1,245 @@
+
+A FUZZY/BAYESIAN APPROACH FOR THE TIME SERIES CHANGE POINT DETECTION PROBLEM
+
+
+Marcos Flávio 
+S V D'angelo dangelo@cpdee.ufmg.br 
+Departamento de Ciência da Computac ¸ão
+Universidade Estadual de Montes Claros -UNIMONTES
+Av. Rui Braga, s/n39401-089Montes ClarosMGBrazil
+
+Reinaldo M Palhares palhares@cpdee.ufmg.br 
+Departamento de Engenharia Eletr ônica
+Universidade Federal de Minas Gerais -UFMG
+Av. Antônio Carlos6627, 31270-901Pampulha, Belo HorizonteMGBrazil
+
+Ricardo H C Takahashi 
+Departamento de Matemática
+Universidade Federal de Minas Gerais -UFMG
+Av. Antônio Carlos6627, 31270-901Pampulha, Belo HorizonteMGBrazil
+
+Rosangela H Loschi loschi@est.ufmg.br 
+Departamento de Estatística
+Universidade Federal de Minas Gerais -UFMG
+Av. Antônio Carlos6627, 31270-901Pampulha, Belo HorizonteMGBrazil
+
+A FUZZY/BAYESIAN APPROACH FOR THE TIME SERIES CHANGE POINT DETECTION PROBLEM
+0101-74382C58AEBB4D15F486349D3F4481626079Received February 4, 2009 / Accepted September 8, 2010change pointfuzzy clusteringMetropolis-Hastings
+This paper addresses the change point detection problem in time series.A methodology based on the Metropolis-Hastings algorithm applied to time series modeled as a process with Beta distribution is discussed.In order to make this methodology useful in practice, a fuzzy cluster technique is applied to the initial time series at first, generating a new data set with Beta distribution.Bayesian procedures are considered for inference and the Metropolis-Hastings algorithm is used to sample from the posteriors.In the clustering process, a Kohonen neural network is used having as objective to find the best centers of the time series to be used in the fuzzyfication process.Finally, it will be presented a simulation results in the series of the electric energy consumption in Brazil, between January of 1976 and December of 2000, five months before the blackout occurred in 2001.Such result illustrates the efficiency of the proposed methodology for change point detection in time series.
+
+INTRODUCTION
+
+Traditional methods of describing a time series behavior are based on models which satisfactorily explain its dynamics.Some fundamental question must be answered, however, in order to obtaine a model that reasonably fits to data: Are there switching regimes in the series?Can a single model, all the time, fit the dynamics behavior?If there are significant changes for the underlying time series, it seems natural to find out those change points or change periods before modeling the whole process.The CUSUM test proposed by (Hinkey, 1971) is widely used in the change point detection, and applications of this method can be found in (Hadjiliadis & Moustakides, 2006), (Lee, Nishiyama & Yoshida, 2006), and (Lee S, Park S, Maekawa K & Kawai K, 2006), as well as its modifications and extensions.In the Bayesian approach, inference about the changes are made based on the posterior for the positions of the change point.In this setting, the MCMC (Markov chain Monte Carlo) methods are commonly used to approximate the posteriors.The Bayesian analysis context the reference work for multiple change points detection is the paper of (Barry & Hartigan, 1993) that introduced the product partition model (ppm) to identify change points in the mean of data having a Gaussian distribution.In (Loschi RH & Cruz FRB, 2005b) the posterior probability of any instant being a change point is used as an evidence measure that the behavior of a sequence of data changes at any moment.The effectiveness of this technique in identifying changes in a Poisson distribution when compared with the measure proposed by (Hartigan, 1990) is presented in (Loschi RH & Cruz FRB, 2005a).However, all the previous approaches necessarily demand some type of prior knowledge about the time series, namely the type of distribution that models the data behavior.Thus, differently from former techniques, the method proposed in this paper does not require any prior knowledge about statistical properties of the time series before the application of the MCMC procedure.This is made by the introduction of a first step, in which a fuzzy set technique is applied in order to cluster and to transform the initial time series, about which there is no a priori knowledge of its distribution, into a time series which can be approximated by a Beta distribution.Specifically in this first step, the Kohonen network is used to find centers of the clusters, and in the sequel the fuzzy membership degree is computed for each point of the initial time series, generating a new time series with beta distribution.This new time series generated in the first step allows systematically to apply the same strategy to detect the change via Bayesian change point model with a fixed reference distribution: the Beta distribution.Thus the Metropolis-Hastings algorithm (Gamerman, 1997) can be used to sample from the posteriors including the one that indicates the position of the change point.
+
+Assuming that p 1 is the first operation point, p 2 is the second operation point, ε(t) is the noise signal with π(•) distribution and m is the position of the change point, throughout the paper, it is considered the following time series:
+f (t) = p 1 + 0.1 * ε(t) − 0.1 * ε(t − 1), se t ≤ m ; p 2 + 0.1 * ε(t) − 0.1 * ε(t − 1), se t > m .(1)
+The Figure 1 show the time series behavior with fixed p 1 = 1, p 2 = 2, m = 30 e ε(t) ∼ U (0, 1) and 60 samples of time series.To establish notation, along this paper, U (0, 1) denotes the uniform distribution in the interval [0, 1], N (0, 1) denotes the standard Normal distribution with zero mean and unit variance, t (5) denotes the Students-t distribution with 5 degrees of freedom, gamma(a, b) denotes the Gamma distribution with scale parameter a and shape parameter b and (a) denotes the gamma function evaluated in a.All the time series, e.g., y(t), denotes a discrete-time sequence.
+
+
+TIME SERIES TRANSFORMATION BY FUZZY SETS
+
+One of the main applications of the fuzzy sets theory (Zadeh, 1965)
+μ i (t) 1 − (y(t) − C i ) 2 k j=1 (y(t) − C j ) 2(3)
+Given the set C of cluster centers, it is an easy task to measure the distance between each point in the time series y(t) and each center C i .The problem of finding the centers can be solved, for instance, via k-means (Kaufman & Rousseeuw, 1990), C-means (Bezdek, 1981), and Kohonen network (Kohonen, 2001).In this paper, the Kohonen network technique is used.
+
+The proposed fuzzy clustering to transform a given time series into a new one is described below:
+
+1. Input the time series y(t);
+2. Find the set of k centers C = {C i | min{y(t)} ≤ C i ≤ max{y(t)} , i = 1, 2}
+, that minimizes the Euclidean distance given in (2) and that is illustrated in Figure 2, considering, for example, the time series (1).For the proposal of this paper, it is considered k = 2 centers.
+
+3. Compute the fuzzy membership degree given in (3), for each sample of the time series, y(t), with respect to each center C i (as illustrated in Figure 3 considering, for example, the time series (1)).
+
+Since the idea is to find just one change point, only two centers are found.The function μ1(t) defines a new time series, in which the change point is detected.
+
+From Figure 3, it is noticeable that the fuzzy membership degree is concentrated around 1 (one) for the first 30 values observed before the change point (see also the histogram in Figure 4), and is concentrated around zero for the last 30 values observed after the change point (see also the histogram in Figure 5).Furthermore, the distribution of μ 1 (t), defined according to (3), is confined into the interval [0, 1], as shown below:
+
+if
+y(t) −→ C1 then μ 1 (t) −→ 1 − ; if y(t) −→ C2 then μ 1 (t) −→ 0 + ; if C1 −→ C2 then μ 1 (t) −→ 1/2 ; if y(t) −→ [C1, C2] then μ 1 (t) −→ [0, 1] .
+Using the Kullback-Leibler divergence (Kullback & Leibler, 1951) one may conclude that the distributions of μ 1 (t) before and after the change point can be approximated by Beta distributions with different input parameters, say, for t ≤ m, one assumes a beta(a, b) distribution, and for   6, N (0, 1) in Figure 7, and t (5) in Figure 8.In all these cases, the behavior of the transformed time series, obtained by applying the clustering technique, was well described by Beta distributions with similar shapes.Since the clustering technique assures the same type of probability distribution function for the new time series, μ 1 (t) this fixed statistical model can be assumed in the Bayesian formulation to detect the change point in the transformed time series.In this paper, the Metropolis-Hastings algorithm is used to sample from the posteriors, since it is a powerful and simple strategy to do it.
+
+
+METROPOLIS-HASTINGS FORMULATION
+
+The goal of the Metropolis-Hastings algorithm (Gamerman, 1997) is to construct a Markov chain that has a specified equilibrium distribution π that in the paper is the posterior distribution of all parameters in the change point model.Define a Markov chain as follows.If X i−1 = x i−1 , then generate a candidate value x * = y from a reference distribution with density f X * |X (y) = q(x i−1 , x * ).The candidate value x * is then accepted or rejected as a sample of π .The acceptance probability is
+α(x, y) = min 1, π(x * ) π(x i−1 ) q(x * , x i−1 ) q(x i−1 , x * )(4)
+which defines the transition kernel of the chain.If the candidate is accepted, then set
+X i = x * , otherwise, set X i = x i−1 .
+It is possible to show that under general conditions the sequence X 0 , X 1 , X 2 , . . . is a Markov chain with equilibrium distribution π .
+
+In practical terms, the Metropolis-Hastings algorithm can be specified by the following steps:
+
+1. Choose a starting value x 0 , the number of iterations, R, and set the iteration counter r = 1;
+
+2. Generate a candidate value y ∼ q(x i,• );
+
+3. Calculate the acceptance probability (4) and generate u ∼ U (0, 1);
+
+Pesquisa Operacional, Vol.31(2), 2011
+
+4. Compute the new value for the current state:
+x t+1 = y , if α(x, y) > u x t , otherwise 5. If r < R, return to step 2. Otherwise stop.
+As discussed in the previous section, the clustering technique generates a transformed time series with the following distribution
+y(t) ∼ beta(a, b) , for t = 1, . . . , m y(t) ∼ beta(c, d) , for t = m + 1, . . . , n
+where a, b, c, d and the change point m are the parameters to be estimated.To complete the model specification, prior distributions are elicited for the parameters.As usually done whenever there is no prior information available, in this paper the following non-informative prior distributions are assumed: These non-informative gamma prior distributions, with parameters 0.1, have been chosen with the purpose of spreading the whole parametric space.
+a ∼ gamma (0.1, 0.
+Since the posteriors do not have a close form, the Metropolis-Hastings algorithm is used to sample from them.Its formulation is given by the pseudo-code in the Table 1, and the reference distributions
+π(a * ) π(a i−1 ) q(a * , a i−1 ) q(a i−1 , a * ) , π(b * ) π(b i−1 ) q(b * , b i−1 ) q(b i−1 , b * ) , π(c * ) π(c i−1 ) q(c * , c i−1 ) q(c i−1 , c * ) , π(d * ) π(d i−1 ) q(d * , d i−1 ) q(d i−1 , d * ) and π(m * ) π(m i−1 ) q(m * , m) q(m i−1 , m * )
+are presented in the Appendix A. The change point m is obtained as the mode of its posterior distribution.It is approximated by the maximum value in the histogram for the R simulations of the pseudo-code in Table 1, with the exception of the border points of the distribution.The Figure 9 illustrates the convergence of parameter m for p 1 = 1, p 2 = 2, ε(t) ∼ U (0, 1), R = 100 and m = 30.Read number of simulations R a 0 ← Gamma(0.1, 0.1) b 0 ← Gamma(0.1, 0.1) c 0 ← Gamma(0.1, 0.1)
+d 0 ← Gamma(0.1, 0.1) m 0 ← U [1, . . . , n] For i = 1 to R Go a * ← Gamma(0.1, 0.1) b * ← Gamma(0.1, 0.1) c * ← Gamma(0.1, 0.1) d * ← Gamma(0.1, 0.1) m * ← U [1, . . . , n] If min 1, π(a * ) π(a i−1 ) q(a * ,a i−1 ) q(a i−1 ,a * ) > U (0, 1) a i ← a * Else a i ← a i−1 End If If min 1, π(b * ) π(b i−1 ) q(b * ,b i−1 ) q(b i−1 ,b * ) > U (0, 1) b i ← b * Else b i ← b i−1 End If If min 1, π(c * ) π(c i−1 )
+q(c * ,c i−1 ) 100% of correctness in detecting the change point in almost all situations.However, in the case when the time series changes from point p 1 = 1 to point p 2 = 1.1, the proposed approach has detected points in the neighborhood of m = 30, including it.In Table 2, the sign 'XX' indicates that the percentage of correctness was not conclusive.This fact is illustrated in the Figure 10, where a test was performed assuming p 1 = 1, p 2 = 1.1, ε(t) ∼ U (0, 1), R = 1000 and m = 30.This behavior is due to the fact that both the noise and the signal change have the same amplitude.
+q(c i−1 ,c * ) > U (0, 1) c i ← c * Else c i ← c i−1 End If If min 1, π(d * ) π(d i−1 ) q(d * ,d i−1 ) q(d i−1 ,d * ) > U (0, 1) d i ← d * Else d i ← d i−1 End If If min 1, π(m * ) π(m i−1 ) q(m * ,m i−1 ) q(m i−1 ,m * ) > U (0, 1) m i ← m * Else m i ← m i−1 End If End For
+
+A CASE STUDY
+
+The energy crisis faced by Brazil in early 2001 triggered a process of energy rationing in the country.This phenomenon was responsible for modifying habits and behaviors taken so far as standards when it came to consumption of electricity in Brazil.Since this fact has been occurred more useful studies to predict the electricity sector make necessary.In this case study the proposed methodology is used to assess the change in the trend at a particular time series that characterizes the energy consumption only in the Southeast Brazil (industry trade) in the period January 1976 to December 2000 (five months before the blackout in 2001), as presented in Figure 11, available at (IPEA).
+
+Since such time series can experienced a change in its trend in the analyzed period, it is important to find this change point before modeling more precisely the entire process as discussed in the introduction section.Before applying the proposed methodology, the series was decomposed into a time series trend and a time series of cycles, (Hodrick & Prescott, 1997).The trend time series is illustrated in Figure 12.One can notice changes in the rate of growth of consumption between points 200 and 250, and points 250 and 300.The process of detection of change points in the time series trend, in Figure 12, was found by the taking its time-derivative and is illustrated in Figure 13.The result of the proposed methodology for the change point detection in Figure 13 is illustrated in Figure 14, which shows the effectiveness of this technique.Notice that the results in Figure 14 have been obtained after 1000 simulations of the pseudo-code in Table 1.Further this methodology cannot be used as "blackout detector", but as an auxiliary tool in the forecasting process in this time series to be used in the planning of the expansion in the energy sector.Pesquisa Operacional, Vol.31(2), 2011
+
+
+CONCLUSIONS
+
+In this paper a novel fuzzy/Bayesian methodology for change point detection in time series was proposed.The methodology is based on a two step formulation.Firstly, a fuzzy clustering generates a transformed time series with Beta distribution to be used in the second step.In the second step, a Bayesian modeling is used for change point detection in the transformed time series.The Metropolis-Hastings algorithm is used to sample form the posteriors and the position of the change point is thus obtained taking the posterior mode as it estimation.
+
+
+A Appendix
+
+In this appendix is presented the acceptance probability for the posterior distribution of the parameters a, b, c, d and m described in the Metropolis-Hastings algorithm.The reference distributions used in the work are the prior distributions gamma(0.1,0.1).
+
+The reference distribution in Metropolis-Hastings is computed by likelihood function:
+f (y|a, b, c, d, m) ∼ m i=1 (a + b) (a) + (b) y a−1 i (1 − y i ) b−1 m i=m+1 (c + d) (c) + (d) y c−1 i (1 − y i ) d−1
+1.For the parameter a:
+π(a * ) π(a i−1 ) q(a * , a i−1 ) q(a i−1 , a * ) = π(a * ) π(a i−1 ) f (y|a * , b i−1 , c i−1 , d i−1 , m i−1 )π(a * )π(b i−1 )π(c i−1 )π(d i−1 )π(m i−1 ) f (y|a i−1 , b i−1 , c i−1 , d i−1 , m i−1 )π(a i−1 )π(b i−1 )π(c i−1 )π(d i−1 )π(m i−1 ) = (a * +b i−1 ) (a * ) (b i−1 ) m i−1 (c i−1 +d i−1 ) (c i−1 ) (d) n−m i−1 m i−1 j=1 y a * −1 j (1 − y j ) b i−1 −1 (a i−1 +b i−1 ) (a i−1 ) (b i−1 ) m i−1 (c i−1 +d i−1 ) (c i−1 ) (d i−1 ) n−m i−1 m i−1 j=1 y a i−1 −1 j (1 − y j ) b i−1 −1 × n j=m i−1 +1 y c i−1 −1 j (1 − y j ) d i−1 −1 n j=m i−1 +1 y c i−1 −1 j (1 − y j ) d i−1 −1 0.1 0.1 [ (0.1)] −1 a * 0.1−1 e −0.1a * 2 0.1 0.1 [ (0.1)] −1 a i−1 0.1−1 e −0.1a i−1 2 = (a * +b i−1 ) (a * ) m i−1 m i−1 j=1 y a * −1 j a i−1 a * 0.9 e −0.1(a * −a i−1 )2(a i−1 +b i−1 ) (a i−1 ) m i−1 m i−1 j=1 y a i−1 −1 j Pesquisa Operacional,π(b * ) π(b i−1 ) q(b * , b i−1 ) q(b i−1 , b * ) = π(b * ) π(b i−1 ) f (y|a i , b * , c i−1 , d i−1 , m i−1 )π(a i )π(b * )π(c i−1 )π(d i−1 )π(m i−1 ) f (y|a i , b i−1 , c i−1 , d i−1 , m i−1 )π(a i )π(b i−1 )π(c i−1 )π(d i−1 )π(m i−1 ) = (a i +b * ) (a i ) (b * ) m i−1 (c i−1 +d i−1 ) (c i−1 ) (d) n−m i−1 m i−1 j=1 y a i −1 j (1 − y j ) b * −1 (a i +b i−1 ) (a i ) (b i−1 ) m i−1 (c i−1 +d i−1 ) (c i−1 ) (d i−1 ) n−m i−1 m i−1 j=1 y a i −1 j (1 − y j ) b i−1 −1 × n j=m i−1 +1 y c i−1 −1 j (1 − y j ) d i−1 −1 n j=m i−1 +1 y c i−1 −1 j (1 − y j ) d i−1 −1 0.1 0.1 [ (0.1)] −1 b * 0.1−1 e −0.1b * 2 0.1 0.1 [ (0.1)] −1 b i−1 0.1−1 e −0.1b i−1 2 = (a i +b * ) (b * ) m i−1 m i−1 j=1 (1 − y j ) b * −1 b i−1 b * 0.9 e −0.1(b * −b i−1 )2(a i−1 +b i−1 ) (b i−1 ) m i−1 m i−1 j=1 (1 − y j ) b i−1 −1
+3. For the parameter c: Sendo π(m (•) ) ∼ U (0, 1), então:
+π(c * ) π(c i−1 ) q(c * , c i−1 ) q(c i−1 , c * ) = π(c * ) π(c i−1 ) f (y|a i , b i , c * , d i−1 , m i−1 )π(a i )π(b i )π(c * )π(d i−1 )π(m i−1 ) f (y|a i , b i , c i−1 , d i−1 , m i−1 )π(a i )π(b i )π(c i−1 )π(d i−1 )π(m i−1 ) = (a i +b i ) (a i ) (b i ) m i−1 (c * +d i−1 ) (c * ) (d i−1 ) n−m i−1 m i−1 j=1 y a i −1 j (1 − y j ) b i −1 (a i +b i ) (a i ) (b i ) m i−1 (c i−1 +d i−1 ) (c i−1 ) (d i−1 ) n−m i−1 m i−1 j=1 y a i −1 j (1 − y j ) b i −1 × n j=m i−1 +1 y c * −1 j (1 − y j ) d i−1 −1 n j=m i−1 +1 y c i−1 −1 j (1 − y j ) d i−1 −1 0.1 0.1 [ (0.1)] −1 c * 0.1−1 e −0.π(m * ) π(m i−1 ) q(m * , m) q(m i−1 , m * ) = f (y|a i , b i , c i , d i , m * ) f (y|a i , b i , c i , d i , m i−1 ) = (a i +b i ) (a i ) (b i ) m * (c i +d i ) (c i ) (d i ) n−m * m * j=1 y a i −1 j (1 − y j ) b i −1 n j=m * +1 y c i −1 j (1 − y j ) d i −1 (a i +b i ) (a i ) (b i ) m i−1 (c i +d i ) (c i ) (d i ) n−m i−1 m i−1 j=1 y a i −1 j (1 − y j ) b i −1 n j=m i−1 +1 y c i −1 j (1 − y j ) d i −1
+Pesquisa Operacional, Vol.31(2), 2011
+
+
+
+Change points detection is a problem of interest in many different areas and it has been used to analyze financial time series (Oh KJ, Roh TH & Moon MS, 2005), ecological time series (Beckage, Joseph, Belisle, Wolfson & Platt, 2007), number of crimes series (Loschi RH, Gonc ¸alves FB & Cruz FBR, 2005), and many others.The main techniques for change points detection presented in the literature are based on sequential statistical tests and Bayesian analysis.The most common statistical test on the change point detection problem is the CUSUM (Cumulative Sum).
+
+
+Figure 1 -
+1
+Figure 1 -Time series behavior with fixed p 1 = 1, p 2 = 2, m = 30 e ε(t) ∼ U (0, 1) and 60 samples of time series.
+
+
+Figure 2 -Figure 3 -
+23
+Figure 2 -Time series centers considering the Figure 1: × -before of Kohonen network learning and • -after of Kohonen network learning.
+
+
+Figure 4 -
+4
+Figure 4 -Histogram of μ 1 (t) for ≤ 30.
+
+
+Figure 5 -
+5
+Figure 5 -Histogram of μ 1 (t) for > 30.
+
+
+Figure 8 -
+8
+Figure 8 -Histograms of μ 1t for ε(t) ∼ t (5).
+
+
+1 )b
+1
+∼ gamma (0.1, 0.1) c ∼ gamma (0.1, 0.1) d ∼ gamma (0.1, 0.1) m ∼ U [1, . . ., n] , with p(m) = 1/n .
+
+
+Figure 9 -
+9
+Figure 9 -Convergence of parameter m.
+
+
+Figure 10 -
+10
+Figure 10 -Convergence of parameter m.
+
+
+Figure 11 -
+11
+Figure 11 -Time series that characterizes the energy consumption only in the Southeast Brazil (industry trade) in the period January 1976 to December 2000.
+
+
+Figure 12 -
+12
+Figure 12 -Time series trend.
+
+
+Figure 13 -
+13
+Figure 13 -Time-derivative of the time series trend.
+
+
+Figure 14 -
+14
+Figure 14 -Response of the proposed methodology.
+
+
+1c * 2 0. 1 0. 1 [ 2 = 1 1 j 4 .− 1 j=1 y a i − 1 j( 1 −− 1 j=1 y a i − 1 j( 1 − 1 × n j=m i− 1 +1 y c i − 1 j( 1 − 1 n j=m i− 1 +1 y c i − 1 j( 1 − 1 0. 1 0. 1 [ 2 = 1 d 9 e 2 (
+2112114111111111111111112192
+(0.1)] −1 c i−1 0.1−1 e −0.1c i−1 +1 y c i−1 −For the parameter d:π(d * ) π(d i−1 ) q(d * , d i−1 ) q(d i−1 , d * ) = π(d * ) π(d i−1 ) f (y|a i , b i , c i , d * , m i−1 )π(a i )π(b i )π(c i )π(d * )π(m i−1 ) f (y|a i , b i , c i , d i−1 , m i−1 )π(a i )π(b i )π(c i )π(d i−1 )π(m i−1 ) = (a i +b i ) (a i ) (b i ) m i−1 (c i +d * ) (c i ) (d * ) n−m i−1 m iy j ) b i −1 (a i +b i ) (a i ) (b i ) m i−1 (c i +d i−1 ) (c i ) (d i−1 ) n−m i−1 m iy j ) b i −y j ) d * −y j ) d i−1 −(0.1)] −1 d * 0.1−1 e −0.1d * 2 0.1 0.1 [ (0.1)] −1 d i−1 0.1−1 e −0.1d i−1 (c * +d i−1 ) (c * ) n−m i−1 n j=m i−1 −1 (1 − y j ) d * −−0.1(d * −d i−1 ) c i−1 +d i−1 ) (d i−1 ) n−m i−1 n j=m i−1 +1 (1 − y j ) d i−1 −1 5.For the parameter m:π(m * ) π(m i−1 ) q(m * , m) q(m i−1 , m * ) = π(m * ) π(m i−1 ) f (y|a i , b i , c i , d i , m * )π(a i )π(b i )π(c i )π(d i )π(m * ) f (y|a i , b i , c i , d i , m i−1 )π(a i )π(b i )π(c i )π(d i )π(m i−1 )
+
+
+
+
+(1) m it is assumed the beta(c, d) distribution.For example, in the case in which there is a change point in the time series, the parameter a is greater than the parameter in the Beta distribution of μ 1 (t) if t ≤ m, and the parameter c is smaller than the parameter d in the Beta distribution of μ 1 (t) if t > m.Figures6-8presents an illustration of the distributions of μ 1 (t) for the time series in(1)with sample size n = 200.It is assumed that the change point took place at the position m = 100.This empirical test has been performed starting from several time series, with different probability distributions for ε(t), say, U (0, 1) in Figure
+
+
+Table 2
+2
+shows the results for 100 replications of the time series assuming different values of the parameters p 2 and ε(t).It is clear from Table2that the proposed methodology has presented
+
+
+Table 1 -
+1
+Pseudo-code of the Metropolis-Hastings algorithm.
+
+
+Table 2 -
+2
+Results of change point detection.
+% of correct% of correct% of correctp 1p 2mNoise sizedetectiondetectiondetectionε(t) ∼ U (0, 1) ε(t) ∼ N (0, 1)ε(t) ∼ t (5)12300.110010010011.9300.110010010011.8300.110010010011.7300.110010010011.6300.110010010011.5300.110010010011.4300.110010010011.3300.110010010011.2300.110010010011.1300.1XXXXXX11300.1100100100
+Pesquisa Operacional, Vol. 31(2), 2011
+Pesquisa Operacional, Vol. 31(2), 2011 MARCOS FL ÁVIO S.V. D'ANGELO et al.
+ACKNOWLEDGEMENTSThis work has been supported by Brazilian agencies FAPEMIG and CNPq.
+A Bayesian Analysis for Change Point Problems. D Barry, J A Hartigan, 199388
+
+Bayesian change-point analyses in ecology. B Beckage, Joseph L Belisle, P , Wolfson Db, Platt Wj, New Phytologist. 1742007
+
+Pattern recognition with fuzzy objective function algorithms. J C Bezdek, 1981Plenum Press
+
+Markov chain Monte Carlo: stochastic simulation for Bayesian inference. D Gamerman, 1997Chapman & Hall
+
+Optimal and Asymptotically Optimal CUSUM Rules for Change Point Detection in the Brownian Motion Model with Multiple Alternatives. Theory of Probability and its Applications. & Hadjiliadis, V Moustakides, 200650
+
+J A Hartigan, Partition Models. 199019
+
+Inference About the Change Point from Cumulative Sum Test. D V Hinkey, 197126
+
+Postwar U.S. Business Cycles: An Empirical Investigation. Prescott Ec Hodrick R &, Journal of Money, Credit, and Banking. 291997
+
+. Ipea -Instituto De Pesquisas Econ Ômica Aplicada, may 10, 2008
+
+Finding groups in data: An introduction to cluster analysis. L Kaufman, Rousseeuw Pj, 1990John Wiley & Sons
+
+Self-organizing maps. T Kohonen, 2001Springer
+
+On Information and Sufficiency. Kullback S & Leibler Ra, Annals of Mathematical Statistics. 2211951
+
+Test for Parameter Change in Diffusion Processes by Cusum Statistics Based on One-step Estimators. S Lee, N Nishiyama Y & Yoshida, Annals of the Institute of Statistical Mathematics. 5822006
+
+Test for Parameter Change in ARIMA Models. S Lee, Park S , Maekawa Kawai, K , Communications in Statistics: Simulation and Computation. 3522006
+
+Bayesian Identification of Multiple Change Points in Poisson Data. & Loschi, Frb Cruz, Advances in Complex Systems. 82005
+
+Extension to the product partition model: computing the probability of a change. & Loschi, Frb Cruz, Computational Statistics and Data Analysis. 4822005
+
+Avaliac ¸ão de uma medida de evidência de um ponto de mudanc ¸a e sua utilizac ¸ão na identificac ¸ão de mudanc ¸as na taxa de criminalidade em Belo Horizonte. Gonc Loschi Rh, ¸alves, Cruz Fbr, Pesquisa Operacional. 2532005
+
+Developing time-based clustering neural networks to use change-point detection: Application to financial time series. Roh Oh Kj, Th, M S Moon, Asia-Pacific Journal of Operational Research. 2212005
+
+. L A Zadeh, Fuzzy Sets. Information and Control. 831965

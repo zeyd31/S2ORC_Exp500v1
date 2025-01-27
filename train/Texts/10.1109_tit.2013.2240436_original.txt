@@ -1,0 +1,604 @@
+
+Probabilistic Recovery Guarantees for Sparsely Corrupted Signals
+May 5, 2014 26 Sep 2012 2
+
+Student Member, IEEEGraeme Pope gpope@nari.ee.ethz.ch 
+Annina Bracher brachera@student.ethz.ch. 
+Member, IEEEChristoph Studer studer@rice.edu. 
+G Pope 
+A Bracher 
+C Studer 
+
+Dept. of Information Technology and Electrical Engineering
+Dept. of Electrical and Computer Engineering
+ETH Zurich
+8092ZurichSwitzerland
+
+
+Rice University
+77005HoustonTXUSA
+
+Probabilistic Recovery Guarantees for Sparsely Corrupted Signals
+May 5, 2014 26 Sep 2012 21 The material in this paper was presented in part at the IEEE Information Theory Workshop (ITW), September, Lausanne, Switzerland, 2012 [1]. The work of C. Studer was supported by the Swiss National Science Foundation (SNSF) under Grant PA00P2-134155. DRAFTIndex Terms Sparse signal recoveryprobabilistic recovery guaranteescoherencebasis pursuitsignal restorationsignal separationcompressed sensing
+We consider the recovery of sparse signals subject to sparse interference, as introduced in Studer et al., IEEE Trans. IT, 2012. We present novel probabilistic recovery guarantees for this framework, covering varying degrees of knowledge of the signal and interference support, which are relevant for a large number of practical applications. Our results assume that the sparsifying dictionaries are characterized by coherence parameters and we require randomness only in the signal and/or interference. The obtained recovery guarantees show that one can recover sparsely corrupted signals with overwhelming probability, even if the sparsity of both the signal and interference scale (near) linearly with the number of measurements.• The interference support set E is arbitrary, i.e., E ⊆ {1, . . . , n b } can be any subset of cardinality n e . In particular, E may depend upon the sparse signal vector x and/or the dictionary A, and hence, may also be chosen adversarially. The support set X of x is chosen uniformly at random, i.e., X is chosen uniformly at random from all subsets of {1, . . . , n a } with cardinality n x .• The support set E of the sparse interference vector e is chosen uniformly at random, i.e., E is chosen uniformly at random from all subsets of {1, . . . , n b } with cardinality n e . The support set X is assumed to be arbitrary and of size n x .• Both X and E, the support sets of the signal and of the interference with size n x and n e , respectively, are chosen uniformly at random.In addition, for each model on the support sets X and E we may or may not know either of the support sets prior to recovery.As discussed in [2], recovery of the sparse signal vector x from the sparsely corrupted observation z in(1)is relevant in a large number of practical applications. In particular, restoration of saturated or clipped signals [3]-[5], signals impaired by impulse noise [6]-[8], or removal of narrowband interference is captured by the input-output relation (1). Furthermore, the model (1) enables us to investigate sparsity-based super-resolution and in-painting [9], [10], as well as signal separation [11], [12]. Hence, identifying the fundamental limits on the recovery of the vector x from the sparsely corrupted observation z is of significant practical interest. Recovery guarantees for sparsely corrupted signals have been partially studied in [2], [3], [13]-[20]. In particular, [2], [13] investigated coherence-based recovery guarantees for arbitrary support sets X and E and for varying levels of support-set knowledge; [14] analyzed the special DRAFT
+
+I. INTRODUCTION
+
+We consider the problem of recovering the sparse signal vector x ∈ C na with support set X (containing the locations of the non-zero entries of x) from m linear measurements [2] z = Ax + Be.
+
+(1)
+
+Here, A ∈ C m×na and B ∈ C m×n b are given and known dictionaries, i.e., matrices that are possibly over-complete and whose columns have unit Euclidean norm. The vector e ∈ C n b with support set E represents the sparse interference. We investigate the following models for the sparse signal vector x and sparse interference vector e, and their support sets X and E:
+
+case where both support sets are unknown, but one is chosen arbitrarily and the other at random.
+
+The recovery guarantees in [15]- [17] require that the measurement matrix A is chosen at random and that B is unitary. The guarantees in [3], [18]- [20] characterize A by the restricted isometry property (RIP), which is, in general, difficult to verify in practice. The recovery guarantees [3], [16], [18] require B to be unitary, whereas [19], [20] only consider a single dictionary A and partial support-set knowledge within A. The case of support-set knowledge was also addressed in [21], but for a model that differs considerably from the setting here. Specifically, [21] uses a time-evolution model that incorporates support-set knowledge obtained in previous iterations and the corresponding results are based on the RIP. Finally, [22] considered a model where the interference is sparse in an unknown basis. The specific models and assumptions underlying the results in [3], [15]- [22] reduce their utility for the applications outlined above.
+
+
+A. Generality of the signal and interference model
+
+In this paper, we will exclusively focus on probabilistic results where the randomness is in the signal and/or the interference but not in the dictionary. Furthermore, the dictionaries A and B will be characterized only by their coherence parameters and their dimensions. Such results enable us to operate with a given (and arbitrary) pair of sparsifying dictionaries A and B, rather than hoping that the signal will be sparse in a randomly generated dictionary (as in [17]) or that A satisfies the RIP. The following two application examples illustrate the generality of our results.
+
+1) Restoration of saturated signals: In this example, a signal y = Ax is subject to saturation [2]. This impairment is captured by setting z = g a (y) in (1), where g a (·) implements element-wise saturation to [−a, a] with a being the saturation level. By writing z = y + e with e = g a (y) − y, where e is non-zero only for the entries where the saturation in z occurs, we see that for moderate saturation levels a, the vector e will be sparse. The reconstruction of the (uncorrupted) signal y from the saturated measurement z, amounts to recovering x from z = Ax + e, followed by computing y = Ax.
+
+We assume that the signal y = Ax is drawn from a stochastic model where x has a support set chosen uniformly at random. Since the saturation artifacts modeled by e are dependent on y, we want to guarantee recovery for arbitrary E. Furthermore, we can identify the locations where the saturation occurs (e.g., by comparing the entries of z to the saturation level a) and hence, May 5, 2014 DRAFT we can assume that E is known prior to recovery. The recovery guarantees developed in this paper include this particular combination of support-set knowledge and randomness as a special case, whereas the recovery guarantees in [2], [14], [23] are unable to consider all aspects of this model and turn out to be more restrictive.
+
+2) Removal of impulse noise: Consider a signal y = Ax that is subject to impulse noise. Specifically, we observe z = y + e, where e is the impulse noise vector. For a sufficiently low impulse-noise rate, e will be sparse in the identity basis, i.e., B = I. As before, consider the setting where y = Ax is generated from a stochastic model with unknown support set X . Since impulse noise does not, in general, depend on the signal y, we may chose E at random. In addition, the locations E of the impulse noise are normally unknown.
+
+Recovery guarantees for this setting are partially covered by [2], [14], [23]. However, as for the saturation example above, the recovery guarantees in [2], [14], [23] are unable to exploit all aspects of support-set knowledge and randomness. The results developed here cover this particular setting as a special case and hence, lead to less restrictive recovery guarantees.
+
+In fact, there is an even more general setting compared to (1), which encompasses the cases listed in Table I. Specifically, a generalization would be to consider the model z = Ax + Be with X = supp(x) = X r ∪ X a and E = supp(e) = E r ∪ E a where the support set X is known and E is unknown, and, furthermore, X a and E a are chosen arbitrarily and X r and E r are chosen uniformly at random. The analysis of this model, however, is left for future work. 1
+
+
+B. Contributions
+
+In this paper, we present probabilistic recovery guarantees that improve or refine the ones in [2], [14], [23] and cover novel cases for varying degrees of knowledge of the signal and interference support sets. Our results depend on the coherence parameters of the two dictionaries A and B, their dimensions, and their spectral norms. In particular, we present novel recovery guarantees for the situations where the support sets X and/or E are chosen at random, and for the cases where knowledge of neither, one, or both support sets X and E is available prior to recovery.
+
+For the case where one support set is random and the other arbitrary, but no knowledge of X and E is available, we present an improved (i.e., less restrictive) recovery guarantee than the 1 Note that our model corresponds to the case where two of the sets Xr, Xa, Er, and Ea are forced to be the empty set. A summary of all the cases studied in this paper is given in Table I; the theorems highlighted in dark gray indicate novel recovery guarantees, light gray indicates refined ones. We will only prove the boldface theorems; the corresponding symmetric cases are shown in italics and the associated recovery guarantees can be obtained by interchanging the roles of x and e.
+
+
+C. Notation
+
+Lowercase and uppercase boldface letters stand for column vectors and matrices, respectively.
+
+For the matrix M, we denote its transpose, adjoint, and (Moore-Penrose) pseudo-inverse by  1/q to be the qth moment, which defines an q -norm on the space of complex-valued random variables, and hence satisfies the triangle inequality. We define E q X [f (X, Y )] to be the qth moment with respect to X and we define 1[µ = 0] to be equal to 1 if the condition µ = 0 holds and 0 otherwise. For two functions f and g we write f ∼ g to indicate that f (n)/g(n) → 1 as n → ∞, and we say that "f scales with g."
+M 2,2 = σ max (M
+Throughout the paper, X = supp(x) is assumed to be of cardinality n x and E = supp(e) of cardinality n e . We define D = [ A B ] and D X ,E = [ A X B E ] to be the sub-dictionary of D associated with the non-zero entries of x and e. Similarly, we define the vector
+s X ,E = [ x T X e T E ] T which consists of the non-zero components of s = [ x T e T ] T .
+
+D. Outline of the paper
+
+The remainder of the paper is organized as follows. Related prior work is summarized in Section II. The main theorems are presented in Section III and a corresponding discussion is given in Section IV. We conclude in Section V. All proofs are relegated to the Appendices.
+
+
+II. RELATED PRIOR WORK
+
+We next summarize relevant prior work on sparse signal recovery and sparsely corrupted signals, and we put our results into perspective.
+
+
+A. Coherence-based recovery guarantees
+
+During the last decade, numerous deterministic and probabilistic guarantees for the recovery of sparse signals from linear (and non-adaptive) measurements have been developed [23]- [31]. In particular, in [24]- [26] it is shown that if x 0 n x for some n x < (1 + 1/µ a ) /2 with the coherence parameter
+µ a = max i,j,i =j | a i , a j | ,(2)
+then (P0) and (BP) are able to perfectly recover the sparse signal vector x. Such coherence-based recovery guarantees are, however, subject to the "square-root bottleneck", which only guarantees the recovery of x for sparsity levels on the order of n x ∼ √ m [23]. This behavior is an immediate consequence of the Welch bound [32] and dictates that the number of measurements must grow at least quadratically in the sparsity level of x to guarantee recovery. In order to overcome this square-root bottleneck, one must either resort to a RIP-based analysis, e.g., [27]- [30], which typically requires randomness in the dictionary A, or a probabilistic analysis that only considers randomness in the vector x, and where A is constant (known) and solely characterized by its coherence parameter, dimension, and spectral norm [23]. In this paper, we are interested in the latter type of results. Such probabilistic and coherence-based recovery guarantees that overcome the square-root bottleneck have been derived for (P0) and (BP) in [23]. The corresponding results, however, do not exploit the structure of the problem (1), i.e., the fact that we are dealing with two dictionaries and that knowledge of X and/or E may be available prior to recovery.
+
+
+B. Recovery guarantees for sparsely corrupted signals
+
+Guarantees for the recovery of sparsely corrupted signals as modeled by (1) have been developed recently in [2], [13], [14]. The reference [2] considers deterministic (and coherencebased) results for several cases 2 which arise in different applications: 1) X = supp(x) and E = supp(e) are known prior to recovery, 2) only one of X and E is known, and 3) neither X nor E are known. For case 1), the non-zero entries of both the signal and interference vectors can be recovered by [2]  There, e is assumed to be random, but x is assumed to be arbitrary. This model overcomes the square-root bottleneck and is able to significantly improve upon the corresponding deterministic recovery guarantees in [14,Thms. 2 and 3].
+s X ,E = D † X ,E z,(3)
+Another strain of recovery guarantees for sparsely corrupted signals that are able to overcome the square-root bottleneck have been developed in [3], [15]- [20]. The references [15]- [17] consider the case where A is random, whereas [3], [18]- [20] consider matrices A that are characterized by the RIP, which is, in general, difficult to verify for a given (deterministic) A.
+
+Indeed, it has been recently shown that calculating the RIP for a given matrix is NP-hard [33].
+
+Moreover, the recovery guarantees in [3], [15]- [18] require that B is an orthogonal matrix and, hence, these results do not allow for arbitrary pairs of dictionaries A and B. In addition, [16], [18] do not study the impact of support-set knowledge on the recovery guarantees. The results in [19], [20] only consider a single dictionary with partial support-set knowledge and, thus, are unable to exploit the fact that the signal and interference exhibit sparse representations in two different dictionaries. While all these assumptions are valid for applications based on compressive sensing (see, e.g., [34], [35]), they are not suitable for the application scenarios outlined in Section I.
+
+To overcome the square-root bottleneck for arbitrary pairs of dictionaries A and B, we next propose a generalization of the probabilistic models developed in [14], [23] for the cases 1), 2), and 3) outlined above. In particular, we impose a random model on the signal and/or interference vectors rather than on the dictionaries, and we allow for varying degrees of knowledge of the support sets X and E. An overview of the coherence-based recovery guarantees developed next is given in Table I.
+
+
+III. MAIN RESULTS
+
+The recovery guarantees developed next rely upon the models M(P0) and M(BP) summarized in Model 1 and Model 2, respectively. Model 2 differs subtly from the model in [14] in that we do not require the uniform phase assumption in the vector with known support, a setting which DRAFT May 5, 2014
+
+
+Model 1 M(P0)
+
+• Let x ∈ C na and e ∈ C n b have support set X and E, respectively, of which at least one is chosen uniformly at random and where the non-zero entries of both x and e are drawn from a continuous distribution.
+
+• The observation z is given by z = Ax + Be.
+
+
+Model 2 M(BP)
+
+• The conditions of M(P0) hold.
+
+• If X or E is unknown, then assume that the corresponding non-zero entries of the associated vector(s) are drawn from a continuous distribution, where the phases of the individual components are independent and uniformly distributed on [0, 2π).
+
+was not considered in [14]. In addition to the Models 1 and 2, our results require the coherence parameters 3 of the dictionaries A and B, i.e., the coherence µ a of A in (2), the coherence µ b of B given by
+µ b = max i,j,i =j | b i , b j | ,
+and the mutual coherence µ m between A and B, defined as
+µ m = max i,j | a i , b j | .
+Our main results for the cases highlighted in Table I are detailed next.
+
+A. Cases 1b and 1c: X and E known
+
+We start with the case where both support sets X and E are known prior to recovery. The following theorem guarantees recovery of x and e from z, using (3), with high probability.
+
+Theorem 1 (Cases 1b and 1c): Let x and e be signals satisfying the conditions of M(P0), assume that both X and E are known, and choose β log(n x ). If X is chosen uniformly at random, E is arbitrary, and if
+δe − 1 4 A 2,2 B 2,2 n x n a + 12µ a βn x + (n e − 1)µ b + 1[µ a = 0] 2n x n a A 2 2,2 + 3µ m 2βn e ,(4)
+holds with 4 δ = 1, then we can recover x and e using (3) with probability at least 1 − e −β .
+
+If both X and E are chosen at random and if
+δe − 1 4 12 β (µ a √ n x + µ b √ n e ) + 1[µ a = 0] 2n x n a A 2 2,2 + 1[µ b = 0] 2n e n b B 2 2,2 + min 3µ m 2βn x + n e n b A H B 2,2 , 3µ m 2βn e + n x n a A H B 2,2 ,(5)
+holds with δ = 1 and β max{log(n x ), log(n e )}, then we can recover x and e using (3) with
+probability at least 1 − e −β .
+Proof: See Appendix B.
+
+A discussion of the recovery conditions (4) and (5) is relegated to Section IV. 5
+
+
+B. Cases 2b and 2d: E known
+
+Consider the case where only the support set E of e is known prior to recovery. In this case, recovery of x (and the non-zero entries of e) from z can be achieved by solving [2] 
+6 (P0 , E)    minimizê x,ê E x 0 + ê E 0 subject to z = Ax + B EêE ,(6)
+or its convex relaxation 7
+(BP , E)    minimizê x,ê E x 1 + ê E 1 subject to z = Ax + B EêE .(7)
+The following theorems guarantee the recovery of x and e from z, using (P0 , E) or (BP , E), with high probability.
+
+Theorem 2 (Case 2b): Let x and e be signals satisfying the conditions of M(P0), assume that E is known prior to recovery and chosen arbitrarily, and assume that X is unknown and drawn uniformly at random. Choose β log(n x ). If (4) holds for some δ where 0 < δ < 1 and if
+n x µ 2 a + n e µ 2 m < 1 − δ,(8)
+then we can recover x and e using (P0 , E) with probability at least 1 − e −β .
+
+Moreover, if x and e are signals satisfying the conditions of M(BP), and, in addition to (4),
+
+if
+n x µ 2 a + n e µ 2 m < (1 − δ) 2 2(log(n a ) + β) ,(9)
+holds, then we can recover x and e using (BP , E) with probability at least 1 − 3e −β .
+
+Proof: See Appendices C and D. Note that by combining (4), (8), and possibly (9) into a single recovery condition, thereby effectively removing δ, we can easily calculate the largest values of n x and n e for which successful recovery with high probability is guaranteed (see Section IV-C for a corresponding discussion).
+
+Theorem 3 (Case 2d): Let x and e be signals satisfying the conditions of M(P0), assume that E is known but X is unknown prior to recovery, and assume that both X and E are drawn uniformly at random. If (5) and (8) hold for some 0 < δ < 1 and β max{log(n x ), log(n e )}, then we can recover x and e using (P0 , E) with probability at least 1 − e −β .
+
+Moreover, if x and e are signals satisfying the conditions of M(BP) and if (9) holds in addition to (5) and (8), then we can recover x and e using (BP , E) with probability at least
+1 − 3e −β .
+Proof: See Appendices C and D. A discussion of both theorems is relegated to Section IV.
+
+
+C. Case 2c: X known
+
+The case where X is random and known, and E is unknown and arbitrary, differs slightly to the case where X is random and unknown, and E is arbitrary and known (covered by Theorem 2). May 5, 2014 DRAFT Hence, we need to consider both cases separately. The recovery problems (P0 , X ) and (BP , X ) required here are defined analogously to (P0 , E) and (BP , E).
+
+Theorem 4 (Case 2c): Let x and e be signals satisfying the conditions of M(P0), assume that the support set X is known and chosen uniformly at random, and assume that E is unknown and arbitrary. If
+δe − 1 4 A 2,2 B 2,2 n e n b + 12µ b βn e + (n x − 1)µ a + 1[µ b = 0] 2n e n b B 2 2,2 + 3µ m 2βn x ,(10)
+holds for some 0 < δ < 1 and β log(n e ), and if
+n x µ 2 m + n e µ 2 b < 1 − δ,(11)
+then we can recover x and e using (P0, X ) with probability at least 1 − e −β .
+
+Moreover, if x and e are signals satisfying the conditions of M(BP), and, in addition to (10),
+
+if
+n x µ 2 m + n e µ 2 b < (1 − δ) 2 2(log(n b ) + β) ,(12)
+holds, then we can recover x and e using (BP, X ) with probability at least 1 − 3e −β .
+
+Proof: See Appendices C and D.
+
+A discussion of this theorem is relegated to Section IV.
+
+
+D. Cases 3b and 3c: No support-set knowledge
+
+Recovery guarantees for the case of no support-set knowledge, but where one support set is chosen at random and the other arbitrarily can be found in [14,Thm. 6]. The theorem shown next is able to refine the result in [14,Thm. 6]. The refinements are due to the following facts: i)
+
+We allow for arbitrary 0 < δ < 1, whereas δ = 1/2 in [14, Thm. 6], ii) we add a correction term improving the bounds when either A or B are unitary, and iii) we do not use a global coherence parameter µ = max{µ a , µ b , µ m }, but rather we further exploit the individual coherence parameters µ a , µ b , and µ m of A and B. See Section IV-A for a corresponding discussion.
+
+Theorem 5 (Case 3b): Let x and e be signals satisfying the conditions of M(P0), assume that X is chosen uniformly at random, and assume that E is arbitrary. If (4), (8), and (11) hold for some 0 < δ < 1 and β log(n x ), then
+(P0 ) minimizê x,ê x 0 + ê 0 subject to z = Ax + Bê, recovers x and e with probability at least 1 − e −β .
+Moreover, if x and e are signals satisfying the conditions of M(BP) and if (9) and (12) hold in addition to (4), (8), and (11), then  (9) and (12) hold in addition to (5), (8), and (11), then (BP ) recovers x and e with probability at least 1 − 3e −β .
+(BP ) minimizê x,ê x 1 + ê 1 subject to z = Ax + Bê,
+Proof: See Appendices C and D.
+
+A discussion of both theorems is given below.
+
+
+IV. DISCUSSION OF THE RECOVERY GUARANTEES
+
+We now discuss the theorems presented in Section III. In particular, we study the impact of support-set knowledge on the recovery guarantees and characterize the asymptotic behavior of the corresponding recovery conditions, i.e., the threshold for which recovery is guaranteed with high probability.
+
+In the ensuing discussion, we consider two scenarios. For the first scenario, we assume that A and B are unitary, i.e., n a = n b = m and µ a = µ b = 0, and maximally incoherent, i.e.,
+µ m = 1/ √ m.
+For example, A could be the discrete Fourier transform (or Hadamard) matrix with appropriately normalized columns and B the identity matrix. The corresponding plots are shown in Figure 1. For the second scenario, A is assumed to be unitary and B is assumed to be the concatenation of two unitary matrices so that m = n a = 10 8 , n b = 2n a , µ a = 0, and µ b = µ m = 1/ √ m as described in [36], [37]. The corresponding plots are shown in Figure 2. 
+10 7 X , E rand X , E rand X , E arb [2]
+X rand, E arb interference sparsity, ne signal sparsity, nx (a) X and E known 10 1 10 3 10 5 10 7
+X , E rand (P0 , E) (BP , E) X rand, E arb (P0 , E) & (BP , E)
+X , E arb [2] interference sparsity, ne (b) E known X , E arb [14] X , E rand [23] X rand, E arb [14] X rand, E arb X , E rand interference sparsity, ne (c) X and E unknown In each case we set β = log(m) or β = log(m)/3 for the 0 -norm and 1 -norm-based recovery problems, respectively, so that recovery is guaranteed with probability at least 1 − 1/m.
+
+In order to plot the recovery conditions, we note that for a pair of unitary matrices and a given n e , the recovery conditions of the theorems are quadratic equations in √ n x ; this enables us to calculate the maximum n x guaranteeing the successful recovery of x and e in closed form.
+
+A. Recovery guarantees 1) X and E known: Figure 1a shows the recovery conditions for the cases when both support sets X and E are assumed to be known. For small problem dimensions, i.e., m = 10 4 , the recovery conditions where both support sets are assumed to be arbitrary turn out to be less restrictive than for the case where both support sets are chosen at random. For large problem dimensions, i.e., m = 10 8 , we see, however, that the probabilistic results of Theorem 1 guarantee the recovery (with high probability) for larger n x and n e than the deterministic results of [2] considering arbitrary support sets. Hence, the probabilistic recovery conditions presented here require a sufficiently large problem size in order to outperform the corresponding deterministic results. We furthermore see from Figure 1a that one can guarantee the recovery of signals having DRAFT May 5, 2014 a larger number of non-zero entries if both support sets are chosen at random compared to the situation where X is random but E is arbitrary.
+
+2) Only E known: Figure 1b shows the recovery conditions from Theorems 2 and 3 for the cases where only E is known prior to recovery (the case of only X known behaves analogously).
+
+We see that for a random X and random E successful recovery at high probability is guaranteed for significantly larger n x and n e compared to the case where one or both support sets are assumed to be arbitrary. Hence, having more randomness in the support sets leads to less restrictive recovery guarantees. We now see that the recovery conditions for (P0 , E) are slightly less restrictive than those for (BP , E).
+
+3) No support-set knowledge: Finally, Figure 1c shows the recovery conditions for (BP ) for the case of no support-set knowledge. We see that for random X and E, successful recovery is guaranteed for significantly larger n x and n e compared to the case where one or both support sets are assumed to be arbitrary. As a comparison, we also show the recovery conditions derived in [14,Thm. 6] and the conditions from [23], the latter of which does not take into account the structure of the problem (1). We see that the recovery conditions derived in Theorems 5 and 6 are less restrictive, i.e., they guarantee the successful recovery (with high probability) for a larger number of nonzero coefficients in both the sparse signal vector x and the sparse interference e.
+
+
+4) Non-unitary B:
+
+We now consider the setting where B is the concatenation of two unitary matrices and plot the corresponding recovery threshold for differing levels of support set knowledge in Figure 2. For a fixed n x and n a , we see that by increasing n b and µ b , we suffer a significant loss in the number of non-zero entries of e that we can recover, when compared to the case where B is unitary. However, the number of non-zero entries of x that we can guarantee to recover is virtually unchanged-an effect which is also present in the deterministic recovery conditions [2].
+
+B. Impact of support-set knowledge As detailed in [2], having knowledge of the support set of x or e implies that one can guarantee the recovery of x and e having up to twice as many non-zero entries (compared to the case of no support-set knowledge).
+
+A similar behavior is also apparent in the probabilistic results presented here. Specifically, for unitary and maximally incoherent A and B, the recovery conditions in Figure 3 using (3)  X rand, E arb interference sparsity, ne signal sparsity, nx (a) X and E known 10 1 10 3 10 5 10 7
+X , E rand (P0 , E) & (BP , E) X rand, E arb (P0 , E) & (BP , E)
+X , E arb [2] interference sparsity, ne (b) E known X , E arb [14] X , E rand [23] X rand, E arb [14] X rand, E arb X , E rand interference sparsity, ne (c) X and E unknown Fig. 2: A is assumed to be unitary and B is assumed to be the concatenation of two unitary matrices so that m = n a = 10 8 , n b = 2n a , µ a = 0, and µ b = µ m = 1/ √ m as described in [36], [37]. In (c) we show the recovery regions only for (BP ). In each case, recovery is guaranteed with probability at least 1 − 10 −8 .
+
+and (P0 , E) show a similar factor-of-two gain in the case where both X and E are chosen at random. For example, knowledge of X enables one to recover a pair (x, e) with approximately twice as many non-zero entries compared to the case of not knowing X . In Figure 4, we show the recovery conditions for the case where one dictionary is unitary, but the other is a concatenation of two unitary matrices, as described earlier in Section IV. We again see that the extra supportset knowledge allows us to guarantee the recovery of a signal with more non-zero entries. It is interesting to note that in both of these scenarios, by adding the knowledge of one of the support sets, we increase the number of non-zero components we can guarantee to recover in the other signal component. For example, by knowing X prior to recovery, we can guarantee to recover a signal with more non-zero entries in e.
+
+We note that a similar gain is apparent for X arbitrary and E random, as well as for using (BP) and (BP , E) instead of (P0) and (P0 , E).
+
+
+C. Asymptotic behavior of the recovery conditions
+
+We now compare the asymptotic behavior of probabilistic and deterministic recovery conditions, i.e., we study the scaling behavior of n x and n e . To this end, we are interested in the largest n x for which recovery of x (and e) from z can be guaranteed with high probability. In particular, we consider the following models for the sparse interference vector e: i) Constant sparsity, i.e., n e = 10 3 , ii) sparsity proportional to the square root of the problem size, i.e., n e = √ m, and iii) sparsity proportional to the problem size, i.e., n e = m/10 5 . Figure 5 shows the largest n x for which recovery can be guaranteed using (BP , E). Here, E is assumed to be known and arbitrary and X is unknown and chosen at random. Note that the other cases of support-set knowledge and arbitrary/random exhibit the same scaling behavior.
+
+We see from Figure 5 that for a constant interference sparsity (i.e., n e = 10 3 ), the probabilistic and deterministic results show the same scaling behavior. For the cases where n e scales with √ m or m, however, the deterministic thresholds developed in [2] result in worse scaling, while the behavior of the probabilistic guarantees derived in this paper remain unaffected.
+
+We now investigate the scaling behavior observed in Figure 5 analytically. Again, we only consider the case where X is unknown and chosen at random and E is known and chosen arbitrarily; an analysis of the other cases yields similar results. Assume that A and B are in the case where X and E are both random. In the top left we assume A is unitary and B is the concatenation of two unitary matrices so that m = n a = 10 8 , n b = 2n a , µ a = 0, and µ b = µ m = 1/ √ m as described in [36], [37]. For the curves in the bottom right (with X known/unknown and E known) we reverse the roles of A and B, so that now B is unitary.
+
+unitary and maximally incoherent, i.e., µ a = µ b = 0, n a = n b = m, and µ m = 1/ √ m. Then, by Theorem 2, the recovery of x from z using (BP , E) is guaranteed with probability at least 1 − 3/n a (i.e., for β = log(n a )) if δe −1/4 n x /n a + 3µ m 2βn e , and 2n e µ 2 m (log(n a ) + β)
+< (1 − δ) 2 ,
+hold. Combining these two conditions gives
+e − 1 4 √ m > √ n x + (3 √ 2 + 2e − 1 4 ) n e log(m).(13)
+Hence, if n x ∼ m and n e ∼ m/ log(m), the condition (13)  linearly in the number of (corrupted) measurements m and n e scales near-linearly (i.e., with m/ log(m)) in m.
+
+We finally note that the recovery guarantees in [16] also allow for the sparsity of the interference vector to scale near-linearly in the number of measurements. The results in [16], however, require the matrix A to be random and B to be orthogonal, whereas the recovery guarantees shown here are for arbitrary pairs of dictionaries A and B (characterized by the coherence parameters) and for varying degrees of support-set knowledge.
+
+
+D. No error component
+
+It is worth briefly discussing how our results behave when there is no error, that is when n e = 0. In this case, the relevant setting is with X unknown and chosen uniformly at random. As Theorem 2 holds for any B, it suffices to take B equal to a single column 8 , since n e = 0 means we do not consider any component of B when attempting to recover the signals. And since the mutual coherence µ m only appears as a product with n e , it does not matter what we assume µ m to be. Thus by taking n e = 0 and applying Theorem 2 we find that for (P0 , E), recovery is guaranteed with probability at least 1 − e −β if
+e − 1 4 (1 − n x µ 2 a ) A 2 n x n a + 12µ a βn x .(14)
+For (BP , E), recovery is guaranteed with probability at least
+1 − 3e −β if e − 1 4 1 − 2n x µ 2 a (log(n a ) + β) A 2 n x n a + 12µ a βn x .(15)
+Now assume that µ a ∼ 1/ √ m, A 2 2 = n a /m, and that β = log(n a ). Then (after ignoring lower order terms), we find that (14) and (15) imply recovery with probability at least 1 − 1/n a and 1 − 3/n a , respectively, provided that m C n x log(n a ), for some positive constant C. This result is in accordance with [23], the RIP-based proof of [38] which requires m C 0 n x log(n a /n x ) to guarantee recovery with high probability, and the random sub-sampling model of [27], which, for a maximally incoherent sparsity basis and measurement matrix 9 , requires m C 1 n x log(n a ) to guarantee recovery with high probability.
+
+Thus, our results reduce to some of the existing results in the setting where there is no error.
+
+
+V. CONCLUSIONS
+
+In this paper, we have presented novel coherence-based recovery guarantees for sparsely corrupted signals in the probabilistic setting. In particular, we have studied the case where the sparse signal and/or sparse interference vectors are modeled as random and the dictionaries A and B are solely characterized by their coherence parameters. Our recovery guarantees complete all missing cases of support-set knowledge and improve and refine the results in [2], [14]. Furthermore, we have shown that the reconstruction of sparse signals is guaranteed with high probability, even if the number of non-zero entries in both the sparse signal and sparse interference are allowed to scale (near) linearly with the number of (corrupted) measurements.
+
+There are many avenues for follow-on work. The derivation of probabilistic recovery guarantees for the more general setting studied in [13], i.e., z = Ax + Be + n with n being additive noise and x and e being approximately sparse (rather than perfectly sparse), is left for future work. In addition, our framework could be generalized to the setting where we split both the known and the unknown support sets into a random and arbitrary part, resulting in four parts, as outlined in Section I-A2. Finally, the derivation of probabilistic uncertainty relations for pairs of general dictionaries is an interesting open problem and would complete the deterministic uncertainty relations in [2], [14].
+
+
+ACKNOWLEDGMENTS
+
+The authors would like to thank C. Aubel, R. G. Baraniuk, H. Bölcskei, I. Koch, P. Kuppinger, A. Pope, and E. Riegler for inspiring discussions. We would also like to thank the anonymous reviewers for their valuable comments, which improved the overall quality of the paper.
+APPENDIX A BOUNDS ON σ min (D X ,E )
+We now derive probabilistic bounds on σ min (D X ,E ), which are key in showing when the recovery from sparsely corrupted signals succeeds. We extend [14,Lemma 7] to the case where both supports X and E are chosen at random and give improved results for the case where only one support set is random. First, we require the following two results from [23].
+
+Theorem 7 (Thm. 8 of [23]): Let M ∈ C m×n be a matrix. Let S ⊆ {1, 2, . . . , n} be a set of size s drawn uniformly at random. Fix q 1, then for each p max{2, 2 log(rank(MR S )), q/2}
+
+we have
+E q MR S 2,2 3 √ p M 1,2 + s n M 2,2 ,
+where M 1,2 = sup v∈C n Mv 2 / v 1 and is the maximum 2 -norm of the columns of M. We now state the main result for σ min (D X ,E ).
+
+Theorem 9: Choose β log(n x ), q = 4β and assume that A and B are characterized by the coherence parameters µ a , µ b , and µ m . If i) X is chosen uniformly at random with cardinality n x , E is arbitrary, and (4) holds, or ii) E is chosen uniformly at random with cardinality n e , X is arbitrary, and (10) holds, or iii) both X and E are chosen uniformly at random with cardinalities n x and n e respectively, and (5) holds, then
+P D H X ,E D X ,E − I 2,2 δ e −β ,(16)
+and if (4), (5) or (10) hold with δ = 1, then
+P{σ min (D X ,E ) = 0} e −β .(17)
+Proof: The proof follows that of [14,Lemma 7]. We start by defining the hollow Gram matrix
+H = D H X ,E D X ,E − I =   A H X A X − I A H X B E B H E A X B H E B E − I   .
+Splitting H into diagonal and off-diagonal blocks and applying the triangle inequality leads to
+H 2,2   A H X A X − I 0 0 B H E B E − I   2,2 +   0 A H X B E B H E A X 0   2,2 max A H X A X − I 2,2 , B H E B E − I 2,2 + B H E A X 2,2 A H X A X − I 2,2 + B H E B E − I 2,2 + B H E A X 2,2 .
+Since the qth moment effectively defines an q -norm, it satisfies the triangle inequality, namely,
+E q [|X + Y |] E q [|X|] + E q [|Y |]. Hence, it follows that E q H 2,2 E q A H X A X − I 2,2 + E q B H E B E − I 2,2 + E q B H E A X 2,2 .(18)
+We now separately bound each of the terms in (18) and we do this for each case where X and E is either chosen at random or arbitrarily. If X is chosen uniformly at random, then it follows from Lemma 8 that
+E q A H X A X − I 2,2 12µ a βn x + 1[µ a = 0] 2n x n a A 2,2 ,(19)
+for any 4β = q 4 log(n x ). If X is allowed to be arbitrary, then for all X we have
+A H X A X − I 2,2 max k j =k [A H X A X ] j,k (n x − 1)µ a ,(20)
+where the first inequality follows from the Geršgorin disc theorem [39, Thm. 6.1.1] and the second inequality is a consequence of the definition of µ a . By reversing the role of A and B, we get the analogous bounds for the right-hand side (RHS) term E q B H E B E − I 2,2 in (18). For the third summand appearing in the RHS of (18), let us first consider the case where E is chosen arbitrarily and X uniformly at random. We then want to apply Theorem 7 to M = B H E A and R X . Since MR X has n e rows and n x non-zero columns, rank(MR X ) min{n x , n e } and thus we can apply Theorem 7 with q = 2p = 4β where q 4 min{log(n x ), log(n e )} 4 log(rank(MR X )) to get
+E q B H E A X 2,2 = E q X B H E A X 2,2 (21a) 3 √ p B H E A 1,2 + n x n a B H E A 2,2 3µ m 2βn e + n x n a B H A 2,2 ,(21b)
+where the entries of B H E A are bounded by the mutual coherence µ m . The case where E is random and X is arbitrary follows by reversing the roles of A and B. Now consider the case where both E and X are random. We can set M = B H A so that we may write E q B H E A X 2,2 = E q E E q X R E MR X 2,2 in order to apply Theorem 7 to first bound the inner expectation, and then to bound the resulting outer expectation. However, this approach results in a worse bound compared to reusing (21b), which does not depend on E and hence holds for all E. By also taking the expectation in (21a) with respect to E instead of X and bounding similarly, we get that
+E q B H E A X 2,2 min 3µ m 2βn x + n e n b A H B 2,2 , 3µ m 2βn e + n x n a A H B 2,2 ,(22)
+for any β min{log(n x ), log(n e )}. Combining (19), (20), (21b), and (22) with the analogous results for B and E leads to the conditions (4), (5), and (10).
+
+Due to (19) and the analogous result for B E , if X is chosen at random, we require β log(n x ), if E is chosen at random we need β log(n e ), and if both X and E are chosen at random, both of these conditions need to be satisfied, namely that β max{log(n x ), log(n e )}.
+
+We now show that the conditions (4), (5), and (10) are sufficient to show that (16) holds.
+
+Chebyshev's Inequality [40,Sec. 1.3] states that for a random variable X and a function
+f : R → R + P{X ∈ A} E[f (X)] inf{f (x) : x ∈ A} .(23)
+Application of (23) with f (x) = x q and the random variable
+X = D H S D S − I 2,2 gives P{X δ} E[X q ] inf{x q : x δ} δe −1/4 q δ q = e −q/4 ,(24)
+provided that (δe −1/4 ) q E[X q ]. But this is guaranteed by the assumptions in (4), (5), or (10), depending on the signal and interference model. Therefore, we have
+P H 2,2 δ e −β ,
+since q = 4β. The second part of the theorem, (17), is a result of the fact that σ min (D X ,E ) = 0
+
+implies that H 2,2 1 and hence, P{σ min (D X ,E ) = 0} P H 2,2 1 .
+
+
+APPENDIX B BOTH SUPPORTS KNOWN
+
+Proof of Theorem 1: It suffices to show that D X ,E is invertible, which is equivalent to the condition that σ min (D X ,E ) > 0. By assumption, the conditions of Theorem 9 hold, which implies P{σ min (D X ,E ) = 0} e −β . Hence, recovery of x and e using (3) succeeds with probability at least 1 − e −β .
+
+
+APPENDIX C (P0) WITH LIMITED SUPPORT KNOWLEDGE
+
+We now prove the recovery guarantees for (P0 ), (P0 , E), and (P0, X ) for partial (or no) support-set knowledge of E and X . We follow the proof of [23] and present the three cases 1) X known, 2) E known, and 3) no support-set knowledge, all together, since the corresponding proofs are similar. Note that R(D) denotes the space spanned by the columns of D.
+
+DRAFT May 5, 2014 We begin by generalizing [23,Thm. 13] to the case of pairs of dictionaries A and B where we know the support set of e. The result gives us a sufficient condition for when there is a unique minimizer of (P0 ), (P0 , E), or (P0, X ).
+
+Lemma 10 (Based on Thm. 13 of [23]): LetÃ ∈ C m×na andB ∈ C m×n b be two dictionaries and suppose that we observe the signal z =Ãx +Be where X = supp(x) and E = supp(e) and the non-zero entries of x and e are drawn from a continuous distribution. Furthermore, suppose
+that E is known. WriteD = [ÃB ] andD X ,E = [Ã XBE ]. If dim R D X ,E ∩ R D X ,E < |X | + |E| ,(25)
+for all sets X = X where |X | = |X |, then, almost surely, (P0 , E) recovers the vectors x and e.
+
+This result also provides a sufficient condition for (P0 ), if we setÃ = D and takeB to be the empty matrix, or for (P0, X ), if we setÃ = B andB = A.
+
+Proof: We follow the proof of [23,Thm. 13]. We begin by defining the set of all alternative representations as follows:
+D E X ,X =          (x, e) :Ã x +Be =Ãx +Be supp(x) = X , supp(x ) = X supp(e) = supp(e ) = E         
+, and the set of observations that have alternative representations
+A E X ,X = z : z =Ã X x X +B E e E , (x, e) ∈ D E X ,X ,
+so that A E X ,X is the set of observations that can be written in terms of two pairs of signals (x, e) and (x , e ) where X = supp(x), X = supp(x ), and E = supp(e) = supp(e ).
+
+For any X of size |X | and X = X , we have
+A E X ,X ⊆ R D X ,E ∩ R D X ,E .
+Now assume that (25) holds for X , X , and E, then dim(A E X ,X ) < |X | + |E|. Thus the smallest subspace containing A E X ,X is a strict subspace of R(D X ,E ) and hence, has zero measure with respect to any nonatomic measure defined in the range ofD X ,E . Since x and e, and hence z, have non-zero entries drawn from a continuous distribution
+P Ã x +Be = z ∈ A E X ,X = 0.
+Thus, with probability zero, there exists no alternative pair (x , e ) with supports X and E, respectively, otherwise z would lie in A E X ,X . Therefore, if (25) holds for all X , then the probability of choosing random x and e so that z admits an alternative representation is zero, and hence, almost surely, given z =Ãx +Be, (P0 , E) returns the vectors x and e.
+
+We can use Lemma 10 to prove the first part of Theorems 2, 3, 4, 5, and 6 by showing that (25) holds with high probability. To show that (25) holds for all X we show that for every columnã γ ofÃ not inÃ X (i.e., for all γ / ∈ X ) thatã γ / ∈ R(D X ,E ), which is equivalent to showing that
+P X ,Eãγ 2 < ã γ 2 = 1,(26)
+for all γ / ∈ X and whereP X ,E = (D † X ,E ) HDH X ,E is the projection onto the range space ofD X ,E . We will now bound the probability that (26) holds for the following three situations: 1) only E known, 2) only X known, and 3) both support sets unknown.
+
+
+1) Only E known:
+
+Consider the setting where E is known, but X is unknown; this case fits the setting of Lemma 10 withÃ = A andB = B. Hence, the condition (26) is equivalent to P X ,E a γ 2 < a γ 2 = 1. We have
+P X ,E a γ 2 (D † X ,E ) H 2,2 D H X ,E a γ 2 σ −1 min (D X ,E ) A H X a γ 2 2 + B H E a γ 2 2 .
+From the definitions of the coherence parameters 10
+D H X ,E a γ 2 ξ E = µ 2 a n x + µ 2 m n e .(27)
+Thus, in order to guarantee P X ,E a γ 2 < 1 it suffices to have
+ξ E < σ min (D X ,E ).(28)
+10 Note that we use bounds that hold for all X , rather than a bound that holds with high probability. The underlying reason is the fact that if A is an equiangular tight frame, the associated inequalities hold with equality and hence, we cannot do any better by using probabilistic bounds, unless we take advantage of a property of A other than the coherence µa.
+
+2) Only X known: For the setting where only X is known, we apply Lemma 10 withÃ = B andB = A, thus the condition of (25) becomes dim(R(D X ,E ) ∩ R(D X ,E )) < |X | + |E|, and so we only want to show that P X ,E b γ 2 < b γ 2 for all γ / ∈ E. Proceeding as before, it follows that
+P X ,E b γ 2 σ −1 min (D X ,E ) D H X ,E b γ 2 σ −1 min (D X ,E ) ξ X ,(29)
+where ξ X = µ 2 m n x + µ 2 b n e . Hence, it suffices to show that
+ξ X < σ min (D X ,E ).(30)
+3) No support-set knowledge: Finally, we consider the setting where neither X nor E is known, so we apply Lemma 10 withÃ = [ A B ] andB being the empty matrix, thus this is exactly the condition of [23,Thm. 13]. Then, we show that P X ,E d γ 2 < d γ 2 for any column d γ of D not in D X ,E . In other words, we want both (27) and (29) to hold as d γ can be a column of either A or B. So it suffices to show
+P X ,E d γ 2 σ −1 min (D X ,E ) ξ + < 1,(31)
+where ξ + = max{ξ X , ξ E }.
+
+Finally, to show that the (P0) based problems succeed, we want to bound the probability that (28), (30), or (31) holds (depending on which, if any, support sets we know). In each of the cases, we know that (P0 ), (P0 , E), or (P0, X ) returns the correct solution if ξ < σ min (D X ,E ),
+
+where ξ ∈ (0, 1) is equal to ξ E , ξ X , or ξ + (as appropriate to the case). Hence, we can bound the probability of error as follows
+P{error} P{ξ σ min (D X ,E )} P D H X ,E D X ,E − I 2,2 1 − ξ 2 e −β ,
+where we use Theorem 9 with δ = 1 − ξ 2 . Therefore, with probability exceeding 1 − e −β , the pair (x, e) is the unique minimizer. 
+| h,d γ | < 1 for all columnsd γ ofD not inD S ,(32b)
+then s is the unique minimizer of (BP).
+
+We can easily apply Theorem 11 to attain recovery conditions for (BP , E), (BP, X ), and (BP ). For (BP , E), we apply Theorem 11 to the matrixD = [ A B E ] so that the two problems (BP) and (BP , E) are the same. We want to show that s T
+S = [ x T X e T E ]
+is the sparsest representation of the observation z. By rewriting (32a) and (32b) it follows that it is sufficient to guarantee recovery with (BP , E) if there exists a vector h ∈ C m such that
+[ A X B E ] H h = sign     x X e E     , and (33a) | h, a γ | < 1 for all columns a γ of A not in A X .(33b)
+Similarly, to get a recovery condition for (BP ), we merely apply Theorem 11 to the matrix
+D = [ A B ].
+Finally, before we can prove the probabilistic recovery guarantees for the 1 -norm-based algorithms of Theorems 2, 3, 4, 5, and 6, we require the following lemma.
+
+Lemma 12 (Bernstein's Inequality, Prop. 16 of [23]): Let v ∈ C n and let ε ∈ C n be a Steinhaus sequence. Then, for u 0 we have
+P n i=1 ε i v i u v 2 2 exp − u 2 2 .(34)
+A Steinhaus sequence is a (countable) collection of independent complex-valued random variables, whose entries are uniformly distributed on the unit circle [23].
+
+We now prove the second part of Theorems 2, 3, 4, 5, and 6. To show that recovery with (BP ), (BP , E), or (BP, X ) succeeds, we demonstrate that the vector h, as in Theorem 11, exists with high probability. We now consider the following three settings in turn: 1) only E known, 2) only X known, and 3) both support sets unknown. But first, let us assume that in each case D X ,E is full rank.
+
+1) Only E known: Consider the case where E is known but X is unknown, we show that a vector h exists that satisfies (33a) and (33b) with high probability. To this end, set h = D X ,E D H X ,E D X ,E −1 sign(s X ,E ), so that (33a) is satisfied. Then, for any column a γ of A where
+γ / ∈ X , | h, a γ | = D X ,E D H X ,E D X ,E −1 sign(s X ,E ), a γ = sign(s X ,E ), D H X ,E D X ,E −1 D H X ,E a γ = nx j=1 ε j v γ j ,
+with ε = sign(s X ,E ) and v γ = D H X ,E D X ,E −1 D H X ,E a γ . Since ε is a Steinhaus sequence (by assumption), we can apply Lemma 12 with u = v γ −1 2 to arrive at 
+
+2) Only X known: Consider the setting where X is known, but E is unknown. This setting follows exactly as in the setting where E is known and X is unknown by switching the roles of X and E. Thus, we arrive at
+P max γ / ∈E ne j=1 ε j v γ j 1 2n b exp − σ 4 min (D X ,E ) 2ξ 2 X ,(37)
+where ξ 2 X = n x µ 2 m + n e µ 2 b and v γ = D † X ,E b γ . 3) No support-set knowledge: Finally, we consider the third setting where neither X nor E are known. In particular, we want to show that in Theorem 11, we can satisfy (32a) and (32b) with high probability. For any column d γ of D not in D X ,E , set v γ = D † X ,E d γ . In this case, we have 
+
+We now want to derive an upper bound on the right hand sides of (36), (37), and (38). First we calculate the probability conditioned on σ min (D X ,E ) > λ ∈ (0, 1). Note that if λ > 0, then σ min (D X ,E ) > λ > 0 and we satisfy the remaining assumption of Theorem 11, namely that D X ,E is full rank.
+
+For convenience, in the case where E is known, let us set N = n a and ξ = ξ E . In the case where X is known, set N = n b and ξ = ξ X and finally, in the case where neither X nor E are known, set N = n a + n b and ξ = ξ + .
+
+Thus, we have
+P max γ / ∈S N j=1 ε j v γ j 1 σ min (D X ,E ) > λ 2N exp − λ 4 2ξ 2 2e −β ,(39)
+for some β λ 4 /(2ξ 2 ) − log N .
+
+For our particular choice of h, (33a) (in the case where X or E is known) or (32a) (in the case where both supports are unknown) will always be satisfied. So let E be the event that (33b) (in the case where one support is unknown) or (32b) (in the case where both supports are known) is not fulfilled with our choice of h and let R be the event that D X ,E is not full rank. As E ∪ R is a necessary condition for the (BP) based algorithms not to be able to recover the vectors x and e, P{E ∪ R} is an upper bound on the probability of error. Then, since σ min (D X ,E ) > λ > 0 implies that R cannot occur, and hence that P E ∪ R σ min (D X ,E ) > λ = P E σ min (D X ,E ) > λ , we have that for any λ > 0
+P{E ∪ R} = P E ∪ R σ min (D X ,E ) > λ P{σ min (D X ,E ) > λ} + P E ∪ R σ min (D X ,E ) λ P{σ min (D X ,E ) λ} P E σ min (D X ,E ) > λ + P{σ min (D X ,E ) λ} .(40)
+We can bound the first summand in (40) using (39) under the assumption that β λ 4 /(2ξ 2 ) − log N . The second term we can bound using Theorem 9 with δ = 1 − λ 2 ∈ (0, 1), which, provided that β N where N is the size of the supports chosen at random, says that
+
+P{σ min (D X ,E ) λ} e −β . Therefore, we have
+P{E ∪ R} 3e −β ,(41)
+and hence, we can recover x and e with probability at least 1 − 3e −β .
+
+M
+T , M H , and M † , respectively. The jth column and the entry in the ith row and jth column of the matrix M is designated by m j and [M] i,j , respectively. The minimum and maximum singular value of M are given by σ min (M) and σ max (M), respectively; the spectral norm is
+
+
+These results give sufficient conditions for when one can reconstruct the sparse signal vector x from the (interference-less) observation y = Ax by solving (P0) minimizê x x 0 subject to y = Ax, or its convex relaxation, known as basis pursuit, defined as (BP) minimizê x x 1 subject to y = Ax.
+
+
+recovers x and e with probability at least 1 − 3e −β . Proof: See Appendices C and D Theorem 6 (Case 3c): Let x and e be signals satisfying the conditions of M(P0) and assume that X and E are both unknown and chosen uniformly at random. If (5), (8), and (11) hold for some 0 < δ < 1 and β max{log(n x ), log(n e )}, then (P0 ) recovers x and e with probability at least 1 − e −β . Moreover, if x and e are signals from M(BP) and if
+
+Fig. 1 :
+1A and B are assumed to be unitary with m = n a = n b = 10 8 and µ m = 1/ √ m. In (a) the darker curves in the upper-right are for m = 10 8 and the lighter curves in the lower-left are for m = 10 4 . In (c) we show the recovery regions only for (BP ). In each case, recovery is guaranteed with probability at least 1 − 10 −8 .
+
+Fig. 3 :
+3Impact of support-set knowledge on the recovery conditions for (3), (P0), and (P0 , E) in the case where X and E are both random. A and B are unitary with m = n a = n b = 10 6 (lower-left curves) and m = n a = n b = 10 8 (upper-right curves) and µ m = 1/ √ m.
+
+Fig. 4 :
+4Impact of support-set knowledge on the recovery conditions for (3), (P0), and (P0 , E)
+
+XFig. 5 :
+5can be satisfied. Consequently, recovery of x (and of e) is guaranteed with probability at least 1 − 3/m even if n x scales arb, n e = m/10 5 X arb, n e = √ m X rand, n e = m/10 5 X rand, n e = 10 3 & n e = √ m signal dimensions, n a = n b = m signal sparsity, n x Maximum signal sparsity n x that ensures recovery of x for E known and arbitrary. We assume n e = 10 3 , n e = √ m, and n e = m/10 5 . The probability of successful recovery is set to be at least 1 − 10 −15 .
+
+Lemma 8 (
+8Eq. 6.1 of[23]): Let M ∈ C m×n be a matrix with coherence µ and let S ⊆ {1, 2, . . . , n} be a set of size s chosen uniformly at random. Then, for β log(s) and q = 4βE q M H S M S − I 2,212µβs + 1[µ = 0] 2s n M 2 2,2 . Note that the result in [23, Eq. 6.1] does not include the indicator function 1[µ = 0]. It is, however, straightforward to verify that if M is orthonormal, then µ = 0 and hence, M H S M S − I 2,2 = 0 for all sets S.
+
+= n x µ 2 a + n e µ 2
+2Now we want (32b) to hold for all γ / ∈ X . Hence, applying the union bound to the result a exp − σ 4 min (D X ,E ) 2ξ 2 E .
+
+.
+max{n x µ 2 a + n e µ 2 m , n x µ 2 m + n e µ 2 b } and hence,Finally, we want (32b) to hold for all d γ . Therefore, applying the union bound to the
+
+TABLE I :
+ISummary of all recovery guarantees for sparsely corrupted signals. existing one in[14, Thm. 6]. Finally, we show that 1 -norm minimization is able to recover the vectors x and e with overwhelming probability, even if the number of non-zero components in both scales (near) linearly with the number of measurements.X , E arbitrary 
+X random, E arbitrary 
+X arbitrary, E random 
+X , E random 
+
+X , E known 
+Case 1a 
+Case 1b 
+Case 1b 
+Case 1c 
+
+[2, Thm. 3] 
+Theorem 1 
+Theorem 1 
+Theorem 1 
+
+E known 
+Case 2a 
+Case 2b 
+Case 2c 
+Case 2d 
+
+[2, Thm. 4] 
+Theorem 2 
+Theorem 4 
+Theorem 3 
+
+X known 
+Case 2a 
+Case 2c 
+Case 2b 
+Case 2d 
+[2, Cor. 6] 
+Theorem 4 
+Theorem 2 
+Theorem 3 
+
+neither known 
+Case 3a 
+Case 3b 
+Case 3b 
+Case 3c 
+
+[14, Thms. 2 and 3] 
+Theorem 5 and [14, Thm. 6] 
+Theorem 5 and [14, Thm. 6] 
+Theorem 6 
+
+
+
+
+). The 1 -norm of the vector v is denoted by v 1 and v 0 stands for the number of nonzero entries in v. Sets are designated by upper-case calligraphic letters; the cardinality of the set S is |S|. The support set of v, i.e., the indices of the nonzero entries, is given by supp(v). The matrix M S is obtained from M by retaining the columns of M with indices in S; the vector v S is obtained analogously from the vector v. The sign(·) function applied to a vector returns a vector consisting of the phases of each entry. The N × N restriction matrix R S for the set S ⊆ {1, . . . , N } has [R S ] k,k = 1 if k ∈ S and is zero otherwise. For random variables X and Y , we define E q [X] = E[|X| q ]May 5, 2014 
+DRAFT 
+
+
+
+(BP) WITH LIMITED SUPPORT KNOWLEDGEWe now prove the recovery results for the (BP) based algorithms. To do this, we restate the sufficient recovery condition of[41] and then show when we can satisfy this condition, thereby guaranteeing the successful recovery of x with (BP , E), (BP, X ), or (BP ).Theorem 11 (Thm. 5 of[41]): Suppose that the sparsest representation of a complex vector z isD S s S . If D X ,E is full rank and there exists a vector h ∈ C m such thatMay 5, 2014 
+DRAFT 
+APPENDIX D 
+
+D H 
+S h = sign(s S ), and 
+(32a) 
+
+
+Note that no efficient recovery algorithm with corresponding guarantees is known for the case studied in[2], where only the cardinality of X or E is known. Thus, we do not consider this case in the remainder of the paper.May 5, 2014 DRAFT
+Note that we could also characterize the dictionaries A and B with the cumulative coherence[25]. For the sake of simplicity of exposition, however, we stick to the coherence parameters µa, µ b , and µm only.May 5, 2014 DRAFT
+Later we will require (4) to hold for different values of δ.5 In order to slightly improve the conditions in (4) or (5), one could replace the term (ne − 1)µ b with the cumulative coherence as defined in[25].6 Note that since E is known, the term ê E 0 in (P0 , E) can be omitted. We keep the term, however, for the sake of consistency with the problem (BP , E).7 Note that we consider a slightly different convex optimization problem (BP , E) to that proposed in[2], (BP, E), for the case where E is known prior to recovery. In practice, however, both problems exhibit similar recovery performance.DRAFT   May 5, 2014
+May 5, 2014DRAFT
+Taking B to be the zero-matrix and so removing all the terms that appear in the recovery conditions also leads to the same scaling behavior.May 5, 2014 DRAFT
+For example, measuring with a randomly sub-sampled Fourier matrix and taking the Identity matrix as the sparsity basis, so that with the differently normalized definition of coherence as in[27], µa = 1.DRAFTMay 5, 2014
+
+Coherence-based probabilistic recovery guarantees for sparsely corrupted signals. A Bracher, G Pope, C Studer, Proc. of IEEE Inf. Th. Workshop. of IEEE Inf. Th. WorkshopLausanne, SwitzerlandA. Bracher, G. Pope, and C. Studer, "Coherence-based probabilistic recovery guarantees for sparsely corrupted signals," in Proc. of IEEE Inf. Th. Workshop, Lausanne, Switzerland, Sep. 2012.
+
+Recovery of sparsely corrupted signals. C Studer, P Kuppinger, G Pope, H Bölcskei, IEEE Trans. Inf. Theory. 585C. Studer, P. Kuppinger, G. Pope, and H. Bölcskei, "Recovery of sparsely corrupted signals," IEEE Trans. Inf. Theory, vol. 58, no. 5, pp. 3115-3130, May 2012.
+
+Democracy in action: Quantization, saturation, and compressive sensing. J N Laska, P T Boufounos, M A Davenport, R G Baraniuk, App. Comp. Harm. Anal. 313J. N. Laska, P. T. Boufounos, M. A. Davenport, and R. G. Baraniuk, "Democracy in action: Quantization, saturation, and compressive sensing," App. Comp. Harm. Anal., vol. 31, no. 3, pp. 429-443, Nov. 2011.
+
+A constrained matching pursuit approach to audio declipping. A Adler, V Emiya, M G Jafari, M Elad, R Gribonval, M D Plumbley, Proc. of IEEE Int. Conf. Acoustics, Speech, and Sig. Proc. of IEEE Int. Conf. Acoustics, Speech, and SigPrague, Czech RepublicA. Adler, V. Emiya, M. G. Jafari, M. Elad, R. Gribonval, and M. D. Plumbley, "A constrained matching pursuit approach to audio declipping," in Proc. of IEEE Int. Conf. Acoustics, Speech, and Sig. Proc., Prague, Czech Republic, May 2011, pp. 329-332.
+
+Audio inpainting. IEEE Trans. on Audio, Speech, and Language Processing. 203--, "Audio inpainting," IEEE Trans. on Audio, Speech, and Language Processing, vol. 20, no. 3, pp. 922-932, Mar. 2012.
+
+Restoration of old gramophone recordings. S V Vaseghi, R Frayling-Cork, Journal of Audio Engineering. 40S. V. Vaseghi and R. Frayling-Cork, "Restoration of old gramophone recordings," Journal of Audio Engineering, vol. 40, pp. 791-801, Oct. 1992.
+
+Digital audio restoration: a statistical model based approach. S J Godsill, P J W Rayner, Springer-VerlagBerlin, GermanyS. J. Godsill and P. J. W. Rayner, Digital audio restoration: a statistical model based approach. Berlin, Germany: Springer-Verlag, 1998.
+
+The effect of unreliable LLR storage on the performance of MIMO-BICM. C Novak, C Studer, A Burg, G Matz, Proc. of 44th Asilomar Conf. on Signals, Systems, and Comput. of 44th Asilomar Conf. on Signals, Systems, and ComputPacific Grove, CA, USAC. Novak, C. Studer, A. Burg, and G. Matz, "The effect of unreliable LLR storage on the performance of MIMO-BICM," in Proc. of 44th Asilomar Conf. on Signals, Systems, and Comput., Pacific Grove, CA, USA, Nov. 2010, pp. 736-740.
+
+A fast super-resolution reconstruction algorithm for pure translational motion and common space-invariant blur. M Elad, Y Hel-Or, IEEE Trans. Image Process. 108M. Elad and Y. Hel-Or, "A fast super-resolution reconstruction algorithm for pure translational motion and common space-invariant blur," IEEE Trans. Image Process, vol. 10, no. 8, pp. 1187-1193, Aug. 2001.
+
+Super-resolution with sparse mixing estimators. S G Mallat, G Yu, IEEE Trans. Image Process. 1911S. G. Mallat and G. Yu, "Super-resolution with sparse mixing estimators," IEEE Trans. Image Process., vol. 19, no. 11, pp. 2889-2900, Nov. 2010.
+
+Simultaneous cartoon and texture image inpainting using morphological component analysis (MCA). M Elad, J.-L Starck, P Querre, D L Donoho, App. Comp. Harm. Anal. 19M. Elad, J.-L. Starck, P. Querre, and D. L. Donoho, "Simultaneous cartoon and texture image inpainting using morphological component analysis (MCA)," App. Comp. Harm. Anal., vol. 19, pp. 340-358, Dec. 2005.
+
+Split bregman methods and frame based image restoration. J.-F Cai, S Osher, Z Shen, Multiscale Model. Simul. 82J.-F. Cai, S. Osher, and Z. Shen, "Split bregman methods and frame based image restoration," Multiscale Model. Simul, vol. 8, no. 2, pp. 337-369, Dec. 2009.
+
+Stable restoration and separation of approximately sparse signals. C Studer, R G Baraniuk, arXiv:1107.0420v1submittedC. Studer and R. G. Baraniuk, "Stable restoration and separation of approximately sparse signals," submitted, arXiv:1107.0420v1, July 2011.
+
+Uncertainty relations and sparse signal recovery for pairs of general signal sets. P Kuppinger, G Durisi, H Bölcskei, IEEE Trans. Inf. Theory. 581P. Kuppinger, G. Durisi, and H. Bölcskei, "Uncertainty relations and sparse signal recovery for pairs of general signal sets," IEEE Trans. Inf. Theory, vol. 58, no. 1, pp. 263-277, Jan. 2012.
+
+Dense error correction via 1 -minimization. J Wright, Y Ma, IEEE Trans. Inf. Theory. 567J. Wright and Y. Ma, "Dense error correction via 1 -minimization," IEEE Trans. Inf. Theory, vol. 56, no. 7, pp. 3540-3560, July 2010.
+
+Compressed sensing and matrix completion with constant proportion of corruptions. X Li, arXiv:1104.1041v2X. Li, "Compressed sensing and matrix completion with constant proportion of corruptions," arXiv:1104.1041v2, Jan. 2012.
+
+Sharp recovery bounds for convex deconvolution, with applications. M B Mccoy, J A Tropp, arXiv:1205.1580v1M. B. McCoy and J. A. Tropp, "Sharp recovery bounds for convex deconvolution, with applications," arXiv:1205.1580v1, May 2012.
+
+Exact signal recovery from sparsely corrupted measurements through the pursuit of justice. J N Laska, M A Davenport, R G Baraniuk, Proc. of 43rd Asilomar Conf. on Signals, Systems, and Comput. of 43rd Asilomar Conf. on Signals, Systems, and ComputJ. N. Laska, M. A. Davenport, and R. G. Baraniuk, "Exact signal recovery from sparsely corrupted measurements through the pursuit of justice," Proc. of 43rd Asilomar Conf. on Signals, Systems, and Comput., pp. 1556-1560, Nov. 2009.
+
+Modified-CS: Modifying compressive sensing for problems with partially known support. N Vaswani, W Lu, IEEE Trans. Sig. Proc. 589N. Vaswani and W. Lu, "Modified-CS: Modifying compressive sensing for problems with partially known support," IEEE Trans. Sig. Proc., vol. 58, no. 9, pp. 4595-4607, Sep. 2010.
+
+A short note on compressed sensing with partially known signal support. L Jacques, Signal Processing. 9012L. Jacques, "A short note on compressed sensing with partially known signal support," Signal Processing, vol. 90, no. 12, pp. 3308-3312, Dec. 2010.
+
+LS-CS-residual (LS-CS): compressive sensing on least squares residual. N Vaswani, IEEE Trans. Sig. Proc. 588N. Vaswani, "LS-CS-residual (LS-CS): compressive sensing on least squares residual," IEEE Trans. Sig. Proc., vol. 58, no. 8, pp. 4108-4120, Aug. 2010.
+
+Recursive sparse recovery in large but correlated noise. C Qiu, N Vaswani, 49th Allerton Conf. on Communication, Control, and Computing. Monticello, IL, USAC. Qiu and N. Vaswani, "Recursive sparse recovery in large but correlated noise," in 49th Allerton Conf. on Communication, Control, and Computing, Monticello, IL, USA, Sep. 2011, pp. 752-759.
+
+On the conditioning of random subdictionaries. J A Tropp, App. Comp. Harm. Anal. 25J. A. Tropp, "On the conditioning of random subdictionaries," App. Comp. Harm. Anal., vol. 25, pp. 1-24, July 2008.
+
+Optimally sparse representation in general (nonorthogonal) dictionaries via 1 minimization. D L Donoho, M Elad, Proc. of Natl. Acad. Sci. of Natl. Acad. Sci100D. L. Donoho and M. Elad, "Optimally sparse representation in general (nonorthogonal) dictionaries via 1 minimization," Proc. of Natl. Acad. Sci, vol. 100, no. 5, pp. 2197-2202, Dec. 2003.
+
+Greed is good: Algorithmic results for sparse approximation. J A Tropp, IEEE Trans. Inf. Theory. 5010J. A. Tropp, "Greed is good: Algorithmic results for sparse approximation," IEEE Trans. Inf. Theory, vol. 50, no. 10, pp. 2231-2242, Oct. 2004. DRAFT May 5, 2014
+
+Atomic decomposition by basis pursuit. S S Chen, D L Donoho, M A Saunders, SIAM J. Sci. Comput. 201S. S. Chen, D. L. Donoho, and M. A. Saunders, "Atomic decomposition by basis pursuit," SIAM J. Sci. Comput., vol. 20, no. 1, pp. 33-61, 1998.
+
+Sparsity and incoherence in compressive sampling. E J Candès, J Romberg, Inverse Problems. 233E. J. Candès and J. Romberg, "Sparsity and incoherence in compressive sampling," Inverse Problems, vol. 23, no. 3, pp. 969-985, 2007.
+
+A probabilistic and RIPless theory of compressed sensing. E J Candès, Y Plan, IEEE Trans. Inf. Theory. 5711E. J. Candès and Y. Plan, "A probabilistic and RIPless theory of compressed sensing," IEEE Trans. Inf. Theory, vol. 57, no. 11, pp. 7235-7254., Nov. 2010.
+
+Stable signal recovery from incomplete and inaccurate measurements. E J Candès, J Romberg, T Tao, Comm. Pure and Appl. Math. 598E. J. Candès, J. Romberg, and T. Tao, "Stable signal recovery from incomplete and inaccurate measurements," Comm. Pure and Appl. Math., vol. 59, no. 8, pp. 1207-1223, Aug. 2006.
+
+The restricted isometry property and its implications for compressed sensing. E J Candès, C. R. Acad. Sci. 3469E. J. Candès, "The restricted isometry property and its implications for compressed sensing," C. R. Acad. Sci. Paris, vol. 346, no. 9-10, pp. 589-592, 2008.
+
+Stable recovery of sparse signals and an oracle inequality. T Cai, L Wany, G Xu, IEEE Trans. Inf. Theory. 567T. Cai, L. Wany, and G. Xu, "Stable recovery of sparse signals and an oracle inequality," IEEE Trans. Inf. Theory, vol. 56, no. 7, pp. 3516-3522, July 2010.
+
+Lower bounds on the maximum cross correlation of signals. L R Welch, IEEE Trans. Inf. Theory. 203L. R. Welch, "Lower bounds on the maximum cross correlation of signals," IEEE Trans. Inf. Theory, vol. 20, no. 3, pp. 397-399, May 1974.
+
+The computational complexity of the restricted isometry property, the nullspace property, and related concepts in compressed sensing. M E Pfetsch, A M Tillmann, arXiv:1205.2081v2M. E. Pfetsch and A. M. Tillmann, "The computational complexity of the restricted isometry property, the nullspace property, and related concepts in compressed sensing," arXiv:1205.2081v2, May 2012.
+
+Decoding by linear programming. E J Candès, T Tao, IEEE Trans. Inf. Theory. 5112E. J. Candès and T. Tao, "Decoding by linear programming," IEEE Trans. Inf. Theory, vol. 51, no. 12, pp. 4203-4215, Dec. 2005.
+
+Compressed sensing. D L Donoho, IEEE Trans. Inf. Theory. 524D. L. Donoho, "Compressed sensing," IEEE Trans. Inf. Theory, vol. 52, no. 4, pp. 1289-1306, Apr. 2006.
+
+Z4-kerdock codes, orthogonal spreads, and extremal Euclidean line-sets. A R Calderbank, P J Cameron, W M Kantor, J J Seidel, Proc. London Math. Soc. 752A. R. Calderbank, P. J. Cameron, W. M. Kantor, and J. J. Seidel, "Z4-kerdock codes, orthogonal spreads, and extremal Euclidean line-sets," Proc. London Math. Soc, vol. 75, no. 2, pp. 436-480, Sep. 1997.
+
+Sparse representations in unions of bases. R Gribonval, M Nielsen, IEEE Trans. Inf. Theory. 4912R. Gribonval and M. Nielsen, "Sparse representations in unions of bases," IEEE Trans. Inf. Theory, vol. 49, no. 12, pp. 3320-3325, Dec. 2003.
+
+A simple proof of the restricted isometry property for random matrices. R G Baraniuk, M A Davenport, R Devore, M B Wakin, Constructive Approximation. 283R. G. Baraniuk, M. A. Davenport, R. DeVore, and M. B. Wakin, "A simple proof of the restricted isometry property for random matrices," Constructive Approximation, vol. 28, no. 3, pp. 253-263, Dec. 2008.
+
+Matrix analysis. R Horn, C Johnson, Cambridge Univ. PressNew York, NY, USAR. Horn and C. Johnson, Matrix analysis. New York, NY, USA: Cambridge Univ. Press, 1990.
+
+R Durrett, Probability: Theory and Examples. New York, NY, USACambridge Univ. PressR. Durrett, Probability: Theory and Examples. New York, NY, USA: Cambridge Univ. Press, 2010.
+
+Recovery of short, complex linear combinations via 1 minimization. J A Tropp, IEEE Trans. Inf. Theory. 514J. A. Tropp, "Recovery of short, complex linear combinations via 1 minimization," IEEE Trans. Inf. Theory, vol. 51, no. 4, pp. 1568-1570, Apr. 2005.

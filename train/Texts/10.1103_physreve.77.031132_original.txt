@@ -1,0 +1,465 @@
+
+Near mean-field behavior in the generalized Burridge-Knopoff earthquake model with variable range stress transfer
+20 Feb 2008
+
+Junchao Xia 
+Harvey Gould 
+W Klein 
+J B Rundle 
+
+Department of Physics
+Department of Physics and Center for Computational Science
+Clark University
+01610WorcesterMA
+
+
+Department of Physics and Center for Computational Science and Engineering
+Boston University
+02215BostonMA
+
+
+Department of Chemistry
+University of California
+95616DavisCA
+
+
+The University of Iowa
+52240Iowa CityIA
+
+Near mean-field behavior in the generalized Burridge-Knopoff earthquake model with variable range stress transfer
+20 Feb 2008* Present address: 2
+Simple models of earthquake faults are important for understanding the mechanisms for their observed behavior in nature, such as Gutenberg-Richter scaling. Because of the importance of long-range interactions in an elastic medium, we generalize the Burridge-Knopoff slider-block model to include variable range stress transfer.We find that the Burridge-Knopoff model with long-range stress transfer exhibits qualitatively different behavior than the corresponding long-range cellular automata models and the usual Burridge-Knopoff model with nearest-neighbor stress transfer, depending on how quickly the friction force weakens with increasing velocity. Extensive simulations of quasiperiodic characteristic events, mode-switching phenomena, ergodicity, and waiting-time distributions are also discussed. Our results are consistent with the existence of a mean-field critical point and have important implications for our understanding of earthquakes and other driven dissipative systems.
+
+I. INTRODUCTION
+
+Earthquake faults are important examples of driven dissipative systems [1]. Models of fault systems are important for understanding Gutenberg-Richter (power law) behavior, the occurrence of characteristic events, and the relation between small and large earthquakes [1,2,3,4,5]. Understanding driven dissipative systems is important, for example, in the context of avalanches [6], neural networks [7], depinning transitions in charge density waves and superconductors [8], magnetized domains in ferromagnets [9], domain rearrangements in flowing foams [10], and granular materials under shear stress [11].
+
+A relatively simple dynamical model that contains much of the essential physics of earthquake faults is the spring-block model proposed by Burridge and Knopoff [12]. This model consists of blocks connected by linear springs to their nearest neighbors with spring constant k c . The blocks are also connected to a loader plate by linear springs with spring constant k L , and rest on a surface with a nonlinear velocity-weakening stick-slip friction force which depends on a parameter α that controls how quickly the friction force decreases as the velocity is increased. The model was studied numerically in one dimension in Ref. [12] and more recently in Refs. [13,14,15,16,17,18,19,20,21].
+
+An earthquake event is defined as a cluster of blocks that move (slip) due to the initial slip of a single block. In addition to the amount of energy released in an earthquake event, a quantity of interest is the moment M, which is defined as j ∆x j , where ∆x j is the net displacement of block j during an event and the sum is over all the blocks in the event.
+
+Carlson and Langer simulated the one-dimensional Burridge-Knopoff model for N = 100 and N = 1000 blocks. The main result of their simulations [13,14,15,16,17,19] is that for α > ∼ 2 the moment probability distribution P (M) scales as M −x for small localized events with an exponent x ≈ 2 [22]. There also is a peak in P (M) for large events indicating a significant presence of characteristic (non-power law) events.
+
+Because simulations of the Burridge-Knopoff model require solving Newton's equations of motion and are time consuming, several cellular automata (CA) models have been proposed that neglect the inertia of the blocks and simplify the effect of the friction force by assuming that the motion is overdamped. These cellular automata include those due to Rundle, Jackson, and Brown [23] and Olami, Feder, and Christensen [24]. In these models P (s), the distribution of the number of blocks in an event, does not exhibit power law scal-ing [25] for nearest-neighbor stress transfer if periodic boundary conditions are used [26]. A generalization of these CA models to include more realistic long-range stress transfer [27] yields considerable differences with the nearest-neighbor CA models [28] and with the original Burridge-Knopoff model. In particular, for long-range stress transfer P (s) exhibits Gutenberg-Richter scaling consistent with the system being near a mean-field (spinodal) critical point [29,30,31,32]. In addition, the long-range CA models can be described by a Langevin equation [29,31,33] and small and medium size events can be interpreted as fluctuations about a free energy minimum [29,30,34]. Large events drive the system out of equilibrium from which the system decays back to an equilibrium state [29].
+
+The CA and Burridge-Knopoff models lack several elements that would make them more realistic. In particular, the long-range CA models do not include inertia and more realistic friction laws, and the Burridge-Knopoff model does not include long-range stress transfer.
+
+Both types of models do not include elastic (seismic) wave radiation (phonons) because there is no medium in which seismic waves can propagate. However, the lack of seismic waves is a reasonable approximation, because seismic waves carry little energy in real faults [35].
+
+In this paper we discuss our extensive simulations of a generalized Burridge-Knopoff model with long-range stress transfer between the blocks [36]. For various values of the dynamic friction parameter α and the range of stress transfer R, we observed phenomena similar to real fault network systems, including Gutenberg-Richter scaling, quasiperiodic characteristic events, and mode-switching. Our primary results are that the behavior of the long-range Burridge-Knopoff model differs significantly from the short-range Burridge-Knopoff model, the behavior of the long-range Burridge-Knopoff and CA models is similar only for small α, and the nature of the friction force is important and strongly affects the behavior of the Burridge-Knopoff model. In particular, we find numerical evidence for two types of scaling behavior: a mean-field spinodal critical point similar to that found in the long-range CA models [29,30,31,32] for R ≫ 1 and α < ∼ 1 [36] and the scaling behavior found in Refs. [14,15,19] for α > ∼ 2 and all values of R studied in the range 1 ≤ R ≤ 500.
+
+
+II. BURRIDGE-KNOPOFF MODEL
+
+The original Burridge-Knopoff model in one dimension is governed by the equation of motion [12,14,15] 
+m d 2 x j dt 2 = k c (x j+1 − 2x j + x j−1 ) − k L x j − F (v +ẋ j ),(1)
+where x j is the displacement of block j from its equilibrium position, v is the speed of the substrate, which moves to the left,
+F (ẋ) = F 0 φ(ẋ/ṽ) is a velocity-dependent friction force,
+v is a characteristic velocity, and m is the mass of a block. The loader plate is fixed.
+
+As in Ref. [14] we introduce the scaled variables τ = ω p t, ω 2 p = k L /m, and u j = (k L /F 0 )x j , and rewrite Eq. (1) in dimensionless form as
+u j = ℓ 2 (u j+1 − 2u j + u j−1 ) − u j − φ(2αν + 2αu j ),(2)
+with 2α = ω p F 0 /k Lṽ , ℓ 2 = k c /k L , and ν = vk L /(ω p F 0 ); a dot denotes differentiation with respect to τ . The form of the friction force is plotted in Fig. 1 and is given by [15] φ(y) =
+         (−∞, 1], y = 0 1 − σ 1 + y 1 − σ , y > 0.(3)
+Note that φ(y) decays monotonically to zero from φ(0 + ) = 1 − σ and prohibits slip in the same direction as the motion of the substrate [37].
+
+The four dimensionless parameters, ℓ, α, ν, and σ govern the behavior of the system.
+
+The parameter α appears in the argument of φ in Eq. (2) and determines how quickly the dynamic friction force decreases with increasing velocity; α = 0 means that the dynamic friction force is equal to the constant 1 − σ. Larger α means that the friction force decreases more rapidly with velocity and the motion is less damped; α → ∞ implies that the friction force drops to zero immediately for positive velocities.
+
+We generalize the Burridge-Knopoff model by assuming that a block is connected to R neighbors (in each direction) with the rescaled spring constant k c /R [38]; R = 1 corresponds to the usual Burridge-Knopoff model. We used the second-and fourth-order Runge-Kutta algorithms [39,40] with the time step ∆t = 0.001 to solve Eq. (2) generalized to arbitrary R. Both algorithms and other fourth-order algorithms [41] give similar results. 
+
+
+III. IMPLEMENTATION OF THE BURRIDGE-KNOPOFF MODEL
+
+Because the velocity of a block is a continuous variable, we need to introduce a criterion for when a "stuck" block begins to move and when a moving block becomes stuck so that we can define the beginning and end of an event. We define a block to be stuck if its velocity is less than a parameter v 0 . In addition, the stress on the block, defined to be the force due to all the springs coupled to it including the loader plate spring, must be smaller than the maximum static friction force F 0 (taken to be unity in dimensionless units). If a block is stuck, we choose the value of the static friction force to be such that it cancels the stress.
+
+At the next time step, a stuck block will remain stuck if the stress on it is still smaller than F 0 . A moving block will become stuck at the next time step if its speed is less than v 0 and decreasing and if the stress on it is less than F 0 . In our simulations we take v 0 = 10 −5 , which yields reasonable results.
+
+An earthquake event begins with the slip of a block and ends when all blocks become stuck. A block is said to "fail" when it begins to move after being stuck. A moving block can become stuck and then move (slip) again during an event.
+
+We initially setu j = 0 for all j and assign small random displacements to all the blocks;
+
+hence all blocks are initially stuck. We compute the force on all the blocks and updatė u j and u j for all j using the generalization of Eq. (2) for arbitrary R. We continue these updates until all blocks become stuck again. We then move the substrate (the loader plate is fixed) until the stress on one block exceeds F 0 . This stress loading mechanism is known as the zero velocity limit [15,32,42] and is equivalent to setting ν = 0 in Eq. (2). The zero velocity limit is realistic because the dynamics of earthquake faults can be divided into continuous loading on a long time scale and relaxation with release of stress and energy on a much shorter time scale. The zero velocity limit ensures that there is only one event per substrate update and saves considerable simulation time. The relaxation process occurs when the motion or failure of the initiator induces other blocks to slip. If there are "moving" blocks, the event is still alive; otherwise, we reload the system to induce a new event.
+
+The results in this paper are for σ = 0.01, ℓ = 10, v 0 = 10 −5 , N = 5000, 10 6 events, and various values of R and α. Most previous work has been for R = 1 with N = 100 [14], N = 1000 [15], N = 800 [20,21], and the same values of σ and ℓ. Open boundary conditions are used as in previous work [14,15,20,21].
+
+
+IV. THE SIZE DISTRIBUTION OF EARTHQUAKE EVENTS
+
+In Refs. [14,15] the moment distribution P (M) was found to exhibit small localized events and larger delocalized events (for M > 2ℓ/α). The localized events show power-law behavior with a slope x ≈ 2; the delocalized or characteristic earthquakes correspond to a pronounced peak in P (M). Carlson and Langer [14,15] considered ℓ = 6, 8, 10, and 12
+
+and α = 2.5, 3, 4, and 5, and found the same general behavior for P (M). They also found that the effective value of the exponent x decreases as α → 1 and the power law behavior becomes less well defined. in the range 0.5 ≤ α ≤ 2.5. We find that for α > ∼ 1, P (M) exhibits power law behavior with slope x ≈ 2 for small localized events in the range 10 −4 < ∼ M < ∼ 10 0 and a non-power law distribution of characteristic events. For α < ∼ 1, no power law behavior is found [43]. These results are consistent with the results in Refs. [14,15,19]. ∼ 1 we see that the increased interaction range R does not change the value of the exponent x, but the scaling range becomes smaller, and the distribution of characteristic events (M > ∼ 1) is concentrated in a narrower range close to the system size. We conclude that although P (M) exhibits power law behavior for α = 2.5, the slope x ≈ 2 differs from the mean-field value of x = 3/2 found in the long-range CA models [31,32].
+
+In contrast, for R > ∼ 100 and α < ∼ 1 the scaling exponent approaches x ≈ 1.5 as α → 0. This value of x is close to the mean-field value of 3/2 found in the long-range CA models.
+
+Increasing R increases the range of the power law behavior and decreases the number of characteristic events. For α = 0 the mean-field behavior of P (M) becomes even better defined. We conclude that the scaling exponent of P (M) converges to the mean-field value of 3/2 for sufficiently small values of α and sufficiently large values of R.
+
+To compare our results more directly with the cellular automata models, we compute P (s), the distribution of the number of blocks in an event (including multiple failures). As shown in Fig. 4(a), there is no power law behavior for R = 1 and all values of α studied in contrast to the power law behavior of P (M). This result is similar to that observed in Ref. [15]. Our results for P (s) with R = 500 are shown in Fig. 4(b) for the same values of α as in Fig. 4(a). We see that for R = 500, P (M) and P (s) display similar power law behavior with the slope x ≈ 2 for α ≈ 2.5 and x ≈ 1.5 for α < ∼ 1 (see Table I). As expected, the power law behavior of P (s) and P (M) does not hold for large s. These large scale characteristic events are also observed in the cellular automata models and become less probable as R is increased [44,45,46].
+
+The scaling behavior for α = 3, 4, 5 and 10 is similar to that for α = 2.5. We conclude that the generalized Burridge-Knopoff model exhibits Gutenberg-Richter scaling with a meanfield exponent of 1.5 for small α and large R. Different scaling behavior is found for α > ∼ 2 and all values of R studied.
+
+
+V. THE MEAN SLIP, STRESS DROP, AND THE NUMBER OF FAILURES
+
+In the CA models [23,24,25,31,32] the stress on a block after it fails decreases to its residual stress, which is chosen to be either the same for all blocks, or if noise is introduced, is the same on the average. In the Rundle-Jackson-Brown model [23], each failed block is displaced by an amount corresponding to the decrease of its stress. For large R the stress on a block at failure approaches the failure threshold and therefore all blocks in an event are displaced the same amount. Hence, the moment M of an event and s, the total number of failed blocks in an event, are proportional for the long-range Rundle-Jackson-Brown model [31], and the scaling behavior of P (M) and P (s) becomes identical. In addition, in the mean-field limit, a site fails (slips) only once during an event [31,32]. These conditions are assumed by the coarse-graining theory of the long-range Rundle-Jackson-Brown model [31] and have been verified by computer simulations [32]. We check here if these assumptions hold for the Burridge-Knopoff model for sufficiently large R.     The mean decrease of the stress on a block after an event is given by
+<∆f > = 1 s i ∆f i ,(4)
+where the sum is over all blocks in the event, and ∆f i is the difference of the stress on the ith block before and after an event. In Fig. 7 we see that the range of constant <∆f > scales has a much larger mean slip than that for α = 0.5. with R; <∆f > ≈ σ = 0.01 for power law (small s) events, independent of the value of α.
+
+The independence of the mean displacement and mean stress drop on the size of an earthquake has been observed in real earthquakes and has been interpreted as evidence for their self-similarity [2]. This independence on the size of an earthquake is one of the assumptions of the static crack model of earthquakes [2] and suggests that the Burridge-Knopoff model with long-range stress transfer can capture some of the aspects of real earthquakes. Figure 8 shows the mean number of times a block fails during an event as a function of s. We see that the range of s over which a block fails only once scales with R; that is, multiple failures occur only for nonscaling events that are larger than 2R, the total number of neighbors of a block. This behavior is independent of α. We conclude that in the limit R → ∞, there are no blocks with multiple failures, consistent with the assumption made in the coarse-graining description of the Rundle-Jackson-Brown model in the mean-field limit [31,32].
+
+
+VI. ERGODICITY AND THE STRESS METRIC
+
+We characterize the nature of ergodicity in the Burridge-Knopoff model by determining the metric Ω f (t) of the stress [47]. We take f i (t) to be a quantity associated with block i and define  and the metric
+f i (t) = 1 t t 0 f i (t ′ ) dt ′ (5) <f (t)> = 1 N N i=1 f i (t),(6)Ω f (t) = 1 N N i=1 f i (t) − <f (t)> 2 .(7)
+If the system is ergodic, Ω f (t) ∝ 1/t [47]. Because the metric studied in the CA models is the stress metric [32], we choose f j to be the stress on block j just after an event.  Table I for more values of α). the slope of Ω(0)/Ω(t) becomes larger as R is increased. The system exhibits punctuated ergodicity for α = 0.5 and R = 100, similar to the behavior of the long-range CA models [32]. See Ref. [46] for more values of α and R.
+
+In Fig. 9 we show the normalized inverse stress metric Ω f (0)/Ω f (t) for R = 1 and different values of α. We see that Ω f (0)/Ω f (t) increases linearly with t. The mixing time τ can be defined by the relation Ω f (0)/Ω f (t) = t/τ . We see that the mixing time τ decreases with increasing α [47]. We conclude that the nearest-neighbor (R = 1) Burridge-Knopoff model is ergodic for all values of α studied.
+
+The system exhibits qualitatively different behavior for larger values of R. For α = 2.5 the system is nonergodic for R > ∼ 100 during our observation time. In contrast, for α < ∼ 1 the system remains ergodic as R is increased and the mixing time τ decreases with increasing α as for R = 1 (see Figs. 10(b) and 10(c)). Note that for α = 0.5 and R = 100, the system displays punctuated ergodicity during our observation time, similar to the behavior of the long-range CA models [32].
+
+Punctuated ergodicity has been observed in the Southern California fault system for some coarse graining conditions [48]. Ergodicity can also be recovered for a simple, far-fromequilibrium system with underlying chaotic dynamics serving as a temperature bath [49].
+
+Our results suggest the possibility of both ergodic faults and nonergodic faults.
+
+
+VII. THE TIME SERIES OF THE STRESS
+
+To understand the behavior of the stress metric, we plot the times series of the stress f per block just after an event (see Fig. 11). For α = 2.5 and R = 1, the times series fluctuates between 0 to 0.4. This behavior is consistent with the observed ergodicity of the system (see Fig. 9). As R is increased (Fig 11(b)), the time series becomes quasiperiodic and the period becomes longer for larger α [46]. For R = 500, f (t) is quasiperiodic with a mean of ≈ 0.4 and a range from ≈ −0.2 to almost 1. This quasiperiodic time dependence from a lower stress state to a high stress state is the origin of the nonergodicity for α > ∼ 1 and R ≫ 1. That is, small earthquakes accumulate stress locally and characteristic earthquakes release the stress globally and quasiperiodically. The periodicity of large characteristic earthquakes for R = 1 and α = 2.5 was also observed in Refs. [20,21]. The quasiperiodic behavior in Fig. 11 is reminiscent of the stress versus time curves observed in laboratory experiments with rocks [50].
+
+For R = 1 and α = 0.5 [46], there are intervals where the stress increases after small events. However, many random decreases occur and the time series fluctuates between 0.3 and 0.8 similar to the behavior for α = 2.5 and R = 1. These random fluctuations are consistent with the system being ergodic (see Fig. 9). In contrast with the behavior of the time series for α = 2.5, no quasiperiodic behavior is observed as R is increased (see Figs. 11(c) and 11(d)). Instead, f (t) remains in a high stress state, <f > ≈ 0.99, and the system remains ergodic. This behavior is also observed in the long-range CA models [32].
+
+Note that for R = 100, the stress returns to a relatively small value only once during the observation time, which makes the system exhibit punctuated ergodicity as shown in and α = 0.5 corresponds to the punctuated ergodicity seen in Fig. 10(b). As R is increased, no quasiperiodic behavior is observed, and f fluctuates about a high stress state close to 1 − σ. Increasing α for R = 500 makes the quasiperiodic behavior of f (t) better defined and increases the period [46]. For α = 0.9 (not shown) [46] the system remains in a high stress state for some time and exhibits mode-switching behavior similar to the long-range Olami-Feder-Christensen model with a long healing time [51], and a cellular automaton model of a vertical fault with dynamic weakening of cell strengths [52]. Ben-Zion et al. [53] have noted the importance of mode switching in understanding earthquake fault systems. The characteristic time τ of the exponential decay increases with M for the power law events.
+
+The waiting-time distribution P (t) is close to an exponential for both the scaling events and the characteristic events for R = 1. For R = 500 the waiting-time distribution for the scaling events is close to an exponential, but P (t) for events with M ≥ 1 is not. For clarity, each distribution is shifted vertically by 0.1.
+
+
+VIII. WAITING-TIME DISTRIBUTION
+
+The nature of the waiting or recurrence-time distribution P (t) for events of a given range of sizes is of current interest [54,55,56]. Statistical data from the Southern California Fault
+
+Network show there exists correlations, at least between large events [54,55,56]. These correlations imply that the waiting-time distribution is not exponential.
+
+We assume that the substrate moves with a constant velocity and hence the time t between two events is proportional to the number of substrate updates. Figure 12 shows our results for P (t) for α = 0.5 and 2.5 and R = 1 and 500. For all combinations of R = 1 and α the waiting-time distribution for both the scaling events and characteristic events is close to an exponential distribution, which implies that there is little correlation between the events.
+
+The exponential decay of P (t) for R = 1 and α = 2.5 has been reported in Refs. [20,21].
+
+For R = 500 and α = 2.5 (see Fig. 12(b)) the waiting time distribution for the characteristic events is nonexponential because the characteristic events are quasiperiodic for large R.
+
+Because there were no characteristic events for R = 500 and α = 0.5 during our observation time, we computed P (t) for events in the range 1 ≤ M < 10 and found that there is a maximum at t ≈ 100 and a long exponential tail. Hence, we conclude that the large events in long-range models for α = 2.5 and α = 0.5 are correlated.
+
+
+IX. SUMMARY
+
+The Burridge-Knopoff model with long-range stress transfer is more realistic than the usual Burridge-Knopoff model with nearest neighbor interactions and is more realistic than the long-range CA models because of the presence of inertia and a dynamic friction force.
+
+Our results show that the generalized Burridge-Knopoff model exhibits much richer scaling behavior than the cellular automata models and its behavior depends on the nature of the velocity-weakening friction force and the range of the stress transfer [57].
+
+For nearest-neighbor interactions (R = 1) we verified the power law behavior of the moment distribution P (M) for M < ∼ 1.0 and α > ∼ 1 with a scaling exponent of x ≈ 2 for α > ∼ 2 [14,15]. Qualitatively similar results (not shown) [46] were found for α = 3, 4, 5, and 10 with ℓ = 10 and for ℓ = 5, 7, 10, and 20 with α = 2.5. No scaling was found for the moment distribution for α < ∼ 1, and the distribution of the number of failed blocks during an event, P (s), does not scale for all values of α considered.
+
+For the long-range model (R ≫ 1), P (M) and P (s) show similar behavior. For α > ∼ 1, power law behavior with an apparent exponent of x ≈ 2 as for R = 1 was found with the additional presence of characteristic events. As R is increased, the range of power law behavior becomes smaller. For α < ∼ 1, an exponent of x ≈ 1.5 was obtained for R ≫ 1. This value of x is consistent with that found for the long-range CA models and the existence of a spinodal critical point [29,30,31,32]. The probability of characteristic events for small α decreases rapidly with increasing R.
+
+We found that the Burridge-Knopoff model is ergodic for R = 1 and all values of α studied; this behavior is in agreement with the random fluctuations in the time series of the stress. For R ≫ 1, the system is ergodic for α < ∼ 1 because the system fluctuates about a high stress state. This behavior is consistent with the behavior of the long-range CA models [30, 31,32] and the observation of the Southern California fault system [48]. The system becomes nonergodic for R ≫ 1 and α > ∼ 1 due to the quasiperiodic behavior of the stress. For α = 0.9 and R = 500, we found mode-switching between quasiperiodic behavior and fluctuations around a high-stress state, similar to that found in other models [51,52,53].
+
+The exponential fits to the distribution of waiting times for the scaling events for the values of α and R studied implies that there is no correlation between these events, which is inconsistent with the statistical data from real fault network systems [58]. However, large events such as characteristic events are correlated.
+
+Our simulation results suggest that there exists two scaling regimes with qualitatively different behavior, one of which (α → 0 and R ≫ 1) is consistent with an equilibrium spinodal critical point and a mean-field exponent of x = 3/2, similar to the long-range CA models and the near-mean-field picture of spinodal nucleation [29,30,31]. The nature of the other scaling regime with x ≈ 2 for α > ∼ 1 is not well understood [14,15,18]. The apparent dependence of the scaling exponent x on α for 1 < ∼ α < ∼ 2.5 suggests that the interpretation of this scaling regime in terms of a dynamical critical point must be viewed with caution and that larger system sizes as well as longer run times should be investigated. Because real faults are finite and the number of events observed is small, the α-dependence of x seen in the long-range Burridge-Knopoff model may accurately reflect the behavior of some real faults. The qualitatively different behavior observed for α < ∼ 1 and α > ∼ 1 is consistent with recent results [18,19] for R = 1.
+
+For large α and large R, our results resemble those observed in laboratory experiments on rocks. As the range R is increased and α is decreased, our results more closely resemble the long-range CA models. This wide range of behavior indicates that the physics of several models of earthquake faults [12,14,23,24] can be obtained from the generalized Burridge-Knopoff model with the appropriate choice of R and α. Our results can be in-terpreted as suggesting that real earthquake faults and laboratory rocks can have different statistical distributions of events and different physical characteristics due to the details of the friction force as well as range of the stress transfer. This dependence means that we must develop ways of determining the friction force with considerably more accuracy if we want to understand the relation between physical processes and observed earthquake phenomena.
+
+Our waiting-time results also shows that other physical features might need to be added to the generalized Burridge-Knopoff model considered in this paper such as memory effects, heterogeneities, and a more realistic rate-dependent friction force [2,59,60].
+
+FIG. 1 :
+1The form of the velocity-weakening friction force φ(y). The friction force decays monotonically to zero from the initial value φ(0 + ) = 1 − σ with the initial slope −1.
+
+FIG. 2 :
+2(Color online) Log-log plot of P (M ) versus M for different values of α for R = 1. Scaling behavior can be found for small events for α > ∼ 1. The exponent x defined by P (M ) ∼ M −x decreases from x ≈ 2 as α is decreased from 2.5 to 1. For α < ∼ 1, no scaling behavior is observed. A nonuniform bin size was used here and in Figs. 3 and 4. For clarity each distribution is shifted vertically by 2 units.
+
+Figure 2
+2shows our results for the moment distribution P (M) for R = 1 and values of α
+
+Figure 3 shows
+3P (M) for R = 500 and the same values of α as in Fig. 2. For α >
+
+FIG. 3 :Fig. 2 .
+32(Color online) Log-log plot of P (M ) versus M for R = 500 and the same values of α as in For α < ∼ 1 the power law exponent converges to the mean-field value of x = 1.5 as α → 0.For α > ∼ 1, the scaling exponent becomes close to 2 as α is increased. The scaling range becomes smaller as α increases. For clarity each distribution is shifted vertically by 2 units. (The apparent linear behavior for M > ∼ 1 is an artifact due to limited statistics and the use of a nonlinear bin width.) online) The distribution of events with s blocks, P (s). (a) Log-log plot of P (s) versus s for R = 1 and various values of α. In contrast to the behavior of P (M ), P (s) does not exhibit power law behavior for R = 1 for all values of α studied. (b) For R = 500, P (s) ∼ s −x with x ≈ 2 for α ≈ 2.5 and x ≈ 1.5 for α < ∼ 0.5. Note that s can exceed N because a block can slip and become stuck and then slip again during an event. For clarity each distribution is shifted vertically by 2 units.
+
+Figure 5 shows
+5<∆u>, the mean displacement or slip of a block during an event, as a function of s. Each block is counted only once even if it slips multiple times. The behavior of <∆u> as a function of s is similar for α = 2.5 and α = 0.5, and the range of s over which <∆u> is independent of s increases with the interaction range R for all values of α studied.
+
+For α > ∼ 1 ,
+1P (M ) exhibits power law behavior for all R studied with the exponent x m ≈ 2. Power law behavior of P (s) is found only for R > ∼ 100; the corresponding exponent is denoted as x s . For α < ∼ 1, P (M ) and P (s) exhibit mean-field scaling with slope x ≈ 1.5 for R > ∼ 100. Ergodicity is discussed in Sec. VI, and the time series of the stress is discussed in Sec. VII.for R = 1 there is no range of s over which <∆u> is independent of s, even though P (M) exhibits power law behavior for small M and α = 2.5. Also note that the mean slip of a block in a characteristic event increases with α for fixed R.
+
+Figure 6
+6displays the moment M as a function of s. As expected, the range of s for which M ∝ s increases with R because the range of s for which the mean displacement is constant increases with R.
+
+
+online) Log-log plot of the mean displacement (slip) <∆u> of a block as a function of the number of blocks s in an event for (a) α = 2.5 and (b) α = 0.5. Each block is counted only once even if it fails multiple times. The mean slip of a block becomes independent of s over a wide range of s for R ≫ 1, and the range scales with R. For R ≫ 1, a characteristic event for α = 2.5
+
+
+online) Log-log plot of the moment M as a function of s, the number of blocks in an event for (a) α = 2.5 and (b) α = 0.5. The range of s for which M ∝ s increases as R is increased. A log-log plot is used to show the linear region more clearly.
+
+
+online) The mean stress drop per block, <∆f >, as a function of s for (a) α = 2.5 and (b) α = 0.5. The decrease is approximately equal to σ = 0.01 for small s. The range of s over which the decrease is independent of s is proportional to the interaction range R. Note that the stress drop in a characteristic event for α = 2.5 is a much larger than for α = 0.5.
+
+
+online) The mean number of times a block fails during an event as a function of s, the size of an event, for (a) α = 2.5 and (b) α = 0.5. We see that the range of s over which blocks fail only once is proportional to the interaction range R. Note that the blocks in a characteristic event fail many more times for α = 2.5 than for α = 0.5. The curves extrapolate to 1 as log s → 0.
+
+FIG. 9 :
+9(Color online) The inverse stress metric versus the number of substrate updates (loading times) for R = 1. The system is ergodic for all the values of α studied, and the slope is an increasing function of α (see
+
+
+10: (Color online) The normalized inverse stress metric versus the number of substrate updates (loading times) for R = 100 and 500 and (a) α = 2.5, (b) α = 0.5, and (c) α = 0. Note the different vertical scales. The system is nonergodic for larger values of R for α = 2.5. For α = 0.5 and α = 0,
+
+FIG. 11 :
+11Time series of the stress f per block as a function of substrate plate updates (loading times) for (a) R = 1, α = 2.5, (b) R = 500, α = 2.5, (c) R = 100, α = 0.5, and (d) R = 500, α = 0.5. For R = 1 the stress fluctuates between 0 and 0.4. As R is increased, the time series becomes quasiperiodic and the system is no longer ergodic. The sharp decrease in f for R = 100
+
+Fig. 10 (
+10b).
+
+
+12: (Color online) The waiting-time distribution P (t) for (a) R = 1, α = 2.5, (b) R = 500, α = 2.5, (c) R = 1, α = 0.5, and (d) R = 500, α = 0.5. The time is scaled by the mean waiting time <t>. The waiting-time distributions are fitted to the exponential form f (t) ∝ e −t/τ if possible.
+
+
+The implication of this independence is that each block slips the same amount. Note thatα 
+R 
+x m 
+x s 
+ergodic time series 
+
+2.5 
+1 
+1.95 
+no scaling yes 
+random 
+
+2.5 500 
+1.96 
+1.95 
+no 
+quasi-periodic 
+
+0.5 
+1 no scaling no scaling yes 
+random 
+
+0.5 100 
+1.60 
+1.57 
+yes 
+random 
+
+0 1000 
+1.52 
+1.51 
+yes 
+random 
+
+10 
+1 
+1.96 
+no scaling yes 
+random 
+
+1.5 
+1 
+1.72 
+no scaling yes 
+random 
+
+1 
+1 no scaling no scaling yes 
+random 
+
+10 500 
+2.02 
+2.01 
+no 
+quasi-periodic 
+
+2 500 
+1.84 
+1.82 
+no 
+quasi-periodic 
+
+1 500 
+1.63 
+1.62 
+no 
+quasi-periodic 
+
+0.9 500 
+1.62 
+1.60 
+no mode-switching 
+
+
+
+TABLE I :
+ISummary of the behavior of the Burridge-Knopoff model for several values of R and α.
+AcknowledgmentsThis work has been supported in part by DOE grants DE-FG02-95ER14498 (WK and JX) and DE-FG02-04ER15568 (JBR). The simulations were done at Clark University with the partial support of NSF grant DBI-0320875.
+J B Rundle, D L Turcotte, W Klein, GeoComplexity and the Physics of Earthquakes. Washington, DCAmerican Geophysical UnionJ. B. Rundle, D. L. Turcotte, and W. Klein, editors, GeoComplexity and the Physics of Earthquakes, American Geophysical Union, Washington, DC (2000).
+
+C Scholz, The Mechanics of Earthquakes and Faulting. CambridgeCambridge University Press2nd ed.C. Scholz, The Mechanics of Earthquakes and Faulting, 2nd ed., Cambridge University Press, Cambridge (2002).
+
+. D D Bowman, G Ouillon, C Sammis, A Sornette, D Sornette, J. Geophys. Res. 10324359D. D. Bowman, G. Ouillon, C. Sammis, A. Sornette, and D. Sornette, J. Geophys. Res. 103, 24359 (1998).
+
+B Gutenberg, C F Richter, Seismicity of the Earth and Associated Phenomena. PrincetonPrinceton University Press2nd ed.B. Gutenberg and C. F. Richter, Seismicity of the Earth and Associated Phenomena, 2nd ed., Princeton University Press, Princeton (1954).
+
+. D S Fisher, K Dahmen, S Ramanathan, Y Ben-Zion, Phys. Rev. Lett. 784885D. S. Fisher, K. Dahmen, S. Ramanathan, and Y. Ben-Zion, Phys. Rev. Lett. 78, 4885 (1997).
+
+. P Bak, C Tang, K Wiesenfeld, Phys. Rev. Lett. 59381P. Bak, C. Tang, and K. Wiesenfeld, Phys. Rev. Lett. 59, 381 (1987);
+
+. Phys. Rev. A. 38364Phys. Rev. A 38, 364 (1988).
+
+. A V M Herz, J J Hopfield, Phys. Rev. Lett. 751222A. V. M. Herz and J. J. Hopfield, Phys. Rev. Lett. 75, 1222 (1995).
+
+. D S Fisher, Phys. Rep. 301113D. S. Fisher, Phys. Rep. 301, 113 (1998).
+
+. J S Urbach, R C Madison, J T Markert, Phys. Rev. Lett. 75276J. S. Urbach, R. C. Madison, and J. T. Markert, Phys. Rev. Lett. 75, 276 (1995).
+
+. A D , D J Durian, Phys. Rev. Lett. 752610A. D. Gopal and D. J. Durian, Phys. Rev. Lett. 75, 2610 (1995).
+
+. C S O&apos;hern, A J Liu, S R Nagel, Phys. Rev. Lett. 93165702C. S. O'Hern, A. J. Liu, and S. R. Nagel, Phys. Rev. Lett. 93, 165702 (2004).
+
+. R Burridge, L Knopoff, Bull. Seismo. Soc. Amer. 57341R. Burridge and L. Knopoff, Bull. Seismo. Soc. Amer. 57, 341 (1967).
+
+. J M Carlson, J S Langer, Phys. Rev. Lett. 622632J. M. Carlson and J. S. Langer, Phys. Rev. Lett. 62, 2632 (1989);
+
+. J M Carlson, J S Langer, Phys. Rev. A. 406470J. M. Carlson and J. S. Langer, Phys. Rev. A 40, 6470 (1989).
+
+. J M Carlson, J S Langer, B E Shaw, C Tang, Phys. Rev. A. 44884J. M. Carlson, J. S. Langer, B. E. Shaw, and C. Tang, Phys. Rev. A 44, 884 (1991).
+
+. J S Langer, C Tang, Phys. Rev. Lett. 671043J. S. Langer and C. Tang, Phys. Rev. Lett. 67, 1043 (1991).
+
+. J M Carlson, J S Langer, B E Shaw, Rev. Mod. Phys. 66657J. M. Carlson, J. S. Langer, and B. E. Shaw, Rev. Mod. Phys. 66, 657 (1994).
+
+. G L Vasconcelos, M Vieira, S R Nagel, Physica A. 19169G. L. Vasconcelos, M. de Vieira, and S. R. Nagel, Physica A 191, 69 (1992);
+
+. M Vieira, G L Vasconcelos, S R Nagel, Phys. Rev. E. 472221M. de Vieira, G. L. Vasconcelos, and S. R. Nagel, Phys. Rev. E 47, R2221 (1993);
+
+. G L Vasconcelos, Phys. Rev. Lett. 764865G. L. Vasconcelos, Phys. Rev. Lett. 76, 4865 (1996).
+
+. I Clancy, D Corcoran, Phys. Rev. E. 7346115I. Clancy and D. Corcoran, Phys. Rev. E 73, 046115 (2006);
+
+. I Clancy, D Corcoran, Phys. Rev. E. 7146124I. Clancy and D. Corcoran, Phys. Rev. E 71, 046124 (2005).
+
+. T Mori, H Kawamura, Phys. Rev. Lett. 9458501T. Mori and H. Kawamura, Phys. Rev. Lett. 94, 058501 (2005).
+
+. T Mori, H Kawamura, J. Geophys. Res. 1117302T. Mori and H. Kawamura, J. Geophys. Res. 111, B07302 (2006).
+
+This definition of x corresponds to the exponent B in Ref. [2]. In Ref. [14] b is used to denote the exponent for the probability distribution of the magnitude, which is the logarithm of the moment. It also is common to denote the power law behavior of the cumulative behavior of the moment by b and hence b = x − 1. To confuse matters further, the exponent b in Ref. ∼ , the probability distribution of the moment, has not been standardized in the literature. We define the exponent x by P (M ). The standard notation for the power law distribution of the number of blocks in an event is P (s) ∼ s 1−τ. We will express the power law behavior of P (s) as P (s) ∼ s −x and write x m and x s whenever necessary to avoid confusionThe notation for the power law exponent of P (M ), the probability distribution of the moment, has not been standardized in the literature. We define the exponent x by P (M ) ∼ M −x . This definition of x corresponds to the exponent B in Ref. [2]. In Ref. [14] b is used to denote the exponent for the probability distribution of the magnitude, which is the logarithm of the moment. It also is common to denote the power law behavior of the cumulative behavior of the moment by b and hence b = x − 1. To confuse matters further, the exponent b in Ref. [36] corresponds to the exponent x in the present paper. The standard notation for the power law distribution of the number of blocks in an event is P (s) ∼ s 1−τ . We will express the power law behavior of P (s) as P (s) ∼ s −x and write x m and x s whenever necessary to avoid confusion.
+
+. J B Rundle, D D Jackson, Bull. Seismol. Soc. Am. 671363J. B. Rundle and D. D. Jackson, Bull. Seismol. Soc. Am. 67, 1363 (1977);
+
+. J B Rundle, S R Brown, J. Stat. Phys. 65403J. B. Rundle and S. R. Brown, J. Stat. Phys. 65, 403 (1991).
+
+. Z Olami, H J S Feder, K Christensen, Phys. Rev. Lett. 681244Z. Olami, H. J. S. Feder, and K. Christensen, Phys. Rev. Lett. 68, 1244 (1992);
+
+. K Christensen, Z Olami, Phys. Rev. A. 461829K. Christensen and Z. Olami, Phys. Rev. A 46, 1829 (1992);
+
+. W Klein, J Rundle, Phys. Rev. Lett. 711288W. Klein and J. Rundle, Phys. Rev. Lett. 71, 1288 (1993);
+
+. K Christensen, Phys. Rev. Lett. 711289K. Christensen, Phys. Rev. Lett. 71, 1289 (1993).
+
+. P Grassberger, Phys. Rev. E. 492436P. Grassberger, Phys. Rev. E 49, 2436 (1994).
+
+did a multiscaling analysis of the OFC model with open and free boundary conditions (not periodic) and find a power law distribution of earthquake sizes P (s) ∼ s −x with x ≈ 1.8. A similar analysis of the Burridge-Knopoff for R = 1 model would be of interest. S Lise, M Paczuski, Phys. Rev. E. 6336111S. Lise and M. Paczuski, Phys. Rev. E 63, 036111 (2001) did a multiscaling analysis of the OFC model with open and free boundary conditions (not periodic) and find a power law distribution of earthquake sizes P (s) ∼ s −x with x ≈ 1.8. A similar analysis of the Burridge-Knopoff for R = 1 model would be of interest.
+
+. J A Stekettee, Can. J. Phys. 36192J. A. Stekettee, Can. J. Phys. 36, 192 (1958);
+
+. J B Rundle, W Klein, Nonlinear Proc. Geophys. 261J. B. Rundle and W. Klein, Nonlinear Proc. Geophys. 2, 61 (1995);
+
+. D P Hill, Nature. 2601617D. P. Hill et al., Nature (London) 260, 1617 (1993).
+
+. J B Rundle, W Klein, J. Stat. Phys. 72405J. B. Rundle and W. Klein, J. Stat. Phys. 72, 405 (1993).
+
+. J B Rundle, W Klein, S Gross, D L Turcotte, Phys. Rev. Lett. 751658J. B. Rundle, W. Klein, S. Gross, and D. L. Turcotte, Phys. Rev. Lett. 75, 1658 (1995).
+
+. W Klein, J B Rundle, C Ferguson, Phys. Rev. Lett. 783793W. Klein, J. B. Rundle, and C. Ferguson, Phys. Rev. Lett. 78, 3793 (1997).
+
+. C Ferguson, W Klein, J B Rundle, Phys. Rev. E. 601374C. Ferguson, W. Klein, and J. B. Rundle, Phys. Rev. E 60, 1374 (1999).
+
+. J B Rundle, W Klein, S Gross, D L Turcotte, Phys. Rev. Lett. 783798J. B. Rundle, W. Klein, S. Gross, and D. L. Turcotte, Phys. Rev. Lett. 78, 3798 (1995);
+
+. H.-J Xu, D Sornette, Phys. Rev. Lett. 783797H.-J. Xu and D. Sornette, Phys. Rev. Lett. 78, 3797 (1997).
+
+) for an overview of near-mean-field effects in earthquake faults and other systems. See W Klein, H Gould, N Gulbahce, J B Rundle, K Tiampo, Phys. Rev. E. 7531114See W. Klein, H. Gould, N. Gulbahce, J. B. Rundle, and K. Tiampo, Phys. Rev. E 75, 031114 (2007) for an overview of near-mean-field effects in earthquake faults and other systems.
+
+. A Mcgarr, J B Fletcher, Bull. Seismological Soc. Am. 9251633A. McGarr and J. B. Fletcher, Bull. Seismological Soc. Am. 92 (5), 1633 (2002);
+
+. A Mcgarr, J B Fletcher, N M Beeler, Geophysical Res. Lett. 311414606A. McGarr, J. B. Fletcher, and N. M. Beeler, Geophysical Res. Lett. 31 (14), L14606 (2004).
+
+The main results of this paper have been reported in J. H Xia, W Gould, J B Klein, Rundle, Phys. Rev. Lett. 95248501The main results of this paper have been reported in J. Xia, H. Gould, W. Klein, and J. B. Rundle, Phys. Rev. Lett. 95, 248501 (2005).
+
+Note that the loading plate is fixed and the substrate is moved to the left. The direction of the net force from the loading plate and the neighboring blocks is to the right. Hence, a block will begin to move to the right, the direction opposite to the moving substrate. The asymmetry of the friction force causes it to cancel the net force due to the loading plate and neighboring blocks so that a block will. not be accelerated to the left. Hence, the friction force prohibits slip (relative to the substrate) in the same direction as the motion of the substrateNote that the loading plate is fixed and the substrate is moved to the left. The direction of the net force from the loading plate and the neighboring blocks is to the right. Hence, a block will begin to move to the right, the direction opposite to the moving substrate. The asymmetry of the friction force causes it to cancel the net force due to the loading plate and neighboring blocks so that a block will not be accelerated to the left. Hence, the friction force prohibits slip (relative to the substrate) in the same direction as the motion of the substrate.
+
+that a system of particles becomes mean-field in the limit that the interaction range goes to infinity and the interaction strength goes to zero such that the total interaction seen by an individual particle is a constant. A similar theorem was shown to hold for Ising models by. M Kac, G E Uhlenbeck, P C Hemmer, J. Math. Phys. J. L. Lebowitz and O. Penrose498It was shown in Ref. 31 that a similar procedure for the Rundle-Jackson-Brown and Olami-Feder-Christensen models leads to mean-field behavior. We do not claim to have proven that the Kac procedure gives mean-field results for the Burridge-Knopoff modelIt was shown rigorously by M. Kac, G. E. Uhlenbeck, and P. C. Hemmer, J. Math. Phys. 4, 216 (1963) that a system of particles becomes mean-field in the limit that the interaction range goes to infinity and the interaction strength goes to zero such that the total interaction seen by an individual particle is a constant. A similar theorem was shown to hold for Ising models by J. L. Lebowitz and O. Penrose, J. Math. Phys. 7, 98 (1966). It was shown in Ref. 31 that a similar procedure for the Rundle-Jackson-Brown and Olami-Feder-Christensen models leads to mean-field behavior. We do not claim to have proven that the Kac procedure gives mean-field results for the Burridge-Knopoff model.
+
+H Gould, J Tobochnik, W Christian, An Introduction to Computer Simulation Methods. Reading, MAAddison-Wesley3rd ed.H. Gould, J. Tobochnik, and W. Christian, An Introduction to Computer Simulation Methods, 3rd ed., Addison-Wesley, Reading, MA (2006).
+
+W H Press, S A Teukolsky, W T Vetterling, B P Flannery, Numerical Recipes in Fortran, the Art of Scienific Computing. New YorkCambridge University PressW. H. Press, S. A. Teukolsky, W. T. Vetterling, and B. P. Flannery, Numerical Recipes in Fortran, the Art of Scienific Computing, Cambridge University Press, New York (1992).
+
+. L F Shampine, H A Watts, S Davenport, Rev, 18376L. F. Shampine, H. A. Watts, and S. Davenport, SIAM Rev. 18, 376 (1976).
+
+Note that we do not load the system while the blocks are slipping. Note that we do not load the system while the blocks are slipping.
+
+18 and 19 suggest that a transition between creep and stick-slip behavior might occur for R = 1 and α = 1. Because the long-range Burridge-Knopoff model is ergodic for small α and is not ergodic for large α, in contrast to the R = 1 model which is ergodic for all α studied, the mechanisms behind the different behavior near α = 1 for R = 1. The results of Refs. and large R might not be the sameThe results of Refs. 18 and 19 suggest that a transition between creep and stick-slip behavior might occur for R = 1 and α = 1. Because the long-range Burridge-Knopoff model is ergodic for small α and is not ergodic for large α, in contrast to the R = 1 model which is ergodic for all α studied, the mechanisms behind the different behavior near α = 1 for R = 1 and large R might not be the same.
+
+W Klein, C Ferguson, J B Rundle, Reduction and Predictability of Natural Disasters. J. B. Rundle, D. L. Turcotte, and W. KleinReading, MAAddison-Wesley LongmanW. Klein, C. Ferguson, and J. B. Rundle, in Reduction and Predictability of Natural Disasters, edited by J. B. Rundle, D. L. Turcotte, and W. Klein (Addison-Wesley Longman, Reading, MA, 1995).
+
+. M Anghel, W Klein, J B Rundle, J S Martins, arXiv:cond-mat/0002459M. Anghel, W. Klein, J. B. Rundle, and J. S. Sá Martins, arXiv:cond-mat/0002459.
+
+. Junchao Xia, Clark UniversityPh.D. thesisJunchao Xia, Ph.D. thesis, Clark University (2006).
+
+. D Thirumalai, R D Mountain, Phys. Rev. A. 42479Phys. Rev. ED. Thirumalai and R. D. Mountain, Phys. Rev. A 42, 4574 (1990) and ibid., Phys. Rev. E 47, 479 (1996).
+
+The effect of the coarse graining is discussed in K. K F Tiampo, J B Rundle, W Klein, J Martins, C D Ferguson, ; F Tiampo, J B Rundle, W Klein, J Holliday, J Martins, C D Ferguson, Phys. Rev. Lett. 9166107Phys. Rev. EK. F. Tiampo, J. B. Rundle, W. Klein, J. sa Martins, and C. D. Ferguson, Phys. Rev. Lett. 91, 238501 (2003). The effect of the coarse graining is discussed in K. F. Tiampo, J. B. Rundle, W. Klein, J. Holliday, J. sa Martins, and C. D. Ferguson, Phys. Rev. E 75, 066107 (2007).
+
+. D A Egolf, Science. 287101D. A. Egolf, Science 287, 101 (2000).
+
+See the article by S. L. Karner and C. Marone in Ref. 1See the article by S. L. Karner and C. Marone in Ref. 1.
+
+. D Weatherley, P Mora, M Xia, Pure Appl. Geophys. 1592469D. Weatherley, P. Mora, and M. Xia, Pure Appl. Geophys. 159, 2469 (2002).
+
+. Y Ben-Zion, J R Rice, J. Geophys. Res. 10012959Y. Ben-Zion and J. R. Rice, J. Geophys. Res. 100, 12959 (1995).
+
+. Y Ben-Zion, K Dahmen, V Lyakhovshy, D Ertas, A Agnon, Earth Plan. Sci. Lett. 17211Y. Ben-Zion, K. Dahmen, V. Lyakhovshy, D. Ertas, and A. Agnon, Earth Plan. Sci. Lett. 172, 11 (1999).
+
+. X Yang, S Du, J Ma, Phys. Rev. Lett. 92228501X. Yang, S. Du, and J. Ma, Phys. Rev. Lett. 92, 228501 (2004);
+
+. R Woodard, D E Newman, R Sánchez, B A Carreras, Phys. Rev. Lett. 93249801R. Woodard, D. E. Newman, R. Sánchez, and B. A. Carreras, Phys. Rev. Lett. 93, 249801 (2004);
+
+. X Yang, S Du, J , X. Yang, S. Du, and J.
+
+. Ma, Phys. Rev. Lett. 93249802Ma, Phys. Rev. Lett. 93, 249802 (2004);
+
+. A Corral, Phys. Rev. Lett. 95159801A. Corral, Phys. Rev. Lett. 95, 159801 (2005);
+
+. X , X.
+
+. S Yang, J Du, Ma, Phys. Rev. Lett. 95159802Yang, S. Du, and J. Ma, Phys. Rev. Lett. 95, 159802 (2005).
+
+. A Corral, Phys. Rev. Lett. 92108501A. Corral, Phys. Rev. Lett. 92, 108501 (2004);
+
+. A Corral, Phys. Rev. Lett. 9528501A. Corral, Phys. Rev. Lett. 95, 028501 (2005).
+
+. M Lindman, K Jonsdottir, R Roberts, B Lund, R Bödvarsson, Phys. Rev. Lett. 94108501M. Lindman, K. Jonsdottir, R. Roberts, B. Lund, and R. Bödvarsson, Phys. Rev. Lett. 94, 108501 (2005);
+
+. A Corral1, K Christensen, Phys. Rev. Lett. 96109801A Corral1 and K. Christensen, Phys. Rev. Lett. 96, 109801 (2006);
+
+. M Lindman, K Jonsdottir, R Roberts, B Lund, R Bödvarsson, Phys. Rev. Lett. 96109802M. Lind- man, K. Jonsdottir, R. Roberts, B. Lund, and R. Bödvarsson, Phys. Rev. Lett. 96, 109802 (2006).
+
+have recently simulated the two-dimensional Burridge-Knopoff model with a long-range interaction between blocks that decreases with the distance r as 1/r 3 . Their qualitative results are consistent with ours. T Mori, H Kawamura, arXiv:0802.1305T. Mori and H. Kawamura, arXiv:0802.1305, have recently simulated the two-dimensional Burridge-Knopoff model with a long-range interaction between blocks that decreases with the distance r as 1/r 3 . Their qualitative results are consistent with ours.
+
+. A Helmstetter, D Sornette, J. Geophys. Res. J. B. Rundle, P. B1082457A. Helmstetter and D. Sornette, J. Geophys. Res. 108, 2457 (2003). J. B. Rundle, P. B.
+
+. A Rundle, D Donnellan, R Turcotte, P Shcherbakov, B D Li, L B Malamud, G Grant, Rundle, A. Donnellan, D. Turcotte, R. Shcherbakov, P. Li, B. D. Malamud, L. B. Grant, G.
+
+C Fox, D Mcleod, G Yakovlev, J Parker, W Klein, K F Tiampo, Proc. Nat. Acad. Sci. Nat. Acad. Sci10215363C. Fox, D. McLeod, G. Yakovlev, J. Parker, W. Klein, and K. F. Tiampo, Proc. Nat. Acad. Sci. 102, 15363 (2005).
+
+J B Rundle, K F Tiampo, W Klein, J Martins, Proc. Nat. Acad. Sci. USA 99. Nat. Acad. Sci. USA 9912514J. B. Rundle, K. F. Tiampo, W. Klein, and J. sa Martins, Proc. Nat. Acad. Sci. USA 99, Supplement 1, 2514 (2002).
+
+. Akio Ohmura, H Kawamura, Europhys. Lett. 7769001Akio Ohmura and H. Kawamura, Europhys. Lett. 77, 69001 (2007).

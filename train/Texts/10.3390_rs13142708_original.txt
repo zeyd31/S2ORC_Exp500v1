@@ -1,0 +1,412 @@
+
+remote sensing Passive MIMO Radar Detection with Unknown Colored Gaussian Noise
+Published: 9 July 2021
+
+Yongjun Liu 
+National Laboratory of Radar Signal Processing
+Xidian University
+Xi'an 710071China
+
+Guisheng Liao 
+National Laboratory of Radar Signal Processing
+Xidian University
+Xi'an 710071China
+
+Haichuan Li 
+Shengqi Zhu 
+National Laboratory of Radar Signal Processing
+Xidian University
+Xi'an 710071China
+
+Yachao Li 
+National Laboratory of Radar Signal Processing
+Xidian University
+Xi'an 710071China
+
+Yingzeng Yin 
+National Laboratory of Radar Signal Processing
+Xidian University
+Xi'an 710071China
+
+National Key Laboratory of Antennas and Microwave Technology
+Xidian University
+710071Xi'anChina
+
+remote sensing Passive MIMO Radar Detection with Unknown Colored Gaussian Noise
+Published: 9 July 202110.3390/rs13142708Received: 18 May 2021 Accepted: 6 July 2021Article 2021, 13, 2708. https://doi.org/ 10.3390/rs13142708 Academic Editor: Andrzej Stateczny
+Citation: Liu, Y.; Liao, G.; Li, H.; Zhu, S.; Li, Y.; Yin, Y. Passive MIMO Radar Detection with Unknown Colored Gaussian Noise. Remote Sens.
+
+Introduction
+
+In the field of radar, passive radar has been an important research area . In passive radar, the transmitters are usually the noncooperative illuminators of opportunity. These illuminators can be digital audio broadcast stations [26], digital television stations [27], or commercial cellular phone base stations [28]. Compared with active radar [29][30][31][32][33][34][35][36][37][38][39], passive radar requires less infrastructure, and is also covert and low-cost, since passive radar does not require to be equipped with its own transmitters. Due to this, passive radar has been attracted great attention.
+
+Compared with active radar that knows the transmitted signal, passive radar does not know the transmitted signal, which complicates target detection for passive radar. For passive radar detection, according to the property of the transmitted signal of the illuminator of opportunity, the unknown transmitted signal is usually modeled as either a stochastic model or a deterministic model. For the stochastic model, the transmitted signal is usually modeled as a stochastic process, while it is deterministic but unknown for the deterministic model. For the deterministic model, the traditional method that utilizes the correlation between the direct-path (transmitter to receiver) and target-path (transmitter to target to receiver) signals is proposed in [1]. However, the performance of the method in [1] will be significantly degraded when the signal-to-noise ratio (SNR) of the received direct-path signal is low. To improve the detection performance of passive radar, the generalized likelihood ratio test (GLRT) [40] is proposed in [2], in which the unknown parameters are replaced with the corresponding maximum likelihood estimates (MLEs). In this paper, we consider a more practical case where the covariance matrix of colored noise in a passive MIMO radar network is unknown, i.e., the colored noise is un-whitened, and the GLRT will be developed. The developed GLRT can simultaneously estimate the statistics of the colored noise while performing the passive radar target detection. This is a very practical problem: passive radar detection in un-whitened colored noise, for which GLRT-based algorithms have not yet been published to date. These algorithms are highly nontrivial and do not follow easily from the work in [23]. Moreover, the developed GLRT approaches the previous GLRT performance with the known covariance matrix when the number of training samples used to estimate the covariance matrix is increased.
+
+The major technical contributions of this paper are summarized as follows. (1) We proposed a target detection method for the passive MIMO radar when the transmitted signal, channel coefficients, and covariance matrix of colored Gaussian noise are unknown.
+
+(2) A closed-form GLRT is derived in this paper.
+
+The remainder of this paper is organized as follows. In Section 2, the signal model and assumption are developed. In Section 3, the GLRT for the passive MIMO radar with unknown colored noise is derived. Numerical results are presented in Section 4. Finally, conclusions are drawn in Section 5.
+
+
+Signal Model and Assumption
+
+In this section, the assumptions of a passive MIMO radar network will be made and the signal model will be constructed.
+
+In this paper, we assume that there are N r receivers and N t transmitters in the passive MIMO radar network. In each receiver, there is an antenna array which can separate the direct-path and target-path signals by spatial filtering [23]. Suppose that the signals transmitted by different noncooperative illuminators of opportunity or transmitters occupy different frequency bands (In a cellular system, this is usually true for the signals transmitted by neighboring base stations in order to minimize the mutual interference.) [23]. Hence, the received signals due to the transmission from different transmitter can be separated by frequency domain. Moreover, suppose that in the received signals, the clutter has been suppressed by clutter cancellation techniques [20,43], which is the same assumption made in [23].
+
+For each hypothesized range-Doppler cell under test, passive MIMO radar requires to determine whether there is a target or not. For each range-Doppler cell under test, the Doppler shift and range are known, which can be used to compensate the Doppler shift and time delay of the received signal.
+
+Following the compensation in [23], after delay-Doppler compensation, the targetpath signal (surveillance channel signal) vector of N time samples at the jth receiver due to the transmission from the ith transmitter is represented as y s i,j = y s i,j (0), y s i,j (1), . . . ,
+y s i,j (N − 1) T
+, and the direct-path signal (reference channel signal) vector of N time samples at the jth receiver due to the transmission from the ith transmitter is represented as
+y r i,j = y r i,j (0), y r i,j (1), . . . , y r i,j (N − 1)
+T , for i = 0, 1, . . . , N t − 1 and j = 0, 1, . . . , N r − 1, as per the model in [23], where (·) T denotes the transpose operator. Similar to [29], we suppose that the training samples, i.e., secondary data, are available, and they have the same probability distribution as the colored Gaussian noise in the reference and surveillance channels (the training samples can be obtained by monitoring the frequency bands, which do not have a communication signal in them). Moreover, suppose that for each receiver and transmitter pair we can obtain K training samples, and the kth training samples obtained in the jth receiver and in the frequency band occupied by the ith transmitter is y n i,j,k = y n i,j,k (0), y n i,j,k (1), . . . , y n i,j,k (N − 1)
+
+T , for i = 0, 1, . . . , N t − 1, j = 0, 1, . . . , N r − 1, and k = 0, 1, . . . , K − 1.
+
+For the target detection in passive MIMO radar, under hypothesis H 1 , i.e., target present, the compensated signals and secondary data can be represented as
+H 1 : y s i,j = µ s i,j s i + n s i,j y r i,j = µ r i,j s i + n r i,j y n i,j,k = n n i,j,k .(1)
+Under hypothesis H 0 , i.e., target absent, the compensated signals and secondary data can be described as
+H 0 : y s i,j = n s i,j y r i,j = µ r i,j s i + n r i,j y n i,j,k = n n i,j,k .(2)
+In (1) and (2), µ r i,j and µ s i,j respectively denote the complex reference and surveillance channel coefficients from the ith transmitter to the jth receiver, s i = [s i (0), s i (1), . . . , s i (N − 1)] T is an N × 1 vector collecting the unknown transmitted signal samples of the ith transmitter, the N × 1 vectors n s i,j = n s i,j (0), n s i,j (1), . . . , n s i,j (N − 1) T and n r i,j = n r i,j (0), n r i,j (1), . . . ,
+n r i,j (N − 1)
+T denote the surveillance and reference channel noise at the jth receiver focused on the transmission from the ith transmitter, respectively, and the N × 1 vector n n i,j,k = n n i,j,k (0), n sn i,j,k (1), . . . , n n i,j,k (N − 1)
+
+T denotes the kth training samples obtained at the jth receiver focused on the transmission from the ith transmitter.
+
+Suppose that the colored noise vectors n s i,j , n r i,j , and n n i,j,k , for i = 0, 1, . . . , N t − 1, j = 0, 1, . . . , N r − 1, k = 0, 1, . . . , K − 1 are all independent identically distributed, and each of them is the Gaussian random vector with zero mean and covariance matrix Σ ∈ C N×N , where Σ is a positive definite matrix, which is assumed to be unknown in this paper.
+
+
+GLRT for Passive MIMO Radar
+
+In this section, the probability distribution of the received signal is formulated and the GLRT for passive MIMO radar is investigated.
+
+
+Probability Distribution of Received Signal
+
+Following the assumption in Section II, under hypothesis H 1 , the joint conditional probability density function (PDF) of the received target-path signal, direct-path signal, and secondary data in (1) is
+p 1 (y r , y s , y n |µ r , µ s , s, Σ) = 1 π Nc 0 |Σ| c 0 exp − N t −1 ∑ i=0 N r −1 ∑ j=0 K−1 ∑ k=0 y n i,j,k H Σ −1 y n i,j,k + y s i,j − µ s i,j s i H Σ −1 y s i,j − µ s i,j s i + y r i,j − µ r i,j s i H Σ −1 y r i,j − µ r i,j s i ,(3)
+where c 0 = N t N r (K + 2), |·| represents the determinant of a matrix, (·) H denotes Hermitian conjugate operator, y r = y r  (2) is
+p 0 (y r , y s , y n |µ r , s, Σ) = 1 π Nc 0 |Σ| c 0 exp − N t −1 ∑ i=0 N r −1 ∑ j=0 K−1 ∑ k=0 y n i,j,k H Σ −1 y n i,j,k + y r i,j − µ r i,j s i H Σ −1 y r i,j − µ r i,j s i + y s i,j H Σ −1 y s i,j .(4)
+
+GLRT Derivation
+
+According to the Neyman-Pearson Lemma [44,45], we can obtain that the likelihood ratio test has the largest detection probability when the probability of false alarm (P fa ) is fixed. Nevertheless, for the problem considered in this paper, the likelihood ratio test can not be obtained because the PDF of the received signals depends on the unknown channel coefficients, transmitted signals, and covariance matrix of colored noise. To solve this problem, a typical method is to use the maximum likelihood estimates of unknown parameters as the true values. This method is called GLRT. The GLRT for our problem will be investigated in this subsection.
+
+For the passive MIMO radar, the GLRT can be written as max µ r ,µ s ,s,Σ p 1 (y r , y s , y n |µ r , µ s , s, Σ) max µ r ,s,Σ p 0 (y r , y s , y n |µ r , s, Σ)
+H 1 ≷ H 0 γ,(5)
+where γ is the detection threshold which is usually determined according to a desired P fa in practice. The GLRT in (5) can also be written as
+max µ r ,µ s ,s,Σ l 1 (y r , y s , y n |µ r , µ s , s, Σ) − max µ r ,s,Σ l 0 (y r , y s , y n |µ r , s, Σ) H 1 ≷ H 0 γ 0 ,(6)
+where γ 0 = ln γ, l 0 (y r , y s , y n | µ r , s, Σ) = ln p 0 (y r , y s , y n |µ r , s, Σ) and l 1 (y r , y s , y n |µ r , µ s , s, Σ) = ln p 1 (y r , y s , y n |µ r , µ s , s, Σ) denote the log-likelihood functions under H 0 and H 1 , respectively.
+
+From (3), the log-likelihood function under H 1 is
+l 1 (y r , y s , y n |µ r , µ s , s, Σ) = c 1 − c 0 ln|Σ|− N t −1 ∑ i=0 N r −1 ∑ j=0 K−1 ∑ k=0 y n i,j,k H Σ −1 y n i,j,k + y s i,j − µ s i,j s i H Σ −1 y s i,j − µ s i,j s i + y r i,j − µ r i,j s i H Σ −1 y r i,j − µ r i,j s i ,(7)
+where
+c 1 = −NN t N r (K + 2) ln π.
+Similarly, from (4), the log-likelihood function under H 0 is
+l 0 (y r , y s , y n |µ r , s, Σ) =c 1 − c 0 ln|Σ|− N t −1 ∑ i=0 N r −1 ∑ j=0 K−1 ∑ k=0 y n i,j,k H Σ −1 y n i,j,k + y r i,j − µ r i,j s i H Σ −1 y r i,j − µ r i,j s i + y s i,j H Σ −1 y s i,j .(8)
+In order to obtain the optimal solution to the problem in (6), the optimal solution to the optimization problem max µ r ,µ s ,s,Σ l 1 (y r , y s , y n |µ r , µ s , s, Σ) (9) is required to be obtained.
+
+To obtain the optimal solution to the optimization problem in (9), let the derivative of (7) with respect to the covariance matrix Σ be the zero matrix, and then we can achievê
+Σ = 1 c 0 N t −1 ∑ i=0 N r −1 ∑ j=0 y r i,j − µ r i,j s i y r i,j − µ r i,j s i H + y s i,j − µ s i,j s i y s i,j − µ s i,j s i H + K−1 ∑ k=0 y n i,j,k y n i,j,k H ,(10)
+whereΣ satisfies (9) for any s i , µ r ij , µ s ij , i = 0, 1, . . . , N t − 1, j = 0, 1, . . . , N r − 1. According to Theorem 3.1.4 in [46],Σ will be a positive definite matrix with probability 1 if and only if
+N N t N r (K + 2).(11)
+Suppose that the inequation in (11) is satisfied. Replacing Σ in (7) withΣ in (10) and utilizing the formula x H Ax = tr Axx H , (7) can be rewritten as
+l 1 y r , y s , y n |µ r , µ s , s,Σ = c 1 − c 0 ln|Σ|− N t −1 ∑ i=0 N r −1 ∑ j=0 K−1 ∑ k=0 y n i,j,k HΣ −1 y n i,j,k + y r i,j − µ r i,j s i HΣ −1 y r i,j − µ r i,j s i + y s i,j − µ s i,j s i HΣ −1 y s i,j − µ s i,j s i =c 1 − c 0 ln|Σ|−tr Σ −1 N t −1 ∑ i=0 N r −1 ∑ j=0 K−1 ∑ k=0 y n i,j,k y n i,j,k H + y r i,j − µ r i,j s i y r i,j − µ r i,j s i H + y s i,j − µ s i,j s i y s i,j − µ s i,j s i H (12) =c 1 − c 0 ln|Σ|−tr(N t N r (K + 2)I N )(13)=c 1 + c 2 − c 0 ln|Σ|,(14)
+where in going from (12) to (13) we use (10), c 2 = −NN t N r (K + 2), and I N represents an
+N × N identity matrix. Let Y sr = [Y s , Y r ] denote the N × 2N r N t matrix that collects all the received surveillance and reference channel signals, where Y s = Y s 0 , Y s 1 , . . . , Y s N t −1 , Y r = Y r 0 , Y r 1 , . . . , Y r N t −1 , Y s i = y s i,0 , y s i,1 , . . . , y s i,N r −1 , and Y r i = y r i,0 , y r i,1 , . . . , y r i,N r −1 , for i = 0, 1, . . . , N t − 1. Let S = [ s 0 , s 1 , . . . , s N t −1 ] denote an N × N t matrix that collects all the unknown trans- mit signals. Let U sr = [U s , U r ] represent an N t × 2N t N r matrix which collects all the surveil- lance and reference channel coefficients, where U s = blkdiag (µ s 0 ) T , (µ s 1 ) T , . . . , (µ s N t −1 ) T , U r = blkdiag (µ r 0 ) T , (µ r 1 ) T , .
+. . , (µ r N t −1 ) T , and blkdiag{A 0 , A 1 , . . . , A m } denote the block diagonal matrix with the main diagonal elements being the matrix blocks.
+
+Then (10) can also be rewritten aŝ
+Σ = 1 c 0 (Y sr − SU sr )(Y sr − SU sr ) H + R n ,(15)
+where
+R n = N t −1 ∑ i=0 N r −1 ∑ j=0 K−1 ∑ k=0 y n i,j,k y n i,j,k H .(16)
+Using (15), the optimization problem in (9) can be rewritten as max µ r ,µ s ,s
+l 1 y r , y s , y n |µ r , µ s , s,Σ = max S,U sr l 1 y r , y s , y n |S, U sr ,Σ = max S,U sr c 1 + c 2 − c 0 ln|Σ|.(17)
+We can see that the log-likelihood function in (17) can be viewed as either a function of µ r , µ s , s, andΣ, or a function of S, U sr , andΣ.
+
+Ignoring the constant terms in (17), the optimization problem in (17) can be rewritten as min S,U sr ln|Σ|.
+
+Note that
+Σ = 1 c N 0 (Y sr − SU sr )(Y sr − SU sr ) H + R n .(19)
+Using Theorem 3.1.4 in [46], we can achieve that the matrix
+Q =R n + (Y sr − SU sr )(Y sr − SU sr ) H = c 0Σ(20)
+which is a positive definite matrix with probability one, if
+N ≤ N t N r (K + 2).(21)
+If the inequation in (21) satisfies, thenΣ in (19) is a positive definite matrix with probability one. In order to minimize ln|Σ| with respect to S for any U sr as in (18), let the derivative of ln|Σ| with respect to S * be the zero matrix, i.e.,
+∂ ln|Σ| ∂S * = tr Q −1 ∂Q ∂S * = −Q −1 Y sr U H sr + Q −1 SU sr U H sr = Q −1 SU sr U H sr − Y sr U H sr = 0,(22)
+where (·) * represents the conjugate operator.
+
+Since the matrix Q −1 is a nonsingular matrix, from (22) we can obtain the S that satisfies (18) for any U sr asŜ
+= Y sr U H sr U sr U H sr † ,(23)
+where (A) † denotes the Moore Penrose inverse of A.
+
+Using (23), the optimization problem in (18) can be rewritten as
+min U sr R n + Y sr − Y srŨsr Y sr − Y srŨsr H ,(24)whereŨ sr = U H sr U sr U H sr † U sr .
+Let F be the object function in (24). We can achieve
+F = R n + Y sr − Y srŨsr Y sr − Y srŨsr H = R n + Y sr I 2N r N t −Ũ sr I 2N r N t −Ũ sr H Y H sr = R n + Y sr P ⊥ U H sr P ⊥H U H sr Y H sr ,(25)
+where
+P ⊥ U H sr =I 2N r N t −Ũ sr = I 2N r N t − U H sr U sr U H sr † U sr(26)
+is the orthogonal projection matrix of U H sr [47]. Note that P ⊥  
+F = R n + Y sr P ⊥ U H sr P ⊥H U H sr Y H sr = R n + Y sr P ⊥ U H sr Y H sr .(27)P ⊥ U H sr =VDV H = [V m , V 2N r N t −m ] I m 0 m×(2N r N t −m) 0 (2N r N t −m)×m 0 2N r N t −m V H m V H 2N r N t −m = V m V H m ,(28)
+where D = diag{I m , 0 2N r N t −m } with 0 n denotes an n × n zero matrix, V is an orthogonal matrix, i.e., Plugging (28) into (27) yields
+VV H = V H V = I 2N r N t , V m collects the first m column vectors of V, V 2N r N t −m collects the last 2N r N t − m column vectors of V, V H m V m = I m , V H 2N r N t −m V m = 0 (2N r N t −mF = R n + Y sr V m V H m Y H sr .(29)
+According to Theorem 3.1.4 in [46], if
+N t N r K ≥ N,(30)
+the matrix R n will be positively definite with probability one. We assume that (30) is satisfied. By using |A n×n B n×n | = |A n×n ||B n×n | and |I m + A m×n B n×m | = |I n + B n×m A m×n |, (29) can be rewritten as
+F =|R n | I N + R −1 n Y sr V m V H m Y H sr = |R n | I r + V H m Y H sr R −1 n Y sr V m .(31)
+Since V H m V m = I m , (31) can be simplified as
+F =|R n | V H m I 2N r N t V m + V H m Y H sr R −1 n Y sr V m =|R n | V H m I 2N r N t + Y H sr R −1 n Y sr V m =|R n | V H m ΨV m ,(32)
+where
+Ψ = I 2N r N t + Y H sr R −1 n Y sr(33)
+is a 2N r N t × 2N r N t positive definite matrix. From (32), the optimization problem in (24) can be rewritten as the following optimization problem
+min V m F = |R n | V H m ΨV m subject to V H m V m = I m .(34)
+To solve the optimization problem in (34), we introduce Theorem 1 (the proof is given in Appendix A). According to Theorem 1, the optimal solution to (34) isV m = [ψ 1 , ψ 2 , . . . , ψ m ] and the optimal value isF(m) = |R n | ∏ m i=1 λ i , where λ i , for i = 1, 2, . . . , 2N r N t , is the eigenvalue of Ψ, ψ i is the corresponding eigenvector, and 1 ≤ λ 1 ≤ λ 2 ≤ · · · ≤ λ 2N r N t . Note that the optimal valueF(m) depends on the rank m = ρ P ⊥ U H . Obviously, the smaller the m, the smaller the optimal valueF(m) will be.
+
+Since P U H sr =Ũ sr = U H sr U sr U H sr † U sr is the projection matrix of U H sr and the rank of U H sr satisfies ρ U H sr ≤ N t , the rank of P U H sr is ρ P U H sr ≤ N t . Since P ⊥
+U H sr = I 2N r N t − P U H sr , the rank of P ⊥ U H sr satisfies m =ρ P ⊥ U H sr = 2N r N t − ρ P U H sr ≥ 2N r N t − N t .(36)
+Using (36) and Theorem 1, we can obtain that the optimal solution to the optimization problem in (34) 
+isV 2N r N t −N t =Ψ 2N r N t −N t = ψ 1 , ψ 2 , . . . , ψ 2N r N t −N t(37)
+and the corresponding optimal value iŝ
+F(2N r N t − N t ) = |R n | 2N r N t −N t ∏ i=1 λ i .(38)
+The optimal solutionÛ sr to the optimization problem in (24) is (the proof is shown in Appendix B)Û
+sr = Γ H ΩΨ H N t ,(39)
+where
+Ψ N t = ψ 2N r N t −N t +1 , ψ 2N r N t −N t +2 , . . . , ψ 2N r N t , Ω is any N t × N t invertible diago- nal matrix, and Γ is any N t × N t orthogonal matrix, i.e., Γ H Γ = ΓΓ H = I N t .
+Using (9) 
+c 1 + c 2 − c 0 ln|Σ| =c 1 + c 2 − c 0 lnF (2N r N t − N t ) c N 0 = c 1 + c 2 + c 3 − c 0 ln |R n | 2N r N t −N t ∏ i=1 λ i ,(40)
+where c 3 = NN t N r (K + 2) ln[N t N r (K + 2)]. Similar to the previous processing, under the hypothesis H 0 , the following optimization problem is required to be solved max µ r ,s,Σ l 0 (y r , y s , y n |µ r , s, Σ). (41) Using the previous estimation method, we can achieve that
+Σ = 1 c 0 N t −1 ∑ i=0 N r −1 ∑ j=0 y r i,j − µ r i,j s i y r i,j − µ r i,j s i H +y s i,j y s i,j H + K−1 ∑ k=0 y n i,j,k y n i,j,k H = 1 c 0 (Y r − SU r )(Y r − SU r ) H + R sn ,(42)
+is the optimal solution to the optimization problem in (41) for any s i , µ r ij , i = 0, 1, . . . , N t − 1,
+j = 0, 1, . . . , N r − 1, where R sn = N t −1 ∑ i=0 N r −1 ∑ j=0 y s i,j y s i,j H + N t −1 ∑ i=0 N r −1 ∑ j=0 K−1 ∑ k=0 y n i,j,k y n i,j,k H .(43)
+Substituting (42) into (8) with Σ =Σ produces l 0 y r , y s , y n |µ r , s,Σ =c 1 + c 2 − c 0 ln|Σ|.
+
+From (44), we can achieve that the optimization problem in (41) can be reformulated as max µ r ,s l 0 y r , y s , y n |µ r , s,Σ = max S,U r l 0 y r , y s , y n |S, U r ,Σ = max S,U r c 1 + c 2 − c 0 ln|Σ|. (45) In (45), we can see that the log-likelihood function l 0 (·) can be viewed as either a function of µ r , s, andΣ, or a function of S, U r , andΣ.
+
+Ignoring the constant terms in (45), the optimization problem in (45) can be rewritten as min S,U r ln|Σ|.
+
+Using Theorem 3.1.4 in [46], we can achieve that the matrixΣ is a positive definite matrix with probability one, if
+N ≤ N t N r (K + 2).(47)
+Assume that (47) is true. In order to minimize ln|Σ| with respect to S for any U r as in (46), let the derivative of ln|Σ| with respect to S be the zero matrix, and we can achieve thatŜ
+= Y r U H r U r U H r † .(48)
+Using (48), the optimization problem in (46) can be rewritten as
+min U r Y r − Y rŨr Y r − Y rŨr H + R sn ,(49)whereŨ r = U H r U r U H r † U r .
+Similar to previous processing, we can achieve that the optimal solutionÛ r to the problem in (49) isÛ
+r = Γ H Ω Ψ H N t ,(50)
+where Ω is any N t × N t invertible diagonal matrix, Γ is any N t × N t orthogonal matrix, and Ψ N t = ψ N r N t −N t +1 , ψ N r N t −N t +2 , . . . , ψ N r N t , in which ψ i , for i = 1, 2, · · · , N r N t , is the eigenvector corresponding to the eigenvalue λ i of
+Ψ = I N r N t + Y H r R −1 sn Y r(51)
+that is an N r N t × N r N t positive definite matrix, and 1 ≤ λ 1 ≤ λ 2 ≤ · · · ≤ λ N r N t . The optimal value of (49) iŝ
+F (N r N t − N t ) = |R sn | N r N t −N t ∏ i=1 λ i .(52)
+Using (41), (45), and (52), we can obtain max µ r ,s,Σ l 0 (y r , y s , y n |µ r , s, Σ) = max µ r ,s l 0 y r , y s , y n |µ r , s,Σ = max S,U r l 0 y r , y s , y n |S,
+U r ,Σ = max S,U r c 1 + c 2 − c 0 ln|Σ|= c 1 + c 2 − c 0 lnF (N r N t − N t ) c N 0 =c 1 + c 2 + c 3 − c 0 ln |R sn | N r N t −N t ∏ i=1 λ i .(53)
+Substituting (40) and (53) into (6) yields
+c 0 ln |R sn | ∏ N r N t −N t i=1 λ i |R n | ∏ 2N r N t −N t i=1 λ i H 1 ≷ H 0 γ 0 ,(54)
+i.e., the GLRT is equivalent to
+|R sn | ∏ N r N t −N t i=1 λ i |R n | ∏ 2N r N t −N t i=1 λ i H 1 ≷ H 0γ ,(55)whereγ = exp γ 0 /c 0 .
+
+Performance Analysis and Discussion
+
+The computational complexity of the proposed GLRT in (55) is approximately
+O 3N 3 + 3N 2 N r N t + 5NN 2 r N 2 t + NN r N t + 9N 3 r N 3 t + 2N r N t K .
+The computational complexity of the GLRT in [23] is approximately O NN 2 r N t + 9N 3 r N 3 t . Obviously, the computational complexity of the proposed method is higher than the GLRT in [23], since the proposed method does not know the covariance matrix of colored noise, which complicates the target detection and increases the computational complexity.
+
+In practice, the proposed GLRT will determine whether there is a target or not for each range and Doppler cell. Hence, for multiple targets that are in different range or Doppler cells, the proposed GLRT is applicable. That is to say, the proposed GLRT work for multi-target detection.
+
+
+Simulation
+
+In this section, several simulations results are provided to show the performance of the proposed GLRT. In the following simulations, when the channel coefficients, transmitted signal, and covariance matrix of colored noise are unknown, the proposed GLRT is denoted by 'UK CovM'. When the channel coefficients and transmitted signals are unknown whereas the covariance matrix of colored noise is known, the GLRT in [23] is denoted by 'K CovM'. In the simulations, the results are obtained by performing 10 5 Monte Carlo experiments. The number of transmitted signal samples, receivers, and transmitters is N = 10, N r = 2, and N t = 2, respectively. Furthermore, the transmitted signal of the ith transmitter is s i = exp{jθ i }, where θ i ∈ R N×1 is a random phase vector with each independent component uniformly distributed on [0, 2π] (same as [23]). Suppose that all the independent noise vectors in {n r i,j , n s i,j , and n n i,j,k , for i = 0, 1, . . . , N t − 1, j = 0, 1, . . . , N r − 1, k = 0, 1, . . . , K − 1} obey the same complex Gaussian distribution with zero mean and covariance matrix Σ t , where the mth row and nth column element of Σ t is m/n, for m ≤ n.
+
+The SNR of the received target-path signal is defined as
+TNR = 1 NN r N t σ 2 1 N t −1 ∑ i=0 N r −1 ∑ j=0 µ s ij s i 2 ,(56)
+where σ 2 1 represents the colored noise power in the surveillance channel. The SNR of the received direct-path signal is defined as
+DNR = 1 NN r N t σ 2 2 N t −1 ∑ i=0 N r −1 ∑ j=0 µ r ij s i 2 ,(57)
+where σ 2 2 represents the colored noise power in the reference channel. In the simulation, µ s ij and µ r ij are randomly drawn from the Gaussian distribution with zero mean and unit variance. Then, they are scaled to achieve the desired TNR and DNR according to (56) and (57), respectively.
+
+
+Variation of P d with P fa
+
+The dependence of the probability of detection (P d ) on P fa is illustrated in Figure 2. In Figure 2a, the TNR is −15 dB and the DNR is −30 dB. We choose the number of training samples to be K = 3, K = 9, and K = 15, respectively. In Figure 2b, the TNRs are set as −18 dB, −15 dB, and −12 dB, respectively. The DNR is −30 dB and K = 15 training samples are used. Figure 2a shows that the performance of the proposed GLRT is close to that of the GLRT in [23] when more than nine training samples are employed for the illustrated cases. This is due to that the estimate of unknown covariance matrix of colored noise becomes more and more accurate with the increase of training samples. As depicted in Figure 2b, the performance of the proposed GLRT and that of the GLRT in [23] are improved when the TNR is increased, since more accurate estimates of unknown parameters can be obtained with higher TNR. Under different DNRs, the dependence of P d on P fa is illustrated in Figure 3. In Figure 3, the TNR is chosen to be −15 dB, and there are K = 15 training samples. The DNRs are −30 dB, −10 dB, and 10 dB, respectively. When the DNR is improved, both the performance of the proposed GLRT and that of the GLRT in [23] are improved, since more accurate estimates of unknown parameters are obtained with high DNR. Compared with the proposed GLRT, the GLRT in [23] can achieve greater performance gain when the DNR is increased, since the proposed GLRT needs to estimate more unknown parameters.  
+
+
+Variation of P d with TNR
+
+The dependence of the P d on TNR is illustrated in Figure 4. In Figure 4a, we consider that there are K = 6, K = 9, K = 15, and K = 21 training samples, respectively. The P fa is chosen to be 10 −3 , and the DNR is set as −30 dB. In Figure 4b, the DNR is −30 dB, and we consider that there are K = 18 training samples. The P fa s are 10 −3 , 10 −2 , and 10 −1 , respectively.
+
+As shown in Figure 4, the P d of both the GLRT in [23] and the proposed GLRT is increased with the increase of TNR, because the estimates of the unknown parameters become more accurate when TNR is increased. Moreover, as the number of training samples increases, the proposed GLRT gradually approaches the GLRT in [23]. Increasing the P fa , the detection threshold will be reduced, and hence the P d will be improved.  In Figure 5a, the variation of the P d with TNR is illustrated with different DNRs. In Figure 5a, the DNRs are considered to be −30 dB, −10 dB, and 10 dB, respectively, and there are K = 21 training samples. The P fa is set as 10 −3 .
+
+In Figure 5b, the variation of the P d with TNR for different numbers of receivers and transmitters is shown. In Figure 5b, there are K = 20 training samples, the DNR is −30 dB, and the P fa is chosen to be 10 −3 . There are (N t = 1, N r = 2), (N t = 2, N r = 2), (N t = 2, N r = 3), and (N t = 3, N r = 3) transmitters and receivers, respectively.
+
+In Figure 5a, as expected, with an increase in DNR, the performance of both the GLRT in [23] and the proposed GLRT is improved, because the estimate accuracy of unknown parameters is improved when the DNR is improved. In Figure 5b, as expected, the P d is improved when either the number of transmitters or the number of receivers is improved. Obviously, with more transmitters and receivers, we can obtain more observations that will contribute to obtaining more accurate estimates of unknown parameters. Hence, we can achieve higher P d with more transmitters and receivers.   
+
+
+P d Loss
+
+The performance of the GLRT in [23] is better than that of the proposed GLRT, since the covariance matrix is unknown for the proposed GLRT. To measure the performance degradation, the following P d loss is utilized, which is defined as
+L Pd = P d K − P d UK ,(58)
+where P d UK denotes the P d of the proposed GLRT, and P d K denotes the P d of the GLRT in [23]. In Figure 6, the P d loss of the proposed method is shown. In Figure 6a, the P fa is 10 −3 , the DNR is −30 dB, and the TNRs are, respectively, set as −14 dB, −12 dB, −10 dB, and −8 dB. In Figure 6b, the DNR is considered to be −30 dB, the TNR is chosen to be −12 dB, and the P fa s are 10 −3 , 10 −2 , and 10 −1 , respectively.
+
+As expected, the P d loss decreases as the number of training samples increases. This is due to that we can achieve more accurate estimates of the unknown covariance matrix of colored noise with the increase of the number of training samples. As shown in Figure 6, when there are more than 25 training samples, the P d loss will be close to 0. For low TNR, the P d loss is smaller as shown in Figure 6a. For low TNR, both the GLRT in [23] and the proposed GLRT have small P d , which will result in a small P d loss. Moreover, the proposed GLRT needs to estimate more unknown parameters than the GLRT in [23]. Using the same training samples, the GLRT in [23] will achieve more performance improvement when the TNR is increased. Hence, the Pd loss will be increased when the TNR is increased. In Figure 6b, for large P fa , the P d loss is larger. Under large P fa , both the P d of the GLRT in [23] and that of the proposed GLRT are large. For large P fa , to achieve the same P d loss, it needs more training samples for the proposed GLRT. In Figure 7, the dependence of the P d loss on the number of training samples is illustrated. In Figure 7, the TNR is −12 dB, the P fa is 10 −3 , and the DNRs are −30 dB, −10 dB, and 10 dB, respectively. As the number of training samples increases, the P d loss is decreased. Moreover, the proposed GLRT will need more training samples to obtain the same P d loss when the DNR is improved. 
+
+
+Conclusions
+
+In this paper, target detection of a passive MIMO radar is studied when the transmitted signals, complex channel coefficients, and covariance matrix of colored Gaussian noise are unknown. A GLRT for passive MIMO radar is derived by utilizing the training samples. Simulation results show that the proposed GLRT can almost achieve the same performance of a GLRT with a known covariance matrix if there are sufficient training samples. In this paper, we assume that the noise and clutter are independent and identically distributed, while they might be heterogeneous in practice. In our future work, target detection for passive MIMO radar in the heterogeneous environment will be investigated. Moreover, the intelligent methods has become a hot topic for target detection nowadays, such as machinelearning-based approaches. In our future work, we will also investigate the intelligent method for target detection in the passive MIMO radar network.
+
+
+Appendix B. Maximum Likelihood EstimateÛ
+
+The optimal solution to (34) isV 2N r N t −N t = Ψ 2N r N t −N t = ψ 1 , ψ 2 , . . . , ψ 2N r N t −N t . Hence, we can obtain
+P ⊥ U H sr = I 2N r N t −Û H sr Û srÛ H sr †Û sr = I 2N r N t − PÛH sr = Ψ 2N r N t −N t Ψ H 2N r N t −N t .(A8)
+Furthermore, we can obtain
+PÛH sr =Û H sr Û srÛ H sr †Û sr = I 2N r N t − P ⊥ U H sr = I 2N r N t − Ψ 2N r N t −N t Ψ H 2N r N t −N t .(A9)
+Note that Ψ = [Ψ 2N r N t −N t , Ψ N t ] and ΨΨ H = I 2N r N t , where Ψ N t = ψ 2N r N t −N t +1 , ψ 2N r N t −N t +2 , . . . , ψ 2N r N t is a 2N r N t × N t full-column rank matrix. Hence, we can obtain that
+PÛH sr =ΨΨ H − Ψ 2N r N t −N t Ψ H 2N r N t −N t = Ψ 2N r N t −N t Ψ N t I 2N r N t −N t 0 (2N r N t −N t )×N t 0 N t ×(2N r N t −N t ) I N t Ψ H 2N r N t −N t Ψ H N t − Ψ 2N r N t −N t Ψ N t I 2N r N t −N t 0 (2N r N t −N t )×N t 0 N t ×(2N r N t −N t ) 0 N t Ψ H 2N r N t −N t Ψ H N t = Ψ 2N r N t −N t Ψ N t 0 2N r N t −N t 0 (2N r N t −N t )×N t 0 N t ×(2N r N t −N t ) I N t Ψ H 2N r N t −N t Ψ H N t = Ψ N t Ψ H N t .(A10)
+Now we show thatÛ H sr = Ψ N t ΩΓ, where Ω is any N t × N t invertible diagonal matrix, and Γ is any N t × N t orthogonal matrix, i.e., Γ H Γ = ΓΓ H = I N t . We can verify that 
+PÛH sr = Ψ N t ΩΓΓ H Ω −2 ΓΓ H ΩΨ H N t = Ψ N t Ψ H N t ,(A12)
+which is the same result in (A10). Hence, the maximum likelihood estimateÛ sr iŝ
+
+Figure 1 .
+1The notional passive MIMO radar consists of two multichannel receiver and two transmitters.
+
+
+collects all the reference channel samples with y r i = y r i,0 , y r i,1 , . . . , vector that collects all the reference channel coefficients with µ r i = µ r i,0 , µ r i,1 , . . . , vector that collects all the surveillance channel coefficients with µ s i = µ s i,0 , µ s i,1 , . . . , µ s i,N r −1 T , and s = (s 0 ) T , (s 1 ) T , . . . , (s N t −1 ) T T collects the s i for all i. Under hypothesis H 0 , the joint conditional PDF of the received target-path and directpath signals, and secondary data in
+
+
+)×m with 0 n×m denotes an n × m zero matrix, and m = ρ P ⊥ U H sr with ρ(·) represents the rank of a matrix.
+
+Theorem 1 .
+1Let A be an n × n positive Hermitian matrix, and X m = [x 1 , x 2 , . . . , x m ] be an n × m matrix with m ≤ n. The solution to arg min X m |X H m AX m | subject to X H m X m = I m (35) isX m = [x 1 ,x 2 , . . . ,x m ], which collects the m eigenvectors corresponding to the m smallest eigenvalues of A, i.e.,x i ∈ {v 1 , v 2 , . . . , v m } andx i =x j , for i = j, where v 1 , v 2 , . . . , v m are the m eigenvectors corresponding to the m smallest eigenvalues of A. Moreover, the optimum value of the objective function in (35) is the product of m smallest eigenvalues of A.
+
+
+,(17), and(38), we can obtain max µ r ,µ s ,s,Σ l 1 (y r , y s , y n |µ r , µ s , s, Σ) = max µ r ,µ s ,s l 1 y r , y s , y n |µ r , µ s , s,Σ = max S,U sr l 1 y r , y s , y n |S, U sr ,Σ = max S,U sr
+
+Figure 2 .
+2P d vs. P fa . (a) TNR = −15 dB. (b) K = 15.
+
+Figure 3 .
+3P d vs. P fa (TNR = −15 dB, K = 15).
+
+Figure 4 .
+4The variation of P d with TNR. (a) DNR = −30 dB, P fa = 10 −3 . (b) DNR = −30 dB, K = 18.
+
+-
+
+
+Figure 5 .
+5The variation of P d with TNR. (a) P fa = 10 −3 , K = 21. (b) P fa = 10 −3 , K = 20, DNR = −30 dB.
+
+Figure 6 .
+6The P d loss of the proposed method. (a) DNR = −30 dB, P fa = 10 −3 . (b) DNR = −30 dB, TNR = −12 dB.
+
+Figure 7 .
+7The P d loss of the proposed method (TNR = −12 dB, P fa = 10 −3 ).
+
+
+PÛH sr =Û H sr Û srÛ H sr †Û sr = Ψ N t ΩΓ Γ H ΩΨ H N t Ψ N t ΩΓ † Note that Ψ H N t Ψ N t = I N t and Γ H ΩΨ H N t Ψ N t ΩΓ † = Γ H Ω −2 Γ.Hence, (A11) can be simplified asΓ H ΩΨ H 
+N t . 
+(A11) 
+
+
+Remote Sens. 2021,13, 2708   
+Acknowledgments:The authors would like to thank the anonymous reviewers for their valuable and useful comments and suggestions that helped improve the paper.Appendix A. Proof of Theorem 1Since A is a positive Hermitian matrix, according to Theorem 21.5.7 in[47], A is orthogonally diagonalizable, i.e.,For any n × m matrix X m that satisfies the constraint in(35), we can obtain that the m × m matrix G(X m ) = X H m AX m is also a positive Hermitian matrix, since A is a positive Hermitian matrix. Thus, according to Theorem 21.5.7 in[47], G(X m ) is orthogonally diagonalizable, i.e., G(X m ) = WΦW H , where W = [w 1 , w 2 , . . . , w m ] is an m × m orthogonal matrix, Φ = diag{φ 1 , φ 2 , . . . , φ m } is a diagonal matrix, and 0 < φ 1 ≤ φ 2 ≤, . . . , ≤ φ m .Let G(X m ) = |X H m AX m | = |G(X m )| represent the objective function in(35). Since W is an orthogonal matrix, we can obtainwhere Z m = X m W with the ith column of Z m being z i = X m w i , for i = 1, 2, . . . , m.Since G(X m ) = WΦW H , we can obtainwhere from (A2) to (A3) we use (A1).Since φ i and d i , for i = 1, 2, . . . , m, are positive and nondecreasing with the increase of i, there must be some i that satisfiesNote that Z H m Z m = I m . Hence, the first i columns of Z m , denoted as Z i , form the basis for an i -dimensional subspace S i of n-dimensional complex space C n . Any n × 1 vector x in the subspace S i can be represented aswhere α i , for i = 1, 2, . . . , i , are the coefficients of x in the i -dimensional subspace S i . Hence, we can obtainwhere dim(S) represents the dimension of the subspace S. Obviously, the obtained solution in (A7) contradicts the assumption in (A4). This completes the proof. Theorem 1 can also be proved by majorization theory[49,50].
+On the performance of the cross-correlation detector for passive radar applications. Signal Process. J Liu, H Li, B Himed, 10.1016/j.sigpro.2015.01.006113Liu, J.; Li, H.; Himed, B. On the performance of the cross-correlation detector for passive radar applications. Signal Process. 2015, 113, 32-37. [CrossRef]
+
+Signal detection with noisy reference for passive sensing. Signal Process. G Cui, J Liu, H Li, B Himed, 10.1016/j.sigpro.2014.09.034108Cui, G.; Liu, J.; Li, H.; Himed, B. Signal detection with noisy reference for passive sensing. Signal Process. 2015, 108, 389-399. [CrossRef]
+
+Group sparsity based multi-target tracking in passive multi-static radar systems using Doppler-only measurements. S Subedi, Y D Zhang, M G Amin, B Himed, 10.1109/TSP.2016.2552498IEEE Trans. Signal Process. 64Subedi, S.; Zhang, Y.D.; Amin, M.G.; Himed, B. Group sparsity based multi-target tracking in passive multi-static radar systems using Doppler-only measurements. IEEE Trans. Signal Process. 2016, 64, 3619-3634. [CrossRef]
+
+Target detection using weather radars and electromagnetic vector sensors. Signal Process. G Prateek, M Hurtado, A Nehorai, 10.1016/j.sigpro.2017.02.009137Prateek, G.; Hurtado, M.; Nehorai, A. Target detection using weather radars and electromagnetic vector sensors. Signal Process. 2017, 137, 387-397. [CrossRef]
+
+Multistatic detection for passive radar with direct-path interference. X Zhang, H Li, B Himed, 10.1109/TAES.2017.2667223IEEE Trans. Aerosp. Electron. Syst. 53Zhang, X.; Li, H.; Himed, B. Multistatic detection for passive radar with direct-path interference. IEEE Trans. Aerosp. Electron. Syst. 2017, 53, 915-925. [CrossRef]
+
+Structure-aware sparse reconstruction and applications to passive multistatic radar. Y D Zhang, M G Amin, B Himed, 10.1109/MAES.2017.160021IEEE Aerosp. Electron. Syst. Mag. 32Zhang, Y.D.; Amin, M.G.; Himed, B. Structure-aware sparse reconstruction and applications to passive multistatic radar. IEEE Aerosp. Electron. Syst. Mag. 2017, 32, 68-78. [CrossRef]
+
+The significant gains from optimally processed multiple signals of opportunity and multiple receive stations in passive radar. Q He, R S Blum, 10.1109/LSP.2013.2296369IEEE Signal Process. Lett. 21He, Q.; Blum, R.S. The significant gains from optimally processed multiple signals of opportunity and multiple receive stations in passive radar. IEEE Signal Process. Lett. 2014, 21, 180-184. [CrossRef]
+
+Linear fusion for target detection in passive multistatic radar. Signal Process. H Y Zhao, J Liu, Z J Zhang, H Liu, S Zhou, 10.1016/j.sigpro.2016.06.024130Zhao, H.Y.; Liu, J.; Zhang, Z.J.; Liu, H.; Zhou, S. Linear fusion for target detection in passive multistatic radar. Signal Process. 2017, 130, 175-182. [CrossRef]
+
+GLRT detector in single frequency multi-static passive radar systems. B K Chalise, B Himed, 10.1016/j.sigpro.2017.07.001Signal Process. 142Chalise, B.K.; Himed, B. GLRT detector in single frequency multi-static passive radar systems. Signal Process. 2018, 142, 504-512. [CrossRef]
+
+Detector for Passive MIMO Radar With Direct-Path Interference. M Fazlollahpoor, M Derakhtian, S Khorshidi, Rao, 10.1109/TAES.2019.2961841IEEE Trans. Aerosp. Electron. Syst. 2020Fazlollahpoor, M.; Derakhtian, M.; Khorshidi, S. Rao Detector for Passive MIMO Radar With Direct-Path Interference. IEEE Trans. Aerosp. Electron. Syst. 2020, 56, 2999-3009. [CrossRef]
+
+Limited-Complexity Receiver Design for Passive/Active MIMO Radar Detection. Y Li, Q He, R S Blum, 10.1109/TSP.2019.2911262IEEE Trans. Signal Process. 67Li, Y.; He, Q.; Blum, R.S. Limited-Complexity Receiver Design for Passive/Active MIMO Radar Detection. IEEE Trans. Signal Process. 2019, 67, 3258-3271. [CrossRef]
+
+Two-Channel Passive Detection of Cyclostationary Signals. S Horstmann, D Ramírez, P J Schreier, 10.1109/TSP.2020.2981767IEEE Trans. Signal Process. 68Horstmann, S.; Ramírez, D.; Schreier, P.J. Two-Channel Passive Detection of Cyclostationary Signals. IEEE Trans. Signal Process. 2020, 68, 2340-2355. [CrossRef]
+
+Passive detection of correlated subspace signals in two MIMO channels. I Santamaria, L L Scharf, J Via, H Wang, Y Wang, 10.1109/TSP.2017.2723340IEEE Trans. Signal Process. 65Santamaria, I.; Scharf, L.L.; Via, J.; Wang, H.; Wang, Y. Passive detection of correlated subspace signals in two MIMO channels. IEEE Trans. Signal Process. 2017, 65, 5266-5280. [CrossRef]
+
+A GLRT approach for detecting correlated signals in white noise in two MIMO channels. I Santamaria, J Via, L L Scharf, Y Wang, Proceedings of the 2017 25th European Signal Processing Conference (EUSIPCO). the 2017 25th European Signal Processing Conference (EUSIPCO)Kos, Greece; Hoboken, NJ, USASantamaria, I.; Via, J.; Scharf, L.L.; Wang, Y. A GLRT approach for detecting correlated signals in white noise in two MIMO channels. In Proceedings of the 2017 25th European Signal Processing Conference (EUSIPCO), Kos, Greece, 28 August-2 September 2017; IEEE: Hoboken, NJ, USA, 2017; pp. 1395-1399.
+
+Passive detection of rank-one signals with a multiantenna reference channel. I Santamaria, L L Scharf, D Cochran, J Vía, Proceedings of the 2016 24th European Signal Processing Conference (EUSIPCO). the 2016 24th European Signal Processing Conference (EUSIPCO)Budapest, Hungary; Hoboken, NJ, USAIEEESantamaria, I.; Scharf, L.L.; Cochran, D.; Vía, J. Passive detection of rank-one signals with a multiantenna reference channel. In Proceedings of the 2016 24th European Signal Processing Conference (EUSIPCO), Budapest, Hungary, 29 August-2 September 2016; IEEE: Hoboken, NJ, USA, 2016; pp. 140-144.
+
+Passive radar detection using multiple transmitters. S D Howard, S Sirianunpiboon, Proceedings of the 2013 Asilomar Conference on Signals, Systems and Computers. the 2013 Asilomar Conference on Signals, Systems and ComputersPacific Grove, CA, USA; Hoboken, NJ, USAIEEEHoward, S.D.; Sirianunpiboon, S. Passive radar detection using multiple transmitters. In Proceedings of the 2013 Asilomar Conference on Signals, Systems and Computers, Pacific Grove, CA, USA, 3-6 November 2013; IEEE: Hoboken, NJ, USA, 2013; pp. 945-948.
+
+Improved Detection Performance for Passive Radars Exploiting Known Communication Signal Form. A K Karthik, R S Blum, 10.1109/LSP.2018.2870341IEEE Signal Process. Lett. 25Karthik, A.K.; Blum, R.S. Improved Detection Performance for Passive Radars Exploiting Known Communication Signal Form. IEEE Signal Process. Lett. 2018, 25, 1625-1629. [CrossRef]
+
+Passive MIMO radar detection exploiting known format of the communication signal observed in colored noise with unknown covariance matrix. Y Liu, R S Blum, G Liao, S Zhu, 10.1016/j.sigpro.2020.107611Signal Process. 2020, 174, 107611. [CrossRefLiu, Y.; Blum, R.S.; Liao, G.; Zhu, S. Passive MIMO radar detection exploiting known format of the communication signal observed in colored noise with unknown covariance matrix. Signal Process. 2020, 174, 107611. [CrossRef]
+
+Improving detection performance of passive MIMO radar by exploiting the preamble information of communications signal. Y Liu, G Liao, J Xu, Z Yang, Y Yin, 10.1109/JSYST.2020.3009752IEEE Syst. J. 2020Liu, Y.; Liao, G.; Xu, J.; Yang, Z.; Yin, Y. Improving detection performance of passive MIMO radar by exploiting the preamble information of communications signal. IEEE Syst. J. 2020, 1-12. [CrossRef]
+
+A multistage processing algorithm for disturbance removal and target detection in passive bistatic radar. F Colone, D O&apos;hagan, P Lombardo, C Baker, 10.1109/TAES.2009.5089551IEEE Trans. Aerosp. Electron. Syst. 45Colone, F.; O'hagan, D.; Lombardo, P.; Baker, C. A multistage processing algorithm for disturbance removal and target detection in passive bistatic radar. IEEE Trans. Aerosp. Electron. Syst. 2009, 45, 698-722. [CrossRef]
+
+GLRT-based CFAR detection in passive bistatic radar. A Zaimbashi, M Derakhtian, A Sheikhi, 10.1109/TAES.2013.6404095IEEE Trans. Aerosp. Electron. Syst. 49Zaimbashi, A.; Derakhtian, M.; Sheikhi, A. GLRT-based CFAR detection in passive bistatic radar. IEEE Trans. Aerosp. Electron. Syst. 2013, 49, 134-159. [CrossRef]
+
+Theoretical approach for target detection and interference cancellation in passive radars. M Masjedi, M Moddares-Hashemi, S Sadri, 10.1049/iet-rsn.2012.0200IET Radar Sonar Navigat. 7Masjedi, M.; Moddares-Hashemi, M.; Sadri, S. Theoretical approach for target detection and interference cancellation in passive radars. IET Radar Sonar Navigat. 2013, 7, 205-216. [CrossRef]
+
+Detection in passive MIMO radar networks. D E Hack, L K Patton, B Himed, M A Saville, 10.1109/TSP.2014.2319776IEEE Trans. Signal Process. 62Hack, D.E.; Patton, L.K.; Himed, B.; Saville, M.A. Detection in passive MIMO radar networks. IEEE Trans. Signal Process. 2014, 62, 2999-3012. [CrossRef]
+
+Centralized passive MIMO radar detection without direct-path reference signals. D E Hack, L K Patton, B Himed, M A Saville, IEEE Trans. Signal Process. 62Hack, D.E.; Patton, L.K.; Himed, B.; Saville, M.A. Centralized passive MIMO radar detection without direct-path reference signals. IEEE Trans. Signal Process. 2014, 62, 3013-3023.
+
+Canonical correlations for target detection in a passive radar network. Y Wang, L L Scharf, I Santamaría, H Wang, Proceedings of the 2016 50th Asilomar Conference on Signals, Systems and Computers. the 2016 50th Asilomar Conference on Signals, Systems and ComputersPacific Grove, CA, USA, 6-9; Hoboken, NJ, USAIEEEWang, Y.; Scharf, L.L.; Santamaría, I.; Wang, H. Canonical correlations for target detection in a passive radar network. In Proceedings of the 2016 50th Asilomar Conference on Signals, Systems and Computers, Pacific Grove, CA, USA, 6-9 November 2016; IEEE: Hoboken, NJ, USA, 2016; pp. 1159-1163.
+
+Tracking in multistatic passive radar systems using DAB/DVB-T illumination. Signal Process. M Daun, U Nickel, W Koch, 10.1016/j.sigpro.2011.09.00592Daun, M.; Nickel, U.; Koch, W. Tracking in multistatic passive radar systems using DAB/DVB-T illumination. Signal Process. 2012, 92, 1365-1386. [CrossRef]
+
+Mismatched filter for analogue TV-based passive bistatic radar. IET Radar Sonar Navigat. H Wang, J Wang, L Zhong, 10.1049/iet-rsn.2010.01365Wang, H.; Wang, J.; Zhong, L. Mismatched filter for analogue TV-based passive bistatic radar. IET Radar Sonar Navigat. 2011, 5, 573-581. [CrossRef]
+
+Applications of passive surveillance radar system using cell phone base station illuminators. H Sun, D K Tan, Y Lu, M Lesturgie, 10.1109/MAES.2010.5552611IEEE Aerosp. Electron. Syst. Mag. 25Sun, H.; Tan, D.K.; Lu, Y.; Lesturgie, M. Applications of passive surveillance radar system using cell phone base station illuminators. IEEE Aerosp. Electron. Syst. Mag. 2010, 25, 10-18. [CrossRef]
+
+An adaptive detection algorithm. E J Kelly, 10.1109/TAES.1986.310745IEEE Trans. Aerosp. Electron. Syst. 2Kelly, E.J. An adaptive detection algorithm. IEEE Trans. Aerosp. Electron. Syst. 1986, 2, 115-127. [CrossRef]
+
+Adaptive detection and estimation for an unknown occurring interval signal in correlated Gaussian noise. Signal Process. Y Xiao, G Cui, W Yi, L Kong, J Yang, 10.1016/j.sigpro.2014.10.006108Xiao, Y.; Cui, G.; Yi, W.; Kong, L.; Yang, J. Adaptive detection and estimation for an unknown occurring interval signal in correlated Gaussian noise. Signal Process. 2015, 108, 440-450. [CrossRef]
+
+MIMO radar moving target detection in homogeneous clutter. Q He, N H Lehmann, R S Blum, A M Haimovich, 10.1109/TAES.2010.5545189IEEE Trans. Aerosp. Electron. Syst. 46He, Q.; Lehmann, N.H.; Blum, R.S.; Haimovich, A.M. MIMO radar moving target detection in homogeneous clutter. IEEE Trans. Aerosp. Electron. Syst. 2010, 46, 1290-1301. [CrossRef]
+
+Moving target detection in distributed MIMO radar on moving platforms. H Li, Z Wang, J Liu, B Himed, 10.1109/JSTSP.2015.2467355IEEE J. Sel. Top. Signal Process. 9Li, H.; Wang, Z.; Liu, J.; Himed, B. Moving target detection in distributed MIMO radar on moving platforms. IEEE J. Sel. Top. Signal Process. 2015, 9, 1524-1535. [CrossRef]
+
+Adaptive detection without training data in colocated MIMO radar. W Liu, Y Wang, J Liu, W Xie, H Chen, W Gu, 10.1109/TAES.2015.130754IEEE Trans. Aerosp. Electron. Syst. 51Liu, W.; Wang, Y.; Liu, J.; Xie, W.; Chen, H.; Gu, W. Adaptive detection without training data in colocated MIMO radar. IEEE Trans. Aerosp. Electron. Syst. 2015, 51, 2469-2479. [CrossRef]
+
+Tunable Adaptive Detection in Colocated MIMO Radar. J Liu, S Zhou, W Liu, J Zheng, H Liu, J Li, 10.1109/TSP.2017.2778693IEEE Trans. Signal Process. 66Liu, J.; Zhou, S.; Liu, W.; Zheng, J.; Liu, H.; Li, J. Tunable Adaptive Detection in Colocated MIMO Radar. IEEE Trans. Signal Process. 2017, 66, 1080-1092. [CrossRef]
+
+A sparsity based GLRT for moving target detection in distributed MIMO radar on moving platforms. Z Wang, H Li, B Himed, Proceedings of the 2015 49th Asilomar Conference on Signals, Systems and Computers. the 2015 49th Asilomar Conference on Signals, Systems and ComputersPacific Grove, CA, USA, 8; Hoboken, NJ, USAIEEEWang, Z.; Li, H.; Himed, B. A sparsity based GLRT for moving target detection in distributed MIMO radar on moving platforms. In Proceedings of the 2015 49th Asilomar Conference on Signals, Systems and Computers, Pacific Grove, CA, USA, 8-11 November 2015; IEEE: Hoboken, NJ, USA, 2015; pp. 90-94.
+
+Generalized multivariate analysis of variance-A unified framework for Signal Processing in correlated noise. A Dogandzic, A Nehorai, 10.1109/MSP.2003.1236771IEEE Signal Process. Mag. 20Dogandzic, A.; Nehorai, A. Generalized multivariate analysis of variance-A unified framework for Signal Processing in correlated noise. IEEE Signal Process. Mag. 2003, 20, 39-54. [CrossRef]
+
+A CFAR adaptive matched filter detector. F C Robey, D R Fuhrmann, E J Kelly, R Nitzberg, 10.1109/7.135446IEEE Trans. Aerosp. Electron. Syst. 28Robey, F.C.; Fuhrmann, D.R.; Kelly, E.J.; Nitzberg, R. A CFAR adaptive matched filter detector. IEEE Trans. Aerosp. Electron. Syst. 1992, 28, 208-216. [CrossRef]
+
+A noncoherent adaptive detection technique. P Monticciolo, E Kelly, J Porakis, 10.1109/7.135438IEEE Trans. Aerosp. Electron. Syst. 28Monticciolo, P.; Kelly, E.; Porakis, J. A noncoherent adaptive detection technique. IEEE Trans. Aerosp. Electron. Syst. 1992, 28, 115-124. [CrossRef]
+
+Adaptive Target Detection in Gaussian Clutter Edges. B Tang, J Liu, Z Huang, G Wang, F Fan, 10.1109/TAES.2019.2930019IEEE Trans. Aerosp. Electron. Syst. 2020Tang, B.; Liu, J.; Huang, Z.; Wang, G.; Fan, F. Adaptive Target Detection in Gaussian Clutter Edges. IEEE Trans. Aerosp. Electron. Syst. 2020, 56, 1662-1673. [CrossRef]
+
+Fundamentals of Statistical Signal Processing. M K Steven, Prentice-Hall, Englewood Cliffs, NJ, USASteven, M.K. Fundamentals of Statistical Signal Processing; PTR Prentice-Hall: Englewood Cliffs, NJ, USA, 1993.
+
+Signal Parameter Estimation for Passive Bistatic Radar With Waveform Correlation Exploitation. F Wang, H Li, X Zhang, B Himed, 10.1109/TAES.2017.2775898IEEE Trans. Aerosp. Electron. Syst. 54Wang, F.; Li, H.; Zhang, X.; Himed, B. Signal Parameter Estimation for Passive Bistatic Radar With Waveform Correlation Exploitation. IEEE Trans. Aerosp. Electron. Syst. 2018, 54, 1135-1150. [CrossRef]
+
+An Overview of Parametric Modeling and Methods for Radar Target Detection With Limited Data. F Wang, P Wang, X Zhang, H Li, B Himed, 10.1109/ACCESS.2021.3074063IEEE Access. 9Wang, F.; Wang, P.; Zhang, X.; Li, H.; Himed, B. An Overview of Parametric Modeling and Methods for Radar Target Detection With Limited Data. IEEE Access 2021, 9, 60459-60469. [CrossRef]
+
+Evaluation of adaptive filter algorithms for clutter cancellation in passive bistatic radar. J E Palmer, S J Searle, Proceedings of the 2012 IEEE Radar Conference. the 2012 IEEE Radar ConferenceAtlanta, GA, USA; Hoboken, NJ, USAIEEEPalmer, J.E.; Searle, S.J. Evaluation of adaptive filter algorithms for clutter cancellation in passive bistatic radar. In Proceedings of the 2012 IEEE Radar Conference, Atlanta, GA, USA, 7-11 May 2012; IEEE: Hoboken, NJ, USA, 2012; pp. 0493-0498.
+
+Statistical Signal Processing: Detection, Estimation, and Time Series Analysis. L L Scharf, C Demeure, Addison-Wesley63Reading, MA, USAScharf, L.L.; Demeure, C. Statistical Signal Processing: Detection, Estimation, and Time Series Analysis; Addison-Wesley: Reading, MA, USA, 1991; Volume 63.
+
+. S M Kay, Fundamentals of Statistical Signal Processing. Detection Theory. IIPrentice HallKay, S.M. Fundamentals of Statistical Signal Processing. Detection Theory, Volume II; Prentice Hall: Upper Saddle River, NJ, USA, 1998.
+
+Aspects of Multivariate Statistical Theory. R J Muirhead, Muirhead, R.J. Aspects of Multivariate Statistical Theory;
+
+Matrix Algebra from a Statistician's Perspective. D A Harville, Springer1Berlin/Heidelberg, GermanyHarville, D.A. Matrix Algebra from a Statistician's Perspective; Springer: Berlin/Heidelberg, Germany, 1997; Volume 1.
+
+. R A Horn, C R Johnson, Matrix Analysis. Cambridge University PressHorn, R.A.; Johnson, C.R. Matrix Analysis; Cambridge University Press: Cambridge, UK, 2013.
+
+MIMO radar waveform design in colored noise based on information theory. B Tang, J Tang, Y Peng, 10.1109/TSP.2010.2050885IEEE Trans. Signal Process. 58Tang, B.; Tang, J.; Peng, Y. MIMO radar waveform design in colored noise based on information theory. IEEE Trans. Signal Process. 2010, 58, 4684-4697. [CrossRef]
+
+Spectrally Constrained MIMO Radar Waveform Design Based on Mutual Information. B Tang, J Li, 10.1109/TSP.2018.2887186IEEE Trans. Signal Process. 67Tang, B.; Li, J. Spectrally Constrained MIMO Radar Waveform Design Based on Mutual Information. IEEE Trans. Signal Process. 2019, 67, 115-127. [CrossRef]

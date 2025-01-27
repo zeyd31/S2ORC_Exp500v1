@@ -1,0 +1,423 @@
+
+molecules Molecular Dynamics Simulation of Distribution and Diffusion Behaviour of Oil-Water Interfaces
+Published: 17 May 2019
+
+Chengbin Zhang cbzhang@seu.edu.cnc.z. 
+School of Energy and Environment
+Key Laboratory of Energy Thermal Conversion and Control of Ministry of Education
+Southeast University
+210096NanjingChina
+
+Hanhui Dai hhdai@microflows.neth.d. 
+School of Energy and Environment
+Key Laboratory of Energy Thermal Conversion and Control of Ministry of Education
+Southeast University
+210096NanjingChina
+
+Pengfei Lu pengfeilu@dicp.ac.cnp.l. 
+School of Hydraulic, Energy and Power Engineering
+Yangzhou University
+225127YangzhouChina
+
+Dalian National Laboratory for Clean Energy
+Dalian Institute of Chemical Physics
+Chinese Academy of Sciences
+116023DalianChina
+
+Liangyu Wu lywu@yzu.edu.cnl.w. 
+School of Hydraulic, Energy and Power Engineering
+Yangzhou University
+225127YangzhouChina
+
+Bo Zhou zhou-b12@tsinghua.org.cn*correspondence:iamyucheng@seu.edu.cn 
+School of Environmental Science and Engineering
+Jiangsu Key Laboratory of Micro and Nano Heat Fluid Flow Technology and Energy Application
+Suzhou University of Science and Technology
+215009SuzhouChina
+
+Cheng Yu 
+School of Energy and Environment
+Key Laboratory of Energy Thermal Conversion and Control of Ministry of Education
+Southeast University
+210096NanjingChina
+
+Andrei Rotaru 
+Maria Dinescu 
+molecules Molecular Dynamics Simulation of Distribution and Diffusion Behaviour of Oil-Water Interfaces
+Published: 17 May 201910.3390/molecules24101905Received: 24 April 2019; Accepted: 16 May 2019;Article Academic Editors:concentration distributionsinterface roughnessoil-water interfacediffusion
+The distribution and diffusion behaviors of microscopic particles at fluorobenzene-water and pentanol-water interfaces are investigated using molecular dynamics simulation. The influences of Na + /Cl − ions and the steric effects of organic molecules are examined. The concentration distributions of different species, the orientations of oil molecules at the interface, and oil-water interface morphology as well as the diffusion behaviors of water molecules are explored and analyzed.The results indicate that a few fluorobenzene molecules move into the water phase influenced by Na + /Cl − ions, while the pentanol molecules at the interface prefer orientating their hydrophilic groups toward the water phase due to their large size. The water molecules more easily burst into the pentanol phase with larger molecular spaces. As the concentration of ions in the water phase increases, more water molecules enter into the pentanol molecules, leading to larger interface roughness and interface thickness. In addition, a lower diffusion coefficient for water molecules at the fluorobenzene-water interface are observed when introducing Na + /Cl − ions in the water phase, while for the pentanol-water system, the mobility of interfacial water molecules are enhanced with less ions and inhibited with more ions.
+
+Introduction
+
+Oil-water interfaces exist widely in physical, chemical, and biological processes, such as interface adsorption [1], extraction [2], emulsification [3,4], phase transfer [5,6], and component transport [7,8]. From a microscopic point of view, the particle diffusion at the oil-water interface is simultaneously affected by the same and heterogeneous phases nearby in the interface, thus presenting distribution and diffusion characteristics that differ from the particles inside the substance. This directly affects the micromorphology of the oil-water interface and the diffusion efficiency at the interface. Therefore, the investigation of the distribution and diffusion of microscopic particles at the oil-water interface is not only of scientific significance for understanding the structure and physicochemical characteristics of the oil-water interface, but also to provide key technical support for the regulation and optimization of various interface processes in practical applications [9][10][11][12].
+
+Since the 19th century, extensive experimental studies have been conducted on interfacial tension, solution adsorption, liquid membrane separation, and other interfacial properties and processes [13,14]. The rapid development of modern surface/interface analysis techniques (such as surface microscopy, surface spectroscopy, etc.) has pushed surface/interface science into the era of molecular/atomic analysis. Atkin et al. [15] used atomic force microscopy (AFM) and tunneling scanning microscopy (TSM) to find a unique multilayer solvation layer at the interface between gold and ionic liquids. Han et al. [16] studied the electrocatalytic performance of platinum-carbon nanoparticles by means of modern electrochemical analysis. It was indicated that the electrocatalytic activity of platinum-carbon nanoparticles was closely related to their size and irregular surface. However, these surface/interface analysis techniques are mainly used to analyze and characterize the microscopic characteristics of fixed surfaces/interfaces. It is difficult to study the distribution and diffusion behavior of microscopic particles at liquid-liquid interfaces, such as oil-water interfaces.
+
+Fortunately, molecular simulation provides another important means for exploring the distribution and movement of microparticles in the free interface region, and to some extent, makes up for the deficiency of modern surface/interface analysis technology. In recent years, molecular dynamics simulation has been used to study the distribution and movement of microscopic particles at the oil-water interface. Patel et al. [17] studied the structure orientation and hydrogen bonding of water molecules at the octane-water interface. The results indicated that the average number of hydrogen bonds and dielectric constant of water molecules at the interface were less than those in the water phase. Through the study of the hydrogen bond interaction between water molecules at the interface of dodecane phase and water phase, Chen et al. [18] pointed out that the slow hydrogen bond exchange between water molecules delayed the rearrangement of water molecules at the interface when the water phase and oil phase contact each other. Vatente et al. [19] used nonequilibrium molecular dynamics simulation to find that when potassium ions transfer from the water phase to the oil phase, it is necessary to strip the hydration layer molecules and overcome a certain energy barrier. Kadota et al. [20] pointed out that the mobility of ions at oil-water interface and the formation of organic molecular clusters could be effectively regulated by changing the types of organic molecules in the oil phase.
+
+In conclusion, it has been confirmed that there are differences in the distribution and diffusion characteristics of microscopic particles between the oil-water interface and the oil-water phase, and some progress has been made in the molecular dynamics simulation of oil-water interfaces. However, the microscopic behaviors of particle distribution and diffusion in oil-water systems remain unclear. Especially, the mechanism behind the microscopic morphology of oil-water interfaces and the diffusion characteristics of microscopic particles near the interface when adding electrolyte ions in the aqueous phase are still to be explored. Therefore, molecular dynamics simulation is performed to study the distribution and diffusion behavior of microscopic particles at the interface of two phases in two oil-water systems of fluorobenzene-water and 1-pentanol-water, which are commonly used in pharmaceutical manufacturing. The effect of adding electrolyte ions (Na + /Cl − ) to water on the interface morphology and water diffusion characteristics was analyzed in order to provide a clearer understanding of the distribution and diffusion of microscopic particles at the oil-water interface, which provides a theoretical basis for the design and control of physicochemical interface processes in engineering practice.
+
+
+Molecular Dynamics Simulation
+
+The structure of the oil-water system, the microstructure of water molecules, Na + /Cl − ions, and oil phase molecules used in the molecular dynamics simulation study are depicted in Figure 1. As shown in the figure, the oil-water system consists of an upper water phase and a lower oil phase, forming an oil-water interface perpendicular to the z direction. The upper water phase contains 2000 water molecules (1.0 g/cm 3 ), while the lower oil phase contains 300 fluorobenzene molecules (1.0 g/cm 3 ) or 200 1-pentanol molecules (0.8 g/cm 3 ). In the simulation, periodic boundary conditions are applied in the x, y, and z directions. The total thickness of the oil and water phases along the z direction is 9.49 nm, of which the oil phase thickness is about 5.00 nm, the water phase thickness is about 4.49 nm, and the area of the oil-water interface perpendicular to the z direction is 4.00 × 4.00 nm 2 . In this way, the oil and water phases in the z direction have enough thickness so that the interaction between them and the influence caused by the oil-water interface in the adjacent periodic cell can be neglected. Different quantities of electrolyte ions (Na + /Cl − ) were added to the simulated water phase to investigate the impact of electrolyte ions on the distribution and diffusion characteristics of the microscopic particles at the oil-water interface. The number of molecules and ions in each simulation system is listed in Table 1. As is known, the mass concentration of saturated NaCl solution is 26.47% at room temperature. In our work, the simulation systems were all dilute solutions of NaCl (from 0.00% to 6.10%).
+
+Molecules 2019, 24, x FOR PEER REVIEW 3 of 13 about 4.49 nm, and the area of the oil-water interface perpendicular to the z direction is 4.00 × 4.00 nm 2 . In this way, the oil and water phases in the z direction have enough thickness so that the interaction between them and the influence caused by the oil-water interface in the adjacent periodic cell can be neglected. Different quantities of electrolyte ions (Na + /Cl − ) were added to the simulated water phase to investigate the impact of electrolyte ions on the distribution and diffusion characteristics of the microscopic particles at the oil-water interface. The number of molecules and ions in each simulation system is listed in Table 1. As is known, the mass concentration of saturated NaCl solution is 26.47% at room temperature. In our work, the simulation systems were all dilute solutions of NaCl (from 0.00% to 6.10%).   The interactions of microscopic particles decide the distribution and diffusion characteristics of particles at the oil-water interface; thus, the choice of molecular force field is quite significant in the calculation these properties. COMPASS (Condensed-phase Optimized Molecular Potentials for Atomistic Simulation Studies) force field [21] is an ab initio molecular force field, which can better deal with the interactions among inorganic and organic molecules and ions, and is suitable for the calculation of molecular structure and thermodynamic properties of condensed matter. Therefore, a COMPASS force field is used to calculate the interactions among water molecules, ions, and oil molecules. Bond length, bond angle, and dihedral angle are used to describe molecular structures.  The interactions of microscopic particles decide the distribution and diffusion characteristics of particles at the oil-water interface; thus, the choice of molecular force field is quite significant in the calculation these properties. COMPASS (Condensed-phase Optimized Molecular Potentials for Atomistic Simulation Studies) force field [21] is an ab initio molecular force field, which can better deal with the interactions among inorganic and organic molecules and ions, and is suitable for the calculation of molecular structure and thermodynamic properties of condensed matter. Therefore, a COMPASS force field is used to calculate the interactions among water molecules, ions, and oil molecules. Bond length, bond angle, and dihedral angle are used to describe molecular structures. Lennard-Jones (LJ) potential and Coulomb potential are used to describe nonbonding interactions [22]. In order to eliminate unreasonable interaction between molecules and ions and optimize the initial particle distribution of the model system, steepest descent, conjugate gradient, and quasi-Newton methods were comprehensively used to optimize the initial configuration. On the basis of the initial configuration, we use canonical ensemble (NVT) to make the system balance via 1 ns of dynamic simulation, and then perform another 1 ns of molecular dynamics simulation. The simulation time step of which is 1 fs and the atomic coordinate information is saved every 10,000 steps. In the whole simulation process, the atom-based addition method is used to calculate Van der Waals forces, and the truncation radius is 1.2 nm. The Ewald summation method is applied in Coulomb force calculation [23] and the accuracy was 10 −3 kcal/mol. A Nose heat bath [24] is adopted to control the temperature of the whole system during simulation at 298 K. All the sets and calculations stated above were conducted in the Materials Studio 6.0 packages [25].
+
+In order to verify the simulation method in our work, we simulate the molecular distributions of an octane-water system as provided by Valente [19]. The concentration distributions are compared in Figure 2. The agreement of the interfacial distribution profiles of water and octane molecules verifies the rationality of the method used in our work. Lennard-Jones (LJ) potential and Coulomb potential are used to describe nonbonding interactions [22]. In order to eliminate unreasonable interaction between molecules and ions and optimize the initial particle distribution of the model system, steepest descent, conjugate gradient, and quasi-Newton methods were comprehensively used to optimize the initial configuration. On the basis of the initial configuration, we use canonical ensemble (NVT) to make the system balance via 1 ns of dynamic simulation, and then perform another 1 ns of molecular dynamics simulation. The simulation time step of which is 1 fs and the atomic coordinate information is saved every 10,000 steps. In the whole simulation process, the atom-based addition method is used to calculate Van der Waals forces, and the truncation radius is 1.2 nm. The Ewald summation method is applied in Coulomb force calculation [23] and the accuracy was 10 −3 kcal/mol. A Nose heat bath [24] is adopted to control the temperature of the whole system during simulation at 298 K. All the sets and calculations stated above were conducted in the Materials Studio 6.0 packages [25].
+
+In order to verify the simulation method in our work, we simulate the molecular distributions of an octane-water system as provided by Valente [19]. The concentration distributions are compared in Figure 2. The agreement of the interfacial distribution profiles of water and octane molecules verifies the rationality of the method used in our work. 
+
+
+Results and Discussion
+
+
+Microscopic Particle Distribution and Oil-Water Interface Morphology
+
+In order to establish an intuitive understanding of the distribution characteristics of various microscopic particles at the oil-water interface, the interfacial microstructures of the fluorobenzenewater system and the pentanol-water system at equilibrium state with different electrolyte ion contents are presented in Figure 3. As shown in Figure 3a-d, fluorobenzene molecules are closely packed in the oil phase in the fluorobenzene-water system due to their planar configuration and small volume. Owing to the attraction of hydrogen bonds of adjacent water molecules, the arrangement of fluorobenzene molecules at the interface is looser than that of fluorobenzene molecules in the oil phase. When sodium ions and chloride ions exist in the aqueous phase, a small amount of fluorobenzene molecules enter the aqueous phase (as shown in Figure 3b) because of the additional ion-fluorobenzene electrostatic interaction. However, with the further increase of electrolyte ions (Na + /Cl − ) in the aqueous phase, the density of aqueous phase layer increases, the electrostatic interaction between water molecules and anion and cation increases, thus the binding between water molecules and ions makes it difficult for fluorobenzene molecules to enter the aqueous phase (as shown in Figure 3d).
+
+Compared with the fluorobenzene-water system, the pentanol molecule in the pentanol-water system has a larger volume and needs to overcome much larger steric hindrance in the process of movement and migration. Therefore, no pentanol molecule has been observed in the water phase, 
+
+
+Results and Discussion
+
+
+Microscopic Particle Distribution and Oil-Water Interface Morphology
+
+In order to establish an intuitive understanding of the distribution characteristics of various microscopic particles at the oil-water interface, the interfacial microstructures of the fluorobenzene-water system and the pentanol-water system at equilibrium state with different electrolyte ion contents are presented in Figure 3. As shown in Figure 3a-d, fluorobenzene molecules are closely packed in the oil phase in the fluorobenzene-water system due to their planar configuration and small volume. Owing to the attraction of hydrogen bonds of adjacent water molecules, the arrangement of fluorobenzene molecules at the interface is looser than that of fluorobenzene molecules in the oil phase. When sodium ions and chloride ions exist in the aqueous phase, a small amount of fluorobenzene molecules enter the aqueous phase (as shown in Figure 3b) because of the additional ion-fluorobenzene electrostatic interaction. However, with the further increase of electrolyte ions (Na + /Cl − ) in the aqueous phase, the density of aqueous phase layer increases, the electrostatic interaction between water molecules and anion and cation increases, thus the binding between water molecules and ions makes it difficult for fluorobenzene molecules to enter the aqueous phase (as shown in Figure 3d).
+
+Compared with the fluorobenzene-water system, the pentanol molecule in the pentanol-water system has a larger volume and needs to overcome much larger steric hindrance in the process of movement and migration. Therefore, no pentanol molecule has been observed in the water phase, regardless of whether ions are added or not, as shown in Figure 3e-h. In addition, the amphiphilic nature of pentanol molecules makes the pentanol molecule at the interface point to the aqueous phase mainly with hydrophilic hydroxyl groups, as shown in Figure 3e. Moreover, owing to the large volume of pentanol molecules, loose accumulation, and large gaps between pentanol molecules at the interface, water molecules often enter the pentanol phase, as shown in Figure 3g.
+
+Various particle concentration curves at the oil-water interface directly reflect the microscopic distribution characteristics of particles. The relative concentration distributions of various particles along the z direction is directedly shown in Figures 4 and 5, respectively (C r , the ratio of the concentration of microscopic particles at the interface to the average concentration in the aqueous phase). The concentration curves of fluorine atoms (F) and α carbon atoms (C 1 ) characterize the concentration distributions of fluorobenzene molecules and the concentration curves of hydroxyl (-OH) and methyl (-CH 3 ) groups characterize the concentration distribution of pentanol molecules, while the concentration curve of oxygen atom (O) represents the concentration distribution of water molecules.
+
+Molecules 2019, 24, x FOR PEER REVIEW 5 of 13 regardless of whether ions are added or not, as shown in Figure 3e-h. In addition, the amphiphilic nature of pentanol molecules makes the pentanol molecule at the interface point to the aqueous phase mainly with hydrophilic hydroxyl groups, as shown in Figure 3e. Moreover, owing to the large volume of pentanol molecules, loose accumulation, and large gaps between pentanol molecules at the interface, water molecules often enter the pentanol phase, as shown in Figure 3g. Various particle concentration curves at the oil-water interface directly reflect the microscopic distribution characteristics of particles. The relative concentration distributions of various particles along the z direction is directedly shown in Figure 4 and Figure 5, respectively (Cr, the ratio of the concentration of microscopic particles at the interface to the average concentration in the aqueous phase). The concentration curves of fluorine atoms (F) and α carbon atoms (C1) characterize the concentration distributions of fluorobenzene molecules and the concentration curves of hydroxyl (-OH) and methyl (-CH3) groups characterize the concentration distribution of pentanol molecules, while the concentration curve of oxygen atom (O) represents the concentration distribution of water molecules.  It can be seen from the figures that there is a interfacial zone between the oil and water phase (defined as the area where the concentration of oil phase molecule or water phase molecule is 10%-90% of their respective bulk phase concentration), that is, the oil-water interface region [26]. It can be seen that the oil-water interface thickness of the fluorobenzene-water system decreases with the increase of electrolyte ions (Na + /Cl − ), while the oil-water interface thickness of the pentanol-water system increases with the increase of sodium ions and chloride ions, which is because the pentanol molecule has a longer alkyl chain than the fluorobenzene molecule, larger steric hindrance, and looser accumulation. In this way, when the ions in the water phase increase, the water molecules are squeezed, and the number of water molecules entering the interior of the pentanol phase increases, resulting in an increase of the volume of the oil-water interface. In addition, compared with the concentration curves of fluorine atoms (F) and α carbon atoms (C 1 ), the concentration distribution curves of hydroxyl (-OH) and alkyl (-CH 3 ) groups of pentanol molecules have concentration peaks near the oil-water interface, which are near the water and oil phases, respectively, indicating again that the amphiphilicity of pentanol molecule leads to an obvious orientation selectivity at the oil-water interface, that is, hydroxyl groups point towards the water phase and alkyl chains point towards the oil phase. Moreover, as can be seen from Figures 4 and 5, the concentration curves of F and C 1 at the interface basically coincide, which indicates that the fluorobenzene molecules at the interface do not show a specific orientation due to their small steric hindrance and easily achievable movement and rotation. It can be seen from the figures that there is a interfacial zone between the oil and water phase (defined as the area where the concentration of oil phase molecule or water phase molecule is 10%-90% of their respective bulk phase concentration), that is, the oil-water interface region [26]. It can be seen that the oil-water interface thickness of the fluorobenzene-water system decreases with the increase of electrolyte ions (Na + /Cl − ), while the oil-water interface thickness of the pentanol-water system increases with the increase of sodium ions and chloride ions, which is because the pentanol molecule has a longer alkyl chain than the fluorobenzene molecule, larger steric hindrance, and looser accumulation. In this way, when the ions in the water phase increase, the water molecules are squeezed, and the number of water molecules entering the interior of the pentanol phase increases, resulting in an increase of the volume of the oil-water interface. In addition, compared with the concentration curves of fluorine atoms (F) and α carbon atoms (C1), the concentration distribution curves of hydroxyl (-OH) and alkyl (-CH3) groups of pentanol molecules have concentration peaks near the oil-water interface, which are near the water and oil phases, respectively, indicating again that the amphiphilicity of pentanol molecule leads to an obvious orientation selectivity at the oilwater interface, that is, hydroxyl groups point towards the water phase and alkyl chains point towards the oil phase. Moreover, as can be seen from Figure 4 and Figure 5, the concentration curves of F and C1 at the interface basically coincide, which indicates that the fluorobenzene molecules at the interface do not show a specific orientation due to their small steric hindrance and easily achievable movement and rotation.  The rough morphology of the oil-water interface is also an important feature of the microscopic distribution of particles at the interface. Therefore, based on the spatial distribution of various particles in the oil-water two-phase systems, the oil-water interface boundary curves are generated The rough morphology of the oil-water interface is also an important feature of the microscopic distribution of particles at the interface. Therefore, based on the spatial distribution of various particles in the oil-water two-phase systems, the oil-water interface boundary curves are generated by projecting the oil-water two-phase system to the x-y-z plane, as shown in Figures 6 and 7. Here, the root mean square roughness R ms [27] is especially defined to quantitatively characterize the roughness of an oil-water interface:
+R ms = 1 L L 0 [z(x) − z(x)] 2 dx(1)
+Among them, L is the length in the x direction and z(x) − z(x) is the difference between the z coordinates of each position on the interface boundary curve and the average of z. The z coordinates of different positions were obtained by Get Data software. Thus, for the fluorobenzene-water system (as shown in Figure 6), the roughness of the oil-water interface curve fluctuates slightly (R ms = 0.07-0.17), and the root mean square roughness reaches the minimum (R ms = 0.07) when the number of ions in the water phase reaches 40. It can be inferred that adding more ions in the water phase can reduce the roughness of the interface, which is due to the tight accumulation of molecules at the interface caused by the extrusion of water relative to the oil phase. Compared with the fluorobenzene-water system, the interfacial boundary curve of the pentanol-water system (as shown in Figure 7) fluctuates more obviously and its roughness is greater, which is mainly due to the large void of pentanol molecules, loose accumulation, and easy entry of water molecules into the void to form an irregular "erosion" morphology.
+
+Molecules 2019, 24, x FOR PEER REVIEW 7 of 13 by projecting the oil-water two-phase system to the x-y-z plane, as shown in Figures 6 and 7. Here, the root mean square roughness Rms [27] is especially defined to quantitatively characterize the roughness of an oil-water interface:
+R ms = 1 L z x − z (x) 2 dx L 0(1)
+Among them, L is the length in the x direction and (x) − z (x) is the difference between the z coordinates of each position on the interface boundary curve and the average of z. The z coordinates of different positions were obtained by Get Data software. Thus, for the fluorobenzene-water system (as shown in Figure 6), the roughness of the oil-water interface curve fluctuates slightly (Rms = 0.07-0.17), and the root mean square roughness reaches the minimum (Rms = 0.07) when the number of ions in the water phase reaches 40. It can be inferred that adding more ions in the water phase can reduce the roughness of the interface, which is due to the tight accumulation of molecules at the interface caused by the extrusion of water relative to the oil phase. Compared with the fluorobenzene-water system, the interfacial boundary curve of the pentanol-water system (as shown in Figure 7) fluctuates more obviously and its roughness is greater, which is mainly due to the large void of pentanol molecules, loose accumulation, and easy entry of water molecules into the void to form an irregular "erosion" morphology.   
+
+
+Diffusion Characteristics of Microscopic Particles at the Oil-water Interface
+
+Diffusion and migration of microscopic particles at oil-water interfaces are important for the distribution and rough morphology of those particles. The mean squared displacement (MSD) of microscopic particles can be used to characterize the difficulty of particle diffusion. The MSD (formula 2) of water molecules in the water phase and at the interface of two oil-water systems is calculated in this paper, and the MSD curves are plotted in Figure 8 and Figure 9.
+MSD = 1 N 〈|r i t −r i 0 | 2 〉 N i = 1(2)
+On this basis, the diffusion coefficient (D) of water molecules at the interface is calculated as following [28]:
+D = 1 6 lim t→∞ dMSD dt (3)
+In Formulas (2) and (3), the position coordinates of ri(0) and ri(t) are the position coordinates of the i-th water molecule at the initial time and the current time, respectively, and D is the diffusion coefficient of the water molecule. Accordingly, the corresponding diffusion coefficients are given in Table 2 (Di is the diffusion coefficients of water molecules at the interface and Db is the diffusion coefficients of water molecules in the water phase). From Formulas (2) and (3), it should be noted that for normal diffusion, the MSD-t plots should be linear and then the correct diffusion coefficient D can  
+
+
+Diffusion Characteristics of Microscopic Particles at the Oil-water Interface
+
+Diffusion and migration of microscopic particles at oil-water interfaces are important for the distribution and rough morphology of those particles. The mean squared displacement (MSD) of microscopic particles can be used to characterize the difficulty of particle diffusion. The MSD (formula 2) of water molecules in the water phase and at the interface of two oil-water systems is calculated in this paper, and the MSD curves are plotted in Figure 8 and Figure 9.
+MSD = 1 N 〈|r i t −r i 0 | 2 〉 N i = 1(2)
+On this basis, the diffusion coefficient (D) of water molecules at the interface is calculated as following [28]:
+D = 1 6 lim t→∞ dMSD dt(3)
+In Formulas (2) and (3), the position coordinates of ri(0) and ri(t) are the position coordinates of the i-th water molecule at the initial time and the current time, respectively, and D is the diffusion coefficient of the water molecule. Accordingly, the corresponding diffusion coefficients are given in Table 2 (Di is the diffusion coefficients of water molecules at the interface and Db is the diffusion coefficients of water molecules in the water phase). From Formulas (2) and (3), it should be noted that for normal diffusion, the MSD-t plots should be linear and then the correct diffusion coefficient D can 
+
+
+Diffusion Characteristics of Microscopic Particles at the Oil-water Interface
+
+Diffusion and migration of microscopic particles at oil-water interfaces are important for the distribution and rough morphology of those particles. The mean squared displacement (MSD) of microscopic particles can be used to characterize the difficulty of particle diffusion. The MSD (formula 2) of water molecules in the water phase and at the interface of two oil-water systems is calculated in this paper, and the MSD curves are plotted in Figures 8 and 9.
+MSD = 1 N N i=1 r i (t) − r i (0) 2(2)
+On this basis, the diffusion coefficient (D) of water molecules at the interface is calculated as following [28]:
+D = 1 6 lim t→∞ dMSD dt(3)
+In Formulas (2) and (3), the position coordinates of r i (0) and r i (t) are the position coordinates of the i-th water molecule at the initial time and the current time, respectively, and D is the diffusion coefficient of the water molecule. Accordingly, the corresponding diffusion coefficients are given in Table 2 (D i is the diffusion coefficients of water molecules at the interface and D b is the diffusion coefficients of water molecules in the water phase). From Formulas (2) and (3), it should be noted that for normal diffusion, the MSD-t plots should be linear and then the correct diffusion coefficient D can  Table 2. Diffusion coefficients (in three-dimensional space) of water molecules in the water phase and at the interface with different oil-water interface systems (unit: 10 −10 m 2 /s).
+
+
+Diffusion Coefficient
+
+Di Db By calculating the MSD curves and diffusion coefficients, it can be seen that adding electrolyte ions can reduce the diffusivity of water molecules in the fluorobenzene-water and pentanol-water  Table 2. Diffusion coefficients (in three-dimensional space) of water molecules in the water phase and at the interface with different oil-water interface systems (unit: 10 −10 m 2 /s).
+
+
+Diffusion Coefficient
+
+Di Db By calculating the MSD curves and diffusion coefficients, it can be seen that adding electrolyte ions can reduce the diffusivity of water molecules in the fluorobenzene-water and pentanol-water  Table 2. Diffusion coefficients (in three-dimensional space) of water molecules in the water phase and at the interface with different oil-water interface systems (unit: 10 −10 m 2 /s).
+
+
+Diffusion Coefficient
+D i D b
+Fluoro benzene-NaCl Aqueous Solution By calculating the MSD curves and diffusion coefficients, it can be seen that adding electrolyte ions can reduce the diffusivity of water molecules in the fluorobenzene-water and pentanol-water systems (as shown in Figure 8, Figure 9 and Table 2), which is due to the fact that when electrolyte ions are added, the movement of water molecules not only overcomes the hydrogen bonding between them, but also overcomes the electrostatic interaction exerted by electrolyte ions. However, for water molecules at the oil-water interface, there are quite different situations in these two systems, that is, the diffusion ability of water molecules at the fluorobenzene-water interface decreases with the increase of the number of ions in the water phase, while the diffusion ability of water molecules at the pentanol-water interface increases first and then decreases with the increase of the number of ions in the water phase (as shown in Figure 8a,b and Table 2). In the fluorobenzene-water system, the extrusion of water molecules at the interface increases with the increase of the number of ions in the water phase. However, due to the tight accumulation of fluorobenzene molecules, this kind of squeezing action compresses the space of water molecules, resulting in a decrease in the diffusion capacity (as shown in Figures 3a-d and 8). However, in the pentanol-water system, although the number of ions in the aqueous phase will still squeeze the water molecules at the interface, the water molecules can more easily enter the pentanol because of the loose accumulation of pentanol molecules at the interface. Therefore, this extrusion promotes the diffusion of water molecules into the voids of pentanol molecules, resulting in the enhancement of the diffusion ability of water molecules as the number of ions increases (as shown in Figures 3e-h and 9). With the further increase of electrolyte ions in the aqueous phase, not only are the water molecules at the interface are squeezed, but so are the pentanol molecules. The gaps between pentanol molecules decrease, and the difficulty for water molecules to enter pentanol increases, resulting in a downward trend of diffusion ability of water molecules at the interface (Figure 9b).
+
+In addition, the abnormal increase of the diffusion ability of water molecules at the pentanol-water interface with the increase of the number of ions in the water phase can be explained by radial distribution function (RDF) analysis. Figure 10a shows the g(r) of the hydrophilic and hydrophobic parts of fluorobenzene molecules around O (water) atoms for the fluorobenzene-water system with (without) Na + /Cl − ions in the water phase. Larger peaks can be observed at~0.3 nm in the g(r) of the hydrophilic groups and water molecules (F-O), especially for the system with Na + /Cl − ions. This means the addition of NaCl leads to the compression of the interface and densely packing of the molecules. For the pentanol-water system (Figure 10b), more pronounced first peak was presented at the g(r) of hydrophilic part and water molecules (head-O). However, there is no obvious change in the g(r) profiles with and without NaCl in the water phase. It is suggested that the pentanol molecules at the interface orient their hydroxyl group toward the water phase. When adding NaCl in the water phase, some water molecules burst into the space of pentanol and the pentanol molecules retain regular configurations at the interface. Thus, the interfacial packing is not obviously changed. systems (as shown in Figures 8,9 and Table 2), which is due to the fact that when electrolyte ions are added, the movement of water molecules not only overcomes the hydrogen bonding between them, but also overcomes the electrostatic interaction exerted by electrolyte ions. However, for water molecules at the oil-water interface, there are quite different situations in these two systems, that is, the diffusion ability of water molecules at the fluorobenzene-water interface decreases with the increase of the number of ions in the water phase, while the diffusion ability of water molecules at the pentanol-water interface increases first and then decreases with the increase of the number of ions in the water phase (as shown in Figure 8a,b and Table 2). In the fluorobenzene-water system, the extrusion of water molecules at the interface increases with the increase of the number of ions in the water phase. However, due to the tight accumulation of fluorobenzene molecules, this kind of squeezing action compresses the space of water molecules, resulting in a decrease in the diffusion capacity (as shown in Figures 3a-d and 8). However, in the pentanol-water system, although the number of ions in the aqueous phase will still squeeze the water molecules at the interface, the water molecules can more easily enter the pentanol because of the loose accumulation of pentanol molecules at the interface. Therefore, this extrusion promotes the diffusion of water molecules into the voids of pentanol molecules, resulting in the enhancement of the diffusion ability of water molecules as the number of ions increases (as shown in Figures 3e-h and 9). With the further increase of electrolyte ions in the aqueous phase, not only are the water molecules at the interface are squeezed, but so are the pentanol molecules. The gaps between pentanol molecules decrease, and the difficulty for water molecules to enter pentanol increases, resulting in a downward trend of diffusion ability of water molecules at the interface (Figure 9b).
+
+In addition, the abnormal increase of the diffusion ability of water molecules at the pentanolwater interface with the increase of the number of ions in the water phase can be explained by radial distribution function (RDF) analysis. Figure 10a shows the g(r) of the hydrophilic and hydrophobic parts of fluorobenzene molecules around O (water) atoms for the fluorobenzene-water system with (without) Na + /Cl − ions in the water phase. Larger peaks can be observed at ~0.3 nm in the g(r) of the hydrophilic groups and water molecules (F-O), especially for the system with Na + /Cl − ions. This means the addition of NaCl leads to the compression of the interface and densely packing of the molecules. For the pentanol-water system (Figure 10b), more pronounced first peak was presented at the g(r) of hydrophilic part and water molecules (head-O). However, there is no obvious change in the g(r) profiles with and without NaCl in the water phase. It is suggested that the pentanol molecules at the interface orient their hydroxyl group toward the water phase. When adding NaCl in the water phase, some water molecules burst into the space of pentanol and the pentanol molecules retain regular configurations at the interface. Thus, the interfacial packing is not obviously changed.   
+
+
+Conclusions
+
+
+Conclusions
+
+In this paper, the distribution and diffusion behavior of microscopic particles at oil-water (fluorobenzene-water, 1-pentanol-water) two-phase interfaces were studied based on molecular dynamics simulation. The microscopic particle distribution, molecular orientation, interfacial roughness, and particle diffusion ability were analyzed. The effects of water molecular distribution and diffusion characteristics exerted on the types of organic molecules in the oil phase and the concentration of electrolyte ions (Na + /Cl − ) in water on the oil-water interface were examined. The conclusions are as follows:
+
+(1) The addition of a small amount of electrolyte ions in the water phase will promote the movement of fluorobenzene molecules towards the water phase at the oil-water interface, while the pentanol molecules at the oil-water interface cannot easily enter the water phase because of their large molecular size. The pentanol molecules show obvious orientation selectivity at the oil-water interface, i.e., hydroxyl groups orientate towards the water phase and alkyl chains orientate towards the oil phase. For water molecules, the close accumulation of fluorobenzene makes it difficult for water molecules to enter the fluorobenzene phase, whereas the larger voids between pentanol molecules facilitate the entry of water molecules.
+
+(2) There is a microscopic particle interfacial zone at the oil-water interface. With the increase of the number of electrolyte ions, the water molecules at the interface are squeezed, and the accumulation of fluorobenzene is denser, which is not conducive to the entry of water molecules, and the thickness of the interfacial zone decreases. In contrast, the increase of the number of electrolyte ions promotes more water molecules to enter the pentanol phase with larger voids, which leads to the increase of the thickness of the interfacial zone.
+
+(3) The root mean square roughness of oil-water interface increases first and then decreases with increasing of ion concentration in the water phase, and the interface roughness of the oil-water interface is larger than that of pentanol molecules.
+
+(4) Whether in the fluorobenzene-water system or in the pentanol-water system, the diffusion coefficient of water molecules in the water phase decreases with the increase of the number of ions; the diffusion coefficient of water molecules in the fluorobenzene-water system decreases with the increase of the number of ions at the oil-water interface, while the diffusion coefficient of water molecules increases first and then decreases with the increase of the number of ions at the pentanol-water interface.
+
+Figure 1 .
+1Model and molecular structure of the oil-water interface.
+
+Figure 1 .
+1Model and molecular structure of the oil-water interface.
+
+Figure 2 .
+2Comparison of concentration profiles of water and octane molecules at the oilwater interface between the present simulation and Valente's work.
+
+Figure 2 .
+2Comparison of concentration profiles of water and octane molecules at the oil-water interface between the present simulation and Valente's work.
+
+Figure 3 .
+3Simulation of oil-water interface in different systems after 1 ns molecular dynamics simulation: (a-d) Fluorobenzene-NaCl aqueous solution system containing different concentrations of ions; (e-h) 1-Pentanol-NaCl aqueous solution system containing different concentrations of ions.
+
+Figure 3 .
+3Simulation of oil-water interface in different systems after 1 ns molecular dynamics simulation: (a-d) Fluorobenzene-NaCl aqueous solution system containing different concentrations of ions; (e-h) 1-Pentanol-NaCl aqueous solution system containing different concentrations of ions.
+
+Figure 4 .
+4Concentration distribution curve of F, C, O, Na + , and Cl − at the oil-water interface in the fluorobenzene-NaCl aqueous solution system: (a) Case 1; (b) Case 2; (c) Case 3; (d) Case 4.
+
+Figure 4 .
+4Concentration distribution curve of F, C, O, Na + , and Cl − at the oil-water interface in the fluorobenzene-NaCl aqueous solution system: (a) Case 1; (b) Case 2; (c) Case 3; (d) Case 4.
+
+Figure 5 .
+5Concentration distribution curve of F, C, O, Na + , and Cl − at the oil-water interface in the 1pentanol-NaCl aqueous solution system: (a) Case 5; (b) Case 6; (c) Case 7; (d) Case 8.
+
+Figure 5 .Figure 6 .
+56Concentration distribution curve of F, C, O, Na + , and Cl − at the oil-water interface in the 1-pentanol-NaCl aqueous solution system: (a) Case 5; (b) Case 6; (c) Case 7; (d) Case 8. Molecules 2019, 24, Interface morphology of the fluorobenzene-NaCl aqueous solution system with different contrations of ions: (a) Case 1; (b) Case 2; (c) Case 3; (d) Case 4.
+
+Figure 7 .
+7Interface morphology of the 1-pentanol-NaCl aqueous solution system with different concentrations of ions: (a) Case 5; (b) Case 6; (c) Case 7; (d) Case 8.
+
+Figure 6 .Figure 6 .
+66Interface morphology of the fluorobenzene-NaCl aqueous solution system with different contrations of ions: Interface morphology of the fluorobenzene-NaCl aqueous solution system with different contrations of ions: (a) Case 1; (b) Case 2; (c) Case 3; (d) Case 4.
+
+Figure 7 .
+7Interface morphology of the 1-pentanol-NaCl aqueous solution system with different concentrations of ions: (a) Case 5; (b) Case 6; (c) Case 7; (d) Case 8.
+
+Figure 7 .
+7Interface morphology of the 1-pentanol-NaCl aqueous solution system with different concentrations of ions: (a) Case 5; (b) Case 6; (c) Case 7; (d) Case 8.
+
+Figure 8 .Figure 9 .
+89Mean displacement curve of water molecules in: (a) Fluorobenzene-NaCl aqueous solution system; (b) 1-Pentanol-NaCl aqueous solution system. Mean displacement curve of water molecules at the interface: (a) Fluorobenzene-NaCl aqueous solution system; (b) 1-Pentanol-NaCl aqueous solution system.
+
+Figure 8 .Figure 8 .Figure 9 .
+889Mean displacement curve of water molecules in: (a) Fluorobenzene-NaCl aqueous solution system; (b) 1-Pentanol-NaCl aqueous solution system. Mean displacement curve of water molecules in: (a) Fluorobenzene-NaCl aqueous solution system; (b) 1-Pentanol-NaCl aqueous solution system. Mean displacement curve of water molecules at the interface: (a) Fluorobenzene-NaCl aqueous solution system; (b) 1-Pentanol-NaCl aqueous solution system.
+
+Figure 9 .
+9Mean displacement curve of water molecules at the interface: (a) Fluorobenzene-NaCl aqueous solution system; (b) 1-Pentanol-NaCl aqueous solution system.
+
+Figure 10 .
+10The radial distribution functions g(r) of hydrophilic and hydrophobic parts of organic solvents and water molecules at different oil-water interfaces: (a) The g(r) of C1-O and F-O in the fluorobenzene-water system; (b) The g(r) of head-O and tail-O in 1-the pentanol-water system.
+
+Figure 10 .
+10The radial distribution functions g(r) of hydrophilic and hydrophobic parts of organic solvents and water molecules at different oil-water interfaces: (a) The g(r) of C 1 -O and F-O in the fluorobenzene-water system; (b) The g(r) of head-O and tail-O in 1-the pentanol-water system.
+
+Table 1 .
+1The number of microscopic particles contained in the various oil-water systems.Fluorobenzene-NaCl 
+Aqueous Solution 
+
+Case Number 
+Case 1 Case 2 Case 3 Case 4 
+
+Fluorobenzene 
+300 
+300 
+300 
+300 
+
+Water Molecule 
+2000 
+2000 
+2000 
+2000 
+
+Sodium Ion 
+0 
+10 
+20 
+40 
+
+Chloride 
+0 
+10 
+20 
+40 
+
+Mass Concentration 
+------
+1.60% 
+3.15% 
+6.10% 
+
+1-Pentanol-NaCl 
+
+Aqueous Solution 
+
+Case Number 
+Case 5 Case 6 Case 7 Case 8 
+
+1-Pentanol 
+200 
+200 
+200 
+200 
+
+Water Molecule 
+2000 
+2000 
+2000 
+2000 
+
+Sodium Ion 
+0 
+10 
+20 
+40 
+
+Chloride 
+0 
+10 
+20 
+40 
+
+Mass Concentration 
+------
+1.60% 
+3.15% 
+6.10% 
+
+
+
+Table 1 .
+1The number of microscopic particles contained in the various oil-water systems.Fluorobenzene-NaCl 
+Aqueous Solution 
+
+Case Number 
+Case 1 
+Case 2 
+Case 3 
+Case 4 
+
+Fluorobenzene 
+300 
+300 
+300 
+300 
+Water Molecule 
+2000 
+2000 
+2000 
+2000 
+Sodium Ion 
+0 
+10 
+20 
+40 
+Chloride 
+0 
+10 
+20 
+40 
+Mass Concentration 
+--
+1.60% 
+3.15% 
+6.10% 
+
+1-Pentanol-NaCl 
+Aqueous Solution 
+
+Case Number 
+Case 5 
+Case 6 
+Case 7 
+Case 8 
+
+1-Pentanol 
+200 
+200 
+200 
+200 
+Water Molecule 
+2000 
+2000 
+2000 
+2000 
+Sodium Ion 
+0 
+10 
+20 
+40 
+Chloride 
+0 
+10 
+20 
+40 
+Mass Concentration 
+--
+1.60% 
+3.15% 
+6.10% 
+
+
+Conflicts of Interest:The authors declare no conflict of interest.
+Nanometer-size polyoxometalate anions adsorb strongly on neutral soft surfaces. B Naskar, O Diat, V Nardello-Rataj, P Bauduin, 10.1021/acs.jpcc.5b06273J. Phys. Chem. C. 119Naskar, B.; Diat, O.; Nardello-Rataj, V.; Bauduin, P. Nanometer-size polyoxometalate anions adsorb strongly on neutral soft surfaces. J. Phys. Chem. C 2015, 119, 20985-20992. [CrossRef]
+
+Vortex-assisted surfactant-enhanced-emulsification liquid-liquid microextraction with solidification of floating organic droplet combined with hplc for the determination of neonicotinoid pesticides. J Vichapong, R Burakham, S Srijaranai, 10.1016/j.talanta.2013.08.034Talanta. 117Vichapong, J.; Burakham, R.; Srijaranai, S. Vortex-assisted surfactant-enhanced-emulsification liquid-liquid microextraction with solidification of floating organic droplet combined with hplc for the determination of neonicotinoid pesticides. Talanta 2013, 117, 221-228. [CrossRef]
+
+Chitosan-based aerogel membrane for robust oil-in-water emulsion separation. J P Chaudhary, N Vadodariya, S K Nataraj, R Meena, 10.1021/acsami.5b08705Acs Appl. Mater. Interfaces. 7Chaudhary, J.P.; Vadodariya, N.; Nataraj, S.K.; Meena, R. Chitosan-based aerogel membrane for robust oil-in-water emulsion separation. Acs Appl. Mater. Interfaces 2015, 7, 24957-24962. [CrossRef]
+
+Hydrodynamics of double emulsion droplet in shear flow. Y Chen, X Liu, M Shi, 10.1063/1.4789865Appl. Phys. Lett. 102Chen, Y.; Liu, X.; Shi, M. Hydrodynamics of double emulsion droplet in shear flow. Appl. Phys. Lett. 2013, 102, 051609. [CrossRef]
+
+Novel kinetics model for third-liquid phase-transfer catalysis system of the "complex" carbanion: Competitive role between catalytic cycles. Q Q Zhao, J Sun, B J Liu, J X He, Chem. Eng. J. 280Zhao, Q.Q.; Sun, J.; Liu, B.J.; He, J.X. Novel kinetics model for third-liquid phase-transfer catalysis system of the "complex" carbanion: Competitive role between catalytic cycles. Chem. Eng. J. 2015, 280, 782-795.
+
+. Molecules. 241905Molecules 2019, 24, 1905
+
+Ultrasound-assisted phase-transfer catalysis method in an aqueous medium to promote the knoevenagel reaction: Advantages over the conventional and microwave-assisted solvent-free/catalyst-free method. P De-La-Torre, E Osorio, J H Alzate-Morales, J Caballero, J Trilleras, L Astudillo-Saavedra, I Brito, A Cardenas, J Quiroga, M Gutierrez, 10.1016/j.ultsonch.2014.02.021Ultrason. Sonochem. 21De-La-Torre, P.; Osorio, E.; Alzate-Morales, J.H.; Caballero, J.; Trilleras, J.; Astudillo-Saavedra, L.; Brito, I.; Cardenas, A.; Quiroga, J.; Gutierrez, M. Ultrasound-assisted phase-transfer catalysis method in an aqueous medium to promote the knoevenagel reaction: Advantages over the conventional and microwave-assisted solvent-free/catalyst-free method. Ultrason. Sonochem. 2014, 21, 1666-1674. [CrossRef]
+
+Strategies for formulating and delivering poorly water-soluble drugs. M Rodriguez-Aller, D Guillarme, J L Veuthey, R Gurny, 10.1016/j.jddst.2015.05.009J. Drug Deliv. Sci. Technol. 30Rodriguez-Aller, M.; Guillarme, D.; Veuthey, J.L.; Gurny, R. Strategies for formulating and delivering poorly water-soluble drugs. J. Drug Deliv. Sci. Technol. 2015, 30, 342-351. [CrossRef]
+
+Hydrodynamics of a droplet passing through a microfluidic t-junction. Y P Chen, Z L Deng, 10.1017/jfm.2017.181J. Fluid Mech. 819Chen, Y.P.; Deng, Z.L. Hydrodynamics of a droplet passing through a microfluidic t-junction. J. Fluid Mech. 2017, 819, 401-434. [CrossRef]
+
+Dynamics of adsorption of polyallylamine hydrochloride/sodium dodecyl sulphate at water/air and water/hexane interfaces. A Sharipova, S Aidarova, V B Fainerman, A Stocco, P Cernoch, R Miller, 10.1016/j.colsurfa.2011.02.052Colloid Surf. A. 391Sharipova, A.; Aidarova, S.; Fainerman, V.B.; Stocco, A.; Cernoch, P.; Miller, R. Dynamics of adsorption of polyallylamine hydrochloride/sodium dodecyl sulphate at water/air and water/hexane interfaces. Colloid Surf. A 2011, 391, 112-118. [CrossRef]
+
+Hydrodynamics of particles at an oil-water interface. A Dani, G Keiser, M Yeganeh, C Maldarelli, 10.1021/acs.langmuir.5b02146Langmuir. 31PubMedDani, A.; Keiser, G.; Yeganeh, M.; Maldarelli, C. Hydrodynamics of particles at an oil-water interface. Langmuir 2015, 31, 13290-13302. [CrossRef] [PubMed]
+
+Fabrication of unusual asymmetric colloids at an oil-water interface. B J Park, E M Furst, 10.1021/la101030hLangmuir. 26PubMedPark, B.J.; Furst, E.M. Fabrication of unusual asymmetric colloids at an oil-water interface. Langmuir 2010, 26, 10406-10410. [CrossRef] [PubMed]
+
+Sonication effect on the reaction of 4-bromo-1-methylbenzene with sodium sulfide in liquid-liquid multi-site phase-transfer catalysis condition -kinetic study. P Abimannan, V Selvaraj, V Rajendran, 10.1016/j.ultsonch.2014.08.006Ultrason. Sonochem. 23Abimannan, P.; Selvaraj, V.; Rajendran, V. Sonication effect on the reaction of 4-bromo-1-methylbenzene with sodium sulfide in liquid-liquid multi-site phase-transfer catalysis condition -kinetic study. Ultrason. Sonochem. 2015, 23, 156-164. [CrossRef]
+
+Bioinspired shape-memory graphene film with tunable wettability. J Wang, L Sun, M Zou, W Gao, C Liu, L Shang, Z Gu, Y Zhao, 10.1126/sciadv.1700004PubMedWang, J.; Sun, L.; Zou, M.; Gao, W.; Liu, C.; Shang, L.; Gu, Z.; Zhao, Y. Bioinspired shape-memory graphene film with tunable wettability. Sci. Adv. 2017, 3, e1700004. [CrossRef] [PubMed]
+
+Three-dimensional splitting microfluidics. Y Chen, W Gao, C Zhang, Y Zhao, 10.1039/C6LC00186FLab Chip. 16Chen, Y.; Gao, W.; Zhang, C.; Zhao, Y. Three-dimensional splitting microfluidics. Lab Chip 2016, 16, 1332-1339. [CrossRef]
+
+Afm and stm studies on the surface interaction of bmp tfsa and (emim tfsa ionic liquids with au(111). R Atkin, S Z El Abedin, R Hayes, L H S Gasparotto, N Borisenko, F Endres, 10.1021/jp9026755J. Phys. Chem. C. 113Atkin, R.; El Abedin, S.Z.; Hayes, R.; Gasparotto, L.H.S.; Borisenko, N.; Endres, F. Afm and stm studies on the surface interaction of bmp tfsa and (emim tfsa ionic liquids with au(111). J. Phys. Chem. C 2009, 113, 13266-13272. [CrossRef]
+
+Heat treatment and potential cycling effects on surface morphology, particle size, and catalytic activity of pt/c catalysts studied by c-13 nmr, tem, xrd and cv. K S Han, Y S Moon, O H Han, K J Hwang, I Kim, H Kim, 10.1016/j.elecom.2006.09.027Electrochem. Commun. 9Han, K.S.; Moon, Y.S.; Han, O.H.; Hwang, K.J.; Kim, I.; Kim, H. Heat treatment and potential cycling effects on surface morphology, particle size, and catalytic activity of pt/c catalysts studied by c-13 nmr, tem, xrd and cv. Electrochem. Commun. 2007, 9, 317-324. [CrossRef]
+
+Molecular structure and hydrophobic solvation thermodynamics at an octane-water interface. H A Patel, E B Nauman, S Garde, 10.1063/1.1605942J. Chem. Phys. 119Patel, H.A.; Nauman, E.B.; Garde, S. Molecular structure and hydrophobic solvation thermodynamics at an octane-water interface. J. Chem. Phys. 2003, 119, 9199-9206. [CrossRef]
+
+Retardation of water reorientation at the oil/water interface. M Chen, X C Lu, X D Liu, Q F Hou, Y Y Zhu, H Q Zhou, 10.1021/acs.jpcc.5b03742J. Phys. Chem. C. 119Chen, M.; Lu, X.C.; Liu, X.D.; Hou, Q.F.; Zhu, Y.Y.; Zhou, H.Q. Retardation of water reorientation at the oil/water interface. J. Phys. Chem. C 2015, 119, 16639-16648. [CrossRef]
+
+Transfer of the k + cation across a water/dichloromethane interface: A steered molecular dynamics study with implications in cation extraction. M Valente, S F Sousa, A L Magalhaes, C Freire, 10.1021/jp210786jJ. Phys. Chem. B. 116PubMedValente, M.; Sousa, S.F.; Magalhaes, A.L.; Freire, C. Transfer of the k + cation across a water/dichloromethane interface: A steered molecular dynamics study with implications in cation extraction. J. Phys. Chem. B 2012, 116, 1843-1849. [CrossRef] [PubMed]
+
+Effect of organic solvent on mutual diffusion and ionic behavior near liquid-liquid interface by molecular dynamics simulations. K Kadota, T Wake, K Gonda, A Kitayama, Y Tozuka, A Shimosaka, Y Shirakawa, J Hidaka, 10.1016/j.molliq.2014.05.025J. Mol. Liq. 197Kadota, K.; Wake, T.; Gonda, K.; Kitayama, A.; Tozuka, Y.; Shimosaka, A.; Shirakawa, Y.; Hidaka, J. Effect of organic solvent on mutual diffusion and ionic behavior near liquid-liquid interface by molecular dynamics simulations. J. Mol. Liq. 2014, 197, 243-250. [CrossRef]
+
+Compass: An ab initio force-field optimized for condensed-phase applications -overview with details on alkane and benzene compounds. H Sun, 10.1021/jp980939vJ. Phys. Chem. B. 102Sun, H. Compass: An ab initio force-field optimized for condensed-phase applications -overview with details on alkane and benzene compounds. J. Phys. Chem. B 1998, 102, 7338-7364. [CrossRef]
+
+Computer simulations of poly(ethylene oxide): Force field, pvt diagram and cyclization behaviour. D Rigby, H Sun, B E Eichinger, 10.1002/(SICI)1097-0126(199711)44:3<311::AID-PI880>3.0.CO;2-HPolym. Int. 44Rigby, D.; Sun, H.; Eichinger, B.E. Computer simulations of poly(ethylene oxide): Force field, pvt diagram and cyclization behaviour. Polym. Int. 1997, 44, 311-330. [CrossRef]
+
+Ewald summation and reaction field methods for potentials with atomic charges, dipoles, and polarizabilities. T M Nymand, P Linse, 10.1063/1.481216J. Chem. Phys. 112Nymand, T.M.; Linse, P. Ewald summation and reaction field methods for potentials with atomic charges, dipoles, and polarizabilities. J. Chem. Phys. 2000, 112, 6152-6160. [CrossRef]
+
+A unified formulation of the constant temperature molecular-dynamics methods. S Nose, 10.1063/1.447334J. Chem. Phys. 81Nose, S. A unified formulation of the constant temperature molecular-dynamics methods. J. Chem. Phys. 1984, 81, 511-519. [CrossRef]
+
+. Materials Studio Accelrys. Accelrys Software IncRelease 6.0Materials Studio Accelrys, Release 6.0; Accelrys Software Inc.: San Diego, CA, USA, 2012.
+
+Structure and dynamics of the liquid-liquid interface of an aqueous nacl solution with liquid carbon tetrachloride from first-principles simulations. J R Choudhuri, A Chandra, 10.1021/jp506193nJ. Phys. Chem. C. 118Choudhuri, J.R.; Chandra, A. Structure and dynamics of the liquid-liquid interface of an aqueous nacl solution with liquid carbon tetrachloride from first-principles simulations. J. Phys. Chem. C 2014, 118, 23083-23091. [CrossRef]
+
+Evaluation of the root-mean-square slope of 3d surface topography. C G Li, S Dong, G X Zhang, 10.1016/S0890-6955(99)00044-9Int. J. Mach. Tool Manu. 40Li, C.G.; Dong, S.; Zhang, G.X. Evaluation of the root-mean-square slope of 3d surface topography. Int. J. Mach. Tool Manu. 2000, 40, 445-454. [CrossRef]

@@ -1,0 +1,391 @@
+
+Theoretical Bounds in Minimax Decentralized Hypothesis Testing
+
+
+Student Member, IEEEGökhan Gül 
+Fellow, IEEEAbdelhak M Zoubir 
+Theoretical Bounds in Minimax Decentralized Hypothesis Testing
+1Index Terms-RobustnessDistributed DetectionData FusionConsensusSensor Networks
+Minimax decentralized detection is studied under two scenarios: with and without a fusion center when the source of uncertainty is the Bayesian prior. When there is no fusion center, the constraints in the network design are determined. Both for a single decision maker and multiple decision makers, the maximum loss in detection performance due to minimax decision making is obtained. In the presence of a fusion center, the maximum loss of detection performance between with-and without fusion center networks is derived assuming that both networks are minimax robust. The results are finally generalized.
+
+I. INTRODUCTION
+
+Detecting events of interest, which is often carried out by hypothesis testing, is fundamental in many areas such as radar, sonar and digital communications. With a Bayesian framework for detection, testing a simple null hypothesis against a simple alternative requires the assumption that both the a priori probabilities (priors) and the exact probability distributions under each hypothesis are known. However, in practice, such assumptions often do not hold as there are deviations from the model assumptions, such as occurs with the presence of outliers or inaccurate a priori information. In order to deal with such situations, an optimum decision rule should take into account the imprecise knowledge of the nominal distributions as well as the a priori probabilities of the hypotheses [1]. A statistical test, which maintains a certain level of detection performance, regardless of the uncertainties in the assumed model, is known as minimax detection. While the term minimax hypothesis testing is reserved for the test that provides robustness with respect to unknown probabilities of the hypothesis, i.e. P (H 0 ) and P (H 1 ), the term, robust hypothesis testing, is widely used for a test that is robust against possible deviations from the nominal probability distributions under each hypothesis [1], [2], [3]. In addition to robustness, which is crucial for the design of a decision maker, another important aspect is to include multiple decision makers (physical sensors) into the decision making process, because it is well known that if the events of interest are independent, the system error probability decreases exponentially with the number of sensors [4]. Depending on the type of data, that is transmitted to the fusion center, a distributed detection network can either be centralized or decentralized, i.e. it is decentralized if the transmitted data is quantized and centralized otherwise. [5].
+
+G. Gül  Decentralized detection can be implemented with and without a fusion center network. Figure 1 illustrates a decentralized detection network without a fusion center (DDN-WoF), which is often preferred due to its robustness to single link failure, fairly simplified design procedure and the ease of scalability [6]. The fusion is established among sensors (decision makers) via exchange of information in an iterative way, e.g. via belief propagation. A decentralized detection network with a fusion center (DDN-WF), on the other hand, considers a fusion center where the decisions of each single decision maker is fused. An example of a DDN-WF with a parallel topology is illustrated in Figure 2. Despite a physical lack of robustness, such as being prone to a single link failure, DDN-WF includes the previously introduced DDN-WoF as a special case in terms of error minimization, because DDN-WF allows joint optimization of local decision rules and fusion rules, whereas for DDN-WoF optimization is performed only over decision rules for a pre-determined fusion rule, see [7,Chapter 3]. In this context, minimax decentralized detection fulfills two important requirements for any detection problem that is intended to be realized in practice: high detection accuracy due to multiple sensors and reliability due to the decentralized nature of detection as well as the robustness of hypothesis testing. The design of robust decentralized hypothesis testing for withand without fusion center networks has been studied for the first time by Geroniotis [8], [9], [10] and generalized thereafter [11]. Later in [12] it was proven that DDN-WF is minimax robust if the individual sensors employ minimax robust tests. Moreover, the authors formalized necessary conditions that need to be satisfied by the Bayesian cost assignment procedure for DDN-WoF. The results derived in [12] generalize the results of [9] to a network of more than two sensors and to more general cost functions. Recent studies in this area apply earlier results to scenarios with constraints such as power [13], communication rate, [14], or local optimality [15]. Minimax decentralized hypothesis testing, on the other hand, can be designed as a special case of the Bayesian formulation of the decentralized hypothesis testing problem [5]. Such a design also imposes constraints on the choice of Bayesian costs and on the achievable performance, which parallels with the work of Veerevalli et al. [12]. Furthermore, there are universal losses in minimax decentralized hypothesis testing, and due to the differences in the design of DDN-WoF and DDN-WF.  single sensor [16] and multiple sensors [12], according to our best knowledge, the aforementioned theoretical bounds (the losses) as the implications of minimax hypothesis testing in the design of DDN-WoF and DDN-WF have never been published yet.
+φ 1 φ 2 φ K y 1 y 2 y K u 1 u 2 u K Phenomenon
+In this paper, decentralized detection networks in both the absence and the presence of a fusion center are studied. The constraints and losses resulting from minimax hypothesis testing in a single and a multi-sensor detection system are obtained. The maximum of the performance loss between DDN-WoF and DDN-WF are derived when both networks are minimax robust. Finally, the results are generalized. The organization of the paper is as follows. In the following section, the problem definition is given. In Section III the constraints in the design of minimax DDN-WoF are determined. In Section IV both for a single sensor as well as for multiple sensors, the maximum loss in detection performance due to minimax hypothesis testing is obtained. In Section V the maximum loss in detection performance between DDN-WoF and DDN-WF is derived when both networks are minimax robust. In Section VI the paper is concluded and the proofs are provided in Appendices A-G.
+
+
+II. PROBLEM DEFINITION
+
+Let P 0 and P 1 be two distinct probability measures on a measurable space (Ω, A ), and for each decision maker i consider the following binary hypothesis testing problem:  rule γ : φ → {0, 1}. The aim of decentralized hypothesis testing is to find the decision and fusion rules which minimize the Bayesian risk
+H 0 : Y i ∼ P 0 H 1 : Y i ∼ P 1(1)φ 1 φ 2 φ K y 1 y k y K u 1 u 2 u K Phenomenon γ(u 1 , u 2 . . . , u K ) u 0R = 1 i=0 1 j=0 π j C ij P [γ(φ) = i|H j ](2)
+where π 0 = P (H 0 ) and π 1 = P (H 1 ) = 1 − π 0 are the a priori probabilities and C ij ∈ R ≥0 are the costs of making a decision i when hypothesis j is true. To achieve minimum error probability it is reasonable to assign equal costs to error and detection probabilities, i.e. C 01 = C 10 and C 00 = C 11 , where C 01 > C 00 (since the risk is needed to be minimized). Together with this assumption defining the overall false alarm and miss detection probabilities as P F0 = P [γ(φ) = 1|H 0 ] and P M0 = P [γ(φ) = 0|H 1 ] leads to
+R =π 0 (P F0 (C 01 − C 00 ) + P M0 (C 01 − C 00 )) +P M0 (C 01 − C 00 ) + C 00 .(3)
+
+A. Minimum error probability and minimax decision and fusion rules
+
+Depending on the practical application, it may or may not be possible to know the a priori probabilities. These two cases lead to two different optimization problems as explained in the following sections.
+
+1) Minimum error probability decision and fusion rules: For various applications, such as digital communications or classification, it is reasonable to assign equal a priori probabilities, e.g. π 0 = 1 − π 1 = 1/2, which results in decision and fusion rules that solve
+(φ 0 , γ 0 ) = arg min φ,γ R(φ, γ, ·),(4)
+where R(φ, γ, ·) = 1 2 (C 01 − C 00 )(P F0 (φ, γ, P 0 ) +P M0 (φ, γ, P 1 )) + C 00 .
+
+Here, φ 0 and γ 0 are called the minimum error decision and fusion rules.
+
+2) Minimax decision and fusion rules: In many other applications, including radar and sonar the a priori probabilities are not known and it is preferable to design the test based on the least favorable priors. This involves solving (φ r , γ r , π 0r ) = arg min
+φ,γ max π0 R(π 0 , φ, γ, ·) = arg max π0 min φ,γ R(π 0 , φ, γ, ·)(6)
+where
+R(π 0 , φ, γ, ·) =π 0 (C 01 − C 00 ) (P F0 (φ, γ, P 0 ) − P M0 (φ, γ, P 1 )) +(C 01 − C 00 )P M0 (φ, γ, P 1 ) + C 00 .(7)
+In (6) performing the maximization first leads to (6) the problem definition can be rewritten as
+∂R(π 0 , φ, γ, ·) ∂π 0 = 0 =⇒ P F0 (φ, γ, P 0 ) = P M0 (φ, γ, P 1 ) (8) Inserting (8) in(φ r , γ r ) = arg min φ,γ P M0 (φ, γ, P 1 ) s.t. P F0 (φ, γ, P 0 ) = P M0 (φ, γ, P 1 ).(9)
+Note that (φ r , γ r , π 0r ) constitutes a saddle value for (6), therefore a certain level of detection performance can always be maintained [1], i.e. inserting (8) in (7) makes R independent of π 0 . The solution of (9) results in minimax decision and fusion rules.
+
+
+B. Assumptions
+
+The following three assumptions will be valid throughout the paper.
+
+Assumption II.1. The random variables Y i , which correspond to the observations y i , are identically distributed and mutually independent.
+
+Assumption II.2. The decision rules are identical, i.e. φ i (Y ) = φ j (Y ) almost surely for all pairs (i, j). The first assumption is basically needed for mathematical tractability. It is also a fairly valid assumption if the sensors are geographically disperse. The second assumption is considered both for DDN-WoF and DDN-WF for the sake of fairness of comparisons. Another motivation for the second assumption is due to the result of minimax modeling of DDN-WoF, which will be shown in Section III-A. Note that identical local decision makers are not always optimum, see counterexamples in [17], but they often result in little or no loss of performance [7] and they are asymptotically optimum [18]. The last assumption is needed to make the Receiving Operating Characteristic (ROC) curve continuous. This property will later be used in the derivations.
+
+
+C. Different solutions of the defined optimization problems
+
+The optimization problems defined by (4) in Section II-A1 and by (9) in Section II-A2 can be solved differently by considering different network configurations as detailed in the following.
+
+1) Singe Sensor: If there is a single sensor in the sensor network, the fusion rule γ is undefined. There is a single decision rule φ r := φ r or φ 0 := φ 0 and the overall false alarm and miss detection probabilities, P F0 and P M0 are replaced by P F and P M , respectively.
+
+2) Multi-sensor DDN-WoF: For multiple sensor decentralized detection network without a fusion center the solution of (4) and (9) is performed only over the decision rules φ. The fusion rule γ is fixed a-priori, see [7,Chapter 3]. The main advantage of such a design is that the optimization over only decision rules is much simpler than an optimization over both decision and fusion rules. Moreover, there are readily accepted fusion rules such as the majority voting rule, which is known to be quite powerful. If all sensors are identical, and the fusion is performed iteratively via exchange of decisions, then the result converges to the decision of the majority. Therefore, for K decision makers, the fusion rule can be chosen as the majority voting rule defined by
+γ K =      0, K i φ i < K 2 κ, K i φ i = K 2 1, K i φ i > K 2(10)
+where κ ∈ {0, 1} is a Bernoulli random variable (r.v.) with success probability P (κ = 1) = 1/2 [19]. In the sequel, for DDN-WoF (as well as for DDN-WF), false alarm and miss detection probabilities of each sensor are denoted by P F = P Fi and P M = P Mi for all i, respectively, as a consequence of Assumptions II.1,II.2.
+
+3) Multi-sensor DDN-WF: Decentralized detection network with a fusion center provides a solution to (4) and (9) over both the decision and the fusion rules, still considering all the assumptions given in Section II-B. In particular, Assumptions II.1,II.2 imply that i φ i ∼ Binomial is the sufficient statistic and the optimum fusion rule is called Kout-of-N fusion rule [5], [7]:
+γ K k = 0, K i φ i ≤ k 1, K i φ i > k.
+Hence, the overall false alarm and miss detection probabilities are given by
+P F0 (P F ; K, k) =1 − B(k; K, P F ) =1 − k i=0 K i P i F (1 − P F ) K−i(11)
+and
+P M0 (P M ; K, k) =B(k; K, 1 − P M ) = k i=0 K i (1 − P M ) i P K−i M (12)
+where B is a binomial cumulative distribution function with at most k successes out of K total trials. Equations (11), (12) imply that the optimization over γ in (4) and (9) can be performed over integers k. Additionally, the choice of k = K/2 corresponds to the error probabilities resulting from DDN-WoF.
+
+
+D. Objectives
+
+Having defined two different optimization problems in Section II-A and different solutions in Section II-C considering the assumptions in Section II-B, next, the aim is to define the objectives:
+
+• The first aim is to determine the restrictions in the design of minimax DDN-WoF, in particular, the constraints on the choice of Bayesian costs and on the achievable performance. • The second aim is to find the maximum (over all probability distributions on (Ω, A )) performance loss for DDN-WoF if the minimax decision rule is considered instead of the minimum error probability decision rule. • The third aim is to find the maximum (over all probability distributions on (Ω, A )) performance loss between minimax DDN-WoF and minimax DDN-WF. The solutions of these three problems are addressed in the following sections in the same order as given above.
+
+
+III. CONSTRAINTS IN THE DESIGN OF MINIMAX DDN-WOF
+
+Minimax formulation of the decentralized detection problem imposes constraints on the choice of the Bayesian costs as well as on the achievable performance since the problem is a constraint type of optimization. 2 The following sections address these two issues.
+
+
+A. Constraints on the System Design
+
+Consider the Bayesian formulation of the risk function
+R = i1,...,i K ,j π j C i1,...,i K ,j P j [φ 1 = i 1 , . . . , φ K = i K ] (13)
+where C (·) is the cost of making decisions φ 1 = i 1 , . . . , φ K = i K when the true hypothesis is H j . Minimax decision rules φ r should minimize R subject to the constraint P F0 = P M0 . A person by person optimum (PBPO) solution that minimizes (13) is known by Tsitlikis [5] and Varshney [7] to be the likelihood ratio tests. The results in [7] may be preferable over [5], since [7] treats DDN-WoF and DDN-WF separately 2 The choice of the more general costs functions, see for example [20], may result in different costs assignments for minimax robustness. Throughout this paper only the Bayesian formulation of the hypothesis testing problem is considered. and specifies the likelihood ratio tests explicitly. Such a specification requires tedious steps of derivations and for every K, the derivations should be repeated from the beginning. Therefore, the results are not generic for every number of sensors and in such a case, a reasonable approach, which will be followed shortly, is to consider a specific case and generalize the results thereafter. When K = 2, [7] suggests that if Assumption II.1 holds, the likelihood ratio tests for two sensors are given by
+φ 1 : p 1 (y 1 ) p 0 (y 1 ) φ1=1 φ1=0 π 0 E p 0 (y 2 ) [C a + P [φ 2 = 0|y 2 ]C b ] dy 2 π 1 E p 0 (y 2 ) [C c + P [φ 2 = 0|y 2 ]C d ] dy 2 ,(14)
+and φ 2 , which is obtained similarly by exchanging (
+y 2 , φ 2 ) with (y 1 , φ 1 ) in (14), where C a = C 110 − C 010 , C b = C 100 − C 000 + C 010 − C 110 , C c = C 011 − C 111 , C d = C 001 − C 101 + C 111 − C 011 .
+The DDN-WoF shown in Figure 1 does not allow exchanging observations among the decision makers. In contrast, the optimum decision rules given by (14) requires the observation of the other sensor, e.g. φ 1 needs y 2 ,unless
+C b = 0 ∧ C d = 0.
+Hence, the choice of costs
+C 2 = {C i1i2j : C b = 0 ∧ C d = 0}(15)
+guarantees a possible minimax test. As a result, both decision makers own the same thresholds ( (14) follows from (15)), which leads to Assumption II.2. For K > 2, it is expected that there are costs, which couple the sensor decisions and some other costs, which have no effect in coupling. This generalization suggests that the coupling terms must be set to zero and the other parameters should be determined accordingly in order to guarantee minimax robustness. The choice of majority voting rule and identical sensor decisions is a consequence of the analysis above. The identical sensor decisions can further be restricted with the following proposition.
+
+Proposition III.1. For identical sensor decisions, P F0 = P M0 if and only if all the local decision rules result in θ = P F (φ, P 0 ) = P M (φ, P 1 ), with a suitable choice of (C a , C b ) and (π 0 , π 1 ).
+
+A short proof of Proposition III.1 is given in Appendix A. In conclusion, (4) has a solution for DDN-WoF with the majority voting rule and identical local sensor decisions, which result in θ = P M = P F for every sensor. In the following sections, DDN-WoF will be referred to this setting.
+
+
+B. Constraints on the Achievable Performance
+
+In addition to the constraint on the selection of the costs to achieve a robust test, there is a similar restriction, in terms of performance, when a new sensor is added to the sensor network. The following proposition states this claim.
+
+Proposition III.2. When majority voting rule is combined with identical local decision makers, adding one more sensor to the network of 2i−1, i ≥ 1 sensors does not improve the detection performance.
+
+In Appendix B, Proposition III.2 is proven by showing that the false alarm probability for 2K − 1 sensors
+P 2K−1 F0 = 2K−1 i=K 2K − 1 i P F i (1 − P F ) 2K−1−i
+is equal to the false alarm probability for 2K sensors
+P 2K F0 = 2K i=K+1 2K i P F i (1 − P F ) 2K−i + 1 2 2K K P F K (1 − P F ) K(16)
+where the second term in (16) comes from the randomization in (10).
+Since P F0 = P M0 , see Appendix B, it follows that P 2K−1 M0 = P 2K M0 .
+
+IV. THE MAXIMUM LOSS DUE TO MINIMAX DECISION MAKING IN DDN-WOF
+
+From the previous section, there are two main conclusions: first is the setting of DDN-WoF, i.e. majority voting rule together with identical sensor decisions leading to θ = P M = P F , and second is the fact that increasing the number of sensors from odd numbers to even numbers does not improve the detection performance. Hence, without loss of generality, only the odd numbered sensors can/will be considered with the given DDN-WoF setting for further analysis. Before proceeding with the derivations, some sets and functions are needed to be defined. The main idea is to perform the optimization over the receiver operating characteristics (ROC)s which uniquely characterizes all possible false alarm and miss detection pairs resulting from the decision rules φ r and φ 0 . Formally,
+P F × P M = {(P F (φ(t), P 0 ), P M (φ(t), P 1 )) : ∀t ∈ [0, ∞]}
+defines the ROC, where P F is the set of all P F s and P M is the set of all corresponding P M s. Let r t : [0, 1] → [0, 1] be a function with the mapping P F rt → P M , and φ(t) is the deterministic likelihood ratio test with threshold t. The following Lemma is necessary for further analysis:
+
+Lemma IV.1. Let Assumption II.3 holds. The function r t is bounded on [0, 1] 2 , passes through (P F , P M ) = (1, 0) and (P F , P M ) = (0, 1), and is continuous, and convex.
+
+A proof of Lemma IV.1 can be found in Appendix C.
+
+Example IV.1. For mean shifted Gaussian distributions P 0 and P 1 each having a variance σ 2 = 1 and, a difference in mean d = 1, the function r t is given by:
+P M = r t (P F ) = F F −1 (1 − P F ) − 1
+where F is the cumulative distribution function of the standard Gaussian distribution. Lemma IV.1 implies that every r t lies below the line P M = 1 − P F . Hence, all simple hypothesis testing problems with the nominal distributions P 0 and P 1 can be identified with the lower triangle of [0, 1] 2 for performance evaluation. Let P θ 0 and P θ 1 denote two distinct probability distributions on (Ω, A ) which satisfies Assumption II.3 and for which a likelihood ratio test φ yields an error probability of θ. Then, the set of all such pairs of distributions is
+(P 0 ×P 1 )(θ) = {(P θ 0 , P θ 1 )|∃φ : θ = P F (φ, P θ 0 ) = P M (φ, P θ 1 )}.
+Hence, varying θ ∈ [0, 1/2), the set (P 0 × P 1 )(θ) covers all distinct pairs of distributions on (Ω, A ) satisfying Assumption II.3. Due to the convexity of r t , see Lemma IV.1, if any pair of distributions (P θ 0 , P θ 1 ) belong to (P 0 × P 1 )(θ), then the function r t lies in the butterfly shaped area 
+l 2 = {(P F , P M ) : P M =(1 − P F /θ)}(17)
+on [0, 1] 2 , whereθ = θ/(1 − θ). Notice that l 1 is the inverse function of l 2 . An example of B θ , for θ ≈ 0.309, together with the lines l 1 and l 2 , and P M = r t (P F ) given by Example IV.1 are illustrated in Figure 3. The function h K k will be defined later. Next, the aim is to find the maximum loss of detection performance between minimax and minimum error probability decision rules, i.e. between φ r and φ 0 . The fusion rule γ K is fixed as the majority voting rule for both decision strategies.
+
+
+A. Single Sensor Case
+
+Assume that DDN-WoF has a single decision maker, cf. Section II-C1, which uses the minimax decision rule φ r , in comparison to the minimum error probability decision rule φ 0 . The loss between the error probabilities of φ r and φ 0 can then be found from (5) and (7) with (9):
+L(φ r , φ 0 , P θ 0 , P θ 1 ) = R(π 0 , φ r , ·) − R(φ 0 , ·) = (C 01 − C 00 )P M (φ r , P θ 1 ) − 1 2 (C 01 − C 00 ) P F (φ 0 , P θ 0 ) + P M (φ 0 , P θ 1 ) = 1 2 (C 01 − C 00 )(2P M (φ r , P θ 1 ) − (P F (φ 0 , P θ 0 ) + P M (φ 0 , P θ 1 ))).
+Now, the aim is to answer the following problem:
+
+Problem IV.1. What is the maximum of L over all (P θ 0 , P θ 1 ) ∈ (P 0 × P 1 )(θ) in terms of θ, and in general?
+
+The error probability resulting from φ r is θ = P F (φ r , P θ 0 ) = P M (φ r , P θ 1 ). Minimizing the average error probability resulting from φ 0 , hence, maximizing the loss function L, is equivalent to finding a (P F , P M ) on B θ such that P F + P M is minimum. Notice that the butterfly B θ is symmetric with respect to P M = P F . Thus, only the upper part (P M ≥ θ) or the lower part (P M ≤ θ) of B θ can be considered, though both of them result in the same error probability. Let
+l * 1 = {l 1 : P M ≥ θ} and l * 2 = {l 2 : P M ≤ θ}
+be the line segments of the lines l 1 and l 2 , respectively. Then, the minimum error probability is achieved either on l * 1 or on l * 2 . This is because, the points on l * 1 have the lowest P M for every P F on upper B θ , and the points on l * 2 have the lowest P F for every P M on the lower B θ . The average error probability increases on l * 1 and decreases on l * 2 . Hence, either (P F , P M ) = (0,θ), cf. l 1 (P F := 0) or (P F , P M ) = (θ, 0) cf. l 2 (P F :=θ) minimizes the average error probability for φ 0 . Since neither (0,θ) nor (θ, 0) is achievable as r t must be continuous with r t (0) = 1 and r t (1) = 0 it follows that
+sup (P θ 0 ,P θ 1 )∈(P 0 ×P1)(θ) L(φ r , φ 0 , P θ 0 , P θ 1 ) = (C 01 − C 00 )(θ −θ/2) = (C 01 − C 00 ) 2 θ(1 − 2θ) 1 − θ and max θ∈[0,1/2) sup (P θ 0 ,P θ 1 )∈(P 0 ×P1)(θ) L(φ r , φ 0 , P θ 0 , P θ 1 ) = (C 01 − C 00 ) 3 − 2 √ 2 2 .(18)
+Equation (18) suggests that if the costs are chosen as C 01 − C 00 = 1, the loss between φ r and φ 0 is upper bounded by ≈ 0.086.
+
+
+B. Multiple Sensor Case
+
+Consider the distributed detection network without a fusion center as illustrated in Figure 1. Let the total number of decision makers not be restricted to 1, i.e. K ≥ 1. In this case the loss in detection performance between minimax DDN-WoF and minimum error probability DDN-WoF can be found from    (7) with (9):
+L K (φ r , φ 0 , γ K , P θ 0 , P θ 1 ) =R(π 0 , φ r , γ K , ·) − R(φ 0 , γ K , ·) = 1 2 (C 01 − C 00 )(2P M0 (φ r , γ K , P θ 1 ) −(P F0 (φ 0 , γ K , P θ 0 ) + P M0 (φ 0 , γ K , P θ 1 ))
+). The aim is to address the following problem:
+
+Problem IV.2. What is the maximum of L over all (P θ 0 , P θ 1 ) ∈ (P 0 × P 1 )(θ) in terms of θ, and in general?
+
+Problem IV.2 is a redefinition of Problem IV.1 for multiple sensors. Proposition III.1 and Equation (12) indicate that minimax solution of DDN-WoF leads to P M0 (φ r , γ K , P θ 1 ) = P F0 (φ r , γ K , P θ 0 ) = B(K/2; K, 1 − θ). For the minimum error probability decision rule φ 0 , it is assumed that all individual decision makers φ 0,i are identical, cf. SectionII-B. Hence, P F = P Fi and P M = P Fi for each decision maker, i, and due to the analyzes in the previous section, error minimizing (P F , P M ) lies either on the line segment l * 1 or on l * 2 . Without loss of generality either of them can be considered, because B θ is symmetric with respect to P M = P F . Considering the former choice, let x ∈ [1, ∞] be a free parameter. Then, (P F , P M ) = (θ/x, (θ(x − θ))/(x(1 − θ))) characterizes l * 1 completely. This indicates that some choice of x := x min minimizes the error probability resulting from (φ 0 , γ K ) and maximizes the loss function section. As x → ∞, which corresponds to the single sensor case, the loss function becomes
+L K x (θ) = (C 01 − C 00 ) B(K/2; K, 1 − θ) − 1 2 B(K/2; K, 1 − θ/x) + B K/2; K, 1 − θ(x − θ) x(1 − θ) .L K ∞ (θ) = B(K/2; K, 1 − θ) − 1 2 B K/2; K, 1 − 2θ 1 − θ .
+Proposition IV.2. L K ∞ is almost everywhere negative on θ ∈ (0, 1/2) for sufficiently large K.
+
+Proposition IV.2 is proven in Appendix D. Negativity of L K ∞ indicates that single sensor optimum decision rules, which maximize the loss function are no more optimum for multiple sensor case for every θ ∈ (0, 1/2). Because L K xmin is lower bounded by 0. Remark IV.1. The choice of φ r at local decision makers do not only lead to a minimax test but also to an asymptotically optimal test, i.e. to the fastest decay rate of P F0 and P M0 as K → ∞. This is due to the fact that the fastest exponential decay rate of the error probability amounts to equal rates of decreases for the false alarm and miss detection probabilities [1, pp.74-82]. P F0 and P M0 share the same polynomial function f for the majority voting rule, cf. Appendix A. Hence, they also share the same exponential decay rate whenever θ = P M = P F . This is equivalent to x min → 1 as K → ∞, see Figure 4.
+
+
+V. THE MAXIMUM LOSS BETWEEN MINIMAX DDN-WOF
+
+AND DDN-WF Consider the distributed detection networks with and without a fusion center illustrated in Figures 1 and 2. For both DDN-WoF and DDN-WF, each local decision maker observes a phenomenon which is characterized by the distribution functions (P θ 0 , P θ 1 ) that belong to (P 0 × P 1 )(θ). In either case the sensors are known to employ likelihood ratio tests and θ < 1/2. Both sensor networks have K decision makers, where K is assumed to be odd, cf. Proposition III.2, Section IV, and the fusion center is assumed not to collect any observation.
+
+As shown in the previous sections, the DDN-WoF solution to minimax hypothesis testing problem suggests that the loss of performance due to minimax decision making is small, see Figure 5, and is asymptotically optimum cf. Remark IV.1. In addition to the statistically satisfactory properties, DDN-WoF is also physically robust, making it appealing for real time applications. A major drawback of DDN-WoF compared to DDN-WF is a possible loss of performance, as DDN-WF allows joint optimization of decision and fusion rules, in contrary to DDN-WoF. It can further be assumed that both DDN-WoF and DDN-WF are minimax robust, since this is a desired property, which leads to a little or no loss of performance. Hence, the loss function between DDN-WoF and DDN-WF can be defined as
+L K (·) =R(π 0 , φ r , γ K , ·) − R(π 0 , φ * r , γ K k , ·) =(C 01 − C 00 ) P M0 (φ r , γ K , P θ 1 ) − P M0 (φ * r , γ K k , P θ 1 ) =(C 01 − C 00 ) B(K/2; K, 1 − θ) − P M0 (φ * r , γ K k , P θ 1 ) ,(19)
+where γ K is the majority voting rule and γ K k is the K-outof-N fusion rule with overall error probabilities as given in Section II-C3. Notice that φ r and φ * r are not the same decision rules, i.e. each component of φ r leads to θ = P M = P F but φ * r results in P F = P Fi and P M = P Mi (not necessarily P M = P F ) for every decision maker i. Hence, the optimization for DDN-WF runs over all possible fusion thresholds k and pairs (P F , P M ) jointly. Now, the aim is to provide a solution to the following problem:
+
+Problem V.1. What is the maximum loss of performance between minimax DDN-WoF and minimax DDN-WF, i.e. the maximum of L(·) over all (P θ 0 , P θ 1 ) ∈ (P 0 × P 1 )(θ), φ * r and γ K k , in terms of θ and in general? Determining a solution to Problem V.1 is equivalent to finding the maximum gain achievable if DDN-WoF is re-designed to be in the form of a DDN-WF having no information about the observation statistics.
+
+
+A. Derivation of the Maximum Performance Loss
+
+It can be seen that the maximization of L in (19) is equivalent to the minimization of P M0 (φ * r , γ K k , P θ 1 ) over all φ * r , γ K k and (P θ 0 , P θ 1 ) ∈ (P 0 × P 1 )(θ). Since the decision makers are identical, for every (P θ 0 , P θ 1 ) ∈ (P 0 ×P 1 )(θ), the decision rule φ * r results in (P F , P M ) ∈ B θ , hence the minimization over the distributions (P θ 0 , P θ 1 ) ∈ (P 0 × P 1 )(θ) and the decision rule φ * r can be performed over (P F , P M ) ∈ B θ . It is important to note that the fusion rule γ K k must also guarantee P M0 = P F0 in addition to the minimization of P M0 . From Equations (11) and (12), the restriction of P M0 = P F0 yields the set of all possible valid pairs (P F , P M ) to belong to 
+K k h K k → M K k , i.e. P M = h K k (P F ) = 1 − B −1 (1 − B(P F )).(21)
+Now only the pair (B θ , h K k ) can further be considered for minimization, because the minimization over (P θ 0 , P θ 1 ) ∈ (P 0 × P 1 )(θ) and φ * r is restricted to (P F , P M ) ∈ B θ and the minimization over γ K k is restricted to h K k . The properties of B θ has been introduced in Section IV. In the following, the aim is to evaluate the properties of the minimax fusion function h K k and determine which points in B θ satisfy h K k and from those points to find the point that minimizes P M0 (or equivalently P F0 ). It can be seen that the function h K k is continuous, passes through the points (P F , P M ) ∈ {(0, 0), (1, 1)} for every K and k < K. Therefore, at least one point in (P * F , P * M ) ∈ B θ satisfies P * M = h K k (P * F ). An example of h K k is illustrated in Figure 3 for K = 5 and k ∈ {0, 1, 2}; the cases of k ∈ {3, 4} are omitted for the sake of clarity, since h K k is symmetric with respect to P M = P F (this will be proven later). The following remark and Proposition V.1 will be used to prove the monotonicity properties of h K k in Proposition V.2.
+
+Remark V.1. P F0 (P F ; K, k) is a monotonically decreasing and P M0 (P M ; K, k) is a monotonically increasing function of k.
+
+Proposition V.1. P F0 (P F ; K, k) and P M0 (P M ; K, k) are monotonically increasing functions of P F and P M respectively.
+
+A proof of Proposition V.1 can be found in Appendix E.
+
+Proposition V.2. For every K and k, h K k is a monotonically increasing function and in particular if k ∈ {0, . . . , K/2 − 1}, h K k (P F ) > P F and if k ∈ { K/2 + 1, . . . , K − 1}, h K k (P F ) < P F for all P F ∈ (0, 1). A proof of Proposition V.2 can be found in Appendix F. In addition to the monotonicity properties of h K k , it is also a symmetric function; see the following remark:
+
+Remark V.2. The function h K k is symmetric with respect to k = K/2 , meaning that it accepts an inverse function. That is for every m ∈ {0, . . . ,
+K/2 }, if P M = h K K/2 −m (P F ) then, P F = h K K/2 +m (P M ).
+The assertion follows from the condition that creates (F × M) K k . For m = 0, we have P M0 (x; K, k) = P F0 (x; K, k). Thus, for every (P F , P M ) ∈ (F ×M) K k , it is true that P F = P M , i.e. h K K/2 and its inverse are the same. Similarly, when m > 0,
+P M0 (x; K, K/2 + m) = P F0 (x; K, K/2 − m) , P M0 (x; K, K/2 − m) = P F0 (x; K, K/2 + m)
+prove the symmetry of h K k on [0, 1] 2 . To date all the necessary properties of the set B θ and the minimax fusion function h K k have been derived. It is now possible to state the main theorem of this section.
+
+Theorem V.3. For a fixed θ, among all (P θ 0 , P θ 1 ) ∈ (P 0 × P 1 )(θ), and all minimax fusion rules h K k , minimum error probability, i.e. the maximum of (19), is achieved by the fusion threshold k = 0, (or k = K − 1) and a point on l * 1 (or on l * 2 ).
+
+Hence, the maximum of performance loss due to the absence of a fusion center for C 01 − C 00 = 1 is given by
+L K (θ) = 1 1 +θ K − B ( K/2 ; K, θ) .(22)
+Moreover, lim K→∞ arg sup
+θ∈(0,1/2) L K (θ) = lim K→∞ sup θ∈(0,1/2) L K (θ) = 1 2 .(23)
+Proof: As mentioned before, the maximum of (19) requires joint minimization over B θ and h K k . Due to the properties of h K k stated by Propositions V.1 and V.2, the minimization over B θ can further be confined to the line segments l * 1 and l * 2 . The details are as follows: continuity and monotonicity of h K k on [0, 1] 2 guarantees that for every K, h K k intersects only a single point (P F K k , P M K k ), which is either on l * 1 or on l * 2 . Examples of (P F K k , P M K k ) can be seen in Figure 3, e.g. (P F Again by the monotonicity of h K k , all other points belonging to B θ and intersected by h K k have higher P F and P M . From Proposition V.1, P F0 and P M0 are increasing in P F and P M , respectively. Therefore, the minimization over B θ reduces to a minimization over l * 1 and l * 2 . The minimization can further be reduced to either l * 1 and h K k for k ∈ {0, . . . , K/2 }, or l * 2 and h K k for k ∈ { K/2 , . . . , K − 1}. This result follows from the symmetry of B θ , and h K k with respect to P M = P F , cf. Remark V.2, Figure 3. Since both choices result in the same error probability, let us consider l * 1 and h K k for k ∈ {0, . . . , K/2 }, and generalize the results thereafter. By doing so, the intersection point of h K k with the line segment l * 1 is (P F K k ,θ(1 − P F K k )). Since h K k passes through this point, this point must satisfy Equation (21). Let x K k = 1 − P F K k , then Equation (21) for (1 − x K k ,θx K k ) can be written as
+x K k = 1 θ K f 1 (x K k , ·) + f 2 (x K k , ·) 1/K ,(24)
+where
+f 1 (x K k , ·) = (θx K k ) −K B(k; K, 1 −θx K k ), f 2 (x K k , ·) = (x K k ) −K B(k; K, 1 − x K k )
+. The difference in error probability for the cases k = 0 and k > 0 can then be determined by
+L K (·) =P M0 (θx K k ; K, k) − P M0 (θx K 0 ; K, 0) =(θx K k ) K f 1 (x K k , ·) −θ K /(1 +θ K ) =θ K 1 +θ K θK f 1 (x K k , ·) + f 1 (x K k , ·) θ K f 1 (x K k , ·) + f 2 (x K k , ·) − 1 > 0,(25)
+where the second equality follows from (12) and (24), the third equality follows from (24) and the last inequality follows from f 1 (x K k , ·) − f 2 (x K k , ·) > 0, since 0 <θ < 1. This proves that h K 0 and the point (1 − 1/(1 +θ K ) 1/K ,θ/(1 +θ K ) 1/K ) on l * 1 minimizes the error probability. Due to the symmetry of the problem, this result is equivalent to h K K−1 and then immediate (and is a very special case) from (25) with k = K/2 and noting that for this choice, θ = P M K K/2 = P F K K/2 . A proof of (23) is given in Appendix G.
+(θ/(1 +θ K ) 1/K , 1 − 1/(1 +θ K ) 1/K ) on l * 2 . Equation 22 is
+The derivations indicate that given θ, the lack of fusion center amounts to a maximum loss of performance given by (22), without having any knowledge about the observation statistics. In case θ is also unknown, the maximum loss L K tends to 1/2, when K and θ are large enough. This can also be seen in Figure 6, where L K is illustrated for various K. Therefore, it is theoretically possible that while DDN-WoF gives decisions that are equivalent to tossing a coin, DDN-WF can give decisions that are free of errors. The fusion rules which provide this property are AND (k = 0) and OR (k = K/2 − 1) fusion rules, which are widely used in many practical applications due to their simplicity.
+
+
+B. Generalizations
+
+There are two possible generalizations, which are detailed as follows:
+
+1) Non-identical Decisions Scenario: The results obtained above can be generalized to non-identical decisions scenario. Consider K to be sufficiently large. It was shown that k = 0 or k = K/2 − 1 maximizes L K . Fixing k = 0 and allowing non-identical decisions, the condition P F0 = P M0 reduces to
+K i=1 P Mi + K i=1 (1 − P Fi ) = 1.(26)
+When K is large, either P Fi must be small or P Mi must be large such that (26) holds. The P Mi are large only on l 2 , for which the P Fi are also small. This eventually indicates that either (26) does not hold or if it holds, the error probability is higher than that of the one obtained by considering the points on l 1 . Hence, for each sensor, (P Fi , P Mi ) can be sampled from l 1 , which is defined to satisfy 1 − P Fi = P Mi /θ. Inserting this into (26) gives
+K i=1 P Mi =θ K 1 +θ K = P M0 (θx K 0 ; K, 0),
+which is the same error probability with the one that is obtained by the identical local decision makers constraint.
+
+2) Comparison Regarding the Number of Sensors: There is a possible generalization of the loss of performance in terms of the number of sensors. If advantageous, an observer may prefer to increase the number of sensors instead of re-designing the network with a fusion center. Let K 1 be the number of sensors for DDN-WF and K 2 is the number of sensors for DDN-WoF. Then, for the worst case analysis,
+P M0 (θ; K 2 , K 2 /2) =θ K1 /(1 +θ K1 ).(27)
+Solving Equation (27) for K 1 gives
+K 1 = logP M0 logθ ,P M0 = P M0 (θ; K 2 , K 2 /2) 1 − P M0 (θ; K 2 , K 2 /2) .
+The relation between K 1 and K 2 is exponential, e.g. for θ ≈ 0.19, if K 1 = 19, then K 2 = 101. Therefore, the change of the network is more practical, especially if DDN-WoF possesses a large number of sensors.
+
+VI. CONCLUSIONS Implications of minimax detection has been studied for two cases of decentralized detection networks, with and without a fusion center. Under a Bayesian setting of the hypothesis testing problem, DDN-WoF is composed of a majority fusion rule and identical local decision makers, each resulting in an error probability of θ = P F = P M . For this setup, it has been shown that increasing the total number of sensors from an odd number to an even number does not lead to an increase in detection performance. This result is counterintuitive, because large deviations theory indicates that the error probability decreases exponentially with the increase of the number of observations, which is analogous to the number decision makers in DDN-WoF. Another implication of minimax decision making is on the loss of detection performance in terms of average error probability. The bounds derived for a single decision maker and for multiple decision makers indicate no significant loss of detection performance due to minimax decision making. Another concern is that single sensor optimum decision rules rapidly become non optimal for multi-sensor systems. In many applications DDN-WoF is considered as a default distributed detection scheme due to its physical robustness properties and the exponential decay rate of error probability provided by the large deviations theory. The results indicate that when the number of decision makers K, and the average error probability θ < 1/2 are large enough, it is possible that DDN-WoF outputs random decisions while DDN-WF is error free. This result has been generalized to the case, where the decision makers are not necessarily identical. Another generalization suggests that for the worst case analysis, the same detection performance between DDN-WoF and DDN-WF can be obtained if the number of sensors for DDN-WoF is exponentially larger than that of DDN-WF. It is then more appealing to re-design DDN-WoF in the form of DDN-WF, instead of increasing the number of sensors. Our findings are theoretical and we believe that they are crucial before, during, and after designing minimax robust decentralized detection systems.
+
+
+APPENDIX A PROOF OF PROPOSITIONIII.1
+
+Proof: Given P F = P Fi and P M = P Mi for all i ∈ {1, . . . , K}, false alarm and miss detection probabilities resulting from γ K are P F0 = 1 − B(K/2; K, P F ) and P M0 = B(K/2; K, 1−P M ), respectively, where B(k; K, P ) is a binomial cumulative distribution function with at most k successes out of K trials each having a success probability P . Let X ∼ B(K, P ) and Y ∼ B(K, 1 − P ) be two Binomial r.v.s with K trials each having a success probability P and 1 − P , respectively. Then, for two disjoint events E 1 = X ≤ K/2 and E 2 = (K − X) ≤ K/2,
+P (E 1 ∪ E 2 ) = P (E 1 ) + P (E 2 ) = 1.
+Now, by noting that Y = K − X in distribution, we have P (E 1 ) + P (E 2 ) = P (X ≤ K/2) + P (Y ≤ K/2) = B(K/2; K, P ) + B(K/2; K, 1 − P ) = 1 which implies that P F0 and P M0 own the same polynomial function f s.t. P F0 = f (P F ) and P M0 = f (P M ). From Propo-sitionIII.1, f is monotonically increasing, hence P F0 = P M0 iff P F = P M .
+
+
+APPENDIX B PROOF OF PROPOSITIONIII.2
+
+Proof: Using the substitution j = i + 1, we have
+P F P 2K−1 F0 = 2K−1 i=K 2K − 1 i P F i+1 (1 − P F ) 2K−1−i = 2K j=K+1 2K − 1 j − 1 P F j (1 − P F ) 2K−j =   2K−1 j=K+1 2K − 1 j − 1 P F j (1 − P F ) 2K−j   + P F 2K(28)
+and
+(1 − P F )P 2K−1 F0 = 2K−1 i=K 2K − 1 i P F i (1 − P F ) 2K−i = 2K − 1 K P F K (1 − P F ) K + 2K−1 i=K+1 2K − 1 i P F i (1 − P F ) 2K−i .(29)
+Adding up (28) and (29), we get
+(1 − P F )P 2K−1 F0 + P F P 2K−1 F0 = 2K − 1 K P K F (1 − P F ) K + 2K−1 i=K+1 2K − 1 i − 1 + 2K − 1 i P F i (1 − P F ) 2K−i + P F 2K = 1 2 2K K P F K (1 − P F ) K + 2K i=K+1 2K i P F i (1 − P F ) 2K−i = P 2K F0
+using the identities
+2K − 1 K = 1 2 2K K , 2K − 1 i + 2K − 1 i − 1 = 2K i and P F 2K = 2K 2K P F 2K (1 − P F ) 2K−2K .
+APPENDIX C PROOF OF LEMMA IV.1
+
+Proof: By definition, P F and P M are probabilities, hence
+(P F , P M ) ∈ [0, 1] 2 . Evaluating P F = 1 − P 0 [l(Y ) ≤ t] and P M = P 1 [l(Y ) ≤ t]
+for lim t→ 0 and lim t→ ∞ shows that r t passes through the points (1, 0) and (0, 1). Let p 0,l and p 1,l be the density functions of l(Y ) for Y ∼ P 0 and Y ∼ P 1 , respectively. Since r t is differentiable for every t, i.e.
+dP M dP F = dP M dt dt dP F = − p 1,l (t) p 0,l (t)(30)
+exists, r t is continuous. The miss detection probability can also be written as where the last equality follows from
+p 0,l (x) = dl −1 (x) dx p 0 (l −1 (x))
+with the change of variable x = l(y). Hence,
+dP M dt = tp 0,l (t) (30) =⇒ dP M dP F = −t.
+As a result,
+d 2 P M dP F 2 = d dP F dP M dP F = − dt dP F = 1 p 0,l (t) ≥ 0
+proves that r t is convex.
+
+
+APPENDIX D PROOF OF PROPOSITIONIV.2
+
+Letting p = p(θ) = 1 − θ and q = q(θ) = 1−2θ 1−θ , showing that L K ∞ is negative for sufficiently large K is equivalent to showing that
+K/2 i=0 K i p i (1 − p) K−i < 1 2 K/2 i=0 K i q i (1 − q) K−i (31)
+for sufficiently large K. There are two possible cases:
+
+• Trivial case: For 1/3 ≤ θ < 1/2, the sum on the left converges to zero and the sum on the right converges to a positive number, so the inequality (31) is true for large K. • Remaining case: Suppose 0 < θ < 1/3. The inequality of the sums can be proven working term by term. It suffices to show that
+p i (1 − p) K−i < 1 2 q i (1 − q) K−i(32)
+for all 0 ≤ i ≤ K/2, when K is large enough. Note that
+p(1−q) q(1−p) = 1−θ 1−2θ > 1 and p(1−p) q(1−q) = (1−θ) 3 1−2θ < 1. Therefore, 1 − p 1 − q K p(1 − q) q(1 − p) i ≤ 1 − p 1 − q K p(1 − q) q(1 − p) K/2 = p(1 − p) q(1 − q) K/2 .(33)
+The right hand side of (33) can be made less than 1/2 by taking K sufficiently large, giving the inequality (32) and hence the inequality (31).
+
+
+APPENDIX E PROOF OF PROPOSITION V.1
+
+Proof: To prove that P F0 (P F ; K, k) and P M0 (P M ; K, k) are increasing functions of P F and P M , respectively, it is sufficient to prove it only for P F0 (P F ; K, k). Because Noting that (34) is zero for P F = 0, we have
+P F0 = K i=k K i P i F (1 − P F ) K−i = K i=k K − 1 i − 1 P i F (1 − P F ) K−i + K i=k K − 1 i P i F (1 − P F ) K−i .(35)
+Since in the second sum, the term is zero when i = K, we get
+K i=k K − 1 i P i F (1 − P F ) K−i = K−1 i=k K − 1 i P i F (1 − P F ) K−i < K−1 i=k−1 K − 1 i P i F (1 − P F ) K−i .(36)
+Changing the variable j = i + 1,
+K−1 i=k−1 K − 1 i P i F (1 − P F ) K−i = K j=k K − 1 j − 1 P j−1 F (1 − P F ) K−j+1(37)
+and writing (37) in (35) with (36), it follows that
+K i=k K i P F i (1 − P F ) K−i < K i=k K − 1 i − 1 P F i (1 − P F ) K−i + K j=k K − 1 j − 1 P F j−1 (1 − P F ) K−j+1 .(38)
+Using
+P F i (1−P F ) K−i +P F i−1 (1−P F ) K−i+1 = P F i−1 (1−P F ) K−i rewrite (38), K i=k K i P F i (1−P F ) K−i < K i=k K − 1 i − 1 P F i−1 (1−P F ) K−i .
+(39) Multiplying (39) with K/(1 − P F ) and noting that
+i K i = K K − 1 i − 1 we finally get K i=k K i P F i−1 (1−P F ) K−i−1 (i − KP F ) = ∂P F0 (P F ; K, k) ∂P F > 0.
+
+APPENDIX F PROOF OF PROPOSITION V.2
+
+Proof: The claim will be proven for odd k, while its extension to even k can be accomplished following the same line of arguments. Let the threshold be k ∈ {0, K/2 − 1} for some K. If k = K/2 , then clearly P F0 (x; K, K/2 ) = P M0 (x; K, K/2 ) , ∀x ∈ [0, 1].
+
+One can also see that, cf. Remark V.1, P F0 (x; K, K/2 − 1) > P F0 (x; K, K/2 ) , ∀x ∈ (0, 1), and P M0 (x; K, K/2 − 1) < P M0 (x; K, K/2 ) , ∀x ∈ (0, 1).
+
+Hence, P F0 (x; K, K/2 − 1) > P M0 (x; K, K/2 − 1) , ∀x ∈ (0, 1).
+
+(40) For a pair (P F , P M ) to be valid, it should be in (F × M) K k , i.e. P F0 (P F ; K, K/2 − 1) = P M0 (P M ; K, K/2 − 1) . (41) Assume that (41) holds for some (P * F , P * M ) with P * M = P * F or with P * M < P * F . Then, both cases are obviously a contradiction with (40), since both P F0 and P M0 are monotonically increasing functions of P F and P M , respectively, cf. Proposition V.1. Therefore, P * M > P * F must be true for all pairs (P * F , P * M ) ∈ (F × M) K k . This proves that h K k (P F ) > P F for all P F ∈ (0, 1). Clearly, when k ∈ { K/2 + 1, K}, due to symmetry, e.g., P M0 (x; K, K/2 + 1) = P F0 (x; K, K/2 − 1), the inequalities above change direction and we get h K k (P F ) < P F for all P F ∈ (0, 1). Next, assume that (P * F , P * M ), (P * F , P * M ) = (1, 1), is a valid pair that satisfies (41) and fix a small positive number δ. Since P F0 is increasing, P F0 (P * F + δ; K, K/2 − 1) > P F0 (P * F ; K, K/2 − 1) , ∀P * F ∈ [0, 1). This suggests that the left hand side of (41) increases by adding δ to P * F . In order (41) to hold, its right hand side must also increase, which implies an increase of P * M by some positive number , since P M0 is also an increasing function. Then, (P * F + δ, P * M + ) ∈ (F × M) K k for all (P * F , P * M ) = (1, 1) implies that h K k is a monotonically increasing function.
+
+APPENDIX G PROOF OF (23) Proof: Introducing a random variable X K with a binomial distribution B(K, θ), it can be shown that L K (θ) = P [X K > K/2 ] − 1 1 +θ(θ) −K .
+
+For every θ ≤ 1 2 , P [X K > K/2 ] ≤ 1 2 hence P [X K > K/2 ] < 1 2 . Assume that θ = θ K (x) where θ K (x) = 1 2 1 − x √ K , for some fixed positive x. Then, K/2 = E[X K ] + x K σ(X K ) with x K = x/ 4θ K (x)(1 − θ K (x)) ∼ x. The central limit theorem implies that
+P [X K > K/2 ] = P [X K > E[X K ] + x K σ(X K )] = P X K − E[X K ] σ(X K ) > x K = P [X K > x] = 1 − F (x) when K → ∞
+where X K ∼ N (0, σ 2 ). Sinceθ(θ K (x)) −K → ∞ when K → ∞, we get, lim K→∞ sup θ≤1/2 L K (θ) ≥ lim K→∞ L K (θ K (x)) = 1 − F (x).
+
+As F (x) → 1 2 when x → 0 + , this proves the claim.
+
+
+and A. M. Zoubir are with the Signal Processing Group, Institute of Telecommunications, Technische Universität Darmstadt, 64283, Darmstadt, Germany (e-mail: ggul@spg.tu-darmstadt.de; zoubir@spg.tu-darmstadt.de) Manuscript received April 21, 2016; revised Jane 21, 2016.
+
+Fig. 1 .
+1Distributed detection network without a fusion center for K decision makers.
+
+Fig. 2 .
+2Distributed detection network with a fusion center for K decision makers.
+
+Assumption II. 3 .
+3The density of the likelihood ratio function l = dP 1 /dP 0 does not have a point mass under each hypothesis, i.e. P [l(Y i ) = c|H 0 ] = P [l(Y i ) = c|H 1 ] = 0 for all constant c and decision maker i.
+
+Fig. 3 .
+3An example of an ROC curve together with the fusion function h K k for K = 5 and k ∈ {0, 1, 2}.
+
+
+B θ = {{(P F , P M ) : P M ≥ l 1 (P F )} ∩ {(P F , P M ) : P M ≤ l 2 (P F )}} ∪{{(P F , P M ) : P M ≤ l 1 (P F )} ∩ {(P F , P M ) : P M ≥ l 2 (P F )}} defined by the intersection of two lines, l 1 = {(P F , P M ) : P M =θ(1 − P F )},
+
+Fig. 4 .
+4The parameter x min , which results in the maximum performance loss due to minimax decision making in DDN-WoF for all performance measures θ ∈ (0, 1/2) and various number of sensors K.
+
+Figure 4 Fig. 5 .
+45and 5 illustrate x min and the maximum of L K x , i.e. L K xmin , respectively, over θ ∈ (0, 1/2) and for every K ∈ {3, 5, 7, 9}, where (C 01 − C 00 ) = 1. Notice that L 1 xmin is the same with the maximum of the loss L found in the previous The maximum performance loss due to minimax decision making in DDN-WoF for all performance measures θ ∈ (0, 1/2) and various number of sensors K.
+
+(
+F×M) K k = (P F , P M ) : B(k; K, P F )+B(k; K, 1−P M ) = 1(20) where F K k is the set of all P F s and M K k is the set of all corresponding P M s. Define a function,
+
+
+, which is the intersection point of h 5 1 with l 1 .
+
+
+Maximum performance loss between minimax DDN-WoF and minimax DDN-WF for various K.
+
+∂P
+M0 (P M ; K, k) ∂P M = ∂P F0 (P F ; K, k) ∂P F | P F :=1−P M . (34)
+
+
+where each Y i : Ω → Ω is a continuous random variable corresponding to the observation y i ∈ Ω, see Figures 1,2. Without loss of generality Ω can be any interval of real numbers or the whole real line 1 . To decide for the hypothesis H j , each sensor makes an observation y i and gives a decision φ i ∈ {0, 1}. The decisions of all sensors φ = {φ 1 , ..., φ n } are either exchanged among sensors, or sent to the fusion center in order to give the final decision which is made based on a fusion1 The random variables Y i can also be vector valued. This does not affect the results derived throughout the paper.
+
+Principles of Signal Detection and Parameter Estimation. B C Levy, Springer Publishing Company1st ed. IncorporatedB. C. Levy, Principles of Signal Detection and Parameter Estimation, 1st ed. Springer Publishing Company, Incorporated, 2008.
+
+A robust version of the probability ratio test. P J Huber, Ann. Math. Statist. 36P. J. Huber, "A robust version of the probability ratio test," Ann. Math. Statist., vol. 36, pp. 1753-1758, 1965.
+
+Quantization of prior probabilities for hypothesis testing. K R Varshney, L R Varshney, IEEE Transactions on Signal Processing. 5610-1K. R. Varshney and L. R. Varshney, "Quantization of prior probabilities for hypothesis testing." IEEE Transactions on Signal Processing, vol. 56, no. 10-1, pp. 4553-4562, 2008.
+
+A measure of asymptotic efficiency for tests of a hypothesis based on the sums of observations. H Chernoff, Annals of Mathematical Statistics. 23H. Chernoff, "A measure of asymptotic efficiency for tests of a hy- pothesis based on the sums of observations," Annals of Mathematical Statistics, vol. 23, pp. 409-507, 1952.
+
+Decentralized detection. J N Tsitsiklis, Advances in Statistical Signal Processing. JAI PressJ. N. Tsitsiklis, "Decentralized detection," in In Advances in Statistical Signal Processing. JAI Press, 1993, pp. 297-344.
+
+Distributed detection over adaptive networks using diffusion adaptation. F S Cattivelli, A H Sayed, IEEE Transactions on Signal Processing. 595F. S. Cattivelli and A. H. Sayed, "Distributed detection over adaptive networks using diffusion adaptation," IEEE Transactions on Signal Processing, vol. 59, no. 5, pp. 1917-1932, May 2011.
+
+Distributed detection and data fusion. P K Varshney, Springer-Verlag New York, IncSecaucus, NJ, USA1st edP. K. Varshney, Distributed detection and data fusion, 1st ed. Secaucus, NJ, USA: Springer-Verlag New York, Inc., 1996.
+
+Robust distributed block and sequential continuous time detection. E Geroniotis, Proc. of 26th Conf. on Decision and Control. of 26th Conf. on Decision and ControlLos Angeles, CAE. Geroniotis, "Robust distributed block and sequential continuous time detection," in Proc. of 26th Conf. on Decision and Control, Los Angeles, CA, Dec. 1987, pp. 2245-2250.
+
+Robust distributed discrete-time block and sequential detection. Proc. 1987 Conf. Inform. Sci. Syst., Johns Hopkins Univ. 1987 Conf. Inform. Sci. Syst., Johns Hopkins UnivBaltimore, MD--, "Robust distributed discrete-time block and sequential detection," in Proc. 1987 Conf. Inform. Sci. Syst., Johns Hopkins Univ.,Baltimore, MD, Mar. 1987, pp. 354-360.
+
+On minimax robust data fusion. E Geroniotis, Y A Chau, Proc. nullE. Geroniotis and Y. A. Chau, "On minimax robust data fusion," in Proc.
+
+. Conf. Inform. Sci. Syst., Princeton Univ. Conf. Inform. Sci. Syst., Princeton Univ., Princeton, NJ, Mar. 1988, pp. 876-881.
+
+Robust data fusion for multisensor detection systems. E Geraniotis, IEEE Trans. Inform. Theory. 36E. Geraniotis, "Robust data fusion for multisensor detection systems," IEEE Trans. Inform. Theory, vol. 36, pp. 1265-1279, Nov 1990.
+
+Minimax robust decentralized detection. V V Veeravalli, T Basar, H V Poor, IEEE Trans. Inform. Theory. 40V. V. Veeravalli, T. Basar and H. V. Poor, "Minimax robust decentralized detection," IEEE Trans. Inform. Theory, vol. 40, pp. 35-40, Jan 1994.
+
+Robust distributed detection with total power constraint in large wireless sensor networks. J Park, G Shevlyakov, K Kim, IEEE Transactions on Wireless Communications. J. Park, G. Shevlyakov, and K. Kim, "Robust distributed detection with total power constraint in large wireless sensor networks," IEEE Transactions on Wireless Communications, pp. 2058-2062, 2011.
+
+Robust detection under communication constraints. G Gül, A M Zoubir, Proc. IEEE 14th Int. Workshop on Advances in Wireless Communications (SPAWC). IEEE 14th Int. Workshop on Advances in Wireless Communications (SPAWC)Darmstadt, GermanyG. Gül and A. M. Zoubir, "Robust detection under communication constraints," in Proc. IEEE 14th Int. Workshop on Advances in Wireless Communications (SPAWC), Darmstadt, Germany, June 2013, pp. 410-414. [Online]. Available: http://tubiblio.ulb.tu-darmstadt.de/66508/
+
+Decentralized detection with censoring sensors. S Appadwedula, V V Veeravalli, D L Jones, IEEE Transactions on Signal Processing. 564S. Appadwedula, V. V. Veeravalli, and D. L. Jones, "Decentralized detec- tion with censoring sensors." IEEE Transactions on Signal Processing, vol. 56, no. 4, pp. 1362-1373, 2008.
+
+Robust hypothesis testing for modeling errors. G Gül, A M Zoubir, Proceedings of the IEEE International Conference on Acoustics, Speech, and Signal Processing. the IEEE International Conference on Acoustics, Speech, and Signal ProcessingVancouver, CanadaG. Gül and A. M. Zoubir, "Robust hypothesis testing for modeling errors," in Proceedings of the IEEE International Conference on Acous- tics, Speech, and Signal Processing (ICASSP), Vancouver, Canada, May 2013.
+
+Counterexamples in distributed detection. M Cherikh, P B Kantor, IEEE Transactions on Information Theory. 381M. Cherikh and P. B. Kantor, "Counterexamples in distributed detec- tion." IEEE Transactions on Information Theory, vol. 38, no. 1, pp. 162-165, 1992.
+
+Decentralized detection by a large number of sensors. J N Tsitsiklis, Mathematics of Control, Signals, and Systems. J. N. Tsitsiklis, "Decentralized detection by a large number of sensors," Mathematics of Control, Signals, and Systems, pp. 167-182, 1988.
+
+Average consensus on networks with quantized communication. P Frasca, R Carli, F Fagnani, S Zampieri, 10.1002/rnc.1396]PublishedOnline:12International Journal of Robust and Nonlinear Control. 19P. Frasca, R. Carli, F. Fagnani, and S. Zampieri, "Average con- sensus on networks with quantized communication," International Journal of Robust and Nonlinear Control, vol. 19, pp. 1787 - 1816, 2009, [10.1002/rnc.1396] Published Online: 12 Nov 2008 [http://dx.medra.org/10.1002/rnc.1396].
+
+Interactive fusion in distributed detection: Architecture and performance analysis. E Akofor, B Chen, Acoustics, Speech and Signal Processing (ICASSP), 2013 IEEE International Conference on. E. Akofor and B. Chen, "Interactive fusion in distributed detection: Architecture and performance analysis," in Acoustics, Speech and Signal Processing (ICASSP), 2013 IEEE International Conference on, May 2013, pp. 4261-4265.

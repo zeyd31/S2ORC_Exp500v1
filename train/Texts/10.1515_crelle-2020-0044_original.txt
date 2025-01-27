@@ -1,0 +1,352 @@
+
+THE FRANKEL PROPERTY FOR SELF-SHRINKERS FROM THE VIEWPOINT OF ELLIPTIC PDE'S
+6 Mar 2018
+
+Debora Impera 
+ANDStefano Pigola 
+Michele Rimoldi 
+THE FRANKEL PROPERTY FOR SELF-SHRINKERS FROM THE VIEWPOINT OF ELLIPTIC PDE'S
+6 Mar 2018
+We show that two properly embedded self-shrinkers in Euclidean space that are sufficiently separated at infinity must intersect at a finite point. The proof is based on a localized version of the Reilly formula applied to a suitable f -harmonic function with controlled gradient. In the immersed case, a new direct proof of the generalized half-space property is also presented.1.Basic notation and purpose of the paper 1.1. Weighted manifolds. By a weighted manifold (also called manifold with density, or smooth metric measure space) we mean a triadRiemannian manifold with volume element dv, dv f = e −f dv and f : M → R is a smooth weight function. The (obviously intrisic) geometric analysis of M f is related to bounds on its Bakry-Émery Ricci curvature Ric f := Ric + Hess(f ) combined with the analysis of its weighted Laplacianwhere the weighted divergence is the operator div f X = e f div(e −f X).An important example of weighted manifold is represented by the Gaussian spaceSince the weight function is f (x) = 1 2 |x| 2 we have that the Bakry-Émery Ricci curvature ishence R m+1 f is called a shrinking Ricci soliton. Moreover, the weighted Laplacian is the Ornstein-Uhlenbeck operator ∆ f u = ∆u − ∇u, x .
+
+1.2. Self shrinkers of the MCF. Given an isometrically immersed hypersurface in the weighted manifold M m+1 f x : Σ m → M m+1 f , we introduce the corresponding weighted mean curvature vector field of the immersion as
+H f := H + (∇f ) ⊥ ,
+where we are using the convention H = tr Σ A, A is the vector-valued second fundamental form, and (·) ⊥ denotes the orthogonal projection on the normal bundle of Σ. We say that
+x : Σ m → M m+1 f is f -minimal if H f ≡ 0.
+A self-shrinker of the mean curvature flow (MCF) in the Euclidean space R m+1 is an fminimal hypersurface of the Gaussian space R m+1 f . This is completely equivalent to require that the mean curvature vector field satisfies the equation (1) x ⊥ = −H.
+
+
+1.3.
+
+Intrinsic vs extrinsic weighted structure. Clearly, the self-shrinker Σ m inherits the weighted structure of the ambient space. Thus, intrinsically, we can consider the manifold with density Σ m f = (Σ m , g = x * ·, · , dvf ) wheref = f • x. It is customary to drop the "tilde" in the weight function and to write Σ m f . An important relation between the (intrinsic) Bakry-Émery Ricci tensor of Σ m f and the extrinsic geometry of the f -minimal hypersurface Σ m comes from the Gauss equations. Indeed, it was observed in [20] that Ric Σ f ≥ 1 − |A| 2 . As in the usual minimal surface theory, another important link between the intrinsic weighted geometry and the extrinsic properties of the self-shrinker comes from the f -Laplacian of the immersion. We have the following identity (see e.g. [3]) (2) ∆ Σ f x = −x and its direct consequence ∆ Σ f |x| 2 = 2(m − |x| 2 ).
+
+1.4. Properly immersed self-shrinkers. We are mainly interested in properly immersed self-shrinkers. A remarkable result by Q. Ding and Y.L. Xin, [4], states that a properly immersed self-shrinker x : Σ m → R m+1 f has extrinsic Euclidean volume growth
+(3) Σ m ∩ B m+1 R = O(R m )
+and, hence, finite weighted volume vol f (Σ m ) < +∞.
+
+This latter condition implies that the complete weighted manifold Σ m f is f -parabolic, i.e., for any u ∈ C 0 (Σ) ∩ W 1,2 loc (Σ),
+∆ Σ f u ≥ 0 sup Σ u < +∞ ⇒ u ≡ const.
+It is well known that parabolicity is a kind of compactness from several view points, including maximum principles and global Stokes theorems. This is already visible from the characterising property (1.4).
+
+1.5. The Frankel property. In many instances, properly immersed self-shrinkers behave like compact minimal hypersurfaces of the standard sphere. In this latter setting, it is well known that any two closed minimal immersed hypersurfaces must intersect. Actually, the ambient space can be generalized to a compact Riemannian manifold with strictly positive Ricci curvature. This is called the Frankel property after the celebrated paper by T. Frankel, [5]. Several proofs of the Frankel theorem are now available, each arguing by contradiction and, thus, assuming that the hypersurfaces are a positive distance apart. The original proof uses the second variation of length along minimal geodesic realizing the (positive) distance. New arguments based on the maximum principles for the hypersurface-distance function are supplied by P. Petersen and F. Wilhelm, [16]. The validity of the Frankel property has been subsequently extended to other geometric contexts. Most notably, and relevantly for the development of the present paper, A. Fraser and M. M.-C. Li, [6], proved that the Frankel property holds for compact embedded free boundary minimal surfaces in a manifold with nonnegative Ricci curvature. It is natural to ask:
+Problem. Let x j : Σ m j → R m+1 f , j = 1, 2, be complete, properly immersed self-shrinkers. To what extent is it true that x 1 (Σ m 1 ) ∩ x 2 (Σ m 2 ) = ∅?
+Starting from the work by G. Wei and W. Wylie, [22], where the case of compact hypersurfaces is considered (actually what is really needed is that the positive distance between the hypersurfaces is realized at finite points), few partial positive answers to this question appeared in the literature. They are mostly related to (generalized) half-space properties of the shrinkers; see Section 2.
+
+During the summer school "Geometric Analysis on Riemannian and Singular Metric Measure Spaces", held in Como in July 2016, http://arms.lakecomoschool.org, Prof. Tom Ilmanen stated (and kindly outlined the main steps of the parabolic proof) that the Frankel property can be proved in the general framework of the motion by level-sets in Euclidean space.
+
+1.6. Purpose of the paper. These notes are growing around the attempt of proving the validity of the (smooth) properly embedded Frankel property for self-shrinkers of the MCF by taking the purely elliptic viewpoint. We shall collect results and techniques based on different elliptic methods that, we feel, will be interesting also in other settings. The main contributions are the following:
+
+-With a new direct argument, based on the potential theory of weighted manifolds, we recover the main result of [1], namely we show that a properly immersed selfshrinker cannot be located neither inside nor outside a self-shrinker cylinder; see Theorem A in Section 2. -We apply a localized version of the Reilly formula to a suitable f -harmonic function with controlled gradient in order to show that two properly embedded self-shrinkers that are sufficiently separated at infinity must intersect at a finite point; see Theorem B and Theorem C in Section 3.
+
+
+Immersed shrinkers: half-space type properties
+
+After the celebrated paper by D. Hoffman and W. Meeks, [9], one says that the (weak) half-space property holds for a certain family F of immersed hypersurfaces, if any Σ ∈ F cannot be confined in certain half-spaces unless it is a totally geodesic hyperplane.
+
+The first half-space property for Euclidean properly immersed self-shrinkers of the MCF was observed in [18,Theorem 3].
+
+Theorem. Let x : Σ m → R m+1 be a properly immersed self-shrinker. If x(Σ) is contained in a closed half-space of R m+1 determined by a hyperplane Π passing through the origin, then x(Σ) = Π.
+
+In the same paper, the authors started the investigation on the possible regions where a properly immersed self-shrinker (with various geometric assumptions) can be located. The proof of the half-space property proposed in [18] is a simple application of the f -parabolicity of the self-shrinkers. Soon after, P. Cavalcante and J. Espinar, [1, Theorem 1.1], obtained the same result using the touching principle following closely the original proof by Hoffman-Meeks. The role of the catenoid is now played by a rotational self-shrinker discovered by S. Kleene and N. Möller [12]. With the same geometric technique, they were also able to replace the half-space by the interior or the exterior region of a cylindrical self-shrinker; [1, Theorem 1.2 and Theorem 1. 3] In the next result we use potential theoretic arguments to recover [1, Theorem 1.2 and Theorem 1.3] in a very succinct way.
+
+Theorem A. Let x : Σ m → R m+1 be a complete properly immersed self-shrinker. If x(Σ) is confined inside either one of the connected regions of R m+1 determined by the self-shrinker
+cylinder S k √ k × R m−k ⊂ R m+1 , 1 ≤ k ≤ m − 1, then x(Σ) = S k √ k × R m−k .
+Proof. Letting {e A } m+1 A=1 be an orthonormal frame of R m+1 , we will denote the coordinate functions of x by x A := x, e A and by N the chosen (local) Gauss map of the immersion. Fix 1 ≤ k ≤ m − 1 and consider a self-shrinker cylinder
+C k √ k := S k √ k × R m−k ⊂ R m+1 .
+Let u : Σ → R be the smooth function defined by
+u = k+1 A=1 x 2 A .
+Clearly, for every p ∈ Σ,
+u(p) = dist R m+1 x(p), C k √ k + √ k 2 ,
+where dist R m+1 x(p), C k √ k denotes the signed distance. Here, we are using the convention that such a distance is negative inside C k √ k . Note that
+1 4 |∇ Σ u| 2 = u − k+1 A=1 x A e A , N 2 (4) = u − x, N 2 = u 1 − x |x| , N 2 ,
+where we are using the notation x = k+1 A=1 x A e A and N = k+1 A=1 e A , N e A . By Equation (2), we have that
+1 2 ∆ Σ f x 2 A = x A ∆ Σ f x A + |∇ Σ x A | 2 = −x 2 A + |e T A | 2 .
+Hence,
+1 2 ∆ Σ f u = k+1 A=1 |e T A | 2 − u (5) = k + 1 − k+1 A=1 e A , N 2 − u = k + 1 − |N | 2 − u.
+A direct consequence of (5) is that
+1 2 ∆ Σ f u ≥ k − u.(6)
+On the other hand, using (4) and (5) we deduce the estimate
+∆ Σ f √ u = ∆ Σ f u 2 √ u − |∇ Σ u| 2 4u 3 2 (7) = k − u √ u + x |x| , N 2 − |N | 2 √ u ≤ k − u √ u .
+Assume now that x(Σ) is confined in the closed exterior region determined by the selfshrinker cylinder C k √ k ⊂ R m+1 . Thus, u ≥ k and, by inequality (7),
+√ u is f -superharmonic.
+On the other hand, since Σ is properly immersed, Σ f is parabolic in the sense of (1.4). It follows that √ u ≡ C for some constant C ≥ 0 and this implies
+dist R m+1 x, C k √ k ≡ const ≥ 0.
+In particular the distance between the two self-shrinkers is realized. By [22,Theorem 7
+.3] we must conclude that dist R m+1 x, C k √ k ≡ 0, that is, x(Σ m ) ⊆ C k √ k .
+The desired equality now follows by geodesic completeness.
+
+Similarly, suppose that x(Σ) is confined inside the solid cylinder bounded by the selfshrinker C k √ k ⊆ R m+1 . Then, we see from (6) that the function u is f -subharmonic. Since u ≤ k it follows that u must be constant by f -parabolicity. Whence, reasoning as in the previous case, we reach once more the conclusion that x(Σ) = C k √ k . Remark 1. In both cases, if k ≥ 2, we can conclude using a simple universal covering argument that does not rely on [22]. Indeed, let us assume that we have already proved that u ≡ const and, hence,
+dist R m+1 x, C k √ k ≡ C ∈ (− √ k, +∞), that is, x(Σ) ⊆ C k √ k+C . By geodesic completeness, we have that x : Σ → C k √
+k+C is a Riemannian covering map and, since C k √ k+C is simply connected for k ≥ 2, Σ must be equal to C k √ k+C in the Riemannian sense. Using the self-shrinker equation (1) we conclude that C = 0, as desired.
+
+
+Embedded shrinkers with controlled asymptotic distance: main results
+
+In the recent paper [6], A. Fraser and M. Li proved that the Frankel property holds for compact embedded free boundary minimal surfaces in a compact manifold with nonnegative Ricci curvature. They supplied two different arguments: the first one is a small variation of the original proof by Frankel whereas the second one, to the best of our knowledge, is completely new. It relies on the Reilly's formula applied to a harmonic function that separates the two surfaces. Inspired by this latter proof we shall obtain the following result. Roughly speaking it states that if two properly embedded self-shrinkers are separated enough at infinity then they must intersect at some finite point.
+
+Theorem B. Let Σ m 1 and Σ m 2 be properly embedded connected self-shrinkers in the Euclidean space R m+1 . Assume that Σ 2 has a uniform regular normal neighborhood T (Σ 2 ). If
+(8) lim inf |z| → +∞ z ∈ Σ 2 dist R m+1 (z, Σ 1 ) e −b|z| 2 P(|z|) −1 > 0,
+for some polynomial P ∈ R[t] and some constant 0 ≤ b < 1 2 , then Σ 1 ∩ Σ 2 = ∅. Remark 2. As it will be clear from the proof, the extrinsic regularity assumption on Σ 2 can be considerably relaxed. What is really needed is that the ray R(z) > 0 of T (Σ 2 ) at a point z ∈ Σ 2 decays in the following controlled way:
+(9) lim inf |z| → +∞ z ∈ Σ 2 R(z) e −c|z| 2 Q(|z|) −1 > 0,
+for some c > 0 such that mc + b < 1 2 and some Q ∈ R[t]. If we drop the restriction on the extrinsic geometry of Σ 2 , the same method gives the following weaker conclusion of independent interest. We point out that this result, in the setting of embedded hypersurfaces, extends [22,Theorem 7.4] since it covers also the case where the two hypersurfaces realize their positive distance at infinity.
+Theorem C. Let Σ m 1 , Σ m 2 be properly embedded f -minimal hypersurfaces inside the com- plete weighted manifold M m+1 f with Ric f ≥ K 2 > 0. Assume that each of Σ 1 and Σ 2 separates M f . Then Σ m 1
+can not be a positive distance apart from Σ m 2 . Both Theorem B and Theorem C, can be considered as concrete realizations of the following abstract result.
+Theorem D. Let Σ m 1 , Σ m 2 be properly embedded f -minimal hypersurfaces inside the com- plete weighted manifold M m+1 f with Ric f ≥ K 2 > 0. Assume that Σ 1 ∩ Σ 2 = ∅ and that each of Σ 1 and Σ 2 separates M f . The domain enclosed by the two hypersurfaces is denoted by Ω. If u ∈ C ∞ (Ω) is a solution of the following problem (10)      ∆ f u = 0 in Ω u = 0 on Σ 1 u = 1 on Σ 2 then lim sup R→+∞ B M R ∩Ω |∇u| 2 dv f R 2 = +∞.
+The rest of the paper is organized as follows: -First, in Section 4, we prove the abstract Theorem D using a localized version of the Reilly's formula that, we feel, is of independent interest. -Next, in Section 5, we assume by contradiction that the two self-shrinkers do not intersect and we prove that a bounded solution of (10), with finite Dirichlet fenergy, exists provided the assumptions of Theorem B are met. This contradicts Theorem D. -Finally, in Section 6, using a variational viewpoint, we still assume by contradiction that the two self-shrinkers do not intersect and we show that a bounded solution of (10), with finite Dirichlet f -energy, exists without any restriction on the extrinsic geometry of Σ 2 , provided the distance between the two self-shrinkers is strictly positive. This, again, contradicts Theorem D.
+
+
+Localized Reilly's formula and a proof of Theorem D
+
+Reilly's formula is a celebrated integral formula first introduced in [19] to study isometric immersions and geometric bounds on the first Neumann eigenvalue of a compact manifold with boundary; see also [2] and the survey paper [17] for more applications. A version of this formula for the weighted Laplacian is obtained in [14] following the arguments in [2]. We are going to prove a localized version of the Reilly's formula that holds in the non-compact weighted setting.
+Lemma 3. Let Ω be a domain with smooth boundary Σ = ∂Ω in the complete smooth metric measure space M m+1 f and let φ ∈ C ∞ c (M ). Then, for any u ∈ C 0 (Ω) ∩ C 2 (Ω), Ω φ 2 |Hess u| 2 − (∆ f u) 2 + Ric f (∇u, ∇u) dv f + Ω ∇φ 2 , 1 2 ∇|∇u| 2 − ∆ f u∇u dv f (11) = Σ φ 2 A Σ (∇ Σ u, ∇ Σ u) + ∇ Σ u ∂u ∂ν − ∆ Σ f u − H f ∂u ∂ν ∂u ∂ν dv Σ f ,
+where ν is the exterior unit normal to Σ and A Σ is the corresponding second fundamental form, and dv Σ f is the weighted measure of the boundary Σ.
+Proof. Let φ ∈ C ∞ c (M f ) and let Z = ∇ |∇u| 2 2 −∆ f u ∇u.
+Then, using the f -Bochner formula, we get
+div f φ 2 Z =φ 2 div f ∇ |∇u| 2 2 − ∆ f u div f (∇u) − ∇∆ f u, ∇u + ∇φ 2 , ∇ |∇u| 2 2 − ∆ f u∇u =φ 2 ∆ f |∇u| 2 2 − (∆ f u) 2 − ∇∆ f u, ∇u + ∇φ 2 , ∇ |∇u| 2 2 − ∆ f u∇u =φ 2 |Hess u| 2 + ∇∆ f u, ∇u + Ric f (∇u, ∇u) − (∆ f u) 2 − ∇∆ f u, ∇u + ∇φ 2 , ∇ |∇u| 2 2 − ∆ f u∇u =φ 2 |Hess u| 2 + Ric f (∇u, ∇u) − (∆ f u) 2 + ∇φ 2 , ∇ |∇u| 2 2 − ∆ f u∇u .
+Applying the f -divergence theorem we get:
+Σ φ 2 Z, ν dv f = Ω div f (φ 2 Z)dv Σ f (12) = Ω φ 2 |Hess u| 2 + Ric f (∇u, ∇u) − (∆ f u) 2 dv f + Ω ∇φ 2 , ∇ |∇u| 2 2 − ∆ f u∇u dv f . Let {E i } m i=1
+be a local orthonormal frame on Σ. Letting H f := H + ∇f, ν and using the identity
+∇u = ∇ Σ u + ∂u ∂ν ν,
+one gets that
+∆ f u = m i=1
+Hess u(E i , E i ) + Hess u(ν, ν) − ∇f, ∇u
+=∆ Σ f u + Hess u(ν, ν) − H f ∂u ∂ν and ∇ |∇u| 2 2 , ν =Hess u ∇ Σ u, ν + ∂u ∂ν Hess u(ν, ν) = − ∇ ∇ Σ u ν, ∇ Σ u + ∇ ∇ Σ u ∂u ∂ν ν , ν + ∂u ∂ν Hess u(ν, ν) =A Σ (∇ Σ u, ∇ Σ u) + ∇ Σ u ∂u ∂ν + ∂u ∂ν
+Hess u(ν, ν).
+
+Inserting these two relations in (12) we obtain the desired conclusion.
+
+Theorem D is a direct consequence of the localized Reilly's formula.
+
+Proof of Theorem D. Let u ∈ C ∞ (Ω) be a solution of
+     ∆ f u = 0 in Ω u = 0 on Σ 1 u = 1 on Σ 2
+Applying (11) to u and using Young's and Kato's inequalities we get that for any ε > 0
+0 ≥ Ω φ 2 |Hess u| 2 + K 2 |∇u| 2 + ∇φ 2 , ∇|∇u| 2 2 dv f = Ω φ 2 |Hess u| 2 + K 2 |∇u| 2 + 2φ|∇u| ∇φ, ∇|∇u| dv f ≥ Ω φ 2 |Hess u| 2 + K 2 |∇u| 2 − φ 2 ε |∇|∇u|| 2 − ε|∇φ| 2 |∇u| 2 dv f ≥ Ω φ 2 1 − 1 ε |∇|∇u|| 2 dv f + Ω K 2 φ 2 − ε|∇φ| 2 |∇u| 2 dv f .
+Choose now ε > 1 and let φ R be smooth cut-offs such that
+φ R = 1 on B M R , supp(φ R ) ⊂ B M 2R
+and |∇φ| 2 ≤ 4 R 2 . Then, we get
+K 2 Ω∩B M R |∇u| 2 dv f ≤ K 2 Ω∩B M 2R φ 2 |∇u| 2 dv f ≤ ε Ω∩B M 2R |∇φ| 2 |∇u| 2 dv f ≤ 4ε R 2 Ω∩B M 2R |∇u| 2 dv f
+Taking the limit as R → +∞ this yields that
+(13) Ω |∇u| 2 dv f ≤ 4ε K 2 lim sup R→+∞ 1 R 2 Ω∩B M 2R |∇u| 2 dv f .
+Since, obviously, u is non-constant, we must have lim sup
+R→+∞ 1 R 2 Ω∩B M 2R |∇u| 2 dv f > 0.
+In particular, |∇u| ∈ L 2 (Ω, dv f ) and from inequality (13) we conclude lim sup
+R→+∞ 1 R 2 Ω∩B M 2R |∇u| 2 dv f = +∞,
+thus completing the proof.
+
+
+5.
+
+Construction of special f -harmonic functions and proof of Theorem B
+
+The strategy of the proof of Theorem B goes as follows:
+
+-By contradiction we assume that Σ 1 and Σ 2 are disjoint. Recall that, by the Jordan-Brouwer separation Theorem, each hypersurface Σ j separates R m+1 ; [8]. Therefore it is well defined the region Ω of R m+1 in between Σ 1 and Σ 2 .
+
+-We construct on Ω a (unique) bounded positive f -harmonic function u with Dirichlet boundary conditions 0 and 1, respectively, on Σ 1 and Σ 2 . To construct u, we solve a mixed boundary value problem along an exhaustion of Ω where a Neumann condition is imposed on the "free" part of the boundary. An application of interior and boundary Schauder estimates enables us to extract a subsequence converging in C 2 on every compact set to the desired global solution.
+
+-We use the asymptotic distance assumption (8) and the condition on the extrinsic geometry of Σ 2 to obtain that, in fact, |∇u| ∈ L 2 (Ω, dv f ). To this end, a Caccioppoli inequality up to the boundary reduces the problem to an estimate of |∇u| on the hypersurface Σ 2 . Thanks to the control on the extrinsic geometry of Σ 2 , a pointwise estimate of |∇u| on Σ 2 is obtained using maximum principle arguments.
+
+-We use Theorem D to get a contradiction.
+
+Accordingly, the main purpose of the present section is to prove the following Lemma E. Let Σ m 1 and Σ m 2 be disjoint, properly embedded hypersurfaces in the complete weighted manifold M m+1 f satisfying Ric f ≥ K 2 > 0. Assume that Σ 1 , Σ 2 separate M and let Ω ⊂ M be the domain enclosed between these hypersurfaces so that ∂Ω = Σ 1 ∪ Σ 2 . Then, there exists a unique bounded solution u ∈ C ∞ (Ω) of the problem
+(14)      ∆ f u = 0 in Ω u = 0 on Σ 1 u = 1 on Σ 2 satisfying 0 < u < 1, on Ω.
+Moreover, assume that M m+1 f = R m+1 f is the Gaussian space and that Σ 2 satisfies the asymptotic distance condition (8) and the normal neighborhood condition (9). Then u has finite f -energy: (15) |∇u| ∈ L 2 (Ω, dv f ).
+
+As we have outlined above, we split the proof in several steps.
+
+
+5.1.
+
+Uniqueness of the solution. Following [11], it is convenient to set the following Adapting to the framework of manifolds with density what is known from [11] (see also [10]), we have the following Since, in the setting of Lemma E, vol f (Ω) ≤ vol f (M ) < +∞, the complete manifoldΩ with boundary ∂Ω = ∅ is f -parabolic in the sense of Dirichlet. Hence a bounded solution of (14), if any, must be unique.
+
+
+5.2.
+
+Existence of the solution by exhaustion. As in the statement of Lemma E, let M m+1 f be a complete smooth metric measure space and letΩ ⊂ M be the domain whose boundary is given by ∂Ω = Σ 1 ∪ Σ 2 . Let D k ր M be an exhaustion of M by relatively compact domains with smooth boundary ∂D k intersecting transversally Σ 1 and Σ 2 ; see e.g. [15]. Let Ω k ր Ω be the Lipschitz domains defined by Ω k = D k ∩ Ω. Note that,
+∂Ω k = Σ 1,k ∪ Σ 2,k ∪ Γ k where Σ i,k ⊂ Σ i , i = 1, 2, and Γ k ⊂ ∂D k .
+The singular set of Ω k is denoted by S k . Then, {Ω k } is a "good" exhaustion of Ω with respect to mixed boundary value problems. Consider the solution u k to the problem
+(16)          ∆ f u k = 0 in Ω k u k = 0 on Σ 1,k u k = 1 on Σ 2,k ∂u k ∂ν k = 0 on Γ k ,
+where ν k is the outward unit normal to Γ k . It follows from the Perron construction in [13], and the well-known local regularity theory, that u k ∈ C 0 (Ω k )∩C ∞ Ω k \ S k . Furthermore, by the strong maximum principle and the boundary point lemma,
+0 < u k < 1, on Ω k .
+For any fixed k 0 ∈ N, let us consider the sequence of solutions of (16):
+U k 0 +2 = {u k : k ≥ k 0 + 2} ⊂ C ∞ (Ω k 0 +1 ).
+We claim that, given α > 0, there exists a constant C k 0 > 0 such that
+(17) sup u k ∈U k 0 +2 u k C 2,α (Ω k 0 ) ≤ C k 0 .
+To this end:
+
+-We apply [7, Corollary 6.7] with the choices Ω := Ω k 0 +1 , T := Σ 1,k 0 +1 , L := ∆ f , ϕ := 0, f := 0 and we obtain that there exists a ray δ 1,k 0 > 0 and a constant C 1,k 0 > 0 such that, having defined the δ k 0 -neighborhood of Σ 1,k 0 as
+T δ 1,k 0 (Σ 1,k 0 ) = ∪ p∈Σ 1,k 0 B M δ 1,k 0 (p) ∩ Ω k 0 +1 it holds u k C 2,α T δ 1,k 0 (Σ 1,k 0 ) ≤ C 1,k 0 ,
+for every u k ∈ U k 0 +2 . -Similarly, we apply [7, Corollary 6.7] with the choices Ω := Ω k 0 +1 , T := Σ 2,k 0 +1 , L := ∆ f , ϕ := 1, f := 0 and we obtain that there exists a ray δ 2,k 0 > 0 and a constant C 2,k 0 > 0 such that
+u k C 2,α T δ 2,k 0 (Σ 2,k 0 ) ≤ C 2,k 0 ,
+for every u k ∈ U k 0 +2 . -Set δ k 0 = min(δ 1,k 0 , δ 2,k 0 ) > 0 and define the compact set
+K k 0 =Ω k 0 \ T δ k 0 2 (Σ 1,k 0 ) ∪ T δ k 0 2 (Σ 2,k 0 ) ⊂ Ω k 0 +1 .
+By [7,Theorem 6.2] with Ω := Ω k 0 +1 and L := ∆ f , there exists a constant C 3,k 0 > 0 such that
+u k C 2,α (K k 0 ) ≤ C 3,k 0 , for every u k ∈ U k 0 +2 . -Since Ω k 0 ⊂ T δ k 0 (Σ 1,k 0 ) ∪ T δ k 0 (Σ 2,k 0 ) ∪ K k 0 ,
+and U k 0 +2 ⊂ C ∞ (Ω k 0 +1 ), the claimed estimate (17) follows by taking C k 0 = max(C 1,k 0 , C 2,k 0 , C 3,k 0 ). Now, for 0 < α 1 < α 2 , the embedding C 2,α 2 (Ω k 0 ) ֒→ C 2,α 1 (Ω k 0 ) is compact. Therefore, possibly passing to a subsequence, we obtain that U k 0 +2 converges in C 2 (Ω k 0 ) to a solution u k 0 ∈ C 2 (Ω k 0 ) (actually u k 0 ∈ C ∞ (Ω k 0 ) by higher elliptic regularity) of the problem
+     ∆ f u k 0 = 0, in Ω k 0 u k 0 = 0, on Σ 1,k 0 u k 0 = 1, on Σ 2,k 1 .
+Moreover, 0 ≤ u k 0 ≤ 1. To conclude the construction, we let k 0 increase to +∞ and we use a classical diagonal argument. This yields the desired solution u ∈ C ∞ (Ω) of
+     ∆ f u = 0, in Ω u = 0, on Σ 1 u = 1, on Σ 2 , satisfying 0 ≤ u ≤ 1.
+
+5.3
+
+. The finite f -energy condition. From now on, unless otherwise specified, we assume that M f is the Gaussian space R m+1 f . We want to obtain the finiteness of the Dirichlet fenergy of the solution u of (14): ∇u L 2 (Ω,dv f ) < +∞. A standard Caccioppoli inequality up to the boundary reduces the problem to an estimate of |∇u| along Σ 2 (the boundary hypersurface where the datum 1 is imposed). This latter, in turn, can be carried out by maximum principle considerations.
+
+
+A Caccioppoli inequality up to the boundary.
+
+We prove the following Lemma 6. Let u : Ω → R be a solution of (14). Then,
+(18) Ω |∇u| 2 dv f ≤ 2 Σ 2 |∇u| dv 2;f 2 where dv i;f i is the weighted measure of the boundary hypersurface Σ i,f i and f i = f | Σ i , i = 1, 2.
+Proof. Let ϕ = ϕ R ∈ C ∞ c (R m+1 ) be a family of standard cut-off functions satisfying the following conditions:
+i) 0 ≤ ϕ ≤ 1; ii) ϕ = 1 on B m+1 R/4 (x); iii) ϕ = 0 on R m+1 \ B m+1 R/2 (x); iv) ∇ϕ ∞ ≤ 2/R. Consider the vector field X = ϕ 2 u∇u
+Observe that the f -divergence of X is given by div f X = 2uϕ ∇u, ∇ϕ + ϕ 2 |∇u| 2 .
+
+Integrating X on Ω, using the f -divergence theorem, the Young inequality and recalling the (Dirichlet) boundary conditions satisfied by u, we get
+Ω ϕ 2 |∇u| 2 dv f = − Ω 2uϕ ∇u, ∇ϕ dv f + Σ 2 ϕ 2 ∂u ∂ν 2 dv 2;f 2 ≤ ε Ω u 2 |∇ϕ| 2 dv f + ε −1 Ω ϕ 2 |∇u| 2 dv f + Σ 2 ϕ 2 ∂u ∂ν 2 dv 2;f 2 where ε > 0 is any fixed constant. Whence, if ε = 2 we deduce Ω ϕ 2 |∇u| 2 dv f ≤ 2 2 Ω u 2 |∇ϕ| 2 dv f + Σ 2 ϕ 2 ∂u ∂ν 2 dv 2;f 2 .
+Now, by the boundary point lemma and the maximum principle we have
+Σ 2 = {u = 1}, ∇u = 0, on Σ 2
+and the outward unit normal to the hypersurface Σ 2 is given by
+ν 2 = ∇u |∇u| .
+Inserting this information into the above integral inequality, and recalling property iv) of ϕ, we deduce
+Ω ϕ 2 |∇u| 2 dv f ≤ 16 R 2 Ω∩B m+1 2R u 2 dv f + 2 Σ 2 ϕ 2 |∇u| dv 2;f 2 .
+Whence, using once again the properties of ϕ = ϕ R , the fact that u is bounded, hence L 2 (Ω, dv f ), on the finite f -measure domain Ω, and letting R → +∞ we conclude the validity of (18).
+
+
+5.3.2.
+
+Pointwise gradient estimates at the boundary. It remains to estimate Σ 2 |∇u|dv 2;f 2 . Since the self-shrinker Σ 2 is properly embedded, it has polynomial (actually Euclidean) extrinsic volume growth. Assuming that Σ 2 has bounded extrinsic geometry, we can estimate |∇u| pointwise along Σ 2 by maximum principle arguments. This is done in the next Lemma. Whence, using (8) we shall deduce immediately the desired L 1 integrability of |∇u| on Σ 2 , thus completing the proof of Lemma E.
+
+
+Lemma 7.
+
+Let u ∈ C ∞ (Ω) be a solution of (14). Assume that Σ 2 satisfies an exterior R-sphere condition at some point z ∈ Σ 2 . Then
+(19) |∇u|(z) ≤ (R + 1) m R m e |z| dist R m+1 (z, Σ 1 ) .
+Recall that a connected component Σ of the boundary ∂Ω of a domain Ω ⊂ R m+1 is said to satisfy the exterior R-sphere condition at z ∈ Ω if there exists a ball B m+1 R (y) ⊂ R m+1 \Ω such thatB m+1 R (y) is tangent to Σ at z. Clearly the exterior R-sphere condition at z implies that the (scalar) second fundamental form A Σ = A Σ , ν of Σ, with respect to the exterior unit normal ν, satisfies A Σ (z) ≤ 1/R in the sense of quadratic forms. More importantly, we point out the following simple fact that gives the link between the exterior sphere condition and the tubular neighborhood assumption in Lemma E.
+
+Fact. The exterior R-sphere condition at z ∈ Σ is implied by the existence of a regular normal neighborhood of Σ whose width at z is at least R.
+
+Proof. Indeed, start with a small ball B m+1 a (y) touching Σ only at z and let the ray a > 0 increase by keeping the same tangent property. The corresponding balls are all centered along the normal line to Σ passing through z. Let T (z) ∈ R >0 ∪{+∞} denote the supremum of such rays and assume T (z) < +∞, for otherwise there is nothing to prove. Then B m+1 T (z) (y ′ ) is tangent to Σ at two distinct points z, z ′ ∈ Σ. The (closed) segments normal to Σ, of length 2T (z) and centered respectively in z and z ′ meet precisely at the center y ′ of the ball. Therefore, by definition, the ray R(z) of the normal regular tubular neighborhood of Σ at z must satisfy R(z) ≤ T (z). The conclusion now follows trivially.
+
+Proof (of Lemma 7). We use the technique developed in [21] (see also [7,Chapter 14]). Keeping the notation introduced in the previous section, we let v = u − 1.
+
+Thus, v is a smooth solution of (20)
+         ∆ f v = 0 in Ω v = −1 on Σ 1 v = 0 on Σ 2 −1 < v < 0 in Ω.
+Fix z ∈ Σ 2 . Let B m+1 R (y) ⊂ R m+1 \Ω be an exterior ball tangent to Σ 2 at z. We assume that ∂B m+1 R+a (y) ∩ Σ 1 = ∅, for a suitable a > 0. Namely, we choose iii) ψ(a) = 1; iv) ψ ′ > 0.
+0 < a < dist R m+1 (z, Σ 1 ). Define the domain W R,a = B m+1 R+a (y) \B m+1 R (y) ∩ Ω. Let r(x) = |x − y| and d(x) = r(x) − R so that d(x) = dist R m+1 (x, ∂B m+1 R (y)).
+To this aim, note that, if iv) is satisfied, then
+∆ f ψ = ψ ′′ + ψ ′ m d + R − x, ∇r ≤ ψ ′′ + ψ ′ m d + R − |x − y| + |y − z| + |z| = ψ ′′ + ψ ′ m d + R − d + |z| .
+Therefore, we are led to impose
+ψ ′′ + ψ ′ m d + R − d + |z| = 0.
+Integrating on [0, d] ⊆ [0, a] and recalling ii) we get
+ψ(d) = R m ψ ′ (0) d 0 e t 2 2 dt (t + R) m e |z|t .
+This definition satisfies i), ii) and iv) provided ψ ′ (0) > 0. Finally, we impose the validity of iii). This implies the choice We observe explicitly from (21) that the following rough estimate holds (22) 0 < ψ ′ (0) ≤ C(R, a)e a|z| where C(R, a) = (R + a) m R m a Summarizing we have obtained that:
+         ∆ f ψ(d(x)) ≤ 0, in W R,a ψ = 0 = v, at z ψ = 1 > 0 ≥ v, on ∂W R,a ∩ Ω ψ ≥ 0 = v,
+on ∂Ω ∩W R,a = Σ 2 ∩W R,a . and, similarly,
+         ∆ f (−ψ(d(x))) ≥ 0, in W R,a (−ψ) = 0 = v, at z (−ψ) = −1 ≤ v, on ∂W R,a ∩ Ω (−ψ) ≤ 0 = v, on ∂Ω ∩W R,a = Σ 2 ∩W R,a .
+In view of (20), (22) and the fact that ∂v ∂ν = |∇u| on Σ 2 , arguing as in [21] we conclude that
+|∇u|(z) ≤ ψ ′ (0) ≤ C(R, a)e a|z| .
+This latter implies the validity of (19) by choosing a = min(1, dist R m+1 (z, Σ 1 ) − ǫ) and letting ǫ ց 0. 
+|∇u| 2 dv f ≤ C 1 Σ 2 |∇u|dv 2;f 2 .
+On the other hand, in view of the asymptotic distance condition (8) and the normal neighborhood condition (9), from (19) of Lemma 7 we know that |∇u(z)| ≤ C 2 eb |z| 2 , on Σ 2
+
+for some constants C 2 > 0 and 0 <b < 1/2. Since Σ 2 is properly immersed, it has a polynomial extrinsic volume growth; see (3). Recalling e.g. [18,Lemma 25] we deduce that |∇u| ∈ L 1 (Σ 2 , dv 2;f 2 ) and, therefore, |∇u| ∈ L 2 (Ω, dv f ), as required. The proof of Lemma E is completed.
+
+6. Variational considerations and proof of Theorem C 6.1. The finite f -energy condition from a variational viewpoint. There is (at least) an alternative way to deduce the finiteness condition of the f -energy (15) for the bounded solution of (14). It relies on a variational argument that however seems to need the validity of the asymptotic distance assumption (8) with the more demanding condition
+(23) 0 ≤ b < 1 4 .
+We briefly outline the argument.
+
+Let Σ 1 ∩ Σ 2 = ∅ be properly embedded hypersurfaces that separate the complete ambient space M m+1 , ·, · and let Ω be the enclosed region of M so that ∂Ω = Σ 1 ∪ Σ 2 . Consider the orthogonal projection Π 1 :Ω → Σ 1 and note that dist M (z, Π 1 (z)) = dist M (z, Σ 1 ). Now, let ψ : R → [0, 1] be the Lipschitz function
+(24) ψ(t) =      0 t ≤ 0 t 0 < t < 1 1 t ≥ 1.
+Define a locally Lipschitz function Ψ :Ω → [0, 1] by
+(25) Ψ(z) = ψ dist M (z, Σ 1 ) dist M (Π 1 (z), Σ 2 ) .
+Obviously, Thus, if we now specify the situation to properly embedded self-shrinkers in R m+1 f and we assume the validity of the asymptotic distance condition (8) with b satisfying (23), then (a) Ψ ∈ W 1,2 (Ω, dv f ), (b) Ψ ≡ 0 on Σ 1 , (c) Ψ ≡ 1 on Σ 2 .
+
+Note now that the solutions u k to (16) over the exhaustion Ω k ր Ω and constructed using Lieberman approach coincide with those obtained by applying the direct calculus of variations to the weighted energy functional With this preparation, let Ψ k = Ψ| Ω k be the restriction to Ω k ր Ω ∞ = Ω of the barrier function (25) and let u k be the solution of problem (16). Recall that, up to subsequences, u k C 2 -converges on compact subsets of Ω to the bounded solution u of (14). Since Ψ k ∈ W 1,2, D (Ω k , dv f ), we deduce E k 0 ,f (u k ) ≤ E k,f (u k ) ≤ E k,f (Ψ k ) ≤ E ∞,f (Ψ) < +∞ for every k 0 < k. Whence, recalling that ∇u k → ∇u uniformly on compact subsets ofΩ and using Fatou lemma, we conclude that |∇u| ∈ L 2 (Ω, dv f ).
+
+
+6.2.
+
+Proof of Theorem C. If on the one hand the previous arguments require a more stringent condition on the asymptotic behaviour of Σ 1 and Σ 2 and, thus, cannot be used to recover Theorem B, on the other hand they suggest a way to obtain the intersection property when no extrinsic condition on Σ 2 is imposed. Indeed, note that if the two fminimal hypersurfaces Σ m 1 , Σ m 2 of M m+1 f are a positive distance apart (but their positive distance could be realized at infinity), then we can consider the function defined by
+Ψ(z) = ψ dist M (z, Σ 1 ) − dist M (z, Σ 2 ) + dist M (Σ 1 , Σ 2 ) 2dist M (Σ 1 , Σ 2 ) ,
+with ψ as in (24). It is easy to check that Ψ is a Lipschitz function satisfying conditions (26) and (27). In particular, Ψ can be used as a global barrier function and reasoning as in the previous subsection we deduce that, without any assumption on the extrinsic geometry of the hypersurfaces, the bounded solution u of (14) satisfies |∇u| ∈ L 2 (Ω, dv f ). When combined with Theorem D and Lemma E this fact proves Theorem C.
+
+Definition 4 .
+4Let M f be a smooth metric measure space with boundary ∂M = ∅. Say that M f is f -parabolic in the sense of Dirichlet if every bounded f -harmonic function u ∈ C ∞ (intM ) ∩ C 0 (M ) is uniquely determined by its boundary values.
+
+Lemma 5 .
+5Let M f be a complete weighted manifold with boundary such that, for some origin o ∈ intM , vol f (B R (o)) = O(R 2 ). Then M f is f -parabolic in the sense of Dirichlet.
+
+
+We construct a smooth function ψ(d) : [0, a] → [0, +∞) satisfying the following conditions i) ∆ f ψ(d(x)) ≤ 0 on W R,a ;ii) ψ(0) = 0;
+
+
+(t+R) m e |z|t and we conclude that, the desired function ψ has the expression
+
+
+M (z, Σ 1 ) = dist M (Π 1 (z), z) ≥ dist M (Π 1 (z), Σ 2 ), ∀z ∈ Σ 2 , [Π 1 ](z) dist M (Π 1 (z), Σ 2 ) ,for some constant C > 0. This follows from the fact that distances are globally Lipschitz functions and, furthermore,dist M (z, Σ 1 ) dist M (Π 1 (z), Σ 2 ) > 1 ⇒ Lip[Ψ](z) = 0.
+
+
+(Ω k , dv f ) = v ∈ W 1,2 (Ω k , dv f ) : v| Σ 1 ≡ 0, and v| Σ 2 ≡ 1 .Here, Dirichlet data are understood in the trace sense. Thus, each u k is a minimizer of E k,f over W1,2 D (Ω k , dv f ). Thanks to the global W 1,2 -regularity established in [11, Proposition 1.2], this follows from [11, Remark 1.3] by a suitable choice of the domains Ω and D ⋐ Ω.
+
+
+5.4. Proof of Lemma E. Recall from Section 5.1 and Section 5.2 that, in any complete weighted manifold M m+1 f with Ric f ≥ K 2 > 0, the Dirichlet problem (14) has a unique solution u ∈ C ∞ (Ω) satisfying 0 ≤ u ≤ 1. Assume now that M m+1 are f -minimal. Then, by Lemma 6f 
+
+= R m+1 
+
+f 
+
+is the Gaussian 
+soliton and that Σ m 
+1 , Σ m 
+2 ֒→ R m+1 
+
+f 
+
+Ω 
+
+
+Acknowledgement. The authors would like to thank Carlo Mantegazza and Luciano Mari for their interest in this work and useful comments on a previous version of the paper. The first author is partially supported by INdAM-GNSAGA. The second and third authors acknowledge partial support by INdAM-GNAMPA.
+Halfspace type theorems for self-shrinkers. M P Cavalcante, J M Espinar, Bull. Lond. Math. Soc. 482M. P. Cavalcante and J. M. Espinar, Halfspace type theorems for self-shrinkers, Bull. Lond. Math. Soc. 48 (2016), no. 2, 242-250.
+
+A first eigenvalue estimate for minimal hypersurfaces. H I Choi, A.-N Wang, J. Differ. Geom. 18H.I. Choi and A.-N Wang, A first eigenvalue estimate for minimal hypersurfaces, J. Differ. Geom. 18 (1983), 559-562.
+
+Generic mean curvature flow I: generic singularities. T H Colding, W P Minicozzi, Ann. of Math. 2T. H. Colding and W. P. Minicozzi, Generic mean curvature flow I: generic singularities, Ann. of Math. (2) 175 (2012), no. 2, 755-833.
+
+Volume growth, eigenvalue and compactness for self-shrinkers. Q Ding, Y L Xin, Asian J. Math. 173Q. Ding and Y. L. Xin, Volume growth, eigenvalue and compactness for self-shrinkers, Asian J. Math. 17 (2013), no. 3, 443-456.
+
+On the fundamental group of a compact minimal submanifold. T Frankel, Ann. of Math. 2T. Frankel, On the fundamental group of a compact minimal submanifold, Ann. of Math. (2) 83 (1966), 68-73.
+
+Compactness of the space of embedded minimal surfaces with free boundary in three-manifolds with nonnegative Ricci curvature and convex boundary. A Fraser, M , M.-C Li, J. Differential Geom. 962A. Fraser and M. M.-C. Li, Compactness of the space of embedded minimal surfaces with free boundary in three-manifolds with nonnegative Ricci curvature and convex boundary, J. Differential Geom. 96 (2014), no. 2, 183-200.
+
+Elliptic partial differential equations of second order. D Gilbarg, N S Trudinger, Classics in Mathematics. BerlinSpringer-VerlagReprint of the 1998 editionD. Gilbarg and N. S. Trudinger, Elliptic partial differential equations of second order, Classics in Math- ematics, Springer-Verlag, Berlin, 2001, Reprint of the 1998 edition.
+
+V Guillemin, A Pollack, Differential topology. Englewood Cliffs, N.J.Prentice-Hall, IncV. Guillemin and A. Pollack, Differential topology, Prentice-Hall, Inc., Englewood Cliffs, N.J., 1974.
+
+The strong halfspace theorem for minimal surfaces. D Hoffman, W H Meeks, Invent. Math. 101D. Hoffman and W. H. Meeks, The strong halfspace theorem for minimal surfaces, Invent. Math. 101 (1990), 373-377.
+
+Height estimates for Killing graphs. D Impera, J H De Lira, S Pigola, A G Setti, 10.1007/s12220-017-9938-5Online first. D. Impera, J.H. de Lira, S. Pigola, and A. G. Setti, Height estimates for Killing graphs, J. Geom. Anal. (2017), 1-29, Online first. DOI: 10.1007/s12220-017-9938-5.
+
+Potential theory for manifolds with boundary and applications to controlled mean curvature graphs. D Impera, S Pigola, A G Setti, J. Reine Angew. Math. 733D. Impera, S. Pigola, and A. G. Setti, Potential theory for manifolds with boundary and applications to controlled mean curvature graphs, J. Reine Angew. Math. 733 (2017), 121-159.
+
+Self-shrinkers with a rotational symmetry. S Kleene, N M Möller, Trans. Amer. Math. Soc. 3668S. Kleene and N. M. Möller, Self-shrinkers with a rotational symmetry, Trans. Amer. Math. Soc. 366 (2014), no. 8, 3943-3963.
+
+Mixed boundary value problems for elliptic and parabolic differential equations of second order. G M Lieberman, J. Math. Anal. Appl. 1132G. M. Lieberman, Mixed boundary value problems for elliptic and parabolic differential equations of second order, J. Math. Anal. Appl. 113 (1986), no. 2, 422-440.
+
+Extension of Reilly formula with applications to eigenvalue estimates for drifting Laplacians. L Ma, S.-H Du, C. R. Acad. Sci., Sèr. 1 Math. 348L. Ma and S.-H. Du, Extension of Reilly formula with applications to eigenvalue estimates for drifting Laplacians, C. R. Acad. Sci., Sèr. 1 Math. 348 (2010), 1203-1206.
+
+Dirichlet parabolicity and L 1 -Liouville property under localized geometric conditions. L F Pessoa, S Pigola, A G Setti, J. Funct. Anal. 2732L. F. Pessoa, S. Pigola, and A. G. Setti, Dirichlet parabolicity and L 1 -Liouville property under localized geometric conditions, J. Funct. Anal. 273 (2017), no. 2, 652-693.
+
+On Frankel's theorem. P Petersen, F Wilhelm, Canad. Math. Bull. 461P. Petersen and F. Wilhelm, On Frankel's theorem, Canad. Math. Bull. 46 (2003), no. 1, 130-139.
+
+Some applications of integral formulas in Riemannian geometry and PDE's, Milan. S Pigola, M Rigoli, A G Setti, J. Math. 71S. Pigola, M. Rigoli, and A. G. Setti, Some applications of integral formulas in Riemannian geometry and PDE's, Milan J. Math. 71 (2003), 219-281.
+
+Complete self-shrinkers confined into some regions of the space. S Pigola, M Rimoldi, Ann. Global Anal. Geom. 451S. Pigola and M. Rimoldi, Complete self-shrinkers confined into some regions of the space, Ann. Global Anal. Geom. 45 (2014), no. 1, 47-65.
+
+Applications of Hessian operator in a Riemannian manifold. R Reilly, Indiana Univ. Math. J. 26R.C Reilly, Applications of Hessian operator in a Riemannian manifold, Indiana Univ. Math. J. 26 (1977), 459-472.
+
+On a classification theorem for self-shrinkers. M Rimoldi, Proc. Amer. Math. Soc. 14210M. Rimoldi, On a classification theorem for self-shrinkers, Proc. Amer. Math. Soc. 142 (2014), no. 10, 3605-3613.
+
+The boundary gradient estimate for quasilinear elliptic and parabolic differential equations. N S Trudinger, Indiana Univ. Math. J. 21N. S. Trudinger, The boundary gradient estimate for quasilinear elliptic and parabolic differential equa- tions, Indiana Univ. Math. J. 21 (1971/1972), 657-670.
+
+Comparison geometry for the Bakry-Emery Ricci tensor. G Wei, W Wylie, J. Differential Geom. 832G. Wei and W. Wylie, Comparison geometry for the Bakry-Emery Ricci tensor, J. Differential Geom. 83 (2009), no. 2, 377-405.
+
+I-10129 E-mail address: debora.impera@gmail.com (Stefano Pigola) Dipartimento di Scienza e Alta Tecnologia -Sezione di Matematica, Università dell'Insubria, via Valleggio 11. ; (debora Impera) Dipartimento Di Scienze Matematiche &quot;giuseppe Luigi Lagrange ; Politecnico Di Torino, Politecnico Di Torino, Corso Duca degli Abruzzi. 24Corso Duca degli Abruzzi. I-10129 E-mail address: michele.rimoldi@gmail.com(Debora Impera) Dipartimento di Scienze Matematiche "Giuseppe Luigi Lagrange", Politec- nico di Torino, Corso Duca degli Abruzzi 24, Torino, Italy, I-10129 E-mail address: debora.impera@gmail.com (Stefano Pigola) Dipartimento di Scienza e Alta Tecnologia -Sezione di Matematica, Univer- sità dell'Insubria, via Valleggio 11, Como, Italy, I-22100 E-mail address: stefano.pigola@uninsubria.it (Michele Rimoldi) Dipartimento di Scienze Matematiche "Giuseppe Luigi Lagrange", Politec- nico di Torino, Corso Duca degli Abruzzi 24, Torino, Italy, I-10129 E-mail address: michele.rimoldi@gmail.com

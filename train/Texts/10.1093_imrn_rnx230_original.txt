@@ -1,0 +1,308 @@
+
+Quantization of vector bundles on Lagrangian subvarieties
+6 Jan 2017 January 3, 2017
+
+Vladimir Baranovsky 
+Taiji Chen 
+Quantization of vector bundles on Lagrangian subvarieties
+6 Jan 2017 January 3, 2017
+We consider a smooth Lagrangian subvariety Y in a smooth algebraic variety X with an algebraic symplectic from. For a vector bundle E on Y and a choice O h of deformation quantization of the structure sheaf O X we establish when E admits a deformation quantization to a module over O h . If the necessary conditions hold, we describe the set of equivalence classes of such quantizations.
+
+Introduction.
+
+Consider a smooth algebraic variety X over a field C of characteristic zero with an algebraic symplectic form ω ∈ H 0 (X, Ω 2 X ), and assume that we are given a deformation quantization O h of the structure sheaf O X which agrees with ω. This means that O h is a Zariski sheaf of flat associative C [[h]]-algebras on X, for which we can find local C [[h]]-module isomorphisms η : O h ≃ O X [[h]] such that its product * satisfies
+a * b ≡ ab + 1 2 hP (da, db) (mod h 2 )
+where a, b are local sections of O X (viewed as local sections of O h using η) and P ∈ H 0 (X, Λ 2 T X ) is the Poisson bivector obtained from ω via the isomorphism T X → Ω 1 X induced by the same ω.
+
+Given such data and a coherent sheaf E of O X -modules, we could look for a deformation quantization of E as well. Thus, we want a Zariski sheaf E h of O h -modules which is flat over C [[h]], complete in (h)-adic topology and such that the O h -action reduces modulo h to the original action of O X on E. The usual questions are: does E h exist at all, if yes then how many such sheaves can we find?
+
+In full generality this is a difficult problem. One possible simplification is to assume that E is a direct image of a vector bundle on a closed smooth subvariety j : Y ֒→ X.
+
+We will denote this bundle by E as well (i.e., abusing notation we think of any sheaf on Y as a sheaf on X using the direct image functor j * ).
+
+In general, E h will not exist at all. The first observation is that Y must be coisotropic with respect to the symplectic form ω. In other words, the bivector P projects to a zero section of Λ 2 N , where N is the normal bundle. See Proposition 2.3.1 in [BG] for the explanation why Y has to be coisotropic (this also follows from the proof of Gabber's Integrability of Characteristics Theorem). In this paper we assume that Y is in fact Lagrangian (i.e. isotropic of dimension 1 2 dim C X). Then P induces a perfect pairing between the tangent bundle T Y and the normal bundle N of Y , and hence an isomorphism N * ≃ T Y . The case when E has rank r = 1 was considered in [BGKP] and here we deal with general r.
+
+The second observation is that E must carry a structure somewhat similar to a flat algebraic connection. One could say that the "quasi-classical limit" of E h is given by E together with this additional structure, and it is this quasi-classical limit which is being deformed, not just E.
+
+More details are given in Section 2, and the brief account follows here. A convenient language to use is that of Picard algebroids on Y , cf. [BB], i.e. those Lie algebroids L which fit a short exact sequence
+0 → O Y → L → T Y → 0
+(the trivialization of the sheaf of the left is chosen and forms a part of the structure). Such algebroids are classified by their characteristic class c(L) with values in the truncated de Rham cohomology:
+H 2 F (Y ) := H 2 (Y, 0 → Ω 1 Y → Ω 2 Y → . . .)
+One example of such a sheaf is L(O h ) = T or O h 1 (O Y , O Y ). Next, E itself gives an Atiyah Lie algebroid L(E) with its exact sequence
+0 → End O Y (E) → L(E) → T Y → 0.
+A choice of deformation quantization E h , or even the isomorphism class of E h /h 2 E h as a module over O h /(h 2 ), gives a morphism of Zariski sheaves γ : L(O h ) → L(E) which agrees with the Lie bracket but not the O Y -module structure. One can change the module structure on the source of γ, also changing its characteristic class in H 2 F (Y ), to obtain a new Picard algebroid L + (O h ) and a morphism of Zariski sheaves γ + : L + (O h ) → L(E) which now agrees both with the bracket and the O Y -module structure. It also embeds O Y → End O Y (E) as scalar endomorphisms and descends to identity on T Y . In this situation, following [BB], we say that E is a module over L + (O h ).
+
+Existence of such γ + is a non-trivial condition on E. We will see in Section 2, and it is only a slight rephrasing of Section 2.3 in [BB], that in this case the projectivization P(E) has a flat algebraic connection and the refined first Chern class
+c 1 (E) = c(L(det E)) ∈ H 2 F (Y ) satisfies the identity 1 r c 1 (E) = c(L + (O h )).
+Existence of a full deformation quantization for an L + (O h )-module E is formulated in terms of the non-commutative period map of [BK]: a particular choice of O h gives a class
+
+[ω] + hω 1 + h 2 ω 2 + . . . ∈ H 2 DR (X) [[h]] in the algebraic de Rham cohomology of X. We will mostly treat the period map as a black box, appealing to rank 1 results of [BGKP] that will serve as a bridge between the definitions in [BK] and our argument.
+
+By the Lagrangian condition, [ω] restricts to zero on Y . The class of c(L(O h )) in H 2 F (Y ) is a canonical lift of the restriction j * ω 1 of ω 1 under the closed embedding j : Y → X. We will abuse notation and write j * ω 1 for that lift as well (note however that in a number of cases of interest, such as X and Y being complex projective, H 2 F is a subspace of H 2 DR so equations in the truncated de Rham cohomology may be viewed as equations in the usual de Rham cohomology). The class ω 1 affects the choice of E via the identity
+c(L + (O h )) = 1 2 c 1 (K Y ) + j * ω 1 ,
+established in Proposition 4.3.5 and Lemma 5.3.5(ii) of [BGKP]. The restrictions of the remaining classes are also an important ingredient in the main result of our paper:
+
+Theorem 1. A rank r vector bundle E on a smooth Lagrangian subvariety j : Y → X admits a deformation quantization if and only if the following conditions hold:
+
+1. j * ω k = 0 in H 2 DR (Y ) for k ≥ 2; 2. the projectivization P(E) admits a flat algebraic connection;
+
+
+the refined first Chern class in H
+2 F (Y ) satisfies 1 r c 1 (E) = 1 2 c 1 (K Y ) + j * ω 1 ;
+for the canonical lift of j * ω 1 to H 2 F (Y ) representing the class of the Picard algebroid
+L(O h ) = T or O h 1 (O Y , O Y )
+. If nonempty, the set of equivalence classes of all rank r deformation quantizations on Y for various E has a free action of the group G of isomorphism classes of O Y [[h]] * -torsors with a flat algebraic connection. The set of orbits for this action may be identified with the space of all P GL(r, C[[h]]) bundles with a flat algebraic connection.
+
+The paper is organized as follows. In Section 1 we discuss the relevant details on Lie algebroids and modules over them. In Section 2 we give a definition of Harish Chandra pairs, introduce the main Harish Chandra pair for this paper and etablish its important algebraic properties. In Section 3 we explain how the Harish Chandra description arises naturally from the formal Darboux lemma for a deformation quantization, and reformulate our main problem as a lifting problem for transitive Harish Chandra torsors. In Section 4 we study the lifting problem in three steps and prove the main results. Finally, in Section 5 we discuss some related open questions.
+
+To the best of our knowledge, quantization for square roots of the canonical bundle has been discovered (without proof) by M. Kashiwara in [Ka] in the framework of complex analytic contact geometry. Later D'Agnolo and Schapira [DS] established a similar result for Lagrangian submanifolds of a complex analytic symplectic manifold. In the C ∞ context, some closely related constructions can be found in the work of Nest and Tsygan [NT]. Obstructions to deformation quantization have been also studied by Bordemann in [Bo]. The case of complex tori and quantization of arbitrary sheaves has been studied by Ben-Bassat, Block and Pantev in [BBP]. The case an arbitrary line bundle and Lagrangian Y was considered in [BGKP]. For general rank r, results on deformations modulo h 3 were obtained in [Pe] where the relation with projectively flat algebraic connections has been discussed. We apologize for any possible omissions in the references, asking to view them as a sign of ignorance rather than arrogance, as the literature on the subject is somewhat disorganized. Notation. To unload notation we will write C h for the ring C[[h]] of formal power series in h and C * h for its multiplicative group. The symbols GL h (r), P GL h (r) will stand for the groups of C h -valued points, and similarly for their tangent Lie algebras.
+
+1 Modules over a Lie algebroid.
+
+In this section we provide more details on the "quasiclassical limit" for a deformation quantization. To that end, denote by I ⊂ O X the ideal sheaf of Y and recall the isomorphism
+I/I 2 ≃ N * of coherent sheaves on Y , while also N * ≃ T Y since Y is Lagrangian. Let I h ⊂ O h be the preimage of I in O h , with respect to the quotient map O h → O X .
+Assume that a deformation quantization E h is given and fixed. We will work locally on Y modulo h 2 , assuming that local
+splittings O h /(h 2 ) ≃ O Y + hO Y , E h /h 2 E h ≃ E + hE are given.
+For O h these exist by [Ye] and for E h the arugment is similar, cf. the comments in the last section.
+
+Choosing a local section a of O X and a local section e of E, we write the deformed action as a * e = ae + hγ 1 (a, e)
+
+If a ∈ I we see that a * E h ⊂ E h . Moreover, if a 1 , a 2 ∈ I then modulo h 2 we can write a 1 a 2 = a 1 * a 2 − h 1 2 P (da 1 , da 2 ) using our assumption on the product in O h . Since P (da 1 , da 2 ) ∈ I by the Lagrangian assumption on Y , this implies that
+I 2 * E h ⊂ h 2 E h . Therefore (hO Y + I/I 2 ) sends E ≃ E h /hE h to E ≃ hE h /h 2 E h , with ha + b sending e to ae + γ 1 (b, e).
+Writing out associativity equations a * (b * e) = (a * b) * e and b * (a * e) = (b * a) * e and comparing them we get the two conditions
+γ 1 (b, ae) − aγ 1 (f, e) = P (db, da)e; γ 1 (ab, e) − aγ 1 (f, e) = 1 2 P (db, da)e.
+Observe also that b → P (db, ·) is exactly the isomorphism I/I 2 ≃ T Y . Therefore ha + b acts on E by a first order differential operator with scalar principal symbol and we obtain (locally, at this moment) a map γ : hO Y + I/I 2 → L(E) with values in the sections of the Atiyah algebroid of E. This map agrees with Lie brackets if its source is given the bracket induced by (a, b) → P (db, da), (b 1 , b 2 ) → P (db 1 , db 2 ). If we don's start with E h , just with a deformation modulo h 2 , we need to assume existence of its extension modulo h 3 to ensure agreement with the bracket. The map γ is not O Y -linear but satisfies
+γ(f (ha + b)) − f γ(ha + b) = 1 2 P (db, f ).
+To globalize this consider
+L(O h ) = I h /(I h * I h ) ≃ I Y ⊗ O h O Y ≃ T or O h 1 (O Y , O Y )
+and observe that hO h ⊂ I h and hence hI h ⊂ (I h * I h ). This leads to a short exact
+sequence 0 → O Y → L(O h ) → T Y → 0 where we use O Y ≃ hO h /hI h and I h /(hO h + I h * I h ) ≃ I/I 2 ≃ T Y . In other words, L(O h )
+is a a Picard algebroid on Y in the sense of Section 2 in [BB] with the bracket that descends from (a, b) → 1 h (a * b − b * a). Our local computation above gives a morphism of Zariski sheaves γ :
+L(O h ) → L(E)
+which agrees with the Lie bracket but satisfies
+γ(f x) − f γ(x) = 1 2 x(f )
+where f is a locally defined function and x is the image of the local section
+x of L(O h ) in T Y . So γ fails to be a morphism of O Y -modules.
+To repair the situation we use the fact that Picard algebroids form a vector space, i.e. for two algebroids L 1 , L 2 and any pair of scalars λ 1 , λ 2 there is a Picard algebroid L = λ 1 L 1 + λ 2 L 2 and a morphism of sheaves
+s λ 1 ,λ 2 : L 1 × T Y L 2 → L,
+cf. Section 2.1. in [BB], which on the subbundle copies of O Y is given by (a 1 , a 2 ) → λ 1 a 1 + λ 2 a 2 , and on the quotient copies of T Y it is given by the identity. The other fact that we use is that the Atiyah algebroid of the canonical bundle L(K Y ) has a non-O Y -linear splitting sending a vector fields ∂ to the Lie derivative l(∂) on top degree differential forms, which satisfies
+l(f ∂) − f l(∂) = ∂(f ),
+cf. Section 2.4 in [BB]. So we consider the algebroid
+L + (O h ) = L(O h ) + 1 2 L(K Y ) where L(K Y ) is the Aityah algebroid of the canonical bundle K Y . The expression x → s 1, 1 2 (x, l(x)) defines an isomorphism of Zariski sheaves L(O h ) → L + (O h )
+which agrees with the bracket, descends to identity on T Y but fails to be O Y -linear in exactly the same way as it happens for L(O h ) → L(E). Composing the inverse isomorphism with γ we obtain a morphism of sheaves of O Y -modules
+γ + : L + (O h ) → L(E)
+which is now a morphism of Lie algebroids on Y . Existence of γ + imposes strong restrictions on E. For instance, composing with the trace morphism
+End O Y (E) → O Y we get a morphism L + (O h ) → L(det(E))
+to the Atiyah algebroid of the determinant bundle det(E). By construction, this map is multiplication by r = rk(E) on the subbundles O Y and identity on the quotient bundles T Y . In particular, the map is an isomorphism of Lie algebroids. Since by [BB] both Picard algebroids have characteristic classes in the truncated de Rham cohomology, we get
+c 1 (E) = c 1 (det(E)) = r · c(L + (O h )) in H 2 F (Y ). Furthermore, taking the quotient of L(E) by the subbundle O Y ⊂ End O Y (E)
+we obtain the Atiyah algebroid L(P(E)) of the associated P GL(r) bundle P(E). By construction, γ descends to a Lie morphism T Y → L(P(E)) which lifts the identity on T Y . In other words, we have a flat algebraic connection on P(E).
+
+The above discussion can also be reversed (we are adjusting the argument in Section 2.3 of [BB]): assume that the equation on c 1 in H 2 F (Y ) is satisfied and we are given a flat connection on the P GL(r)-bundle P(E) associated to E. Then we have a commutative diagram
+O Y / / L + (O h ) / / T Y O Y ⊕ End 0 (E) / / L(det(E)) ⊕ L(P(E)) / / T Y ⊕ T Y
+Here the lower row is understood as the sum of Atiyah algebras of det(E) and P(E). The map into the Atiyah algebra of det(E) is as before (identity on T Y and multiplication by r on O Y ). The map into the Atiyah algebra of P(E) is the composition of the projection to T Y and the splitting T Y → L(P(E)) given by the flat connection. Observe that the
+quotient map T Y → T Y ⊕ T Y is just the diagonal morphism ∂ → (∂, ∂)
+. Now a local section of the Atiyah algebra of E can be interpreted as invariant vector field on the total space of the principal GL(r)-bundle of E and its direct image gives vector fields on the total spaces of the C * -bundle and the P GL(r)-bundle, corresponding to det(E) and P(E), respectively. Indeed, these total spaces are obtained as quotients by the SL(r) action and the C * action, respectively. This gives an embedding of sheaves
+L(E) → L(det(E)) ⊕ L(P(E))
+which agrees with brackets and has image equal to the preimage of the diagonal in T Y ⊕ T Y . This means that the earlier morphism from L + (O h ) lands into L(E), as required. We can summarize the discussion of this section as the following Proposition 2. A flat deformation quantization of E modulo h 2 which admits an extension to a deformation modulo h 3 , gives E a structure of a module over the Lie algebroid
+L + (O h ). with the class 1 2 c 1 (K Y ) + j * ω 1 in H 2 F (Y ).
+For an arbitrary vector bundle E on Y such a structure is equivalent to a choice of an isomorphism L + (O h ) ≃ L(det(E)) as Lie algebroids on Y which satisfies f → rf on functions, and a flat P GL(r) connection on the P GL(r)-bundle P(E) associated to E.
+
+
+Harish Chandra pairs.
+
+We recall here some definitions and facts about transitive Harish Chandra torsors which may be found e.g. in [BK].
+
+Definiton 3. A Harish Chandra pair (G, h) over C is a pair consisting of a connected (pro)algebraic group G over C, a Lie algebra h over C with a G-action and an embedding g = Lie(G) ⊂ h such that the adjoint action of g on h is the differential of the given G-action.
+
+The reasons why Harish Chandra pairs are relevant to our problem will be explained in the next section while here we introduce the main Harish Chandra pair of this paper. Let n = 1 2 dim C X and consider the Weyl algebra D isomorphic to C[[x 1 , . . . , x n , y 1 , . . . , y n , h]] as a vector space but with relations [y i , . . . , x n , h]] ⊕r as a vector space, on which x i , h act by multiplication while y j acts by h d dx j . Now consider the group Aut(D, M r ) of automorphisms of the pair (D, M r ), each consisting of a C h -algebra automorphism Φ : D → D preserving the maximal ideal
+x i ] = δ ij h, [h, x i ] = [h, y j ] = [x i , x j ] = [y i , y j ] = 0. We view it as a "formal local model" for O h . The "formal local model" for E h is the D-module M r isomorphic to C[[x 1 ,m = x i , y j , h , plus a C h -linear invertible map Ψ : M r → M r which satisfies Ψ(am) = Φ(a)Ψ(m) for a ∈ D, m ∈ M r .
+Its Lie algebra of derivations of the pair (D, M r ) can be expanded by adding derivations which may not preserve m. For instance, although the element 1 h y j is not in D, the commutator [ 1 h y j , ·] does define a derivation of D which sends e.g. x j to 1. The same element acts as d dx j on M r . Therefore, we consider the Lie algebra Der(D, M r ) which consists of pairs φ : D → D, ψ : M r → M r of C h -linear maps, where φ is a derivation and ψ satisfies ψ(am) = φ(a)m + aψ(m). This gives a Harish Chandra pair Aut(D, M r ), Der(D, M r ) .
+
+Note that not all automorphisms Φ and not all derivations φ can be extended to (Φ, Ψ) or (φ, ψ), respectively. Indeed, the quotient module M r = M r /hM r is annihilated by the ideal J ⊂ D generated by y j and h (which is the "formal local model" for I h ). Since both Ψ and ψ would have to preserve hM r and hence to descend to M r we conclude that Φ and φ would have to preserve J . We denote by Aut(D) J the subgroup of Aut(D) formed by automorphisms which preserve J and similarly by Der(D) J ⊂ Der(D) the subalgebra of derivations preserving J .
+
+Lemma 4. There is an extension of Harish Chandra pairs
+1 → GL h (r), gl h (r) → Aut(D, M r ), Der(D, M r ) → Aut(D) J , Der(D) J → 1. Moreover, Der(D, M 1 ) ≃ 1 h J where the right hand side is considered with commutator bracket.
+Proof. For r = 1 this is proved in Corollary 3.1.8 of [BGKP]. Since M r ≃ M ⊕r 1 and we have the map Aut(D, M 1 ) → Aut(D, M r ) sending (Φ, Ψ) to (Φ, Ψ ⊕r ). Hence any lift for Φ ∈ Aud(D) J to Aut(D, M 1 ) also gives a lift of the same Φ to Aut(D, M r ). Therefore the right arrow is surjective. Its kernel is the group of automorphisms of M r as a Dmodule. Every such automorphism is uniquely determined by its value on generators, and we can choose a set of generators on which y j act by zero. Then their images are independent on x i , which means that the automorphism if given by an invertible r × r matrix with entries in C h .
+
+The proof in the case of Lie algebras is entirely similar.
+
+Remark. Perhaps it will help the reader to understand the Lie algebra 1 h J if we introduce the grading in which deg h = 3, deg y j = 2 and deg x = 1 (then the Lie algebra will be an infinite direct product, not a direct sum, of its homogeneous components).
+
+Degree −1 component is spanned by the elements 1 h ad(y 1 ), . . . , 1 h ad(y n ), and this gives the non-integrable part of the Lie algebra. Degree ≥ 0 part is the tangent Lie algebra of Aut(D, M 1 ). Degree 0 component is spanned by 1 and x i y j h , which gives the tangent Lie algebra of the reductive part C * × GL(n). Degree ≥ 1 part is the pro-nilpotent subalgebra which contains, in particular, the elements of hC h . Similar grading exists on Der(D, M r ) if we place gl(r) in degree zero.
+
+The following diagram for Lie algebras and its group analogue will be fundamental in our analysis of the main Harish Chandra pair Aut(D, M r ), Der(D, M r ) :
+0 / / C h / / 1 h J / / Der(D) J / / 0 0 / / gl h (r) / / Der(D, M r ) / / Der(D) J / / 0
+where the middle arrow uses sends α ∈ 1 h J to the pair (φ, ψ) with φ = [α, ·] and ψ = α(. . .). Note that in both cases the maps are well defined, i.e. a possible denominator cancels out. Since the images of 1 h J and gl h (r) commute in Der(D, M r ), the following lemma is immediate
+Lemma 5. Der(D, M r ) ≃ 1 h J ⊕ gl h (r) /C h ≃ 1 h J ⊕ pgl h (r).
+In the group case we have a diagram
+1 / / C * h / / Aut(D, M 1 ) / / Aut(D) J / / 1 1 / / GL h (r) / / Aut(D, M r ) / / Aut(D) J / / 1
+but the corresponding splitting fails in the constant terms with respect to h: Aut(D, M r ) has a subgroup GL(r) which does not split as P GL(r) × C * . However, there is a slightly different splitting on the group level, and the interplay between the two splittings is key to our later arguments on deformation quantization.
+
+Lemma 6. We have a splitting
+Aut(D, M r ) ≃ Aut(D, M 1 )/C * × GL(r) ⋉ exp(h · pgl h (r))
+where exp(h · pgl h (r)) is the pro-unipotent kernel of the evaluation map P GL h (r) → P GL(r), h → 0. The two splittings (of the group and the Lie algebra) agree modulo C * , C :
+Aut(D, M r ), Der(D, M r )/ C * , C ≃ Aut(D, M 1 )/C * , 1 h J /C × P GL h (r), pgl h (r)
+Proof. The first statement is follows from the diagram before the lemma and the fact that the images of GL h (r) and Aut(D, M 1 ) in Aut(D, M r ) commute. To prove the splitting mod C * , observe the that pro-algebraic groups on both sides are semidirect product of finite dimensional reductive subgroups and infinite dimensional pro-unipotent groups. The reductive part on the left hand side is GL(r) × GL(n) where GL(r) acts on the generators of M r and GL(n) on the variables x 1 , . . . , x n ∈ D, with the dual action on y 1 , . . . , y n . The copy of C * acts by scalar automorphisms on M r only. Thus, the reductive part of the quotient on the left hand side is P GL(r) × GL(n). The same argument repeated for r = 1 shows that the reductive part on the right is the same. The isomorphism of tangent Lie algebras on the pro-unipotent parts follows from the previous lemmas. Since we are taking quotients by the central copy of C * which acts trivially on the Lie algebras, the semidirect products match as well.
+
+Informally we could say that on the group level there is an extra copy of C * ⊂ GL(r) which on the level of Lie algebras migrates to the other factor C ⊂ 1 h J ≃ Der(D, M 1 ) but after taking the quotient by these, the two splittings match.
+
+
+Transitive Harish Chandra Torsors
+
+The concept of a G-torsor over a smooth variety X can be extended to Harish-Chandra pairs. We will only need the special case of a transitive Harish Chandra torsor. Note that the definition below implies that dim(h/g) is finite and equal to dim C Y , as is the case with the main Harish Chandra pair considered in the previous section.
+
+Definiton 7. A transitive Harish-Chandra torsor (or tHC torsor for short) over a Harish Chandra pair (G, h) on a smooth variety Y is a G-torsor P → Y together with a Lie algebra morphism h → Γ(P, T P ) which induces an isomorphism of vector bundles h ⊗ C O P ≃ T P .
+
+This data can be rephrased in terms of the Atiyah algebra L(P ) of G-invariant vector fields on P , viewed as a Lie algebroid on Y 0 → Ad(P ) = P g → L(P ) → T X → 0 For a tHC torsor P we have an isomorphism of locally free sheaves on Y :
+
+A : L(P ) ≃ P h which restricts to identity on Ad(P ) = P g . This isomorphism does not agree with the Lie bracket but instead P h has a flat algebraic connection such that
+A[x, y] − [Ax, Ay] = ∂ x Ay − ∂ y Ax
+where x → ∂ x is the anchor map of L(P ).
+
+
+Remarks.
+
+(1) Note that the sheaf of sections of P h has a Lie bracket since the action of G preserves the bracket on h.
+
+(2) In general, if V is a representation of G with the infinitesimal action of g extended to that of h, for a transitive Harish-Chandra torsor P the associated vector bundle P V = P × G V has a flat algebraic connection, see Section 2.3 in in [BK].
+
+Let X be a 2n-dimentional symplectic variety over k with a symplectic form Ω. Assume that a deformation quantization O h of O X is given, such that its non-commutative period is given by ω(t) = [Ω] + tω 1 + t 2 ω 2 + . . . ∈ H 2 DR (X) ⊗ C h . Assume that a smooth Lagrangian subvariety Y ⊂ X is given, with a rank r vector bundle E which we consider as a sheaf of O X -modules via the direct image functor. Assume further that x ∈ Y is a point and in some neighborhood of x ∈ X we are given a deformation quantization E h of E.
+
+The stalk O h,x is a non-commutative ring with a maximal ideal m x , which is the preimage of the maximal ideal n x in the commutative local ring O h,x /hO h,x ≃ O X,x . Let O h,x and E h,x be completions of stalks with respect to this maximal ideal.
+
+Lemma 8. There exist isomorphisms η : O h,x ≃ D, µ : E h,x ≃ M r of topological C h -modules which are compatible with filtrations and action of rings on corresponding modules. Moreover, the first isomorphism may be chosen in such a way that the images of y 1 , . . . , y n in O X,x come from a regular sequence in O X,x generating the ideal I x of functions vanishing on Y .
+
+Proof. We sketch a proof here briefly. First, we can find an isomorphism O X,x = C[[x 1 , . . . , x n , y 1 , . . . , y n ]] such that y 1 , . . . , y n are the images of a regular sequence defining Y in the neighborhood of x. This is due to the formal Weinstein Lagrangian Neighborhood Theorem, the proof of which, cf. Sections 7,8 on [CdS], may be used without changes. The key point here is that the Moser Trick in Section 7.2 of loc. cit. works in the completion of the local ring, although not the local ring itself.
+
+Next, both D and O h,x can be viewed as deformation quantizations of the algebra C[[x 1 , . . . , x n , y 1 , . . . , y n ]] with the Poisson bivector equal to h( i ∂/∂x i ∧ ∂/∂y i ) + h 2 α(h). By general deformation theory, the bivector α(h) is a Maurer-Cartan solution for the DG Lie algebra of polyvector fields with the non-trivial differential given by the bracket with the bivector i ∂/∂x i ∧ ∂/∂y i . If we identify polyvector fields with differential forms, this bracket will become the standard de Rham differential. Since for the algebra of formal power series the the Rham complex is exact and the Maurer-Cartan groupoid is invariant under quasi-isomophisms, all deformation quantizations are equivalent and D is isomorphic to the completion of O h,x . This settles the assertions about the algebras.
+
+As for the module part, since (E h /hE h ) x is free over O Y,x we can find an isomorphism of this module with M r = M r /hM r ≃ C[[x 1 , . . . , x n ]] ⊕r . Now we repeat the argument of Lemma 2.3.5 (given there for r = 1) to produce an isomorphism of E h,x and M r .
+
+Given the data (X, Y, O h ) we can consider the proalgebraic scheme P J parameterizing the pairs (x, η), where x ∈ Y and η is an isomorphism as above, cf. Section 3.1 of [BK] for a similar case.
+
+Lemma 9. P J has a canonical structure of a transitive Aut(D) J , Der(D) J -torsor.
+
+Proof. The group Aut(D) J acts on P J by changing the isomorphism η. Locally in the Zariski topology on X we can denote by A, B the rings of sections of O X , O h over an affine subset, and then the pair (x, η) can be described by two ring homomorphisms Proof. Given E h , we can construct the tHC torsor P for which the fiber at x ∈ Y represents all pairs (η, µ) which identify completions of O h and E h at x with the "formal local models" D and M r . It has the transitive Harish Chandra structure similarly to P J . By consturction, the torsor P J is induced from P by forgetting the isomorphism µ. Conversely, given a lift P of the tHC torsor P J , we have a vector bundle P Mr associated via the action of Aut(D, M r ), Der(D, M r ) on M r . It carries a flat algebraic connection as any vector bundle associated to a tHC torsor. As in Lemma 3.4 of [BK], the Zariski sheaf E h is can be recovered as the sheaf of flat sections of P Mr .
+
+
+Lifting the torsor by steps.
+
+In this section we study the problem of tHC orsor lifting by considering a chain of surjections 
+G, h → G 2 , h 2 → G 1 , h 1 → G 0 ,G 2 , h 2 = G, h / C * , C ≃ Aut(D, M 1 )/C * , 1 h J /C × P GL h (r), pgl h (r) . G 1 , h 1 = Aut(D) J , Der(D) J × P GL h (r), pgl h (r) .
+The following is a more precise version of Theorem 1.
+
+Theorem 11. Let P 0 = P J be the transitive Harish-Chandra torsor over the pair 1. The groupoid category of lifts of P 0 to a tHC torsor P 1 over G 1 , h 1 is equivalent to the category of P GL h (r)-bundles on Y with a flat algebraic connection.
+G 0 , h 0 on Y ,
+2. Given a choice of P 1 , the category of its lifts to a tHC torsor P 2 over G 2 , h 2 is equivalent to the category of lifts of the original torsor P 0 to a tHC torsor over Aut(D, M 1 )/C * , 1 h J /C . The latter is non-empty if and only if in
+H 2 DR (Y )[[h]] one has j * (h 2 ω 2 + h 3 ω 3 + . . .) = 0;
+3. Given a choice of P 2 , the groupoid category of its lifts to a tHC torsor P over G, h is equivalent to the category of rank r modules E over the Lie algebroid L + (O h ), equipped with an isomorphism of P(E) and the flat P GL(r)-bundle induced from P 1 via the homomorphism P GL h (r) → P GL(r). Such lifts exist if and only if the following equality holds in H 2 F (Y ):
+1 r c 1 (E) = 1 2 c 1 (K Y ) + c(L(O h )) = c(L + (O h )).
+4. For a given choice of P 1 , the groupoid category of its lifts to a tHC torsor P over Proof. The first part is easy due to the splitting of the Harish Chandra pair G 1 , g 1 . We are looking for a torsor P 1 over G 1 and a G 1 -equivariant form h 1 -valued form on the total space of P 1 , which lifts a similar form on the total space of P 0 . Due to the splitting of G 1 such P 1 would be a fiber product over Y , of the original P 0 and a P GL h (r)-torsor Q. The connection form on P 1 , due to the G 1 -equivariant splitting of h 1 , would also have to be a sum of the h 0 -valued connection on P 0 and a pgl h (r)-valued connection on Q. The zero curvature condition on P 1 (i.e. agreement with the Lie bracket) implies that the connection on Q is flat.
+G 1 , h 1 -if non-empty -is equivalent to the groupoid category O Y [[h]] * -
+For the second part, we use the splitting of the Harish Chandra pair G 2 , h 2 and the fact that the flat bundle Q is already defined on the previous step. Therefore, P 2 would be a fiber product of Q and a tHC torsor R over Aut(D, M 1 )/C * , 1 h J /C lifting P 0 . Comparing the definitions we see that a tHC structure on P 2 of the required type is equivalent to a similar structure on R lifting that of P 0 . Existence of R follows by a combination of Proposition 2.7 in [BK] and Lemma 5.2.2 of [BGKP].
+
+For the third part we use the short exact sequence
+1 → C * , C → G, h → G 2 , h 2 → 1.
+First consider the group side. Due to the splitting of Lemma 6 on the level of usual torsors, we just need to lift a P GL h (r) torsor Q to a torsor Q over GL(r)⋉exp(h·pgl h (r). The required Harish Chandra structure is an isomorphism of bundles T P ≃ h ⊗ C O P which is G-equivariant and has the zero curvature condition. Since the action of C * ⊂ GL(r) on h · pgl h (r) and h is trivial, we can take C * invariant direct image of both sheaves under P → P 2 = P/C * where they have a G 2 -equivariant structure, and look for a G 2 -equivariant isomorphism on the total space of P 2 instead.
+
+The tangent bundle of P turns into the Atiyah algebroid of the C * -torsor P → P 2 and the trivial bundle with fiber h also gets a Lie algebroid structure since on P 2 we have identified T P 2 with the trivial bundle with fiber h 2 ≃ h/C. We need to construct a G 2equivariant isomorphism of two bundles with an additional property that corresponds to agreement of brackets (zero curvature) on P . The G 2 -equvariant stucture means that the projection to T P 2 ≃ h 2 ⊗ C O P 1 has a partial section over the smaller sub-bundle g 2 ⊗ C O P 1 . Taking the quotient of both algebroids by the image of this sub-bundle, and then taking G 2 -equivariant direct image to Y , we reduce to the question of isomorphism of two Picard algebroids on Y . Both are classified by a cohomology class in H 2 F (Y ), hence the isomorphism exists precisely when the two classes are equal.
+
+To compute the class for the algebroid obtained from h ⊗ O P observe that instead of taking the equivariant descent with respect to G 2 , we can first take the descent by P GL h (r) and then by Aut(D, M 1 )/C * . The first step will lead to an equivariant Picard algebroid on R with the fiber corrseponding to the middle term of the Lie algebra extension 0 → C → Der(D, M 1 ) → Der(D, M 1 )/C → 0
+
+In other words, we find ourselved in the rank 1 situation. By Proposition 4.3.5 in [BGKP] its equivariant descent to Y gives a Picard algebroid with the class 1 2 c 1 (K Y ) + j * ω 1 . For the Atiyah algebroid of P → P 2 we will first take the descent with respect to Aut(D, M 1 )/C * , then with respect to exp(h · pgl h (r). This leads to a GL(r)-torsor E on Y lifting a P GL(r)-torsor P(E). The equivariant descent of the Atiyah algebroid of P → P 2 to a Picard algebroid on Y is just the quotient of the Atiyah algebroid of E by the trace zero part in End(E) ⊂ L(E). Therefore it has class 1 r c 1 (E) and the desired equation in H 2 F (Y ) is 1 r c 1 (E) = 1 2 c 1 (K Y ) + j * ω 1 , concluding the proof of the third part.
+
+For the last part, we interpret the tHC torsor lifting in the language of gerbes, following Chapter 5 of [Br]. Consider the central extension
+1 → C * h , C h → G, h → G 1 , h 1 → 1
+The lifting of a tHC torsor P 1 = Q × Y P 0 to P , can be split as follows. First, choose a lifting on the group level. As we have seen before, globally on Y this may not be possible but local lifts form a gerbe over O Y [[h]] * , see Definition 5.2.4 of [Br]. If a (local) lift is chosen, we can look for an h-valued connection on the lift, and all possible choices of such a connection form a connective structure on the gerbe in the sense of Definition 5.3.1 of loc. cit.. Moreover, whenever we can choose a connection, this leads to the curvature dΩ + 1 2 Ω ∧ Ω where Ω is the h-valued form on the total space of the torsor which described the connection. This gives a curving of the connective structure, see Definition 5.3.7 of loc. cit. As in Theorem 5.3.17 of loc. cit. this leads to a gerbe over the C h -version of Deligne complex
+Del h (Y ) := O Y [[h]] * → Ω 1 Y [[h]] → Ω 2 Y [[h]] → . . .
+where the first arrow sends f to df f . Since we want to trivialize the gerbe over this complex (i.e. the lifting torsor must exist and it must admit a connection and the connection must have zero curvature), the category of such trivializations -if nonempty -is equivalent to the category of torsors over the same complex. By a C h version of Theorem 2.2.11 in loc. cit. the latter is equivalent to the category of O Y [[h]] *torsors with a flat algebraic connection. In particular the set of equivalence classes of deformation quantizations with a fixed projectivization Q is in bijective correspondence with the set of isomorhism clases of O Y [[h]] * -torsors with a flat algebraic connection.
+
+A more explicit, if a bit less conceptual version of this step is as follows. We look at the short exact sequence
+Ω ≥1 (Y )[[h]] → Del h (Y ) → O Y [[h]] *
+and piece of the associated long exact sequence in cohomology:
+. . . → H 1 (Y, O Y [[h]] * ) → H 2 F (Y )[[h]] → H 2 (Y, Del h (Y )) → H 2 (Y, O Y [[h]] * ) → . . . ...
+If a G 1 , h 1 torsor and its tHC structure can be trivialized on an covering {U i } of X then we can first look at G-valued liftings ψ ij : U i ∩ U j → G of the cocycle defining P 2 . Then we can look at those h-valued connections ∇ i on the trivial G-bundles on each U i which lift the given h 1 -valued connection on P 1 . The functions ψ ij lead to an expression a ijk = ψ ij ψ jk ψ ki on U i ∩ U j ∩ U k which takes values in O Y [[h]] * since its projection to G 2 is trivial. Moreover, the difference of ∇ i − ∇ j on U i ∩ U j is given by a C h -valued differential 1-form b ij and a quick comparison of definitions shows that on triple intersections (b ij + b jk + b ki ) = da ijk /a ijk . On each U i the curvature of ∇ i is given by a 2-form c i which takes values in the Lie subalgebra C h ⊂ h since the projection of the connection to h 2 satisfies the zero curvature conditon. On the double intersections we have (c i − c j ) = db ij , the usual comparison of curvatures for two different connections.
+
+The two identities relating b ij with a ijk and c i with b ij mean that the three groups of sections define a single cohomology class in H 2 (Y, Del h (Y )).
+
+The projection of this class to
+H 2 (Y, O Y [[h]] * )
+is represented by the cocycle a ijk . In the case when the class is trivial we can readjust the choice of ψ ij by the cochain resolving a ijk and ensure a ijk ≡ 1. This means that ψ ij do define a lift of P 1 to a G-torsor P . Now the obstruction too is lifted from 
+H 2 (Y, Del h (Y )) to H 2 F (Y )[[h]].
+
+Remarks and open questions.
+
+• When Y is affine, a straightforward argument following Section 3 and Appendix A from [Ye] or, alternatively, an imitation of the arguments in Section 5 of [CCT], shows that we can assume that E h is isomorphic to E[[h]] as a Zariski sheaf of C h -modules. This is established inductively, considering E h /h k E h and observing that obstructions to trivializing E h /h k+1 E h , given a trivialization of E h /h k E h , live in an Ext group which vanishes since Y is affine and E is locally free on Y .
+
+• Our results make sense in the category of complex manifolds where de Rham cohomology groups correspond to the holomorphic de Rham complex. In fact, the arguments of the paper carry over to the case of etale topology, and should hold in the case of smooth Deligne-Mumford stacks as well.
+
+For the case of real manifolds more work is needed to adapt our arguments but one expects that the output will be similar in spirit to the arguments in [NT].
+
+• Perhaps the most celebrated example of a vector bundle with a flat projective connection is the bundle of conformal blocks on the moduli space M of (marked) curves with the Hitchin connection. It would be interesting to see whether M may be realized as a Lagrangian subvariety (actually, sub-orbifold) in a larger sympletic variety, so that the bundle of conformal blocks admits a deformation quantization. Maybe the approach to M via representations of π 1 (C) in P SL(2, R) (which are embedded into P SL(2, C) representations) could give something here.
+
+• In theory, our methods should work for vector bundles on smooth coisotropic subvarieties. In this case the conormal bundle N * embeds as a null-foliation sub-bundle of the tangent bundle: N * ≃ T F ֒→ T Y . Consequently, the full de Rham complex will be replaced by the normal de Rham complex built from exterior powers of T * F ≃ N . For second order deformations this has been studied in [Pe]. • It has been noted in [Pe] that for a given bundle E on Y its deformation quantization problem is described by a sheaf of curved dg Lie algebras. If we assume that all ω i restrict to zero on Y , we have an interesting situation: at the first step of the deformation there is an obstruction (coming from the curvature element) but if it is resolved, there are no further obstructions. One way to understand it is to view E h as a deformation of an O h module E over the power series ring C [[h]]. Not every deformation is a deformation quantization though, and one way to formulate the condition is to require that the first order deformation is given by an element of Ext 1 O h (E, E) which projects to identity under the map
+Ext 1 O h (E, E) → Hom O X (T or O h 1 (O X , E), E) = Hom O X (E, E)
+provided by the Change of Rings Spectral Sequence for the homomorphism O h → O X . This implies that the identity Id E must be closed with respect to this spectral sequence differential Hom O X (E, E) → Ext 2 O X (E, E). Once this obstruction vanishes, any higher order extension of the first order deformation as an O h -module, is automatically a deformation quantization of E and the first order adjustment to the differential of the deformation complex in [Pe] removes the curvature.
+
+• Perhaps the category of vector bundles with a structure of a L + (O h )-modules deserves a closer attention. The condition of having a flat structure on P(E) and an equation in H 2 F (Y ) 1 r c 1 (E) = 1 2 c 1 (K Y ) + j * ω 1 is stable under direct sums, and taking the tensor product of E with a flat vector bundle F . For any pair of bundles E 1 , E 2 with these conditions the bundle Hom O Y (E 1 , E 2 ) is flat. Indeed, for a local section ϕ of this bundles we can attempt to take its derivative along a vector field ∂ by lifting it to a section of L + (O h ) and then using the action of L + (O h ) of E 1 and E 2 . The lift of ∂ is only well-defined up to a section of O Y ⊂ L + (O h ) but ϕ is O-linear so its derivative will not depend on the choice of this lift.
+
+In particular, if we can find a line bundle L which satisfies the above equation with r = 1, then we can write any L + (O h )-module in the form E = F ⊗ L where F has flat algebraic connection. Of course, when 1 2 c 1 (K Y ) + j * ω 1 = 0 we can take L = O Y . Another instance is when j * ω 1 = 0, in which case the category admits an involution E → E * ⊗ K Y . When, in addition, we can find L such that K Y ≃ L ⊗2 this involution corresponds to dualization of the local system F . In would be interesting to compare the de Rham cohomology of the local system Hom O Y (E 1 , E 2 ) and the groups Ext O h (E 1,h , E 2,h ) for deformation quantizations of E 1 , E 2 , respectively.
+
+• The original motivation of [BG] was to relate deformation quantization of the Kapustin-Rozansky 2-category of the original algebraic symplectic variety (X, ω), cf. [KR]. At least when the class ω 1 ∈ H 2 DR (X) vanishes, it is natural to expect that an L + (O h )-module E on a Lagrangian Y should define an object (Y, E) in this category. We further expect that for the same Y and different E 1 , E 2 the cyclic homology of the 1-category Hom((Y, E 1 ), (Y, E 2 )) has something to do with the de Rham cohomology of the local system Hom O Y (E 1 , E 2 ). This also suggests a connection between L + (O h )-modules and generalized complex branes of Gualtieri, [Gu]. Indeed, those are defined as modules over a Lie algebroid which appears after restriction to a subvariety. On the other hand, counting dimensions we see that L(O h ) cannot come from an exact Courant algebroid on X, but perhaps one should work with some algebroid on X × Spec(C[[h]]). By an earlier remark in this section one expects a more general construction for vector bundles on smooth coisotropic subvarieties when connections and similar structures are only defined along the null-folitation.
+
+
+x : A → C, η : lim k (B/n k ) ≃ D where n ⊂ B is the preimage in B of the ideal Ker(x) ⊂ A = B/hB. Given a derivation ∂ : D → D, we can consider its composition with D → C = D/m which descends to a linear function on m/m 2 , and using the isomorphism η and h-linearity of ∂, to a linear function z : Ker(x)/(Ker(x)) 2 → C. Thus we can write extensions of x and η over the ring C[ǫ]/(ǫ 2 ) of dual numbersx ǫ (a) := x(a) + ǫz(a); η ǫ (b) = η(b) + ǫ∂(η(b)).This means that Der(D) J maps to vector fields on the torsor P J . The defining properties of tHC torsors (agreement with the group action and the bracket on vector fields) are immediate from the definitions.Proposition 10. A choice of a vector bundle E of rank r on Y and its deformation quantization E h is equivalent to a choice of a lift of the torsor P J to a transitive Harish-Chandra Aut(D, M r , Der(D, M r )) -torsor P Mr along the extension of pairs 1 → GL h (r), gl h (r) → Aut(D, M r ), Der(D, M r ) → Aut(D) J , Der(D) J → 1.
+
+h 0
+0At the two ends we have pairs G, h = Aut(D, M r ), Der(D, M r ) , G 0 , h 0 = Aut(D) J , Der(D) J and the intermediate pairs both have product decompositions
+
+
+torsors with a flat algebraic connection. More precisely, for any fixed choice of P and a flat O Y [[h]] * -torsor L there is a well-defined tHC torsor L ⋆ P , and the functor L → L ⋆ P gives an equivalence of categories.
+
+
+induced by the choice of quantization O h on X and a closed embedding j : Y → X of a smooth Lagrangian subvariety Y . Assume that Oh has the non-
+commutative period 
+[ω] + hω 1 + h 2 ω 2 + . . . ∈ H 2 
+DR (X)[[h]] 
+Then j  *  ω 1 admits a canonical lift to H 2 
+F (Y ) represented by the class of the Picard alge-
+broid L(O h ). 
+
+
+
+
+The fact that such lift is only well defined up to an element in the image of H 1 (Y, O Y [[h]] * ) reflects the fact that P is only well defined only up to a twist by a torsor over O Y [[h]] * .Since P → P 1 is a G 1 -equivariant torsor over C * h on P 1 we can descend its Lie algebroid to Y and obtain a class of this algebroid in H 2 F (Y )[[h]] which must vanish if we want to lift the tHC structure to P . This finishes the proof.
+Acknowledgements.We are grateful to V. Gizburg, J. Pecharich and D. Kaledin for the useful discussions. The first author is supported by the Simons Collaboration Grant.
+Bi)modules, morphims and reduction of star-products: the symplectic case, foliations and obstructions. M Bordemann, Travaux mathématiques. Fasc. XVI. Bordemann, M.: (Bi)modules, morphims and reduction of star-products: the symplectic case, foliations and obstructions. Travaux mathématiques. Fasc. XVI (2005), 9-40.
+
+Loop spaces, characteristic classes and geometric quantization. J.-L Brylinski, Birkhäuser Boston, IncBoston, MAReprint of the 1993 edition. Modern Birkhäuser ClassicsBrylinski, J.-L.: Loop spaces, characteristic classes and geometric quantization. Reprint of the 1993 edition. Modern Birkhäuser Classics. Birkhäuser Boston, Inc., Boston, MA, 2008.
+
+A proof of Jantzen Conjectures. A Beilinson, J Bernstein, Advances in Soviet Mathematics. 161Beilinson, A.; Bernstein, J.: A proof of Jantzen Conjectures, Advances in Soviet Mathematics, Vol. 16, part 1 (1993), pp. 1-50.
+
+Non-commutative tori and Fourier-Mukai duality. O Ben-Bassat, J Block, T Pantev, Compos. Math. 1432Ben-Bassat, O.; Block, J.; Pantev, T.: Non-commutative tori and Fourier- Mukai duality. Compos. Math. 143 (2007), no. 2, 423-475.
+
+Gerstenhaber-Batalin-Vilkovisky structures on coisotropic intersections. V Baranovsky, V Ginzburg, Math. Res. Lett. 172Baranovsky, V.; Ginzburg, V.: Gerstenhaber-Batalin-Vilkovisky structures on coisotropic intersections. Math. Res. Lett. 17 (2010), no. 2, 211-229.
+
+Quantization of line bundles on lagrangian subvarieties. V Baranovsky, V Ginzburg, D Kaledin, J Pecharich, Selecta Math. (N.S.). 221Baranovsky, V.; Ginzburg, V.; Kaledin, D.; Pecharich, J.: Quantization of line bundles on lagrangian subvarieties. Selecta Math. (N.S.) 22 (2016), no. 1, 1-25.
+
+Fedosov quantization in algebraic context. R Bezrukavnikov, D Kaledin, Mosc. Math. J. 43Bezrukavnikov, R.; Kaledin, D. Fedosov quantization in algebraic context. Mosc. Math. J. 4 (2004), no. 3, 559-592, 782.
+
+On the Lie algebroid of a derived selfintersection. D Calaque, A Cǎldǎraru, J Tu, Adv. Math. 262Calaque, D.; Cǎldǎraru, A.; Tu, J.: On the Lie algebroid of a derived self- intersection. Adv. Math. 262 (2014), 751-783.
+
+A Cannas Da Silva, Lectures on Symplectic Geometry. BerlinSpringer-Verlag1764Cannas da Silva, A.: Lectures on Symplectic Geometry, Lecture Notes in Math- ematics, 1764. Springer-Verlag, Berlin, 2001.
+
+Quantization of complex Lagrangian submanifolds. A D&apos;agnolo, P Schapira, Adv. math. 2131D'Agnolo, A.; Schapira, P.: Quantization of complex Lagrangian submanifolds, Adv. math., 213 (2007), no. 1, 358-379.
+
+Branes on Poisson varieties. The many facets of geometry. M Gualtieri, Oxford Univ. PressOxfordGualtieri, M.: Branes on Poisson varieties. The many facets of geometry, 368- 394, Oxford Univ. Press, Oxford, 2010.
+
+Quantization of contact manifolds. M Kashiwara, Publ. Res. Inst. Math. Sci. 32Kashiwara, M.: Quantization of contact manifolds, Publ. Res. Inst. Math. Sci. 32 (1996), 1-7.
+
+Three-dimensional topological field theory and symplectic algebraic geometry II. A Kapustin, L Rozansky, Commun. Number Theory Phys. 43Kapustin, A.; Rozansky, L.: Three-dimensional topological field theory and symplectic algebraic geometry II. Commun. Number Theory Phys. 4 (2010), no. 3, 463-549.
+
+Remarks on modules over deformation quantization algebras. R Nest, B Tsygan, Moscow Math J. 4Nest, R.; Tsygan, B.: Remarks on modules over deformation quantization algebras, Moscow Math J, 4 (2004), 911-940.
+
+Deformations of vector bundles on coisotropic subvarieties via the Atiyah class. J Pecharich, preprint arxiv 1010.3671Pecharich, J.: Deformations of vector bundles on coisotropic subvarieties via the Atiyah class, preprint arxiv 1010.3671.
+
+Twisted deformation quantization of algebraic varieties (survey). A Yekutieli, Contemp. Math. 562Amer. Math. SocNew trends in noncommutative algebra, 279297Yekutieli, A.: Twisted deformation quantization of algebraic varieties (survey). New trends in noncommutative algebra, 279297, Contemp. Math., 562, Amer. Math. Soc., Providence, RI, 2012.
+
+. Address: Department of Mathematics. Address: Department of Mathematics, UC Irvine, 340 Rowland Hall, Irvine CA 92617, USA

@@ -1,0 +1,371 @@
+
+Discretely Sampled Variance and Volatility Swaps versus their Continuous Approximations
+7 Mar 2011 January 14, 2013
+
+Robert Jarrow 
+Younes Kchia 
+Martin Larsson 
+Philip Protter 
+Discretely Sampled Variance and Volatility Swaps versus their Continuous Approximations
+7 Mar 2011 January 14, 2013variance swapsvolatility swapsNFLVRsemimartingales
+Discretely sampled variance and volatility swaps trade actively in OTC markets. To price these swaps, the continuously sampled approximation is often used to simplify the computations. The purpose of this paper is to study the conditions under which this approximation is valid. Our first set of theorems characterize the conditions under which the discretely sampled swap values are finite, given the values of the continuous approximations exist. Surprisingly, for some otherwise reasonable price processes, the discretely sampled swap prices do not exist, thereby invalidating the approximation. Examples are provided. Assuming further that both swap values exist, we study sufficient conditions under which the discretely sampled values converge to their continuous counterparts. Because of its popularity in the literature, we apply our theorems to the 3/2 stochastic volatility model. Although we can show finiteness of all swap values, we can prove convergence of the approximation only for some parameter values.
+
+Introduction
+
+Although variance and volatility swaps only started trading in the mid-1900s, they have since become a standard financial instrument useful for managing volatility risk (see Carr and Lee [7] for the history of volatility derivative markets). In the pricing and hedging of variance and volatility swaps, a distinction is made between payoffs that are discretely or continuously sampled. Discretely sampled variance and volatility swaps trade in the over-the counter (OTC) markets. In contrast, continuously sampled variance and volatility swaps are only an abstract construct, often used to approximate the values of their discretely sampled counterparts (see Broadie and Jain [4], [5], Chan and Platen [10], and Carr and Lee [8]). These approximations depend on an exchange of a limit operator (as the discrete sampling period goes to zero) with an expectation operator. This operator exchange is often invoked without adequate justification. The purpose of this paper is to characterize the conditions under which this operator exchange is valid.
+
+For our investigation we utilize the martingale pricing methodology where we take as given the asset's price process assuming markets are arbitrage free (in the sense of No Free Lunch with Vanishing Risk (NFLVR)). This evolution is taken to be very general. We only assume that the price process is a strictly positive semimartingale with possibly discontinuous sample paths. We also assume, as a standing hypothesis, that the continuously sampled variance and volatility swaps have finite values. Otherwise, before the analysis begins, the approximation would not make sense.
+
+Our first two Theorems (1 and 2) characterize the additional conditions needed on the price process such that the discretely sampled variance and volatility swaps have finite values. Of course, when the discretely sampled variance and volatility swap values do not exist, the approximation is again nonsensical. Surprisingly, we provide examples of otherwise reasonable price processes, with stochastic volatility of the volatility, where these discretely sample variance swap values do not exist.
+
+Next, assuming both the continuous and discretely sampled variance swap values are finite, we study conditions justifying an exchange of the limit and expectation operators. In this regard, under no additional hypotheses, Theorem 3 provides an upper bound for the maximum difference between these two values. Theorem 4 proves, under some additional moment conditions, that the exchange of the two operators is valid. Furthermore, this theorem also provides infomation on the rate of convergence (1/n where n is the number of discretely sampled prices).
+
+Lastly, given the recent interest in the 3/2 stochastic volatility model for pricing volatility derivatives (see Carr and Sun [9], Chan and Platen [10]), we explore its consistency with valuing discretely sampled variance swaps with their continuously sampled counterparts. Here we show that both the discrete and continuously sampled variance swaps have finite values. Unfortunately, we can only prove convergence of the discrete to the continuously sampled variance swap values for some parameter ranges, but not all. A complete characterization of this convergence for the 3/2 stochastic volatility model remains an open question.
+
+An outline for this paper is as follows. Section 2 gives the framework underlying the model. Section 3 studies the finiteness and convergence of the discretely sampled variance and volatility swap values. Finally, Section 4 provides examples to illustrate the theorems proved.
+
+
+Framework
+
+Let a filtered probability space (Ω, F, F, P ) be given, where the filtration F = (F t ) t∈[0,T ] satisfies the usual conditions and T is a fixed time horizon. We suppose that there is a liquidly traded asset paying no dividends, whose market price process is modeled by a semimartingale S = (S t ) t∈[0,T ] such that S > 0 and S − > 0. The value of the money market account is chosen as numeraire, or, viewed differently, the interest rate is zero. The price process is assumed to be arbitrage free in the sense of No Free Lunch with Vanishing Risk (NFLVR), see Delbaen and Schachermayer [13] and [14], which guarantees the existence of at least one equivalent probability measure under which S is a local martingale. We assume P is such a measure, and that the modeler prices future payoffs by taking expectations with respect to P .
+
+
+Variance and volatility swaps
+
+A variance swap (with strike zero) and maturity T is a contract which pays the "realized variance," i.e. the square of the logarithm returns up to time T , namely
+252 n n i=1 ln S t i S t i−1 2 , where 0 = t 0 < ... < t n = T is a regular sampling of the time interval [0, T ], i.e. t i −t i−1 = 1 n for i = 1, . . . , n.
+Finally, 252 is the number of trading days per year. The maturity T is approximately n 252 . Rather than considering the quantity
+P n (T ) = n i=1 ln S t i S t i−1 2
+, practitioners 1 often use its limit
+P (T ) = [ln S, ln S] T
+in the pricing of variance swaps (see Carr and Lee [7]). That is, one approximates the quantity E(P n (T )) by E(P (T )). The continuous approximation P (T ) to the variance swap's true payoff P n (T ) is justified by the fact that
+[ln S, ln S] T = lim n→∞ n i=1 ln S t i S t i−1 2 ,
+where the limit is in probability and taken over a sequence of subdivisions whose mesh size tends to zero.
+
+Analogous to a variance swap, a volatility swap is a security written on the square root of the variance swap's payoff. We will use the notation
+V n (T ) = n−1 i=0 ln S t i S t i−1 2 and V (T ) = ln S T .
+Again, V n (T ) is the volatility swap payoff up to multiplicative and additive constants.
+
+Our aim is to investigate the validity of these approximations, motivated by the fact that the convergence of P n (T ) to P (T ), respectively V n (T ) to V (T ), is only in probability, which a priori does not guarantee convergence of their expectations. It is the latter convergence one needs in order to justify the use of this approximation in the context of pricing.
+
+To simplify the notation later on, we introduce the following convention.
+
+Notation. For a process X = (X t ) t∈[0,T ] we define
+δ i X = X t i − X t i−1 (i = 1, . . . , n).
+In particular, P n (T ) = n i=1 (δ i ln S) 2 .
+
+
+Mathematical preliminaries
+
+Since S > 0 and S − > 0 there is a semimartingale M such that
+S = S 0 E(M ),
+where E(·) denotes stochastic exponential; see [18], Theorem II.8.3. In fact, since S is a local martingale and hence a special semimartingale, it follows that from Theorem II.8.21 in [18] that M is a stochastic integral with respect to the local martingale part of S. Furthermore, since S > 0, the jumps of M satisfy ∆M > −1, so by the Ansel-Stricker Theorem (see [2]), M is a local martingale.
+
+The following notation is standard. We direct the reader to [18] for details. The random measure µ M associated with the jumps of M is given by
+µ M (dt, dx) = s 1 {∆Ms =0} ε (s,∆Ms) (dt, dx),
+and its predictable compensator is ν(dt, dx). We may then write
+S = S 0 exp M − 1 2 M c , M c − (x − ln(1 + x)) * µ M ,(1)
+and furthermore decompose M as
+M = M c + M d = M c + x * (µ M − ν),(2)
+where M c is the continuous local martingale part of M and M d = x * (µ M − ν) is the jump part. Both these processes are local martingales. The following elementary result will be useful later, so we state it as a lemma. 
+= M c , M c + x 2 * µ M + (x − ln(1 + x)) 2 * µ M − 2x(x − ln(1 + x)) * µ M .
+By the Cauchy-Schwartz inequality,
+|x(x − ln(1 + x))| * µ M = s≤· |∆M s (∆M s − ln(1 + ∆M s ))| ≤ s≤· (∆M s ) 2 s≤· (∆M s − ln(1 + ∆M s )) 2 < ∞, so
+x(x − ln(1 + x)) * µ M also converges absolutely, a.s. Termwise manipulation is therefore allowed, so since
+x 2 + (x − ln(1 + x)) 2 − 2x(x − ln(1 + x)) = (ln(1 + x)) 2 , we get x 2 * µ M + (x − ln(1 + x)) 2 * µ M − 2x(x − ln(1 + x)) * µ M = (ln(1 + x)) 2 * µ M .
+The result follows.
+
+We also have the following lemma, which gives the semimartingale decomposition of ln S.
+
+
+Lemma 2 Assume that ln S is locally integrable. Then
+ln S − ln S 0 = M c + ln(1 + x) * (µ M − ν) − 1 2 M c , M c − (x − ln(1 + x)) * ν.
+Proof. From (1) and (2) we have
+ln S − ln S 0 = M c − 1 2 M c , M c + x * (µ M − ν) − (x − ln(1 + x)) * µ M .
+Our assumption together with the fact that M c and x * (µ M − ν) are local martingales, hence locally integrable, implies that M c , M c and (x−ln(1+x)) * µ M are locally integrable (notice that both are nonnegative). Hence (x − ln(1 + x)) * ν is locally integrable (see [18], Proposition II.1.8), so we may add and subtract this quantity to the right side of the previous display to obtain
+ln S − ln S 0 = M c − 1 2 M c , M c + ln(1 + x) * (µ M − ν) − (x − ln(1 + x)) * ν.
+This is the desired expression.
+
+3 Approximation using the quadratic variation
+
+
+Finiteness of expectations
+
+In order for there to be any hope that E(P (T )) accurately approximates E(P n (T )), a minimal requirement is that both these quantities be finite. Perhaps somewhat surprisingly, they need not be finite or infinite simultaneously. This is of course a potentially serious issue, since the value of E(P (T )), when finite, is nonsensical as an approximation of E(P n (T )) if this is infinite.
+
+The following result gives necessary and sufficient conditions for E(P n (T )) to be finite, given that the approximation P (T ) is known to have finite expectation.
+
+Theorem 1 Assume that P (T ) ∈ L 1 . The following statements are equivalent.
+
+(i) P n (T ) ∈ L 1 for at least one n ≥ 1
+(ii)    M c , M c T ∈ L 2 (x − ln(1 + x)) * ν T ∈ L 2 Proof. First of all, note that since P n (T ) = n i=1 (δ i ln S) 2 , we have P n (T ) ∈ L 1 if and only if δ i ln S ∈ L 2 for each i, which is equivalent to having ln S t i − ln S 0 ∈ L 2 for each i.
+We thus need to show that this is equivalent to condition (ii) in the statement of the theorem.
+
+By Lemma 1, our basic assumption
+P (T ) = [ln S, ln S] T ∈ L 1 implies that M c , M c T ∈ L 1 and (ln(1 + x)) 2 * µ M T ∈ L 1 .
+Hence both M c t and ln(1 + x) * (µ M − ν) t are in L 2 for every t ≤ T . Therefore, using the representation from Lemma 2, namely
+ln S − ln S 0 = M c − 1 2 M c , M c + ln(1 + x) * (µ M − ν) − (x − ln(1 + x)) * ν,
+we deduce that ln S t i − ln S 0 ∈ L 2 for each i holds if and only if
+1 2 M c , M c t i + (x − ln(1 + x)) * ν t i ∈ L 2
+for each i. Since both M c , M c and (x − ln(1 + x)) * ν are nonnegative and nondecreasing, this is equivalent to condition (ii). The proof is finished.
+
+We note that the above theorem implies that if P n (T ) ∈ L 1 for some n then P n (T ) ∈ L 1 for all n ≥ 1. An analogous result holds for volatility swaps.
+
+Theorem 2 Assume that V (T ) ∈ L 1 . The following statements are equivalent.
+(i) V n (T ) ∈ L 1 for some n ≥ 1 (ii)    M c , M c T ∈ L 1 (x − ln(1 + x)) * ν T ∈ L 1
+Proof. Using for instance the fact that all norms on R n are equivalent, there are constants 0 < c ≤ C < ∞ such that
+cV n (T ) ≤ n i=1 δ i ln S ≤ CV n (T ) a.s. Thus V n (T ) ∈ L 1 is equivalent to δ i ln S ∈ L 1 for each i, which is equivalent to ln S t i − ln S 0 ∈ L 1 for each i.
+Now the proof is similar to that of Theorem 1. By Lemma 1,
+V (T ) = [ln S, ln S] T ∈ L 1 implies that M c , M c T and (ln(1 + x)) 2 * µ M T are in L 1 , which via the Burkholder- Davis-Gundy inequalities implies that M c t and ln(1 + x) * (µ M − ν) t are in L 1 for each t ≤ T . By Lemma 2, therefore, ln S t i − ln S 0 ∈ L 1 for each i if and only if 1 2 M c , M c t i + (x − ln(1 + x)) * ν t i ∈ L 1
+for each i. This is equivalent to condition (ii) of the theorem.
+
+Again, we note that Theorem 2 implies that if V n (T ) ∈ L 1 for some n then V n (T ) ∈ L 1 for all n ≥ 1.
+
+When S is continuous we have the following variation of Theorem 1, which indicates that in many cases, E(P n (T )) < ∞ is a stronger requirement than E(P (T )) < ∞. This will be used in Section 4, where we discuss specific examples. Notice that when S is continuous,
+P (T ) = [ln S, ln S] = M c , M c = M, M .
+Proposition 1 Assume that S is continuous. Then the following are equivalent.
+(i) M t ∈ L 1 and P n (T ) ∈ L 1 (ii) P (T ) ∈ L 2
+Proof. In the continuous case, ln S − ln S 0 = M − 1 2 M, M . First assume (ii), i.e. that P (T ) = M, M T ∈ L 2 . Then certainly M t ∈ L 2 for every t ≤ T , hence ln S t ∈ L 2 for every t ≤ T . Therefore δ i ln S ∈ L 2 for every i, and as in the beginning of the proof of Theorem 1, this implies that P n (T ) ∈ L 1 . Hence (i) holds. Conversely, if (i) is satisfied, then δ i ln S ∈ L 2 for every i, so ln S T ∈ L 2 . We also have M T ∈ L 1 by assumption, so
+M, M T = 2(M T − ln S T + ln S 0 ) is in L 1 , implying that M T is in fact in L 2 .
+This lets us strengthen the previous conclusion to M, M T ∈ L 2 , which is (ii).
+
+Notice that the implication (ii) ⇒ (i) also follows from Theorem 1. We can prove an analogous result for volatility swaps.
+
+Proposition 2 Assume that S is continuous. Then the following are equivalent.
+(i) M t ∈ L 1 and V n (T ) ∈ L 1 (ii) V (T ) ∈ L 2 , i.e. M, M T ∈ L 1 .
+Proof. As in the proof of Theorem 2, V n (T ) ∈ L 1 is equivalent to δ i ln S ∈ L 1 for each i. The rest of the proof is similar to that of Proposition 1.
+
+In the case of continuous price processes, Proposition 1 makes it clear how one can proceed to construct examples where the approximation P (T ) has finite expectation, but the true payoff P n (T ) does not. Indeed, any process S of the form S = S 0 E(M ) will do, where M is a continuous local martingale that satisfies  (3) can appear in models that may appear innocuous at first sight.
+   M, M T ∈ L 1 M, M T / ∈ L 2 .(3)
+
+Bounds on the approximation error
+
+In this section we assume that both E(P (T )) and E(P n (T )) are finite, and study conditions under which they are close for large n; as already mentioned, although P n (T ) → P (T ) in probability, the expectations need not converge. We start by showing that under general conditions, the two expectations at least cannot be too far apart. We then impose additional structure on the model and give conditions that guarantee convergence. The focus of this section is on variance swaps. The analysis of volatility swaps is more complicated and is omitted.
+
+Theorem 3 Assume that P n (T ) and P (T ) both are in L 1 . Then there is a constant C > 0, independent of n, such that |E(P (T )) − E(P n (T ))| ≤ C for all n.
+
+The proof of Theorem 3 is straightforward once the following lemma has been established.
+
+Lemma 3 Assume that P n (T ) and P (T ) both are in L 1 and define
+N = ln(1 + x) * (µ M − ν) A = 1 2 M c , M c + (x − ln(1 + x)) * ν.
+Then M c , M c T and [N, N ] T are in L 1 . Moreover,
+E P (T ) − E P n (T ) ≤ E n i=1 (δ i A) 2 + 2E n i=1 |δ i M c |δ i A + 2E n i=1 |δ i N |δ i A ,
+and we have
+E n i=1 |δ i M c |δ i A ≤ E M c , M c T E n i=1 (δ i A) 2 and E n i=1 |δ i N |δ i A ≤ E [N, N ] T E n i=1 (δ i A) 2 .
+Proof. Observe that N is a purely discontinuous local martingale with [N, N ] = (ln(1 + x)) 2 * µ M , and A is a nondecreasing process. Since by assumption P (T ) = [ln S, ln S] T ∈ L 1 , Lemma 1 implies that both M c and N are L 2 martingales, which is the first assertion.
+
+Since also P n (T ) ∈ L 1 , Theorem 1 shows that A T ∈ L 2 . Again by Lemma 1,
+E [ln S, ln S] T = n i=1 E δ i M c , M c + n i=1 E δ i [N, N ] = n i=1 E (δ i M c ) 2 + (δ i N ) 2 .
+Lemma 2 shows that with N and A as above, we have ln
+S − ln S 0 = M c + N − A. Hence δ i ln S = δ i M c + δ i N − δ i A, and therefore E P n (T ) − E P (T ) = n i=1 E (δ i A) 2 + 2(δ i M c )(δ i N ) − 2(δ i M c )(δ i A) − 2(δ i N )(δ i A) = n i=1 E (δ i A) 2 − 2(δ i M c )(δ i A) − 2(δ i N )(δ i A) ,
+where the second equality holds because M c and N are orthogonal L 2 martingales. The triangle inequality and Jensen's inequality yield
+E P (T ) − E P n (T ) ≤ E n i=1 (δ i A) 2 + 2E n i=1 |δ i M c |δ i A + 2E n i=1 |δ i N |δ i A
+
+= (I) + (II) + (III).
+
+This settles the first inequality in the statement of the lemma. For (II), applying the Cauchy-Schwartz inequality twice, first for the sum and then the expectation, yields
+(II) ≤ 2E n i=1 (δ i M c ) 2 n i=1 (δ i A) 2 ≤ 2 E n i=1 (δ i M c ) 2 E n i=1 (δ i A) 2 .
+
+It only remains to notice that
+E n i=1 (δ i M c ) 2 = n i=1 E δ i M c , M c = E M c , M c T . An analogous calculation yields (III) ≤ 2 E [N, N ] T E n i=1 (δ i A) 2 ,
+thus proving the lemma.
+
+
+Proof of Theorem 3. By Lemma 3 it suffices to bound
+E n i=1 (δ i A) 2 . Since δ i A ≥ 0 for each i, we get E n i=1 (δ i A) 2 ≤ E n i=1 δ i A 2 = E(A 2 T ) < ∞.
+The proof is complete.
+
+Notice that constant C can be taken to be
+C = E(A 2 T ) + 2 E M c , M c T E(A 2 T ) + 2 E [N, N ] T E(A 2 T ),
+where N and A are as in Lemma 3. It is worth pointing out that since C is independent of n, it is in particular valid for n = 1. It can therefore not be expected to provide a tight bound for large n. Such results can be obtained under additional structure on the model, which we now introduce.
+
+For the remainder of this section we assume that our probability space supports an mdimensional Brownian motion W = (W 1 , . . . , W n ) and a Poisson random measure µ = µ(dt, dz) on R + × R with intensity measure dt ⊗ F (dz), where (z 2 ∧ 1)F (dz) < ∞. Moreover, we assume that M c is a stochastic integral with respect to W , and that M d is a stochastic integral with respect to µ − dt ⊗ F (dz). That is, we assume that there are predictable processes a 1 , . . . , a m and a predictable function ψ > −1 such that
+M c t = m k=1 t 0 a k s dW k s and M d t = ψ * (µ − dt ⊗ F (dz)) t .
+In this case the compensator ν of µ M satisfies Under this structure we can formulate conditions on σ and ψ under which the expectation of P n (T ) converges to the expectation of P (T ) as n → ∞. Theorem 4 With the notation and assumptions just described above, assume that the following conditions hold:
+       E T 0 σ 4 s ds < ∞ E T 0 R (1 ∨ |z| −p ) ψ(s, z) 2 + (ln(1 + ψ(s, z))) 2 F (dz)ds < ∞,
+for some p ≥ 0 such that R (1 ∧ |z| p )F (dz) < ∞. Then lim n→∞ |E(P (T )) − E(P n (T ))| = 0.
+
+More specifically, there are constants C and D such that
+|E(P (T )) − E(P n (T ))| ≤ Cn −1 + Dn −1/2 .
+Notice that p ≤ 2 always works, in the sense that R (1 ∧ z 2 )F (dz) < ∞. However, depending on F (dx), smaller values of p may also work, imposing less stringent restrictions on ψ. In particular, if the Poisson random measure only has finitely many jumps, so that R F (dx) < ∞, we may take p = 0, and the condition on ψ reduces to
+E T 0 R ψ(s, z) 2 + (ln(1 + ψ(s, z))) 2 F (dz)ds < ∞.
+We remark that Theorem 4 generalizes results in [4], where the authors study the Black-Scholes model, the Heston stochastic volatility model, the Merton jump-diffusion model, and the stochastic volatility with jumps model by Bates and Scott.
+
+The proof of Theorem 4 requires two lemmas.
+Lemma 4 For 0 ≤ s < t ≤ T we have, a.s., t s (−1,∞) (x − ln(1 + x))ν(du, dx) 2 ≤ (t − s)C T 0 R
+(1 ∨ |z| −p ) ψ(s, z) 2 + (ln(1 + ψ(s, z))) 2 F (dz)ds for any p ≥ 0 such that R (1 ∧ |z| p )F (dz) < ∞, and a finite constant C that does not depend on s, t or p.
+
+Proof. Jensen's inequality yields
+t s (−1,∞) (x − ln(1 + x))ν(du, dx) 2 = t s R (ψ(s, z) − ln(1 + ψ(s, z)))F (dz)ds 2 ≤ (t − s) t s R G(s, z)F (dz) 2 ds,
+where we have defined G(s, z) = ψ(s, z) − ln(1 + ψ(s, z)). Splitting up the integral over R as the sum of the integrals over {|z| ≤ 1} and {|z| > 1}, and applying the inequality
+(a + b) 2 ≤ 2a 2 + 2b 2 , we obtain R G(s, z)F (dz) 2 ≤ 2 {|z|≤1} G(s, z)F (dz) 2 + 2 {|z|>1} G(s, z)F (dz) 2 .
+Since C 1 = F ({|z| > 1}) < ∞, Jensen's inequality applied to the second term yields
+{|z|>1} G(s, z)F (dz) 2 ≤ C 1 {|z|>1} G(s, z) 2 F (dz).
+For the first term, let F (dz) = |z| p F (dz). Then C 2 = F ({|z| ≤ 1}) < ∞ by assumption, and using once again Jensen's inequality we get
+{|z|≤1} G(s, z)F (dz) 2 = {|z|≤1} |z| −p G(s, z) F (dz) 2 ≤ C 2 {|z|≤1} |z| −2p G(s, z) 2 F (dz) = C 2 {|z|≤1} |z| −p G(s, z) 2 F (dz).
+Assembling the different terms and noting that G(s, z) 2 ≤ 2 ψ(s, z) 2 + (ln(1 + ψ(s, z))) 2 yields the result with C = 4(C 1 ∨ C 2 ).
+
+
+Lemma 5 Under the assumptions of Theorem 4, we have
+P (T ) ∈ L 1 , M c , M c T ∈ L 2 , and (x − ln(1 + x)) * ν T ∈ L 2 .
+Proof. By Jensen's inequality, E{(
+T 0 σ 2 s ds) 2 } ≤ T E{ T 0 σ 4 s ds},
+which is finite by hypothesis. So M c , M c T ∈ L 2 . To prove that P (T ) ∈ L 1 it therefore suffices to note that
+E (ln(1 + x)) 2 * µ M T = E (ln(1 + ψ)) 2 * µ T = E (ln(1 + ψ)) 2 * (ds ⊗ F (dz)) ,
+which is finite by assumption, since 1 ∨ |z| −p ≥ 1. Finally, an application of Lemma 4 with s = 0 and t = T gives a bound on E{((x − ln(1 + x)) * ν T ) 2 } that is finite by assumption. The lemma is proved.
+
+Proof of Theorem 4. By Lemma 5, the hypotheses of Lemma 3 are satisfied, so we have the bound
+E P (T ) − E P n (T ) ≤ E n i=1 (δ i A) 2 + 2E n i=1 |δ i M c |δ i A + 2E n i=1 |δ i N |δ i A = (I) + (II) + (III), where N = ln(1 + x) * (µ M − ν) and A = 1 2 M c , M c + (x − ln(1 + x)) * ν.
+We first deal with (I). Using the inequality (x + y) 2 ≤ 2x 2 + 2y 2 we obtain
+n i=1 E (δ i A) 2 ≤ n i=1 1 2 E (δ i M c , M c ) 2 + 2E (δ i (x − ln(1 + x)) * ν) 2 .
+
+Now, Jensen's inequality yields
+E (δ i M c , M c ) 2 = E t i t i−1 σ 2 s ds 2 ≤ T n E t i t i−1 σ 4 s ds .
+Furthermore, Lemma 4 with s = t i−1 and t = t i yields
+E (δ i (x− ln(1 + x)) * ν) 2 ≤ C 1 n t i t i−1 R
+(1 ∨ |z| −p ) ψ(s, z) 2 + (ln(1 + ψ(s, z))) 2 F (dz)ds for some constant C 1 independent of i. Summing over i shows that
+(I) ≤ T 2n E T 0 σ 4 s ds + 2C 1 n E T 0 R (1 ∨ |z| −p ) ψ(s, z) 2 + (ln(1 + ψ(s, z))) 2 F (dz)ds ,
+which is equal to n −1 times a constant C that is finite by assumption.
+
+Concerning the two remaining terms (II) and (III), Lemma 3 gives
+(II) ≤ 2 E M c , M c T E n i=1 (δ i A) 2 and (III) ≤ 2 E [N, N ] T E n i=1 (δ i A) 2 ,
+so that (II) + (III) ≤ C 2 (I) ≤ C 2 √ Cn −1/2 for some constant C 2 . The claim now follows with C as above and D = C 2 √ C.
+
+
+Examples
+
+
+Strict local martingales
+
+examples show that the martingale property of S has little to do with the integrability of M, M T .
+
+Our first example uses the following criterion, which is well-known [6]. As in Section 3.2, B is standard Brownian motion.
+
+Lemma 6 Assume S > 0 satisfies the stochastic differential equation dS t = σ(S t )dB t . It is then a true martingale if and only if for some a > 0,
+∞ a x σ 2 (x) dx = ∞.(4)
+Example 1 (S a strict local martingale and M, M T ∈ L 2 ) Consider the Constant Elasticity of Variance (CEV) models dS t = S α t dB t . By Lemma 6, S is a strict local martingale if and only if α > 1. We would like to choose α > 1 such that M t = t 0 S α−1 s dB s is a martingale with an integrable quadratic variation, i.e. E{(
+t 0 S 2(α−1) s ) 2 } < ∞.
+This can be achieved with ε ∈ (0, 1) and α = 1 + ε 4 > 1. Indeed,
+E T 0 S 2(α−1) s ds 2 ≤ T E T 0 S 4(α−1) s ds = T E T 0 S ε s ds = T T 0 E(S ε s )ds.
+Since ε ∈ (0, 1), x → x ε is concave. Jensen's inequality thus implies that the right side above is dominated by For completeness, we also give a simple example showing that the reverse situation is also possible: that S can be well-behaved (a bounded martingale), while M is not.
+T T 0 E(S s ) ε ds ≤ T 2 S ε 0 < ∞, where E(S s ) ≤ S 0 because S
+Example 2 (S a bounded martingale and M a strict local martingale) Let X be the reciprocal of a Bessel(3) process. It is well-known that X is a strict local martingale, see e.g. [11, p. 20-21]. Set M t = −X t , so that M is a strict local martingale with M t ∈ L 1 and M t < 0 a.s. for all t ≥ 0. Now, P (T ) = M, M T is not in L 1 (otherwise M would be a true martingale), and also P n (T ) fails to be in L 1 by Proposition 1.
+
+However, since S t = E(M ) t = exp{−X t − 1 2 X, X t } ≤ 1, it is a bounded local martingale, hence a true martingale. In this example, the "bad" behavior of M is caused by its ability to take on very large negative values. This does not carry over to S, since it is obtained through exponentiation.
+
+
+Stochastic volatility of volatility
+
+We now proceed to give an example of a class of continuous stock price models that look innocuous, but where the conditions (3) at the end of Section 3.1 are satisfied for certain parameter values. In those cases, Proposition 1 implies that E(P (T )) < ∞ but E(P n (T )) = ∞.
+
+We use stochastic volatility models with stochastic volatility of volatility. Let B, W and Z be three Brownian motions, and let ρ denote the correlation between W and Z, i.e. d W, Z t = ρdt. No restrictions will be imposed on the correlation structure of (B, W, Z), other than through the parameter ρ. We consider the following model for the stock price S, its volatility v and the volatility of volatility w:
+dS t = S t √ v t dB t (5) dv t = v t √ w t dW t (6) dw t = κ(θ − w t )dt + η √ w t dZ t ,(7)
+where κ, θ, η are positive constants. Maintaining our previous notation, where M is the stochastic logarithm of S, we have that
+M t = t 0 √ v s dB s , so M, M t = t 0 v s ds. Recall condition (3) from Section 3.1:    M, M T ∈ L 1 M, M T / ∈ L 2 .
+Note that v is a nonnegative local martingale and hence a supermartingale. Together with Fubini's theorem, this yields
+E( M, M T ) = E T 0 v s ds = T 0 E(v s )ds ≤ T v 0 , so M, M T ∈ L 1 . Now we wish to find conditions such that M, M T = T 0 v s ds / ∈ L 2 .
+To this end, define T * = sup{t : E(v 2 t ) < ∞}, and let χ = 2ρη − κ and ∆ = χ 2 − 2η 2 . It is proven in [1] that
+T * =                1 √ ∆ ln( χ+ √ ∆ χ− √ ∆ ) if ∆ ≥ 0 and χ > 0, 2 √ −∆ arctan( √ −∆ χ ) + π1 {χ<0} if ∆ < 0, +∞ otherwise.
+The next step is to establish that v is in fact a martingale.
+
+
+Lemma 7
+
+The process v defined above is a true martingale.
+
+Proof. Using Feller's test of explosion (see e.g. [21]), a straightforward calculation shows that w does not explode under P . Therefore, using the same techniques as in [1], it suffices to establish that the auxiliary processŵ, defined as the solution to
+dŵ t = κ(θ −ŵ t ) + ρηŵ t dt + η ŵ t dZ t ,ŵ 0 = w 0 ,
+is non-explosive. This can again be verified using Feller's criterion.
+
+We may now conclude our construction by choosing the parameters ρ, η and κ such that T * < ∞, and then choose T > T * . In this case, Fubini's theorem implies that
+E T 0 v s ds 2 = E T 0 T 0 v s v t dsdt = T 0 T 0 E(v s v t )dsdt. Moreover, E(v s v t ) = E(v s E(v t | F s )) = E(v 2 s ), so we get E T 0 v s ds 2 = T 0 T 0 E(v 2 s )dsdt ≥ T T * T T * E(v 2 s )dsdt = ∞.
+We conclude that M, M T / ∈ L 2 , and can summarize our findings as follows.
+
+Example 3 Suppose in the stock price model with stochastic volatility of volatility described above, the parameters are such that T > T * . Then the preceding discussion shows that E(P (T )) < ∞ but E(P n (T )) = ∞.
+
+That is, the approximation to the variance swap payoff has finite expectation, whereas the true payoff does not.
+
+It is interesting to note that it is sometimes possible to change to an equivalent measure Q ∼ P , under which the price process is still a local martingale, and such that both P (T ) and P n (T ) become integrable. The authors would like to thank Kerry Back [3] for posing the question of whether or not this can happen. To carry out the construction, let us continue to consider the stochastic volatility of volatility model described above.
+
+Proposition 3 Assume that we are in the framework of a doubly stochastic volatility model as described in (5), (6), and (7). Suppose that ∆ ≥ 0 and χ > 0, so that T * < ∞, and assume also that B is independent of (W, Z). Then there is an equivalent measure Q such that S is a local martingale under Q, andT * = sup{t : E Q (v 2 t ) < ∞} = ∞. As a consequence, E Q (P (T )) < ∞ and E Q (P n (T )) < ∞, and we have lim n→∞ P n (T ) = P (T ).
+
+Proof. We can find a Brownian motion W ′ , independent of W and B, such that
+Z t = ρW t + 1 − ρ 2 W ′ t .
+Let Q be the measure whose density process Y t = E P dQ dP | F t is given by dY t = −Y t γ √ w t dW ′ t , where γ > 0 is a constant to be determined. To show that Y is indeed a martingale on [0, T ], it suffices to verify, as in Lemma 7, that the auxiliary process dŵ t = κ(θ −ŵ t ) − γρηŵ t dt + η ŵ t dZ t ,ŵ 0 = w 0 , is non-explosive. This can again be done using Feller's criteria. Next, it follows from Girsanov's theorem that the dynamics of w under Q is given by dw t =κ(θ − w t )dt + η √ w t dZ t , whereκ = κ + γη 1 − ρ 2 ,θ = κθ κ + γη 1 − ρ 2 , and dZ t = dZ t + γ 1 − ρ 2 √ w t dt is Brownian motion under Q. Hence, if we definẽ
+χ = 2ρη −κ and∆ =χ 2 − 2η 2 ,
+we have thatT * = ∞ ifχ ≤ 0 and∆ ≥ 0. But
+χ = χ − γη 1 − ρ 2 and∆ = ∆ + γη 1 − ρ 2 γη 1 − ρ 2 − 2χ ,
+so it suffices to choose γ ≥ 2χ
+η √ 1−ρ 2 .
+The verification of the last assertion is straightforward: E Q (P (T )) < ∞ is proved in the same way as under the measure P . To show that E Q (P n (T )) < ∞ and lim n→∞ P n (T ) = P (T ), note that 
+
+
+The 3/2-stochastic volatility model
+
+A model that has received considerable attention both in the theoretical and empirical literature is the 3/2-stochastic volatility process. See for example [9] and the references therein. Let B and W be two correlated Brownian motions. The model prescribes the following dynamics for the stock price and its volatility dS t = S t √ v t dB t dv t = v t (p + qv t )dt + ǫv 3 2 t dW t where p, q and ǫ are constants such that q < ǫ 2 2 and ǫ > 0. The reason for the upper bound on q is to avoid explosion of v in finite time. To see this, consider the process R t = 1 vt , the reciprocal of v, which satisfies the SDE
+dR t = (ǫ 2 − q − pR t )dt − ǫ R t dW t .
+The process R is a square-root process, and it is well-known that this process avoids zero when ǫ 2 − q > ǫ 2 q , which is exactly the condition q < ǫ 2 2 . Let again M be the stochastic logarithm of S, i.e. M t = t 0 √ v s dB s , so that M, M t = t 0 v s ds. Carr and Sun [9] provide the Laplace transform of the integrated variance (ii) If q < 0, i.e. when the squared volatility process is mean reverting, P n (T ) converges to P (T ) as n → ∞.
+
+(iii) If q ≥ 0, our sufficient condition fails and we can no longer guarantee that P n (T ) converges to P (T ).
+
+It is an open problem to establish whether or not this convergence actually takes place.
+
+Lemma 1
+1The quadratic variation of M and ln S are given by (i) [M, M ] = M c , M c + x 2 * µ M (ii) [ln S, ln S] = M c , M c + (ln(1 + x)) 2 * µ M Proof. Part (i) is a standard fact. For part (ii), write X = (x − ln(1 + x)) * µ M and notice that ln S − ln S 0 = M − X − 1 2 M c , M c . Hence [ln S, ln S] = [M − X, M − X] = [M, M ] + [X, X] − 2[M, X]
+
+G
+(s, ψ(s, z))F (dz)ds for every nonnegative predictable function G. Moreover, it is a classical result that there exists a one-dimensional Brownian motion B and a nonnegative predictable process σ such that dB s .
+
+
+is a positive local martingale, hence a supermartingale. This shows that S can be a strict local martingale, even if the quadratic variation M, M T = ln S, ln S T is in L 2 .
+
+T 0 E
+0Q (v 2 t )dt < ∞ due to the continuity and finiteness of E Q (v 2 t ) on the compact interval [0, T ]. An application of Theorem 4 concludes the proof.
+
+
+ds in closed form. Proposition 4 In the 3/2-model, the Laplace transform of the realized variance T 0 v s ds is given by E(e −λ T 0 vsds ) = Γ(γ − α) Γ(γ) 2 ǫ 2 y 0 α M (α, γ, −2 ǫ 2 y 0 )
+Confirmed in a private discussion with Peter Carr.
+The literature on asset price bubbles centers around the phenomenon that S can be a strict local martingale under the risk neutral measure P , see[12],[19],[20]. Moreover, in[16]this issue has been noted to cause complications for pricing using PDE techniques. On the other hand, alternative criteria of no arbitrage type have been proposed by various authors to guarantee the existence of a true martingale measure, for instance[22],[6],[17]. It is therefore natural to ask about the relationship between our previous results and the true martingale (or strict local martingale) property of S. We give two examples, in the continuous case, showing that the two are not connected in general. More specifically, thewhere y 0 = v 0 e pT −1 p , α = −( 1 2 − q ǫ 2 )+ ( 1 2 − q ǫ 2 ) 2 + 2 λ ǫ 2 , γ = 2(α + 1− q ǫ 2 ), Γ is the Gamma function, and M is the confluent hypergeometric functionWe refer the reader to Carr and Sun[9].Since the Laplace transform of the realized variance exists in a neighborhood of zero, all moments of Recall now the following result proved by Dufresne[15]on the finiteness of moments of the square-root process., Γ is the Gamma function, and M is the congruent hypergeometric function defined in Proposition 4.If q < 0, define κ = −q > 0 and θ = p κ . Then the SDE satisfied by v can be re-written as dv t = κv t (θ − v t )dt + ǫv3 2t dW t So under the condition q < 0, the process v is mean-reverting with a rate of mean-reversion proportional to v. Also v > 2 when q < 0, so using Proposition 5, it can be seen that E(v 2 t ) = E(R −2 t ) is finite and integrable on [0, T ] as a continous function on this compact time interval. Hence the condition of Theorem 4 is satisfied and the expectation of P n (T ) converges to the expectation of P (T ) as n → ∞.Under the condition 0 ≤ q < ǫ 2 2 , it follows that 1 < v ≤ 2 and Proposition 5 implies that E(v 2 t ) = ∞. By Fubini's theorem, E( T 0 v 2 s ds) = ∞ so that the condition of Theorem 4 fails and the convergence of the E(P n (T )) to E(P (T )) is not guaranteed anymore.We now summarize the above findings.Example 4 Suppose the stock price follows the 3/2-stochastic volatility model. The above discussion shows that (i) Both the true payoff P n (T ) and the approximation P (T ) have finite expectation.
+Moment explosions in stochastic volatility models. L Andersen, V Piterbarg, Finance and Stochastics. 11L. Andersen and V. Piterbarg. Moment explosions in stochastic volatility models. Finance and Stochastics, 11:29-50, 2007.
+
+Couverture des actifs contingents et prix maximum. J Ansel, C Stricker, Annales de l'IHP. 302J. Ansel and C. Stricker. Couverture des actifs contingents et prix maximum. Annales de l'IHP, 30(2):303-315, 1994.
+
+. K Back, personal communicationK. Back, personal communication, 2010.
+
+Pricing and hedging volatility derivatives. M Broadie, A Jain, Journal of Derivatives. 153M. Broadie and A. Jain. Pricing and hedging volatility derivatives. Journal of Deriva- tives, 15(3):7-24, 2008.
+
+The Effect of Jumps and Discrete Sampling on Volatility and Variance Swaps. M Broadie, A Jain, International Journal of Theoretical and Applied Finance. 118M. Broadie and A. Jain. The Effect of Jumps and Discrete Sampling on Volatility and Variance Swaps, International Journal of Theoretical and Applied Finance, 11 (8), 761 -797, 2008.
+
+On the martingale property of time-homogeneous diffusions. P Carr, A Cherny, M Urusov, PreprintP. Carr, A. Cherny, and M. Urusov. On the martingale property of time-homogeneous diffusions. Preprint, 2007.
+
+Volatility derivatives. P Carr, R Lee, Annual Review of Financial Economics. 1P. Carr and R. Lee. Volatility derivatives. Annual Review of Financial Economics, 1:319-339, 2009.
+
+Variance swaps on time-changed Levy processes, working paper. P Carr, R Lee, University of ChicagoP. Carr and R. Lee. Variance swaps on time-changed Levy processes, working paper, University of Chicago, 2009.
+
+A new approach for option pricing under stochastic volatility. P Carr, J Sun, Review of Derivatives Research. 10P. Carr and J. Sun. A new approach for option pricing under stochastic volatility. Review of Derivatives Research, 10:87-150, 2007.
+
+Exact pricing and hedging formulas of long dated variance swaps under a 3/2 volatility model, working paper. L Chan, E Platen, Sydney, AustrialiaUniversity of TechnologyL. Chan and E. Platen. Exact pricing and hedging formulas of long dated variance swaps under a 3/2 volatility model, working paper, University of Technology, Sydney, Austrialia, 2009.
+
+An Introduction to Stochastic Integration. K Chung, R J Williams, Birkhäuser, BostonSecond EditionK.L Chung and R.J. Williams, An Introduction to Stochastic Integration, Second Edition, Birkhäuser, Boston, 1990.
+
+Local martingales, bubbles and option prices. A Cox, D Hobson, Finance and Stochastics. 9A. Cox and D. Hobson. Local martingales, bubbles and option prices. Finance and Stochastics, 9:477-492, 2005.
+
+A general version of the fundamental theorem of asset pricing. F Delbaen, W Schachermayer, Mathemathische Annalen. 300F. Delbaen and W. Schachermayer. A general version of the fundamental theorem of asset pricing. Mathemathische Annalen, 300:463-520, 1994.
+
+Fundamental theorem of asset pricing for unbounded stochastic processes. F Delbaen, W Schachermayer, Mathemathische Annalen. 312F. Delbaen and W. Schachermayer. Fundamental theorem of asset pricing for un- bounded stochastic processes. Mathemathische Annalen, 312:215-250, 1998.
+
+The integrated square-root process. D Dufresne, University of MelbourneResearch paper no. 90D. Dufresne. The integrated square-root process. Research paper no. 90, University of Melbourne, 2001.
+
+Bubbles, convexity and the black-scholes equation. E Ekström, J Tysk, Annals of Applied Probability. 19E. Ekström and J. Tysk. Bubbles, convexity and the black-scholes equation. Annals of Applied Probability, 19:1369-1384, 2009.
+
+Comparison results for stochastic volatility models via coupling. D Hobson, Finance and Stochastics. 14D. Hobson. Comparison results for stochastic volatility models via coupling. Finance and Stochastics, 14:129-152, 2010.
+
+Limit Theorems for Stochastic Processes. J Jacod, A Shiryaev, Springer-Verlagsecond editionJ. Jacod and A. Shiryaev. Limit Theorems for Stochastic Processes. Springer-Verlag, second edition, 2003.
+
+Asset price bubbles in a complete market. R Jarrow, P Protter, K Shimbo, In Honor of Dilip B. MadanAdvances in Mathematical FinanceR. Jarrow, P. Protter, and K. Shimbo. Asset price bubbles in a complete market. Advances in Mathematical Finance, In Honor of Dilip B. Madan:105-130, 2006.
+
+Asset price bubbles in incomplete markets. R Jarrow, P Protter, K Shimbo, Mathematical Finance. 202R. Jarrow, P. Protter, and K. Shimbo. Asset price bubbles in incomplete markets. Mathematical Finance, 20(2):145-185, 2010.
+
+L Rogers, D Williams, Diffusions, Markov Processes and Martingales. Cambridge University Press2L. Rogers and D. Williams. Diffusions, Markov Processes and Martingales, Volume 2: Itô Calculus. Cambridge University Press, 1994.
+
+Complications with stochastic volatility models. C A Sin, Advances in Applied Probability. 301C. A. Sin. Complications with stochastic volatility models. Advances in Applied Probability, 30(1):256-268, 1998.

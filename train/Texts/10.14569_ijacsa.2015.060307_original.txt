@@ -1,0 +1,166 @@
+
+Apply Metaheuristic ANGEL to Schedule Multiple Projects with Resource-Constrained and Total Tardy Cost
+
+
+Shih-Chieh Chen 
+Ching-Chiuan Lin 
+
+Department of Information Management
+Overseas Chinese University Taichung
+Taiwan, R.O.C
+
+
+Department of Information Management
+Overseas Chinese University Taichung
+Taiwan, R.O.C
+
+Apply Metaheuristic ANGEL to Schedule Multiple Projects with Resource-Constrained and Total Tardy Cost
+1DE85646F5FC78999E4211BEC4570BBBmultiple project schedulingresource-constrained project schedulingANGELant colony optimizationgenetic algorithmslocal searchmetaheuristics
+In this paper the multiple projects resourceconstrained project scheduling problem is considered.Several projects are to be scheduled simultaneously with sharing several kinds of limited resources in this problem.Each project contains non-preemptive and deterministic duration activities which compete limited resources under resources and precedence constraints.Moreover, there are the due date for each project and the tardy cost per day that cause the penalty when the project cannot be accomplished before its due date.The objective is to find the schedules of the considered projects to minimize the total tardy cost subject to the resource and precedence constraints.Since the resource-constrained project scheduling problem has been proven to be NP-Hard, we cannot find a deterministic algorithm to solve this problem efficiently and metaheuristics or evolutionary algorithms are developed for this problem instead.The problem considered in this paper is harder than the original problem because the due date and tardy cost of a project are considered in addition.The metaheuristic method called ANGEL was applied to this problem.ANGEL combines ant colony optimization (ACO), genetic algorithm (GA) and local search strategy.In ANGEL, ACO and GA run alternately and cooperatively.ANGEL performs very well in the multiple projects resource-constrained project scheduling problem as revealed by the experimental results.
+
+I. INTRODUCTION
+
+The resource-constrained project scheduling problem (RCPSP) is an important problem both in practice and research.Many researchers work on the single-project case for several years and have very good results, but the research works for the multiple-projects case are only a few.The multiple projects RCPSP model is a more realistic model.
+
+The work by Lova et.al. [1] indicated that 84% of the companies, in the Valencian Region-Spain which responded to their survey, work with multiple projects.This data is in line with the work by Payne [6] that indicated that up to 90% of all projects occurred in the multiple-project context.And the due date and tardy cost are also important realistic situations to be considered.These reasons motivate us to research and to find some good algorithms on this topic.
+
+We summarize some research works for the multiple projects RCPSP.Fendley [8] used multiple projects with 3 and 5 projects and concluded that the priority rule MINSLK is the best for the measurements project slippage, resource utilization and in-process inventory.Kurtulus and Davis [2] showed six new priority rules to the multiple projects instances they designed.They showed that the priority rules MAXTWK and SASP are the best when the objective is to minimize the mean project delay.Kurtulus and Narula [3] showed that the priority rule Maximum Penalty is the best to minimize the sum of the project weight delay.Dumond and Marbert [5] designed five resource allocation heuristics and four strategies to assign due dates to the projects.They showed that the priority rule FCFS with the Schedule Finish Time Due Date rule is the best to minimize the mean completion time, the mean lateness, the standard deviation of lateness and the total tardiness.Lova et al. [1] developed a multi-criteria heuristic to schedule multiple projects with the one-time criteria (mean project delay or multiple project duration) and one-no-time criteria (project splitting, in-process inventory, resource leveling or idle resources).
+
+RCPSP has been proven to be an NP-Hard problem.Many evolutionary algorithms and metaheuristics were proposed to solve RCPSP and the related extension problems.Tseng and Chen [9] proposed an algorithm ANGEL which combines ant colony optimization (ACO), genetic algorithm (GA) and local search strategy (LS) to solve the single project RCPSP.Chen and Lin [13] proposed a discrete particle swam optimization to solve RCPSP.The experimental results of these works showed that they are compatible to other state-of-the-art algorithms in the literature for solving instance sets in PSPLIB [11].Tseng and Chen [10] also proposed a two-phase genetic local search algorithm to solve the single project RCPSP with multiple modes.Chen [12] proposed a two-phase genetic local search algorithm to solve the single project RCPSP with generalized precedence constraints.Rivera et al. [7] proposed an algorithm which combined the GRASP, Scatter Search and justification to solve RCPSP.These researches showed that combined heuristics and evolutionary algorithms, like ANGEL, can solve these RCPSP and related extension problems efficiently.
+
+The remaining parts of the paper are organized as follows.
+
+In Section II, we provide a description of the problem.In Section III, we describe ouer ANGEL algorithm.In Section IV, www.ijacsa.thesai.org the computational results are shown and in Section V the concluding remarks are given.
+
+
+II. PROBLEM DESCRIPTION
+
+We consider a multiple project scheduling problem with n independent projects 1 , , n PP where 1 , , n dd and 1 , , n cc are the due dates and tardy costs per day for the projects respectively.There are K kinds of common resources which are renewable that all projects share on them.For project i P , 1, 2, , in  , the set i J consists of i num non-dummy activities and each activity has deterministic duration and resource demand for execution.By the single-project approach, we add two dummy activities as the source and the sink to bind the projects together.Hence this multiple-project problem can be considered as a single project problem in which the activity set J has
+n i i J J num       
+is the set of activities.Fig. 1 shows a multiple projects instance with 2 independent projects and the corresponding combined single project is shown in Fig. 2, where j d is the duration and jk r is the resource demand for resource k of activity j .
+
+Let i PSet be the set of all immediate predecessors (activities) of activity i .The precedence constraints are given that activity i cannot be executed before all activities belong to i PSet have finished.For resource k , the per-period- availability is given by a constant k R .Each dummy activity has zero duration and does not require any resource.
+
+In multiple projects RCPSP, let 1 m , …, n m be the makespans we scheduled for each project respectively, then the total tardy cost TC is defined in equation (1) as the sum of tardy costs of the projects which cannot be accomplished in their due dates.The objective of the problem considered in this paper is to minimize the total tardy cost ( TC ) subject to all the precedence and resource constraints.In this paper, we use a precedence-feasible activity list to represent a solution.When a precedence-feasible activity list is given, we use the list scheduling method to create a schedule.To make a schedule, we apply either the forward scheduling or the backward scheduling on the activity list to set the execution starting time for each activity.The forward scheduling sets the execution starting time of an activity, from the front to the end of the list, as early as possible but satisfies the resource constraints.That is, if an activity lacks for some resources to start its execution, then its execution starting time will be delayed until some activity is finished and the resources are released to satisfy its resource demand.The backward scheduling sets the execution starting time of an activity, from the end to the front of the list, as late as its finish time is just right before the earliest execution starting time of all its successors.If an activity lacks for some resource for its execution, then the execution starting time will be set earlier just right before the starting time of some activity in order to satisfy its resource demand.
+
+
+III. THE ANGEL METAHEURISTIC FOR THE MULTIPLE PROJECTS RCPSP
+
+In this section, we present the strategies in ANGEL metaheuristic for the multiple projects RCPSP.We modify the algorithm of Tseng and Chen [12] because we solve this problem by single-project approach but coincide the ()
+ii i i i md TC m d c      www.ijacsa.thesai.org
+characteristic of this problem.ANGEL consists of the ACO, the GA and the local search strategy.All parts of the metaheuristic ANGEL are described in detail in the following.
+
+
+A. The Ant Colony Optimization (ACO)
+
+In original ACO several ants share the common memory set called pheromone and each ant find its own path of solution independently.The schemes local updating, global updating, and evaporation change the common memory by the experience of each ant, experience from global best solution and decreasing during time past respectively.We apply ACO to generate a population of precedence-feasible activity lists.
+
+To construct an activity list by a specific ant x, we first put the dummy activity 0 into the first position of the list.Then, if activity v is put in position j , ant x has to choose another activity from the candidate set j N and put the chosen activity to position 1 j  of the list.The candidate set j N consists of the activities whose predecessors have been put in the list.When activity in position , the probability that ant x chooses activity to be in position is defined in equation ( 2), where is an user-defined parameter, q a random number drawn between 0 and 1, and is the amount of pheromone been deposited on the ordered pair .S is a random variable selected according to the probability distribution given in equation ( 3), where { }.
+j 0 uN arg max{ } , if , otherwise vu qq w S            2 2 min min ( / ) / ( / ) ,if w ,otherwise 0 j vw vu j x uN vw N p               
+The formulae of the local updating, the evaporation, and the global updating are described in equations ( 4)-( 6) respectively.
+vw vw            1            1 vw vw vw               In (4)
+, is a small increment when the local updating is performed on the ordered pair .In (5), the evaporation means the amount of pheromone of all ordered pairs are decremented by a ratio , where .The increment of the global updating in ( 6) is defined in (7), where and is the minimal total tardy cost of schedules ever found.Note that the global updating is only conducted on the list with the minimum total tardy cost in each ACO iteration.
+
+if activity is next to activity 1/ in the list with the minimum total tardy cost found by ants in an iteration 0 otherwise
+gb vw w v TC            
+By the effort of the ACO, the ants find for us a population of activity lists, then evaluate the associated schedules by forward and backward scheduling method, and evaluate the makespans and the corresponding total tardy costs.From the schedules conducted by forward and backward scheduling, only the one with smaller total tardy cost will be reserved.Tie will be broken by random selection.
+
+
+B. The Genetic Algorithm (GA)
+
+The GA we proposed is a permutation-based GA.The chromosomes in the population are the activity lists which consist of 90% constructed by the ACO and 10% randomly generated.The fitness of an activity list is the inverse value of the total tardy cost of the corresponding schedule.The crossover, mutation and selection operators are as follows.
+
+We implement two-point forward crossover and two-point backward crossover, which are modified versions of the twopoint forward-backward crossover proposed by Alcaraz and Maroto [4], in GA.The two-point forward crossover constructs the offspring from front to rear, and the two-point backward crossover constructs the offspring from rear to front.The crossover operators are defined as follows.
+
+Two parent lists, called father and mother, produce two offspring, called son and daughter.We first randomly draw two crossover-points denoted by 1 L and 2 L .To produce the son, when the two-point forward crossover is applied, the first positions of the son are directly taken from the first 1 L activities of the father.Then, in the father and the mother, the activities that have been taken are marked.The next LL  unmarked activities of the mother.In the father, these taken activities are marked.The rest positions of the son are taken from the rest unmarked activities of the father.All the activities taken from the mother or the father are in their relative order.The daughter is produced by interchanging the roles of the father and the mother.The two-point backward crossover works as a "reverse version" of the forward crossover that takes the activities and constructs the offspring from rear to front.To apply the crossover operators, the lists in the population are randomly divided into pop/2 pairs and a probability threshold, pcro, is specified.For each pair of lists, the two-point forward crossover is applied if the random number drawn is greater than the threshold.Otherwise, the two-point backward crossover is applied.We design two mutation operators which try to pick out some activities and then randomly put them back as long as the precedence relations are satisfied.First, the activities in a list are classified to two classes A and B. Those activities in class A are picked out by a larger probability pmut2 while those in class B by a smaller probability pmut3.When mapping a list to the corresponding schedule by the list scheduling method, an activity may not be started right after all its predecessors finished because lacking the resources it needs.We call this activity a delayed activity.If an activity in a list is a delayed activity while this activity is not a delayed activity in most of lists in the population, this activity belongs to class A in this list.Otherwise, activities not belonging to class A in a list www.ijacsa.thesai.orgbelong to class B. When applying the mutation to a list, for each activity in the list, if the activity belongs to class A, it is picked out by probability pmut2, otherwise, it is picked out by probability pmut3.In a random order, those pick-out activities are then randomly put back to the list as long as the precedence relations are preserved.
+
+We implement the ranking selection and the 2-tournament selection in our GA.After the crossover and the mutation, there are 2*pop lists in the population, pop parent lists and pop offspring lists.In the ranking selection, we select the first pop lists from the population that is ranking by the makespan to the new population.In the 2-tourament selection, two lists are selected randomly from the population and the one with smaller makespan will be put in the new population.This procedure will be repeated pop times to construct the new population.
+
+
+C. The Local Search Strategy
+
+The local search strategy in this study is the forwardbackward local search (FBLS) proposed by Tseng and Chen [9].This local search utilizes the standard representation of permutation to reduce the search space and both forward scheduling and backward methods to improve the solution quality that very few computational effort is needed.The FBLS tries to search better solutions for a given permutation by following steps: (i) evaluate the forward schedule of the list, sort the operation starting times of activities and make the standard representation permutation the list by the order of operation starting times; (ii) evaluate the backward schedule of the list, sort the operation starting times of activities and then make a new permutation the list by the order of operation starting times; (iii) evaluate the forward schedule of the list, sort the operation starting times of activities and then make a new permutation the list by the order of operation starting times; compare the makespans of the schedules evaluated from the previous three steps and replace the list by the permutation which has the smallest makespan at last.From the experimental results conducted by Tseng and Chen [9], this local search is a very fast and effective local search to improve the solution quality in RCPSP.
+
+
+D. The ANGEL
+
+In the process of ANGEL, we apply the ACO first to generate activity lists, followed by applying the forward and the backward scheduling to each of them and reserve the better one.These lists along with several randomly generated lists are used as the initial population of GA.The local search is applied to the new lists to search better solutions.In GA, if the best schedule ever found is not improved for GenStuck generations, we apply the mutation operator and the 2-tournament selection to the population.And then start GA again.After applying the mutation operator LoopStuck times, it seems that the population is highly homogeneous, and then the ACO is applied again, construct new population, and begins another run of ANGEL.The procedure of ANGEL is shown in Fig. 3.
+
+
+IV. COMPUTATIONAL RESULTS
+
+We create eight sets of multiple projects instances, as shown in Table I, by combining single project instances from the PSPLIB.Each of the instance set J30 and J60 contains 480 single project instances and each instance contains 30 and 60 non-dummy activities.We combine the instances of J30 and J60 randomly to be the multiple projects problem instances.To show the effect of our method, we first define the upper bound for the instances.Suppose a multiple projects which consists of projects 1 , , n PP where 1 , , n dd and 1 , , n cc are the due dates and tardy costs per day for the projects respectively.Let i u be the best makespan when project i P is scheduled as a single project RCPSP, then the upper bound for this instance is evaluated by equation (8).
+ 1 () n i i i i UB u d c        
+The statistical property of UB of each multiple project instance set is shown in Table II.As for the lower bound, it is obvious that zero is a trivial lower bound for each instance.We also define the improvement ratio IR in equation (9).
+IR     
+In our computational experiments, each instance set is tested 3 times and based on average IR, the best case, the worst case and the average case are presented.Each instance is searched with 1000 or 5000 schedules evaluated.Table 4-10 show the computational results of IR and the percentage of the instances with zero total tardy cost ( 0 TC  ) for all instance sets except the instance set 30_8.In instance set 30_8, the total tardy costs are zero for all instances within 1000 schedules.We can see from all the tables that the average IR ratio and the percentage of instances with zero total tardy cost increase, and the standard deviation of IR ratio decreases as the number of schedules evaluated increases.These results means the total tardy cost of multiple projects will be improved effectively by ANGEL if more searching is conducted.We can also observe that if more projects are to be scheduled simultaneously, there are greater chances that projects be accomplished in their due dates.This result also fits the realistic situation and suggests that in a company, all projects that share the common resources should be scheduled simultaneously.
+
+V. CONCLUDING REMARKS ANGEL had been applied to solve the single project RCPSP [9] and the single project RCPSP with multiple modes [10] and obtained good results.In this paper we consider the problem that multiple projects sharing common resources are to be scheduled simultaneously subject to the precedence and resource constraints.The objective is to minimize the total tardy cost of the projects.The computational results show that ANGEL is effective on this problem.It also reveals that projects sharing common resources should be scheduled simultaneously rather than scheduled one by one.
+
+From the computational results and other researchers' works we can find that the combined algorithms or metaheuristics performed well in solving discrete combinatorial optimization problems.The further researches of us are to test the combination of different evolutionary algorithms, like GRASP or Particle Swarm Optimization, to find better algorithms to different optimization problems
+
+Fig. 1 .Fig. 2 .
+12
+Fig. 1.A multiple projects instance
+
+
+
+
+son are taken from the first 1 2
+
+
+Fig. 3 .
+3
+Fig. 3. Procedure of ANGEL
+
+
+
+
+search to the list, and generate the population While ( !termination_ga) Crossover Evaluate schedule, local search and local update pheromone Ranking selection If ( the best solution is improved ) global update pheromone If ( the best solution is not improved for a long time)
+
+
+TABLE I
+I.MULTIPLE PROJECTS INSTANCE SETSInstance setInstancesProjects in each instance30_22402 projects with 30 activities each30_41204 projects with 30 activities each30_8608 projects with 30 activities each60_22402 projects with 60 activities each60_41204 projects with 60 activities each60_8608 projects with 60 activities each30_60_2_22404 projects, 2 with 30 and 2 with 60 activities30_60_4_41208 projects, 4 with 30 and 4 with 60 activities
+
+TABLE III .
+III
+COMPUTATION RESULTS OF INSTANCE SET 30_2
+(%)Schedules CaseMax MinAve.S. Dev.(%)Best100095.40 11.7876.251000Worst100095.36 11.9676.25Average 100095.38 11.9076.67Best100096.61 10.2980.425000Worst100096.43 10.5479.17Average 100096.49 10.4680.00
+
+TABLE IV .
+IV
+COMPUTATION RESULTS OF INSTANCE SET 30_4
+Schedules CaseMax Min (%) IRAve.S. Dev.(%) TC 0Best10079.93 99.25 2.9889.171000Worst10079.17 99.20 2.9490.00Average 10079.13 99.23 2.9989.44Best10086.13 99.68 1.7092.505000Worst10085.36 99.64 1.7590.83Average 10086.68 99.67 1.6591.67TABLE V.COMPUTATION RESULTS OF INSTANCE SET 60_2Schedules CaseMax Min (%) IRAve.S. Dev.(%) TC 0Best100-10088.8028.2574.581000Worst100-10088.0430.9873.33Average 100-10088.2930.0773.89Best1002.8493.7115.5278.335000Worst100093.4316.4378.33Average 1000.9593.5216.1278.33TABLE VI. COMPUTATION RESULTS OF INSTANCE SET 60_4Schedules CaseMax Min (%) IRAve.S. Dev.(%) TC 0Best10065.68 98.076.0583.331000Worst10057.73 97.737.5185.00Average 10059.92 97.916.7084.44Best10081.04 99.132.9586.675000Worst10076.32 98.973.8387.50Average 10078.57 99.033.4687.23TABLE VII. COMPUTATION RESULTS OF INSTANCE SET 60_8Schedules CaseMax Min (%) IRAve.S. Dev.(%) TC 0Best10086.17 99.511.9688.331000Worst10080.81 99.422.5988.33Average 10084.27 99.462.2488.33Best10098.66 99.970.1995.005000Worst10097.51 99.950.3395.00Average 10098.10 99.960.2595.55TABLE VIII. COMPUTATION RESULTS OF INSTANCE SET 30_60_2_2IRTC 0(%)Schedules CaseMax MinAve.S. Dev.(%)Best10059.99 98.93 4.3287.921000Worst10066.43 98.82 4.4687.08Average 10063.72 98.87 4.3687.36Best10082.75 99.61 1.9893.335000Worst10079.13 99.53 2.1992.92Average 10080.79 99.58 2.0993.05
+IR0 TC  www.ijacsa.thesai.org
+
+
+TABLE IX .
+IX
+COMPUTATION RESULTS OF INSTANCE SET 30_60_4_4
+(%)Schedules CaseMax MinAve.S. Dev.(%)Best10094.40 99.82 0.8093.331000Worst10096.31 99.82 0.6891.67Average 10095.46 99.82 0.7592.50Best10099.18 99.99 0.1198.335000Worst10099.59 99.99 0.0597.50Average 10099.29 99.99 0.0998.06
+
+A multicritertia heuristic method to improve resource allocation in multiproject scheduling. A Lova, C Maroto, P Tormos, Euro. J. Oper. Res. 1272000
+
+Multi-project scheduling: categorization of heuristic rules performance. I S Kurtulus, E W Daivs, Mana. Sci. 281982
+
+Multi-project scheduling: analysis of project performance. I S Kurtulus, S C Narula, 1985IIE Trans17
+
+A robust genetic algorithm for the resource allocation in project scheduling. J Alcaraz, C Maroto, Ann. Oper. Res. 1022001
+
+Evaluating project scheduling and due date assignment procedures: An experimental analysis. J Dumond, V A Marbert, Mana. Sci. 341998
+
+Management of multiple simultaneous projects: A state-ofthe-art review. J H Payne, Inter. J. Proj. Mana. 131995
+
+A Hybrid Heuristic Algorithm for Solving the Resource Constrained Project Scheduling Problem. J Rivera, L Velásquez, F Serna, G Zapata, Revi. EIA. 102013
+
+Towards the development of a complet multiproject scheduling system. L G Fendley, J. of Indu. Engi. Pp. 1968
+
+A hybrid metaheuristic for the resourceconstrained project scheduling problem. L Y Tseng, S C Chen, Euro. J. Oper. Res. 1752006
+
+Two-Phase Genetic Local Search Algorithm for the Multimode Resource-Constrained Project SchedulingG. L Y Tseng, S C Chen ; Eason, B Noble, I N Sneddon, Phil. Trans. Roy. Soc. London. 247April 1955On certain integrals of Lipschitz-Hankel type involving products of Bessel functions
+
+PSPLIB -a project scheduling problem library. R Kolisch, A Sprecher, Euro. J. Oper. Res. 961996
+
+A Genetic Local Search Algorithm for the Resource-Constrained Project Scheduling Problem with Generalized Precedence Constraints. S C Chen, The 6th IEEE Inter. Conf. Ubi-Media Comp., Aizu-Wakamatsu. JapanNovember, 2013
+
+A Discrete Particle Swam Optimization for Scheduling Projects with Resource Constrained. S C Chen, The 2nd Inter. Conf. Comp., Meas. TaiwanMay, 2014Cont. and Sens. Net., Tunghai University

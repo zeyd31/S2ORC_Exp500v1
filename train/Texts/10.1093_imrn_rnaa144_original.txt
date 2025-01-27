@@ -1,0 +1,506 @@
+
+LEFSCHETZ-BOTT FIBRATIONS ON LINE BUNDLES OVER SYMPLECTIC MANIFOLDS
+31 Mar 2019
+
+Takahiro Oba 
+LEFSCHETZ-BOTT FIBRATIONS ON LINE BUNDLES OVER SYMPLECTIC MANIFOLDS
+31 Mar 2019arXiv:1904.00369v1 [math.GT]
+We describe Lefschetz-Bott fibrations on complex line bundles over symplectic manifolds explicitly. As an application, we construct more than one strong symplectic filling of the link of the A k -type singularity. In the appendix, we show that the total space of a Lefschetz-Bott fibration over the unit disk serves as a strong symplectic filling of a contact manifold compatible with an open book induced by the fibration.
+
+Introduction
+
+Lefschetz fibrations have played an important role in the study of Stein fillings of contact manifolds. According to results of Akbulut and Ozbagci [3], Loi and Piergallini [19] and Giroux and Pardon [16], it is known that every Stein domain admits a Lefschetz fibration over a disk. Conversely, thanks to a result of Eliashberg [11] (see also [7]), the total space of a Lefschetz fibration over a disk admits a Stein structure. Lefschetz fibrations demonstrate their ability especially in construction of various Stein fillings of contact manifolds. Ozbagci and Stipsicz [24], for example, constructed infinitely many Stein fillings of contact 3-manifolds using Lefschetz fibrations. This result was generalized to higher dimensions by the author [23] recently. Moreover, in the lowdimensional case, one can show uniqueness of Stein fillings of contact 3-manifolds through Lefschetz fibrations combined with a result of Wendl [33] (see [26] for example).
+
+To see a broader class of symplectic fillings of contact manifolds via fibration-like structures, we need to consider other ones, not Lefschetz fibration. In this article, we discuss (symplectic) Lefschetz-Bott fibrations, which can be seen as the complexification of Morse-Bott functions (see Definition 3.3 for the precise definition). Although these fibrations were introduced by Perutz [25] in a different context, it is natural to expect that they help us to study symplectic fillings of contact manifolds as well as Lefschetz fibrations. In fact, as shown in Appendix A, the total space of a symplectic Lefschetz-Bott fibration serves as a strong symplectic filling of a contact manifold. However, little is known about these fibrations, and hence we first find examples of symplectic manifolds that admit Lefschetz-Bott fibrations.  A theorem of Donaldson [10] provides tons of pairs of a symplectic manifold and its symplectic hypersurface satisfying the assumption of Theorem 1.1. Indeed, given a symplectic manifold (M, ω) with [ω/2π] ∈ H 2 (M ; Z), there exists a sufficiently large k > 0 such that [kω/2π] is Poincaré dual to the homology class of a symplectic hypersurface in (M, kω). In Section 3.5, we will give more meaningful examples.
+
+We would like to emphasize that if the dimension of M is greater than 2, any line bundle over M never admits a Lefschetz fibration by a topological reason (see Remark 3.14 for the details). Using the theorem, in Section 3.4 we construct a Lefschetz-Bott fibration over the unit disk on the corresponding disk bundle, which is a not Stein in general but strong symplectic filling of the circle bundle. Hence, Lefschetz-Bott fibrations can capture not Stein but strong symplectic fillings of contact manifolds, which Lefschetz fibrations cannot do. It is known that there are contact manifolds whose contact structures are not Stein fillable but strongly fillable. In Example 3.13, we pick up the link of a cyclic quotient singularity as such a contact manifold and see that a strong symplectic filling of this contact manifold admits a Lefschetz-Bott fibration over a disk.
+
+We will apply the above theorem to construct various strong symplectic fillings of contact manifolds. In their paper, Acu and Avdek [1] (cf. [2]) gave relations in symplectic mapping class groups of Milnor fibers. In fact, such a relation connects a resolution of an isolated singularity of a complex hypersurface with its Milnor fiber. This enables us to generalize a combinatorial technique of mapping class groups for low-dimensional Lefschetz fibrations. In Section 4.1, we construct more than one strong symplectic filling of the link of the A k -type singularity. This construction is actually related to blowingup process to obtain a resolution of the singularity (see Proposition 4.5). Furthermore, we would like to point out a paper of Smith and Thomas [31] where they discussed a symplectic surgery along a Lagrangian sphere. Our operation to produce various symplectic fillings corresponds to their surgery. In other words, we realize their surgery as an operation for Lefschetz-Bott fibrations. See Remark 4.3 for more details.
+
+This article is organized as follows: In Section 2, we review Boothby-Wang bundles and line bundles associated to them. Section 3 is divided into five subsections. After reviewing fibered Dehn twists and Lefschetz-Bott fibrations in Section 3.1 and 3.2, respectively, we prove the main theorem in Section 3.3. In Section 3.4, cutting the above fibration, we construct a Lefschetz-Bott fibration over a disk with compact fibers. We examine some examples in Section 3.5. In Section 4, we discuss strong symplectic fillings of the link of the A k -type singularity. Moreover, we interpret this result from the point of view of the singularity theory and Lefschetz-Bott fibrations. To make this article selfcontained, in Appendix A, we give an explicit description of smoothing of the corners of the total space of a Lefschetz-Bott fibration over the unit disk. As a consequence, we also show that the smoothed manifold is a strong symplectic filling of a contact manifold compatible with an open book induced by the fibration.
+
+
+Line bundles
+
+2.1. Boothby-Wang bundles and associated line bundles. Let (B, ω) be a closed symplectic manifold with [ω/2π] ∈ H 2 (B; Z), i.e., the cohomology class [ω/2π] ∈ H 2 (B; R) lies in the image of the natural map H 2 (B; Z) → H 2 (B; R) induced by the canonical inclusion Z ֒→ R. According to the construction due to Kobayashi [17], there exists a principal S 1 -bundle p : P → B with a connection 1-form α ∈ Ω 1 (P ) whose curvature form is equal to dα = p * ω. We call this bundle p : (P, α) → (B, ω) the Boothby-Wang bundle (or the prequantization bundle) over (B, ω). In our convention, the Euler class of this bundle is e(P ) = −[ω/2π]. Note that we identify the Lie algebra of S 1 with R and regard the connection 1-form α on P as an (R-valued) differential 1-form on P . Since ω is a symplectic form, α is a contact form on P whose Reeb vector field R α is the generator of the S 1 -action on each fiber of p : P → B.
+
+In this article, we think two types of bundles associated to p : P → B. Define two homomorphisms ρ,ρ :
+S 1 ∼ = R/Z → U (1) ∼ = S 1 by ρ(θ) = e 2πiθ ,ρ(θ) = e −2πiθ .
+Consider the associated bundle P × ρ C → B, that is, the quotient space of P × C with the right S 1 -action defined by
+(x, z) · θ = (x · θ, ρ(−θ)z) = (x · θ, e −2πiθ z)
+for (x, z) ∈ P × C and θ ∈ S 1 . By definition, the first Chern class c 1 (P × ρ C) of this bundle agrees with e(P ). One can equip the total space with a symplectic structure as follows. Let
+p * ω + d(r 2 dθ) + d(r 2 α) = d((1 + r 2 )(α + dθ))
+be a 2-form on P ×C, where (r, θ) are polar coordinates of C. This 2-form is S 1 -invariant and horizontal, and in particular its kernel at each point (x, z) is spanned by the vector (R α − ∂ θ )| (x,z) (see [22,Lemma IV. 17] for example). Therefore, the 2-form on P × C descends to the symplectic form ω α on P × ρ C.
+
+Next, consider the other associated bundle, namely, P ×ρ C → B. The total space is obtained by dividing P × C by the S 1 -action given by
+(x, z) · θ = (x · θ,ρ(−θ)z) = (x · θ, e 2πiθ z).
+This construction shows that this bundle P ×ρ C is dual to the previous bundle P × ρ C, and c 1 (P ×ρ C) = −e(P ). Similar to the above argument, we can equip a symplectic structure on the disk bundle P ×ρD, whereD is the open unit disk in C. Define a 2-form on P ×D by
+p * ω + d(r 2 dθ) − d(r 2 α) = d((1 − r 2 )(α − dθ)).
+A straightforward computation shows that this 2-form is S 1 -invariant and horizontal, and its kernel at each point (x, z) is spanned by the vector (R α + ∂ θ )| (x,z) . Hence, the 2-form defines the symplectic form ωᾱ on P ×ρD. Furthermore, it is an exact form on the complement of the zero-section B 0 ⊂ P ×ρD, that is, the 1-
+form λᾱ = (1 − r 2 )(α − dθ) on (P ×ρD) \ B 0 satisfies dλᾱ = ωᾱ| (P ×ρD)\B 0 . Let Xᾱ = − 1 − r 2 2r ∂ r
+be a vector field defined in (P ×ρD) \ B 0 . Then, we have ι Xᾱ ωᾱ = λᾱ. This shows that Xᾱ is ωᾱ-dual to λᾱ, which is called the Liouville vector field of λᾱ. 
+ϕ ν : (P ×ρ D(δ), ωᾱ) → (M, ω) such that ϕ ν * λ = λᾱ and the zero-section under ϕ ν coincides with H, where D(δ) is the closed disk in C of radius δ. Set ν M (H) = ϕ ν (P ×ρ D(δ)) and V = M \ν M (H), where ν M (H) is the interior of ν M (H). Endow M \ H with the Liouville vector field X of λ.
+Since ϕ ν pulls back λ to λᾱ, its push-forward map sends Xᾱ to X.
+
+For future use, we define an annulus bundle associated to P . Take δ ′ ∈ R such that 0 < δ < δ ′ < 1, and embed (P ×ρ D 2 (δ ′ ), ωᾱ) into (M, ω) symplectically by a canonical extensionφ ν of the previous embedding ϕ ν . Set A(δ, δ ′ ) = {z ∈ C | δ ≤ |z| ≤ δ ′ }, which is diffeomorphic to an annulus. Our desired annulus bundle is
+P ×ρ A(δ, δ ′ ) → H.
+Note that the imageφ ν (P ×ρ A(δ, δ ′ )) lies in V .
+
+
+2.3.
+
+Line bundles over symplectic manifolds. Let (M, ω) and H be a closed symplectic manifold and its symplectic hypersurface as above, respectively. We assume that M is decomposed as M = V ∪ ν M (H) as in the previous subsection. Here we construct a principal S 1 -bundle over M based on [6] and its associated line bundle over each piece of the decomposition, and then we glue two line bundles together to obtain a line bundle over M .
+
+Let p V : V × S 1 → V be the projection to the first factor. It can be seen as a principal S 1 -bundle, and its connection 1-form is
+α V = λ + dθ 1 ,
+where θ 1 is the standard coordinate of S 1 . Consider the associated line bundle (V × S 1 ) × ρ C → V endowed with the symplectic structure ω α V on the total space defined by
+ω α V = p V * (dλ) + d(r 2 2 dθ 2 ) + d(r 2 2 α V ) = d((1 + r 2 2 )(λ + dθ 1 + dθ 2 )),
+where (r 2 , θ 2 ) are polar coordinates of C. In fact, this line bundle is isomorphic to the product bundle Π V : V × C → V by
+Ψ V : (V × S 1 ) × ρ C → V × C, [x, θ 1 , (r 2 , θ 2 )] → (x, (r 2 , θ 1 + θ 2 )).
+Note that S 1 acts on V × S 1 by (x, θ 1 ) · θ = (x, θ 1 + θ).
+
+Letting
+Ω V = d((1 + r 2 )(α V + dθ)) ∈ Ω 2 (V × C), since we have Ψ * V ((1 + r 2 )(λ + dθ)) = (1 + r 2 2 )(λ + dθ 1 + dθ 2 ), the map Ψ V : ((V × S 1 ) × ρ C, ω α V ) → (V × C, Ω V ) is a symplectomorpshim.
+Next, we discuss bundles over ν M (H) ∼ = P ×ρ D(δ). Let p ν : P × D(δ) → P ×ρ D(δ) be the natural projection, which is a principal S 1 -bundle with the connection 1-form
+α ν = (1 − r 2 1 )α + r 2 1 dθ 1 . Composing ϕ ν with p ν , we obtain the principal S 1 -bundle ϕ ν • p ν : P × D(δ) → ν M (H)
+with the same connection 1-form. Hence, the line bundle associated to ϕ ν •p ν is given by Π ν : (P × D(δ)) × ρ C → ν M (H). Its total space is equipped with a symplectic structure ω αν that lifts to the 2-form on (P × D(δ)) × C defined by
+dα ν + d(r 2 2 dθ 2 ) + d(r 2 2 α ν ) = d((1 + r 2 2 )(α ν + dθ 2 )). (2.1)
+We claim that one can glue two line bundles Π V and Π ν together symplectically, and the resulting bundle forms the line bundle Π :
+L = (V × C) ∪ ((P × D(δ)) × ρ C) → M with c 1 (L) = −[ω/2π].
+To check this claim, enlarge the tubular neighborhood ν M (H) slightly and take an extensionφ ν : P ×ρ D 2 (δ ′ ) → H for some δ ′ slightly greater than δ. We think of the image ϕ ν (P ×ρ A(δ, δ ′ )) ⊂ V as a collar neighborhood of ∂V in V and set ν V (∂V ) = ϕ ν (P ×ρ A(δ, δ ′ )). Define a gluing map Φ : (P × A(δ, δ ′ )) × ρ C → ν V (∂V ) × C of the bundles by Φ([x, (r 1 , θ 1 ), (r 2 , θ 2 )]) = (ϕ ν ([x, (r 1 , θ 1 )]), (r 2 , θ 1 + θ 2 )).
+
+It is easy to check that Φ * d((1 + r 2 )(λ + dθ)) = d(1 + r 2 2 )(α ν + dθ 2 ) because ϕ ν * λ = (1 − r 2 1 )(α−dθ 1 ), which implies that two bundles Π V and Π ν are glued together symplectically. By construction, the curvature forms of the connections on Π V and Π ν are ω| V and ω| ν M (H) , respectively. Therefore, c 1 (L) = −[ω/2π].
+
+
+Lefschetz-Bott fibrations
+
+3.1. Fibered Dehn twists. We first recall a Dehn twist in the lowest dimensional case. Let T * S 1 = R × S 1 be the cotangent bundle with the canonical symplectic structure ω can = d(tdθ), where S 1 = R/Z and (t, θ) ∈ R × S 1 . Let S 0 be the zero-section of the bundle. The moment map Φ : T * S 1 \ S 0 → R, Φ(t, θ) = |t| defines the Hamiltonian S 1 -action on T * S 1 \ S 0 given by
+σ ϕ (t, θ) = (t, θ + ϕ) (t > 0), (t, θ − ϕ) (t < 0),
+for ϕ ∈ S 1 and (t, θ) ∈ T * S 1 . Take a cut-off function g : R → R with Supp(g) ⊂ (−∞, ǫ) (for some ǫ > 0) such that g(s) = 1/2 for s near 0. Define the map τ : (T * S 1 , ω can ) → (T * S 1 , ω can ), called a model Dehn twist, by
+τ (t, θ) = σ g(|t|) (t, θ) if (t, θ) ∈ T * S 1 \ S 0 , (t, θ + 1/2) if (t, θ) ∈ S 0 .
+By definition, it is compactly supported and a symplectic automorphism of (T * S 1 , ω can ). Moreover, it is independent of the choice of g up to isotopy.
+
+Let (B, ω B ) be a symplectic manifold with [ω B /2π] ∈ H 2 (B; Z) and p : (P, α) → (B, ω B ) the Boothby-Wang bundle over (B, ω B ). Considering the Hamiltonian S 1 -action on T * S 1 defined by (t, θ) · ϕ = (t, θ + ϕ) for (t, θ) ∈ T * S 1 and ϕ ∈ S 1 , we can associate the T * S 1 -bundle P × S 1 T * S 1 → B to p, where S 1 acts on P × T * S 1 by (x, (t, θ)) · ϕ = (x · ϕ, (t, θ − ϕ)).
+
+Equip the total space P × S 1 T * S 1 with the symplectic structure ω P given by
+ω P = p * ω B + d(tdθ) + d(tα).
+Let us define a model fibered Dehn twist τ P by
+τ P ([x, (t, θ)]) = [x, τ (t, θ)],
+which is a compactly supported symplectic automorphism of (P × S 1 T * S 1 , ω P ).
+
+Let (V, ω) be a Liouville domain whose boundary is the Boothby-Wang bundle p : (P, α) → (B, ω B ). We identify a collar neighborhood of ∂V with ((−ǫ ′ , 0] × P, d(e t α)). Since P is a codimension 1 submanifold of V , {pt} × P is a coisotropic submanifold of (V, ω). By the tubular neighborhood theorem of coisotropic submanifolds [20, p.124], a neighborhood ν of {−ǫ ′ /2} × P in V is symplectomorphic to a neighborhood ν ′ of P × S 1 S 0 in P × S 1 T * S 1 . Denoting this symplectomorphism by φ : ν → ν ′ , we define the map τ ∂ : V → V by
+τ ∂ = φ • τ P • φ −1 on ν, id on V \ ν,
+where we choose τ P whose support is contained in ν ′ . The map τ ∂ is a compactly supported symplectic automorphism of (V, ω) and called a fibered Dehn twist along ∂V .
+
+Remark 3.1. In general, a fibered Dehn twist can be defined for a spherically fibered coisotropic submanifold of a symplectic manifold [25,32]. A coisotropic submanifold C of a symplectic manifold (M, ω) is said to be spherically fibered if C is a submanifold C ⊂ M of codimension c ≥ 1 such that: the null foliation of C is fibrating over a symplectic manifold B with fiber a c-dimensional sphere S c ; the structure group of p : C → B is equipped with a reduction to SO(c + 1), that is, a principal SO(c + 1)-bundle P → B and a bundle isomorphism P × SO(c+1) S c ∼ = C. For example, the above Boothby-Wang bundle P = ∂V is a spherically fibered coisotropic submanifold of (V, ω).
+
+
+Preliminaries of symplectic Lefschetz-Bott fibrations.
+
+Let M be a 2n-dimensional smooth manifold equipped with a closed 2-form Ω and an almost complex structure J. 25,32]). Let N be an almost complex submanifold of (M, J). The 2-form Ω is said to be normally Kähler near N if there exists a tubular neighborhood 25,32]). A symplectic Lefschetz-Bott fibration (E, π, Ω, J, j) on E consists of an even dimensional open manifold E with a closed 2-form Ω and a smooth surjective map π : E → C with Crit(π) ⊂E and Critv(π) ⊂ C, where Crit(π) and Critv(π) are the set of critical points of π and critical values of π, respectively; an almost complex structure J defined in a neighborhood U ⊂ E of Crit(π); a positively oriented complex structure j defined in a neighborhood V ⊂ D 2 of Critv(π) satisfying the following conditions:
+Definition 3.2 ([ν M (N ) of N in M , foliated by normal slices {D x ⊂ ν M (N )} x∈N , such that J| T Dx is integrable and Ω| T Dx is Kähler for each x ∈ D x . Definition 3.3 ([(i) the restriction π| U : U → V is a (J, j)-map;
+(ii) the critical point set Crit(π) is a smooth submanifold with finitely many connected components;
+
+(iii) the holomorphic normal Hessian
+D 2 π x | T ⊗2 Dx is non-degenerate at each point x ∈ Crit(π),
+where D x is a normal slice of a tubular neighborhood of Crit(π);
+
+(iv) Ω| U is non-degenerate, compatible with J and normally Kähler near Crit(π);
+
+(v) Ω is non-degenerate on ker(Dπ) ⊂ T E.
+
+If E is a compact manifold with boundary and codimension 2 corners, replace the range of π by a closed 2-disk D 2 with the standard orientation, and the tuple (E, π, Ω, J, j) satisfies two more conditions:
+
+(vi) the boundary ∂E consists of the vertical boundary ∂ v E and the horizontal boundary ∂ h E meeting at the corner, where
+∂ v E = π −1 (∂D 2 ) and ∂ h E = ∪ y∈D 2 ∂(π −1 (y)). We require that if x lies in ∂ h E, then (ker(Dπ x )) Ω ⊂ T x ∂ h E;
+(vii) the map π restricts to a fibration on ∂ v E, and on a neighborhood of ∂ h E, π is equivalent to the projection
+ν F (∂E z ) × D 2 → D 2 ,
+with Ω identified with the split form ω f + π * ω b for some K > 0, where E z is the regular fiber of π over z, ω f = Ω| T Ez and ω b is some symplectic form on D 2 .
+
+For the sake of brevity, we often denote a symplectic Lefschetz-Bott fibration (E, π, Ω, J, j) by π : (E, Ω) → C or π : E → C. If dim(Crit(π)) = 0, a symplectic Lefschetz-Bott fibration π is a Lefschetz fibration.
+
+Remark 3.4. Occasionally we focus on the topology of the total space of a symplectic Lefschetz-Bott fibration. Then, we use an alternative notion to symplectic Lefschetz-Bott fibration: A tuple (E, π, Ω, J, j) is a smooth Lefschetz-Bott fibration if E, π, J, j are the same as in Definition 3.3; Ω is a closed 2-form defined in a tubular neighborhood U of Crit(π); the tuple satisfies the conditions from (i) to (iv) in Definition 3.3.
+
+Next, we briefly review materials related to symplectic Lefschetz-Bott fibrations following [32, Section 2.1]. It suffices to think a symplectic Lefschetz-Bott fibration π : (E, Ω) → D 2 over a closed 2-disk because given a symplectic Lefschetz-Bott fibration over C, one can take a disk D 2 ⊂ C containing all its critical values. Moreover, without loss of generality, we may assume that for each critical value, there exists only one connected component of Crit(π).
+
+Let us take a point z 0 ∈ ∂D 2 and let Critv(π) = {z 1 , . . . , z k }. Set (E z , Ω Ez ) = (π −1 (z), Ω| π −1 (z) ). For any critical value z ∈ Critv(π), a vanishing path is an embedded path γ : [0, 1] → D 2 such that γ(0) = z 0 , γ(1) = z and γ −1 (Critv(π)) = {1}. To each such a path and the connected component B of Crit(π) in E γ(1) , one can associate a smooth submanifold, called the vanishing thimble T γ for γ, defined by
+T γ = ∪ t∈[0,1) {x ∈ E γ(t) | lim t 0 →1 Γ γ|[t,t 0 ] (x) ∈ B} ∪ B, where Γ γ|[t,t 0 ] : E γ(t) → E γ(t 0 ) is the parallel transport along the restricted curve γ| : [t, t 0 ] → D 2 determined by the canonical symplectic connection on π −1 (γ([t, t 0 ])). Each intersection T γ ∩ E γ(t) is a coisotropic submanifold in (E γ(t) , Ω E γ(t) ), and C γ = T γ ∩ E z 0 =γ(0) is called the vanishing cycle for γ. In fact, this coisotropic submanifold is spherically fibered ([32, Proposition 2.3]).
+A distinguished basis of vanishing paths is an ordered collection of vanishing paths (γ 1 , . . . , γ k ) each of which starts at z 0 and ends at a critical value such that the following condition holds:
+
+• The path γ j intersects γ k only at z 0 for j = k;
+
+• Thinking of the tangent vectors γ ′ 1 (0), . . . , γ ′ k (0) as vectors in the upper halfplane, they have a natural clockwise ordering.
+
+Given a symplectic Lefschetz-Bott fibration π : (E, Ω) → D 2 and a distinguished basis (γ 1 , . . . , γ k ) of vanishing paths based at z 0 ∈ ∂D 2 , we obtain a collection (C γ 1 , . . . , C γ k ) of spherically fibered coisotropic submanifolds in the fiber (E z 0 , Ω| Ez 0 ). Conversely, based on [32, Theorem 2.13], one can show that given a symplectic manifold V and a collection (C 1 , . . . , C k ) of spherically fibered coisotropic submanifolds in V , there is a symplectic Lefschetz-Bott fibration π : E → D 2 with fibers symplectomorphic to V such that a collection of vanishing cycles with respect to some distinguished basis of vanishing paths coincides with the given collection (cf. [30,Lemma 16.9]).  
+π ν : P (D(δ), C) → C by π V (x, r, θ) = (r, θ), (3.1) π ν ([x, (r 1 , θ 1 ), (r 2 , θ 2 )]) = (µ(r 1 )r 2 , θ 1 + θ 2 ). (3.2)
+Here µ : R → R is a smooth function such that µ(r) = r for r ≤ ǫ, µ(r) ≡ 1 for r near δ and µ ′ (r) ≥ 0 at any point r, where ǫ > 0 is sufficiently small (Figure 1). Set π = π V ∪ π ν : L → C, namely
+π(p) = π V (p) if p ∈ V × C, π ν (p) if p ∈ P (D(δ), C). By definition, Crit(π) coincides with H 0 = {[x, z 1 , z 2 ] ∈ P (D(δ), C) | z 1 = z 2 = 0}
+, which can be seen as the zero-section of the (D(δ) × C)-bundle P (D(δ), C) → H.
+
+Recall how to define a symplectic form on P (D(δ), C). The 2-form defined by (2.1) descends to the symplectic form Ω 0 on P (D(δ), C). Set
+ν ǫ (H 0 ) = {[x, z 1 , z 2 ] ∈ P (D(δ), C) | |z 1 | 2 + |z 2 | 2 ≤ ǫ} ⊂ P (D(δ), C).
+Regarding ν ǫ (H 0 ) as the total space of the bundle ν ǫ (H 0 ) → H, we see that Ω 0 does not agree with the standard symplectic form on each fiber of this bundle. To obtain a suitable symplectic form, we will deform the symplectic form Ω 0 . Pick a smooth function u : R → R such that u(s) ≡ 0 for s ≤ ǫ ′ , u(s) ≡ 1 for s ≥ ǫ ′′ and u ′ (s) ≥ 0 at any point s for some small ǫ ′ , ǫ ′′ > 0 with ǫ < ǫ ′ < ǫ ′′ < 1 ( Figure 2). Set
+(3.3) f (r 1 , r 2 ) = u(r 2 1 + r 2 2 ) for (r 1 , r 2 ) ∈ [0, δ) × [0, ∞). DefineΩ 1 ∈ Ω 2 (P × D(δ) × C) bỹ Ω 1 = d((1 + r 2 2 )(dθ 2 + α)) + d((1 + f (r 1 , r 2 )r 2 2 )r 2 1 (dθ 1 − α)). It is easy to see thatΩ 1 descends to a 2-form Ω 1 on P (D(δ), C). Note that Ω 1 = Ω 0 outside ν ǫ ′′ (H 0 ). Lemma 3.5.
+Let Ω 0 and Ω 1 be 2-forms on P (D(δ), C) defined above. Then, Ω 1 is a symplectic form on P (D(δ), C). Moreover, there exists a symplectomorphism between (P (D(δ), C), Ω 0 ) and (P (D(δ), C),
+Ω 1 ) supported in ν ǫ ′′ (H 0 ).
+Proof. To show the first claim, it suffices to show the kernel of (Ω 1 ) n+1 is spanned by
+∂ θ 1 − ∂ θ 2 + R α . A direct computation show that (Ω 1 ) n+1 = C(r 1 , r 2 )dr 2 1 ∧ (dθ 1 − α) ∧ dr 2 2 ∧ (dθ 2 + α) ∧ (dα) n−1 , where C(r 1 , r 2 ) = n(n + 1)(1 − r 2 1 + r 2 2 (1 − f r 2 1 )) n−1 (r 2 1 r 2 2 u ′ + f r 2 2 + 1) > 0.
+This shows the claim.
+
+Since
+Ω 0 − Ω 1 = d((1 − f )r 2 1 r 2 2 (dθ 1 − α)) = d(r 2 1 r 2 2 (dθ 1 − α)) (r 2 1 + r 2 2 < ǫ ′ ), 0 (r 2 1 + r 2 2 > ǫ ′′ )
+, the difference is an exact form and supported in ν ǫ ′′ (H 0 ). Thus, a standard Moser type argument shows the second claim (see [20,Theorem 3.2.4] for example).
+
+Lemma 3.6. Let Ω 1 be the symplectic form on P (D(δ), C) defined above. Then, there exists an almost complex structure J on P (D(δ), C) compatible with Ω 1 such that H 0 is an almost complex submanifold of (ν ǫ (H 0 ), J), and Ω 1 is a normally Kähler near H 0 .
+
+Proof. We first construct a compatible almost complex structure defined in ν ǫ (H 0 ). Let J α be a compatible almost complex structure on ker(α) ⊂ T P and g α a Riemannian metric on P given by
+(g α ) x (u, v) = dα x (u, J α v) + α x (u)α x (v)
+for x ∈ P and u, v ∈ T x P . Since α and dα are S 1 -invariant, so is g α . Let g 1 and g 2 be the standard Riemannian metrics on D(δ) and C, respectively. The Riemannian metric g α + g 1 + g 2 on P × D(δ) × C is S 1 -invariant, and hence this induces a metric g on the quotient space P (D(δ), C). The polar decomposition of (P (D(δ), C), Ω 1 ) with respect to the metric g yields an almost complex structure J on ν ǫ (H 0 ). By construction, J is compatible with Ω 1 , and H 0 is an almost complex submanifold of (P (D(δ), C), J).
+
+Next, we see that Ω 1 is normally Kähler near H 0 . The tubular neighborhood
+ν ǫ (H 0 ) is foliated by normal slices {D x } [x,0,0]∈H 0 , where D x = {[x, z 1 , z 2 ] ∈ P (D(δ), C) | |z 1 | 2 + |z 2 | 2 < ǫ}.
+By definition, the symplectic form Ω 1 coincides with r 1 dr 1 ∧dθ 1 +r 2 dr 2 ∧dθ 2 on each D x , which is the standard symplectic form on the disk. Moreover, by construction the almost complex structure J| T Dx is the standard complex structure, in particular integrable and compatible with the symplectic form r 1 dr 1 ∧ dθ 1 + r 2 dr 2 ∧ dθ 2 . This completes the proof.
+
+Define a symplectic structure Ω on L to be
+Ω| V ×C = Ω V and Ω| P (D(δ),C) = Ω 1 .
+Proof of Theorem 1.1. We show that the tuple (L, π, Ω, J, j 0 ) is a symplectic Lefschetz-Bott fibration. We choose ν ǫ (H 0 ) and C as neighborhoods of Crit(π) and Critv(π), respectively. Since Crit(π) = H 0 , the tuple satisfies the condition (ii) of Definition 3.3. By the construction of J in Lemma 3.6, it is easy to see that the tuple meets the condition (iv). Moreover, a straightforward computation shows that the tuple satisfies (v). Thus, it suffices to show the (J, j 0 )-holomorphicity of π and the non-degeneracy of its holomorphic normal Hessian at each point of H 0 .
+
+On each normal slice D x ⊂ ν ǫ (H 0 ), we have µ(r 1 ) = r 1 , and the map π can be written as w = π([x, z 1 , z 2 ]) = z 1 z 2 by using complex coordinates (z 1 , z 2 ) of D x and w of C. Note that these are compatible with J and j 0 , respectively. Thus, π| Dx is (J, j 0 )-holomorphic, and in particular so is the whole π because J preserves T D x and its orthogonal complement with respect to the metric g constructed above. Furthermore, the holomorphic normal Hessian of π at [x, 0, 0] ∈ H 0 is given by 0 1 1 0 , which is non-degenerate. This finishes the proof.
+
+
+Fibrations with compact fibers.
+
+In the previous subsection, we saw that the line bundle L admits a symplectic Lefschetz-Bott fibration π : L → C. Here, cutting the vertical and horizontal directions of the fibration, we show that a disk bundle associated to L admits a symplectic Lefschetz-Bott fibration over the unit closed disk D with compact fibers.
+
+First, we construct the total space of our new fibration. One can define its vertical boundary by the preimage π −1 (∂D) of the boundary of D. It suffices to define its horizontal boundary. To do this, we will find a function h : P (D(δ), C) → R satisfying that dh(v) = 0 for any v ∈ ker(D [x,z 1 ,z 2 ] π ν ) Ω . Note that V × C ⊂ L does not matter to the horizontal boundary. A straightforward computation shows that
+ker(D [x,z 1 ,z 2 ] π ν ) ∼ = T p H (x) H ⊕ R µ∂ r 1 − µ ′ r 2 ∂ r 2 , ∂ θ 1 − ∂ θ 2 ,
+where z j = r j e 2πiθ j and p H : (P, α) → (H, ω H ) is the Boothby-Wang bundle. It turns out that its symplectic complement (ker(D [x,z 1 ,z 2 ] π ν )) Ω is spanned by
+2µ ′ r 2 2 ∂ θ 1 + µ ∂(r 2 1 + f r 2 1 r 2 2 ) ∂r 1 − µ ′ r 2 ∂(f r 2 1 r 2 2 ) ∂r 2 ∂ θ 2 , ∂(r 2 2 − f r 2 1 r 2 2 ) ∂r 2 ∂ r 1 + ∂(r 2 1 + f r 2 1 r 2 2 ) ∂r 1 ∂ r 2 ,
+where f is the function (3.3). Now let us define h : P (D(δ), C) → R as a desired function by h([x, (r 1 , θ 1 ), (r 2 , θ 2 )]) = −r 2 1 + r 2 2 − f (r 1 , r 2 )r 2 1 r 2 2 . It is actually a function of r 1 , r 2 only, and we often write briefly h(r 1 , r 2 ) for h([x, (r 1 , θ 1 ), (r 2 , θ 2 )]). We can see that there is a unique point (r 1 , r 2 ) ∈ R ≥0 × R ≥0 such that h(r 1 , r 2 ) = c 2 and ρ(r 1 )r 2 = s for a sufficiently large c > 0 and s ≤ 1. Set Figure 3. Schematic picture of π ν,c . The thick black curves represent the fibers over s and 2s. The red one represents Σ, and the green ones represent part of the horizontal boundary of E c .
+P c (D(δ), C) = {[x, (r 1 , θ 1 ), (r 2 , θ 2 )] ∈ P (D(δ), C) | ρ(r 1 )r 2 ≤ 1, h(r 1 , r 2 ) ≤ c 2 }, E c = (V × D) ∪ P c (D(δ), C). z 1 (base of L, i.e., M ) z 2 (fiber of L) 0 (H) ǫ δ π −1 (s) π −1 (2s) π −1 (s) π −1 (2s) h = c 2 h = c 2 c −c h = 0 h = 0 2s s/ǫ 2s/ǫ s
+The glued manifold E c is diffeomorphic to a disk bundle over M associated to Π : L → M by construction. We also note that the fibers of the restriction π ν | Pc(D(δ),C) are compact, and in particular its regular fibers are diffeomorphic to [0, 1] × P . Thus, the map π : L → C induces the desired map π c = π| Ec : E c → D with compact fibers.
+
+This π c satisfies all conditions but (vii) in Definition 3.3. Thus, following the argument of [29, Lemma 1.10], we next deform the symplectic structure Ω on E c so that it meets the remaining condition. More precisely speaking, we will analyze the monodromy of π c along a loop in D by a direct computation and deform Ω so that the monodromy is compactly supported, which implies the horizontal triviality of π c .
+
+Since π V is a trivial fibration, we only need to consider π ν,c := π ν | Ec . Set Σ = h −1 (0), which can be also written as
+Σ = H 0 ∪ (∪ z∈D\{0} {p ∈ π −1 c (z) | lim t 0 →1 Γ γz| [0,t 0 ] (p) ∈ H 0 }), where H 0 = {[x, z 1 , z 2 ] ∈ P c (D(δ), C) | z 1 = z 2 = 0} ∼ = H and Γ γz| [0,t 0 ]
+denotes the parallel transport along the restriction of the path γ z : Figure 3). Since Crit(π c ) = H 0 and h is constant horizontally, one can trivialize P c (D(δ), C) \ Σ symplectically via parallel transport in radial direction. Fix the identification ψ :
+[0, 1] → D, γ z (t) = (1 − t)z (cf.P × S 1 (([−δ 2 , 0) ∪ (0, c 2 ]) × S 1 ) → π −1 ν,c (0) \ Σ given by ψ : [x, (t, θ)] → [x, 0, ( √ t, −θ)] (t > 0), [x, ( √ −t, θ), 0] (t < 0). Note that ([−δ 2 , 0) ∪ (0, c 2 ]) × S 1 is a subset of T * S 1 \ S 0 ∼ = (R \ {0}) × S 1 .
+We also remark that π −1 ν,c (0) \ Σ consists of the following two parts:
+{[x, 0, (r 2 , θ 2 )] ∈ P c (D(δ), C) | 0 < r 2 ≤ c}, {[x, (r 1 , θ 1 ), 0] ∈ P c (D(δ), C) | 0 < r 1 ≤ δ}.
+Lifting the ray γ θ (s) = se 2πiθ with respect to the symplectic connection, we obtain the trivialization Ψ of P c (D(δ), C) \ Σ as follows:
+Ψ : (P × S 1 (([−δ 2 , 0) ∪ (0, c 2 ]) × S 1 )) × C → P c (D(δ), C) \ Σ, Ψ([x, (t, θ)], (s, ϕ)) = [x, (r 1 (s, t), ϕ + θ), (r 2 (s, t), −θ)] (t > 0), [x, (r 1 (s, t), θ), (r 2 (s, t), ϕ − θ)] (t < 0),
+where by definition (r 1 (s, t), r 2 (s, t)) is the solution of the following initial value problem derived from lifting γ θ :
+dr 1 ds = ∂h ∂r 2 r 2 ∂h ∂r 2 −µ(r 1 ) ∂h ∂r 1 , dr 2 ds = − ∂h ∂r 1 r 2 ∂h ∂r 2 −µ(r 1 ) ∂h ∂r 1 , (3.4) (r 1 (0, t), r 2 (0, t)) = (0, √ t) (t > 0), ( √ −t, 0) (t < 0).
+If we restrict Ψ to the fiber over a point s > 0, it extends to a diffeomorphism ψ s between P × S 1 ([−δ 2 , c 2 ] × S 1 ) and the whole fiber π −1 ν,c (s). Recall from the previous subsection that the symplectic structure Ω| Pc(D(δ),C) is given by
+d((1 + r 2 2 )(dθ 2 + α) + (r 2 1 + f (r 1 , r 2 )r 2 1 r 2 2 )(dθ 1 − α)).
+Let us denote this primitive 1-form on P c (D(δ), C) \ Σ by λ ν . Note that Ω is exact on P c (D(δ), C) \ Σ but never on P c (D(δ), C). A straightforward computation yields
+Ψ * (λ ν ) = (1 + |t|)(α − dθ) −R s (t) ∧ dθ, R s (t) = −r 2 2 (s, t) + t (t > 0), −r 2 2 (s, t) − 1 (t < 0).
+Let s 0 > 0 be sufficiently small and ℓ s 0 : [0, 1] → D the loop defined by ℓ s 0 (t) = s 0 e 2πit . The monodromy of π c along this loop is the conjugation
+ψ s 0 •τ • ψ −1 s 0 of the symplectic automorphismτ of P × S 1 (([−δ 2 , c 2 ]) × S 1 ) defined bỹ τ : [x, (t, θ)] → [x, (t, θ +R ′ s 0 (t))].
+Observe the behavior ofR ′ s 0 (t). If lim t→±0R ′ s 0 (t) = ±1/2 andR ′ s 0 (t) = 0 for t near −δ 2 and c 2 , thenτ would be a fibered Dehn twist. First, considerR ′ s 0 (t) near t = 0. Since s 0 is sufficiently small, we may assume by definition that f (r 1 , r 2 ) = 0, h(r 1 , r 2 ) = −r 2 1 + r 2 2 and µ(r 1 ) = r 1 for small s and |t|. This reduces the equations (3.4) to
+dr 1 ds = r 2 r 2 1 + r 2 2 , dr 2 ds = r 1 r 2 1 + r 2 2 .
+Solving the initial value problem, we have (r 1 (s, t), r 2 (s, t)) =
+   u(s,t) 1/2 +u(s,t) −1/2 2 √ t, u(s,t) 1/2 −u(s,t) −1/2 2 √ t (t > 0), u(s,t) 1/2 −u(s,t) −1/2 2 √ −t, u(s,t) 1/2 +u(s,t) −1/2 2 √ −t (t < 0),
+where u(s, t) = 2s|t| −1 + 4s 2 |t| −2 + 1. It can be seen directly that
+lim t→+0R ′ s 0 (t) = 1/2, lim t→−0R ′ s 0 (t) = −1/2.
+Next, let us look atR ′ s 0 (t) for t near −δ 2 . Since r 1 (s 0 , t) is close to δ in this case, we may assume that µ(r 1 (s 0 , t)) ≡ 1. We have s 0 = µ(r 1 (s 0 , t))r 2 (s 0 , t) = r 2 (s 0 , t), and it follows thatR ′ s 0 (t) = 0 for t near −δ 2 . What is left is to seeR ′ s 0 (t) for t near c 2 . As the constant c is sufficiently large, we may assume that f (r 1 , r 2 ) = 1 and h(r 1 , r 2 ) = −r 2 1 + r 2 2 − r 2 1 r 2 2 . Thus, the initial value problem (3.4) is reduced to
+dr 1 ds = r 2 (1 − r 2 1 ) r 2 1 + r 2 2 , dr 2 ds = r 1 (1 + r 2 2 ) r 2 1 + r 2 2 , (r 1 (0, t), r 2 (0, t)) = (0, √ t).
+A direct computation using Mathematica gives the solution
+r 1 (s, t) = −|t| − s 2 + t 2 + 4s 2 + 2|t|s 2 + s 4 √ 2 , r 2 (s, t) = −|t| + s 2 − t 2 + 4s 2 + 2|t|s 2 + s 4 −2 − |t| − s 2 + t 2 + 4s 2 + 2|t|s 2 + s 4 .
+We see thatR ′ s (t) → 0 as t → +∞, butR ′ s (t) > 0 for any t. Therefore, this implies that the monodromy of π c along γ θ is not compactly supported.
+
+To obtain a compactly supported monodromy, choose a cutoff function σ ∈ C ∞ (R >0 , R) such that σ ′ (t) ≥ 0 for every t, σ(t) = 0 for small t and σ(t) = 1 for t close to c 2 . Take a 1-form γ on P c (D(δ), C) such that
+Φ * γ = σ(t)R s (t)dθ.
+Set λ ν,c = λ ν + γ and Ω c = Ω + dγ. It is easy to check that λ ν,c agrees with λ ν near the boundary of each fiber of π ν,c , and Ω c coincides with Ω on each fiber of π c . The monodromy of π ν,c along the loop ℓ s 0 is given by ψ s 0 • τ • ψ −1 s 0 , where τ is the extension of the automorphism given by
+[x, (t, θ)] → [x, (t, θ + {(1 − σ(t))R s 0 (t)} ′ )].
+By the choice of σ, this is compactly supported and a fibered Dehn twist along the boundary of π −1 c (s 0 ). The monodromy along a loop in D is well-defined up to symplectic isotopy independently of the choice of the representative of the homotopy class of the loop. Moreover, if one changes the base point of the loop, this contributes to only a conjugation of the initial monodromy.
+
+Since σ(t) = 0 for small t and Ω c | νǫ(H 0 ) = Ω νǫ(H 0 ) , the almost complex structure J on ν ǫ (H 0 ) constructed in Lemma 3.6 and j 0 on D satisfy the conditions of a symplectic Lefschetz-Bott fibration. As for the triviality of the horizontal boundary, in the pull-back 2-form Ψ * (λ ν,c ) = (1 + |t|)(α − dθ) − (1 − σ(t))R s (t) ∧ dθ, the second term on the right-hand side vanishes close to P × S 1 ({−δ 2 , c 2 } × S 1 ), which concludes that Ψ provides a trivialization of near ∂ h E c . Therefore, (E c , π c , Ω c , J, j 0 ) is a symplectic Lefschetz-Bott fibration over D.
+
+We summarize the above discussion as follows.
+
+Proposition 3.7. The tuple (E c , π c , Ω c , J, j 0 ) constructed above is a symplectic Lefschetz-Bott fibration over D. Its monodromy along a small loop centered at the origin is a fibered Dehn twist along the boundary of the reference fiber.  The total space L d of this line bundle has a singular theoretical meaning. Consider the affine hypersurface in C n+2 given by
+X d =    (x 0 , . . . , x n+1 ) ∈ C n+2 n+1 j=0 x d j = 0    ,
+which has a unique singularity at the origin. Let C n+2 = {(ℓ, z) ∈ CP n+1 ×C n+2 | z ∈ ℓ}, and σ : C n+2 → CP n+1 , τ : C n+2 → C n+2 the projections to the first and second factors, respectively. Note that σ is the tautological line bundle O(−1) → CP n+1 , and τ is the blow-up of the origin. The map σ restricts to the line budle σ| :
+O(−1)| M d → M d ⊂ CP n+1 , and in fact O(−1)| M d is isomorphic to L d .
+On the other hand, τ defines the restriction τ | : L d → X d :
+L d ∼ = O(−1)| M d τ | / / σ| X d M d
+It turns out that τ | contracts the zero-section of the bundle σ| to the singular point of X n+1 d . This shows that L d is a resolution of the singularity whose exceptional set is M d .
+
+Next we discuss a monodromy of a symplectic Lefschetz-Bott fibration π c : E d,c → D with compact fibers obtained from π : L d → C as in Section 3.4. As we saw there, the monodromy of π c along ∂D is a fibered Dehn twist along the boundary of the fiber π −1 c (1). We will see below that π −1 c (1) is diffeomorphic to the affine hypersurface V d (δ 0 ) given by
+V d (δ 0 ) =    (x 0 , . . . , x n ) ∈ C n+1 n j=0 x d j = 1    ∩    n j=0 |x j | 2 ≤ δ 2 0    .
+The following is known. In our case, the symplectic structure on V d (δ 0 ) is different from the standard one ω 0 . We will show, however, that the above relation between a fibered Dehn twist and Dehn twists also holds under our symplectic structure.
+
+Let us specify our fiber (F = π −1 c (1), ω F = Ω| F ). In general, for a given closed symplectic manifold (M, ω) with [ω/2π] = P D[H], the fiber (F, ω F ) is symplectomorphic to 
+(M d \ {z n+1 = 0}) ∩    n j=0 |z j /z n | 2 ≤ δ 2 0    ∼ = V n d (δ 0 )
+for some δ 0 . According to the discussion of [4, Section 7], we may take
+λ d = −d C log   n j=0 |z j | 2 + 1   = −d C log( z 2 + 1) on V n d (δ 0 ) as the primitive 1-form λ in (3.5), where d C = d • J 0 . This λ d is different from the standard Liouville form on V n d (δ 0 )
+. However, we conclude as follows.
+
+Proposition 3.10. Let (F, ω F ) be the fiber π −1 c (1) as above. A fibered Dehn twist along the boundary ∂F is isotopic to a product of Dehn twists in Symp c (F, ω F ).
+
+To prove this, we need the following lemma.  , ω a ). The map L a is a homotopy inverse for ι S a .
+(V, dλ) → Symp c (V a , ω a ) by L a (ϕ) = Φ −a • ϕ • Φ a . The inclusion ι a : V ֒→ V a induces the inclusion ι S a : Symp c (V, dλ) ֒→ Symp c (V a
+Proof of Proposition 3.10. First, we prove that π 0 (Symp c (F, ω F )) ∼ = π 0 (Symp c (V n d (δ 0 ), dλ st )). Set λ log = −d C log( z 2 + 1) and ω log = dλ log . By Lemma 3.11, Symp c (F, ω F ) is homotopy equivalent to Symp c (V n d (δ 0 ), ω log ). Let (V n d (δ 0 ),ω log ) be the symplectic completion of (V n d (δ 0 ), ω log ). By [13,Lemma 2.2], this completion is symplectomorphic to (1), ω 0 ) are weakly homotopy equivalences. Therefore, we conclude that
+(X n d (1), ω 0 ), where X n d (1) =    (x 0 , . . . , x n ) ∈ C n+1 n j=0 x d j = 1    .
+
+Moreover, according to [13, Proposition 2.1], the inclusion maps Symp
+c (V n d (δ 0 ), ω log ) ֒→ Symp c (V n d (δ 0 ),ω log ) and Symp c (V n d (δ 0 ), ω 0 ) ֒→ Symp c (X n dπ 0 (Symp c (F, ω F )) ∼ = π 0 (Symp c (V n d (δ 0 ), ω log )) ∼ = π 0 (Symp c (V n d (δ 0 ),ω log )) ∼ = π 0 (Symp c (X n d (1), ω 0 )) ∼ = π 0 (Symp c (V n d (δ 0 )
+, ω 0 )). It can be checked that each isomorphism above assigns a (fibered) Dehn twist to each (fibered) Dehn twist. Combining this and Theorem 3.9 completes the proposition.
+
+Remark 3.12. One can interpret the above relation from the point of view of symplectic fillings of the link of the singularity 0 ∈ X n+1 d as follows. As Acu and Avdeck pointed out in [1], the product of Dehn twists comes from a Lefschetz fibration on a smoothing of the singularity, i.e., a Milnor fiber of the singularity. It serves as a Stein filling of the link of the singularity. The fibered Dehn twist is obtained as the monodromy of a Lefschetz-Bott fibration π c : E d,c → D on a resolution of the singularity along ∂D. After smoothing corners of E d,c (see Appendix A), it serves as a strong symplectic filling of a contact manifold supported by the induced open book, in fact which is contactomorphic to the link of the singularity. Thus, the mapping class relation is related to two fillings of the link of the singularity. This interpretation will play an important role in Section 4 below. 
+O(−m) = O(−1) ⊗m = {(ℓ, x 1 ⊗ · · · ⊗ x m ) ∈ CP n × (C n+1 ) ⊗m | x 1 , . . . , x m ∈ ℓ}.
+Similar to the previous example, this line bundle has a singular theoretical meaning. Let τ : O(−1) → C n+1 and σ : O(−1) → CP n be the projections as in the previous example. Let us denote by σ m : O(−m) → CP n the projection to the first factor. Considering the projection O(−m) → (C n+1 ) ⊗m to the second factor, its image is identified with the quotient space C n+1 /G m derived from the diagonal action of the group G m = {ξ ∈ C | ξ m = 1} on C n+1 . Write τ m : O(−m) → C n+1 /G m for this projection. We obtain the following commutative diagram:
+O(−1) σ x x q q q q q q q q q q q τ / / q C n+1 q CP n L m ∼ = O(−m) σm o o τm / / C n+1 /G m , whereq : O(−1) → O(−m)
+and q : C n+1 → C n+1 /G m are the natural projections. The quotient map q yields a singularity at the origin [0] ∈ C n+1 /G m , which is a so-called cyclic quotient singularity. Thus, the total space of our line bundle L m ∼ = O(−m) can be regarded as a resolution of the singularity.
+
+Remark 3.14. The link of this singularity is a so-called lens space of dimension 2n + 1. It is known that if n ≥ 2, the singularity is not smoothable [28]. Moreover, as discussed in [12, Section 6.2], [27, Corollary 4.8] and [5, Example 6.5], the link bounds no (2n + 2)dimensional manifold which is decomposed into handles of indices ≤ n+1. Thus, Milnor's topological characterization of Stein domains [21] shows that any contact structure on the link of dimension 2n + 1 ≥ 5 is never Stein fillable.
+
+
+4.
+
+A k -type singularities and Lefschetz-Bott fibrations 4.1. Fillings of the link of the A k -type singularity. Let (M, ξ) be a closed contact manifold. A strong symplectic filling of (M, ξ) is a compact symplectic manifold (W, ω) with ∂W = M such that there exists a Liouville vector field X defined near ∂W , pointing outwards along ∂W , and satisfying ξ = ker(i X ω| T M ) (as cooriented contact structure).
+
+Consider the complex polynomial
+f (x 0 , . . . , x n+1 ) = x 2 0 + · · · + x 2 n + x k+1 n+1 and set V k = {x ∈ C n+2 | f (x) = 0}, Σ k = V k ∩ S 2n+3 .
+The variety V k has a unique singularity at the origin. This is called the A k -type singularity, and Σ k is called the link of the singularity. The link inherits a canonical contact structure from the standard contact sphere S 2n+3 . We often denote this contact manifold just by Σ k omitting the contact structure from the notation.
+
+In this subsection, we construct more than one strong symplectic filling of Σ k using symplectic Lefschetz-Bott fibrations over a disk. Such a fibration can be written topologically as the fiber sum of smooth Lefschetz-Bott fibrations with a single singular fiber. For given smooth Lefschetz-Bott fibrations π j : E j → D 2 (j = 1, 2) with the fibers diffeomorphic to F , the fiber sum E 1 # f E 2 is defined as follows: Take z j ∈ ∂D 2 (j = 1, 2) and set F j = π −1 j (z j ). Take tubular neighborhoods ν(F j ) of these fibers in the vertical boundaries ∂ v E j so that they are diffeomorphic to [−ǫ, ǫ] × F for some small ǫ > 0. Using a fiber-preserving diffeomorphism of ν(F j ), we can glue E j together along ν(F j ) and construct a new manifold E 1 # f E 2 , which admits a smooth Lefschetz-Bott fibration π :
+E 1 # f E 2 → D 2 ♮D 2 ∼ = D 2 ,
+where ♮ denotes a boundary connected sum. The next lemma follows from this construction immediately.
+
+Lemma 4.1. Let π j : E j → D 2 (j = 1, 2) be smooth (or symplectic) Lefschetz-Bott fibrations with the regular fibers diffeomorphic to F . Then, we have
+χ(E 1 # f E 2 ) = χ(E 1 ) + χ(E 2 ) − χ(F ).
+Proposition 4.2. The contact manifold Σ k has at least ⌈k/2⌉ strong symplectic fillings up to homotopy, where ⌈ · ⌉ denotes the ceiling function.
+
+Proof. Let DT * S n be a disk cotangent bundle over the sphere S n . This bundle can be considered as the complement of a neigborhood of an (n−1)-dimensional smooth quadric Q n−1 in an n-dimensional smooth quadric Q n ⊂ CP n+1 . Hence we equip DT * S n with a symplectic structure ω derived from restricting the Fubini-Study form on Q n−1 , where ω can be written explicitly as
+ω = −dd C log   n j=0 |z j | 2 + 1   .
+Let λ = −d C log( n j=0 |z j | 2 + 1) and S 0 the zero-section of DT * S n , and consider the open book (DT * S n , λ; τ k+1 S 0 ). Then, according to [6, Theorem 6.5], the contact manifold OB(DT * S n , λ; τ k+1 S 0 ) is contactomorphic to the Boothby-Wang orbibundle over a symplectic orbifold. In fact, it is contactomorphic to the link Σ k .
+
+To construct strong symplectic fillings of Σ k , for ℓ = 1, · · · , ⌈k/2⌉ consider a symplectic Lefschetz-Bott fibration whose fibers are (DT * S n , λ) and whose collection of vanishing cycles are (∂DT * S n , . . . , ∂DT * S n ℓ , S 0 , . . . , S 0
+k+1−2ℓ
+).
+
+Let us denote by X ℓ the symplectic manifold associated to the fibration. Since the fibered Dehn twist τ ∂ along ∂DT * S n is symplectically isotopic to τ 2 S 0 , the monodromy of the open book induced by each fibration is symplectically isotopic to τ k+1 S 0 . Therefore, X ℓ is a strong symplectic filling of Σ k . Now we shall compute the Euler characteristic χ(X ℓ ) to distinguish our fillings. Let E 1 (resp. E 2 ) be the total space of a symplectic Lefschetz-Bott fibration whose fibers are (DT * S n , ω) and whose monodromy is τ ∂ (resp. τ S 0 ). Note that E 1 is diffeomorphic to a disk bundle over a quadric Q n , and E 2 is diffeomorphic to a (2n + 2)-dimensional disk. Moreover, it is known that χ(E 2 ) = χ(Q n ) = ((−1) n+1 − 1)/2 + n + 1 (see [8,Exercise 5.3.7 (i)]). Since X ℓ can be regarded as the fiber sum of ℓ copies of E 1 and k + 1 − 2ℓ copies of E 2 , applying Lemma 4.1 repeatedly, we have
+χ(X ℓ ) = ℓ · χ(E 1 ) + (k + 1 − 2ℓ) · χ(E 2 ) − (k − ℓ) · χ(DT * S n ) = {1 − 2χ(Q n ) + χ(S n )}ℓ + (k + 1) · χ(Q n ) − k · χ(S n ) = {3 + 2(−1) n − 2(n + 1)}ℓ + (k + 1) · χ(Q n ) − k · χ(S n ).
+Since 3 + 2(−1) n − 2(n + 1) = −2n + 1 + 2(−1) n = 0, χ(X ℓ ) is a linear function of ℓ, which shows that X ℓ 's are mutually non-homotopic.
+
+Remark 4.3. In the above proof, E 1 is diffeomorphic to the total space of a disk bundle over Q n , and E 2 # f E 2 is diffeomorphic to the one of a disk cotangent bundle of S n+1 . In the light of Example 3.8, they are a resolution and a smoothing of the A 1 -type singularity, respectively. Hence, we conclude that our strong symplectic fillings of Σ k are obtained by switching successively these two spaces originated from the singularity. Smith and Thomas introduced a symplectic model of this operation in [31, Section 3].
+
+
+4.2.
+
+Resolution of the A k -type singularity. To interpret Proposition 4.2 from the singular theoretical view point in the next subsection, here we review a resolution of the A k -type singularity.
+
+Let V k be the variety defined by the polynomial f as above. Set X 0 = C n+1 and V
+(0) k = V k . Consider the blow-upτ 1 : X 1 ∼ = O(−1) → X 0 of X 0 at 0 and let V (1) k denote the proper transform of V (0) k . Here, X 1 = {(x, [z]) ∈ C n+1 × CP n | x i z j − x j z i = 0 for any i, j}.
+Letting U 1,j = {(x, [z]) ∈ X 1 | z j = 0}, we have X 1 = ∪ j U 1,j . On each U 1,j , we take the coordinate function ϕ 1,j = (y 0 , . . . , y n ) defined by
+y i = z i /z j (i = j), x j (i = j).
+Then, the preimageτ −1 1 (V (0) k ) is given by the following equations: y 2 j (y 2 0 + · · · + y 2 j−1 + 1 + y 2 j+1 + · · · + y k−1 j y k+1 n ) = 0 on U 1,j (j = n), y 2 n (y 2 0 + · · · y 2 n−1 + y k−1 n ) = 0 on U 1,n .
+
+Since the points of ϕ 1,j (U 1,j ) ⊂ C n+1 with y j = 0 correspond to points of the exceptional set
+E 1 = {(0, [z]) ∈ X 1 } ofτ 1 , the proper transform V (1) k
+is given by y 2 0 + · · · + y 2 j−1 + 1 + y 2 j+1 + · · · + y k−1 j y k+1 n = 0 on U 1,j (j = n), y 2 0 + · · · + y 2 n−1 + y k−1 n = 0 on U 1,n , (4.1) which is equivalent to the set
+V (1) k = {(x, [z]) ∈ X 1 | z 2 0 + · · · + z 2 n−1 + x k−1 n z 2 n = 0}. If k = 1, 2, V (1) k
+is non-singular. In the case k > 2, it has a unique singularity at p 1 = (0, [0 : . . . : 0 : 1]) ∈ V (1) k . On U 1,n , the defining equation of V (1) k is given by the equation (4.1), and it turns out that the singularity is nothing but of type A k−2 . Thus, we can resolve the singularity by taking the blow-up τ 2 : V
+(2) k → V (1) k of V (1) k
+at the singularity as we did above. Thus, by induction on k, we conclude that the procedure of ⌈k/2⌉ times successive blowing up resolves the initial A k -type singularity. where ⌈ · ⌉ denotes the ceiling function.
+
+
+4.3.
+
+Lefschetz-Bott fibrations and blowing up. Let V k be the variety {f = 0} as above and τ :Ṽ k → V k the restriction of the blow-up at 0 ∈ C n+2 . Although the resulting spaceṼ k still has a singularity in general, we can smooth it and denote its smoothing byṼ k,ǫ . As a model of this smoothing, we take the union of the following two spaces:
+U := {((x 0 , . . . , x n , 0), [z 0 : . . . : z n : 0]) ∈Ṽ k | z 2 0 + · · · + z 2 n = 0} ⊂ C n+2 × CP n+1 , W ǫ = ϕ −1 1,n+1 ({(y 0 , .
+. . , y n+1 ) ∈ C n+2 | y 2 0 + · · · + y 2 n−1 + y k−1 n+1 = ǫρ( y 2 )}), where ρ : R ≥0 → R is a smooth, monotonically increasing function such that ρ(t) ≡ 1 for t < ǫ and ρ(t) ≡ 0 for t > 1. Note that U is the total space of a line bundle over Q n−1 and in particular smooth. According to [14,Proposition 2.3], W ǫ is smooth, and so is V k,ǫ . It is well known that V k,ǫ = {x ∈ C n+2 | f (x) = ǫ} admits a Lefschetz fibration π : V k,ǫ → C defined by the projection to the last coordinate:
+π(x 0 , . . . , x n+1 ) = x n+1 .
+The collection of its vanishing cycles is given by (k + 1)-tuple (S 0 , . . . , S 0 ) of the zerosection of the cotangent bundle of S n with respect to some distinguished basis. To state the following lemma and proposition, we recall one notion. Let π i : E i → C (i = 1, 2) be smooth Lefschetz-Bott fibrations and (C i,1 , . . . , C i,k i ) (i = 1, 2) the ordered collections of vanishing cycles of π i for some distinguished basis. The two fibrations are said to be related by a monodromy substitution if there exists an integer j 0 with 1 ≤ j 0 ≤ min{k 1 , k 2 } such that C 1,j = C 2,j for any j < j 0 , and τ C 1,j 0 • τ C 1,j 0 +1 · · · • τ C 1,k 1 and τ C 2,j 0 • τ C 2,j 0 +1 • · · · • τ C 2,k 2 are smoothly isotopic. Note that the products τ C 1,1 • τ C 1,2 • · · · • τ C 1,k 1 and τ C 2,1 • τ C 2,2 • · · · • τ C 2,k 2 are smoothly isotopic.
+
+Lemma 4.4. The smoothingṼ k,ǫ admits a smooth Lefschetz-Bott fibration that is related to π by a monodromy substitution.
+
+Proof. Define a mapπ :Ṽ k,ǫ → C bỹ π((x 0 , . . . , x n+1 ), [z 0 : . . . :
+z n+1 ]) = x n+1 .
+On W ǫ , the mapπ restricts to a Lefschetz fibration. To see this, consider π • ϕ −1 1,n+1 : ϕ 1,n+1 (W ǫ ) → C, (y 0 , · · · , y n+1 ) → y n+1 . By the definition of W ǫ , we see that this map is a smooth Lefschetz fibration, which is similar to π.
+
+A straightforward computation using local coordinates shows that on a neighborhood of U ,π is a smooth Lefschetz-Bott fibration whose critical point set is {x = 0} ⊂ U , isomorphic to a quadric. It turns out that the monodromy sequence ofπ with respect to some distinguished basis is given by (τ S 0 , . . . , τ S 0 , τ ∂ ) that consists of k − 1 Dehn twists along the zero-section of T * S n and a fibered Dehn twist. The automorphism τ ∂ is symplectically, in particular smoothly isotopic to τ S 0 •τ S 0 , which completes the proof.
+
+Proposition 4.5. A resolution of the A k -type singularity admits a smooth Lefschetz-Bott fibration which are related to the Lefschetz fibration π on a Milnor fiber of the A k -type singularity by a sequence of monodromy substitutions.
+
+Proof. As we saw in the previous subsection, a resolution of the A k -type singularity is obtained by a sequence of successive blow-ups:
+V (⌈k/2⌉) k τ ⌈k/2⌉ − −−− → V (⌈k/2⌉−1) k τ ⌈k/2⌉−1 − −−−− → · · · τ 1 − → V (0) k = V k .
+Here, each τ j is the blow-up at the A k−2(j−1) -type singularity in V k,ǫ admits a smooth Lefschetz-Bott fibration that is related to one on V (j−1) k,ǫ . Therefore, inductively we conclude the proposition.
+
+
+Appendix A. Lefschetz-Bott fibrations and fillings of contact manifolds
+
+In this appendix, we show that the total space of a symplectic Lefschetz-Bott fibration over the unit disk D serves as a strong symplectic filling of a contact manifold supported by an open book induced by the fibration. To prove this, we mainly follow a recent paper of Lisi, Van Horn-Morris and Wendl [18] where they discussed a relation between 4-dimensional Lefschetz fibrations and various symplectic fillings of contact 3-manifolds.
+
+A.1. Open books. Let V be a 2n-dimensional compact smooth manifold with boundary equipped with an exact symplectic form ω = dλ such that the Liouville vector field of λ is transverse to ∂V and points outwards along ∂V . Then, the symplectic manifold (V, dλ) is called a Liouville domain. Let us review that an abstract open book (V, λ; φ) provides a contact manifold. According to [15,Section 7.3], the symplectomorphism φ is assumed to be compactly supported and exact, i.e., φ * λ − λ = dH for some positive function H ( [15,Lemma 7.3.4]). Note that since φ is compactly supported, H is constant near ∂V . We assume H = 2π near ∂V . Define the mapping cylinder V H (φ) by
+V H (φ) = (V × R)/(φ(x), ϕ + H(x)) ∼ (x, ϕ).
+Let D 2 (a) = {z ∈ C | |z| ≤ a} and A(a, b) = {z ∈ C | a ≤ |z| ≤ b}. Identifying a collar neighborhood of ∂V H (φ) with [−ǫ, 0] × ∂V × S 1 , we define a manifold by
+M (V, λ; φ) = V H (φ) ∪ Φ (∂V × D 2 (1 + ǫ)), where Φ : ∂V × A(1, 1 + ǫ) → [−ǫ, 0] × ∂V × S 1 ⊂ V H (φ) is the diffeomorphism given by Φ : (x, re 2πiϕ ) → (1 − r, x, ϕ). (A.1)
+The manifold M (V, λ; φ) is what we shall equip with a contact structure. The 1-form α = λ + Kdϕ for an arbitrary constant K > 0 defines a contact structure on V H (φ). On the collar neighborhood [−ǫ, 0] × ∂V × S 1 of ∂V H (φ), α can be written as e r λ ∂V + Kdϕ.
+
+Here, λ ∂V is the pull-back of λ by the inclusion ∂V ֒→ V . What is left is to extend α to ∂V × D 2 (1 + ǫ). Let us define a 1-form on ∂V × D 2 (1 + ǫ) by
+β = f (r)λ ∂V + g(r)dϕ,
+where f (r), g(r) : [0, 1 + ǫ] → R are smooth functions specified later. Simple computations give Φ * (α) = e 1−r λ ∂V + Kdϕ and
+β ∧ (dβ) n = nf (r) n−1 (f (r)g ′ (r) − f ′ (r)g(r))λ ∂V ∧ (dλ ∂V ) n−1 ∧ dr ∧ dϕ.
+Thus, for β being a contact form, the functions f and g satisfy the following conditions (see Figure 4):
+
+• f (r) = C 0 and g(r) = C 1 r 2 for r ≤ ǫ/2, where C 0 > 1 and C 1 > 0 are constants;
+
+• f (r) = e 1−r and g(r) = K for r ≥ 1;
+
+• (f (r), g(r)) is never parallel to its tangent vector (f ′ (r), g ′ (r)) for r = 0.
+
+Taking such functions f and g, we obtain a contact form and hence a contact structure on M (V, λ; ϕ). We denote the resulting contact manifold by OB(V, λ; φ).  The following lemma follows easily from the above construction. A.2. Strong symplectic fillings of contact manifolds. Let π : (E, Ω) → D be a symplectic Lefschetz-Bott fibration over the closed unit disk D such that Ω is exact near the boundary ∂E and on each regular fiber of π. We may assume that Ω is nondegenerate, i.e., symplectic on E by [29,Lemma 1.5] and also that the Liouville vector field of λ, where dλ = Ω, defined near ∂E points outwards along ∂E. Horizontal triviality allows us to identify a collar neighborhood
+ν E (∂ h E) of ∂ h E with ([−2ǫ, 0] × ∂V × D, de t λ ∂V + dλ b )
+for some small ǫ > 0, where V = π −1 (1), λ ∂V = λ| T ∂V and dλ b is an exact symplectic form on D. Moreover, for future use, identify it with
+([−ǫ, ǫ] × ∂V ′ × D, de t λ ∂V ′ + dλ b ),
+where V ′ = V \ (−ǫ, 0] × ∂V . We deform the symplectic structure Ω so that the 1-form λ b is a 1-form on D which has the form h(s)dϕ,
+
+where the function h(s) is equal to Ks 2 for some constant K > 0 near s = 0 and Ke s−1 on [1 − ǫ, ǫ] × ∂D ⊂ D, and h ′ (s) > 0 except for s = 0. Note that the deformation induces a one-parameter family of contact forms on ∂E, so it does not affect the initial contact structure on ∂E up to isotopy. By definition, in a neighborhood of the corners, the symplectic form de t λ ∂V ′ + dλ b can be written as
+de t λ ∂V ′ + Kde s dϕ.
+Hence, the Liouville vector field of λ coincides with ∂ t + ∂ s on this neigborhood. To smooth the corners, first let γ ǫ be the image of a curve [−ǫ, ǫ] → [−ǫ, ǫ] × [1 − ǫ, 1], r → (f (r), g(r)) (see Figure 5), where f, g satisfies that
+
+• f (r) = ǫ and g(r) = 1 + r for r ≤ −ǫ/2;
+
+• f ′ (r) < 0 and g ′ (r) > 0 for −ǫ/2 < r < 0;
+
+• f (r) = −r and g(r) = 1 for r ≥ 0.
+
+Write Γ ǫ for the component of ([−ǫ, ǫ] × [1 − ǫ, 1]) \ γ ǫ containing the point (ǫ, 1) (see Figure 5). Define the manifold E ǫ by E ǫ := E \ Φ −1 h ({(s, x, te 2πiϕ ) ∈ [−ǫ, ǫ] × ∂V ′ × D | (s, t) ∈ Γ ǫ }), which will be a smooth manifold we desired. Here, Φ h : ν E (∂ h E) → [−ǫ, ǫ] × ∂V ′ × D is a trivialization of ν E (∂ h E). Proposition A.3 (cf. [18, Section 2.5]). Let π : (E, Ω) → D be a symplectic Lefschetz-Bott fibration, (V, dλ) = (π −1 (1), Ω| π −1 (1) ) and φ ∈ Symp c (V, dλ) the monodromy of π along ∂D. Suppose Ω is non-degenerate on E and exact near ∂E and on each regular fiber of π. Then, after deforming Ω and smoothing the corners of E, E is a strong symplectic filling of the contact manifold OB(V, λ; φ).
+
+Proof. We may assume that Ω has been already deformed so that λ b agrees with h(s)dϕ. Let E ǫ be a smooth manifold constructed above. By construction, it has a convex −ǫ ǫ 1 − ǫ 1 Γ ǫ γ ǫ Figure 5.
+
+boundary. Hence, it suffices to show that (M = ∂E ǫ , ker(i X Ω| T M )) is contactomorphic to OB(V, λ; φ), where X is the Liouville vector field defined near ∂E ǫ . Set
+M v = M ∩ ∂ v E, M h = M ∩ ∂ h E M c = Φ −1 h ({(s, x, te 2πiϕ ) ∈ [−ǫ, ǫ] × ∂V ′ × D | (s, t) ∈ γ ǫ })
+. Unless otherwise noted, we do not distinguish ν E (∂ h E) from [−ǫ, ǫ]×∂V ′ ×D in this proof. Since the monodromy of the symplectic fibration π| : M v → ∂D is φ, it is isomorphic to Next, we define the diffeomorphism Ψ h : ∂V ′ × D 1+ǫ → M h ∪ M c ⊂ [−ǫ, ǫ] × ∂V ′ × D by Ψ h (x, r, ϕ) = (ǫ, x, re 2πiϕ ) (r < 1 − ǫ), (f (r − 1), x, g(r − 1)e 2πiϕ ) (r ≥ 1 − ǫ).
+V ′ (φ) = (V ′ × R)/(φ(x), ϕ + 1) ∼ (x, ϕ)
+A direct computation shows that Ψ * h (e t λ ∂V ′ + h(r)dϕ) = e ǫ λ| ∂V ′ + h(r)dϕ (r < 1 − ǫ), e f (r−1) λ| ∂V ′ + h(g(r − 1))dϕ (r ≥ 1 − ǫ).
+
+The pull-back 1-form on ∂V ′ × D 2 (1 + ǫ) satisfies the conditions for them being contact in Section A.1. As a consequence, the following diagram is commute and each map is a contactomorphim:
+∂V ′ × A(1, 1 + ǫ) Φ / / Ψ h [−ǫ, 0] × ∂V ′ × S 1 ⊂ V H (φ) Ψv M h ∩ M c ⊃ Ψ h (∂V ′ × A(1, 1 + ǫ)) Id / / Ψ v ([−ǫ, 0] × ∂V ′ × S 1 ) ⊂ M v ∩ M c ,
+where Φ is the map (A.1) defined in the previous subsection. Hence we conclude that (M, ker(i X Ω| T M )) is contactomorphic to OB(V ′ , λ| V ′ ; φ| V ′ ), which is contactomorphic to OB(V, λ; φ) by Lemma A.2. This completes the proof.
+
+Corollary A.4. Let (V, ω = dλ) be a Liouville domain and φ an element of Symp c (V, ω). Suppose there exists a collection of spherically fibered coisotropic submanifolds (C 1 , . . . , C k ) in (V, ω) such that φ is symplectically isotopic to the product τ C 1 • · · · • τ C k of fibered Dehn twists. Then, a contact structure compatible with the open book (V, λ; φ) is strongly fillable.
+
+Proof. One can associate to the collection (C 1 , . . . , C k ) in (V, ω) a symplectic Lefschetz-Bott fibration over D whose collection of vanishing cycles equals the given collection for some distinguished basis. The corollary straightforwardly follows from this fact coupled with Proposition A.3.
+
+Theorem 1. 1 .
+1Let (M, ω) be a closed symplectic manifold. Suppose that [ω/2π] ∈ H 2 (M ; R) has an integral lift that is Poincaré dual to the homology class of a symplectic Date: April 2, 2019. 2010 Mathematics Subject Classification. Primary 57R17; Secondary 57R65. This work was partially supported by JSPS KAKENHI Grant Number 18J01373.
+
+
+hypersurface in (M, ω). Then, a line bundle L over (M, ω) with c 1 (L) = −[ω/2π] admits a symplectic Lefschetz-Bott fibration over C.
+
+3. 3 .
+3Fibrations on line bundles. Now we construct a symplectic Lefschetz-Bott fibration on the total space of the line bundle Π : L → M constructed in Section 2.3. Let us denote (P × D(δ)) × ρ C by P (D(δ), C). Define maps π V : V × C →
+
+
+Figure 2.
+
+3. 5 .
+5Examples.
+
+Example 3 . 8 (
+38Hypersurface singularity). Consider the projective hypersurface M d ⊂ CP n+1 degree d defined by 0 : . . . : z n+1 ] Let us denote by ω F S the Fubini-Study form on CP n+1 . Here, we take this form so that the cohomology class [ω F S /2π] is Poincaré dual to the homology class of a hyperplane h in CP n+1 . The pull-back ω d of ω F S by the canonical inclusion map i : M d ֒→ CP n+1 is a symplectic form on M d . Since the preimage i −1 (h) can be seen as the hypersurface in M d given by H d = {[z 0 : . . . : z n+1 ] ∈ M d | z n+1 = 0}, we have [ω d /2π] = P D([H d ]). Thus, by Theorem 1.1, a line bundle L d → (M d , ω d ) with c 1 (L d ) = −[ω d /2π] admits a symplectic Lefschetz-Bott fibration π : L d → C.
+
+Theorem 3. 9 ([ 1 ,
+91Theorem 1.1]). Let ω 0 be a symplectic form on V d (δ 0 ) induced by the standard symplectic form on C n+1 Then, a fibered Dehn twist along the boundary ∂V d (δ 0 ) is symplectically isotopic to a product of d(d − 1) n Dehn twists in Symp c (V d (δ 0 ), ω 0 ).
+
+
+2ω| V = 2dλ) ∪ ([0, c 0 ] × ∂V, 2d(e t λ| ∂V )), where V = M \ν M (H) and c 0 is some constant determined by the condition h = c 2 in Section 3.4. In our case, (M, ω) is (M d , ω d ), and V is
+
+Lemma 3 . 11 .
+311Let (V, ω = dλ) be an exact symplectic manifold with convex boundary. For an arbitrarily positive number a > 0, set(V a , ω a ) = (V, ω) ∪ ([0, a] × ∂V, d(−e t (λ| ∂V )), where t ∈ [0, a]. Then, Symp c (V, ω) is homotopy equivalent to Symp c (V a , ω a ).Proof. The following argument is essentially the first half of the proof of [13, Proposition 2.1]. Let Φ t be the flow of the Liouville vector field X of λ a on V a . Define a map L a : Symp c
+
+Example 3. 13 (
+13Cyclic quotient singularity). Consider (CP n , mω F S ) and its hypersurface H 0 : . . . : z n ] = m[h] ∈ H n−2 (CP n ; Z) for a hyperplane h ⊂ CP n , we have [mω F S /2π] = P D[H n−1 m ]. Therefore, by Theorem 1.1, a line bundle L m → (CP n , mω F S ) with c 1 (L m ) = −[mω F S /2π] admits a symplectic Lefschetz-Bott fibration. Note that this line bundle is isomorphic to the line bundle O(−m) → CP n of degree −m, where
+
+Definition A. 1 .
+1An abstract open book (V, λ; φ) consists of a Liouville domain (V, dλ) and its compactly supported symplectomorphism φ ∈ Symp c (V, dλ).
+
+Figure 4 .
+4Figure 4.
+
+Lemma A. 2 .
+2Let (V, λ; φ) be an abstract open book. Suppose φ is the identity map on a (closed) collar neighborhood ν V (∂V ) of ∂V . Then, OB(V \ν V (∂V ), λ|; φ|) is contactomorphic to OB(V, λ; φ), where λ| and φ| are the restrictions of λ and φ to V \ν V (∂V ), respectively.
+
+
+equipped with the contact form λ + d(Hϕ), where H is a function with φ * λ − λ = dH and H ≡ 2π near ∂V ′ . Define the contactomorphism Ψ v :V ′ H (φ) → V ′ (φ) ∼ = M v by Ψ v : (x, ϕ) → (x, ϕ/H).
+
+
+Suppose that the cohomology class [ω/2π] is Poincaré dual to the homology class of a symplectic hypersurface H ⊂ M . Set ω H = ω| T H and let p H : (P, α) → (H, ω H ) be the Boothby-Wang bundle over (H, ω H ). It is easy to check that the symplectic form ω is exact on the complement M \H. Thus, there is a primitive 1-form λ of ω on M \H, i.e., dλ = ω| M \H .2.2. Decompositions of symplectic manifolds. Let (M, ω) be a closed symplectic 
+manifold with [ω/2π] ∈ H 2 (M ; Z). By Weinstein's tubular neighborhood theorem 
+coupled with an argument of Diogo and Lisi [9, Lemma 2.2], there exists some 0 < δ < 1, 
+a primitive 1-form λ of ω on M \ H and a symplectic embedding 
+
+
+Acknowledgments. The author would like to thank Tadashi Ashikaga, Joontae Kim, Myeonggi Kwon and Kaoru Ono for helpful discussions.
+Symplectic mapping class group relations generalizing the chain relation. B Acu, R Avdek, Internat. J. Math. 2712B. Acu and R. Avdek. Symplectic mapping class group relations generalizing the chain relation. Internat. J. Math., 27(12):1650096, 26, 2016.
+
+Relations in symplectomorphism groups from the geometry of lefschetz pencils and generalized lantern relations. B Acu, R Avdek, in preparationB. Acu and R. Avdek. Relations in symplectomorphism groups from the geometry of lefschetz pencils and generalized lantern relations. in preparation.
+
+Lefschetz fibrations on compact Stein surfaces. S Akbulut, B Ozbagci, Geom. Topol. 5S. Akbulut and B. Ozbagci. Lefschetz fibrations on compact Stein surfaces. Geom. Topol., 5:319-334, 2001.
+
+Lagrangian barriers and symplectic embeddings. P Biran, Geom. Funct. Anal. 113P. Biran. Lagrangian barriers and symplectic embeddings. Geom. Funct. Anal., 11(3):407-464, 2001.
+
+The topology of Stein fillable manifolds in high dimensions I. J Bowden, D Crowley, A I Stipsicz, Proc. Lond. Math. Soc. 1093J. Bowden, D. Crowley, and A. I. Stipsicz. The topology of Stein fillable manifolds in high dimensions I. Proc. Lond. Math. Soc. (3), 109(6):1363-1401, 2014.
+
+Open books for Boothby-Wang bundles, fibered Dehn twists and the mean Euler characteristic. R Chiang, F Ding, O Van Koert, J. Symplectic Geom. 122R. Chiang, F. Ding, and O. van Koert. Open books for Boothby-Wang bundles, fibered Dehn twists and the mean Euler characteristic. J. Symplectic Geom., 12(2):379-426, 2014.
+
+From Stein to Weinstein and back. K Cieliebak, Y Eliashberg, American Math. 59American Mathematical SocietySymplectic geometry of affine complex manifoldsK. Cieliebak and Y. Eliashberg. From Stein to Weinstein and back, volume 59 of American Math- ematical Society Colloquium Publications. American Mathematical Society, Providence, RI, 2012. Symplectic geometry of affine complex manifolds.
+
+Singularities and topology of hypersurfaces. A Dimca, Springer-VerlagNew YorkUniversitextA. Dimca. Singularities and topology of hypersurfaces. Universitext. Springer-Verlag, New York, 1992.
+
+L Diogo, S T Lisi, arXiv:1804.08014Symplectic homology for complements of smooth divisors. arXiv preprintL. Diogo and S. T. Lisi. Symplectic homology for complements of smooth divisors. arXiv preprint arXiv:1804.08014, 2018.
+
+Symplectic submanifolds and almost-complex geometry. S K Donaldson, J. Differential Geom. 444S. K. Donaldson. Symplectic submanifolds and almost-complex geometry. J. Differential Geom., 44(4):666-705, 1996.
+
+Topological characterization of Stein manifolds of dimension > 2. Y Eliashberg, Internat. J. Math. 11Y. Eliashberg. Topological characterization of Stein manifolds of dimension > 2. Internat. J. Math., 1(1):29-46, 1990.
+
+Geometry of contact transformations and domains: orderability versus squeezing. Y Eliashberg, S S Kim, L Polterovich, Geom. Topol. 10Y. Eliashberg, S. S. Kim, and L. Polterovich. Geometry of contact transformations and domains: orderability versus squeezing. Geom. Topol., 10:1635-1747, 2006.
+
+Symplectic mapping class groups of some Stein and rational surfaces. J D Evans, J. Symplectic Geom. 91J. D. Evans. Symplectic mapping class groups of some Stein and rational surfaces. J. Symplectic Geom., 9(1):45-82, 2011.
+
+Rabinowitz-Floer homology on Brieskorn spheres. A Fauck, Int. Math. Res. Not. IMRN. 14A. Fauck. Rabinowitz-Floer homology on Brieskorn spheres. Int. Math. Res. Not. IMRN, (14):5874- 5906, 2015.
+
+An introduction to contact topology. H Geiges, Cambridge Studies in Advanced Mathematics. 109Cambridge University PressH. Geiges. An introduction to contact topology, volume 109 of Cambridge Studies in Advanced Math- ematics. Cambridge University Press, Cambridge, 2008.
+
+Existence of Lefschetz fibrations on Stein and Weinstein domains. E Giroux, J Pardon, Geom. Topol. 212E. Giroux and J. Pardon. Existence of Lefschetz fibrations on Stein and Weinstein domains. Geom. Topol., 21(2):963-997, 2017.
+
+Principal fibre bundles with the 1-dimensional toroidal group. S Kobayashi, Tôhoku Math. J. 82S. Kobayashi. Principal fibre bundles with the 1-dimensional toroidal group. Tôhoku Math. J. (2), 8:29-45, 1956.
+
+On symplectic fillings of spinal open book decompositions i: Geometric constructions. S Lisi, J Van Horn-Morris, C Wendl, arXiv:1810.12017arXiv preprintS. Lisi, J. Van Horn-Morris, and C. Wendl. On symplectic fillings of spinal open book decompositions i: Geometric constructions. arXiv preprint arXiv:1810.12017, 2018.
+
+Compact Stein surfaces with boundary as branched covers of B 4. A Loi, R Piergallini, Invent. Math. 1432A. Loi and R. Piergallini. Compact Stein surfaces with boundary as branched covers of B 4 . Invent. Math., 143(2):325-348, 2001.
+
+Oxford Graduate Texts in Mathematics. D Mcduff, D Salamon, Oxford University PressOxfordIntroduction to symplectic topology. third editionD. McDuff and D. Salamon. Introduction to symplectic topology. Oxford Graduate Texts in Mathe- matics. Oxford University Press, Oxford, third edition, 2017.
+
+Morse theory. J Milnor, ; M Spivak, R Wells, Annals of Mathematics Studies. 51Princeton University PressJ. Milnor. Morse theory. Based on lecture notes by M. Spivak and R. Wells. Annals of Mathematics Studies, No. 51. Princeton University Press, Princeton, N.J., 1963.
+
+Compact Lie group actions on contact manifolds. K Niederkrüger, Universität zu KölnPhD thesisK. Niederkrüger. Compact Lie group actions on contact manifolds. PhD thesis, Universität zu Köln, 2005.
+
+Higher-dimensional contact manifolds with infinitely many Stein fillings. T Oba, Trans. Amer. Math. Soc. 3707T. Oba. Higher-dimensional contact manifolds with infinitely many Stein fillings. Trans. Amer. Math. Soc., 370(7):5033-5050, 2018.
+
+Contact 3-manifolds with infinitely many Stein fillings. B Ozbagci, A I Stipsicz, Proc. Amer. Math. Soc. 1325B. Ozbagci and A. I. Stipsicz. Contact 3-manifolds with infinitely many Stein fillings. Proc. Amer. Math. Soc., 132(5):1549-1558, 2004.
+
+Lagrangian matching invariants for fibred four-manifolds. T Perutz, II. Geom. Topol. 123T. Perutz. Lagrangian matching invariants for fibred four-manifolds. II. Geom. Topol., 12(3):1461- 1542, 2008.
+
+Planar open books, monodromy factorizations and symplectic fillings. O Plamenevskaya, J Van Horn-Morris, Geom. Topol. 144O. Plamenevskaya and J. Van Horn-Morris. Planar open books, monodromy factorizations and symplectic fillings. Geom. Topol., 14(4):2077-2101, 2010.
+
+On the cohomology rings of holomorphically fillable manifolds. P Popescu-Pampu, Singularities II. Providence, RIAmer. Math. Soc475P. Popescu-Pampu. On the cohomology rings of holomorphically fillable manifolds. In Singularities II, volume 475 of Contemp. Math., pages 169-188. Amer. Math. Soc., Providence, RI, 2008.
+
+Rigidity of quotient singularities. M Schlessinger, Invent. Math. 14M. Schlessinger. Rigidity of quotient singularities. Invent. Math., 14:17-26, 1971.
+
+A long exact sequence for symplectic Floer cohomology. P Seidel, Topology. 425P. Seidel. A long exact sequence for symplectic Floer cohomology. Topology, 42(5):1003-1063, 2003.
+
+Fukaya categories and Picard-Lefschetz theory. P Seidel, Zurich Lectures in Advanced Mathematics. European Mathematical Society (EMS). P. Seidel. Fukaya categories and Picard-Lefschetz theory. Zurich Lectures in Advanced Mathematics. European Mathematical Society (EMS), Zürich, 2008.
+
+Symplectic surgeries from singularities. I Smith, R Thomas, Turkish J. Math. 271I. Smith and R. Thomas. Symplectic surgeries from singularities. Turkish J. Math., 27(1):231-250, 2003.
+
+Exact triangle for fibered Dehn twists. K Wehrheim, C T Woodward, Res. Math. Sci. 317K. Wehrheim and C. T. Woodward. Exact triangle for fibered Dehn twists. Res. Math. Sci., 3:Paper No. 17, 75, 2016.
+
+Strongly fillable contact manifolds and J-holomorphic foliations. C , Duke Math. J. 1513C. Wendl. Strongly fillable contact manifolds and J-holomorphic foliations. Duke Math. J., 151(3):337-384, 2010.
+
+Kyoto 606-8502, Japan E-mail address: oba@kurims. Research Institute of Mathematical Sciences, Kyoto Universitykyoto-u.ac.jpResearch Institute of Mathematical Sciences, Kyoto University, Kyoto 606-8502, Japan E-mail address: oba@kurims.kyoto-u.ac.jp

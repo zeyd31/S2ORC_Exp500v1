@@ -1,0 +1,280 @@
+
+Symmetric Monoidal Categories with Attributes
+2021
+
+Spencer Breiner 
+Spencer Breiner@nist 
+John S Gov 
+Nolan jnolan13@terpmail.umd.edu 
+
+National Institute of Standards and Technology Gaithersburg
+MDUSA
+
+
+University of Maryland College Park
+MDUSA
+
+Symmetric Monoidal Categories with Attributes
+
+Applied Category Theory 2020 (ACT2020) EPTCS 333
+202110.4204/EPTCS.333.3
+When designing plans in engineering, it is often necessary to consider attributes associated to objects, e.g. the location of a robot. Our aim in this paper is to incorporate attributes into existing categorical formalisms for planning, namely those based on symmetric monoidal categories and string diagrams. To accomplish this, we define a notion of a "symmetric monoidal category with attributes." This is a symmetric monoidal category in which objects are equipped with retrievable information and where the interactions between objects and information are governed by an "attribute structure." We discuss examples and semantics of such categories in the context of robotics to illustrate our definition.
+
+Introduction
+
+Symmetric monoidal categories (SMCs) and the related graphical syntax of string diagrams have recently been used to great effect in representing and understanding plans and processes (see e.g. [4,5]). In large part, this is because the syntax of SMCs enables users to reasonably interpret objects in a SMC as resources and morphisms in a SMC as processes.
+
+Here we extend this interpretation to include a distinction between physical and informational resources, entities and values or data, which behave quite differently. Our approach is inspired by the relationship between classical and quantum information in categorical quantum mechanics [4]. We are motivated by foundational concerns in a related paper [2], where we use this framework to link high-level action planning and low-level path planning in the context of robotics.
+
+As an example, consider the following equation (where the diagrams are to be read top-to-bottom), which axiomatizes one of the operations of a robot arm: 
+
+Here (and throughout the paper) solid lines represent entities and dashed lines represent data. The equation defines a post-condition of the operation: after executing the process MoveTo, the robot has moved to the specified location. Given similar axioms for Pick and Place operations, we can use string diagrams to prove that a sequence of operations is well-defined or validates a desired specification, as shown in Figure 1. These specific examples are formalized in Subsection 2.3. A few questions arise when trying to formalize this. First, how are informational resources supposed to behave in general? To model such resources, we borrow the notion of a data service from [9]; we summarize this in Definition 1. Data services are algebraic structures (defined internally to SMCs) which formalize the operations of filtering, copying, and deleting pieces of data.
+
+Furthermore, what does it mean for an entity to have a datum as an attribute (e.g. in the way that the robot above "has a location")? We argue that this question can be answered by requiring that the data service associated to the informational object "acts on" the other object in a suitable sense. To provide more control over the behavior of these attributes, we define the notion of an attribute structure on a SMC. These concepts are discussed in Subsection 2.1.
+
+When considering the semantics of these categories, it is often the case that certain morphisms turn out to be "partially defined." This manifests itself through a partial order structure on hom-sets, or more precisely an enrichment over Poset, the category of partially-ordered sets (posets) and monotone increasing functions. Due to similarities between these partial orders across semantics, we find it useful and illuminating to enrich the syntax categories over Poset as well. By doing so we are able to impose extra conditions on these attribute structures that mimic the ways users expect informational resources to behave. The details of this enrichment are spelled out in Subsection 2.2.
+
+In our motivating example, we use these categories with attributes and their diagrams to coordinate two semantic models at different levels of abstraction, based on the principle of functorial semantics. First, we define a Boolean semantics based on the Planning Domain Definition Language (PDDL) [7]; a presentation of the categorical syntax can be used to generate a PDDL domain, and the solution to a PDDL problem can be used to define an associated string diagram. Once a high-level plan has been identified, a second mapping to a category of geometric semantics can be used to parameterize a path planning algorithm. We give sketches of these categories and mappings in Section 3.
+
+We seek to achieve two principal goals in this paper. First, we aim to develop rigorous foundations for the forthcoming paper [2], which explores similar ideas with a greater focus on the engineering than on the mathematics. Second, we seek to present interesting examples of categorical modeling in engineering. It is our hope that the applications presented in this paper will motivate other researchers to investigate the connections between category theory and engineering models.
+
+
+Categories with Attributes
+
+Our goal in this section is to develop a definition of a category with attributes -that is, a (symmetric monoidal) category in which objects can have "information" (defined internally to the category) attached to them in some way. We develop one notion of a category with attributes in Subsection 2.1. In Subsection 2.2, we adapt this notion to the case where the categories involved are Poset-enriched. This additional structure allows us to impose conditions on the relationships between certain morphisms, allowing us to connect categories with attributes to our intuition about partially-defined morphisms (e.g. partial functions).
+
+
+General Case
+
+For a formal categorical notion of information, we borrow the definition of a data service from [9]. 1 This definition is restated as follows. As hinted above, we will depict the underlying objects of data services with dashed lines to contrast them with other objects.
+Definition 1 ([9]). A data service in a SMC (C , ⊗, I) consists of • An object D in C ; • A multiplication morphism µ : D ⊗ D → D; • A comultiplication morphism δ : D → D ⊗ D; and • A counit morphism ε : D → I.
+The morphisms of a data service are depicted as follows:
+µ := D D D ; δ := D D D ; ε := D(2)
+These morphisms are also required to satisfy several axioms:
+
+• (V, µ) is a commutative semigroup object in C ;
+
+• (V, δ , ε) is a commutative comonoid object in C ;
+
+• µ and δ satisfy the 
+
+1 Readers familiar with Frobenius algebras will observe that a data service is the same as a special commutative Frobenius algebra except for the fact that data services are not required to have units. Non-unitality can be unavoidable in certain applications; for example, every object in PartFn, the category of sets and partial functions, has a canonical data service structure, but this structure typically does not admit a unit.
+
+• µ and δ satisfy the special law:
+D D D D = D(4)
+When we have no reason to explicitly reference the morphisms µ, δ , and ε, we will refer to the data service (D, µ, δ , ε) simply as D.
+
+Some discussion of the intuition behind data services is in order. As mentioned above, an object with a data service structure can be thought of as a value or datum. From this perspective, the comultiplication morphism can be viewed as creating a copy of the input value (where the copy is indistinguishable from the original), while the counit morphism can be viewed as deleting or forgetting about the input value. Meanwhile, the multiplication morphism can be thought of as filtering for equality: given two values, the multiplication morphism checks whether or not they're the same and returns the common value of both (if they're the same) or nothing (if they aren't). The Frobenius, special, semigroup, and comonoid axioms formalize this intuition.
+
+For any SMC C , we can define a category Data(C ) of data services in C . The "obvious" definition of a morphism of data services D → D ′ (i.e. a morphism D → D ′ in C that is both a semigroup homomorphism and a comonoid homomorphism) will turn out to be too restrictive for our eventual goals. In this general case, we are unable to find any nontrivial useful ways to weaken this "obvious" definition, so we opt for the trivial solution, allowing any morphism between the underlying objects of two data services to be considered a "morphism of data services." (Contrast this with the discussion in Subsection 2.2, where we are able to formulate acceptable conditions). This is recorded in the following definition. In order to define categories with attributes, we still need to determine a proper definition for "attributes" themselves. To an initial approximation, we consider an attribute of an object M to be a data service D associated to D in some way. Given an instance of M, we should be able to retrieve the associated instance of D. This notion can be formalized by the morphism γ : M → M ⊗ D depicted in (5). 2 Furthermore, we should be able to "filter attributes for equality," checking whether or not the instance of D associated to the instance of M agrees with some arbitrary instance of D. This is formalized by the
+morphism φ : M ⊗ D → M depicted in (5). γ := ⊲ M M D ; φ := ⊲ M D M(5)
+These morphisms should be expected to satisfy some compatibility conditions with the data service structures on the object D. For example, we expect that retrieving a datum twice in a row should be the same as retrieving the datum once and then copying the result. A collection of similar axioms are presented in the following definition. 
+
+Remarkably, a data service action (γ, φ ) is entirely determined by the comonoid action γ, as the following proposition shows. 3 Proposition 1. Let (D, µ, δ , ε) be a data service and let γ : M → M ⊗ D (depicted as above) be a (right) action of the comonoid object (D, δ , ε) on the object M. Then there exists a unique morphism φ : M ⊗ D → M such that (γ, φ ) forms a data service action of D on M. This φ is defined as in (10).
+φ := ⊲ M D D D M(10)
+The proof that such a φ is unique is fairly straightforward; in fact, one only needs to use the equality between the first and third terms of (8) and the fact that D is a data service. A series of immediate diagram chases then establishes all of the other laws of Definition 3 (provided that γ gives a comonoid action of (D, δ , ε) on M). In particular, the data service action axioms are overdetermined, so that some of the less immediately intuitive laws (e.g. the equality between the first and second terms of (8)) follows from the other assumptions Given a data service action (γ, φ ) of some data service D on some object M, we can define several other interesting morphisms. For example, because C is symmetric and D is a commutative semigroup / comonoid object, we obtain a pair of morphisms (γ ′ , φ ′ ) giving a "left data service action" of D on M, defined by (post-or pre-)composing γ and φ with the appropriate braiding. We depict these γ ′ and φ ′ with the (horizontal) mirror images of our usual notation for γ and φ (respectively); the morphisms γ ′ and φ ′ then satisfy the mirror images of the laws in Definition 3.
+
+Furthermore, we can extend the "filtering" operation from data services to objects equipped with data service actions. This enables us to take instances of two entities M and M ′ , each equipped with a data service action by a common data service D, and ensure that the corresponding instances of D are equal. We define this via the morphism χ :
+M ⊗ M ′ → M ⊗ M ′ ) defined in (12). χ := ⊲ ⊳ M M ′ D M M ′ := ⊲ ⊳ M M ′ D D M M ′ D(11)
+Our depiction of χ is a priori ambiguous, as it could easily be interpreted as referring to other morphisms, for example:
+⊲ ⊳ M M ′ D M M ′ ? = ⊲ ⊳ M M ′ D M M ′(12)
+However, there is no real ambiguity here, as in fact this equation (and other obvious equations arising from our depiction) do hold, e.g. by Proposition 1. Proposition 1 can also be used to show that the diagrams in Figure 1 (and other well-formed diagrams with the action morphisms displayed horizontally) represent well-defined morphisms.
+
+From this setup, the definition of a category with attributes (or equivalently an attribute structure on a SMC) is straightforward.
+
+Definition 4. An attribute structure (A , E,V, γ) on a SMC C consists of:
+
+• A category A , called the category of attributes;
+• A functor E : A → C ; • A functor V : A → Data(C ); • A natural transformation 4 γ : E → E ⊗ (U •V )
+such that:
+• Each γ A : E(A) → E(A) ⊗V (A) gives a action of the comonoid (V (A), δ V (A) , ε V (A) ) on E(A).
+When we have an attribute structure on C in mind, we refer to C as a category with attributes.
+
+An attribute structure on C be viewed as a "collection of distinguished attributes in C ." The naturality condition on γ ensures that, given f : A → A ′ in A , the map V ( f ) allows us to "predict" the effects of E( f ) on the relevant informational objects. Note that we require no naturality condition on the φ A maps associated to each γ A through Proposition 1. This is because we cannot anticipate that the "processing" performed by V ( f ) will produce meaningful results when applied to an arbitrary input.
+
+
+Poset-Enriched Case
+
+When modeling attributes, we are often interested in SMCs which are enriched in Poset. This enriched structure can be used to model the notion that a morphism or process is partially defined, i.e. that it could fail to execute on certain inputs. Heuristically, morphisms f and g satisfy f ≤ g iff the results of f are the same as those of g when both exist, and whenever f successfully executes given a certain input, so too does g. We spell out the details of this enrichment for ease of reference.
+
+Definition 5. A Poset-enrichment of a category C is an assignment of a partial order (uniformly denoted ≤) to each hom-set C (A, B) such that:
+• If f ≤ f ′ and g ≤ g ′ , and g • f and g ′ • f ′ exist, then g • f ≤ g ′ • f ′ .
+If (C , ⊗, I) is a SMC, we require furthermore: From this viewpoint, a certain condition on the data services in a Poset-enriched SMC seems desirable. Namely, filtering two values for equality and then returning both values should yield the same results as simply returning both values whenever the former operation is defined. This is best formalized in the following axiom, which appears in [3]. Definition 6. A data service D in a Poset-enriched SMC C is said to be well-behaved with respect to the enrichment (for brevity, "well-behaved") if it satisfies:
+• If f ≤ f ′ and g ≤ g ′ , then f ⊗ g ≤ f ′ ⊗ g ′ .D D D D D ≤ D D .(13)
+One is led to wonder whether or not an analogous property to that satisfied by well-behaved data services holds for data service actions by such data services. This is indeed the case, as shown in the following proposition. 
+
+We can also prove a useful proposition about the morphism χ described above. 
+
+As indicated above, well-behaved data services enable us to create a useful variation on the category Data(C ) defined previously. • Objects are well-behaved data services in C , and • Morphisms D → D ′ are lax data service homomorphisms from D to D ′ ; that is, morphisms f : D → D ′ satisfying the axioms (see [3]): (16) and (17) are equalities.
+f D D ′ D ′ D ′ ≤ f f D D D D ′ D ′ (16) f D D ′ ≤ D (17) f D D D D ′ ≤ f f D D D ′ D ′ D ′ (18) A morphism f in Data ′ (C ) is deterministic if it is a (strong) comonoid homomorphism, i.e. if both
+The inequalities in Definition 7 are described in [3] as (some of) those which hold between relations and (Set-based) monoids. That is, each object of the categories Rel or PartFn comes equipped with a natural data service structure (with respect to the Cartesian product of sets as tensor product) such that the inequalities described above hold for all morphisms f in the respective category. In fact, (16) is always an equality in PartFn, though it's only an inequality in Rel and other non-deterministic contexts. Since we are using Poset-enrichments to describe partial definition of operations, requiring these inequalities in Data ′ (C ) helps us to accurately reflect the desired behavior. 
+
+
+An Example
+
+A key motivating example for our definition of categories with attributes is the modeling of planning in robotics. This context provides a collection of excellent simple (and not-so-simple) examples of the interaction of physical and informational resources. We walk through a toy example in this context in the hopes of clarifying our definitions above. This example will be described in the non-enriched case, though readers can easily extend it to the Poset-enriched case as desired.
+
+It should be noted that the purpose of this example is to provide intuition for the rest of the paper and inspiration for future research into these themes. As such, this example may need modifications before being used in practical applications or being connected to the functorial semantics below.
+
+Example 1. Suppose that we have a strict SMC C with:
+
+• generator objects R (robot), B (ball), R B (robot holding ball), and L (location);
+
+• morphisms µ, δ , ε such that (L, µ, δ , ε) is a data service;
+
+• for each generator object X other than L, a morphism γ X comprising an action of (L, δ , ε) on X ;
+
+• and morphisms MoveTo : R ⊗ L → R, MoveTo ′ : R B ⊗ L → R B , Pick : R ⊗ B → R B , and Place :
+R B → R ⊗ B.
+Suppose furthermore that the following tuple (A , E,V, γ) defines a valid attribute structure on C . Let A contain objects X L where X ∈ Ob C appears as the domain or codomain of one of MoveTo, MoveTo ′ , Pick, or Place above. Furthermore, let A be generated by morphisms f L : X L → Y L where f is one of MoveTo, MoveTo ′ , Pick, or Place, X is the domain of f , and Y is the codomain of f . Define E : A → C by E(X L ) = X and E( f L ) = f L for all X L and f L in A .
+
+The functor V is more complicated to define. Let V (X L ) = L for all X L such that X is a generator object of C , and let V ((X ⊗ Y ) L ) = L ⊗ L when X and Y are both generator objects of C (here the data service structure on L ⊗ L is defined in the obvious way). Define V on the generator morphisms by:
+V (MoveTo) = ε ⊗ id L (19) V (MoveTo ′ ) = ε ⊗ id L (20) V (Pick) = µ (21) V (Place) = δ(22)
+To define the requisite natural transformation γ, first note that, given actions γ X and γ Y of the comonoid L on X and Y respectively, we can define an action γ X⊗Y of the comonoid L ⊗ L on X ⊗ Y by
+γ X⊗Y := ⊲ ⊲ X X L Y Y L(23)
+Use this approach to define γ R⊗L , γ R B ⊗L , and γ R⊗B . Then, for each X L ∈ Ob(A ), let γ X L = γ X . This completes the tuple (A , E,V, γ).
+
+Viewing C as a category with attributes in this way enables us to perform useful reasoning about C . For example, given the above attribute structure, we can derive (1) as well as both of the equations shown in Figure 1. We can also show that Pick • χ R⊗B = Pick and χ R⊗B • Place = Place, where χ R⊗B is defined using γ R and γ B as in (12).
+
+Furthermore, this attribute structure allows us to analogize MoveTo to the "put" of a lens, with γ R serving as the corresponding "get." From this perspective, we can formulate laws on MoveTo that admit similar interpretations to the Put-Put, Put-Get, and Get-Put lens laws, albeit taking into account the resource-and time-sensitive nature of these operations.
+
+From this viewpoint, the coassociativity property of γ R can be viewed as a novel "Get-Get" law, controlling what happens when one retrieves an attribute twice in a row. Further research is necessary to understand the connections between lenses and resource-sensitive situations like that described in this example.
+
+
+Semantics
+
+The semantics of a category with attributes C typically manifests itself through a functor from C to some "semantics category" Sem. Oftentimes, there also exists a forgetful functor Sem → Set, allowing us to define a composite functor S : C → Set. The category of elements el(S) of S also reflects information about the semantics of C ; while Sem can be viewed as a category of state spaces and state space transformations, el(S) can be viewed as a category of states and state update rules. This allows us to make Figure 2: Schematic of the discussion at the beginning of Section 3. Special cases of interest are Sem = BoolAlg op and Sem = Geom.
+el(S) Set * C Sem Set S
+mathematical sense of intuitive terms like "instance of an entity" that were used above. See Figure 2 for a depiction of this setup.
+
+In this section, we examine the semantics of categories with attributes by way of two key examples (Boolean and geometric semantics) relevant to applications in engineering. We also illustrate the above construction involving categories of elements in the case of geometric semantics.
+
+
+Boolean Semantics
+
+The Planning Domain Definition Language (PDDL) is a standard encoding for "classical" planning problems involving collections of Boolean variables and discrete actions that operate on them [7]. It extends the earlier STRIPS 5 language with features including typing and object equality. PDDL aligns quite well with the diagrammatic syntax presented earlier, providing both a graphical interface to define and report PDDL problems and solutions, and an approach to string-diagram generation based on existing PDDL solvers.
+
+PDDL can be divided into three fundamental units: domains, problems and solutions. Domains define the relevant (Boolean) features of the situation of interest, as well as the actions that manipulate these features. A problem is posed relative to a domain; it specifies a collection of elements, their initial state, and a desired goal state. A solution gives a sequence of applied actions which transform the initial state into the goal.
+
+Before proceeding we briefly recall a few facts about Boolean algebras [6], which will provide the substance for our high-level semantics. The free Boolean algebra over a finite set of atomic statements S is given by Bool(S) := 2 2 S ; here we think of a map s : S → 2 as a truth function defining a global state, while a proposition defines a map q : 2 S → 2 picking out a subset of global states.
+
+Any element of a Boolean algebra q ∈ B defines an associated quotient algebra B ։ B/q; logically speaking, B/q represents the theory B extended by the axiom q. A homomorphism b : B → B ′ descends to the quotient B/q if and only if b(q) = ⊤, in which case we write b |= q.
+
+A point of a Boolean algebra B (also called a valuation) is a homomorphism b : B → 2. For a free, finite algebra Bool(S) it is easy to show that this is equivalent to a truth function S → 2. Stone duality estabilishes a contravariant relationship between algebra homomorphisms and (continuous) functions between points. Here, where everything is finite, the Stone topologies are discrete and every function between points induces a homomorphism in the opposite direction.
+
+A PDDL domain consists of two main elements, a set of predicates P and a set of actions A. Each predicate has a list of variables which are (optionally) typed from a fixed set or hierarchy T , corresponding to an arity function ar : P → List(T ). Given a set of typed variables tp : X → T , the collection of atomic statements p(x) can be identified with the pullback Atom(P/X ) := P ×
+
+
+List(T )
+
+List(X ). We write P(X ) for the free algebra over Atom(P/X ), yielding a functor P : Set/T → BoolAlg.
+
+A PDDL action a ∈ A consists of a set of typed parameters X a along with pre-and post-conditions q a 0 , q a 1 ∈ P(X a ). Because P(X a ) is free, this induces an associated homomorphism a : P(X a )/q a 1 → P(X a )/q a 0 . This is easiest to see by defining a dual function on points, regarded as truth functions s : Atom(P/X a ) → 2:
+a(s) : p(x) → ¬s(p(x)) if p(x) ∧ q a 1 = ⊥ s(p(x)) otherwise(24)
+In other words, we flip any bits that are inconsistent with the post-condition, and leave everything else alone.
+
+From the actions A, we construct a pair of categories B and C along with a span of functors C ← B I → el(Pt), where el(Pt) is the category of elements of the functor Pt : BoolAlg op → Set sending a Boolean algebra to its set of points. Moreover, the functor B → C is a "partial opfibration," in that lifts of arrows are unique if they exist.
+
+Both B and C are free symmetric monoidal. In B, the objects are Boolean points, and we include one generator a s : s → a(s) for each point s |= q a 0 . By contrast, C is generated by the objects X a (for a ∈ A) and contains a generator morphism a : X a → X a for each a ∈ A. The functor B → C forgets about the pre-and post-conditions that appear in B.
+
+There is an obvious functor I : B → el(Pt) sending a s to the point function defined in (24). We note that I does not preserve the monoidal structure because a global state over two collections X and Y will include predicates with variables from both collections. However, I is oplax monoidal: a global state over X and Y entails global states on X and Y individually, corresponding to a function I(X ⊗Y ) → IX × IY .
+
+A PDDL problem is defined relative to a domain, and specifies a set of typed variables (called objects) O. In addition, a problem provides initial and goal states, formulated as propositions q * 0 , q * 1 ∈ P(O). We can regard these as a pair of (category-theoretic) objects in B.
+
+Finally, a PDDL solution is given as a sequence of (validly) applied actions which, when applied to any initial state s 0 |= q * 0 , result in a final state s 1 |= q * 1 . Here an "applied action" for a state s ∈ P(O) consists of an action a and a function j : X a → O. This induces a function j * : Pt(P(O)) → Pt(P(X a )), and for an application to be valid we should have j * s |= q a 0 . Because P(O) is free, we can use the principle of minimal modification to lift the local transformation a j * s to a global map a j s : Pt(P(O)) → Pt(P(O)) satisfying j * (a j s (s)) |= q a 1 ; i.e., the new global state satisfies the local post-condition for a. Given a sequence of applied actions (a i , j i ) we can iteratively construct a sequence of states s i and, if each application is valid for the previous state, this will define a string diagram in B.
+
+We can relate our Boolean semantics and the attribute syntax introduced earlier by associating any free attribute category with a PDDL domain. The types of the domain are the atomic entities and data services of the syntax. Predicates are defined from the attributes. Given two attributes over a shared data service, say with underlying comonoid actions φ : M → M ⊗ D and ψ : N → N ⊗ D, we introduce a binary predicate D φ ,ψ (M, N) indicating whether or not their data values agree. (Based on our semantic intuition from before, D φ ,ψ (M, N) should be true precisely when the χ morphism associated to these attributes is defined.)
+
+Actions of the PDDL domain correspond to generating morphisms of the syntax, and the equational axioms attached to a morphism define the pre-and post-conditions of the action. For example, the equation shown in (1) corresponds to a post-condition L φ ,δ (R, L) on the MoveTo action, equating the location attribute of the robot with the copy "attribute" of the target location.
+
+
+Geometric Semantics
+
+Here we describe a "geometric semantics category" Geom and its connections to categories with attributes and modeling. The category Geom provides a lower-level semantic counterpart to the Boolean approach outlined above. In addition, it yields a "physical" approach to understanding the behaviors specified by a category with attributes. Informally, objects in Geom are physical objects together with data values, while morphisms in Geom are (partially defined) paths of the physical objects and update rules for the corresponding values.
+
+Formally, an object X = ({X i }, P X , θ X ) in Geom consists of a sequence {X i } k X i=1 of subsets of R 3 where each X i is called a simple object, a topological space P X called the parameter space, and a continuous function θ X = (θ X,i ) : P X → SE(3) k X , called the structure map, 6 such that for all p ∈ P X , the sets θ X,i (p) · U i are pairwise disjoint. In general, if X is an object in Geom, we will write {X i } k X i=1 for the simple objects of X , P X for the parameter space of X , and θ X for the structure map of X . We use similar notation when the object is instead called Y or anything else.
+
+A good example object to keep in mind is a multi-jointed robot arm. Such an arm can be modeled as a finite collection of rods, the positions of which vary based on parameters (e.g. Euler angles). The condition imposed on the structure map ensures that, regardless of the parameters, no two rods ever occupy the same point in space at once.
+
+A morphism f : X → Y in Geom, where X and Y have the same simple objects (in the same order), consists of a continuous partial function Φ f : P X → P Y and a continuous partial function φ f :
+P X ×[0, T f ] → SE(3) k X (for some T f ≥ 0), such that: • For all p ∈ P and t ∈ [0, T f ], φ f (p,t) is defined if and only if Φ f (p) is defined; • For all p ∈ P such that Φ f (p) is defined: -φ f (p, 0) = θ X (p); -φ f (p, T f ) = θ Y (Φ f (p));
+-For all t ∈ [0, T f ], the sets π i (φ f (p,t)) ·U i are pairwise disjoint.
+
+If X and Y are two objects of Geom such that X and Y do not have the same sequence of simple objects, then there are no morphisms between X and Y .
+
+Morphisms f : X → Y and g : Y → Z, specified using the pattern established above, can be composed as follows. We set Φ g• f = Φ g • Φ f (composition of partial functions) and define φ g• f by:
+φ g• f (p,t) = φ f (p,t) t ∈ [0, T f ] and Φ g• f (p) is defined φ g (Φ f (p),t − T f ) t ∈ [T f , T f + T g ] and Φ g• f (p) is defined.
+It is clear that identity morphisms exist and that composition is associative, so Geom is in fact a category. In fact, Geom is a Poset-enriched category, where f ≤ g if and only if T f = T g and Φ f ≤ Φ g and φ f ≤ φ g as partial functions.
+
+The category Geom admits a useful notion of "tensor product of objects," defined as follows. Let X ,Y ∈ Ob(Geom); then X ⊗Y is defined to be the object
+({X i } k X i=1 ⊔ {Y j } k Y j=1 , P X ⊗ P Y , (θ X × θ Y )| P X ⊗P Y ),
+where P X ⊗ P Y is the subspace of P X × P Y given by the set:
+{(p x , p y ) ∈ P X × P Y : ∀i, j, (θ X,i (p x ) · X i ) ∩ (θ Y, j (p y ) ·Y j ) = / 0}.
+In other words, P X ⊗ P Y is the largest subset P of P X × P Y for which
+({U i } k X i=1 ∪ {V j } k Y j=1 , P, (θ X × θ Y )| P )
+is a valid object of Geom. It is not clear how to extend or adapt this notion to allow for "tensor products of morphisms," which would equip Geom with a symmetric monoidal structure or something of that sort. 7 We can specify the geometric semantics of a given category with attributes C by defining a functor F : C → Geom. (This F may be Poset-enriched if the attribute structure on C is.) In order to construct such an F, we would need models of all the relevant objects and processes in C . Hence, instead of outright defining any such F here, we describe properties F should satisfy.
+
+We expect that F sends an entity A ∈ Ob C to an object F(A) ∈ Geom with simple objects consisting of the component parts of some physical model of A, parameter space describing the possible states of A, and structure map attaching to each state a physical configuration of the component parts. This approach works even if A is a value; in this case, F(A) has no simple objects (k F(A) = 0) and so is described entirely by its parameter space.
+
+The functor F sends a morphism f : A → B to a physical model of the process specified by f . Specifically, given a state p ∈ P F(A) , the map Φ F( f ) sends p to the state achieved by applying f to a system in the state p (if such a state exists), while φ F( f ) describes the physical motion needed to accomplish this change in state.
+
+When A is a value / data service, the morphisms µ A , δ A , ε A making A into a data service would typically be sent to morphisms much like those of the canonical data service structures on objects of PartFn. For example, Φ F(δ A ) might be the partial function P A → P A × P A given by p → (p, p); in this case, we would have T F(δ A ) = 0 and φ F(δ A ) (p, 0) = Φ F(δ A ) (p) = (p, p). The image of the natural transformation γ from the attribute structure could be defined in a similar way.
+
+We can instantiate the discussion at the beginning of this section in the context of geometric semantics as follows. We have a canonical functor Geom → PartFn (the category of sets and partial functions) defined by X → P X and f → Φ f . Composing this functor with the standard equivalence PartFn ≃ Set * (the category of pointed sets and point-preserving maps) and the forgetful functor Set * → Set yields a forgetful functor G : Geom → Set.
+
+Given F and G as above, the functor S = F • G : Geom → Set sends X ∈ Ob C to the parameter space of some model of X and a morphism to its action on such parameter spaces. If we consider the state of an object to be entirely determined by a point in its parameter space (and also allow the existence of an "undefined" state for each object of C ), then the category of elements el(S) consists of states of objects in C and processes in C transforming the domain state into the codomain state.
+
+
+Conclusion
+
+In this work, we have presented a categorical interpretation of the notion of an "attribute" of an object. We have also discussed example applications of this interpretation to the categorical modeling of robotics, illustrating how categorical perspectives can be used for the benefit of engineering and other applied fields.
+
+Several interesting questions remain about categorical notions of "attributes." For example, it appears that several of the axioms for Poset-enriched categories with elements break down when considered with respect to subprobabilistic semantics, e.g. semantics valued in the category SRel of [8], leading one to wonder how the approach here might be modified for compatibility with such semantics. In addition, it is sometimes useful to think of time as an attribute of an object, although there are enough differences between time and the other attributes discussed here that it seems that a separate formalism might work better for modeling time. We hope that future work in this area will be able to resolve some of these questions.
+
+Figure 1 :
+1(a) This equation guarantees that the preconditions of Pick are satisfied. (b) This equation guarantees the desired specification (ball at goal).
+
+Definition 2 .
+2Let C be a SMC. The category of data services in C , denoted Data(C ), is the category where: • Objects are data services in C • Data(C )(D, D ′ ) = C (D, D ′ ), i.e. morphisms in Data(C ) are arbitrary morphisms between the underlying objects of the domain / codomain.There exists an obvious (fully faithful) forgetful functor U : Data(C ) → C .
+
+Definition 3 .
+3Let C be a SMC, let (D, µ, δ , ε) be a data service in C , and let M be any object of C . A (right) data service action of D on M is a pair (γ, φ ) of morphisms γ : M → M ⊗ D and φ : M ⊗ D → M, depicted as in(5), such that • φ gives a (right) action of the semigroup object (V, µ) on E: gives a (right) action of the comonoid object (M, δ , ε) on E: and γ satisfy modified Frobenius laws: and γ satisfy a modified special law:
+
+A
+Poset-enriched functor between Poset-enriched categories C , D is a functor F : C → D such that the associated functions C (A, B) → D(FA, FB) are all monotone increasing.
+
+Proposition 2 .
+2Let C be a Poset-enriched SMC, D a well-behaved data service in C , and M an object of C together with a data service action by D. Then:
+
+Proposition 3 .
+3Let C be a Poset-enriched SMC, D a well-behaved data service in C , and M an object of C together with a data service action by D. Then:
+
+Definition 7 .
+7Let (C , ⊗, I, ≤) be a Poset-enriched SMC. Define Data ′ (C ), the category of well-behaved data services in C , to be the category where:
+
+Definition 8 .
+8A Poset-enriched attribute structure on a Poset-enriched SMC C is an attribute structure (A , E,V, γ) such that:• A , E, and V are all Poset-enriched;• V factors through the inclusion Data ′ (C ) ֒→ Data(C ).
+An attribute is not determined by the pair (M, D), so our depiction here is lacking insofar as it does not represent the specific choice of attribute for (M, D). Despite this shortcoming, the depiction here is still useful for brevity, and we have no need to explicitly consider different attributes with the same D and M.
+This proposition is closely related to results obtained in[1] for Frobenius algebras. Note that the asymmetry of the data service axioms prevents us from recovering γ from φ alone in a data service, as in[1].
+Recall U : Data(C ) → C is the forgetful functor.
+Stanford Research Institute Problem Solver
+Here SE(3) is the group of rigid motions in R 3 .
+The difficulty lies in the interchange law (f 1 ⊗ g 1 ) • ( f 2 ⊗ g 2 ) = ( f 1 · f 2 ) ⊗ (g 1 • g 2 );when morphisms represent paths (as above), rather than paths up to some suitable notion of homotopy or reparametrization, this law does not hold for "obvious" definitions of ⊗.
+AcknowledgmentsThe authors would like to thank Angeline Aguinaldo, Blake Pollard, Fred Proctor, and Eswaran Subrahmanian for helpful comments and discussions. Thanks are also due to the anonymous reviewers for comments that helped the authors improve and clarify aspects of this paper.The second named author would also like to thank the organizers of the Applied Category Theory 2020 Adjoint School for providing an excellent environment in which to gain a deeper understanding of category theory. In particular, special thanks are due to Paolo Perrone, whose references to categories of elements during meetings of the School helped the second author to realize the role that such constructions played in the semantics of categories with attributes.DisclaimerThis paper includes contributions from the U. S. National Institute of Standards and Technology, and is not subject to copyright in the United States. Commercial products are identified in this article to adequately specify the material. This does not imply recommendation or endorsement by the National Institute of Standards and Technology, nor does it imply the materials identified are necessarily the best available for the purpose.
+Modules, comodules, and cotensor products over Frobenius algebras. Lowell Abrams, 10.1006/jabr.1999.7901Journal of Algebra. 2191Lowell Abrams (1999): Modules, comodules, and cotensor products over Frobenius algebras. Journal of Algebra 219(1), pp. 201-213, doi:10.1006/jabr.1999.7901.
+
+Robot planning with string diagrams. Angeline Aguinaldo, Spencer Breiner, John S Nolan, &amp; Blake, S Pollard, In preparationAngeline Aguinaldo, Spencer Breiner, John S Nolan & Blake S Pollard: Robot planning with string diagrams. In preparation.
+
+Filippo Bonchi, Dusko Pavlovic &amp; Paweł, Sobociński, arXiv:1711.08699Functorial semantics for relational theories. arXiv preprintFilippo Bonchi, Dusko Pavlovic & Paweł Sobociński (2017): Functorial semantics for relational theories. arXiv preprint arXiv:1711.08699. Available at https://arxiv.org/abs/1711.08699.
+
+Picturing quantum processes. Bob Coecke, &amp; Aleks Kissinger, 10.1017/9781316219317Cambridge University PressBob Coecke & Aleks Kissinger (2017): Picturing quantum processes. Cambridge University Press, doi:10.1017/9781316219317.
+
+Brendan Fong, &amp; David, I Spivak, 10.1017/9781108668804Seven Sketches in Compositionality: An Invitation to Applied Category Theory. Cambridge University PressBrendan Fong & David I. Spivak (2019): Seven Sketches in Compositionality: An Invitation to Applied Category Theory. Cambridge University Press, doi:10.1017/9781108668804. Available at https://math.mit.edu/~dspivak/teaching/sp18/7Sketches.pdf.
+
+T Peter, Johnstone, Stone spaces. Cambridge studies in advanced mathematics 3. Cambridge University PressPeter T Johnstone (1982): Stone spaces. Cambridge studies in advanced mathematics 3, Cambridge University Press.
+
+PDDL-the planning domain definition language. Drew Mcdermott, Malik Ghallab, Adele Howe, Craig Knoblock, Ashwin Ram, Manuela Veloso, Daniel Weld &amp; David Wilkins, CVC TR-98-003/DCS TR-1165Yale Center for Computational Vision and ControlTechnical ReportDrew McDermott, Malik Ghallab, Adele Howe, Craig Knoblock, Ashwin Ram, Manuela Veloso, Daniel Weld & David Wilkins (1998): PDDL-the planning domain definition language. Technical Report CVC TR-98-003/DCS TR-1165, Yale Center for Computational Vision and Control. Available at http://icaps-conference.org/ipc2008/deterministic/data/mcdermott-et-al-tr-1998.pdf.
+
+Probabilistic relations. Prakash Panangaden, School of Computer Science Research Reports -University of Birmingham CSRPrakash Panangaden (1998): Probabilistic relations. School of Computer Science Research Reports -Univer- sity of Birmingham CSR, pp. 59-74.
+
+Monoidal computer I: Basic computability by string diagrams. Information and computation 226. Dusko Pavlovic, 10.1016/j.ic.2013.03.007Dusko Pavlovic (2013): Monoidal computer I: Basic computability by string diagrams. Information and computation 226, pp. 94-116, doi:10.1016/j.ic.2013.03.007.

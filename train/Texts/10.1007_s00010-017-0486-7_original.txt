@@ -1,0 +1,752 @@
+
+Category-measure duality: convexity, mid-point convexity and Berz sublinearity by
+19 Jul 2016
+
+N H Bingham 
+A J Ostaszewski 
+Category-measure duality: convexity, mid-point convexity and Berz sublinearity by
+19 Jul 2016Dependent Choicesubadditivesublinearmid-point convexdensity topologySteinhaus-Weil propertyBaire topologyleft Haar null Mathematics Subject Classification (2000): Primary 26A03; 39B62
+Category-measure duality concerns applications of Baire-category methods that have measure-theoretic analogues. The set-theoretic axiom needed in connection with the Baire category theorem is the Axiom of Dependent Choice DC rather than the Axiom of Choice AC. Berz used the Hahn-Banach Theorem over Q to prove that the graph of a measurable sublinear function that is Q + -homogeneous consists of two half-lines through the origin. We give a category form of the Berz theorem. Our proof is simpler than that of the classical measure-theoretic Berz theorem, our result contains Berz's theorem rather than simply being an analogue of it, and we use only DC rather than AC. Furthermore, the category form easily generalizes: the graph of a Baire sublinear function defined on a Banach space is a cone. The results are seen to be of automatic-continuity type. We use Christensen Haar null sets to extend the category approach beyond the locally compact setting where Haar measure exists. We extend Berz's result from Euclidean to Banach spaces, and beyond. Passing from sublinearity to convexity, we extend the Bernstein-Doetsch theorem and related continuity results, allowing our conditions to be 'local' -holding off some exceptional set.
+
+Introduction
+
+The Berz theorem of our title is his characterization of a function S : R → R which is sublinear, that is -it is subadditive ( [HilP,Ch. 3], [Ros]):
+
+
+S(u + v) S(u) + S(v),
+
+and homogeneous with respect to non-negative integer scaling. Following Berz [Ber], we call S sublinear on a set Σ if S is subadditive and equivalently, if Σ is closed under non-negative rational scaling,
+S(qx) = qS(x) for x ∈ Σ, q ∈ Q + = Q ∩ [0, ∞);
+in words, S is positively Q-homogeneous on Σ and S(0) = 0. An important class of functions with these two properties but with a more general domain occurs in mathematical finance -the coherent risk measures introduced by Artzner et al. [ArtDEH] (cf. §6.5); for textbook treatments see [McNFE], [FolS,4.1]. In §4 we characterize such functions in the category setting when the domain is a Banach space. Working in a locally convex Fréchet space and under various axiomatic assumptions Ajtai [Ajt], Wright [Wri], and Garnir [Gar], motivated by semi-norm considerations, study the continuity of a subadditive function S with the property S(2x) = 2S(x).
+
+Berz used the Hahn-Banach Theorem over Q to prove that the graph of a (Lebesgue) measurable sublinear function consists of two half-lines through the origin ( [Kuc,§16.4,5]; cf. [BinO1]). Recall that in a topological space X, a subset H is Baire (has the Baire property, BP) if H = (V \M V ) ∪ M H for some open set V and meagre sets M V , M H in the sense of the topology on X; similarly a function f : X → R is Baire if preimages of (Euclidean) open subsets of R are Baire subsets in the topology of X. Our first result is the Baire version of Berz's theorem on the line. Below R ± denotes the non-negative and non-positive half-lines.
+
+Theorem 1B (ZF+DC). For S : R → R sublinear and Baire, there are c ± ∈ R such that S(x) = c ± x, for x ∈ R ± .
+
+As we shall see in §3, Theorem 1B implies the classical Berz theorem as a corollary:
+
+Theorem 1M (ZF+DC, containing Berz [Ber] with AC). For S : R → R sublinear and measurable, there are c ± ∈ R such that
+S(x) = c ± x, for x ∈ R ± .
+Theorems 1B and 1M may be combined, into 'Theorem 1(B+M)', say. Following necessary topological preliminaries (Lemma S, Theorem BL; Steinhaus-Weil property) in §2, the two cases are proved together in §3 bi-topologically, by switching between the two relevant density topologies of §2 ( [BinO6,10,15], [Ost2]). Here we also prove Theorem 2 (local boundedness for subadditive functions) and Theorem 3, the corresponding continuity result. We introduce universal measurability (used in §4 in defining Christensen's notion of Haar null sets -in contexts where there may be no Haar measure - [Chr1,2]), and use this to note a variant on Theorem 2,Theorem 2H ('H for Haar').
+
+The sector between the lines c ± x in the upper half-plane is a two-dimensional cone. This suggests the generalization to Banach spaces that we prove in §4 (Theorems 4B, 4M, 4F -'F for F-space').
+
+The results above for the Baire/measurable functions on R are to be expected: they follow from the classical Bernstein-Doetsch continuity theorem for locally bounded mid-point convex functions on normed vector spaces, to which we turn in §5 (see e.g. [Kuc,6.4.2] quoted for R d , but its third proof there applies more generally, as does Theorem B below, also originally for R d ; see also [HarLP, Ch. III]), once one proves their local boundedness ( §3, Th. 2), since a sublinear function is necessarily mid-point convex. Indeed, by Q-homogeneity and subadditivity,
+f 1 2 (x + y) = 1 2 (f (x + y)) 1 2 (f (x) + f (y)) .
+We handle the Berz sublinear case first (in §3), as the arguments are simpler, and turn to mid-convexity matters in §5, where we prove the following two results (for topological and convexity terminology see respectively §2 and 5).
+
+Theorem M (Mehdi's Theorem, [Meh,Th. 4]; cf. [Wri]). For a Banach space X, if S : X → R is mid-point convex and Baire, then S is continuous.
+
+Theorem FS (cf. [FisS]). For a Banach space X, if S : X → R is mid-point convex and universally measurable, then S is continuous.
+
+For the Banach context both there and in §4, we rely on the following dichotomy result, Theorem B, especially on its second assertion, which together with an associated Corollary B in §4 (on boundedness), enables passage from a general Banach space to a separable one (wherein the Christensen theory of Haar null sets is available). See [Blu] and Appendix 2 of the arXiv version of this paper.
+
+Theorem B (Blumberg's Dichotomy Theorem, [Blu,Th. 1]; cf. [Sie2]). For X any normed vector space and S : X → R mid-point convex: either S is not continuous at x 0 ∈ X, or S(x n ) is unbounded above for some sequence x n with limit x 0 .
+
+In particular, for X a Banach space, if for any closed separable subspace B ⊆ X the restriction S|B is continuous (for instance S|B is locally bounded on B), then S is continuous.
+
+In §5 we switch to a form of mid-convexity that is assumed to hold only on a co-meagre or co-null set (so on an open set of a density topology -see §2); we term this weak mid-point convexity, and show in particular that a Baire/measurable weakly mid-point convex function is continuous and convex. It follows that the Berz theorems are true under the hypothesis of weak sublinearity (sublinearity on a co-meagre or co-null set); however, we leave open the possibility of a direct proof along the lines of §3 and also the question whether a Bernstein-Doetsch dichotomy holds -that a weakly midpoint convex/sublinear function is either everywhere continuous or nowhere continuous. We close in §6 with some complements.
+
+Theorem 1B (under the usual tacit assumption ZF+AC) was given in [BinO13,Th. 5]. The results imply the classical results that Baire/measurable additive functions are linear (see [BinO9] for historical background); indeed, an additive function A(.) is sublinear and
+A(−x) = −A(x), so c + = −c − .
+The primacy of category within category-measure duality is one of our two main themes here. This is something we have emphasised before 9,10]; Oxtoby [Oxt] calls this measure-category duality, but from a different viewpoint -he has no need of Steinhaus's theorem (cf. [Ost2]), which is crucial for us. Our second main theme, new here, is AC versus DC. As so much of the extensive relevant background is still somewhat scattered, we summarize what we need in detail in Appendix 1 (which has its own separate references). This may be omitted by the expert (or uninterested) reader, and so is included only in the fuller arXiv version of this paper.
+
+Without further comment, we work with ZF+DC, rather than ZF+AC, throughout the paper. It is natural that DC should dominate here. For, DC suffices for the common parts of the Baire category and Lebesgue measure cases: for the first, see Blair [Bla], and for the second, see Solovay (Appendix 1.3;[Solo2,p. 25]). For the contrasts -or 'wedges' -between them, see Appendix 1.5. It is here that further set-theoretic assumptions become crucial; in brief, measure theory needs stronger assumptions.  [Kom] and [RosS] for extensions of this property.) This is just what is needed to make the infinite combinatorics used in our proofs work.
+
+Call a an (outer) Lebesgue-density point of a set A if lim δ↓0 |A ∩ (a − δ, a + δ)|/2δ = 1, where |S| is the outer measure of S; the Lebesgue density theorem asserts that almost all points of a set are density points. (On this point the survey [Bru] is a classic. For further background see [Wil] and literature cited there; cf. the recent [BinO14].) By analogy, say that a is a Baire-density point of A if V \A is meagre, for some open neighbourhood V of a; if A is Baire, then it is immediate from the BP that, except for a meagre set, all points of A are Baire density points. Each of the category and measure notions of density defines a density topology (denoted respectively D B /D Lwith L denoting Lebesgue measurable sets), in which a set W is density-open if all its points are category/measure density points of W, the latter case introduced by Goffman and his collaborators -see [GofNN] and [GofW]. Both refine the usual Euclidean topology, E; see [BinO14] for properties common to both topologies. We call meagre/null sets negligible, and say that quasi all points of a set have a property if, but for a negligible subset, all have the property. These negligible sets form a σ-ideal; see Fremlin [Fre2], Lukes et al. [LukMZ], Wilczyński [Wil], [BinO14] for background, and also [BinO5] and [Ost1]. Below (for use in §4) we consider a further σ-ideal: the left Haar null sets (equivalently: Haar null ) of a Banach space and by extension use the same language of negligibles there. The corresponding density topologies may also be studied via the Hashimoto topologies (cf. [Has], [BalR], [LukMZ,1C]), obtained by declaring as basic open the sets of the form U\N with U ∈ E and N the appropriate negligible. (That these sets, even under DC, form a topology follows from E being second countable -cf. [JanH,4.2] and [BinO14].)
+
+The definition above of a Baire-density point may of course be repeated verbatim in the context of any topology T on any set X by referring to B(T ), the Baire sets of T . In particular, working with T = D L in place of E we obtain a topology D B (D L ). Since B(D L ) = L (see [Kec,17.47] and [BinO6]),
+D B = D B (E), D L = D B (D L ).
+Lemma S (Multiplicative Sierpiński Lemma; [BinO5,Lemma S], cf. [Sie1]). For A, B Baire/measurable in (0, ∞) with respective density points (in the category/measure sense) a, b, then for n = 1, 2, ... there exist positive rationals q n and points a n , b n converging (metrically) to a, b through A, B respectively such that b n = q n a n .
+
+Proof. For n = 1, 2, ... and the consecutive values ε = 1/n, the sets B ε (a)∩A and B ε (b)∩B are Baire/measurable non-negligible. So by Steinhaus's theorem (see e.g. [Kuc,§3.7], [BinGT,Th. 1
+.1.1]; cf. [BinO9]), the set [B ∩ B ε (b)] · [A ∩ B ε (a)
+] −1 contains interior points, and so in particular a rational point q n . Thus for some a n ∈ B ε (a) ∩ A and b n ∈ B ε (b) ∩ B we have q n = b n a −1 n > 0, and as |a − a n | < 1/n and |b − b n | < 1/n, a n → a, b n → b.
+
+Remark. The result above is a consequence of the Steinhaus-Weil property regarded as a corollary of the Category Interior Theorem ( [BinO7,Th. 4.4]; cf. [GroE1,2]). The latter, applied to the topology D that is either of the above two topologies D B /D L , asserts that U − V or UV −1 is an E-open nhd (of the relevant neutral element) for U, V open under D, since D is a shift-invariant Baire topology satisfying the Weak Category Convergence condition of [BinO6] for either of the shift actions x → x + a, x → xa. The Category Interior Theorem in turn follows from the Category Embedding Theorem ( [BinO6]; cf. [MilO]). Now a ∈ A o := int D (A), b ∈ B o , as a and b are respectively density points of A and B, and
+B ε (a) ∩ A o and B ε (b) ∩ B o are in D, as D refines E.
+Definition. Say that f : X → R is quasi σ-continuous if X contains a B-set Σ + which is quasi all of X and an increasing decomposition Σ + := ∞ m=0 Σ m into B-sets Σ m such that each f |Σ m is continuous.
+
+Separability is a natural condition in the next result -see the closing comments in [Zak].
+
+Theorem BL (Baire Continuity Theorem [BinO8,Th. 11.8]; Baire-Luzin Theorem; cf. [Hal], end of Section 55, [Zak, Th. II]). For a separable Banach space, if f : X → R is Baire, or measurable with respect to a regular σ-finite measure, then f is quasi σ-continuous, with the sets Σ m in the Baire case being in D B . Furthermore, for X = R under Lebesgue measure the sets Σ m may likewise be taken in D L = D B (D L ).
+
+Remarks. 1. In the category case, with Σ m = Σ 0 for all m and Σ 0 co-meagre, this is Baire's Theorem ( [Oxt,Th. 8.1]). In the Lebesgue measure case this is a useful form of Luzin's Theorem formulated in [BinO4]. The extension to a regular (i.e. G-outer regular) σ-finite measure may be made via Egoroff's Theorem (cf. [Hal,§21 Th. A]). 2. Below, and especially in §5, it is helpful if the sets Σ m are not only in D B but also dense. So, in particular, sets that are locally co-meagre come to mind; however, any Baire set that is locally co-meagre is co-meagre. (For Σ Baire, its quasi-interior -the largest (regular) open set equal to Σ modulo a meagre set -is then locally dense, so everywhere dense and so co-meagre. Our approach below is via the Steinhaus-Weil property of certain nonnegligible sets Σ: 0 is a (usual) interior point of Σ − Σ. Our motivation comes from some infinite combinatorics going back to Kestelman [Kes] in 1947 that has later resurfaced in the work of several authors: Kemperman [Kem] in 1957, Borwein and Ditor [BorD] in 1978, Trautner [Trau] in 1987, Harry Miller [Mil] in 1989, Grosse-Erdmann [GroE2] in 1989, and [BinO1,2,3,7] from 2008. The Kestelman-Borwein-Ditor Theorem (KBD below) asserts that for any Baire/measurable non-negligible Σ and any null sequence z n → 0, there are t ∈ Σ and an infinite M such that t + z m ∈ Σ for m ∈ M.
+
+On R, KBD is both a consequence and a sharpening of the Baire Category Theorem (BC below). For, BC implies KBD, and conversely -the proof of KBD requires a sequence of applications of BC [MilO]. The power of these ideas is shown in the proof of the Uniform Convergence Theorem of regular variation ( [BinGT Ch. 1], [BinO2]).
+
+None of this is special to R: one can work in a Polish abelian group. Then KBD in this setting implies as an almost immediate consequence the Effros Theorem ( [Ost3], cf. [vMil]), and so the Open Mapping Theorem [Ost5], as well as other classical results, for instance the Banach-Steinhaus Theorem -see the survey [Ost4] and the more recent developments in [BinO14] and [BinO15,Th. 2].
+
+The significance of the KBD is three-fold. Firstly, if KBD applies for the non-negligible sets Σ of some family of sets, then these sets have the Steinhaus-Weil property. For if not, choose z n / ∈ Σ−Σ with z n → 0 (henceforth termed a 'null' sequence); now there are t ∈ Σ and an infinite M such that t + z m ∈ Σ for m ∈ M, so z m = (t + z m ) − t ∈ Σ − Σ, a contradiction.
+
+Secondly, the several proofs of KBD rely on elementary induction, i.e. recursion through the natural numbers via DC (see §1). As a result our Berz-type theorems depend only on DC rather than on the full strength of AC used by Berz. Finally, any application of KBD in a topological vector space context may be deemed to take place in the separable subspace generated by the null sequence.
+
+In an infinite-dimensional separable Banach space: we cannot rely on Haar measure, as here that does not exist; but we can nevertheless rely on a σ-ideal of sets whose 'negligibility' is predicated on the Borel probability measures of that space 2 . We recall below their definition and two key properties, the first of which relies on separability (hence the frequent recourse below to separable Banach subspaces): the Steinhaus-Weil property and the weak extension of the Fubini theorem (WFT; see below) due to Christensen [Chr1], which may be applied here. For this we need to recall that B ⊆ G is universally measurable if B is measurable with respect to every Borel measure on G -for background, see e.g. cf. [Fre2,434D,432]. Examples are analytic subsets (see e.g. [Rog,Part 1 §2.9], or [Kec,Th. 21.10], [Fre2,434Dc]) and the σ-algebra that they generate. Beyond these are the provably ∆ 1 2 sets of [FenN], defined in Appendix 1.1 below.
+
+The σ-ideal of Haar null sets is a generalization of Christensen [Chr1,2] to a non-locally compact group of the notion of a Haar measure-zero set: see again Hoffmann-Jørgensen [Rog,Part 3,Th. 2.4.5] and Solecki [Sole1,2,3] (and [HunSY] in the function space setting).
+
+Christensen [Chr1] shows that in an abelian Polish group (G, ·) the family H(G, ·) of Haar null sets forms a σ-ideal. This was extended for ' left Haar null' sets (see below) by Solecki [Sole3,Th. 1] in the more general setting of (not necessarily abelian) Polish groups (G, ·) amenable at 1, the scope of which he studies, in particular proving that any abelian Polish group is amenable at 1 [Sole3,Prop 3.3]; this includes, as additive groups, separable F -(and hence Banach) spaces.
+
+A subset of a Polish group G is left Haar null [Sole3] if it is contained in a universally measurable set B (for which see §3) such that for some Borel probability measure µ on G
+µ(gB) = 0 (g ∈ G).
+Solecki also considers the (in general) narrower family of Haar null sets (as above, but now µ(gBh) = 0 for all g, h ∈ G). Below we work in vector spaces and so the non-abelian distinctions vanish. The Steinhaus-Weil Theorem holds also for universally measurable sets that are not Haar null; this was proved by Solecki (actually for left Haar null [Sole3, Th. 1(ii)]; cf. Hoffmann-Jørgensen [Rog,Part 3,Th. 2.4.6]) by implicitly proving KBD. It may be checked that his proof uses only DC. One may also show that the KBD theorem follows from amenability at 1: see [BinO15].
+
+Christensen's WFT [Chr1] (for a detailed proof, see [BorM]) concerns the product H × T of a locally compact group T, equipped with Haar measure η, and an arbitrary abelian Polish group H, and is a 'one-way round' theorem (for T -sections): if A ⊆ H × T is universally measurable, then A is Haar null iff the sections A(h) := {t ∈ T : (h, t) ∈ A} are Haar measure-zero except possibly for a Haar null set (in the sense above) of h ∈ H (i.e. for 'quasi all' h ∈ H). The 'other way round' (for H-sections) may fail, as was shown by Christensen [Chr1,Th. 6].
+
+
+Sublinearity and Berz's Theorem
+
+We begin with Theorem 2 on subadditive functions. We deal with the category and measure versions together via the Steinhaus-Weil property, and use DC rather than AC. The Lebesgue measurable case (with AC) is classical [HilP,Ch. 7]. See also [BinO1,Prop. 1], [Kuc,Th. 16.2.2], [BinO13,Prop. 7 
+′ ].
+Recalling that T is a Baire space topology if Baire's theorem holds under T , say that a vector space X has a Steinhaus-Weil topology T if the nonmeagre Baire sets of T have the Steinhaus-Weil property. Thus E and D L are Steinhaus-Weil topologies for R that are Baire topologies, by the classical Steinhaus-Piccard-Pettis Theorems (see e.g. [BinO9]).
+
+As above, say that S :
+X → R is T -Baire if S −1 takes (Euclidean) open sets of R to T -Baire sets in X.
+Thus E-Baire means Baire in the usual sense, and D L -Baire means Lebesgue measurable.
+
+
+Theorem 2. For X a vector space with a Steinhaus-Weil, Baire topology T and S
+: X → R subadditive: if S is T -Baire, then it is locally bounded. Proof. Suppose |S(u + z n )| → ∞ for some u ∈ X and null sequence z n → 0. As the level sets H ± n := {t : |S(±t)| n} are T -Baire and T is Baire, for some k the set H ± k is non-meagre. As T is Steinhaus-Weil, H ± k − H ± k has 0 in its interior. So there is n ∈ N such that z m ∈ H ± k − H ± k for all m n. For m n, choose a m , b m ∈ H ± k with z m = a m − b m for m n. Then for all m n S(u) − 2k S(u) − S(−a m ) − S(b m ) S(u + a m − b m ) = S(u + z m ) S(u) + S(a m ) + S(−b m ) S(u) + 2k, contradicting unboundedness.
+The key to Theorem 1B is Theorem 3 below. It may be regarded as a subadditive analogue of Ostrowski's Theorem for additive functions (cf. [BinO9], [MatS]). The result extends its counterpart in [BinO10,Prop. 13], with a simpler proof, and uses only DC (via KBD). As it depends on the Steinhaus-Weil property, it handles the Baire and measurable cases together. In the theorem below, we write R > := R + \{0} and similarly R < .
+Theorem 3. If S : R → R is subadditive, locally bounded with S(0) = 0, and: (i) there is a symmetric set Σ (i.e. Σ = −Σ) containing 0 with S|Σ conti- nuous at 0; (ii) for each δ > 0, Σ + δ := Σ ∩ (0, δ)
+has the Steinhaus-Weil property then S is continuous at 0 and so everywhere.
+
+In particular, this is so if S(0) = 0 and there is a symmetric set Σ containing 0 on which
+S(u) = c ± u for some c ± ∈ R and all u ∈ Σ ∩ R > , or all u ∈ Σ ∩ R < resp., and Σ is Baire/measurable, non-negligible in each (0, δ) for δ > 0.
+Proof. If S is not continuous at 0, then (see e.g. [HilP,7.4.3], cf. [BinO13,Prop. 7
+]) λ + := lim sup t→0 S(t) > lim inf t→0 S(t)
+0, the last inequality by subadditivity and local boundedness at 0. Choose
+z n → 0 with S(z n ) → λ + > 0. Let ε = λ + /3. By continuity on Σ at 0, there is δ > 0 with |S(t)| < ε for t ∈ Σ ∩ (−δ, δ). By the Steinhaus-Weil property of Σ δ there is n such that z m ∈ Σ + δ − Σ + δ for all m n. Choose a m , b m ∈ Σ + δ with z m = a m − b m ; so by subadditivity S(z m ) S(a m ) + S(−b m ) 2ε.
+Taking limits,
+λ + 2ε < λ + .
+This contradiction shows that S is continuous at 0. As in [HilP,Th. 2.5.2], continuity at all points follows by noting that
+S(x) − S(−h) S(x + h) S(x) + S(h).
+The remaining assertion follows from the Steinhaus-Piccard-Pettis Theorem via Theorem 2, as continuity at 0 on Σ follows from |c ± u| |u| · max{|c + |, |c − |}.
+
+Proofs of Theorems 1B and 1M. Let S : R → R be sublinear and either Baire or measurable, that is, Baire in one of the two topologies
+D B (E) or D B (D L ). By Theorem BL S is quasi σ-continuous. Taking Σ m as in the Definition in §2 (with m fixed), apply Lemma S to A = B = Σ m ⊆ R + . Fix (non-zero!) a, b ∈ Σ m
+; as these are density points, there are a n , b n ∈ Σ m and q n ∈ Q + so that b n = q n a n ; a = lim n a n , b = lim n b n .
+
+As S is sublinear, S(q n a n )/S(a n ) = q n = b n /a n → b/a. But S|Σ m is continuous at a and b, so
+S(b)/S(a) = lim n S(b n )/S(a n ) = b/a. So on Σ m , S(u) = c m u. But Σ m ⊇ Σ 0 , so c m = c 0 for all m. So S(x) = c 0 x for x ∈ Σ + , i.e.
+for almost all x > 0. Repeat for R − with an analogous set Σ − and put Σ := {0} ∪ Σ + ∪ Σ − . We may assume −Σ = Σ (otherwise pass to the subset Σ ∩ (−Σ), which is quasi all of R). By Th. 3, S is continuous at 0 and so everywhere. In summary: S is linear on the dense subset Σ + ⊆ R + and continuous, and likewise on the dense subset Σ − ⊆ R − . So S is linear on the whole of R + , and on the whole of R − .
+
+For later use (in §4 below) we close this section with a variant on Theorem 2, Theorem 2H ('H for Haar'). The proof is the same as that of Theorem 2 above, but needs a little introduction. Say that a function S : 
+G → R is universally measurable if S −
+
+Banach versions
+
+In Theorem 4B and 4M below we extend the category and measure results in Theorems 1B and 1M to the setting of a Banach space X. Since the conclusions are derived from continuity (and local boundedness), our results are first established for separable (sub-) spaces, which then extend to the nonseparable context, by Theorem B ( §1). The key in each case is an appropriate application of Theorem 2 (or Theorem 2H). The category case here is covered by the Piccard-Pettis Theorem, true for non-meagre Baire sets in X; in fact more is true, as KBD holds in any analytic group with a translationinvariant metric -see [BinO8,Ths. 1.2,5.1] or [Ost2,Th. 2], which also covers F -spaces, so including Fréchet spaces (see the end of this section). In the absence of Haar measure, the analogous 'measure case' arising from universal measurability is technically more intricate, but nevertheless true -see below. It is here that our methodology requires us to pass down to separable subspaces of a Banach space X. That this suffices to reduce the case of a general Banach space X to the separable case follows from the result below, a corollary of Theorem B of §1. Henceforth we write B δ , Σ δ respectively for the closed unit ball {x : ||x|| δ} and the δ-sphere {x : ||x|| = δ}, and use the following notation for lines and rays:
+R(u) := {λu : λ ∈ R}, R ± (u) := {λu : λ ∈ R ± ∪ {0}}. Corollary B. For X a Banach space and S : X → R subadditive, if S|B is locally bounded for each closed separable subspace B, then {|S(x)|/||x|| : x = 0} is bounded. Proof. By Theorem B, S is continuous on X , so there is δ > 0 with ||S(v)|| 1 (||v|| δ).
+Furthermore, for any x = 0 taking u := x/||x||, the restriction of S to the ray R + (u) is positively homogeneous by Theorem 1B, and so
+|S(x)| = |S(||x||u)| = |S(δu)||x||/δ| ||x||/δ.
+The proof of the category case in Theorem 4B below would have been easier had we used AC to construct the function c(x); but, as we wish to rely only on DC, more care is needed.
+
+We offer two proofs. The first uses Theorems 1B and 2 (and is laid out so as to extend easily to the more demanding F -space setting of Theorem 4F below); the second is more direct, but uses a classical selection (uniformization) theorem, together with a Fubini-type theorem for negligible sets in a product space. Both proofs have Banach-space 'measure' analogues.
+
+Theorem 4B. For X a Banach space, and S : X → R Baire, if S is subadditive and Q + -homogeneous, then (i) S is continuous and convex with epigraph a convex cone pointed at 0, and (ii) there is a bounded function c : X → R such that
+S(x) = c(x)||x||.
+First Proof. Since S is mid-point convex, and we first seek to establish continuity, we begin by establishing it for any separable subspace; we then use Theorem and Corollary B above to draw the same conclusion about X itself. Consequently, we may w.l.o.g. assume X is itself separable. By Theorem 2 applied to the usual meagre sets, S is locally bounded at 0, so there are M and δ > 0 such that
+|S(x)| M (x ∈ B δ ). In particular, for v ∈ Σ δ , |S(v)| M. For u ∈ X define a ray-restriction of S by f u (x) := S(x) (x ∈ R(u)). For fixed u, as the mapping (λ, u) −→ λu from R into X is continuous, the set R(u) is σ-compact. So for any fixed u, f u is Baire; indeed, f u (x) ∈ (a, b) iff S(x) ∈ (a, b) and x ∈ R(u), i.e. {x : f u (x) ∈ (a, b)} = {x : S(x) ∈ (a, b)} ∩ R(u),
+and R(u) has the Baire property (being σ-compact). So by Th. 1B, for any fixed u the function f u is continuous and there exist c ± ∈ R with S(λu) = c ± λ according to the sign of λ. This justifies the definitions below for u ∈ X:
+c + (u) := S(u), c − (u) := −S(−u).
+Then, for fixed u, by continuity of
+f u , S(λu) = c + (u)λ = λS(u) for λ 0, so that S is positively homogeneous on R + (u); likewise, S(λu) = S((−λ)(−u)) = (−λ)S(−u) = c − (u)λ for λ 0. Then for u = x/||x|| with x = 0, as v := δu ∈ Σ δ , |S(x)| = |S(||x||u)| = |S(v)| · ||x||/δ (M/δ)||x||.
+So S is continuous at 0, and so by subadditivity everywhere, as in the proof of Theorem 3. By continuity (as S is positively homogeneous) S is (R-) convex [Roc,Th. 4.7]; so its epigraph is a convex cone pointed at the origin [Roc,Th. 13.2]. Finally, for x = 0, take c(x) := S(x/||x||), which as above is bounded by
+M/δ; then S(x) = c(x)||x||.
+Second Proof. As above, we again assume that X is separable. By Theorem BL ( §2) there is a co-meagre subset Σ with S|Σ continuous. By passage to Σ ∩ (−Σ) we may assume Σ is symmetric; we may also assume that Σ is a G δ . By the Kuratowski-Ulam Theorem [Oxt,Th. 15.1], for quasi all x = 0, say for x ∈ D with D a G δ -set, the ray R + (x)∩Σ is co-meagre on Σ. By the Steinhaus Theorem, Sierpiński's Lemma S applies. By Theorem 1B for s ∈ Σ ∩ R + (x) there is c with S(s) = c||s|| (as s = x||s||/||x||). Now S|Σ is continuous so a Borel function, as Σ is a G δ , and for fixed x, S(a)/||a|| is constant for (density) points a of Σ ∩ R + (x) for x ∈ D. (This uses the isometry of R + (x) and R + .) So by Novikov's Theorem (see e.g. [JayR], p. x] -cf. [Kec,36.14]) there is a Borel function c : D → R such that S(x) = c(x)||x|| for x ∈ D. By Theorem 1B, since S is bounded near the origin, c(x) is also bounded on D near 0 (as in the previous proof). From this boundedness near 0, by Theorem 3, S(x) is continuous for all x. By continuity, S is positively homogeneous, so again convex with epigraph a convex cone pointed at the origin.
+
+Remarks. 1. In the first proof, one may show that S is continuous at 0 by considering a (null) non-vanishing sequence z n → 0. Put u n := z n /||z n ||; by DC select c ± n such that S(λu n ) = c ± n λ, according to the sign of λ. As S is locally bounded at 0, there are M and δ > 0 such that
+|S(x)| M (x ∈ B δ ).
+W.l.o.g. δ ∈ Q + , so for x = δu n ∈ B δ , |S(x)| = |c + n δ| M; then |c + n | M/δ. So S(z n ) = S(||z n ||u n ) = c + n ||z n || (M/δ)||z n || → 0. 2. The second proof uses the Fubini-like Kuratowski-Ulam Theorem [Oxt,15.1] (cf. [Chr1]). This can fail in a non-separable metric context, as shown in [Pol] (cf. [vMilP]), but see [FreNR] and [Sole4].
+
+Either argument for Theorem 4B above has an immediate Lebesgue measure analogue for X = R d , and beyond that a Haar measure analogue for X a locally compact group with Haar measure η, by the classical Fubini Theorem (see e.g. [Oxt,Th. 14.2]). But we may reach out further still for a measure analogue, Theorem 4M below, by employing the σ-ideal of Haar null sets ( §2). Whilst our argument is simpler (through not involving radial open-ness), there is a close relation to the result of [FisS], which is concerned with convex functions S that are measurable in the following sense: S −1 takes open sets to sets that, modulo Haar null sets, are universally measurable sets in X (we turn to convexity in §5: see especially Th. 7 and 8). Below (recall §3) a function S : G → R is universally measurable if S −1 takes open sets to universally measurable sets in G; this means that, as in §3, the level sets H ± n are universally measurable, so if G is amenable at 1, in particular if G is an abelian Polish group, for some k ∈ N the level set H ± k is not Haar null (since X = n∈N H ± n is not Haar null). This aspect would remain unchanged if the level sets were universally measurable modulo Haar null sets.
+
+Theorem 4M. For X a Banach space, and S : X → R universally measurable: if S is subadditive and Q + -homogeneous, then (i) S is continuous and convex with epigraph a convex cone pointed at 0, and (ii) there is a bounded function c : X → R such that
+S(x) = c(x)||x||.
+First Proof. Proceed as in the first proof of Theorem 4B (reducing as there to separability), but in lieu of Theorem 2 apply Theorem 2H here to the σ-ideal of Haar null sets H(X, +).
+
+Second Proof. Reduce as before to the separable case. With WFT above, as a replacement for the Kuratowski-Ulam theorem, we may follow the proof strategy in the second proof of Theorem 4B, largely verbatim. Regarding the line R(x) (for x = 0) as a locally compact group isomorphic to R, take µ := µ Σ × η 1 to be a probability measure with atomless spherical component µ Σ (a probability on the unit sphere of X; this can be done since the atomless measures form a dense G δ under the weak topology -cf. [Par,Th. 8.1]) and radial component η 1 a probability on R absolutely continuous with respect to Lebesgue (Haar) measure. We claim that S|R + (x) is quasi-σ-continuous on a (Haar/Lebesgue) co-null set for quasi all x. For if not, there is a set C that is not Haar null with S|R + (x) not σ-continuous for x ∈ C. So there is u ∈ X with µ(u + C) > 0, and so u + C is not radial. Put m(B) := µ(u + B) for Borel sets B, again a probability measure. By Theorem BL and WFT, S|R + (x) is quasi-σ-continuous for m-almost all x, except on some set E with m(E) = 0. This is a contradiction for points in C\E. Now continue as in Theorem 4B.
+
+
+F-spaces.
+
+Recall that an F -space is a topological vector space with topology generated by a complete translation-invariant metric d X ([KalPR, Ch. 1], [Rud,Ch. 1]). Thus the topology is generated by the F -norm ||x|| := d X (0, x), which satisfies the triangle inequality with ||αx|| ||x|| for |α| 1, and under it scalar multiplication is jointly continuous. This continuity implies that a vector x can be scaled down to arbitrarily small size. Consequently, the proofs above may be re-worked to yield F-space versions of Theorems 4B and 4M. However, in the absence of a norm (see §6.5 for normability), there is no isometry between the rays R(x) below and R + , only an injection ∆ : R(x) → R + . We are thus left with a result that has a somewhat weaker representation of S.
+
+We need the F -norm to be unstarlike, in the sense that the 'norm-length' (i.e. the range of the norm) of all rays be the same, say unbounded for convenience. This last property holds for the L p spaces for 0 < p < 1 with the familiar F -norm ||f || := ( |f (t)| p dt) 1/p .
+
+Unstarlikeness is an F -norm, rather than a topological, property; it will hold after re-norming, albeit with (0, 1) as the common range, when taking the F -norm to be ||x|| := sup n 2 −n (||x|| n /(1+||x|| n )), for ||·|| n a distinguishing sequence of semi-norms, since ϕ x,n (t) := t||x|| n /(1 + t||x|| n ) maps [0, ∞) onto [0, 1). Examples here are provided by spaces of continuous functions such as C(Ω), for Ω := n K n with K n ⊆int(K n+1 ) a chain of compact subsets of a Euclidean space, and with ||f || n := ||f | Kn || ∞ for || · || ∞ the supremum norm. Likewise this holds in the subspace H(Ω) of holomorphic functions, and in C ∞ (Ω) when ||f || n := max{||D α f || ∞ : |α| < n} for multi-indices αsee [Rud,). Being infinite-dimensional, none of them are normable as they are either locally bounded or Heine-Borel (or both) -cf. [Rud,Th. 1.23].
+
+Theorem 4F. For X an F -space and S : X → R Baire, if S is subadditive and Q + -homogeneous, then (i) S is continuous and convex with epigraph a convex cone pointed at 0, and (ii) for any unstarlike F -norm || · || (with ||tx|| → ∞ (t → ∞) for all x = 0), there are a bounded function c : X → R, a constant δ, and an injection ∆ : R(x) → R + such that
+S(x) = c(x)∆(x), where ||x/∆(x)|| = δ.
+In particular, if X is normable with norm || · || X , then ∆(x) = ||x|| X /δ.
+
+Proof. Let ||.|| be an unstarlike F -norm. For any x = 0, the map ϕ x : t → ||tx|| is a continuous injection with ϕ x (0) = 0 and ϕ x (1) = ||x||; so for ||x|| δ we may define δ(x) := min{t : ||tx|| = δ}, the infimum being attained. So ||δ(x)x|| = δ. The unstarlike property implies that δ(x) is likewise well defined for all x = 0. We now assume w.l.o.g. that X is separable, as in the earlier variants of Th. 4, for the same reasons (though we need the F -norm analogue of Corollary B, also valid -see below for the relevant positive homogeneity). Proceed as in the first proofs of Theorems 4B and 4M, with a few changes, which we now indicate. Of course we refer respectively to the σ-ideals of meagre sets and Haar null sets.
+
+With this in mind one deduces again positive homogeneity, and thence, for x = 0 and with v = δ(x)x ∈ Σ δ , that as δ(x) > 0
+
+
+|S(x)| = |S(v/δ(x))| = |S(v)|/δ(x) M/δ(x).
+
+Now δ(x) → ∞ as x → 0, and so S is continuous at 0; indeed, for each n ∈ N the function x → ||nx|| is continuous at x = 0, so by DC there is a positive sequence {η(n)} n∈N such that ||nx|| < δ for all x ∈ B η(n) . So δ(x) > n for x ∈ B η(n) and n ∈ N, and so 
+
+
+|S(x)| M/δ(x) < M/n
+(x ∈ B η(n) ).
+
+Convexity
+
+We begin by recalling a classical result, Theorem BD below, which motivates the themes of this section. These focus on the two properties of a function S of mid-point convexity
+S 1 2 (x + y) 1 2 (S(x) + S(y)) ,
+and convexity, which, for purposes of emphasis, we also refer to (as in [Meh]) as full (or R-) convexity:
+S((1 − t)x + ty) (1 − t)S(y) + tS(y) (t ∈ (0, 1)),
+by considering the weaker property of mid-point convexity on a set Σ :
+S 1 2 (x + y) 1 2 (S(x) + S(y)) (x, y ∈ Σ).
+This is the weak mid-point convexity of §1.
+
+In Theorems 5-7 below, we give local results, with the hypotheses holding on a set Σ. The smaller Σ is, the more powerful (and novel) the conclusions are. For instance, Σ might be locally co-meagre (and so co-meagre, as noted in the remarks to the definition of quasi-σ-continuity in §2). [Kuc,§ 6.4
+
+
+Theorem BD (Bernstein-Doetsch Theorem,
+
+
+]). For X a normed vector space, if S : X → R is mid-point convex and locally bounded somewhere (equivalently everywhere), then S is continuous and fully convex.
+
+Proof. This is immediate from Theorem B (see §1). See also the 'third proof' in [Kuc,§ 6.4], as the other two apply only in R d .
+
+The theorem gives rise to a sharp dichotomy for mid-point convex functions, similar to that for additive functions: they are either continuous everywhere or discontinuous everywhere ('totally discontinuous'), since local boundedness is 'transferable' between points. So on the one hand, a Hamel basis yields discontinuous additive examples (the 'Hamel pathology' of [BinGT,§1.1.4]) and, on the other, a smidgen's worth of regularity prevents this -see Corollary 1 below -and the mid-point convex functions are then continuous. A closely related result (for which see e.g. [Sim,Prop. 1.18]) we give as Theorem BD * below, whose proof we include, as it is so simple.
+
+
+Theorem BD * . For X a normed vector space, if S : X → R is fully convex and locally bounded, then S is continuous.
+
+Proof. W.l.o.g. assume that S is bounded in the unit ball, by K say (otherwise translate to the origin and rescale the norm). For x in the unit ball, setting u = x/||x||, and first writing x as a convex combination of 0 and u, then 0 as a convex combination of −u and x,
+
+
+S(x) < (1 − ||x||)S(0) + ||x||S(u),
+
+(1 + ||x||)S(0) < ||x||S(−u) + S(x).
+
+
+From here
+||x||[S(0)−S(−u)] < S(x)−S(0) < ||x||[S(u)−S(0)] : |S(x)−S(0)| < 2K||x||.
+Thus the emphasis in convexity theory is on generic differentiability; for background see again [Sim]. In Theorem 6 below we derive continuity and full (i.e. R-) convexity, as in Theorem BD [Kuc,§ 6.4], for functions possessing the weaker property of mid-point convexity on certain subsets Σ of their domain with negligible complement, for instance co-meagre or co-null sets. The results below vary their contexts between R and a general Banach space, and refer to sets with the following Steinhaus-Weil property.
+
+Definition. Say that Σ is locally Steinhaus-Weil, or has the Steinhaus-Weil property locally, if for x, y ∈ Σ and, for all δ > 0 sufficiently small, the sets Σ + z := Σ ∩ B δ (z), for z = x, y, have the interior point property that
+Σ + x − Σ + y has x − y in its interior. (Here B δ (x)
+is the closed ball about x of radius δ.) See [BinO7] for conditions under which this property is implied by the interior point property of the sets Σ + x − Σ + x (cf. [BarFN]).
+
+Examples of locally Steinhaus-Weil sets relevant here are the following: (i) Σ density-open in the case X := R n (by Steinhaus's Theorem); (ii) Σ locally non-meagre at all points x ∈ Σ (by the Piccard-Pettis Theorem -such sets can be extracted as subsets of a second-category set, using separability or by reference to the Banach Category Theorem); (iii) Σ universally measurable and not Haar null at any point (by the Christensen-Solecki Interior-points Theorem -again such sets can be extracted using separability).
+
+If Σ has the Baire property and is locally non-meagre then it is co-meagre (since its quasi interior is eveywhere dense).
+
+For contrast with Corollary 2 below, we first note that local boundedness of mid-point convex functions follows from regularity almost exactly as in the subadditive case of Theorem 2 of §3.
+
+
+Theorem 2 ′ . For X a vector space with a Steinhaus-Weil, Baire topology T and S : X → R mid-point convex: if S is T -Baire, then it is locally bounded.
+
+Proof. Suppose |S(u + z n )| → ∞ for some u ∈ X and null sequence z n → 0. As the level sets H ± n := {t : |S(±t)| n} are T -Baire and T is Baire, for some k the set H ± k is non-meagre. As T is Steinhaus-Weil, H ± k − H ± k has 0 in its interior.
+
+First suppose that S(u + z n ) → +∞. Then there is n ∈ N such that
+4z m ∈ H ± k − H ± k for all m n . For m n, choose a m , b m ∈ H ± k with 4z m = a m − b m
+for m n. Then, as
+u + z m = 1 2 2u + 1 4 a m + 1 4 (−b m ), for all m n S(u + z m ) 1 2 S(2u) + 1 4 S(a m ) + 1 4 S(−b m ) 1 2 S(2u) + 1 2 k,
+contradicting upper unboundedness. If on the other hand S(u + z n ) → −∞, then argue similarly, but now choose k, n and a m , b m ∈ H ± k so that
+−2z m = a m − b m ,
+for all m n. Then
+S(u/2) − 1 4 S(a m ) − 1 4 S(−b m ) 1 2 S(u + z m ),
+contradicting lower unboundedness.
+
+This result immediately yields a Banach-space version of Theorem BD in the separable context. The non-separable variant must wait.
+
+
+Corollary 1. For a separable Banach space X, if S : X → R mid-point convex is Baire or universally measurable, then it is locally bounded and so continuous.
+
+Proof. Apply Theorem 2 or 2H respectively to the σ-ideal of meagre or Haar null sets.
+
+As with Theorem 2H (at the end of §3) so too here, Theorem 2 ′ has a 'Haar'-type variant with the same proof, which we need below in Theorem FS.
+
+
+Theorem 2H ′ . For X a topological vector space, H a proper σ-ideal with the Steinhaus-Weil property and S : X → R mid-point convex: if S is universally measurable, then it is locally bounded.
+
+Our aim now is to identify in Theorem 5 below, for any weakly convex function on R, a canonical continuous convex function using continuity on sets Σ with the local Steinhaus-Weil property. Thereafter in Theorem 6 we will deduce continuity of a weakly convex function on R, which we extend to the separable Banach context of Theorem 7. As corollaries we then deduce Theorems M and FS of §1.
+
+
+Theorem 5 (Canonical Extension Theorem). For Σ locally Steinhaus-Weil and I ⊆ int(cl(Σ)), if S : R → R is both continuous and mid-point convex on Σ, and
+S(x) =S Σ (x) := lim sup Σ y→x S(y) (x ∈ I) -then (i) the limit exists for x ∈ I:S(x) := lim Σ y→x S(y); (ii)S = S on Σ; (iii) for all x ∈ I S(x) S (x);
+(iv)S is R + -convex:
+S(tx + (1 − t)y) tS(x) + (1 − t)S(y) (x, y ∈ I, t ∈ (0, 1)).
+For the proof we need three lemmas.
+
+
+Lemma 1 (Full convexity on Σ). For Σ ⊆ R locally Steinhaus-Weil, if S is both continuous and weakly convex on Σ, then S is fully convex on Σ :
+S((1 − t)a + tb) (1 − t)S(a) + tS(b) (a, b ∈ Σ, t ∈ (0, 1)).
+Proof. For any T, write B T ε (x) := B ε (x) ∩ T. Take any u. Choose a, b ∈ Σ with a < u < b and define t by
+u = (1 − t)a + tb : t = (u − a)/(b − a).
+As Σ − u has the Steinhaus-Weil property locally, and exponentiation is a homeomorphism, for small enough ε
+B Σ−u ε (b − u)[B Σ−u ε (u − a)] −1 + 1 = −B Σ−u ε (b − u)B Σ−u ε (a − u) −1 + 1 has (b − u)(u − a)
+−1 + 1 > 1 in its interior, and so has a rational element r > 1. Taking successively ε = 1/n for n ∈ N, select as above rational r n > 1 and a n , b n in Σ such that
+a n → a, b n → b, r n = 1 + b n − u u − a n = b n − a n u − a n → b − a u − a = 1/t.
+So with q n = 1/r n ∈ Q + , u = a n + q n (b n − a n ) = (1 − q n )a n + q n b n , and 0 < q n < 1.
+
+As a, b are relative-continuity points and q n is rational with q n → t,
+S(u) = S((1 − q n )a n + q n b n ) (1 − q n )S(a n ) + q n S(b n ) → (1 − t)S(a) + tS(b).
+So for any a, b ∈ Σ and 0 < t < 1,
+
+
+S((1 − t)a + tb) (1 − t)S(a) + tS(b).
+
+That is: S is R + -convex over Σ.
+
+
+Corollary 2 (Boundedness on Σ). For Σ ⊆ R locally Steinhaus-Weil, if
+
+S is both continuous and mid-point convex on Σ, then for each x ∈ int(cl(Σ)) and each sequence {u n } in Σ converging to x the sequence {S(u n )} is bounded .
+
+Proof. For x ∈ int(cl(Σ)), choose a, b ∈ Σ with a < x < b; then S is bounded above on (a, b). Indeed, applying Lemma 1 to a, b ∈ Σ,
+
+
+S((a, b)) max(S(a), S(b)).
+
+Suppose that S(u n ) → −∞ for some u n in Σ with u n → x ∈ int(cl(Σ)). Take x < v ∈ Σ and put w = (x + v)/2. Write w = t n u n + (1 − t n )v for some 0 < t n < 1. W.l.o.g. t n is convergent, to t say; then w = tx + (1 − t)v = (x + v)/2 and so t = 1/2. But
+S(w) = S(t n u n + (1 − t n )v) t n S(u n ) + (1 − t n )S(v),
+giving in the limit S(w) −∞, a contradiction.
+
+The following result is stated as we need it -for the line; we raise, and leave open here, the question of whether it holds in an infinite-dimensional Banach space. It does, however, hold under a stronger Q-convexity assumption on the set Σ -see Lemma 2 ′ below. Choose t n ↓ 0 and m(n) > n in order to express the right-sided sequence v in terms of the left-sided sequence u:
+
+
+Lemma 2 (Unique limits on R). For Σ ⊆ R locally Steinhaus-Weil, if S|Σ is both continuous and mid-point convex, then for any x ∈ R and for any sequences in
+Σ with u n ↑ x and v n ↓ x, lim S(u n ) = lim S(v n ),v m(n) = (1 − t n )u m(n) + t n v n .
+This is possible as u n ↑ x and v n ↓ x. As u m(n) , v m(n) ∈ Σ, by Lemma 1,
+R − ε S(v m(n) ) (1 − t n )S(u m(n) ) + t n S(u n ) → L.
+But R − ε L gives the contradiction R − L ε (R − L)/3. Now suppose that L > R. Taking ε = (L − R)/3, proceed to a similar contradiction by exchanging the roles of the u and v sequences: u m(n) = (1 − t n )v m(n) + t n u n with t n ↓ 0, to obtain
+L − ε S(u m(n) ) (1 − t n )S(v m(n) ) + t n S(u n ) → R.
+This time L − R ε.
+
+
+Lemma 2 ′ (Banach-space variant of unique limits). For a Banach space
+
+X and w ∈ X, and Q-convex (closed under rational convex combinations) Σ, if S : X → R is both mid-point convex, and locally bounded on Σ at w, then for any sequences u n →
+x and v n → x in Σ with {S(u n )} and {S(v n )} convergent lim S(u n ) = lim S(v n ).
+Proof. Put A := lim S(u n ), B := lim S(v n ). By symmetry of the assumptions we may assume that A < B. Noting that the translate w + Σ is Q-convex and the translate S w (x) = S(a + x) is mid-point convex on w + Σ, w.l.o.g suppose that x = 0. Choose δ > 0 and K such that |S(y)| K for all y ∈ Σ with |y| δ. For ε := (B − A)/3 > 0, there is m(0) so that for n > m(0),
+B − ε S(v n ).
+Let t n ↓ 0 be dyadic rational, e.g. t n = 2 −n . Then s n := 1/t n → ∞. For each n choose m(n) > n such that ||u m(n) || < δ/3 and ||s n u m(n) || < δ/3, ||s n v m(n) || < δ/3. Put w n := s n v m(n) + (s n − 1)u m(n) ∈ Σ.
+
+Then ||w n || = ||s n v m(n) || + ||s n u m(n) || + ||u m(n) || δ, so that ||S(w n )|| < K and v m(n) = (1 − t n )u m(n) + t n w n .
+
+Here S is mid-point convex on Σ, so
+R − ε S(v m(n) ) (1 − t n )S(u m(n) ) + t n S(w n ) → A. But B − ε A gives the contradiction B − A ε (B − A)/3.
+Below we write lim sup Σ y→x , lim Σ y→x S(y) for the upper limit or limit of S(y) as y tends to x through Σ.
+
+
+Lemma 3 (Regularization). For Σ locally Steinhaus-Weil and I
+⊆ int(cl(Σ)), if S : R → R with S|Σ mid-point convex locally bounded, writē S(x) := lim sup Σ y→x S(y) (x ∈ I),
+Then (i) the limit exists for x ∈ I:S(x) := lim Σ y→x S(y); (ii) the functionS(x) is continuous on I.
+Proof. (i) By Lemma 2,S is well-defined. (ii) Suppose thatS(x n ) → L =S(x) for some sequence x n → x in I, with L possibly infinite. Choose y n ∈ B 1/n (x n ) ∩ Σ with |S(y n ) −S(x n )| < 2 −n .
+Then y n → x and S(y n ) → L, contradicting S(y n ) →S(x).
+
+Proof of Theorem 5. By Corollary 2, (i) and (ii) follow as in the proof of Lemma 3, but in (ii) take y n ∈ Σ.
+
+By continuity of S on Σ, S|Σ =S|Σ. (iii) As in Lemma 1, for any
+x ∈ I take x = t x u x +(1−t x )v x with u x < x < v x , u x , v x ∈ Σ, and t x ∈ (0, 1); then S(x) t x S(u x ) + (1 − t x )S(v x ).
+
+Taking limits as
+u x ↑ x, v x ↓ x, and w.l.o.g. assuming t x → τ x (by bounded- ness), S(x) τ xS (x) + (1 − τ x )S(x) =S(x).
+(iv) Take x, y, α arbitrary, and put β = 1 − α. In Σ choose x n → x, y n → y and z n → αx + βy, so that with β n = 1 − α n z n := α n x n +β n y n : α n := (y n −z n )/(y n −x n ) → [y−αx+βy]/(y−x) = α.
+
+Then, as x n , y n , z n ∈ Σ, from S(α n x n + β n y n ) α n S(x n ) + β n S(y n )
+
+we getS (αx + βy) αS(x) + βS(y).
+
+For S : R → R Baire/measurable, since S is quasi σ-continuous (Th. BL, §2), there is Σ = m Σ m , which is quasi all of R and so dense in R, with Σ m an increasing sequence of sets each having the Steinhaus-Weil property locally. Before returning to a Banach space setting we prove a result in R, which we shall apply (twice) later in the context of a 'typical' line segment.
+
+Theorem 6. For a dense set Σ = m Σ m , with each Σ m locally Steinhaus-Weil, if S : R → R is mid-point convex on Σ and quasi-σ-continuous with respect to Σ, then S is continuous.
+
+Proof. If not, referring to the dense set Σ = m Σ m and the continuous functionsS Σm of the Canonical Extension Theorem, which, identified with their graphs, form an increasing union (by (i) above), we may putS := 
+|S(x) −S(y)| ε (y ∈ (x − ∆, x + ∆)).(*)
+Take 0 < δ < (∆/2), and set z := x + δ. For some m, Σ ′ := Σ m ∩(x, z) is non-empty and so has the Steinhaus-Weil property; then Σ ′ + Σ ′ contains an interval, (a, b) say. Put s := inf Σ ′ x; then (a, b) ⊆ (2s, 2z) ⊆ (2x, 2z). As a 2s, there is t ∈ Σ ′ with t > s, such that αt ∈ (a, b) for some dyadic rational α > 2. Indeed, for 2s < a and t ∈ (s, a/2) ∩ Σ ′ , taking α ∈ (a/t, b/t) gives 2t < a < αt < b and α > 2; on the other hand, for 2s = a, if t ∈ (s, b/2) ∩ Σ ′ , then 2 < b/t, and so taking α ∈ (2, b/t), gives 2s = a < 2t < αt < b.
+
+For any dyadic α > 2, take
+q = q(α) = α − 1 > 1;
+then q is a positive dyadic rational, and 1 α + q α = 1.
+
+Furthermore, if α satisfies αt < 2z, then as t > x
+1 < q = α − 1 < z + z − x x = x + 2(z − x) x = 1 + 2 δ x .
+For t > s in Σ ′ and dyadic α > 2 as above, since αt ∈ Σ ′ + Σ ′ ,
+αt = (x + u) + (x + v), t = (1/α)x + (q/α)[x + u + v]/q,
+with 0 < u, z < δ. As δ < (∆/2)/(1 − ∆/x) (as 1 − ∆/x < 1), as above.
+1 < q < 1 + 2 δ x < ∆ x − ∆ + 1 < x/(x − ∆). So (x − ∆) < x/q < x.
+Also as δ < ∆/2 and 1 < q,
+(u + v)/q < 2δ/q < 2δ < ∆.
+So for δ < ∆/2 small enough as above,
+[x + u + v]/q ∈ [x − ∆, x + ∆] and likewise (x + u)/q ∈ [x − ∆, x + ∆].
+As S(y) S (y), for all y, and as t ∈ Σ m , using mid-point convexity and continuity ofS at t (indeed ofS Σm ),
+S(x) − ε S (t) = S(t) (1/α)S(x) + (q/α)S([x + u + v]/q) (1/α)S(x) + (q/α)S([x + u + v]/q) (1/α)S(x) + (q/α)[S(x) + ε].
+So for δ > 0 small enough
+S(x) − ε (1/α)S(x) + (q/α)[S(x) + ε],
+where α and q depend on δ. But 1 1
+α (1 + 1 + 2δ/x), 1 2 > 1 α 1 2(1 + δ/x) .
+Let δ ↓ 0 : 1/α → 1/2, sō
+S(x) − ε (1/2)S(x) + (1/2)[S(x) + ε], orS (x) − S(x) 3ε = (3/4)[S(x) − S(x)],a contradiction.
+As a corollary we now have a result on separable Banach spaces, which by Theorem B will enable us to prove in their more general setting Theorems M and FS, stated in §1. Note the local character of the key assumption.
+
+Theorem 7. For a separable Banach space X, a dense set Σ = m Σ m , with each Σ m locally Steinhaus-Weil, if S : X → R is mid-point convex on Σ, Baire, and quasi-σ-continuous with respect to Σ, then S is continuous.
+
+Proof. Since Σ has the Steinhaus-Weil property locally, we may proceed as in Theorem 6 above to consider x = 0 with S(x) <S(x); define ε > 0 as there and choose ∆ > 0 similarly so that (*) holds for y ∈ B ∆ (x). Take δ < ∆/2 and Σ ′ := Σ ∩ B δ (x). By the Kuratowski-Ulam Theorem, for some σ ∈ Σ ′ the ray
+R x (σ) := {x + λ(σ − x) : λ 0} meets Σ ′ in a non-meagre set: otherwise Σ ′ ∩ R x (σ) is meagre for all σ ∈ Σ ′ , and so Σ ′ is meagre. As Σ ′ ∩ R x (σ) is Baire there is an interval I := [s, s ′ ]
+along R x (σ) for which Σ ′ ∩ I is co-meagre in I. Continue as in Theorem 6 working in R x (σ) rather than R + to obtain a contradiction to S(x) <S(x), so deducing continuity of S.
+
+As an immediate corollary we are now able to prove Theorem M due to Mehdi (albeit for a general topological vector space), and Theorem FS, a result slightly weaker than of Fischer and Słodkowski [FisS] (where universal measurability is modulo Haar null sets).
+
+Proof of Theorem M. By Theorem B we may assume w.l.o.g. that X is separable. By Theorem BL, S is continuous relative to a co-meagre (so dense) set Σ. Since Σ has the Steinhaus-Weil property locally, we may apply Theorem 7 above with Σ m ≡ Σ, as S is mid-point convex on Σ, so deducing continuity of S. Proof of Theorem FS. As above, we may again assume that X is separable. For any distinct points a, b, consider the line L through a and b, and let λ be Lebesgue masure on L. Then S|L : L → R is universally measurable, so λ-measurable and so quasi-σ-continuous by Luzin's Theorem. By Theorem 6, S|L is continuous on L and so fully convex on L. So S is fully convex. By Theorem 2H ′ , S is locally bounded, so continuous by Theorem BD*.
+
+We close with an analogue of Theorem 7. We will need to argue as in Theorem 6 twice: once, in the 'measure-case' mode of Theorem 6 (using σ-continuity), to establish that the continuity points form a big set (as in Luzin's Theorem), and then again, but now in the 'category mode' of Theorem 6 as in Theorem 7 (where Σ is dense and locally Steinhaus-Weil). This reflects the hybrid nature of Christensen's definition of Haar null sets.
+
+Theorem 8. For a separable Banach space X, a dense set Σ = m Σ m , with each Σ m locally Steinhaus-Weil, if S : X → R is mid-point convex on Σ and universally measurable, then S is continuous.
+
+Proof. Put Γ := {x ∈ X : S is continuous at x}; then Γ is universally measurable. Indeed, by Lemma 3S is well-defined and continuous (from the given Σ). Thus S is discontinuous at x iff S(x) =S(x), and so, sinceS is continuous and S universally measurable, the complement of Γ is
+q∈Q {x : S(x) < q <S(x)} ∪ {x :S(x) < q < S(x)} = q∈Q S −1 (−∞, q) ∩S −1 (q, ∞) ∪S −1 (−∞, q) ∩ S −1 (q, ∞), so universally measurable.
+We claim first that Γ∩U is non-Haar null for all non-empty open U. If not, U ∩Γ is Haar null for some non-empty open U; then, by the definition of Haar nullity (see §3), there exist a Borel set G ⊇ U ∩ Γ and a Borel probability measure µ such that µ(g + G) = 0 for all g ∈ X. W.l.o.g. U = u + B δ ; as X is separable, a countable number of translates t i + U of U, and so also of B δ , covers X. So µ(u+v+B δ ) > 0 for some v := t i . Put µ ν (E) = µ(v+E) for E ⊆ X Borel; then µ v is finite with µ v (U) > 0, and S is quasi-σ-continuous w.r.t. µ v , by Luzin's Theorem. Proceed as in Theorem 7, but this time applying Christensen's WFT in place of the Kuratowski-Ulam Theorem (again since S is universally measurable), to deduce that S is continuous at x for each x ∈ U, so contradicting the assumption that G is Haar null (and so not the whole of B δ ).
+
+Being universally measurable and locally non-Haar null, Γ has the Steinhaus-Weil property locally, by a theorem of Christensen [Chr1,Th. 2] (extended by Solecki [Sole3,Th. 1(ii) via Prop. 3.3(i)]). With Σ = Γ and X =Γ, proceed once more as in Theorem 7, again applying Christensen's WFT in place of the Kuratowski-Ulam Theorem. This gives that S is continuous on X.
+
+
+Complements
+
+1. Berz's other theorems. A sublinear function S has Q + -convex epigraph C. This observation allows Berz to deduce from the Q-version of the Hahn-Banach theorem that S is the supremum of all the additive functions f which it majorizes; the proof refers to the Q-hyperplanes defined by f that support the epigraph. Since a Baire/measurable S is locally bounded (Th. 2 above), all of the additive minorants of S supporting C are bounded above and so linear by Darboux's Theorem (see e.g. [BinO9] and the references cited there). This allows Berz to deduce that their upper envelope comprises the two halflines defining S (equivalently, this is the upper envelope of the supremum and infimum of the additive minorants of S). Hence Berz deduces a third result: when S is symmetric about the origin it may be represented as a norm. Indeed, embed x → {f (x)} f so that f (x) is the projection of x onto the f co-ordinate space; then a norm is defined by
+||x|| := sup f |f (x)| = S(x).
+2. Automatic continuity. The proof of Theorem 1 is inspired by an idea due to Goldie appearing in [BinG,I,Th. 5.7] (cf. [BinGT,Th. 3.2.5]), and more fully exploited in a recent series of papers including 13 Prop. 3]. The theme here is the interplay between functional inequalities (as with subadditivity, convexity etc.) and functional equations (as with additivity and the Cauchy functional equation). Here, minimal regularity implies continuity -whence the term automatic continuity -and linearity; see e.g. [BinO8] and the references cited there. 3. Automatic continuity and group action. An automatic continuity theorem of Hoffmann-Jørgensen is particularly relevant here for the discussion of the Baire-Berz Theorem. Hoffmann-Jørgensen proves in [Rog,Part 3: Th. 2.2.12] the (sequential) continuity of a Baire function f : X → Y when a single nonmeagre group T acts on the two (Hausdorff) spaces X and Y with f (tx) = tf (x), by appealing to a KBD argument (under T rather than under addition) in X. In the Baire-Berz Theorem it is a meagre group, namely Q + , that acts multiplicatively on the Banach spaces X and Y = R; but it is the additive structure of a Banach space which permits the use of KBD to obtain global continuity from continuity on a smaller set. 4. Convex and coherent risk measures. As remarked in §1, Berz's sublinearity theorem is connected with the theory of coherent risk measures [FolS,§ 4.1].
+
+The key properties are convexity and positive homogeneity (ρ(λx) = λρ(x) for λ 0). Under positive homogeneity, convexity is equivalent to subadditivity. This paper thus extends to sublinearity studies of the related areas of convexity, subadditivity and additivity, for which see e.g. [BinO1,3].
+
+In the economic/financial context, positive homogeneity -a form of scaleinvariance -means that large and small firms (or agents) have similar preferences; see e.g. Lindley [Lin,Ch. 5]. This is far from the case in practice, which is why convex risk measures (in which positive homogeneity is dropped) are often preferred; again, see e.g. [FolS,§4.1]. Sensitivity to scale here is related to curvature of utility functions, and the 'law of diminishing returns'. This incidentally underpins the viability of the insurance industry; again see e.g. Lindley [Lin,Ch. 5].
+
+The two half-lines in Berz's theorem correspond to taking long and short positions in one dimension. One can extend to many dimensions, as in [FolS], where the 'broken line' becomes a cone, and as we do in §4. Berz himself worked in one dimension, as his motivation was normability (below). 5. Normability. As norms are necessarily sublinear, Berz's third result (6.1) addresses the question of which sublinear functions are realized as norms. In this connection, the criterion for normability of a topological vector space was established by Kolmogorov, see e.g. [Rud,Th. 1.39]; for recent metric characterizations of normability -in terms of translation-invariant metrics -see the Oikhberg-Rosenthal result [OikR] demanding continuity of scaling and isometry of all one-dimensional subspaces R(x) with R.Šemrl's relaxation [Sem] drops this continuity when spaces are of dimension at least 2. (As for relaxation of homogeneity see [Mat].) Invariant metrics are provided by the Birkhoff-Kakutani normability theorem -see e.g. [Rud,Th. 1.24], [HewR,Th. 8.3], or for recent accounts [Gao,, [Ost2, §2.1]. 6. Beyond local compactness: Haar category-measure duality. In the absence of Haar measure, the definition (in §2) of left Haar null subsets of a topological group G required U(G), the universally measurable sets -by dint of the role of the totality of (probability) measures on G. The natural dual of U(G) is the class U B (G) of universally Baire sets, defined,for G with a Baire topology, as those sets B whose preimages f −1 (B) are Baire (have the Baire property) in any compact Hausdorff space K for any continuous f : K → G. Initially considered in [FenMW] for G = R, these have attracted continued attention for their role in the investigation of axioms of determinacy and large cardinals -see especially [Woo]; cf. [MarS].
+
+Analogously to the left Haar null sets, define in G the family of left Haar meagre sets, HM(G), to comprise the sets M coverable by a universally Baire set B for which there are a compact Hausdorff space K and a continuous f : K → G with f −1 (gB) meagre in K for all g ∈ G. These were introduced, in the abelian Polish group setting and with K metrizable, by Darji [Dar], cf. [Jab], and shown there to form a σ-ideal of meagre sets (co-extensive with the meagre sets for G locally compact); as HM(G)⊆ B 0 (G), the family is not studied here. [Kec,§ 38.B], restricting the operation of AD to the smaller class of projective sets. (The independence and consistency of DC versus AD was established respectively in Solovay [Solo3] and Kechris [Kech] -see also [KechS].) 4. LM versus PB. In 1983 Raissonier and Stern [RaiS,Th. 2] (cf. [Bar1,2]), inspired by then current work of Shelah (circulating in manuscript since 1980) and earlier work of Solovay, showed that if every Σ 1 2 set is Lebesgue measurable, then every Σ 1 2 set has BP, whereas the converse fails -for the latter see [Ste] -cf. [BarJ,§9.3]. This demonstrates that measurability is in fact the stronger notion -see [JudSh,§1] for a discussion of the consistency of analogues at level 3 and beyond -which is why we regard category rather than measure as primary. For we have seen above how the category version of Berz's theorem implies its measure version; see also [BinO6,7].
+
+Note that the assumption of Gödel's Axiom of Constructibility V = L, a strengthening of AC, yields ∆ 1 2 non-measurable subsets, so that the Fenstad-Normann result on the narrower class of provably ∆ 1 2 sets mentioned in 6.1 above marks the limit of such results in a purely ZF framework (at level 2). 5. Consistency and the role of large cardinals. While LM and PB are inconsistent with AC, such axioms can be consistent with DC. Justification with scant exception involves some form of large-cardinal assumption, which in turn calibrates relative consistency strengths -see [Kan] and [KoeW] (cf. [Lar] and [KanM]). Thus Solovay [Solo2] in 1970 was the first to show the equiconsistency of ZF+DC+LM+PB with that of ZFC+'there exists an inaccessible cardinal '. The appearance of the inaccessible in this result is not altogether incongruous, given its emergence in results (from 1930 onwards) due to Banach [Ban] (under GCH), Ulam [Ula] (under AC), and Tarski [Tar1], concerning the cardinalities of sets supporting a countably additive/finitely additive [0,1]-valued/{0, 1}-valued measure (cf. [Bog,1.12(x)]. Later in 1984 Shelah [She1,5.1] showed in ZF+DC that already the measurability of all Σ 3 1 sets implies that ℵ L 1 is inaccessible (the symbol ℵ L 1 refers to the substructure of constructible sets and denotes the first uncountable ordinal therein). As a consequence, Shelah [She1,5.1A] showed that ZF+DC+LM is equiconsistent with ZF+'there exists an inaccessible', whereas [She1,7.17] ZF+DC+PB is equiconsistent with just ZFC (i.e. without reference to inaccessible cardinals), so driving another wedge between classical measure-category symmetries (see [JudSh] for further, related 'wedges'). The latter consistency theorem relies on the result [She1,7.16] that any model of ZFC + CH has a generic (forcing) extension satisfying ZF+ 'every set of reals (first-order) defined using a real and an ordinal parameter has BP'. For a topological proof see Stern [Ste].
+
+6. LM versus PB continued. Raisonnier [Rai,Th. 5] (cf. [She1,5.1B]) has shown that in ZF+DC one can prove that if there is an uncountable wellordered set of reals (in particular a set of cardinality ℵ 1 ), then there is a non-measurable set of reals. (This motivates Judah and Spinas [JudSp] to consider generalizations including the consistency of the ω 1 -variant of DC.) See also Judah and Rosłanowski [JudR] for a model (due to Shelah) in which ZF+DC+LM+¬PB holds, and also [She2] where an inaccessible cardinal is used to show consistency of ZF+LM+¬PB+'there is an uncountable set without a perfect subset'. For a textbook treatment of much of this material see again [BarJ].
+
+Raisonnier [Rai,Th. 3] notes the result, due to Shelah and Stern, that there is a model for ZF+DC+PB+ℵ 1 = ℵ L 1 + 'the ordinally definable subsets of real are measurable'. So, in particular by Raisonnier's result, there is a non-measurable set in this model. Shelah's result indicates that the nonmeasurable is either Σ 1 3 (light-face symbol: all open sets coded effectively) or Σ 1 2 (bold-face). Thus here PB+¬LM holds. 7. Regularity of reasonably definable sets. From the existence of suitably large cardinals flows a most remarkable result due to Shelah and Woodin [SheW] justifying the opening practical remark about BP, which is that every 'reasonably definable' set of reals is Lebesgue measurable: compare the commentary in [BecK] following their Th 5.3.2. This is a latter-day sweeping generalization of a theorem due to Solovay (cf. [Solo1]) that, subject to large-cardinal assumptions, Σ 1 2 sets are measurable (and so also have BP by [RaiS]).
+
+on this ray, for any k ∈ N, choose k + 1 equally spaced points, denoted x n (i) for i = 0, 1, ..., k, starting with x n (0) = x 0 and x n (1) = x n (so that the distance apart of consecutive points is ||x n − x 0 ||). As above, since
+
+x n (i + 1) = 1 2 (x n (i) + x n (i + 2)), i = 0, 1, ..., k − 2 2S(x n (i+1)) S(x n (i))+S(x n (i+2)) :
+
+S(x n (i+1))−S(x n (i)) S(x n (i+2))−S(x n (i+1)), and so inductively: (1)) − S(x n (0)) ... S(x n (k)) − S(x n (k − 1)).
+h n = S(x n ) − S(x 0 ) = S(x n
+So, using telescoping sums, 
+
+) 3 .
+3For f Baire, f |V is continuous in the usual sense (i.e. E → E) on a D B -open set V [Oxt, Th. 8.1].
+
+
+Thereafter, taking c(x) := c + (δ(x)x) = S(δ(x)x), which is bounded by M,S(x) = S(δ(x)x/δ(x)) = c(x)∆(x), where ∆(x) := 1/δ(x).So ||x/∆(x)|| = δ. If the F -norm is a norm, δ(x) := δ/||x||; then ||xδ(x)|| = δ, so that ∆(x) := ||x||/δ. Theorem 4F implies Theorem 4B and 4M by taking c(x)/δ in place of c(x).
+
+
+when both limits exist. Proof. Put L := lim S(u n ), R := lim S(v n ); we show that L = R. If not, suppose first that L < R. For ε := (R − L)/3 > 0 there is m(0) so that for n > m(0), R − ε S(v n ).
+
+
+mS Σm and so may suppose w.l.o.g. for some x > 0 that S(x) <S(x). (Otherwise shift the origin to the left, or consider S(−x).) Fix such an x, and put ε := [S(x) − S(x)]/4. By continuity ofS at x, for some ∆ ∈ (0, x),
+
+S
+(x n (k)) − S(x 0 ) = [S(x n (k)) − S(x n (k − 1))] + [S(x n (k − 1)) − S(x n (k − 2))] + ... + S(x n ) − S(x 0 ) kh n .Taking successively k = k m := m, and choosing n = n(m) so large that k m ||x n(m) − x 0 || < 1/m, we obtain a subsequence x n(m) with ||x n(m) − x 0 || = k m ||x n(m) − x 0 || → 0, and, since h n(m) → h ∈ (0, ∞], S(x n (k)) = S(x n(m) (k m )) S(x 0 ) + k m h m(n) → ∞.
+
+2
+Topological preliminaries: Steinhaus-Weil propertyFundamental for our purposes is the Steinhaus-Weil property 1[BinO14,15]  that the difference set A − A has non-empty interior for A any non-negligible set with the Baire property, briefly: Baire set -as opposed to Baire topology.We focus on Baire topological spaces on which the Steinhaus-Weil theorem 
+holds. (See [Sole2, Remark to Th. 6.1] for failure of the Steinhaus-Weil pro-
+perty in a group; cf. 
+
+
+1 takes open sets to universally measurable sets (as in §2) in G; further say that a σ-ideal H of subsets of a topological vector space X (the 'negligible sets') is proper if X / ∈ H, and that H has the Steinhaus-Weil property if universally measurable sets that are not in H have the interior point property. Theorem 2H. For X a topological vector space, H a proper σ-ideal with the Steinhaus-Weil property and S : X → R subadditive: if S is universally measurable, then it is locally bounded.
+Initially, as in the Steinhaus-Piccard-Pettis context, this concerns R; the wider context is due to Weil and concerns (Haar) measurability in locally compact groups[Wei, p. 50], cf.[GroE2]. These distinctions blur in our bitopological context.
+Also relevant here is their regularity: for their outer regularity (approximation by open sets) see[Par, Th. II.1.2], and their inner regularity (approximation by compacts) see[Par,  Ths. II.3.1 and 3.2], the latter relying on completeness.
+This Appendix for the arXiv version only.
+R + (x n ) := {λ(x 0 − x n ) : λ > 0};4 This Appendix for the arXiv version only.
+Appendix 1: Set-theoretic foundations3We summarize below background information needed to appreciate the various set-theoretic axioms to which we have referred. As mentioned in the Introduction, this may be omitted by the expert (or uninterested) reader; the earlier article[Wri2]of 1977 had a similar motivation.1. Category/measure regularity versus practicality. The Baire/measurable property assumed above is usually satisfied in mathematical practice. Indeed, any analytic subset of R possesses these properties ([Rog,Part 1 §2.9],[Kec,29.5]), hence so do all the sets in the σ-algebra that they generate (the C-sets,[Kec,§29.D]). There is a broader class still. Recall first that an analytic set may be viewed as a projection of a planar Borel set P, so is definable as {x : Φ(x)} via the Σ 1 1 formula Φ(x) := (∃y ∈ R)[(x, y) ∈ P ]; here the notation Σ 1 1 indicates one quantifier block (the subscripted value) of existential quantification, ranging over reals (type 1 objects -the superscripted value). Use of the bold-face version of the symbol indicates the need to refer to arbitrary coding (by reals not necessarily in an effective manner, for which see[Gao,§1.5]) the various opens sets needed to construct P. (An open set U is coded by the sequence of rational intervals contained in U.)Consider a set A such that both A and R\A may be defined by a Σ 1 2 formula, say respectively as {x : Φ(x)} and {x : Ψ(x)}, where Φ(x) := (∃y ∈ R)(∀z ∈ R)(x, y, z) ∈ P } now, and similarly Ψ. This means that A is both Σ 1 1 and Π 1 1 (with Π indicating a leading universal quantifier block), and so in the ambiguous class ∆ 1 1 . If in addition the equivalenceis provable in ZF, i.e. without reference to AC, then A is said to be provably ∆ 1 2 . It turns out that such sets have the Baire/measurable property -see[FenN], where these are generalized to the universally (=absolutely) measurable sets ( §2). How much further this may go depends on what axioms of set-theory are admitted, a matter to which we now turn.Our interest in such matters is dictated by the Character Theorems of regular variation, noted in[BinO7,§3](revisited in[BinO12]), which identify the logical complexity of the function h * (x) := lim sup h(t + x) − h(t), which is ∆ 1 2 if the function h is Borel (and is Π 1 2 if h is analytic, and Π 1 3 if h isAppendix 2: Blumberg Dichotomy 4Proof of Theorem B. The first assertion is established[Blu,Th. 1]as the second step of an argument but without depending on the (local compactness) assumptions of the first step (note also that the quantity h there could be +∞). We expand Blumberg's rather brief proof below. As for the second assertion, if S is not continuous at x 0 choose a sequence x n with limit x 0 and with S(x n ) unbounded, and take D to be the closed span of {x n : n = 0, 1, 2, ...}. Continuity of S|D at x 0 implies that S(x n ) is bounded, a contradiction.To return to the first assertion: fix x 0 with S not continuous at x 0 . First construct a sequence x n convergent to x 0 withas follows. Begin with any sequence u n with limit x 0 such that S(u n ) fails to converge to S(x 0 ). The construction now splits into two cases. Case (i): lim sup S(u n ) > S(x 0 ). Passage to a subsequence x n of u n yields the desired result that lim S(x n ) > S(x 0 ). Case (ii) lim sup S(u n ) S(x 0 ). Then lim inf S(u n ) < S(x 0 ). Passing to a subsequence, we may assume that lim S(u n ) < S(x 0 ); then taking y n := 2x 0 − u n :x 0 = (u n + y n )/2 gives 2S(x 0 ) − S(u n ) S(y n ), implying S(x 0 ) < 2S(x 0 ) − lim S(u n ) lim inf S(y n ). Now pass to a subsequence x n of y n to obtain S(x 0 ) < lim S(x n ). In either case we obtain a sequence x n with limit x 0 and with ( ‡). Put h n := S(x n ) − S(x 0 ); then h := lim h n ∈ (0, ∞]. Consider the positive ray from x 0 to x n
+On the boundedness of definable linear operators. M Ajtai, Period. Math. Hungar. 5M. Ajtai, On the boundedness of definable linear operators, Period. Math. Hungar. 5 (1974), 343-352.
+
+Coherent measures of risk. P Artzner, F Delbaen, J.-M Eber, D Heath, Math. Finance. 93P. Artzner, F. Delbaen, J.-M. Eber, D. Heath, Coherent measures of risk. Math. Finance 9 (1999), no. 3, 203-228.
+
+Marczewski sets in the Hashimoto topologies for measure and category. M Balcerzak, J Rzepecka, Acta Univ. Carolin. Math. Phys. 39M. Balcerzak, J. Rzepecka, Marczewski sets in the Hashimoto topo- logies for measure and category. Acta Univ. Carolin. Math. Phys. 39 (1998), 93-97
+
+On Smital properties. A Bartoszewicz, Artur , M Filipczak, T Natkaniec, Topology Appl. 158A. Bartoszewicz, Artur, M. Filipczak, T. Natkaniec, On Smital pro- perties. Topology Appl. 158 (2011), 2066-2075.
+
+Sublinear functions on R. E Berz, Aequat. Math. 12E. Berz, Sublinear functions on R, Aequat. Math. 12 (1975), 200-206.
+
+Extensions of regular variation. I. Uniformity and quantifiers; Extensions of regular variation. II. Representations and indices. N H Bingham, C M Goldie, Proc. London Math. Soc. 3N. H. Bingham, C.M. Goldie, Extensions of regular variation. I. Uni- formity and quantifiers; Extensions of regular variation. II. Representations and indices. Proc. London Math. Soc. (3) 44 (1982), 473-496, 497-534.
+
+N H Bingham, C M Goldie, J L Teugels, Regular variation. Cambridge University Press2nd ed.. 1st edN. H. Bingham, C. M. Goldie and J. L. Teugels, Regular variation, 2nd ed., Cambridge University Press, 1989 (1st ed. 1987).
+
+Generic subadditive functions. N H Bingham, A J Ostaszewski, Proc. Amer. Math. Soc. 136N. H. Bingham and A. J. Ostaszewski, Generic subadditive func- tions, Proc. Amer. Math. Soc. 136 (2008), 4257-4266.
+
+Infinite combinatorics and the foundations of regular variation. N H Bingham, A J Ostaszewski, Journal of Math. Anal. Appl. 360N. H. Bingham and A. J. Ostaszewski, Infinite combinatorics and the foundations of regular variation, Journal of Math. Anal. Appl. 360 (2009), 518-529.
+
+N H Bingham, A J Ostaszewski, Automatic continuity: subadditivity, convexity, uniformity. Aequationes Mathematicae. 78N. H. Bingham and A. J. Ostaszewski, Automatic continuity: sub- additivity, convexity, uniformity. Aequationes Mathematicae, 78 (2009), 257- 270
+
+Beyond Lebesgue and Baire: generic regular variation. N H Bingham, A J Ostaszewski, Coll. Math. 116N. H. Bingham and A. J. Ostaszewski, Beyond Lebesgue and Baire: generic regular variation, Coll. Math. 116 (2009), 119-138.
+
+. N H Bingham, A J Ostaszewski, Kingman, London Math. Soc. Lecture Notes in Mathematics. Sir John Kingman Festschrift, ed. N. H. Bingham and C. M. Goldie378CUPN. H. Bingham and A. J. Ostaszewski, Kingman, category and com- binatorics. Probability and Mathematical Genetics (Sir John Kingman Fest- schrift, ed. N. H. Bingham and C. M. Goldie), 135-168, London Math. Soc. Lecture Notes in Mathematics 378, CUP, 2010.
+
+Beyond Lebesgue and Baire II: Bitopology and measure-category duality. N H Bingham, A J Ostaszewski, Colloquium Math. 121N. H. Bingham and A. J. Ostaszewski, Beyond Lebesgue and Baire II: Bitopology and measure-category duality. Colloquium Math. 121 (2010), 225-238.
+
+Regular variation without limits. N H Bingham, A J Ostaszewski, J. Math. Anal. Appl. 370N. H. Bingham and A. J. Ostaszewski, Regular variation without limits. J. Math. Anal. Appl., 370 (2010), 322-338.
+
+Normed versus topological groups: dichotomy and duality. N H Bingham, A J Ostaszewski, Dissertationes Math. 472ppN. H. Bingham and A. J. Ostaszewski, Normed versus topological groups: dichotomy and duality, Dissertationes Math. 472 (2010) 138 pp.
+
+Dichotomy and infinite combinatorics: the theorems of Steinhaus and Ostrowski. N H Bingham, A J Ostaszewski, Math. Proc. Camb. Phil. Soc. 150N. H. Bingham and A. J. Ostaszewski, Dichotomy and infinite com- binatorics: the theorems of Steinhaus and Ostrowski. Math. Proc. Camb. Phil. Soc. 150 (2011), 1-22.
+
+The Steinhaus theorem and regular variation : De Bruijn and after. N H Bingham, A J Ostaszewski, Indag. Math. 24N. H. Bingham and A. J. Ostaszewski, The Steinhaus theorem and regular variation : De Bruijn and after, Indag. Math. 24 (2013),679-692.
+
+Cauchy's functional equation and extensions: Goldie's equation and inequality, the Gołąb-Schinzel equation and Beurling's equation. N H Bingham, A J Ostaszewski, arXiv:1405.3947Aequat. Math. 89fuller versionN. H. Bingham and A. J. Ostaszewski, Cauchy's functional equ- ation and extensions: Goldie's equation and inequality, the Gołąb-Schinzel equation and Beurling's equation, Aequat. Math. 89 (2015), 1293-1310 (ful- ler version: arXiv: 1405.3947).
+
+Beurling moving averages and approximate homomorphisms. N H Bingham, A J Ostaszewski, Indag. Math. (NS). fuller version: arXiv1407.4093v2)N. H. Bingham and A. J. Ostaszewski, Beurling moving averages and approximate homomorphisms, Indag. Math. (NS) 27 (2016), 601-633 (fuller version: arXiv1407.4093v2).
+
+N H Bingham, A J Ostaszewski, arXiv:1405.3948v2Additivity, subadditivity and linearity: automatic continuity and quantifier weakening. N. H. Bingham and A. J. Ostaszewski, Additivity, subadditivity and linearity: automatic continuity and quantifier weakening, arXiv: 1405.3948v2.
+
+Beyond Lebesgue and Baire IV: Density topologies and a converse Steinhaus-Weil Theorem. N H Bingham, A J Ostaszewski, arXiv1607.00031N. H. Bingham and A. J. Ostaszewski, Beyond Lebesgue and Baire IV: Density topologies and a converse Steinhaus-Weil Theorem, arXiv1607.00031.
+
+The Steinhaus-Weil property: its converse, Solecki amenability and subcontinuity. N H Bingham, A J Ostaszewski, arXiv1607.00049N. H. Bingham and A. J. Ostaszewski, The Steinhaus-Weil proper- ty: its converse, Solecki amenability and subcontinuity, arXiv1607.00049.
+
+On convex functions. H Blumberg, Trans. Amer. Math. Soc. 20H. Blumberg, On convex functions, Trans. Amer. Math. Soc. 20 (1919), 40-44.
+
+Translates of sequences in sets of positive measure. D Borwein, S Z Ditor, Canadian Math. Bull. 21D. Borwein and S. Z. Ditor, Translates of sequences in sets of positive measure, Canadian Math. Bull. 21 (1978), 497-498.
+
+Null sets and essentially smooth Lipschitz functions. J M Borwein, W B Moors, SIAM J. Optim. 8J. M. Borwein, W. B. Moors, Null sets and essentially smooth Lip- schitz functions. SIAM J. Optim. 8.2 (1998), 309-323.
+
+. A M Bruckner, Differentiation of integrals. Amer. Math. Monthly. 78A. M. Bruckner, Differentiation of integrals. Amer. Math. Monthly 78.9 (1971), 1-51
+
+On sets of Haar measure zero in abelian Polish groups. J P R Christensen, Proceedings of the International Symposium on Partial Differential Equations and the Geometry of Normed Linear Spaces. the International Symposium on Partial Differential Equations and the Geometry of Normed Linear SpacesJerusalemJ. P. R. Christensen, On sets of Haar measure zero in abelian Polish groups. Proceedings of the International Symposium on Partial Differential Equations and the Geometry of Normed Linear Spaces (Jerusalem, 1972).
+
+. Israel J. Math. 13Israel J. Math. 13 (1972), 255-260 (1973).
+
+Topology and Borel structure. Descriptive topology and set theory with applications to functional analysis and measure theory. J P R Christensen, North-Holland Mathematics Studies. 10J. P. R. Christensen, Topology and Borel structure. Descriptive to- pology and set theory with applications to functional analysis and measure theory. North-Holland Mathematics Studies, Vol. 10, 1974.
+
+On absolutely measurable sets. J E Fenstad, D Normann, Fund. Math. 8174J. E. Fenstad, D. Normann, On absolutely measurable sets. Fund. Math. 81 (1973/74), no. 2, 91-98.
+
+Christensen zero sets and measurable convex functions. P Fischer, Z Słodkowski, Proc. Amer. Math. Soc. 793P. Fischer, Z. Słodkowski, Christensen zero sets and measurable co- nvex functions. Proc. Amer. Math. Soc. 79.3 (1980), 449-453.
+
+Stochastic finance: An introduction in discrete time, de Gruyter Studies in Math. H Föllmer, A Schied, 27rd ed.H. Föllmer and A. Schied, Stochastic finance: An introduction in di- screte time, de Gruyter Studies in Math. 27, 3 rd ed., 2011 (1 ed 2002, 2 nd ed. 2004).
+
+Measure-additive coverings and measurable selectors, Dissertationes Math. D Fremlin, 260116D. Fremlin, Measure-additive coverings and measurable selectors, Dis- sertationes Math. 260 (1987),116p.
+
+D Fremlin, Topological measure theory. Torres-Fremlin, 2 nd printing. 4Measure theory. st printing 2003D. Fremlin, Measure theory Vol. 4: Topological measure theory. Torres- Fremlin, 2 nd printing, 2006 (1 st printing 2003).
+
+Universally Kuratowski-Ulam spaces. D Fremlin, T Natkaniec, I Recław, Fund. Math. 1653D. Fremlin, T. Natkaniec, I. Recław, Universally Kuratowski-Ulam spaces, Fund. Math. 165 (2000), no. 3, 239-247.
+
+S Gao, Invariant descriptive theory. CRC PressS. Gao, Invariant descriptive theory, CRC Press, 2009.
+
+Solovay's axiom and functional analysis. H G Garnir, Functional analysis and its applications. H. G. Garni, K. R. Unni, J.H. WillaimsonSpringer399Proc. Madras Conf. on Funct. Anal.H. G. Garnir, Solovay's axiom and functional analysis, 189-204, in Functional analysis and its applications, eds. H. G. Garni, K. R. Unni, J.H. Willaimson, Proc. Madras Conf. on Funct. Anal., Lecture Notes in Math. 399, Springer, 1974.
+
+Density topology and approximate continuity. C Goffman, C J Neugebauer, T Nishiura, Duke Math. J. 28C. Goffman, C. J. Neugebauer and T. Nishiura, Density topology and approximate continuity, Duke Math. J. 28 (1961), 497-505.
+
+Approximately continuous transformations. C Goffman, D Waterman, Proc. Amer. Math. Soc. 12C. Goffman, D. Waterman, Approximately continuous transforma- tions, Proc. Amer. Math. Soc. 12 (1961), 116-121.
+
+Regularity properties of functional equations and inequalities. K.-G Grosse-Erdmann, Aequat. Math. 37K.-G. Grosse-Erdmann, Regularity properties of functional equ- ations and inequalities, Aequat. Math. 37 (1989) 233-251.
+
+An extension of the Steinhaus-Weil Theorem. K.-G Grosse-Erdmann, Coll. Math. 57K.-G. Grosse-Erdmann, An extension of the Steinhaus-Weil The- orem, Coll. Math. 57 (1989), 307-317.
+
+Measure Theory, Grad. Texts in Math. P R Halmos, Springer 1974 (1st. Van Nostrand18P. R. Halmos, Measure Theory, Grad. Texts in Math. 18, Springer 1974 (1st. ed. Van Nostrand, 1950).
+
+. G H Hardy, J E Littlewood, G Pólya, Inequalities, 2nd ed., CUPG. H. Hardy, J. E. Littlewood, G. Pólya, Inequalities. 2nd ed., CUP, 1952.
+
+On the *topology and its application. H Hashimoto, Fund. Math. 911H. Hashimoto, On the *topology and its application. Fund. Math. 91 (1976), no. 1, 5-10.
+
+Abstract harmonic analysis. E Hewitt, K A Ross, Structure of topological groups, integration theory, group representations. 2 nd ed. Grundlehren Wiss., 115. SpringerIE. Hewitt, K. A. Ross, Abstract harmonic analysis, Vol. I. Structu- re of topological groups, integration theory, group representations. 2 nd ed. Grundlehren Wiss., 115. Springer, 1979.
+
+Functional analysis and semi-groups. E Hille, R S Phillips, Coll. Publ. 31Amer. Math. Soc3rd ed. 1974 (1st ed. 1957E. Hille and R. S. Phillips, Functional analysis and semi-groups, Coll. Publ. Vol 31, Amer. Math. Soc, 3rd ed. 1974 (1st ed. 1957).
+
+Prevalnce: a translation-invariant "almost everywhere" on infinite dimensional spaces. B R Hunt, T Sauer, J A Yorke, Bull. Amer. Math. Soc. 27B.R. Hunt, T. Sauer, J. A. Yorke, Prevalnce: a translation-invariant "almost everywhere" on infinite dimensional spaces, Bull. Amer. Math. Soc. 27.2 (1992), 217-238.
+
+Some analogies between Haar meager sets and Haar null sets in abelian Polish groups. E Jabłońska, J. Math. Anal. Appl. 421E. Jabłońska, Some analogies between Haar meager sets and Haar null sets in abelian Polish groups. J. Math. Anal. Appl. 421 (2015),1479-1486.
+
+New topologies from old via ideals. D Janković, T R Hamlett, Amer. Math. Monthly. D. Janković, T. R. Hamlett, New topologies from old via ideals, Amer. Math. Monthly, 97 (1990), 295-310.
+
+. J E Jayne, C A Rogers, Selectors, Princeton University PressJ. E. Jayne and C. A. Rogers, Selectors. Princeton University Press, 2002.
+
+An F-space sampler. N J Kalton, N T Peck, J W Roberts, London Math. Soc. Lect. Note Ser. 89Cambridge University PressN. J. Kalton, N. T. Peck, J. W. Roberts, An F-space sampler. Lon- don Math. Soc. Lect. Note Ser. 89, Cambridge University Press, 1984.
+
+Kechris: Classical Descriptive Set Theory. Grad. Texts in Math. A S , Springer156A. S. Kechris: Classical Descriptive Set Theory. Grad. Texts in Math. 156, Springer, 1995.
+
+A general functional equation. J H B Kemperman, Trans. Amer. Math. Soc. 86J. H. B. Kemperman, A general functional equation, Trans. Amer. Math. Soc. 86 (1957), 28-56.
+
+The convergent sequences belonging to a set. H Kestelman, J. London Math. Soc. 22H. Kestelman, The convergent sequences belonging to a set, J. London Math. Soc. 22 (1947), 130-136.
+
+On an equivalent form of a Steinhaus theorem, Mathematica (Cluj). Z Kominek, 30Z. Kominek, On an equivalent form of a Steinhaus theorem, Mathe- matica (Cluj), 30 (53) (1988), 25-27.
+
+An introduction to the theory of functional equations and inequalities. Cauchy's equation and Jensen's inequality. M Kuczma, BirkhäuserWarszawa2nd ed.. 1st ed. PWNM. Kuczma, An introduction to the theory of functional equations and inequalities. Cauchy's equation and Jensen's inequality. 2nd ed., Birkhäuser, 2009 [1st ed. PWN, Warszawa, 1985].
+
+D V Lindley, Taking decisions. Wiley2nd ed.D. V. Lindley, Taking decisions, 2nd ed., Wiley, 1985.
+
+J Lukeš, J Malý, L Zajíček, Fine topology methods in real analysis and potential theory. Springer1189J. Lukeš, J. Malý, L. Zajíček, Fine topology methods in real ana- lysis and potential theory, Lecture Notes in Mathematics 1189, Springer, 1986.
+
+Subadditive functions and a relaxation of the homogeneity condition of seminorms. J Matkowski, Proc. Amer. Math. Soc. 1174J. Matkowski, Subadditive functions and a relaxation of the homoge- neity condition of seminorms. Proc. Amer. Math. Soc. 117 (1993), no. 4, 991-1001
+
+Quantitative risk management. Concepts, techniques and tools. A J Mcneil, R Frey, P Embrechts, Princeton University PressA. J. McNeil, R. Frey, P. Embrechts, Quantitative risk manage- ment. Concepts, techniques and tools. Princeton University Press, 2005.
+
+On convex functions. M R Mehdi, J. London Math. Soc. 39M. R. Mehdi, On convex functions. J. London Math. Soc. 39 (1964), 321-326.
+
+A note on the Effros Theorem. J Van Mill, Amer. Math. Monthly. 1119J. van Mill, A note on the Effros Theorem, Amer. Math. Monthly, 111.9 (2004), 801-806.
+
+The Baire category theorem in products of linear spaces and topological groups. J Van Mill, R Pol, Topology Appl. 223J. van Mill, R. Pol, The Baire category theorem in products of linear spaces and topological groups. Topology Appl.. 22 (1986), no. 3, 267-282.
+
+Generalization of a result of Borwein and Ditor. H I Miller, Proc. Amer. Math. Soc. 1054H. I. Miller, Generalization of a result of Borwein and Ditor, Proc. Amer. Math. Soc. 105 (1989), no. 4, 889-893.
+
+Group action and shift-compactness. H I Miller, A J Ostaszewski, J. Math. Anal. App. 392H. I. Miller and A. J. Ostaszewski, Group action and shift-compactness, J. Math. Anal. App. 392 (2012), 23-39.
+
+A metric characterization of normed linear spaces. T Oikhberg, H Rosenthal, Rocky Mountain J. Math. 37T. Oikhberg, H. Rosenthal, A metric characterization of normed li- near spaces, Rocky Mountain J. Math. 37 (2007) 597-608.
+
+Analytically heavy spaces: Analytic Cantor and Analytic Baire Theorems. A J Ostaszewski, Topology and its Applications. 158A. J. Ostaszewski, Analytically heavy spaces: Analytic Cantor and Analytic Baire Theorems, Topology and its Applications 158 (2011), 253- 275.
+
+Beyond Lebesgue and Baire III: Steinhaus's Theorem and its descendants. A J Ostaszewski, Topology and its Applications. 160A. J. Ostaszewski, Beyond Lebesgue and Baire III: Steinhaus's The- orem and its descendants, Topology and its Applications 160 (2013), 1144- 1154.
+
+Almost completeness and the Effros Theorem in normed groups. A J Ostaszewski, Topology Proceedings. 41fuller version: arXiv.1606.04496A. J. Ostaszewski, Almost completeness and the Effros Theorem in normed groups, Topology Proceedings 41 (2013), 99-110 (fuller version: arXiv.1606.04496).
+
+Shift-compactness in almost analytic submetrizable Baire groups and spaces, survey article. A J Ostaszewski, Topology Proceedings. 41A. J. Ostaszewski, Shift-compactness in almost analytic submetriza- ble Baire groups and spaces, survey article, Topology Proceedings 41 (2013), 123-151.
+
+Effros, Baire, Steinhaus and non-separability, Topology and its Applications. A J Ostaszewski, Mary Ellen Rudin Special Issue. 195A. J. Ostaszewski, Effros, Baire, Steinhaus and non-separability, To- pology and its Applications, Mary Ellen Rudin Special Issue, 195 (2015), 265-274.
+
+J C Oxtoby, Measure and category. Springer2nd ed. Graduate Texts in Math. 2. st ed. 1972J. C. Oxtoby: Measure and category, 2nd ed. Graduate Texts in Math. 2, Springer, 1980 (1 st ed. 1972).
+
+Probability measures on metric spaces. K R Parthasarathy, Academic PressK. R. Parthasarathy, Probability measures on metric spaces. Academic Press, 1967.
+
+Note on category in Cartesian products of metrizable spaces. R , Fund. Math. 1021R. Pol, Note on category in Cartesian products of metrizable spaces, Fund. Math. 102 (1979), no. 1, 55-59.
+
+R T Rockafellar, Convex analysis. PrincetonR. T. Rockafellar, Convex analysis, Princeton, 1972.
+
+Analytic sets. C A Rogers, J Jayne, C Dellacherie, F Topsøe, J Hoffmann-Jørgensen, D A Martin, A S Kechris, A H Stone, Academic PressC. A. Rogers, J. Jayne, C. Dellacherie, F. Topsøe, J. Hoffmann-Jørgensen, D. A. Martin, A. S. Kechris, A. H. Stone, Analytic sets. Academic Press, 1980.
+
+Sub-additive functions. R A Rosenbaum, Duke Math. J. 17R. A. Rosenbaum, Sub-additive functions, Duke Math. J. 17 (1950), 227-242.
+
+Automatic continuity of homomorphisms and fixed points on metric compacta. C Rosendal, S Solecki, Israel J. Math. 162C. Rosendal, S. Solecki, Automatic continuity of homomorphisms and fixed points on metric compacta. Israel J. Math. 162 (2007), 349-371
+
+W Rudin, Functional Analysis. McGraw-HillW. Rudin, Functional Analysis, McGraw-Hill, 1991.
+
+A characterization of normed spaces. P , J. Math. Anal. Appl. 343P.Šemrl, A characterization of normed spaces. J. Math. Anal. Appl. 343 (2008), 1047-1051.
+
+Sur l'équation fonctionelle f (x+y) = f (x)+f (y). W Sierpiński, Fund. Math. 1PWNW. Sierpiński, Sur l'équation fonctionelle f (x+y) = f (x)+f (y), Fund. Math. 1 (1920), 116-122 (reprinted in Oeuvres choisis, Vol. 2, 331-33, PWN, Warsaw 1975).
+
+Sur les fonctions convexes mesurables. W Sierpiński, Fund. Math. 1PWNW. Sierpiński, Sur les fonctions convexes mesurables, Fund. Math. 1 (1920), 125-128 (reprinted in Oeuvres choisis, Vol. 2, 337-340, PWN, Warsaw 1975).
+
+Convexity: An analytic viewpoint, Cambridge Tracts in Math. B Simon, CUP. 187B. Simon, Convexity: An analytic viewpoint, Cambridge Tracts in Math. 187, CUP, 2011.
+
+On Haar null sets. S Solecki, Fund. Math. 1493S. Solecki, On Haar null sets. Fund. Math. 149 (1996), no. 3, 205-210.
+
+Size of subsets of groups and Haar null sets. S Solecki, Geom. Funct. Analysis. 15S. Solecki, Size of subsets of groups and Haar null sets, Geom. Funct. Analysis, 15 (2005), 246-273.
+
+Amenability, free subgroups, and Haar null sets in nonlocally compact groups. S Solecki, Proc. London Math. Soc. 3S. Solecki, Amenability, free subgroups, and Haar null sets in non- locally compact groups. Proc. London Math. Soc. (3) 93 (2006), 693-722.
+
+. S Solecki, A Fubini Theorem. Topology Appl. 15412S. Solecki, A Fubini Theorem. Topology Appl. 154 (2007), no. 12, 2462-2464.
+
+A covering principle in real analysis. R Trautner, Quart. J. Math. Oxford. 2R. Trautner, A covering principle in real analysis, Quart. J. Math. Oxford (2) 38 (1987), 127-130.
+
+A Weil, L'integration dans les groupes topologiques, Actualités Scientifiques et Industrielles 1145. Hermannst ed. 1940A. Weil, L'integration dans les groupes topologiques, Actualités Scien- tifiques et Industrielles 1145, Hermann, 1965 (1 st ed. 1940).
+
+W Wilczyński, Density topologies, Handbook of measure theory. North-HollandIW. Wilczyński, Density topologies, Handbook of measure theory, Vol. I, II, 675-702, North-Holland, 2002.
+
+On the continuity of mid-point convex functions. J D Wright, Bull. London Math. Soc. 7J. D. Maitland Wright, On the continuity of mid-point convex func- tions. Bull. London Math. Soc. 7 (1975), 89-92.
+
+A remark on the theorems of Lusin and Egoroff. E Zakon, Canad. Math. Bull. 7E. Zakon, A remark on the theorems of Lusin and Egoroff. Canad. Math. Bull. 7 (1964), 291-295.
+
+London SW7 2AZ; n.bingham@ic.ac.uk Mathematics Department. Houghton Street, London WC2A 2AEMathematics Department, Imperial College ; London School of EconomicsMathematics Department, Imperial College, London SW7 2AZ; n.bingham@ic.ac.uk Mathematics Department, London School of Economics, Houghton Street, London WC2A 2AE;
+
+We argued in [BinO7, §5] that ∆ 1 2 is a natural setting in which to study regular variation. A J , Ostaszewski@lse.ac.uk co-analytic)A.J.Ostaszewski@lse.ac.uk co-analytic). We argued in [BinO7, §5] that ∆ 1 2 is a natural setting in which to study regular variation.
+
+which is used in the same context of R over the field of scalars Q as in Hamel's construction of a discontinuous additive function, and so ultimately rests on transfinite induction of continuum length requiring continuum many selections. Our proof of Berz's theorem depends in effect on the Baire Category Theorem BC, or the completeness of R, since Theorem KBD is a variant of BC (see §2), and so ultimately rests on elementary induction via the Axiom (Principle) of Dependent Choice(s) DC (thus named in 1948 by Tarski [Tar2, p. 96] and studied in [Mos], but anticipated in 1942 by Bernays' [Ber, Axiom IV*, p. 86] -see. his paper Berz relied on the Axiom of Choice AC, in the usual form of Zorn's Lemma. ) We note that DC is equivalent to a statement about trees: a pruned tree has an infinite branch (for which see [Kec, 20.B]) and so by its very nature is an ingredient in set-theory axiom systems which consider the extent to which Banach-Mazur-type games (with underlying tree structure) are determined. The latter in turn have been viewed as generalizations of Baire's Theorem ever since Choquet. Kec, 8C,D,E]. Inevitably, determinacy and the study of the relationship between category and measure go hand in handPrinciple of Dependent Choice DC. In his paper Berz relied on the Axiom of Choice AC, in the usual form of Zorn's Lemma, which is used in the same context of R over the field of scalars Q as in Hamel's construction of a discontinuous additive function, and so ultimately rests on transfinite induction of continuum length requiring continuum many selections. Our proof of Berz's theorem depends in effect on the Baire Category Theorem BC, or the completeness of R, since Theorem KBD is a variant of BC (see §2), and so ultimately rests on elementary induction via the Axiom (Principle) of Dependent Choice(s) DC (thus named in 1948 by Tarski [Tar2, p. 96] and studied in [Mos], but anticipated in 1942 by Bernays' [Ber, Axiom IV*, p. 86] -see [Jec1, §8.1], [Jec2, Ch. 5]), and DC is equivalent to BC by a result of Blair [Bla]. (For further results in this direction see also [Pin1,2], [Gol], [HerK], [Wol], and the textbook [Her].) We note that DC is equivalent to a statement about trees: a pruned tree has an infinite branch (for which see [Kec, 20.B]) and so by its very nature is an ingredient in set-theory axiom systems which consider the extent to which Banach-Mazur-type games (with underlying tree structure) are determined. The latter in turn have been viewed as generalizations of Baire's Theorem ever since Choquet [Cho] -cf. [Kec, 8C,D,E]. Inevitably, determinacy and the study of the relationship between category and measure go hand in hand.
+
+AC is not, and alternatives to it are widely used, in which for example all sets are Lebesgue-measurable (usually abbreviated to LM) and all sets have the Baire property, sometimes abbreviated to PB (as distinct from BP to indicate individual 'possession of the Baire property'). One such DC above. As Solovay [Solo2, p. 25] points out, this axiom is sufficient for the establishment of Lebesgue measure, i.e. including its translation invariance and countable additivity. P B Lm, A D , P D , While ZF is common ground in mathematics. Another is the Axiom of Determinacy AD mentioned above and introduced by Mycielski and Steinhaus [MycS]; this implies LM, for which see [MySw], and PB, the latter a result due to Banach -see [Kec, 38.B]. Its introduction inspired remarkable and still current developments in set theory concerned with determinacy of 'definable' sets of reals (see. and consequent combinatorial properties (such as partition relations) of the alephs (see [Kle]). Others include the (weaker) Axiom of Projective Determinacy PD References for Appendix 1Practical axiomatic alternatives: LM, PB, AD, PD. While ZF is common ground in mathematics, AC is not, and alternatives to it are widely used, in which for example all sets are Lebesgue-measurable (usually abbreviated to LM) and all sets have the Baire property, sometimes abbreviated to PB (as distinct from BP to indicate individual 'possession of the Baire proper- ty'). One such DC above. As Solovay [Solo2, p. 25] points out, this axiom is sufficient for the establishment of Lebesgue measure, i.e. including its trans- lation invariance and countable additivity ("...positive results ... of measure theory..."), and may be assumed together with LM. Another is the Axiom of Determinacy AD mentioned above and introduced by Mycielski and Ste- inhaus [MycS]; this implies LM, for which see [MySw], and PB, the latter a result due to Banach -see [Kec, 38.B]. Its introduction inspired remarka- ble and still current developments in set theory concerned with determinacy of 'definable' sets of reals (see [ForK] and particularly [Nee]) and consequ- ent combinatorial properties (such as partition relations) of the alephs (see [Kle]). Others include the (weaker) Axiom of Projective Determinacy PD References for Appendix 1.
+
+Additivity of measure implies additivity of category. T Bartoszyński, Trans. Amer. Math. Soc. 2811T. Bartoszyński, Additivity of measure implies additivity of category. Trans. Amer. Math. Soc. 281 (1984), no. 1, 209-213
+
+Invariants of measure and category. T Bartoszyński, T. Bartoszyński, Invariants of measure and category, Ch. 7 in [ForK].
+
+T Bartoszyński, H Judah, Set Theory: On the structure of the real line. PetersT. Bartoszyński and H. Judah, Set Theory: On the structure of the real line, Peters 1995.
+
+The descriptive set theory of Polish group actions. H Becker, A S Kechris, London Math. Soc. Lect. Note Ser. 232Cambridge University PressH. Becker, A. S. Kechris, The descriptive set theory of Polish gro- up actions. London Math. Soc. Lect. Note Ser., 232, Cambridge University Press, 1996.
+
+A system of axiomatic set theory. III. Infinity and enumerability. P Bernays, Analysis, J. Symbolic Logic. 7P. Bernays, A system of axiomatic set theory. III. Infinity and enume- rability. Analysis, J. Symbolic Logic 7 (1942), 65-89.
+
+The Baire category theorem implies the principle of dependent choices. C E Blair, Bull. Acad. Polon. Sci. Sér. Sci. Math. Astronom. Phys. 25C. E. Blair, The Baire category theorem implies the principle of de- pendent choices. Bull. Acad. Polon. Sci. Sér. Sci. Math. Astronom. Phys. 25 (1977), 933-934.
+
+G Choquet, Lectures on analysis. Benjamin, New YorkIG. Choquet, Lectures on analysis, Vol. I, Benjamin, New York, 1969.
+
+Handbook of Set theory. M Foreman, A Kanamori, SpringerM. Foreman, A. Kanamori, Handbook of Set theory, Springer, 2010.
+
+Set-theoretic measure theory, Part I. D Fremlin, Measure theory. Torres-Fremlin5D. Fremlin, Measure theory Vol. 5: Set-theoretic measure theory, Part I. Torres-Fremlin, 2008.
+
+On the role of the Baire category theorem and dependent choice in the foundations of logic. R Goldblatt, J. Symbolic Logic. 502R. Goldblatt, On the role of the Baire category theorem and depen- dent choice in the foundations of logic. J. Symbolic Logic 50 (1985), no. 2, 412-422.
+
+Axiom of choice. H Herrlich, Lecture Notes in Mathematics. SpringerH. Herrlich, Axiom of choice. Lecture Notes in Mathematics, 1876. Springer, 2006.
+
+The Baire category theorem, and the axiom of dependent choice. H Herrlich, K Keremedis, Comment. Math. Univ. Carolin. 404H. Herrlich, K. Keremedis, The Baire category theorem, and the axiom of dependent choice. Comment. Math. Univ. Carolin. 40 (1999), no. 4, 771-775.
+
+The Boolean prime ideal theorem plus countable choice do [does] not imply dependent choice. P Howard, J E Rubin, Math. Logic Quart. 423P. Howard, J. E. Rubin, The Boolean prime ideal theorem plus co- untable choice do [does] not imply dependent choice. Math. Logic Quart. 42 (1996), no. 3, 410-420.
+
+Structural consequences of AD. S Jackson, 21 in [ForKS. Jackson, Structural consequences of AD, Ch. 21 in [ForK].
+
+The axiom of choice. T J Jech, Studies in Logic and the Foundations of Mathematics. North-Holland75T. J. Jech, The axiom of choice. Studies in Logic and the Foundations of Mathematics, Vol. 75. North-Holland, 1973.
+
+T J Jech, Set Theory, 3 rd Millennium. SpringerT. J. Jech, Set Theory, 3 rd Millennium ed. Springer, 2003.
+
+On Shelah's amalgamation. Set theory of the reals. H Judah, A Rosłanowski, Israel Math. Conf. Proc. 6H. Judah, A. Rosłanowski, On Shelah's amalgamation. Set theory of the reals (Ramat Gan, 1991), 385-414, Israel Math. Conf. Proc., 6, Bar-Ilan Univ., Ramat Gan, 1993.
+
+Baire property and axiom of choice. H Judah, S Shelah, Israel J. Math. 843H. Judah, S. Shelah, Baire property and axiom of choice. Israel J. Math. 84 (1993), no. 3, 435-450.
+
+Large cardinals and projective sets. H Judah, O Spinas, Arch. Math. Logic. 362H. Judah, O. Spinas, Large cardinals and projective sets. Arch. Math. Logic 36 (1997), no. 2, 137-155.
+
+The higher infinity. Large cardinals in set theory from their beginnings. A Kanamori, Springernd ed. 2003 (1 st ed. 1994A. Kanamori, The higher infinity. Large cardinals in set theory from their beginnings, Springer, 2 nd ed. 2003 (1 st ed. 1994).
+
+The evolution of large cardinal axioms in set theory. A Kanamori, M Magidor, Higher set theory (Proc. Conf., Math. Forschungsinst. Springer669OberwolfachA. Kanamori, M. Magidor, The evolution of large cardinal axioms in set theory. Higher set theory (Proc. Conf., Math. Forschungsinst., Oberwol- fach, 1977), pp. 99-275, Lecture Notes in Math. 669, Springer, 1978.
+
+The axiom of determinacy implies dependent choices in L(R). A S Kechris, J. Symbolic Logic. 491A. S. Kechris,The axiom of determinacy implies dependent choices in L(R). J. Symbolic Logic 49 (1984), no. 1, 161-173.
+
+Infinitary combinatorics and the axiom of determinateness. E M Kleinberg, Lecture Notes in Math. 612SpringerE. M. Kleinberg, Infinitary combinatorics and the axiom of determina- teness. Lecture Notes in Math. 612, Springer, 1977.
+
+On the relative consistency strength of determinacy hypotheses. A S Kechris, R M Solovay, Trans. Amer. Math. Soc. 2901A. S. Kechris, R. M. Solovay, On the relative consistency strength of determinacy hypotheses. Trans. Amer. Math. Soc. 290 (1985), no. 1, 179- 211.
+
+Large cardinals from determinacy. P Koellner, W H Woodin, 23 in [ForKP. Koellner, W.H. Woodin, Large cardinals from determinacy, Ch. 23 in [ForK].
+
+A brief history of determinacy. P B Larson, J. R. Steel), Assoc. Symbolic Logic. A. S. Kechris, B. Löwe4The Cabal SeminarP. B. Larson, A brief history of determinacy, The Cabal Seminar Vol. 4 (eds. A. S. Kechris, B. Löwe, J. R. Steel), Assoc. Symbolic Logic, 2010.
+
+Notes on set theory. 2 nd ed. Undergrad. Texts in Math. Y Moschovakis, SpringerY. Moschovakis, Notes on set theory. 2 nd ed. Undergrad. Texts in Math. Springer, 2006.
+
+On the principle of dependent choices. A Mostowski, Fund. Math. 35A. Mostowski, On the principle of dependent choices. Fund. Math. 35 (1948). 127-130.
+
+A mathematical axiom contradicting the axiom of choice. J Mycielski, H Steinhaus, Bull. Acad. Polon. Sci. Sér. Sci. Math. Astronom. Phys. 10J. Mycielski, H. Steinhaus, A mathematical axiom contradicting the axiom of choice. Bull. Acad. Polon. Sci. Sér. Sci. Math. Astronom. Phys. 10 (1962), 1-3.
+
+On the Lebesgue measurability and the axiom of determinateness. J Mycielski, S Świerczkowski, Fund. Math. 54J. Mycielski, S. Świerczkowski, On the Lebesgue measurability and the axiom of determinateness. Fund. Math. 54 (1964), 67-71.
+
+I Neeman, Determinacy in L(R). Ch. 21 in [ForKI. Neeman, Determinacy in L(R), Ch. 21 in [ForK].
+
+Adding dependent choice to the prime ideal theorem. D Pincus, Studies in Logic and Found. Math. 87Logic Colloquium 76D. Pincus, Adding dependent choice to the prime ideal theorem. Lo- gic Colloquium 76 (Oxford, 1976), pp. 547-565. Studies in Logic and Found. Math., Vol. 87, North-Holland, 1977.
+
+Adding dependent choice. D Pincus, Ann. Math. Logic. 111D. Pincus, Adding dependent choice. Ann. Math. Logic 11 (1977), no. 1, 105-145.
+
+A mathematical proof of S. Shelah's theorem on the measure problem and related results. J Raisonnier, Israel J. Math. 481J. Raisonnier, A mathematical proof of S. Shelah's theorem on the me- asure problem and related results. Israel J. Math. 48 (1984), no. 1, 48-56.
+
+. J Raisonnier, J Stern, Mesurabilité, De Baire, Comptes Rendus Acad. Sci. I. (Math.). 296J. Raisonnier, J. Stern, Mesurabilité and propriété de Baire, Comptes Rendus Acad. Sci. I. (Math.) 296 (1983), 323-326.
+
+Can you take Solovay's inaccessible away?. S Shelah, Israel J. Math. 48S. Shelah, Can you take Solovay's inaccessible away? Israel J. Math. 48 (1984), 1-47.
+
+On measure and category. S Shelah, Israel J. Math. 521-2S. Shelah, On measure and category. Israel J. Math. 52 (1985), no. 1-2, 110-114.
+
+Large cardinals imply that every reasonably definable set of reals is Lebesgue measurable. S Shelah, H Woodin, Israel J. Math. 703S. Shelah, H. Woodin, Large cardinals imply that every reasonably definable set of reals is Lebesgue measurable. Israel J. Math. 70 (1990), no. 3, 381-394.
+
+On the cardinality of Σ 1 2 sets of reals. R M Solovay, Foundations of Mathematics (Symposium Commemorating Kurt Gödel. Columbus, Ohio; New YorkSpringerR. M. Solovay, On the cardinality of Σ 1 2 sets of reals. 1969 Founda- tions of Mathematics (Symposium Commemorating Kurt Gödel, Columbus, Ohio, 1966) pp. 58-73 Springer, New York
+
+A model of set-theory in which every set of reals is Lebesgue measurable. R M Solovay, Ann. of Math. 2R. M. Solovay, A model of set-theory in which every set of reals is Lebesgue measurable. Ann. of Math. (2) 92 (1970), 1-56.
+
+The independence of DC from AD. The Cabal Seminar 76-77. R M Solovay, Proc. Caltech-UCLA Logic Sem. Caltech-UCLA Logic SemSpringer689R. M. Solovay, The independence of DC from AD. The Cabal Semi- nar 76-77 (Proc. Caltech-UCLA Logic Sem., 1976-77), pp. 171-183, Lecture Notes in Math. 689, Springer, 1978.
+
+Regularity properties of definable sets of reals. J Stern, Annals of Pure and Appl. Logic. 29J. Stern, Regularity properties of definable sets of reals, Annals of Pure and Appl. Logic, 29 (1985), 289-324.
+
+Une contributionà la théorie de la mesure. A Tarski, Fund. Math. 15A. Tarski, Une contributionà la théorie de la mesure, Fund. Math. 15 (1930), 42-50.
+
+Axiomatic and algebraic aspects of two theorems on sums of cardinals. A Tarski, Fund. Math. 35A. Tarski, Axiomatic and algebraic aspects of two theorems on sums of cardinals. Fund. Math. 35 (1948), 79-104.
+
+. S Ulam, Zur Masstheorie in der allgemeinen Mengenlehre. Fund. Math. 16S. Ulam, Zur Masstheorie in der allgemeinen Mengenlehre. Fund. Math. 16 (1930), 140-150.
+
+On the principle of dependent choices and some forms of Zorn's lemma. E Wolk, Canad. Bull. Math. 26E. Wolk, On the principle of dependent choices and some forms of Zorn's lemma, Canad. Bull. Math., 26 (1983), 365-367.
+
+Functional Analysis for the practical man. J D Wright, Functional Analysis: Surveys and Recent Results. North-Holland Math. Studies27J. D. Maitland Wright, Functional Analysis for the practical man, 283- 290 in Functional Analysis: Surveys and Recent Results 27, North-Holland Math. Studies, 1977.

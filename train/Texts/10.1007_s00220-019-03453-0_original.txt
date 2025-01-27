@@ -1,0 +1,277 @@
+
+LEE-YANG PROPERTY AND GAUSSIAN FREE FIELDS
+8 Sep 2017
+
+Charles M Newman 
+Wei Wu 
+LEE-YANG PROPERTY AND GAUSSIAN FREE FIELDS
+8 Sep 2017
+The Lee-Yang property of certain moment generating functions having only pure imaginary zeros is valid for Ising type models with one-component spins and XY models with two-component spins. Villain models and complex Gaussian multiplicative chaos are two-component systems analogous to XY models and related to Gaussian free fields. Although the Lee-Yang property is known to be valid generally in the first case, we show that is not so in the second. Our proof is based on two theorems of general interest relating the Lee-Yang property to distribution tail behavior.
+
+Overview
+
+The original theorem of Lee and Yang [15] on zeros of the partition function of a spin-1 2 ((±1) −valued) Ising model {σ v } with pair ferromagnetic interactions implies that the moment generating function E e zX of X = λ v σ v with λ v ≥ 0 has only pure imaginary zeros (PIZ) in the complex z−plane. As we explain in more detail below, this has been extended [2,16] 
+to X = λ v S 1 v where {S v = (S 1 v , S 2 v )
+} for certain two-component XY models where S v takes values in the unit circle of R 2 .
+
+In this paper, we consider two interesting two-component systems, namely the Villain model [24] and complex Gaussian multiplicative chaos, related to the Gaussian Free Field (GFF) [13] and whether they have a Lee-Yang PIZ property. For Villain models, like for XY models, such a property is expressed in terms of the cosines of the angular variables; for Gaussian multiplicative chaos, it is expressed in terms of the real part of the complexvalued field and hence in terms of a sine-Gordon field [7]. A PIZ property seems plausible for both systems because of the connection between GFF and the XY model via the spinwave conjecture [4,18] on the one hand and the connection between GFF and the Villain Gaussian-like distribution on the other. Although Villain models are known to have the PIZ property (see p. 636 of [6] and Theorem 3 below) we prove that complex Gaussian multiplicative chaos in general does not (see Propositions 17 and 19 below).
+
+Our analysis relies on two results relating for (symmetric) random variables X n , the PIZ property, tail behavior and convergence in distribution of X n to X, which may be of independent interest. The first of these (Theorem 7) is a new result which states that the PIZ property plus a sub-Gaussian tail bound for each symmetrically distributed X n (with no uniformity in n) implies not only that X has the PIZ property but also, surprisingly, sub-Gaussian tail behavior. The second (Theorem 10) states that any X with tail behavior strictly between Gaussian and exp −c |x| 1+ε cannot have the PIZ property; it follows directly from a result of Goldberg and Ostrovskii [8] (see Theorem 14.4.2 of [17]).
+
+
+Introduction
+
+The Lee-Yang theorem, first obtained by Lee and Yang when studying phase transitions in the classical Ising model, states that all the zeroes of the partition function of the Ising model as a function of the external magnetic field lie on the imaginary axis [15]. Lee and Yang proved this result only for the spin-1 2 (i.e., (±1) −valued) Ising model, but later it was extended by Griffiths to spin-n 2 models [9], and then by Newman to ferromagnetic Ising models with quite general single spin distributions [19] (see also [16]). Since then, it has been applied to prove the properties of the infinite volume limit and existence of a mass gap under an external magnetic field [21,10], and to prove correlation inequalities [20,3] -see also [5] for a general review of the Lee-Yang type theorem and their applications.
+
+For two component ferromagnets, analogous Lee-Yang type theorems were first proved by Dunlop and Newman [2] for the classical XY model (see also [23]) and then by Lieb and Sokal [16] for generic two component ferromagnets with quite general single spin distributions. We now recall the Lee-Yang theorem for the classical XY model. Given a finite graph G = (V, E), we denote the spin variable at each v ∈ V by S v = (S 1 v , S 2 v ) in the unit circle. Given real numbers {J e } e∈E , the classical XY model on G is defined by a Gibbs measure
+Z −1 G exp − 1 T H (S) v∈V δ(|S v | = 1),(1)
+with the Hamiltonian H (S) given by
+H (S) = − e=(i,j)∈E J e S i · S j ,(2)
+where S i · S j = S 1 i S 1 j + S 2 i S 2 j , and with Z G = Z G (T ) the normalization constant that makes (1) a probability measure.
+Theorem 1 ([2, 16]). Suppose that J e ≥ 0 for all e ∈ E and λ v ≥ 0 for all v ∈ V, then E exp z v∈V λ v S 1 v
+has only pure imaginary zeros (namely, it is not zero when Re z > 0 or Re z < 0).
+
+
+Remark 2. Theorem 1 is a corollary of a more general result that
+E exp v∈V z v S 1 v does not vanish when Re z v > 0 ∀v ∈ V.
+The classical Villain model is another two component spin model which is closely related to the XY model [24]. Given any finite graph G = (V (G) , E (G)), and positive numbers {J e } e∈E(G) , a Villain model on G is defined by the Gibbs measure
+Z −1 G e=(u,v)∈E(G) V e (θ u − θ v ) v∈V(G) dθ v ,(3)
+where
+θ v ∈ (−π, π] for v ∈ V (G), V e (θ) = m∈Z exp − J e 2 (θ + 2πm) 2(4)
+is a periodized Gaussian, and Z G is the normalizing constant. Let (Θ v : v ∈ V (G)) be jointly distributed by the Gibbs measure (3). Given non-negative real numbers {λ v } v∈V(G) , let µ λ denote the distribution of
+v∈V(G) λ v cos Θ v .(5)
+The validity of the Lee-Yang type property as well as correlation inequalities for Villain models, due to Fröhlich and Spencer and to Bellissard ( [6] and ref. 34 there), is discussed and a proof is sketched on pp. 635-636 of [6]. Since that Lee-Yang property does not seem to be widely known, we present it as the next theorem and provide a detailed proof in Sections 4 and 5. The Lee-Yang property does not seem to follow from the Lieb-Sokal approach since unlike (2), the Villain model (3) is not written as a Gibbs measure with ferromagnetic pair interactions.
+Theorem 3 ([6]). Suppose that J e ≥ 0 for all e ∈ E (G) and λ v ≥ 0 for all v ∈ V (G), then E   exp   z v∈V(G) λ v cos Θ v     = ∞ −∞ e zx dµ λ (x)
+has only pure imaginary zeros as a function of complex z.
+
+Remark 4. By extending Theorem 7 below to a multivariable version, the same proof leads to a more general result, that is, for any {z v } v∈V(G) such that Re z v > 0 ∀v,
+E exp v∈V(G) z v cos Θ v = 0.
+Remark 5. Theorem 3 is stated for the Villain model (3) with free boundary condition. The same result holds for some other boundary conditions, including periodic boundary (i.e., the Villain model on a torus), or for Dirichlet-type boundary condition where Θ v for all v in the boundary are equal with a value that is uniformly distributed on the unit circle. This can be shown as a corollary of Theorem 3 by adding couplings between boundary vertices and letting the coupling magnitudes tend to infinity. We note that the Lee-Yang property of Theorem 1 for XY models will also be valid for such boundary conditions.
+
+Obtaining new Lee-Yang type theorems for lattice models can be useful to derive new results for continuum field theories. For example, Simon and Griffiths [22] proved a Lee-Yang result for the continuum (φ 4 ) 2 Euclidean field theory by first obtaining a new Lee-Yang result for φ 4 lattice models. Indeed, part of our motivation comes from the so-called spin-wave conjecture [4,18], which states that for both the XY and the Villain model at temperature T less than some critical value, on large scales the angular variable θ behaves like a Gaussian Free Field (GFF) modulo 2π. This suggests that the spin field (S · in the XY model and exp (iθ · ) in the Villain model) may behave like a version of complex Gaussian multiplicative chaos (see e.g., [13]); or, after a duality transformation, a version of the Sine-Gordon field [7]. We have not obtained a Lee-Yang property for complex Gaussian multiplicative chaos and even ruled it out (as we discuss below) in a certain parameter range. However that parameter range does not correspond to very low temperature T , so it may still be that there is a low T Lee-Yang property.
+
+Our approach is based on showing that a certain set of properties of moment generating functions (see Definition 6) is preserved under convergence in distribution (Theorem 7). This is more than the requirement that all zeros are pure imaginary -it further requires a sub-Gaussian tail for the distribution. In Sections 4 and 5 we prove Theorem 3 by approximating the Villain model on any finite graph by one dimensional XY spin chains. Since the XY models do satisfy the Lee-Yang property, we obtain the result by applying the convergence Theorem 7.
+
+Based on the spin-wave conjecture, it is natural to ask whether there is a Lee-Yang property for complex Gaussian multiplicative chaos, namely exp (iβh) where h is a two dimensional GFF. In Section 6 we give a negative answer to this question when β ∈ 1, √ 2 -the Lee-Yang property does not hold for complex Gaussian multiplicative chaos with such values of β. The proof is based on a general theorem that shows that the pure imaginary zeros property does not hold for random variables with tail slower than Gaussian (Theorem 10), and an explicit computation of the tail probability for the integral of complex Gaussian multiplicative chaos. We also study the so-called discrete complex Gaussian multiplicative chaos on finite graphs, which roughly speaking, is exp (iβh) where h is a discrete Gaussian free field (DGFF) with certain boundary condition where the Lee-Yang property might be expected to hold. We show (see Proposition 19) that for discrete complex Gaussian multiplicative chaos with β ∈ 1, √ 2 , the Lee-Yang property cannot hold on all finite graphs. Interestingly, we use there a corollary of the weak convergence result of Theorem 7 to rule out the Lee-Yang property.
+
+Complex Gaussian multiplicative chaos corresponds to a type of a Sine-Gordon field (see, e.g., [7] and [1]). It has been pointed out to us by T. Spencer [personal communication] that because of the relation of the Lee-Yang property to exponential decay or existence of a mass gap for Sine-Gordon fields, how the validity of the Lee-Yang property depends on the parameter β is of some interest. The Sine-Gordon beta-parameter used in [7], which we denote here byβ, is related to the β we use for complex Gaussian multiplicative chaos byβ = 2πβ 2 . Thus our region β ∈ 1, √ 2 of non-validity of the Lee-Yang property corresponds toβ ∈ (2π, 4π).
+
+
+Lee-Yang property and weak convergence
+
+Let µ be a probability measure on R and X be a random variable on some probability space (Ω, F , P) with distribution µ.
+Definition 6. We say µ (or X) is of Lee-Yang type (and write µ ∈ L) if (1) X has the same distribution as −X (2) E [exp (bX 2 )] < ∞ for some b > 0 (3) For z ∈ C, E [exp (zX)]
+only has zeros on the pure imaginary axis. The next theorem states that the Lee-Yang type property is preserved under weak convergence and helps explain why the sub-Gaussian property (2) is built into Definition 6.
+
+Theorem 7. Suppose for each n ∈ N, µ n ∈ L, and µ n converges weakly to µ. Then µ ∈ L.
+
+Remark 8. We note in particular that the limiting measure must satisfy µ (r, ∞) ≤ exp (−cr 2 ) for some c > 0. We will use this fact later. This property of µ seems apriori surprising, because if one does not assume µ n has the pure imaginary zero property (Definition 6.3), the conclusion is not true since the constant b in Definition 6.2 may depend on n.
+
+Corollary 9. Suppose that for n = 1, 2, ...,
+
+(1) X n has the same distribution as −X n , and
+(2) E [exp (b n X 2 n )] < ∞ for some b n > 0. If X n converges in distribution to X and E [exp (bX 2 )] = ∞ for all b > 0, it
+follows that for all but finitely many n, E [exp (zX n )] has some zeros that are not purely imaginary.
+
+Proof. The proof is by contradiction. If the conclusion were not valid, then there would be a subsequence X n k with distributions µ k ∈ L which would converge weakly to the distribution µ of X with µ / ∈ L. That would contradict Theorem 7, which completes the proof.
+
+The next theorem relates the Lee-Yang property to the distribution tail behavior and explains further why the sub-Gaussian property (2) is natural in Definition 6. As we explain below, it follows directly from a theorem of Goldberg and Ostrovskii [8] (see Theorem 14.4.2 of [17]). We note that there is a typographical error in [17] and k a 2 k < ∞ should be replaced there by k (1/a 2 k ) < ∞. Theorem 10. Suppose the random variable X satistifes the following two properties:
+
+(1) Ee b|X| α < ∞ for some b > 0 and α > 1,
+(2) Ee b ′ X 2 = ∞ for all b ′ > 0.
+Then Ee zX has some zeroes that are not purely imaginary.
+
+Remark 11. A natural question is how much Property (1) of this theorem can be weakened without changing the conclusions. The answer is not very much. This can be seen by constructing examples of random variables X where E e b|X| log|X| < ∞ for some b > 0 but E e zX has no zeros that are not purely imaginary. Probably the simplest example is a Poisson random variable X, where E e zX = exp (λ (e z − 1)) has no zeros at all. One can also extend this example to obtain symmetric random variables with Poisson-type tail behavior whose moment generating functions do have many zeros, all purely imaginary.
+
+We now turn to the proof of Theorems 7 and 10. The proof of Theorem 7 is based on the uniform convergence of entire functions and an application of Hurwitz Theorem. The proof will be given in two steps. In the first step we prove Theorem 7 under the additional assumption that sup n E [X 2 n ] < ∞. In the second step we show sup n E [X 2 n ] < ∞ automatically holds.
+
+The key ingredient for the proof is the following Proposition (see Proposition 2 of [20]). We include a proof for completeness.
+Proposition 12 ([20]). Suppose X ∈ L. Then f (z) := E [exp (zX)] is an entire function of z with product expansion f (z) = e Bz 2 k 1 + z 2 y 2 k , where B ≥ 0, y k ∈ R such that k 1 y 2 k < ∞. Also E [X 2 ] =Var[X] = 2 B + k 1 y 2 k .
+Proof. We first note that f is entire of (exponential) order 2 (and finite type), since
+|f (z)| ≤ E exp bX 2 + |z| 2 4b .
+By (2) of Definition 6, there is some C < ∞ such that |f (z)| ≤ C exp (4b) −1 |z| 2 . By the Hadamard factorization theorem,
+f (z) = e P 2 (z) z m 0 j 1 − z z j e z/z j ,
+where P 2 is a quadratic polynomial, m 0 is the degree of zero of f at the origin, {z j } are the other zeros and j |z j | −2 < ∞. Since µ is a symmetric probability measure, Proof of Theorem 7. Let f n (z) = E [exp (zX n )]. We first prove Theorem 7 assuming sup n E [X 2 n ] < ∞. We claim that it suffices to prove sup n |f n (z)| < ∞ uniformly on compact sets of z (6) and that sup
+n E exp b ′ X 2 n < ∞ for some fixed b ′ > 0.(7)
+We now explain why (6) and (7) suffice to imply the conclusion of Theorem 7. First note that the validity of (1) of Definition 6 for each µ n implies it for µ. As X n converges in distribution to X, f n → f on the pure imaginary axis, and (6) implies that f extends to an entire function with f n → f uniformly on compact sets. Moreover, by Hurwitz' Theorem, open zero-free regions for all f n (e.g., C\iR) are zero-free for f . This verifies (3) of Definition 6 for X. Finally, (7) implies (2) of Definition 6 for X (e.g., by taking any b ∈ (0, b ′ )) and thus X ∈ L. We next claim that (6) and (7) are direct consequences of Proposition 12. Apply Proposition 12 and use the fact that |1 + z 2 /y 2 | ≤ exp |z| 2 /y 2 to see that
+|f n (z)| ≤ exp       B (n) + k 1 y (n) k 2    |z| 2    = exp 1 2 Var [X n ] |z| 2 ,(8)
+where B (n) and y (n) k for X n correspond to B and {y k } for X in Proposition 12. Since we assumed sup n E [X 2 n ] < ∞, we conclude (6). To prove (7), note that (8) implies that the tail of X n is dominated by the tail of Y n ∼ N (0, Var [X n ]). Therefore we conclude (7) with any b ′ < (2 sup n E [X 2 n ]) −1 . Finally we prove that convergence of X n to some X in distribution implies that sup n E [X 2 n ] < ∞. We will argue by contradiction. Suppose that X n ∈ L, sup n E [X 2 n ] = ∞ and X n converges to some X in distribution. By taking a subsequence and applying Proposition 12 we may assume that
+2E X 2 n = B (n) + k 1 y (n) k 2 → ∞.(9)
+We also know from the convergence in distribution of X n that f n (it) → f (it) uniformly on compact subsets of t ∈ R. Both f n (it) and f (it) are real and continuous in t so that there exists ε > 0 such that f (it) > 0 for t ∈ [0, ε]. Since f n iy (n) 1 = 0, we must have lim inf n→∞ y (n) 1 ≥ ε. However, by Proposition 12, for t ∈ (0, y
+
+1 ],
+f n (it) = e −B (n) t 2 k    1 − t 2 y (n) k 2    ≤ exp       −B (n) − k 1 y (n) k 2    t 2    .
+By (9) this goes to zero as n → ∞. This contradicts f (it) > 0 for t ∈ [0, ε] and completes the proof.
+
+Finally we note that Theorem 10 is an immediate consequence of the following proposition, which follows from the Goldberg-Ostrovskii result [8] stated as Theorem 14.4.2 in [17].
+
+Proposition 13. Suppose that the random variable Y satisfies Property 1 of Theorem 10, and Ee zY has only pure imaginary zeroes. Then Y − EY belongs to the class L.
+
+Proof. The proof follows directly from a result of Goldberg and Ostrovskii (see Theorem 14.4.2 of [17]). Arguing as in the proof of Proposition 12, let f (z) = Ee zY ; then by Young's inequality,
+|f (z)| ≤ E exp b |Y | a + 1 aa ′ b |z| a ′ , where a ′ = 1 − a −1 −1 .
+By Property 1 of Theorem 10 we have that
+|f (z)| ≤ C exp 1 aa ′ b |z| a ′ , for some C < ∞.
+Therefore f is an entire function of finite (exponential) order a ′ . By the Goldberg-Ostrovskii result it follows that
+f (z) = e αz e Bz 2 k 1 + z y k 2 ,
+with α ∈ R, B ≥ 0 and k |y k | −2 < ∞. But this implies that EY = α and Y − EY satisfies all the properties to be in L.
+
+
+1D XY Spin Chain
+
+In this and the next sections we will show that the distribution of (5) from the Villain model is of Lee-Yang type as defined in Definition 6, which implies Theorem 3. The proof uses the following scaling limit result for a one dimensional XY model.
+
+Let G n denote the graph whose vertex set V (G n ) is {0, 1/n, 2/n, ..., 1} and edge set is {{(j − 1) /n, j/n} : j = 1, ..., n}. We assign to each i ∈ V (G n ) a spin variable S n i in the unit circle, with the corresponding angle θ n i ∈ (−π, π], and consider the XY model on G n defined by the Gibbs measure
+Z −1 Gn exp − 1 T n H (S n ) i∈V(Gn) δ(|S n i | = 1),(10)
+with Hamiltonian
+H (S n ) = − (i,j)∈E(Gn) S n i · S n j = − (i,j)∈E(Gn) cos θ n i − θ n j .(11)
+For the remainder of this section, we write B or B n for 1/T or 1/T n .
+Proposition 14. If B n /n → b ∈ (0, ∞), then S n [nt] converges in distribution (using a Skorohod metric) to S (t) = (cos Φ (t) , sin Φ (t)), where Φ (0) is uniformly distributed in [−π, π) and exp (i (Φ (t) − Φ (0))) is distributed as exp iB (t) / √ b , where B (t)
+is a standard one-dimensional Brownian motion.
+
+
+Remark 15. This implies that the probability density on
+(−π, π] of Φ (t) − Φ (0) is m∈Z 1 √ 2πt exp − b (θ + 2πm) 2 2t ,
+which is proportional to V e defined in (4) with J e = b/t.
+
+
+Proof.
+
+One can view S n as a one dimensional Markov process with transition density given by
+K B (θ, θ ′ ) = e B cos(θ ′ −θ) π −π e B cos φ dφ for θ, θ ′ ∈ (−π, π].
+We provide a sketch of a proof of the scaling limit result. Based on a standard convergence result for discrete time Markov chains (see, e.g., Theorem 17.28 of [12]), it suffices to prove that for any twice differentiable function f : S 1 → R, the transition operator K B defined by
+K B f (θ) = π −π K B (θ, θ ′ ) f (θ ′ ) dθ ′ , satisfies 1 1/n (K Bn − I) f → 1 2b d 2 dθ 2 f. Notice that 1 2b d 2 dθ 2 is the generator of exp iB (t) / √ b . Indeed, since B n = O (n), Laplace's method yields π −π e Bn cos φ dφ = e Bn 2π B n 1 + 1 8B n + O 1 B 2 n .
+Also, the value of θ ′ that minimizes
+K B (θ, θ ′ ) f (θ ′ ) is given by − sin θ ′ m + 1 B n f ′ (θ ′ m − θ) f (θ m − θ) = 0, or θ ′ m = θ + 1 B n f ′ (θ) f (θ) + O 1 B 2 n . Let g (θ ′ ) = B −1 n log [exp (B n cos (θ ′ − θ)) f (θ ′ )], then Laplace's method yields π −π e g(θ ′ ) dθ ′ = e Bn cos(θ ′ m −θ) f (θ ′ m ) 2π B n g ′′ (θ ′ m ) 1 + 1 8B n + O 1 B 2 n .
+In particular, for any f ∈ H 1 (S 1 ),
+K B f (θ) = f (θ ′ m ) e − 1 2Bn (f ′ /f ) 2 1 − 1 B n f ′′ (θ) f (θ) + 1 B n f ′ (θ) f (θ) 2 −1/2 1 + O 1 B 2 n = f (θ) + 1 2B n f ′′ (θ) + O 1 B 2 n , which implies 1 1/n (K Bn − I) f → 1 2b f ′′ (θ) .
+We will also need the following version of Proposition 14 with Dirichlet boundary conditions. The proof follows from essentially the same arguments as for Proposition 14.
+
+Proposition 16. Consider the XY model on G n with Dirichlet boundary condition, defined by the Gibbs measure
+Z −1 Gn (θ 0 , θ 1 ) exp (−BH (S n )) i∈V(Gn)\{0,1} dθ n i δ (θ n 0 = θ 0 ) δ (θ n 1 = θ 1 ) ,
+for some θ 0 , θ 1 ∈ (−π, π], where H (S n ) is defined in (11). If B n /n → b ∈ (0, ∞), then S n [nt] converges in distribution to
+S (t) = exp iB (t) / √ b , where B (t) is the one dimensional
+Brownian bridge conditioned on exp iB (0) / √ b = e iθ 0 , and exp iB (1) / √ b = e iθ 1 . Moreover, given any θ 0 , θ 1 , θ ′ 0 , θ ′ 1 ∈ (−π, π], as n → ∞,
+Z Gn (θ 0 , θ 1 ) Z Gn (θ ′ 0 , θ ′ 1 ) → m∈Z exp − 1 2b (θ 1 − θ 0 + 2πm) 2 m∈Z exp − 1 2b (θ ′ 1 − θ ′ 0 + 2πm) 2 .
+
+Proof of Theorem 3
+
+We now apply Theorem 7, Proposition 14 and Proposition 16 to prove Theorem 3. We first prove Theorem 3 when G is a single edge, i.e., G = ({x, y} , {e}), and without loss of generality we can identify x and y with 0 and 1 in the unit interval [0,1]. Consider an XY model on G n of Section 4, defined by the Gibbs measure (10) with B = B n = nJ −1 e . By Proposition 14, (S n 0 , S n n ) converges in distribution to (exp (iΘ (0)) , exp (iΘ (1))), where Θ (0) is uniform in [−π, π) and exp (i (Θ (1) − Θ (0))) is distributed as exp iB (1) √ J e . In other words, (exp (iΘ (0)) , exp (iΘ (1))) has the probability density
+Z −1 V e (θ 1 − θ 0 ) dθ 0 dθ 1 , θ 0 , θ 1 ∈ (−π, π]
+which has the same distribution as for the Villain model on G. By Theorem 1, for all λ 0 , λ 1 ≥ 0, the distribution of λ 0 cos θ n 0 + λ 1 cos θ n n satisfies the Lee-Yang property (Property (3) of Definition 6). It also satisfies Properties (1) and (2). Applying Theorem 7, we conclude that λ 0 cos Θ (0) + λ 1 cos Θ (1) is also of Lee-Yang type. This proves Theorem 3 in the special case when G is a single edge.
+
+In the general case, given G = (V (G) , E (G)) we first replace each vertex v ∈ V (G) by several new vertices -one denoted v * and then one more denoted (v, e, 0) for each e ∈ E (G) incident on v, which we write as e ∼ v. (We will also denote (v, e, 0) for e = {v, w} by (w, e, n).) We then create one new edge between {v * , (v, e, 0)} v∈V and each (v, e, 0). Each e = {v, w} ∈ E (G) is replaced by a collection V (e, n) of n − 1 new vertices which will be labelled (v, e, 1) , (v, e, 2) , ..., (v, e, n − 1) (and also in opposite order (w, e, 1) , (w, e, 2) , ..., (w, e, n − 1)) and a collection E (e, n) of n new edges: This defines a new graph G * n = (V (G * n ) , E (G * n )). See Figure 1 for an illustration. To prove Theorem 3, it suffices to prove that for all non-negative
+{(v, e, 0) , (v, e, 1)} , {(v, e, 1) , (v,{λ v } v∈V(G) Z G E   exp   z v∈V(G) λ v cos Θ v     = exp   z v∈V(G) λ v cos θ v   e=(u,v)∈E(G) V e (θ u − θ v ) v∈V(G) dθ v(12)
+has only pure imaginary zeroes. Applying the Lee-Yang theorem for the XY model (Theorem 1), we see that for all non-
+negative {λ v * } v∈V(G) , exp   −H J XY (θ n ) + z v∈V(G) λ v * cos θ n v *   v∈V(G * n ) dθ n v
+has only pure imaginary zeros. Given e = (u, v) ∈ E (G), and any θ u , θ v ∈ (−π, π], we also define Z e,n XY (θ u , θ v ) = exp (−H e,n XY (θ n )) j∈V(e,n)
+dθ n j δ (θ n u = θ u ) δ (θ n v = θ v ) .
+Using the definition of H J XY , we see that
+exp   − e∈E(G) H e,n XY (θ n ) + J v∈V(G) e∼v cos θ n v * − θ n (v,e,0) + z v∈V(G) λ v * cos θ n v *   × v∈V(G * n ) dθ n v ×   e∈E(G) Z e,n XY (0, 0)   −1(13)
+has only pure imaginary zeros. Applying Proposition 16, by taking n → ∞ we have
+Z e,n XY (θ u , θ v ) Z e,n XY (0, 0) → Constant · m∈Z exp − J e 2 (θ u − θ v + 2πm) 2 = Constant · V e (θ u − θ v ) .
+Therefore, omitting all the superscripts n in θ n · , the integral (13) converges to
+Constant · exp   J v∈V(G) e∼v cos θ v * − θ (v,e,0) + z v∈V(G) λ v * cos θ v *   (14) × e=(u,v)∈E(G) V e (θ u − θ v ) v∈V(G) dθ v * .
+By Theorem 7, we see that (14), as a function of z, only has pure imaginary zeroes. Applying Laplace's method, we can multiply (14) by the right J−dependent factor and let J → ∞ to recover the Villain model on G, finishing the proof of (12).
+
+6. Complex Gaussian Multiplicative Chaos 6.1. Continuum Complex Gaussian multiplicative chaos. In this subsection we apply Theorem 10 to complex Gaussian multiplicative chaos. Let D r , r > 0 be the disk of radius r centered at the origin. For β > 0, complex Gaussian multiplicative chaos in D r is defined as exp (iβh r ), where h r is a Dirichlet zero boundary condition GFF in D r . As was discussed in [13], for β ∈ 0, √ 2 the (complex-valued) measure e iβh r (x) dx is well-defined and is absolutely continuous with respect to Lebesgue measure.
+
+We will obtain results for complex Gaussian multiplicative chaos in the whole plane, which is defined informally as exp (iβh), where h is a GFF in all of R 2 . Mathematically, the GFF in R 2 is not well-defined as a random generalized function -it is only defined up to an additive constant. Therefore, a priori, exp (iβh) is only defined up to a multiplicative constant (on the unit circle in C). In this section, we obtain the measure exp (iβh) dx by defining for any bounded simply connected domain U ⊂ R 2 , the random variable U exp (iβh (x)) dx as the limit in distribution of U exp (iβh r (x)) dx as r → ∞. Roughly speaking, the undetermined multiplicative constant becomes irrelevant because of the invariance of the limiting distribution under rotations in C. This whole-plane complex Gaussian multiplicative chaos measure will then be uniquely defined.
+
+Based on the spin-wave picture of the XY and Villain models, it a priori seems reasonable to conjecture that complex Gaussian multiplicative chaos with any of the boundary conditions mentioned in Remark 5 also satisfies a Lee-Yang property. Here we restrict attention first to the whole-plane field (without boundary). Let U ⊂ R 2 be a bounded simply connected domain with smooth boundary, and for any non-negative bounded continuous function λ : D r → R, define the random variable
+X ∞ = U λ (x) Re e iβh(x) dx.(15)
+If the Lee-Yang property were valid, then E [exp (zX ∞ )] as a function of z would only have pure imaginary zeroes. The next theorem disproves the Lee-Yang property for complex Gaussian multiplicative chaos, when β ∈ 1, √ 2 .
+
+Proposition 17. Let X ∞ be as in (15) with λ (x) ≡ 1 for any bounded simply connected domain U with smooth boundary. Then for any β ∈ 1,
+√ 2 , E [exp (zX ∞ )]
+has some zeroes that are not purely imaginary.
+
+To prove Proposition 17, we start with the following tail estimate for
+W U := U e iβh(x) dx. Proposition 18. For β ∈ (0, √ 2) and k ∈ N, log E |W U | 2k = β 2 k log k + c (β, U) k + o (k) as k → ∞.(16)
+Therefore, for t sufficiently large
+P (|W U | > t) = exp −c * (β, U) t 2 β 2 + o(t 2 β 2 ) .(17)
+In (16) and (17) c (β, U) and c * (β, U) in (0, ∞) depend on β and U but not on k.
+
+Proof of Proposition 18. Apply Lemma A.1 of [14], Appendix A (the same calculation works for any domain U ⊂ R 2 ), to obtain
+E |W U | 2k = U ⊗2k 1<i<j<k |x i − x j | |y i − y j | i,j |x i − y j | β 2 d xd y.
+This is the partition function for a Coulomb gas ensemble with k positive charges and k negative charges confined in U. Eq (16) then follows from the calculation of this partition function in [11] (see also [14]). Eq. (17) is a consequence of (16) and Chebyshev's inequality (see Lemma A.2 of [14] for a proof when U = D 1 ).
+
+Proof of Proposition 17. We now apply Proposition 18 and Theorem 10 to finish the proof of Proposition 17. To apply Proposition 18, we want upper and lower bounds on the moment generating function and distribution tails for
+X ∞ = Re W U = U Re e iβh(x) dx.
+and for powers of |X ∞ | in terms of those for |W U |. The upper bounds are immediate since
+X ∞ ≤ |X ∞ | ≤ |W U | ,
+so by Proposition 18,
+P (|X ∞ | > t) ≤ P (|W U | > t) ≤ exp −0.9c * (β, U) t 2/β 2
+for t large, which implies, by an explicit computation that for b > 0,
+Ee b|X∞| 2/β 2 < ∞.
+Note that for β ∈ 1, √ 2 , 2/β 2 ∈ (1, 2). For a lower bound, we use the fact that W U is equidistributed with e iφ W U for any real φ, which implies that X ∞ = Re W U and Y ∞ = Im W U are equidistributed. Thus
+Ee b ′ X 2 ∞ = E e b ′ X 2 ∞ + e b ′ Y 2 ∞ /2 ≥ E e b ′ X 2 ∞ /2 e b ′ Y 2 ∞ /2 = E e b ′ |W U | 2 /2 .(18)
+Then by Proposition 18, E e b ′ |W U | 2 /2 = ∞ for any b ′ > 0 and now by Theorem 10 we conclude that E [exp (zX ∞ )] must have some zeroes that are not purely imaginary.
+
+6.2. Discrete complex Gaussian multiplicative chaos. Let G = (V, E) be a planar domain, i.e., V ⊂ Z 2 and E is the set of nearest neighbor edges between vertices of V.
+
+We use ∂G to denote the boundary vertices of G, i.e., those that are connected to Z 2 \ V by a single edge. Consider a random function h (i), i ∈ V, such that h (i) ∈ (−π, π], distributed according to the (conditional) joint density
+Z −1 i∈V\∂G n i ∈Z (i,j)∈E exp − B ij 2 (h (i) − 2πn i − h (j) + 2πn j ) 2 (19) × i∈V\∂G dh (i) i∈∂G δ (h (i) − φ) ,
+where φ is uniformly distributed in (−π, π] and {B ij } are some positive numbers. Heuristically, one can construct h by first choosing φ uniformly in (−π, π], then sampling a discrete Gaussian free field (DGFF) on G with Dirichlet boundary condition φ (denoted as h φ ); finally, we obtain h by taking the value of h φ modulo 2π. We call the random function h thus defined the discrete complex Gaussian multiplicative chaos on G, since it is a discrete analogue of the complex Gaussian multiplicative chaos considered in Section 6.1. Motivated by the spin-wave picture of the XY and Villain models, it is natural to ask whether the discrete complex Gaussian multiplicative chaos with any boundary conditions mentioned in Remark 5 also satisfies a Lee-Yang theorem. Here we restrict attention to Dirichlet boundary conditions, with h sampled from the discrete complex Gaussian multiplicative chaos (19), and we define M = i∈V λ i cos (h (i)) , with λ i ≥ 0. This is a discrete analogue of the random variable X ∞ defined in (15). In this section we show that the Lee-Yang property cannot be valid in general, by giving a family of counter-examples in the next proposition. We first introduce some notation. Recall that D r is the disk of radius r centered at the origin. Given x ∈ D r , we denote by C r (x) the conformal radius of D r from x. Proposition 19. Take B ij = β −2 , G n,r = D nr ∩ Z 2 and g = 2/π. Let h n,r be sampled from (19) on G n,r and M n,r = x∈Dn∩Z 2 1 n 2 Re exp ih n,r (x) + β 2 2 g log n − gC r x n .
+
+Proof of Proposition 19. Notice that when B ij = β −2 , Lemma 20 implies that as n → ∞, M n,r converges in distribution to the integral
+X r := D 1
+Re e i(βh r (x)+Φ) dx.
+
+Moreover, by the construction and the rotational invariance of the whole plane complex Gaussian multiplicative chaos, as r → ∞, D 1 e i(βh r (x)+Φ) dx converges in distribution to W D 1 e iΦ , which is equidistributed with W D 1 . Thus X r converges in distribution to X ∞ . However, by Eq (18), when β > 1, E e b|X∞| 2 = ∞ for all b > 0. Applying Corollary 9 completes the proof.
+
+E
+f (z) = f (−z) with f (0) = 1, and f only has pure imaginary zeros, we have m 0 = 0, P 2 (z) = Bz 2 and {z j } come in pairs {±iy k }. Combining the pairs gives X 2 = f ′′ (0) = 2 B +
+
+
+e, 2)} , ... (or in opposite order {(w, e, 0) , (w, e, 1)} , ...).
+
+Figure 1 .
+1An example of a graph G (on the left) with 4 vertices and 4 edges and the modified graph G * n with n = 4. Square dots in G * n indicate the replacements for the vertices of G; some of these are labelled as discussed in the text. Circular dots indicates the n − 1 = 3 new vertices replacing each edge of G. For any fixed J > 0 and {J e } e∈E(G) , let B e = nJ −1 e , and consider an (inhomogeneous) XY model on G * n , defined by the Gibbs measure
+Acknowledgments: The research reported here was supported in part by U.S. NSF grant DMS-1507019. We thank P.-F. Rodriguez and T. Spencer for useful communications.Then for β ∈ 1, √ 2 , large enough r and then large enough n, E [exp (zM n,r )] has some zeros that are not purely imaginary.Notice that we can write M n,r = x∈Dn∩Z 2 λ n,r (x) cos (h n,r (x)), with λ n,r (x) = n β 2 2 g−2 e −gCr(x/n) .We start by proving the following limit theorem for M n,r .Lemma 20. As n → ∞, M n,r converges in distribution towhere h r is a continuum GFF on D r with zero boundary, and Φ is uniformly distributed in (−π, π].Proof. Recall that for any c > 0, both the discrete and continuum GFF have the Gibbs-Markov property: a GFF/DGFF with Dirichlet boundary condition c equals in law a zero boundary GFF/DGFF plus the constant c. Therefore it suffices to prove the lemma with Φ = 0 in both(19)and(20). Next definêSince M n,r = Re M n,r is a bounded continuous function ofM n,r , it suffices to show that M n,r converges in distribution toTo see this, we compute the moments ofM n,r as(21) Let G nr be the Dirichlet Green's function on D nr ∩ Z 2 . We haveWe now use the standard estimates for the lattice Green's function,where g Dr is the Dirichlet Green's function in D r with zero boundary condition. Substituting these into(21)and using the convergence of Riemann sums to integrals concludes the proof.
+Sine-Gordon revisited. Jonathan Dimock, Thomas Hurd, Annales Henri Poincaré. 13Jonathan Dimock and Thomas Hurd. Sine-Gordon revisited. Annales Henri Poincaré, 1(3): 499-541, 2000.
+
+Multicomponent field theories and classical rotators. François Dunlop, Charles M Newman, Communications in Mathematical Physics. 443François Dunlop and Charles M Newman. Multicomponent field theories and classical rotators. Communications in Mathematical Physics, 44(3): 223-235, 1975.
+
+Zeros of the partition function and Gaussian inequalities for the plane rotator model. François Dunlop, Journal of Statistical Physics. 215François Dunlop. Zeros of the partition function and Gaussian inequalities for the plane rotator model. Journal of Statistical Physics, 21(5):561-572, 1979.
+
+General theory of spin-wave interactions. J Freeman, Dyson, Physical Review. 10251217Freeman J Dyson. General theory of spin-wave interactions. Physical Review, 102(5):1217, 1956.
+
+Some applications of the Lee-Yang theorem. Jürg Fröhlich, Pierre-François Rodriguez, Journal of Mathematical Physics. 53995218Jürg Fröhlich and Pierre-François Rodriguez. Some applications of the Lee-Yang theorem. Journal of Mathematical Physics, 53(9):095218, 2012.
+
+On the statistical mechanics of classical Coulomb and dipole gases. Jürg Fröhlich, Thomas Spencer, Journal of Statistical Physics. 244Jürg Fröhlich and Thomas Spencer. On the statistical mechanics of classical Coulomb and dipole gases. Journal of Statistical Physics, 24(4), 617-701, 1981.
+
+The Kosterlitz-Thouless transition in two-dimensional abelian spin systems and the Coulomb gas. Jürg Fröhlich, Thomas Spencer, Communications in Mathematical Physics. 814Jürg Fröhlich and Thomas Spencer. The Kosterlitz-Thouless transition in two-dimensional abelian spin systems and the Coulomb gas. Communications in Mathematical Physics, 81(4):527-602, 1981.
+
+On the growth of entire ridge functions. Anatoly Goldberg, Iossif Ostrovskii, Math. Physics and Functional Analysis, Akad. Nauk Ukr. SSR, Fiz. Tehn. Inst. Nizkih Temperatur. 5Anatoly Goldberg and Iossif Ostrovskii. On the growth of entire ridge functions. Math. Physics and Functional Analysis, Akad. Nauk Ukr. SSR, Fiz. Tehn. Inst. Nizkih Temperatur, Kharkov 5:3-10, 1974.
+
+Rigorous results for Ising ferromagnets of arbitrary spin. B Robert, Griffiths, Journal of Mathematical Physics. 109Robert B Griffiths. Rigorous results for Ising ferromagnets of arbitrary spin. Journal of Mathematical Physics, 10(9):1559-1565, 1969.
+
+Correlation inequalities and the mass gap in p(ϕ) 2. Francesco Guerra, Lon Rosen, Barry Simon, Communications in Mathematical Physics. 411Francesco Guerra, Lon Rosen, and Barry Simon. Correlation inequalities and the mass gap in p(ϕ) 2 . Communications in Mathematical Physics, 41(1):19-32, 1975.
+
+Two-dimensional neutral Coulomb gas. J Gunson, Panta, Communications in Mathematical Physics. 523J Gunson and LS Panta. Two-dimensional neutral Coulomb gas. Communications in Mathematical Physics, 52(3):295-304, 1977.
+
+Foundations of modern probability. Olav Kallenberg, Springer Science and Business MediaOlav Kallenberg. Foundations of modern probability. Springer Science and Business Media, 2006.
+
+Complex gaussian multiplicative chaos. Hubert Lacoin, Rémi Rhodes, Vincent Vargas, Communications in Mathematical Physics. 3372Hubert Lacoin, Rémi Rhodes, and Vincent Vargas. Complex gaussian multiplicative chaos. Commu- nications in Mathematical Physics, 337(2):569-632, 2015.
+
+Large deviations for the two-dimensional two-component plasma. Thomas Leblé, Sylvia Serfaty, Ofer Zeitouni, Communications in Mathematical Physics. 3501with an appendix by Wei WuThomas Leblé, Sylvia Serfaty, and Ofer Zeitouni, with an appendix by Wei Wu. Large deviations for the two-dimensional two-component plasma. Communications in Mathematical Physics,350(1): 301-360, 2017
+
+Statistical theory of equations of state and phase transitions. II. Lattice gas and Ising model. Tsung-Dao Lee, Chen-Ning Yang, Physical Review. 873410Tsung-Dao Lee and Chen-Ning Yang. Statistical theory of equations of state and phase transitions. II. Lattice gas and Ising model. Physical Review, 87(3):410, 1952.
+
+A general Lee-Yang theorem for one-component and multicomponent ferromagnets. H Elliott, Alan D Lieb, Sokal, Communications in Mathematical Physics. 802Elliott H Lieb and Alan D Sokal. A general Lee-Yang theorem for one-component and multicompo- nent ferromagnets. Communications in Mathematical Physics, 80(2):153-179, 1981.
+
+Developments in Characteristic Function Theory. Eugene Lukacs, MacmillianNew YorkEugene Lukacs. Developments in Characteristic Function Theory. Macmillian, New York, 1983.
+
+Absence of ferromagnetism or antiferromagnetism in one-or two-dimensional isotropic Heisenberg models. David Mermin, Herbert Wagner, Physical Review Letters. 17221133N David Mermin and Herbert Wagner. Absence of ferromagnetism or antiferromagnetism in one-or two-dimensional isotropic Heisenberg models. Physical Review Letters , 17(22):1133, 1966.
+
+Zeros of the partition function for generalized Ising systems. M Charles, Newman, Communications on Pure and Applied Mathematics. 272Charles M Newman. Zeros of the partition function for generalized Ising systems. Communications on Pure and Applied Mathematics, 27(2):143-159, 1974.
+
+Inequalities for Ising models and field theories which obey the Lee-Yang theorem. M Charles, Newman, Communications in Mathematical Physics. 411Charles M Newman. Inequalities for Ising models and field theories which obey the Lee-Yang theo- rem. Communications in Mathematical Physics, 41(1):1-9, 1975.
+
+On the exponential decay of correlation functions. Oliver Penrose, Lebowitz, Communications in Mathematical Physics. 393Oliver Penrose and Joel L Lebowitz. On the exponential decay of correlation functions. Communi- cations in Mathematical Physics, 39(3):165-184, 1974.
+
+The (ϕ 4 2 ) field theory as a classical Ising model. Barry Simon, B Robert, Griffiths, Communications in Mathematical Physics. 332Barry Simon and Robert B Griffiths. The (ϕ 4 2 ) field theory as a classical Ising model. Communications in Mathematical Physics, 33(2):145-164, 1973.
+
+Zeros of the partition function for the Heisenberg, ferroelectric, and general Ising models. Masuo Suzuki, Michael E Fisher, Journal of Mathematical Physics. 122Masuo Suzuki and Michael E Fisher. Zeros of the partition function for the Heisenberg, ferroelectric, and general Ising models. Journal of Mathematical Physics, 12(2):235-246, 1971.
+
+Theory of one-and two-dimensional magnets with an easy magnetization plane. II. The planar, classical, two-dimensional magnet. Jacques Villain, Journal de Physique. 366Charles Newman) Courant Institute of Mathematical SciencesJacques Villain. Theory of one-and two-dimensional magnets with an easy magnetization plane. II. The planar, classical, two-dimensional magnet. Journal de Physique, 36(6):581-590, 1975. (Charles Newman) Courant Institute of Mathematical Sciences, New York University,

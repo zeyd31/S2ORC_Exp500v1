@@ -1,0 +1,196 @@
+
+Entanglement Witness Derived From NMR Superdense Coding
+arXiv:quant-ph/0405175v4 10 Aug 2005
+
+Robabeh Rahimi rahimi@qc.ee.es.osaka-u.ac.jp 
+Kazuyuki Takeda 
+Masanao Ozawa 
+Graduate School of Information Sciences
+Tohoku University
+Aoba-ku980-8579SendaiJAPAN
+
+Masahiro Kitagawa 
+
+Graduate School of Engineering Science
+Osaka University
+1-3 Machikaneyama560-8531ToyonakaOsakaJAPAN
+
+Entanglement Witness Derived From NMR Superdense Coding
+arXiv:quant-ph/0405175v4 10 Aug 2005Submitted to: J. Phys. A: Math. Gen.Entanglement Witness Derived From NMR Superdense Coding 2numbers: 0365Ud0367Hk8764Hd
+We show that it is possible to transfer two-bit information via encoding a single qubit in a conventional nuclear magnetic resonance (NMR) experiment with two very weakly polarized nuclear spins. Nevertheless, the experiment can not be regarded as a demonstration of superdense coding by means of NMR because it is based on the large number of molecules being involved in the ensemble state rather than the entanglement of the NMR states. Following the discussions, an entanglement witness, particularly applicable for NMR, is introduced based on separate and simultaneous measurement of the individual nuclear spin magnetizations.
+
+Introduction
+
+A quantum computer, which is promised to be more powerful than the classical computers in solving some intractable problems by employing quantum algorithms, is not completely available yet, even though there are several proposals based on different quantum systems. Nuclear magnetic resonance (NMR) [1] has been known as one of the most viable methods for demonstrating even relatively complicated quantum algorithms [2]. However, the status of NMR has not been completely approved compared to the other candidates such as photons and ion traps, in that it treats an ensemble system composed of a large number of molecules. Moreover, the states are mixed rather than quantum pure states. Accordingly, nearly all previous attempts to demonstrate NMR quantum information processing (QIP) and quantum computations (QC) relied on pseudo-initialization [3,4] of highly mixed states. However, with or without employing the pseudo-pure states, mathematical arguments refute the credibility of NMR QIP and QC except at very low spin temperatures by verifying separability of the states [5,6].
+
+Entanglement is believed to be an essential requirement for quantum non-local algorithms to give enhancement over the classical counterparts [7,8]. For example, superdense coding (SDC) [9] enables transfer of two bits of classical information by encoding a single qubit. This remarkable effect is ascribed to the existence of entanglement in the system. However, in the implementation of the non-local algorithms by means of NMR, there is confusion with regard to the role of entanglement. NMR SDC has been demonstrated [10], as well as other quantum non-local algorithms [2,11], with the separable states with which the non-local algorithms should not work.
+
+In this work, we show that with NMR mixed states, even if the states are definitely separable, still there is a considerably high probability to detect signals with appropriate signs which apparently imply transfer of two-bit message even though we encode only one qubit. The reason for detection of the signals is proved to be because of the large number of molecules being involved in the NMR ensemble state. Therefore, a system composed of a huge number of molecules should be necessarily prepared in order to realize the transfer of two bits of information. Then, taking account the required number of resources, molecules, it is totally non-sense to claim on the quantum advantage over the classical counterpart. However, for an exact demonstration of SDC with NMR, in the sense that it can realize enhancement over the classical communication, nuclear spin polarization should be increased above a certain threshold, and this threshold coincides with the mathematical criterion for non-separability of the density matrix.
+
+We also discuss experimental detection of entanglement in terms of the concept of entanglement witness [12,13]. We introduce a new class of entanglement witness, which is based on measurement of nuclear spin magnetizations in a single run experiment. This approach provides a simple and convenient way of evaluating the existence of entanglement, and is applicable to all possible states encountered in SDC. Although the entanglement witness derived from the conventional approach is also shown to be measurable in a single run experiment, it requires pre-application of somewhat Figure 1. A quantum circuit for superdense coding. Two nuclear spins I and S are involved. After the first Hadamard and controlled-NOT, the spin I is given to Bob and S to Alice. Bob encodes the spin I by applying the unitary transformation U zx and then sends it off to Alice. Alice has now the two nuclear spins in her disposal. She applies the second controlled-NOT and Hadamard gates and measures the spin magnetizations. As a result, she obtains the encoded message, meaning that two-bit message is transferred while only a single spin has been encoded.
+
+complicated unitary transformation that depends on the state under investigation.
+
+
+Ideal SDC with Nuclear Spins
+
+Let us consider a pair of nuclear spins I = 1/2 and S = 1/2 placed in a static magnetic field B 0 , and suppose for a moment that the system is initially in a pure state |ψ 0 = |00 [1]. Then, the procedure of SDC, whose quantum circuit is described in Fig.1, is as follows [9]. Firstly, the entangling operation is applied on the state of the nuclear spins. The entangling operation is composed of a Hadamard gate (H) on the I spin and then a controlled-NOT gate (U cn ) whose control and target qubits are the I and S spins, respectively. The quantum state |ψ 1 after the entangling operation is represented as
+|ψ 1 = U ent |ψ 0 = 1 √ 2 (|00 + |11 ) = |β 00 ,(2.1)
+where we have defined U ent = U cn (H I ⊗ I S ). Here, |β 00 is known as one of the four Bell states [12] |β zx ≡ |0,
+x + (−1) z |1,x √ 2 ,(2.2)
+where z, x = 0, 1 andx = 1 − x. Now, suppose that the nuclear spin I is given to Bob and the other nuclear spin to Alice. Bob encodes a two-bit classical message zx by applying the unitary operation U zx = Z z X x on the I spin and then sends off the encoded qubit to Alice. The effect of the unitary transformation by Bob is to toggle |ψ 1 = |β 00 into the other Bell state. That is,
+|ψ 2 = U zx |β 00 = |β zx . (2.3)
+Then, Alice applies the disentangling operation, which is composed of a U cn followed by H. The state |ψ 3 after the disentangling operation is
+|ψ 3 = U Bell |ψ 2 = |zx , (2.4)
+where we defined U Bell = (H I ⊗ I S )U cn . Finally, she performs measurement of the resultant magnetizations, Z I and Z S and extracts the results as (−1) z and (−1) x . If it was possible to execute all the above process in an NMR apparatus, then the signal intensities detected through the measurement in this ideal case of the fully polarized initial state would have been maximum and information on the choice of U zx could be extracted with a success probability of unity. In this case, the maximum entanglement is shared between Alice and Bob, which causes transfer of two classical bits of information from Bob to Alice via the I spin alone. Communication by SDC is efficient by a factor of two as compared to the classical communication.
+
+
+Transfer of Two-Bit Message by Encoding a Single Spin in NMR
+
+NMR [1] is a spectroscopy, manipulating the nuclear spins placed in a strong, typically 10 Tesla, static magnetic field B 0 . The corresponding total spin Hamiltonian in an isotropic liquid state is composed of several terms, but the most important parts are considered as the Zeeman Hamiltonian and spin-spin interaction parts. So that we take
+H = − m−1 i=0h ω i 2 Z i + 1 4 m−2 i=0 j>i 2πhJ ij Z i Z j , (3.1)
+where ω i is the Larmor frequency and Z i is the Pauli operator for the z component of the ith spin and J ij is the coupling constant between ith and jth spins in a molecule.
+
+In the high field approximation, which is valid for most practical cases, in the thermal equilibrium at temperature T , the polarization ǫ i is given by
+ǫ i = tanh( −γ ih B 0 2k B T ), (3.2)
+where γ i is gyromagnetic ratio. Accordingly, the probabilities p i and q i of finding the ith spin in the states |0 and |1 , respectively, are given by
+p i = 1 + ǫ i 2 , q i = 1 − ǫ i 2 . (3.3)
+Then, the density matrix in thermal equilibrium is given by
+ρ m−qubit = ρ 1 ⊗ ... ⊗ ρ m = ⊗ m i=1 ρ i , (3.4)
+where ρ i is the density matrix for the ith nuclear spin in a molecule and is written as
+ρ i = p i |0 0| + q i |1 1|. (3.5)
+At room temperature, the energy splitting between the ground state and the excited state is much smaller than the thermal energy and as a result, large number of spins (qubits) are in statistical mixture with low spin polarization. Accordingly, the information processing should be evaluated statistically. For nuclear spins I = 1/2 and S = 1/2 the initial state is a mixed state described by partially polarized density matrix with the form of (3.4) and (3.5) with m = 2 as
+ρ 0 = (p I |0 0| + q I |1 1|) ⊗ (p S |0 0| + q S |1 1|) (3.6) = p I p S |00 00| + p I q S |01 01| + q I p S |10 10| + q I q S |11 11|.
+After performing the entangling operation the state of the two qubits (3.6) changes to a general Bell diagonal state of the form
+ρ 1 = U ent ρ 0 U † ent (3.7) = p I p S |β 00 β 00 | + p I q S |β 01 β 01 | + q I p S |β 10 β 10 | + q I q S |β 11 β 11 |.
+This is the shared state between Alice and Bob. Suppose that Bob owns the state of the nuclear spin I. Then, Bob applies the unitary operation U zx . The state ρ 2 , after the encoding operation is still a general Bell diagonal state as follows
+ρ 2 = U zx ρ 1 U † zx (3.8) = p I p S |β z,x β z,x | + p I q S |β z,x β z,x | + q I p S |βz ,x βz ,x | + q I q S |βz ,x βz ,x |.
+He hands over the nuclear spin to Alice, who applies the disentangling operation. Then, the state ρ 2 changes into
+ρ 3 = U Bell ρ 2 U † Bell (3.9) = p I p S |z, x z, x| + p I q S |z,x z,x| + q I p S |z, x z, x| + q I q S |z,x z,x| = (p I |z z| + q I |z z|) ⊗ (p S |x x| + q S |x x|).
+Measurement of the spin magnetizations Z I and Z S is done on the total ensemble state composed of n molecules. Then, measurement on the product state ⊗ n i=0 ρ (i) 3
+
+is composed of separate but simultaneous measurements, n i=1 Z (i)
+I and n i=1 Z (i)
+S , on the spin magnetizations. Note, that ρ (i) 3 stands for the density matrix ρ 3 of the ith molecule. Measurement of the spin magnetizations gives results as binomial probability distributions over (−n, −n + 1, ..., −1, 0, 1, ..., n − 1, n), with the mean values to be as follows
+µ I = (−1) z np I + (−1)znq I = (−1) z nǫ I , (3.10) µ S = (−1) x np S + (−1)xnq S = (−1) x nǫ S .
+Let us make an assumption that z, x = 0, which does not influence the generality of the discussion. The corresponding variances are characterized by
+σ 2 I = 4np I q I = n(1 − ǫ 2 I ), (3.11) σ 2 S = 4np S q S = n(1 − ǫ 2 S )
+. Recall that σ I and σ S are essentially the widths of the range over which the outcomes are distributed around the mean values (3.10). The relative widths of distributions are characterized by
+σ I µ I = n(1 − ǫ 2 I ) nǫ I ≈ 1 ǫ I √ n , (3.12) σ S µ S = n(1 − ǫ 2 S ) nǫ S ≈ 1 ǫ S √ n .
+Entanglement Witness Derived From NMR Superdense Coding
+
+
+6
+
+Then it is clear that the relative widths decrease as √ n with increasing the number of molecules n. Thus, the greater the number of molecules, the more likely it is that an observation gives a result which is relatively close to the mean values (3.10). Now, it is also required to calculate the corresponding error probability of detection of a negative value for z = 0. For simplicity, let us consider only Z 
+P e = P ( n i=1 Z (i) I < 0|z = 0). (3.13)
+We would like to calculate the error probability to show that for a range of n of the current NMR experiments, this quantity is negligible. From the DeMoivre and Laplace theorem [15] if n is large enough then generally we have
+P    α < n i Z (i) I − µ I σ I < β    ≈ 1 √ 2π β α e − x2 2 dx. (3.14)
+For the error probability P e , therefore
+P e = P    −∞ < n i Z (i) I − µ I σ I < − µ I σ I    (3.15) ≈ 1 √ 2π −µ I /σ I −∞ e − x2 2 dx ≈ 1 √ 2π e − µ I 2 2σ I 2 σ I µ I ≈ 1 √ 2π e − (nǫ 2 I ) 2 1 ( √ nǫ I )
+.
+
+If the number of molecules are large enough, the result of the measurement on the spin magnetizations Z I and Z S on the ensemble state gives results very close to the mean values (3.10) with negligible error probabilities. In a conventional NMR experiment, the number of molecules are n ∼ 10 18 , with low spin polarization ǫ ∼ 10 −5 . Then we calculate P e ≪ 10 −100 , to be negligible. Therefore, in an NMR apparatus, if signals can be detected despite of the low spin polarization the choice zx can be evaluated with probability of almost one through the signs of the signals (3.10). Detection of signals depends on the NMR apparatus. The NMR signal intensity is defined by amplitude 16) and the noise is determined through Nyquist formula [16] V N = 4k B T R∆ν, (3.17) where Q is the quality factor of the resonance coil, V is the volume of the coil, R is the resistance, ω I is the Larmor frequency of the nuclear spin I, and ∆ν is the amplifier bandwidth. The noise which is defined by (3.17) is entirely classical noise generated by the equilibrium fluctuations of the electric current inside an electrical conductor. Nevertheless, for an NMR experiment with two qubit liquid ensemble at room temperature with V = 1cm 3 and Q = 10 3 , the number of required molecules is bounded by N > 10 16 [17]. Therefore, in the case which we are facing, n is large to get strong enough signal intensities to be detectable with an NMR apparatus. Deviations are very small (3.11) and the signals are very close to the mean values (3.10) with the error probabilities to be negligible. Thus the signs of the detected signals give information on the choice of zx, and hence the encoded two-bit message, regardless of the separability due to the very low polarized initial states. Then we emphasize the results of the measurement of the spin magnetizations Z I and Z S to be as follows
+V S = 1 4 (Q/V )µ 0 Rω Ih γ I nǫ I ,(3.Z I = (−1) z ǫ I , Z S = (−1) x ǫ S . (3.18)
+We note that this does not necessarily mean that the experiment described here is a demonstration of SDC with NMR mixed states, even though the signs of the detected signals appear to give the two-bit message while the I spin alone has been applied by encoding pulses. SDC relies on entanglement of states in order to realize transfer of twobit information by only encoding a single qubit. In the case of the NMR experiment, as explained here, the large number of molecules are inevitably required for detection of encoded two-bit message. Then taking account the required number of molecules it is in principle erroneous to call the corresponding NMR experiment a demonstration of SDC.
+
+
+Detection of Entanglement
+
+Given the density matrix (3.8), we obtain a probability for a successful SDC to be p I p S , with which a two-bit message can be transferred inside any individual single molecule. Therefore, for this experiment to represent the quantum information advantage and to outperform the classical one-bit communication through one-qubit channel, the success probability, p I p S , must exceed 50%. This is because two-bit information can be obtained by one-bit classical communication and a one-bit of random guess, which comes true with a probability of 1/2. Then SDC is beyond the classical achievements only if the inequality
+p I p S > 1/2 (4.1)
+is satisfied. It is worth noting that this condition exactly coincides with the condition for the non-separability of ρ 2 derived from e.g. the negativity criterion [18,19]. Therefore, only when F , to be defined as follows, imposes a negative value, the NMR SDC is successful and there exists entanglement.
+F ≡ 1/2 − p I p S . (4.2)
+Detection of entanglement through finding a negative value for an observable is reminiscent of entanglement witness [12,13]. Entanglement witness is a Hermitian operator W = W † which has positive mean values for all separable states ρ, Tr(W ρ) > 0, but a negative mean value for at least one entangled state σ ent , Tr(W σ ent ) < 0. In other words, entanglement is detected if a negative mean value is obtained through the measurement of the entanglement witness.
+
+Using the spin polarizations, we rewrite F as
+F = 1 2 − 1 4 (1 + ǫ I )(1 + ǫ S ) (4.3) = 1 2 − 1 4 (1 + | Z I |)(1 + | Z S |),
+where we used (3.18). The absolute values are required for the evaluation of the function F for different choices of zx. Measurement on the state ρ 3 with the observables Z I and Z S is equivalent to measurement on the state ρ 2 (or ρ 1 in the special case of x, z = 0) in the Bell basis, because
+Z I = Trρ 3 (Z I ⊗ I S ) (4.4) = Trρ 2 (X I ⊗ X S ) = W 1 Z S = Trρ 3 (I I ⊗ Z S ) (4.5) = Trρ 2 (Z I ⊗ Z S ) = W 2 ,
+where the two observables W 1 and W 2 are defined as follows
+W 1 = U † Bell (Z I ⊗ I S )U Bell = X I ⊗ X S , (4.6) W 2 = U † Bell (I I ⊗ Z S )U Bell = Z I ⊗ Z S . (4.7)
+From (4.3), (4.4) and (4.5), then F is further rewritten as
+F ≡ f ( W 1 , W 2 ) = 1 2 − 1 4 (1 + | W 1 |)(1 + | W 2 |). (4.8)
+Measurement of the two observables W 1 and W 2 on the ensemble system described by ρ 2 is related to the measurement on the state ρ 3 of the spin magnetization, which affords information on the spin polarizations. Therefore, separate and simultaneous measurement of the observables W 1 and W 2 is possible in a single experiment, and tells the existence of entanglement. That is, if W 1 and W 2 satisfy
+F ≡ f ( W 1 , W 2 ) < 0, (4.9)
+then the state is entangled. In this sense, W 1 and W 2 are regarded as a new class of entanglement witnesses. These observables are easily measurable in a single run NMR experiment and give information on the status of entanglement through quantitative evaluation of the function F (4.8).
+
+We also note, that entanglement can be detected in principle through measuring the conventional entanglement witness [12,13]. For ρ 2 , entanglement witness is derived by the conventional approach [12,13] as W = 1 4 (I I ⊗I S +(−1)zX I ⊗X S +(−1)z(−1)xY I ⊗Y S +(−1)xZ I ⊗Z S ).(4.10)
+
+If we assume the ability of implementation of any form of the unitary transformations with NMR pulse sequences, then the conventional entanglement witness also can be measured in a single run experiment and by measuring the spin magnetizations (see appendix A). We emphasize here, that the scheme which is introduced in this contribution for detection of entanglement, still has advantage in the sense that for different choices of z and x it is applicable by just evaluation the function with the absolute values. In other words, there is no need to change the experimental operations. However, the conventional entanglement witness even though is proved here to be measurable in a single run NMR experiment by only measuring the spin magnetizations, still requires different pre-applied unitary transformations, which depend on the choices of z and x.
+
+
+Conclusion
+
+Liquid state NMR with very low nuclear spin polarizations prohibits the existence of entanglement. Then, with this physical system, it is absolutely impossible to demonstrate a faithful non-local quantum information processing, which requires entangled states. Although two-bit information is correctly detected in NMR SDC experiment, it is not based on the existence of entanglement but relys on the large number of molecules. For a completely reliable demonstration of NMR SDC within a single molecule, spin polarization should inevitably be enhanced over a certain threshold and this threshold coincides with the condition for non-separability of the states. According to the results, we introduced a new class of entanglement witnesses, with several advantages particularly for NMR. The introduced entanglement witness is measurable in a single run experiment and generally is applicable for all the states without any requirement on any extra experimental operation. Detection of entanglement through the conventional entanglement witness is also proved to be possible in a single NMR experiment, however for different states under investigation, it requires different pre-application of somehow complicated unitary transformations.
+
+Acknowledgments R. R. and M. K. are grateful for helpful discussions with Dr. Fumiaki Morikoshi. R.R. would like to thank Akira SaiToh for contributions to the appendix A. This work has been supported by CREST of Japan Science and Technology Agency.
+
+
+Appendix A. Single Run Detection of the Conventional Entanglement Witness
+
+Suppose that we have the observableW = U †W o U = U † (aZ I ⊗ I S + bI I ⊗ Z S + cI I ⊗ I S )U with coefficients a, b, c ∈ R and a unitary transformation U ∈ U(4), and have the conventional entanglement witness (4.10). For zx, which is fixed to each of the possible four classes, we would like to prove with an explicite example that there exists a set of a, b, c, and U such that Trρ 2W = Trρ 2 W .
+
+In the following, we first restrict the problem to the case of x, z = 0 then will discuss on the other cases. The entanglement witness W for z = x = 0 is [12,13] 
+W = 1 4 (I I ⊗ I S − X I ⊗ X S + Y I ⊗ Y S − Z I ⊗ Z S ). (A.1)
+The eigenvalues of W are different to the ones forW . Then the two observables are essentially different to each other. However they can still give the same value after calculating the traces. Consider the case where p I = p S = 1/2, a maximally mixed state ρ 2 = 1 4 (I I ⊗ I S ) for the input. We have
+Trρ 2 W = 1 4 , (A.2)
+Trρ 2W = TrUρ 2 U †W o = c. Therefore c = 1/4 holds. An equivalent problem, then would be finding a set of α = a+b and β = a − b that satisfies
+Trρ 1 (W ′ − V †W o V) = 0, (A.3)
+where V = UU cn (H I ⊗ I S ) = UU ent and W ′ = U † ent W U ent . Because ρ 1 is a diagonal matrix, the above equality holds for ∀ p I , p S if the diagonal elements of (W ′ − V †W o V) are zero. This condition is expressed as follows 
+W ′ − V †W o V =       0 a 01 a      = V †       α 0 0 0 0 β 0 0 0 0 −β 0 0 0 0 −α       V. (A.5)
+This is an eigenvalue problem. The Hermitian matrix A has the eigenvalues ±α, ±β.
+
+Then we should solve the following system of equations for i = 0, 1, 2, 3.
+α|v 0i | 2 + β|v 1i | 2 − β|v 2i | 2 − α|v 3i | 2 = h i , (A.6) where h 0 = −3/4, otherwise h i = 1/4.
+As far as we only want to show the possibility of the measurement of the conventional entanglement witness by only measuring the spin polarizations in a single run NMR experiment, it is enough to give an example and to avoid the unnecessary complexities due to a general proof.
+
+Suppose that the state to be measured is a maximally entangled state. Measurement with the conventional witness observable W gives W = −1/2. We impose the observableW to give the same value. We observe that for the maximally entangled state, Z I and Z S should take ±1. Recall that generally c = 1/4. Then, as an example, we can choose a ex = b ex = 3/8 and the corresponding unitary transformation is obtained as follows
+V ex = 1 √ 3       0 1 e iπ2/3 e −iπ2/3 0 1 e −iπ2/3 e iπ2/3 0 1 1 1 √ 3 0 0 0       . (A.7)
+For different choices of zx, the elements of the matrix A should be changed in a way that the unsimilar diagonal element −3/4 stands for the matrix component A x+2z,x+2z . Then similar calculation shows that the components of V ex for different choices of zx interchange according to each case. Therefore, we showed that it is also possible to decompose the conventional entanglement witness to the separate but simultaneous measurement on the spin magnetizations. However, we emphasize that still the entanglement witness, which we introduced in this work is more handy as it covers all the cases for different z and x, by just evaluation of the function F with the absolute values without additional requirements on the different experimental operations. Whereas, as far as the conventional entanglement witness is concerned, different sets of a, b and more over different unitary transformations are required for different choices of z and x. In other words, by only changing the signs of the absolute values a and b but with a fixed unitary transformation, generally it is impossible to get the equality for the expectation values of W andW . This can be proved by contradiction.
+
+Suppose that it would be possible to have the equality with a fixed unitary transformation but just changing the signs of the absolute values. Then the equality (A.5) should also be satisfied with a fixed V but different signs for α and β. Recall that the diagonal elements of A have to interchange in accordance with the values of z and We conclude as follows. The conventional entanglement witness is measurable in a single NMR experiment and by only measuring the spin magnetizations, provided that any required unitary transformation can be applied prior to the measurement. However, the unitary transformation has to be changed in accordance to the choices of z and x and in this sense the new entanglement witness, which we introduced in this contribution is proved to have its favorite advantage.
+
+I
+, which is the measurement on the spin magnetization of the nuclear spin I in the ith molecule. It should be clear at the moment that results are applicable to the signals detected through measurement on the other spin magnetization in the molecule, Z (i) S . The error probability is defined as
+
+
+x. All of them if applied to the system of equations (A.6) result in some contradiction. Particularly two resultant equations from the system of equations for different z and x are as followsα|v 00 | 2 + β|v 10 | 2 − β|v 20 | 2 − α|v 30 | 2 = − 3 4 ,(A.8) α|v 00 | 2 + β|v 10 | 2 − β|v 20 | 2 − α|v 30 | 2 = − 1 4 , (A.9) where (A.8) is for the case a = |a| and b = |b| but (A.9) is for the case a = −|a| and b = −|b|. The clear contradiction between (A.8) and (A.9) leads to the result that the original assumption can not be true.
+
+Principles of Nuclear Magnetic Resonance in One and Two Dimentions. R R Ernst, G Bodenhausen, A Wokaun, OxfordOxford UniversityErnst R R, Bodenhausen G and A. Wokaun 1994 Principles of Nuclear Magnetic Resonance in One and Two Dimentions (Oxford: Oxford University)
+
+. L M K Vandersypen, M Steffen, G Breyta, C S Yannoni, M H Sherwood, I L Chuang, Nature. 414883Vandersypen L M K, Steffen M, Breyta G, Yannoni C S, Sherwood M H and Chuang I L 2001 Nature 414, 883
+
+. D G Cory, A Fahmy, T F Havel, Proc. Natl. Acad. Sci. USA. 941634Cory D G, Fahmy A F and Havel T F 1997 Proc. Natl. Acad. Sci. USA 94 1634
+
+. E Knill, Chuang I Laflamme, R , Phys. Rev. A. 573348Knill E, Chuang I and Laflamme R 1998 Phys. Rev. A 57 3348
+
+. K Zyczkowski, P Horodecki, A Sanpera, M Lewenstein, Phys. Rev. A. 58883Zyczkowski K, Horodecki P, Sanpera A and M. Lewenstein 1998 Phys. Rev. A 58 883
+
+. S L Braunstein, S M Caves, R Jozsa, N Linden, S Popescu, R Schack, Phys. Rev. Lett. 831054Braunstein S L, Caves S M, Jozsa R, Linden N, Popescu S and Schack R 1999 Phys. Rev. Lett. 83 1054
+
+. A Ekert, R Jozsa, Phil. Trans. R. Soc. Lond. A. 3561769Ekert A and Jozsa R 1998 Phil. Trans. R. Soc. Lond. A 356 1769
+
+. N Linden, S Popescu, Phys. Rev. Lett. 8747901Linden N and Popescu S 2001 Phys. Rev. Lett. 87 047901
+
+. C H Bennett, S J Wiesner, Phys. Rev. Lett. 692881Bennett C H and Wiesner S J 1992 Phys. Rev. Lett. 69 2881
+
+. X Fang, X Zhu, M Feng, Mao X Du, F , Phys. Rev. A. 6122307Fang X, Zhu X, Feng M, Mao X and Du F 2000 Phys. Rev. A 61, 022307
+
+. M A Nielsen, Knill E Laflamme, R , Nature. 39652Nielsen M A, Knill E and Laflamme R 1998 Nature 396, 52
+
+. B M Terhal, P Horodecki, Phys. Rev. A. 6140301Terhal B M and Horodecki P 2000 Phys. Rev. A 61 040301
+
+. M Lewenstein, S B Kraus, J Cirac, P Horodecki, Phys. Rev. A. 6252310Lewenstein M, Kraus S B, Cirac J I and Horodecki P 2000 Phys. Rev. A 62 052310
+
+M A Nielsen, I L Chuang, Quantum Computation and Quantum Information. CambridgeCambridge UniversityNielsen M A and Chuang I L 2000 Quantum Computation and Quantum Information (Cambridge: Cambridge University)
+
+W Feller, Introduction to Probability Theory and its Applications. New YorkJohn Wiley and SonsFeller W 1968 In Introduction to Probability Theory and its Applications (New York: John Wiley and Sons)
+
+. H Nyquist, Phys. Rev. 32110Nyquist H 1928 Phys. Rev. 32 110
+
+. A Kokin, K A Valiev, Quantum Computers and Computing. 325Kokin A A and Valiev K A 2002 Quantum Computers and Computing 3 25
+
+. A Peres, Phys. Rev. Lett. 771413Peres A 1996 Phys. Rev. Lett. 77 1413
+
+. H Horodecki, P Horodecki, R Horodecki, Phys. Lett. A. 2231Horodecki H, Horodecki P and Horodecki R 1996 Phys. Lett. A 223 1

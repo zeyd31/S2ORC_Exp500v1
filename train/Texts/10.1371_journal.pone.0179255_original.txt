@@ -1,0 +1,529 @@
+
+Functional neural circuits that underlie developmental stuttering
+July 31, 2017
+
+Jianping Qiao 
+School of Physics and Electronics
+Institute of Data Science and Technology
+Shandong Province Key Laboratory of Medical Physics and Image Processing Technology
+Shandong Normal University
+JinanChina
+
+Zhishun 2☯ 
+Department of Psychiatry
+Columbia University
+New YorkNYUnited States of America
+
+Wang wangz@nyspi.columbia.eduzw 
+Department of Psychiatry
+Columbia University
+New YorkNYUnited States of America
+
+Guihu Zhao zhaoguihu@foxmail.comgz 
+School of Information Science and Engineering
+Central South University
+Changsha, Los AngelesCAChina, United States of America
+
+Yuankai Huo 
+Department of Psychiatry
+Columbia University
+New YorkNYUnited States of America
+
+Carl L Herder 
+Chamonix O Sikora 
+Bradley S Peterson 
+Department of Psychiatry
+Keck School of Medicine at the University of Southern California
+Los AngelesCAUnited States of America
+
+Functional neural circuits that underlie developmental stuttering
+July 31, 201710.1371/journal.pone.0179255RESEARCH ARTICLE 4 American Institute for Stuttering, New York, NY, United States of America, 5 Institute for the Developing Mind, Children's Hospital ☯ These authors contributed equally to this work. *
+The aim of this study was to identify differences in functional and effective brain connectivity between persons who stutter (PWS) and typically developing (TD) fluent speakers, and to assess whether those differences can serve as biomarkers to distinguish PWS from TD controls. We acquired resting-state functional magnetic resonance imaging data in 44 PWS and 50 TD controls. We then used Independent Component Analysis (ICA) together with Hierarchical Partner Matching (HPM) to identify networks of robust, functionally connected brain regions that were highly reproducible across participants, and we assessed whether connectivity differed significantly across diagnostic groups. We then used Granger Causality (GC) to study the causal interactions (effective connectivity) between the regions that ICA and HPM identified. Finally, we used a kernel support vector machine to assess how well these measures of functional connectivity and granger causality discriminate PWS from TD controls. Functional connectivity was stronger in PWS compared with TD controls in the supplementary motor area (SMA) and primary motor cortices, but weaker in inferior frontal cortex (IFG, Broca's area), caudate, putamen, and thalamus. Additionally, causal influences were significantly weaker in PWS from the IFG to SMA, and from the basal ganglia to IFG through the thalamus, compared to TD controls. ICA and GC indices together yielded an accuracy of 92.7% in classifying PWS from TD controls. Our findings suggest the presence of dysfunctional circuits that support speech planning and timing cues for the initiation and execution of motor sequences in PWS. Our high accuracy of classification further suggests that these aberrant brain features may serve as robust biomarkers for PWS.
+a1111111111 a1111111111 a1111111111 a1111111111 a1111111111
+Introduction Developmental stuttering is a speech disorder in which sounds, syllables, or words are repeated or prolonged, disrupting the normal flow of speech [1][2]. These speech disruptions may be accompanied by behaviors representing effortful motor control, such as rapid eye blinking or lip tremor. Stuttering affects approximately 5 percent of all children at some time in their life, most often between 2 and 5 years of age, when speech and language skills are developing rapidly. Symptoms typically last from several weeks to several years, with adult persistence noted in less than 25% of those affected [3]. Stuttering therefore affects people of all ages, and it often impairs overall quality of life [4].
+
+Prior neuroimaging studies have revealed structural and functional differences in people who stutter (PWS) compared with fluent speakers. The preponderance of evidence currently suggests that the pathogenesis of stuttering involves neural systems involved in the production and control of speech, those within Broca's region of the inferior frontal gyrus and associated portions of the arcuate fasciculus, as well as their interconnections with cortico-striato-thalamo-cortical (CSTC) loops [5][6][7][8][9][10][11]. Voxel-based morphometry studies using anatomical Magnetic Resonance Imaging (MRI) have reported atypical leftward asymmetry [8,[12][13] and increased white matter volumes in the superior temporal gyrus (STG), middle temporal gyrus (MTG), inferior frontal gyrus (IFG), middle frontal gyrus (MFG) and corpus callosum [14][15][16] of adults who stutter compared with controls. Moreover, children who stutter are reported to have less grey matter volume (GMV) in the IFG, caudate, and putamen [8,[17][18][19] but more GMV in the right rolandic operculum and STG relative to fluent children [17]. Diffusion Tensor Imaging (DTI) has shown that children who stutter have reduced fractional anisotropy in the region of the left superior longitudinal fasciculus and bilateral corticospinal tracts [18,20]. Other DTI studies have also shown that adults who stutter have reduced fractional anisotropy (FA) in the left sensorimotor cortex [21][22]. Our recent spectroscopy study in the same participants of the present study reported reduced levels of N-acetyl aspartate (NAA), an index of neural density, in inferior and superior frontal cortices (including Broca's region) and caudate nucleus, and increased NAA in the posterior cingulate, lateral parietal, and parahippocampal cortices, as well as the hippocampus and amygdala [5].
+
+Functional imaging studies have suggested the presence of a dysfunctional feedforward CSTC network in language learning [23], with these functions extending to linguistic sequencing in a domain-specific manner [24]; because sequencing difficulties during spoken language are the defining hallmark of stuttering, these studies suggest the importance of CSTC circuits in the pathogenesis of developmental stuttering. Positron Emission Tomography [25][26][27] and functional Magnetic Resonance Imaging (fMRI) studies of stuttering have reported similar patterns of deactivation in the left IFG (Broca's region), as well as hyperactivation in right frontal operculum, motor areas, basal ganglia, and thalamus in PWS, implicating disturbances in speech planning [28] and speech execution [29] during various speech [26,[30][31][32] and nonspeech tasks [33][34], even for PWS who are non-English speakers [35][36]. In our prior perfusion study of the same participants included in the present study, we detected lower perfusion at rest in PWS compared to fluent controls in Broca's region bilaterally and in the superior frontal gyrus [10]. Perfusion in Broca's area correlated inversely with the severity of stuttering and extended posteriorly into other portions of the arcuate fasciculus.
+
+Resting state fMRI studies in stuttering children and adults have reported reduced intrinsic functional connectivity in CTSC and auditory-motor cortical loops of the left hemisphere [37][38][39], suggesting that the neural systems supporting complex and dynamic speech production is dysfunctional in PWS [6,33]. These studies support the central role that Broca's region within the IFG, the basal ganglia, and CSTC loops play in the pathogenesis of dysfluent speech.
+
+Despite this progress from neuroimaging in elaborating the brain basis for stuttering, the neural systems that underlie developmental stuttering have not been fully identified. Analyses of functional connectivity using resting-state functional MRI data can be a powerful tool for identifying the intrinsic neural circuits that underlie pathogenic disturbances in neuropsychiatric illnesses. Therefore, we applied independent component analysis (ICA) with hierarchical partner matching (HPM) [40][41][42] to resting-state fMRI data, aiming to identify altered intrinsic connectivity within cortical-subcortical circuits in a large sample of PWS compared with age-and sex-matched, typically developing (TD) fluent speakers. ICA combined with HPM identifies robust networks of functionally connected brain regions that are reproducible across participants, and it can identify significant connectivity differences across diagnostic groups. We also used Granger Causality (GC) to study the causal interactions (effective connectivity) among the regions that ICA-HPM identified.
+
+One of the main goals of brain imaging and neuroscience is to uncover neural circuits that govern human behaviors and psychiatric disorders, and thereby to identify biomarkers that can robustly predict and identify these behaviors and disorders. Many studies have demonstrated that machine learning techniques are useful for finding potential biomarkers of psychological disorders [43][44][45]. However, to our knowledge, no studies have been reported that classify PWS and TD controls based on intrinsic brain connectivity. Therefore, we used machine learning to assess how well the ICA measures of functional connectivity and Granger Causality differentiate PWS from TD controls.
+
+Based on prior theoretical models and empirical studies of stuttering, we hypothesized that we would detect brain connectivity differences in PWS in Broca's region and the associated language loop, and within the cortical-subcortical neural systems that support the components for phonetic encoding, sensory feedback, motor planning, and motor execution of human speech. We further hypothesized that measures of functional and effective connectivity in these systems would discriminate among PWS and TD controls with high accuracy, thereby providing a set of putative biomarkers for stuttering that can be useful for future studies of the pathophysiology and treatment of PWS.
+
+
+Materials and methods Participants
+
+We recruited 44 participants with developmental stuttering (PWS: 27 males, 17 females, mean age 24.6±11.2 years, range 9-49 years) via advertisements posted on the internet or at local clinics, hospitals, and stuttering support groups. We recruited participants across this wide age range intentionally, to permit assessment of the stability of group differences in imaging measures across the lifespan. All PWS participants, including the adults, were currently symptomatic. A licensed speech-language pathologist diagnosed all stuttering participants before enrollment. The Kiddie-Schedule for Affective Disorders and Schizophrenia, Present and Lifetime Version was administered to a parent for participants under age 18 [46], whereas the Structured Clinical Interview for DSM-IV-TR Axis I Disorders was administered to participants over 18 [47]. Stuttering participants with comorbid disorders (chronic motor tic disorder, N = 2; attention deficit hyperactivity disorder, N = 2; social anxiety disorder, N = 1) were allowed into the study because these are highly prevalent in stuttering speakers; excluding comorbidities would have impaired the generalizability of our findings.
+
+The Assessment of the Child's Experience of Stuttering (ACES) for children who stuttered and the corresponding scale for adults, the Overall Assessment of the Speaker's Experience of Stuttering (OASES), were used to evaluate stuttering severity [48], which ranged from mild to severe, with an average severity of 50.8. Approximately 70% of PWS participants endorsed symptoms of moderate severity. We recruited 50 TD controls (31 males, 19 females, mean age 23.1±11.3 years, ranging from 8 to 49 years) randomly from a telemarketing list of 10,000 names in the local community, excluding those with lifetime Axis I or language disorder, group-matching to the PWS group on age and sex.
+
+The Institutional Review Board of the New York State Psychiatric Institute approved the study procedures. We obtained written informed consent from all participants and parental consent for participants under age 18.
+
+
+Image acquisition
+
+Participants were positioned in the scanner and head coil using canthomeatal landmarks. We instructed the participants to keep their eyes closed and not to think about anything in particular for the duration of the scan. Images were acquired using a 3 Telsa GE Signa EXCITE scanner (General Electric, Milwaukee, USA) equipped with an 8-channel head coil. Resting-state fMRI data were acquired using a gradient-echo echo-planar imaging (EPI) sequence (matrix 64×64, field of view 24cm×24cm, repetition time 2200msec, echo time 30msec, flip angle 90˚, slice thickness 3.5mm without gap). Thirty-four interleaved slices were acquired along the AC-PC plane to provide whole brain coverage, with 146 images acquired per participant, for a scan duration of 5 minutes 21 seconds.
+
+
+Data analysis
+
+Preprocessing. Functional MRI data were preprocessed using SPM8 (Welcome Department of Imaging Neuroscience, London, United Kingdom; see http://www.fil.ion.ucl.ac.uk/ spm/) that was run under MATLAB. The first six volumes of scans were excluded from analysis to allow for signal stabilization following onset transients. The remaining functional scans (140 volumes) were slice timing-corrected, realigned to the first scan using rigid-body transformations to correct for head movements. Realigned functional volumes were motionadjusted. The outlier volumes were identified based on the first-order derivative of the motion parameters between successive EPI images and global mean BOLD signal. We used linear interpolation to replace the identified outlier volumes with the closest non-outlier volumes in ArtRepair toolbox version 4 (http://spnl.stanford.edu/tools/ArtRepair) [49]. Finally, functional images were normalized to the Montreal Neurological Institute (MNI) coordinate system [50] and spatially smoothed using an isotropic 8 mm full-width at half-maximum Gaussian kernel.
+
+Independent component analysis with hierarchical partner matching. We elected to employ single-subject ICA in this study because, compared with group-based ICA [51], it better preserves the specificity and independence of independent components (ICs) identified within individual participants. Furthermore, ICA combined with HPM is able to identify networks of functionally connected brain regions that are reproducible across participants and that are highly robust with respect to the number of ICs generated for each person [40][41], a considerable advantage that group-based ICA by definition cannot provide. The combination of ICA with HPM, and the validation of the ICs they identify, are provided in detail elsewhere [40][41], but we briefly summarize them here.
+
+Determining rationally and accurately the number of components that should be extracted in any given dataset is notoriously difficult. We therefore combined individual-level ICA with HPM to ensure that we identified ICs that were robust with respect to the number of ICs generated in each participant. HPM first identifies ICs that are robust and reproducible across participants for a given number of extracted ICs, and then it identifies those ICs that are independent of the number of ICs extracted in each participant. Thus in the first HPM step we combined Minimum Description Length and Akaike's Information Criterion to establish the lower and upper bounds (determined to be 20 and 130, respectively) for the number of ICs likely present in each participant. Next, starting from the lower bound of 20, we increased by increments of 10 the number of IC's extracted in each person (i.e., 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, and 130 IC's per set), yielding 12 sets of ICs for each participant. We used Principal Component Analysis (PCA) to do the data reduction prior to the ICA. We reduced the data X with a dimension of T×M to a dimension of N×M, where T represented the number of time points and N represented the number of independent components to be generated (N<<T), and M is the number of the voxels. Spatial ICA was then performed on the reduced N time-point dataset for each subject using the ICA algorithm 'FastICA' [52]. In this way, we applied the ICA to individual-level fMRI time series to generate the requisite number of spatial IC's within each of these 12 sets of IC's for each participant.
+
+In the first step of HPM we used bidirectional mapping within each of these corresponding 12 sets of ICs to identify components that were reproducible across participants for a given number of components generated for each person (i.e., in the set containing 20 components, then 30 components, and so on). We operationally defined 'bidirectional matching' as follows: Given a component i from set A, we calculated Tanimoto Distance which was used as indices of spatial similarity between IC i and each IC in set B. Among all the ICs of set B we found an IC, say IC j, which had the largest similarity index to IC i. Then we calculated all the similarity indices between component j in set B and each of the ICs in set A. We selected an IC, say IC k in set A that had the largest similarity index to component j. If k = i, then the spatial matching of component k in set A and component j in set B was bidirectional, and the two components were considered to be bidirectional matched or partner-matched [40]. The ICs that were identified as being significantly similar to one another in their spatial configuration thereby formed a cluster within each of the 12 IC sets. We then applied a one-sample t test to the z-score maps of ICs within each cluster to obtain a map of voxels in which functional connectivity differed significantly from zero within that cluster, which we designated as a 'cluster map' of reproducible ICs within each of the 12 IC sets.
+
+We next wanted to identify those ICs that were reproducible across participants not only within a single set (identified in the first HPM step), but that were also present regardless of the number of ICs extracted from the original dataset. Therefore in the second HPM step we applied bidirectional mapping a second time, but this time across the 12 sets of ICs, to identify the most similar and reproducible clusters across individuals and across these 12 sets of ICs. We used Cronbach's Alpha reliability index in each application of bidirectional mapping to identify clusters with the greatest reproducibility across participants both within a given IC set (HPM step one) and across the 12 sets of ICs (HPM step two). Finally, we generated z-score maps of the 12 clusters of ICs to represent the strength of connectivity within ICs that are reproducible across participants and that are as independent as possible of the number of ICs generated for each participant.
+
+Group-level statistical analyses. The z-score maps of the 12 clusters of ICs were entered into a second-level factorial analysis to detect the random effects of group difference in functional connectivity between PWS and TD controls while covarying for age and sex. We used a combination of uncorrected p-value of 0.01 and cluster extent threshold of 20 voxels (determined by Monte Carlo simulation) to correct for multiple comparisons across the imaging volume. In addition, we calculated the Pearson's correlation for these z-scores and overall symptom severity (combining across the child and adult scales, then standardized using a ztransform), the most representative index of speech difficulties in various social settings. We also assessed the significance of the main effects of age in our model and, in a separate analysis, the significance of an age-by-diagnosis interaction.
+
+Assessing the effective connectivity between differing independent components. We used Granger Causality to assess the causal influences between the ICs that we identified using HPM. We extracted the time courses of these components to calculate Granger Causality Indices (GCIs) between ICs [41]. We then used 2-sample t-tests to detect group difference in GCIs between PWS and TD controls.
+
+Machine learning. We used this pattern classification technique to determine whether the abnormalities we identified in neural connectivity can serve as a functional biomarker for stuttering. The z-score maps of ICs and GCIs that differed significantly across diagnostic groups were selected as feature vectors. A kernel support vector machine (SVM) with leave-one-out cross-validation was used to distinguish PWS from TD controls [53]. A Gaussian kernel with width of 0.5 was used in the SVM modeling.
+
+
+Results
+
+
+Reproducible independent components
+
+By design, spatial ICA generated 12 different sets of ICs for each participant. We applied HPM to these 12 sets of components and identified 10 clusters of ICs that were significantly reproducible in their spatial patterns across stuttering and control participants and across the differing number of ICs extracted from each participant. We performed a one-sample t-test on each of the 10 clusters to generate IC maps that represented statistically significant functional connectivity in this dataset (Fig 1). These maps yielded 12 ICs located in primary motor cortex (PMC), supplementary motor cortex (SMA), inferior frontal gyrus (IFG), primary somatosensory cortex (PSC), caudate, putamen, thalamus, anterior cingulate cortex (ACC), superior temporal gyrus (STG), inferior parietal lobule (IPL), Heschl's gyrus, and posterior cingulate cortex (PCC).
+
+
+Comparing functional connectivity between PWS and TD control participants
+
+The reproducible IC's of PWS and TD controls were compared in a second-level, randomeffects analysis while covarying for age and sex. Connectivity in PWS was significantly weaker than in TD controls in the left inferior frontal gyrus (IFG), right putamen, right caudate, and right thalamus. Functional connectivity was significantly stronger in PWS in the left supplementary motor area (SMA) and primary motor cortex (PMC) (Fig 2). The detailed findings are summarized in Table 1. Connectivity in the left IFG correlated inversely with the severity of PWS (r = -0.30, p<0.05) (Fig 3). We detected no significant main effect of age on our measures of functional connectivity, nor did we detect any significant age-by-diagnosis interaction, suggesting that group differences in connectivity were stable throughout development.
+
+Granger causality analyses. We computed two types of Granger Causality indices. One was the influence of region A on B, and the other was the influence of region A on B through the thalamus. Causal influences were generally weaker in PWS than in TD controls in connections from the IFG (Broca's area) to SMA, ACC to SMA, SMA to PMC, SMA to putamen, and caudate to SMA via the thalamus (Fig 4, Table 2).
+
+
+Machine learning classification
+
+We applied kernel SVM to the measures of functional connectivity and GCIs that differed significantly across diagnostic groups, including functional connectivity measures of the IFG, caudate, putamen, thalamus, SMA, and PMC (Table 1) and the GCIs shown in Table 2. Average classification accuracy was 90.3% under a 5-fold cross-validation and 92.7% under a leave-one-out cross-validation. To assess further the respective contributions of these independent components to the classification, we also performed classification using a maximum uncertainty linear discriminant analysis (MLDA) classifier [54] with leave-one-out cross validation, achieving a classification accuracy of 89.9%, with a sensitivity of 82.8% and a specificity of 91.8%. The contribution of each feature to the classification (Tables 1 and 2) was determined Activity in each of the 12 clusters of reproducible independent components. The first three columns display the random-effect group activity maps detected from the 44 PWS. The first column is a coronal view, the second is a sagittal view, and the third is an axial view. The last three columns displays the group activity maps detected from the 50 TD controls. Each row displays one group activity map generated by applying a one-sample t-test to 1 of the 12 clusters of independent components. Any two group activity maps within the same row across the first three and second three columns are significantly similar to one another in their spatial configurations. PMC = primary motor cortex; SMA = supplementary motor cortex; IFG = inferior frontal gyrus; PSC = primary somatosensory cortex; ACC = anterior cingulate cortex; STG = superior temporal gyrus; IPL = inferior parietal lobule; PCC = posterior cingulate cortex.
+
+https://doi.org/10.1371/journal.pone.0179255.g001 using the coefficients of the discrimination hyperplane that measured the weights of the feature in question to the classification. The SMA, PMC, IFG, and putamen made the largest contributions to the classification and can be regarded as the optimal feature subset. Using features of IC activity in the key portions of circuits comprising motor portions of cortical language systems (IFG, PMC, SMA), as well as all available subcortical components of the CTSC loops (caudate, putamen, and thalamus) and GCIs, an average of 1,000 leave-one-out cross validation trials yielded a classification accuracy of 86.8%.
+
+
+Discussion
+
+We compared intrinsic neural connectivity between PWS and TD control participants. The ICs that we identified included the inferior frontal gyrus (IFG, Broca's area), supplementary motor cortex (SMA), primary motor cortex (PMC), anterior cingulate cortex (ACC), posterior cingulate cortex (PCC), primary somatosensory cortex (PSC), inferior parietal lobule (IPL), superior temporal gyrus (STG), and Heschl's gyrus, as well as in the caudate, putamen, and thalamus. Functional connectivity was significantly weaker in PWS in the left IFG and basal ganglia but stronger in the left SMA and PMC. Granger causality influences were generally weaker in PWS than in TD controls in connections from the IFG (Broca's area) to SMA, ACC to SMA, SMA to PMC, SMA to putamen, and caudate to SMA via the thalamus. As we will elaborate, these findings taken together suggest the presence of dysfunction in the language circuits that support speech planning and the timing, initiation, and execution of motor sequences in PWS [37,[55][56][57][58][59]. The high accuracy of our machine learning classifier applied to these measures of connectivity and causality differences suggests that these brain features may serve as robust biomarkers for PWS.
+
+The IFG (Broca's area) is a key component of the language network that participates in speech planning, semantic, syntactic, and phonological processing [60][61][62]. The weaker intrinsic functional connectivity within the IFG of PWS may contribute to their speech disfluency. The significant inverse correlation of connectivity measures with the severity of stuttering symptoms suggests that the more abnormal the connectivity is within the IFG, the more severe were the symptoms in PWS, further supporting a role for reduced connectivity of the IFG in the pathogenesis of stuttering. The reduced causal influence from the IFG to SMA furthermore suggests that at least one locus of network dysfunction in PWS resides in the interface of speech planning processes with motor execution. These findings are consistent with previous anatomical studies reporting reduced gray matter volumes and reduced fractional anisotropy in the left or bilateral IFG [17][18][19], as well as with previous fMRI studies reporting lower intrinsic functional connectivity in the left IFG [39] and deficient left hemisphere connectivity between inferior frontal and premotor cortices under auditory and visual stimulation [63]. Our finding of reduced intrinsic functional connectivity of the IFG is also consistent with our prior findings of reduced perfusion and reduced spectroscopic indices of neural density in Broca's region in the same sample of participants as included in the present study [5,10]. Functional connectivity was also lower in the PWS group compared with TD controls in the caudate, putamen, and thalamus but increased in the left SMA and PMC. The basal ganglia support the learning [64], planning, and internal timing of automatized behaviors [9]. Basal Functional circuits in developmental stuttering ganglia dysfunction can therefore disrupt the initiation of speech processing [6]. PWS have been reported previously to have reduced volumes [8] and activity [65] in the caudate nucleus. Our Granger Causality analyses further suggest that the causal influence from the caudate to SMA via the thalamus was weaker in PWS than in TD controls. The caudate is generally considered to represent the cognitive control portion of CSTC circuits [66]. Therefore, reduced connectivity of the caudate may represent the presence of deficient control over speech motor programs. Meanwhile, the increased functional connectivity within the SMA and PMC may represent greater effort to control motor behavior in PWS as a compensatory neural response to the deficient input from the caudate.
+
+We also identified ICs in the primary somatosensory cortex (PSC), superior temporal gyrus (STG), inferior parietal lobule (IPL), Heschl's gyrus, anterior cingulate cortex (ACC) and posterior cingulate cortex (PCC) (Fig 1). Although we did not detect statistically significant Functional circuits in developmental stuttering differences between the PWS and TD groups in functional connectivity within these ICs, Granger Causality analyses did demonstrate significantly reduced effective connectivity from the PSC, STG, IPL, and ACC to motor areas ( Table 2). Previous research has demonstrated that the ACC plays an important role in cognitive control [67]. Less effective connections from the ACC to SMA and PMC may impair intrinsic control of motor execution. Our findings of aberrant connectivity in motor, auditory, sensory, and language areas in PWS are thus in general agreement with the two-loop timing model of speech output [56], which posits that stuttering may be the product of dysfunction within two neural networks: an outer linguistic cortical loop that supports the control of speech-language functions and auditory self-monitoring, and an The data in cells of the second and third columns represent the median and interquartile range of the Granger causality indices. The p-values (uncorrected)
+
+indicate how significantly different the median was from zero (assessed using the Wilcoxon signed rank test). We used a two-sided Wilcoxon rank sum test to compare the Granger causality indices of stutterers and controls, yielding the significance test statistics in the fourth column (p<0.05, uncorrected). Thalamus X!Y represents connectivity between X and Y via the thalamus.
+
+https://doi.org/10.1371/journal.pone.0179255.t002
+
+Functional circuits in developmental stuttering inner phonatory loop of cortical and subcortical motor regions that controls the output of speech [6,37]. Disturbances in functional and effective connectivity within the outer or inner loop may disrupt the coordinated activity of these two circuits to produce a momentary instability in coordinated neural activity within these systems that manifests as stuttering behavior [56]. The connectivity and causal indices that differed significantly between groups yielded impressive group discrimination using machine learning, with classification accuracies of 90.3% under a 5-fold cross-validation and 92.7% under a leave-one-out cross-validation. An MLDA classifier suggested that the IFG, SMA, PMC, and putamen together compose an optimal feature subset that made the largest contributions to classification accuracy. The high classification accuracy of these connectivity and causality measures across our diverse sample of participants, including both children and adults across a wide age range, suggests that the measures capture trait-like, rather than state-like, disturbances in PWS, and that the measures are promising functional biomarkers for future studies of the pathogenesis and treatment of stuttering.
+
+Several limitations of this study should be noted. First, the age range of the participants was wide. This was by design, however, so as to assess whether group differences in our connectivity measures varied with age or were stable across the lifespan. The absence of a significant age-by-diagnosis interaction suggests that the findings were stable throughout development, as do our overall accuracy measures for machine learning-based group discrimination. Second, our measures of stuttering severity, the ACES and OASES, are self-reports that provide subjective measures of stuttering severity. Objective measures of speech fluency should be included in future studies. Third, our findings conceivably could have been influenced by the presence of comorbid illnesses in the 5 stuttering participants who had them. Findings were unchanged, however, when excluding those participants from statistical analyses, making us confident that our findings represent stuttering effects rather than comorbidities. Finally, stuttering persons could have had atypical neural responses to MRI scanner noise, which could have yielded atypical measures of brain connectivity. It will be important to replicate our findings using other techniques, such as EEG.
+
+Supporting information S1 File. Image data. (RAR) 
+
+Fig 1 .
+1Fig 1. Activity in each of the 12 clusters of reproducible independent components. The first three columns display the random-effect group activity maps detected from the 44 PWS. The first column is a coronal view, the second is a sagittal view, and the third is an axial view. The last three columns displays the group activity maps detected from the 50 TD controls. Each row displays one group activity map generated by applying a one-sample t-test to 1 of the 12 clusters of independent components. Any two group activity maps within the same row across the first three and second three columns are significantly similar to one another in their spatial configurations. PMC = primary motor cortex; SMA = supplementary motor cortex; IFG = inferior frontal gyrus; PSC = primary somatosensory cortex; ACC = anterior cingulate cortex; STG = superior temporal gyrus; IPL = inferior parietal lobule; PCC = posterior cingulate cortex.
+
+Fig 2 .
+2Comparisons of neural connectivity between PWS and normal controls (PWS vs. controls). The two sets of three columns display t-contrast maps comparing the group activity maps from the PWS and TD control participants. The images show that functional connectivity was greater in PWS compared with normal control participants in the SMA and PMC (shown in red), but their functional connectivity was weaker in the IFG, caudate, putamen, and thalamus (shown in blue). PMC = primary motor cortex; SMA = supplementary motor cortex; IFG = inferior frontal gyrus.https://doi.org/10.1371/journal.pone.0179255.g002 Functional circuits in developmental stuttering PLOS ONE | https://doi.org/10.1371/journal.pone.0179255 July 31, 2017
+
+Fig 3 .
+3Correlation of z-score for Blood-Oxygen-Level-Dependent (BOLD) activity, an fMRI index of neural activity, in the independent component from the left Inferior Frontal Gyrus (IFG, Broca's area) with the severity of stuttering symptoms in PWS (z-transformed total score in the ACES and OASES self-report measures). BOLD correlated inversely with symptom severity, indicating that greater neural activity accompanied less severe symptoms across PWS participants. https://doi.org/10.1371/journal.pone.0179255.g003
+
+Fig 4 .
+4Diagram showing the significant interregional causal connections as estimated by the Granger Causality Index (GCI) and the comparison of GCIs between the PWS and normal control participants (as shown by the corresponding z-score). Red lines represent causal influences from region X to region Y. Yellow lines represent up causal influence from region X to region Y via the thalamus. The arrowhead shows the direction of each causal influence. The z-score indicates the group difference in GCIs between PWS and Controls. Only significant connections are shown.https://doi.org/10.1371/journal.pone.0179255.g004
+
+Table 1 .
+1Regional locations and significant comparisons of the independent component maps between PWS and normal control participants.Brain Areas 
+Location 
+Peak location 
+T 
+Classification 
+
+Side 
+BA 
+x 
+y 
+z 
+statistic 
+contribution 
+
+PWS vs. Controls (positive) 
+
+Primary motor cortex (PMC) 
+L 
+4 
+-36 
+-25 
+61 
++3.06 
+0.3177 
+
+Supplementary motor area (SMA) 
+L 
+6 
+-9 
+-16 
+61 
++3.81 
+0.8095 
+
+PWS vs. Controls (negative) 
+
+Inferior frontal gyrus (IFG) 
+L 
+44/45 
+-54 
+23 
+7 
+-3.09 
+0.3047 
+
+Putamen 
+R 
+NA 
+30 
+-7 
+-5 
+-2.96 
+0.2550 
+
+Caudate 
+R 
+NA 
+9 
+17 
+-2 
+-3.14 
+0.2213 
+
+Thalamus 
+R 
+NA 
+9 
+-25 
+1 
+-3.08 
+0.1725 
+
+NA = Not applicable 
+All coordinates are in the MNI (Montreal Neurological Institute) ICBM152 space. 
+
+https://doi.org/10.1371/journal.pone.0179255.t001 
+
+Functional circuits in developmental stuttering 
+
+
+
+Table 2 .
+2Comparisons of statistically significant granger causality indices of the interregional connections of the reproducible independent components.PWS 
+Normal Controls 
+PWS vs. Controls 
+Classification 
+contribution 
+
+IFG ! SMA 
+0.028 (-0.032-0.089), p = 7.62e-09 
+0.045(-0.051-0.142), p = 7.56e-10 
+z = -2.285, p = 2.23E-2 
+0.1620 
+
+PMC ! SMA 
+0.028(-0.053-0.109), p = 7.62e-09 
+0.066 (-0.033-0.164), 
+p = 7.56e-10 
+
+z = -2.360, p = 1.83E-2 
+0.0909 
+
+ACC ! SMA 
+0.058(-0.024-0.140), 
+p = 7.62e-09 
+
+0.082(-0.008-0.173), p = 7.56e-10 
+z = -2.186, p = 2.88E-2 
+0.0523 
+
+PSC ! SMA 
+0.019(-0.020-0.058), p = 7.62e-09 
+0.041(-0.039-0.121), p = 7.56e-10 
+z = -3.004, p = 2.70E-3 
+0.1050 
+
+IPL ! SMA 
+0.028(-0.030-0.087), p = 7.62e-09 
+0.054(-0.048-0.156), p = 7.56e-10 
+z = -2.171, p = 2.99E-2 
+0.0049 
+
+ACC ! PMC 
+0.115(0.006-0.224), p = 1.12e-08 
+0.156(0.053-0.259), p = 7.56e-10 
+z = -2.148, p = 3.17E-2 
+0.1094 
+
+STG ! PMC 
+0.065(-0.047-0.177), p = 7.62e-09 
+0.122(-0.017-0.261), 
+p = 7.56e-10 
+
+z = -2.042, p = 4.11E-2 
+0.0071 
+
+SMA! PMC 
+0.111(0.015-0.206), 
+p = 7.62e-09 
+
+0.146 (0.022-0.271), 
+p = 7.56e-10 
+
+z = -2.103, p = 3.55E-2 
+0.1258 
+
+Heschl's ! IFG 
+0.093(-0.019-0.204), 
+p = 1.12e-08 
+
+0.121(0.032-0.210), p = 7.56e-10 
+z = -2.019, p = 4.34E-2 
+0.0008 
+
+SMA ! IFG 
+0.094(0.004-0.184), 
+p = 1.12e-08 
+
+0.133(-0.017-0.282), 
+p = 1.11e-09 
+
+z = -2.038, p = 4.15E-2 
+0.0681 
+
+IFG ! PSC 
+0.084(-0.047-0.214), 
+p = 7.62e-09 
+
+0.130(0.014-0.245), 
+p = 7.56e-10 
+
+z = -2.080, p = 3.75E-2 
+0.0105 
+
+SMA ! STG 
+0.044(-0.044-0.131), 
+p = 1.12e-08 
+
+0.116(-0.001-0.232), 
+p = 7.56e-10 
+
+z = -2.512, p = 1.20E-2 
+0.0057 
+
+PSC ! STG 
+0.036(-0.021-0.093), 
+p = 7.62e-09 
+
+0.077(-0.032-0.185), 
+p = 7.56e-10 
+
+z = -2.269, p = 2.32E-2 
+0.0076 
+
+PSC ! Thalamus 
+0.056(-0.046-0.158), p = 7.62e-09 
+0.102 (-0.009-0.214), 
+p = 7.56e-10 
+
+z = -2.353, p = 1.86E-2 
+0.0128 
+
+SMA ! Putamen 
+0.046(-0.016-0.108), 
+p = 7.62e-09 
+
+0.077(-0.045-0.199), 
+p = 7.56e-10 
+
+z = -2.141, p = 3.23E-2 
+0.0957 
+
+Caudate ! SMA via Thalamus 
+0.022(-0.022-0.065), 
+p = 7.62e-09 
+
+0.053(-0.012-0.117), 
+p = 7.56e-10 
+
+z = -2.398, p = 1.65E-2 
+0.0885 
+
+Caudate ! IFG via Thalamus 
+0.021(-0.028-0.070), 
+p = 7.62e-09 
+
+0.042(-0.026-0.111), 
+p = 7.56e-10 
+
+z = -2.269, p = 2.32E-2 
+0.0901 
+
+Caudate ! STG via Thalamus 
+0.080(-0.001-0.161), 
+p = 7.62e-09 
+
+0.043 (-0.039-0.125), p = 7.56e-10 
+z = 2.315, p = 2.06E-2 
+0.0117 
+
+Putamen ! STG via Thalamus 
+0.040(-0.042-0.121), 
+p = 7.62e-09 
+
+0.022(-0.025-0.070), 
+p = 7.56e-10 
+
+z = 2.209, p = 2.72E-2 
+0.0109 
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0179255 July 31, 2017
+
+A Standard Definition of Stuttering. M E Wingate, 14257050J Speech Hear Disord. 29Wingate ME. A Standard Definition of Stuttering. J Speech Hear Disord. 1964; 29:484-9. Epub 1964/ 11/01. PMID: 14257050.
+
+A handbook on stuttering: Singular Publishing Group. O Bloodstein, Bloodstein O. A handbook on stuttering: Singular Publishing Group; 1995.
+
+Onset of stuttering in preschool children: selected factors. E Yairi, N Ambrose, 1405533J Speech Hear Res. 354Yairi E, Ambrose N. Onset of stuttering in preschool children: selected factors. J Speech Hear Res. 1992; 35(4):782-8. Epub 1992/08/01. PMID: 1405533.
+
+Stuttering: incidence and causes. N Gordon, 11995897Dev Med Child Neurol. 444Gordon N. Stuttering: incidence and causes. Dev Med Child Neurol. 2002; 44(4):278-81. Epub 2002/ 05/09. PMID: 11995897.
+
+Proton Chemical Shift Imaging of the Brain in Pediatric and Adult Developmental Stuttering. J O&apos;neill, Z Dong, R Bansal, I Ivanov, X Hao, J Desai, 10.1001/jamapsychiatry.2016.319927893013JAMA Psychiatry. 741O'Neill J, Dong Z, Bansal R, Ivanov I, Hao X, Desai J, et al. Proton Chemical Shift Imaging of the Brain in Pediatric and Adult Developmental Stuttering. JAMA Psychiatry. 2017; 74(1):85-94. Epub 2016/11/ 29. https://doi.org/10.1001/jamapsychiatry.2016.3199 PMID: 27893013.
+
+Stuttering and the basal ganglia circuits: a critical review of possible relations. P A Alm, 10.1016/j.jcomdis.2004.03.00115159193J Commun Disord. 374Alm PA. Stuttering and the basal ganglia circuits: a critical review of possible relations. J Commun Dis- ord. 2004; 37(4):325-69. https://doi.org/10.1016/j.jcomdis.2004.03.001 PMID: 15159193.
+
+Sequence skill learning in persons who stutter: implications for corticostriato-thalamo-cortical dysfunction. S Smits-Bandstra, De Nil, L F , 10.1016/j.jfludis.2007.06.00117963936J Fluency Disord. 324Smits-Bandstra S, De Nil LF. Sequence skill learning in persons who stutter: implications for cortico- striato-thalamo-cortical dysfunction. J Fluency Disord. 2007; 32(4):251-78. Epub 2007/10/30. https:// doi.org/10.1016/j.jfludis.2007.06.001 PMID: 17963936.
+
+Atypical caudate anatomy in children who stutter. A L Foundas, J R Mock, R Cindass, Jr Corey, D M , 10.2466/15.10.PMS.116.2.528-54324032328Percept Mot Skills. 1162Foundas AL, Mock JR, Cindass R, Jr., Corey DM. Atypical caudate anatomy in children who stutter. Percept Mot Skills. 2013; 116(2):528-43. Epub 2013/09/17. https://doi.org/10.2466/15.10.PMS.116.2. 528-543 PMID: 24032328.
+
+Behavioral and multimodal neuroimaging evidence for a deficit in brain timing networks in stuttering: a hypothesis and theory. A C Etchell, B W Johnson, P F Sowman, 10.3389/fnhum.2014.0046725009487PMC4070061Front Hum Neurosci. 8467Etchell AC, Johnson BW, Sowman PF. Behavioral and multimodal neuroimaging evidence for a deficit in brain timing networks in stuttering: a hypothesis and theory. Front Hum Neurosci. 2014; 8:467. Epub 2014/07/11. https://doi.org/10.3389/fnhum.2014.00467 PubMed Central PMCID: PMC4070061. PMID: 25009487
+
+Reduced perfusion in Broca's area in developmental stuttering. J Desai, Y Huo, Z Wang, R Bansal, S C Williams, D Lythgoe, 10.1002/hbm.2348728035724PMC5342907Hum Brain Mapp. 384Desai J, Huo Y, Wang Z, Bansal R, Williams SC, Lythgoe D, et al. Reduced perfusion in Broca's area in developmental stuttering. Hum Brain Mapp. 2017; 38(4):1865-74. Epub 2016/12/31. https://doi.org/10. 1002/hbm.23487 PubMed Central PMCID: PMC5342907. PMID: 28035724
+
+A functional imaging study of self-regulatory capacities in persons who stutter. J Liu, Z Wang, Y Huo, S M Davidson, K Klahr, C L Herder, 10.1371/journal.pone.008989124587104PMC3937393PLoS One. 92PubMed CentralLiu J, Wang Z, Huo Y, Davidson SM, Klahr K, Herder CL, et al. A functional imaging study of self-regula- tory capacities in persons who stutter. PLoS One. 2014; 9(2):e89891. Epub 2014/03/04. PubMed Cen- tral PMCID: PMC3937393. https://doi.org/10.1371/journal.pone.0089891 PMID: 24587104
+
+Atypical cerebral laterality in adults with persistent developmental stuttering. A L Foundas, D M Corey, Angeles V Bollich, A M Crabtree-Hartman, E Heilman, K M , 14638959Neurology. 6110Foundas AL, Corey DM, Angeles V, Bollich AM, Crabtree-Hartman E, Heilman KM. Atypical cerebral laterality in adults with persistent developmental stuttering. Neurology. 2003; 61(10):1378-85. Epub 2003/11/26. PMID: 14638959.
+
+Perisylvian sulcal morphology and cerebral asymmetry patterns in adults who stutter. M D Cykowski, P V Kochunov, R J Ingham, J C Ingham, J F Mangin, D Riviere, 10.1093/cercor/bhm09317584852Cereb Cortex. 183Cykowski MD, Kochunov PV, Ingham RJ, Ingham JC, Mangin JF, Riviere D, et al. Perisylvian sulcal morphology and cerebral asymmetry patterns in adults who stutter. Cereb Cortex. 2008; 18(3):571-83. Epub 2007/06/23. https://doi.org/10.1093/cercor/bhm093 PMID: 17584852.
+
+Morphological brain differences between adult stutterers and nonstutterers. L Jancke, J Hanggi, H Steinmetz, 10.1186/1471-2377-4-2315588309PMC539354BMC Neurol. 41PubMed CentralJancke L, Hanggi J, Steinmetz H. Morphological brain differences between adult stutterers and non- stutterers. BMC Neurol. 2004; 4(1):23. Epub 2004/12/14. PubMed Central PMCID: PMC539354. https://doi.org/10.1186/1471-2377-4-23 PMID: 15588309
+
+Voxel-based morphometry of auditory and speech-related cortex in stutterers. D S Beal, V L Gracco, S J Lafaille, De Nil, L F , 10.1097/WNR.0b013e3282202c4d17632278Neuroreport. 1812Beal DS, Gracco VL, Lafaille SJ, De Nil LF. Voxel-based morphometry of auditory and speech-related cortex in stutterers. Neuroreport. 2007; 18(12):1257-60. Epub 2007/07/17. https://doi.org/10.1097/ WNR.0b013e3282202c4d PMID: 17632278.
+
+Corpus callosum differences associated with persistent stuttering in adults. A L Choo, S J Kraft, W Olivero, N G Ambrose, H Sharma, S E Chang, 10.1016/j.jcomdis.2011.03.00121513943PMC3138816J Commun Disord. 444PubMed CentralChoo AL, Kraft SJ, Olivero W, Ambrose NG, Sharma H, Chang SE, et al. Corpus callosum differences associated with persistent stuttering in adults. J Commun Disord. 2011; 44(4):470-7. Epub 2011/04/26. PubMed Central PMCID: PMC3138816. https://doi.org/10.1016/j.jcomdis.2011.03.001 PMID: 21513943
+
+A voxel-based morphometry (VBM) analysis of regional grey and white matter volume abnormalities within the speech production network of children who stutter. D S Beal, V L Gracco, J Brettschneider, R M Kroll, De Nil, L F , 10.1016/j.cortex.2012.08.01323140891Epub 2012/11/13. PubMed Central PMCID: PMC3617061. 49Beal DS, Gracco VL, Brettschneider J, Kroll RM, De Nil LF. A voxel-based morphometry (VBM) analysis of regional grey and white matter volume abnormalities within the speech production network of children who stutter. Cortex. 2013; 49(8):2151-61. Epub 2012/11/13. PubMed Central PMCID: PMC3617061. https://doi.org/10.1016/j.cortex.2012.08.013 PMID: 23140891
+
+Brain anatomy differences in childhood stuttering. S E Chang, K I Erickson, N G Ambrose, M A Hasegawa-Johnson, C L Ludlow, 10.1016/j.neuroimage.2007.09.06718023366PMC2731627Neuroimage. 393/11/21. PubMed CentralChang SE, Erickson KI, Ambrose NG, Hasegawa-Johnson MA, Ludlow CL. Brain anatomy differences in childhood stuttering. Neuroimage. 2008; 39(3):1333-44. Epub 2007/11/21. PubMed Central PMCID: PMC2731627. https://doi.org/10.1016/j.neuroimage.2007.09.067 PMID: 18023366
+
+How the brain repairs stuttering. C A Kell, K Neumann, K Von Kriegstein, C Posenenske, A W Von Gudenberg, H Euler, 10.1093/brain/awp18519710179Brain. 132Pt 10Kell CA, Neumann K, von Kriegstein K, Posenenske C, von Gudenberg AW, Euler H, et al. How the brain repairs stuttering. Brain. 2009;132(Pt 10):2747-60. Epub 2009/08/28. https://doi.org/10.1093/ brain/awp185 PMID: 19710179.
+
+A study of the reproducibility and etiology of diffusion anisotropy differences in developmental stuttering: a potential role for impaired myelination. M D Cykowski, P T Fox, R J Ingham, J C Ingham, Robin Da, 10.1016/j.neuroimage.2010.05.01120471482Epub 2010/05/18. 52Cykowski MD, Fox PT, Ingham RJ, Ingham JC, Robin DA. A study of the reproducibility and etiology of diffusion anisotropy differences in developmental stuttering: a potential role for impaired myelination. Neuroimage. 2010; 52(4):1495-504. Epub 2010/05/18. https://doi.org/10.1016/j.neuroimage.2010.05. 011 PMID: 20471482.
+
+Disconnection of speech-relevant brain areas in persistent developmental stuttering. M Sommer, M A Koch, W Paulus, C Weiller, C Buchel, 10.1016/S0140-6736(02)09610-112241779Lancet. 3609330Sommer M, Koch MA, Paulus W, Weiller C, Buchel C. Disconnection of speech-relevant brain areas in persistent developmental stuttering. Lancet. 2002; 360(9330):380-3. Epub 2002/09/21. https://doi.org/ 10.1016/S0140-6736(02)09610-1 PMID: 12241779.
+
+Structural and functional abnormalities of the motor system in developmental stuttering. K E Watkins, S M Smith, S Davis, P Howell, 10.1093/brain/awm24117928317PMC2492392Brain. 131PubMed CentralPt 1Watkins KE, Smith SM, Davis S, Howell P. Structural and functional abnormalities of the motor system in developmental stuttering. Brain. 2008; 131(Pt 1):50-9. Epub 2007/10/12. PubMed Central PMCID: PMC2492392. https://doi.org/10.1093/brain/awm241 PMID: 17928317
+
+Two distinct neural networks support the mapping of meaning to a novel word. Z Ye, A Mestres-Misse, A Rodriguez-Fornells, T F Munte, 10.1002/hbm.2109320681014Hum Brain Mapp. 327Ye Z, Mestres-Misse A, Rodriguez-Fornells A, Munte TF. Two distinct neural networks support the map- ping of meaning to a novel word. Hum Brain Mapp. 2011; 32(7):1081-90. Epub 2010/08/04. https://doi. org/10.1002/hbm.21093 PMID: 20681014.
+
+Role of the striatum in language: Syntactic and conceptual sequencing. S H Chan, L Ryan, T G Bever, 10.1016/j.bandl.2011.11.00522200490Brain Lang. 1253Chan SH, Ryan L, Bever TG. Role of the striatum in language: Syntactic and conceptual sequencing. Brain Lang. 2013; 125(3):283-94. Epub 2011/12/28. https://doi.org/10.1016/j.bandl.2011.11.005 PMID: 22200490.
+
+Functional-lesion investigation of developmental stuttering with positron emission tomography. R J Ingham, P T Fox, J C Ingham, F Zamarripa, C Martin, P Jerabek, 8959606J Speech Hear Res. 396Ingham RJ, Fox PT, Ingham JC, Zamarripa F, Martin C, Jerabek P, et al. Functional-lesion investigation of developmental stuttering with positron emission tomography. J Speech Hear Res. 1996; 39(6):1208- 27. Epub 1996/12/01. PMID: 8959606.
+
+Altered patterns of cerebral activity during speech and language production in developmental stuttering. An H2(15)O positron emission tomography study. A R Braun, M Varga, S Stager, G Schulz, S Selbie, J M Maisog, 9183248Brain. 120Pt 5Braun AR, Varga M, Stager S, Schulz G, Selbie S, Maisog JM, et al. Altered patterns of cerebral activity during speech and language production in developmental stuttering. An H2(15)O positron emission tomography study. Brain. 1997; 120 (Pt 5):761-84. Epub 1997/05/01. PMID: 9183248.
+
+Brain activity in adults who stutter: similarities across speaking tasks and correlations with stuttering frequency and speaking rate. R J Ingham, S T Grafton, A K Bothe, J C Ingham, 10.1016/j.bandl.2012.04.00222564749PMC3372660Brain Lang. 1221PubMed CentralIngham RJ, Grafton ST, Bothe AK, Ingham JC. Brain activity in adults who stutter: similarities across speaking tasks and correlations with stuttering frequency and speaking rate. Brain Lang. 2012; 122 (1):11-24. Epub 2012/05/09. PubMed Central PMCID: PMC3372660. https://doi.org/10.1016/j.bandl. 2012.04.002 PMID: 22564749
+
+Where is the semantic system? A critical review and meta-analysis of 120 functional neuroimaging studies. J R Binder, R H Desai, W W Graves, L L Conant, 10.1093/cercor/bhp05519329570PMC2774390Cereb Cortex. 1912PubMed CentralBinder JR, Desai RH, Graves WW, Conant LL. Where is the semantic system? A critical review and meta-analysis of 120 functional neuroimaging studies. Cereb Cortex. 2009; 19(12):2767-96. Epub 2009/03/31. PubMed Central PMCID: PMC2774390. https://doi.org/10.1093/cercor/bhp055 PMID: 19329570
+
+Modulation of frontal lobe speech areas associated with the production and perception of speech movements. J Fridriksson, D Moser, J Ryalls, L Bonilha, C Rorden, G Baylis, 10.1044/1092-4388(2008/06-0197)18978212PMC2693218J Speech Lang Hear Res. 523PubMed CentralFridriksson J, Moser D, Ryalls J, Bonilha L, Rorden C, Baylis G. Modulation of frontal lobe speech areas associated with the production and perception of speech movements. J Speech Lang Hear Res. 2009; 52(3):812-9. Epub 2008/11/04. PubMed Central PMCID: PMC2693218. https://doi.org/10.1044/1092- 4388(2008/06-0197) PMID: 18978212
+
+Weak responses to auditory feedback perturbation during articulation in persons who stutter: evidence for abnormal auditory-motor transformation. S Cai, D S Beal, S S Ghosh, M K Tiede, F H Guenther, J S Perkell, 10.1371/journal.pone.004183022911857PMC3402433PLoS One. 77PubMed CentralCai S, Beal DS, Ghosh SS, Tiede MK, Guenther FH, Perkell JS. Weak responses to auditory feedback perturbation during articulation in persons who stutter: evidence for abnormal auditory-motor transfor- mation. PLoS One. 2012; 7(7):e41830. Epub 2012/08/23. PubMed Central PMCID: PMC3402433. https://doi.org/10.1371/journal.pone.0041830 PMID: 22911857
+
+A PET study of the neural systems of stuttering. P T Fox, R J Ingham, J C Ingham, T B Hirsch, J H Downs, C Martin, 10.1038/382158a08700204Nature. 3826587Fox PT, Ingham RJ, Ingham JC, Hirsch TB, Downs JH, Martin C, et al. A PET study of the neural sys- tems of stuttering. Nature. 1996; 382(6587):158-61. Epub 1996/07/11. https://doi.org/10.1038/ 382158a0 PMID: 8700204.
+
+Severity of dysfluency correlates with basal ganglia activity in persistent developmental stuttering. A L Giraud, K Neumann, A C Bachoud-Levi, Von Gudenberg, A W Euler, H A Lanfermann, H , 10.1016/j.bandl.2007.04.00517531310Brain Lang. 1042Giraud AL, Neumann K, Bachoud-Levi AC, von Gudenberg AW, Euler HA, Lanfermann H, et al. Sever- ity of dysfluency correlates with basal ganglia activity in persistent developmental stuttering. Brain Lang. 2008; 104(2):190-9. Epub 2007/05/29. https://doi.org/10.1016/j.bandl.2007.04.005 PMID: 17531310.
+
+Altered effective connectivity and anomalous anatomy in the basal ganglia-thalamocortical circuit of stuttering speakers. C Lu, D Peng, C Chen, N Ning, G Ding, K Li, 10.1016/j.cortex.2009.02.01719375076Cortex. 461Lu C, Peng D, Chen C, Ning N, Ding G, Li K, et al. Altered effective connectivity and anomalous anat- omy in the basal ganglia-thalamocortical circuit of stuttering speakers. Cortex. 2010; 46(1):49-67. Epub 2009/04/21. https://doi.org/10.1016/j.cortex.2009.02.017 PMID: 19375076.
+
+Van den Bergh BR. Inhibitory control in childhood stuttering. K Eggers, De Nil, L F , 10.1016/j.jfludis.2012.10.00123540909J Fluency Disord. 381Eggers K, De Nil LF, Van den Bergh BR. Inhibitory control in childhood stuttering. J Fluency Disord. 2013; 38(1):1-13. Epub 2013/04/02. https://doi.org/10.1016/j.jfludis.2012.10.001 PMID: 23540909.
+
+Stuttering attitudes in Hong Kong and adjacent Mainland China. M L Ip, K O St Louis, F L Myers, S A Xue, 10.3109/17549507.2012.71215822974072Int J Speech Lang Pathol. 146Ip ML, St Louis KO, Myers FL, Xue SA. Stuttering attitudes in Hong Kong and adjacent Mainland China. Int J Speech Lang Pathol. 2012; 14(6):543-56. Epub 2012/09/15. https://doi.org/10.3109/17549507. 2012.712158 PMID: 22974072.
+
+Neural control of rising and falling tones in Mandarin speakers who stutter. P Howell, J Jiang, D Peng, C Lu, 10.1016/j.bandl.2012.09.01023122701Brain Lang. 1233Howell P, Jiang J, Peng D, Lu C. Neural control of rising and falling tones in Mandarin speakers who stutter. Brain Lang. 2012; 123(3):211-21. Epub 2012/11/06. https://doi.org/10.1016/j.bandl.2012.09. 010 PMID: 23122701.
+
+Neural network connectivity differences in children who stutter. S E Chang, D C Zhu, 10.1093/brain/awt27524131593Epub 2013/10/18. PubMed Central PMCID: PMC3859219. 136Pt 12Chang SE, Zhu DC. Neural network connectivity differences in children who stutter. Brain. 2013; 136(Pt 12):3709-26. Epub 2013/10/18. PubMed Central PMCID: PMC3859219. https://doi.org/10.1093/brain/ awt275 PMID: 24131593
+
+Resting-state brain activity in adult males who stutter. Y Xuan, C Meng, Y Yang, C Zhu, L Wang, Q Yan, 10.1371/journal.pone.003057022276215PMC3262831PLoS One. 71PubMed CentralXuan Y, Meng C, Yang Y, Zhu C, Wang L, Yan Q, et al. Resting-state brain activity in adult males who stutter. PLoS One. 2012; 7(1):e30570. Epub 2012/01/26. PubMed Central PMCID: PMC3262831. https://doi.org/10.1371/journal.pone.0030570 PMID: 22276215
+
+Neural anomaly and reorganization in speakers who stutter: a short-term intervention study. C Lu, C Chen, D Peng, W You, X Zhang, G Ding, 10.1212/WNL.0b013e31826356d222875083Neurology. 797Lu C, Chen C, Peng D, You W, Zhang X, Ding G, et al. Neural anomaly and reorganization in speakers who stutter: a short-term intervention study. Neurology. 2012; 79(7):625-32. Epub 2012/08/10. https:// doi.org/10.1212/WNL.0b013e31826356d2 PMID: 22875083.
+
+Partner-matching for the automated identification of reproducible ICA components from fMRI datasets: algorithm and validation. Z Wang, B S Peterson, 10.1002/hbm.2043418058813PMC2574809Hum Brain Mapp. 298Wang Z, Peterson BS. Partner-matching for the automated identification of reproducible ICA compo- nents from fMRI datasets: algorithm and validation. Hum Brain Mapp. 2008; 29(8):875-93. Epub 2007/ 12/07. https://doi.org/10.1002/hbm.20434 PubMed Central PMCID: PMC2574809. PMID: 18058813
+
+The neural circuits that generate tics in Tourette's syndrome. Z Wang, T V Maia, R Marsh, T Colibazzi, A Gerber, B S Peterson, 10.1176/appi.ajp.2011.0911169221955933Am J Psychiatry. 16812Wang Z, Maia TV, Marsh R, Colibazzi T, Gerber A, Peterson BS. The neural circuits that generate tics in Tourette's syndrome. Am J Psychiatry. 2011; 168(12):1326-37. Epub 2011/10/01. https://doi.org/10. 1176/appi.ajp.2011.09111692 PMID: 21955933.
+
+Normalization of Intrinsic Neural Circuits Governing Tourette's Syndrome Using Cranial Electrotherapy Stimulation. J Qiao, S Weng, P Wang, J Long, Z Wang, 10.1109/TBME.2014.238515125546850IEEE Trans Biomed Eng. 625Qiao J, Weng S, Wang P, Long J, Wang Z. Normalization of Intrinsic Neural Circuits Governing Tou- rette's Syndrome Using Cranial Electrotherapy Stimulation. IEEE Trans Biomed Eng. 2015; 62 (5):1272-80. Epub 2014/12/30. https://doi.org/10.1109/TBME.2014.2385151 PMID: 25546850.
+
+Utilizing temporal information in fMRI decoding: classifier using kernel regression methods. C Chu, J Mourao-Miranda, Y C Chiu, N Kriegeskorte, G Tan, J Ashburner, 10.1016/j.neuroimage.2011.06.05321729756PMC3159769Neuroimage. 582PubMed CentralChu C, Mourao-Miranda J, Chiu YC, Kriegeskorte N, Tan G, Ashburner J. Utilizing temporal information in fMRI decoding: classifier using kernel regression methods. Neuroimage. 2011; 58(2):560-71. Epub 2011/07/07. PubMed Central PMCID: PMC3159769. https://doi.org/10.1016/j.neuroimage.2011.06. 053 PMID: 21729756
+
+Classification of schizophrenia patients and healthy controls from structural MRI scans in two large independent samples. M Nieuwenhuis, N E Van Haren, Hulshoff Pol, H E Cahn, W Kahn, R S Schnack, H G , 10.1016/j.neuroimage.2012.03.07922507227Neuroimage. 613Nieuwenhuis M, van Haren NE, Hulshoff Pol HE, Cahn W, Kahn RS, Schnack HG. Classification of schizophrenia patients and healthy controls from structural MRI scans in two large independent sam- ples. Neuroimage. 2012; 61(3):606-12. Epub 2012/04/18. https://doi.org/10.1016/j.neuroimage.2012. 03.079 PMID: 22507227.
+
+Random forest-based similarity measures for multi-modal classification of Alzheimer's disease. K R Gray, P Aljabar, R A Heckemann, A Hammers, D Rueckert, 10.1016/j.neuroimage.2012.09.06523041336PMC3516432Neuroimage. 65PubMed CentralGray KR, Aljabar P, Heckemann RA, Hammers A, Rueckert D. Random forest-based similarity mea- sures for multi-modal classification of Alzheimer's disease. Neuroimage. 2013; 65:167-75. Epub 2012/ 10/09. PubMed Central PMCID: PMC3516432. https://doi.org/10.1016/j.neuroimage.2012.09.065 PMID: 23041336
+
+Schedule for Affective Disorders and Schizophrenia for School-Age Children-Present and Lifetime Version (K-SADS-PL): initial reliability and validity data. J Kaufman, B Birmaher, D Brent, U Rao, C Flynn, P Moreci, 10.1097/00004583-199707000-000219204677J Am Acad Child Adolesc Psychiatry. 367Kaufman J, Birmaher B, Brent D, Rao U, Flynn C, Moreci P, et al. Schedule for Affective Disorders and Schizophrenia for School-Age Children-Present and Lifetime Version (K-SADS-PL): initial reliability and validity data. J Am Acad Child Adolesc Psychiatry. 1997; 36(7):980-8. Epub 1997/07/01. S0890-8567 (09)62555-7. https://doi.org/10.1097/00004583-199707000-00021 PMID: 9204677.
+
+Structured Clinical Interview for DSM-IV-TR Axis I Disorders, Research Version, Non-patient Edition. (SCID-I/NP). M B First, R L Spitzer, M Gibbon, Jbw Williams, Biometrics Research. First MB, Spitzer RL, Gibbon M, Williams JBW. Structured Clinical Interview for DSM-IV-TR Axis I Dis- orders, Research Version, Non-patient Edition. (SCID-I/NP). New York: Biometrics Research, New York State Psychiatric Institute; 2002.
+
+Overall Assessment of the Speaker's Experience of Stuttering (OASES): documenting multiple outcomes in stuttering treatment. J S Yaruss, R W Quesal, 10.1016/j.jfludis.2006.02.00216620945J Fluency Disord. 312Yaruss JS, Quesal RW. Overall Assessment of the Speaker's Experience of Stuttering (OASES): docu- menting multiple outcomes in stuttering treatment. J Fluency Disord. 2006; 31(2):90-115. Epub 2006/ 04/20. https://doi.org/10.1016/j.jfludis.2006.02.002 PMID: 16620945.
+
+Methods and Software for fMRI Analysis for Clinical Subjects. P K Mazaika, F Hoeft, G H Glover, A L Reiss, Human Brain Mapping. Mazaika PK, Hoeft F, Glover GH, Reiss AL. Methods and Software for fMRI Analysis for Clinical Sub- jects. Human Brain Mapping; San Fransisco, CA.2009.
+
+Spatial registration and normalization of images. K Friston, J Ashburner, C D Frith, J B Poline, J D Heather, R S Frackowiak, Human brain mapping. 33Friston K, Ashburner J, Frith CD, Poline JB, Heather JD, Frackowiak RS. Spatial registration and nor- malization of images. Human brain mapping. 1995; 3(3):165-89.
+
+A method for making group inferences from functional MRI data using independent component analysis. V D Calhoun, T Adali, G D Pearlson, J J Pekar, 11559959Hum Brain Mapp. 143Calhoun VD, Adali T, Pearlson GD, Pekar JJ. A method for making group inferences from functional MRI data using independent component analysis. Hum Brain Mapp. 2001; 14(3):140-51. Epub 2001/ 09/18. PMID: 11559959.
+
+Fast and robust fixed-point algorithms for independent component analysis. A Hyvarinen, 10.1109/72.76172218252563IEEE Trans Neural Netw. 103Hyvarinen A. Fast and robust fixed-point algorithms for independent component analysis. IEEE Trans Neural Netw. 1999; 10(3):626-34. Epub 2008/02/07. https://doi.org/10.1109/72.761722 PMID: 18252563.
+
+An overview of statistical learning theory. V N Vapnik, 10.1109/72.78864018252602IEEE Trans Neural Netw. 105Vapnik VN. An overview of statistical learning theory. IEEE Trans Neural Netw. 1999; 10(5):988-99. Epub 2008/02/07. https://doi.org/10.1109/72.788640 PMID: 18252602.
+
+Discriminative analysis of early Alzheimer's disease using multi-modal imaging and multi-level characterization with multi-classifier (M3). Z Dai, C Yan, Z Wang, J Wang, M Xia, K Li, 10.1016/j.neuroimage.2011.10.00322008370Neuroimage. 593Dai Z, Yan C, Wang Z, Wang J, Xia M, Li K, et al. Discriminative analysis of early Alzheimer's disease using multi-modal imaging and multi-level characterization with multi-classifier (M3). Neuroimage. 2012; 59(3):2187-95. Epub 2011/10/20. https://doi.org/10.1016/j.neuroimage.2011.10.003 PMID: 22008370.
+
+Reappraisal of the motor role of basal ganglia: a functional magnetic resonance image study. T Taniwaki, A Okayama, T Yoshiura, Y Nakamura, Y Goto, J Kira, 12716951J Neurosci. 238Taniwaki T, Okayama A, Yoshiura T, Nakamura Y, Goto Y, Kira J, et al. Reappraisal of the motor role of basal ganglia: a functional magnetic resonance image study. J Neurosci. 2003; 23(8):3432-8. Epub 2003/04/30. 23/8/3432 [pii]. PMID: 12716951.
+
+Aberrant auditory processing and atypical planum temporale in developmental stuttering. A L Foundas, A M Bollich, J Feldman, D M Corey, M Hurley, L C Lemen, 15534249Neurology. 639Foundas AL, Bollich AM, Feldman J, Corey DM, Hurley M, Lemen LC, et al. Aberrant auditory process- ing and atypical planum temporale in developmental stuttering. Neurology. 2004; 63(9):1640-6. Epub 2004/11/10. 63/9/1640 [pii]. PMID: 15534249.
+
+Movement preparation in self-initiated versus externally triggered movements: an event-related fMRI-study. H Wiese, P Stude, K Nebel, A De Greiff, M Forsting, H C Diener, 10.1016/j.neulet.2004.08.07815519761Neurosci Lett. 3712-3Wiese H, Stude P, Nebel K, de Greiff A, Forsting M, Diener HC, et al. Movement preparation in self-initi- ated versus externally triggered movements: an event-related fMRI-study. Neurosci Lett. 2004; 371(2- 3):220-5. Epub 2004/11/03. https://doi.org/10.1016/j.neulet.2004.08.078 PMID: 15519761.
+
+Role of the human rostral supplementary motor area and the basal ganglia in motor sequence control: investigations with H2 15O PET. H Boecker, A Dagher, A O Ceballos-Baumann, R E Passingham, M Samuel, K J Friston, 9463462J Neurophysiol. 792Boecker H, Dagher A, Ceballos-Baumann AO, Passingham RE, Samuel M, Friston KJ, et al. Role of the human rostral supplementary motor area and the basal ganglia in motor sequence control: investi- gations with H2 15O PET. J Neurophysiol. 1998; 79(2):1070-80. Epub 1998/04/18. PMID: 9463462.
+
+A quantitative meta-analysis and review of motor learning in the human brain. R M Hardwick, C Rottschy, R C Miall, S B Eickhoff, 10.1016/j.neuroimage.2012.11.02023194819PMC3555187Neuroimage. 67Epub 2012/12/01. PubMed CentralHardwick RM, Rottschy C, Miall RC, Eickhoff SB. A quantitative meta-analysis and review of motor learning in the human brain. Neuroimage. 2013; 67:283-97. Epub 2012/12/01. PubMed Central PMCID: PMC3555187. https://doi.org/10.1016/j.neuroimage.2012.11.020 PMID: 23194819
+
+Left inferior frontal cortex and syntax: function, structure and behaviour in patients with left hemisphere damage. L K Tyler, W D Marslen-Wilson, B Randall, P Wright, B J Devereux, J Zhuang, 10.1093/brain/awq36921278407PMC3030769Brain. 1342PubMed CentralTyler LK, Marslen-Wilson WD, Randall B, Wright P, Devereux BJ, Zhuang J, et al. Left inferior frontal cortex and syntax: function, structure and behaviour in patients with left hemisphere damage. Brain. 2011; 134(Pt 2):415-31. Epub 2011/02/01. PubMed Central PMCID: PMC3030769. https://doi.org/10. 1093/brain/awq369 PMID: 21278407
+
+. P Hagoort, Brain Broca, Binding, 10.1016/j.tics.2005.07.00416054419Trends Cogn Sci. 99Hagoort P. On Broca, brain, and binding: a new framework. Trends Cogn Sci. 2005; 9(9):416-23. Epub 2005/08/02. S1364-6613(05)00209-3 [pii]10.1016/j.tics.2005.07.004. https://doi.org/10.1016/j.tics. 2005.07.004 PMID: 16054419.
+
+Brain and language: evidence for neural multifunctionality. D Cahana-Amitay, M L Albert, 10.1155/2014/26038125009368PMC4070396Behav Neurol. Cahana-Amitay D, Albert ML. Brain and language: evidence for neural multifunctionality. Behav Neurol. 2014; 2014:260381. Epub 2014/07/11. https://doi.org/10.1155/2014/260381 PubMed Central PMCID: PMC4070396. PMID: 25009368
+
+Evidence of left inferior frontal-premotor structural and functional connectivity deficits in adults who stutter. S E Chang, B Horwitz, J Ostuni, R Reynolds, C L Ludlow, 10.1093/cercor/bhr02821471556PMC3183422Cereb Cortex. 2111PubMed CentralChang SE, Horwitz B, Ostuni J, Reynolds R, Ludlow CL. Evidence of left inferior frontal-premotor struc- tural and functional connectivity deficits in adults who stutter. Cereb Cortex. 2011; 21(11):2507-18. Epub 2011/04/08. PubMed Central PMCID: PMC3183422. https://doi.org/10.1093/cercor/bhr028 PMID: 21471556
+
+The origins of vocal learning: New sounds, new circuits, new cells. F Nottebohm, W C Liu, 10.1016/j.bandl.2010.05.00220955897Brain Lang. 1151Epub 2010/10/20Nottebohm F, Liu WC. The origins of vocal learning: New sounds, new circuits, new cells. Brain Lang. 2010; 115(1):3-17. Epub 2010/10/20. https://doi.org/10.1016/j.bandl.2010.05.002 PMID: 20955897.
+
+A positron emission tomography [18F] deoxyglucose study of developmental stuttering. J C Wu, G Maguire, G Riley, J Fallon, L Lacasse, S Chin, 7766852Neuroreport. 63Wu JC, Maguire G, Riley G, Fallon J, LaCasse L, Chin S, et al. A positron emission tomography [18F] deoxyglucose study of developmental stuttering. Neuroreport. 1995; 6(3):501-5. Epub 1995/02/15. PMID: 7766852.
+
+Basal ganglia and cerebellar loops: motor and cognitive circuits. F A Middleton, P L Strick, 10719151Brain Res Brain Res Rev. 312-3Middleton FA, Strick PL. Basal ganglia and cerebellar loops: motor and cognitive circuits. Brain Res Brain Res Rev. 2000; 31(2-3):236-50. Epub 2000/03/17. S0165017399000405 [pii]. PMID: 10719151.
+
+Anterior cingulate cortex, error detection, and the online monitoring of performance. C S Carter, T S Braver, D M Barch, M M Botvinick, D Noll, J D Cohen, 9563953Science. 2805364Carter CS, Braver TS, Barch DM, Botvinick MM, Noll D, Cohen JD. Anterior cingulate cortex, error detection, and the online monitoring of performance. Science. 1998; 280(5364):747-9. Epub 1998/05/ 23. PMID: 9563953.

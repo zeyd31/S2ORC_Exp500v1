@@ -1,0 +1,784 @@
+
+Reasoning about Cardinal Directions between Extended Objects *
+September 1, 2009
+
+Xiaotong Zhang 
+Weiming Liu 
+Sanjiang Li 
+† 
+Mingsheng Ying 
+
+Faculty of Engineering and Information Technology
+Department of Computer Science and Technology
+Centre for Quantum Computation and Intelligent Systems
+University of Technology
+2007Sydney, BroadwayNSWAustralia
+
+
+Tsinghua University
+100084BeijingChina
+
+Reasoning about Cardinal Directions between Extended Objects *
+September 1, 2009
+Direction relations between extended spatial objects are important commonsense knowledge. Recently, Goyal and Egenhofer proposed a formal model, known as Cardinal Direction Calculus (CDC), for representing direction relations between connected plane regions. CDC is perhaps the most expressive qualitative calculus for directional information, and has attracted increasing interest from areas such as artificial intelligence, geographical information science, and image retrieval. Given a network of CDC constraints, the consistency problem is deciding if the network is realizable by connected regions in the real plane. This paper provides a cubic algorithm for checking consistency of basic CDC constraint networks, and proves that reasoning with CDC is in general an NP-Complete problem. For a consistent network of basic CDC constraints, our algorithm also returns a 'canonical ' solution in cubic time. This cubic algorithm is also adapted to cope with cardinal directions between possibly disconnected regions, in which case currently the best algorithm is of time complexity O(n 5 ). * This paper is an extended version of Xiaotong Zhang, Weiming Liu, Sanjiang Li, Mingsheng Ying: Reasoning with Cardinal Directions: An Efficient Algorithm. AAAI 2008: 387-392.(GISs), robotics, computer vision, image retrieval, natural language processing, etc. While the numerical quantitative approach prevails in robotics and computer vision, it is widely acknowledged in AI and GIS that the qualitative approach is more attractive (see e.g.[4]).A predominant part of spatial information is represented by relations between spatial objects. In general, spatial relations are classified into three categories: topological, directional, and metric (e.g. size, distance, shape, etc.). The RCC8 constraint language [26] is the principal topological formalism in AI, and has been extensively investigated by many researchers (see e.g.[29,27,34,5,37,36,18,19,17]. When restricted to simple plane regions, RCC8 is equivalent to the 9-Intersection Model (9IM) [6], which is a very influential relation model in GIS.Unlike topological relations, there are several competitive formal models for direction relations[7,8,2]. Most of these models approximate a spatial object by a point (e.g. its centroid) or a box. This is too crude in real-world applications such as describing directional information between two countries, say, Portugal and Spain. Recently, Goyal and Egenhofer [11, 10] proposed a relation model, known as cardinal direction calculus (CDC), for representing direction relations between connected plane regions. In CDC the reference object is approximated by a box, while the primary object is unaltered. This means, the exact geometry of the primary object could be used in the representation of the direction. This calculus has 218 basic relations, which is quite large when compared with RCC8 and Allen's Interval Algebra[1]. Due to its expressiveness, CDC has attracted increasing interest from areas such as AI[32,33,23], GIS [12], database [31], and image retrieval[14].One basic criterion for evaluating a formal spatial relation model is the proper balance between its representation expressivity and reasoning complexity. While reasoning complexity of the point-based and the box-based model of direction relations have been investigated in depth (see[20]and [2]), there are few works discussing the complexity of reasoning with CDC.One central reasoning problem with CDC (and any other qualitative calculus) is the consistency (or satisfaction) problem. Other reasoning problems such as deriving new knowledge from the given information, updating the given knowledge, or finding a minimal representation can be easily transformed into the consistency problem[4]. In particular, given a network of CDC constraintsover n spatial variables v 1 , · · · , v n , the consistency problem is deciding if the network N is realizable by a set of n connected regions in the real plane. The consistency problem over CDC is an open problem. Before this work, we do not know if there are efficient algorithms deciding if a set of CDC constraints are realizable. Even worse, we do not know if this is a decidable problem. Furthermore, given a satisfiable set of CDC constraints, how to construct a realization in the real plane? This paper is devoted to solving these problems. We first show by examples that local consistency in particular path-consistency is insufficient for deciding
+
+Introduction
+
+Representing and reasoning with spatial information is of particular importance in areas such as artificial intelligence (AI), geographical information systems the consistency of basic CDC constraints. Then we devise a cubic algorithm for checking if a network of basic CDC constraints is consistent. In case the network is consistent, this algorithm also generates a solution that is canonical in a sense. Moreover, we also show that deciding the consistency of an arbitrary network of CDC constraints is an NP-Complete problem. This implies that reasoning with CDC is decidable.
+
+Some restricted versions of the consistency problem have been discussed in the literature. Cicerone and di Felice [3] discussed the pairwise consistency problem, which decides when a pair of basic CDC relations (δ, δ ) is consistent. Skiadopoulos and Koubarakis [32] investigated the weak composition problem [5,18] of CDC, which is closely related to the consistency problem of basic CDC networks involving only three variables.
+
+The CDC algebra is defined over connected regions. A variant of CDC was proposed in [33], where cardinal directions between possibly disconnected regions are defined in the same way. This calculus, termed CDC d in this paper, contains 511 basic relations. An O(n 5 ) algorithm was proposed in [33] for checking the consistency of basic constraints in CDC d , but the consistency problem over CDC is still open. Recently, Navarrete et al. [23] tried to adapt the approach used in [33] to cope with connected regions, but their approach turns out to be incorrect.
+
+The remainder of this paper proceeds as follows. Section 2 recalls basic notations in qualitative spatial/temporal reasoning and introduces the well-known Interval Algebra (IA) [1] and Rectangle Algebra (RA) -the two-dimensional counterpart of IA. We introduce the CDC algebra in Section 3, where the connections between CDC and RA relations are established in a natural way. Section 4 introduces the notion of canonical solution of a consistent basic CDC network. Section 5 first proposes an intuitive O(n 4 ) algorithm for consistency checking of basic networks and then improves it to O(n 3 ). We apply our main algorithm to the pairwise consistency problem and the weak composition problem over CDC in Section 6. In Section 7 we adapt the main algorithm for connected regions to solve consistency checking in two variants of CDC. Conclusions are given in the last section.
+
+
+Qualitative Calculi: Basic Notions and Examples
+
+Since Allen's Interval Algebra, the study of qualitative calculi or relation models has been a central topic in qualitative spatial and temporal reasoning. This section introduces basic notions and important examples of qualitative calculi.
+
+
+Basic Notions
+
+Let D be a universe of temporal or spatial or spatial-temporal entities. We use small Greek symbols for representing relations on D. For a relation α on D and two elements x, y in D, we write (x, y) ∈ α or xαy to indicate that (x, y) is an instance of α. For two relations α, β on D, we define the complement of α, the intersection, and the union of α and β as follows.  [21], where B was required to be closed under converse and contain id D -the identity relation on D.
+
+For two relations α, β on D, the converse of α and the composition of α and β are defined as usual.
+α ∼ = {(y, x) ∈ D × D : (x, y) ∈ α} α • β = {(x, y) ∈ D × D : (∃z ∈ D) [(x, z) ∈ α and (z, y) ∈ β]}.
+The composition of two relations α, β in B is not necessarily in B , i.e. α • β cannot be represented as the union of some relations in B. We say a qualitative calculus B is closed under composition if the composition of any two relations in B is still a relation in B . In general, for α, β ∈ B , the weak composition [5,18,28] of α and β, written as α • w β, is defined to be the smallest relation in B which contains α • β. Clearly, a qualitative calculus is closed under composition if and only if the weak composition operation is the same as the composition operation.
+
+An important reasoning problem in a qualitative calculus B is the consistency (or satisfaction) problem. Let A be a subset of B . A constraint over A has the form (xγy) with γ ∈ A. For a set of variables V = {v i } n i=1 , and a set of constraints N involving variables in V , we say N is a constraint network if for each pair (i, j) there exists a unique constraint (v i γv j ) in N . A network N is said to be over A if each constraint in N is over A. In particular, we say a network is a basic network if it is over B.
+A constraint network N = {v i γ ij v j } n i,j=1
+is consistent (or satisfiable) if there is an instantiation {a i } n i=1 in D such that (a i , a j ) ∈ γ ij holds for all 1 ≤ i, j ≤ n. In this case, we call {a i } n i=1 a solution of N . The consistency problem over A is the decision problem of the consistency of constraint networks over A.
+
+
+Interval Algebra
+
+Interval Algebra (IA) [1] is a qualitative calculus defined on the set of (closed) intervals in the real line. IA is generated by a set B int of 13 JEPD relations between intervals (see Table 1).
+
+
+Relation Symbol Converse
+
+Meaning before p pi
+x − < x + < y − < y + meets m mi x − < x + = y − < y + overlaps o oi x − < y − < x + < y + starts s si x − = y − < x + < y + during d di y − < x − < x + < y + finishes f fi y − < x − < x + = y + equals
+eq eq x − = y − < x + = y + IA is closed under converse and composition. This means IA is a relation algebra in the sense of Tarski [35]. The computational complexity of reasoning with IA has been extensively investigated by researchers in artificial intelligence (see [25,15] and references therein). In particular, Allen [1] introduced the important notion of path-consistency for networks of IA constraints and proved that path-consistency suffices to decide the consistency of basic IA networks. Nebel and Bürckert [25] found a maximal tractable subclass of IA, which is known as ORD-Horn and usually denoted by H. For a network of IA constraints over H, path-consistency also suffices to decide consistency.
+
+The definitions of basic IA relations as given in Table 1 concern only the ordering of the endpoints of intervals. This suggests that different solutions of the same basic IA network respect the same ordering. In particular, we could choose intervals that have integer endpoints.
+
+Definition 1 (canonical set of intervals [22]).
+Suppose m = {[m − i , m + i ]} n i=1
+is a set of intervals. Set E(m) to be the set of endpoints of intervals in m. We say m is a canonical set of intervals iff E(m) = [0, M ] ∩ Z, where M is the largest number in E(m). A solution of a basic IA network is called a canonical interval solution if it is a canonical set of intervals.
+Clearly, if m = {[m − i , m + i ]} n i=1 is a canonical set of intervals, then each m − i (m + i )
+is an integer between 0 and 2n − 1. Moreover, set M to be the largest number in E(m). Then M < 2n and for any 0 ≤ m ≤ M there exists i such that m − i = m or m + i = m. The following theorem shows that each consistent basic IA network has a unique canonical solution.
+Theorem 1. Suppose N = {v i λ ij v j } n i,j=1
+is a basic IA network. If N is consistent, then it has a unique canonical interval solution.
+Proof. Suppose {l i } n i=1 is a solution of N , where l i = [l − i , l + i ]. Write α 0 < α 1 < · · · < α n * for the ordering of {l − i , l + i } n i=1 . Define f, g : {1, · · · , n} → {0, 1, · · · , n * } as f (i) = k if l − i = α k and g(i) = k if l + i = α k . Let h i = [f (i), g(i)].
+Because only the ordering of endpoints of intervals matters in a solution, it is easy to see that h = {h i } n i=1 is a solution of N . Set E(h) to be the set of endpoints of all intervals h i . It is easy to see that n * = max E(h). Moreover, there exists i such that m = f (i) or m = g(i) for each 0 ≤ m ≤ n * . In other words, E(h) = [0, n * ] ∩ Z. Therefore, h is a canonical interval solution of N . Such a solution is clearly unique.
+
+
+Rectangle Algebra
+
+Rectangle Algebra (RA) [13,2] is a qualitative calculus defined on the set of all rectangles in the plane, where we assume a predefined orthogonal basis in the plane and only consider rectangles or boxes two sides of which parallel to the axes of the orthogonal basis. For a rectangle r, write I x (r) and I y (r) as, resp., the x-and y-projection of r. The basic rectangle relation between two rectangles r 1 , r 2 is defined by the basic IA relation between I x (r 1 ) and I x (r 2 ) and that between I y (r 1 ) and I y (r 2 ) (see Fig. 1). More precisely, if (I x (r 1 ), I x (r 2 )) ∈ α and (I y (r 1 ), I y (r 2 )) ∈ β, then we write α ⊗ β for the basic rectangle relation between r 1 and r 2 . In other words, for any basic IA relations α, β,
+(r 1 , r 2 ) ∈ α ⊗ β ⇔ (I x (r 1 ), I x (r 2 )) ∈ α and (I y (r 1 ), I y (r 2 )) ∈ β.(2)
+Write B rec for the set of these rectangle relations, i.e.
+B rec = {α ⊗ β : α, β ∈ B int }(3)
+RA is defined as the qualitative calculus generated by B rec on the set of rectangles.
+Proposition 1. A basic RA network N = {v i α ij ⊗ β ij v j } n i,j=1 (α ij , β ij ∈ B int ) is consistent iff its component IA networks N x = {v i α ij v j } n i,j=1 and N y = {v i β ij v j } n i,j=1 are consistent.
+Proof. This naturally follows from the definition of basic RA relations.
+
+The definition of canonical solution can be easily extended to RA.
+
+Definition 2 (canonical rectangle solution). For a consistent basic RA network In this section we first introduce Cardinal Direction Calculus (CDC) of Goyal and Egenhofer [11] and then establish its connection with Rectangle Algebra. In particular, we will associate a basic RA network N r with each basic CDC network N , such that N is consistent only if N r is consistent. More profound connection will be established in the following section.
+N = {v i α ij ⊗ β ij v j } n i,j=1 (α ij , β ij ∈ B int ), a set of rectangles {m i } n i=1 is a canonical rectangle solution of N iff its x-and y-projections, {I x (m i )} n i=1 and {I y (m i )} n i=1 , are canonical interval solutions of N x = {v i α ij v j } n i,j=1 and N y = {v i β ij v j } n i,j=1 , respectively.
+
+Cardinal Direction Calculus
+
+
+Direction Relation Matrix
+
+CDC is a qualitative calculus defined for extended two-dimensional objects in the real plane.
+
+Definition 3 (plane region and connected region). A subset a of the real plane is called a region if a is a nonempty regular closed subset, i.e. if a = a • , where x • and x are the (topological) interior, and respectively, the (topological) closure of a subset x of the real plane. A region a is said to be connected if it has a connected interior a • .
+
+For a bounded set b in the real plane, set
+x − (b) = inf{x : (x, y) ∈ b}, x + (b) = sup{x : (x, y) ∈ b},(4)
+y − (b) = inf{y : (x, y) ∈ b}, y − (b) = sup{y : (x, y) ∈ b}.
+
+We write
+I x (b) = [x − (b), x + (b)], I y (b) = [y − (b), y + (b)].(6)
+Set
+M(b) = I x (b) × I y (b).(7)
+We call M(b) the minimum bounding rectangle (mbr) of b, and call I x (b) and I y (b), respectively, the x-and y-projection of b. Clearly, M(b) is the smallest rectangle containing b.
+
+Remark 1. The RA relations can be extended from rectangles to arbitrary bounded regions via their minimum bounding rectangles. The extended RA relation between two bounded regions a and b is defined to be the RA relation between M(a) and M(b).
+
+By extending the four edges of M(b), we partition the plane into nine tiles, Fig. 2 (left)). For ease of representation, we also write in sequence b 11 , b 12 , · · · , b 33 or b 1 , b 2 , · · · , b 9 for these tiles (see Fig. 2 (right)). Note that each tile is a region, and the intersection of two tiles is either empty or of dimension lower than two.
+denoted as N W b , N b , N E b , W b , O b , E b , SW b , S b , SE b (see
+Since the partition only concerns the mbr of b, the following lemma is clear.
+Lemma 1. For two bounded regions b, c, if M(b) = M(c), then b i = c i for i = 1, 2, · · · , 9. In particular, if we set m = M(b), then b i = m i for each i = 1, 2, · · · , 9.
+The following notion of direction relation matrix was first proposed by Goyal and Egenhofer [11] for representing the cardinal direction between connected plane regions.
+
+Definition 4 (direction relation matrix). Suppose a, b are two bounded connected plane regions. Take b as the reference object, and a as the primary object. The direction of a to b is encoded in a 3 × 3 Boolean matrix dir(a, b) = [d ij ] 3 i,j=1 , where d ij = 1 if and only if a • ∩b ij = ∅, where a • is the interior of a (see Fig. 3). In this case, we call dir(a, b) a direction relation matrix, or a valid matrix.
+
+By Lemma 1, it is clear that the direction of a to b is the same as that of a to M(b).
+Lemma 2. For connected regions a, b, c, if M(b) = M(c), then dir(a, b) = dir(a, c). In particular, dir(a, b) = dir(a, M(b)).
+This lemma shows that the shape of the reference object is irrelevant: what matters is its mbr.
+
+In what follows we make no distinction between a valid 3 × 3 Boolean matrix and the direction relation it represents. It is easy to see that not all matrices are valid. That a matrix is valid is closely related to the following notion of 4-connectedness.
+
+Definition 5 (4-connected Boolean matrix). A m×n Boolean matrix [d ij ] 1≤i≤m,1≤j≤n is said to be 4-connected if for any two nonzero cells pq and st, there are a series of k + 1 nonzero matrix places p 0 q 0 , p 1 q 1 , · · · , p k q k such that • pq = p 0 q 0 and st = p k q k ; and
+• p i+1 q i+1 is a 4-neighbor of p i q i , i.e. |p i+1 − p i | + |q i+1 − q i | = 1, for each i = 0, · · · , k − 1.
+In other words, two cells in a Boolean matrix are 4-neighbors if they are horizontally or vertically adjacent, and a Boolean matrix is 4-connected if any two nonzero cells are connected by a series of 4-neighbors. In order to describe the relative position of two connected regions a, b, knowing the direction of b to a is not enough. Fig. 3 shows an example, where the direction of b to a is the same as that of b to a but the direction of a to b is different from that of a to b, i.e. dir(b, a) = dir(b, a ) but dir(a, b) = dir(a , b). This is drastically different from IA and many other well-known qualitative calculi. For example, the basic IA relation of a to b is uniquely determined by that of b to a. Section 6.1 will investigate this pairwise consistency problem in detail.
+
+In the remainder of this section, we establish the connection between CDC and RA relations.
+
+
+Direction Relation Vector
+
+We begin with the one-dimensional counterpart of CDC relations.   Interestingly, each direction relation vector actually represents an IA relation. • t = (0, 1, 0) iff IsJ or IdJ or IfJ or IeqJ;
+
+• t = (0, 0, 1) iff IpiJ or ImiJ;
+
+• t = (1, 1, 0) iff IoJ or IfiJ;
+
+• t = (0, 1, 1) iff IoiJ or IsiJ; In what follows, we call an IA relation a vector IA relation if it is the IA relation represented by a direction relation vector. We make no difference between a direction relation vector and the vector IA relation it represents. By the above lemma, we know there are six vector IA relations, viz.
+• t = (1, 1, 1) iff IdiJ.p ∪ m, s ∪ d ∪ f ∪ eq, pi ∪ mi, o ∪ fi, oi ∪ si, di
+Note that a vector IA relation is in general non-basic, but a pair of vector IA relations are more precise. For example, from dir(I, J) = (0, 1, 0), we are not sure whether IsJ, or IdJ, or IfJ, or IeqJ hold. Assuming dir(J, I) is also given, then it is easy to see that the IA relation between I, J is definite, i.e. a basic IA relation.
+
+The following lemma summaries the correspondence between pairs of direction relation vectors and IA relations.  Table 2.
+
+Lemma 5 shows that all basic IA relations except 'meets' and 'before' (and their converses) can be represented as pairs of direction relation vectors. 
+s \ t (1,0,0) (0,1,0) (0,0,1) (1,1,0) (0,1,1) (1,1,1) (1,0,0) ∅ ∅ p, m ∅ ∅ ∅ (0,1,0) ∅ eq ∅ f s d (0,0,1) pi, mi ∅ ∅ ∅ ∅ ∅ (1,1,0) ∅ fi ∅ ∅ o ∅ (0,1,1) ∅ si ∅ oi ∅ ∅ (1,1,1) ∅ di ∅ ∅ ∅ ∅
+
+Projective IA Networks
+
+The connection between CDC and RA relations is established via the notion of projective interval relations.
+
+Definition 7 (projective interval relation). For a basic CDC relation δ, the x-projective interval relation of δ is defined as
+ι x (δ) ≡ {(I x (a), I x (b)) : (a, b) ∈ δ},(8)
+where I x (a) and I x (b) are the x-projective intervals of M(a) and M(b), respectively.
+
+The following lemma proves that each ι x (δ) is indeed a vector IA relation. Therefore, each x-projective relation ι x (δ) is an IA relation. Immediately, we have Lemma 7. For a pair of basic CDC relation (δ, γ), if (a, b) is an instance of {v 1 δv 2 , v 2 γv 1 }, then (I x (a), I x (b)) is an instance of ι x (δ) and the converse of
+ι x (γ), i.e. (I x (a), I x (b)) ∈ ι x (δ) ∩ ι x (γ) ∼ . Proof. From (a, b) ∈ δ and (b, a) ∈ γ we have (I x (a), I x (b)) ∈ ι x (δ) and (I x (b), I x (a)) ∈ ι x (γ). Therefore, (I x (a), I x (b)) ∈ ι x (δ) ∩ ι x (γ) ∼ .
+As a consequence, we have
+Lemma 8. A basic CDC constraint network N = {v i δ ij v j } n i,j=1 is consis- tent only if the IA constraint network {v i ι x ij v j } n i,j=1 is consistent, where ι x ij = ι x (δ ij ) ∩ ι x (δ ji ) ∼ . Proof. Suppose {a i } n i=1 is a solution to N . Then {I x (a i )} n i=1 is a solution to {v i ι x ij v j } n i,j=1 .
+Note that ι x ij is empty or a basic IA relation or the non-basic IA relation p ∪ m or its converse. Set
+B * int = {o, s, d, f, eq, fi, di, si, oi} ∪ {p ∪ m, pi ∪ mi}(9)
+For each nonempty IA relation ι in B * int , define
+ι =    p, if ι = p ∪ m; pi, if ι = pi ∪ mi; ι, otherwise.(10)
+We call ι the meet-free refinement of ι.
+Clearly, ι = ι \ (m ∪ mi) for each ι in B * int . Lemma 9. An IA network N = {v i ι ij v j } n i,j=1 over B * int is consistent if and only if N = {v i ι ij v j } n i,j=1 is satisfiable.
+Proof. See Appendix B.
+
+All the above notions and results also apply to the y-direction.
+
+
+Definition 8 (projective IA networks). For a basic CDC network
+N = {v i δ ij v j } n i,j=1 , recall ι x
+ij is an IA relation defined in Lemma 8. We write N x and N y , resp., for the basic IA networks
+{v i ρ x ij v j } n i,j=1 and {v i ρ y ij v j } n i,j=1 , where ρ x ij = ι x ij \ (m ∪ mi) (11) ρ y ij = ι y ij \ (m ∪ mi).(12)
+We call N x and N y , respectively, the x-and y-projective IA networks of N . We write N r for the basic RA network
+{v i ρ ij v j } n i,j=1 , where ρ ij = ρ x ij ⊗ ρ y ij .
+As a corollary of Lemma 8 and Lemma 9, we know
+Theorem 2. A basic CDC network of constraints N = {v i δ ij v j } n i,j=1 is consis- tent only if the projective IA networks N x = {v i ρ x ij v j } n i,j=1 and N y = {v i ρ y ij v j } n i,j=1
+are consistent.
+
+The above theorem shows that if a basic CDC network is consistent, then its projected IA networks are also consistent. By Prop. 1, this implies that the associated basic RA network N r is also consistent.
+Example 1. Fig. 4 specifies a basic CDC network N = {v i δ ij v j } 3 i,j=1 , and its associated RA network N r = {v i ρ ij v j } 3 i,j=1 , where ρ ij = ρ x ij ⊗ ρ y ij . For each pair of i = j, a solution of {v i δ ij v j , v j δ ji v i } and a solution of {v i ρ ij v j } are also illustrated.
+In the next section, we prove that a consistent CDC network N has a solution
+{a i } n i=1 such that {M(a i )} n i=1
+is a solution to N r , the associated basic RA network of N .
+(i, j) δ ij δ ji illus. ρ x ij ⊗ ρ y ij illus.
+(1,2) 
+  0 1 1 0 0 1 0 0 0     0 0 0 1 1 0 1 1 0   oi ⊗ oi (1,3)   1 1 0 0 1 0 0 0 0     0 0 0 0 0 1 0 1 1   o ⊗ oi (2,3)   0 0 0 1 0 0 0 0 0     0 0 1 0 0 1 0 0 1   p ⊗ d
+
+Local Consistency Is Insufficient
+
+As we have mentioned in §2.2, path-consistency is sufficient to decide the consistency of a basic IA network. This property is shared by several other qualitative calculi, including RCC8 [24,29] and the point-based cardinal direction calculus of Ligozat [20]. This property, however, does not hold for CDC. We first note that a basic network is path-consistent if and only if every subnetwork involving three variables is consistent. The following example shows that there is a basic CDC network that is path-consistent but still inconsistent. Similar conclusion has been obtained in [33] for the case of possibly disconnected regions.
+
+Example 2. Let a 1 , a 2 , a 3 , a 4 be the squares illustrated in Fig. 5. Consider the basic CDC network Fig. 6 show that every subnetwork of N which involves four variables is satisfiable. This implies in particular that N is path-consistent. N is, however, inconsistent. We prove this by contradiction. Suppose
+N = {v i δ ij v j } 5 i,j=1 , where • δ ij = dir(a i , a j ) for 1 ≤ i, j ≤ 4, • δ i5 =   0 0 0 0 1 0 0 0 0   for 1 ≤ i ≤ 4, and • δ 51 =   0 1 1 0 0 1 0 0 0   , δ 52 = δ 53 =   1 1 1 1 0 1 0 0 0   , δ 54 =   1 1 0 1 0 0 0 0 0   .
+
+Fig. 5 and
+{b i } 5 i=1 is a solution to N . Then M(b i )(1 ≤ i ≤ 4)
+will be related in a configuration similar to that of a i in Fig. 5. By the assumption of 
+δ i5 for 1 ≤ i ≤ 4, we know M(b i ) is contained in M(b 5 ) for each i = 1, 2, 3, 4.b 5 ). Meanwhile, accord- ing to δ 5i we have b • 5 ∩ M(b i ) = ∅ for 1 ≤ i ≤ 4. By the configuration of b 1 , b 2 , b 3 , b 4 (c.f. Fig. 5), this means no point of b • 5 can be below the line y = y 0 , where y 0 = sup{y : (x, y) ∈ M(b 1 )}. This is impossible since M(b 1 ) ⊂ M(b 5 ). Therefore, N is inconsistent.
+In fact, for any positive integer k, the consistency of all subnetworks of N with k variables does not guarantee the consistency of N . A counter example can be constructed analogously (see Fig. 7, where k squares instead of four are used). This shows that local consistency is insufficient for consistency even for basic CDC networks. To determine if a CDC network is consistent, we need to consider the constraints in a network as a whole.
+
+
+Canonical Solution
+Suppose N = {v i δ ij v j } n i,j=1 is a consistent basic CDC network, where each δ ij is in B dir .
+We show N has a canonical solution in a sense similar to that for IA network. We begin with an arbitrary solution a = {a i } n i=1 of N , then transform regions in a step by step into regions in the digital plane Z 2 without changing the cardinal direction relations between any two of these regions.
+
+
+Regular Solution
+Suppose a = {a i } n i=1
+is a set of n connected regions. This subsection shows how to regularize a. Illustrations are given in Fig. 8.
+
+Write
+m i = [x − i , x + i ] × [y − i , y + i ] for the mbr of a i . Set e − = min{x − i : 1 ≤ i ≤ n},(13)e + = max{x + i : 1 ≤ i ≤ n},(14)f − = min{y − i : 1 ≤ i ≤ n},(15)f + = max{y + i : 1 ≤ i ≤ n}.(16)
+Let 
+S(a) = [e − , e + ] × [f − , f + ].(17)α 0 < α 1 < · · · < α nx(18)
+is the ordering of real numbers in
+{x − i , x + i : 1 ≤ i ≤ n}, and β 0 < β 1 < · · · < β ny(19)
+is the ordering of real numbers in
+{y − i , y + i : 1 ≤ i ≤ n}. Denote c ij = [α i , α i+1 ] × [β j , β j+1 ], (0 ≤ i < n x , 0 ≤ j < n y )(20)
+and write
+C(a) = {c ij : 0 ≤ i < n x , 0 ≤ j < n y }(21)
+for the set of these cells. For each i, let
+a r i = {c ∈ C(a) : c ∩ a • i = ∅}.(22)
+Definition 9 (frame, cell set, regularization). For a set of connected regions The regularization a r has the same frame and the same cell sets with a. If a is a solution to a basic CDC network N , then so is its regularization.
+a = {a i } n i=1 , we call S(a) theLemma 11. Suppose a = {a i } n i=1 is a solution to a basic CDC network N . Then a r = {a r i } n i=1 is also a solution to N . Proof. It is clear that each a r i is connected, and M(a r i ) = M(a i ). It is straight- forward to show that dir(a i , a j ) = dir(a r i , a r j ) for any i, j. Definition 10 (regular solution). A solution a = {a i } n i=1 of a basic CDC net- work N is called regular if a is the same as its regularization a r = {a r i } n i=1
+. It is easy to see that the regularization of a solution is regular. This is because a r and a have the same frame and the same cell set. By Eq. 22, it is straightforward to see that a solution a = {a i } n i=1 of a basic CDC network N is regular if and only if each a i is the union of all cells in C(a) that has nonempty intersection with the interior of a i .
+
+
+Meet-Free Solution
+
+We next show each consistent basic CDC network N has a solution that is meet-free in the following sense.
+Definition 11 (meet-free solution). A solution a = {a i } n i=1 of N is meet-free if for any i, j, I x (a i ) does not meet I x (a j ), and I y (a i ) does not meet I y (a j ). Suppose a = {a i } n i=1 is a solution of N and a r = {a r i } n i=1 is its regularization (see Fig. 11). Suppose m i = [x − i , x + i ] × [y − i , y + i ] and m j = [x − j , x + j ] × [y − j , y + j ] meet at x direction, i.e. x + i = x − j . Recall α 0 < · · · < α nx is the ordering of {x − i , x + i : 1 ≤ i ≤ n}. We call α k = x + i an x-meet point. Clearly, k > 0 and x − i ≤ α k−1 < x + i = x − j = α k < α k+1 ≤ x + j .
+We next show how to delete this meet point by transforming a r into another regular solution.
+
+Write α * = (α k +α k+1 )/2. The line x = α * divides each cell c kl (0 ≤ l < n y ) into two equal parts, written in order c − kl and c + kl . For each 1 ≤ s ≤ n and each 0 ≤ l < n y , if c kl ⊆ a r s but c k−1,l ⊆ a r s then delete c − kl from a r s . The remaining part of each a r s , written as b s , is still connected, and it is straightforward to show that b = {b s } n s=1 is also a regular solution of N . Such a modification introduces no new meet points. Continuing this process for at most n times, we will have a solution that has no x-meet points. The same modification can be applied to y-meet points. In this way we obtain a meet-free solution. An example is shown in Fig. 9. It is easy to see that the meet-free solution has the same frame as a. The two solutions, however, have different cell sets. In conclusion, we have the following lemma:
+
+Lemma 12. Each consistent basic CDC network has a regular solution that is meet-free.
+
+So we can safely assume that a is a meet-free solution that is regular, i.e. a r = a.
+
+
+Digital Solution and Canonical Solution
+
+Suppose a is a meet-free solution of N that is regular. We next transform a into a solution in the digital plane Z 2 . 
+Definition 12 (pixel, digital region, digital solution). A pixel is a rectangle p ij = [i, i + 1] × [j, j + 1], where i, j are integers. A region a is digital if a is composed of pixels, i.e. p ij ∩ a • = ∅ iff p ij ⊆ a. A solution a = {a i } n i=1 of a basic CDC network is digital if each a i is a digital region.m i = [x − i , x + i ]× [y − i , y + i ]
+for the mbr of a i . Recall S(a) and C(a) = {c ij } 0≤i<nx,0≤j<ny are, respectively, the frame and the cell set of a. Since a is regular, each a i is composed of a subset of cells in C(a).
+
+We next show how to transform the solution a = {a s } n s=1 into a digital solution b = {b s } n s=1 . For 1 ≤ s ≤ n, define a subset b s of S(a) = [0, n x ] × [0, n y ] as follows:
+A pixel p ij is contained in b s iff the cell c ij in C(a) is contained in a s . That is, b s = {p ij : c ij ⊆ a s , 0 ≤ i < n x , 0 ≤ j < n y }(23)
+Clearly, b s is a connected digital region (See Fig. 11 for illustration). By definition we have dir(a i , a j ) = dir(b i , b j ) for any i, j. Therefore, the assignment b = {b s } n s=1 is also a solution of N . We observe that b has several good properties.
+Lemma 13. Suppose a = {a s } n s=1 is a regular meet-free solution of a basic CDC network N . The digital solution b = {b s } n s=1
+constructed as above is also regular and meet-free. Moreover, {I x (b s )} n s=1 and {I y (b s )} n s=1 are the canonical solutions of the projective IA networks N x and N y , respectively.
+
+Proof. That b is regular and meet-free follows directly from the properties of a. We show {I x (b s )} n s=1 and {I y (b s )} n s=1 are canonical sets of intervals. Take the x-direction as example. 
+Because b = {b i } n i=1 is a solution to N , we know (I x (b i ), I x (b j )) is an instance of ι x (δ ij ) ∩ ι x (δ ji ) ∼ . Since b is meet-free, I x (b i ) cannot meet I x (b j ) for any two i, j. This implies that {I x (b i )} n i=1 is a solutionN x = {v i ρ x ij v j } n i,j=1 , where ρ x ij is defined by Eq. 11. By the choice of α i (Eq. 18), we can easily show {I x (b i )} n i=1 is a canonical set of intervals.
+We call the solution b in the above lemma a canonical solution. More precisely, we have
+Definition 13 (canonical solution). A solution b = {b i } n i=1 of N is said to be canonical if it is digital, regular, and meet-free, and {I x (b i )} n i=1 and {I y (b i )} n i=1
+are canonical sets of intervals.
+
+As a corollary of Lemma 13, we have Theorem 3. Each consistent basic CDC network has a canonical solution.
+
+Canonical solutions are not necessarily unique. For a consistent basic CDC
+network N = {v i δ ij v j } n i,j=1 , recall we write N x = {v i ρ x ij v j } n i,j=1 and N y = {v i ρ y ij v j } n i,j=1
+for the two projective basic IA networks (see Dfn. 8). By Thm. 2, we know both N x and N y are consistent.
+Suppose I = {I i } n i=1 and J = {J i } n i=1
+are their canonical interval solutions as given by Thm. 1, where
+I i = [x − i , x + i ], J i = [y − i , y + i ]. Write n x = max{x + i } n i=1 < 2n, n y = max{y + i } n i=1 < 2n. Set T ≡ [0, n x ] × [0, n y ] and m i = I i × J i . Clearly, m i ⊆ T . By Thm. 3, N has a canonical solution because of its consistency. Lemma 14. If a = {a i } n i=1 is a canonical solution of N , then each a i is a connected digital region whose mbr is m i = I i × J i , where {I i } n i=1 , {J i } n i=1
+are, respectively, the canonical interval solutions of N x and N y .
+
+As a corollary, we have
+Corollary 1. Suppose b = {b i } n i=1 and b = {b i } n i=1 are two canonical solutions of N . Then I x (b i ) = I x (b i ), I y (b i ) = I y (b i ), and M(b i ) = M(b i ).
+This shows that two canonical solutions have the same mbrs. Moreover, it can be proved that the union of two canonical solutions is also a canonical solution. Is there a maximal canonical solution? Where a canonical solution
+a = {a i } n i=1 of a basic CDC network N is said to be maximal if for any other canonical solution a = {a i } n i=1 of N we have a i ⊆ a i for i = 1, · · · , n.
+In the next subsection, we give a method for constructing the maximal canonical solution. 
+
+
+Maximal Canonical Solution
+(d φ ) 9 φ=1 by setting d φ = d st , where φ = 3(s − 1) + t.
+For each variable v j and each 1 ≤ φ ≤ 9, we write m φ j for the φ-th tile associated to the rectangle m j (see Fig. 2 (24) That is, D i contains all pixels in m i that are disallowed for violating some constraint in N .
+(right)). For each constraint δ ij = (d φ ij ) 9 φ=1 of v i to v j , by (a i , a j ) satisfies δ ij and M(a j ) = m j , we know d φ ij = 0 if and only if a • i ∩ m φ j = ∅. Therefore, each pixel contained in m φ j is disallowed in a i if d φ ij = 0. For each i, we write D i = {p st ⊆ m i : there exist j = i, φ such that p st ⊆ m φ j and d φ ij = 0}Set b i = {p st ⊆ m i : p st ∈ D i }(25)Lemma 15. If a = {a i } n i=1 is a canonical solution of N , then M(a i ) = M(b i ) and a • i ∩ p st = ∅ for any p st ∈ D i , i.e. a i ⊆ b i , where b i is defined in Eq. 25.
+We note that b i may be disconnected. As a connected region, a i must be contained in a unique connected component of b i . We observe that two connected digital regions share at least one pixel in common if they have the same mbr. , a contains a pixel p 0s and a pixel p n1−1,t for some s, t ∈ {0, 1, · · · , n 2 −1}. Because a is a connected digital region, there is a path α (i.e. a sequence of pixels in a) that connects p 0s to p n1−1,t . Clearly, α separates M(a) into at least two disjoint components, each of which is contained in a rectangle that is smaller than M(a). Since a • ∩ b • = ∅, we know b is contained in one such component. Therefore, M(b) is smaller than M(a). A contradiction.
+
+By the above lemma, we know each b i has at most one connected component 
+c i such that M(c i ) = m i . Moreover, if N is consistent, then each b i has a unique component c i with M(c i ) = M(b i ) = m i . Lemma 17. Suppose N = {v i δ ij v j } n i,b i such that M(c i ) = m i . Then c = {c i } n i=1 is a solution of N . Moreover, if a = {a i } n i=1 is a canonical solution of N , then a i ⊆ c i for each i.
+Proof. That a i is contained in c i is clear. We need only show dir(c i , c j ) = δ ij also holds for each pair of i, j. This is equivalent to proving for all 1
+≤ φ ≤ 9 that c • i ∩ m φ j = ∅ if and only if d φ ij = 0. Recall a i ⊆ c i ⊆ b i ⊆ m i = M(a i ). If d φ ij = 0, by c i ⊆ b i , for each pixel p st ∈ D i , we know c • i ∩ p st = ∅, hence c • i ∩ m φ j = ∅. On the other hand, if d φ ij = 1, then c • i ∩ m φ j ⊇ a • i ∩ m φ j = ∅.
+This shows c is a solution of N .
+
+It is easy to see that each region c i in c is a connected digital region. Moreover, c is a regular and meet-free solution of N such that I x (c i ) = I x (a i ) and I y (c i ) = I y (a i ) for each i. By Dfn. 13, we know c is also a canonical solution of N . By a i ⊆ c i and the arbitrariness of a, we know c is the maximal canonical solution of N . An example is given in Fig. 12 (left) to illustrate the procedures. Note that each b i obtained in this example happens to be connected.
+Theorem 4. Suppose N = {v i δ ij v j } n i,
+
+Example 1 (continued)
+
+For the network specified in Fig. 4, we have
+x − 2 < x − 1 < x + 2 < x − 3 < x + 1 < x + 3 (26) y − 3 < y − 2 < y − 1 < y + 2 < y + 3 < y + 1(27)
+The canonical interval solutions of N x and N y are illustrated in Fig. 12 (left). Suppose {a, b, c} is a solution of the network described in Fig. 4. Note that the (2,2)-entry of δ 12 is 0, which is possible only if a • ∩ M(b) = ∅. This excludes pixel p 12 from a (see Fig. 12). Fig. 12 (right) illustrates the maximal canonical solution {a, b, c} of N . 
+
+
+A Consistency Checking Algorithm
+
+In this section, we describe our algorithm for checking consistency of basic CDC networks. As in the last section, we assume N = {v i δ ij v j } n i,j=1 is a basic CDC network. To examine the consistency of N , we first compute the two projective IA networks N x and N y . If any of these two networks is inconsistent, then N is inconsistent, either. Assume both N x and N y are consistent. We then compute their canonical interval solutions, and therefore construct a frame T and a rectangle m i for each i. As in the last section, we continue to compute the digital region b i and try to find the connected component c i such that M(c i ) = m i . If such c i does not exist for some i, then N is inconsistent.
+Otherwise, set c = {c i } n i=1 .
+If c is a solution, then N is consistent. Otherwise, as implied by Thm. 4, N must be inconsistent. Fig. 13 gives the flowchart of the algorithm.
+
+
+An O(n 4 ) Consistency Checking Algorithm
+
+In this section, we give a detailed description of our consistency checking algorithm.
+
+Step 1. Projective IA Networks Step 2. Canonical Interval Solutions
+
+Suppose N x and N y are consistent. Their canonical solutions {I i } n i=1 and {J i } n i=1 can be constructed in cubic time.
+Write I i = [x − i , x + i ] and J i = [y − i , y + i ].
+By definition of canonical interval solution, we know x − i , x + i , y − i , y + i are integers between 0 and 2n − 1. Write n x = max{x + i } and n y = max{y + i }. Set T = [0, n x ] × [0, n y ] as the frame and
+define m i = [x − i , x + i ] × [y − i , y + i ] for each i.
+Step 3. Excluding Impossible Pixels
+
+As before, we write D i for the set of pixels in m i that are disallowed for v i , i.e.  Step
+D i = {p st ⊆ m i : there exist j = i, φ such that p st ⊆ m φ j and d φ ij = 0} Equivalently, p st ∈ D i if and only if p st ⊆ m i ∩ {m φ j : d φ ij = 0, j = i}. Set b i = {p st ⊆ m i : p st ∈ D i } Clearly, b • i ∩ m φ
+
+Checking A Possible Solution
+
+The last step is then checking if {c i } n i=1 is a solution of N . Note that if the answer is yes, then {c i } n i=1 is the maximal canonical solution of N . For each pair c i and c j , we should check if dir(c i , c j ) = δ ij . In other words, we should check for each 1 ≤ φ ≤ 9 whether the following equation holds
+c • i ∩ m φ j = ∅ ⇔ d φ ij = 0(28)When d φ ij = 0, by the definition of b i , we have b • i ∩m φ j = ∅. Since c i is contained in b i , we know c • i ∩ m φ j = ∅.
+The condition is always satisfied. So to determine if dir(c i , c j ) = δ ij , we need only check whether
+c • i ∩ m φ j is nonempty for each φ with d φ ij = 1. Recall c i is a connected component of b i and M(c i ) = m i . If m • i ∩ m φ j = ∅, then c • i ∩ m φ j = ∅.
+The condition is violated and hence N is inconsistent. Note that each m i has been computed and each m φ j can be computed in constant time. Therefore, whether m • i ∩ m φ j is empty can be checked in constant time for any i, j, φ.
+
+Suppose   
+m i • ∩ m φ j = ∅. Write m i ∩ m φ j = [x − , x + ] × [y − , y + ]. To check if c • i ∩ m φ
+
+A Cubic Improvement
+
+In this subsection, we improve the main algorithm to cubic. This is achieved by an O(n 2 ) improvement for computing each D i (see Eq. 24) in Step 3. As a consequence, all b i can be computed in cubic time.
+
+Suppose T = [0, n x ] × [0, n y ]. Then any digital region a ⊆ T can be represented as an n x × n y Boolean matrix B(a) as follows:  For each i, recall D i is the set of pixels in m i that are disallowed for v i (cf. Eq. 24 or Step 3 of the main algorithm). For simplicity, we write P i for the matrix that represents the digital region which consists of pixels in D i . Similarly, we write B j for the matrix that represents the rectangle m j , and write B φ j for the matrix that represents T ∩ m φ j . In case T ∩ m φ j contains no pixel, we assume it is represented by the zero matrix.
+B(a)[k, l] = 1, if p kl ∈ a; 0, otherwise.(29)
+Boolean operations ∧ and ∨ can be defined on Boolean matrices in a natural way. By definition of D i (see Eq. 24), we have
+P i = B i ∧ {B φ j : d φ ij = 0 and j = i}.(30)
+Adding up all B φ j with d φ ij = 0 and j = i, we obtain an integer matrix Q i , i.e.
+Q i = {B φ j : d φ ij = 0 and j = i}.(31)
+Easy to see, the following equation holds:
+P i [k, l] = 1, if Q i [k, l] > 0 and B i [k, l] = 1; 0, otherwise.(32)
+Note that T ∩ m φ j is a (may be degenerative) rectangle. We next show that this property plays an important role in the improvement. To this end, we introduce the following operations on matrices.
+
+Definition 14 (cumulative matrix and difference matrix). For a matrix N , we define its cumulative matrix as
+acc(N )[k, l] = k t=0 N [t, l].(33)
+and its difference matrix as
+diff(N )[k, l] = N [k, l], if k = 0; N [k, l] − N [k − 1, l], otherwise.(34)
+The cumulative matrix can be computed column by column. We first add the first column to the second one, and then add the updated second column to the third, etc. In this way, cumulative matrix acc(N ) can be computed linearly in the number of elements of N .
+
+It is easy to verify that N = acc(diff(N )). Since the difference operation is additive, i.e. diff(N 1 + N 2 ) = diff(N 1 ) + diff(N 2 ), we have
+Q i = acc(diff(Q i )) = acc(diff( {B φ j : d φ ij = 0 and j = i})) = acc( {diff(B φ j ) : d φ ij = 0 and j = i})
+We next show each Q i can be computed in quadratic time. To this end, we need the following lemma, which asserts that the number of non-zero elements in diff(B φ j ) is of order O(n).
+
+Lemma 19. The number of non-zero elements in diff(B φ j ) is less than 4n.
+
+Proof. If B φ j is the zero matrix, then diff(B φ j ) is also the zero matrix. Otherwise, the non-zero elements in B φ j compose a rectangle, i.e., there exist 0 ≤ x 1 ≤ x 2 < n x and 0 ≤ y 1 ≤ y 2 < n y s.t.
+B φ j [k, l] = 1, if x 1 ≤ k ≤ x 2 and y 1 ≤ l ≤ y 2 ; 0, otherwise.
+Easy to prove,
+diff(B φ j )[k, l] =    1, if k = x 1 and y 1 ≤ l ≤ y 2 ; −1, if k = x 2 + 1 and y 1 ≤ l ≤ y 2 ; 0, otherwise.
+So if x 2 < n x − 1, there are (y 2 − y 1 + 1) '1's and '-1's in diff(B φ j ); otherwise x 2 = n x − 1, there are (y 2 − y 1 + 1) '1's and none '-1's, with other elements being zeros. So there are at most 2 × (y 2 − y 1 + 1) ≤ 2 × n y ≤ 4n non-zero elements in diff(B φ j ).
+
+Since 1 ≤ j ≤ n and 1 ≤ φ ≤ 9, there are at most 9n B φ j need to consider. By Lemma 19, we know {diff(B φ j ) : d φ ij = 0} can be computed in quadratic time. As it is a matrix with n x × n y elements, computing its cumulative matrix, viz. Q i , also needs quadratic time.
+
+By Eq. 32, we know P i , the matrix representation of D i , can be computed in quadratic time. As a consequence, each b i can be computed in O(n 2 ), instead of O(n 3 ), time. In this way, we improve Step 3 of the main algorithm from O(n 4 ) to cubic time. 
+      diff(B 4 3 ) =       0 0 0 0 0 1 0 0 −1 0 1 0 0 −1 0 1 0 0 −1 0 1 0 0 −1 0      
+Summing up all corresponding diff(B φ j ) and calculating its cumulative matrix, we obtain Q 1 . Finally, we get b 1 by Eq. 25, shown in Fig. 12, which is clearly connected. This shows c 1 = b 1 .
+Q 1 = acc(       0 0 0 0 0 1 0 0 −1 0 1 0 0 −1 0 1 0 0 −1 0 2 0 0 −1 0       ) =      
+
+Beyond Basic CDC Constraints
+
+In the above two subsections, we have shown that the consistency of a basic network of CDC constraints can be determined in cubic time. Using backtracking method, we immediately know that the consistency satisfaction problem of CDC is an NP problem.
+
+Lemma 20. The consistency satisfaction problem of CDC is an NP problem.
+
+Proof. Let C = {v i c ij v j } n i,j=1 be a set of CDC constraints. To determine if C is consistent, we need only branch each non-basic constraint c ij , and then call our cubic algorithm to solve the basic network of CDC constraints.
+
+This problem is also NP-hard.
+
+
+Lemma 21. The consistency satisfaction problem of CDC is NP-hard.
+
+Proof. We prove this by reducing a known NP-hard problem to the consistency satisfaction problem of CDC. Let A be the JEPD set of IA relations
+{p ∪ m ∪ pi ∪ mi, o ∪ s ∪ d ∪ f ∪ eq ∪ fi ∪ si ∪ di ∪ oi}.
+It can be proved that reasoning with A is already NP-hard. Actually, the NPhardness of A is guaranteed by the work of Krokhin, Jeavons, and Jonsson [15]. We need only to show A is not contained in any of the eighteen maximal tractable subclasses of IA (see [15, Table III]). The verification is straightforward and omitted here.
+
+Reasoning with IA relations in A can be easily reduced to reasoning with CDC. For a set of IA constraints
+N = {v i λ ij v j } n i,j=1 , (λ ij ∈ A),
+it is easy to see that N is satisfiable if and only if the set of CDC constraints
+N * = {v i ϕ ij v j } n i,j=1
+is consistent, where ϕ ij is the disjunction of the basic CDC relations in otherwise. This shows that reasoning with CDC is at least as hard as reasoning with A. Therefore, reasoning with CDC is also NP-hard.
+{   0 0 0 1 0 0 0 0 0   ,   0 0 0 0 0 1 0 0 0   } if λ ij = p ∪ m ∪ pi ∪ mi,
+As a corollary, we know Theorem 5. Reasoning with CDC is an NP-Complete problem.
+
+
+The Pairwise Consistency Problem and The Weak Composition Problem
+
+Our main algorithm can be applied to solve the two special subproblems of reasoning with CDC, i.e. the pairwise consistency problem and the weak composition problem. These two subproblems have been considered in [3] and [32], respectively. In this section, we will compare their results with ours.
+
+
+The Pairwise Consistency Problem
+
+Given that you know the relation of a to b, what about that of b to a? Mathematically speaking, this is the converse problem. The relation of b to a is the converse of that of a to b, and vice versa. Suppose B is a set of JEPD relations on D. The qualitative calculus B is not necessarily closed under converse. This means, α ∼ could be a relation outside of B despite α ∈ B .
+
+As for CDC, we have shown in Fig. 3 that a basic CDC relation may have more than one 'converses,' where for two basic relations α, β, we say α is a converse of β (in CDC) if {v 1 αv 2 , v 2 βv 1 } is consistent.
+
+The pairwise consistency problem in CDC is the problem of deciding if {v 1 δ 12 v 2 , v 2 δ 21 v 1 } is satisfiable for a pair of basic CDC relations δ 12 and δ 21 . This problem has been discussed by Cicerone and di Felice [3], where they identified 2004 consistent pairs of basic CDC relations.
+
+We next apply our main algorithm to solve the pairwise consistency problem. The first step computes ρ x 12 = ι x (δ 12 ) ∩ ι x (δ 21 ) ∼ and ρ y 12 = ι y (δ 12 ) ∩ ι y (δ 21 ) ∼ . If ρ x 12 or ρ y 12 is empty, then the program stops and returns 'inconsistent.' Otherwise, we go to Step 2. We construct the canonical solutions {I 1 , I 2 } and {J 1 , J 2 } to ρ x 12 and ρ y 12 , respectively. Set 3]. Continuing as described in the main algorithm, we will determine if {v 1 δ 12 v 2 , v 2 δ 21 v 1 } is consistent, and find the maximal canonical solution in case it is consistent.
+m i = I i × J i for i = 1, 2. Write I i = [x − i , x + i ] and J i = [y − i , y + i ]. Denote n x = max{x + 1 , x + 2 }, n y = max{y + 1 , y + 2 }. Clearly, 1 ≤ n x , n y ≤ 3. Set T = [0, n x ] × [0, n y ]. Then T ⊆ [0, 3] × [0,
+A specialized algorithm is implemented. We obtain in total 757 consistent pairs of basic CDC relations. Among these consistent pairs (δ, δ ), one δ may correspond to multiple δ , i.e. δ may have multiple converses. In fact, among the 218 basic CDC relations, 119 have unique converse, 68 have two converses, 6 have four converses, 20 have eight converses, 4 have thirty converses, and one (viz. the one such that d ij = 1 iff i = j = 2) has 198 converses.
+
+Our result is unexpectedly different from that of [3], where Cicerone and di Felice obtained 2004 consistent pairs of basic CDC relations. A careful examination, however, shows that a similar but different model was used in [3].
+
+When defining the direction relation matrix dir(a, b) = [d ij ] 3 i,j=1 of a to b (see Dfn. 4), we require d ij = 1 if and only if a • ∩ b ij = ∅. While in [3], the (ij)-entry d ij is 1 if and only if a has nonempty intersection with b ij , i.e. d ij = 1 iff a ∩ b ij = ∅. We call these two definitions the interior-based and, respectively, the closure-based direction relation matrix.
+
+In the following, we argue that the interior-based definition is more coherent than the closure-based one.
+
+First, though the original definition of Direction Relation Matrix (DRM) [11] does not mention that d ij = 1 iff a has a common interior point with the tile b ij , Goyal and Egenhofer defined in [12] the detailed direction relation matrix of a to b as a numerical matrix dir * (a, b) = [d * ij ] 3 i,j=1 , where d * ij is interpreted as the ratio of the area of a∩b ij and a. This is a natural extension of the interior-based direction relation matrix.
+From dir * (a, b) = [d * ij ] 3 i,j=1 , we can obtain the coarse direction relation matrix dir(a, b) = [d ij ] 3
+i,j=1 by setting d ij = 1 iff d * ij > 0. Second, the qualitative calculus introduced by the interior-based direction relation matrix is more desirable. For example, it is a natural requirement that the identity relation is contained in a unique basic CDC relation. for any connected region a. The following example, however, shows that this is not the case for the closure-based direction relation matrix. 
+
+
+The Weak Composition Problem
+
+The notion of weak composition plays a very important role in qualitative spatial and temporal reasoning [1,5,18,28]. For two basic CDC relations α, β, the weak composition α • w β of α and β is defined to be the smallest relation in the CDC algebra which contains the composition α • β. Since CDC is a Boolean algebra, α • w β is the union of all basic CDC relations it contains. For a basic CDC relation γ, it is easy to prove that
+γ ⊆ α • w β ⇔ γ ∩ (α • β) = ∅.(35)
+Note that γ ∩ (α • β) is nonempty iff the following set of basic CDC constraints
+C = {v 1 αv 2 , v 2 βv 3 , v 1 γv 3 }(36)
+is consistent. We note that C is not a complete network. The constraint of, say, v 2 to v 1 , is not specified. According to the previous subsection, α may have multiple converses. To apply our main algorithm, we need to extend C to a complete network:
+C * = {v 1 αv 2 , v 2 α v 1 , v 2 βv 3 , v 3 β v 2 , v 1 γv 3 , v 3 γ v 1 }(37)
+We then call our main algorithm to determine if the above completed network is consistent. If the answer is 'yes' for some α , β , γ , then γ is contained in the weak composition of α and β. Note that we need only to apply the main algorithm to those α , β , γ such that (α, α ), (β, β ), (γ, γ ) are consistent pairs. The above algorithm was implemented, and its codes are available from the authors.
+
+The same problem has been considered in [32], where Skiadopoulos and Koubarakis gave an algorithm to compute the weak composition. The main idea is to compute the weak composition progressively.
+
+Definition 15 (single-tile, multi-tile, component). A basic CDC relation is called single-tile if its matrix has only one nonzero entry, and called multi-tile otherwise. We say a single-tile relation [
+s ij ] 3 i,j=1 is a component of a multi-tile relation [d ij ] 3 i,j=1 , if s ij ≤ d ij for 1 ≤ i, j ≤ 3.
+The weak composition of two single-tile relations has been computed by Goyal [10]. Upon this, Theorem 1 of [32] establishes a rule for computing the weak composition of a single-tile relation and a basic relation. The correctness of this theorem is confirmed by our algorithm. Furthermore, Theorem 2 of [32] then gives a rule to compute the weak composition of two multi-tile relations.
+
+Definition 16 (decomposability). Let α, β are two basic CDC relations. Suppose α 1 , α 2 , · · · , α k are the component single-tile relations of α. We say a basic relation γ is decomposable with respect to (α, β), if γ is the join of k direction relation matrices γ s , where each γ s is a basic relation contained in α s • w β.
+
+The following rule was used in [32] to compute the weak composition between α and any other basic CDC relation β.
+
+[32, Theorem 2] A basic relation γ is contained in α • w β if and only if γ is decomposable with respect to (α, β).
+
+We next give two examples to show that this rule is incorrect in some cases. we assert that γ is not decomposable with respect to (α, β) (see Lemma 23 below). According to [32,Theorem 2], this will imply that γ ⊆ α• w β, i.e. {v 1 αv 2 , v 2 βv 3 , v 1 γv 3 } is inconsistent. The consistency of the above set is, however, confirmed by our algorithm. Fig. 15 (left) gives a configuration of three regions {a, b, c} which satisfies the constraints.
+
+We next show γ is not decomposable w.r. t. (α, β). First of all, it is easy to see that α 1 and α 2 in Eq. 39 are the only component single-tile relations of α in Eq. 38.
+α 1 =   0 0 0 0 0 0 1 0 0   α 2 =   0 0 0 1 0 0 0 0 0  (39)
+The next lemma characterizes when a basic relation is contained in the weak composition of α s and β for s = 1, 2.
+
+
+Lemma 22.
+
+A basic relation π is contained in α s • w β if and only if π is a valid matrix whose component single-tile relations are also component single-tile relations of π s , where π s (s = 1, 2) are matrices in Eq. 40.
+π 1 =   0 0 0 1 1 1 1 1 1   π 2 =   1 1 1 1 1 1 0 0 0   (40)
+Proof. The proof is straightforward. We illustrate the weak composition in Fig. 15 (middle and right). Take α 1 in Eq. 39 as example. In the middle of Fig. 15, there are six pixels marked "a." For each a, we have aα 1 b and bβc. Moreover, dir(a, c) is a single-tile relation for each of the six a. These single-tile relations are components of π 1 . The case of α 2 is similar and illustrated in the right of Fig. 15. Then we arrive at our conclusion.
+
+Lemma 23. γ is not decomposable with respect to (α, β).
+
+Proof. Suppose γ = γ 1 ∨ γ 2 , and γ s ⊆ α s • w β (s = 1, 2). This means, by Lemma 22, γ s is a valid matrix whose component single-tile relations are all π s 's.  [3,2] = 0. Therefore, γ 2 is not 4-connected, hence not a direction relation matrix. This shows that γ is not decomposable.
+For 1 ≤ i, j ≤ 3, we have γ[i, j] = γ 1 [i, j] ∨ γ 2 [i,
+The following example provides a set of three basic CDC constraints which is inconsistent but satisfies the condition of [32,Theorem 2]. we assert that γ is decomposable with respect to α and β . Let α s (s = 1, · · · , 5) (the middle matrices of Eqs. 42-46) be the component single-tiled relations of α . It is easy to see γ s ⊆ α s • w β (Eqs. 42-46). Evidences are given in Fig. 16, where a configuration aα s b, bβ c, aγ s c is given for each s. Note that γ is the join of γ s for s = 1, · · · , 5. According to Theorem 2 of [32], γ should be contained
+in α • β , i.e. Γ = {v 1 α v 2 , v 2 β v 3 , v 1 γ v 3 }
+should be consistent. Our algorithm, however, shows that Γ is not consistent. An argument is also given in Lemma 24.   (33). Therefore, the impossible regions separate the plane into two disconnected pieces, one is above the impossible regions, the other below (see Fig. 17). Since γ [2, 2] = 1, i.e. a • ∩ M(c) = ∅, we know a has an interior point P which belongs to M(c), hence, the upper piece. By α [3, 2] = 1, i.e. a • ∩ b 32 = ∅, we know a has an interior point Q which belongs to the lower piece. This is impossible since we assume a is a connected region. These two examples show that the weak composition algorithm proposed in [32] is not always correct.
+Lemma 24. Γ = {v 1 α v 2 , v 2 β v 3 , v 1 γ v 3 } is inconsistent. Proof. Suppose a = {a, b,
+
+Consistency Checking for Two Variants of CDC
+
+The CDC algebra introduced in Dfn. 4 requires regions to be connected. This calculus has two variants in the literature. One, as introduced in [33], deals with cardinal direction relations between possibly disconnected regions; the other, as originally proposed in [11], deals with simple regions, i.e. connected regions that are topologically equivalent to closed disks. In this section, we show our consistency checking algorithm designed for connected regions can be adapted to cope with these two variants.  = dir(a, b). It is easy to see that all but the zero 3 × 3 Boolean matrices are valid. Each of these matrices represents a basic direction relation between possibly disconnected regions. We call the Boolean algebra generated by these JEPD relations the Cardinal Direction Calculus for possibly disconnected regions, denoted as CDC d .
+
+
+Cardinal Directions between Possibly Disconnected Regions
+
+Consistency checking in CDC d is similar to that in CDC. Suppose N = {v i δ ij v j } n i,j=1 is a network of basic CDC d constraints. Similar definitions of regular solutions, meet-free solutions, and canonical solutions can be defined in CDC d . Moreover, suppose a is a solution to N . We can transform a into a canonical solution a = {a i } n i=1 of N . That is, a is a regular, meet-free, and digital solution, and {I x (a i )} n i=1 and {I y (a i )} n i=1 are canonical sets of intervals. Write m i = I x (a i ) × I y (a i ). We next show N has a maximal canonical solution. Actually, for each i, set D i to be the set of pixels in m i that are disallowed for violating some constraint in N (see Eq. 24), and set b i to be the region obtained by deleting all disallowed pixels from m i (see Eq. 25). We assert that
+b = {b i } n i=1 is the maximal canonical solution of N . Theorem 6. Suppose N = {v i δ ij v j } n i,j=1 is a network of basic CDC d con- straints. If N is consistent, then b = {b i } n i=1 is the maximal canonical solution of N , where b i is defined as in Eq. 25.
+Proof. The proof is similar to that for Lemma 18.
+
+This shows, to construct the maximal canonical solution of a network of basic CDC d constraints, we need not to compute the connected components of b i . We next adapt our main algorithm to determine the consistency of a network N = {v i δ ij v j } n i,j=1 of basic CDC d constraints. As in the case of connected regions, Step 1 computes the projective IA networks N x and N y . If either is inconsistent, then N is inconsistent. Otherwise, Step 2 constructs their canonical interval solutions, and Step 3 computes b i for each i. In case M(b i ) = m i for some i then N is inconsistent. Otherwise, we go to the next step. The above procedures, as in the connected case, need at most cubic time.
+
+Since regions in a solution to CDC d constraints are allowed to be disconnected, we need not compute the connected components of each b i . Therefore, we go directly to Step 5, where we need check if dir(b i , b j ) = δ ij holds for each pair of i, j. Suppose δ ij is represented as a 9-tuple (d φ ij ) 9 φ=1 . Similar to the connected case, we need only check whether
+b • i ∩ m φ j is nonempty for each φ with d φ ij = 1. To check if b • i ∩ m φ j is nonempty, it is sufficient to show that there is a pixel p contained in b i ∩ m φ j .
+Since b i may be disconnected, checking all boundary pixels is, however, insufficient. Note that checking all pixels in m i ∩ m φ j alone needs O(n 2 ) time in the worst case for each pair i, j. This is undesirable since it will cost O(n 4 ) time in total.
+
+We next show this could also be simplified. For a digital region b contained in T , write B(b) for the Boolean matrix that represents b (see Eq. 29), and define an n x × n y integer matrix M (b) as
+M (b)[k, l] = {B(b)[p, q] : 0 ≤ p ≤ k, 0 ≤ q ≤ l}(47)
+for each 0 ≤ k < n x and each 0 ≤ l < n y . It is easily to see that 
+M (b)[x − − 1, y − − 1] + M (b)[x + − 1, y + − 1] > M (b)[x + − 1, y − − 1] + M (b)[x − − 1, y + − 1],(48)
+where 
+x − , x + ]×[y − , y + ] is M (b)[x + −1, y + −1]−(M (b)[x − −1, y + −1]+ M (b)[x + −1, y − −1])+M (b)[x − −1, y − −1].
+The conclusion follows directly. Remark 2. For a consistent CDC d network N , the O(n 5 ) algorithm proposed in [33] outputs a solution of N using possibly disconnected regions. It is difficult to extend this method to cope with cardinal directional constraints between connected regions. Actually, Navarrete et al. [23] tried to adapt this algorithm to cope with connected regions, and proposed an O(n 4 ) algorithm for checking the consistency of a basic CDC network. The algorithm was based on Theorem 1 in [23], which actually implied the following proposition.
+Suppose T ∩ m φ j = [x − , x + ] × [y − , y + ]. Since b i ⊆ T , we have b i ∩ m φ j = b i ∩ (T ∩ m φ j ) = b i ∩ [x − , x + ] × [y − , y + ].
+For a basic CDC network N , if all subnetworks of N involving four variables are consistent, then N is consistent.
+
+However, the counterexample constructed in Section 3.4 of this paper shows this is not true.
+
+
+Cardinal Directions between Simple Rgions
+
+In the definition of direction relation matrix (Dfn. 4), we only assume connected regions. It is possible that these connected regions have holes. In the original work of Goyal and Egenhofer [11,12], objects are represented as simple regions,
+
+i.e. regions that are topologically equivalent to closed disks. Interestingly, each direction relation matrix between connected regions can be realized by a pair of simple regions. Therefore, the set of cardinal direction relations between simple regions is the same as that between connected regions. We write CDC s for the qualitative calculus generated by these cardinal direction relations on the set of simple regions.
+
+In this subsection, we show this difference between simple regions and connected regions does not affect the consistency of cardinal direction constraints. In particular, we prove that a consistent network of CDC constraints always has a solution only using simple regions. The idea is to transform each connected region in the maximal canonical solution into a simple region without changing the relations between these regions.
+
+Suppose a is a digital region that is connected. Clearly, a has at most finite holes, where a hole of a is the closure of a bounded connected component of the exterior of a. It is easy to see that for a digital region all holes are digital and simple regions.
+
+
+Definition 17 (contact points). Let a be a digital region. A point
+P = (k, l) is called a contact point of a if p k,l ⊆ a ⇔ p k−1,l−1 ⊆ a ⇔ p k−1,l ⊆ a ⇔ p k,l−1 ⊆ a.(49)
+Clearly, among the four pixels around a contact point, only two belong to a, and these two pixels are 8-neighbors, i.e. they are diagonally adjacent. Figure 18: A digital region a with two contact points P = (5, 5) and Q = (5, 6), where h 1 and h 2 are two holes of a, h ∞ is the closure of the unbounded component of the exterior of a Suppose a = {a i } n i=1 is the maximal canonical solution of a basic CDC network. We next transform each a i into a simple region by deleting subpixels from a. Examples are show in Fig. 19 and Fig. 20. 
+Lemma 26. Suppose a = {a i } n i=1
+is the maximal canonical solution of a basic CDC network. Let T be the frame of a, and let m j be the mbr of a j for each j. If p kl is a pixel which is contained in a hole of a i , then there exists j = i such that p kl ⊆ m j and a • i ∩ m j = ∅.
+
+Proof. If p kl is contained in a hole if a i , then there exist pixels contained in a i that are, respectively, above, below, right of, and left of p kl . That is, there exist k 1 < k < k 2 and l 1 < l < l 2 such that p k1l , p k2l and p kl1 , p kl2 are all contained in a i . By the construction of a i , we know p kl is a pixel in D i (see Eq.24). This means, there exist j = i and φ such that a • i ∩ m φ j = ∅ and p kl ⊆ m φ j . If φ = 5, it is easy to see m φ j also contains at least one of the four 'guarding' pixels p k1l , p k2l and p kl1 , p kl2 . This contradicts the fact that these pixels are contained in a i . As a consequence, we know φ = 5 and m φ j = m 5 j = m j . This means, there is j = i such that p kl ⊆ m j and a • i ∩ m j = ∅. 
+b implies (b ) • ∩ p = ∅.(51)
+Proof. This follows directly from the definition of direction relation matrix. Note that for any φ = 1, · · · , 9 we have a ∩ m φ = ∅ if and only if a ∩ m φ = ∅,
+where m φ = b φ = (b ) φ .
+Recall a maximal canonical solution is a meet-free solution (cf. Dfn. 11). This implies that the mbrs of any two regions in a maximal canonical solution do not meet at a point. The following lemma is a consequence of this observation.
+Lemma 28. Suppose a = {a i } n i=1
+is the maximal canonical solution of a basic CDC network. If P = (k, l) is a contact point of a 1 , then among the four pixels around P , viz. p k−1,l−1 , p kl , p k−1,l , p k,l−1 , one is contained in a hole of a 1 , two are contained in a 1 , the other is contained in neither a 1 nor its holes.
+
+Proof. Without loss of generality, suppose p kl and p k−1,l−1 are contained in a 1 . If p k−1,l and p k,l−1 are contained in neither a 1 nor its holes, then they are connected to a same pixel in the unbounded connected component of the exterior of a 1 . This means p kl is separated from p k−1,l−1 , which contradicts the assumption that a 1 is a connected region. On the other hand, if each of p k−1,l and p k,l−1 is contained in a hole of a 1 , then by Lemma 26, p k−1,l ⊆ m j and p k,l−1 ⊆ m j for some j, j with a • 1 ∩ m j = ∅ and a • 1 ∩ m j = ∅. Because p kl and p k−1,l−1 are not contained in m j and m j , we know m j and m j must meet at point P . This is impossible for maximal canonical solutions. Therefore, only one of p k,l−1 and p k−1,l is contained in a hole of a 1 .
+
+By the above lemma, there are four different types of contact points. See Fig. 3. For convenience, we denote each type as a 4-tuple of symbols taken from {h, a, x}. For the four pixels, we start from the top left corner and go clockwise. These four types are written, respectively, as (haxa), (ahax), (xaha), and (axah).  Table 3: Four types of contact points, where h, a, x denote, respectively, a pixel that is contained in a hole of a, in a, and in neither.
+
+A contact point can be removed by deleting a sub-pixel from the a-pixel which follows the h-pixel according to the sequence of the type of the contact point. Once all contact points are removed from each a i , the remaining holes are quite easy to cope with. Theorem 7. Let N = {v i δ ij v j } n i,j=1 be a network of basic CDC constraints. If N is consistent, then it has a solution a = {a i } n i=1 such that each a i is a simple region.
+
+Proof. Suppose a = {a i } n i=1 is the maximal canonical solution of N . Then each a i is a connected digital region, which may have holes. We assert that, for each i, there exists a simple region a i such that a i ⊆ a i and M(a i ) = M(a i ), and dir(a i , a j ) = dir(a i , a j ) and dir(a j , a i ) = dir(a j , a i ) for any j = i.
+
+To prove this statement, we first subdivide each pixel into 25 equal sub-pixels (see Fig. 21).
+
+
+Figure 21: Subdivision of a pixel into 25 sub-pixels
+
+For a contact point P = (k, l) of a i , without loss of generality, assume P has type (haxa). Removing the 1/25 sub-pixel which contains P from a i , we obtain (after necessary regularization 1 ) a new region (see Fig.22). This procedure can be applied to all contact points of a i at the same time. Write a * i for the resulted region. Since each pixel p of a i has at most four contact points, the revised region a * i contains at least 21 of the 25 sub-pixels of p. This implies that a * i ⊆ a i and M(a * i ) = M(a i ). It is routine to check that a * i is still connected but has fewer contact points as well as fewer holes. By Lemma 27 we know dir(a * i , a j ) = dir(a i , a j ) and dir(a j , a * i ) = dir(a j , a i ) for any j = i. Now, we have removed all contact points of a i . This means, any two holes of a * i are disjoint, and each hole of a * i is disjoint from the closure of the unbounded component of the exterior of a * i . For each hole h of a * i , select a pixel p(h) in h which has the highest y-index but whose left 4-neighbor is out of h. We cut a slot from a * i to connect the hole h with the exterior of a * i . For a pixel p above p(h), if p and all pixels between p and p(h) are contained in a * i , then delete the middle column of sub-pixels from p (see Fig. 19). After necessary regularization, we obtain another connected region which has fewer holes than a * i . Applying this operation to holes of a * i one by one, we obtain a connected region a i , which has no holes. That is, a i is a simple region. By Lemma 27, we know dir(a i , a j ) = dir(a i , a j ) and dir(a j , a i ) = dir(a j , a i ) for any j = i.
+
+We claim {a i } n i=1 is a solution of N which consists of simple regions. For any i = j, because M(a j ) = M(a j ) and dir(a i , a j ) = dir(a i , a j ), we know dir(a i , a j ) = dir(a i , a j ). The conclusion holds already.
+
+As a conclusion, we know the satisfaction problem over CDC s can be decided in the same way as that over CDC.
+
+Theorem 8. The consistency of a network of basic CDC s constraints can be determined in cubic time.
+
+
+Conclusion
+
+This paper provided a cubic algorithm for checking consistency of basic CDC networks, which was earlier observed as impossible [23] for connected regions. If a basic CDC network is consistent, our algorithm also generates the maximal canonical solution. This general algorithm was then applied to solve two subproblems: the pairwise consistency problem and the weak composition problem. Through careful examination, we showed that the cardinal direction relation model used in [3] is not coherent, and showed by examples that the weak composition algorithm obtained in [32] is not always correct.
+
+Although devised to solve cardinal directional constraints between connected regions, our main algorithm can also be adapted to cope with cardinal directional constraints between possibly disconnected regions as well as those between simple regions. For a basic network of CDC d constraints, our algorithm determines in cubic time if it is consistent. Compared with the O(n 5 ) algorithm reported in [33], our algorithm is more efficient. As for cardinal direction constraints over simple regions, we proved that a basic CDC network has a solution using only simple regions if it is consistent. This suggests that CDC does not distinguish between simply connectedness and connectedness.
+
+Most potential applications of qualitative spatial reasoning require multiple aspects of space. Combining spatial constraints of different calculi is a very important problem in the research of qualitative spatial reasoning. Some work has been done in this direction (see e.g. [9,16,22]). In particular, [22] points out that reasoning with basic RCC8 and basic RA constraints is in P, but reasoning with basic RCC8 and basic CDC d constraints is NP-Complete. Note that in RCC8, RA and CDC d , spatial variables are interpreted over possibly disconnected regions. It is still open if the above results for possibly disconnected regions still hold for connected regions. In particular, we do not know if reasoning with basic RCC8 and basic CDC constraints is still decidable if spatial variables are interpreted over connected regions. It is worth noting that connectedness is a tough requirement as far as topological relations are concerned. Although path-consistency suffices to determine if a basic RCC8 network is consistent, it was recently proved that deciding if a basic RCC8 network has a solution using connected regions is NP-Complete [30].
+
+Case 5. If u − k = w and u + i = w, the ordering of v − i , v + i , v − k , v + k is the same as that of So {J i } n i=1 is also a solution to N . Note that either Case 2 or Case 3 is true, because w is a meet point. Moreover, w is not a meet point in the new solution anymore since all 'meets' instances at this point has been changed to 'before' instance. Therefore, {J i } n i=1 has fewer meet points than {I i } n i=1 . By the induction hypothesis, we know N has a solution. This ends the proof.
+
+
+−α = {(x, y) ∈ D × D : (x, y) ∈ α} α ∩ β = {(x, y) ∈ D × D : (x, y) ∈ α and (x, y) ∈ β} α ∪ β = {(x, y) ∈ D × D : (x, y) ∈ α or (x, y) ∈ β}.We write Rel(D) for the set of binary relations on D. Clearly, the 6-tuple(Rel(D); −, ∩, ∪, ∅, D × D) is a Boolean algebra, where ∅ and D × D are, respectively, the empty relation and the universal relation on D. A finite set B of nonempty relations on D is jointly exhaustive and pairwise disjoint (JEPD) if any two entities in D are related by one and only one relation in B. We write B for the subalgebra of Rel(D) generated by B, i.e. the smallest subalgebra of the Boolean algebra Rel(D) which contains B. Clearly, relations in B are atoms in the Boolean algebra B . We call B a qualitative calculus on D, and call relations in B basic relations of the calculus. A similar definition was given by Ligozat and Renz
+
+Figure 1 :
+1Illustration of Rectangle Relation
+
+Figure 2 :
+2A bounded connected region b and its 9-tiles
+
+Proposition 2 .Figure 3 :
+23[10] A 3 × 3 Boolean matrix is a direction relation matrix if and only if it is nonzero and 4-connected. Goyal and Egenhofer identified all together 218 valid matrices. For a pair of bounded connected region a, b, it is clear that (a, b) determines a unique direction relation matrix, viz. dir(a, b). Write B dir for the set of cardinal directions represented by these matrices. This means, B dir is a JEPD set of relations. Cardinal Direction Calculus (CDC) is defined to be the qualitative calculus generated by B dir over the set of bounded connected regions. dir(b, a) = dir(b, Illustrations of basic CDC relations
+
+Definition 6
+6(direction relation vector). Suppose I = [x − , x + ] and J = [y − , y + ] are two intervals. Interval J partitions the real line into three parts L 1 = (−∞, y − ], L 2 = (y − , y + ), and L 3 = [y + , +∞). The direction of I to J is encoded in a Boolean vector dir(I, J) = (d 1 , d 2 , d 3 ), where d i = 0 if and only if (x − , x + ) ∩ L i = ∅. In this case, we call (d 1 , d 2 , d 3 ) a direction relation vector.
+
+
+Clearly, a Boolean vector t = (t 1 , t 2 , t 3 ) is a direction relation vector if and only if there exist two intervals I, J such that t = dir(I, J). The following lemma gives a characterization of direction relation vectors.
+
+Lemma 3 .
+3A Boolean vector t = (t 1 , t 2 , t 3 ) is a direction relation vector if and only if t = (0, 0, 0) and t = (1, 0, 1).
+
+Lemma 4 .
+4For two intervals I, J, suppose t = (t 1 , t 2 , t 3 ) is the direction relation vector of I to J. Then we have • t = (1, 0, 0) iff IpJ or ImJ;
+
+
+Proof. Take t = (1, 0, 0) as example. For two intervals I = [x − , x + ] and J = [y − , y + ], dir(I, J) = (1, 0, 0) if and only if x − < y − , (x − , x + ) ∩ (y − , y + ) = ∅, and x + < y + hold. This is equivalent to saying that x + ≤ y − , which is possible if and only if IpJ or ImJ.
+
+Lemma 5 .
+5For a pair of direction relation vectors (s, t) and two intervals I, J, we have s = dir(I, J) and t = dir(J, I) if and only if (I, J) is an instance of one basic IA relation in the cell specified by (s, t) in
+
+Lemma 6 .
+6Suppose δ = [d ij ] 3 i,j=1 is a basic CDC relation. Then the x-projective interval relation ι x (δ) is the IA relation associated to the vector (d 1 , d 2 , d 3 ), i.e. (I, J) ∈ ι x (δ) iff dir(I, J) = (d 1 , d 2 , d 3 ), where d j is 0 if Σ 3 i=1 d ij = 0 and 1 otherwise.Proof. See Appendix A.
+
+Figure 4 :
+4A basic CDC network and its associated basic RA network
+
+
+By the definition of δ 51 , we further conclude that M(b 1 ) contains the lower left corner of M(b 5 ). Similarly, M(b 4 ) contains the lower right corner of M(
+
+Figure 5 : 2 Figure 6 :Figure 7 :Figure 8 :
+52678A solution to the subnetwork over {v 1 , v 2 , v 3 , v 4 } of N in Example Solutions to other subnetworks of N in Example exam:path-consistencyNOTcons which involve four variables A configuration of k squares Illustration of regularization Extending edges of each rectangle m i until meeting the boundary of S(a), we partition S(a) into small cells. Suppose
+
+
+frame of a, and call C(a) the cell set of a, and call a r = {a r i } n i=1 the regularization of a, where S(a), C(a), and a r i are defined in Equations 17,21,22, respectively.
+
+Lemma 10 .
+10For a set of connected regions a = {a i } n i=1 , we have a i ⊆ a r i for each i, and S(a) = S(a r ) and C(a) = C(a r ), where a r = {a r i } n i=1 is the regularization of a.Proof. Straightforward.Example 1 (continued)For the constraint network specified inFig. 4, Fig. 8illustrates how to transform a solution {a 1 , a 2 , a 3 } (leftmost ofFig. 8) to a regular solution {a r 1 , a r 2 , a r 3 } (rightmost ofFig. 8). The frame and cell set are also illustrated.
+
+Figure 9 :
+9Illustration of meet-freeing
+
+Figure 10 :
+10A pixel and a digital region a As in the paragraph immediately above Lemma 11, we write
+
+Figure 11 :
+11Transform a regular solution into a digital one to the basic IA network
+
+
+a consistent basic CDC network N , suppose a = {a i } n i=1 is a canonical solution of N . By Lemma 14 and the definition of canonical solution, we know {I x (a i )} n i=1 and {I y (a i )} n i=1 are the canonical interval solutions of, respectively, N x and N y . Set I i = I x (a i ), J i = I y (a i ), and m i = I i × J i for each i. Because of the constraints in N , not all pixels in m i can appear in a i . Note a basic CDC relation δ = [d st ] 3 s,t=1 can be rewritten as a 9-tuple δ =
+
+Lemma 16 .
+16Let a and b be two connected digital regions. If a • ∩ b • = ∅, then M(a) = M(b). Proof. Without loss of generality, suppose M(a) = [0, n 1 ] × [0, n 2 ], where n 1 , n 2 are positive integers. Suppose a • ∩ b • = ∅ and M(a) = M(b). Since M(a) = [0, n 1 ]×[0, n 2 ]
+
+
+j=1 is a consistent basic CDC network. Then each b i has a unique connected component c i such that M(c i ) = M(b i ) = m i . Proof. Suppose {a i } n i=1 is a canonical solution. We have a i is connected and M(a i ) = m i . By Lemma 15, we know a i ⊆ b i . Let c i be the unique component of b i which contains a i . Then by m i = M(a i ) ⊆ M(c i ) ⊆ M(b i ) = m i we know M(c i ) = m i . Moreover, {c i } n i=1 is also a solution of N . Lemma 18. Let c i be the unique connected component of
+
+
+j=1 is a consistent basic CDC network. Let c i be the unique connected component of b i of Eq. 25 such that M(c i ) = m i . Then c = {c i } n i=1 is the maximal canonical solution of N . It is worth stressing that each m i , b i , c i are independent of the choice of canonical solution a. They only depend on the specific constraint network N .
+
+Figure 12 :
+12Canonical interval solutions and maximal canonical solution
+
+Figure 13 :
+13For any basic CDC constraints {x 1 δ 12 x 2 , x 2 δ 21 x 1 }, the x-and y-projective IA relations ρ x 12 and ρ y 12 (Eq.s 11 and 12) can be computed in constant time. So the Flowchart of the main algorithm projective IA networks N x and N y can be constructed in O(n 2 ) time. If N x or N y is inconsistent, which can be checked in cubic time, then N is inconsistent.
+
+
+j is empty for any j, φ with d φ ij = 0. Note that each b i can be computed in O(n 2 ) time from D i . To compute D i , an intuitive method is checking for each pixel p in m i , and each tile m φ j of any reference object m j , whether p is in m φ j . Note that there are at most O(n 2 ) pixels contained in m i and at most O(n) different m φ j . This requires cubic time for a fixed i, and hence O(n 4 ) time in total. Later, we will show this can be improved to O(n 3 ).
+
+Step 4 .
+4Connected ComponentsWe further compute connected components of b i for each i. Note that b i has at most one component whose mbr ism i (Lemma 16). If no such component exists for some i, then N is inconsistent. Otherwise, set c i for the connected component of b i such that M(c i ) = m i . Applying a general Breadth-First Search algorithm, we can find all connected components of b i and determine if their mbrs are m i in O(n 2 ) time. So, this step need only O(n 3 ) time.
+
+
+j is nonempty, we need show there is a pixel p which is contained in both m i ∩ m φ j and c i . We need not check this for all pixels in m i ∩ m φ j . Instead, we need only check whether p kl ⊆ c i for all boundary pixels p kl of m i ∩ m φ j with (k, l) ∈ H 1 ∪ H 2 , where
+
+H 1 =
+1{(k, l) : k ∈ {x − , x + − 1} and y − ≤ l < y + },
+
+H 2 =
+2{(k, l) : x − ≤ k < x + and l ∈ {y − , y + − 1}}.We justify the above statement as follows. If m i ∩m φ j = m i , then by M(c i ) = m i we know there exists a boundary pixel which is contained in c i . Otherwise,m i ∩ m φ j is a rectangle strictly contained in m i , which means c i contains a pixel p out of in m i ∩ m φ j .If c i contains no boundary pixel of m i ∩ m φ j , then, because it is connected, c i contains no pixel of m i ∩ m φ j at all. Since H 1 ∪ H 2 contains O(n) pixels and checking if a pixel is contained in c i needs constant time, dir(c i , c j ) = δ ij can be checked in O(n) time.In conclusion, we can determine in cubic time whether {c i } n i=1 is a solution of N . Now, since only Step 3 needs at most O(n 4 ) time, the algorithm determines the consistency of a basic CDC network in O(n 4 ) time.
+
+Example 3 .
+3The left of Fig. 14 illustrates a digital region a contained in T = [0, 4] × [0, 4], and the right of Fig. 14 shows the Boolean matrix B(a) that represents a.
+
+Figure 14 :
+14A digital region a and the Boolean matrix B(a) It is worthy noting that we adopt a different way to address the elements of B(a). For example, the lower left corner of B(a) in Fig. 14 is addressed as the (0,0)-element, i.e. B(a)[0, 0], instead of the (5,1)-element.
+
+
+In our running example, for m 1 , there are four different m φ j such that B φ j is not the zero matrix and d φ 1j = 0, viz. m 5 2 = m 2 ,
+
+
+. 32, we know P 1 [k, l] = min{B 1 [k, l], Q 1 [k, l]}. Therefore,
+
+Example 4 .
+4Take a as the square [−1, 1] × [−1, 1], and take a as the unit disk centered at (0, 0). Then M(a ) = M(a) =a, but dir(a, a) = dir(a , a )if we take the closure-based definition. the interior-based definition is also consistent with the one adopted in[32,33].
+
+Example 5 .
+5For basic relations α, β, γ in Eq.
+
+Figure 15 :
+15Illustrations of evidences of weak compositions α • w β (left), α 1 • w β (middle), α 2 • w β (right)
+
+Example 6 .
+6For basic relations α , β , γ as in Eq.
+
+Figure 16 :
+16Illustrations of evidences of weak compositions α s • w β (s = 1, · · · , 5)
+
+
+c} is a solution to Γ . We construct the frame S(a) and the cell set C(a) of a (see Dfn. 9). Since (b, c) is an instance of β , weknow (M(b), M(c)) is an instance of ι x (β ) ⊗ ι y (β ) = (o ∪ fi) ⊗ (o ∪ fi), i.e.(M(b), M(c)) is an instance of one of the four basic RA relations o ⊗ o, fi ⊗ o, o ⊗ fi, fi ⊗ fi. Take o ⊗ o as example. By α [2, 2] = α [1, 3] = α [2, 3] = α [3, 3] = 0, we know a • ∩ b ij = ∅ for (ij) = (22), (13), (23), (33). Similarly, by γ [2, 1] = γ [1, 3] = γ [2, 3] = γ [3, 3] = 0, we know a • ∩ c ij = ∅ for (ij) = (21), (13), (23),
+
+Figure 17 :
+17Illustration of Lemma 24
+
+For
+two (possibly disconnected) regions a, b, similar to Dfn. 4, we write dir(a, b) = [d ij ] 3 i,j=1 for the direction relation matrix of a to b, where d ij is 1 if a • ∩b ij = ∅, and 0 otherwise. A 3 × 3 Boolean matrix M is valid if there exist two region a, b such that M
+
+
+M (b)[k, l] is the number of pixels of b which are also contained in the rectangle [0, k+1]×[0, l+1]. Given the Boolean matrix B(b), M (b) can be computed in O(n 2 ) time by iteratively adding the k-th column to the (k + 1)-th, and then iteratively adding the p-th row to the (p + 1)-th. Lemma 25. Given a rectangle r = [x − , x + ] × [y − , y] and a digital region b, both contained in T = [0, n x ] × [0, n y ], b contains a pixel in r if and only if
+
+
+M (r)[−1, l] = M (r)[k, −1] = 0. Proof. Because M (b)[k, l] denotes the number of pixels in b which are also contained in [0, k + 1] × [0, l + 1], the number of pixels in b which are contained in the rectangle [
+
+
+By the above lemma, we know b i ∩ m φ j contains a pixel if and only if Eq. 48 holds, which can be checked in constant time. So, given M (b i ), the constraint δ ij can be checked in constant time. Computing all M (b i ) needs O(n 3 ) time. Since there are n 2 constraints in total, Step 5, and thereby the who algorithm, can be finished in O(n 3 ) time.
+
+Figure 19 :Figure 20 :
+1920Transform a connected digital region without contact points into a simple region Transform a connected digital region with one contact points into a simple region
+
+Lemma 27 .
+27For two digital regions a, b, if a ⊆ a and b ⊆ b satisfy Eq. 50 and, respectively, Eq. 51, then dir(a, b) = dir(a , b ). M(a) = M(a ) and for all pixels p, p ⊆ a implies (a ) • ∩ p = ∅ (50) M(b) = M(b ) and for all pixels p, p ⊆
+
+Figure 22 :
+22Remove a type (haxa)-contact point
+
+Table 1 :
+1Basic IA relations and their converse, where x = [x − , x + ], y = [y − , y + ] are two intervals.
+
+Table 2 :
+2Pairs of vector IA relations.
+Note here by regularization we mean the topological regularization of a set a, which is defined as a • .
+AcknowledgementsThis work was partially supported by NSFC (60673105, 60736011, 60621062), and a 973 Program (2007CB311003). The work of Sanjiang Li was also partially supported by a Microsoft Research Professorship.Proof. We need to prove two things. First, suppose (a, b) ∈ δ. We need show v(I x (a), I x (b)), the direction relation vector of (I x (a),. We need show there exist two connected regions a, b such that (a, b) ∈ δ and I 1 = I x (a),The first part can be proved as follows. Seti.e. δ i3 = 0, for i = 1, 2, 3. Therefore, the vector (d 1 , d 2 , d 3 ) as defined here is the direction relation vector of (I x (a), I x (b)). In other words, (I x (a), I x (b)) is an instance of ι x (δ).To prove the second part, we note that δ as a direction relation matrix is 4-connected (see Prop. 2). The proof is by construction. TakeThen we have u < s < v ≤ t. There are two subcases.If v < t, put I 1 and I 2 on the x-axis of the orthogonal basis of the plane. Set a, b to be the polygons inFig. 23 (left). It is clear (a, b)∈ δ hold. The case of v = t is similar and illustrated inFig. 23 (right). The same method applies to all the other basic CDC relations.Appendix B: Proof of Lemma 9Proof. We first observe that N is a refinement of N . Therefore, if N is consistent, so is N . On the other hand, supposeWe use induction on the number K of meet points. If there is no meet point,is also a solution to N . Suppose the result holds for K = m. We show this also holds for K = m + 1. Suppose w = u − i0 is the largest meet point. We define a newto N which has fewer meet points. Setwhere ε is the smallest distance between different points in M . We next show each pair (J i , J k ) is also an instance of ι ik . To this end, we need only consider the case when either J i = I i or J k = I k . Note that J i = I i if and only if u − i = w. This means we need only consider the cases whenThis means I k mI i and J k pJ i . Case 3. If u − k = w and u + i = w, then, similar to Case 2, we have I i mI k and J i pJ k . Case 4. If u − i = w and u + k = w, the ordering of v − i , v + i , v − k , v + k is the same as that of u − i , u + i , u − k , u + k .
+Maintaining knowledge about temporal intervals. J F Allen, Communications of the ACM. 2611J.F. Allen. Maintaining knowledge about temporal intervals. Communica- tions of the ACM, 26(11):832-843, 1983.
+
+A new tractable subclass of the rectangle algebra. P Balbiani, J.-F Condotta, L Fariñas Del Cerro, Proceedings of the 16th International Joint Conference on Artificial Intelligence (IJCAI-99). the 16th International Joint Conference on Artificial Intelligence (IJCAI-99)P. Balbiani, J.-F. Condotta, and L. Fariñas del Cerro. A new tractable sub- class of the rectangle algebra. In Proceedings of the 16th International Joint Conference on Artificial Intelligence (IJCAI-99), pages 442-447, 1999.
+
+Cardinal directions between spatial objects: the pairwise-consistency problem. S Cicerone, P Di Felice, Information Sciences. 1641-4S. Cicerone and P. di Felice. Cardinal directions between spatial objects: the pairwise-consistency problem. Information Sciences, 164(1-4):165-188, 2004.
+
+Qualitative spatial reasoning. A G Cohn, J Renz, Handbook of Knowledge Representation. F. van Harmelen, V. Lifschitz, and B. PorterElsevierA.G. Cohn and J. Renz. Qualitative spatial reasoning. In F. van Harmelen, V. Lifschitz, and B. Porter, editors, Handbook of Knowledge Representation. Elsevier, 2007.
+
+A relation-algebraic approach to the region connection calculus. I Düntsch, H Wang, S Mccloskey, Theoretical Computer Science. 2551-2I. Düntsch, H. Wang, and S. McCloskey. A relation-algebraic approach to the region connection calculus. Theoretical Computer Science, 255(1-2):63- 83, 2001.
+
+Reasoning about binary topological relations. M J Egenhofer, Proceedings of the 2nd International Symposium on Advances in Spatial Databases (SSD'91). the 2nd International Symposium on Advances in Spatial Databases (SSD'91)London, UKSpringer-VerlagM.J. Egenhofer. Reasoning about binary topological relations. In Proceed- ings of the 2nd International Symposium on Advances in Spatial Databases (SSD'91), pages 143-160. Springer-Verlag London, UK, 1991.
+
+Qualitative spatial reasoning with cardinal directions. A U Frank, OGAI. A.U. Frank. Qualitative spatial reasoning with cardinal directions. In OGAI, pages 157-167, 1991.
+
+Using orientation information for qualitative spatial reasoning. Christian Freksa, Spatio-Temporal Reasoning. 639Christian Freksa. Using orientation information for qualitative spatial rea- soning. In Spatio-Temporal Reasoning, LNCS 639, pages 162-178, 1992.
+
+Combining topological and size information for spatial reasoning. A Gerevini, J Renz, Artificial Intelligence. 1371A. Gerevini and J. Renz. Combining topological and size information for spatial reasoning. Artificial Intelligence, 137(1):1-42, 2002.
+
+Similarity assessment for cardinal directions between extended spatial objects. R K Goyal, The University of MainePhD thesisR.K. Goyal. Similarity assessment for cardinal directions between extended spatial objects. PhD thesis, The University of Maine, 2000.
+
+The direction-relation matrix: A representation of direction relations for extended spatial objects. R K Goyal, M J Egenhofer, UCGIS Annual Assembly and Summer Retreat. R.K. Goyal and M.J. Egenhofer. The direction-relation matrix: A repre- sentation of direction relations for extended spatial objects. UCGIS Annual Assembly and Summer Retreat, Bar Harbor, ME, 1997.
+
+Similarity of cardinal directions. R K Goyal, M J Egenhofer, Proceedings of the 7th International Symposium on Advances in Spatial and Temporal Databases (SSTD 2001). the 7th International Symposium on Advances in Spatial and Temporal Databases (SSTD 2001)R.K. Goyal and M.J. Egenhofer. Similarity of cardinal directions. In Pro- ceedings of the 7th International Symposium on Advances in Spatial and Temporal Databases (SSTD 2001), pages 36-58, 2001.
+
+Spatial reasoning based on allen's temporal logic. H W Guesgen, International Computer Science InstituteTechnical reportH.W. Guesgen. Spatial reasoning based on allen's temporal logic. Technical report, International Computer Science Institute, 1989.
+
+Image database design based on 9D-SPA representation for spatial relations. P W Huang, C H Lee, IEEE Transactions on Knowledge and Data Engineering. 1612P.W. Huang and C.H. Lee. Image database design based on 9D-SPA repre- sentation for spatial relations. IEEE Transactions on Knowledge and Data Engineering, 16(12):1486-1496, 2004.
+
+Reasoning about temporal relations: The tractable subalgebras of Allens interval algebra. A Krokhin, P Jeavons, P Jonsson, Journal of the ACM. 505A. Krokhin, P. Jeavons, and P. Jonsson. Reasoning about temporal rela- tions: The tractable subalgebras of Allens interval algebra. Journal of the ACM, 50(5):591-640, 2003.
+
+Combining topological and directional information for spatial reasoning. S Li, Proceedings of the 20th International Joint Conference on Artificial Intelligence (IJCAI-07). the 20th International Joint Conference on Artificial Intelligence (IJCAI-07)S. Li. Combining topological and directional information for spatial reason- ing. In Proceedings of the 20th International Joint Conference on Artificial Intelligence (IJCAI-07), pages 435-440, 2007.
+
+RCC8 binary constraint network can be consistently extended. S Li, H Wang, Artificial Intelligence. 1701S. Li and H. Wang. RCC8 binary constraint network can be consistently extended. Artificial Intelligence, 170(1):1-18, 2006.
+
+Region connection calculus: its models and composition table. S Li, M Ying, Artificial Intelligence. 1451-2S. Li and M. Ying. Region connection calculus: its models and composition table. Artificial Intelligence, 145(1-2):121-146, 2003.
+
+Generalized region connection calculus. S Li, M Ying, Artificial Intelligence. 1601-2S. Li and M. Ying. Generalized region connection calculus. Artificial In- telligence, 160(1-2):1-34, 2004.
+
+Reasoning about cardinal directions. G Ligozat, Journal of Visual Languages and Computing. 91G. Ligozat. Reasoning about cardinal directions. Journal of Visual Lan- guages and Computing, 9(1):23-44, 1998.
+
+What is a qualitative calculus? A general framework. G Ligozat, J Renz, Proceedings of the 8th Pacific Rim Trends in Artificial Intelligence (PRICAI-04). C. Zhang, H. Guesgen, and W.-K. Yeapthe 8th Pacific Rim Trends in Artificial Intelligence (PRICAI-04)SpringerG. Ligozat and J. Renz. What is a qualitative calculus? A general frame- work. In C. Zhang, H. Guesgen, and W.-K. Yeap, editors, Proceedings of the 8th Pacific Rim Trends in Artificial Intelligence (PRICAI-04), pages 53-64. Springer, 2004.
+
+Combining RCC-8 with qualitative direction calculi: Algorithms and complexity. W Liu, S Li, J Renz, Proceedings of the 21th International Joint Conference on Artificial Intelligence (IJCAI-09. the 21th International Joint Conference on Artificial Intelligence (IJCAI-09AAAIW. Liu, S. Li, and J. Renz. Combining RCC-8 with qualitative direction calculi: Algorithms and complexity. In Proceedings of the 21th International Joint Conference on Artificial Intelligence (IJCAI-09). AAAI, 2009.
+
+Consistency checking of basic cardinal constraints over connected regions. I Navarrete, A Morales, G Sciavicco, Proceedings of the 20th International Joint Conference on Artificial Intelligence (IJCAI-07). the 20th International Joint Conference on Artificial Intelligence (IJCAI-07)I. Navarrete, A. Morales, and G. Sciavicco. Consistency checking of basic cardinal constraints over connected regions. In Proceedings of the 20th International Joint Conference on Artificial Intelligence (IJCAI-07), pages 495-500, 2007.
+
+Computational properties of qualitative spatial reasoning: First results. B Nebel, KI-95: Advances in Artificial Intelligence, Proceedings of the 19th Annual German Conference on Artificial Intelligence. Berlin, GermanySpringer-VerlagB. Nebel. Computational properties of qualitative spatial reasoning: First results. In KI-95: Advances in Artificial Intelligence, Proceedings of the 19th Annual German Conference on Artificial Intelligence, pages 233-244, Berlin, Germany, 1995. Springer-Verlag.
+
+Reasoning about temporal relations: A maximal tractable subclass of Allen's interval algebra. B Nebel, H.-J Bürckert, Journal of the ACM. 421B. Nebel and H.-J. Bürckert. Reasoning about temporal relations: A max- imal tractable subclass of Allen's interval algebra. Journal of the ACM, 42(1):43-66, 1995.
+
+A spatial logic based on regions and connection. D A Randell, Z Cui, A G Cohn, Proceedings of the 3rd International Conference on Knowledge Representation and Reasoning (KR-92). the 3rd International Conference on Knowledge Representation and Reasoning (KR-92)D.A. Randell, Z. Cui, and A.G. Cohn. A spatial logic based on regions and connection. In Proceedings of the 3rd International Conference on Knowledge Representation and Reasoning (KR-92), pages 165-176, 1992.
+
+Maximal tractable fragments of the Region Connection Calculus: A complete analysis. J Renz, Proceedings of the Sixteenth International Joint Conference on Artificial Intelligence (IJCAI-99). D. Deanthe Sixteenth International Joint Conference on Artificial Intelligence (IJCAI-99)Morgan KaufmannJ. Renz. Maximal tractable fragments of the Region Connection Calculus: A complete analysis. In D. Dean, editor, Proceedings of the Sixteenth In- ternational Joint Conference on Artificial Intelligence (IJCAI-99), pages 448-454. Morgan Kaufmann, 1999.
+
+Weak composition for qualitative spatial and temporal reasoning. J Renz, G Ligozat, Lecture Notes in Computer Science. 3709J. Renz and G. Ligozat. Weak composition for qualitative spatial and temporal reasoning. Lecture Notes in Computer Science, 3709:534-548, 2005.
+
+On the complexity of qualitative spatial reasoning: A maximal tractable fragment of the Region Connection Calculus. J Renz, B Nebel, Artificial Intelligence. 108J. Renz and B. Nebel. On the complexity of qualitative spatial reasoning: A maximal tractable fragment of the Region Connection Calculus. Artificial Intelligence, 108:69-123, 1999.
+
+Recognizing string graphs in NP. M Schaefer, E Sedgwick, D Štefankovič, Journal of Computer and System Sciences. 672M. Schaefer, E. Sedgwick, and D.Štefankovič. Recognizing string graphs in NP. Journal of Computer and System Sciences, 67(2):365-380, 2003.
+
+Computing and managing cardinal direction relations. S Skiadopoulos, C Giannoukos, N Sarkas, P Vassiliadis, T Sellis, M Koubarakis, IEEE Transactions on Knowledge and Data Engineering. 1712S. Skiadopoulos, C. Giannoukos, N. Sarkas, P. Vassiliadis, T. Sellis, and M. Koubarakis. Computing and managing cardinal direction relations. IEEE Transactions on Knowledge and Data Engineering, 17(12):1610- 1623, 2005.
+
+Composing cardinal direction relations. S Skiadopoulos, M Koubarakis, Artificial Intelligence. 1522S. Skiadopoulos and M. Koubarakis. Composing cardinal direction rela- tions. Artificial Intelligence, 152(2):143-171, 2004.
+
+On the consistency of cardinal direction constraints. S Skiadopoulos, M Koubarakis, Artificial Intelligence. 1631S. Skiadopoulos and M. Koubarakis. On the consistency of cardinal direc- tion constraints. Artificial Intelligence, 163(1):91-135, 2005.
+
+Boolean connection algebras: a new approach to the Region-Connection Calculus. J G Stell, Artificial Intelligence. 1221J.G. Stell. Boolean connection algebras: a new approach to the Region- Connection Calculus. Artificial Intelligence, 122(1):111-136, 2000.
+
+On the calculus of relations. A Tarski, Journal Symbolic Logic. 6A. Tarski. On the calculus of relations. Journal Symbolic Logic, 6:73-89, 1941.
+
+Spatial reasoning in RCC-8 with Boolean region terms. F Wolter, M Zakharyaschev, Proceedings of the 14th European Conference on Artificial Intelligence (ECAI 2000). the 14th European Conference on Artificial Intelligence (ECAI 2000)F. Wolter and M. Zakharyaschev. Spatial reasoning in RCC-8 with Boolean region terms. In Proceedings of the 14th European Conference on Artificial Intelligence (ECAI 2000), pages 244-250, 2000.
+
+Spatio-temporal representation and reasoning based on RCC-8. F Wolter, M Zakharyaschev, Proceedings of the 7th Conference on Principles of Knowledge Representation and Reasoning. the 7th Conference on Principles of Knowledge Representation and ReasoningF. Wolter and M. Zakharyaschev. Spatio-temporal representation and rea- soning based on RCC-8. In Proceedings of the 7th Conference on Principles of Knowledge Representation and Reasoning (KR 2000), pages 3-14, 2000.

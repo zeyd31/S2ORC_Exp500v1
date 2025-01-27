@@ -1,0 +1,542 @@
+
+K-STABILITY OF CUBIC THREEFOLDS
+13 Sep 2017
+
+Yuchen Liu 
+Chenyang Xu 
+K-STABILITY OF CUBIC THREEFOLDS
+13 Sep 2017
+We prove the K-moduli space of cubic threefolds is identical to their GIT moduli. More precisely, the K-(semi,poly)-stability of cubic threefolds coincide to the corresponding GIT stabilities, which could be explicitly calculated. In particular, this implies that all smooth cubic threefolds admit Kähler-Einstein metric as well as provides a precise list of singular KE ones. To achieve this, the main new ingredient is an estimate in dimension three of the normalized volumes of kawamata log terminal singularities introduced by Chi Li.
+
+Introduction
+
+After the celebrated work of [CDS15] and [Tia15], we know that a Fano manifold has a Kähler-Einstein (KE) metric if and only if it is K-polystable. Then the main question left for the existence of KE metric on a Fano manifold is how to check its K-polystability. A classical strategy first appeared in [Tia90] was using deformation in the parametrizing space, so that from one Fano manifold X known to have KE metric, we can use continuity method to study other Fano manifolds which can deform to X. This idea is successfully used to find out all smooth del Pezzo surfaces with KE metric in [Tia90] and then extended to all (not necessarily smooth) limits of quartic del Pezzo surfaces in [MM93] which also gives an explicit construction of the compact moduli space. Later with a more focus on the stability study, the work of [MM93] was further extended to limits of all smooth KE surfaces in [OSS16].
+
+The strategy can be summarized by two steps: in the first step, we need to give a good control of all the possible local singularities appeared on the limit by bounding their local volume; then in the second step, we show such limit can all be embedded in an explicit ambient space, and this often leads to an explicit characterization by more standard method, e.g. geometric invariant theory (GIT).
+
+After the case of surface is completely settled, it is natural to apply this strategy to higher dimensional examples. Built on the results in [CDS15,Tia15], in [LWX14] (see also [Oda15,SSY16]) we construct an algebraic scheme M which is a good quotient moduli space with closed points parametrizing all smoothable K-polystable Q-Fano varieties X. However, the construction is essentially theoretical and can not lead to an effective calculation. One sticky point is that although X is often explicitly given, the limits from the continuity method may be embedded in a much larger ambient space, which we do not have a direct control of it.
+
+On the other hand, there is an indirect way to study the limit. In fact, using a completely algebraic approach and built on the global work of [Fuj15] and the local study of [Li15a], in [Liu16] an inequality vol(x, X) · n + 1 n n ≥ (−K X ) n between the global volume of an n-dimensional K-semistable Fano variety X and the local volume of each singularity x ∈ X is established. Here we note that following [Li15a], the local volume vol(x, X) of a kawamata log terminal (klt) singularity x ∈ X is defined as the minimal normalized volume vol x,X (v) for all valuations v in Val x,X . See [Li15b,LL16,LX16,Blu16] for some recent progress on this topic. Then when the volume of X is large, by a detailed analysis of volumes of singularities, we hope that the local volume bound obtained by [Liu16] is restrictive enough so that we can use it to show that all the limiting objects are only mildly singular. Once this is true, then we will have a chance to proceed as in the surface case by showing that X and its limits are contained in a (not very large) natural ambient space. This way we could obtain the needed explicit description.
+
+In this note, we carry out this strategy for cubic threefolds and prove the following theorem.
+
+Theorem 1.1. If a Fano cubic threefold X ⊂ P 4 is GIT polystable (resp. semistable), then X is K-polystable (resp. K-semistable).
+
+In particular, if we let (U ss ⊂ P 34 ) parametrize all GIT-semistable Fano cubic threefolds in P 4 , the GIT quotient morphism U ss → M GIT := defn U ss //PGL(5).
+
+explicitly yields the proper good quotient moduli space M paramerizing all K-polystable threefolds which can be smoothable to a cubic threefold.
+
+By the classification in [All03], we have a concrete description. (1) All smooth cubic threefolds are K-stable;
+
+(2) All cubic threefolds only containing isolated A k singularities (k ≤ 4) are K-stable;
+
+(3) There are two type K-polystable cubic threefolds with non-discrete automorphisms:
+F ∆ = x 0 x 1 x 2 + x 3 3 + x 3 4
+and F A,B = Ax 3 2 + x 0 x 2 3 + x 2 1 x 4 − x 0 x 2 x 4 + Bx 1 x 2 x 3 . In particular, each cubic threefold on the above list admits a KE metric.
+
+We note that combined Corollary 1.2 with [Fuj16,Corollary 1.4] which says that all smooth quartic threefolds are K-stable, we answer affirmatively the folklore conjecture that all smooth Fano hypersurfaces have KE metrics for dimension 3.
+
+As we mentioned, we need a local result which uses the volume to bound the singularities. For instance, we aim to show that all objects parametrized by M are Gorenstein.
+
+The key local result is the following. Theorem 1.3. Let x ∈ X be a three dimensional (non-smooth) klt singularity. Then (1) vol(x, X) ≤ 16 and the equality holds if and only if it is an A 1 singularity;
+
+(2) If x ∈ X is a quotient singularity by a finite group G, then vol(x, X) = 27/|G|;
+
+(3) vol(x, X) ≤ 27 r where r is the maximal order of a torsion element in the class group; (4) If x ∈ X is not a quotient singularity and there exists a nontrivial torsion class in
+
+Pic(x ∈ X), then vol(x, X) ≤ 9.
+
+Remark 1.4. While we were preparing this note, the authors of [SS17] informed us by using a more analytic approach, they did a similar analysis for n-dimensional del Pezzo manifolds of degree 4, i.e. the smooth intersections of two quadratics in P n+2 , whose existence of KE metric is established in [AGP06]. More precisely, they obtain a description of the K-moduli as a GIT quotient for the compactification of degree 4 del Pezzo manifolds. In their paper, they in fact also consider cubic hypersurfaces, and show that Theorem 1.1 is a consequence of a statement like Theorem 1.3.1 (but for an analytic definition of local volume).
+
+We note that our proof of Theorem 1.3.1 relies on a detailed study of three dimensional canonical singularities, which is a classical topic on birational geometry of threefolds. More precisely, by induction, we need to understand two cases: a Gorenstein terminal singularity and a Gorenstein canonical singularity equipped with a smooth crepant resolution with an irreducible exceptional divisor. In dimension three, the former singularity is known to be a hypersurface singularity, and the geometry of the exceptional divisor in the latter case has been classified (see [Rei94]). These facts are essential to our proof, and their generalization to higher dimension seems to be challenging to us.
+
+Another technical point in our argument we want to make is that the assumptions in Theorem 1.3.2-4 yield quasi-étale Galois coverings, i.e. Galois coverings which are ramified along loci of codimension at least 2. Therefore, a key ingredient to prove this kind of results would be a multiplication formula as stated in Conjecture 4.1. However, for now we are still lack of its proof, so we have to go through a more detailed discussion on the classification of three dimensional singularities and obtain weaker results as in Theorem 1.3.3-4.
+
+It was shown in [TX17] that the local fundamental group of a three dimensional algebraic klt singularity is finite (also see [Xu14] for a result on general dimension). Using similar arguments in proving Theorem 1.3, we give an effective upper bound on the size of the local fundamental group in terms of normalized volumes:
+
+Theorem 1.5. If x ∈ X is a three dimensional algebraic klt singularity, then |π 1 (Link(x ∈ X))| · vol(x, X) < 324.
+
+
+Notation and Conventions:
+
+We follow the standard notations as in [Laz04a,KM98,Kol13]. Any singularity (X, x) we consider in this note is the localization of a point x on an algebraic variety X (over C).
+
+Acknowledgement: The project was initiated in a discussion with Radu Laza in 2017 AIM workshop 'Stability and Moduli Spaces'. We thank Radu Laza for the inspiring conversation and the organizers for providing us the collaborating chance. We also want to thank Valery Alexeev, Harold Blum, Chi Li, János Kollár, Song Sun, Gang Tian and Ziquan Zhuang for helpful discussions and useful comments. YL was partially supported by NSF Grant DMS-1362960. CX was partially supported by The Chinese National Science Fund for Distinguished Young Scholars (11425101).
+
+
+Properties of normalized volumes
+
+2.1. Normalized volumes. Normalized volumes are first defined in [Li15a] for real valuations centered at any klt singularity (x ∈ X). More precisely, we define the normalized volume of a singularity to be vol(x, X) = defn min vol(v) for all v ∈ Val X,x , where vol(v) is defined as in [Li15a, Section 3]. We note that such a minimum (instead of only infimum) exists by the work in [Blu16].
+
+There are two other different ways to characterize this normalized volume. One is using ideals (or graded sequence of ideals). More precisely, we have the following.
+Theorem 2.1 ([Liu16], [Blu16]). Let (X, x) = (SpecR, m), then vol(x, X) = inf a : m-primary lct(a) n · mult(a) = min a• : m-primary lct(a • ) n · mult(a • ),
+where a • means a graded ideal sequence.
+
+The second approach is using birational models.
+Theorem 2.2 ([LX16]). Let (X, x) = (SpecR, m), then vol(x, X) = inf model Y vol(Y /X) = inf Kollár component S vol(ord S ).
+(For the definition of vol(Y /X), see [LX16]).
+
+
+2.2.
+
+Normalized volumes under Galois morphisms. We will study the change of the volume under a Galois quotient morphism. As we mentioned in Conjecture 4.1, we expect there is a degree formula. However, what we can prove in this section is weaker.
+
+In the below, we use the approach of ideals to treat it, as we hope it could be later generalized to positive characteristics. We can also use the approach of models to get the comparison results which we need later. See Remark 2.7.
+
+Let (x ∈ X) be an algebraic klt singularity with a Galois action by G. We define
+vol G (x, X) = defn inf v∈Val G X,x vol(v),
+where Val G X,x means the G-invariant points in Val X,x . Actually, the approach in [Blu16] should be extended into this setting to show that in the above definition, the infimum is indeed a minimum. More challengingly, by the uniqueness conjecture of the minimizer (see [Li15a, Conjecture 6.1.2]), we expect the following is true.
+Conjecture 2.3. We indeed have vol G (x, X) = vol(x, X).
+As we will see, this is equivalent to Conjecture 4.1.
+
+Throughout this section, when a finite group G acts on a Noetherian local ring (R, m), we denote by R G the subring of G-invariant elements in R. For an ideal a of R, we denote by a G := a ∩ R G . Denote by n := dim R. Proof. The first equality of lct's is an easy consequence of [KM98,5.20]. The second equality of multiplicities follows from [Mat86, Theorem 14.8].
+
+The following lemma is also true in characteristic p > 0 when the order of G is not divisible by p. A characteristic free proof will follow from Lemma 2.4 and [Sym00]. Here we present a proof that works only in characteristic zero. Proof. Let d := |G|. For any element z ∈ Jac R G · a m , we know that z is a root of the monic polynomial
+f (x) := g∈G (x − g(z)) = x d + c 1 x d−1 + c 2 x d−2 + · · · + c d .
+It is not hard to see that c i ∈ Jac i R G · (a mi ) G . Denote by b s := (a s ) G . By [Blu16, Proposition 3.4], we have
+c i ∈ Jac i R G · (a mi ) G = Jac i R G · b mi ⊂ J (m · b • ) i . Hence we know that z ∈ J (m · b • )R, which implies Jac R G · a m ⊂ J (m · b • )R. Hence mult(Jac R G · a m ) ≥ mult(J (m · b • )R) = mult(J (m · b • )R).
+Choose a positive integer l such that m l ⊂ a. It is clear that
+(Jac R G R + m ml ) · a m = Jac R G · a m .
+Hence again by Teissier's Minkowski inequality, we know that lim sup
+m→∞ 1 m n mult(J (m · b • )R) ≤ lim sup m→∞ 1 m n mult((Jac R G R + m ml ) · a m ) ≤ lim sup m→∞ 1 m n mult(Jac R G R + m ml ) 1/n + mult(a m ) 1/n n (2.1) = lim sup m→∞ mult(a m ) m n = mult(a).
+Here we use that dim R/Jac R G R ≤ n − 1.
+
+To bound the log canonical threshold, we notice the following inequality appeared in [Mus02, 3.6 and 3.7]:
+lct(b • ) m ≤ lct(J (m · b • )) ≤ lct(b • ) m − lct(b • )
+for any m > lct(b • ). In particular, we have that
+lim sup m→∞ m · lct(J (m · b • )) ≤ lim sup m→∞ m · lct(b • ) m − lct(b • ) = lct(b • ).
+Since b s R = (a s ) G R ⊂ a s , we know that
+lct(b • ) = lim s→∞ s · lct(b s ) = lim s→∞ s · lct(b s R) ≤ lim s→∞ s · lct(a s ) = lct(a).
+Combining the last two inequalities, we have
+(2.2) lim sup m→∞ m · lct(J (m · b • )) ≤ lct(a).
+Combining (2.1) and (2.2) yields lct(a) n · mult(a) ≥ lim sup
+m→∞ lct(J (m · b • )) n · mult(J (m · b • )R) = |G| · lim sup m→∞ lct(J (m · b • )) n · mult(J (m · b • )) ≥ |G| · inf b : m G -primary lct(b) n mult(b).
+Hence we prove the lemma.  In particular, if |G| ≥ 2 then vol(x, X) < vol(x,X).
+
+(3) If moreover that (X,x) is quasi-regular in the sense of [LX16], then we have
+vol(x,X) = vol G (x,X) = |G| · vol(x, X) Proof. (1) Firstly, for any G-invariant valuation v onX centered atx, we have vol(v) ≥ lct(a • (v)) n · mult(a • (v))
+by the proof of Theorem 2.1 in [Liu16]. Since a • (v) is a graded sequence of G-invariant ideals, we have
+(2.3) vol G (x,X) ≥ inf a : mx-primary G-invariant lct(X; a) n · mult(a).
+Secondly, applying Lemma 2.5 and [Liu16, Theorem 27] yields
+(2.4) inf a : mx-primary G-invariant lct(X; a) n ·mult(a) ≥ |G| inf b : mx-primary lct(X; b) n ·mult(b) = |G|· vol(x, X).
+Finally, let S be an arbitrary Kollár component on (X, x). By [LX16], π * S is also a Kollár component up to scaling, where π :X → X is the quotient map. It is clear that AX(π * S) = A X (S) and vol(π * S) = |G| · vol(S). Hence Theorem 2.2 implies
+(2.5) vol G (x,X) ≤ inf S vol(π * S) = |G| · inf S vol(S) = |G| · vol(x, X).
+The proof of (1) is finished by combining (2.3), (2.4) and (2.5).
+
+(2) Denote by (R, m) := (OX ,x , mx). By (1) it suffices to show that
+(2.6) inf b : m-primary G-invariant lct(b) n · mult(b) < [G : H] · vol H (x,X).
+By [Blu16], there exist a sequence of m H -primary ideals c m of R H and δ > 0, such that
+lct(c • ) n · mult(c • ) = inf c : m H -primary lct(c) n · mult(c) = vol H (x,X) |H| and c m ⊂ (m H ) ⌊δm⌋ for all m. Let us pick g 1 = id, g 2 , · · · , g [G:H] ∈ G such that {g i H} = G/H is the set of left cosets of H in G. Let b m := [G:H] i=1 g i (c m R). It is clear that (b • ) is a graded sequence of G-invariant m-primary ideals. Since b m ⊂ c m R, we have lct(b m ) ≤ lct(c m R) = lct(c m ) which implies lct(b • ) ≤ lct(c • ). Since ℓ(R/a ∩ b) = ℓ(R/a) + ℓ(R/b) − ℓ(R/(a + b)), by induction we have ℓ(R/b m ) = ℓ(R/ [G:H] i=1 g i (c m R)) = ℓ(R/c m R) + ℓ(R/ [G:H] i=2 g i (c m R)) − ℓ(R/(c m R + [G:H] i=2 g i (c m R))) ≤ [G:H] i=1 ℓ(R/g i (c m R)) − ℓ(R/ [G:H] i=1 g i (c m R)) = [G : H] · ℓ(R/c m R) − ℓ(R/ [G:H] i=1 g i (c m R)). Since c m ⊂ (m H ) ⌊δm⌋ , we have c m R ⊂ m ⌊δm⌋ . Thus g i (c m R) ⊂ m ⌊δm⌋ which implies [G:H] i=1 g i (c m R) ⊂ m ⌊δm⌋ . Hence we have mult(b • ) = lim sup m→∞ ℓ(R/b m ) m n /n! ≤ lim sup m→∞ [G : H] · ℓ(R/c m R) − ℓ(R/ [G:H] i=1 g i (c m R)) m n /n! ≤ [G : H] · mult(c • R) − lim m→∞ ℓ(R/m ⌊δm⌋ ) m n /n! = |G| · mult(c • ) − δ n mult(m) < |G| · mult(c • ). Therefore, lim m→∞ lct(b m ) n · mult(b m ) = lct(b • ) n · mult(b • ) < |G| · lct(c • ) n · mult(c • ) = [G : H] · vol H (x,X).
+This finishes the proof of (2.6).
+
+(3) Since (X,x) is quasi-regular, there exists a unique Kollár component S over (X,x) such that ord S minimizes vol in ValX ,x by [LX16]. It is clear that vol(g * ord S ) = vol(ord S ) for any g ∈ G, hence g * S = S since they are both Kollár components minimizing vol.
+Thus ord S ∈ Val G X,x .
+Remark 2.7. If G acts on a singularityx ∈X, we can also consider G-equivariant birational models Y →X and study the volume of the model vol(Y /X) (see [LX16,Definition 3.3]). By running equivariant minimal model program, it is not hard to follow the arguments in [LX16] verbatim to show that
+inf G−model Y vol(Y /X) = vol G (x,X).
+Then Theorem 2.6.1 can be also obtained using the comparison of volume of models under a Galois quotient morphism.
+
+
+Normalized volumes under birational morphisms.
+
+Lemma 2.8. Let φ : Y → X be a birational morphism of normal varieties. Then (1) For any closed point y ∈ Y and any valuation
+v ∈ Val Y,y , we have vol X,x (φ * v) ≤ vol Y,y (v) where x := φ(y). (2) Assume both X and Y have klt singularities. If K Y ≤ φ * K X , then vol(x, X) ≤ vol(y, Y ) for any closed point y ∈ Y where x := φ(y). Proof. (1) Denote by φ # : O X,x → O Y,y the injective local ring homomorphism induced by φ. Then it is clear that φ # (a m (φ * v)) = a m (v) ∩ φ # (O X,x ). Hence O X,x /a m (φ * v) injects into O Y,y /a m (v) under φ # , which implies ℓ(O X,x /a m (φ * v)) ≤ ℓ(O Y,y /a m (v))
+and we are done.
+
+(
+2) Since K Y ≤ φ * K X , we have A X (φ * v) ≤ A Y (v) for any (divisorial) valuation v ∈ Val Y,y . Hence (2) follows from (1).
+In the below, we aim to prove a stronger result Corollary 2.11 on the comparison of volumes under a birational morphism.
+
+Lemma 2.9. Let Y be a normal projective variety. Let L be a nef and big line bundle
+on Y . Let y ∈ C be a closed point where C is a curve satisfying (C · L) = 0. Then there exists ǫ > 0 such that h 1 (Y, L ⊗k ⊗ m k y ) ≥ ǫk n for k ≫ 1. Proof. Let ψ : Y → Y be the normalized blow up of y with exceptional divisor E = a i E i . By [LM09, Corollary C], we know that (2.7) vol Y (ψ * L) − vol Y (ψ * L − E) = n 1 0 vol Y |E (ψ * L − tE)dt, where vol Y |E (ψ * L − tE) := a i vol Y |E i (ψ * L − tE). Let C be the birational transform of C in Y .
+Then for a fixed t ∈ (0, 1] ∩ Q we know that
+((ψ * L − tE) · C) = (L · C) − t(E · C) < 0. Hence by [dFKL07, Proposition 1.1] there exist a positive integer q = q(t) such that b(|k(ψ * L − tE)|) ⊂ I ⌊k/q⌋ C for k ≫ 1 with kt ∈ Z,
+where b(| · |) means the base ideal of a linear system. Pick a closed pointŷ ∈ C ∩Supp(E),
+then b(|k(ψ * L − tE)|) ⊂ m ⌊k/q⌋ y . Let E i be a component of E containingŷ. Then for each divisor D ∈ |k(ψ * L − tE)| that does not contain E i as a component, we have ordŷ(D| E i ) ≥ ⌊k/q⌋. Since ψ * L| E i is a trivial line bundle and (−E)| E i ∼ O E i (1), we have an inclusion image(H 0 ( Y , k(ψ * L − tE)) → H 0 (E i , O E i (kt))) ⊂ H 0 (E i , O E i (kt) ⊗ m ⌊k/q⌋ y ). Thus we have vol Y |E i (ψ * L − tE) ≤ lim sup k→∞ h 0 (E i , O E i (kt) ⊗ m ⌊k/q⌋ y ) k n−1 /(n − 1)! . Let us pick q ′ ≥ q such that q ′ ·ǫ(O E i (1),ŷ) > t where ǫ(O E i (1),ŷ) is the Seshadri constant.
+Then the following sequence is exact for k ≫ 1 with kt ∈ Z:
+0 → H 0 (E i , O E i (kt) ⊗ m ⌊k/q ′ ⌋ y ) → H 0 (E i , O E i (kt)) → H 0 (E i , (O E i /m ⌊k/q ′ ⌋ y )(kt)) → 0, as H 1 (E i , O E i (kt) ⊗ m ⌊k/q ′ ⌋ y ) = 0. Hence we have vol Y |E i (ψ * L − tE) ≤ lim sup k→∞ h 0 (E i , O E i (kt) ⊗ m ⌊k/q ′ ⌋ y ) k n−1 /(n − 1)! = lim sup k→∞ h 0 (E i , O E i (kt)) − ℓ(Oŷ ,E i /m ⌊k/q ′ ⌋ y ) k n−1 /(n − 1)! = vol E i ((−tE)| E i ) − multŷE i (q ′ ) n−1 < vol E i ((−tE)| E i ). For any j = i, we have vol Y |E j (ψ * L − tE) ≤ vol E j ((−tE)| E j ). Hence we have (2.8) vol Y |E (ψ * L − tE) < a i vol E i ((−tE)| E i ) = −(−E) n t n−1 = mult y Y · t n−1 .
+Notice that the inequality above works for all t
+∈ (0, 1] ∩ Q. Since vol Y |E (ψ * L − tE) is continuous in t, (2.7) and (2.8) implies that vol Y (ψ * L − E) > vol Y (ψ * L) − n 1 0 mult y Y · t n−1 = vol Y (L) − mult y Y.
+Thus we have for k ≫ 1,
+h 1 (Y, L ⊗k ⊗ m k y ) ≥ h 1 (Y, L ⊗k ⊗ ψ * (O Y (−kE))) = h 1 ( Y , ψ * L ⊗k ⊗ O Y (−kE)) = (mult y Y − vol Y (L) + vol Y (ψ * L − E)) k n n! + O(k n−1 ) ≥ ǫk n .
+Hence we finish the proof.
+Lemma 2.10. Let φ : (Y, y) → (X, x) be a birational morphism of normal varieties with y ∈ Ex(φ). Then for any valuation v ∈ Val Y,y satisfying Izumi's inequality, we have vol X,x (φ * v) < vol Y,y (v).
+Proof. Let us take suitable projective closures of X, Y such that φ extends to a birational morphism between normal projective varieties. Denote by a k := a k (v) and b k := a k (φ * v).
+
+Then by [LM09, Lemma 3.9] there exists an ample line bundle M on X such that for every k, i > 0 we have
+H i (X, M ⊗k ⊗ b k ) = 0. Thus we have (2.9) lim sup k→∞ h 0 (X, M ⊗k ⊗ b k ) k n /n! = vol X (M) − vol X,x (φ * v).
+Since v satisfies Izumi's inequality, there exist c 1 ≥ c 2 > 0 such that m ⌈c 1 k⌉ y ⊂ a k ⊂ m ⌊c 2 k⌋ y for k ≫ 1. Thus we have the following relations
+H 1 (Y, (φ * M) ⊗k ⊗ a k ) ։ H 1 (Y, (φ * M) ⊗k ⊗ m ⌊c 2 k⌋ y ), H i (Y, (φ * M) ⊗k ⊗ a k ) ∼ = − → H i (Y, (φ * M) ⊗k ) for any i ≥ 2. Since h i (Y, (φ * M) ⊗k ) = O(k n−1 ), we have lim sup k→∞ h 0 (Y, (φ * M) ⊗k ⊗ a k ) k n /n! = vol Y (φ * M) − vol Y,y (v) + lim sup k→∞ h 1 (Y, (φ * M) ⊗k ⊗ a k ) k n /n! ≥ vol X (M) − vol Y,y (v) + lim sup k→∞ h 1 (Y, (φ * M) ⊗k ⊗ m ⌊c 2 k⌋ y ) k n /n! By Lemma 2.9, there exists ǫ > 0 such that h 1 (Y, (φ * M) ⊗k ⊗ m ⌊c 2 k⌋ y ) ≥ ǫk n for k ≫ 1. Thus (2.10) lim sup k→∞ h 0 (Y, (φ * M) ⊗k ⊗ a k ) k n /n! ≥ vol X (M) − vol Y,y (v) + n!ǫ.
+Since b k = φ * a k , we know that the left hand sides of (2.9) and (2.10) are the same. As a result,
+vol X (M) − vol X,x (φ * v) ≥ vol X (M) − vol Y,y (v) + n!ǫ
+and we finish the proof.
+Corollary 2.11. Let φ : (Y, y) → (X, x) be a birational morphism of klt singularities such that y ∈ Ex(φ). If K Y ≤ φ * K X , then vol(x, X) < vol(y, Y ).
+Proof. Let v * ∈ Val Y,y be a minimizer of vol whose existence was proved in [Blu16]. Then A Y (v * ) < +∞ which implies that v * satisfies Izumi's inequality by [Li15a, Proposition 2.3]. By Lemma 2.10 we know that vol X,
+x (φ * v * ) < vol Y,y (v * ). The assumption K Y ≤ φ * K X implies that A X (φ * v * ) ≤ A Y (v * ).
+Hence the proof is finished.
+
+
+Normalized volumes of threefold singularities
+
+In this section, we will estimate some upper bound of the volume of three dimensional singularity and prove Theorem 1.3. We first prove that any three dimensional singular point will have volume at most 16, which is Theorem 1.3.1. We obtain this by going through some explicit descriptions. Then taking the action by a cyclic group into the account of the analysis, we obtain Theorem 1.3.3-4. A similar argument will also give the proof of Theorem 1.5.
+
+3.1. Estimate on the local volume.
+
+Lemma 3.1. Let (X, x) be a canonical hypersurface singularity of dimension n. Assume a finite group G acts on (X, x). Then
+(3.1) vol G (x, X) ≤ (n + 1 − mult x X) n · mult x X ≤ n n .
+In particular, vol
+G (x, X) ≤ 2(n − 1) n unless (X, x) is smooth. Proof. Fix an embedding (X, x) ⊂ (A n+1 , o), consider the blow up φ : Bl o A n+1 → A n+1 with exceptional divisor E. Let Y := φ −1 * (X), then by adjunction we have that ω Y ∼ = φ * ω X ⊗ O Y ((n − mult x X)E| Y ). Let ν : Y → Y be the normalization, then ω Y ∼ = I · ν * ω Y where I ⊂ O Y is the conductor ideal. As a result, we have K Y ≤ (φ • ν) * K X + (n − mult x X)ν * (E| Y ). Let F be a prime divisor in ν * (E| Y ) of coefficient a ≥ 1. Then we have A X (ord F ) ≤ 1 + (n − mult x X)a and ord F (m x ) = ord F (ν * (E| Y )) = a. Thus we have lct(X; m x ) ≤ A X (ord F ) ord F (m x ) ≤ 1 + (n − mult x X)a a ≤ n + 1 − mult x X.
+It is clear that the maximal ideal m x is G-invariant. Hence (3.1) follows from lct(X; m x ) ≤ n + 1 − mult x X by Theorem 2.6.
+
+Lemma 3.2. Let X be a variety with canonical singularities. Assume a finite group G acts on X. Then there exists a G-equivariant proper birational morphism φ : 
+Y → X such that Y is G-Q-factorial terminal and K Y = φ * K X . IfY → Y ′ , where Y 1
+Y is the composition of a sequence of flips, and g : Y → Y ′ contracts the birational transform of E, which we also denote by E as abuse of notation. It is clear that Y is a maximal crepant model over X as well, so it is Gorenstein terminal and Q-factorial. If dim g(E) = 1, then Y ′ has non-isolated cDV singularities along g(E) by [KM98, Theorem 5.34]. Hence for any point y ′ ∈ g(E), Lemma 3.1 and 2.8 imply that vol(x, X) ≤ vol(y ′ , Y ′ ) ≤ 16 and we are done.
+
+The only case left is when g(E) = y ′ is a point. If Y has a singularity y along E, then since it is terminal Gorenstein, we know
+vol(y ′ , Y ′ ) ≤ vol(y, Y ) ≤ 16. So we can assume Y is smooth along E. In particular, the divisor E is Cartier in Y , so E is Gorenstein. Since (−E) is g-ample, K E = (K Y + E)| E = E| E and A Y ′ (ord E ) = 1, it is clear that E is a reduced irreducible Gorenstein del Pezzo surface, and vol(y ′ , Y ′ ) ≤ vol y ′ ,Y ′ (ord E ) = (E 3 ) = (−K E ) 2 =: m.
+Firstly, we treat the case when E is normal. By Lemma 3.3, E is either a cone over an elliptic curve or E only has rational double point. In the first case, let the y be the cone point, then
+m = (−K E ) 2 = edim(E, y) ≤ edim(Y, y) ≤ 3.
+In the latter case, m = (−K E ) 2 ≤ 9.
+
+Now the only case left is when E is non-normal. Since E is a reduced irreducible nonnormal Gorenstein del Pezzo surfaces, Reid's classification [Rei94] tells us that E is one of the following:
+
+• The degree m = (−K E ) 2 is 1 or 2, such E is classified by [Rei94, 1.4];
+
+• Cone over a nodal/cuspidal rational curve, then the assumption that edim(E, y) ≤ 3 implies m ≤ 3; • A linear projection of Veronese P 2 ⊂ P 5 , then m = (−K E ) 2 = 4; • A linear projection of F m−2;1 by identifying a fiber with the negative line;
+
+• A linear projection of F m−4;2 by identifying the negative conic to itself via an involution. In the first three cases, we have m ≤ 4 and we are done. In the last two cases, let ν : E → E be the normalization map. It is clear that E is nodal in codimension 1, hence ν is unramified away from finitely many points on E. Letl be a general fiber of the Hirzebruch surface E. Denote by l := ν * l .
+
+In the rest of the proof we will show that vol Y ′ ,y ′ (ord l ) ≤ 16. We know that ν is unramified alongl, which implies that Ω E/E ⊗ Ol = 0. From the following exact sequence
+(ν * Ω E ) ⊗ Ol → Ω E ⊗ Ol → Ω E/E ⊗ Ol = 0,
+we have a sequence of surjections after applying ν * :
+(3.2) Ω Y ⊗ O l ։ Ω E ⊗ O l ։ ν * (Ω E ⊗ Ol) ։ ν * Ωl = Ω l .
+Since Y is smooth along l, the conormal sheaf N ∨ l/Y is a vector bundle. It is clear that
+ker(Ω E ⊗ Ol → ν * Ωl) = N ∨ l/E ∼ = Ol, hence the sequence (3.2) gives us a surjection N ∨ l/Y ։ O l . Since ω Y ⊗ O l ∼ = O l , we know that deg N ∨ l/Y = 2. Hence we have an exact sequence 0 → O l (2) → N ∨ l/Y → O l → 0 which splits because Ext 1 (O l , O l (2)) = 0. Hence N ∨ l/Y ∼ = O l ⊕ O l (2)
+. Let I l be the ideal sheaf of l in Y . Then we have an injection (a k /a k+1 )(ord l ) ֒→ H 0 (l, I k l /I k+1 l ) where a k (ord l ) is the k-th valuative ideal of ord l in O Y ′ ,y ′ . Since
+I k l /I k+1 l ∼ = Sym k N ∨ l/Y ∼ = O l ⊕ O l (2) ⊕ · · · ⊕ O l (2k),
+we know that h 0 (l, I k l /I k+1
+l ) = k 2 + O(k). Hence ℓ(O Y ′ ,y ′ /a k (ord l )) ≤ k 3 /3 + O(k 2 ) which implies that vol Y ′ ,y ′ (ord l ) ≤ 2. Since A Y ′ (ord l ) = 2, we have vol(y ′ , Y ′ ) ≤ vol Y ′ ,y ′ (ord l ) = 8vol Y ′ ,y ′ (ord l ) ≤ 16
+and the proof is finished.
+
+Next, we treat the equality case of Theorem 1.3.1.
+
+Proposition 3.5. A three dimensional klt singularity x ∈ X has vol(x, X) = 16 if and only if x ∈ X is an A 1 singularity.
+
+Proof. Letx ∈X be the index 1 cover of x ∈ X, then by Proposition 3.4 if vol(x,X) > 16, then it is a smooth point, so vol(x, X) = 27/|G| for some nontrivial G and we get a contradiction. So by 16 ≥ vol(x,X) and Theorem 2.6, we indeed know (x,X) = (x, X). By the proof of Proposition 3.4, we see that x ∈ X is either a c-DV point or it has a crepant resolution which extracts a non-normal del Pezzo surface E and a blow up of a curve l ⊂ E yields a valuation with normalized volume at most 16.
+
+Firstly let us consider that x ∈ X is a c-DV point. If x ∈ X is not of cA type, then it is locally given by an equation (x 2 1 + f (x 2 , x 3 , x 4 ) = 0) where ord 0 f ≥ 3. Then the model Y ′ → X given by the normalized weighted blow up of (3, 2, 2, 2) satisfies vol(Y ′ /X) ≤ 27 4 < 16. Hence we may assume that x ∈ X is of cA-type. Let Y → X be its blow up of x with exceptional divisor E. Since x ∈ X is of cA-type, we know that E is reduced which implies Y is normal by Serre's criterion. If Y is singular along E at some point y, then by Corollary 2.11, vol(x, X) < vol(y, Y ) ≤ 16. Therefore, Y is smooth. Furthermore, if the model Y → X does not give a Kollár component, then by [LX16, Theorem C.2 and its proof], we know there is a Kollár component S, such that vol X,x (ord S ) < vol(Y /X) = 16. Thus Y → X has to be a Kollár component, so x ∈ X is of A k type. In fact, as Y is smooth, it is either A 1 or A 2 . For A 2 singlarity, it is known that its volume is 125 9 computed on the weighted blow up of (3, 3, 3, 2) (see e.g. [Li15a] on the concrete calculations). Now consider the case that Y → X extracts a non-normal del Pezzo surface E. We want to show that vol(x, X) < 16. From the proof of Proposition 3.4 we know that vol X,x (ord l ) ≤ 16 for a general line l ⊂ E. Since a minimizing divisorial valuation of vol is unique if exists by [LX16, Theorem B], we conclude that either vol X,x (ord l ) < 16 or vol X,x (ord l ) = 16 for any general line l but then these valuations ord l can not be a minimizer of vol X,x . Therefore, vol(x, X) < 16 and we finish the proof. Proposition 3.6. Let G be a finite group and (x ∈ X) a G-invariant klt singularity. Then for any G-birational model f : Y → X, there will be a G-invariant (irreducible) rationally connected subvariety W ⊂ f −1 (x).
+
+Proof. In [HX09], this is shown when G is a Galois group. But the proof does not use any specific property of a Galois group, hence works for any finite group. Proof. Let φ : Y → X be a G-equivariant maximal crepant model constructed in Lemma 3.2. By Proposition 3.6, there exists a G-invariant rationally connected closed subvariety W ⊂ φ −1 (x). Let W be a G-equivariant resolution of W . Since G is cyclic and W is rationally connected, the G-action on W has a fixed pointỹ by holomorphic Lefschetz fixed point theorem. Thus the G-action on W has a fixed point y which is the image of y. Then Lemma 2.8 implies that vol If the equality holds, then by Corollary 2.11, we know that X = Y . Then X has to be smooth since otherwise, vol G (x, X) ≤ 16.
+G (x, X) ≤ vol G (y, Y ). Since (Y, y) is a
+Proof of Theorem 1.3.3. For singularity x ∈ X and a torsion element of order r in its class group, we can take the corresponding index 1 cover y ∈ Y . Letỹ ∈Ỹ be the index 1 cover of y ∈ Y corresponding to K Y . Then there exists a quasi-étale Galois closure (z ∈ Z) → (x ∈ X) of the composite map (ỹ ∈Ỹ ) → (x ∈ X) (see e.g. [GKP16, Theorem 3.7]). In particular, z ∈ Z is Gorenstein. Denote by G := Aut(Z/X) and G ′ := Aut(Z/Y ). Then G ′ is a normal subgroup of G with G/G ′ ∼ = Z/r. Pick g ∈ G whose image in G/G ′ is a generator. Then Theorem 2.6 and Lemma 3.7 imply
+vol(x, X) = 1 |G| vol G (z, Z) ≤ 1 | g | vol g (z, Z) ≤ 27 r .
+The proof is finished. Next we turn to the proof of Theorem 1.3.4 which follows from below.
+
+Proposition 3.8. Let (X, x) be a Gorenstein canonical threefold singularity whose general hyperplane section is an elliptic singularity, with a nontrivial G := Z/2-action which only fixes x ∈ X, then vol G (x, X) ≤ 18.
+
+Proof. Donote by σ the non-trivial element in G. Let φ 1 : Y 1 → X be a G-equivariant maximal crepant model of X constructed in Lemma 3.2. So Y 1 is equivariant Q-factorial, i.e., every G-invariant divisor is Q-Cartier. By our assumption there is a divisorial part contained in φ −1 1 (x) which we denote by Γ. Then by running an of −Γ-MMP sequence over X, we can assume −Γ is nef over X which implies Γ = φ −1 1 (x). First we make the following reduction.
+
+Lemma 3.9. We may assume there is a G-equivariant maximal model φ :
+Y → X with an intermediate model g : Y → Y ′ over X such that ρ G (Y /Y ′ ) = 1 and g(E) is a point for E = Ex(Y /Y ′ ).
+Proof. By the proof of Lemma 3.7 there exists a G-invariant closed point y 1 ∈ Y 1 over x. If there exists a G-invariant φ 1 -exceptional component of Γ containing y 1 , we denote this divisor by E; otherwise there exist two φ 1 -exceptional components of Γ containing y 1 interchanged by σ, and we denote the sum of these two divisors by E.
+
+Let us run the G-equivariant (Y 1 , ǫE)-MMP over X for 0 < ǫ ≪ 1. If there is a flipping contraction Y 1 → Y ′ 1 that contracts a curve through y 1 , then 
+y ′ 1 = (the image of y 1 in Y ′ 1 ) is a G-invariant non-Q-factorial Gorenstein terminal singularity. Since Y ′ 1 is also crepant over X, we know that vol G (x, X) ≤ vol G (y ′ 1 , Y ′ 1 ) ≤1 Y → Y ′ , where Y 1
+Y is the composition of a sequence of flips whose exceptional locus does not contain y 1 , and g : Y → Y ′ contracts the birational transform of E, which we also denote by E as abuse of notation. Let y ′ be the image of y 1 in Y ′ . If dim g(E) = 1, then Y ′ has non-isolated cDV singularities along g(E). Since y ′ ∈ g(E) is a G-invariant point, Lemma 3.1 and 2.8 implies that vol G (x, X) ≤ vol G (y ′ , Y ′ ) ≤ 16 and we are done. So the only case left is when E gets contracted by g to a G-invariant point y ′ ∈ Y ′ . Since Y ′ is Gorenstein and crepant over X, Lemma 2.8 implies that vol
+G (x, X) ≤ vol G (y ′ , Y ′ ).
+Therefore, by Lemma 2.8 it suffices to prove that vol G (y ′ , Y ′ ) ≤ 18.
+
+In the above argument, we see that if the indeterminate locus of a flip or its inverse contains a fixed point of G, then we know vol G (x, X) ≤ 16. So we can assume that all G-fixed points are contained in the open locus where Y 1 and Y are isomorphic.
+
+Therefore for the choice of E, we can make the following assumption which will be needed later.
+
+♣ : If there is a curve or a divisor in Γ which is fixed pointwisely by G, we will choose E containing such curve or divisor.
+
+For the rest of the proof, we may assume (X, x) = (Y ′ , y ′ ) for simplicity. It is clear that Y is a G-equivariant maximal crepant model over X as well, so it is Gorenstein terminal and equivariant Q-factorial. Since any G-invariant Weil divisor is Q-Cartier, by local Grothendieck-Lefschetz theorem (see [Rob76, Section 1]), we know it is indeed Cartier. In particular, the divisor E is Cartier in Y , so E is Gorenstein. Since (−E) is g-ample, 
+we have −K E = −(K Y + E)| E = (−E)| E is ample. Hence E(y ′ , Y ′ ) ≤ vol Y ′ ,y ′ (ord E ) = (−K E ) 2 ≤ 9.
+If E is non-normal, then from Reid's classification [Rei94] in the proof of Lemma 3.4 we know that either m := (−K E ) 2 ≤ 4 or E is one of the following:
+
+• A linear projection of F m−2;1 by identifying a fiber with the negative line;
+
+• A linear projection of F m−4;2 by identifying the negative conic to itself via an involution. Let ν : E → E be the normalization map. It is clear that σ lifts naturally to an involution of the Hirzebruch surface E which we denote byσ. We may assume that E is not isomorphic to F 0 since otherwise m ≤ 4 and we are done. Hence the negative curve B in E is G-invariant.
+
+In the first case, E is obtained by gluing a fiber A with the negative curve B from E ∼ = F m−2 . Since any involution of P 1 has at least two invariant points, there exists a fixed pointȳ ∈ B \ A ofσ. If Y is singular at y := ν(ȳ), then we know that vol(y ′ , Y ′ ) ≤ vol(y, Y ) ≤ 16 by Lemma 3.1 and 2.8 and we are done. Hence we may assume that Y is smooth at y. Denote byl the fiber in E containingȳ and l := ν * l . Since E is smooth along l \ {y} and E is Cartier in Y , we know that Y is also smooth along l \ {y}. This implies that Y is smooth along l. Besides, we know that ν is unramified alongl because y is a normal crossing point of E. Thus by similar argument in the proof of Lemma 3.4,
+we have N ∨ l/Y ∼ = O l ⊕ O l (2) and vol Y ′ ,y ′ (ord l ) ≤ 16. Since l is G-invariant, we have vol G (y ′ , Y ′ ) ≤ vol Y ′ ,y ′ (ord l ) ≤ 16
+and we are done.
+
+In the second case, E is obtained by gluing the negative curve B via a non-trivial involution τ : B → B from E ∼ = F m−4 . Letȳ ∈ B be a fixed point ofσ and y := ν(ȳ). Let l be the fiber ofĒ containingȳ and l := ν * l . We may assume that Y is smooth at y (hence smooth along l) since otherwise vol G (y, Y ) ≤ 16 and we are done. If τ (ȳ) =ȳ, then y is a normal crossing point of E. By a similar argument to the previous case, we have l is
+G-invariant, N ∨ l/Y ∼ = O l ⊕ O l (2) and vol y ′ ,Y ′ (ord l ) ≤ 16 so we are done. If τ (ȳ) =ȳ, then we want to show that N ∨ l/Y ∼ = O l (−1) ⊕ O l (3)
+. Let C be the reduced curve with support ν(B). Then we know that
+O E = ker (ν * O E → (ν| B ) * O B /O C )
+by [Rei94]. By writing out local equations, it is clear that E has a pinch point at y (i.e. the completion of O E,y is isomorphic to C[[x 1 , x 2 , x 3 ]]/(x 1 x 2 2 − x 2 3 )), and the scheme-theoretic fiber of ν over y is isomorphic to Spec C[x]/(x 2 ). Hence in an open neighborhood U of y, the sheaf Ω E/E | U ∼ = Cȳ is a skyscrapper sheaf supported atȳ of length 1. We have the following exact sequence
+ν * Ω E ⊗ Ol → Ω E ⊗ Ol → Ω E/E ⊗ Ol → 0. Denote by F := image(Ω E ⊗ O l → ν * Ω E ⊗ O l ), then we have the following commutative diagram 0 F ν * Ω E ⊗ O l C y 0 0 Ω l Ω l 0 ∼ =
+where the horizontal sequences are exact. Thus we have a short exact sequence by taking kernels of vertical maps:
+0 → ker(F → Ω l ) → ν * N ∨ l/E → C y → 0. Since N ∨ l/E ∼ = Ol, we know that ker(F → Ω l ) ∼ = O l (−1). From the following surjective sequence Ω Y ⊗ O l ։ Ω E ⊗ O l ։ F ։ Ω l we know that there is a surjection from N ∨ l/Y to O l (−1). Since deg(N ∨ l/Y ) = 2, this surjection splits since Ext 1 (O l (−1), O l (3)) = 0. Hence N ∨ l/Y ∼ = O l (−1) ⊕ O l (3). Since I k l /I k+1 l ∼ = Sym k N ∨ l/Y ∼ = O l (−k) ⊕ O l (−k + 4) ⊕ · · · ⊕ O l (3k),
+we know that h 0 (l, I k l /I k+1 l ) = 9 8 k 2 + O(k). Since there is an injection (a k /a k+1 )(ord l ) ֒→ H 0 (l, I k l /I k+1 l ),
+we have ℓ(O Y ′ ,y ′ /a k (ord l )) ≤ 3 8 k 3 +O(k 2 ) which implies vol Y ′ ,y ′ (ord l ) ≤ 9 4 . Since A Y ′ (ord l ) = 2, we have vol G (y ′ , Y ′ ) ≤ vol Y ′ ,y ′ (ord l ) = 8 · vol Y ′ ,y ′ (ord l ) ≤ 18.
+Lemma 3.11. Proposition 3.8 holds when E = E 1 + E 2 is reducible.
+Proof. Denote by b k := g * O Y (−kE) as an ideal of O Y ′ ,y ′ . Since (−E) is g-ample, for k sufficiently divisible we have lct(b k ) ≤ A Y ′ (E 1 ) ord E 1 (b k ) = 1 k , mult(b k ) = (E 3 ) · k 3 .
+In particular, we have
+vol G (y ′ , Y ′ ) ≤ lct(b k ) 3 · mult(b k ) ≤ (E 3 ) = (−K E ) 2 .
+From Reid's classification [Rei94] and the fact that σ induces an isomorphism between (E 1 , ω E | E 1 ) and (E 2 , ω E | E 2 ), either (−K E ) 2 ≤ 8 or E is one of the following : • E is obtained by gluing two copies of F a;0 along their line pairs/double lines; • E is obtained by gluing two copies of F a;1 along their line pairs; • E is obtained by gluing two copies of F a;2 along their negative conics.
+
+In the first case, since the local embedding dimension of E i ∼ = F a;0 at the cone point is at most 4, we have a ≤ 3. Hence (−K E ) 2 = 2a ≤ 6 and we are done.
+
+Remark 3.12. We want to remark, up to this point, we do not use the assumption that the x is the only fixed point of G on X.
+
+In the second case, there is only one σ-fixed point y ∈ E which is the image of the intersection point of the pair of lines on E i . We may assume y is smooth, since otherwise vol G (x, X) ≤ vol G (y, Y ) ≤ 16. Then the (common) tangent plane Θ of E i is fixed by σ, and on it σ interchanges two smooth lines which are the tangent lines of the pair of lines. Thus the action is either of type 1 2 (0, 1, 1) or 1 2 (0, 0, 1). Therefore, there is a G-invariant divisor or curve on Y . By our assumption of Proposition 3.8, it is contained in Γ but E does not contain any such curve. Thus it is contradictory to our Assumption ♣.
+
+For the third case, denote by B := E 1 ∩ E 2 and it is invariant under σ. If σ fixes every point on B, then we can assume Y is smooth along B as otherwise we will have vol(y, Y ) ≤ 16 for a singular fixed point y on B. This implies that Y is smooth along E, as E i are smooth Cartier divisors along E i \ B. We have the following short exact sequence:
+0 → T B → (T E 1 ⊕ T E 2 ) ⊗ O B → T Y ⊗ O B → 0. Hence we know that 2 N B/Y ∼ = N B/E 1 ⊗ N B/E 2 . Since deg N B/Y = −2 and deg N B/E i = −a,
+we have a = 1. Hence (−K E ) 2 = 10 and we are done. The remaining case is that σ induces a nontrivial order 2 automorphism on B. Denote by y ∈ B be a fixed point, then we can again assume it is a smooth point. Since σ interchanges E 1 and E 2 , similar as before, we know either y ∈ Y is not smooth or y ∈ Y is smooth but Γ contains a curve which is pointwisely fixed by σ but not E. Thus the latter case is again contradictory to our Assumption ♣. Thus we finish the proof of Proposition 3.8. Proof of Theorem 1.3.4. Let L be a divisor whose class in Pic(x ∈ X) is nontrivial torsion. Let (x ∈X) be the index 1 cover with respect to L. By Theorem 1.3.2, we can assume the index of L is 2.
+
+Ifx ∈X is not Gorenstein, then x ∈ X is not Gorenstein either. The index of K X is 2 by Theorem 1.3.2. Let π : (y ∈ Y ) → (x ∈ X) be the index 1 cover with respect to K X . If π * L is Cartier at y, then L ∼ K X and hence (x ∈X) ∼ = (y ∈ Y ) is Gorenstein which is a contradiciton. So π * L is not Cartier at y, and we may replace (x ∈ X, L) by (y ∈ Y, π * L) since vol(x, X) < vol(y, Y ) by Lemma 2.6. Therefore, we can always assume that (x ∈X) is Gorenstein. Lemma 3.13. Let G be a finite group acting on P 1 , then the smallest G-orbit has at most 12 points.
+
+Proof. This follows from the classification of finite subgroups of SL(2, C).
+
+Proposition 3.14. Let (X, x) be a Gorenstein canonical threefold singularity with a finite group G-action. Then vol G (x, X) < 324.
+
+Proof. We may assume that (X, x) is not a hypersurface singularity since otherwise we are done by Lemma 3.1. Let φ 1 : Y 1 → X be a G-equivariant maximal crepant model of X constructed in Lemma 3.2. By Proposition 3.6, there exists a G-invariant rationally connected closed subvariety W ⊂ φ −1 1 (x). If W = {y 1 } is a closed point, then Lemma 3.1 and 2.8 imply vol G := Aut( X/X), then Theorem 2.6 and Proposition 3.14 imply that |G| · vol(x, X) = vol G (x, X) < 324.
+
+Hence we have shown |π loc 1 (X, x)| · vol(x, X) < 324. Then the proof follows from [TX17, Corollary 1.4] which asserts that π 1 (Link(x ∈ X)) is finite (hence isomorphic to its profinite completionπ loc 1 (X, x)). 3.4. K-moduli of cubic threefolds as GIT. In this section, we give a brief account on how Theorem 1.3 implies Theorem 1.1. Such an argument for surface appeared in [OSS16], and was also sketched in [SS17] for cubic hypersurfaces.
+
+A straightforward consequence from [Liu16] is the following result.
+
+Lemma 3.15. Let X be a Q-Gorenstein smoothable K-semistable Fano varieties, such that its smoothing is a cubic threefold. Then the local volume of any point on X is at least 81/8.
+
+Proof. The volume of (X, −K X ) is (−K X ) 3 = 24. Then by [Liu16], we know the local volume of a point x ∈ X satisfies that vol(x, X) ≥ 24 × (3/4) 3 = 81/8.
+
+Lemma 3.16. Let X be a Q-Gorenstein smoothable K-semistable Fano variety, such that its smoothing is a cubic threefold. Then X is Gorenstein, furthermore, −K X = 2L for some Cartier divisor L.
+
+Proof. Given a point x ∈ X, by Lemma 3.15 and Theorem 1.3.3, we know its Cartier index is at most 2. Since a klt variety has only quotient singularities in codimension 2, there is a neighborhood U ⊂ X of x such that U \ {x} has only quotient singularities of type 1 2 (1, 1, 0). Hence U \ {x} is Gorenstein. Then by Theorem 1.3.4 and Lemma 3.15, and the fact that the singularity of type 1 2 (1, 1, 1) is not smoothable ([Sch71]), we know that X only has Gorenstein canonical singularities.
+
+Let X → C be a family which gives a Q-Gorenstein deformation of X to some smooth cubic threefold such that over 0 ∈ C, X 0 ∼ = X. By shrinking C, we can assume X 0 = X × C (C \ {0}) is a family of smooth cubic threefolds. Then −K X 0 ∼ C 0 O(2). By taking the closure, we know −K X ∼ C 2L for some Q-Cartier integral Weil divisor L. By inverse of adjunction (see [BCHM10,Corollary 1.4.5]), we know that X has Gorenstein canonical singularities. We want to show that L is in fact Cartier.
+
+Assume to the contrary that L is not Cartier at x ∈ X. Since O X (L) is Cohen-Macaulay by [KM98,5.25
+], we know that O X (L) ⊗ O X is S 2 . Hence L := L| X is a Q-Cartier integral Weil divisor on X satisfying O X (L) ∼ = O X (L) ⊗ O X .
+Thus L can not be Cartier at x since otherwise O X (L) would be locally free at x. If x ∈ X is a non-smooth quotient singularity satisfying vol(x, X) ≥ 81/8 then the index has to be 2 by Theorem 1.3.2. If moreover it is not of type 1 2 (1, 1, 1), then it is of type 1 2 (1, 1, 0), i.e. locally analytically defined by (x 2 1 + x 2 2 + x 2 3 = 0) in (0 ∈ A 4 ). Similarly, if x ∈ X has a neighborhood U such that x is the only non-Cartier point on L| U , then Theorem 1.3.4 implies that vol(x, X) ≤ 9 which contradicts Lemma 3.15. Therefore, L is not Cartier along a curve C ⊂ X. In particular, C is not smooth and we can replace x by a general point (x ′ ∈ C ⊂ X) which is of quotient type as any general singularity along a curve on a klt threefold. This again implies it is of type 1 2 (1, 1, 0) by the previous argument. Since edim(x, X) = 4, we know that (x ∈ X ) is a hypersurface singularity as well. Let H be a general hyperplane section of X through x. Then (x ∈ H) is a normal isolated hypersurface singularity. By similar arguments, there is a well-defined Q-Cartier integral
+Weil divisor L| H on H satisfying O H (L| H ) ∼ = O X (L) ⊗ O H .
+By local Grothendieck-Lefschetz theorem (see [Rob76]), the local class group of (x ∈ H) is torsion free which implies that L| H is Cartier at x. Hence L is Cartier at x and we get a contradiction. As a result, the Weil divisor L = L| X is Cartier and −K X = 2L by adjunction.
+
+Lemma 3.17. Let X be a Q-Gorenstein smoothable K-semistable Fano varieties, such that its smoothing is a cubic threefold. Then X is a cubic threefold in P 4 .
+
+Proof. This is a well known result. In fact, X is a del Pezzo variety (see [Fuj90,P 117] for the definition) of degree 3 and thus L is very ample by [Fuj90, Section 2].
+
+Proof of Theorem 1.1. We know at least one smooth cubic threefold, namely the Fermat cubic threefold, admits a KE metric (see [Tia87] or [Tia00, p 85-87]). Let P 34 be the space parametrizing all cubic threefolds. By [LWX14], there is an artin stack M containing an Zariski open set of [P 34 /PGL(5)] such that the C-points of M parametrize the isomorphic classes of K-semistable Fano threefolds which can smoothed to a smooth cubic threefold. Moreover, there is a morphism µ : M → M which yields a good quotient morphism such that M is a proper algebraic scheme whose close points parametrizes isomorphic classes of K-polystable ones.
+
+Lemma 3.17 then shows that all points in M indeed parametrize cubic threefolds. Then by a result of Paul-Tian (see [Tia94] or [OSS16, Corollary 3.5]), we know they are all contained in the locus U ss of GIT semistable cubic threefolds. Denote the GIT quotient (U ss ⊂ P 34 ) → M GIT . To summarize, we obtain an morphism g : M → [U ss /PGL(5)], whose good quotient yields a morphism h : M → M GIT .
+
+We then proceed to show that the morphism g is an isomorphism for which we only need to verify it is bijective on C-points. The injectivity follows from the modular interpretation. The surjectivity on the polystable points follow from the fact that M is proper. And this indeed implies the surjectivity on the semistable points since M consists of all cubic threefolds whose orbit closures contain K-polystable points, which are then precisely the GIT semistable points. Proof of Corollary 1.2. The list of GIT-(polystable)stable three dimensional cubics is provided by the main results in [All03, Section 1]. Since they are polystable, then the existence of KE metric follows from [CDS15,Tia15].
+
+Remark 3.18. We want to remark that our proof of Theorem 1.1 only uses two pieces of simple information of cubic threefolds: its volume and Picard group. So we expect such a strategy with Theorem 1.3 can be used to construct many other compact K-moduli of smoothable threefolds.
+
+
+Discussions
+
+There are lots of interesting questions on the volume of a singularity. Here we mention some of them which are related to our work.
+
+As we mentioned before, we expect the following to be true, whose proof would simplify and strength our result.
+
+Conjecture 4.1. Let f : (x ∈ X) → (y ∈ Y ) be a quotient map of klt singularities by the group G, which isétale in codimension 1, then vol(y, Y ) · |G| = vol(x, X).
+
+As mentioned in Theorem 2.6.3 this is known in the quasi-regular case, i.e., if vol(x, X) is computed by a divisorial valuation.
+
+Next we turn to the set (contained in (0, 27] as we show) of normalized volumes of three dimensional klt singularities.
+
+Example 4.2. Let (X p,q , x) be the singularity in (A 4 , o) defined by x 2 + y 2 + z p + w q = 0. If p, q ≥ 2, 2p > q and 2q > p, then (X p,q , x) is a quasi-regular canonical singularity with minimizing valuation v * of weights (pq, pq, 2q, 2p) (see [CS15]). Thus computation shows vol(x, X p,q ) = vol(v * ) = 4(p + q) 3 p 2 q 2 .
+
+These volumes vol(x, X p,q ) are definitely discrete away from 0.
+
+We may ask the following question:
+
+Question 4.3. Is the set of normalized volumes of 3-fold klt singularities discrete away from 0?
+
+Actually the same question can be asked for any dimension, though we do not have a lot of evidence. Even for quasi-regular cases it seems to be a hard question. From discussions above we know that q(−K V ) 2 ≤ 27. Discreteness of vol would imply
+that q = o( 1 (−K V ) 2 ).
+When a klt singularity appears on the Gromov-Hausdorff limit of smooth KE Fano manifolds, it is easy to see the normalized volume is at most n n (= normalized volume of smooth points) by Bishop Comparison Theorem. We show that this in fact holds for all klt singularities in the following theorem, which can be viewed as a local analogue of the global volume bounds in [Fuj15, Theorem 1.1].
+
+Theorem 4.5. Let x ∈ X be an n-dimensional klt singularity. Then vol(x, X) ≤ n n and the equality holds if and only if x ∈ X is smooth.
+Proof. See Appendix A.
+We also have the following conjecture on the singularities with large volumes in general dimension.
+
+Definition A.2. (a) A flat morphism π : (X , ∆) → C over a smooth curve C together with a section σ : C → X is called a Q-Gorenstein flat family of klt singularities if it satisfies the following conditions: • X is normal, ∆ is an effective Q-divisor on X , and K X + ∆ is Q-Cartier;
+
+• For any c ∈ C, the fiber X c is normal and not contained in Supp(∆);
+
+• (X c , ∆ c ) is a klt pair for any closed point c ∈ C. (b) Given a Q-Gorenstein flat family of klt pairs π : (X , ∆) → C and σ : C → X , we call a proper birational morphism µ : Y → X provides a flat family of Kollár components S over (X , ∆) (centered at σ(C)) if the following conditions hold:
+
+• Y is normal, µ is an isomorphism over X \ σ(C) and S = Ex(µ) is a prime divisor on Y; • −S is Q-Cartier and µ-ample; If S • c computes vol(σ(c), X c , ∆ c ) for all c ∈ C • , then there exists a proper birational morphism µ : Y → X as an extension of µ • which provides a flat family of Kollár components S over (X , ∆), such that S 0 computes vol(σ(0), X 0 , ∆ 0 ).
+
+Proof. Let us fix k sufficiently divisible so that kS • is Cartier. Since −S • is ample over X, after replacing k again, we can assume that
+µ • * O Y • (−kmS • ) = defn b • km = (b • k )
+m is a flat family of ideals over C • for any m ∈ Z >0 . Then there exists a unique ideal sheaf b km on X which extends b • km to a flat family of ideals over C. By the same reason as argued in the proof of Lemma A.1, (b k• ) is a graded sequence of flat families of ideals over C.
+
+Denote by α := A (X • ,∆ • ) (S • ). By adjunction, it is clear that α = A (Xc,∆c) (S • c ) for any c ∈ C • . As a result, we have lct(X • , ∆ • ; b • km ) = lct(X c , ∆ c ; b c,km ) = α km .
+
+Since vol(σ(0), X 0 ) = vol(σ(c), X c ), we know that lim m→∞ km · lct(X 0 , ∆ 0 ; b 0,km ) = α. Hence given ǫ > 0 sufficiently small, we have lct(X 0 , ∆ 0 ; b 0,km ) > α−ǫ km for m ≫ 0. By adjunction, we know that (X , ∆ + α−ǫ km b mk ) is klt, and a(S • ; X , ∆ + α−ǫ km b mk ) < 0. Then by [BCHM10,1.4.3], we can construct a relative projective model µ : Y → (X , ∆) extending µ • , such that the exceptional locus of µ is precisely the prime divisor S and −S is µ-nef. Denote by S 0 = i m i S 
+K Y 0 + (µ 0 ) −1 * (∆ 0 ) ∼ Q (K Y + µ −1 * ∆ + Y 0 )| Y 0 ∼ Q µ * 0 (K X 0 + ∆ 0 ) + (α − 1)S 0 .
+Hence A (X 0 ,∆ 0 ) (S (i) 0 ) = m i (α − 1) + 1 ≤ m i α. Therefore by [LX16, Section 3.1], for any c ∈ C • we have vol(σ(0), X 0 , ∆ 0 ) ≤ vol(Y 0 /(X 0 , ∆ 0 )) = vol F σ(0) (− i A (X 0 ,∆ 0 ) (S Since vol(σ(0), X 0 , ∆ 0 ) = vol(σ(c), X c , ∆ c ) by assumption, we conclude the two inequalities in (A.1) have to be equalities. The first inequality being equality means that the model Y 0 /(X 0 , ∆ 0 ) computes the volume vol(σ(0), X 0 , ∆ 0 ), so it must be a model extracting a Kollár component S is reduced. Hence we finish the proof.
+
+The following result implies Theorem 4.5 by setting ∆ = 0.
+
+Theorem A.4. Let x ∈ (X, ∆) be an n-dimensional klt singularity. Then vol(x, X, ∆) ≤ n n and the equality holds if and only if x ∈ X \ Supp(∆) is smooth.
+
+Proof. The inequality case is in Lemma A.1. For the equality case, let us assume that τ : C → X such that C is a smooth curve, τ (C • = defn C \ {0}) is contained in X reg \ Supp(∆) and x = τ (0) satisfies vol(x, X, ∆) = n n . By Lemma A.3, we know the model Y • obtained by the standard blow up along the image σ • = (τ • , id) : C • → X reg × C • , degenerates to a model µ : Y → (X × C, ∆ × C) which provides a flat family of Kollár component S. In particular, over the special fiber 0, we obtain a model µ 0 : Y 0 → (X, ∆) which yields a Kollár component S 0 over x. Denote by Γ 0 the different of (µ 0 ) −1 * ∆ on S 0 . Since S 0 computes vol(x, X, ∆) by Lemma A.3, we have n n = A (X,∆) (S 0 ) · (−K S 0 − Γ 0 ) n−1 = n · (−K S 0 − Γ 0 ) n−1 .
+
+By [LX16, Theorem D], (S 0 , Γ 0 ) is log K-semistable with volume n n−1 . If Γ 0 = 0, we pick a closed point y ∈ (S 0 ) reg ∩ Supp(Γ 0 ). It is easy to see that A (S 0 ,Γ 0 ) (ord y ) < n − 1 and vol y,S 0 (ord y ) = 1, hence [LL16, Proposition 4.6] implies n n−1 = (−K S 0 − Γ 0 ) n−1 ≤ n n − 1 n−1 A (S 0 ,Γ 0 ) (ord y ) n−1 · vol y,S 0 (ord y ) < n n−1 and we get a contradiction. So Γ 0 = 0 and hence (S 0 , Γ 0 ) ∼ = (P n−1 , 0) by [Liu16,Theorem 36]. And −S| St gives O(1) fiberwisely, thus x ∈ X is smooth, as Y 0 → X induces a degeneration of x ∈ X to C(P n−1 , O(1)) which is smooth. Since x ∈ X is smooth and the different Γ 0 = 0, we have x ∈ Supp(∆). Thus we finish the proof.
+
+Corollary 1 . 2 .
+12We have the following list which gives all the closed points of M(= M GIT ) in Theorem 1.1:
+
+Lemma 2 . 4 .
+24Let (R, m) be the local ring of a complex klt singularity. Let G ⊂ Aut(R/C) be a finite subgroup acting freely in codimension 1 on Spec(R). Then for any m G -primary ideal b in R G , we have lct(bR) = lct(b), mult(bR) = |G| · mult(b).
+
+Lemma 2 . 5 .
+25Let (R, m) be the local ring of a complex klt singularity. Let G ⊂ Aut(R/C) be a finite subgroup acting freely in codimension 1 on Spec(R). Then for any G-invariant m-primary ideal a of R, we have lct(a) n mult(a) ≥ |G| inf b : m G -primary lct(b) n mult(b).
+
+Theorem 2. 6 .
+6Let (X,x) be a complex klt singularity with a faithful action of a finite group G that is free in codimension 1. Let (X, x) := (X,x)/G. Then (1) We have vol G (x,X) = |G| · vol(x, X) = inf a : mx-primary G-invariant lct(X; a) n · mult(a).
+
+Lemma 3 . 7 .
+37Let (X, x) be a Gorenstein canonical threefold singularity. Assume a finite cyclic group G acts on (X, x). Then vol G (x, X) ≤ 27 with equality if and only if (X, x) is smooth.
+
+
+Gorenstein terminal threefold singularity by Lemma 3.2, we know that (Y, y) is a smooth point or an isolated cDV singularity by [KM98, Corollary 5.38]. Hence vol G (y, Y ) ≤ 27 by Lemma 3.1 and we are done.
+
+By
+Lemma 2.6 it suffices to show vol G (x,X) ≤ 18. The covering (x ∈X) is not smooth as we assume (x ∈ X) is not a quotient singularity. If (x ∈X) is c-DV, then vol G (x,X) ≤ 16 by Lemma 3.1. Thus we can assume a general section ofx ∈X is of elliptic type, then vol G (x,X) ≤ 18 by Proposition 3.8. Hence the proof is finished. 3.3. Effective bounds on local fundamental groups.
+
+Example 4 . 4 .
+44Let V be a K-semistable klt log del Pezzo surface. Let q be the largest integer such that there exists a Weil divisor L satisfying −K V ∼ Q qL. Then (X, o) := (C(V, L), o) is a threefold klt singularity. By [LX16] we know that vol(o, X) = vol o,X (ord V ) = q(−K V ) 2 .
+
+
+• S c := S| Yc is a prime divisor on Y c which gives Kollár component fiberwisely, i.e., (Y c , S c + (µ −1 * ∆)| Yc ) is a plt pair for any closed point c ∈ C. Lemma A.3. Let π : (X , ∆) → C be a Q-Gorenstein flat family of klt singularities over a smooth curve C with a section σ : C → X, such that c → vol(σ(c), X c ) is constant. Let 0 ∈ C be a closed point. Denote by C • := C \ {0}, X • := π −1 (C • ) and ∆ • := ∆| X • . Suppose there exists a proper birational morphism µ • : Y • → X • which provides a flat family of Kollár components S • over (X • , ∆ • ).
+
+
+irreducible components of S 0 , then by adjunction we have
+
+)
+(−αS 0 ) = α n · (−(−S 0 ) n−1 ) (A.1) = α n · (−(−S c ) n−1 ) = vol(σ(c), X c , ∆ c ).
+
+
+moreover that X is Gorenstein, then such Y is Gorenstein as well. Such Y will be called a G-equivariant maximal crepant model over X.Proof. By [KM98, Proposition 2.36], there are only finitely many crepant exceptional divisors over X. Then the lemma is an easy consequence of[BCHM10] (see also[Kol13,   Corollary 1.38]) by extracting all crepant exceptial divisors over X using G-MMP.We need a lemma on del Pezzo surfaces.Lemma 3.3. If E is a normal Gorenstein surface such that −K E is ample, then either 
+E is a cone over an elliptic curve or E only has rational double points. 
+
+Proof. See [Bre80]. 
+The following result proves the inequality part of Theorem 1.3.1. 
+
+Proposition 3.4. Let (X, x) be a Gorenstein canonical singularity of dimension 3. Then 
+vol(x, X) ≤ 16 unless (X, x) is smooth. 
+
+Proof. We may assume that (X, x) is not a cDV singularity, otherwise we could conclude 
+by Lemma 3.1. Let φ 1 : Y 1 → X be a maximal crepant model constructed in Lemma 3.2. 
+From [KM98, Theorem 5.35] we know that there exists a crepant φ 1 -exceptional divisor 
+E ⊂ Y 1 over x. Let us run (Y 1 , ǫE)-MMP over X for 0 < ǫ ≪ 1. By [Kol13, 1.35] this 
+MMP will terminate as Y 1 
+
+
+
+3.2. Equivariant estimate. We have proved Theorem 1.3.1. Theorem 1.3.2 follows from [LX16, 7.1.1]. In this section, we aim to prove Theorem 1.3.3-4. We need the following result from[HX09].
+
+
+16 by Lemma 2.8 and we are done. Hence we may assume that a flipping contraction Y 1 → Y ′ does not contract a curve through y 1 . Then the flip Y + 1 is another G-equivariant maximal crepant model over X containing a G-invariant point y + 1 over x. By [Kol13, 1.35] this MMP will terminate as Y1 
+
+
+
+
+is a reduced Gorenstein del Pezzo surface. Lemma 3.10. Proposition 3.8 holds if E is irreducible. Proof. Since Y has hypersurface singularities, all local embedding dimensions of E are at most 4. If E is normal, then by similar argument in the proof of Lemma 3.4 we know that volG 
+
+
+G (x, X) ≤ vol G (y 1 , Y 1 ) ≤ 27 and we are done. If W is a rational curve, then by Lemma 3.13 there exists a closed point y 1 ∈ W whose G-orbit has at most 12 points. Let H ⊂ G be the group of stabilizer of y 1 , then Lemma 3.1 and 2.8 implies that vol H (y 1 , Y 1 ) ≤ 27. Since [G : H] ≤ 12, by Theorem 2.6 we know that vol G (x, X) < 12 vol H (x, X) ≤ 12 vol H (y 1 , Y 1 ) ≤ 324.Hence we may assume that W = E is a rational surface. Let us run the G-equivariant (Y 1 , ǫE)-MMP over X for 0 ≤ ǫ ≪ 1. By[Kol13,1.35] this MMP will terminate asY is the composition of a sequence of flips, and g : Y → Y ′ contracts the birational transform of E which we also denote by E as abuse of notation. If dim g(E) = 1, then Y ′ has non-isolated cDV singularities along g(E). Since g(E) is a G-invariant rational curve, there exists y ′ ∈ Y ′ whose G-orbit has at most 12 points by Lemma 3.13. Then we havewhere H ⊂ G is the group of stabilizer of y ′ . Now the only case left is when g(E) = y ′ is a G-invariant closed point. If E is normal, then by similar argument in the proof of Lemma 3.4 we know thatand we are done. If E is non-normal, then from Reid's classification[Rei94]we know that either vol G (x, X) ≤ m := (−K E ) 2 ≤ 4 or E is one of the following:• A linear projection of F m−2;1 by identifying a fiber with the negative line;• A linear projection of F m−4;2 by identifying the negative conic to itself via an involution. In both cases above the non-normal locus C of E is a rational curve. Since C is Ginvariant, Lemma 3.13 implies that there exists a closed point y ∈ C whose G-orbit has at most 12 points. Then we havewhere H ⊂ G is the group of stabilizer of y. So we finish the proof.Proof of Theorem 1.5. We will show that |π loc 1 (X, x)|· vol(x, X) < 324 (note that this gives a new proof that the algebraic fundamental group of a three dimensional klt singularity is finite (see[SW94,Xu14]). It suffices to show the inequality |Aut(X/X)| · vol(x, X) < 324 for any finite quasi-étale Galois morphism π : ( X,x) → (X, x). By taking Galois closure of index one covering of ( X,x), we may assume that ( X,x) is Gorenstein. Denote by Conjecture 4.6. The second largest volume of n-dimensional klt singularity is 2(n − 1) n ,and it reaches this volume if and only if it is an ordinary double point.This conjecture is asked in[SS17]. We confirmed Conjecture 4.6 when dimension is at most 3 in Theorem 1.3.Appendix A. Optimal bounds of normalized volumes of singularitiesIn this appendix we will prove Theorem 4.5 and its logarithmic version Theorem A.4. Let us begin with proving the inequality part.For a morphism π : X → C from a variety X to a smooth curve C (over C), we say an ideal sheaf a on X is a flat family of ideals over C if the quotient sheaf O X /a is flat over C. For an n-dimensional klt pair (X, ∆) and a closed point x ∈ X, we define the normalized volume of the singularity x ∈ (X, ∆) to bewhere vol (X,∆),x (v) := A (X,∆) (v) n vol(v) (notice that such minimum exists by[Blu16]).Lemma A.1. Let x ∈ (X, ∆) be an n-dimensional klt singularity. Then vol(x, X, ∆) ≤ n n .Proof. Let C 1 ⊂ X be a curve through x that intersects X reg \ Supp(∆). Denote by τ :C 1 → C 1 the normalization ofis a graded sequence of flat families of ideals over C. Denote by ∆ c the pushforward of ∆ under the isomorphism X → X c , then σ(c) ∈ Supp(∆ c ) for all c ∈ C • by our assumption. For a general c ∈ C • , flatness of b • impliesHere the inequality on lct's follows from the lower semi-continuity of log canonical thresholds (see e.g.
+Pirola; Symmetries, quotients and Kähler-Einstein metrics. C Arezzo, A Ghigi, G P , J. Reine Angew. Math. 591C. Arezzo, A. Ghigi and G.P. Pirola; Symmetries, quotients and Kähler-Einstein metrics. J. Reine Angew. Math. 591 (2006), 177-200.
+
+The moduli space of cubic threefolds. D Allcock, J. Algebraic Geom. 122D. Allcock; The moduli space of cubic threefolds. J. Algebraic Geom. 12 (2003), no. 2, 201-223.
+
+Existence of minimal models for varieties of log general type. C Birkar, P Cascini, C D Hacon, J M C Kernan, J. Amer. Math. Soc. 23C. Birkar, P. Cascini, C. D. Hacon and J. M c Kernan; Existence of minimal models for varieties of log general type, J. Amer. Math. Soc. 23 (2010), 405-468.
+
+Existence of valuations with smallest normalized volume. H Blum, to appear in Compos. Math.H. Blum; Existence of valuations with smallest normalized volume, to appear in Compos. Math..
+
+On singular complex surfaces with negative canonical bundle, with applications to singular compactifications of C 2 and to 3-dimensional rational singularities. L Brenton, Math. Ann. 2482L. Brenton; On singular complex surfaces with negative canonical bundle, with applications to singular compactifications of C 2 and to 3-dimensional rational singularities. Math. Ann. 248 (1980), no. 2, 117-124.
+
+Kähler-Einstein metrics on Fano manifols, I-III. X Chen, S Donaldson, S Sun, J. Amer. Math. Soc. 28X. Chen, S. Donaldson and S. Sun; Kähler-Einstein metrics on Fano manifols, I-III. J. Amer. Math. Soc. 28 (2015), 183-197, 199-234, 235-278.
+
+. T Collins, G Székelyhidi, K-Stability Sasaki-Einstein Metrics, arXiv:1512.07213Preprint available atT. Collins and G. Székelyhidi; Sasaki-Einstein metrics and K-stability. Preprint available at arXiv:1512.07213.
+
+Multiplicities associated to graded families of ideals. S Cutkosky, Algebra Number Theory. 79S. Cutkosky; Multiplicities associated to graded families of ideals. Algebra Number Theory 7 (2013), no. 9, 2059-2083.
+
+Higher cohomology of divisors on a projective variety. T De Fernex, A Küronya, R Lazarsfeld, Math. Ann. 3372T. de Fernex, A. Küronya and R. Lazarsfeld; Higher cohomology of divisors on a projective variety. Math. Ann. 337 (2007), no. 2, 443-455.
+
+. S Donaldson, S Sun, S. Donaldson and S. Sun;
+
+Gromov-Hausdorff limits of Kähler manifolds and algebraic geometry. IIto appear in J. Diff. Geom.Gromov-Hausdorff limits of Kähler manifolds and algebraic geometry, II, to appear in J. Diff. Geom..
+
+Optimal bounds for the volumes of Kähler-Einstein Fano manifolds, to appear in Amer. K Fujita, J. Math. K. Fujita; Optimal bounds for the volumes of Kähler-Einstein Fano manifolds, to appear in Amer. J. Math..
+
+K-stability of Fano manifolds with not small alpha invariants. K Fujita, to appear in J. Inst. Math. JussieuK. Fujita; K-stability of Fano manifolds with not small alpha invariants, to appear in J. Inst. Math. Jussieu.
+
+On singular del Pezzo varieties. T Fujita, Lecture Notes in Math. SpringerAlgebraic geometryT. Fujita; On singular del Pezzo varieties. Algebraic geometry (L'Aquila, 1988), 117-128, Lecture Notes in Math., 1417, Springer, Berlin, 1990.
+
+Étale fundamental groups of Kawamata log terminal spaces, flat sheaves, and quotients of abelian varieties. D Greb, S Kebekus, T Peternell, Duke Math. J. 16510D. Greb, S. Kebekus and T. Peternell;Étale fundamental groups of Kawamata log terminal spaces, flat sheaves, and quotients of abelian varieties. Duke Math. J. 165 (2016), no. 10, 1965-2004.
+
+Robin; Algebraic geometry. R Hartshorne, Graduate Texts in Mathematics. 52Springer-Verlagxvi+496 ppR. Hartshorne, Robin; Algebraic geometry. Graduate Texts in Mathematics, No. 52. Springer- Verlag, New York-Heidelberg, 1977. xvi+496 pp.
+
+Degenerations of rationally connected varieties. A Hogadi, C Xu, Trans. Amer. Math. Soc. 3617A. Hogadi and C. Xu; Degenerations of rationally connected varieties. Trans. Amer. Math. Soc. 361 (2009), no. 7, 3931-3949.
+
+Singularities of the minimal model program. With a collaboration of Sándor Kovács. J Kollár, Cambridge Tracts in Mathematics. Cambridge University Pressx+370 ppJ. Kollár; Singularities of the minimal model program. With a collaboration of Sándor Kovács. Cambridge Tracts in Mathematics, 200. Cambridge University Press, Cambridge, 2013. x+370 pp.
+
+Birational geometry of algebraic varieties. With the collaboration of C. H. Clemens and A. Corti. Translated from the 1998 Japanese original. J Kollár, S Mori, Cambridge Tracts in Mathematics. 134Cambridge University Pressviii+254 ppJ. Kollár and S. Mori; Birational geometry of algebraic varieties. With the collaboration of C. H. Clemens and A. Corti. Translated from the 1998 Japanese original. Cambridge Tracts in Mathematics, 134. Cambridge University Press, Cambridge, 1998. viii+254 pp.
+
+Positivity in algebraic geometry I: Classical setting: line bundles and linear series. R Lazarsfeld, Ergeb. Math. Grenzgeb. 48Springer-VerlagR. Lazarsfeld, Positivity in algebraic geometry I: Classical setting: line bundles and linear series. Ergeb. Math. Grenzgeb. 48, Springer-Verlag, New York, 2004.
+
+Positivity in algebraic geometry II: Positivity for vector bundles, and multiplier ideals. R Lazarsfeld, Ergeb. Math. Grenzgeb. 49Springer-VerlagR. Lazarsfeld, Positivity in algebraic geometry II: Positivity for vector bundles, and multiplier ideals. Ergeb. Math. Grenzgeb. 49, Springer-Verlag, New York, 2004.
+
+Convex bodies associated to linear series. R Lazarsfeld, M Mustaţȃ, Ann. Sci.Éc. Norm. Supér. 4R. Lazarsfeld and M. Mustaţȃ: Convex bodies associated to linear series. Ann. Sci.Éc. Norm. Supér. (4) 42 (2009), no. 5, 783-835.
+
+Minimizing normalized volumes of valuations. C Li, to appear in Math. Z.C. Li; Minimizing normalized volumes of valuations, to appear in Math. Z..
+
+K-semistability is equivariant volume minimization. C Li, to appear in Duke Math. J.C. Li; K-semistability is equivariant volume minimization, to appear in Duke Math. J..
+
+Kähler-Einstein metrics and volume minimization. C Li, Y Liu, arXiv:1602.05094Preprint available atC. Li and Y. Liu; Kähler-Einstein metrics and volume minimization. Preprint available at arXiv:1602.05094.
+
+On proper moduli space of smoothable Kähler-Einstein Fano varieties. C Li, X Wang, C Xu, arXiv:1411.0761v3Preprint available atC. Li, X. Wang and C. Xu; On proper moduli space of smoothable Kähler-Einstein Fano varieties. Preprint available at arXiv:1411.0761v3.
+
+Stability of valuations and Kollár components. C Li, C Xu, arXiv:1604.05398Preprint available atC. Li and C. Xu; Stability of valuations and Kollár components. Preprint available at arXiv:1604.05398.
+
+The volume of singular Kähler-Einstein Fano varieties. Y Liu, to appear in Compos. Math.Y. Liu; The volume of singular Kähler-Einstein Fano varieties, to appear in Compos. Math..
+
+H Matsumura, Commutative ring theory. Translated from the Japanese by M. Reid. Cambridge Studies in Advanced Mathematics. CambridgeCambridge University Press8xiv+320 ppH. Matsumura: Commutative ring theory. Translated from the Japanese by M. Reid. Cambridge Studies in Advanced Mathematics, 8. Cambridge University Press, Cambridge, 1986. xiv+320 pp.
+
+Stability and Einstein-Kähler metric of a quartic del Pezzo surface. Einstein metrics and Yang-Mills connections. T Mabuchi, S Mukai, Lecture Notes in Pure and Appl. Math. 145DekkerT. Mabuchi, S. Mukai; Stability and Einstein-Kähler metric of a quartic del Pezzo surface. Einstein metrics and Yang-Mills connections (Sanda, 1990), 133-160, Lecture Notes in Pure and Appl. Math., 145, Dekker, New York, 1993.
+
+On multiplicities of graded sequences of ideals. M Mustaţȃ, J. Algebra. 2561M. Mustaţȃ; On multiplicities of graded sequences of ideals. J. Algebra 256 (2002), no. 1, 229- 249.
+
+Compact moduli spaces of Kähler-Einstein Fano varieties. Y Odaka, Publ. Res. Inst. Math. Sci. 513Y. Odaka; Compact moduli spaces of Kähler-Einstein Fano varieties. Publ. Res. Inst. Math. Sci. 51 (2015), no. 3, 549-565.
+
+Compact moduli spaces of del Pezzo surfaces and Kähler-Einstein metrics. Y Odaka, C Spotti, S Sun, J. Differential Geom. 1021Y. Odaka, C. Spotti and S. Sun; Compact moduli spaces of del Pezzo surfaces and Kähler- Einstein metrics. J. Differential Geom. 102 (2016), no. 1, 127-172.
+
+Nonnormal del Pezzo surfaces. M Reid, Publ. Res. Inst. Math. Sci. 305M. Reid; Nonnormal del Pezzo surfaces. Publ. Res. Inst. Math. Sci. 30 (1994), no. 5, 695-727.
+
+Some properties of complete intersections in "good" projective varieties. L Robbiano, Nagoya Math. J. 61L. Robbiano; Some properties of complete intersections in "good" projective varieties. Nagoya Math. J. 61 (1976), 103-111.
+
+Rigidity of quotient singularities. M Schlessinger, Invent. math. 141M. Schlessinger: Rigidity of quotient singularities. Invent. math. 14 (1971), no. 1, 17-26.
+
+Explicit Gromov-Hausdorff compactifications of moduli spaces of Kähler-Einstein Fano manifolds. C Spotti, S Sun, arXiv:1705.00377Preprint available atC. Spotti and S. Sun; Explicit Gromov-Hausdorff compactifications of moduli spaces of Kähler- Einstein Fano manifolds. Preprint available at arXiv:1705.00377.
+
+Existence and deformations of KähleraEinstein metrics on smoothable Q-Fano varieties Duke Math. C Spotti, S Sun, C Yao, J. 16516C. Spotti, S. Sun and C. Yao; Existence and deformations of KähleraEinstein metrics on smooth- able Q-Fano varieties Duke Math. J. 165, no. 16 (2016), 3043-3083.
+
+Singular threefolds with numerically trivial first and second Chern classes. N I Shepherd-Barron, P M H Wilson, J. Algebraic Geom. 3N. I. Shepherd-Barron and P. M. H. Wilson; Singular threefolds with numerically trivial first and second Chern classes. J. Algebraic Geom. 3 (1994), 265-281.
+
+Group action on polynomial and power series rings. P Symonds, Pacific J. Math. 1951P. Symonds; Group action on polynomial and power series rings. Pacific J. Math. 195 (2000), no. 1, 225-230.
+
+G Tian, On Kähler-Einstein metrics on certain Kähler manifolds with c 1 (M ) > 0. Invent. Math. 89G. Tian; On Kähler-Einstein metrics on certain Kähler manifolds with c 1 (M ) > 0. Invent. Math. 89 (1987), no. 2, 225-246.
+
+On Calabi's conjecture for complex surfaces with positive first Chern class. G Tian, Invent. Math. 1011G. Tian; On Calabi's conjecture for complex surfaces with positive first Chern class. Invent. Math. 101 (1990), no. 1, 101-172.
+
+The K-energy on hypersurfaces and stability. G Tian, Comm. Anal. Geom. 22G. Tian. The K-energy on hypersurfaces and stability. Comm. Anal. Geom., 2 (1994), no.2, 239-265.
+
+Canonical metrics in Kähler geometry. Notes taken by Meike Akveld. G Tian, Lectures in Mathematics ETH Zürich. Birkhäuser Verlag. G. Tian; Canonical metrics in Kähler geometry. Notes taken by Meike Akveld. Lectures in Math- ematics ETH Zürich. Birkhäuser Verlag, Basel, 2000.
+
+. G Tian; K-Stability, Kähler-Einstein Metrics, Comm. Pure and Applied Math. 687G. Tian; K-stability and Kähler-Einstein metrics, Comm. Pure and Applied Math., 68 (2015), no. 7, 1085-1156.
+
+Finiteness of fundamental groups. Z Tian, C Xu, Compos. Math. 1532Z. Tian and C. Xu; Finiteness of fundamental groups. Compos. Math. 153 (2017), no. 2, 257-273.
+
+Finiteness of algebraic fundamental groups. C Xu, Compos. Math. 1503C. Xu; Finiteness of algebraic fundamental groups. Compos. Math. 150 (2014), no. 3, 409-414.

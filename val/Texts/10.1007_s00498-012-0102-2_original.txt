@@ -1,0 +1,418 @@
+
+Explicit approximate controllability of the Schrödinger equation with a polarizability term
+20 Jul 2012 February 3, 2013
+
+Morgan Morancey 
+Explicit approximate controllability of the Schrödinger equation with a polarizability term
+20 Jul 2012 February 3, 2013Approximate controllabilitySchrödinger equationpolariz- abilityoscillating controlsaveragingfeedback stabilizationLaSalle invari- ance principle
+We consider a controlled Schrödinger equation with a dipolar and a polarizability term, used when the dipolar approximation is not valid. The control is the amplitude of the external electric field, it acts non linearly on the state. We extend in this infinite dimensional framework previous techniques used by Coron, Grigoriu, Lefter and Turinici for stabilization in finite dimension. We consider a highly oscillating control and prove the semi-global weak H 2 stabilization of the averaged system using a Lyapunov function introduced by Nersesyan. Then it is proved that the solutions of the Schrödinger equation and of the averaged equation stay close on every finite time horizon provided that the control is oscillating enough. Combining these two results, we get approximate controllability to the ground state for the polarizability system with explicit controls. Numerical simulations are presented to illustrate those theoretical results.
+
+Introduction
+
+
+Main result
+
+Following [R] we consider a quantum particle in a potential V (x) and an electric field of amplitude u(t). We assume that the dipolar approximation is not valid (see [DBA + , DKAB]). Then, the particle is represented by its wave function ψ(t, x) solution of the following Schrödinger equation i∂ t ψ = (−∆ + V (x))ψ + u(t)Q 1 (x)ψ + u(t) 2 Q 2 (x)ψ, x ∈ D, ψ |∂D = 0,
+
+(1.1) with initial condition
+ψ(0, x) = ψ 0 (x), x ∈ D,(1.2)
+where D ⊂ R m is a bounded domain with smooth boundary. The functions V, Q 1 , Q 2 ∈ C ∞ (D, R) are given, Q 1 is the dipolar moment and Q 2 the polarizability moment. For the sake of simplicity, we denote by L 2 , H 1 0 and H 2 respectively the usual Lebesgue and Sobolev spaces L 2 (D, C), H 1 0 (D, C) and H 2 (D, C). The following well-posedness result holds (see [Ca]) by application of the Banach fixed point theorem.
+
+Proposition 1.1. For any ψ 0 ∈ H 1 0 ∩ H 2 and u ∈ L 2 loc ([0, +∞), R), the system (1.1)-(1.2) has a unique weak solution ψ ∈ C 0 ([0, +∞), H 1 0 ∩H 2 ). Moreover, for all t > 0, ||ψ(t, .)|| L 2 = ||ψ 0 || L 2 and there exists C = C(Q 1 , Q 2 ) > 0 such that for any t > 0, ||ψ(t, ·)|| H 2 ≤ ||ψ 0 || H 2 e C t 0 |u(τ )|+|u(τ )| 2 dτ .
+
+Let S := ψ ∈ L 2 (D, C); ||ψ|| L 2 = 1 and ·, · be the usual scalar product on L 2 (D, C) f, g = D f (x)g(x)dx, for f, g ∈ L 2 (D, C).
+
+We consider the operator (−∆ + V ) with domain H 1 0 ∩ H 2 and denote by (λ k ) k∈N * the non decreasing sequence of its eigenvalues and by (φ k ) k∈N * the associated eigenvectors in S. The family (φ k ) k∈N * is a Hilbert basis of L 2 . Our goal is to stabilize the ground state. As the global phase of the wave function is physically meaningless, our target set is
+C := {cφ ; c ∈ C and |c| = 1} ,(1.3)
+where φ := φ 1 . Let J =0 := k ≥ 2; Q 1 φ, φ k = 0 and J 0 := k ≥ 2; Q 1 φ, φ k = 0 . We assume that the following hypotheses hold.
+
+Hypotheses 1.1.
+
+i) ∀k ∈ J 0 , Q 2 φ, φ k = 0 i.e. all coupling are realized either by Q 1 or Q 2 , ii) Card(J 0 ) < ∞ i.e. only a finite number of coupling is missed by Q 1 , iii) λ 1 − λ k = λ p − λ q for k, p, q ≥ 1 such that {1, k} = {p, q} and k = 1, Remark 1.1. The hypothesis i) is weaker than the one in [BN] (i.e. J 0 = ∅). As proved in [N1,Section 3.4], we get that generically with respect to Q 1 and Q 2 in C ∞ (D, R), the scalar products Q 1 φ, φ k and Q 2 φ, φ k are all non zero. The spectral assumption iii) does not hold in every physical situation. For example, it is not satisfied in 1D if V = 0. However, it is proved in [N1,Lemma 3.12] that if D is the rectangle [0, 1] n , Hypothesis 1.1 iii) hold generically with respect to V in the set G := V ∈ C ∞ (D, R) ; V (x 1 , . . . , x n ) = V 1 (x 1 ) + · · · + V n (x n ), with V k ∈ C ∞ ([0, 1], R) .
+
+As in [CGLT], we use a time-periodic oscillating control of the form u(t, ψ) := α(ψ) + β(ψ) sin t ε .
+
+(1.4)
+
+Following classical techniques (see e.g. [SVM]) of dynamical systems in finite dimension let us introduce the averaged system
+         i∂ t ψ av = − ∆ + V (x) ψ av + α(ψ av )Q 1 (x)ψ av + α(ψ av ) 2 + 1 2 β(ψ av ) 2 Q 2 (x)ψ av , ψ av |∂D = 0,
+(1.5) with initial condition ψ av (0, ·) = ψ 0 .
+
+(1.6)
+
+Let P be the orthogonal projection in L 2 onto the closure of Span {φ k ; k ≥ 2} and γ be a positive constant (to be determined later). Our stabilization strategy relies on the following Lyapunov function (used in [BN]) defined on S ∩ H 1 0 ∩ H 2 by
+L(ψ) := γ||(−∆ + V )P ψ|| 2 L 2 + 1 − | ψ, φ | 2 . (1.7)
+This leads to feedback laws given by α(ψ av (t, ·)) := −kI 1 (ψ av (t, ·)), β(ψ av (t, ·)) := g(I 2 (ψ av (t, ·)), (1.8) with k > 0 small enough and
+g ∈ C 2 (R, R + ) satisfying g(x) = 0 if and only if x ≥ 0, g ′ bounded, (1.9)
+and for j ∈ {1, 2}, for z ∈ H 2 ,
+I j (z) = Im γ (−∆ + V )P Q j z, (−∆ + V )P z − Q j z, φ φ, z . (1.10)
+We can now state the well-posedness of the averaged closed loop system (1.5).
+
+Proposition 1.2. Let R > 0. There exists k 0 = k 0 (V, Q 2 , R) > 0 such that for any ψ 0 ∈ H 2 ∩ H 1 0 ∩ S with L(ψ 0 ) < R and k ∈ (0, k 0 ), the closed-loop system (1.5)-(1.6)-(1.8) has a unique solution ψ av ∈ C 0 ([0, +∞),
+H 2 ∩ H 1 0 ). There exists M > 0 such that ||ψ av (t)|| H 2 ≤ M, ∀t ≥ 0.
+(1.11)
+Moreover, if ∆ψ 0 ∈ H 1 0 ∩ H 2 , then ∆ψ av ∈ C 0 ([0, +∞), H 1 0 ∩ H 2 ).
+We define X 0 := ψ 0 ∈ S ∩ H 1 0 ∩ H 2 ; ∆ψ 0 ∈ H 1 0 ∩ H 2 the set of admissible initial conditions. For an initial condition ψ 0 ∈ X 0 , we define the control
+u ε (t) := α(ψ av (t)) + β(ψ av (t)) sin t ε , (1.12)
+where ψ av is the solution of (1.5)-(1.6)-(1.8).
+
+The main result of this article is the following one.
+
+Theorem 1.1. Assume that Hypotheses 1.1 hold. Let C, the target set, be defined by (1.3). There exists k 0 = k 0 (V, Q 2 ) > 0 such that for any k ∈ k 0 , for any s < 2 and for any ψ 0 ∈ X 0 with 0 < L(ψ 0 ) < 1, there exist an increasing time sequence (T n ) n∈N in R * + tending to +∞ and a decreasing sequence (ε n ) n∈N in R * + such that if ψ ε is the solution of (1.1)-(1.2) associated to the control u ε defined by (1.12) then for all n ∈ N, if ε ∈ (0, ε n ),
+dist H s (ψ ε (t, ·), C) ≤ 1 2 n , ∀t ∈ [T n , T n+1 ].
+Remark 1.2. Theorem 1.1 gives the semi-global approximate controllability with explicit controls of system (1.1). Hypotheses 1.1 are needed to ensure that the invariant set coincides with the target set. The semi-global aspect comes from the hypothesis 0 < L(ψ 0 ) < 1 : by reducing γ (in a way dependant of ψ 0 ), this condition can be fulfilled as soon as ψ 0 / ∈ C. In Theorem 1.1, there is a gap between the H 4 regularity of the initial condition and the approximate controllability in H s with s < 2. The extraregularity is used in this article to prove an approximation property in H 2 between the oscillating system and the averaged one (see Section 3). Weakening this regularity assumption is an open problem for which an alternative strategy is required. The last lost of regularity comes from the application of a weak LaSalle principle instead of a strong one due to lack of compactness in infinite dimension.
+
+
+A review of previous results
+
+In this section, we recall previous results about quantum systems with bilinear controls. The model (1.1) of an infinite potential well was proposed by Rouchon in [R] in the dipolar approximation (Q 2 = 0). A classical negative result was obtained in [BMS] by Ball, Marsden and Slemrod for infinite dimensional bilinear control systems. This result implies, for system (1.1) with Q 2 = 0, that the set of reachable states from any initial data in H 2 ∩ H 1 0 ∩ S with control in L 2 (0, T ) has a dense complement in H 2 ∩ H 1 0 ∩ S. However, exact controllability was proved in 1D by Beauchard in [B] for V = 0 and Q 1 (x) = x in more regular spaces (H 7 ). This result was then refined in [BL] by Beauchard and Laurent for more general Q 1 and a regularity H 3 .
+
+The question of stabilization is addressed in [BN] where Beauchard and Nersesyan extended previous results from Nersesyan [N1]. They proved, under appropriate assumptions on Q 1 , the semi-global weak H 2 stabilization of the wave function towards the ground state using explicit feedback control and Lyapunov techniques in infinite dimension. However sometimes, for example in the case of higher laser intensities, this model is not efficient (see e.g. [DBA + , DKAB]) and we need to add a polarizability term u(t) 2 Q 2 (x)ψ in the model. This term, if not neglected, can also be helpful in mathematical proofs. Indeed the result of [BN] only holds if Q 1 couples the ground state to any other eigenstate and then the use of the polarizability enables us to weaken this assumption. Mathematical use of the expansion of the Hamiltonian beyond the dipolar approximation was used by Grigoriu, Lefter and Turinici in [GLT, T]. A finite dimension approximation of this model was studied in [CGLT] by Coron, Grigoriu, Lefter and Turinici. The authors proposed discontinuous feedback laws and periodic highly oscillating feedback laws to stabilize the ground state. In this article, we extend in our infinite dimensional framework their idea of using (time-dependent) periodic feedback laws. We also refer to the book [Cor] by Coron for a comprehensive presentation of the feedback strategy and the use of time-varying feedback laws.
+
+How to adapt the Lyapunov or LaSalle strategy in an infinite dimensional framework is not clear because closed bounded sets are not compact so the trajectories may lack compactness in the considered topology. In this direction we should cite some related works of Mirrahimi and Beauchard [BM, M] where the idea was to prove approximate convergence results. In this article, we will use an adaptation of the LaSalle invariance principle for weak convergence which was used for example in [BN] by Beauchard and Nersesyan. There are other strategies to show a strong stabilization property. Coron and d'Andréa-Novel proved in [CdAN] the compactness of the trajectories by a direct method for a beam equation and thus the strong stabilization. In [Cou1,Cou2] Couchouron gave sufficient conditions to obtain the compactness in favorable cases where the control acts diagonally on the state. Another strategy to obtain strong results is to look for a strict Lyapunov function, which is an even trickier question, and was done for example in [CdANB] by Coron, d'Andréa-Novel and Bastin for a system of conservation laws.
+
+The question of approximate controllability has been addressed by var-ious authors using various techniques. In [N2], Nersesyan uses a Lyapunov strategy to obtain approximate controllability in large time in regular spaces.
+
+In [CMSB], Chambrion, Mason, Sigalotti and Boscain proved approximate controllability in L 2 for a wider class of systems using geometric control tools for the Galerkin approximations. The hypotheses needed were weakened in [BCCS] and the approximate controllability was extended to some H s spaces in [BCC]. Explicit approximate controllability in large time has also been obtained by Ervedoza and Puel in [EP] on a model of trapped ion, using different tools.
+
+
+Structure of this article
+
+As announced in Section 1.1, we study the system (1.1) by introducing a highly oscillating time-periodic control and the corresponding averaged system. Section 2 is devoted to the introduction of this averaged system and its weak stabilization using Lyapunov techniques and an adaptation of the LaSalle invariance principle in infinite dimension.
+
+In Section 3 we study the approximation property between the solution of the averaged system and the solution of (1.1) with the same initial condition. We prove that on every finite time interval these two solutions remain arbitrarily close provided that the control is oscillating enough. This is an extension of classical averaging results for finite dimension dynamical systems.
+
+Finally gathering the stabilization result of Section 2 and the approximation property of Section 3, we prove Theorem 1.1 in Section 4.
+
+Section 5 is devoted to numerical simulations illustrating several aspects of Theorem 1.1 and of the averaging strategy.
+
+2 Stabilization of the averaged system 2.1 Definition of the averaged system System (1.1) with feedback law u defined by (1.4) can be rewritten as
+     ∂ t ψ(t) = Aψ(t) + F t ε , ψ(t) , ψ |∂D = 0, (2.1) where the operator A is defined by D(A) := H 2 ∩ H 1 0 , Aψ := (i∆ − iV )ψ and F (s, z) := −i (α(z) + β(z) sin(s)) Q 1 z − i (α(z) + β(z) sin(s)) 2 Q 2 z. (2.2) For any z, F (., z) is T -periodic (with here T = 2π). Following classical techniques of averaging, we introduce F 0 (z) := 1 T T 0 F (t, z)dt.
+We can define the averaged system associated to (2.1) by
+∂ t ψ av = Aψ av + F 0 (ψ av ), ψ av |∂D = 0. (2.3)
+Straightforward computations of F 0 show that the system (2.3) can be rewritten as (1.5).
+
+We show by Lyapunov techniques that we can choose α and β such that the solution of the averaged system (2.3) is weakly convergent in H 2 towards our target set C.
+
+
+Control Lyapunov function and damping feedback laws
+
+Our candidate for the Lyapunov function, L, is defined in (1.7). It is clear that L(ψ) ≥ 0 whenever ψ ∈ S ∩ H 1 0 ∩ H 2 and that L(ψ) = 0 if and only if ψ ∈ C.
+
+The main advantage of this Lyapunov function is that it can be used to bound the H 2 norm. In fact, for any ψ
+∈ S ∩ H 1 0 ∩ H 2 , L(ψ) ≥ γ||(−∆ + V )P ψ|| 2 L 2 ≥ γ 2 ||∆(P ψ)|| 2 L 2 − C ≥ γ 4 ||∆ψ|| 2 L 2 − C,
+where here, as in all this article, C is a positive constant possibly different each time it appears. This leads to the existence ofC > 0 satisfying
+||ψ|| 2 H 2 ≤C(1 + L(ψ)), ∀ψ ∈ S ∩ H 1 0 ∩ H 2 . (2.4)
+Remark 2.1. Although the idea of using a feedback of the form (1.4) is inspired by [CGLT], the construction of the Lyapunov function and of the controls is here different because we are dealing with an infinite dimensional framework. We follow the strategy used in [N1,BN].
+
+Choice of the feedbacks. We would like to choose the feedbacks α and β such that for all t ≥ 0,
+d dt L(ψ av (t)) ≤ 0 where ψ av is the solution of (1.5),(1.6). If ∆ψ av (t) ∈ H 1 0 ∩ H 2 for all t ≥ 0 then d dt L(ψ av (t)) = 2γRe (−∆ + V )P ∂ t ψ av , (−∆ + V )P ψ av − 2Re ∂ t ψ av , φ φ, ψ av = 2γRe (−∆ + V )P i∆ψ av − iV ψ av − iαQ 1 ψ av − i(α 2 + 1 2 β 2 )Q 2 ψ av , (−∆ + V )P ψ av − 2Re i∆ψ av − iV ψ av − iαQ 1 ψ av − i(α 2 + 1 2 β 2 )Q 2 ψ av , φ φ, ψ av .
+Then we perform integration by parts. As P commutes with (−∆ + V ), V is real and thanks to the following boundary conditions
+(−∆ + V )P ψ av|∂D = ψ av|∂D = φ |∂D = 0, we have 2γRe −i(−∆ + V ) 2 P ψ av , (−∆ + V )P ψ av − 2Re (i∆ − iV )ψ av , φ φ, ψ av = 2γRe −i∇(−∆ + V )P ψ av , ∇(−∆ + V )P ψ av + 2γRe −iV (−∆ + V )P ψ av , (−∆ + V )P ψ av + 2λ 1 Re iψ av , φ φ, ψ av = 0.
+This leads to
+d dt L(ψ av (t)) = 2αI 1 (ψ av (t)) + 2 α 2 + 1 2 β 2 I 2 (ψ av (t)), (2.5)
+where I j is defined in (1.10).
+
+In order to have a decreasing Lyapunov function we define the feedback laws α and β as in (1.8). Thus (2.5) becomes
+d dt L(ψ av (t)) = −2 kI 2 1 (1 − kI 2 ) − 1 2 I 2 g 2 (I 2 ) . (2.6)
+If we assume that we can choose the constant k such that (1 − kI 2 ) > 0 for all t ≥ 0 and if ∆ψ av (t) ∈ H 1 0 ∩ H 2 then the feedbacks (1.8
+) in system (1.5) lead to d dt L(ψ av (t)) ≤ 0, ∀t ≥ 0. (2.7)
+Well-posedness and boundedness proofs. Using the previous heuristic on the Lyapunov function, we can state and prove the well-posedness of the closed loop system (1.5)-(1.8) globally in time and derive a uniform bound on the H 2 norm of the solution. Namely, we prove Proposition 1.2.
+
+Proof of Proposition 1.2. By the explicit expression (1.10) of I 2 , we get for
+any z ∈ H 2 , |I 2 (z)| ≤ f ||z|| H 2 where f (x) := ||Q 2 || L ∞ +γ(x+||V || L ∞ +λ 1 )(||Q 2 || C 2 x+||V || L ∞ ||Q 2 || L ∞ +λ 1 ||Q 2 || L ∞ ).
+Notice that f is increasing on R + . Let K := 2f C (1 + R) whereC is defined by (2.4), k 0 := 1 K and k ∈ (0, k 0 ). The local existence and regularity is obtained by a classical fixed point argument : there exists T * > 0 such that the closed loop system (1.5) with initial condition (1.6) and feedback laws (1.8) admits a unique solution defined on (0, T * ) and satisfying either T * = +∞ or T * < +∞ and
+lim sup t→T * ||ψ av (t)|| H 2 = +∞.
+We have
+|I 2 (ψ av (0))| ≤ f (||ψ 0 || H 2 ) ≤ f C (1 + L(ψ 0 )) ≤ K 2 , thus, by continuity, |I 2 (ψ av (t))| ≤ K for t small enough. Let T max := sup {t ∈ (0, T * ); |I 2 (ψ av (τ ))| ≤ K, ∀τ ∈ (0, t)} .
+We want to prove that
+T max = T * = +∞. For all t ∈ [0, T max ), we have 1 − kI 2 (ψ av (t)) > 0, which implies (by (2.6)), L(ψ av (·)) is decreasing on [0, T max ). Estimate (2.4) leads to ||ψ av (t)|| H 2 ≤ C (1 + L(ψ av (t)) ≤ C (1 + L(ψ 0 )), ∀t ∈ [0, T max ).
+(2.8) Let us proceed by contradiction and assume that T max < T * . This implies |I 2 (ψ av (T max ))| = K. By definition of K,
+|I 2 (ψ av (t))| ≤ f C (1 + L(ψ 0 ) ≤ K 2 ∀t ∈ [0, T max ).
+This is inconsistent with |I 2 (ψ av (T max ))| = K so T max = T * and the solution is bounded in H 2 when it is defined. As no blow-up is possible thanks to (2.8) we obtain that T max = T * = +∞ and thus the solution is global in time and bounded. Finally, taking the time derivative of the equation we obtain the announced regularity.
+
+
+Convergence Analysis
+
+In all this section we assume that k ∈ (0, k 0 ) where k 0 is defined in Proposition 1.2 with R = 1. The closed-loop stabilization for the averaged system (1.5) is given by the next statement.
+
+Theorem 2.1. Assume that Hypotheses 1.1 hold. If ψ 0 ∈ X 0 with 0 < L(ψ 0 ) < 1, then the solution ψ av of the closed-loop system (1.5)-(1.8) with initial condition (1.6) satisfies
+ψ av (t) ⇀ t→∞ C in H 2 .
+We prove this theorem by adapting the LaSalle invariance principle to infinite dimension in the same spirit as in [BN]. This is done in two steps. First we prove that the invariant set, relatively to the closed-loop system (1.5)-(1.8) and the Lyapunov function L, is C. Here, Hypothesis 1.1 is crucial. Then we prove that every adherent point for the weak H 2 topology of the solution of this closed-loop system is contained in C. This is due to the continuity of the propagator of the closed-loop system for the weak H 2 topology.
+
+
+Invariant set
+
+Proposition 2.1. Assume that Hypotheses 1.1 hold. Assume that ψ 0 belongs to S ∩ H 1 0 ∩ H 2 and satisfies ψ 0 , φ = 0. If the function t → L(ψ av (t)) is constant, then ψ 0 ∈ C.
+
+Proof. Thanks to (2.6), the fact that 1 − kI 2 (ψ av (t)) > 0 for all t ≥ 0 and (1.9) we get I 1 [ψ av (·)] ≡ 0, I 2 (ψ av (·))g 2 (I 2 (ψ av (·))) ≡ 0 i.e. I 2 (ψ av (t)) ≥ 0, ∀t ≥ 0.
+
+By (1.8) this implies that α(ψ av (·)) ≡ β(ψ av (·)) ≡ 0 and then ψ av is solution of the uncontrolled Schrödinger equation. So,
+ψ av (t) = ∞ j=1 e −iλ j t ψ 0 , φ j φ j .
+Recall that φ := φ 1 is the ground state. Following the idea of [N1], we obtain after computations and gathering the terms with different exponential term
+I 1 (ψ av (t)) = j,k≥2P (ψ 0 , j, k, Q 1 )e −i(λ j −λ k )t + j∈J =0P (ψ 0 , j, Q 1 )e i(λ j −λ 1 )t + j∈J =0 ψ 0 , φ j φ, ψ 0 Q 1 φ j , φ (1 + γλ 2 j )e −i(λ j −λ 1 )t ,
+whereP (ψ 0 , j, k, Q 1 ) andP (ψ 0 , j, Q 1 ) are constants. Then, by [N1,Lemma 3.10], ψ 0 , φ j φ, ψ 0 Q 1 φ j , φ (1 + γλ 2 j ) = 0, ∀j ∈ J =0 . Using the assumption φ, ψ 0 = 0 and Hypotheses 1.1 it comes that for all j ∈ J =0 , ψ 0 , φ j = 0. This leads to
+ψ av (t) = e −iλ 1 t ψ 0 , φ φ + j∈J 0 e −iλ j t ψ 0 , φ j φ j ,
+where by Hypotheses 1.1, J 0 is a finite set. By simple computations we obtain,
+I 2 (ψ av (t)) = Im k,j∈J 0 γλ j φ j , ψ 0 ψ 0 , φ k (−∆ + V )P (Q 2 φ k ), φ j e i(λ j −λ k )t + j∈J 0 γλ j φ j , ψ 0 ψ 0 , φ (−∆ + V )P (Q 2 φ), φ j e i(λ j −λ 1 )t − j∈J 0 ψ 0 , φ j φ, ψ 0 Q 2 φ j , φ e −i(λ j −λ 1 )t − | ψ 0 , φ | 2 Q 2 φ, φ ≥ 0.
+(2.9)
+
+There exists N 0 ∈ N * and (µ n ) n∈{0,...,N 0 } such that
+{µ n ; n ∈ {0, . . . , N 0 }} = {±(λ k − λ j ) ; (k, j) ∈ J 0 × (J 0 ∪ {1})} ,
+with µ 0 = 0 and µ j = µ k if j = k. Thus, (2.9) implies that for any n ∈ {0, . . . , N 0 }, there exists Λ n = Λ n (ψ 0 , Q 2 ) ∈ C such that
+Im N 0 j=0 Λ j e iµ j t ≥ 0, ∀t ≥ 0. (2.10) Straightforward computations give Λ 0 = j∈J 0 γλ 2 j | φ j , ψ 0 | 2 Q 2 φ j , φ j − | ψ 0 , φ | 2 Q 2 φ, φ .
+Thus, Im Λ 0 = 0 and our inequality (2.10) can be rewritten as
+Im N 0 j=1 Λ j e iµ j t ≥ 0, ∀t ≥ 0,
+with the µ j being all different and non-zero. Then using the same argument as in [CGLT, Proof of Theorem 3.1], we get that Λ j = 0 for j ≥ 1 and then using (2.9) in particular that the coefficient of e −i(λ j −λ 1 )t vanishes. It implies ψ 0 , φ j = 0 for all j ∈ J 0 . Consequently, ψ 0 = ψ 0 , φ φ. As ψ 0 , φ ∈ S, we obtain ψ 0 ∈ C.
+
+
+Weak H 2 continuity of the propagator
+
+We denote by U t (ψ 0 ) the propagator of the closed-loop system (1.5)-(1.8). We detail here the continuity property of this propagator and of the feedback laws we need to apply the LaSalle invariance principle.
+Proposition 2.2. Let z n ∈ S ∩ H 1 0 ∩ H 2 be a sequence such that z n ⇀ z ∞ in H 2 . For every T > 0, there exists N ⊂ (0, T ) of zero Lebesgue measure verifying for all t ∈ (0, T )\N , i) U t (z n ) ⇀ n→∞ U t (z ∞ ) in H 2 , ii) α U t (z n ) → n→∞ α U t (z ∞ ) and β U t (z n ) → n→∞ β U t (z ∞ ) . Proof. Proof of ii). We start by proving that if (z n ) n∈N ∈ H 1 0 ∩ H 2 satisfy z n ⇀ n→∞ z ∞ in H 2 then α(z n ) → n→∞ α(z ∞ ) and β(z n ) → n→∞ β(z ∞ ). Thus ii)
+will be a simple consequence of i). As proved in [BN,Proposition 2.2], using the fact that the regularity H 3/2 is sufficient to define the feedback, we get
+I j (z n ) −→ n→+∞ I j (z ∞ ), for j = 1, 2.
+So by the design of our feedback,
+α(z n ) −→ n→+∞ α(z ∞ ), β(z n ) −→ n→+∞ β(z ∞ ).
+Proof of i). The exact same proof as in [BN,Proposition 2.2] based on extraction in less regular spaces, uniqueness property of the closed loop system and taking into account the polarizability term leads to the announced result.
+
+
+LaSalle invariance principle
+
+We now have all the needed tools to prove Theorem 2.1.
+
+Proof of Theorem 2.1. Consider ψ 0 ∈ X 0 with 0 < L(ψ 0 ) < 1. Thanks to the bound (2.4), U t (ψ 0 ) is bounded in H 2 . Let (t n ) n∈N be a sequence of times tending to +∞ and ψ ∞ ∈ H 2 be such that U tn (ψ 0 ) ⇀ n→∞ ψ ∞ in H 2 . We want to show that ψ ∞ ∈ C.
+
+We prove that α(U t (ψ ∞ )) = 0 and β(U t (ψ ∞ )) = 0. Indeed, the function t → α U t (ψ 0 ) belongs to L 2 (0, +∞) (because of (2.6) and (1.8)) so the sequence of functions (t ∈ (0, +∞) → α U tn+t (ψ 0 ) n tends to zero in L 2 (0, +∞). Then by the Lebesgue reciprocal theorem there exists a subsequence (t n k ) k∈N and N 1 ⊂ (0, +∞) of zero Lebesgue measure such that
+α U t+tn k (ψ 0 ) → k→∞ 0, ∀t ∈ (0, +∞)\N 1 .
+Let T ∈ (0, +∞). Using Proposition 2.2, there exists N ⊂ (0, T ) of zero Lebesgue measure such that T ], and this for all T > 0. Finally α U t (ψ ∞ ) = 0 for all t ≥ 0.
+α U t+tn k (ψ 0 ) → k→∞ α U t (ψ ∞ ) , ∀t ∈ (0, T )\N. Hence, α U t (ψ ∞ ) = 0 for all t ∈ (0, T )\(N 1 ∪ N ). The function t → α U t (ψ ∞ ) being continuous we get α U t (ψ ∞ ) = 0 for all t ∈ [0,
+The same argument holds for β asg : t → I 2 U t (ψ 0 ) g 2 I 2 U t (ψ 0 ) belongs to L 1 (0, +∞). Then by the proof of Proposition 2.2,
+g U t+tn k (ψ 0 ) → k→∞g U t (ψ ∞ ) , ∀t ∈ (0, T )\N, andg U t (ψ ∞ ) = 0 implies β U t (ψ ∞ ) ≡ 0.
+These two results lead to the fact that L U t (ψ ∞ ) is constant. By (2.7), L(ψ ∞ ) ≤ L(ψ 0 ) < 1 so ψ ∞ , φ = 0. All assumptions of Proposition 2.1 are satisfied then ψ ∞ ∈ C. This concludes the proof of Theorem 2.1 and the convergence analysis of (1.5).
+
+
+Approximation by averaging
+
+The method of averaging was mostly used for finite-dimensional dynamical systems (see e.g. [SVM]). The concept of averaging in quantum control theory has already produced interesting results. For example, in [MSR] the authors make important use of these averaging properties in finite dimension through what is called in quantum physics the rotating wave approximation. The main idea of using a highly oscillating control is that if it is oscillating enough the initial system behaves like the averaged system. We extend this concept in our infinite dimensional framework : we prove an approximation result on every finite time interval. More precisely we have the following result.
+
+Proposition 3.1. Let [s, L] be a fixed interval and ψ 0 ∈ X 0 with 0 < L(ψ 0 ) < 1. Let ψ av be the solution of the closed loop system (1.5),(1.8) with initial condition ψ av (s, ·) = ψ 0 . For any δ > 0, there exists ε 0 > 0 such that, if ψ ε is the solution of (1.1) associated to the same initial condition ψ ε (s, ·) = ψ 0 and control u ε (t) defined by (1.12) with ε ∈ (0, ε 0 ) then
+||ψ ε (t, ·) − ψ av (t, ·)|| H 2 ≤ δ, ∀t ∈ [s, L].
+Remark 3.1. Notice that the controls α and β were defined using the averaged system in a feedback form but the control u ε used for the system (1.1) is explicit and is not defined as a feedback control.
+
+Remark 3.2. Due to the infinite dimensional framework, we are facing regularity issues and cannot adapt directly the strategy of [SVM].
+
+Proof. We define for (t, z,z) ∈ R × H 2 × H 2 , F (t, z,z) := −i (α(z) + β(z) sin(t)) Q 1 z − i (α(z) + β(z) sin(t)) 2 Q 2 z. (3.1) Notice that thanks to (2.2) for any (t, z) ∈ R × H 2 ,
+F (t, z, z) = F (t, z).
+(3.2)
+
+With these notations the considered system (1.1) with control (1.12) and initial condition ψ ε (s, ·) = ψ 0 can be rewritten as
+     ∂ t ψ ε (t) = Aψ ε (t) +F t ε , ψ ε (t), ψ av (t) , ψ ε |∂D = 0,
+where ψ av is the solution of the closed-loop system (1.5) with initial condition ψ av (s, ·) = ψ 0 . Denoting by T A the semigroup generated by A, we have for any t ≥ s,
+ψ ε (t) = T A (t − s)ψ 0 + t s T A (t − τ )F τ ε , ψ ε (τ ), ψ av (τ ) dτ, ψ av (t) = T A (t − s)ψ 0 + t s T A (t − τ )F 0 ψ av (τ ) dτ.
+This implies for any t ≥ s,
+||ψ ε (t) − ψ av (t)|| H 2 ≤ t s T A (t − τ ) F τ ε , ψ av (τ ) − F 0 (ψ av (τ )) dτ H 2 + t s T A (t − τ ) F τ ε , ψ ε (τ ), ψ av (τ ) − F τ ε , ψ av (τ ) dτ H 2 . (3.3)
+We study separately the two terms of the right-hand side of (3.3).
+
+First step : We show the existence of C > 0 such that for any t ≥ s, for any ε > 0,
+t s T A (t − τ ) F τ ε , ψ ε (τ ), ψ av (τ ) − F τ ε , ψ av (τ ) dτ H 2 ≤ C t s ψ ε (τ ) − ψ av (τ ) H 2 dτ.
+(3.4) By (2.2),(3.1), it comes that for any τ ≥ s, for any ε > 0,
+F τ ε , ψ ε (τ ), ψ av (τ ) − F τ ε , ψ av (τ ) = −i α(ψ av (τ )) + β(ψ av (τ )) sin τ ε Q 1 [ψ ε (τ ) − ψ av (τ )] − i α(ψ av (τ )) + β(ψ av (τ )) sin τ ε 2 Q 2 [ψ ε (τ ) − ψ av (τ )] .
+As ψ av is bounded in H 2 , using (1.8) and (1.10) we get the existence of M 1 > 0 such that for all τ ≥ s, |α(ψ av (τ ))| + |β(ψ av (τ ))| ≤ M 1 .
+
+(3.5)
+
+As | sin τ ε | ≤ 1, we get the existence of C > 0 independent of ε such that for any τ ≥ s, for any ε > 0,
+F τ ε , ψ ε (τ ), ψ av (τ ) −F τ ε , ψ av (τ ) H 2 ≤ C ψ ε (τ )−ψ av (τ ) H 2 .
+(3.6) Then the contraction property of T A implies (3.4).
+
+Second step : We show that there exists C > 0 satisfying for all t ∈ [s, L], for any ε > 0,
+t s T A (t − τ ) F τ ε , ψ av (τ ) − F 0 (ψ av (τ )) dτ H 2 ≤ Cε. (3.7)
+We follow computations on the semigroup T A done in [HL].
+For (t, v) ∈ R + × C 1 ([s, L], H 2 ), we define U and H by U (t, v(·)) : = t 0 F (τ, v(·)) − F 0 (v(·)) dτ, H(t, v) : = d v U (t, v)v,
+wherev is the time derivative of v. Notice that the T -periodicity of F (·, v) and the definition of F 0 imply that U (·, v) is also T -periodic. Lemma 3.1. As ψ av ∈ C 1 ([s, L], H 1 0 ∩ H 2 ), we have for any t ∈ [s, L], for any ε > 0,
+t s T A (t − τ ) F τ ε , ψ av (τ ) − F 0 (ψ av (τ )) dτ = εU t ε , ψ av (t) − εT A (t − s)U s ε , ψ av (s) +εA t s T A (t − τ )U τ ε , ψ av (τ ) dτ − ε t s T A (t − τ )H τ ε , ψ av (τ ) dτ.
+Proof. The proof is done in [HL,Lemma 2.2] .
+
+We study separately each term of the previous right-hand side.
+• With κ = ⌊ t εT ⌋, we have t ε − κT ∈ [0, T ] and by periodicity U t ε , ψ av (t) = t/ε 0 F (τ, ψ av (t)) − F 0 (ψ av (t)) dτ = t/ε−κT 0 F (τ, ψ av (t)) − F 0 (ψ av (t)) dτ. T A (t − τ )AU τ ε , ψ av (τ ) dτ,
+and for any t ∈ [s, L], for any ε > 0
+AU t ε , ψ av (t) = A t/ε−κT 0 F (τ, ψ av (t)) − F 0 (ψ av (t)) dτ = t/ε−κT 0 AF (τ, ψ av (t)) − AF 0 (ψ av (t)) dτ.
+By definition of F and F 0 we have
+AF (t, z) = −i(α(z) + β(z) sin(t))A(Q 1 z) − i(α(z) + β(z) sin(t)) 2 A(Q 2 z), AF 0 (z) = −iα(z)A(Q 1 z) − i α(z) 2 + 1 2 β(z) 2 A(Q 2 z).
+By regularity hypothesis on Q 1 , Q 2 and V there exists C > 0 such that
+||A(Q 1 z)|| H 2 ≤ C||∆z|| H 2 , ||A(Q 2 z)|| H 2 ≤ C||∆z|| H 2 .
+Thus thanks to Proposition 1.2 and the bound (3.5) on α(ψ av ) and β(ψ av ), we get the existence of M 3 > 0 satisfying
+||AF (τ, ψ av (t))|| H 2 ≤ M 3 , ||AF 0 (ψ av (t))|| H 2 ≤ M 3 , ∀τ ≥ 0, ∀t ∈ [s, L].
+So, for any t ∈ [s, L], for any ε > 0, AU t ε , ψ av (t)
+H 2 ≤ 2M 3 T . Conse- quently , there exists C > 0 such that εA t s T A (t − τ )U τ ε , ψ av (τ ) dτ H 2 ≤ Cε, ∀t ∈ [s, L], ∀ε > 0. (3.9)
+• For the last term we need to estimate H t ε , ψ av (t) . We have
+H t ε , ψ av (t) = d v U t ε , ψ av (t) .∂ t ψ av (t) = t/ε−κT 0 d v F (τ, ψ av ).∂ t ψ av − dF 0 (ψ av ).∂ t ψ av dτ.
+Using (1.8) and (1.10), we have for any
+v, w ∈ C 0 ([s, L], H 1 0 ∩ H 2 ), dα(v).w = −kdI 1 (v).w, dβ(v).w = g ′ I 2 (v) dI 2 (v).w,(3.10)
+where,
+dI j (v).w = Im γ (−∆ + V )P (Q j w), (−∆ + V )P v + γ (−∆ + V )P (Q j v), (−∆ + V )P w − Q j w, φ φ, v − Q j v, φ φ, w .
+Finally, we have
+d v F (t, v).w = −i(α(v) + β(v) sin t)Q 1 w − i(dα(v).w + dβ(v).w sin t)Q 1 v −i(α(v) + β(v) sin t) 2 Q 2 w − 2i(α(v) + β(v) sin t)(dα(v).w + dβ(v).w sin t)Q 2 v,(3.11)
+and
+dF 0 (v).w = −iα(v)Q 1 w − idα(v).wQ 1 v − i α(v) 2 + 1 2 β(v) 2 Q 2 w −i(2α(v)dα(v).w + β(v)dβ(v).w sin t)Q 2 v. (3.12) By Proposition 1.2, ∂ t ψ av ∈ C 0 ([0, +∞), H 1 0 ∩H 2 ) so there exists M 4 > 0 such that ||∂ t ψ av (t)|| H 2 ≤ M 4 , ∀t ∈ [s, L].
+Hence the same computations as previously lead to the existence of C > 0 satisfying |dα(ψ av (t)).∂ t ψ av (t)| + |dβ(ψ av (t)).∂ t ψ av (t)| ≤ C, ∀t ∈ [s, L], and thus by (3.11),(3.12), for any t ∈ [s, L], for any τ ≥ 0,
+
+||d v F (τ, ψ av (t)).∂ t ψ av (t)|| H 2 + ||dF 0 (ψ av (t)).∂ t ψ av (t)|| H 2 ≤ C.
+
+
+As a consequence,
+H τ ε , ψ av (τ ) H 2 ≤ CT, ∀τ ∈ [s, L], ∀ε > 0,
+and then,
+ε t s T A (t − τ )H τ ε , ψ av (τ ) H 2 dτ ≤ (CLT )ε.
+(3.13)
+
+We are now able to deal with the remaining term of the right-hand side of (3.3). Gathering inequalities (3.8), (3.9) and (3.13) in Lemma 3.1 we obtain that there exists C > 0 such that inequality (3.7) holds.
+
+Third step : Putting together (3.3), (3.4) and (3.7) we obtain that there exists C > 0 such that for any t ∈ [s, L], for any ε > 0,
+||ψ ε (t) − ψ av (t)|| H 2 ≤ Cε + C t s ||ψ ε (τ ) − ψ av (τ )|| H 2 dτ.
+Hence Grönwall's lemma implies
+||ψ ε (t) − ψ av (t)|| H 2 ≤ Cεe C(t−s) ≤ (Ce C(L−s) )ε, ∀t ∈ [s, L],
+and Proposition 3.1 is proved with ε 0 = δ Ce C(L−s) . 
+
+
+Explicit approximate controllability
+
+The solution ψ av of the averaged system (1.5),(1.8), can be driven in the H 2 weak topology to the target set C. The solution ψ ε of the system (1.1) associated to the same initial condition, with control u ε , stays close to ψ av on every finite time interval provided that the control is oscillating enough. Gathering these two results we prove Theorem 1.1.
+
+Proof of Theorem 1.1. We consider s < 2 fixed.
+
+By Theorem 2.1, we can construct an increasing time sequence (T n ) n∈N tending to +∞ such that for any n ∈ N,
+dist H s (ψ av (t), C) ≤ 1 2 n+1 , ∀t ≥ T n .
+(4.1)
+
+Using Proposition 3.1 on the time interval [0, T n+1 ] we then construct a decreasing sequence (ε n ) n∈N such that for any n ∈ N,
+||ψ ε (t) − ψ av (t)|| H s ≤ 1 2 n+1 , ∀t ∈ [0, T n+1 ], ∀ε ∈ (0, ε n ).
+(4.2) Then (4.1),(4.2) imply that T n+1 ], ∀ε ∈ (0, ε n ), which is the statement of Theorem 1.1.
+∀n ∈ N, dist H s (ψ ε (t), C) ≤ 1 2 n , ∀t ∈ [T n ,
+
+Numerical simulations
+
+This section is dedicated to numerical simulations of system (1.1). First, we detail how we approximate the solutions of (1.1) and (1.5). Then, we check the validity of the implemented code. Finally, we illustrate different aspects of Theorem 1.1 and of the averaging property, Proposition 3.1.
+
+
+Settings
+
+In all what follows, we set D = [0, 1]. As the potential V will vary in this section, the eigenelements of −∆ + V are denoted ϕ k,V and λ k,V . Any function ψ ∈ L 2 ((0, 1), C) is approximated by its first M modes
+ψ(t) ≈ M k=1 x k (t)ϕ k,V.
+The unknown eigenvectors ϕ k,V are approximated in the following way
+ϕ k,V ≈ N j=1 a k j ϕ k,0 .
+The equality (−∆ + V )ϕ k,V = λ k,V ϕ k,V leads to Ba k = λ k,V a k with a k = (a k 1 , . . . , a k N ) t , B = diag(λ 1,0 , . . . , λ N,0 ) + V ϕ i,0 , ϕ j,0 1≤i,j≤N .
+
+Notice that λ k,0 = (kπ) 2 and ϕ k,0 = √ 2 sin(kπ·) are explicit. The scalar products are approximated by the Matlab function quadl. The eigenelements a k and λ k,V are then approximated by the Matlab function eig.
+
+
+Approximation of ψ ε and ψ av
+
+Let
+H 0 := diag(λ 1,V , . . . , λ M,V ), H n := Q n ϕ i,V , ϕ j,V 1≤i,j≤M , n ∈ {1, 2}.
+It follows that the feedback laws (1.10) are approximated, for X ∈ R M and j ∈ {1, 2}, by Thus, if we define X av , X ε ∈ R M , systems (1.1) and (1.5) are approximated by
+I j (X) : = Im γ H 0 (0, (H j X) 2 , . . . , (H j X) M ) t t H 0 (0, x 2 , . . . , x M ) − (H j X) 1 x 1 ,i d dt X ε = H 0 + u ε (t)H 1 + u ε (t) 2 H 2 X ε , (5.1) and i d dt X av = H 0 + α(X av )H 1 + (α 2 (X av ) + 1 2 β(X av ) 2 )H 2 X av , (5.2)
+where u ε (t) = α(X av (t)) + β(X av (t)) sin(t/ε). Equations (5.1) and (5.2) are solved numerically (simultaneously) using Euler method with a time step dt and a Strang splitting method.
+
+
+Validation
+
+We now prove the validity of the implemented code. The eigenvectors ϕ k,V are approximated by N = 50 modes. We take, as a test case, V (x) :
+= (x − 1/2) 2 , Q 1 (x) := x 2 and Q 2 (x) := x. The considered initial condition is ψ 0 = 1 √ 2 ϕ 1,V + i √ 2 ϕ 2,V .
+The value of the oscillating parameter is ε = 10 −3 . The parameter γ is chosen such that L(ψ 0 ) = 3/4. We compute the discrete Lyapunov function for the averaged system and the H s norm (with s = 1.8) to the ground state for both the oscillating and the averaged system. The time scale is [0, T ] with T = 1000 and a time step dt = 10 −3 . For M = 5, we get the results presented in Figure 1. As expected, we observe the convergence of the Lyapunov function to 0. The solutions of (5.1) and (5.2) are driven to the ground state (up to a global phase). To validate the simulations, we have also tested the code for M = 10 and M = 20. We obtained the same asymptotic behaviour and the same values for the Lyapunov function and the H s distance to the target. As the approximate controllability uses the fact that the controls are oscillating, the time step dt cannot be taken large with respect to the oscillating parameter ε. For ε = 10 −3 , we obtain the same results with dt = 10 −3 and dt = 10 −4 . However, instabilities appear on the oscillating system for dt = 10 −2 . Thus, in all what follows the time step will be chosen smaller than ε. We now present several simulations to illustrate various aspects of Theorem 1.1.
+
+
+Influence of the initial condition
+
+For every other initial condition tested, the asymptotic behaviour is the same. We present here the results for the same parameters as in Figure 1 but with the initial condition ψ 0 = 1
+√ 3 ϕ 1,V + 1 √ 3 ϕ 2,V + i √ 3 ϕ 3,V .
+In this case, the stabilization of the averaged system is slower and we computed it for T = 5000. We observe the same asymptotic behaviour as in Figure 1.
+
+
+Averaging strategy
+
+We present numerically the influence of the oscillating parameter ε. First, we consider the same potential, dipolar and polarizability moments as in Figure 1. We compute the discrete H s norm (for s = 1.8) to the ground state (up to a global phase) and the discrete H 2 norm of X av − X ε . Figure  3 is obtained with ε = 10 −3 while Figure 4 is obtained with ε = 10 −4 . Both are computed with a time step dt = ε and final time T = 500. For a fixed parameter ε, we observe that the H 2 distance between the solution of (1.1) and the solution of (1.5) with the same initial condition does not increase as the time goes to infinity but rather tends to a limit value. This limit value is of the same order of magnitude as ε. We observe that
+||X av (T ) − X 10 −3 (T )|| H 2 ||X av (T ) − X 10 −4 (T )|| H 2 ≈ 30.
+This validates numerically the results of Proposition 3.1 and indicates that this averaging property should be valid on an infinite time horizon. The same behaviour has been obtained with other parameters. We present here the simulations with Q 1 (x) := cos(x) and Q 2 (x) := cos(2x), inspired by the physical situation of alignment dynamic of a HCN molecule as in [DKAB]. Figure 5 is obtained with ε = 10 −3 while Figure 6 is obtained with ε = 10 −4 . Both are computed with a time step dt = ε and final time T = 1000 (as the stabilization process seems slower in this case). Remark 5.1. Although the time scales at stake in these simulations can seem very large, one has to remember that the Schrödinger equation is considered in atomic unity.
+
+
+Conclusion, open problems and perspectives
+
+In this article we have defined explicit oscillating controls that drive the solution of our system arbitrarily close to the ground state provided that the control is oscillating enough and the time is large enough. To achieve this we have used and developed tools from the theory of finite dimension dynamical systems and applied them to the considered Schrödinger equation. We managed by adding a mathematically and physically meaningful term to weaken the previous assumptions on the coupling realized by this model. The assumptions that were made are proved to be generic with respect to the functions determining the system (potential, dipolar and polarizability moments). The results presented should be generalizable to a compact manifold with the Laplace-Beltrami operator. We performed numerical simulations to illustrate the approximate controllability. This gives numerical bounds on the time scale and on the values of the oscillating parameter needed to drive any initial condition arbitrarily close to the ground state.
+
+A challenging question would be to prove an approximation property of the averaged system on an infinite time interval [s, +∞). This would lead to approximate stabilization to the ground state. Based on the numerical simulations, this result seems to hold. Unfortunately the tools developed here are really based on the finite time interval and cannot be extended directly. In [BL], Beauchard and Laurent proved the local exact controllability in H 3 around the ground state for the system (1.1) in the dipolar approximation (i.e. Q 2 ≡ 0) under some coupling assumptions in one dimension. If one manages to extend their result to the system (1.1) with suitable assumptions on Q 2 , this may lead to a global exact controllability result around the ground state, at least for the one dimensional case. The main difficulty would be to obtain the approximate convergence in the same functional setting as their local exact controllability result and with coherent assumptions on the polarizability moment.
+
+Remark 3 . 3 .
+33The proof we used is fundamentally based on the boundedness of ∆ψ av (t) on [s, L] and on Grönwall's lemma so it cannot be extended directly to an infinite time interval [s, +∞).
+
+
+X) := −kI 1 (X), β(X) := − min(I 2 (X), 0).
+
+Figure 1 :
+1Lyapunov function of the averaged system (left). H s norm to the ground state (right) for the averaged system (continuous line) and the oscillating system (dashed line).
+
+Figure 2 :
+2Lyapunov function of the averaged system (left). H s norm to the ground state (right) for the averaged system (continuous line) and the oscillating system (dashed line).
+
+Figure 3 :Figure 4 :
+34H s norm to the ground state (left) for the averaged system (continuous line) and the oscillating system (dashed line). H 2 gap from the average (right). H s norm to the ground state (left) for the averaged system (continuous line) and the oscillating system (dashed line). H 2 gap from the average (right).
+
+Figure 5 :Figure 6 :
+56H s norm to the ground state (left) for the averaged system (continuous line) and the oscillating system (dashed line). H 2 gap from the average (right). H s norm to the ground state (left) for the averaged system (continuous line) and the oscillating system (dashed line). H 2 gap from the average (right).
+Acknowledgements :The author would like to thank K. Beauchard for having interested him in this problem and for fruitful discussions.As ψ av is bounded in H 2 and α(ψ av ), β(ψ av ) are bounded there exists M 2 > 0 such thatThe same computations lead toThen,
+Local controllability of a 1-D Schrödinger equation. K Beauchard, J. Math. Pures Appl. 849K. Beauchard. Local controllability of a 1-D Schrödinger equation. J. Math. Pures Appl. (9), 84(7):851-956, 2005.
+
+Weakly-coupled systems in quantum control. INRIA Nancy-Grand Est "CU-PIDSE" Color program. N Boussaid, M Caponigro, T Chambrion, N. Boussaid, M. Caponigro, and T. Chambrion. Weakly-coupled systems in quantum control. INRIA Nancy-Grand Est "CU- PIDSE" Color program., September 2011.
+
+A weak spectral condition for the controllability of the bilinear Schrödinger equation with application to the control of a rotating planar molecule. U Boscain, M Caponigro, T Chambrion, M Sigalotti, U. Boscain, M. Caponigro, T. Chambrion, and M. Sigalotti. A weak spectral condition for the controllability of the bilinear Schrödinger equation with application to the control of a rotating planar molecule. October 2011.
+
+Local controllability of 1D linear and nonlinear Schrödinger equations with bilinear control. K Beauchard, C Laurent, J. Math. Pures Appl. 949K. Beauchard and C. Laurent. Local controllability of 1D lin- ear and nonlinear Schrödinger equations with bilinear control. J. Math. Pures Appl. (9), 94(5):520-554, 2010.
+
+Practical stabilization of a quantum particle in a one-dimensional infinite square potential well. K Beauchard, M Mirrahimi, SIAM J. Control Optim. 482K. Beauchard and M. Mirrahimi. Practical stabilization of a quan- tum particle in a one-dimensional infinite square potential well. SIAM J. Control Optim., 48(2):1179-1205, 2009.
+
+Controllability for distributed bilinear systems. J M Ball, J E Marsden, M Slemrod, SIAM J. Control Optim. 204J. M. Ball, J.E. Marsden, and M. Slemrod. Controllability for distributed bilinear systems. SIAM J. Control Optim., 20(4):575- 597, 1982.
+
+Semi-global weak stabilization of bilinear Schrödinger equations. K Beauchard, V Nersesyan, C. R. Math. Acad. Sci. Paris. 348K. Beauchard and V. Nersesyan. Semi-global weak stabilization of bilinear Schrödinger equations. C. R. Math. Acad. Sci. Paris, 348(19-20):1073-1078, 2010.
+
+Semilinear Schrödinger equations. T Cazenave, Courant Lecture Notes in Mathematics. 10New York University Courant Institute of Mathematical SciencesT. Cazenave. Semilinear Schrödinger equations, volume 10 of Courant Lecture Notes in Mathematics. New York University Courant Institute of Mathematical Sciences, New York, 2003.
+
+Control and nonlinearity. J.-M Coron, Mathematical Surveys and Monographs. 136American Mathematical SocietyJ.-M. Coron. Control and nonlinearity, volume 136 of Mathemat- ical Surveys and Monographs. American Mathematical Society, Providence, RI, 2007.
+
+Compactness theorems for abstract evolution problems. J.-F Couchouron, J. Evol. Equ. 22J.-F. Couchouron. Compactness theorems for abstract evolution problems. J. Evol. Equ., 2(2):151-175, 2002.
+
+Strong stabilization of controlled vibrating systems. ESAIM : COCV. J.-F Couchouron, 10.1051/cocv/2010041J.-F. Couchouron. Strong stabilization of controlled vibrating sys- tems. ESAIM : COCV, 2010. DOI : 10.1051/cocv/2010041.
+
+Andréa-Novel. Stabilization of a rotating body beam without damping. J.-M Coron, B , IEEE Trans. Automat. Control. 435J.-M. Coron and B. d' Andréa-Novel. Stabilization of a rotating body beam without damping. IEEE Trans. Automat. Control, 43(5):608-618, 1998.
+
+A strict Lyapunov function for boundary control of hyperbolic systems of conservation laws. J.-M Coron, B Andréa-Novel, G Bastin, IEEE Trans. Automat. Control. 521J.-M. Coron, B. d' Andréa-Novel, and G. Bastin. A strict Lya- punov function for boundary control of hyperbolic systems of con- servation laws. IEEE Trans. Automat. Control, 52(1):2-11, 2007.
+
+Quantum control design by Lyapunov trajectory tracking for dipole and polarizability coupling. J.-M Coron, A Grigoriu, C Lefter, G Turinici, New. J. Phys. 1110J.-M. Coron, A. Grigoriu, C. Lefter, and G. Turinici. Quantum control design by Lyapunov trajectory tracking for dipole and po- larizability coupling. New. J. Phys., 11(10), 2009.
+
+Controllability of the discrete-spectrum Schrödinger equation driven by an external field. T Chambrion, P Mason, M Sigalotti, U Boscain, Ann. Inst. H. Poincaré Anal. Non Linéaire. 261T. Chambrion, P. Mason, M. Sigalotti, and U. Boscain. Con- trollability of the discrete-spectrum Schrödinger equation driven by an external field. Ann. Inst. H. Poincaré Anal. Non Linéaire, 26(1):329-349, 2009.
+
+Two-frequency IR laser orientation of polar molecules. numerical simulations for hcn. M Dba + ] C, A D Dion, O Bandrauk, A Atabek, H Keller, Y Umeda, Fujimura, Chem. Phys. Lett. 302DBA + ] C.M. Dion, A.D. Bandrauk, O. Atabek, A. Keller, H. Umeda, and Y. Fujimura. Two-frequency IR laser orientation of polar molecules. numerical simulations for hcn. Chem. Phys. Lett., (302):215-223, 1999.
+
+Laserinduced alignment dynamics of HCN : Roles of the permanent dipole moment and the polarizability. C M Dion, A Keller, O Atabek, A D Bandrauk, Phys. Rev. 591382C.M. Dion, A. Keller, O. Atabek, and A.D. Bandrauk. Laser- induced alignment dynamics of HCN : Roles of the permanent dipole moment and the polarizability. Phys. Rev., (59):1382, 1999.
+
+Approximate controllability for a system of Schrödinger equations modelling a single trapped ion. S Ervedoza, J.-P Puel, Ann. Inst. H. Poincaré Anal. Non Linéaire. 266S. Ervedoza and J.-P. Puel. Approximate controllability for a sys- tem of Schrödinger equations modelling a single trapped ion. Ann. Inst. H. Poincaré Anal. Non Linéaire, 26(6):2111-2136, 2009.
+
+Lyapunov control of Schrödinger equation:beyond the dipole approximations. A Grigoriu, C Lefter, G Turinici, Proc of the 28th IASTED International Conference on Modelling, Identification and Control. of the 28th IASTED International Conference on Modelling, Identification and ControlInnsbruck, AustriaA. Grigoriu, C. Lefter, and G. Turinici. Lyapunov control of Schrödinger equation:beyond the dipole approximations. In Proc of the 28th IASTED International Conference on Modelling, Iden- tification and Control, pages 119-123, Innsbruck, Austria, 2009.
+
+Averaging in infinite dimensions. J K Hale, S M Lunel, J. Integral Equations Appl. 24J.K. Hale and S.M. Lunel. Averaging in infinite dimensions. J. Integral Equations Appl., 2(4):463-494, 1990.
+
+Lyapunov control of a quantum particle in a decaying potential. M Mirrahimi, Ann. Inst. H. Poincaré Anal. Non Linéaire. 265M. Mirrahimi. Lyapunov control of a quantum particle in a de- caying potential. Ann. Inst. H. Poincaré Anal. Non Linéaire, 26(5):1743-1765, 2009.
+
+Lyapunov control of bilinear Schrödinger equations. M Mirrahimi, P Rouchon, G Turinici, Automatica J. IFAC. 4111M. Mirrahimi, P. Rouchon, and G. Turinici. Lyapunov control of bilinear Schrödinger equations. Automatica J. IFAC, 41(11):1987- 1994, 2005.
+
+Real-time synchronization feedbacks for single-atom frequency standards: V-and lambda-structure systems. M Mirrahimi, A Sarlette, P Rouchon, Proceedings of the 49th IEEE Conference on Decision and Control. the 49th IEEE Conference on Decision and ControlAtlanta, DecemberM. Mirrahimi, A. Sarlette, and P. Rouchon. Real-time synchro- nization feedbacks for single-atom frequency standards: V-and lambda-structure systems. In Proceedings of the 49th IEEE Con- ference on Decision and Control, pages 5031-5036, Atlanta, De- cember 2010.
+
+Growth of Sobolev norms and controllability of the Schrödinger equation. V Nersesyan, Comm. Math. Phys. 2901V. Nersesyan. Growth of Sobolev norms and controllability of the Schrödinger equation. Comm. Math. Phys., 290(1):371-387, 2009.
+
+Global approximate controllability for Schrödinger equation in higher Sobolev norms and applications. V Nersesyan, Ann. Inst. H. Poincaré Anal. Non Linéaire. 273V. Nersesyan. Global approximate controllability for Schrödinger equation in higher Sobolev norms and applications. Ann. Inst. H. Poincaré Anal. Non Linéaire, 27(3):901-915, 2010.
+
+Control of a quantum particle in a moving potential well. P Rouchon, Lagrangian and Hamiltonian methods for nonlinear control 2003. LaxenburgP. Rouchon. Control of a quantum particle in a moving potential well. In Lagrangian and Hamiltonian methods for nonlinear control 2003, pages 287-290. IFAC, Laxenburg, 2003.
+
+Averaging methods in nonlinear dynamical systems. J A Sanders, F Verhulst, J Murdock, Applied Mathematical Sciences. 59Springersecond editionJ. A. Sanders, F. Verhulst, and J. Murdock. Averaging methods in nonlinear dynamical systems, volume 59 of Applied Mathematical Sciences. Springer, New York, second edition, 2007.
+
+Beyond bilinear controllability: applications to quantum control. G Turinici, Control of coupled partial differential equations. Birkhäuser, Basel155G. Turinici. Beyond bilinear controllability: applications to quantum control. In Control of coupled partial differential equa- tions, volume 155 of Internat. Ser. Numer. Math., pages 293-309. Birkhäuser, Basel, 2007.

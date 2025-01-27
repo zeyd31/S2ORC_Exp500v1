@@ -43,6 +43,8 @@ dataset/
         └── ...
 ```
 
+The `test` set follows the same structure and it will be released in this repository according to [the planned timeline](https://nfdi4ds.github.io/nslp2025/docs/mesd_shared_task.html) 
+
 ## File Components
 
 ### Annotation Files
@@ -68,7 +70,7 @@ Provides references to source documents:
 
 
 # Purpose
-S2ORC_Enhanced500v1 is designed to support researchers in developing and refining algorithms that automatically extract metadata from scholarly texts. This dataset is particularly prepared for the NFDI4DS shared task MESD, organized at the NLSP Workshop @ESWC 2025, where the focus is on enhancing the precision of metadata extraction techniques in academic literature.
+S2ORC_Enhanced500v1 is designed to support researchers in developing and refining algorithms that automatically extract metadata from scholarly texts. This dataset is particularly prepared for the NFDI4DS shared task MESD, organized at the [NLSP Workshop @ESWC 2025](https://nfdi4ds.github.io/nslp2025/docs/mesd_shared_task.html), where the focus is on enhancing the precision of metadata extraction techniques in academic literature.
 
 # Access
 Participants can access the S2ORC_Enhanced500v1 dataset by closing this repository. The test set will be released according the [timeline announced in the workshop page](https://nfdi4ds.github.io/nslp2025/docs/mesd_shared_task.html)

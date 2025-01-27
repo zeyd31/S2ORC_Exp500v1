@@ -1,0 +1,1023 @@
+
+IEEE TRANSACTIONS ON ROBOTICS 1 Sparse Pose Graph Optimization in Cycle Space
+
+
+Member, IEEEFang Bai 
+Member, IEEETeresa Vidal-Calleja 
+Member, IEEEGiorgio Grisetti 
+IEEE TRANSACTIONS ON ROBOTICS 1 Sparse Pose Graph Optimization in Cycle Space
+Index Terms-Pose graph optimizationminimum cycle basisSE(3) manifoldsimultaneous localization and mapping (SLAM)
+The state-of-the-art modern pose-graph optimization (PGO) systems are vertex based. In this context the number of variables might be high, albeit the number of cycles in the graph (loop closures) is relatively low. For sparse problems particularly, the cycle space has a significantly smaller dimension than the number of vertices. By exploiting this observation, in this paper we propose an alternative solution to PGO, that directly exploits the cycle space. We characterize the topology of the graph as a cycle matrix, and re-parameterize the problem using relative poses, which are further constrained by a cycle basis of the graph. We show that by using a minimum cycle basis, the cyclebased approach has superior convergence properties against its vertex-based counterpart, in terms of convergence speed and convergence to the global minimum. For sparse graphs, our cycle-based approach is also more time efficient than the vertexbased. As an additional contribution of this work we present an effective algorithm to compute the minimum cycle basis. Albeit known in computer science, we believe that this algorithm is not familiar to the robotics community. All the claims are validated by experiments on both standard benchmarks and simulated datasets. To foster the reproduction of the results, we provide a complete open-source C++ implementation 1 of our approach.
+
+I. INTRODUCTION
+
+P OSE graph optimization (PGO) is a fundamental problem which arises in various research disciplines, like simultaneous localization and mapping (SLAM) [1]- [5], structure from motion [6]- [8], calibration of multi-camera rig [9], and sensor network localization [10], [11].
+
+A pose graph is a graph whose vertices encode positions and orientations of 3D poses, and whose edges represent spatial constraints between the connected vertices. Taking a graphbased SLAM system as an example, the system processes the raw measurements to construct local maps. These local maps are then arranged in a pose graph as vertices. Constraints between local maps arise from matching nearby local maps or from proprioceptive measurements coming from odometry or inertial measurement units (IMU).
+
+Typically the constraints are affected by some uncertainty, which is modeled as a Gaussian (or Langevin) distribution centered around the equilibrium point of the constraint. For example, in graph-based SLAM, systematic biases, noise in the sensors, errors in localization propagate to the estimation of these constraints. Hence, in real applications it is impossible to find a configuration of vertices that simultaneously nulls the Fang Bai and Teresa Vidal-Calleja are with the Centre for Autonomous Systems (CAS), University of Technology Sydney, Sydney, Australia. Giorgio Grisetti is with the Department of Computer, Control, and Management Engineering "Antonio Ruberti", Sapienza University of Rome, Rome, Italy. (E-mail: fang.bai@yahoo.com; Fang.Bai@student.uts.edu.au; Teresa.VidalCalleja@uts.edu.au; Grisetti@diag.uniroma1.it). 1 Code: https://bitbucket.org/FangBai/cycleBasedPGO residual error of all constraints. PGO is then the task finding the configuration of the vertices that is maximally consistent with the constraints (i.e., edges), via solving a nonlinear least squares optimization problem.
+
+In real SLAM applications, the number of edges is typically proportional to the number of vertices. This is a consequence of the local nature of SLAM, stemming from the limits in the sensor range. Only local maps that are spatially close can share some common elements, and thus the corresponding vertices can be connected by constraints (i.e., edges). This results in limiting the number of edges connected to a vertex, and ultimately leads to a sparsely connected graph. By leveraging on this sparsity, modern PGO systems [12]- [15] are capable of solving extremely large problems in a fraction of seconds. We term the method in [12]- [15] as vertex-based approaches for a reason that will explain later on.
+
+At its core, the state-of-the-art PGO techniques solve a sparse linear system to update the estimates of vertices [12]- [15]. This system is typically solved by a sparse Cholesky factorization [16], which is guided by the graph topology presented as a vertex-edge incidence matrix. In graph theory, the incidence matrix spans a space called cut space, which is orthogonal complementary to a space called cycle space. A sparse graph implies two facts: (a) low connectivity between vertices, which has been reflected in the incidence matrix and exploited effectively [16]; (b) low dimensionality of cycle space, which has been largely ignored due to the huge success of sparse Cholesky factorization with respect to vertices. In this paper, we will show the possibility of designing effective PGO techniques in the cycle space.
+
+To this end, we reformulate the conventional least squares optimization with a relative parametrization, i.e., using relative poses (associated with edges), as variables to be estimated. This induces the over-parameterization of the problem since the number of edges is higher than that of vertices. This issue is solved by introducing a collection of inherent constraints, that the value of vertices anchors all the paths between any two vertices to generate the same composed transformation. Such a set of constraints are topologically characterized by the graph cycle space, which can be described by a cycle basis. Finally, our optimization problem is casted as a constrained least squares optimization problem, which can be solved in the sequential quadratic programming (SQP) scheme. We term this PGO technique as cycle-based approach.
+
+A common issue in the relative parameterization is that it is not necessarily sparse [17]- [20]. It turns out this issue can be resolved by using a minimum cycle basis (MCB); however the computation of a MCB itself is a hard problem. We exploit the fact that graphs in PGO (and other similar applications) are sparse, with positive (integer) weights, to design a tailored MCB algorithm that can greatly mitigate arXiv:2203.15597v1 [cs.RO] 29 Mar 2022 this issue, in particular for sparse graphs that are encountered in real SLAM/PGO applications. It can be shown that relative formulations have faster convergence compared with the vertex-based ones in the absolute frame (both in this work and the work in [20]). Therefore for sparse graphs, based on the MCB, the cycle-based approach can attain faster (or comparable at least) computational time compared with the vertex-based ones, due to the reduced dimension in the cycle space and the sparsity forced by the MCB. Aside from the numerical sparsity, the usage of the MCB can also improves the convergence to the global minimum.
+
+Concretely, we make following contributions in this paper: 1) We propose a cycle-based PGO formulation based on the cycle matrix and SE(3) Lie group, and derive a SQP algorithm on the manifold to solve it. 2) We give insights that the matrix structure in the Cholesky factorization is characterized by a cycle matrix: (a) the matrix to be factorized has exactly the same dimension as that in the cycle space; (b) the numerical sparsity can be maximized by a MCB. 3) We propose an effective MCB algorithm that is tailored for sparse graphs with positive integer weights. We give theoretical insights like LexDijkstra, and working heuristics like pruning vertices of degree two. 4) We provide principled analyses in terms of observability, convergence with respect to cycle bases, and convergence rate for the cycle-based PGO formulation. 5) We provide extensive experimental results to validate the advantages of using cycle-based PGO, in terms of both the computational complexity and robustness. 6) We provide a C++ implementation of the overall algorithm which is freely available to the community. The remainder of this paper is structured as follows: Section II reviews the related work. The Lie group and graph preliminaries are provided in Section III. Section IV recaps the conventional vertex-based PGO formulation. Section V derives the cycle-based PGO formulation and the corresponding SQP solver on the manifold. Section VI is dedicated to calculate a MCB for sparse graphs with positive integer weights. Analyses on the observability and convergence are presented in Section VII. Details of our C++ implementation are provided in Section VIII. Experimental validations are given in Section IX. Section X concludes the paper.
+
+II. RELATED WORK PGO, as a maximum likelihood estimation (MLE), was firstly described in the seminal paper by Lu et al. [21], where a nonlinear least squares (NLS) is used to optimize the network generated by scan-matchings. At the time, although in theory, techniques like Gauss-Newton [22] were available to solve the NLS problem, the development of its numerical side was a bit behind. To address the computational complexity, Frese et al. [23] proposed a multi-level relaxation method, based on the Gauss-Seidel relaxation. Olson et al. [24] suggested an incremental pose parameterization, and a PGO solver based on the stochastic gradient descent method, which had a large basin of convergence to the global optimum. Grisetti et al. [25] extended the framework to 3D, and applied a tree parameterization to improve the convergence speed.
+
+The rapid advancement in sparse linear algebra techniques (see Davis [16]) completely changed the landscape. In robotics, Dellaert et al. [12] is the first to show that MLE can be solved efficiently by a Gauss-Newton method, using sparse matrix decompositions. Kaess et al. attributed to the incremental solver of MLE, using the Givens rotation based QR decomposition [26], or the Bayes tree [27]. Kummerle et al. [13] designed a general graph based optimization framework. Ila et al. [14] exploited the block structure of sparse matrices. Besides matrix decompositions, the resulting linear system can also be solved by an iterative method, for example preconditioned conjugate gradient [28]- [30]. The convergence property of the Gauss-Newton based method can be further improved by using the idea of trust region [22], like Levenberg-Marquardt [31], or Powell's-dog-leg [32]. All these MLE techniques can provide rather efficient PGO solutions.
+
+It is possible to exploit specific structures of PGO to design more specialized solvers, for example, the divide-and-conquer methods by Grisetti et al. [33], [34]. The basic idea is to divide the full PGO into several submaps (i.e. subgraphs), solve each one of them, and then join the submaps together to obtain an approximation to the full PGO. Zhao et al. [35], [36] investigated the special case of joining two submaps, with a clever parameterization which can be solved by a linear least squares, followed by a nonlinear transformation. For 2D cases, Carlone et al. [37] suggested a linear approximation framework to PGO, by computing firstly an orientation estimation, and then the position part using the given orientation. The core was the regularization of rotation angles [37], which was systematically addressed in [38] using a quadratic integer programming. The separability of the orientation and position estimation was further studied by Khosoussi et al. [39], based on a variable projection approach.
+
+Besides practical algorithms to solve PGO, some theoretical insights are also drawn. Huang et al. [17] showed empirically that a point-feature based SLAM is close to a convex optimization problem, and a relative formulation is proposed for the purpose of reducing the nonlinearity in SLAM. Wang et al. [40] discussed the number of local minimums for PGO in special cases. Carlone [41] provided an analysis on the convergence basin of the global minimum for the Gauss-Newton method. Several key factors are concluded, for example orientation noises, and graph topologies. With the assumption of isometric additive Gaussian noise, Khosoussi et al. [42] established the connection between the Fisher information matrix of the estimate and the graph complexity.
+
+Convex optimization is a powerful technique to design globally optimal solutions to PGO. An early touch on this topic came from Liu et al. [43], who relaxed planar PGO into a semidefinite programming (SDP) which was solved by standard convex optimization tools [44]. It can be observed that the nonconvexity of PGO comes from the cost function, and manifold constraints. Carlone and Rosen et al. showed that the cost function can be chosen convex by using a Frobenius norm with an isotropic noise model [15], [45]- [48]. The manifold constraints can be relaxed by their convex-hulls, as shown by Rosen et al. [48]. However, the relaxations in [43], [48] are not tight enough. Carlone et al. [45], [47] explored the Lagrangian duality of PGO, leading to a tight SDP relaxation, which can be verified to be globally optimal in many cases. Rosen et al. [15], [49] designed a certifiable PGO solver, exploiting convex relaxations, and a Riemannian trust-region method. Briales et al. [50] suggested a compact matrix formulation, with concise and efficient derivations.
+
+Loop-closing constraints and cycles have a rich history in SLAM literatures. Estrada et al. [51] formulated the loopclosing problem between local maps as a quadratic optimization problem with equality constraints. The problem was solved by SQP, and a connection to iterated extended Kalman filter was drawn. Russell et al. [52] proposed a distributed network optimization method based on the graph cycle space, and proved its convergence in linear cases. Olson [53] evaluated the pairwise consistency of two loop-closing edges by joining them with the odometry sequence as a cycle. Dubbelman et al. [54] employed interpolations in SE(3) along a cycle to obtain an approximate solution to pose-chain SLAM. The concept of cycle bases was used by Carlone et al. in [37], [38], [41]. The loop-closing cycle in a point-feature based SLAM was considered by Bai et al. [18], while both point and line-features are included by Guo et al. [55] in more specific scenarios. Later, Bai et al. [19] formulated PGO explicitly as a constrained optimization problem by using cycles in the graph. The cycle structure in graph optimization is typically presented as relative formulations [18], [19], which have been used in the work [17], [20], [24], [25], [56]- [60] as well.
+
+Although the usage of concepts like cycle space and cycle bases abounds in existing literatures, none of these works study how to design efficient cycle-based optimization algorithms by exploiting: the dimension reduction of Cholesky factorization in the cycle space due to graph sparsity, and the possibility of designing a tailored MCB algorithm that takes advantage of sparsity and positive integer weights.
+
+
+III. PRELIMINARIES AND BACKGROUNDS
+
+
+A. Notations
+
+For any two sets X 1 and X 2 , we denote respectively X 1 ∩X 2 the intersection, X 1 ∪ X 2 the union, X 1 \X 2 the difference, and X 1 ⊕ X 2 = (X 1 ∪ X 2 )\(X 1 ∩ X 2 ) the symmetric difference of these two sets. Let |X | be the cardinality of the set X . We will use Z to denote the set of integers, and R the set of real numbers. If not explicitly stated, the lower-case in normal font, the lower-case in bold font, and the upper-case in bold font are reserved for scalars, vectors, and matrices respectively. A matrix of zeros is denoted by O, and an identity matrix is denoted by I. A T represents the transpose, and A † the Moore-Penrose pseudo inverse of a matrix A. The notation {v i } ⊥ stands for the orthogonal complement to the space spanned by a set of vectors {v i }. < v 1 , v 2 >= v T 1 v 2 is the inner product between v 1 and v 2 . The squared Mahalanobis distance is denoted by e 2 Σ = e T Σ −1 e. The notation [m : n] is used to describe a sequence of consecutive integers from m to n. We will use "iff" as a shorthand of "if and only if". The graph notations used throughout the paper are listed in Table I. 
+GF = Z 2 finite field of modulo 2 GF d 1 ×d 2 d 1 × d 2 dimensional matrix on Z 2 G = G(V, E) undirected graph E edge set of a graph G V vertex set of a graph G euv E edge with endpoints u, v ν = |E| − |V| + 1 R dimension of cycle space T = T (G) GF 1×m tree in G Puv = Puv(G) GF 1×m path in G, from vertex u to v C = C(G) GF 1×m cycle in G S
+GF 1×m support vector Note: A vector on GF 1×m can be sparsely described by a set.
+{ * } set with elements in form of * H {C} Horton set I {C} set of isometric cycles B {C} cycle basis B = B(G) GF n×ν cycle matrix of cycle basis B T k SE(3) poses T k SE(3) relative poses Puv {T k } geometric path from u to v C {T k } geometric cycle
+
+B. Special Euclidean Group
+
+The special Euclidean group, SE (3), is a standard tool to describe rigid body transformations [61], [62], which typically occur in robotics and computer vision community. SE(3) is a Lie group. A Lie group is a peculiar smooth manifold whose local structure can be described by the socalled Lie algebra, which is the tangent space at the identity of the group. Let se(3) be the Lie algebra of SE(3). Both SE(3) and se(3) can be described by matrices. For each matrix T ∈ SE(3), we can find an associated matrix X ∈ se(3), and vice versa, by matrix exponential and matrix logarithm: T = exp(X), X = log(T).
+
+An element X ∈ se(3) can be identified by a "screw matrix", taking the form
+X =     0 −x 3 x 2 x 4 x 3 0 −x 1 x 5 −x 2 x 1 0 x 6 0 0 0 0     .
+It is obvious that each screw matrix X can be uniquely identified by a vector x = [x 1 , x 2 , x 3 , x 4 , x 5 , x 6 ] T ∈ R 6 . The relationship can be expressed as X = x ∧ , x = X ∨ with operation ∧ and ∨. Therefore for convenience, we define an encapsulated exponential and logarithm mapping between T and x directly as
+T = Exp(x) = exp(x ∧ ), x = Log(T) = log(T ∨ ).
+The adjoint of Lie algebra, ad(x), is related to a binary operation [·, ·], called Lie bracket, yielding the relation
+[X, Y] = XY − YX = (ad(x)y) ∧ ,
+which holds for any Y ∈ se(3), y = Y ∨ ∈ R 6 . Exponentiating ad(x), we would get a matrix Ad(T) called the adjoint of Lie group. The adjoint matrix has a nice property,
+T · Exp(y) = Exp (Ad (T) y) · T(1)
+which can be used to shift the position of T and Exp(·). Another property of Ad(·) is
+Ad(T 1 )Ad(T 1 ) = Ad(T 1 T 2 )
+which is used to collect two Ad(·) together. The Baker-Campbel-Hausdorff formula (BCH) is used to concatenate two matrix exponentials. The exact BCH formula is expressed as a series, and a closed form approximation is:
+Exp (x) · Exp (y) ≈ Exp J −1 l (y) x + y , if x → 0 Exp x + J −1 r (x) y , if y → 0
+where J l (·), J r (·) are called the left-hand and right-hand Jacobian of the exponential coordinate parameterization. The mappings between SE(3) and se (3), the adjoint operation, and the BCH formula are used to linearize PGO, which is the prerequisite to apply an iterative nonlinear solver.
+
+For SE (3), all the operations Exp(·), Log(·), ad(·), Ad(·), J l (·) and J r (·) are calculated in closed form [61], [62].
+
+
+C. Graph Theory
+
+Let G be an undirected graph G(V, E), where V is a finite set, and E is a set of unordered pairs (u, v), with u, v ∈ V. The elements in V are termed vertices (or nodes), and the elements in E are termed edges. In what follows, we will denote an edge from u to v as e uv . An edge e uv is said to be incident to the vertices u and v, while u and v are called the endpoints of e uv . The degree of a vertex in G is the number of edges incident to that vertex. A subgraph of G stands for a graph with only part of vertices and edges from G. In particular, we will be interested in three types of subgraphs, i.e., path, cycle, and tree. Formally, a graph is said to be connected if there exists a path for any pair of vertices in the graph. A path is a connected subgraph in which there are exactly two vertices having degree of one, and the rest of vertices having degree of two. A cycle is a subgraph in which every vertex has an even degree. If a cycle is connected and the degree of each vertex is exactly two, the cycle is called a simple/elementary cycle, or a circuit. A tree is a connected subgraph which contains no cycles (i.e. acyclic subgraph). If a tree of G contains all vertices in V, it is called a spanning tree of G. We will use P to denote a path, C a cycle, and T a tree, respectively.
+
+A subgraph, i.e., a path/cycle/tree, can be uniquely identified by the set of edges it used, which induces an "incidence vector" whose elements are assigned to either 0 or 1. For instance, a cycle C can be expressed as an incidence vector [c 1 , c 2 , . . . , c |E| ], with c k = 1 (k = 1, 2, . . . |E|) iff the k-th edge is used by the cycle C, and c k = 0 otherwise (see Fig.  1). The concept of finite field (or Galois field) is useful to describe this phenomenon. A finite field is basically a finite set equipped with arithmetic rules. In particular, we are interested in the finite field of order 2, denoted as Cycles can be concatenated by the symmetric difference of sets: C 3 = C 1 ⊕ C 2 . In this graph, C 1 and C 2 are two independent cycles forming a cycle basis of the graph. The vectorized representation on GF, i.e., the cycle basis matrix, is presented in B, where the blanks are zeros. C 3 can be written as a vector C 3 = [0, 1, 1, 1, 1, 1, 0, 0, 1]. Based on the arithmetics of GF, we have C 3 = C 1 +C 2 , which is in accordance with the symmetric difference of sets. whose elements are 0 and 1 only. The addition and multiplication on Z 2 are defined respectively to be the addition and multiplication on Z modulo 2. Obviously, incidence vectors (to describe paths/cycles/trees) are vectors on GF. Moreover, all the cycles in G can be described by a matrix on GF with each row being a cycle incidence vector. This matrix is called cycle matrix: B = [b i,j ], with b i,j = 1 iff the j-th edge is contained in the i-th cycle, and b i,j = 0 otherwise. The rows of B span a vector space over the two-element finite field based on the modulo two arithmetics, which is called cycle space. A basis to the cycle space is called cycle basis. The cycle space of an undirected graph is orthogonal complementary to the so-called cut space. The cut space is not needed to understand this work, but important to build connections with Gauss-Newton based optimizers [12]- [14]. Interested readers are referred to [63], [64] for accessible explanations. For a connected graph, the cycle space has a dimension ν = |E| − |V| + 1, and the cut space has a dimension |V| − 1.
+GF = Z 2 = {0, 1}, v 1 v 2 v 3 v 4 v 5 v 6 v 7 e 12
+Let x 1 , x 2 be two vectors on GF |E| , and X 1 , X 2 be the corresponding set representations. Then the vector addition x 1 + x 2 on GF |E| corresponds to the symmetric difference of sets, i.e., X 1 ⊕ X 2 . The inner product satisfies:
+< x 1 , x 2 >= x T 1 · x 2 = 1 iff |X 1 ∩ X 2 | is odd; < x 1 , x 2 >= x T 1 · x 2 = 0 iff |X 1 ∩ X 2 | is even.
+In what follows, we will use the vector representation and set representation interchangeably and describe both with the same notation, where the difference can be easily told by the operation used.
+
+
+IV. TRADITIONAL POSE-GRAPH OPTIMIZATION
+
+The topology of PGO can be visualized as a graph whose vertices represent poses. An edge is created if there exists a relative geometric relation between two poses, i.e. relative poses, which can be produced by a wheel-encoder, scanmatching [21], [65], [66], epipolar geometry [67], [68], or visual loop-closing techniques etc. [69], [70].
+
+Both poses and relative poses are rigid-body transformations, which can be described by SE(3) Lie group. Denote T i to be the i-th pose. The relative poses from the i-th pose to the j-th pose, denoted by T i,j , is a rigid-body transformation evaluated in the local coordinate frame of the i-th pose, which mathematically writes T i,j = T −1 i T j . For the clarity of notations, we assign each edge a unique index, and use T k with subscript in bold to represent a relative poses.
+
+For each relative pose T k , there is a noisy measurement T k . The measurement noise is conventionally assumed to be zero-mean Gaussian in the vector space of SE(3) Lie algebra, which can be mathematically formalized as,
+Log(T −1 k · T k ) ∼ N (0, Σ k )
+. Note that other noise models are also possible, for example, the matrix Langevin distributions in [15], [45].
+
+Let the topology of PGO be described by the graph G(V, E). Then PGO aims to obtain a maximum likelihood (MLE) estimator for the set of poses {T i } i∈V using the set of measurements of relative poses {T k } k∈E , via solving a least squares optimization problem,
+{T i } i∈V = arg min k∈E Log(T −1 k · T k ) 2 Σ k .(2)
+Remark 1: Note that the relative poses T i,j is evaluated at the local frame of the i-th pose, so ideally a PGO is described by a directed graph. However, the edge orientation will not affect the topological side of a graph, like paths/cycles we discuss later on. Therefore we opt to describe PGO as an undirected graph G(V, E). The restriction to the undirected graph limits the graph matrices/vectors to Galois field instead of real numbers. Besides, the undirected edges can be easily lifted to directed edges whenever it is desired.
+
+Remark 2: The traditional PGO is unobservable, in the sense that if {T i } i∈V is a solution to (2), then ∀T ∈ SE(3), {T T i } i∈V is also a solution to (2). This can be easily verified by the fact that
+T i,j = T −1 i T j = (T T i ) −1 (T T j )
+, thus {T i } i∈V and {T T i } i∈V yields exactly the same contribution in the cost function. To ensure a unique solution, a popular practice is to anchor some poses (usually the first pose) to a fixed value or the identity of SE(3).
+
+
+V. CYCLE BASED POSE-GRAPH OPTIMIZATION
+
+The state-of-the-art PGO techniques [12]- [15], [45] describe PGO as a factor graph [71], whose topology is represented by an incidence matrix. The graph is solved by a second-order optimization technique, for example Gauss-Newton, which results to solve a sparse linear system whose dimension is decided by the number of vertices. These approaches solve PGO in the cut space, and we will term them as vertex-based PGO (VB-PGO). The VB-PGO can be solved rather efficiently by sparse matrix factorizations [16].
+
+Practical PGO instances are rather sparse. Let us measure the graph sparsity as a concept called cycle ratio, defined as ν |E| , i.e., the dimension of the cycle space divided by the number of edges. Empirically, a PGO instance encountered in SLAM has a cycle ratio well below 20%, which implies ν |V|−1 < 1/4, i.e., the dimension of the cut space is at least four times larger than that of the cycle space. Let alone SLAM instances with a long trajectory and a few loop-closures, whose cycle ratio can be less than 5%, or even 1%.
+
+In this section, we will describe an approach that transforms PGO from the cut space to the cycle space. The cycle-based PGO, denoted as CB-PGO, has a reduced dimension compared with its vertex-based counterpart, as long as the graph is sparse enough. While the dimension reduction to the cycle space can undermine the sparsity of PGO, we propose to maximize the sparsity by a minimum cycle basis which will be described in Section VI. The observability and convergence properties of the proposed CB-PGO are discussed in Section VII.
+
+
+A. Preliminaries
+
+In what follows, we will use the term toplogical path and toplogical cycle to represent a path and cycle in a pure topological graph G. If such a G is associated with geometric information, namely by associating vertices with poses and edges with relative poses respectively, we will term this graph as a geometric graph. A (topological) path P whose edges are associated with relative poses will be termed as a geometric path, denoted by P. Analogously, a (topological) cycle C with edges associated with relative poses will be termed as a geometric cycle, denoted by C. If not explicitly stated, the terms, paths and cycles, refer to the topological version.
+
+The orientations of edges are irrelevant in this paper when discussing the topology of G, as well as concepts like cycle bases and sparsity. However, they are useful in terms of describing the geometric paths/cycles. The orientation of an edge is decided by the geometric information, i.e., relative poses it associated with. For example, given an edge k in G with the associated relative poses being T i,j = T −1 i T j , we stipulate the edge orientation to be from i to j. In other words, i j is the forward direction of the edge k, and j i is the backward direction.
+
+
+B. Consistency of Pose-Graph Optimization
+
+Let P st be a path from s to t in G. The corresponding geometric path P st is defined as:
+P st = T (1 p ) 1 p T (2 p ) 2 p · · · T (θ p ) θ p (3)
+where T 1 p , T 2 p , · · · , T θ p is the sequence of relative poses by traversing P st from s to t. In (3), the superscript (k p ) is assigned to +1 if the traversal uses the edge k p in the forward direction, and −1 if in the backward direction. The superscript of a matrix T will be interpreted as the power of the matrix, by T +1 = T and T −1 = inv(T).
+
+PGO is a consistent formulation with respect to poses and relative poses. To show this, let T s and T t be two arbitrary poses. Let P 1:st and P 2:st be two geometric paths from pose s to t. Then the pose T t calculated from these two paths are exactly the same, i.e., T t = T s P 1:st = T s P 2:st . Obviously, the consistency of the PGO can be also interpreted as the equivalence of the geometric paths, in the sense that P 1:st = P 2:st = T −1 s T t . At last, with a slightly abuse of notation, we can write the consistency of two geometric paths as P −1 1:st P 2:st = I, which is a geometric cycle. The geometric cycles will play a key role in formulating PGO in cycle space, which in general ensures the consistency of the PGO. On the other hand, the underlying topological cycles will decide the sparsity of the proposed PGO formulation.
+
+
+C. PGO in Cycle Space
+
+Alternatively, we can traverse edges sequentially along a topological cycle, and consider the associated relative poses, to obtain a geometric cycle. For example, consider a topological cycle with length λ. Let the sequential relative poses along the cycle be T 1 c , T 2 c , · · · , T λ c , and the corresponding orientations of the edges be σ(1 c ), σ(2 c ), · · · , σ(λ c ), where σ(k c ) takes value +1 if the traversal uses the edge k c in the forward direction, and −1 otherwise. Then the corresponding geometric cycle can be written as follow,
+C lhs = I, with C lhs = T σ(1 c ) 1 c T σ(2 c ) 2 c · · · T σ(λ c ) λ c where T +1 = T and T −1 = inv(T) respectively.
+Based on the edge orientations and associated relative poses, for each topological cycle C, we can generate a corresponding geometric cycle C lhs = I. To characterize the cycle space of the graph G, we need ν independent topological cycles, i.e., a cycle basis of G. Let such a cycle basis be B = {C i } i= [1:ν] , and its corresponding cycle matrix be B. Then given the cycle basis B, we can find ν independent geometric cycles accordingly, denoted as {C lhs i = I} i= [1:ν] . Then let us take all |E| relative poses as new variables to be estimated, and take ν independent geometric cycles as constraints in an optimization problem:
+{T k } k∈E = arg min k∈E Log(T −1 k · T k ) 2 Σ k s.t. C lhs i = I ∀i ∈ [1 : ν].(4)
+This optimization problem has a degree-of-freedom (DOF) |E| − ν = |V| − 1, which is the same as the DOF of (2). If an optimal configuration of relative poses is found by solving (4), the objective value becomes minimum and all paths between two vertices in the graph become equivalent (guaranteed by the geometric constraints). Then a solution to (2) can be calculated by composing the estimates of relative poses along an arbitrary path in the graph (for example along odometry).
+
+In what follows, we will term the PGO formulation in (4) as cycle-based PGO (CB-PGO), and in contrast, the PGO formulation in (2) as vertex-based PGO (VB-PGO).
+
+
+D. Solving Cycle Based PGO on Manifold
+
+A typical iterative optimization algorithm on Manifold is driven by a sequence of small perturbations until convergence (to a local optimum). For SE (3), the perturbations are normally applied in the vector space of its Lie algebra, which can be passed to the manifold via the exponential mapping. To solve the PGO formulation in (4), at each iteration t, we would like to find a perturbation ξ k for each relative poses T k , so that its estimate can evolve fromT
+(t) k (estimate at iteration t) toT (t+1) k (estimate at iteration t + 1) as, T (t+1) k =T (t) k · Exp (ξ k ) , k ∈ E.
+To this end, we linearize the PGO formulation in (4) with respect to the set of perturbations, to a quadratic programming with equality constraints,
+min J −1 ξ + η 2 Σ s.t. Bξ + b = 0.(5)
+Here J and η are the Jacobian matrix and the residual vector respectively by linearizing the objective function, whose calculations are provided in Appendix A-A. Analogously, B and b are the Jacobian matrix, and its corresponding residual vector by linearizing the geometric cycles. The details on how to derive B and b can be found in Appendix A-B. Note that the i-th block row and k-th block column of B represents the partial derivative of the i-th geometric cycle with respect to the k-th edge (i.e., relative poses), which is non-zero iff the k-th edge is contained in the i-th cycle. In other words, the structure of B is captured by the cycle matrix B. (5) takes the form of a minimum norm optimization problem,
+By lettingξ = Σ − 1 2 (η + J −1 ξ),B = BJΣ 1 2 , andb = BJη − b, the quadratic programming inmin ξ 2 s.t.Bξ =b(6)
+whose solution isξ opt =B †b . Note that since both Σ 1 2 and J are block-diagonal matrices,B and B would have the same structure. Finally, the perturbation in ξ can be recovered by
+ξ opt = J(Σ 1 2ξ opt − η).
+The overall algorithm can be termed as sequential quadratic programming (SQP) [18], [19], [72], since it requires the solving of a sequence of perturbations via quadratic programming.
+
+Remark 3: The linear systemξ opt =B †b to be solved in CB-PGO has exactly the same dimension of that in the cycle space, which is ν = |E| − |V| + 1, because the Jacobian is characterized by the cycle matrix B. In contrast, an iterative solver to VB-PGO in (2) solves a linear system with a dimension of |V| − 1, i.e, the dimension of cut space, since its Jacobian is characterized by the incidence matrix [37], [39], [41]. Given the fact that the cut space and cycle space are orthogonal complementary [63], we conclude from the graph topology perspective that the VB-PGO and CB-PGO are counterparts to one another. Moreover, VB-PGO is a least squares optimization for an over-determinant system, while CB-PGO is a minimum norm optimization for an under-determinant system. Mathematically, the least squares optimization and minimum norm optimization are highly correlated [73], where both solutions are compactly written as Moore-Penrose pseudo inverse (i.e., left and right inverse respectively). This fact further confirms that VB-PGO in (2) and CB-PGO (4) are two sides of the same coin. However, while VB-PGO has reached a mature state, the CB-PGO technique is still rather primitive, because of the hardship of choosing a proper cycle basis.
+
+
+E. Choices of Cycle Basis for PGO
+
+For the cycle-based PGO in (4), the structure of the Jacobian matrices B andB is completely described by a cycle matrix B.
+
+Obviously, different choices of cycle bases B lead to different cycle matrices B, which eventually lead to different structures in B andB.
+
+Therefore, we discuss here the pros and cons of different cycle bases for the PGO formulation in (4). We will conclude the advantage of using a minimum cycle basis (MCB) from the sparsity perspective. The discussions on the convergence behavior will be presented in Section VII-B.
+
+1) Fundamental Cycle Basis: Given an arbitrary spanning tree of the graph, a cycle can be constructed by one off-tree edge (i.e. chord), and the path on the tree connecting the ends of the edge. The set of cycles corresponding to these ν off-tree edges are independent, called fundamental cycle basis (FCB). FCB can be generated cheaply, while it cannot ensure a sparse Jacobian matrix in general [19].
+
+2) Minimum Fundamental Cycle Basis: A remedy is to use the minimum fundamental cycle basis (MFCB), where the spanning tree is chosen in a way such that the summation of the lengths of the fundamental cycles is minimum. An exact solution to MFCB is proven to be NP-complete [74]. While approximate algorithms can solve MFCB in polynomial time [74]- [76], constraining cycle basis to be fundamental may compromise the sparsity.
+
+3) Minimum Overlap Cycle Basis: In light of the fact that the matrix to be factorized has the same structure as BB T , the sparseness of the matrix decomposition can be guaranteed by minimizing the number of non-zeros in BB T . We name a cycle basis that minimizes |BB T | 0 as the minimum overlap cycle basis (MOCB), by the fact that an entry at position (i, j) in |BB T | 0 is 0 if and only if the cycle i and j do not share common edges. However, there is no clear way on how to compute a minimum overlap cycle basis yet. 4) Minimum Length Cycle Basis: A minimum length cycle basis (MLCB) maximizes the sparsity of B, by minimizing the overall length of cycles in the basis, which may in turn resulting a sparse BB T . Different from MFCB, the cycles are not confined to be fundamental, thus yielding an easier problem. MLCB belongs to a well-known problem termed minimum (weight) cycle basis (MCB) [64], where MLCB is a special case with weights of edges set to 1.
+
+According to the discussion above, we opt to use MLCB for the cycle-based PGO to maximize the sparsity. Since MLCB is a special case of the general MCB, we focus on how to compute MCB in the following Section VI.
+
+
+VI. COMPUTATION OF MINIMUM LENGTH CYCLE BASIS
+
+In this section, we aim at a complete and concise description of the MCB algorithm used for the cycle-based PGO. We will follow a hybrid approach that firstly construct a superset that contains MCB, and then apply an independence test to extract a MCB. We will recall the basics of these concepts for completeness, in particular the construction of Horton set [77] and isometric set [78], and the state-of-the-art method for independence tests [79], while refer interested reader to the review paper [64] for further reading.
+
+On the present architecture, the computational bottleneck of MCB algorithms is the all-pairs-shortest-paths (APSP) [80],
+Algorithm 1 Minimum Cycle Basis G ← SimplifyGraph (G) Smooth out vertices of degree two APSP ← LexDijkstra (Ḡ)
+Compute a set of consistent all-pairs-shortest-paths H ← HortonSet (APSP) Construct Horton set implicitly
+I ← IsometricSet (H) Construct isometric set B ← ∅ Initialize MCB forḠ I ← SortAscendingByWeight (I) // Independence test by support vectors while |B| = ν do C ← ExtractMinimumWeightCircuit (I) if C is linearly independent fromB then B ←B ∪ C end if I ← I\C end while B ← ReconstructMCB (B)
+Reconstruct MCB for G [81]. APSP is required to construct the Horton set, and a consistent APSP for the isometric set. Given the fact that graphs occurred in PGO are sparse graphs with positive integer weights, we propose two ideas that can substantially improve the performance of APSP: 1) smoothing out vertices of degree two; 2) using LexDijkstra (in Section VI-F) to compute a consistent APSP that can run in parallel, and thus is more advantageous than the sequential method in [82]. The overall procedure of the proposed MCB algorithm is summarized in Algorithm 1.
+
+
+A. Superset of MCB: Horton Set
+
+The study of efficient polynomial time minimum cycle basis algorithms started with Horton's work [77], which builds the connection of shortest paths and a cycle in MCB.
+
+Lemma 1: ( [77]). Let C be a cycle in a minimum cycle basis B. If u and v are two vertices on C, then C must contain one of the shortest paths from u to v.
+
+Another key insight from Horton [77] is that using shortest paths, each cycle C ∈ B can be represented as a vertex-edge pair, called a representation of a cycle. In specific, let x be any vertex in C (C ∈ B), then we can always find an edge e uv such that C can be expressed as C = C(x, e uv ) P xu + P xv + e uv , where P xu and P xv are shortest paths. Based on this observation, Horton [77] proposed a superset (called Horton set) of MCB using all pairs of vertex-edge combinations. Formally, a Horton set is defined as,
+H = {C(x, e uv ) | x ∈ V, e uv ∈ E}.
+Note that there might be several shortest paths between the vertices u and v with exactly the same minimum weight, so the choice of P uv is not unique in general. Horton [77] proved that if all edges in the graph have nonnegative weights, H would definitively contain a MCB no matter what shortest path P uv is chosen for each pair of vertices u and v.
+
+Remark 4: Typically, H is much larger than B. On the one hand, there are degenerated cases in H that do not form a simple cycle, for example, if e uv is on P xu or P xv , or if P xu and P xv have vertices other than x in common. However the degenerated cases can be easily removed. On the other hand, H is a multi-set. By choosing different vertex-edge pairs on C, we obtain different representations of C.
+
+
+B. Superset of MCB: Isometric Circuits
+
+The construction of H requires the computation of all pairs shortest paths (APSP). In Horton's work [77], APSP is allowed to be arbitrary, i.e. the shortest path P uv is selected arbitrarily among all shortest paths from u to v. By intentionally selecting APSP to be consistent, we can identify the duplicates in H, and reduce H to a much smaller set.
+
+Definition 1: (Consistent APSP). For each shortest path P uv in APSP, let s and t be two arbitrary vertices lying on P uv , then P st , the selected shortest path from s to t in APSP, is a subgraph of P uv .
+
+A consistent APSP can be computed by a lexicographic method [64], [82] (see Definition 3 and Lemma 4 in Appendix C). Given a consistent APSP, a cycle C is said to be isometric if for any two vertices u and v on C, the chosen shortest path P uv in APSP is contained in C [77], [78]. It can be further verified that a cycle C is isometric if and only if, for each vertex x ∈ C, there is a unique edge e uv , such that C = C(x, e uv ), with P xu and P xv being in the consistent APSP [78]. Last but not least, the set of all isometric cycles is proved to contain a MCB [64], [78].
+
+In a Horton set H constructed by a consistent APSP, an isometric cycle C ∈ H would contain exactly |C| representations, i.e. |C| duplicates in H. Aiming to eliminate redundant representations, we will use the following Lemma to find all the equivalent representations in the Horton set.
+
+Lemma 2: ( [78]). Let s x (y) be the first vertex (except x) on the shortest path P xy . For any cycle C = C(x, e uv ) ∈ H, with e uv / ∈ P xu , e uv / ∈ P xv , and s
+x (u) = s x (v), (1) if x = u then C = C(v, e uv ). (2) if x = u, let x = s x (u), (a) if x = s x (v) then C = C(x , e uv ). (b) if x = s x (v), u = s v (x ) then C = C(v, e xx ). (c) if x = s x (v), u = s v (x ) then C is not isometric. Proof:
+The proof can be found in [78]. Note that the cases e uv ∈ P xu , e uv ∈ P xv , and s x (u) = s x (v) create bridges, thus do not form cycles and need to be excluded. An intuitive explanation of isometric cases is presented in Fig. 2.
+
+In Lemma 2 and Fig. 2, x is chosen on the path P(xu). However, we can also chose x on the path P(xv), i.e., letting x = s x (v). By doing so, we can find another equivalent representation for an isometric circuit C by Lemma 2.
+
+The connection of different representations can be visualized as a directed graph G † = G † (V † , E † ), where each vertex in G † corresponds to a cycle in the Horton set. If a cycle C(x, e uv ) is equivalent to a cycle C(y, e st ) by Lemma 2, then an arc is formed from the vertex C(x, e uv ) to the vertex C(y, e st ) in G † . It was proved that all representations of an isometric cycle C exactly correspond to a single connected component in G † [78]. The below theorem will greatly improve the efficiency of operations on G † , in terms of graph storage and searching. Each isometric circuit C in G corresponds to a double-linked directed cycle in G † with |C| vertices. This example is created using the graph in Fig. 1, while the cycle representations that do not create links by Lemma 2 are ignored.
+
+Theorem 1: All representations of an isometric circuit C in G † form a double-linked directed cycle with |C| vertices.
+
+Proof: See Appendix B-A. A visualization of connected components in G † is given in Fig. 3.
+
+Based on Theorem 1, the storage of G † can be compressed to a vector with 2 slots reserved for each vertex. We can easily access the adjacent vertices of a given vertex by its index. Besides, a depth-first-search (DFS) [63] on connected components can be simplified as: starting from an arbitrary vertex, keep exploring new vertices until coming back to the start-vertex. This eliminates the use of function recursions or data structures like a stack.
+
+Finally, we characterize the connected components corresponding to isometric cycles by the above simplified DFS. Duplicate representations of an isometric cycle are then removed by keeping only one representation in the connected component. All representations of non-isometric cycles are discarded. The construction of isometric cycles from a Horton set H (constructed by a consistent APSP) can be achieved with an amortized complexity O(|V||E|) [78].
+
+Remark 5: It should be noted that the set of all isometric cycles is a superset to a MCB, but not all MCBs. In other words, even though APSP is chosen to be consistent, a cycle C in an arbitrary MCB can be non-isometric [64].
+
+
+C. Independence Test
+
+To extract a MCB, we sort the set of isometric cycles in non-descending order of weights, and sequentially extract ν linearly independent cycles with the least weights. This procedure is proved to find a MCB [77]. To test the linear independence, we take a circuit as a vector on Z m 2 incident on the set of edges, and then evaluate the linear independence algebraically.
+
+Given a (spanning) tree T , let the restricted incidence vector of C beC = C\T , i.e. considering the off-tree edges of T only [83]. It can be shown that the linear independence of a collection of cycles {C i } i∈N implies the linear independence of the corresponding restricted incidence vectors {C i } i∈N , and vice versa (see Theorem 3 in Appendix B for a proof).
+
+1) Gaussian Elimination Based Approach : Gaussian elimination is a well-exploited technique in graph theory to check the linear independence of incidence vectors [77], [84]. The basic idea is to stack the set of (restricted) incidence vectors as a matrix which will be subsequently reduced to the row echelon form. The incidence vectors are linearly independent if and only if the row echelon form has full row rank. This approach has a cubic complexity in the worst case.
+
+2) Support Vector Based Approach :
+Let {C i } k−1 i=1 be a set of independent circuits. Given a spanning tree T , let {C i } k−1 i=1
+be the corresponding restricted incidence vectors whose span is a space C  [85]. Then a circuit C k is linearly independent from the set of independent circuits  [85]. Let
+{C i } k−1 i=1 [64],{C i } k−1 i=1 , if and only if there exists aS l (k ≤ l ≤ ν), such that C k ,S l = 1 (see Lemma 3 in Appendix B). If such aS l is found, then {C i } k i=1 = {C i } k−1 i=1 ∪ C k are a set of independent circuits. The support vectors of {C i } k i=1 , i.e.S j = S j if C k ,S l = 0 S j +S l if C k ,S l = 1 , then {S j } ν j=k,j =l is a set of support vectors for {C i } k i=1
+. A direct use of support vectors to check independence can be found in [80]. We invert the process in [80] to accommodate our description. Given a spanning tree T , we can initialize ν independent support vectors by ν off-tree edges, where each support vector contains one off-tree edge [80]. Then at each phase, we evaluate the independence of a new circuit C by support vectors, which will be subsequently updated if C is evidenced to be independent by a support vector S l . Iterate this process until a MCB is found. As in [80], the drawback of this method is that we might need to check many support vectors in order to verify C, S l = 1.
+
+A more sophisticated design is due to Amaldi et al. [79]. The approach is based on the idea that if a circuit C contains edges that are not used by any selected circuits, then this circuit is independent from the selected ones. If this is the case, we can verify the independence of C without using any support vector. Moreover, the "new" edges in C can be used to construct new support vectors. Particularly, there is no need to designate a spanning tree T and initialize a set of independent support vectors at the beginning of the algorithm. The spanning tree T is built adaptively by greedily including "new" edges without creating a cycle to maximize the sparsity Obviously, C, S 0 = 1 and C, S k = 0, which means S 0 is an implicit support vector that evidences C, and there is no need to update S k for C. If C does not contain any new edge, the algorithm checks the existing support vectors by Lemma 3 to verify the independence instead. To speed up the inner product C, S , the algorithm maintains E S to be the edges used by present support vectors, and E • to be those not anymore because of the update of support vectors (E S ∪ E • is the set of off-tree edges). At each stage, the edges in both T and E • can be excluded to increase the sparsity of C.
+v 1 v 2 v 3 v 4 v 5 v 6 v 7 v 8 (a) Original unweighted graph. v 1 v 2 v 3 1 1 3 4 (b) Reduced weighted graph.
+We will use the algorithm by Amaldi et al. [79] to extract a MCB from the set of isometric cycles.
+
+
+D. Smoothing Out Vertices of Degree Two
+
+For PGO, the underlying graph is usually sparse. Furthermore, we assume that the sparsity of PGO is positively correlated to the proportion of vertices of degree two in the graph. The sparser the graph is, the more vertices of degree two we have. The vertices of degree two have no contribution to the topology of the graph, thus can be pruned out for the computation of a MCB. The pruning of vertices of degree two, along with the edges incident to them, would greatly reduce the combinatorial complexity of the Horton set.
+
+Algorithmically, we can perform a DFS from a node whose degree is not two. During the search, if a vertex of degree two is detected, we greedily probe along the "degree two chain" until a vertex whose degree is not two is found. Then we replace the "degree two chain" by a new edge (let us name it a "chain edge") whose weight is the accumulated weight along the chain (see Fig. 4). The DFS is recursively called at every unvisited vertex whose degree is not two. Finally, after computing a MCB on the reduced graph, the "chain edges" can be replaced back by the corresponding "degree two chains" to obtain a MCB of the original graph.
+
+Remark 6: (Ear Decomposition). The vertices of degree two can also be pruned out using the ear decomposition [86], which requires the graph to be 2-edge connected. A minimum cycle basis algorithm exploiting ear decomposition is provided in [81]. The algorithm in [81] exploiting the idea of feedback vertices to reduce the Horton set, which is encompassed in the concept of isometric cycles [79]. Nevertheless, the set of isometric cycles are much smaller than the set of cycles exploiting the idea of feedback vertices [79]. Actually, an ear decomposition is closely related to a depth-first-search (DFS) of the graph [86]. As a result, the task of pruning vertices of degree two can be achieved by DFS explicitly without computing an ear decomposition as an intermediate step.
+
+
+E. Self Loops and Multiple Edges
+
+Sometimes the graph may contain self-loops or multipleedges which can be created artificially, or as a consequence of smoothing out vertices of degree two (see Section VI-D and an example in Fig. 4). The self-loops and multiple-edges can be easily coped with by describing paths and cycles as a set of edges (instead of vertices) in the MCB algorithm. It is also possible to eliminate all self-loops and multipleedges for the MCB computation (see Lemma 3.17 and Lemma 3.18 in [64]). However, as shown in the experiments, the computational bottle-neck of the MCB is APSP, while the cost on the independence test is negligible. Thus we retain selfloops and multiple-edges in the graph, and opt to use edges to describe paths and cycles.
+
+
+F. LexDijkstra and Parallelism
+
+The bottleneck of the described MCB algorithm is the computation of a consistent APSP (see Table II).
+
+The method described in [82] first compute all-pairsshortest-distances (APSD) (by using any shortest paths algorithm), then a set of consistent APSP is constructed by choosing the so-called lexicographic shortest path for each pair of vertices (see Definition 3 and Lemma 4 in Appendix C), by processing vertex-pairs according to distances (i.e. weight and length) from the shortest to the longest. Obviously, a sorting process is required [82], which can be mitigated by a topological sorting [64]. Besides, although not shown in amortized complexity, the random access to shortest path trees is expensive, in particular for a serial processing (by distances).
+
+The algorithm in [82] is general, applicable for graphs with negative weights and any APSP algorithm. However, for a sparse graph with positive weight, Dijkstra [87] is always the preferable shortest paths algorithm. It can be shown that the lexicographic shortest path for each vertex-pairs can be selected by slightly modifying Dijkstra's update process. The resultant APSP is to run Dijkstra for each vertex, which can be easily parallelized by using a multi-core CPU. We refer to this consistent APSP method as LexDijkstra.
+
+Proposition 1: (LexDijkstra). Let G(V, E) be an undirected graph with weight w(e) > 0, ∀e ∈ E. A consistent shortest path P uv can be obtained for each pair of nodes u, v by modifying Dijkstra's update process to choose the lexicographic path in Definition 3 (provided in Appendix C).
+
+Proof: See Appendix C-A for the proof, and Theorem 4 in Appendix C that supports this result.
+
+In terms of the lexicographic comparison defined in Definition 3, case (1) and case (2) are rather cheap. However, case (3) in the worst case, needs to traverse and compare all the edges in P uv and P uv , which is rather inefficient. To address this issue, we propose the following theorem that greatly reduces the complexity in case (3).
+
+Theorem 2: Let P uv and P uv be two paths from u to v. In LexDijkstra, if the algorithm reaches the case (3) of Definition 3, it just suffices that the algorithm traverses back to the nearest common vertex that shared by P uv and P uv .
+
+Proof: See Appendix C-B. For the construction of isometric circuits, the algorithm requires random access to the shortest path trees. However, this part can be parallelized without any additional effort.
+
+
+G. Complexity
+
+The overall computational time of the proposed MCB algorithm is presented in Table II, running on a quad-core CPU. Table II shows that the time spending on the independence test is negligible compared with that spending on computing a consistent APSP and constructing the isometric set. Let G(V,Ē) be the reduced graph. Let m = |Ē|, n = |V|.
+
+1) Computing a Consistent APSP: Let us compare the proposed LexDijkstra with the Method in [82]. LexDijkstra: The Dijkstra algorithm has a sorting bottleneck which is usually addressed by a priority queue. In one single Dijkstra run, for each new edge, the operation on the priority queue has a complexity O(log n). In the worst case, the lexicographic comparison between two paths takes O(n) operations. Therefore, each new edge contributes O(log n+n) worst case complexity, which results in O(m(log n + n)) operations for one single LexDijkstra run, and O(nm(log n + n) operations to compute a consistent APSP using LexDijkstra. Method in [82]: By the method in [82], the overall operations used to compute a consistent APSP is O(nm log n + n 2 log n + nm), where the term O(nm log n) accounts for operations to compute an arbitrary APSP based on the Dijkstra algorithm, O(n 2 log n) for sorting paths according to weights and lengths, and O(nm) for constructing the consistent shortest paths.
+
+By the worst cases complexity, it seems that LexDijkstra does not offer any benefits compared with the method in [82]. However, this is not the cases in practice (see Table  II). The reason is four folds: First, O(nm) in the method [82] cannot be eliminated because it requires random access to all pairs shortest path trees, which is expensive on modern architectures. Second, the method in [82] cannot be run in full parallelism since the sorting term O(n 2 log n) and processing term O(nm) are sequential operations. Third, O(n) is the worst case complexity for lexicographic comparison, while in practice the operations can be greatly reduced due to the inherent asymmetry in the graph and by Theorem 2 as well. Last but not least, LexDijkstra can run in full parallelism which can take advantage of multi-core CPU architectures.
+
+2) Constructing the Isometric Set: It takes O(nm) operations to find a single representation for each isometric circuit [78]. However there is a big constant due to the random access to the all pairs shortest path trees, which is implemented as a dense n × n matrix. While the running time of this part is not major in Table II compared with the expenses on the consistent APSP, we believe this part can be further improved using a sparse storage for all pairs shortest path trees, given that most of the elements in the dense matrix are redundant because of the consistency of shortest paths.
+
+
+VII. DISCUSSIONS
+
+
+A. Observability
+
+We propose to define the observability in the maximum likelihood estimation (MLE) as:
+
+Definition 2: (Observability of MLE [88]) Let M d be a manifold of dimension d. A noise-free system Z = F(X) :
+M d1 1 M d2 2 , is locally observable at X 0 ∈ M d1 1 if there is a neighborhood of X 0 , denoted by U X0 , such that ∀X ∈ U X0 , X = X 0 , we have F(X) = F(X 0 ).
+By Definition 2, it is easy to verify that VB-PGO in (2) is unobservable. Because given a solution X 0 {T i } i∈V and any neighborhood U X0 around X 0 , by the fact that a Lie group is a continuous group, we can always find a shifted solution X
+
+{T T i } i∈V , X ∈ U X0 , which yields exactly the same measurements (see Remark 2).
+
+This result coincides with the Fisher information matrix (FIM) based observability tool (see Remark 7). Now we extend Definition 2 to estimation problems with constraints, i.e., a noise-free sytem Z = F(X) : M d1 
+Z = F(X) = X, with X {T k } k∈E , is bijective on M d1
+1 thus its restriction to M d4 4 is also bijective. Therefore, taking CB-PGO as a MLE on M d4 4 , we verify CB-PGO to be observable by Definition 2.
+
+Remark 7: In estimation theory, a common practice is to define the observability of an estimation problem as the invertibility of the FIM [90], (also see [91], [92] for applications in robotics). While FIM being a statistical tool, which is related to a specific noise model (like Gaussian), the deterministic definition of observability for MLE in Definition 2 has been shown to be equivalent to FIM based observability if the probability density function has a continuous derivative [88].
+
+Remark 8: The covariance matrix (whose inversion is FIM) of CB-PGO can be computed in closed form (see [19], [93], [94]). However, this covariance matrix is always rank deficient because of the over-parameterization in (4), namely |E| > ν. This does not mean CB-PGO is unobservable. To apply FIM based tool correctly, we have to obtain FIM for M d4 4 in its Euclidean space via an atlas [89], instead of using FIM on M d1
+
+1 . Nevertheless, we can verify the observability by Definition 2, without explicitly assigning the atlas.
+
+
+B. Jacobian Matrix Design: MCB and Invariance
+
+In CB-PGO, the entry in the Jacobian matrix (Eq. (8) in Appendix A-B) takes the form of σ(k c )Ad (P(α(σ(k c )))), with P(·) being a geometric path inside the cycle. Let the corresponding topological path be P(·). Ideally, we want P(·) to be as short as possible, so that less errors will be accumulated in P(·), and the Jacobian can more accurately capture the local structure at the linearization point. By using a MCB, the average length of P(·) is minimized along with the overall length of cycles. Therefore CB-PGO based on a MCB can be expected to perform better than that based on cycle bases like a FCB. This is true as will be experimentally validated in Fig. 5 and Fig. 6.
+
+In CB-PGO, we can minimize the linearization errors inside the Jacobian matrix by using a MCB instead of a FCB. The idea of having a Jacobian matrix less relevant to linearization errors has been exploited in the context of Lie group estimation with "invariance" [95]- [99] as well. In brief, invariance works by choosing a special Lie group parameterization (i.e., group affine [95]) that the Jacobian matrix obtained via linearization at a certain point is merely related to some "error-states" rather than the linearization point directly. As a result the left/righthand Jacobian in the BCH formula with respect to the errorstates is eliminated. This technique can significantly improve the convergence of the estimation problem, especially when facing large noise scenarios.
+
+
+C. Convergence Rate
+
+Regarding constrained optimization, one of the major concerns is its convergence rate. However, given that CB-PGO in (4) is essentially an equality constrained least squares optimization problem, techniques like SQP can attain quadratic/superlinear convergence [72]. Here we briefly review some work in this line to confirm the claim. Experimental validations are provided in Fig. 6.
+
+For equality constrained least squares optimization, it has been shown in [100] that a quadratic convergence rate can be obtained by applying Newton's method (an iterative method to solve a nonlinear equation [101]) to calculate a critical point of the corresponding Lagrangian function. This extends the quadratic convergence of Newton's method used in unconstrained optimization to constrained cases by SQP. Methods based on approximate Lagrangian Hessians can attain superlinear convergence [102]- [104].
+
+In the context of least squares, the Gauss-Newton method yields quadratic convergence if the residual error at the minimum is zero [22]. The same conclusion stands in the case of equality constrained least squares, which was proved in [105]. This convergence result implies that SQP by linearizing the cost function and constraints (like in (5)) can have basically similar convergence as the Gauss-Newton method.
+
+These justifications are mostly true if the algorithm works around a minimum. In practice, if the noise level in relative poses is reasonable, CB-PGO initialized by the measurements of relative poses is close to the ground-truth. Therefore CB-PGO can have a better convergence (compared with VB-PGO initialized by odometry) because the working point is closer to a minimum and the Hessian matrix is more accurate.
+
+
+VIII. IMPLEMENTATION DETAILS
+
+The most well-known open-source implementation of a MCB comes from Dimitrios Michail [80], based on the LEDA graph library. However, the code is not maintained anymore for recent LEDA versions, or Ubuntu systems. The other competitive implementations, for example [79], [81], are not available in open-source. In contrast, our implementation is freely available to the research community, and can be easily used in other MCB related problems.
+
+We implement the MCB algorithm described in Section VI from scratch with C++ Standard Library and C++ Standard Template Library (STL) only. For Dijkstra, we use the priorityqueue implementation of STL. We use a dense square matrix with backward pointers to parent vertices to describe the APSP trees. For set operations on support vectors and cycles, sorted sparse vectors are used instead of binary search trees, which is faster by our experiments. OpenMP is used to parallelize CPU computations on multiple cores.
+
+Both CB-PGO and VB-PGO are implemented on an opensource graph optimization library, i.e. SLAM++ [14], which provides the basic operations on block matrices and Cholesky factorization. In SLAM++, we use the default block Cholesky based linear solver, and the approximate minimum degree ordering algorithm (AMD) [106] to reduce the fill-in. Both CB-PGO and VB-PGO use the same Lie group implementation, to avoid the impact of latent numerical round-off errors.
+
+For a fair comparison, we implement chordal initialization [107], [108] as an alternative initialization technique, using Block Cholesky factorization. Instead of initializing the rotational part of poses only [108], we reestimate the translational part as well. This will give an accurate initial objective value for the chordal based methods. An initialization of relative poses is obtained by recalculating relative poses with pose estimates, which can be used to initialize CB-PGO.
+
+Noting that for a batch algorithm, we only need to run MCB and AMD once, which will be followed by several iterations of linearization, Cholesky factorization, and state updates.
+
+
+IX. EXPERIMENTAL RESULTS
+
+In this paper, the experiments are carried out by a laptop equipped with a quad-core CPU, Intel(R) Core(TM) i5-5300U CPU @ 2.30GHz × 4, running on Ubuntu 16.04 LTS.
+
+We will use four real datasets and four simulated datasets as standard benchmarks. INTEL P, Intel and MITb are obtained by processing the raw measurements from wheel odometry and laser range finder [38]. Raw data are available at [109]. KITTI is a pose graph generated by the proSLAM framework [5] from the vision benchmark dataset [110]. The four simulated datasets and their creators are: Manhattan [24], City10k [26], Sphere2500 [26], and Torus10000 [26].
+
+We will use the cycle ratio of a graph, defined as ν/|E|, to benchmark the graph sparsity. In graph simulations, we regard the local minimum computed by using the ground-truth initialization as the global minimum. Let the objective value at the global minimum be f . For any computed solution, if its objective value f satisfies |f /f − 1| < 0.01, the solution is counted as a success. The number of successes divided by the number of Monte Carlo runs is defined as the success rate. For CB-PGO, at each iteration, we firstly calculate a pose configuration through odometry using the current estimate of relative-poses. Then we substitute the pose configuration to the cost function of VB-PGO, and use the obtained cost as the objective value of CB-PGO.
+
+In this section, the VB-PGO initialized by odometry is denoted as VB, while CB-PGO initialized by the measurements of relative poses is denoted as CB. We distinguish CB-PGO techniques based on the MCB and FCB by denoting them as CB-MCB, CB-FCB respectively. Besides the "natural" initialization for VB-PGO and CB-PGO, we use chordal initialization to bootstrap the rotational part [108]. To evaluate the objective value after chordal initialization, we recompute the optimal translational estimate after the rotational initialization. The chordal bootstrapped VB, and CB variants are termed as VB-Chord, CB-MCB-Chord and CB-FCB-Chord respectively.
+
+The maximal iterations are set to 50, and we stop the algorithm if the perturbation (i.e., state updates) has a norm less than 0.001. For CB-PGO, we also ensure the constraint residual norm to be less than 0.001.
+
+
+A. MCB
+
+The timing statistics of the proposed MCB is reported in Table II. The proposed MCB algorithm consists of three major parts: consistent-APSP, isometric set construction (Section VI-B), and independence test (Section VI-C). The construction of Horton set (Section VI-A) requires a APSP, while its reduction to the isometric set requires a consistent-APSP. In Table  II, Dijkstra is used to compute a APSP. The consistent-APSP can be computed via the method in [82], or by LexDijkstra (proposed). All the timings regarding these two consistent-APSP algorithms are presented. To benchmark the overall effectiveness of the proposed MCB, we compare with the stateof-the-art open-source implementation in [80]. In Table II, the symbol "-" in the "parallel" row means that the corresponding computation cannot be parallelized.
+
+In Table II, the proposed MCB algorithm is at least as fast as the state-of-the-art in [80]. Actually the proposed MCB is much faster for sparse graphs (due to the pruning of degree-two vertices), and slightly faster for most dense graphs, except for the Sphere dataset. This is due to the highsymmetry of the graph which results to many lexicographical comparisons. The implementation in [80] fails at the KITTI dataset, because it cannot handle parallel edges. In addition, Table II clearly shows the advantage of using the proposed LexDijkstra to compute a consistent-APSP, since it avoids  the sequel bottleneck in [82]. In the worst case, LexDijkstra accounts for 1.5 times the timing of the pure Dijkstra (APSP), which we believe is already close to the lower borderline. Note that this timing will double without Theorem 2.
+
+In Table II, the computation is parallelized by a quad-core CPU; however these timings can be more advantageous if the CPU has more cores (like an eight-core CPU or more).
+
+B. Standard PGO Benchmarks 1) Statistics of Each Part: We report the computational time for Cholesky factorization, MCB, and Chordal initialization in Table III. The timings for linearization, state updates, and system matrix constructions are ignored, because these operations are rather cheap compared with the Cholesky part. An exception is CB-PGO using FCB (CB-FCB): The system matrix allocation in this case can be rather expensive by indexing non-zero elements in Jacobian. In case of Manhattan, it takes almost 1 minute to construct the system matrix, and fails in case of City10k and Torus10k. The size and sparsity of the benchmarks are included as well.
+
+Regarding Cholesky factorization, CB-MCB and VB have comparable performance, while CB-MCB is (2-3 times) faster on sparse graphs. The Cholesky part of CB-FCB takes around two magnitudes of time compared with that of CB-MCB/VB, except for the MITb dataset (which has a rather small ν = 20 thus it actually does not matter whether the system matrix is sparse or not). The timing statistics of the Cholesky part indicates that CB-FCB is not a viable approach (2 magnitudes slower than VB in almost any cases).
+
+In Table III, the timing of the MCB and Cholesky parts are comparable for sparse graphs, i.e., the four real dataset, MITb, INTEL P, KITTI, Intel. Given that we only need to run MCB once, followed by multiple Cholesky iterations, CB-MCB can take advantage in this case, in particular for the MITb, INTEL P and KITTI datasets. For dense (simulated) graphs, like Sphere, Manhattan, City10k and Torus10k, since the MCB part is too expensive compared with the Cholesky part, it is not a good choice to use CB-MCB (or CB-MCB-Chord) if timing is a critical consideration.
+
+The chordal initialization accounts for roughly 2-3 iterations of the Cholesky time. This is understandable since its solves  a linear system of k times larger (with k = 2 for 2D; and k = 3 for 3D). We will use chordal initialization to boost all the methods (termed VB-Chord, CB-MCB-Chord, CB-FCB-Chord) to examine the robustness.  Table III. However, even in these cases, CB-MCB is still useful because it yields a faster convergence. For instance on the Sphere2500 dataset, if we increase the noise level to 0.1 rads in the rotation part, the convergence of VB degenerates dramatically, and CB-MCB can outperform VB because of the faster convergence. Nonetheless, the VB-Chord can significantly improve the convergence of VB, thus yielding a smaller timing. provide a Monte-Carlo simulation on the simulated dataset Manhattan (2D), and Sphere2500 (3D). We recreate the dataset from its ground-truth with additive noise in the exponential coordinate, with 0.1m standard deviation on the translational part, and 0.01rads 0.05rads, 0.10rads, 0.15rads, 0.20rads respectively on the rotational part.
+
+For each case, we generate 100 noisy graphs, and report in Fig. 5 the success rate of VB, VB-Chord, CB-MCB, CB-MCB-Chord, CB-FCB, and CB-FCB-Chord, when solving these graphs. From Fig. 5, we conclude that CB-FCB is basically worse than VB, while CB-MCB is much more robust than VB (initialized by odometry) and CB-FCB. Unsurprisingly, the chordal bootstrapped approaches, i.e., VB-Chord, CB-MCB-Chord and CB-FCB-Chord show the best robustness. However, a pure CB-MCB (initialized by relative measurements), is almost as robust as the chordal bootstrapped approaches.
+
+2) Computational Time: To better understand the computational complexity of VB, VB-Chord, CB-MCB and CB-MCB-Chord on sparse graphs, we perform a Monte-Carlo simulation, with respect to different cycle ratios and different number of poses. Cases for CB-FCB, CB-FCB-Chord are ignored because the FCB based approaches do not scale well with respect to graph topologies (see Table III).
+
+We firstly simulate a giant dense graph using the g2o simulator [13] (g2o simulator3d). Then the graph is tailored respectively to 1000, 4000, 10000 and 30000 poses, and pruned to different sparsity, i.e., 1%, 5%, 10%, 15%, 20% and 25%. The process randomly generates 100 graphs for each pose number and cycle ratio combination.
+
+The running time statistics of VB, VB-Chord, CB-MCB and CB-MCB-Chord for each simulated scenario is recorded in Fig. 7, where the mean is plotted with color, and the standard deviation is added to the bar-plot as the white margin. The used iterations are also included above each bar. Note that the maximal iteration is set to 50.
+
+In Fig. 7, CB-MCB is obviously more advantageous than VB for all the tested scenarios with a maximal cycle ratio at around 15%, as well as VB-Chord at round 10%. When the graph becomes denser, with the cycle ratio exceeding 20%, the timings of CB-MCB and CB-MCB-Chord grow with respect to the number of poses as their MCB parts start to dominate the complexity. However, even in these cases, the timings of CB-MCB and CB-MCB-Chord are still comparable to that of VB and VB-Chord, without a dramatical deterioration. The VB-Chord can improve the convergence of VB with a slight tradeoff on the computational cost. The same applies to CB-MCB and CB-MCB-Chord, while the improvement is less obvious. Considering CB-MCB is almost as robust as chordal based approaches, as shown in Fig. 5, it seems that CB-MCB-Chord does not offer much compared to CB-MCB.
+
+In case of huge graphs, like 30000 poses, the numerical stability of VB degenerates dramatically, as can be clearly seen by the iterations consumed. In contrast, the CB-MCB shows a much better numerically stability and convergence property in this scenario, while the bootstrapped approach VB-Chord can significantly improve the convergence of VB. It is worth noting that CB-MCB and CB-MCB-Chord can fail when allocating the memory for shortest path trees (a dense matrix of O(n 2 ) memory) if the reduced graph still has too many vertices. Such a case is shown at 25% sparsity, with 30000 poses.
+
+
+X. CONCLUSION
+
+To summarize, we propose CB-PGO, a robust and efficient PGO technique that works in the cycle space of the graph. We characterize the graph sparsity by a MCB, which reduces the numerical complexity and enhances the convergence to the global minimum. We design a tailored MCB algorithm for sparse, positive-integer weighted graphs, which can be used for other cycle based applications as well. The claims on the convergence and computational complexity are validated with experiments. We provide an open-source C++ implementation that is freely available to the community to benefit future research in this direction. The future work includes: extending the cycle-based approach to other sparse graph instances; exploiting sparse representations for the consistent APSP storage; developing incremental algorithms for cycle based approaches; exploring the possibility of using Frobenius norm based cost function and convex relaxations.
+
+
+APPENDIX A LINEARIZATION OF CYCLE BASED PGO
+
+In section, we provide the computational details in terms of how to linearize the CB-PGO formulation in (4).
+
+
+A. Linearization of Cost Function
+
+Denote the error of each edge k at its estimateT k to be η k = Log(T −1 k ·T k ). The linearization of the cost function is trivial using the approximate BCH formula:
+k∈E Log(T −1 k · T k ) 2 Σ k ← k∈E Log T −1 k ·T k · Exp (ξ k ) 2 Σ k = k∈E Log (Exp(η k ) · Exp(ξ k )) 2 Σ k ≈ k∈E Log Exp η k + J −1 r (η k )ξ k 2 Σ k = k∈E η k + J −1 r (η k )ξ k 2 Σ k = η + J −1 ξ 2 Σ
+where, η = stack{η k } k∈E , ξ = stack{ξ k } k∈E , J = blkdiag{J r (η k )} k∈E , and Σ = blkdiag{Σ k } k∈E .
+
+
+B. Linearization of Geometric Cycles
+
+Let us take the metric cycle C lhs = I as an example. Recall that C lhs = T
+σ(1 c ) 1 c T σ(2 c ) 2 c · · · T σ(λ c ) λ c , where T 1 c , .
+. . T λ c are the sequential relative poses obtain by a traversal. σ(1 c ), . . . σ(λ c ) are the relative edge orientations with respect to the traversal, assigned to +1 if the traversal uses the edge in the forward direction, and −1 otherwise.
+
+The constraint C lhs = I can be written as Log(C lhs ) = 0. In the vector space of se(3), the first-order Taylor expansion takes the form,
+λ c k c =1 c ∂Log(C lhs ) ∂ξ T k c · ξ k c + Log(C lhs ) = 0.
+At a set of given estimatesT k c (k c = 1 c · · · λ c ), let us define the error of the geometric cycle to be β = Log(C lhs ). For any h c ∈ [1 c , λ c ], with a bit abuse of notation, we split the geometric cycle into two geometric paths P(h c ),P(h c ):
+P(h c ) =T σ(1 c ) 1 c · · ·T σ(h c ) h c ,P (h c ) =T σ((h+1) c ) (h+1) c · · ·T σ(λ c ) λ c .
+Let P(0 c ) = I be a special case. The equality below is trivial
+P(h c ) ·P(h c ) = Exp(β).(7)
+Now let's add a perturbation ξ k c to the edge k c inside C lhs via the exponential mapping,
+C lhs ←T σ(1 c ) 1 c · · · T k c · Exp(ξ k c ) σ(k c ) · · ·T σ(λ c ) λ c .
+Let the perturbed C lhs at k c be C lhs | k c , which can be compactly written as,
+C lhs | k c = P(α(σ(k c )))Exp (σ(k c )ξ k c )P(α(σ(k c )))
+where α(σ(k c )) is a scalar function with respect to σ(k c ),
+α(σ(k c )) = k c if σ(k c ) = +1 (k − 1) c if σ(k c ) = −1 .
+Applying (1) and considering (7), C lhs | k c can be written as the multiplication of two matrix exponentials, which can be concatenated by the approximate BCH formula, as
+C lhs | k c = Exp (σ(k c )Ad(P(α(σ(k c ))))ξ k c ) Exp (β) ≈ Exp σ(k c )J −1 l (β)Ad(P(α(σ(k c ))))ξ k c + β .
+At last, the partial derivative could be calculated as follow,
+∂Log(C lhs ) ∂ξ T k c = ∂Log(C lhs | k c ) ∂ξ T k c
+=σ(k c )J −1 l (β)Ad (P(α(σ(k c )))) .
+
+It can be seen that J −1 l (β) occurs for each derivative ∂Log(C lhs | k c )/∂ξ k c , so the final linearized cycle writes λ c k c =1 c σ(k c )Ad (P(α(σ(k c )))) ξ k c + J l (β)β = 0. (8) Without loss of generality, let us assume C lhs = I is the i-th geometric cycle. Then the i-th block row and k c -th block column of B writes B i,k c = σ(k c )Ad (P(α(σ(k c )))). The i-th block row of b writes b i = J l (β)β.
+
+For a set of cycles in a cycle basis, we linearize each one of them and assemble the results in the form of Bξ + b = 0.
+
+
+APPENDIX B THEOREMS AND PROOFS ON GRAPH THEORY
+
+This section contains proofs of several key conclusions that have been used in the proposed MCB. Section B-A is the proof for Theorem 1 that is used for the construction of an isometric set. Theorem 3 is used for the restriction of cycle/support vectors. Lemma 3 is used in independence tests.
+
+
+A. Proof of Theorem 1
+
+Proof: It has been proved in [78] that all representations of an isometric cycle C exactly correspond to a single connected component in G † . We extend this result in what follows.
+
+There are three possible switches in Lemma 2, i.e., case (1), case (2).(a) and case (2).(b). First, we observe that the switch in each case is mutual: If C can be switched to C , then C can be switched to C by the same principle. For case (1), it is straightforward by the fact that P uv = P vu , so C(v, e uv ) = C(u, e uv ). In case (2).(a), we need to prove C(x, e uv ) = C(x , e uv ). Starting from C(x , e uv ), x is the first vertex on the shortest path from x to v, i.e. x = s x (v). It can be verified that x = s x (u), so according to Lemma 2.2.(a), C(x , e uv ) = C(x, e uv ). In Lemma 2.(2).(b), we prove C(x, e uv ) = C(v, e xx ). Starting from C(v, e xx ), u is the first vertex on the shortest path from v to x , i.e. u = s v (x ). It can be verified that v = s u (x) and x = s x (u), so by Lemma 2.(2).(b), C(v, e xx ) = C(x, e uv ). This implies that in G † , the arcs (i.e., directed edges) are mutual: If there is an arc from C to C , then there is an arc from C to C as well.
+
+Second, for an isometric circuit C(x, e st ), we can generate exactly two switches because in Lemma 2, the vertex u can be chosen as either s or t, and v as either t or s accordingly. This implies that if a vertex in G † is a representation of an isometric circuit, it must have an out-degree d out = 2. Now assume we replace the two arcs mutually connecting C and C in G † by an undirected edge. Considering the fact that all representations of an isometric circuit lie in the same connected component of G † [78], we conclude: By replacing mutual arc pairs in G † as undirected edges, all representations of an isometric circuit constitute a connected subgraph whose vertices have degree of 2, which is a simple cycle. Therefore the directed version is a double-linked directed cycle in G † .
+
+An isometric circuit has |C| representations, so the directed cycle has |C| vertices.
+
+Theorem 3: Let T be any tree (not necessarily a spanning tree) in G(V, E). DefineC ∈ Z ν 2 to be the incidence vector of C restricted to the set of off-tree edges in E\T , i.e., C = [C,C], whereC ∈ E\T ,C ∈ T .
+
+Then for a collection of cycles {C i = [C i ,C i ]} i∈N , we have rank({C i } i∈N ) = rank({C i } i∈N ).
+
+Proof: Note that rank({C i } i∈N ) ≤ rank({C i } i∈N ). Then we verify the inequality shall never be reached. Otherwise, there exist at least a sequence of λ i (i ∈ K), such that i∈K λ iCi = 0 and i∈K λ iCi = 0. As a result, C = i∈K λ i C i becomes a tree, containing edges only in T , which is impossible. (By composing cycles, the change of the degree for a vertex is even, which implies that each vertex in C has an even degree, thus C cannot be a tree.)
+
+Lemma 3: Let {S i } ν j=k be the support vectors of a collection of independent circuits {C i } k−1 i=1 . Then a circuit C k is linearly independent from {C i } k−1 i=1 , if and only if there exists aS l (k ≤ l ≤ ν) such that C k ,S l = 1.
+
+Proof: Sufficiency: This is well-known in [64], [83], [85]. Assume C k is dependent. Then there is a non-trivial linear combinationC k = k−1 i=1 λ iCi . As a result, C k ,S j = k−1 i=1 λ i C i ,S j = 0 holds for all k ≤ j ≤ ν, which contradicts the existence ofS l . Necessity: Assume C k ,S j = 0 for all k ≤ j ≤ ν. Then the orthogonality C i ,S j = 0 would hold for all 1 ≤ i ≤ k, k ≤ j ≤ ν. Since C k is independent from
+{C i } k−1 i=1 , then {C i } k i=1
+are a set of independent circuits. By theorem 3, the restricted circuits {C i } k i=1 are also independent. Then {C i } k i=1 ∪{S j } ν j=k are ν +1 linearly independent vectors for a space of dimension ν, which cannot be true.
+
+
+APPENDIX C LEXICOGRAPHIC DIJKSTRA (LEXDIJKSTRA)
+
+In this section, we provide the proofs related to LexDijkstra. To begin with, lexicographic paths are defined in Definition 3. Lemma 4 builds the connection between lexicographic paths and consistent paths. Theorem 4 is a supportive conclusion to derive LexDijkstra. The correctness of LexDijkstra is proved in Section C-A. Last but not least, Section C-B is the proof for a key result that can greatly improve the effectiveness of lexicographic comparisons.
+
+Definition 3: (Lexicographic Paths [82]). Consider undirected graph G(V, E) with edge weight vector w. Each edge in E is assigned with a unique index, and a path P is described as a collection of edges. Then for every pair of nodes u, v ∈ V, there exists a unique uv path P uv , that satisfies exactly one of the following three conditions with respect to any other uv path P uv : (1) w(P uv ) < w(P uv ), (2) w(P uv ) = w(P uv ) and |P uv | < |P uv |, (3) w(P uv ) = w(P uv ), |P uv | = |P uv |, and min index(P uv \P uv ) < min index(P uv \P uv ). Lemma 4: ( [82]) If all paths in a APSP are lexicographic paths, then the APSP is a consistent APSP.
+
+Proof: The proof is not given in [82], thus we provide one for completeness. Let s and t be two vertices on the lexicographic shortest path P uv . Suppose the lexicographic shortest path from s to t, denoted by P st , is not on P uv . Let P * st be the subgraph on P uv joining s and t, i.e., P uv = P us + P * st + P tv . Let us further define a path P uv = P us + P st + P tv . Obviously, w(P * st ) = w(P st ) and |P * st | = |P st | (which implies w(P uv ) = w(P uv ) and |P uv | = |P uv |), otherwise either P uv or P st is not a lexicographic shortest path by the case (1) or case (2) of Definition 3.
+
+For the case (3) of Definition 3, we observe that, min index(P uv \P uv ) = min index(P * st \P st )
+
+min index(P uv \P uv ) = min index(P st \P * st ).
+
+Since P st is the lexicographic shortest path, we have min index(P st \P * st ) < min index(P * st \P st ).
+
+By Eq. (9)(10)(11), we have min index(P uv \P uv ) < min index(P uv \P uv ). Therefore by Definition 3.(3), P uv is not a lexicographic shortest path since P uv is lexicographically shorter than P uv , which contradicts the assumption. Theorem 4: Let G be an undirected graph with weight w(e) > 0, ∀e ∈ E. A single-source shortest path tree grown at v can be computed using Dijkstra's algorithm [87]. Let P uv be a shortest path from u to v. Then for Dijkstra's algorithm, if w(P uv ) comes to be the minimum weight available amongst that of all vertices whose shortest path has not been decided yet (such that u is the next vertex to be expanded), all possible paths from u to v with weight w(P uv ) have been traversed.
+
+Proof: Let an arbitrary shortest path from u to v with the minimum weight w(P uv ) = w(P uv ) be described by a vertexedge alternating sequence P uv = {u -e us -s, · · · v}. Then there exists a path P sv = P uv \e us from s to v with weight w(P sv ) < w(P uv ) because w(e us ) > 0. When w(P uv ) comes as the minimum weight amongst that of all vertices whose shortest path has not been decided yet, P sv must have been considered, and a shortest path from s to v must have been found with weight at most w(P sv ). Then at the expansion stage of node s, the edge e us has been traversed, so has been the path P uv = P sv ∪ e us .
+
+A. Proof of Proposition 1 Proof: By Theorem 4, all shortest paths from u to v with exactly the same minimum weight, which is the case (2) and (3) in Definition 3, will be traversed by Dijkstra's algorithm before the final path P uv is decided. Thus it would be sufficient to perform a "lexicographic comparison" in Dijkstra's update process according to Definition 3 whenever a new path from u to v is found. By Lemma 4, the APSP comprising lexicographic paths constructed by Definition 3 is consistent. Therefore P uv constructed by Definition 3 is a consistent path in a consistent APSP.
+
+
+B. Proof of Theorem 2
+
+Proof: Let P uv and P uv be two paths from u to v. Let x be an arbitrary common vertex shared by P uv and P uv . Then P uv and P uv can be divided by x into two parts: P uv = P ux + P xv , and P uv = P ux + P xv . Without loss of generality, let us assume the shortest path tree of LexDijkstra rooted at v. Then by the time comparing paths between u and v, the lexicographic shortest path between x and v must have been found, and is unique, i.e., P xv = P xv . As a result, in case (3) of Definition 3, we have: P uv \P uv = P ux \P ux , and P uv \P uv = P ux \P ux . Therefore it suffices to compare the paths (i.e., indices of edges) between u and x. Since x is chosen arbitrary, we compare to the nearest shared vertex.
+
+eFig. 1 .
+112 e 23 e 34 e 45 e 56 e 67 e 25 e 16 A toy graph of PGO. For each relative poses T i,j , the edge e ij is oriented as i j. When talking about topological information, like cycles/paths, we can safely operate on the undirected version by ignoring the edge orientations, and lifting back to oriented edges when the cycles/paths are computed. In a graph, paths/cycles are a collection of edges, which can be described by a set or a vector on GF. For example, there are three simple cycles in this graph: C 1 = {e 12 , e 25 , e 56 , e 16 }, C 2 = {e 23 , e 34 , e 45 , e 25 }, and C 3 = {e 12 , e 23 , e 34 , e 45 , e 56 , e 16 }.
+
+Fig. 2 .Fig. 3 .
+23An illustration of Lemma 2. Let us consider the cycle represented by the vertex x and edge euv, i.e. C = C(x, euv) P(x, u) + P(x, v) + euv. x = sx(u) is the first vertex on the path P(x, u), i.e., P(x, u) = e xx + P(x , u). The key to the proof of Lemma 2 is based on the observation that: If C is isometric, there are two possible cases for the shortest path between the vertex x and v: (a) P(x , v) = e xx + P(x, v), (b) P(x , v) = P(x , u) + euv. Obviously case (a) implies x = s x (v) and C = C(x , euv), while case (b) implies u = sv(x ) and C = C(v, e xx ). A visualization of connected components in G † .
+
+
+[1:k−1] . Denote the orthogonal complementary space as S [k:ν] = C ⊥ [1:k−1] . Let {S i } ν j=k be a basis of the space S [k:ν] . The vectors {S i } ν j=k are called support vectors of
+
+Fig. 4 .
+4The original graph (unweighted) and the corresponding reduced graph (weighted) by smoothing out the vertices of degree two. The weight of an edge in the reduced graph is the number of edges it represents in the original graph. Both graphs possess the same cycle structure. of C. Let the new edges in C\T be C N = {e 1 , . . . , e k }, then we can identify maximally k independent support vectors, for example, S 0 = {e 1 } and S j = {e j , e j+1 } (1 ≤ j ≤ k − 1).
+
+
+G(X) = I : M d1 1 M d33 . If the constraint forms a submanifold M d4 4 embedded on M d1 1 , then we can reduce the constrained MLE to an unconstrained MLE, and verify the observability by Definition 2. The basic tool is the so-called submersion theorem (Proposition 3.3.3 in[89]): If G is smooth, and I is a regular value of G (i.e. the rank of G isd 3 for each point in Y ∈ M d1 1 satisfying G(Y) = I), then M 4 = {X | X ∈ M d11 , G(X) = I, rank(G) = d 3 } admits a differential structure, and M d4 4 is an embedded submanifold of M d1 1 , with dimension d 4 = d 1 − d 3 . If a set of constraints is "redundant", we can verify a submanifold by the subimmersion theorem (Proposition 3.3.4 in[89]).Finally let us examine the case of CB-PGO. Let M d1 1 be SE(3) m . The ν constraints clearly satisfy the submersion theorem, thus the constraints admit a submanifold M d4 4 embedded in M d1 1 . The noise-free system, i.e., the measurement function of relative poses
+
+Fig. 5 .
+5The robustness of vertex-based approaches and cycle based approaches on 100 run Monte-Carlo simulation. The curves of the chordal bootstrapped methods, i.e., VB-Chord, CB-MCB-Chord, and CB-FCB-Chord, coincide with one other.
+
+Fig. 6 .
+6The convergence of different methods on benchmark datasets. Noet that for INTEL P, the initial objective values with and without the chordal initialization are 6281560 and 6700310 respectively, which are close but not the same. Aside from the MCB, the memory usage of VB and CB are comparable.For example in INTEL P, the graph storage takes 1.13MB, while the matrix to be factorized accounts for 8.11MB; These numbers in CB are 1.34MB and 8.04MB respectively. For MITb, there are 92 nonzero blocks in the Cholesky part of CB-MCB, whereas 2462 for VB. For INTEL P, CB-MCB accounts for 2234 nonzero blocks, and VB 4194. The numbers for KITTI are 5015 and 13831 respectively. For dense graphs like Sphere2500, there are 12244 nonzero blocks in the Cholesky part of CB-MCB, while the number for VB is 12398.
+
+2 )
+2Convergence and Complexity: In Fig. 6, we visualize the convergence of VB, VB-Chord, CB-MCB, CB-MCB-Chord, CB-FCB, and CB-FCB-Chord, against their computational time. The time point of the MCB and Chordal initialization are marked out for a clear visualization. The MTIb dataset shows a case where VB and CB-FCB converges to a local minimum, where CB-MCB converges to the global minimum. The chordal bootstrapped approaches, VB-Chord and CB-FCB-Chord, can converge to the global minimum as well, while taking a longer time. In this case, CB-MCB is both the fastest and robustest approach. The fast convergence of CB-MCB is further validated by a sparse graph, INTEL P (17.3% sparsity), where it significantly outperforms VB, and VB-Chord. The results for FCB, FCB-Chord are not shown for INTEL P as the the timings are too large to be plotted on the same scale. Similar results are witnessed on the KITTI dataset, while the convergence is much faster given that the dataset is less noisy. For dense graphs, CB-MCB is not advantageous in terms of the computational time, since the MCB part is dominant over the Cholesky part as shown in
+
+Fig. 7 .
+7C. Monte-Carlo Simulation 1) Global Minimum: To examine the robustness of CB-PGO, in terms of converging to the global minimum, we The computational time of VB (VB-PGO initialized by odometry), VB-Chord (VB-PGO initialized by the Chordal initialization technique), CB-MCB (CB-PGO based on the MCB, initialized by the measurements of relative poses), and CB-MCB-Chord (CB-PGO based on the MCB, initialized by the Chordal initialization technique) on 100 run Monte-Carlo simulation. The mean is plotted with color, and the standard deviation is added to the bar-plot as the white margin. The number above each bar is the used iterations. The maximal iteration is set to 50.
+
+TABLE I LIST
+IOF NOTATIONS ON GRAPH
+
+TABLE II THE
+IICOMPUTATIONAL TIME OF LEXDIJKSTRA AND MCB ON A QUAD-CORE CPU. TIME IN SECONDSConsistent-APSP 
+Isometric set Independence Proposed Michail [80] 
+Method in [82] 
+LexDijkstra 
+Dijkstra 
+Sorting 
+Processing 
+Overall 
+
+MITb 
+Sequel 
+1.17e-4 
+6.23e-5 
+5.97e-5 
+2.39e-4 
+1.25e-4 
+5.76e-5 
+7.24e-6 
+Parallel 
+6.50e-4 
+-
+-
+7.72e-4 
+7.20e-4 
+4.61e-5 
+-
+8.45e-4 
+2.69e-3 
+
+INTEL P 
+Sequel 
+2.42e-3 
+5.06e-4 
+8.66e-4 
+3.79e-3 
+2.79e-3 
+9.01e-4 
+5.35e-5 
+Parallel 
+1.78e-3 
+-
+-
+3.15e-3 
+1.31e-3 
+5.46e-4 
+-
+2.11e-3 
+2.46e-2 
+
+KITTI 
+Sequel 
+1.36e-3 
+6.50e-4 
+1.41e-3 
+3.42e-3 
+2.32e-3 
+1.13e-3 
+9.49e-5 
+Parallel 
+2.63e-3 
+-
+-
+4.69e-3 
+2.74e-3 
+7.34e-4 
+-
+3.94e-3 
+fail 
+
+Intel 
+Sequel 
+3.52e-2 
+1.26e-2 
+2.66e-2 
+7.44e-2 
+5.83e-2 
+1.49e-2 
+1.88e-4 
+Parallel 
+1.43e-2 
+-
+-
+5.35e-2 
+2.45e-2 
+8.47e-3 
+-
+3.36e-2 
+7.95e-2 
+
+Manhattan 
+Sequel 
+0.495 
+0.250 
+0.511 
+1.26 
+0.623 
+0.211 
+5.66e-4 
+Parallel 
+0.187 
+-
+-
+0.948 
+0.241 
+0.105 
+-
+0.348 
+0.598 
+
+Sphere2500 Sequel 
+0.469 
+0.202 
+0.601 
+1.27 
+2.03 
+0.215 
+2.45e-4 
+Parallel 
+0.187 
+-
+-
+0.990 
+0.766 
+0.116 
+-
+0.883 
+0.309 
+
+City10k 
+Sequel 
+7.74 
+3.45 
+11.1 
+22.3 
+11.7 
+4.69 
+6.25e-3 
+Parallel 
+2.88 
+-
+-
+17.4 
+4.53 
+2.71 
+-
+7.26 
+8.42 
+
+Torus10k 
+Sequel 
+8.91 
+3.64 
+13.6 
+26.2 
+14.3 
+5.93 
+1.08e-2 
+Parallel 
+3.36 
+-
+-
+20.6 
+5.64 
+3.29 
+-
+8.95 
+14.3 
+
+
+
+TABLE III COMPUTATIONAL
+IIITIME OF CHORDAL INITIALIZATION, MCB, AND CHOLESKY FACTORIZATION ON BENCHMARK DATASETS. G(V, E) STANDS FOR THE ORIGINAL GRAPH, WHILEḠ(V ,Ē) THE REDUCED WEIGHTED GRAPH. TIME IN SECONDSGḠ 
+Chord. Init. 
+MCB 
+Cholesky Per Iter. 
+
+|E| 
+|V| 
+ν 
+ν/|E| 
+|Ē| 
+|V| 
+all 
+CB-MCB 
+CB-MCB 
+CB-FCB 
+VB 
+
+MITb 
+827 
+808 
+20 
+2.42% 
+60 
+41 
+7.32e-3 
+8.45e-4 
+6.74e-5 
+6.12e-5 
+1.31e-3 
+INTEL P 
+1483 
+1228 
+256 
+17.3% 
+396 
+141 
+1.18e-2 
+2.11e-3 
+1.04e-3 
+3.98e-2 
+2.28e-3 
+KITTI 
+5065 
+4541 
+525 
+10.4% 
+654 
+130 
+5.98e-2 
+3.94e-3 
+2.60e-3 
+1.43 
+1.02e-2 
+Intel 
+1835 
+943 
+893 
+48.7% 
+1515 
+623 
+1.45e-2 
+3.36e-2 
+3.31e-3 
+0.985 
+2.75e-3 
+
+Manhattan 
+5453 
+3500 
+1954 
+35.8% 
+4350 
+2397 
+4.43e-2 
+0.348 
+8.16e-3 
+1.31 
+8.42e-3 
+Sphere2500 
+4949 
+2500 
+2450 
+49.5% 
+4947 
+2498 
+0.131 
+0.883 
+8.51e-2 
+0.262 
+8.20e-2 
+City10k 
+20687 
+10000 
+10688 
+51.7% 
+19528 
+8841 
+0.209 
+7.26 
+6.78e-2 
+fail 
+6.11e-2 
+Torus10k 
+22280 
+10000 
+12281 
+55.1% 
+21542 
+9262 
+0.589 
+8.95 
+0.319 
+fail 
+0.340 
+
+
+Fang Bai was born in Ningxia Province,China, in 1988. He received the computer science degree from Nankai University in 2010, and the Ph.D. degree in robotics from University of Technology Sydney in 2020. His Ph.D. thesis studies theoretical aspects in graph optimization, resulting a cycle based approach, and a closed form equation to predict the optimal values in least squares optimization.His research interests include both mathematical abstractions and practical applications in robotics.
+A solution to the simultaneous localization and map building (slam) problem. M G Dissanayake, P Newman, S Clark, H F Durrant-Whyte, M Csorba, IEEE Transactions on robotics and automation. 173M. G. Dissanayake, P. Newman, S. Clark, H. F. Durrant-Whyte, and M. Csorba, "A solution to the simultaneous localization and map building (slam) problem," IEEE Transactions on robotics and automation, vol. 17, no. 3, pp. 229-241, 2001.
+
+Past, present, and future of simultaneous localization and mapping: Toward the robust-perception age. C Cadena, L Carlone, H Carrillo, Y Latif, D Scaramuzza, J Neira, I Reid, J J Leonard, IEEE Transactions on Robotics. 326C. Cadena, L. Carlone, H. Carrillo, Y. Latif, D. Scaramuzza, J. Neira, I. Reid, and J. J. Leonard, "Past, present, and future of simultaneous localization and mapping: Toward the robust-perception age," IEEE Transactions on Robotics, vol. 32, no. 6, pp. 1309-1332, 2016.
+
+Orb-slam: a versatile and accurate monocular slam system. R Mur-Artal, J M M Montiel, J D Tardos, IEEE transactions on robotics. 315R. Mur-Artal, J. M. M. Montiel, and J. D. Tardos, "Orb-slam: a versatile and accurate monocular slam system," IEEE transactions on robotics, vol. 31, no. 5, pp. 1147-1163, 2015.
+
+Orb-slam2: An open-source slam system for monocular, stereo, and rgb-d cameras. R Mur-Artal, J D Tardós, IEEE Transactions on Robotics. 335R. Mur-Artal and J. D. Tardós, "Orb-slam2: An open-source slam system for monocular, stereo, and rgb-d cameras," IEEE Transactions on Robotics, vol. 33, no. 5, pp. 1255-1262, 2017.
+
+Proslam: Graph slam from a programmer's perspective. D Schlegel, M Colosi, G Grisetti, 2018 IEEE International Conference on Robotics and Automation (ICRA). IEEED. Schlegel, M. Colosi, and G. Grisetti, "Proslam: Graph slam from a programmer's perspective," in 2018 IEEE International Conference on Robotics and Automation (ICRA). IEEE, 2018, pp. 1-9.
+
+Rotation averaging. R Hartley, J Trumpf, Y Dai, H Li, International journal of computer vision. 1033R. Hartley, J. Trumpf, Y. Dai, and H. Li, "Rotation averaging," International journal of computer vision, vol. 103, no. 3, pp. 267-305, 2013.
+
+Spectral synchronization of multiple views in se (3). F Arrigoni, B Rossi, A Fusiello, SIAM Journal on Imaging Sciences. 94F. Arrigoni, B. Rossi, and A. Fusiello, "Spectral synchronization of multiple views in se (3)," SIAM Journal on Imaging Sciences, vol. 9, no. 4, pp. 1963-1990, 2016.
+
+A survey on rotation optimization in structure from motion. R Tron, X Zhou, K Daniilidis, Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition Workshops. the IEEE Conference on Computer Vision and Pattern Recognition WorkshopsR. Tron, X. Zhou, and K. Daniilidis, "A survey on rotation optimization in structure from motion," in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition Workshops, 2016, pp. 77-85.
+
+Calibration of a multi-camera rig from non-overlapping views. S Esquivel, F Woelk, R Koch, Joint Pattern Recognition Symposium. SpringerS. Esquivel, F. Woelk, and R. Koch, "Calibration of a multi-camera rig from non-overlapping views," in Joint Pattern Recognition Symposium. Springer, 2007, pp. 82-91.
+
+A survey on sensor localization. J Wang, R K Ghosh, S K Das, Journal of Control Theory and Applications. 81J. Wang, R. K. Ghosh, and S. K. Das, "A survey on sensor localization," Journal of Control Theory and Applications, vol. 8, no. 1, pp. 2-11, 2010.
+
+Sensor network localization on the group of three-dimensional displacements. J R Peters, D Borra, B Paden, F Bullo, SIAM Journal on Control and Optimization. 536J. R. Peters, D. Borra, B. Paden, and F. Bullo, "Sensor network localization on the group of three-dimensional displacements," SIAM Journal on Control and Optimization, vol. 53, no. 6, pp. 3534-3561, 2015.
+
+Square root SAM: Simultaneous localization and mapping via square root information smoothing. F Dellaert, M Kaess, The International Journal of Robotics Research. 2512F. Dellaert and M. Kaess, "Square root SAM: Simultaneous localization and mapping via square root information smoothing," The International Journal of Robotics Research, vol. 25, no. 12, pp. 1181-1203, 2006.
+
+g2o: A general framework for graph optimization. R Kümmerle, G Grisetti, H Strasdat, K Konolige, W Burgard, Robotics and Automation (ICRA), 2011 IEEE International Conference on. IEEER. Kümmerle, G. Grisetti, H. Strasdat, K. Konolige, and W. Burgard, "g2o: A general framework for graph optimization," in Robotics and Automation (ICRA), 2011 IEEE International Conference on. IEEE, 2011, pp. 3607-3613.
+
+SLAM++ 1-A highly efficient and temporally scalable incremental SLAM framework. V Ila, L Polok, M Solony, P Svoboda, The International Journal of Robotics Research. 362V. Ila, L. Polok, M. Solony, and P. Svoboda, "SLAM++ 1-A highly efficient and temporally scalable incremental SLAM framework," The International Journal of Robotics Research, vol. 36, no. 2, pp. 210-230, 2017.
+
+SE-Sync: a certifiably correct algorithm for synchronization over the special euclidean group. D M Rosen, L Carlone, A S Bandeira, J J Leonard, The International Journal of Robotics Research. 382-3D. M. Rosen, L. Carlone, A. S. Bandeira, and J. J. Leonard, "SE-Sync: a certifiably correct algorithm for synchronization over the special euclidean group," The International Journal of Robotics Research, vol. 38, no. 2-3, pp. 95-125, 2019.
+
+Direct methods for sparse linear systems. T A Davis, Siam. 2T. A. Davis, Direct methods for sparse linear systems. Siam, 2006, vol. 2.
+
+How far is SLAM from a linear least squares problem?" in Intelligent Robots and Systems (IROS). S Huang, Y Lai, U Frese, G Dissanayake, IEEE. IEEES. Huang, Y. Lai, U. Frese, and G. Dissanayake, "How far is SLAM from a linear least squares problem?" in Intelligent Robots and Systems (IROS), 2010 IEEE/RSJ International Conference on. IEEE, 2010, pp. 3011-3016.
+
+Incremental SQP method for constrained optimization formulation in SLAM. F Bai, S Huang, T Vidal-Calleja, Q Zhang, Control, Automation, Robotics and Vision (ICARCV). IEEE14th International Conference onF. Bai, S. Huang, T. Vidal-Calleja, and Q. Zhang, "Incremental SQP method for constrained optimization formulation in SLAM," in Control, Automation, Robotics and Vision (ICARCV), 2016 14th International Conference on. IEEE, 2016, pp. 1-6.
+
+Robust incremental SLAM under constrained optimization formulation. F Bai, T Vidal-Calleja, S Huang, IEEE Robotics and Automation Letters. 32F. Bai, T. Vidal-Calleja, and S. Huang, "Robust incremental SLAM under constrained optimization formulation," IEEE Robotics and Au- tomation Letters, vol. 3, no. 2, pp. 1207-1214, 2018.
+
+Direct Relative Edge Optimization, A Robust Alternative for Pose Graph Optimization. J Jackson, K Brink, B Forsgren, D Wheeler, T Mclain, IEEE Robotics and Automation Letters. 42J. Jackson, K. Brink, B. Forsgren, D. Wheeler, and T. McLain, "Direct Relative Edge Optimization, A Robust Alternative for Pose Graph Optimization," IEEE Robotics and Automation Letters, vol. 4, no. 2, pp. 1932-1939, 2019.
+
+Globally consistent range scan alignment for environment mapping. F Lu, E Milios, Autonomous robots. 44F. Lu and E. Milios, "Globally consistent range scan alignment for environment mapping," Autonomous robots, vol. 4, no. 4, pp. 333-349, 1997.
+
+Methods for non-linear least squares problems. K Madsen, H B Nielsen, O Tingleff, K. Madsen, H. B. Nielsen, and O. Tingleff, "Methods for non-linear least squares problems," 1999.
+
+A multilevel relaxation algorithm for simultaneous localization and mapping. U Frese, P Larsson, T Duckett, IEEE Transactions on Robotics. 212U. Frese, P. Larsson, and T. Duckett, "A multilevel relaxation algorithm for simultaneous localization and mapping," IEEE Transactions on Robotics, vol. 21, no. 2, pp. 196-207, 2005.
+
+Fast iterative alignment of pose graphs with poor initial estimates. E Olson, J Leonard, S Teller, Proceedings 2006 IEEE International Conference on. 2006 IEEE International Conference onIEEERobotics and AutomationE. Olson, J. Leonard, and S. Teller, "Fast iterative alignment of pose graphs with poor initial estimates," in Robotics and Automation, 2006. ICRA 2006. Proceedings 2006 IEEE International Conference on. IEEE, 2006, pp. 2262-2269.
+
+Nonlinear constraint network optimization for efficient map learning. G Grisetti, C Stachniss, W Burgard, IEEE Transactions on Intelligent Transportation Systems. 103G. Grisetti, C. Stachniss, and W. Burgard, "Nonlinear constraint network optimization for efficient map learning," IEEE Transactions on Intelligent Transportation Systems, vol. 10, no. 3, pp. 428-439, 2009.
+
+iSAM: Incremental smoothing and mapping. M Kaess, A Ranganathan, F Dellaert, IEEE Transactions on Robotics. 246M. Kaess, A. Ranganathan, and F. Dellaert, "iSAM: Incremental smoothing and mapping," IEEE Transactions on Robotics, vol. 24, no. 6, pp. 1365-1378, 2008.
+
+iSAM2: Incremental smoothing and mapping using the Bayes tree. M Kaess, H Johannsson, R Roberts, V Ila, J J Leonard, F Dellaert, The International Journal of Robotics Research. 312M. Kaess, H. Johannsson, R. Roberts, V. Ila, J. J. Leonard, and F. Dellaert, "iSAM2: Incremental smoothing and mapping using the Bayes tree," The International Journal of Robotics Research, vol. 31, no. 2, pp. 216-235, 2012.
+
+Large-scale map-making. K Konolige, AAAI. K. Konolige, "Large-scale map-making," in AAAI, 2004, pp. 457-463.
+
+Large-scale robotic 3-d mapping of urban structures. M Montemerlo, S Thrun, Experimental robotics IX. SpringerM. Montemerlo and S. Thrun, "Large-scale robotic 3-d mapping of urban structures," in Experimental robotics IX. Springer, 2006, pp. 141-150.
+
+Subgraphpreconditioned conjugate gradients for large scale slam. F Dellaert, J Carlson, V Ila, K Ni, C E Thorpe, 2010F. Dellaert, J. Carlson, V. Ila, K. Ni, and C. E. Thorpe, "Subgraph- preconditioned conjugate gradients for large scale slam," in 2010
+
+. IEEE. IEEEIEEE/RSJ International Conference on Intelligent Robots and Systems. IEEE, 2010, pp. 2566-2571.
+
+An algorithm for least-squares estimation of nonlinear parameters. D W Marquardt, Journal of the society for Industrial and Applied Mathematics. 112D. W. Marquardt, "An algorithm for least-squares estimation of non- linear parameters," Journal of the society for Industrial and Applied Mathematics, vol. 11, no. 2, pp. 431-441, 1963.
+
+RISE: An incremental trust-region method for robust online sparse least-squares estimation. D M Rosen, M Kaess, J J Leonard, IEEE Transactions on Robotics. 305D. M. Rosen, M. Kaess, and J. J. Leonard, "RISE: An incremental trust-region method for robust online sparse least-squares estimation," IEEE Transactions on Robotics, vol. 30, no. 5, pp. 1091-1108, 2014.
+
+Hierarchical optimization on manifolds for online 2D and 3D mapping. G Grisetti, R Kümmerle, C Stachniss, U Frese, C Hertzberg, Robotics and Automation (ICRA), 2010 IEEE International Conference on. IEEEG. Grisetti, R. Kümmerle, C. Stachniss, U. Frese, and C. Hertzberg, "Hierarchical optimization on manifolds for online 2D and 3D map- ping," in Robotics and Automation (ICRA), 2010 IEEE International Conference on. IEEE, 2010, pp. 273-278.
+
+Robust optimization of factor graphs by using condensed measurements. G Grisetti, R Kümmerle, K Ni, Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on. IEEEG. Grisetti, R. Kümmerle, and K. Ni, "Robust optimization of factor graphs by using condensed measurements," in Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on. IEEE, 2012, pp. 581-588.
+
+Linear slam: A linear solution to the feature-based and pose graph slam based on submap joining. L Zhao, S Huang, G Dissanayake, 2013 IEEE/RSJ International Conference on Intelligent Robots and Systems. IEEEL. Zhao, S. Huang, and G. Dissanayake, "Linear slam: A linear solution to the feature-based and pose graph slam based on submap joining," in 2013 IEEE/RSJ International Conference on Intelligent Robots and Systems. IEEE, 2013, pp. 24-30.
+
+Linear slam: Linearising the slam problems using submap joining. Automatica. 100--, "Linear slam: Linearising the slam problems using submap joining," Automatica, vol. 100, pp. 231-246, 2019.
+
+A fast and accurate approximation for planar pose graph optimization. L Carlone, R Aragues, J A Castellanos, B Bona, The International Journal of Robotics Research. 337L. Carlone, R. Aragues, J. A. Castellanos, and B. Bona, "A fast and accurate approximation for planar pose graph optimization," The International Journal of Robotics Research, vol. 33, no. 7, pp. 965-987, 2014.
+
+From angular manifolds to the integer lattice: Guaranteed orientation estimation with application to pose graph optimization. L Carlone, A Censi, IEEE Transactions on Robotics. 302L. Carlone and A. Censi, "From angular manifolds to the integer lattice: Guaranteed orientation estimation with application to pose graph optimization," IEEE Transactions on Robotics, vol. 30, no. 2, pp. 475-492, 2014.
+
+A sparse separable slam back-end. K Khosoussi, S Huang, G Dissanayake, IEEE Transactions on Robotics. 326K. Khosoussi, S. Huang, and G. Dissanayake, "A sparse separable slam back-end," IEEE Transactions on Robotics, vol. 32, no. 6, pp. 1536- 1549, 2016.
+
+On the structure of nonlinearities in pose graph slam. H Wang, G Hu, S Huang, G Dissanayake, Proc. Robotics: Science Systems. Robotics: Science SystemsH. Wang, G. Hu, S. Huang, and G. Dissanayake, "On the structure of nonlinearities in pose graph slam," in Proc. Robotics: Science Systems, 2013, pp. 425-432.
+
+A convergence analysis for pose graph optimization via gauss-newton methods. L Carlone, Robotics and Automation (ICRA), 2013 IEEE International Conference on. IEEEL. Carlone, "A convergence analysis for pose graph optimization via gauss-newton methods," in Robotics and Automation (ICRA), 2013 IEEE International Conference on. IEEE, 2013, pp. 965-972.
+
+Reliable graph topologies for SLAM. K Khosoussi, M Giamou, G S Sukhatme, S Huang, G Dissanayake, J P How, International Journal of Robotics Research. K. Khosoussi, M. Giamou, G. S. Sukhatme, S. Huang, G. Dissanayake, and J. P. How, "Reliable graph topologies for SLAM," International Journal of Robotics Research, 2018.
+
+A convex optimization based approach for pose SLAM problems. M Liu, S Huang, G Dissanayake, H Wang, Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on. IEEEM. Liu, S. Huang, G. Dissanayake, and H. Wang, "A convex op- timization based approach for pose SLAM problems," in Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on. IEEE, 2012, pp. 1898-1903.
+
+S Boyd, L Vandenberghe, Convex optimization. Cambridge university pressS. Boyd and L. Vandenberghe, Convex optimization. Cambridge university press, 2004.
+
+Planar pose graph optimization: Duality, optimal solutions, and verification. L Carlone, G C Calafiore, C Tommolillo, F Dellaert, IEEE Transactions on Robotics. 323L. Carlone, G. C. Calafiore, C. Tommolillo, and F. Dellaert, "Planar pose graph optimization: Duality, optimal solutions, and verification," IEEE Transactions on Robotics, vol. 32, no. 3, pp. 545-565, 2016.
+
+Duality-based verification techniques for 2d slam. L Carlone, F Dellaert, 2015 IEEE International Conference on Robotics and Automation (ICRA). IEEEL. Carlone and F. Dellaert, "Duality-based verification techniques for 2d slam," in 2015 IEEE International Conference on Robotics and Automation (ICRA). IEEE, 2015, pp. 4589-4596.
+
+Lagrangian duality in 3d slam: Verification techniques and optimal solutions. L Carlone, D M Rosen, G Calafiore, J J Leonard, F Dellaert, 2015 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). IEEEL. Carlone, D. M. Rosen, G. Calafiore, J. J. Leonard, and F. Dellaert, "Lagrangian duality in 3d slam: Verification techniques and optimal solutions," in 2015 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). IEEE, 2015, pp. 125-132.
+
+A convex relaxation for approximate global optimization in simultaneous localization and mapping. D M Rosen, C Duhadway, J J Leonard, Robotics and Automation (ICRA), 2015 IEEE International Conference on. IEEED. M. Rosen, C. DuHadway, and J. J. Leonard, "A convex relaxation for approximate global optimization in simultaneous localization and mapping," in Robotics and Automation (ICRA), 2015 IEEE Interna- tional Conference on. IEEE, 2015, pp. 5822-5829.
+
+Computational enhancements for certifiably correct slam. D Rosen, L Carlone, International Conference on Intelligent Robots and Systems (IROS) in the workshop "Introspective Methods for Reliable Autonomy. D. Rosen and L. Carlone, "Computational enhancements for certifiably correct slam," in International Conference on Intelligent Robots and Systems (IROS) in the workshop "Introspective Methods for Reliable Autonomy". Google Scholar, 2017.
+
+Cartan-Sync: Fast and global SE(d)-synchronization. J Briales, J Gonzalez-Jimenez, IEEE Robotics and Automation Letters. 24J. Briales and J. Gonzalez-Jimenez, "Cartan-Sync: Fast and global SE(d)-synchronization," IEEE Robotics and Automation Letters, vol. 2, no. 4, pp. 2127-2134, 2017.
+
+Hierarchical slam: Realtime accurate mapping of large environments. C Estrada, J Neira, J D Tardós, IEEE Transactions on Robotics. 214C. Estrada, J. Neira, and J. D. Tardós, "Hierarchical slam: Real- time accurate mapping of large environments," IEEE Transactions on Robotics, vol. 21, no. 4, pp. 588-596, 2005.
+
+Optimal estimation on the graph cycle space. W J Russell, D J Klein, J P Hespanha, IEEE Transactions on Signal Processing. 596W. J. Russell, D. J. Klein, and J. P. Hespanha, "Optimal estimation on the graph cycle space," IEEE Transactions on Signal Processing, vol. 59, no. 6, pp. 2834-2846, 2011.
+
+Robust and efficient robotic mapping. E B Olson, Massachusetts Institute of TechnologyPh.D. dissertationE. B. Olson, "Robust and efficient robotic mapping," Ph.D. dissertation, Massachusetts Institute of Technology, 2008.
+
+COP-SLAM: closed-form online pose-chain optimization for visual SLAM. G Dubbelman, B Browning, IEEE Transactions on Robotics. 315G. Dubbelman and B. Browning, "COP-SLAM: closed-form online pose-chain optimization for visual SLAM," IEEE Transactions on Robotics, vol. 31, no. 5, pp. 1194-1213, 2015.
+
+Large-scale cooperative 3d visual-inertial mapping in a manhattan world. C X Guo, K Sartipi, R C Dutoit, G A Georgiou, R Li, J O&apos;leary, E D Nerurkar, J A Hesch, S I Roumeliotis, Robotics and Automation (ICRA). IEEEC. X. Guo, K. Sartipi, R. C. DuToit, G. A. Georgiou, R. Li, J. O'Leary, E. D. Nerurkar, J. A. Hesch, and S. I. Roumeliotis, "Large-scale cooperative 3d visual-inertial mapping in a manhattan world," in Robotics and Automation (ICRA), 2016 IEEE International Conference on. IEEE, 2016, pp. 1071-1078.
+
+Decoupling localization and mapping in slam using compact relative maps. Z Wang, S Huang, G Dissanayake, 2005 IEEE/RSJ International Conference on Intelligent Robots and Systems, IROS. Z. Wang, S. Huang, and G. Dissanayake, "Decoupling localization and mapping in slam using compact relative maps," in 2005 IEEE/RSJ International Conference on Intelligent Robots and Systems, IROS, 2005.
+
+A tree parameterization for efficiently computing maximum likelihood maps using gradient descent. G Grisetti, C Stachniss, S Grzonka, W Burgard, Robotics: Science and Systems. 39G. Grisetti, C. Stachniss, S. Grzonka, and W. Burgard, "A tree param- eterization for efficiently computing maximum likelihood maps using gradient descent." in Robotics: Science and Systems, vol. 3, 2007, p. 9.
+
+Adaptive relative bundle adjustment. D Sibley, C Mei, I D Reid, P Newman, Robotics: science and systems. 3233D. Sibley, C. Mei, I. D. Reid, and P. Newman, "Adaptive relative bundle adjustment." in Robotics: science and systems, vol. 32, 2009, p. 33.
+
+Relative continuoustime SLAM. S Anderson, K Mactavish, T D Barfoot, The International Journal of Robotics Research. 3412S. Anderson, K. MacTavish, and T. D. Barfoot, "Relative continuous- time SLAM," The International Journal of Robotics Research, vol. 34, no. 12, pp. 1453-1479, 2015.
+
+A constanttime SLAM back-end in the continuum between global mapping and submapping: application to visual stereo SLAM. F.-A Moreno, J.-L Blanco, J Gonzalez-Jimenez, The International Journal of Robotics Research. 359F.-A. Moreno, J.-L. Blanco, and J. Gonzalez-Jimenez, "A constant- time SLAM back-end in the continuum between global mapping and submapping: application to visual stereo SLAM," The International Journal of Robotics Research, vol. 35, no. 9, pp. 1036-1056, 2016.
+
+G S Chirikjian, Stochastic Models, Information Theory, and Lie Groups. Springer Science & Business Media2Analytic Methods and Modern ApplicationsG. S. Chirikjian, Stochastic Models, Information Theory, and Lie Groups, Volume 2: Analytic Methods and Modern Applications. Springer Science & Business Media, 2011, vol. 2.
+
+T D Barfoot, State Estimation for Robotics. Cambridge University PressT. D. Barfoot, State Estimation for Robotics. Cambridge University Press, 2017.
+
+Graph theory with algorithms and its applications: in applied science and technology. S S Ray, Springer Science & Business MediaS. S. Ray, Graph theory with algorithms and its applications: in applied science and technology. Springer Science & Business Media, 2012.
+
+Cycle bases in graphs characterization, algorithms, complexity, and applications. T Kavitha, C Liebchen, K Mehlhorn, D Michail, R Rizzi, T Ueckerdt, K A Zweig, Computer Science Review. 34T. Kavitha, C. Liebchen, K. Mehlhorn, D. Michail, R. Rizzi, T. Ueck- erdt, and K. A. Zweig, "Cycle bases in graphs characterization, algorithms, complexity, and applications," Computer Science Review, vol. 3, no. 4, pp. 199-243, 2009.
+
+Method for registration of 3-d shapes. P J Besl, N D Mckay, Sensor Fusion IV: Control Paradigms and Data Structures. 1611P. J. Besl and N. D. McKay, "Method for registration of 3-d shapes," in Sensor Fusion IV: Control Paradigms and Data Structures, vol. 1611. International Society for Optics and Photonics, 1992, pp. 586-607.
+
+Generalized-icp. A Segal, D Haehnel, S Thrun, Robotics: science and systems. 2435A. Segal, D. Haehnel, and S. Thrun, "Generalized-icp." in Robotics: science and systems, vol. 2, no. 4, 2009, p. 435.
+
+Multiple view geometry in computer vision. R Hartley, A Zisserman, Cambridge university pressR. Hartley and A. Zisserman, Multiple view geometry in computer vision. Cambridge university press, 2003.
+
+Visual odometry. D Scaramuzza, F Fraundorfer, IEEE robotics & automation magazine. 184D. Scaramuzza and F. Fraundorfer, "Visual odometry [tutorial]," IEEE robotics & automation magazine, vol. 18, no. 4, pp. 80-92, 2011.
+
+FAB-MAP: Probabilistic localization and mapping in the space of appearance. M Cummins, P Newman, The International Journal of Robotics Research. 276M. Cummins and P. Newman, "FAB-MAP: Probabilistic localization and mapping in the space of appearance," The International Journal of Robotics Research, vol. 27, no. 6, pp. 647-665, 2008.
+
+Visual place recognition: A survey. S Lowry, N Sünderhauf, P Newman, J J Leonard, D Cox, P Corke, M J Milford, IEEE Transactions on Robotics. 321S. Lowry, N. Sünderhauf, P. Newman, J. J. Leonard, D. Cox, P. Corke, and M. J. Milford, "Visual place recognition: A survey," IEEE Trans- actions on Robotics, vol. 32, no. 1, pp. 1-19, 2016.
+
+Factor graphs for robot perception. F Dellaert, M Kaess, Foundations and Trends® in Robotics. 61-2F. Dellaert, M. Kaess, et al., "Factor graphs for robot perception," Foundations and Trends® in Robotics, vol. 6, no. 1-2, pp. 1-139, 2017.
+
+Sequential quadratic programming. P T Boggs, J W Tolle, Acta numerica. 4P. T. Boggs and J. W. Tolle, "Sequential quadratic programming," Acta numerica, vol. 4, pp. 1-51, 1995.
+
+Matrix analysis and applied linear algebra. C D Meyer, 71SiamC. D. Meyer, Matrix analysis and applied linear algebra. Siam, 2000, vol. 71.
+
+Algorithms for generating fundamental cycles in a graph. N Deo, G Prabhu, M S Krishnamoorthy, ACM Transactions on Mathematical Software (TOMS). 81N. Deo, G. Prabhu, and M. S. Krishnamoorthy, "Algorithms for generating fundamental cycles in a graph," ACM Transactions on Mathematical Software (TOMS), vol. 8, no. 1, pp. 26-42, 1982.
+
+Edge-swapping algorithms for the minimum fundamental cycle basis problem. E Amaldi, L Liberti, F Maffioli, N Maculan, Mathematical Methods of Operations Research. 692205E. Amaldi, L. Liberti, F. Maffioli, and N. Maculan, "Edge-swapping algorithms for the minimum fundamental cycle basis problem," Math- ematical Methods of Operations Research, vol. 69, no. 2, p. 205, 2009.
+
+On the approximability of the minimum strictly fundamental cycle basis problem. G Galbiati, R Rizzi, E Amaldi, Discrete Applied Mathematics. 1594G. Galbiati, R. Rizzi, and E. Amaldi, "On the approximability of the minimum strictly fundamental cycle basis problem," Discrete Applied Mathematics, vol. 159, no. 4, pp. 187-200, 2011.
+
+A polynomial-time algorithm to find the shortest cycle basis of a graph. J D Horton, SIAM Journal on Computing. 162J. D. Horton, "A polynomial-time algorithm to find the shortest cycle basis of a graph," SIAM Journal on Computing, vol. 16, no. 2, pp. 358-366, 1987.
+
+Breaking theÕ(m 2 n) barrier for minimum cycle bases. E Amaldi, C Iuliano, T Jurkiewicz, K Mehlhorn, R Rizzi, European Symposium on Algorithms. SpringerE. Amaldi, C. Iuliano, T. Jurkiewicz, K. Mehlhorn, and R. Rizzi, "Breaking theÕ(m 2 n) barrier for minimum cycle bases," in European Symposium on Algorithms. Springer, 2009, pp. 301-312.
+
+Efficient deterministic algorithms for finding a minimum cycle basis in undirected graphs. E Amaldi, C Iuliano, R Rizzi, International Conference on Integer Programming and Combinatorial Optimization. SpringerE. Amaldi, C. Iuliano, and R. Rizzi, "Efficient deterministic algo- rithms for finding a minimum cycle basis in undirected graphs," in International Conference on Integer Programming and Combinatorial Optimization. Springer, 2010, pp. 397-410.
+
+Implementing minimum cycle basis algorithms. K Mehlhorn, D Michail, Journal of Experimental Algorithmics (JEA). 11K. Mehlhorn and D. Michail, "Implementing minimum cycle basis algorithms," Journal of Experimental Algorithmics (JEA), vol. 11, pp. 2-5, 2007.
+
+Applications of ear decomposition to efficient heterogeneous algorithms for shortest path/cycle problems. D Dutta, M Chaitanya, K Kothapalli, D Bera, Parallel and Distributed Processing Symposium Workshops. IPDPSWD. Dutta, M. Chaitanya, K. Kothapalli, and D. Bera, "Applications of ear decomposition to efficient heterogeneous algorithms for shortest path/cycle problems," in Parallel and Distributed Processing Sympo- sium Workshops (IPDPSW), 2017 IEEE International. IEEE, 2017, pp. 864-873.
+
+The all-pairs min cut problem and the minimum cycle basis problem on planar graphs. D Hartvigsen, R Mardon, SIAM Journal on Discrete Mathematics. 73D. Hartvigsen and R. Mardon, "The all-pairs min cut problem and the minimum cycle basis problem on planar graphs," SIAM Journal on Discrete Mathematics, vol. 7, no. 3, pp. 403-418, 1994.
+
+Applications of shortest path methods. J De Pina, Universiteit van AmsterdamPh.D. ThesisJ. de Pina, Applications of shortest path methods. Ph.D. Thesis, Universiteit van Amsterdam, 1995.
+
+A polynomial time algorithm to find the minimum cycle basis of a regular matroid. A Golynski, J D Horton, Scandinavian Workshop on Algorithm Theory. SpringerA. Golynski and J. D. Horton, "A polynomial time algorithm to find the minimum cycle basis of a regular matroid," in Scandinavian Workshop on Algorithm Theory. Springer, 2002, pp. 200-209.
+
+AnÕ(m 2 n) algorithm for minimum cycle basis of graphs. T Kavitha, K Mehlhorn, D Michail, K E Paluch, Algorithmica. 523T. Kavitha, K. Mehlhorn, D. Michail, and K. E. Paluch, "AnÕ(m 2 n) algorithm for minimum cycle basis of graphs," Algorithmica, vol. 52, no. 3, pp. 333-349, 2008.
+
+Parallel open ear decomposition with applications to graph biconnectivity and triconnectivity. V Ramachandran, CiteseerV. Ramachandran, Parallel open ear decomposition with applications to graph biconnectivity and triconnectivity. Citeseer, 1992.
+
+A note on two problems in connexion with graphs. E W Dijkstra, Numerische mathematik. 11E. W. Dijkstra, "A note on two problems in connexion with graphs," Numerische mathematik, vol. 1, no. 1, pp. 269-271, 1959.
+
+Observability and Fisher information matrix in nonlinear regression. C Jauffret, IEEE Transactions on Aerospace and Electronic Systems. 432C. Jauffret, "Observability and Fisher information matrix in nonlinear regression," IEEE Transactions on Aerospace and Electronic Systems, vol. 43, no. 2, pp. 756-759, 2007.
+
+Optimization algorithms on matrix manifolds. P.-A Absil, R Mahony, R Sepulchre, Princeton University PressP.-A. Absil, R. Mahony, and R. Sepulchre, Optimization algorithms on matrix manifolds. Princeton University Press, 2009.
+
+Estimation with applications to tracking and navigation: theory algorithms and software. Y Bar-Shalom, X R Li, T Kirubarajan, John Wiley & SonsY. Bar-Shalom, X. R. Li, and T. Kirubarajan, Estimation with appli- cations to tracking and navigation: theory algorithms and software. John Wiley & Sons, 2004.
+
+The effects of partial observability when building fully correlated maps. J Andrade-Cetto, A Sanfeliu, IEEE Transactions on Robotics. 214J. Andrade-Cetto and A. Sanfeliu, "The effects of partial observability when building fully correlated maps," IEEE Transactions on Robotics, vol. 21, no. 4, pp. 771-777, 2005.
+
+Observability analysis of SLAM using fisher information matrix. Z Wang, G Dissanayake, 2008 10th International Conference on Control, Automation, Robotics and Vision. IEEEZ. Wang and G. Dissanayake, "Observability analysis of SLAM using fisher information matrix," in 2008 10th International Conference on Control, Automation, Robotics and Vision. IEEE, 2008, pp. 1242- 1247.
+
+Lower bounds on parametric estimators with constraints. J D Gorman, A O Hero, Fourth Annual ASSP Workshop on Spectrum Estimation and Modeling. IEEEJ. D. Gorman and A. O. Hero, "Lower bounds on parametric estimators with constraints," in Fourth Annual ASSP Workshop on Spectrum Estimation and Modeling. IEEE, 1988, pp. 223-228.
+
+A simple derivation of the constrained multiple parameter Cramer-Rao bound. T L Marzetta, IEEE Transactions on Signal Processing. 416T. L. Marzetta, "A simple derivation of the constrained multiple pa- rameter Cramer-Rao bound," IEEE Transactions on Signal Processing, vol. 41, no. 6, pp. 2247-2249, 1993.
+
+Linear observation systems on groups (I). A Barrau, S Bonnabel, working paper or preprintA. Barrau and S. Bonnabel, "Linear observation systems on groups (I)," Feb. 2018, working paper or preprint. [Online]. Available: https://hal-mines-paristech.archives-ouvertes.fr/hal-01671724
+
+Invariant kalman filtering. Robotics, and Autonomous Systems. 1Annual Review of Control--, "Invariant kalman filtering," Annual Review of Control, Robotics, and Autonomous Systems, vol. 1, pp. 237-257, 2018.
+
+An EKF-SLAM algorithm with consistency properties. arXiv:1510.06263arXiv preprint--, "An EKF-SLAM algorithm with consistency properties," arXiv preprint arXiv:1510.06263, 2015.
+
+Convergence and consistency analysis for a 3-d Invariant-EKF SLAM. T Zhang, K Wu, J Song, S Huang, G Dissanayake, IEEE Robotics and Automation Letters. 22T. Zhang, K. Wu, J. Song, S. Huang, and G. Dissanayake, "Conver- gence and consistency analysis for a 3-d Invariant-EKF SLAM," IEEE Robotics and Automation Letters, vol. 2, no. 2, pp. 733-740, 2017.
+
+Invariant smoothing on Lie groups. P Chauchat, A Barrau, S Bonnabel, 2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). IEEEP. Chauchat, A. Barrau, and S. Bonnabel, "Invariant smoothing on Lie groups," in 2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). IEEE, 2018, pp. 1703-1710.
+
+Quasi-newton methods for equality constrained optimization: Equivalence of existing methods and a new implementation. R A Tapia, Elsevierin Nonlinear Programming 3R. A. Tapia, "Quasi-newton methods for equality constrained optimiza- tion: Equivalence of existing methods and a new implementation," in Nonlinear Programming 3. Elsevier, 1978, pp. 125-164.
+
+Iterative solution of nonlinear equations in several variables. J M Ortega, W C Rheinboldt, 30SiamJ. M. Ortega and W. C. Rheinboldt, Iterative solution of nonlinear equations in several variables. Siam, 1970, vol. 30.
+
+On the local convergence of quasi-newton methods for constrained optimization. P T Boggs, J W Tolle, P Wang, SIAM journal on control and optimization. 202P. T. Boggs, J. W. Tolle, and P. Wang, "On the local convergence of quasi-newton methods for constrained optimization," SIAM journal on control and optimization, vol. 20, no. 2, pp. 161-171, 1982.
+
+A convergence theory for a class of quasi-newton methods for constrained optimization. R Fontecilla, T Steihaug, R A Tapia, SIAM Journal on Numerical Analysis. 245R. Fontecilla, T. Steihaug, and R. A. Tapia, "A convergence theory for a class of quasi-newton methods for constrained optimization," SIAM Journal on Numerical Analysis, vol. 24, no. 5, pp. 1133-1151, 1987.
+
+On characterizations of superlinear convergence for constrained optimization. T F Coleman, Computational Solution of Nonlinear Systems of Equations. 26113T. F. Coleman, "On characterizations of superlinear convergence for constrained optimization," Computational Solution of Nonlinear Sys- tems of Equations, vol. 26, p. 113, 1990.
+
+Gauss-newton-like methods for nonlinear least squares with equality constraints-local convergence and applications. H Schwetlick, Journal of Theoretical and Applied Statistics. 162Statistics: AH. Schwetlick, "Gauss-newton-like methods for nonlinear least squares with equality constraints-local convergence and applications," Statis- tics: A Journal of Theoretical and Applied Statistics, vol. 16, no. 2, pp. 167-178, 1985.
+
+Algorithm 8xx: AMD, an approximate minimum degree ordering algorithm. P R Amestoy, T A Davis, I S Duff, ACM Trans. Math. Softw. P. R. Amestoy, T. A. Davis, and I. S. Duff, "Algorithm 8xx: AMD, an approximate minimum degree ordering algorithm," ACM Trans. Math. Softw, 2003.
+
+Robust rotation and translation estimation in multiview reconstruction. D Martinec, T Pajdla, 2007 IEEE Conference on Computer Vision and Pattern Recognition. IEEED. Martinec and T. Pajdla, "Robust rotation and translation estimation in multiview reconstruction," in 2007 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2007, pp. 1-8.
+
+Initialization techniques for 3d slam: a survey on rotation estimation and its use in pose graph optimization. L Carlone, R Tron, K Daniilidis, F Dellaert, Robotics and Automation (ICRA), 2015 IEEE International Conference on. IEEEL. Carlone, R. Tron, K. Daniilidis, and F. Dellaert, "Initialization techniques for 3d slam: a survey on rotation estimation and its use in pose graph optimization," in Robotics and Automation (ICRA), 2015 IEEE International Conference on. IEEE, 2015, pp. 4597-4604.
+
+Are we ready for autonomous driving? the kitti vision benchmark suite. A Geiger, P Lenz, R Urtasun, 2012 IEEE Conference on Computer Vision and Pattern Recognition. IEEEA. Geiger, P. Lenz, and R. Urtasun, "Are we ready for autonomous driving? the kitti vision benchmark suite," in 2012 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2012, pp. 3354- 3361.

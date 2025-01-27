@@ -1,0 +1,371 @@
+
+Overdetermined problems with fractional Laplacian
+October 14, 2014
+
+Mouhamed Moustapha Fall 
+Sven Jarohs 
+Overdetermined problems with fractional Laplacian
+October 14, 2014fractional Laplacian · maximum principles · Hopf's Lemma · overdetermined problems Mathematics Subject Classification: 35B50 · 35N25
+Let N ≥ 1 and s ∈ (0, 1). In the present work we characterize bounded open sets Ω with C 2 boundary (not necessarily connected) for which the following overdetermined problemin Ω;has a nonnegative and nontrivial solution, where η is the outer unit normal vectorfield along ∂ Ω and forUnder mild assumptions on f , we prove that Ω must be a ball. In the special case f ≡ 1, we obtain an extension of Serrin's result in 1971. The fact that Ω is not assumed to be connected is related to the nonlocal property of the fractional Laplacian. The main ingredients in our proof are maximum principles and the method of moving planes.
+
+Introduction
+
+Let Ω ⊂ R N , N ≥ 2, be a bounded connected open set with C 2 boundary. By the method of moving planes, Serrin proved, in his celebrated paper [36], that if there is a solution of the overdetermined problem
+         −∆u = 1 in Ω; u = 0 on ∂ Ω;
+u > 0 in Ω;
+∂ η u = c on ∂ Ω (1.1)
+then Ω must be a ball. The motivations for this problem are both from fluid and solid mechanics. Serrin's argument initiated extensive researches in the field of overdetermined problems and symmetry properties of solutions to partial differential equations, see e.g. [26,27] for applications. The moving plane method was first employed in geometry by Alexandrov in [2] to characterize the sphere as the only embedded closed hypersurfaces with constant mean curvature. Over the years there are methods off moving plane to obtain Serrin's result, see e.g. [40], [6] and also [18] which reveal the application of Alexandrov's result in the study of (1.1). In those arguments Ω were assumed to be connected. Several works have been devoted to related Serrin's problem. Since a complete list of references cannot be given, we only quote: [1,4,7,8,11,10,12,19,20,22,23,25,28,31,32,34,33,39,38].
+
+In the present work we study an overdeterminded problem involving the fractional Laplacian (−∆) s , s ∈ (0, 1). It is defined for u ∈ C ∞ c (R N ) as is a normalization constant (see e.g. [14]) so that (−∆) s u(ξ ) = |ξ | 2s u(ξ ). Due to applications in Physics, Biology and Finance, differential equations involving the fractional Laplacian (−∆) s have received growing attention in recent years (see e.g. [14,Introduction] and the references therein) but still much less understood than their non-fractional counterparts. The overdeterminded problem we are interested in is u(x 0 − tη(x 0 )) t s .
+
+We note that solutions to the first two equations in ( * ) are in C s (Ω) (see e.g. [37,Proposition 2.9] or [30,Proposition 1]) and therefore the overdetermined Neuman condition make sense pointwise. Our first result is contained in the following
+Theorem 1.1. Let Ω ⊂ R N , N ≥ 1,
+be a bounded open set with C 2 boundary. Assume that there is a solution u ∈ C s (Ω) of ( * ). Then Ω = B R (x 0 ), a ball centred at x 0 with radius R. In addition
+u(x) = γ N,s R 2 − |x − x 0 | 2 s for all x ∈ B R (x 0 ), where γ N,s := 4 −s Γ( N 2 ) Γ( N 2 + s)Γ(1 + s)
+.
+
+We point out that the precise nonnegative and nontrivial function solving ( * ) when Ω is a ball were calculated in [5] (see also [15]). We should mention that the overdetermined problem ( * ) arises from Euler-Lagrange equations of domain dependent variational problems involving the fractional Laplacian. We refer to [13] where the authors considered the case N = 2, s = 1/2 and ∂ Ω of class C ∞ and assumed Ω to be connected. In addition, under the aforementioned assumptions, the authors obtained similar result via the moving plane method. We also mention that the authors in [13] used the fact that the 1/2-Laplacian can be realized locally via a Dirichlet-to-Neumann operator.
+
+Here we use the moving plane argument only in the fractional framework which is a fundamental difference with respect to [13]. In particular our approach could be feasible for more general types of integro-differential equations. Moreover, we take advantages to the nonlocal structure of the fractional laplacian to construct subsolutions yielding a Hopf lemma (see Lemma 3.3) and a version of Serrin's corner boundary point lemma (see Lemma 4.4). The nonlocal structure of (−∆) s forces the Dirichlet condition in R N \ Ω. This is a key property which allows us to prove that Ω must be connected at some stage during the moving plane process. The moving plane method have been also employed within the fractional framework in [3,9,17,21,29,24].
+
+Our next result is a generalization of the previous one.
+
+Theorem 1.2. Let c ∈ R and Ω ⊂ R N , N ≥ 1, be a bounded open set with C 2 boundary. Furthermore, let f : R → R be locally Lipschitz and assume that there is a function u ∈ C s (Ω), which is nonnegative, nontrivial and satisfies
+     (−∆) s u = f (u) in Ω; u = 0 in R N \ Ω; (∂ η ) s u = c on ∂ Ω. (1.3)
+Then Ω is a ball and u > 0 in Ω.
+
+The paper is organized as follows. In Section 2 we will give some preliminaries and notation. Dealing with the moving plane method leads to dealing with antisymmetric functions so we will give a proof of Hopf's Lemma and some maximum principles for antisymmetric functions in Section 3. Finally, Section 4 is devoted to the proof of Theorem 1.1 and in Section 5, we prove Theorem 1.2.
+
+
+Definitions and Notation
+
+Let N ≥ 1 and s ∈ (0, 1). For u, v ∈ H s (R N ), we consider the bilinear form induced by the fractional laplacian:
+E (u, v) := c N,s 2 R N R N (u(x) − u(y))(v(x) − v(y)) |x − y| N+2s dxdy. Furthermore, let H s 0 (Ω) = {u ∈ H s (R N ) : u = 0 on R N \ Ω}, where Ω ⊂ R N is an arbitrary open set.
+If Ω is bounded, we define the first Dirichlet eigenvalue:
+λ 1 (Ω) = min u∈H s 0 (Ω) E (u, u) Ω u 2 dx .
+Then we have λ 1 (Ω) ≥ C N,s |Ω| − 2s N , see e.g. [42], where C N,s = N 2s |B 1 (0)| 1+2s/N c N,s and c N,s is the constant in (1.2).
+
+In the following all equalities involving (−∆) s are meant in the weak sense, i.e. for g ∈
+L 2 (Ω) we call u ∈ D s (Ω) := {u : R N → R measurable : E (u, ϕ) < ∞ for all ϕ ∈ H s 0 (Ω)} a supersolution (subsolution) of (−∆) s u = g in Ω, (2.1) if for all ϕ ∈ H s 0 (Ω), ϕ ≥ 0 E (u, ϕ) ≥ Ω g(x)ϕ(x) dx   E (u, ϕ) ≤ Ω g(x)ϕ(x) dx   .
+We call u ∈ D s (Ω) an entire supersolution (subsolution) if additionally we have
+u ≥ 0 on R N \ Ω (u ≤ 0 on R N \ Ω).
+The function u is called a solution, if u is an entire supersolution and an entire subsolution. We note that if u is an entire supersolution of (2.1) then u − = − min{w, 0} ∈ H s 0 (Ω). Finally we want to note that if u ∈ C 1,1 (Ω), for some open set Ω ⊂ R N , we have that (−∆) s u is continuous on Ω (see e.g. [37,Proposition 2.5]). Thus if u has such regularity (2.1) holds pointwise.
+
+The following further notation is used throughout the paper: for x ∈ R N and r > 0, B r (x) is the open ball centered at x with radius r and ω N will denote the volume of the N-dimensional ball with radius 1. Moreover, we denote S 1 := {x ∈ R N : |x| = 1}. For any subset M ⊂ R N , we denote by 1 M : R N → R the characteristic function of M and diam(M) the diameter of M. The notation A ⊂⊂ B, A, B ⊂ R N means that we have A ⊂ B and A is compact and nonempty.
+
+Moreover, w + = max{w, 0} and w − = − min{w, 0} denote the positive and negative part of w resp. For any M ⊂ R N , |M| denotes the Lebesgue measure of M and for D,
+U ⊂ R N we set dist(D,U) := inf(|x − y| : x ∈ D, y ∈ U}. If D = {x}, we simply write dist(x,U) in place of dist({x},U). Finally, we denote for Ω ⊂ R N , δ (x) := δ Ω (x) := dist(x, R N \ Ω)
+the distance to the complement of a set Ω. We will omit the subindex Ω, whenever no confusion is possible.
+
+
+Maximum principles for entire antisymmetric supersolutions
+
+Due to the fact that we will work with the moving plane method in the following, we will need to prove some results concerning antisymmetric functions. Let H ⊂ R N be a halfspace, i.e. for any λ ∈ R, e ∈ S 1 we consider
+H := H λ ,e := {x ∈ R N : x · e > λ }.
+Let Ω ⊂ H be a bounded open set. Let T := ∂ H and denote by Q : in Ω for some c ∞ ≥ 0 and let g ∈ L 2 (Ω) be, such that g ≥ −κ with
+R N → R N , x →x the reflection of x at T , i.e.x = x − 2(x · e)e + 2λ e. We will call u ∈ D s (Ω) an entire antisymmetric supersolution of (−∆) s u = g in Ω, if u is a supersolution of (−∆) s u = g in Ω and if additionally we have u ≥ 0 on H \ Ω and u(x) = −u(x) for all x ∈ H.0 ≤ κ < λ 1 (Ω) − c ∞ |Ω| 1/2 .
+If u is an entire antisymmetric supersolution of
+(−∆) s u = c(x)u + g(x) in Ω (3.1) then u − L 2 (Ω) ≤ κ|Ω| 1/2 /(λ 1 (Ω) − c ∞ ) < 1. In particular, if κ = 0 then u ≥ 0 almost every- where in Ω. Proof. Note that ϕ := u − 1 H ∈ H s 0 (Ω) and (u(x) − u(y))(ϕ(x) − ϕ(y)) + (ϕ(x) − ϕ(y)) 2 = −u(x)ϕ(y) − u(y)ϕ(x) − 2ϕ(x)ϕ(y) = −ϕ(x) (ϕ(y) + u(y)) − ϕ(y) (ϕ(x) + u(x)) .
+Thus we have
+E (u, ϕ) = −E (ϕ, ϕ) − c N,s R N R N ϕ(y) (ϕ(x) + u(x)) |x − y| N+2s dxdy = −E (ϕ, ϕ) − c N,s H H ϕ(y)u + (x) |x − y| N+2s + ϕ(y)u(x) |x − y| N+2s dxdy ≤ −E (ϕ, ϕ) − c N,s H H ϕ(y)u + (x) |x − y| N+2s − ϕ(y)u(x) |x − y| N+2s dxdy = −E (ϕ, ϕ) − c N,s H ϕ(y) H u + (x) 1 |x − y| N+2s − 1 |x − y| N+2s + u − (x) |x − y| N+2s dxdy ≤ −E (ϕ, ϕ). (3.2)
+Thus we have
+0 ≤ E (u, ϕ) + Ω c(x)ϕ 2 (x) dx − Ω g(x)ϕ(x) dx ≤ −E (ϕ, ϕ) + c ∞ ϕ 2 L 2 (Ω) + κ Ω ϕ(x) dx ≤ (c ∞ − λ 1 (Ω)) ϕ 2 L 2 (Ω) + κ|Ω| 1/2 ϕ L 2 (Ω) . If ϕ L 2 (Ω) > 1 we have, since ϕ L 2 (Ω) < ϕ 2 L 2 (Ω) , 0 ≤ (c ∞ − λ 1 (Ω)) ϕ 2 L 2 (Ω) + κ|Ω| 1/2 ϕ L 2 (Ω) < c ∞ + κ|Ω| 1/2 − λ 1 (Ω) ϕ L 2 (Ω) ≤ 0,
+since c ∞ − λ 1 (Ω) + κ|Ω| 1/2 < 0, resulting in a contradiction. Thus we must have ϕ L 2 (Ω) ≤ 1.
+
+In this case we have
+0 ≤ − (λ 1 (Ω) − c ∞ ) ϕ L 2 (Ω) + κ|Ω| 1/2 ϕ L 2 (Ω) , Thus we must have ϕ L 2 (Ω) ∈ [0, κ|Ω| 1/2 / (λ 1 (Ω) − c ∞ )]
+, finishing the proof. For the proof of the following version of Hopf's Lemma, we will need the function ψ B satisfying
+(−∆) s ψ B = 1, in B; (3.3) where B ⊂ R N is a ball. If B = B r (x 0 )
+for some r > 0 and x 0 ∈ R N we have (see e.g. [5] or [15])
+ψ B (x) = γ N,s r 2 − |x − x 0 | 2 s + , γ N,s := 4 −s Γ( N 2 ) Γ( N 2 + s)Γ(1 + s)
+.
+
+It was proved in [3,Lemma 4.3] that if u is a continuous supersolution of (−∆) s u = 0 in some open set Ω ⊂ R N , such that u ≡ 0 on R N \ Ω, then we have for any outernormal η and any
+x 1 ∈ ∂ Ω such that there is an interior ball B ⊂ Ω with x 1 ∈ ∂ B ∩ ∂ Ω, that ∂ η u(x 1 ) = −∞ this
+was enough to carry over a moving plane argument. Here we will need precise behavior of antisymmetric solutions near some corner points at the boundary. A recent result in [35] states 
+that if u ∈ H s 0 (Ω) is a solution of (−∆) s u = g in Ω ⊂ R N , with g ∈ L ∞ (Ω), then u δ s ∈ C 0,α (Ω), for some α ∈ (0, 1). For x 1 ∈ ∂ Ω, it therefore make sense to define (∂ η ) s u(x 1 ) := − lim t→0 + u(x 1 − tη(x 1 )) t s .= c L ∞ (Ω) < λ 1 (B 1 ).
+Let u ∈ D s (Ω) be an entire antisymmetric supersolution of Proof. For α > 0, consider the barrier
+(−∆) s u = c(x)u, in Ω; (3.4) such that u ≥ 0, in H. (3.5) Let K ⊂⊂ H \ B 1 such that |K| > 0 and suppose that essinf K u > 0. Then there is a constant d = d(N, s, diam(B 1 ), K, dist(B 1 , K), c 0 , essinf K u) > 0 such that u(x) ≥ dδ s B 1 (x) for almost every x ∈ B 1 . In particular, if u ∈ C(B 1 ) and u(x 0 ) = 0, for some x 0 ∈ ∂ B 1 , then we have − lim inf t→0 + u(x 0 − tη(x 0 )) t s < 0.w(x) := ψ B 1 (x) + α1 K (x) − ψ Q(B 1 ) (x) − α1 Q(K) (x),
+where Q : R N → R N , x →x is the reflection at ∂ H and 1 M is the characteristic function for any M ⊂ R N . Note that we have w ∈ D s (B 1 ) since dist(B 1 , K) > 0. Let ϕ ∈ H s 0 (B 1 ), ϕ ≥ 0 be arbitrary. Then
+E (w, ϕ) = E (ψ B 1 , ϕ) + αE (1 K , ϕ) − E (ψ Q(B 1 ) , ϕ) − αE (1 Q(K) , ϕ) = B 1 ϕ(x) dx − αc N,s B 1 K ϕ(x) |x − y| N+2s dydx + αc N,s B 1 Q(K) ϕ(x) |x − y| N+2s dydx + c N,s B 1 Q(B 1 ) ψ Q(B 1 ) (y)ϕ(x) |x − y| N+2s dydx ≤ B 1 ϕ(x)   κ − αc N,s K |x − y| −N−2s − |x −ȳ| −N−2s dy   dx, where κ := 1 + sup x∈B 1 ψ B 1 (x) · sup x∈B 1 ,ȳ∈H |x − y| −N−2s < ∞ since dist(B 1 , R N \ H) > 0.
+Moreover since K has a positive distance to ∂ H and B 1 we have
+C 1 = C 1 (N, s, K, B 1 ) = c N,s |K| inf x∈B 1 ,y∈K |x − y| −N−2s − |x −ȳ| −N−2s > 0. With this we have E (w, ϕ) ≤ B 1 ϕ(x) (κ − αC 1 ) dx.
+Thus we may take α large so that κ − αC 1 ≤ −c 0 sup x∈B 1 ψ B 1 (x) and thus we have
+(−∆) s w ≤ c(x)w in B 1 .
+Note furthermore that, by construction, w = 0 on R N \(B 1 ∪K) and w(x) = −w(x) for all x ∈ R N . By assumption, we can pick
+ε = essinf K u α > 0 so that v(x) := u(x) − εw(x) ≥ 0 on H \ B 1 . Since we chose B 1 such that c L ∞ (B 1 ) < λ 1 (B 1 ), we can apply Proposition 3.1 to the supersolution v yielding u ≥ εw = εψ B 1 in B 1 . Finally, if u(x 0 ) = 0 with x 0 ∈ ∂ B 1 , we have − lim inf t→0 + u(x 0 − tη(x 0 )) t s ≤ −ε lim t→0 + ψ B 1 (x 0 − tη(x 0 )) t s < 0.
+As a consequence of Proposition 3.3, we have If u ≥ 0 in H then either u ≡ 0 in H or u > 0 in Ω.
+
+Remark 3.5. We emphasize that Proposition 3.3 remains true for entire supersolutions. Indeed, one would repeat the same proof by considering the barrier w(x) = ψ B 1 (x) + αψ K (x). In particular Corollary 3.4 is also valid for entire supersolutions.
+
+4 Proof of Theorem 1.1
+
+Our objective in this section is to prove Theorem 1.1 for the case N ≥ 2. We present an argument based on the fact that u > 0 in Ω. As we shall see, simple observations shows that after two steps of the moving plane argument, we see that Ω must be connected. For the case N ≥ 1 and general right hand side, we postpone the proof in the section. ∂ Ω is C 2 and assume that there is a solution u ∈ C s (Ω) of
+(−∆) s u = 1 in Ω, u = 0 in R N \ Ω.
+If there is a negative real number c such that
+(∂ η ) s u ≡ c on ∂ Ω,
+then Ω is a ball and u = ψ Ω , where ψ Ω is given as in Section 3.
+
+
+Remark 4.2.
+
+We note that by regularity theory u ∈ C ∞ (Ω). In addition a nontrivial solution u ∈ H s 0 to (−∆) s u = 1 in Ω is strictly positive in Ω by Hopf's lemma (see also Remark 3.5) and there must be c < 0.
+
+Proof of Theorem 4.1. Let e ∈ S 1 be fixed and consider T λ := T e,λ := {x ∈ R N : x · e = λ } as a hyperplane in R N , which we will continuously move by continuously varying λ . Since Ω is bounded, denote l := max x∈Ω x · e, so that T λ ∩ Ω = / 0 for λ ≥ l. Denote H λ := H e,λ := {x ∈ R N : x · e > λ } and define Ω λ := Ω e,λ := Ω ∩ H λ . Let Q λ := Q e,λ be the reflection about T λ as described in Section 3 and denote Ω λ := Q λ (Ω λ ), i.e. the reflection of Ω λ about T λ . Since ∂ Ω is C 2 we have that for λ < l but close to l, that Ω λ ⊂ Ω. As we decrease λ , i.e. continue moving T λ , two possible situations may occur: Situation 1: There is a point P 0 ∈ ∂ Ω ∩ Ω λ \ T λ or Situation 2: T λ is orthogonal to ∂ Ω at some point P 0 ∈ ∂ Ω ∩ T λ .
+
+(4.1)
+
+We note, that although Ω is not necessarily connected, there is no other possibility since ∂ Ω is C 2 and Ω is bounded.
+
+Let λ 0 be the point at which one of these situations occur for the first time.
+
+(4.2)
+
+For simplicity, we put T = T λ 0 and H = H λ 0 . Our aim is to prove that if any of the above situation occurs, Ω must be symmetric with respect to the plane T .
+
+To prove that the situations yield symmetry, we let Q be the reflection about T as described in Section 3. Then define Q(x) =:x and consider the function
+v(x) := u(x) − u(x) for x ∈ R N . Since U := Ω λ 0 ⊂ Ω we have that v satisfies (−∆) s v = 0 in U and v ≥ 0 on H \U; v(x) = −v(x) for all x ∈ R N .
+Here H := R N \ H. Thus we have, that v is an entire antisymmetric supersolution on U with v ≥ 0 on H by the weak maximum principle. The strong maximum principle (Corollary 3.4) then implies v ≡ 0 on R N or v > 0 in U.
+
+We will show, that v > 0 in U is not possible. This will be separated in to two cases.
+
+Case 1) First assume we are in the first case, i.e. there is some point P 0 ∈ Ω ∩U \ T . Note, that we have P 0 ∈ ∂ Ω ∩ ∂U due to the choice of λ 0 , we have u
+(P 0 ) = 0 = u(P 0 ), espe- cially v(P 0 ) = 0. Since v > 0 in U Hopf's Lemma (Proposition 3.3) gives, that (∂ η ) s v(P 0 ) < 0,
+where η is the outernormal at P 0 on ∂U. But since (∂ η ) s u(P 0 ) = c = (∂ η ) s u(P 0 ) we must have (∂ η ) s v(P 0 ) = 0 which is a contradiction and thus we cannot be in the first case.
+
+Case 2) Assume that v > 0 in U and that T is orthogonal to ∂ Ω at a point P 0 ∈ T ∩ ∂ Ω.
+
+Up to translation and rotations, we may assume that P 0 = 0 is the origin, e = e 1 , the interior normal of ∂ Ω at the origin is e 2 and ∇ 2 δ Ω (0) is diagonal. Without loss of generality, we may also assume that λ = 0. 
+(−∆) s w ≥ c(x)w in D * ; w ≥ 0 in {x 1 < 0}; w > 0 in D * .
+Then lettingη = (−1, 1, 0 . . . , 0), there exists C,t 0 > 0 depending only on Ω, N, s such that w(tη) ≥ Ct 1+s ∀t ∈ (0,t 0 ).
+
+Then applying Lemma 4.3 and 4.4 (see the proofs below), we reach a contradiction. Therefore v ≡ 0 as desired.
+If v ≡ 0 on R N , then u ≡ 0 on R N \Ũ, whereŨ = U ∪ Q λ 0 (U) ∪ (T ∩ Ω)
+. This implies that Ω =Ũ yielding symmetry about T . It is then clear thatŨ might have many components lined up along T .
+
+Assume by contradiction that there are two connected componentsŨ 1 andŨ 2 .
+
+(4.3)
+
+Observation: There exists a plane T perpendicular to T and separatingŨ 1 andŨ 2 . Otherwise one surround the other (recall that they cannot meet at any boundary points by C 2 regularity of ∂Ũ) contradicting the minimality of λ 0 .
+
+We now move the plane T touching, say,Ũ 1 first. This leads to property (4.2) with some λ 1 with direction e 1 and T = T λ 1 . Then the same argument as a above yields
+U =Ũ 1 =Ũ ∪ Q λ 1 (Ũ) ∪ (T λ 1 ∩Ũ).
+By symmetry of u with respect to T λ 1 and since u = 0 in R N \Ũ 1 , we deduce that u vanish inŨ 2 which is in contradiction with the fact that u is positive in Ω. Hence Ω =Ũ is connected with C 2 boundary.
+
+Restarting the moving plane process, we conclude that Ω is symmetric with respect to all planes for which Situation 1 and/or Situation 2 occur for a first time. We then conclude that Ω must be a ball.
+
+We observe that Lemma 4.3 states that "derivatives of order 1 + s" of v vanish at the origin. 
+u(x) = δ s (x)ψ(x),
+where ψ(x) ∈ C 0,α (Ω) for some α ∈ (0, 1) (recall that δ = δ Ω is the distance function to ∂ Ω). It is clear from our hypothesis that
+ψ(x) = −c ∀x ∈ ∂ Ω.
+(4.4)
+Putū(x) = u(x) = u(−x 1 , x 2 , . . . , x N ),δ (x) = δ (x) andψ(x) = ψ(x)
+. By continuity, we have
+ψ(tη) = −c + o(1) =ψ(tη), as t → 0. Then we have v(tη) = u(tη) −ū(tη) = [δ s (tη) −δ s (tη)](c + o(1)), as t → 0. (4.5)
+By Taylor expansion, we have
+δ (tη) = δ (0) + ∇δ (0) · (tη) + 1 2 ∇ 2 δ (0)[(tη)] · (tη) + o(t 2 ), as t → 0 andδ (tη) = δ (0) + ∇δ (0) · (tη) + 1 2 ∇ 2δ (0)[(tη)] · (tη) + o(t 2 ), as t → 0.
+In addition, since e 2 = ∇δ (0) is the normal direction, ∂ x i δ (0) = 0 for all i = 2. Therefore ∇δ (0) ·η = ∇δ (0) ·η = e 2 ·η = 1.
+
+Since ∇ 2 δ (0) is diagonal, it is plain that
+∇ 2 δ (0)[η] ·η = ∇ 2δ (0)[η] ·η = ∇ 2 δ (0)[e 2 ] · e 2 + ∇ 2 δ (0)[e 1 ] · e 1 .
+It follows that
+δ s (tη) = t s (1 + s 2 ∇ 2 δ (0)[η] · (tη) + o(t)), as t → 0 andδ s (tη) = t s (1 + s 2 ∇ 2 δ (0)[η] · (tη) + o(t)), as t → 0.
+We then conclude that δ s (tη) −δ s (tη) = o(t 1+s ), as t → 0.
+
+This together with (4.5) prove the claim.
+
+We also observe that Lemma 4.4 can be seen as the Serrin's corner boundary point lemma.
+Proof of Lemma 4.4. Let R > 0 small so that B := B R (Re 2 ) ⊂ Ω and ∂ B R (Re 2 ) ∩ ∂ Ω = {0}. Put K = B R (Re 2 ) ∩ {x 1 < 0}.
+Define B 2 = B R (4Rη) and B 1 = B R (4Rη), whereη = e 2 −e 1 . From now on we will consider R small such that B 1 ∪ B 2 ⊂⊂ D (see Figure 2 below):
+
+We next consider the truncated distance functions to the boundary of these balls denoted by
+d 2 (x) = (R − |x − 4Rη|) + , d 1 (x) = (R − |x − 4Rη|) + .
+As in Section 3 we use ϕ B (x) = (R 2 − |x − Re 2 | 2 ) s + , and for α > 0 (to be chosen later), we consider the barrier
+h(x) = −x 1 [ϕ R (x) + α(d 1 (x) + d 2 (x))].
+Note that h(x) = −h(x) and h ∈ C 1,1 (B). Using [15, Theorem 1 + Table 3, pp.549], together with a scaling and translation, 
+|(−∆) s (x 1 ϕ R (x))| = |C N,s R −1 x 1 | ≤ C|x 1 | ∀x ∈ K,I(x) := −(−∆) s x 1 (d 1 (x) + d 2 (x)) .
+Then for x ∈ K we have
+I(x) = −P.V. R N −y 1 (d 1 (y) + d 2 (y)) |x − y| N+2s dy = B 1 y 1 d 1 (y) |x − y| −N−2s − |x −ȳ| −N−2s dy = B 1 y 1 d 1 (y)|x − y| −N−2s 1 − |x − y| |x −ȳ| N+2s dy, = B 1 y 1 d 1 (y)|x − y| −N−2s 1 − |x − y| 2 |x − y| 2 + 4x 1 y 1 (N+2s)/2 dy.
+Observe that by construction,
+7R > |x − y| > R ∀x ∈ ∩B R (Re 2 ), ∀y ∈ B 1 .
+Using this and the fact that the map a → 1 − a a + d k is strictly monotone decreasing in a for all d, k > 0, we therefore get
+I(x) ≤ B 1 y 1 d 1 (y)|x − y| −N−2s 1 − (7R) 2 (7R) 2 + 4x 1 y 1 (N+2s)/2 dy.
+Hence we have (recall that y 1 < 0)
+I(x) ≤ −C B 1 1 − (7R) 2 (7R) 2 + 4x 1 y 1 (N+2s)/2 dy = −C B 1 1 − 1 − 4x 1 y 1 /(7R) 2 1 + 4x 1 y 1 /(7R) 2 (N+2s)/2 dy.
+Using the elementary inequality
+(1 − t) β ≤ 1 − t for t ∈ (0, 1), β > 1
+we get, for all x ∈ K,
+I(x) ≤ −C B 1 4x 1 y 1 /(7R) 2 1 + 4x 1 y 1 /(7R) 2 dy ≤ −C|x 1 |,
+where we have used the fact that |y 1 | is bounded away from 0 as long as y ∈ B 1 and |x 1 | ≤ 5R. Combining this with (4.6), we infer
+(−∆) s h(x) − c(x)h(x) ≤ (C − αC)|x 1 | ∀x ∈ K.
+Hence we can choose α so that (−∆) s h − c(x)h ≤ 0 in K. Since also we can find a positive constant M > 0 so that w ≥ Mh in B 1 , we get immediately w − Mh ≥ 0 in {x 1 < 0} \ K. We then deduce from the weak maximum principle that w ≥ Mh in D * . Now since h(tη) = t 1+s (2R − 4t 2 ), the proof follows immediately because tη ∈ D * for t > 0 small.
+
+
+Generalization
+
+Theorem 5.1 (Theorem 1.2 for N ≥ 2). Let c ∈ R and Ω ⊂ R N , N ≥ 2, be an open, bounded set with C 2 boundary. Furthermore, let f : R → R be locally Lipschitz and assume that there is a function u ∈ C s (Ω), which is nonnegative and nontrivial in Ω and fulfills
+     (−∆) s u = f (u) in Ω; u = 0 in R N \ Ω;
+(∂ η ) s u = c on ∂ Ω.
+
+
+(5.1)
+
+Then Ω is a ball and u > 0 in Ω.
+
+Proof. Let e ∈ S 1 and consider λ 0 as defined in (4.2) and U := Ω λ 0 ⊂ Ω as before. We define v λ 0 (x) := u(x) − u(x) for all x ∈ R N , where we use the notation as usual, i.e. Q λ ,e (x) =:x and Q λ ,e is the reflection of T = T λ ,e . Then v λ 0 solves
+(−∆) s v λ 0 ≥ −c f (x)v λ 0 in U, where c f (x) :=    f (u(x)) − f (u(x)) u(x) − u(x) , if u(x) = u(x); 0, if u(x) = u(x)
+.
+Let L f be the Lipschitz constant of f for B = [0, u L ∞ (R N ) ]. Then we have c L ∞ (U) ≤ L f .
+Here, we cannot directly apply the maximum principle to get v λ 0 ≥ 0 in H as in the previous section because L f might be large. However, by using the moving plane method, we can prove
+that v λ 0 ≥ 0 on H ; (5.2)
+To this end, we observe that for λ ∈ (λ 0 , l) but close to l we have L f ≤ λ 1 (Ω λ ) so that u(x) − u(Q λ ,e (x)) ≥ 0 in Ω λ by the weak maximum principle. Now by the strong maximum principle
+(S λ ) v λ (x) := u(x) − u(Q λ (x)) > 0 for all x ∈ Ω λ
+as u is nontrivial. We letλ := inf{λ > λ 0 : (S µ ) holds for all λ > µ}.
+
+Our aim is to prove thatλ = λ 0 . Assume by contradiction thatλ > λ 0 . Then by continuity and the strong maximum principle we have that (Sλ ) holds. Sinceλ > λ 0 , there is by continuity ε > 0 such that Ω λ −ε ⊂ Ω. Choose an open set Π ⊂ Ω λ −ε such that {v ≤ 0} ∩ Ω λ −ε ⊂ Π and we may assume that |Π| is small by making ε possibly smaller. The maximum principle then can be applied to Π giving vλ −ε > 0 in Π (as before) and thus Sλ −ε holds in contradiction to the choice ofλ . Thusλ = λ 0 . Hence (5.2) is proved. We have now that v is an entire antisymmetric supersolution on U with v λ 0 ≥ 0 in H by the weak maximum principle. Arguing as in the proof of Theorem 1.1 in the previous section, we obtain v λ 0 ≡ 0 in R N . This implies that u is symmetric with respect to all planes T λ 0 ,e = T λ 0 (e),e for which (4.1) occur for a first time. More than that, the moving plane process above yield monotonicity through lines perpendicular to T λ 0 ,e : for every e ∈ S 1 u(x) − u(Q λ ,e (x)) > 0 for all λ ∈ (λ 0 , l) and for all x ∈ Ω λ ,e .
+
+In particular for all e ∈ S 1 and for all λ ∈ R, we have either u(x) ≥ u(Q λ ,e (x)) for all x ∈ H λ ,e or u(x) ≤ u(Q λ ,e (x)) for all x ∈ H λ ,e . Now by a well known result (which we include a proof in the Appendix for the readers convenience), u coincides to a radial function up to a translation which is decreasing. Hence supp(u) is a ball. We claim that Ω = supp(u). Indeed, assume on the contrary that supp(u) = Ω. Then there is a ball B ⊂⊂ Ω \ supp(u), such that u ≡ 0 in B. Consider the hyperplane T separating B and supp(u). It is clear that u ≡ 0 on the halfspace H with boundary T containing B. Let e ∈ S 1 normal to T and contained in H. Now by moving the planes T λ ,e as above, we get, for very λ ∈ (λ 0 , l) u(x) > u(Q λ ,e (x)) ≥ 0 for all x ∈ Ω λ ,e .
+
+This, in particular, implies that u > 0 in Ω ∩ H λ 0 ,e which is impossible. (∂ η ) s u = c on ∂ Ω.
+
+
+(5.3)
+
+Then Ω = (α, β ) for some α, β ∈ R, α < β and u > 0 in Ω.
+
+Proof. Now assume that Ω has at least two different connected components (α, β ) and (a, b) with a < b < α < β . Note that as in the case N ≥ 2 we can move points (instead of moving planes!) from the right up to λ 0 = (α + β )/2, so that v(x) := u(x) − u(x) solves
+(−∆) s v ≥ −c f (x)v in (a, λ 0 )
+and v(x) ≥ 0 for x < λ 0 by arguing as in the proof of Theorem 5.1. Note that only interior touching can occur. Hence by Hopf's Lemma we obtain v ≡ 0 on R, but this gives u ≡ 0 on R \ (α, β ). Next moving from the left up to λ 0 = (a + b)/2 implies, as previously, u ≡ 0 in (a, b). Therefore u ≡ 0 in R leading to a contradiction. The positivity of u finally follows as in Theorem 5.1 by the monotonicity which is a byproduct of the moving plane method.
+
+
+Appendix
+
+The result below was stated in [41].
+
+Proposition 6.1. Let u : R N → R be continuous and such that lim |x|→∞ u(x) = c ∞ ∈ R ∪ {±∞} exists. Then the following statements are equivalent:
+
+(i) There is z ∈ R N , such that u(· − z) or −u(· − z) is radially symmetric and decreasing in the radial variable.
+
+(ii) For every half space H ∈ H we either have u(x) − u(Q H (x)) ≥ 0 for all x ∈ H or u(x) − u(Q H (x)) ≤ 0 for all x ∈ H. We say H is dominant or subordinate for u respectively.
+
+Here H is the set of all affine half spaces in R N and Q H is the reflection at ∂ H for any H ∈ H .
+
+The following proof is communicated to the authors by Tobias Weth.
+
+
+∆) s u = 1 in Ω;u = 0 in R N \ Ω; (∂ η ) s u ≡ c on ∂ Ω,where c is a negative constant, Ω ⊂ R N is a bounded open set with C 2 boundary, η(x 0 ) stands for the outer normal at x 0 ∈ ∂ Ω and(∂ η ) s u(x 0 ) := − lim t→0
+
+Proposition 3 . 1 (
+31Weak Maximum Principle). Let H be a halfspace and let Ω ⊂ H be any open, bounded set, let c ∈ L ∞ (Ω) be such that c ≤ c ∞ < λ 1 (Ω)
+
+Remark 3. 2 .
+2Note that the result also holds if u is an entire supersolution of (−∆) s u = c(x)u+g in Ω, where Ω ⊂ R N is an arbitrary open, bounded set. The proof then simplifies, since the inequality (3.2) follows trivially.
+
+Proposition 3. 3 (
+3Hopf's lemma). Let H ⊂ R N be a halfspace and Ω ⊂ H. Consider a ball B 1 ⊂⊂ H and B 1 ⊂ Ω. Furthermore, let c ∈ L ∞ (Ω) and assume that c 0
+
+Figure 1 :
+1K can be far away from Ω and does not need to be a ball.
+
+Corollary 3. 4 (
+4Strong maximum principle). Let H ⊂ R N be a halfspace and let Ω ⊂ H be an open bounded set. Furthermore let c ∈ L ∞ (Ω) and u ∈ D s (Ω) be an entire antisymmetric supersolution of (−∆) s u = c(x)u, in Ω. (3.6)
+
+Theorem 4. 1 (
+1Theorem 1.1 for N ≥ 2). Let Ω ⊂ R N , N ≥ 2,be an open, bounded set such that
+
+Lemma 4. 3 .
+3We have v(tη) = o(t 1+s ), as t → 0, whereη = (−1, 1, 0, . . . , 0).Lemma 4.4. Let Ω ⊂ R N , N ≥ 2 be an open bounded set with C 2 boundary such that the origin 0 ∈ ∂ Ω. Assume that the hyperplane {x 1 = 0} is orthogonal to ∂ Ω at 0. Let D ⊂ Ω be an open set with C 2 boundary and symmetric about {x 1 = 0}. Let D * := D ∩ {x 1 < 0}. Let c ∈ L ∞ (D * ) and w be an antisymmetric supersolution of
+
+
+Proof of Lemma 4.3. Thanks to [35, Theorem 1.2], we can write
+
+Figure 2 :
+2B 2 = Q(B 1 ), where Q is the reflection at ∂ Hwhere here and in the following C is a positive constant (possibly depending on R, N, s) but never on α. Now we put
+
+Theorem 5. 2 (
+2Theorem 1.1 and Theorem 1.2 for N = 1). Let c ∈ R and Ω ⊂ R be a bounded open set. Let f : R → R be locally Lipschitz and assume that there is a function u ∈ C(Ω), which is nonnegative, nontrivial in Ω and satisfies ) s u = f (u) in Ω;u = 0 in R \ Ω;
+Acknowledgement:The authors would like to thank Tobias Weth for helpful discussions and Xavier Ros-Oton for taking their attention to[15]. Part of this work was done while the second author was visiting AIMS-Senegal. He would like to thank them for their kind hospitalities. The first author is supported by the Alexander von Humboldt foundation.This forces s 1 < ∞, since u is not constant and tends to c ∞ as |x| → ∞. By the maximal choice of s 1 and the continuity of u, u is symmetric with respect to the hyperplane {x 1 = s 1 }. By the same argument, we can find s i ∈ R, such that u is symmetric with respect to the hyperplanes {x i = s i } for i = 2, . . . , N. Translating u if necessary, we may assume, that s i = 0 for i = 1, . . . , N, so that u is symmetric with respect to all coordinate reflections. This implies that u is even, i.e.for every x ∈ H, so that u is symmetric with respect to the hyperplane ∂ H. This implies that u is symmetric with respect to any hyperplane containing 0, so that u is radially symmetric (see e.g. [41, Section 2.1]). Finally, (6.1) implies that u is decreasing in the radial variable.Proof. Assertion (i) implies (ii) is obvious and can be found in[41]. Thus we only need to show that (ii) implies (i). Without restriction, we may assume that u is not constant. Consider the halfspace H λ = {x ∈ R N : x 1 > λ }, for λ ∈ R and the open setSince u is not constant, we may assume, replacing u with −u if necessary, that u is larger than c ∞ at some point in R N . Hence there exists a maximal s 1 ∈ R ∪ {∞} such that I contains the interval (−∞, s 1 ). By (ii) the half spaces H λ , λ ∈ (−∞, s 1 ) are dominant for u, which implies that u is nondecreasing in x 1 in the set {x ∈ R N : x 1 < s 1 }. (6.1)
+Symmetries in an overdetermined problem for the Green's function. V Agostiniani, R Magnanini, Discrete Contin. Dyn. Syst. Ser. S. 4V. Agostiniani and R. Magnanini. Symmetries in an overdetermined problem for the Green's function. Discrete Contin. Dyn. Syst. Ser. S 4.4 (2011), 791-800.
+
+Uniqueness theorems for surfaces in the large I. A D Alexandrov, Vestnik Leningrad Univ. Math. 11A. D. Alexandrov, Uniqueness theorems for surfaces in the large I, Vestnik Leningrad Univ. Math. 11 (1956), 5-17.
+
+Comparison results and steady states for the Fujita equation with fractional Laplacian. M Birkner, J A López-Mimbela, A Wakolbinger, Annales de L'Institut Henri Poincaré. 22M. Birkner, J. A. López-Mimbela, and A. Wakolbinger, Comparison results and steady states for the Fujita equation with fractional Laplacian, Annales de L'Institut Henri Poincaré 22 (2005), 83-97.
+
+Overdetermined problems for some fully non linear operators. I Birindelli, F Demengel, Comm. Part. Diff. Eq. 38I. Birindelli and F. Demengel. Overdetermined problems for some fully non linear opera- tors, Comm. Part. Diff. Eq. 38.4 (2013), 608-628.
+
+K Bogdan, T Byczkowski, Potential Theory of Schrödinger Operator based on fractional Laplacian, Probability and Mathematical Statistics. 2K. Bogdan and T. Byczkowski, Potential Theory of Schrödinger Operator based on frac- tional Laplacian, Probability and Mathematical Statistics, 2.20 (2000), 293-335.
+
+Serrin-type overdetermined problems: an alternative proof. B Brandolini, C Nitsch, P Salani, C Trombetti, Arch. Ration. Mech. Anal. 190B. Brandolini, C. Nitsch, P. Salani and C. Trombetti, Serrin-type overdetermined prob- lems: an alternative proof, Arch. Ration. Mech. Anal. 190.2 (2008), 267-280.
+
+A symmetry result for an overdetermined elliptic problem using continuous rearrangement and domain derivative. F Brock, A Henrot, Rend. Circ. Mat. Palermo. 512F. Brock and A. Henrot, A symmetry result for an overdetermined elliptic problem using continuous rearrangement and domain derivative, Rend. Circ. Mat. Palermo (2) 51.3 (2002), 375-390.
+
+G Buttazzo, B Kawohl, International Mathematics Research Notices. 2Overdetermined boundary value problems for the ∞-laplacianG. Buttazzo and B. Kawohl, Overdetermined boundary value problems for the ∞- laplacian, International Mathematics Research Notices 2011 2, 237-247.
+
+Classification of solutions for an integral equation. W Chen, C Li, Biao Ou, Comm. Pure Appl. Math. 59W. Chen, C. Li and Biao Ou: Classification of solutions for an integral equation. Comm. Pure Appl. Math. 59 (2006), 330-343.
+
+Use of the domain derivative to prove symmetry results in partial differential equations. M Choulli, A Henrot, Math. Nachr. 192M. Choulli and A. Henrot, Use of the domain derivative to prove symmetry results in partial differential equations, Math. Nachr. 192 (1998), 91-103.
+
+Overdetermined anisotropic elliptic problems. A Cianchi, P Salani, Math. Ann. 345A. Cianchi and P. Salani. Overdetermined anisotropic elliptic problems, Math. Ann. 345.4 (2009), 859-881.
+
+Symmetry results for viscosity solutions of fully nonlinear uniformly elliptic equations. F Da Lio, B Sirakov, J. Eur. Math. Soc. 9JEMS)F. Da Lio and B. Sirakov. Symmetry results for viscosity solutions of fully nonlinear uniformly elliptic equations, J. Eur. Math. Soc. (JEMS) 9.2 (2007), 317-330.
+
+On shape optimization problems involving the fractional laplacian, ESAIM. Control, Optimisation and Calculus of Variations. A.-L Dalibard, D Gérard-Varet, 19A.-L. Dalibard and D. Gérard-Varet, On shape optimization problems involving the frac- tional laplacian, ESAIM. Control, Optimisation and Calculus of Variations 19.4 (2013), 976-1013.
+
+Hitchhiker's Guide to the Fractional Sobolev Spaces. E Di Nezza, G Palatucci, E Valdinoci, Bulletin des Sciences Mathé matiques 136. E. di Nezza, G. Palatucci, and E. Valdinoci, Hitchhiker's Guide to the Fractional Sobolev Spaces, Bulletin des Sciences Mathé matiques 136 (2012), 521-573.
+
+Fractional calculus for power functions and eigenvalues of the fractional Laplacian, Fractional Calculus and Applied Analysis. B Dyda, 15B. Dyda, Fractional calculus for power functions and eigenvalues of the fractional Lapla- cian, Fractional Calculus and Applied Analysis 15.4 (2012), 536-555.
+
+L C Evans, R F Gariepy, Measure Theory and Fine Properties of Functions. Boca RatonCRC PressL. C. Evans and R. F. Gariepy, Measure Theory and Fine Properties of Functions, CRC Press, Boca Raton, 1992.
+
+Monotonicity and nonexistence results for some fractional elliptic problems in the half space. M M Fall, T Weth, preprintM. M. Fall, T. Weth, Monotonicity and nonexistence results for some fractional elliptic problems in the half space, preprint (2013) available online at http://arxiv.org/abs/ 1309.7230.
+
+Remarks on an overdetermined boundary value problem. A Farina, B Kawohl, Calc. Var. Partial Differential Equations. 31A. Farina and B. Kawohl, Remarks on an overdetermined boundary value problem, Calc. Var. Partial Differential Equations 31.3 (2008), 351-357.
+
+Flattening results for elliptic PDEs in unbounded domains with applications to overdetermined problems. A Farina, E Valdinoci, Arch. Ration. Mech. Anal. 1953A. Farina and E. Valdinoci, Flattening results for elliptic PDEs in unbounded domains with applications to overdetermined problems, Arch. Ration. Mech. Anal. 195.3 (2010), 1025-1058.
+
+Overdetermined problems in unbounded domains with Lipschitz singularities. A Farina, E Valdinoci, Rev. Mat. Iberoam. 263A. Farina and E. Valdinoci, Overdetermined problems in unbounded domains with Lips- chitz singularities, Rev. Mat. Iberoam. 26.3 (2010), 965-974.
+
+Positive solutions of Nonlinear Schrödinger equation with the fractional Laplacian, to appear in Proc. P Felmer, A Quaas, J , Roy. Soc. EdinburghP. Felmer, A. Quaas, J. Tan Positive solutions of Nonlinear Schrödinger equation with the fractional Laplacian, to appear in Proc. Roy. Soc. Edinburgh.
+
+Partially overdetermined elliptic boundary value problems. I Fragalà, F Gazzola, J. Differential Equations. 245I. Fragalà and F. Gazzola, Partially overdetermined elliptic boundary value problems, J. Differential Equations 245.5 (2009), 1299-1322.
+
+Overdetermined problems with possibly degenerate ellipticity, a geometric approach. I Fragalà, F Gazzola, B Kawohl, Math. Z. 2541I. Fragalà, F. Gazzola, and B. Kawohl, Overdetermined problems with possibly degenerate ellipticity, a geometric approach, Math. Z. 254.1 (2006), 117-132.
+
+Radial symmetry of positive solutions involving the fractional Laplacian. P Felmer, Y Wang, http:/www.worldscientific.com/doi/pdf/10.1142/S0219199713500235Commun. Contemp. Math. P. Felmer and Y. Wang Radial symmetry of positive solutions involving the frac- tional Laplacian, Commun. Contemp. Math (2013), available online at http://www. worldscientific.com/doi/pdf/10.1142/S0219199713500235.
+
+A symmetry result related to some overdetermined boundary value problems. N Garofalo, J L Lewis, American Journal of Mathematics. 111N. Garofalo and J.L. Lewis, A symmetry result related to some overdetermined boundary value problems, American Journal of Mathematics 111.1 (1989), 9-33.
+
+Symmetry and related problems via the maximum principle. B Gidas, W.-M Ni, L Nirenberg, Comm. Math. Phys. 68B. Gidas, W.-M. Ni and L. Nirenberg, Symmetry and related problems via the maximum principle, Comm. Math. Phys. 68 (1979), 209-243.
+
+Symmetry of positive solutions of nonlinear equations. B Gidas, W.-M Ni, L Nirenberg, Adv. Math. Suppl. Studies A. 7Math. Anal. Appl. Part AB. Gidas, W.-M. Ni and L. Nirenberg, Symmetry of positive solutions of nonlinear equa- tions, Math. Anal. Appl. Part A, Adv. Math. Suppl. Studies A 7 (1981), 369-402.
+
+On an overdetermined elliptic problem. L Hauswirth, F Hélein, F Pacard, Pacific J. Math. 250L. Hauswirth, F. Hélein, and F. Pacard, On an overdetermined elliptic problem, Pacific J. Math. 250.2 (2011), 319-334.
+
+Asymptotic symmetry for a class of fractional reaction-diffusion equations. S Jarohs, T Weth, Discrete Contin. Dyn. Syst. 34S. Jarohs, T. Weth, Asymptotic symmetry for a class of fractional reaction-diffusion equa- tions, Discrete Contin. Dyn. Syst. 34.6 (2014), 2581-2615.
+
+Local and global minimizers for a variational energy involving a fractional norm. G Palatucci, O Savin, E Valdinoci, Ann. Mat. Pura Appl. 1924G. Palatucci, O. Savin and E. Valdinoci, Local and global minimizers for a variational energy involving a fractional norm, Ann. Mat. Pura Appl. (4) 192.4 (2013), 673-718
+
+Serrin's result for domains with a corner or cusp, Duke mathematical journal. J Prajapat, 91J. Prajapat, Serrin's result for domains with a corner or cusp, Duke mathematical journal, 91.1 (1998), 29-31.
+
+Ramm, Symmetry problem. A G , Proc. Amer. Math. Soc. 141A. G. Ramm, Symmetry problem, Proc. Amer. Math. Soc. 141.2 (2013), 515-521.
+
+Radial symmetry for an electrostatic, a capillarity and some fully nonlinear overdetermined problems on exterior domains. W , Z. Anal. Anwendungen. 15W. Reichel, Radial symmetry for an electrostatic, a capillarity and some fully nonlinear overdetermined problems on exterior domains, Z. Anal. Anwendungen 15.3 (1996), 619- 635.
+
+Radial symmetry for elliptic boundary-value problems on exterior domains. W Reichel, Arch. Rational Mech. Anal. 137W Reichel, Radial symmetry for elliptic boundary-value problems on exterior domains, Arch. Rational Mech. Anal. 137.4 (1997), 381-394.
+
+The Dirichlet Problem for the fractional Laplacian: Regularity up to the boundary. X Ros-Oton, J Serra, J. Math. Pures Appl. 101X. Ros-Oton and J. Serra, The Dirichlet Problem for the fractional Laplacian: Regularity up to the boundary, J. Math. Pures Appl. 101 (2014), 275-302.
+
+A Symmetry Problem in Potential Theory. J Serrin, Arch. Rational Mech. Anal. 43J. Serrin, A Symmetry Problem in Potential Theory, Arch. Rational Mech. Anal. 43 (1971), 304-318.
+
+Regularity of the obstacle problem for a fractional power of the Laplace operator. L Silvestre, Comm. Pure Appl. Math. 601L. Silvestre, Regularity of the obstacle problem for a fractional power of the Laplace operator, Comm. Pure Appl. Math. 60.1 (2007), 67-112.
+
+Overdetermined problems for fully for fully nonlinear elliptic equations. L Silvestre, B Sirakov, preprintL. Silvestre and B. Sirakov, Overdetermined problems for fully for fully nonlinear elliptic equations, preprint (2013) available online at http://arxiv.org/abs/1306.6673.
+
+Symmetry for exterior elliptic problems and two conjectures in potential theory. B Sirakov, Ann. Inst. H. Poincaré Anal. Non Linéaire. 18B. Sirakov, Symmetry for exterior elliptic problems and two conjectures in potential the- ory, Ann. Inst. H. Poincaré Anal. Non Linéaire 18.2 (2001), 135-156.
+
+. H F Weinberger, Arch. Rational Mech. Anal. 43Remark on the preceding paper of SerrinH. F. Weinberger, Remark on the preceding paper of Serrin, Arch. Rational Mech. Anal. 43 (1971), 319-320.
+
+Symmetry of solutions to variational problems for nonlinear elliptic equations via reflection methods. T Weth, Jahresber. Deutsch. Math.-Ver. 112T. Weth, Symmetry of solutions to variational problems for nonlinear elliptic equations via reflection methods, Jahresber. Deutsch. Math.-Ver. 112 (2010), 119-158.
+
+Estimates for the sums of eigenvalues of the fractional Laplacian on a bounded domain. S Y Yolcu, T Yolcu, Commun. Contemp. Math. 151250048S. Y. Yolcu, T. Yolcu, Estimates for the sums of eigenvalues of the fractional Laplacian on a bounded domain, Commun. Contemp. Math. 15.3 (2013), 1250048.

@@ -1,0 +1,295 @@
+
+Computation of arbitrarily constrained synthetic discriminant functions
+10 July 1995
+
+Mario Montes-Usategui 
+Juan Campos 
+Ignacio Juvells 
+
+Departament de Fı ´sica Aplicada i Electro `nica
+Laboratori d'Optica
+Universitat de Barcelona
+Diagonal 647E-08028BarcelonaSpain. J. Campos
+
+
+Departament de Fı ´sica
+Grup d'Optica
+Universitat Au-to `noma de Barcelona
+E-08193BellaterraSpain
+
+Computation of arbitrarily constrained synthetic discriminant functions
+10 July 199545CCEF228E03DCC24A72BB4256BBBE75Received 7 October 1994; revised manuscript received 9 January 1995.Optical pattern recognitionVanderLugt correlatorssynthetic discriminant functionsarbitrarily constrained filters
+An algorithm for computing correlation filters based on synthetic discriminant functions that can be displayed on current spatial light modulators is presented.The procedure is nondivergent, computationally feasible, and capable of producing multiple solutions, thus overcoming some of the pitfalls of previous methods.
+
+Introduction
+
+The design of filters for VanderLugt correlators has a strong mathematical foundation through the synthetic discriminant function 1SDF2 theory. 1 The modulation of the system response provided by SDF filters is a powerful technique for solving patternrecognition problems and makes the design of optical correlation filters similar to the training procedures used for neural networks.No particular knowledge about the structure of the problem is needed, and only a representative set of examples and solutions must be obtained.
+
+Furthermore, the theory is general enough to encompass, in particular cases, many filters obtained on an independent basis, outside the SDF philosophy; that is, many well-known filters can be obtained through the SDF theory by a proper selection of training images and desired outputs.3][4] By designing an SDF filter with enough in-plane rotated images, we obtain a circular harmonic filter if the outputs are properly selected. 5wever, until recently, little attention has been paid to the restrictions that current technology imposes on the filter values.Modulators are essential in the construction of reliable correlators when the filter must be frequently updated and generalpurpose systems are required to do so many times per second.Unfortunately, current devices can display only a small fraction of the complex values required by the classical designs.The extreme case is that of binary modulators, in which only two values can be selected and with which most filters behave quite differently from their full-complex counterparts.In this context, Juday 6 and recently Laude and Re ´fre ´gier 7 have addressed the problem of the optimum projection of single-image filters to the domain allowed by a modulator.
+
+For SDF filters with several images in the training set, the problem is worse, because a simple projection of the values of the fully complex filter will, in most cases, dramatically modify the desired outputs.Therefore the constraints imposed by the filter plane modulator must be considered in the design of the filter.
+
+The majority of the efforts has been directed at obtaining phase-only and binary-phase-only SDF filters, although the general case of arbitrary constraints has also been studied.The first attempt to design a phase-only SDF was reported by Horner and Gianino, 8 whose solution consisted simply of using the phase of a conventional composite filter.Although the first tests gave good results, the approach is not appropriate because the SDF constraints are no longer met. 9Since then a variety of formulas have appeared in the literature but none of them seem to give the ultimate answer: Kallman's algorithm 10 is computationally expensive and gives little control over the correlation peaks 1according to Ref. 112.The procedures proposed by Jared and Ennis 11 and Bahri and Kumar 12 limit the number of possible solutions by supposing the filter to be a linear combination of the training images, thus affecting the probability of convergence.The Jared and Ennis algorithm has also been applied to design arbitrarily constrained filters. 13The entropy-optimized filter proposed by Mahlab and Shamir 14 uses the simulated annealing algorithm, inheriting its drawbacks: heuristic selection of several parameters 1initial temperature, number of iterations until thermal equilibrium, etc.2 and a high computational load 1Ref.5 reports 7h 30 min on a VAX8200 computer for 10 images of 64 3 64 pixels2.
+
+In this paper a new algorithm for computing constrained SDF filters is proposed.It is based on a new filter design that we call a minimum Euclidean distance SDF 1MED-SDF2 filter, which enables us to obtain the closest SDF filter to a given non-SDF filter in the sense of Euclidean distance.This design is then used in an iterative algorithm that leads to a solution in a few steps.
+
+The paper is organized as follows: In Section 2 we present some previous considerations about the structure of the algorithm.In particular we see the necessity of the MED-SDF filter, whose expression is deduced in Section 3. In Section 4 an sketch of the algorithm is presented as well as an analysis of the convergence properties.Section 5 shows the results of a computer simulation and finally the paper is closed by the conclusions and a mathematical appendix.
+
+
+Structure of the Algorithm
+
+We designed an iterative algorithm with a structure similar to that used in the successive forcing algorithm, 12 that is, an algorithm in which, at each iteration, the filter is forced to fulfill the conditions for the central correlations and subsequently to take values on the allowed domain 1Fig.12.
+
+This technique of successive projections is widely used as a basis of different algorithms in filter synthesis or in image restoration. 15,16The answer to 112 How to project the SDF filter h k onto the domain allowed by the modulator to obtain filter a k and 122 how to force the constrained filter a k to give the desired central correlations, that is, to obtain the SDF filter h k11 , will completely shape the algorithm.
+
+Among all the possibilities, we are interested in those that lead to convergent procedures.Because we are looking for the SDF filters that take values on the specified subset of the complex unit circle, such convergence should be expressed as
+o i51 N 0 h k11 i 2 a k11 i 0 2 , o i51 N 0 h k i 2 a k i 0 2 , 112
+where h and a are the SDF and the constrained filters, respectively.The subscripts k and k 1 1 indicate the iteration, and the superscript i indicates the pixel; finally, N represents the number of pixels of h and a. Inequality 112 demands that some measure of similarity between the SDF and the constrained filter be a quantity decreasing with the number of iterations.Although it has been written with the Euclidean distance as a measure of similarity, this is not the only possibility and other metrics might be of use.The solution will be reached when the distance between the two filters drop under some limit, depending on the desired precision for the correlation values.However, the imposition of inequality 112 implies that one solution always exists and that such a solution can be reached by means of an algorithm with the chosen structure.We are not able to ensure this so we had to use the less ambitious condition
+o i51 N 0 h k11 i 2 a k11 i 0 2 # o i51 N 0 h k i 2 a k i 0 2 , 122
+which is similar to inequality 112 but in which the equality sometimes may hold.By splitting expression 122 into
+o i51 N 0 h k11 i 2 a k11 i 0 2 # o i51 N 0 h k11 i 2 a k i 0 2 # o i51 N 0 h k i 2 a k i 0 2 132
+in which expression 122 is obviously implied, we can answer the two questions stated above in an unique way.
+
+The first inequality in expression (3),
+o i51 N 0 h k11 i 2 a k11 i 0 2 # o i51 N 0 h k11 i 2 a k i 0 2 , 142
+is used to project the SDF filter onto the allowed domain of the complex plane.At this point of the process we know everything except the filter a k11 .Expression 142 compares the distance of a k and a k11 with respect to the SDF filter at iteration k 1 1, h k11 .Because a k is a constrained filter, if we choose a k11 as the constrained filter, that makes minimum  therefore the minimum is reached by the minimization of each addend.As the coding domain is assumed to be known, the process merely reduces to a search of the closest domain value to each component of h k11 1Fig.22.For example, for a phase-only filter, a k11 is obtained by the extraction of the phase of the SDF filter h k11 .It is worth pointing out that this process is used to project, in an optimum way, a single-image filter. 6,7quivalently, the second expression,
+o i51 N 0 h k11 i 2 a k i 0 2 # o i51 N 0 h k i 2 a k i 0 2 , 162
+tells us how to derive the SDF filter at the next iteration, h k11 , from the constrained filter at the previous iteration, a k .At this point we know everything except h k11 .Expression 162 compares the distance of h k and h k11 with respect to the constrained filter at iteration k, a k .Because h k is an SDF filter, when h k11 is selected as the SDF filter, which makes minimum
+E1h2 5 o i51 N 0 h i 2 a k i 0 2 , 172
+the inequality in expression 162 is automatically met.The process for obtaining such a filter is not as evident as before because now the terms of the sum are not independent; they are linked together by the conditions imposed on the correlations with the training images.The appropriate conditions and the resulting expression for the MED-SDF filter is given in Section 3. Figure 3 summarizes the information contained in this section.Starting from the SDF filter at iteration k, h k , we obtain the constrained filter a k by looking, among all possible constrained filters, for the closest to h k .We force this filter to be an SDF design 1to obtain h k11 2 by looking, among all possible SDF filters, for the closest to a k .Note that h k11 is not necessarily equal to the original filter h k and, when they coincide, the algorithm stops.This issue is discussed in Section 4. The latter step is carried out by the computation of the MED-SDF filter.
+
+
+Minimum Euclidean Distance Synthetic Discriminant Function
+
+Let us suppose we have a correlation filter a that we wish to modify to give some prespecified values for the central correlations with M images.The shape of the filter is important, and so we want to change it as little as possible.The question as to which filter enables us to obtain the desired correlations by preserving the original filter a as far as possible is answered in this section.We call this design the minimum Euclidean distance synthetic discriminant function 1MED-SDF2.The problem can be stated in the following terms:
+
+Let X 1 , . . ., X M denote the Fourier transforms of the M images of N components for which we wish to obtain the values c 1 , . . ., c M at the center of the correlation plane.Let a be the filter we need to  modify.We are looking for the filter h so that
+h 1 X 5 c T , 182 where E1h2 5 o i51 N 0 h i 2 a i 0 2 192
+is a minimum.In Eq. 182, X is the N 3 M matrix whose columns are the images X i , c is the column vector of M components containing the values c i , and the superscripts T and 1 mean transpose and conjugate transpose, respectively.Finally, h i and a i represent the component number i of h and a, respectively.Equation 192 can be rewritten with vector notation as
+E1h2 5 o i51 N 31h i 2 a i 2*1h i 2 a i 24 5 o i51 N 31h i 2*h i 2 1h i 2*a i 2 1a i 2*h i 1 1a i 2*a i 4 5 h 1 h 2 h 1 a 2 a 1 h 1 a 1 a.
+1102
+
+If the real and the imaginary parts of all the quantities are made explicit, namely h 5 h R 1 jh I , a 5 a R 1 ja I , X 5 X R 1 jX I , and c 5 c R 1 jc I , where j is the imaginary unit, Eqs.182 and 1102 become
+h R T X R 1 h I T X I 5 c R T , h R T X I 2 h I T X R 5 c I T , 1112 E1h R , h I 2 5 h R T h R 1 h I T h I 2 2h R T a R 2 2h I T a I 1 a R T a R 1 a I T a I .1122
+We can find the solution by setting the gradients of the Lagrange function L1h R , h I 2 to 0 with respect to the filter components, where,
+L1h R , h I 2 5 h R T h R 1 h I T h I 2 2h R T a R 2 2h I T a I 1 a R T a R 1 a I T a I 2 21h R T X R 1 h I T X I 2 c R T 2u 2 21h R T X I 2 h I T X R 2 c I T 2v, 1132
+and u and v are M-dimensional column vectors containing the Lagrange multipliers.Such a solution can be written in vector notation as h 5 a 1 Xw*, 1142
+
+with w 5 u 1 jv.Substitution of Eq. 1142 into Eq.182 leads to
+1a 1 1 w T X 1 2X 5 c T , 1152 whence w* 5 1X 1 X2 21 1c* 2 X 1 a2.1162
+Substituting Eq. 1162 into Eq.1142, we finally obtain
+h 5 X1X 1 X2 21 c* 1 3I N 2 X1X 1 X2 21 X 1 4a
+; comp 1 Pa, 1172
+
+where I N is the N 3 N identity matrix.Equation 1172 can be rewritten as
+h 5 a 1 Da5 a 1 X1X 1 X2 21 1c* 2 X 1 a2,1182
+that is, the modification of filter a is a composite filter that complements the central correlations in the exact amount needed.Because the composite filter is, among the SDF's, that with minimum modulus 1it minimizes h 1 h2, it changes the original filter a as little as possible.The expression in Eq. 1172 admits a potentially useful interpretation.When a is an arbitrarily chosen vector, Eq. 1172 represents the most general solution to the SDF problem, 17 where the term X1X 1 X2 21 c* is the classical composite filter and 1 is the projection operator over the subspace spanned by the N-M orthogonal vectors to the training images.Every SDF design can be expressed in the above form by the proper choice of the vector a, which can now be interpreted as the filter to which h most approximates, thus establishing an interesting link between SDF and non-SDF filters.
+I N 2 X1X 1 X2 21 X
+
+Algorithm
+
+The whole process to compute constrained SDF filters is depicted in Fig. 4 and can be sketched as follows:
+
+Step 1: Choose an initial vector a 0 of N components.by means of Eq. 1172, where a is a scaling constant that is justified below.
+
+Step 3: Compute for i 5 1 to N:
+a k i 5 arg min ;s[D 10h k i 2 s0 2 2 1 202
+where D represents the coding domain and s is an arbitrary value of this domain.
+
+Step 4: If the difference between the constrained and the SDF filters is small or if the algorithm stops its convergence, i.e., if
+E k 5 o i51 N 0 h k i 2 a k i 0 2 , u f ,1212
+or
+0 E k 2 E k21 0 , u m ,1222
+then exit; u f and u m are arbitrarily chosen small numbers.
+
+Step 5: If the condition in step 4 is not satisfied, finish iteration k by going to step 2.
+
+The computation of the MED-SDF filter is carried out in step 2. It involves a matrix-vector multiplication to project the constrained filter onto the orthogonal subspace to the training images and the addition of the resulting vector to the composite filter.Note that both this filter and the projection matrix are fixed and can be precomputed and stored.However, the projection operator is a matrix of N 3 N components and would require a huge amount of memory 1for 128 3 128 images it needs over 1 Gbyte2.A good compromise between memory requirements and computation complexity is to precalculate only S 5 X1X 1 X2 21 , which is an N 3 M matrix 1for 20 images of 128 3 128 pixels it needs ,1 Mbyte2.Then the computation is completed at each iteration when the stored matrix is multiplied by the M-dimensional vector X 1 a and the result is added to the Ndimensional vector a:
+3I 2 X1X 1 X2 21 X 1 4a 5 a 2 X1X 1 X2 21 X 1 a 5 a 2 S1X 1 a2.1232
+The scaling constant in step 2 provides an additional degree of freedom.It accounts for the fact that the specified values for the central correlations can be rescaled to obtain a better match between the computed filter and the values available in the coding domain.We want a bright correlation spot with the target images and a dim one with the nontarget patterns, but the exact value to be imposed at the center of the correlation plane to achieve this depends a good deal on the characteristics of the filter plane modulator.In appendix A we deduce the expression for the scaling constant that leads to a minimum distance between h k11 and a k .Note that we have two additional sources of degrees of freedom:
+
+x The phases of the central correlations with the M training images can be used to minimize further the difference between the SDF filter h k11 and the constrained filter a k .The same procedure proposed for optimizing the phase in previous SDF designs can be used. 18,19 The SDF filter h k11 can be rescaled again by a complex constant to obtain a k11 with minimal error, as proposed in Ref. 6 for single-image filters.
+
+We did not exploit these two possibilities in order to not overly complicate the algorithm.Although the nondivergent behavior of the algorithm will not be affected by not performing these additional operations the probability of convergence is lower.
+
+The process stops only when 1a2 one solution is reached; the constrained filter a k fulfills the SDF conditions, i.e.,
+a k 5 comp 1 Pv, 1242
+where v is some N-dimensional vector.Filter h k11 is then
+h k11 5 comp 1 P1comp 1 Pv2 5 comp 1 P1comp2 1 P 2 v 5 comp 1 0 1 Pv 5 a k ,1252
+and the output is constant from this point on.We derived Eq. 1252 by using P as a projection operator, and therefore P 2 5 P, and the filter comp as a linear combination of the training images and thus its projection P1comp2 is null.
+
+1b2 If a k is not an SDF filter but can be written as
+a k 5 a k21 1 v,1262
+where v belongs to the kernel of the projection matrix, i.e., v [ ker1P2.Filter h k11 is then
+h k11 5 comp 1 Pa k 5 comp 1 P1a k21 1 v2 5 comp 1 Pa k21 5 h k ,1272
+whence a k 5 a k11 5 a k12 5 . . .,
+h k 5 h k11 5 h k12 5 . . . ,1282
+and the distance between the SDF and the constrained filter remains constant.This possibility is unlikely, as the dimension of the kernel of the projection matrix is M, the number of training images, which is in general much smaller than the dimension of the space, the bandwidth product N. 1c2 If a k is not an SDF filter but
+h k fi h k11 , a k 5 a k11 ,1292
+then a k 5 a k11 5 a k12 5 . . .,
+h k11 5 h k12 5 . . . ,1302
+i.e., when the projection of two consecutive and different SDF filters is the same, the algorithm stops its convergence.This possibility is difficult to analyze and depends on the coding domain.It represents the intuitive notion that the smaller the number of coding values the smaller the probability of finding a solution.
+
+When there are no restrictions and the entire complex plane is available, the SDF and the constrained filters are always equal and expression 29 is self-contradictory and never holds.When only one coding value is allowed, all the constrained filters are the same and the process stops at the first iteration.No solution is possible.Binary modulators permit the coding of 2 N different filters, which for 128 3 128 images is greater than 10 4900 .In spite of this seemingly large number, because two consecutive SDF filters may be similar, especially when we are near the solution, their binarization may be equal with relative ease.Although we found this problem with binary-phase-only filters we show in Section 5 that the algorithm can still produce usable filters.
+
+
+Results
+
+The algorithm was tested by means of computer simulation of the optical correlation process.Toward this end, we designed several filters to solve a two-class problem involving different views of out-ofplane rotated objects.The true class was formed by 20 images of a tank captured every 18°.The false class contained 20 images of a truck obtained under the same conditions.All the images were 128 3 128 pixels, and no special preprocessing such as edge enhancement was carried out.The training set, that is, the set of images used in designing the filters, for all the examples that follow is shown in Fig. 5.It is composed of the ten samples of each object taken at 0°, 36°, . . ., 324°angles.The performance of the algorithm was studied for four different coding domains 1Fig.62: a phase-only domain, a binary-phase-only domain, a spiral coupling between amplitude and phase, and an arbitrary domain.Phase-only filters are attractive designs because they provide a good trade-off between noise resistance and peak sharpness together with optimum light efficiency. 5,20inary-phase-only filters retain to a large extent the properties of the latter design, but they can be implemented in actual devices such as magneto-optic spatial light modulators, which, in addition, are very fast.The spiral domain is typical for liquid-crystal displays.Finally, Fig. 61d2 shows a rather arbitrary modulator characteristic for which the algorithm will work.The first issue addressed was the choice of the initial filter a 0 .The algorithm was found to be capable of producing SDF filters with a wide variety of starting points.In particular we tested 1a2 Full complex SDF filters designed to solve the same problem.We used them because sometimes the simple projection of an SDF filter is a good solution.For example, the phase of a composite filter is sometimes a good phase-only SDF 8 and thus would require only small modifications.
+
+1b2 Random complex vectors.In contrast to case 1a2, they contain no information about the problem.1c2 The same starting point used in the Jared and Ennis algorithm, 11 i.e.,
+a 0 5 o i51 M c i X i , 1312
+where X i is the N-dimensional vector representing the i training image, c i is its desired output, and M is the number of training images.
+
+Figure 7 shows the convergence of the algorithm when a phase-only SDF is designed with a MACE filter as a starting point.The Y axis, which has a logarithmic scale, represents the error between the SDF and the constrained filter at a given iteration divided by the sum of the squared magnitude of the components of the SDF filter, i.e.,
+E NORM 1h2 5 1 o i51 N 0 h k i 2 a k i 0 2 2 / 1 o i51 N 0 h k i 0 2 2 , 1322
+where h is the SDF filter and a is the phase-only version of h.The superscript i indicates the component, and the subscript k indicates the iteration.For an ideal phase-only filter this error function is 0.
+
+The graph shows an exponential decay with the number of iterations, indicating a fast approach to the desired phase-only filter.
+
+The accuracy attained for the SDF conditions was found to be only slightly dependent on the initial point, although different number of iterations 1from 10 to 202 were required for different points.However, depending on a 0 , the behavior of the final filters may be different because the algorithm seems to find a solution easily, without modifying the starting point so much.Because the solution is close to the initial filter, it preserves its characteristics to some extent.
+
+We give two examples of this feature.In the first one, three phase-only SDF's were computed by the use of the phase of a MACE filter, a phase-only random vector, and a constant plane in Fourier space 1a delta function in object space2 as initial points.Figure 8 shows the impulse responses of the obtained filters.All three meet the SDF conditions with an accuracy of 96% and are very similar to their respective starting filters.For instance, the filter of  Figure 91a2 shows the central correlations between the whole set of 40 images 120 tanks and 20 trucks2 and a phase-only SDF designed with only the 20 views shown in Fig. 5.The starting point was the sum of the 10 target images 1the 10 tanks2.Note that although there is a perfect control over the central correlations with the training images and small sidelobes 1see Fig. 14 below2, the correlations with the tanks not included in the training set are too small to be separated from those of the trucks.The true-class images can be separated from those belonging to the false class, if the initial point is formed by the sum of the whole set of true-class images 120 tanks2, as shown in Fig. 91b2.Thus the election of an initial vector a 0 that includes information about the intermediate views leads to a filter with enhanced generalization capabilities.
+
+The type of coding domain is the most influential factor with respect to the control of the central correlations.Figures 10, 11, and 12 show respectively the central correlations between the images of the training set and the binary-phase-only filter, the spiral filter, and the arbitrarily constrained filter whose domains are shown in Fig. 6.The correlations with the nontraining images 1the intermediate views2 are not shown because they strongly depend on the filter a 0 as stated above.The two latter designs accurately meet the SDF constraints.The binaryphase-only filter presents more difficulties because, although the values for the true-class images are significantly higher than those of the false class, they show the most marked variation.This is due to the stop of the algorithm at approximately four iterations with all the initial points we used.Finally, Figs.14-17 present three-dimensional plots as well as a front and a lateral view of the intensity of the correlation between the test scene of Fig. 13 and the four filters.A good detection of the tank is possible in all cases.
+
+
+Final Remarks and Conclusion
+
+A new algorithm for computing SDF's adapted to the restrictive modulation characteristics of present-day  devices has been developed.In contrast to other previously proposed methods, our procedure can be proved to be nondivergent.Furthermore it has a solid mathematical background that enables the analysis of the cases that do not lead to a solution.The algorithm needs only a few iterations, ranging from 10 to 20, to obtain the desired filter so the computational load is moderate.Finally, no special assump-tion of the shape of the filter was made, such as the imposition for the filter to be a linear combination of the training images and therefore multiple solutions could be reached by changing the initial point.This property enables an indirect control the characteristics of the final filter, as indicated by the results of the simulation.Nevertheless, a systematic approach for the selection of the initial filter to take full advantage of this feature must still be devised.We are currently working in this direction to introduce optimality considerations into the algorithm.
+
+There are other possibilities worth exploring, such as the use of different metrics to measure the similar-   ity between the SDF and the constrained filter.The change of the similarity criterion might permit us to obtain a solution when this is not feasible with the Euclidean distance.This possibility is also being studied, and the results will be reported in a future work.
+
+
+Appendix A
+
+We derive an expression for the scaling of the central correlations leading to minimum error, as mentioned in Section 4.
+
+The expression for the error function to be minimized can be written in vector notation as 3see Eq. 11024
+
+
+
+0 2 ; 152 expression 142 is automatically satisfied.Equation 152 is a sum of positive and independent terms and
+
+
+Fig. 1 .
+1
+Fig. 1.Structure of the algorithm.CONS, constrained filter.
+
+
+Fig. 2 .
+2
+Fig. 2. Projection of the filter values onto the allowed domain for 1a2 a phase-only filter, 1b2 a binary-phase-only filter, 1c2 an arbitrary domain.
+
+
+Fig. 3 .
+3
+Fig. 3. Sketch of the two successive projections that form an iteration of the algorithm.
+
+
+Fig. 4 .
+4
+Fig. 4. Block diagram of the proposed algorithm.
+
+
+Fig. 5 .
+5
+Fig. 5. Training set: 1a2 true-class images, 1b2 false-class images.
+
+
+Fig. 6 .
+6
+Fig.6.Different coding domains used to test the method: 1a2 phase-only domain, 1b2 binary-phase-only domain, 1c2 spiral coupling between amplitude and phase, 1d2 arbitrary domain.
+
+
+
+
+Fig. 7. Plot showing the convergence of the algorithm for a phase-only SDF.
+
+
+Fig. 8 .
+8
+Fig. 8. Impulse response of three phase-only SDF's designed with the same training set but with different starting points: 1a2 the phase of a MACE filter, 1b2 a phase-only random vector, 1c2 a constant plane in Fourier space.
+
+
+Fig. 10 .
+10
+Fig. 10.Central correlations between a binary phase-only SDF and the images of the training set.Open circles represent the correlations with the trucks; filled circles represent those of the tanks.
+
+
+Fig. 9 .
+9
+Fig. 9. Central correlations obtained with two different phaseonly SDF's: 1a2 with a starting point formed by the sum of the 10 tanks of the training set 3Fig.51a24, 1b2 with a starting point formed by the sum of the whole set of 20 tanks.Open circles represent the correlations with the trucks.Filled circles represent those of the tanks.
+
+
+Fig. 11 .Fig. 12 .
+1112
+Fig. 11.Central correlations between a spirally constrained SDF filter and the images of the training set.Open circles represent the correlations with the trucks; filled circles represent those of the tanks.
+
+
+Fig. 13 .
+13
+Fig. 13.Test input scene.Both images belong to the training set.
+
+
+Fig. 14 .
+14
+Fig. 14.Correlation between the phase-only SDF and the input scene of Fig. 13.
+
+
+E 5 hE1a2 5 3a1comp2 1 1 a 1 comp 1 2 a 1 1a comp 1 2 3a(comp2 1 1 a 1 1 a 1 a 5 a 2 1comp2 1 comp 1 a1comp2 1 1 aa 1 1 a 1 P 2 a 2 aa 1 comp 2 a 1 2 a1comp2 1 a 2 a 1 1comp2 1 1
+5111211111111
+1 h 2 a 1 h 2 h 1 a 1 a 1 a, 1A.12 where h is the MED-SDF filter:h 5 a comp 1 Pa, 1A.22and a is a real constant that scales the central correlations.By substituting Eq. 1A.22 into Eq.1A.12 we get P41a Pa2 Pa2 P4a Pa P1comp2 Pa Pa 1 a 1 a.1A.32Owing to the properties of the projection operator P, Pa 5 0, a P1comp2 5 0, a 1 P 2 a 5 a 1 Pa ⇒ a 1 P 2 a 2 a 1 Pa 5 0, 1A.42
+
+
+Fig. 15 .Fig. 16 .
+1516
+Fig. 15.Correlation between the binary-phase-only SDF and the input scene of Fig. 13.
+
+
+Fig. 17 .E1a2 5 a 2 1comp2 1 comp 2 2aa 1 comp 2 a 1 5 0 ⇔ 2a1comp2 1 comp 2 2a 1 comp 5 0 ,
+17150
+Fig. 17.Correlation between the arbitrarily constrained SDF 3Fig.61d24 and the input scene of Fig. 13.
+
+July 1995 @ Vol. 34, No. 20 @ APPLIED OPTICS
+APPLIED OPTICS @ Vol. 34, No. 20 @ 10 July 1995
+
+Tutorial survey of composite filter designs for optical correlators. B V K Vijaya, Kumar, Appl. Opt. 31119922
+
+Minimum average correlation energy filters. A Mahalanobis, B V K Vijaya Kumar, D Casasent, Appl. Opt. 26119872
+
+Minimum variance synthetic discriminant functions. B V K Vijaya, Kumar, J. Opt. Soc. Am. A. 3119862
+
+Optimal trade-off filters for noise robustness, sharpness of the correlation peak and Horner efficiency. Ph, Opt. Lett. 16119912Re ´fre ´gier
+
+Me ´thodes de reconnaissance des formes pour la corre ´lation optique. Ph, Rev. Tech. Thomson-CSF. 22119902Re ´fre ´gier
+
+Optimal realizable filters and the minimum Euclidean distance principle. R D Juday, Appl. Opt. 32119932
+
+Re ´fre ´gier, ''Multicriteria characterization of coding domains with optimal Fourier spatial light modulators filters. V Laude, Ph, Appl. Opt. 33119942
+
+Applying the phase-only filter concept to the synthetic discriminant function correlation filter. J L Horner, P D Gianino, Appl. Opt. 24119852
+
+Computer-generated and phaseonly synthetic discriminant function filters. D Casasent, W A Rozzi, Appl. Opt. 25119862
+
+Optimal low noise phase-only and binary phase-only optical correlation filters for threshold detectors. R R Kallman, Appl. Opt. 25119862
+
+Inclusion of filter modulation in synthetic-discriminant-function construction. D A Jared, D J Ennis, Appl. Opt. 28119892
+
+Algorithms for designing phase-only synthetic discriminant functions,'' in Optical Information Processing Systems and Architectures. Z Bahri, B V K Vijaya, Kumar, Proc. Soc. Photo-Opt. Instrum. Eng. B. Javidi1151119892
+
+Synthetic discriminant functions for implementation on arbitrarily constrained devices. D W Carlson, B V K Vijaya, Kumar, Optical Information Processing Systems and Architectures IV. B Javidi, 1772119922
+
+Phase-only entropy-optimized filter generated by simulated annealing. U Mahlab, J Shamir, Opt. Lett. 14119892
+
+Application of the projection-ontoconstraint-sets algorithm for optical pattern recognition. J Rosen, J Shamir, Opt. Lett. 16119912
+
+Image restoration by the method of convex projections: Part 1-theory. D C Youla, H Webb, IEEE Trans. Med. Imaging. 1119822
+
+Generalized synthetic discriminant functions. Z Bahri, B V K Vijaya, Kumar, J. Opt. Soc. Am. A. 5119882
+
+Constrained phase optimization in minimum variance synthetic discriminant functions. B V K Vijaya Kumar, Z Bahri, A Mahalanobis, Appl. Opt. 27119882
+
+Phase selection of synthetic discriminant functions filters. J P Ph, Huignard, Appl. Opt. 29119902
+
+Performance measures for correlation filters. B V K Vijaya Kumar, L Hassebrook, Appl. Opt. 29119902

@@ -1,0 +1,380 @@
+
+A complete characterisation of local existence for semilinear heat equations in Lebesgue spaces
+9 Jul 2014
+
+R Laister 
+Department of Engineering Design and Mathematics
+University of the West of England
+BS16 1QYBristolUK
+
+J C Robinson 
+Mathematics Institute
+Zeeman Building
+University of Warwick
+CV4 7ALCoventryUK
+
+M Sierże 
+֒ Ga 
+Mathematics Institute
+Zeeman Building
+University of Warwick
+CV4 7ALCoventryUK
+
+A Vidal-López 
+Department of Mathematical Sciences
+Xi'an Jiaotong-Liverpool University
+215123SuzhouChina P. R
+
+A complete characterisation of local existence for semilinear heat equations in Lebesgue spaces
+9 Jul 2014Semilinear heat equationDirichlet problemlocal existencenon-existenceinstantaneous blow-upDirichlet heat kernel
+We consider the semilinear heat equation u t − ∆u = f (u) with Dirichlet boundary conditions on a bounded domain Ω ⊂ R d . Under the assumption that f : [0, ∞) → [0, ∞) is continuous and non-decreasing we completely characterise those f for which the equation has a local solution bounded in L q (Ω) for all non-negative initial data u 0 ∈ L q (Ω). For q ∈ (1, ∞) this holds if and only if lim sup s→∞ s −(1+2q/d) f (s) < ∞; and for q = 1 if and only if ∞ 1 s −(1+2/d) F (s) ds < ∞, where F (s) = sup 1≤t≤s f (t)/t. The same results hold on the whole space R d provided that in addition lim sup s→0 f (s)/s < ∞.
+
+Introduction
+
+This paper concerns local existence of solutions of the semilinear heat equation
+u t − ∆u = f (u), u(0) = u 0 ≥ 0,(1)
+on the whole space R d and on smooth bounded domains Ω ⊂ R d with Dirichlet boundary conditions, when u 0 ∈ L q (Ω), 1 ≤ q < ∞, and the function f : [0, ∞) → [0, ∞) is taken to be continuous and non-decreasing. Throughout and without loss of generality we assume that Ω contains the origin.
+
+We give a complete solution to the classical problem of characterising those functions f for which (1) has a local solution bounded in L q (Ω) for all non-negative initial data in L q (Ω).
+
+Local well-posedness of (1) for smooth data falls within the scope of the standard theory of parabolic equations that goes back half a century [13]. In the early 1980s the well-posedness theory was extended by Weissler [24,25,26] to include initial data in Lebesgue spaces, with a locally Lipschitz source term f satisfying a Lipschitz bound of the form
+|f (u) − f (v)| ≤ C|u − v|(1 + |u| p−1 + |v| p−1 )(2)
+providing sufficient conditions for local existence (and uniqueness).
+
+In particular, in these papers and in much subsequent work, attention was almost exclusively focused on the canonical model with f (u) = |u| p−1 u introduced by Fujita [8]. For this particular nonlinearity, given q ∈ (1, ∞), the pioneering results of [24,25,26] along with those of Giga [10] and Brezis & Cazenave [3] identify a critical exponent p ⋆ = 1 + 2q/d such that (1) with f satisfying (2) is locally well posed in L q if and only if p ≤ p ⋆ ; for p > p ⋆ one can find initial data in L q for which there is no local solution. While for q > 1 the equation is well behaved when p = p ⋆ , for the case q = 1 Celik & Zhou [6] showed that for the critical exponent p ⋆ = 1 + 2/d there are L 1 initial data for which there is no solution (resolving a problem posed in [3]).
+
+This theory has been extended in a number of ways. One natural direction was to extend the theory towards weaker classes of data (e.g. measure-valued initial conditions), see Brezis & Friedman [5], for example. Along these lines, Baras & Pierre [2] obtained a necessary and sufficient condition on the initial condition for local existence of solutions when f is convex; we discuss their result in the context of our work here in Section 6.
+
+A second direction focuses on finite-time blowup versus global existence. In most of these analyses, the particular form of the Fujita nonlinearity f (u) = |u| p−1 u or a related convexity assumption plays a crucial role, see for example [1,4,7,8,9,12,18]. For example, the homogeneity of u p facilitates the use of similarity solutions -such scale invariance also makes transparent the role of the critical exponent, while for a general convex f one can use Jensen's inequality.
+
+However, most of these results break down if we only make the assumption that f is monotonic. In this case, in order to describe fully the conditions on f ensuring that an initial condition in L q gives rise to a local solution we need a better understanding of the delicate balance between the smoothing action of the heat flow and the converse effect of the growing source. In this paper we provide, for every q ∈ [1, ∞), a precise characterisation of those f for which the equation (1) has local solutions bounded in L q (Ω) for all non-negative initial data u 0 ∈ L q (Ω). Note that this includes the delicate case q = 1.
+
+First we show that for
+q ∈ [1, ∞), if lim sup s→∞ s −(1+2q/d) f (s) = ∞(3)
+then there exists a non-negative u 0 ∈ L q (Ω) for which equation (1) has no local solution that is bounded in L q (Ω). Since the existence of a finite limit implies that f (s) ≤ C(1 + s 1+2q/d ) for some constant C, monotonicity of solutions along with classical results for (4) yields local existence in this case for q ∈ (1, ∞). It follows that equation (1) has at least one local L q -bounded solution for every non-negative u 0 ∈ L q (Ω) if and only if lim sup
+s→∞ s −(1+2q/d) < ∞.
+The case q = 1 is more delicate. As remarked above, Celik & Zhou [6] showed that for the canonical equation
+u t − ∆u = u p(4)
+with p = p ⋆ = 1 + 2/d there is non-negative initial data in L 1 (R d ) and L 1 (Ω) for which there is no local solution. One might therefore conjecture that for q = 1 the condition in (3) can be weakened to lim sup
+s→∞ s −(1+2/d) f (s) > 0
+and still ensure non-existence for some non-negative u 0 ∈ L 1 (Ω). In fact more is true, and we show that the condition
+∞ k=1 s −(1+2/d) k f (s k ) = ∞
+for some sequence such that s k+1 ≥ θs k (θ > 1) is sufficient for such a non-existence result. In particular, if f satisfies this condition there are nonnegative data in L 1 (Ω) for which there is no solution with u(t) ∈ L 1 (Ω) for t > 0.
+
+For any particular f this condition seems awkward to check in practice, so we show that it is equivalent to the integral condition
+∞ 1 s −(1+2/d) F (s) ds = ∞, where F (s) = sup 1≤t≤s f (t) t .(5)
+Remarkably, if the integral in (5) is finite, then a version of an argument due to Sierże ֒ ga [21] guarantees local existence of an L 1 -bounded solution for every non-negative u 0 ∈ L 1 (Ω) (in fact the solution is in L ∞ (Ω) for every t > 0). As a consequence we obtain our second main result (Corollary 4.5), namely that equation (1) has at least one local L 1 -bounded solution for every non-negative u 0 ∈ L 1 (Ω) if and only if
+∞ 1 s −(1+2/d) F (s) ds < ∞, where F (s) = sup 1≤t≤s f (t) t .
+We note here that we do not treat the question of uniqueness in this paper, but concentrate solely on local existence. For this reason we do not require any Lipschitz-type assumptions on f (such as (2)).
+
+The paper is organised as follows. In Section 2 we prove some preliminary lower bounds on solutions of the heat equation for an initial condition that is the characteristic function of a ball. Section 3 contains the results for q > 1, with Section 4 treating q = 1. In Section 5 we discuss the equations posed on the whole space and on a bounded domain with Neumann boundary conditions. After considering the necessary and sufficient condition of Baras & Pierre in Section 6, we end with a brief recapitulation and discussion of open problems.
+
+
+Lower bounds on solutions of the Dirichlet heat equation
+
+An important ingredient of our arguments is the following simple lemma, which gives a lower bound on the action of the heat equation on the characteristic function of a Euclidean ball. We write B r (x) for the ball in R d of radius r centred at x, denote by χ r the characteristic function of B r := B r (0), and use ω d for the volume of the unit ball in R d .
+
+The solution of the heat equation on Ω with Dirichlet boundary conditions,
+u t − ∆u = 0, u| ∂Ω = 0, u(x, 0) = u 0 (x) ∈ L 1 (Ω)
+can be given in terms of the Dirichlet heat kernel K Ω by the expression
+u(x, t) = [S(t)u 0 ](x) := Ω K Ω (x, y; t)u 0 (y) dy.
+The proofs of the results in this section use the following lower bound on K Ω : if the line segment joining x and y is a distance at least δ from ∂Ω, then the Dirichlet heat kernel K Ω (x, y; t) is bounded below by the Gaussian heat kernel on R d ,
+K Ω (x, y; t) ≥ e −d 2 π 2 t/4δ 2 (4πt) −d/2 e −|x−y| 2 /4t for all t > 0.(6)
+(See van den Berg [23], Theorem 2 and Lemmas 8 and 9, with a simplified proof given by Laister et al. in [16].) Lemma 2.1. There exists an absolute constant c d ∈ (0, 1), which depends only on d, such that for any r > 0 for which B r+δ ⊂ Ω,
+S(t)χ r ≥ c d r r + √ t d χ r+ √ t ,(7)
+for all 0 < t ≤ δ 2 .
+
+Proof. For x such that dist(x, ∂Ω) ≥ δ, the lower bound in (6) implies that
+for 0 < t ≤ δ 2 [S(t)χ r ](x) = Br(0) K Ω (x, y; t) dy ≥ e −d 2 π 2 /4 (4πt) −d/2
+Br e −|x−y| 2 /4t dy.
+
+The latter integral is radially symmetric and decreasing with |x| and so for |x| ≤ r + √ t, choosing any unit vector u we can write
+[S(t)χ r ](x) ≥ e −d 2 π 2 /4 (4πt) −d/2 Br((r+ √ t)u) e −|z| 2 /4t dz = e −d 2 π 2 /4 π −d/2 B r/2 √ t (( 1 2 + r 2 √ t )u) e −|w| 2 dw.
+Observing that
+B r/2 √ t (( 1 2 + r 2 √ t )u) ⊆ B ρ/2 √ t (( 1 2 + ρ 2 √ t )u) if ρ ≥ r, it follows that for r/ √ t ≥ 1 we have [S(t)χ r ](x) ≥ e −d 2 π 2 /4 π −d/2 B 1/2 (u) e −|w| 2 dw =: c ′ d .
+On the other hand, if r/ √ t ≤ 1 then
+[S(t)χ r ](x) ≥ e −d 2 π 2 /4 π −d/2 r 2 √ t d e −9/4 =: c ′′ d (r/ √ t) d . So with c d = min(c ′ d , c ′′ d ) [S(t)χ r ](x) ≥ c d r max(r, √ t) d ≥ c d r r + √ t d .
+We will use this result in the form of one of the following two simple corollaries.
+
+Corollary 2.2. There exists an absolute constant α d > 0, depending only on d, such that for any r, δ > 0 for which B r+δ ⊂ Ω,
+Ω S(t)χ r dx ≥ α d r d , for all 0 < t ≤ δ 2 .
+Proof. Integrating the inequality in (7) over Ω yields
+Ω S(t)χ r dx ≥ c d r r + √ t d Ω χ r+ √ t dx = c d ω d r d .
+Corollary 2.3. There exists an absolute constant β d > 0, depending only on d, such that for any r, δ > 0 for which B r+δ ⊂ Ω,
+S(t)χ r ≥ β d χ r+ √ t ,
+for all 0 < t ≤ min(δ 2 , r 2 ).
+
+3. Initial data in L q (Ω), q ∈ (1, ∞)
+
+Given these preliminaries we can prove our first non-existence result. We take the following definition from [19] as our (essentially minimal) definition of a solution of (1). Note that any classical or mild solution is a local integral solution in the sense of this definition [19, p. 77-78]. 
+u(t) = S(t)u 0 + t 0 S(t − s)f (u(s)) ds (8) almost everywhere in Ω × [0, T ).
+We will be interested in solutions with non-negative initial data u 0 ∈ L q (Ω) that remain bounded in L q (Ω). To this end we make the following definition.
+Definition 3.2. We say that u is a local L q solution of (1) if u is a local integral solution on [0, T ) for some T > 0 and u ∈ L ∞ ((0, T ); L q (Ω)
+). If every non-negative u 0 ∈ L q (Ω) gives rise to a local L q solution then we say that (1) has the local existence property in L q (Ω).
+
+We now show that there are non-negative initial conditions in L q (Ω) for which there is no local L q solution if f satisfies the asymptotic growth condition in (9). This condition is modelled on the stronger condition lim sup s→∞ s −γ f (s) = ∞ for some γ > q(1 + 2/d), which was used by Laister et al. in [15] to construct a non-negative initial condition in L q (Ω) for which any local integral solution is not in L 1 loc (Ω) for any t > 0 small (a stronger form of non-existence than we obtain in Theorem 3.3). (A similar condition was used to analyse the problem on the whole space in [14].) Note that our result does not require lower bounds on f , e.g. we require no condition on the behaviour of lim inf
+s→∞ s −(1+2q/d) f (s),
+as in Weissler [25] (Theorem 5, Corollaries 5.1 and 5.2), nor do we require f to be continuous.
+Theorem 3.3. Let f : [0, ∞) → [0, ∞) be non-decreasing. If q ∈ [1, ∞) and lim sup s→∞ s −(1+2q/d) f (s) = ∞ (9)
+then there exists a non-negative u 0 ∈ L q (Ω) such that
+u t − ∆u = f (u), u| ∂Ω = 0, u(0) = u 0(10)
+has no local L q solution.
+
+Proof. Set p = 1 + (2q/d). It follows from (9) that we can choose a sequence φ k such that
+φ k ≥ k and f (φ k ) ≥ φ p k e k/q
+. We now construct an initial condition in L q (Ω) that is the sum of characteristic functions on a sequence of balls of decreasing radius. More precisely, set
+r k = εφ −q/d k k −2q/d ,
+and choose the initial data
+u 0 (x) = ∞ k=1 u k , u k = β −1 d φ k χ r k ,
+where β d is the constant from Corollary 2.3 and ε is chosen sufficiently small that B 2r k ⊂ Ω for every k. Noting that
+u k L q = β −1 d ε d/q k −2 it follows that u 0 L q ≤ k u k L q = β −1 d ε d/q k k −2 < ∞.
+Now, if a solution u(t) of (10) exists, then it can be written using the variation of constants formula,
+u(t) = S(t)u 0 + t 0 S(t − s)f (u(s)) ds.(11)
+Since u ≥ 0 and f ≥ 0, it is immediate that
+u(t) ≥ S(t)u 0 ≥ S(t)u k ,(12)
+for any choice of k. Choosing and fixing one k for now, we can neglect the first term in (11) and use the lower bound in (12) to obtain
+u(t) ≥ t 0 S(t − s)f (S(s)u k ) ds,(13)
+since f is non-decreasing. To aid readability, and in a slight abuse of notation, we now write χ(r) for χ r . Corollary 2.3 with δ = r k implies that
+S(s)u k = S(s)[β −1 d φ k χ(r k )] ≥ φ k χ(r k + √ t) ≥ φ k χ(r k ), 0 ≤ s ≤ r 2 k , and so f (S(s)u k ) ≥ f (φ k ) χ(r k ), 0 ≤ s ≤ r 2 k , since f is non-decreasing. Using Corollary 2.3 again S(t − s)f (S(s)u k ) ≥ β d f (φ k ) χ(r k ), 0 ≤ s ≤ t ≤ r 2 k .
+Now, using the lower bound in (13), it follows that for
+any 1 t ∈ [t k /2, t k ], where t k = r 2 k , [u(t)](x) ≥ t 0 S(t − s)f (S(s)u 0 ) ds ≥ β d r 2 k f (φ k ) χ(r k ).
+Thus
+u(t) q L q ≥ B(r k ) |u(t)| q dx ≥ c r 2q k f (φ k ) q r d k = cr d+2q k f (φ k ) q ≥ c[εφ −q/d k k −2q/d ] d+2q φ [1+(2q/d)]q k e k = ck −2q(d+2q/d) e k .
+Since the right-hand side tends to infinity as k → ∞, it follows that u is not an element of L ∞ ((0, T ); L q (Ω)) for any T > 0.
+
+We remarked above that Laister et al. [15] showed that under the stronger condition lim sup
+s→∞ s −γ f (s) = ∞, γ > q(1 + 2/d)
+there is non-negative initial data in L q (Ω) for which any local solution is not in L 1 loc (Ω) for all small t > 0. It is an interesting open question whether such strong blowup still occurs under the weaker condition in Theorem 3.3. 1 We prove a lower bound valid for t in an interval since a priori our definition of a local L q solution requires only that u(t) ∈ L q for almost every t.
+
+A combination of the blowup result of Theorem 3.3 and classical results for the Fujita equation now give our first characterisation theorem, on local existence in L q (Ω) when q > 1. 
+s→∞ s −(1+2q/d) f (s) < ∞.(14)
+Proof. It remains only to show that (10) has a local solution bounded in L q (Ω) when (14) [20]) and standard existence results for the equation [25]) to guarantee that (10) has the local L q (Ω) existence property.
+u t − ∆u = C(1 + u p ) (Corollary 3.2 in Weissler
+One could rephrase the above result in terms of the quantity
+γ ⋆ = sup{γ ≥ 0 : lim sup s→∞ s −γ f (s) = ∞}.
+With q ⋆ = d(γ ⋆ − 1)/2 equation (10) does not enjoy local existence for all non-negative initial data in L q for q < q ⋆ , but does for q > q ⋆ . In this way q ⋆ defines a 'critical exponent' for the general class of non-decreasing f we consider here. Provided that q ⋆ > 1 local existence/non-existence in the critical space L q ⋆ is determined by the behaviour of
+lim sup s→∞ s −γ ⋆ f (s).
+When q ⋆ = 1 the situation is more delicate and somewhat surprising.
+
+4. Initial data in L 1 (Ω) 4.1. A condition for non-existence of a local L 1 solution As just remarked, the behaviour of solutions for initial data in L 1 (Ω) is more delicate. Celik & Zhou [6] showed that when f (s) = s 1+2/d , there is initial data in L 1 (Ω) for which there is no local L 1 solution. This suggests that when q = 1 the requirement of Theorem 3.3 can be weakened. Indeed, the requirement that the sum in (15) diverges is clearly weaker than the asymptotic condition, lim sup
+s→∞ s −p f (s) > 0;
+blowup can even occur for certain f for which the above lim sup is zero, such as f (s) = s 1+2/d / log(e + s) β with 0 < β ≤ 1. In particular, algebraic growth f (s) = s 1+2/d is not in fact the true 'boundary' for L 1 blowup. We examine this example in a little more detail in Section 4.4.
+Theorem 4.1. Suppose that f : [0, ∞) → [0, ∞) is non-decreasing and that there exists a sequence {s k } such that s k+1 ≥ θs k , θ > 1, and ∞ k=1 s −p k f (s k ) = ∞,(15)
+where p = 1+ 2 d . Then there exists a non-negative initial condition u 0 ∈ L 1 (Ω) such that
+u t − ∆u = f (u), u| ∂Ω = 0, u(x, 0) = u 0(16)
+has no local integral solution that remains in L 1 loc (Ω) for t > 0 (so in particular no local L 1 solution exists). Note that 1/α n ≤ δ 0 and so B 1/αn+δ 0 ⊂ Ω for all n ≥ n 0 , and that
+Proof. Define φ k = c −1 d s k , and set u n (x) = 1 n 2 α d n χ(1/α n ) where α n = (n 2 φ ζn ) 1/d ,u 0 L 1 ≤ ω d ∞ n=1 n −2 < ∞.
+Arguing as in the proof of Theorem 3.3, for any choice of n we have
+Ω u(t; u 0 ) dx ≥ Ω t 0 S(t − s)f (S(s)u n ) ds dx.
+We now consider the action of the heat semigroup on the initial data v 0 = ψα d χ 1/α . It follows from Lemma 2.1 with r = 1/α and δ = δ 0 that
+S(s)v 0 ≥ c d ψ α d (1 + α 2 s) d/2 χ (1/α)+ √ s , so [S(s)v 0 ](x) ≥ c d φ k for |x| ≤ 1 α + √ s while s ≤ t k = min δ 2 0 , ψ φ k 2/d − 1 α 2 ,
+and this range is non-empty provided that φ k ≤ ψα d . Now for any 0 < t < δ 2 0 , using Corollary 2.2 we have
+Ω t 0 S(t − s)f (S(s)v 0 ) ds dx ≥ k Ω
+where the sum in k is taken over those values for which
+1 α d ≤ ψ φ k ≤ t + 1 α 2 d/2 .
+Let us consider k that satisfy this requirement and the additional constraint that φ k+1 /α d ψ ≤ 1/2. For each such k we have
+t k t k+1 s d/2 ds = 2 2 + d (t d/2+1 k − t d/2+1 k+1 ) = 2 2 + d    ψ φ k 2/d − 1 α 2 d/2+1 − ψ φ k+1 2/d − 1 α 2 d/2+1    = 2 2 + d ψ φ k 1+2/d   1 − φ k α d ψ 2/d d/2+1 − φ 1+2/d k φ 1+2/d k+1 1 − φ k+1 α d ψ 2/d d/2+1   ≥ 2 2 + d ψ φ k 1+2/d 1 − φ 1+2/d k φ 1+2/d k+1 1 − φ k+1 α d ψ 2/d d/2+1 ≥ σ ψ φ k 1+2/d ,
+using the facts that φ k+1 ≥ θφ k and φ k+1 /α d ψ ≤ 1/2. So certainly
+Ω t 0 S(t − s)f (S(s)v 0 ) ds ≥ c ′′ σ k f (c d φ k ) ψ φ k 1+2/d = c ′′′ ψ p k f (s k )s −p k ,
+where the sum is taken over
+k : 2 α d ≤ ψ φ k+1 < ψ φ k ≤ t + 1 α 2 d/2 .(17)
+For any fixed t with 0 < t < δ 2 0 , once n is sufficiently large that tn 4/d ≥ 1 the set in (17) with ψ = n −2 and α = α n = (n 2 φ ζn ) 1/d certainly contains
+{k : 1 ≤ φ k and φ k+1 ≤ 1 2 φ ζn } = {k : k 0 ≤ k ≤ k n },
+where k 0 is the smallest value of k for which φ k ≥ 1 and by choosing ζ n such that φ kn+1 ≤ 1 2 φ ζn we can achieve any desired sequence k n . (15)) we can choose k n such that
+Since ∞ k=1 f (s k )s −p k = ∞ (byn −2p kn k=k 0 f (s k )s −p k diverges as n → ∞.
+We note that if we assume in addition that f (s) ≥ cs for some c > 0, then under the conditions in Theorem 4.1 there is in fact no local integral solution of (16). This is particularly interesting since any non-decreasing convex function (such as those considered by Baras  Therefore u = ∞ on B × [τ /2, τ ], contradicting the requirement that u is finite almost everywhere on Ω × [0, T ).
+
+
+An equivalent integral condition for blowup
+
+Since the condition in (15) is potentially awkward to check in practice, we now formulate an equivalent integral condition. Note that when f (s)/s is non-decreasing, the integral condition in (ii) of the lemma below becomes the more conventional  (ii)
+∞ 1 s −p F (s) ds = ∞, where F (s) = sup 1≤t≤s f (t) t .
+Proof. First we show that (i) implies (ii). We can augment the sequence {s k } to a new sequence σ k such that
+∞ k=0 σ −p k f (σ k ) = ∞ and in addition 1 < θ ≤ σ k+1 σ k ≤ θ p−1 ,
+by including points θ j s k until s k+1 ≤ θ j+p−1 s k .
+
+Setting σ 0 = 1 we can write
+∞ 1 s −p F (s) ds = ∞ k=0 σ k+1 σ k s −p F (s) ≥ ∞ k=0 σ k+1 σ k s −p F (σ k ) ds ≥ 1 p − 1 ∞ k=0 (σ −(p−1) k − σ −(p−1) k+1 ) f (σ k ) σ k+1 = 1 p − 1 ∞ k=0 σ −p k f (σ k ) σ k σ k+1 − σ p k σ p k+1 ≥ θ − 1 θ p (p − 1) ∞ k=0 σ −p k f (σ k ),
+from which (ii) follows. We now show that (ii) implies (i). Choose θ > 1 and for k = 0, 1, 2, . . . let σ k = θ k ; note that F (s) ≤ F (σ n+1 ) for all s ∈ (σ n , σ n+1 ]. There exists a sequence {n k } with n k ≤ k and n k+1 ≥ n k such that F (σ n+1 ) = f (τ n )/τ n for some τ n ∈ (σ kn , σ k n+1 ]. Thus
+F (s) ≤ f (σ k n+1 ) σ kn for all s ∈ (σ n , σ n+1 ]. Therefore ∞ 1 s −p F (s) ds = ∞ n=1 σ n+1 σn s −p F (s) ds ≤ ∞ n=1 f (σ k n+1 ) σ kn σ n+1 σn s −p ds. Now observe that for any n ≥ m ∞ σn s −p ds σ m+1 σm s −p ds = σ 1−p n σ 1−p m − σ 1−p m+1 = θ −(n−m)(p−1) 1 1 − θ 1−p ≤ Θ := 1 1 − θ 1−p .
+This allows us to sum over distinct values of k n : observe that there is an increasing sequence n j such that k n j = k n < k n j+1 for k = n j , . . . , n j+1 ,
+and so ∞ n=1 f (σ k n+1 ) σ kn σ n+1 σn s −p ds = j f (σ k n j +1 ) σ kn j σ kn j+1 σ kn j s −p ds = Θ ′ ∞ n=1 f (σ kn+1 ) σ kn σ 1−p kn − σ 1−p k n+1 = Θ ′ ∞ n=1 σ −p k n+1 f (σ kn+1 ) σ 1−p kn − σ 1−p k n+1 σ p k n+1 σ kn = Θ ′ ∞ n=1 σ −p k n+1 f (σ k n+1 )(θ p − θ).
+Taking s n = σ k n+1 yields (i).
+
+
+An integral condition for local existence
+
+We now show that the integral condition in (ii) of Lemma 4.2 is sufficient for the L 1 local existence property. We will use the following theorem from Robinson & Sierże ֒ ga [20] (Theorem 1, after Weissler [26]) which guarantees the existence of a solution u(t) of (1) given the existence of a supersolution v(t), i.e. a function satisfying (18). For later use we remark that Ω = R d , with S(t) denoting the action of the heat semigroup (defined by convolution with the Gaussian kernel) is an admissible choice in Theorem 4.3 (see discussion in the 'Final comments' in [20]). 
+S(t)u 0 + t 0 S(t − s)f (v(s)) ds ≤ v(t) for all t ∈ [0, T ](18)
+then there exists a local integral solution u of (1) on
+[0, T ] with u(x, t) ≤ v(x, t) for all x ∈ Ω and t ∈ [0, T ].
+This theorem is proved by constructing a sequence of supersolutions v n (t) defined by setting v 0 (t) = v(t) and
+v n+1 (t) = F (v n ) := S(t)u 0 + t 0 S(t − s)f (v n (s)) ds.
+Such a sequence is monotonically decreasing, is bounded below by S(t)u 0 , and hence has a pointwise limit u(t) which can be shown to satisfy
+S(t)u 0 + t 0 S(t − s)f (u(s)) ds = u(t)
+for all t ∈ [0, T ] using the Monotone Convergence Theorem. Using this result we prove a local existence theorem; the argument is adapted from the proof of Proposition 7.2 in Sierże ֒ ga [21]. Note that our standing assumption that Ω is bounded is an important ingredient in the proof, since we require χ Ω ∈ L 1 (Ω).
+Theorem 4.4. If f : [0, ∞) → [0, ∞) is continuous, non-decreasing, and ∞ 1 s −(1+2/d) F (s) ds < ∞, where F (s) = sup 1≤t≤s f (t) t (19)
+then for every non-negative u 0 ∈ L 1 (Ω) there exist a T > 0 such that (10) has a solution
+u ∈ L ∞ loc ((0, T ); L ∞ (Ω)) ∩ C 0 ([0, T ]; L 1 (Ω)).
+In particular, (10) has the local L 1 existence property.
+
+Proof. If u 0 = 0 then v(t) ≡ χ Ω is a supersolution, since 
+S(t)u 0 + t 0 S(t − s)f (S(s)χ Ω ) ds ≤ t 0 S(t − s){f (1)χ Ω } ≤ tf (1)χ Ω ≤ χu t − ∆u =f (u)(20)
+is also a supersolution for (10), and therefore to show that (10) has a solution it suffices to find a supersolution for (20). Rewritten in terms off , the integral condition in (19) becomes
+∞ 1 s −(2+2/d)f (s) ds < ∞,
+and after the substitution s = τ −d/2 we obtain
+1 0 τ d/2f (τ −d/2 ) dτ < ∞.
+We now show that for any A > 1, v(t) = AS(t)u 0 + χ Ω is a supersolution of (20) on some suitable time interval, i.e. satisfies the condition (18) in Theorem 4.3. In order to do this, first recall the smoothing estimate
+S(t)u 0 L ∞ ≤ ct −d/2 u 0 L 1 .
+We therefore obtain
+S(t)u 0 + t 0 S(t − s)f (v(s)) ds = S(t)u 0 + t 0 S(t − s)f (AS(s)u 0 + 1) ds = S(t)u 0 + t 0 S(t − s) f (AS(s)u 0 + 1) AS(s)u 0 + 1 (AS(s)u 0 + 1) ds ≤ S(t)u 0 + t 0 S(t − s) f (AS(s)u 0 + 1) AS(s)u 0 + 1 L ∞ (AS(s)u 0 + 1) ds.
+Since the L ∞ norm is a scalar constant and S(t − s) is linear, it follows that
+F (v)(t) ≤ S(t)u 0 + t 0 f (AS(s)u 0 + 1) AS(s)u 0 + 1 L ∞ ds [S(t)u 0 + χ Ω ],
+as S(t)χ Ω ≤ χ Ω for all t > 0. Now, using the fact thatf (s)/s is nondecreasing for s ≥ 1,
+F (v)(t) ≤ S(t)u 0 + t 0f ( AS(s)u 0 + 1 L ∞ ) AS(s)u 0 + 1 L ∞ ds [AS(t)u 0 + χ Ω ] ≤ S(t)u 0 + t 0f (2Acs −d/2 u 0 L 1 ) 2Acs −d/2 u 0 L 1 ds [AS(t)u 0 + χ Ω ],
+for s sufficiently small, since
+AS(s)u 0 +1 L ∞ = AS(s)u 0 L ∞ +1 ≤ Acs −d/2 u 0 L 1 +1 ≤ 2Acs −d/2 u 0 L 1
+for s sufficiently small.
+
+Therefore F (v)(t) is bounded above by
+S(t)u 0 +(2Ac u 0 L 1 ) 2/d t(2Ac u 0 L 1 ) −2/d 0 τ d/2f (τ −d/2 ) dτ [AS(t)u 0 + χ Ω ] ≤ AS(t)u 0 + χ Ω ,
+provided that t is sufficiently small. Local existence of a solution u(t) with u(t) ≤ v(t) = 2S(t)u 0 + χ Ω now follows from Theorem 4.3. That u(t) is bounded in L 1 (Ω) now follows from Theorem 4.3. It follows that u ∈ L ∞ loc ((0, T ); L ∞ (Ω)), i.e. is a classical solution. Then from the integral condition on f , f (u) ∈ L 1 ((0, T ); L 1 (Ω)), whence from (8) it follows that u ∈ C 0 ([0, T ]; L 1 (Ω)).
+
+We have therefore obtained the following characterisation of those f for which there is local existence in L 1 (Ω).  We note that one can apply the 'local existence' part of this characterisation (i.e. Theorem 4.4) to a nonlinearity g that is not non-decreasing by finding a non-decreasing function f (s) such that g(s) ≤ f (s), applying Theorem 4.4 and then deducing local existence by comparison. The example of the following section provides an example of this along with an illustration of the application of Corollary 4.5. (ii) if 1 < β ≤ λp then (1) does have the L 1 local existence property;
+
+and since although when β > λp the function f (s) is not monotone, it is bounded above by the monotone s p / log(e + s) λp , which provides a supersolution and hence (iii) if β > λp then (1) does have the L 1 local existence property;
+
+Within this family the function f (s) = s p / log(e + s) lies on the 'boundary'. Obviously one could refine this with the addition of an arbitrary number of repeated logarithms.
+
+
+Results for the whole space and for Neumann boundary conditions
+
+It is worth remarking that since they rely only on Gaussian lower bounds for the Dirichlet heat kernel, the non-existence results of Theorems 3.3 and 4.1 are valid with essentially the same proofs for the equations posed on the whole space R d . They are also valid for Neumann boundary conditions ( ∂u ∂n = 0 on ∂Ω), since
+K Ω N (x, y; t) ≥ K Ω D (x, y; t), x, y ∈ Ω, t > 0,
+where Ω N and Ω D denote the Neumann and Dirichlet heat kernels, respectively (the proof follows by comparison, or one can use probabilistic methods, see Corollary 2.5 in [22], for example). However, local existence results on the whole space require some additional assumptions. It is easy to see that if f (0) = 0 then any nonnegative initial condition gives rise to a solution that is not in L q (R d ) for any q ∈ [1, ∞). Indeed, since then u(t) ≥ 0 for all t ≥ 0 we have
+u(t) ≥ t 0 S(t − s)f (u(s)) ds ≥ t 0 S(t − s)f (0) ds = tf (0) / ∈ L q (R d ).
+We also require a 'bounded derivative at zero' condition, namely
+lim sup s→0 f (s) s < ∞.(21)
+Without this condition we can find a non-negative u 0 ∈ L q (R d ) for which the solution is not bounded in L q (R d ) for all t > 0. Indeed, if (21) does not hold then there exist s n → 0 such that s n ≤ n −2 and f (s n ) ≥ n 2 s n . Consider initial data
+u 0 = ∞ n=1 c −1 d s n χ n −2/d s −q/d n (x n )
+where the x n are chosen such that B(x n , n −2/d s
+−q/d n ) are disjoint. Note that u 0 L q < ∞ and that n −2/d s −q/d n ≥ 1. Then S(s)u 0 ≥ ∞ n=n 0 s n χ n −2/d s −q/d n (x n )
+for all s ≤ 1. So for t ≤ 1 we have
+u(x, t) ≥ t 0 ∞ n=1 S(t − s)n 2 s n χ n −2/d s −q/d n (x n ) ds ≥ t 0 ∞ n=1 c d n 2 s n χ n −2/d s −q/d n (x n ) ds = tc d ∞ n=1 n 2 s n χ n −2/d s −q/d n (x n ) and so R d |u(x, t)| q dx ≥ (tc d ) q ∞ n=1 n 2q s q n n −2 s −q n = tc d ∞ n=1 n 2(q−1) = ∞. Now, for q > 1 if we have, with p = 1 + 2q/d, lim sup s→∞ s −p f (s) < ∞ and lim sup s→0 f (s) s < ∞ then f (s) ≤ C(s + s p )
+for some C > 0. For f (s) = C(s+s p ) we can guarantee the local L q existence property on R d as follows. First, results guaranteeing the L q local existence property on the whole space when f (s) = 2Cs p can be found in Weissler [24,25] (the analysis there is valid on the whole space), Theorem 1 in Giga [10], or Robinson & Sierże ֒ ga [20] (see 'Final comments'). So given a nonnegative u 0 ∈ L q (R d ), let u(t) be the local L q solution obtained in this way. Now define v(t) = e 2Ct u(t).
+
+Then
+v t − ∆v = 2Ce 2Ct u + e 2Ct (u t − ∆u) = 2Ce 2Ct u + e 2Ct 2Cu p = 2C(v + (e 2Ct ) 1−p v p ) ≥ C(v + v p )
+provided that (e 2Ct ) 1−p ≥ 1/2. This is legitimate since v is a strong, classical solution for t > 0. It then follows easily that v is a supersolution in the integral sense of  using the definition of f * in (22) and S * in (23). A necessary condition for the existence of a local integral solution is there-
+fore 2 that T 0 Ω [S(t)u 0 ](x)h(x, t) dx dt ≤ T 0 Ω [S * (t)h](x)f * h(x, t) [S * (t)h](x)
+dx dt (24) for every non-negative h ∈ L ∞ ((0, T ) × Ω). The main result in the paper of Baras & Pierre is that this condition is also sufficient.
+
+In Section III.2 they show how this result applies to the Fujita equation. Noting that when f (s) = s p we have f * (s) = s p ′ where 1/p + 1/p ′ = 1, they use appropriate smoothing estimate on solutions of the heat equation to recover the classical critical exponent (their Corollary 3.4).
+
+As remarked at the end of Section 4.1, convex non-decreasing functions f satisfy the condition f (s) ≥ Cs for some C > 0, and so the argument of Theorem 4.1 in fact shows that there is no local integral solution of the equation for at least some non-negative L 1 data when the summation condition (15) holds. It should therefore be possible to obtain our necessary and sufficient condition for the L 1 existence property for L 1 data (15) from (24) when f is convex, but we think that the straightforward nature of our argument and its wider applicability is a major strength, and we have not attempted this analysis.
+
+However, note that unlike our condition which considers local existence for all initial data in L 1 (Ω), the finer analysis of Baras & Pierre is able to consider rougher initial data and is valid choice-by-choice for every u 0 (x).
+
+
+Concluding remarks
+
+We have completely characterised those non-negative, non-decreasing, continuous functions f for which the equation We have also given results for the equations on the whole space R d and for the Neumann problem on a bounded domain. The non-existence parts of our arguments are perhaps the most novel, using lower bounds on the Dirichlet heat kernel due to van den Berg [22,23] to give lower bounds on solutions of the heat equation with characteristic functions as initial data, and hence lower bounds on solutions of the semilinear problem. The L 1 case behaves very differently from the problem in spaces with higher integrability, with the appearance of the upper bound sF (s) = s sup 1≤t≤s [f (t)/t] in both the blowup and existence criteria something of a surprise.
+
+An open question left by our L q -based analysis is whether we have 'strong blowup', u(t) / ∈ L q for all t > 0, when q > 1 and lim sup s→∞ s −γ f (s) = ∞, γ ∈ [1 + 2q/d, q(1 + 2/d)], or whether there is a true transition from such strong blowup (obtained in [15] for γ > q(1 + 2/d) to only the unbounded behaviour lim sup t→0 u(t) L q (obtained here in Theorem 3.3 when γ = 1 + 2q/d). A related question is whether it is possible to exclude the existence of local integral solutions for a wider class of f than we do in the discussion at the end of Section 4.1 (we currently require f (s) ≥ Cs for some C > 0). It would be interesting to attempt to prove similar characterisation results in other scales of spaces, such as Sobolev spaces or Besov spaces. These would require different techniques, given that our current arguments do not take into account the smoothness of solutions but only their integrability.
+
+Seeking generalisation in a different direction, one could ask whether there is a way of identifying the critical Lebesgue space for the more general class of positive but not necessarily monotone f , or even for general f with signchanging initial data.
+
+Finally, we note that we have not attempted here to consider the problem of uniqueness. For the nonlinearity f (u) = |u| p−1 u Ni & Sacks [18] proved non-uniqueness for the critical value of p (Theorem 3); see also Matos & Terraneo [17] and Haraux & Weissler [11]. It would be interesting to see whether it is possible to obtain an exact characterisation of those f that admit unique solutions, perhaps based on asymptotic conditions generalising (2) in the way that our conditions for local existence generalise the growth rates of the canonical example f (u) = |u| p−1 u.
+
+Email addresses :
+addressesRobert.Laister@uwe.ac.uk (R. Laister), J.C.Robinson@warwick.ac.uk (J.C. Robinson), M.L.Sierzega@warwick.ac.uk (M. Sierże ֒ ga), Alejandro.Vidal@xjtlu.edu.cn (A. Vidal-López)
+
+Definition 3 . 1 .
+31Given f : [0, ∞) → [0, ∞) and u 0 ≥ 0 we say that u is a local integral solution of (1) on [0, T ) if u : Ω×[0, T ) → [0, ∞] is measurable, finite almost everywhere, and satisfies
+
+Theorem 3. 4 .
+4Let f : [0, ∞) → [0, ∞) be non-decreasing and continuous. If q ∈ (1, ∞) then (10) has the local existence property in L q (Ω) if and only if lim sup
+
+K
+& Pierre[2]) will satisfy this condition.Suppose that there is a local integral solution u :Ω × [0, T ) → [0, ∞).Then by Definition 3.1, u is finite almost everywhere on Ω × [0, T ). Since all our estimates are performed within B δ 0 , we have in fact shown that there is a ball B ⊂ Ω and a time δ 2 0 > 0 such that B u(y, s) dy = ∞ for all s ∈ (0, δ 2 0 ). Now fix τ = min(T, δ 2 0 ) and choose any (x, t) ∈ B × [τ /2, τ ]. Since u satisfies (x, y; t − s)u(y, s) dy ds, using the assumption that f (s) ≥ cs. For s ∈ [0, τ /4] and t ∈ [τ /2, τ ] we have t − s ∈ [τ /4, τ ]. By the continuity and positivity of K there exists κ > 0 such that K(x, y; σ) ≥ κ for all (x, y, σ) ∈ B × B × [τ /4, τ ],
+
+∞ 1 s
+1−(1+p) f (s) ds = ∞.
+
+Lemma 4 . 2 .
+42Suppose that f : [0, ∞) → [0, ∞) is non-decreasing and p > 1. Then the following two conditions are equivalent. (i) There exists a sequence {s k } such that s k+1 ≥ θs k , θ > 1 and ∞ k=1 s −p k f (s k ) = ∞.
+
+Theorem 4 . 3 .
+43Take u 0 ≥ 0. If f : [0, ∞) → [0, ∞) is continuous and non-decreasing and there exists a v ∈ L 1 ((0, T ) × Ω) such that
+
+
+Ω for all t sufficiently small. To treat u 0 = 0, definef (s) = f (s) for s ∈ [0, 1] andf (s) = sF (s) for s > 1. Then f (s) ≤f (s) andf (s)/s : [1, ∞) → [0, ∞) is non-decreasing. In particular, any supersolution for the equation
+
+Corollary 4 . 5 .
+45If f : [0, ∞) → [0, ∞) is continuous and non-decreasing then (10) has the local L 1 existence property if and only if
+
+4. 4 .
+4An example: f (s) = s 1+2/d / log(e + s) β We mentioned before the proof of Theorem 4.1 that the family of nonlinearities f (s) = s p log(e + s) β , p = 1 + 2/d, β ≥ 0, provides an interesting set of examples, particularly in the light of the (erroneous) expectation that f (s) = s 1+2/d lies on the 'boundary' between those functions for which (1) does and does not have the local L 1 existence property. Strictly, such a function f only falls within the scope of our results when it is non-decreasing, which occurs if and only if β ≤ λp, where λ ≃ 3.15 is the largest positive root of the equation e x = e 2 x. It follows from Corollary 4.5 that (i) if 0 ≤ β ≤ 1 then (1) does not have the L 1 local existence property;
+
+[
+Theorem 4.3 on some small time interval. The existence of such a supersolution, which is bounded in L q (R d ), then implies the existence of a solution bounded in L q (R d ) using Theorem 4.3.For q = 1 local existence follows from the arguments in Theorem 4.that if u 0 ≥ 0 and is non-zero then S(t)u 0 > 0 for all t > 0 (this follows immediately from the expression for S(t)u 0 in terms of the Gaussian kernel). (If u 0 = 0 then obviously u(t) = 0 is a solution since f (0) = 0 by the limsup condition at s = 0.)We summarise formally in the following theorem.Theorem 5.1. Let f : [0, ∞) → [0, ∞) be continuous and non-decreasing and let Ω = R d . Then (i) for q ∈ (1, ∞) equation (1) has the local L q existence property if and The necessary and sufficient condition of Baras & Pierre Baras & Pierre [2] considered the same equation u t − ∆u = f (u) but with f : [0, ∞) → [0, ∞) with f (0) = 0 and f convex, with a general initial condition u 0 ∈ L 1 loc (Ω). They defined f * (r) = sup α∈R rα − f (α) (22) and found a necessary and sufficient condition for the existence of a local integral solution in the same sense as our Definition 3.1. It is relatively straightforward to derive their necessary condition, which we do here, although we do not recapitulate their sufficiency argument. Suppose that u is a local integral solution on [0, T ) in the sense of Definition 3.1, i.e. u(t) = S(t)u 0 + t 0 S(t − s)f (u(s)) ds. Multiplying this equality by an arbitrary positive L ∞ function h(x, t) S(t − s)f (u(s))](x)h(x, t) ds dx dt. Now given any h ≥ 0 in L ∞ (Ω × (0, T )), define [S * (s)h](y) =
+
+
+u t − ∆u = f (u), u| ∂Ω = 0, u(0) = u 0 ∈ L q (Ω), u 0 ≥ 0,has at least one local solution that is bounded in L q (Ω). For 1 < q < ∞ this occurs if and only if lim sup s→∞ s −(1+2q/d) f (s) < ∞, while for q = 1 this occurs if and only if
+
+
+holds. In this case it follows that there exists a constant C such that f (s) ≤ C(1 + s p ), where p = 1 + 2q/d, and now one can use comparison (Theorem 1 in Robinson & Sierże ֒ ga
+t k t k+1 S(t − s)f (S(s)v 0 ) ds dx = k t k t k+1 Ω S(t − s)f (S(s)v 0 ) dx ds ≥ c ′ k f (c d φ k ) t k t k+1 Ω S(t − s)χ α −1 + √ s dx ds ≥ α d c ′ k f (c d φ k ) t k t k+1 1 α + √ s d ds ≥ c ′′ k f (c d φ k ) t k t k+1 s d/2 ds,
+We have presented a simplified version of their argument, following their treatment of elliptic problems. One can rewrite(24) by observing that if −ξ t − ∆ξ = h with ξ(0, T ) = 0 then ξ = S * (t)h, and then requiring(24) to hold for an appropriate class of ξ.
+AcknowledgmentsJCR is supported by an EPSRC Leadership Fellowship EP/G007470/1. The work of MS was supported by an EPSRC Platform Grant EP/I019138/1, and also by EP/G007470/1. The work leading to this paper was begun during a visit to the University of Zurich by JCR as a guest of Michel Chipot, and JCR would like to thank Michel for his hospitality. The final version profited greatly from visits to Warwick by RL and AVL, funded by EP/G007470/1.
+Complete blow-up after T max for the solution of a semilinear heat equation. P Baras, L Cohen, J. Funct. Anal. 71P. Baras and L. Cohen. Complete blow-up after T max for the solution of a semilinear heat equation. J. Funct. Anal., 71 (1987), 142-174.
+
+Critère d'existence de solutions positives pour deséquations semi-linéaires non monotones. P Baras, M Pierre, Ann. Inst. H. Poincaré Anal. Non Linéaire. 2P. Baras and M. Pierre. Critère d'existence de solutions positives pour deséquations semi-linéaires non monotones. Ann. Inst. H. Poincaré Anal. Non Linéaire, 2 (1985), 185-212.
+
+A nonlinear heat equation with singular initial data. H Brezis, T Cazenave, J. Anal. Math. 68H. Brezis and T. Cazenave. A nonlinear heat equation with singular initial data. J. Anal. Math., 68 (1996), 277-304.
+
+Blow up for u t − ∆u = g(u) revisited. H Brezis, T Cazenave, Y Martel, A Ramiandrisoa, Adv. Diff. Eqns. 1H. Brezis, T. Cazenave, Y. Martel, and A. Ramiandrisoa. Blow up for u t − ∆u = g(u) revisited. Adv. Diff. Eqns., 1 (1996), 73-90.
+
+Nonlinear parabolic equations involving measures as initial conditions. H Brezis, A Friedman, J. Math. Pures Appl. 62H. Brezis and A. Friedman. Nonlinear parabolic equations involving measures as initial conditions. J. Math. Pures Appl., 62 (1983), 73-97.
+
+No local L 1 solution for a nonlinear heat equation. C Celik, Z Zhou, Comm. Partial Differential Equations. 28C. Celik and Z. Zhou. No local L 1 solution for a nonlinear heat equation. Comm. Partial Differential Equations, 28 (2003), 1807-1831.
+
+Blow-up of positive solutions of semilinear heat equations. A Friedman, B Mcleod, Indiana Univ. Math. J. 34A. Friedman and B. McLeod. Blow-up of positive solutions of semilinear heat equations. Indiana Univ. Math. J., 34 (1985), 425-447.
+
+On the blowing up of solutions of the Cauchy problem for u t = ∆u + u 1+α. H Fujita, J. Fac. Sci. Univ. Tokyo Sect. I. 13H. Fujita. On the blowing up of solutions of the Cauchy problem for u t = ∆u + u 1+α . J. Fac. Sci. Univ. Tokyo Sect. I, 13 (1966), 109-124,.
+
+The problem of blow-up in nonlinear parabolic equations. Discrete and Continuous Dynamical Systems. V Galaktionov, J L Vázquez, 8V. Galaktionov and J.L. Vázquez. The problem of blow-up in nonlinear parabolic equations. Discrete and Continuous Dynamical Systems, 8 (2002), 399-433.
+
+Solutions for semilinear parabolic equations in L p and regularity of weak solutions of the Navier-Stokes system. Y Giga, J. Differential Equations. 62Y. Giga. Solutions for semilinear parabolic equations in L p and reg- ularity of weak solutions of the Navier-Stokes system. J. Differential Equations, 62 (1986), 186-212.
+
+Non-uniqueness for a semilinear initial value problem. A Haraux, F B Weissler, Indiana University Math. J. 31A. Haraux and F.B. Weissler. Non-uniqueness for a semilinear initial value problem. Indiana University Math. J., 31 (1982), 167-189.
+
+On the growth of solutions of quasi-linear parabolic equations. S Kaplan, Comm. Pure Appl. Math. 16S. Kaplan. On the growth of solutions of quasi-linear parabolic equa- tions. Comm. Pure Appl. Math. 16 (1963), 305-330.
+
+Linear and quasilinear equations of parabolic type. O A Ladyzhenskaja, V A Solonnikov, N N Uralceva, Translations of Mathematical Monographs. 23American Mathematical SocietyO.A. Ladyzhenskaja, V.A. Solonnikov, and N.N. Uralceva. Linear and quasilinear equations of parabolic type. Translations of Mathematical Monographs, Vol. 23 American Mathematical Society, Providence, R.I., 1968.
+
+Non-existence of local solutions for semilinear heat equations of Osgood type. R Laister, J C Robinson, M Sierże, Ga, J. Differ. Equ. 255R. Laister, J.C. Robinson and M. Sierże ֒ ga. Non-existence of local solu- tions for semilinear heat equations of Osgood type. J. Differ. Equ. 255 (2013), 3020-3028.
+
+Non-existence of local solutions for semilinear heat equations of Osgood type in bounded domains. R Laister, J C Robinson, M Sierże, Ga, 10.1016/j.crma.2014.05.010Comptes Rendus Acad. to appearR. Laister, J.C. Robinson and M. Sierże ֒ ga. Non-existence of local solutions for semilinear heat equations of Osgood type in bounded domains. Comptes Rendus Acad. Paris I, to appear. DOI: 10.1016/j.crma.2014.05.010.
+
+R Laister, J C Robinson, M Sierże, Ga, arXiv:1307.6688A Gaussian lower bound on the Dirichlet heat kernel. Submitted. R. Laister, J.C. Robinson and M. Sierże ֒ ga. A Gaussian lower bound on the Dirichlet heat kernel. Submitted. arXiv:1307.6688.
+
+Nonuniqueness for a critical nonlinear heat equation with any initial data. J Matos, E Terraneo, Nonlinear Analysis. 55J. Matos and E. Terraneo. Nonuniqueness for a critical nonlinear heat equation with any initial data. Nonlinear Analysis, 55 (2003), 927-936.
+
+Singular behavior in nonlinear parabolic equations. W-M Ni, P Sacks, Trans. Amer. Math. Soc. 287W-M. Ni and P. Sacks. Singular behavior in nonlinear parabolic equa- tions. Trans. Amer. Math. Soc., 287 (1985), 657-671.
+
+Superlinear Parabolic Problems. Blow-up, Global Existence and Steady States. P Quittner, P Souplet, Birkauser Advanced Texts. P. Quittner and P. Souplet. Superlinear Parabolic Problems. Blow-up, Global Existence and Steady States. Birkauser Advanced Texts, Basel, 2007.
+
+Supersolutions for a class of semilinear heat equations. J C Robinson, M Sierże, Ga, Rev. Mat. Complut. 26J.C. Robinson and M. Sierże ֒ ga. Supersolutions for a class of semilinear heat equations. Rev. Mat. Complut., 26 (2013), 341-360.
+
+Topics in the theory of semilinear heat equations. M Sierże, Ga, University of WarwickPh.D. ThesisM. Sierże ֒ ga. Topics in the theory of semilinear heat equations. Ph.D. Thesis, University of Warwick, 2012.
+
+Heat equation and the principle of not feeling the boundary. M Van Den, Berg, Proc. Roy. Soc. Edinburgh A. 112M. van den Berg. Heat equation and the principle of not feeling the boundary. Proc. Roy. Soc. Edinburgh A, 112 (1989), 257-262.
+
+Gaussian bounds for the Dirichlet heat kernel. M Van Den, Berg, J. Funct. Anal. 88M. van den Berg. Gaussian bounds for the Dirichlet heat kernel. J. Funct. Anal., 88 (1990), 267-278.
+
+Semilinear evolution equations in Banach spaces. F B Weissler, J. Funct. Anal. 32F.B. Weissler. Semilinear evolution equations in Banach spaces. J. Funct. Anal., 32 (1979), 277-296.
+
+Local existence and nonexistence for semilinear parabolic equations in L p. F B Weissler, Indiana Univ. Math. J. 29F.B. Weissler. Local existence and nonexistence for semilinear parabolic equations in L p . Indiana Univ. Math. J., 29 (1980), 79-102.
+
+Existence and nonexistence of global solutions for a semilinear heat equation. F B Weissler, Israel J. Math. 38F.B. Weissler. Existence and nonexistence of global solutions for a semi- linear heat equation. Israel J. Math., 38 (1981), 29-40.
