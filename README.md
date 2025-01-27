@@ -16,30 +16,30 @@ The dataset maintains parallel structures for both training and validation sets,
 dataset/
 ├── train/
 │   ├── Annotations/
-│   │   ├── file1__annotations.json
-│   │   ├── file2__annotations.json
+│   │   ├── file1_annotations.json
+│   │   ├── file2_annotations.json
 │   │   └── ...
 │   └── Texts/
-│   │   ├── file1__original.txt
-│   │   ├── file2__original.txt
+│   │   ├── file1_original.txt
+│   │   ├── file2_original.txt
 │   │   └── ...
 │   └── PDF-Links/
-│       ├── file1__link.txt
-│       ├── file2__link.txt
+│       ├── file1_link.txt
+│       ├── file2_link.txt
 │       └── ...
 │
 └── val/
     ├── Annotations/
-    │   ├── file1__annotations.json
-    │   ├── file2__annotations.json
+    │   ├── file1_annotations.json
+    │   ├── file2_annotations.json
     │   └── ...
     └── Texts/
-    │   ├── file1__original.txt
-    │   ├── file2__original.txt
+    │   ├── file1_original.txt
+    │   ├── file2_original.txt
     │   └── ...
     └── PDF-Links/
-        ├── file1__link.txt
-        ├── file2__link.txt
+        ├── file1_link.txt
+        ├── file2_link.txt
         └── ...
 ```
 
@@ -48,7 +48,7 @@ dataset/
 ### Annotation Files
 Located in the `Annotations` directory, these files contain metadata and positional information:
 * **Location**: `train/Annotations/` or `val/Annotations/`
-* **Naming Convention**: `<filename>__annotations.json`
+* **Naming Convention**: `<filename>_annotations.json`
 * **Content**: JSON-formatted metadata including:
   * Document attributes (Title, Author, etc.)
   * Character/token position mappings
@@ -56,14 +56,14 @@ Located in the `Annotations` directory, these files contain metadata and positio
 ### Text Files
 Contains the extracted document content:
 * **Location**: `train/Texts/` or `val/Texts/`
-* **Naming Convention**: `<filename>__original.txt`
+* **Naming Convention**: `<filename>_original.txt`
 * **Content**: Plain text extracted from source PDF documents
 * **Note**: Original PDF documents are excluded due to copyright restrictions
 
 ### Link Files
 Provides references to source documents:
 * **Location**: Adjacent to corresponding text files
-* **Naming Convention**: `<filename>__link.txt`
+* **Naming Convention**: `<filename>_link.txt`
 * **Content**: URL or reference information for accessing the original PDF document
 
 
