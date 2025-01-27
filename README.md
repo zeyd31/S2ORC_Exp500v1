@@ -46,9 +46,8 @@ Located in the `Annotations` directory, these files contain metadata and positio
 * **Location**: `train/Annotations/` or `val/Annotations/`
 * **Naming Convention**: `<filename>__annotations.json`
 * **Content**: JSON-formatted metadata including:
-  * Document attributes (Title, Author)
+  * Document attributes (Title, Author, etc.)
   * Character/token position mappings
-  * Additional metadata annotations
 
 ### Text Files
 Contains the extracted document content:
@@ -62,7 +61,6 @@ Provides references to source documents:
 * **Location**: Adjacent to corresponding text files
 * **Naming Convention**: `<filename>__link.txt`
 * **Content**: URL or reference information for accessing the original PDF document
-* **Purpose**: Enables retrieval of source materials while maintaining copyright compliance
 
 
 # Purpose
