@@ -77,9 +77,9 @@ Participants can access the S2ORC_Enhanced500v1 dataset by closing this reposito
 
 
 # Evaluation and Ranking
-The evaluation of the results will focus on the extraction of attribute values, irrespective of their position in the document. This is particularly important for attributes such as title, which may appear in multiple places within a document.
+The evaluation of the results will focus on the extraction of attribute values, irrespective of their position in the document. This is particularly important for attributes, which may appear in multiple places within a document such as *title*.
 
-The primary goal is to ensure accurate extraction of the attribute values, regardless of their location. Therefore, the positions of the attributes will not be considered during evaluation.
+The primary goal is to ensure accurate extraction of the attribute values, regardless of their location. Therefore, the positions of the attributes **will not** be considered during evaluation.
 
 The ranking of participants will be based on the `F1 score`, which provides a balanced measure of precision and recall.
 
