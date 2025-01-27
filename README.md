@@ -16,10 +16,11 @@ The dataset is organized into separate folders for training and validation. Each
 3. An optional link file pointing to the original PDF document (not included in the dataset for copyright reasons).
 
 Below is an example structure:
-
+```
 train/ ├── Annotations │ ├── file1__annotations.json │ ├── file2__annotations.json │ └── ... └── Texts ├── file1__original.txt ├── file1__link.txt ├── file2__original.txt ├── file2__link.txt └── ...
 
 val/ ├── Annotations │ ├── file1__annotations.json │ ├── file2__annotations.json │ └── ... └── Texts ├── file1__original.txt ├── file1__link.txt ├── file2__original.txt ├── file2__link.txt └── ...
+```
 
 ## Annotation Files
 - Located under `train/Annotations/` and `val/Annotations/`.
