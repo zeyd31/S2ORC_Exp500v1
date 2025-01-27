@@ -84,7 +84,7 @@ The primary goal is to ensure accurate extraction of the attribute values, regar
 The ranking of participants will be based on the `F1 score`, which provides a balanced measure of precision and recall.
 
 # Citation
-Please cite the S2ORC_Enhanced500v1 dataset in any publications or presentations that derive results from this dataset:
+Please cite the S2ORC_Exp500v1 dataset in any publications or presentations that derive results from this dataset:
 ```
 @article{boukhers2025comparison,
   title={Comparison of Feature Learning Methods for Metadata Extraction from PDF Scholarly Documents},
