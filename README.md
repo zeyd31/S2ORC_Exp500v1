@@ -8,33 +8,61 @@ S2ORC_Enhanced500v1 is an enriched subset of the [Semantic Scholar Open Research
 * Testing Samples: 100
 * Labels Included: `Title`, `Author`, `Affiliation`, `Venue`, `Abstract`, `Email`, `DOI`, `URI`, `Date`
 
-# Data Structure
 
-The dataset is organized into separate folders for training and validation. Each sample consists of:
-1. A text file containing the original extracted text.
-2. A JSON file containing metadata annotations (including their positions within the text).
-3. An optional link file pointing to the original PDF document (not included in the dataset for copyright reasons).
+## Directory Structure
+The dataset maintains parallel structures for both training and validation sets, where all files for a single sample share the same base filename prefix:
 
-Below is an example structure:
 ```
-train/ ├── Annotations │ ├── file1__annotations.json │ ├── file2__annotations.json │ └── ... └── Texts ├── file1__original.txt ├── file1__link.txt ├── file2__original.txt ├── file2__link.txt └── ...
-
-val/ ├── Annotations │ ├── file1__annotations.json │ ├── file2__annotations.json │ └── ... └── Texts ├── file1__original.txt ├── file1__link.txt ├── file2__original.txt ├── file2__link.txt └── ...
+dataset/
+├── train/
+│   ├── Annotations/
+│   │   ├── file1__annotations.json
+│   │   ├── file2__annotations.json
+│   │   └── ...
+│   └── Texts/
+│       ├── file1__original.txt
+│       ├── file1__link.txt
+│       ├── file2__original.txt
+│       ├── file2__link.txt
+│       └── ...
+│
+└── val/
+    ├── Annotations/
+    │   ├── file1__annotations.json
+    │   ├── file2__annotations.json
+    │   └── ...
+    └── Texts/
+        ├── file1__original.txt
+        ├── file1__link.txt
+        ├── file2__original.txt
+        ├── file2__link.txt
+        └── ...
 ```
 
-## Annotation Files
-- Located under `train/Annotations/` and `val/Annotations/`.
-- Each file follows the naming convention: `<filename>__annotations.json`.
-- These JSON files contain detailed metadata values (e.g., Title, Author, etc.), along with their corresponding character or token positions in the text.
+## File Components
 
-## Text Files
-- Located under `train/Texts/` and `val/Texts/`.
-- Each text file follows the naming convention: `<filename>__original.txt`.
-- The text is extracted from PDF documents. Due to copyright restrictions, the original PDFs are not included in the dataset.
+### Annotation Files
+Located in the `Annotations` directory, these files contain metadata and positional information:
+* **Location**: `train/Annotations/` or `val/Annotations/`
+* **Naming Convention**: `<filename>__annotations.json`
+* **Content**: JSON-formatted metadata including:
+  * Document attributes (Title, Author)
+  * Character/token position mappings
+  * Additional metadata annotations
 
-## Link Files
-- For each text file, there is an accompanying link file named `<filename>__link.txt`.
-- The link file contains a URL or reference to download the corresponding original PDF document.
+### Text Files
+Contains the extracted document content:
+* **Location**: `train/Texts/` or `val/Texts/`
+* **Naming Convention**: `<filename>__original.txt`
+* **Content**: Plain text extracted from source PDF documents
+* **Note**: Original PDF documents are excluded due to copyright restrictions
+
+### Link Files
+Provides references to source documents:
+* **Location**: Adjacent to corresponding text files
+* **Naming Convention**: `<filename>__link.txt`
+* **Content**: URL or reference information for accessing the original PDF document
+* **Purpose**: Enables retrieval of source materials while maintaining copyright compliance
 
 
 # Purpose
