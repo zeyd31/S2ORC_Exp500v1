@@ -75,6 +75,14 @@ S2ORC_Enhanced500v1 is designed to support researchers in developing and refinin
 # Access
 Participants can access the S2ORC_Enhanced500v1 dataset by closing this repository. The test set will be released according the [timeline announced in the workshop page](https://nfdi4ds.github.io/nslp2025/docs/mesd_shared_task.html)
 
+
+# Evaluation and Ranking
+The evaluation of the results will focus on the extraction of attribute values, irrespective of their position in the document. This is particularly important for attributes such as title, which may appear in multiple places within a document.
+
+The primary goal is to ensure accurate extraction of the attribute values, regardless of their location. Therefore, the positions of the attributes will not be considered during evaluation.
+
+The ranking of participants will be based on the `F1 score`, which provides a balanced measure of precision and recall.
+
 # Citation
 Please cite the S2ORC_Enhanced500v1 dataset in any publications or presentations that derive results from this dataset:
 ```
