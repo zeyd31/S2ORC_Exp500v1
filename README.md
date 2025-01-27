@@ -16,30 +16,30 @@ The dataset maintains parallel structures for both training and validation sets,
 dataset/
 ├── train/
 │   ├── Annotations/
-│   │   ├── file1_annotations.json
-│   │   ├── file2_annotations.json
+│   │   ├── <file1>_annotations.json
+│   │   ├── <file2>_annotations.json
 │   │   └── ...
 │   └── Texts/
-│   │   ├── file1_original.txt
-│   │   ├── file2_original.txt
+│   │   ├── <file1>_original.txt
+│   │   ├── <file2>_original.txt
 │   │   └── ...
 │   └── PDF-Links/
-│       ├── file1_link.txt
-│       ├── file2_link.txt
+│       ├── <file1>_link.txt
+│       ├── <file2>_link.txt
 │       └── ...
 │
 └── val/
     ├── Annotations/
-    │   ├── file1_annotations.json
-    │   ├── file2_annotations.json
+    │   ├── <file1>_annotations.json
+    │   ├── <file2>_annotations.json
     │   └── ...
     └── Texts/
-    │   ├── file1_original.txt
-    │   ├── file2_original.txt
+    │   ├── <file1>_original.txt
+    │   ├── <file2>_original.txt
     │   └── ...
     └── PDF-Links/
-        ├── file1_link.txt
-        ├── file2_link.txt
+        ├── <file1>_link.txt
+        ├── <file2>_link.txt
         └── ...
 ```
 
