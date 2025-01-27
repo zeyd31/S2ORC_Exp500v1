@@ -20,9 +20,11 @@ dataset/
 │   │   ├── file2__annotations.json
 │   │   └── ...
 │   └── Texts/
-│       ├── file1__original.txt
+│   │   ├── file1__original.txt
+│   │   ├── file2__original.txt
+│   │   └── ...
+│   └── PDF-Links/
 │       ├── file1__link.txt
-│       ├── file2__original.txt
 │       ├── file2__link.txt
 │       └── ...
 │
@@ -32,9 +34,11 @@ dataset/
     │   ├── file2__annotations.json
     │   └── ...
     └── Texts/
-        ├── file1__original.txt
+    │   ├── file1__original.txt
+    │   ├── file2__original.txt
+    │   └── ...
+    └── PDF-Links/
         ├── file1__link.txt
-        ├── file2__original.txt
         ├── file2__link.txt
         └── ...
 ```
