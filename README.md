@@ -8,6 +8,34 @@ S2ORC_Enhanced500v1 is an enriched subset of the [Semantic Scholar Open Research
 * Testing Samples: 100
 * Labels Included: `Title`, `Author`, `Affiliation`, `Venue`, `Abstract`, `Email`, `DOI`, `URI`, `Date`
 
+# Data Structure
+
+The dataset is organized into separate folders for training and validation. Each sample consists of:
+1. A text file containing the original extracted text.
+2. A JSON file containing metadata annotations (including their positions within the text).
+3. An optional link file pointing to the original PDF document (not included in the dataset for copyright reasons).
+
+Below is an example structure:
+
+train/ ├── Annotations │ ├── file1__annotations.json │ ├── file2__annotations.json │ └── ... └── Texts ├── file1__original.txt ├── file1__link.txt ├── file2__original.txt ├── file2__link.txt └── ...
+
+val/ ├── Annotations │ ├── file1__annotations.json │ ├── file2__annotations.json │ └── ... └── Texts ├── file1__original.txt ├── file1__link.txt ├── file2__original.txt ├── file2__link.txt └── ...
+
+## Annotation Files
+- Located under `train/Annotations/` and `val/Annotations/`.
+- Each file follows the naming convention: `<filename>__annotations.json`.
+- These JSON files contain detailed metadata values (e.g., Title, Author, etc.), along with their corresponding character or token positions in the text.
+
+## Text Files
+- Located under `train/Texts/` and `val/Texts/`.
+- Each text file follows the naming convention: `<filename>__original.txt`.
+- The text is extracted from PDF documents. Due to copyright restrictions, the original PDFs are not included in the dataset.
+
+## Link Files
+- For each text file, there is an accompanying link file named `<filename>__link.txt`.
+- The link file contains a URL or reference to download the corresponding original PDF document.
+
+
 # Purpose
 S2ORC_Enhanced500v1 is designed to support researchers in developing and refining algorithms that automatically extract metadata from scholarly texts. This dataset is particularly prepared for the NFDI4DS shared task MESD, organized at the NLSP Workshop @ESWC 2025, where the focus is on enhancing the precision of metadata extraction techniques in academic literature.
 
