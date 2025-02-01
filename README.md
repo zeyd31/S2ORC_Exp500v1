@@ -79,9 +79,17 @@ Participants can access the S2ORC_Enhanced500v1 dataset by closing this reposito
 # Evaluation and Ranking
 The evaluation of the results will focus on the extraction of attribute values, irrespective of their position in the document. This is particularly important for attributes, which may appear in multiple places within a document such as *title*.
 
-The primary goal is to ensure accurate extraction of the attribute values, regardless of their location. Therefore, the positions of the attributes **will not** be considered during evaluation.
+The primary goal is to ensure highly accurate extraction of attribute values, allowing for minor variations. Therefore, correctness will be assessed based on **Levenshtein Similarity**, where a label is considered correctly extracted if its similarity score compared to the gold standard is at least 90%. This means that slight deviations are tolerated as long as the extracted text closely matches the source. The positions of the attributes **will not** be considered during evaluation.
 
 The ranking of participants will be based on the `F1 score`, which provides a balanced measure of precision and recall.
+
+## Gold Standard Quality
+We acknowledge that there are some discrepancies in the dataset due to the annotation process and post-processing. To clarify specific cases:
+
+* For DOIs, only the one occurring on the first page (referring to the paper) is relevant. Any additional DOIs can be ignored, as they will not be included in the evaluation.
+* For authors, names may contain affiliation symbols, extra text, etc. Therefore, we strongly recommend considering them part of the name when extracting author information.
+* Extra spaces will be removed during evaluation.
+* Some character encoding issues may appear due to the PDF extraction process. This reflects real-world challenges in metadata extraction and must be accounted for by participants.
 
 # Citation
 Please cite the S2ORC_Exp500v1 dataset in any publications or presentations that derive results from this dataset:
