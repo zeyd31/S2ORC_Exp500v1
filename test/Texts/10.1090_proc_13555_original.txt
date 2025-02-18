@@ -1,0 +1,350 @@
+
+LARGE CARDINAL AXIOMS FROM TAMENESS IN AECS
+19 Oct 2016
+
+Will 
+Spencer Unger 
+LARGE CARDINAL AXIOMS FROM TAMENESS IN AECS
+19 Oct 2016
+We show that various tameness assertions about abstract elementary classes imply the existence of large cardinals under mild cardinal arithmetic assumptions. For instance, we show that if κ is an uncountable cardinal such that µ ω < κ for every µ < κ and every AEC with Löwenheim-Skolem number less than κ is < κ-tame, then κ is almost strongly compact. This is done by isolating a class of AECs that exhibits tameness exactly when sufficiently complete ultrafilters exist.
+
+Introduction
+
+The birth of modern model theory is often said to be Morley's proof [12] of what was then called the Loś Conjecture. This is now called Morley's Categoricity Theorem. It is only natural that this same question be an important test question when studying nonelementary model theory. In one of the most popular contexts for this study, Abstract Elementary Classes, this question is known as Shelah's Categoricity Conjecture.
+
+While still open, there are many partial results towards this conjecture that add various model-theoretic and set-theoretic assumptions. The most relevant for this discussion is the first author's [5,Theorem 7.5], which shows that if there are class many strongly compact cardinals, then any Abstract Elementary Class (AEC) that is categorical in some high enough successor cardinal is categorical in every high enough cardinal. One of the central concepts in the proof is the notion of tameness, which says roughly that if two types differ, then they differ over some small subset of their domain. Types here do not have the syntactic form familiar from first orderlogic, since AECs lack syntax. Instead, a semantic version of type (called Galois or orbital type) is introduced as, roughly, the orbit of elements under automorphisms of a sufficiently homogeneous (or monster) model fixing the domain. In practice tameness has two cardinal parameters, the size of the domain of the types and the cardinal measuring how small the subset of the domain must be.
+
+A key instance of the advances in the first author's work is the following, which with a little more work allows the application of previous results of Shelah [14] and Grossberg and VanDieren [7] to obtain a version of Shelah's categoricity conjecture.  4.5). If K is an AEC with LS(K) < κ and κ is strongly compact, then K is < κ-tame.
+
+Sections 5 and 6 of [5] give similar theorems for measurable and weakly compact cardinals. The main theorems of this paper give converses to these results under mild cardinal arithmetic assumptions. We state the following theorem as a sample application of our methods. We prove below that by strengthening the tameness hypothesis we can drop the "almost" from the conclusion of the theorem.
+
+Theorem. Let κ be uncountable such that µ ω < κ for every µ < κ.
+
+(1) If κ <κ = κ and every AEC with Löwenheim-Skolem number less than κ is (< κ, κ)-tame, then κ is almost weakly compact. (2) If every AEC with Löwenheim-Skolem number less than κ is κ-local, then κ is almost measurable. (3) If every AEC with Löwenheim-Skolem number less than κ is < κ-tame, then κ is almost strongly compact.
+
+The first step in this direction is Shelah [13], where the measurable version appears as Theorem 1.3. The example constructed in this paper is a generalization of Shelah's. Note that Shelah's proof is essentially correct, but requires minor correction (see Remark 4.6 for a discussion).
+
+The proof of the main theorems all follow the same plan, which we outline here. First, Section 2 codes large cardinals into a combinatorial statement #(D, F ) (see Definition 2.4). Then Section 3 defines two structures H 1 and H 2 such that corresponding small substructures of them are isomorphic, but H 1 and H 2 are only isomorphic if the relevant #(D, F ) holds. Finally, Section 4 defines an AEC K σ that contains H 1 and H 2 and codes their isomorphism (and the isomorphism of their substructures) into equality of Galois types. This forms the connection between large cardinals and equality of Galois types.
+
+Our work has an immediate application to category theory. Makkai and Paré proved a theorem [11] about the accessibility of powerful images from the assumption of class many strongly compact cardinals and Lieberman and Rosicky [9] later applied this to AECs to give an alternate proof of Fact 1.1 above. Brooke-Taylor and Rosicky [6] have recently weakened the hypotheses of Makkai and Paré's result to almost strongly compact and our result completes the circle and shows that the conclusion of Makkai and Paré's result is actually a large cardinal statement in disguise. See Corollary 4.14 and the surrounding discussion. Turning back to model theory, this shows that any attempt to prove that all AECs (even with the extra assumption of amalgamation) are eventually tame as a strategy to prove Shelah's Categoricity Conjecture will fail in ZFC. However, the AECs constructed in this paper are unstable and don't really fit into the picture of classification theory so far or the categoricity conjecture. This leaves open the possibility that eventual tameness can be proven in ZFC from model-theoretic assumptions, such as stability or categoricity. Partial work towards this goal has already been done by Shelah [14], which derives a variant of tameness from categoricity; see [2,Theorem 11.15] for an exposition. A related question of Grossberg asks if amalgamation can be derived from categoricity.
+
+In Section 5, we prove that even without our cardinal arithmetic assumption we can derive large cardinal strength from tameness assertions. Roughly speaking we show that if κ carries the tameness property corresponding to weak compactness, then κ is weakly compact in L.
+
+The reader is advised to have some background in both set theory and model theory. The set-theoretic background is in large cardinals for which we recommend Kanamori's book [8]. For the model-theoretic background, see a standard reference on AECs such as Baldwin's book [2]. We would like to thank John Baldwin, Andrew Brooke-Taylor, and the anonymous referee for helpful comments on this paper.
+
+
+Large cardinals
+
+We begin by recalling some relevant large cardinal definitions. These are slight tweaks on standard definitions in the spirit of ℵ 1 -strongly compact cardinals (see for example [1]). The basic framework is to take a large cardinal property that has κ being large if there is a κ-complete object of some type and parameterizing the completeness by some δ. Then κ is "almost large" if a δ-complete object exists for all δ < κ rather than at κ. Definition 2.1. Let κ be an uncountable cardinal.
+
+(1) (a) κ is δ-weakly compact if for every field A ⊂ P(κ) of size κ there is a nonprincipal δ-complete uniform filter measuring each set in A.
+(b) κ is almost weakly compact if it is δ-weakly compact for all δ < κ. (c) κ is weakly compact if it is κ-weakly compact. (2) (a) κ is δ-measurable if there is a uniform, δ-complete ultrafilter on κ. (b) κ is almost measurable if it is δ-measurable for all δ < κ. (c) κ is measurable if it is κ-measurable. (3) (a) κ is (δ, λ)-strongly compact for δ ≤ κ ≤ λ if there is a δ-complete, fine ultrafilter on P κ λ. (b) κ is (δ, ∞)-strongly compact if it is (δ, λ)-strongly compact for all λ ≥ κ. (c) κ is λ-strongly compact if it is (κ, λ)-strongly compact. (d) κ is almost strongly compact if it is (δ, ∞)-strongly compact for all δ < κ. (e) κ is strongly compact if it is (κ, ∞)-strongly compact.
+We note that the notions of δ-weakly compact and δ-measurable are not standard. From the definitions, it can be seen that being almost measurable implies being a limit of measurables. For almost weak and almost strong compactness, the relation is not so clear. For instance, the following seems open. Question 2.2. Is "there exists a proper class of almost strongly compact cardinals" equiconsistent with "there exists a proper class of strongly compact cardinals?"
+
+For the section, we fix an upward directed partial ordering (D, ⊳) with ⊳ strict. The intended applications are (κ, ∈) and (P κ λ, ⊂).
+Definition 2.3. For d ∈ D we define ⌈d⌉ = {d ′ ∈ D | d ′ ⊳ d} and ⌊d⌋ = {d ′ ∈ D | d ⊳ d ′ }.
+We also fix a collection F of functions each of which has domain D. For f 1 , f 2 ∈ F we set f 1 ≤ f 2 if and only if there is an e : ran(f 2 ) → ran(f 1 ) such that f 1 = e • f 2 . Note the witnessing e is unique. Obviously for each f ∈ F , the set {f −1 {i} | i ∈ ran(f )} partitions D. So f 1 ≤ f 2 is equivalent to saying that the partition from f 2 refines the partition from f 1 . We require that F is upward directed under ≤.
+
+We are interested in elements that appear cofinally often as values of f so we define ran * (f ) = d∈D ran(f ↾ ⌊d⌋).
+
+With this notation in mind we formulate the following principle, which is implicit in [13]. 
+⊆ ran * (f ) | f ∈ F ∧ f ≥ f * } of nonempty finite sets such that if e witnesses that f ≥ f * , e ↾ u f : u f → u f * is a bijection.
+Note that e ↾ u f is unique, since there is a unique e witnessing f ≥ f * . This principle allows us to define a filter on D. Assume that #(D, F ) holds; this assumption is active until Corollary 2.10. Then we can choose i f ∈ u f such that
+e(i f ) = min u f * where e witnesses f * ≤ f . Then we define U ⊆ P (D) by A ∈ U if and only if there are d ∈ D and f ∈ F with f ≥ f * such that f −1 {i f } ∩ ⌊d⌋ ⊆ A.
+Note that U depends on the many parameters we have defined so far: D, F , {u f }, and i f . Also, the choice of i f * as the minimum of u f * was arbitrary, any element would have done. Indeed, different elements generate different ultrafilters.
+
+Remark 2.5. The formulation of #(D, F ) given above is chosen because it is the easiest to work with in general. However, there is an alternate formulation in terms of the partitions of D generated by the functions of F that can make the definition of the filter more clear. In that language, #(D, F ) holds if and only if there is a special partition P * such that any finer partition P has a distinguished piece X P that is chosen in a coherent way: if Q is finer than P, then X Q ⊆ X P . We also require that for d ∈ D and P finer than P * , we have X P ∩ ⌊d⌋ = ∅.
+
+Then we can define the filter as follows, given A ⊂ D, we form a partition P A that is finer than both P * and {A, D − A}. Then we set A ∈ U if and only if the distinguished piece X PA is a subset of A rather than D − A.
+
+The choice of i f ∈ u f corresponds to choices of different distinguished pieces, showing that there are |u f * |-many filters with the desired property.
+
+Claim 2.6. U is a proper filter and for all d ∈ D, ⌊d⌋ ∈ U .
+
+Proof. It is not hard to see that f −1 {i f } ∩ ⌊d⌋ is nonempty for all d and f , so ∅ / ∈ U provided that it forms a filter. The fact that ⌊d⌋ ∈ U for all d is immediate from the definition.
+
+To see that U is a filter, let A, B ∈ U witnessed by f 1 , d 1 and f 2 , d 2 respectively. Let d 3 ∈ D be above d 1 and d 2 and f ≥ f 1 , f 2 . This is possible since both D and F are directed. It follows that
+f −1 {i f } ∩ ⌊d 3 ⌋ ⊆ A ∩ B.
+We would like to generate highly complete filters. To do so we use the following ad-hoc definition, which is essentially a closure property of the set of functions F .
+Definition 2.7. We say that F is τ -replete if for every µ < τ and sequence B ǫ | ǫ < µ of subsets of D such that for each ǫ there is a function f ǫ such that B ǫ = f −1 ǫ {i} for some i, there is a function f ∈ F and {i α : α < µ} ⊂ ranf such that f −1 {i 0 } = ǫ<µ B ǫ and for all α < µ and d ∈ D, f (d) = i α+1 if and only if d / ∈ ǫ<µ B ǫ and α is least such that d / ∈ B α . Claim 2.8. If (D, ⊳) is τ -directed and (F , ≤) is τ -replete, then U is τ -complete.
+By τ -directed we mean that sets of size less than τ have an upperbound.
+
+Proof. Let A ǫ for ǫ < µ be elements of U where µ < τ . By the definition of U , for each ǫ < µ we have f ǫ and d ǫ so that
+f −1 ǫ {i fǫ } ∩ ⌊d ǫ ⌋ ⊆ A ǫ . Let B ǫ = f −1 ǫ {i fǫ }
+for ǫ < µ and use the τ -repleteness of F to find f . Using the directedness of F we can findf ≥ f, f * (recall f * is given by #(D, F )). Using the τ -directedness of D, let d be above each d ǫ for ǫ < µ.
+
+Let e witness that f ≤f , ie f = e •f . We want to show that e(if ) = 0, since
+thenf −1 {if } ∩ ⌊d⌋ ⊆ ǫ<µ (B ǫ ∩ ⌊d ǫ ⌋) ⊆ ǫ<µ A ǫ .
+Suppose that e(if ) = ǫ is not zero. Thenf −1 {if } ⊆ D − B ǫ by the definition of f . This contradicts that U is filter containing all the sets ⌊d⌋ for d ∈ D.
+Claim 2.9. If A ⊆ D and there is an f in F such that A = f −1 X for some X ⊆ ran(f ), then U measures A.
+Proof. Let f and X witness the hypotheses of the claim. Since F is directed, we
+can findf ∈ F such that f, f * ≤f . Let e be such that f = e •f . Now it is not hard to see that if e(if ) ∈ X, thenf −1 {if } ⊆ A and if e(if ) / ∈ X, thenf −1 {if } ⊆ D − A.
+In the first instance we have A ∈ U and in the second we have D − A ∈ U .
+
+If F satisfies the hypothesis of the previous claim for A, then we say that F has a characteristic function for A.
+
+We can now reformulate many large cardinal notions that are witnessed by the existence of measures. Our first corollary is an equivalent formulation of weak compactness.
+
+Corollary 2.10. Let κ be a regular cardinal. κ is weakly compact if and only if for all fields A of subsets of κ with |A| = κ, #(κ, F ) holds for some set of functions F on κ which is directed, κ-replete and contains characteristic functions for all elements of A.
+
+Proof. Assume that κ is weakly compact. Let A be a field of subsets of κ with |A| = κ. We can assume that A is closed under intersections of size less than κ. Using the weak compactness of κ, we fix a κ-complete A-ultrafilter U .
+
+Let F A be the collection of functions f : κ → κ such that ran(f ) ⊆ α < κ for some α and for all β ∈ ran(f ),
+f −1 {β} ∈ A. It is not difficult to show that F A is ≤-directed and it is κ-replete since U is κ-complete. For each f ∈ F A let u f = {i f } where i f is the unique element of ranf such that f −1 {i f } ∈ U .
+If we take f * to be the constantly zero function, then it is straightforward to see that f * and
+{u f | f ∈ F A } satisfy #(D, F A ).
+For the reverse direction, for each field A we apply Claims 2.6, 2.8 and 2.9 to see that the filter U generated by #(D, F ) is a nonprincipal κ-complete Aultrafilter.
+
+Remark 2.11. A similar proof characterizes σ + -weak compactness where we just replace κ-replete with σ + -replete and consider functions with codomain σ.
+
+We also have characterizations of σ + -measurable, (δ, λ)-strongly compact and λ-strongly compact.
+
+Corollary 2.12. κ is σ + -measurable if and only if #(κ, F ) holds for some set F of functions from κ to σ such that F is directed, σ + -replete and has characteristic functions for all subsets of κ.
+
+Corollary 2.13. Let κ ≤ λ be cardinals. κ is λ-strongly compact if and only if #(P κ (λ), F ) holds for some set F of functions with domain P κ (λ) and range bounded in κ, such that F is directed, κ-replete and has characteristic functions for all subsets of P κ (λ).
+
+Remark 2.14. The previous corollary can be modified to give a natural characterization of "κ is (δ, λ)-strongly compact".
+
+The proofs of these corollaries are all similar to the proof of Corollary 2.10 and will be omitted.
+
+
+Model constructions
+
+In this section we describe a family of constructions of models which take D and F from the previous section as parameters. We will also use a countable closure hypothesis on F , but we delay this specification until Lemma 3.9.
+
+We define the languages and structures that are the key objects in this section and the next. (2) L − σ is the language with two sorts A and I; functions π : A → I and F c : A → A; and relations P, D c ⊂ A and E ′ , E, R ⊂ A 2 as c ranges over G.
+
+(3) L σ is the language L − σ with an additional sort J and a function Q : A → J. The sorts here are disjoint. ∆ is the symmetric difference on finite subsets of X. Note that (G, +) is the free group of order 2 on σ = |X| many generators, so the definitions above only depend on σ up to renaming. Given an L − σ -structure H, we will often expand it trivially to a L σ -structure M by putting a single point in Q. Also, we allow structures with empty sorts for A and J.
+
+For this section, we focus on L − σ . For ℓ = 1, 2, we will build H ℓ,D as the colimit of the ⊂ L − σ -directed system H ℓ,d | d ∈ D . We focus first on H 1,D . For d ∈ D, H 1,d is the substructure of H 1,D with universe A d = F × ⌈d⌉ × G and I d = F × ⌈d⌉. For each of the functions and relations below, we replace 'D' with 'd' to denote the restriction to H 1,d , for example π d = π D ↾ A d . • π D is the natural projection from A D to I D , and E ′ D is the derived equivalence relation;
+• E D refines E ′ D and is given by (f, d, u)E D (f ′ , d ′ , u ′ ) iff (f, d) = (f ′ , d ′ ) and there are d 0 , . . . , d 2n−1 ∈ ⌊d⌋ such that u∆{f (d 0 )}∆ . . . ∆{f (d 2n−1 )} = u ′ ; • P D is the unary parity predicate and holds at (f, d, u) iff |u ∩ ran(f ↾ ⌊d⌋)| is odd; • For v ∈ G, D D v is a unary difference predicate and holds at (f, d, u) iff u − ran(f ↾ ⌊d⌋) ⊂ v and v ∩ ranf ↾ ⌊d⌋ = ∅; • F D c describe the transitive action of G on each E ′ D -class given by F D c (f, d, u) = (f, d, u∆c); and • (f, d, u)R D (f ′ , d ′ , u ′ ) if and only if f ≤ f ′ and if e witnesses this, then u = {i ∈ X | ∃ odd j ∈ u ′ .e(j) = i}.
+The use of E ′ is redundant given π, but makes the discussion of its equivalence classes easier. We also have that E is redundant.
+Claim 3.3. For all d * ∈ D and (f, d, u), (f ′ , d ′ , u ′ ) ∈ H 1,d * , we have (f, d, u)E d * (f ′ , d ′ , u ′ )
+if and only if the following hold:
+• (f, d, u)E ′ d * (f ′ , d ′ , u ′ ); • P d * (f, d, u) if and only if P d * (f ′ , d ′ , u ′ ); and • for all v ∈ G, D d * v (f, d, u) if and only if D d * v (f ′ , d ′ , u ′ ).
+In particular, within a particular E ′ -class, E-equivalence is determined by the quantifier-free type of the singletons from A.
+Proof. Clearly (f, d, u)E(f ′ , d ′ , u ′ ) if and only if • (f, d, u)E ′ (f ′ , d ′ , u ′ ) (hence f = f ′ and d = d ′ ); • u∆u ′ ⊂ ran(f ) is even; and • u − ran(f ↾ ⌊d⌋) = u ′ − ran(f ′ ↾ ⌊d ′ ⌋)
+It is not hard to see that this is equivalent to the list from the claim. 
+g d (f, d ′ , u) = (f, d ′ , u + {f (d)}) on A d and the identity on I d . Note that g d is defined on (f, d ′ , u) only if d ′ ⊳ d. If ¬(d ′ ⊳ d), we could define g d (f, d ′ , u)
+, but it would not be a member of A d . This is a simply a bijection on the underlying set of H 1,d , but we can describe its interaction with the L − σ structure as well.
+Claim 3.5. Given d 1 , d 2 ∈ ⌊d⌋, g d1 • g d2 is an L − σ -automorphism of H 1,d . Proof. Most of this is clear from the definition of H 1,d .
+For a permutation f of M , we say that some f preserves a predicate U iff U holds of x iff it holds of f (x) (in M ) and it flips U iff U holds of x iff it fails to hold at f (x). It is easy to see that g d ℓ preserves each difference predicate and flips each parity predicate. We show that g d1 already preserves R D on any pair for which the function is defined.
+Suppose (f, d, u)R D (f ′ , d ′ , u ′ ) and let f = e • f ′ . Since u = {i ∈ X | ∃ odd j ∈ u ′ .e(j) = i}, we have that u∆{f (d 1 )} = {i ∈ X | ∃ odd j ∈ u ′ .e(j) = i}∆{e • f ′ (d 1 )} = {i ∈ X | ∃ odd j ∈ u ′ ∆{f ′ (d 1 )}.e(j) = i}.
+The second equality holds because u ′ ∆{f ′ (d 1 )} changes the number of preimages of f (d 1 ) by 1 (when compared to u ′ ). It follows that (f, α, u∆{f
+(d 1 )})R D (f ′ , α ′ , u ′ ∆{f ′ (d 1 )}).
+Finally, we note that E d is preserved because the same elements of D witnessing E d -relatedness in H 1,d will witness E d relatedness of the g d1 •g d2 -images. Since each predicate is flipped or preserved, the composition g d1 • g d2 preserves each predicate and is an L − σ -isomorphism.
+Claim 3.6. If (f, d, u 1 ), (f, d, u 2 ) has the same quantifier-free type in H 1,d * as (f, d, v 1 ), (f, d, v 2 ) for any d ⊳ d * , then u 1 ∆u 2 = v 1 ∆v 2 .
+Proof. Note that "F u1∆u2 (x) = y" is in the quantifier free type of the first and  Tameness type assumptions about our class of models will give an L − σ -isomorphism h from H 1,D to H 2,D with an additional property. We call this additional property "respecting π". Definition 3.8. We say that h : H 1,d → H 2,d respects π iff for all a ∈ A D , π D (a) = π D (h(a)).
+
+In other words, we require h ↾ I D to be the identity. From such an isomorphism we will prove #(D, F ). Note that setting
+h 0 (f, d, u) = (f, d, u∆{f (d)}) is a L − σ −{R}-isomorphism respecting π. This h 0 does not preserve R because different d give different f (d)
+. This could be remedied by picking a "generic" or "average" value to play the role of f (d), and we could use an ultrafilter to find such a value. Since we can derive an ultrafilter from the existence of such an isomorphism, this argues that this average construction is essentially the only way to construct such an isomorphism.
+
+We say that F is countably closed if for any ≤-increasing sequence f n | n < ω from F , there is f ∈ F such that f ≥ f n for all n < ω.
+Lemma 3.9. Suppose that F is countably closed. If there is an L − σ -isomorphism h from H 1,D to H 2,D respecting π, then #(D, F ) holds.
+For the remainder of the section, we assume that F is countably closed and that there is an h as in the lemma to derive #. (
+3) If f ≤ f ′ , then |u f | ≤ |u f ′ |. (4) For all f ∈ F , u f = ∅. (5) For all f ∈ F , u f ⊆ ran * f . Proof. For (1), applying h H 1,D (f, d, ∅)R(f, d ′ , ∅) → H 2,D (f, d, u f,d )R(f, d ′ , u f,d ′ ).
+Recall from the proof of Claim 3.5 that g d preserves R and note that id is the witness that f ≤ f . Applying the definition of R, we have
+u f,d = {i ∈ X | ∃ odd j ∈ u f,d ′ .j = i} = u f,d ′ For (2) we apply Claim 3.6 to (f, d, ∅), (f, d, u) and (f, d, u f ), (f, d, v) where h(f, d, u) = (f, d, v).
+For (3), we let e be any function such that
+f = e • f ′ . Then (f, d, ∅)R D (f ′ , d ′ ∅) implies H 2,D "(f, d, u f )R(f ′ , d, u f ′ ) ′′ implies (f, d, u f )R D (f ′ , d, u f ′ ) because g d preserves R. So u f ⊆ e"u f ′ and |u f | ≤ |u f ′ |.
+For (4), note that H 2,d interprets the parity predicate to mean "|u| is even" since g d flips P and that H 2,D ¬P (f, d, u f ), since H 1, D ¬P (f, d, ∅). Thus |u f | is odd and can't be empty.
+
+For (5), for all d ∈ D, H 2,D D ∅ (f, d, u f ), since H 1,D D ∅ (f, d, ∅). Moreover g d preserves this predicate. So u f ⊂ ran(f ↾ ⌊d⌋).
+
+We are ready to produce the f * for #. It is here that we use for the first (and only) time the countable closure of the space of functions F under the order ≤.
+Claim 3.11. There is f * ∈ F such that |u f | = |u f * | for all f ≥ f * from F . Moreover, if e witnesses f * ≤ f , then e ↾ u f is a bijection from u f to u f * .
+Proof. The moreover part follows from the first part because every member of u f * is in the image of u f under an e witnessing f * ≤ f by the proof of Claim 3.10 part (3).
+
+Suppose there is no such f * . Then there is a ≤-increasing sequence f n ∈ F | n < ω such that |u fn | < |u fn+1 | for all n < ω. By our assumption that F is countably closed we can find f * ≥ f n for all n < ω, but then |u f * | is a natural number above infinitely many natural numbers, a contradiction.
+
+So we have derived #(D, F ) as witnessed by f * and the finite sets u f . This finishes the construction of our sequence of models. We will need further work to show that these models can be thought of as elements of some AEC and that tameness assumptions about that AEC give the hypothesis of Lemma 3.9.
+
+
+Abstract elementary classes
+
+The goal of this section is twofold. First, we put the algebraic constructions of Section 3 into the context of AECs. Second, we put the necessary pieces together to conclude large cardinal principles from global tameness and locality axioms.
+
+The AEC is designed to precisely take in the algebraic examples constructed in Section 3 with a single twist. Recall L σ from Definition 3.1. The extra predicate Q is an index for copies of the algebraic construction, as in Baldwin and Shelah [3]. This allows us to turn the "incompactness" results about the existence of isomorphisms above into the desired nonlocality results for Galois types.
+
+We define an AEC parameterized by σ with very minimal structure. In applications we require σ ω = σ. The strong substructure relation is as weak as possible, leaving open the question of whether restricting to the case of stronger strong substructure relations carries the same large cardinal implications. Definition 4.1. We define K = K σ to be the collection of L σ -structures (recall Definition 3.1) given by M ∈ K if and only if M is an L σ -structure satisfying:
+
+(1) {F c | c ∈ G} is an 1-transitive action of G on π −1 {i} for every i ∈ I.
+
+(2) E ′ and E are equivalence relations on A and aE ′ b if and only if π(a) = π(b).
+
+(3) For all i ∈ I and j ∈ J, there is an a ∈ A such that π(a) = i and Q(a) = j. We let ≺ K be the L σ -substructure relation.
+
+Note that this is an AEC with LS(K) = σ; in fact, K σ is the class of models of an L σ + ,ω -sentence. The main difference between this definition and Shelah [13, ⊠ 2 in Proof of Theorem 1.3] is that we have encoded the entire group G into the language rather than adding a separate sort for it (see Remark 4.6). We note that the structures we call H ℓ,d and M ℓ,d are called M ℓ,α and M + ℓ,α respectively in [13]. As mentioned in the last section, any L − σ -structure can be trivially expanded to an L σ -structure by putting a single point in J and fixing Q to be the constant function with this value on A. For ℓ = 1, 2, let M ℓ,d be this expansion of H ℓ,d and name the single element of J H ℓ,d as i ℓ . We similarly expand H ℓ,D to M ℓ,D .
+
+We also define M 0,d to be the L σ -structure with A and J empty and I = I d ; note that M 0,d ∈ K σ . We similarly define M 0,D .
+
+Note that M 0,d ⊆ M ℓ,d for ℓ = 1, 2. Thus we can define p d := gtp(i 1 /M 0,d ; M 1,d ) and q d := gtp(i 2 /M 0,d ; M 2,d ); p D and q D are defined similarly. The connection between this AEC and the previous work is the following proposition. (1) For all d ∈ D, p d = q d .
+
+(2) There is an isomorphism as in Lemma 3.9 if and only if p D = q D .
+
+To prove the forward direction of (2), we need the notion of admitting intersection coming from [3, Definition 1.2] in the AEC case. The key consequence of closure under intersection is that it simplifies checking if two types are equal.  Proof. We define the closure on each of the predicates. Then cl M (X) will be the substructure with the union of the cl i M (X) as the universe.
+• cl 1 M (X) = (X ∩ J) ∪ {j ∈ J M : ∃a ∈ X ∩ A M .Q M (a) = j}; • cl 2 M (X) = (X ∩ I) ∪ {i ∈ I M : ∃a ∈ X ∩ A M .π M (a) = i}; • cl 3 M (X) = {a ∈ A M : ∃(i, j) ∈ cl 1 M (X) × cl 2 M (X)
+.Q M (a) = j and π M (a) = i}. It is routine to verify that cl M satisfies Definition 4.3.
+
+Remark 4.6. The AEC as constructed in [13] is not closed under intersections. Shelah does not require that the entire group G be included in every model. This means that if there is an empty E ′ -equivalence class of A that must be filled (due to it projecting into I and J), then any proper subgroups G ′ < G allows a choice of orbits to fill the equivalence class. This choice is incompatible with closure under intersection. However, an argument similar to Claim 4.7 still shows it has amalgamation.
+
+Proof of Claim 4.2. We begin by showing (1) and the forward direction of (2). The type equality comes from the fact that if f is an L − σ -isomorphism from H 1,d to H 2,d that respects π, then f * := f ∪ {(i 1 , i 2 )} is a L σ -isomorphism from M 1,d to M 2,d that fixes M 0,d and sends i 1 to i 2 . Since each g d respects π, this witnesses p d = q d . The same argument gives the forward direction of (2).
+
+For the other direction, suppose p D = q D . It is easy to compute that cl M ℓ,D (M 0,D i ℓ ) = M ℓ,D . So by Fact 4.4 we have an isomorphism h : M 1,D ∼ =M 0,D M 2,D . This restricts to an isomorphism from H 1,D to H 2,D that respects π as in Lemma 3.9 and so #(D, F ) follows.
+
+Much of the work on AECs takes place under the assumption of amalgamation.
+
+Although not necessary for this proof, we also point out that K σ has amalgamation. This means the use of the construction [3,Definition 4.5] in [13] is unnecessary. Proof. Suppose that M 0 ⊂ M 1 , M 2 ∈ K and without loss of generality M 1 ∩ M 2 = M 0 . We will define the amalgam to essentially be the disjoint union of M 1 and M 2 over M 0 written in the standard way with A equal to I × G × J. Thus, we define the universe of M * as follows:
+
+• J * = J 1 ∪ J 2 ;
+
+• I * = I 1 ∪ I 2 ; and
+• A * = I * × G × J * . For each (i, j) ∈ I ℓ × J ℓ and ℓ = 1, 2, pick some x ℓ i,j ∈ A M ℓ such that • π M ℓ (x ℓ i,j ) = i; • Q M ℓ (x ℓ i,j ) = j; and • if (i, j) ∈ I 0 × J 0 , then x 1 i,j = x 2 i,j . The x ℓ
+i,j serves as the "zero" to define the action of G on A * . We define f ℓ : M ℓ → M * as the identity on J ℓ , I ℓ , and G and, given y ∈ A M ℓ , f ℓ (y) = (i, g, j) ⇐⇒ F M ℓ g (x ℓ i,j ) = y; π M ℓ (y) = i; and Q M ℓ (y) = j We put the L σ -structure on A * only as required by M 1 and M 2 . For instance, E * holds of (i, g, j) and (i ′ , g ′ , j ′ ) iff they are images of f ℓ and their preimages are E M ℓ related. Then M * ∈ K σ and is the amalgam.
+
+We are now able to put the pieces together and generate several equivalences between global tameness principles for AECs and large cardinal axioms. (1) K is (< κ, λ)-tame if for every M ∈ K λ and p = q ∈ gS(M ), there is a
+M 0 ≺ K M of size < κ such that p ↾ M 0 = q ↾ M 0 . (2) K is < κ-tame if it is (< κ, µ)-tame for all µ ≥ κ.
+(3) K is eventually tame if it is < κ-tame for some κ > LS(K). (4) K is κ-local if for every M ∈ K, p = q ∈ gS(M ), and resolution
+M i ∈ K | i < κ of M , there is i 0 < κ such that p ↾ M i0 = q ↾ M i0 .
+Theorem 4.9. Let σ < κ be infinite cardinals with σ ω = σ.
+
+(1) If κ σ = κ and every AEC K with LS(K) = σ is (< κ, κ)-tame, then κ is σ + -weakly compact. (2) If every AEC K with LS(K) = σ is κ-local, then κ is σ + -measurable.
+
+(3) If every AEC K with LS(K) = σ is (< κ, σ (λ <κ ) )-tame, then κ is (σ + , λ)strongly compact.
+
+So we have the following corollary.
+
+Corollary 4.10. Let κ be an infinite cardinal such that µ ω < κ for all µ < κ.
+
+(1) if κ <κ = κ and every AEC K with LS(K) < κ is (< κ, κ)-tame, then κ is almost weakly compact. (2) if every AEC K with LS(K) < κ is < κ-tame, then κ is almost strongly compact.
+
+Proof of Theorem 4.9. We start with the proof of part (1). We wish to apply our AEC construction together with Remark 2.11. Construct K σ as in Definition 4.1; by assumption, this is (< κ, κ)-tame. Let A be a field of subsets of κ with |A| = κ. Let θ be a big regular cardinal and take X ≺ H θ of size κ with A ∈ X. By our cardinal arithmetic assumption we can take X to be closed under σ-sequences. Let F be the collection of functions in X with domain κ and range a bounded subset of κ and (D, ⊳) = (κ, ∈). A straightforward argument using the fact that X is closed under σ-sequences shows that F is σ + -replete. It is also clear that F has a characteristic function for each A ∈ A. Build the Galois types {p α , q α | α < κ} corresponding to this system. By the (< κ, κ)-tameness of K σ , p κ = q κ . By Claim 4.2 and Lemma 3.9, we have that #(D, F ) holds. Note that Lemma 3.9 requires that F is countably closed and this follows from the fact that σ ω = σ. So by Remark 2.11 κ is σ + -weakly compact.
+
+Part (2) is essentially Shelah's theorem from [13], but with the required corrections. We let F = κ σ and (D, ⊳) = (κ, ∈). By our locality assumption, Claim 4.2 and Lemma 3.9, we have #(D, F ). Hence by Corollary 2.12, we have that κ is σ + -measurable.
+
+For part (3) we let (D, ⊳) = (P κ (λ), ⊂) and F = D σ. By our tameness assumption, Claim 4.2 and Lemma 3.9, we have #(D, F ). Hence by Remark 2.14, κ is (σ + , λ)-strongly compact.
+
+By strengthening the hypotheses a little we can remove the 'almost' from the above theorem. To do so we need a definition that generalizes [5, Definition 2.10].
+
+Definition 4.11. (K, ≺ K ) is quasi-essentially below κ if and only if LS(K) < κ or there is a theory T in L κ,ω such that K = Mod T and ≺ K is implied by ≺ Lκ,ω .
+
+We have introduced quasi-essentially below instead of just essentially below from [5], because although the class of models in K σ are axiomatizable in L σ + ,ω , the strong substructure relation is even weaker than first-order elementary.
+
+Theorem 4.12. Let κ be an infinite cardinal with κ <κ = κ and for every µ < κ, µ ω < κ. If every AEC K which is quasi-essentially below κ is (< κ, κ)-tame, then κ is weakly compact.
+
+Proof. The proof follows the proof of Theorem 4.9.(1), and we point out the differences. The additional cardinal arithmetic implies that X ≺ H θ can be taken to closed under < κ-sequences. Then set F to be the collection of functions in X with domain κ and range bounded in κ. Note that F is countably closed since κ has uncountable cofinality and κ σ is countably closed provided that σ ω = σ. As before, we code this into K κ to conclude that #(D, F ) holds. Moreover F is κ-replete by the closure of X, hence by Corollary 2.10, κ is weakly compact.
+
+Theorem 4.13. Let κ be a cardinal with cf (κ) > ω and for all µ < κ, µ ω < κ. If every AEC K that is quasi-essentially below κ is < κ-tame, then κ is strongly compact.
+
+This theorem has some level by level information. In particular (< κ, sup α<κ α (λ <κ ) )tameness will give that κ is λ-strongly compact.
+
+Proof. The proof is similar to the other proofs above. We take (D, ⊳) = (P κ (λ), ⊂) and F to be the set of functions with domain D and range bounded in κ. A similar argument to the one in the previous theorem shows that F is countably complete. Our tameness assumption gives #(D, F ) and hence κ is λ-strongly compact by Corollary 2.13.
+
+It is important to note that the converses of the main theorems (and corollaries) from this section are true. The bulk of the work is already done in the first author's paper [5]. In some cases the converses of the stated results are stronger than theorems appearing in the literature. With some small adjustment the proofs in the literature already give these stronger claims. We make a brief list of the improvements required.
+
+(1) Loś' Theorem for AECs [5,Theorem 4.3] holds for AECs with Löwenheim-Skolem number σ and any σ + -complete ultrafilter. This allows us to prove for example that every AEC K with LS(K) < κ is < κ-tame from κ is almost strongly compact. (2) Loś' Theorem for AECs does not require an ultrafilter only that the filter measures enough sets. This allows us to prove every AEC K with LS(K) < κ is (< κ, κ)-tame from the assumption that κ is almost weakly compact. In particular we can build everything into a transitive model of set theory of size κ and the weak compactness assumption gives a filter measuring all subsets of κ in the model. This is enough to complete the proof. (3) Loś' Theorem for AECs applies to the class of AECs which are quasiessentially below κ. This allows us to prove that every AEC K which is quasi-essentially below κ is < κ-tame from κ is strongly compact. It could be that such AECs have no models of size less than κ, but existing arguments are enough to give tameness over sets 1 rather than models. We collect a few remarks on our construction:
+
+(1) We do not know if the cardinal arithmetic assumptions are necessary in the main theorems of this section. For example, if we assume that κ is weakly compact and we force to add κ + many subsets to some σ + where σ < κ, then κ remains σ + -weakly compact in the extension. It follows that every AEC with Löwenheim-Skolem number σ is (< κ, κ)-tame in the extension. We do not know if κ satisfies any stronger tameness properties in the extension. (2) Under our mild cardinal arithmetic assumptions, the global full tameness and type shortness and compactness results from [5] follow from the global tameness for 1-types, as this tameness is already enough to imply the necessary large cardinals. We conclude this section with an application to category theory. There has been recent activity in exploring the connection between AECs and accessible categories; see Lieberman [10], Beke and Rosicky [4], and Lieberman and Rosicky [9]. In [9, Theorem 5.2], the authors apply a result of Makkai and Pare to derive a global version of Fact 1.1 from class many strong compacts. Here we show that this application is in fact equivalent to the whole result. Note that in the global version we do not need any cardinal arithmetic assumptions.
+
+Corollary 4.14. The following are equivalent:
+
+(1) The powerful image of any accessible functor is accessible.
+
+(2) Every AEC is eventually tame.
+
+(3) There are class many almost strongly compact cardinals. 1 Typically, Galois types are defined so that the domains are always models. The same definition works for defining Galois types over arbitrary sets. However, many model-theoretic arguments ([14, Claim 3.3] on local character of non-splitting from stability is an early example) only work for Galois types over models, explaining their prevalence. The set-theoretic nature of the arguments from large cardinals, on the other hand, mean that they carry through with little change.
+
+Fix and infinite cardinal κ with µ ω < κ for all µ < κ. The following are equivalent:
+
+(1) The powerful image of a < κ-accessible functor is < κ-accessible.
+
+(2) Every AEC with LS(K) < κ is < κ-tame.
+
+(3) κ is almost strongly compact.
+
+In saying that every AEC is eventually tame, we allow AECs with no models of size κ or larger to be trivially tame by saying they are < κ-tame. For the category theoretic notions in this corollary, see [11]. In particular, given a functor F : K → L, the powerful image of F is the subcategory of L whose objects are F x for x ∈ K and whose arrows are any arrow from L between these objects.
+
+Proof. In the first set of equivalences, the first implies the second by [9,Theorem 5.2]. The third implies the first by Brooke-Taylor and Rosicky [6, Corollary 3.5], which is a modification of Makkai and Pare's original [11, 5.5.1]. To see the second implies the third, for all σ, we know that there is some κ σ such that K σ is < κ σ -tame. Let S be the set of all limit points of the map that takes σ to σ ω + κ σ . Clearly, S is class sized.
+
+We claim that each κ ∈ S is almost strongly compact. First note that σ ω < κ for all σ < κ. Let σ < κ ≤ λ. Then K σ ω is < κ-tame, so it's < κ, (σ ω ) (λ <κ )tame. The proof of Theorem 4.9.(3) only involves this AEC, so it implies that κ is ((σ ω ) + , λ)-strongly compact. Of course, this means that it is (σ, λ)-strongly compact. Since σ and λ were arbitrary, κ is almost strongly compact, as desired.
+
+The second set of equivalences is just the parameterized version of the first one, and follows by the parameterized versions of the relevant results. The cardinal arithmetic is only needed for (2) implies (3). 5. The consistency strength of (< κ, κ)-tameness
+
+We have already remarked that we do not know if the cardinal arithmetic assumptions are necessary in the theorems of Section 4. In this section, we show that in the absence of cardinal arithmetic assumptions, the degree of tameness we associate to weak compactness has the expected consistency strength.
+
+Theorem 5.1. Let κ be a regular cardinal greater than ℵ 1 . If every AEC K which is quasi-essentially below κ is (< κ, κ)-tame, then κ is weakly compact in L.
+
+Proof. We may assume that 0 # does not exist, since otherwise every uncountable cardinal is weakly compact in L (see [8,Theorems 9.17.(b) and 9.14.(b)]). Let A in L be a collection of κ many subsets of κ which is closed under complements and intersections of size less than κ. Choose an ordinal β < (κ + ) L with A ∈ L β and such that L models [L β ∩ P(κ)] <κ ⊆ L β . Let F be the collection of functions in L β from κ to κ whose ranges are bounded in κ.
+
+We claim that F is countably closed in V under the ordering on functions defined in Section 2. Suppose that X is a countable subset of F . By the covering lemma and our assumption that 0 # doesn't exist, there is a set Y ∈ L of size ℵ 1 with X ⊆ Y . By the choice of L β , Y ∈ L β and hence it has an upperbound in L β .
+
+By our tameness assumption, Claim 4.2 and Lemma 3.9, we have #(κ, F ) from which we can derive a filter U on κ. From the way we chose F , U measures all subsets of κ in L β and is κ-complete with respect to sequences in L β . We are now ready to give a standard argument that U restricted to A is in L.
+
+Let j : L β → L γ ≃ Ult(L β , U ) be the elementary embedding derived from the ultrapower by U . Standard arguments show that the critical point of j is κ. Let A α | α < κ be an enumeration of A in L β . The sequence j(A α ) | α < κ is in L, since it is just j( A α | α < κ ) ↾ κ. So the setŪ = {A α | κ ∈ j(A α )} is in L. It is easy to see thatŪ ⊆ U and hence is the κ-complete A-ultrafilter that we require.
+
+We expect that a similar result can be proved for locality and almost measurability with an appropriate inner model in place of L. Of course, extending this result to the almost strongly compact case would require major advances in inner model theory.
+
+Definition 2 . 4 .
+24Suppose F is a directed family of functions with domain D. Let #(D, F ) be the assertion that there are f * ∈ F and a collection {u f
+
+Definition 3 . 1 .
+31Fix a D and F as in the previous section. (1) Set X := ∪{ranf : f ∈ F }, σ := |X| and (G, +) := ([X] <ω , ∆).
+
+
+Definition 3.2. H 1,D is the L − σ -structure with universe A D = F × D × G and I D = F × D with the following functions and relations:
+
+Definition 3. 4 .
+4For d ∈ D, set g d to be the permutation on A d ∪ I d of order two given by
+
+
+F d * c (g, d, u) = (g, d, v) if and only if c = u∆v.
+
+Claim 3 . 10 .
+310The following are true of h: (1) If we let u f,d be the unique element of G such that h(f, d, ∅) = (f, d, u f,d ), then u f,d doesn't depend on d. Hence we denote the common value by u f . (2) For all d ∈ D, f ∈ F and u ∈ G, h(f, d, u) = (f, d, u∆u f ).
+
+
+Definition 4.3. K admits intersections if and only if for all X ⊆ M ∈ K, cl M (X) ≺ K M , where cl M (X) is the substructure of M with universe ∩{N : X ⊆ N ≺ K M }.
+
+Fact 4 . 4
+44([3].1.3). Suppose K admits intersections. Then gtp(a 1 /M 0 ; M 1 ) = gtp(a 2 /M 0 ; M 2 ) if and only if there is h : cl M1 (M 0 a 1 ) ∼ =M 0 cl M2 (M 0 a 2 ) with h(a 1 ) = a 2 .
+
+
+Claim 4.5. K σ admits intersections.
+
+
+Claim 4.7. K σ has amalgamation.
+
+
+Definition 4.8 ([2],Chapter 11). Let K be an AEC and κ ≤ λ.
+
+
+The H 2,d 's are built as the g d -images of the H 1,d .Definition 3.7. For d ∈ D, set H 2,d to be the L − σ -structure with universe A d ∪ I d defined so that g d is an L − σ -isomorphism from H 1,d . Set H 2,D be the direct union of the sequence H 2,d | d ∈ D .This definition is justified because g d is a bijection from A d ∪ I d to itself and, by Claim 3.5, if d ⊳ d ′ ∈ D, then H 2,d ⊆ H 2,d ′ ; here, ⊆ refers to the substructure relation. Note that H 2,D has the same universe as H 1,D .
+
+Joan Bagaria, Menachem Magidor, MR 3152715Group radicals and strongly compact cardinals. 366Joan Bagaria and Menachem Magidor, Group radicals and strongly compact cardinals, Trans. Amer. Math. Soc. 366 (2014), no. 4, 1857-1877. MR 3152715
+
+. John T Baldwin, Categoricity, University Lecture Series. 50American Mathematical SocietyJohn T. Baldwin, Categoricity, University Lecture Series, vol. 50, American Mathematical Society, Providence, RI, 2009.
+
+Examples of non-locality. T John, Saharon Baldwin, Shelah, The Journal of Symbolic Logic. 7303John T Baldwin and Saharon Shelah, Examples of non-locality, The Journal of Symbolic Logic 73 (2008), no. 03, 765-782.
+
+Abstract elementary classes and accessible categories. T Beke, J Rosick, Annals of Pure and Applied Logic. 16312T. Beke and J. Rosick, Abstract elementary classes and accessible categories, Annals of Pure and Applied Logic 163 (2012), no. 12, 2008 -2017.
+
+Tameness from large cardinal axioms. Will Boney, J. Symb. Log. 794Will Boney, Tameness from large cardinal axioms, J. Symb. Log. 79 (2014), no. 4, 1092-1119.
+
+Accessible images revisited. Andrew Brooke, -Taylor , Jirí Rosický, preprintAndrew Brooke-Taylor and Jirí Rosický, Accessible images revisited, preprint.
+
+Categoricity from one successor cardinal in tame abstract elementary classes. Rami Grossberg, Monica Vandieren, 181-201. MR 2317426J. Math. Log. 623070Rami Grossberg and Monica VanDieren, Categoricity from one successor cardinal in tame ab- stract elementary classes, J. Math. Log. 6 (2006), no. 2, 181-201. MR 2317426 (2008k:03070)
+
+Akihiro Kanamori, Large cardinals in set theory from their beginnings. BerlinSpringer-VerlagSpringer Monographs in MathematicsAkihiro Kanamori, The higher infinite, second ed., Springer Monographs in Mathematics, Springer-Verlag, Berlin, 2003, Large cardinals in set theory from their beginnings.
+
+Classification theory for accessible categories. Michael Lieberman, Jirí Rosický, preprintMichael Lieberman and Jirí Rosický, Classification theory for accessible categories, preprint.
+
+Category-theoretic aspects of abstract elementary classes. Michael J Lieberman, Annals of Pure and Applied Logic. 16211Michael J. Lieberman, Category-theoretic aspects of abstract elementary classes, Annals of Pure and Applied Logic 162 (2011), no. 11, 903 -915.
+
+Accessible categories: the foundations of categorical model theory. Michael Makkai, Robert Paré, Contemporary Mathematics. 104American Mathematical SocietyMichael Makkai and Robert Paré, Accessible categories: the foundations of categorical model theory, Contemporary Mathematics, vol. 104, American Mathematical Society, Providence, RI, 1989.
+
+Categoricity in power. Michael Morley, Trans. Amer. Math. Soc. 1142Michael Morley, Categoricity in power, Trans. Amer. Math. Soc 114 (1965), no. 2, 514-538.
+
+Categoricity for abstract classes with amalgamation. Saharon Shelah, 261-294. MR 1696853Ann. Pure Appl. Logic. 981-33087Preprint. 14.Maximal failures of sequence locality in aecSaharon Shelah, Maximal failures of sequence locality in aec, Preprint. 14. , Categoricity for abstract classes with amalgamation, Ann. Pure Appl. Logic 98 (1999), no. 1-3, 261-294. MR 1696853 (2000m:03087)
+
+E-mail address: wboney@math. harvard.eduE-mail address: wboney@math.harvard.edu

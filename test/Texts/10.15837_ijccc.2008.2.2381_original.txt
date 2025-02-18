@@ -1,0 +1,276 @@
+
+Design of a MIMO PID Robust Controller using moments based approach
+
+
+Abdelmadjid Bentayeb 
+Nezha Maamri 
+Jean-Claude Trigeassou 
+Design of a MIMO PID Robust Controller using moments based approach
+47C5BBC63F4A8484AA656513AAA88467PID controlReference modelMomentsOptimizationRobustnessBroïda's identification technique
+In this paper we present a new technique for robust MIMO controllers synthesis and reduction based on a reference model and moments approach intended to control a MIMO thermal system.The reference model allows to specify the performances requirements for the closed loop and improve the controller robustness while the moments tool (frequency and time ones) is used to reduce the controller structure using a Non Linear Optimization.The implementation on the real system associates this methodology of MIMO PID controllers synthesis with Broïda's identification technique in order to carry out a auto-tuning procedure [2][11].
+
+Introduction
+
+The method of moments was introduced in a previous contribution [1] to show how we can treat Single-Input Single-Output (SISO) control systems.We saw that the moments represent a good tool to obtain a reduced robust controller in order to approximate the closed loop behaviour to a reference model one.The reference model gathers all performances requirements like time response and overshoot.
+
+An extension of this method to the multivariable (Multi-Inputs Multi-Outputs) systems is presented in this paper; in this case the fundamental idea is to choose a diagonal reference model to make inputs outputs pairing [10] where the diagonal reference transfer functions are chosen using the same method for the SISO case.
+
+In this paper we present our control methodology for MIMO systems with an application to a thermal system.The control of the MIMO thermal system is realized with the help of a PID controller using moments based approach and reference model.
+
+The aim of this technique is to synthesize a reduced robust controller (PID for example) for the implementation.
+
+The identification was realized thanks to Broïda's method which is an elementary technique very used in the industry in order to develop a auto-tuning procedure requiring a minimum intervention of the user.
+
+The controller achieving the performances for the worst case model is called ideal controller [10] which will be reduced using the moments based approach to have a PID structure for implementation [4].
+
+The reduced controller must preserve the same performances as the ideal one; this rises from frequency and time moments which represent a good tool for synthesis and analysis [7].Concretely, the reduction procedure is based on a Non Linear Optimization and its initialization is given by the Least Squares Algorithm [8].
+
+The paper is organized as follows: in section 2 we give a complete description of the application; in section 3 we develop our synthesis methodology; in section 4 and 5 we describe the moments theory and the reduction method and we finish this communication by presenting the different results obtained and a conclusion.It is composed of a radiator on which we placed two power transistors T 1 and T 2 controlled by the tensions U 1 and U 2 which vary between 0 and 10 Volts.
+
+Near these power transistors, which represent the heat source, two temperature sensors (Pt 100) are laid out.After adaptation and amplification, we obtain the tensions Y 1 and Y 2 (which vary between 0 and 10 Volts) proportional to the temperatures θ 1 and θ 2 .
+
+The ratio tension-temperature is of 0.02Volts/C.
+
+
+Modelling
+
+The aim is to define the model connecting the tensions delivered by the temperature sensors Y 1 and Y 2 to the control tensions U 1 and U 2 applied to the transistors.
+
+The conduction of the heat in the radiator, towards the temperature sensors produced by the power transistors is governed by the following diffusion equation:
+µ ∂ 2 θ ∂ x 2 = ∂ θ ∂t (1)
+where µ is the coefficient of thermal diffusion process.consequently the resulting physical model is of distributed parameters and we preferred to present a black box model adapted to the synthesis of a control law, this model is given from identification.Let:
+  Y 1 (s) Y 2 (s)   =   G 11 (s) G 12 (s) G 21 (s) G 22 (s)     U 1 (s) U 2 (s)  (2)
+where G (s) is the transfer matrix of the system.Notice that the system is symmetrical because of the provision of the heat sources and the position of the sensors.Indeed, we must obtain:
+G 11 (s) = G 22 (s) G 12 (s) = G 21 (s)(3)
+in addition, since the sensors θ 1 and θ 2 are very close to the sources T 1 and T 2 , the transfers G 11 and G 22 can be reasonably modelled by a first order system ( k 11 1 + τ 11 s
+
+).On the other hand θ 2 is less sensitive to the effect of T 1 than that of T 2 (so k 21 < k 11 ), with a settling time definitely higher.We can thus approach this transfer by an aperiodic n th order system with (n >> 1) or more simply by a first order system with a time delay ( k 12 e −α 12 s 1 + τ 12 s ).
+
+Design of a MIMO PID Robust Controller using moments based approach 127
+
+
+Identification
+
+Several sophisticated identification techniques (minimization of a quadratic cost by Least Squares or Non Linear Optimization) (Ljung [5] and Walter [12]) can be used to estimate the parameters of G (s).
+
+Taking into account the fact that the aim is to synthesize PID controllers (in a auto-tuning objective), we preferred to choose a basic identification method requiring only step tests.Our choice thus is Broïda's method which delivers an approached model of the form ( ke −αs 1 + τs ), so well adapted to the selected modelling [2][11].
+
+Let us recall that the coefficient {k, α et τ} are obtained with the help of the following formulas:
+   k i j = y ∞ α i j = 2.8t 1 − 1.8t 2 τ i j = 5.5 (t 2 − t 1 )(4)
+where y ∞ is the final value of the system step response, t 1 (respectively t 2 ) is the time where the output attains 28% (respectively 40%) of its final value.We made 5 tests which provided:
+test1 test2 test3
+
+The nominal model
+
+The nominal model was obtained by carrying out the average of the 5 tests, thus:
+G nom (s) =    0.122 470s+1 0.0625e −31.5s 801s+1 0.0762e −94.5s 740s+1 0.0987 478s+1   (5)
+From the values of the preceding table, we note that the theoretical symmetry is not checked in practice, well that G 11 (s) and G 22 (s) are close (G 12 (s) and G 21 (s) respectively), these differences are the consequences of the noises level disturbing the measurements and the non perfect reproducibility of the assembly.
+
+
+Taking into account of uncertainties
+
+Identification uncertainties will deteriorate the performances of the control device if they are not taken into account during the synthesis.The table recapitulating the 5 tests shows that two uncertainties types are present:
+
+• uncertainties on the d.c gains (of type low frequencies).
+
+• uncertainties on time-constants and time delays, which causes modelling errors (of type high frequencies).
+
+Since the transfer matrix G (s) is theoretically symmetrical, we decided to make the synthesis by basing us on a symmetrical worst case model G p (s).
+
+Using G p (s), we took into account all the uncertainties by raising:
+
+• low frequencies uncertainties by taking k max .
+
+• high frequencies uncertainties by introducing a time delay e −δ s (see [1]).
+
+Remark 1.The worst case model has been chosen to take into account all the identification uncertainties:
+
+• low frequencies uncertainties, by choosing the max of the d.c gains.
+
+• high frequencies, by introducing time delays in all input-output transfers.
+
+thus, we obtain the following worst case model:
+G p (s) =    0.132e −5s 500s+1 0.085e −125s 800s+1 0.085e −125s 800s+1 0.132e −5s 500s+1   (6)
+
+Synthesis
+
+The control configuration is illustrated by Fig.The synthesis of C (s) is based on the Internal Model Control [6][10], so:
+C (s) = Q (s) (I − G (s) Q (s)) −1 (7)
+where Q (s) is any stable transfer matrix [3].
+
+
+The reference model
+
+Q (s) is calculated using G p (s) in order to approach the closed loop T yr (s) to a reference model T re f (s), so:
+T yr (s) = G p (s) Q (s) = T re f (s)(8)
+The reference model gathers all the objectives of the synthesis in terms of stability and performances (i.e inputs-outputs decoupling, settling time... etc).
+
+In our case, T re f (s) is given by:
+T re f (s) =   T 2 (s)e −δ s d(s) 0 0 T 2 (s)e −δ s d(s)  (9)
+where T 2 (s) represent the dominant poles to fixe the closed loop dynamic, d (s) represent the auxiliary poles, which reduce the control input energy, confer robustness to the controller by making a sufficient roll-off of T yr (s) and ensure its causality, finally e −δ s represents the singularity of G p (s) which is integrated in T re f (s) to have Q (s) stable and realizable.So Q (s) is given by:
+Q (s) = G p (s) −1 T re f (s)(10)
+since the singularities of G p (s) (i.e time delays and RHP zeros) are integrated in the reference model T re f (s), so the stability of Q (s) is guaranteed [3].T 2 (s) and d (s) are given by:
+T 2 (s) = ω 2 n s 2 +2ξ ω n s+ω 2 n d (s) = (1 + ηs) n (11)
+where ω n and ξ , fixe the settling time and the overshoot of the outputs.We can recapitulate our reference model by saying that it imposes a inputs-outputs decoupling and the same dynamics for the two outputs of G (s).
+
+
+Robustness and the reference model
+
+It is well-known that the relative modelling errors ∆ r (s) modify the dynamics of the system with a possibility of instability because:
+S yp o (s) = I − G (s) Q (s) (I + ∆ (s) Q (s)) −1 = S nom (s) (I + ∆ r (s) T re f (s)) −1 (12)
+So robustness of stability and performances is guaranteed if:
+∆ r (s) T re f (s) ∞ ≤ δ −1 SR (13)
+where δ SR , represents stability margin; notice that from (13), we can act on the auxiliary poles of T re f (s) to ensure the robustness [3].
+
+
+The ideal controller
+
+From (10), we deduce the ideal controller C (s):
+C (s) = Q (s) (I − G p (s) Q (s)) −1 (14)
+It is clear that the implementation of C (s) is very hard to do because of time delays; for that we will reduce its structure to get an implementable one which must preserve the same performances of those ensured by the ideal controller.The moments tool, particularity of our approach is used for reduction.
+
+
+The Moments
+
+Let us consider a linear SISO system, characterized by its transfer function G (s) analytic in the RHP plan (.i.e Re (s) > 0) and let g (t) be its impulse response:
+G (s) = ∞ 0 g (t) e −st dt (15)
+The transfer function is given by the following state space (not necessary minimal) realization:
+G (s) s = A B C D = C (sI − A) −1 B + D (16)
+where
+A ∈ R n×n , B ∈ R n×1 ,C ∈ R 1×n and D ∈ R 1×1 .
+
+Computing the moments using state space realization
+
+Using the following equality:
+(sI − A) −A −1 − sA −2 − s 2 A −3 − • • • − = I ⇒ (sI − A) −1 = − ∞ ∑ n=0 s n A −(n+1) (17)
+
+Frequency moments
+
+Realizing a variable change µ = jω − jω 0 , equation (15) becomes:
+G (µ) = ∞ ∑ n=0 (−1) n (µ) n A n,ω 0 (g)(18)
+and ( 16):
+G (µ) = C (µI − (− jω 0 I + A)) −1 B + D (19)
+so, we get:
+A 0,ω 0 (g) = −C (− jω 0 I + A) −1 B + D (20) A n,ω 0 (g) = (−1) n+1 C (− jω 0 I + A) −(n+1) B, (n = 1 • • • ∞) (21)
+Remark 2. The time moments are giving by remplacing ω 0 = 0.Both time and frequency moments can be calculated easily using the previous algorithm.Thanks to the computation of the moments using state space realization, we can compute moments for MIMO systems (Multi Inputs Multi Outputs).
+
+
+The controller reduction
+
+For more details of our model reduction procedure, please refer to [1].It is interesting to have a reduced structure of the implemented controller (PID for example) [6].
+
+Let:
+θ =    θ 11 (s) • • • θ 1M (s) . . . . . . . . . θ M1 (s) • • • θ MM (s)   (22)
+be the matrix representing the controller's parameters to be calculated.θ i j represents the parameters vector of numerator and denominator of C r,i j (s); i.e the reduced controller between the j th input and the i th output.
+
+Let us define our cost function J as the 2 norm of the errors between the different moments of the ideal controller and those of the reduced one.
+J = N ∑ n=0 ||ε n || 2 2 = N ∑ n=0 ||A n,ω 0 (C) − A n,ω 0 (C r ) || 2 2 (23)
+where A n,ω 0 (C r ) represents n th order moments matrix, which is function of the parameters θ :
+A n,ω 0 (C r ) = f n (θ )(24)
+let:
+J = N ∑ n=0 ||A n,ω 0 (C) − f n (θ ) || 2 2 (25)
+The objective is to determine the estimated parameters θ minimizing J around ω 0 .This frequency ω 0 is chosen in order to preserve stability of the system (i.e critical pulsation), (see the Generalized Nyquist Criterion [10]).
+
+
+Linear optimization
+
+The first step consists on imposing the common denominator D r (s) of the reduced controller (for example we can take the auxiliary poles of the reference model D r (s) = d (s)).So only the zeros have to be determined; the function f n (θ ) is linear; thus the minimization of J is obtained by Least Squares, let:
+C r (s) = C LS (s)(26)
+be the reduced controller which will be used to initialize the Non Linear Programming algorithm.
+
+Remark 3. by imposing the poles of the reduced controller, for example a pole with an integral action we define so a PID structure.For example we can take D r (s) = s (1 + ηs).
+
+
+Non linear optimization
+
+The fact of imposing the poles of the reduced controller, this will limit its performances and consequently those of the closed loop.So, it is preferable to optimize all the structure (i.e.poles and zeros); the function f n (θ ) is non linear; the estimation of θ is obtained by Non Linear Programming [7].We use MARQUARDT's algorithm which is a good combination between rapidity and convergence [8].
+
+The parameters are updated with the help of the following algorithm:
+θi+1 = θi − {[J + λ i I] −1 .J } θ = θi (27)
+where:
+∂ J ∂ θ = J : Gradient vector (28) ∂ 2 J ∂ θ 2 = J : Hessian matrix (29) λ i : coefficient to adjust (30)
+The initialization is given by the Least Squares solution:
+θ0 = θLS (31)
+6 Results and comments
+
+The controllers synthesis and reduction technique was applied to the thermal system with 2 inputs and 2 outputs.Let us recall that this thermal system is characterized by an important open loop settling time (approximately 33 minutes); moreover the elementary modelling used in a disturbed context involves important uncertainties.The objective of the temperature control, in a auto-tuning context, will be double:
+
+• reduce considerably the closed loop settling time by using a controller of a simplified structure: PID controller.
+
+• guarantee robustness in spite of the simplicity of the controller, the level of uncertainty and the reduction of the settling time.
+
+Let us specify that the implementation of the PID controllers was ensured thanks to XPC Target software of MATLAB.We used for that a sample time T e = 1s.Our objective is to accelerate the system reasonably, in a ratio of 6, thus passing from 33mn in open loop to 5mn in closed loop all while maintaining the relative overshoot around 5%; for that, we fixed:
+
+ω n = 0.02rd/s ξ = 0.7 the auxiliary poles ensuring the robustness condition (13) are:
+d (s) = (1 + 3s) 3
+The PID controller obtained using the synthesis and the reduction procedures described obviously is:
+C r (s) = c 11 (s) c 12 (s) c 21 (s) c 22 (s)(32)
+with:    We can check that the system's responses correspond perfectly to those of the reference model.We can also check the perfect decoupling of the system outputs, Y 2 being insensitive to the reference input applied to Y 1 and reciprocally.It is checked finally that the control input obtained is completely reasonable, that it is with respect to its initial magnitude or of its insensitivity to the output noise (of considerable level).
+c 11 (s) = c 22 (s) = −3.162s 2 +52.
+
+Conclusion
+
+We presented in this communication a synthesis and reduction technique of robust controllers to the multivariable control of a thermal system.This methodology is based on a reference model integrating explicitly the desired performances.The experimental results show that the closed loop system verifies well the performances described by the reference model.
+
+The moments approach, characteristic of this methodology, allows the reduction of the ideal controller to lead to a PID structure, while guaranteeing the dynamic performances and especially the robustness as testify the experimental results.
+
+Let us recall finally that this synthesis methodology and reduction was associated with Broïda's identification technique to carry out the auto tuning of multivariable PID controllers.
+
+Abdelmadjid 2 Figure 1 :
+21
+Figure 1: The general diagram of the system
+
+
+2
+2
+
+
+
+Figure 2 :
+2
+Figure 2: Unitary feedback configuration
+
+
+
+
+81s+0.14 s(1+34.87s)c 12 (s) = c 21 (s) = −2019e −7 s 2 +4403e −6 s−7193e −5 s(1+15.88s)(33) The implementation provides the results illustrated by Fig. (3) and Fig. (4).
+
+
+Figure 3
+3
+Figure 3: Step responses
+
+
+Figure 4 :
+4
+Figure 4: The control inputs
+
+DescriptionThe general diagram of the temperature control device is illustrated by Fig.1.Copyright © 2006-2008 by CCC Publications
+Abdelmadjid Bentayeb, Nezha Maamri, Jean-Claude Trigeassou Bibliography
+The moments in control: a tool for analysis, reduction and design. A Bentayeb, N Maamri, J-C Trigeassou, International Journal of Computers, Communication and Control. II2007
+
+Special edition on PID tuning methods. A Anon, Computing and Control Engineering Journal. 1021999
+
+Feedback Control Theory. J C Doyle, B A Francis, A Tannenbaum, 1991MacmillanNew York
+
+Internal Model Control: An unifying review and some new results. C E Garcia, M Morari, Ind.Eng.Chem.Proc.Dec.Dev. 9121982
+
+System Identification. Theory for the user. Ljung, 1987Prentice Hall
+
+Robust Process Control. M Morari, S Zafiriou, 1989Prentice Hall
+
+Design and Iterative Optimization of Reduced Robust Controllers with Equality-Constraints. N Maamri, A Bentayeb, J-C Trigeassou, 2003ROCOND-Milan
+
+An Algorithm for Least-Squares Estimation of Non Linear Parameters. D W Marquardt, Journal of Soc. Indust. Appl. Math V. 1963
+
+Decoupling Control. Q G Wang, Lecture Notes in Control and Information Sciences. 2003Springer Verlag
+
+Multivariable Feedback Control. S Skogestad, I Postlethwaite, JW. 1996
+
+A simple robust PI/PID controller design via numerical optimization approach. R Toscano, Journal of Process Control. 152005
+
+Identification of parametric models from experimental data. E Walter, L Pronzato, Communications and Control Engineering Series. 1997Springer
+
+Trigeassou University of Poitiers Laboratoire d'Automatique et d'Informatique Industrielle 40 Avenue du Recteur Pineau 86022 Poitiers E-mail: abdelmadjid.bentayeb@gmail. A Bentayeb, N Maamri, J-C , January 16. 2007
+
+Abdelmadjid Bentayeb was born in 1977, he obtained the PhD thesis in Automatic Control at the University of Poitiers in 2006. His current research interests include robust control and model reduction. Nezha Maamri is lecturer at the Unisversity of Poitiers, Hers current research interests include identification and robust control. Jean-Claude Trigeassou is professor at the University of Poitiers, his current research interests include identification and control
