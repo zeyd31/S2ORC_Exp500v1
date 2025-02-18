@@ -1,0 +1,519 @@
+
+A mean-field game of market-making against strategic traders *
+March 25, 2022
+
+Bastien Baldacci 
+Philippe Bergault 
+Dylan Possamaï 
+A mean-field game of market-making against strategic traders *
+March 25, 2022market-makingalgorithmic tradingmean-field games
+We design a market-making model à la Avellaneda and Stoikov in which the market-takers act strategically, in the sense that they design their trading strategy based on an exogenous trading signal. The market-maker chooses her quotes based on the average market-takers' behaviour, modelled through a mean-field interaction. We derive, up to the resolution of a coupled HJB-Fokker-Planck system, the optimal controls of the market-maker and the representative market-taker. This approach is flexible enough to incorporate different behaviours for the market-takers and takes into account the impact of their strategies on the price process.
+
+Introduction
+
+On financial markets, a market-maker is usually defined as a liquidity provider. In a nutshell, it is a market participant who provides bid and ask (i.e. buy and sell) prices on one or several assets. The market-maker makes profit by earning the price difference between her buy and sell orders, called the bid-ask spread. She faces the following optimisation problem: being rarely executed at a very high spread, or being often executed at a very low spread. In the first case, the marked-to-market gain will be high, and conversely in the second case. On most of the order-driven markets, such as equities, the market-making activity is provided by a small number of high-frequency trading firms which are the counterpart of the vast majority of the transactions, see for example Megarbane, Saliba, Lehalle, and Rosenbaum [42]. They quote almost continuously bid and ask prices at the best limits, and their strategies are mostly based on either their superior proprietary technology, or on arbitrage strategies on cross-listed securities based on microstructure signals, see for instance Baldacci and Manziuk [3]. On quote-driven markets, such as for many fixed income products and single stock options, the liquidity-takers, who have a fair price in mind, first request a price for a given transaction size of the asset to a market-maker, often called dealer. The dealer answers by providing a price for the corresponding size, which is then accepted or rejected by the client. It is common that, similarly to order-driven markets, a small number of dealers provide the vast majority of liquidity to a large set of clients. On some specific products, such as options on single stocks, there can even be a monopolistic situation where there is a single liquidity provider 1 .
+
+The optimal market-making problem has been the subject of a vast academic literature. Seminal references are Grossman and Miller [29], and Ho and Stoll [33]. In particular, the authors of [33] studied the behaviour of a marketmaker confronting a stochastic demand, using stochastic control theory. This framework has inspired the well-known model of Avellaneda and Stoikov [2], which was designed to be applicable to order-driven market at the high-frequency scale. However, due to the continuous nature of the market-maker's spreads, and the assumption that the underlying asset is a diffusion process, this model turned out to also be suitable for quote-driven markets, such as corporate bonds markets. By providing a rigorous analysis of the stochastic control problem of [2], Guéant, Lehalle, and Fernandez-Tapia [31] showed, in the case of a CARA utility function, that the market-maker's problem boiled down to a system of linear ordinary differential equations. More recent contributions to the market-making literature can be found in the works of Cartea, Jaimungal, and Penalva [19], Cartea and Jaimungal [18], or Cartea, Donnelly, and Jaimungal [20; 21], who enriched the initial model by introducing α signals, ambiguity aversion, competition with other agents... In all these articles, the authors consider a risk-adjusted expectation instead of a CARA utility function, which leads to the same optimal quotes with a suitable transformation of the intensity functions, see Manziuk [41]. More recently, multi-asset market-making has been addressed through reinforcement learning, see Guéant and Manziuk [30], and dimensionality reduction techniques, see Bergault and Guéant [10], Bergault, Evangelista, Guéant, and Vieira [11], or Baldacci, Bergault, and Guéant [5] for the special case of option market-making. All these models are well-suited for OTC markets and for order-driven markets in the case of small tick assets, but are not straightforwardly applicable to design market-making strategies on order books with a large tick size, where the control process lies in a discrete tick grid. One of the main contributions to this literature is Guilbaud and Pham [32], where the authors build a model where a market-maker can send both limit and market orders on the order book of a single asset. 2 In a similar vein, the model with uncertainty zones introduced by Robert and Rosenbaum [43] to reproduce accurately the highfrequency behaviour of an asset, has been incorporated into a market-making model, see Baldacci, Bergault, Derchu, and Rosenbaum [4].
+
+A striking feature of all the aforementioned models is that the market-takers are systematically assumed to be passive, in the sense that they only respond to a quote proposed by the market-maker through the intensity of a point process. The case of market-making with competitive agents has rarely been addressed in the literature. 3 The reason is that accounting for multiple agents leads to high dimensional problems with complicated interactions, and typically renders the analysis intractable using standard numerical methods in stochastic optimal control. In the context of optimal trading, interactions between a large number of agents have been modelled through the use of mean-field games. This is one possible solution to model more complex market interactions, because of its tractability compared to multiagent models. The classical optimal execution problem à la Almgren and Chriss [1] is thus addressed by controlling McKean-Vlasov equations in Cardaliaguet and Lehalle [13]: the trader faces uncertainty with respect to price changes because of his actions but also has to deal with price changes due to other similar market participants, impacting the prices permanently and acting strategically. Therefore, the distribution of the controls appears inside the drift of the asset's price process. In Huang, Jaimungal, and Nourian [38], the authors extend the previous work on optimal trading using a major-minor mean-field game framework, where a major agent is liquidating a large portion of shares, and a large number of minor agents trade along with the major agent. Mean-field games have also been applied by Casgrain and Jaimungal [22; 23] to the case of heterogeneous traders who aim at performing optimal execution. All these models have in common that the mean-field interaction is through the drift of the asset's price process. Moreover, in the case of major-minor optimal trading in Huang, Jaimungal, and Nourian [38], both the major and the minor agents are traders who only differ by their influence on the market. As stated previously, there is no strategic market-takers in the extensions of Avellaneda and Stoikov [2] due to the difficulties in modelling the interactions between the marketmaker and several market-takers. Having a very granular model will lead to a high-dimensional stochastic control problems, intractable with standard numerical methods. Therefore, we propose in this paper to employ a major-minor mean-field game where the market-maker plays the role of the major player, whereas the strategic market-takers are modelled through a mean-field of minor agents.
+
+We emphasise that many recent papers also make use of the theory of mean-field games with a major player, introduced and studied deeply by Buckdahn, Li, and Peng [12], Cardaliaguet, Cirant, and Porretta [14], Carmona and Wang [15;16], Carmona and Zhu [17], and Lasry and Lions [39]. As in standard mean-field games and optimal control theory, linear-quadratic problems are of particular interest in the presence of a major player facing a mean-field of minor agents as they generally boil down to a system of ODEs of the Riccati type, that can sometimes be solved explicitly. Those problems have been studied in particular in Huang [35;36], Huang, Wang, and Wu [34], Huang and Nguyen [37], but also in Firoozi and Caines [27; 26] and Firoozi, Jaimungal, and Caines [28].
+
+Coming back to the present paper, our main goal is to address the problem of a market-maker providing the vast majority of the liquidity on an underlying asset. The market-maker faces a very high number of traders, or markettakers, with possibly different behaviours such as momentum or mean reverting strategies. Each market-taker acts strategically in the sense that they send request to the market-maker with a fair price in mind, which results from their own optimisation, depending on their inventory and their trading signal. The market-maker proposes quotes based on her inventory process, and the behaviour of her counterparts, which are aggregated through a mean-field game. The problem thus takes the form of a mean-field game with controlled jumps: the intensities of the order arrivals of all market participants are averaged through a single point process, and the market-maker increases her execution rate if her quote is close to the fair price resulting from the mean-field equilibrium of the minor players. Based on the mean-field equilibrium between the traders, the market-maker computes the average fair price of the mean-field.
+
+If the fair bid price of the minor players is higher than her ask quote, for instance, the intensity of arrival orders at the ask for the market-maker will decrease and conversely. We characterise completely the problem by a system of Fokker-Planck equations for the mean-field game associated to the minor players, and a (decoupled) HJB equation for the major player, which can be efficiently solved via classic numerical methods on grids. Up to the resolution of these PDEs, we derive the optimal strategies of both the representative market-taker, and the market-maker. To the best of our knowledge, this is the first work on optimal market-making taking into account the strategic behaviour of market-takers. We believe that the use of mean-field games to represent the interaction between market-maker and market-takers can lead to substantial improvement of the usual optimal market-making models, without increasing drastically the numerical complexity. The numerical results with a set of reasonable market parameters exhibit some interesting features. The probability distribution of the market-takers' inventory shifts with the exogenous trading signal and the market-maker's strategy is adjusted with respect to this flow. Even with an empty inventory, the market-takers prefer to have a non-zero signal as it will allow them to make more profit over the trading horizon: the worst-case for a market-taker is a flat signal. Moreover, when market-takers have a very volatile signal, the distribution of inventories remains symmetric around 0 but with two 'bumps' representing their incapacity to react rapidly to a change of signal. These results enable to enhance the seminal work of Avellaneda and Stoikov [2] in the sense that the behaviour of market-takers is not fixed as a function of the quotes of the market-maker only, but as a function of their own view on the price process as well as their current inventory. This is of particular importance as it leads to a more accurate estimation of the PnL of the strategy of the market-maker. Moreover, our model also provides the optimal strategy of an informed market-taker, which is absent in Avellaneda and Stoikov [2].
+
+The article is constructed as follows: in Section 2, we introduce informally an N -player version of the model, which justifies the presentation in Section 3 of the mean-field probabilistic framework. In Section 4, we solve those problems in the case of Markovian controls, while Section 5 is devoted to the numerical results. For any x ∈ M ,c (R) and y ∈ R , we also define for i ∈ {1, . . . , }, y ⊗ i x ∈ M ,c+1 (R) as the matrix whose first i − 1 columns are equal to the first i − 1 columns of x, such that for j ∈ {i + 1, . . . , c + 1}, its j-th column is equal to the (j − 1)-th column of x, and whose i-th column is equal to y. We extend naturally this definition to M ,c (R)-valued processes. For (a, b) ∈ R 2 with a ≤ b, we denote a, b := [a, b] ∩ Z. For a generic finite-dimensional Euclidean space E, a generic filtered probability space (A, G, G, Π), we let L 0 (E, G) be the space of E-valued, G-predictable processes.
+
+
+Some motivation: one market-maker facing several market-takers
+
+In this section, we provide motivations for the use of mean-field games to model the interaction between a marketmaker and a large number of informed market-takers. We first begin by describing the problem of N market-takers facing one market-maker. Since the purpose of this section is purely motivational, we adopt a heuristic approach in the presentation, and avoid properly defining the weak formulation of the problem, which we reserve to the mean-field version in Section 3.1.
+
+
+Framework
+
+We consider a trading horizon T > 0 and a filtered probability space Ω, F, F := (F t ) t∈[0,T ] , P under which all the stochastic processes are defined. We set some positive integer N ∈ N , corresponding to the number of informed market-takers acting on a market consisting of a single asset whose price process is denoted by S. This quantity, whose definition will be detailed later, can be thought as the mid-price of the asset which can be impacted by the trading activity of the market-takers.
+
+We consider a market whose functioning is as follows: for any i ∈ {1, . . . , N }, at time t ∈ [0, T ], the i-th trader has a fair buy or sell price in mind, around the mid-price S t , meaning that he is ready to buy or sell the asset at time t at prices respectively given by
+P b (S t , δ i,b
+and N i,a , with intensities respectively given by λ i,b,δ i := Λ m (δ i,b ) and λ i,a,δ i := Λ m (δ i,a ), where
+Λ m (x) := A m exp − k m σ x , x ∈ R. (2.1)
+The form of the intensities deserves several comments, which hold for any i ∈ {1, . . . , N } (i) the coefficient A m > 0 is the average number of transactions by unit of time when the i-th market-takers' fair price is identically equal to the mid-price;
+
+(ii) the coefficient k m > 0 represents the sensitivity of the intensity to the mid-to-bid and ask-to-mid quotes proposed by the i-th market-taker. More precisely, the market-taker trades frequently at the bid (resp. at the ask) when his mid-to-bid (resp. ask-to-mid) price is relatively small;
+
+(iii) the intensities are decreasing functions of the volatility of the asset σ > 0, defined below, meaning that a high volatility induces a lower number of trades and conversely, see for example Dayri and Rosenbaum [24], Madhavan, Richardson, and Roomans [40], or Wyart, Bouchaud, Kockelkoren, Potters, and Vettorazzo [44].
+
+At any time t ∈ [0, T ], the market-maker, who does not know the fair prices of the market-takers, proposes quotes around the mid-price S t at which she is ready to buy or sell the asset to the i-th trader. For t ∈ [0, T ], these prices are
+P b (S t , δ 0,b t ) := S t − δ 0,b t , and P a (S t , δ 0,a t ) := S t + δ 0,a t , t ∈ [0, T ],
+where (δ 0,b , δ 0,a ) are what we call the control processes of the market-maker. The set of admissible controls for the N + 1 players is defined as
+A N = (δ 0 , δ −0 ) = (δ 0,b , δ 0,a ), (δ i,b , δ i,a ) i∈{1,...,N } ∈ L 0 M 2,N +1 (R), F : (δ 0 , δ −0 ) bounded by δ ∞ ,
+for a given δ ∞ > 0. The optimisation problem of the i-th market-taker is a function of the spread vector δ −i quoted by the N − 1 other market-takers and the spread δ 0 of the market-maker. Hence, each market-taker will maximise his PnL given the actions of the other market-takers to obtain his so-called best-reaction function. We define the set of admissible controls of the i-th player given controls δ 0 and δ −i chosen by the other market participants by
+A i N (δ 0 , δ −i ) := δ ∈ L 0 M 2,1 (R), F : (δ 0 , δ ⊗ i δ −i ) ∈ A N ,
+and the set of admissible controls of the market-maker given a control δ −0 played by other market participants
+A 0 N (δ −0 ) = δ ∈ L 0 M 2,1 (R), F : (δ, δ −0 ) ∈ A N .
+The number of transactions at the bid and at the ask for the market-maker is modelled by two processes N 0,b and N 0,a , with intensity processes λ 0,b,δ and λ 0,a,δ , respectively given by
+λ 0,b,δ t := Λ 1 N N i=1 δ i,a t , δ 0,b t ,
+and λ 0,a,δ
+t := Λ 1 N N i=1 δ i,b t , δ 0,a t , ∀t ∈ [0, T ], where Λ(x, y) := A exp − k σ (x + y) , (x, y) ∈ R 2 ,(2.2)
+for positive constants A and k. Hence, these intensities depend on the difference between the average fair price of the market-takers on the one hand, and the price proposed by the market-maker on the other hand: for instance, if the average fair price at which market-makers are ready to sell the asset is very large compared to the price at which the market-maker is ready to buy, the market-maker will not trade often. In a framework where all the processes (δ i,b , δ i,a ) are constant equal to zero, that is for all t ∈ [0, T ], δ i,a t = δ i,b t = 0, the market-takers are considered as 'passive', and we recover the classical optimal market-making framework of Avellaneda and Stoikov [2], Cartea, Jaimungal, and Penalva [19], and Guéant, Lehalle, and Fernandez-Tapia [31].
+
+The dynamics of the price process S under which the market-maker and the N market-takers compute the markedto-market value of their inventory is defined as
+dS t = σdW t + κ N N i=1 dN i,b t − dN i,a t , (2.3)
+where κ and σ are positive constants, W is a one-dimensional Brownian motion, independent of N 0,b and N 0,a . This equation deserves several comments (i) σW represents the diffusion part of the asset's price, independent from the trading activity;
+
+(ii) the asset price is impacted by the average behaviour of the market-takers, through the so-called permanent market impact effect: when, on average, market-takers buy (resp. sell) the asset at a high rate, its price increases (resp. decreases).
+
+Finally, we assume that each market-taker reacts to a specific signal on the price, modelled for the i-th market-taker, for any i ∈ {1, . . . , N }, by a process b i , verifying 4 This signal process corresponds to the belief of the i-th market-taker concerning the drift of the asset, which can be modified by the information he acquires over time.
+b i t := N i,+ t − N i,− t , t ∈ [0, T ], where N i,+ and N i,− are Poisson processes of intensitiesλ + andλ − , independent of (W, N 0,b , N 0,a , N i,b , N i,a ).
+
+The problem of the market-maker
+
+The cash process X 0 of the market-maker is naturally defined as follows
+X 0 t := X 0 0 + t 0 P a (S s , δ 0,a s )dN 0,a s − t 0 P b (S s , δ 0,b s )dN 0,b s , t ∈ [0, T ],
+with X 0 0 ∈ R given. Her inventory process q 0 is given by
+dq 0 t := dN 0,b t − dN 0,a t ,
+with q 0 0 ∈ Z given. For any (δ 0 , δ −0 ) ∈ A N , we define a probability measure P δ 0 ,δ −0 under which • for all i ∈ {1, . . . , N }, N i,b and N i,a are point processes of intensity Λ m (δ i,a ) and Λ m (δ i,a ), respectively;
+• N 0,b and N 0,a are point processes of intensity Λ 1 N N i=1 δ i,a , δ 0,b and Λ 1 N N i=1 δ i,b , δ 0,a , respectively; • W is a one-dimensional Brownian motion, independent from (N i,b , N i,a ) i∈{1,...,N } ;
+• the price process S has dynamics (2.3);
+
+• all the processes N i,+ and N i,− have the same respective intensitiesλ + andλ − .
+
+We denote by E δ 0 ,δ −0 the expectation under the probability measure P δ 0 ,δ −0 . The market-maker wishes to maximise the sum of her cash process and the marked-to-market value of her inventory q 0 S, while keeping the inventory process close to zero during the trading period. Therefore, she wants to solve
+V 0 (δ −0 ) := sup δ 0 ∈A 0 N (δ −0 ) E δ 0 ,δ −0 X 0 T + q 0 T S T − φσ 2 T 0 (q 0 t ) 2 dt ,(2.4)
+where φ > 0 is the risk-aversion parameter of the market-maker.
+
+The quadratic penalty aims at penalising the quadratic variation of the term
+X 0 T + q 0 T S T = X 0 0 + q 0 0 S 0 + T 0 δ 0,a t dN 0,a t + T 0 δ 0,b t dN 0,b t + T 0 q 0 t κ N N i=1 dN i,b t − dN i,a t + T 0 σq 0 t dW t .
+
+Using this expression, Equation (2.4) actually boils down to
+V 0 (δ −0 ) = sup δ 0 ∈A 0 N (δ −0 ) E δ 0 ,δ −0 T 0 δ 0,a t Λ 1 N N i=1 δ i,b t , δ 0,a t + δ 0,b t Λ 1 N N i=1 δ i,a t , δ 0,b t (2.5) + q 0 t κ N N i=1 Λ m (δ i,b t ) − Λ m (δ i,a t ) − φσ 2 (q 0 t ) 2 dt .
+Notice in particular that when δ −0 is given, the only state process of this problem is q 0 . This trick, already used in Bergault and Guéant [10], makes the problem mathematically and numerically more tractable, because the associated PDE boils down to a simple ODE.
+
+
+The problem of the market-takers
+
+Each market-taker manages his inventory process q i , i ∈ {1, . . . , N }, which is defined as the difference between the number of filled bid and ask requests
+q i t := N i,b t − N i,a t , ∀t ∈ [0, T ]. (2.6)
+We define the dynamics of the cash process of the i-th trader X i by
+X i t := X i 0 + t 0 P a (S s , δ i,a s )dN i,a s − t 0 P b (S s , δ i,b s )dN i,b s , t ∈ [0, T ].
+The i-th market-taker observes a specific signal b i , meaning that between time t and time t + dt, he expects to make an instantaneous additional gain (or loss) of b i t q i t dt. Given the quotes δ 0 of the market-maker and δ −i of the N − 1 other market-takers, the i-th market-taker wants to solve
+V i (δ 0 , δ −i ) := sup δ i ∈A i N (δ 0 ,δ −i ) E δ 0 ,δ i ⊗iδ −i X i T + q i T S T + T 0 b i t q i t dt − γσ 2 T 0 (q i t ) 2 dt ,(2.7)
+where γ > 0 is the risk-aversion parameter of the traders, assumed here to be homogeneous. The market-taker wants to maximise the sum of his expected cash process and the marked-to-market value of his inventory q i S. The last term is a running penalty for the risk carried by the market-taker.
+
+As before, we can see that the problem boils down to
+V i (δ 0 , δ −i ) = sup δ i ∈A i N (δ 0 ,δ −i ) E δ 0 ,δ i ⊗iδ −i T 0 δ i,a t Λ m (δ i,a t ) + δ i,b t Λ m (δ i,b t ) + b i t q i t + q i t κ N N j=1 Λ m (δ j,b t ) − Λ m (δ j,a t ) − γσ 2 T 0 (q i t ) 2 dt . (2.8)
+With δ 0 and δ −i given, the only state processes of this problem are q i and b i .
+
+
+Limitations of the finite game model and mean-field limit
+
+In this section, we described an agent-based model where N market-takers trade against one market-maker. Solving this multi-agent problem boils down to the resolution of a system of Hamilton-Jacobi-Bellman equations, where the state variables are the inventory processes of the market-maker and the N market-takers. This system of N + 1 HJB equations of dimension N + 2 (that is, the time, the inventories of the N market-takers and the inventory of the market-maker) is obviously intractable in practice for a large number of market-takers.
+
+In order to propose a tractable framework for the optimal market-making problem with strategic market-takers, we propose a mean-field game approach. The market-maker does not face N strategic market-takers but infinitely many of them in a mean-field interaction, which can be thought as the averaged behaviour of the market-takers. In the next section, we present rigorously the mean-field limit of the N -players model, and the corresponding optimisation problems of the market-maker and the mean-field agent.
+
+We see in (2.5) and (2.8) that the empirical distribution of the controls of the market-takers appears in both problems. Though we do not pursue rigorous proofs in that direction, a typical reasoning using propagation of chaos (see for instance Bayraktar and Chakraborty [9]) leads to conjecture that as N goes to +∞, the controls (δ i,b , δ i,a ) i∈{1,...,N } chosen by the market-takers will only intervene through their distribution, which we denote by ν, i.e. ν = (ν t ) t∈[0,T ] denotes the probability flow representing the distribution of those controls on R 2 . For t ∈ [0, T ], we denote by ν b t and ν a t the first and second marginal laws of ν t , respectively. Propagation of chaos also tells us that at the limit, we should expect that the point processes associated to each market-taker will become independent, so that it is reasonable to consider that the intensities of N 0,b and N 0,a will respectively converge towards
+A exp − k σ δ 0,b t + R xν a t (dx) , and A exp − k σ δ 0,a t + R xν b t (dx) , t ∈ [0, T ].
+The intensities of the processes N i,b and N i,a of a given market-taker do not change, as they do not depend on the controls of the other market-takers
+λ i,b,δ i t = A m exp − k m σ δ i,b t , λ i,a,δ i t = A m exp − k m σ δ i,a t , t ∈ [0, T ].
+In the next section, we rigorously introduce the mean-field version of the problem.
+
+
+The mean-field problem
+
+
+Probabilistic framework
+
+Let T > 0 be a final horizon time, Ω d the set of piecewise constant càdlàg functions from [0, T ] into N, and Ω := Ω 6 d . The observable state is the canonical process χ :
+= N b , N a , N m,b , N m,a , N + , N − of the space Ω, with N b t (ω) = n b (t), N a t (ω) = n a (t), N m,b t (ω) = n m,b (t), N m,a t (ω) = n m,a (t), N + t (ω) = n + (t), N − t (ω) = n − (t)
+, for all t ∈ [0, T ], and ω = (n b , n a , n m,b , n m,a , n + , n − ) ∈ Ω. We introduce positive constants (A, A m ,λ,q,q m ,b), as well as the unique probability 5 P on Ω such that, under P, W is a standard Brownian motion, the two point processes N b and N a have respective intensities 6
+λ b t := A1 {N b t− −N a t− <q} , λ a t := A1 {N b t− −N a t− >−q} , t ∈ [0, T ],
+the two point processes N m,b and N m,a have respective intensities
+λ m,b t := A m 1 {N m,b t− −N m,a t− <q m } , λ m,a t := A m 1 {N m,b t− −N m,a t− >−q m } , t ∈ [0, T ]
+, the two point processes N + and N − have respective intensities 
+λ + t =λ + 1 {N + t− −N − t− <b} , λ − t =λ − 1 {N + t− −N − t− >−b} , t ∈ [0, T ],
+
+Admissible controls and changes of measure
+
+Let us define, for a given δ ∞ > 0, the set of admissible controls
+A ∞ = (δ b , δ a ) ∈ L 0 (R 2 , F) : (δ b , δ a ) bounded by δ ∞ .
+As explained before, the market-maker chooses the process (δ b , δ a ) ∈ A ∞ to fix the bid and ask prices respectively given by
+P b (S t , δ b ) = S t − δ b t , and P a (S t , δ a ) = S t + δ a t , t ∈ [0, T ].
+Similarly, the representative market-taker chooses a process denoted by (δ m,b , δ m,a ) ∈ A ∞ to fix what he considers to be the 'fair' bid and ask prices
+P b (S t , δ m,b t ) = S t − δ m,b t , and P a (S t , δ m,a t ) = S t + δ m,a t , t ∈ [0, T ].
+Let us denote by P(R 4 ) the space of probability measures on R 4 . We denote by D p (R 4 ) the space of deterministic measurable functions from [0, T ] to P(R 4 ), and introduce the probability flow V ∈ D p (R 4 ) representing the joint distribution of the controls of the mean-field of market-takers, their inventories, and their specific signals. For t ∈ [0, T ], we denote by ν b t and ν a t the first and second marginal laws of V t , respectively, representing the distributions of the controls at the bid and at the ask. We denote by µ t the third marginal, representing the distribution of the inventories of the mean-field of market-takers, and we denote by β t the fourth marginal, representing the distribution of the signals they observe.
+
+Let us define the following exponential operator
+E β (N ) T := exp T 0 log(1 + β s )dN s − T 0 β s λ s ds ,
+for a point process N with intensity process λ and a process β > −1, P-a.s. We finally introduce the probability measure P δ,δ m ,V given by
+dP δ,δ m ,V dP :=Ē β δ,ν,b (N b ) TĒβ δ,ν,a (N a ) TĒβ δ m ,b (N m,b ) TĒβ δ m ,a (N m,a ) T , (3.1) where for j ∈ {a, b} β δ,ν,b t := 1 A Λ R xν a t (dx), δ b t − 1, β δ,ν,a t := 1 A Λ R xν b t (dx), δ a t − 1, β δ m ,j t := 1 A m Λ m (δ m,j t ) − 1, t ∈ [0, T ].
+We denote by E δ,δ m ,V the expectation under P δ,δ m ,V . To sum up, under P δ,δ m ,V , N b and N a have respective intensities given by 
+λ b,δ,ν t = 1 {qt−<q} Λ R xν a t (dx), δ b t , and λ a,δ,ν t = 1 {qt−>−q} Λ R xν b t (dx), δ a t , t ∈ [0, T ],:= 1 {q m t− >−q m } Λ m (δ m,a t ), t ∈ [0, T ], while N + and N − still have respective intensitiesλ + 1 {N + t− −N − t− <b} , andλ − 1 {N + t− −N − t− >−b} , t ∈ [0, T ]. Remark 3.1.
+Note that, to ease the notations, we only consider symmetric intensities (same Λ and Λ m at the bid and at the ask) and symmetric risk limits. The generalisation to the asymmetric case, with different flows at the bid and at the ask, is of course straightforward.
+
+
+Optimisation problems and definition of equilibria
+Let us define the function L : −q m ,q m × R 2 −→ R by L(y, x b , x a ) := 1 {y>−q m } Λ m (x b ) − 1 {y<q m } Λ m (x a ).
+The inventory process q of the market-maker has dynamics dq t = dN b t − dN a t , with q 0 ∈ −q,q . Taking the mean-field version of (2.5), we consider the following problem for the market-maker
+V (V) := sup δ∈A∞ E δ,δ m ,V T 0 δ b s 1 {qs−<q} Λ R xν a s (dx), δ b s + δ b s 1 {qs−>−q} Λ R xν b s (dx), δ a s − φσ 2 (q s ) 2 + q s κ R 4 L(y, x b , x a )V s (dx b , dx a , dy, dz) ds ,(3.2)
+for a given probability flow V ∈ D p (R 4 ). We now see that q is stil the only state variables of this problem. In particular, we observe that this problem is actually independent of δ m , as the process q and the market impact term only depend on the average behaviour of the market-takers represented by the probability flow V, but not on the behaviour of the representative market-taker alone. This is why we did not spell out any explicit dependent of V on δ m .
+
+Next, the inventory process q m of the market-taker has dynamics dq m
+t = dN m,b t − dN m,a t ,
+with q m 0 ∈ −q m ,q m . Taking the mean-field version of problem (2.8), we consider the following problem for the representative market-taker
+V m (V) := sup δ m ∈A∞ E δ,δ m ,V T 0 δ m,b s 1 {q m s− <q m } Λ m (δ m,b t ) + δ m,a s 1 {q m s− >−q m } Λ m (δ m,a t )) + b m s q m s − γσ 2 (q m s ) 2 + q m s κ R 4 L(y, x b , x a )V s (dx b , dx a , dy, dz) ds ,(3.3)
+again for a given probability flow V ∈ D p (R 4 ). We now see that the only two state variables to this problem are b m and q m . In particular, as before, we observe that, due to our choice of intensity functions, the problem of the representative market-taker does not depend on δ. Finally, we can now define a solution to the mean-field game. 
+
+
+A Markovian version of the MFG problem
+
+To ease the above problem, among all equilibria, we will only study here the Markovian ones. This approach is inspired by Carmona and Wang [16]. In our case, this allows to write a numerically tractable system of PDEs. . We now define the set of admissible controls for the market-maker as
+
+
+Admissible controls and change of measure
+A ∞ (Π) = (δ b , δ a ) ∈ A ∞ : ∃(δ b ,δ a ) ∈ D 2 , δ i t =δ b (t, q t− , Π t ), P ⊗ dt-a.e., i ∈ {a, b} ,
+where the probability flow Π = (Π t ) t∈[0,T ] ∈ D p (R 2 ) represents the joint distribution of the inventories of the mean-field of market-takers and the signals they observe. Similarly, the admissible controls for the representative market-taker now lie in the set
+A m ∞ (Π) = (δ m,b , δ m,a ) ∈ A ∞ : ∃(δ m,i ,δ m,a ) ∈ (D m ) 2 , δ m,i t =δ m,i (t, b m t− , q m t− , Π t ), P ⊗ dt-a.e., i ∈ {a, b} .
+For a probability flow Π on R 2 , considering that all the market-takers choose their controls according to a Markovian functionδ MF = δ MF,b ,δ MF,a ∈ (D m ) 2 , the probability flow V on R 4 of the distribution of the controls, the inventories and the signals of the market-takers, is entirely determined byδ MF and Π. Hence, we will denote it V δ MF , Π . Under 
+P δ,δ m ,V(δ MF ,Π) , N + , N − have intensitiesλ + 1 {N + t− −N − t− <b} ,λ − 1 {N + t− −N − t− >−b} , those of N b and N a are 1 {qt−<q} Λ R 2δ MF,a (t, z, y, Π t )Π t (dy, dz), δ b t , and 1 {qt−>−q} Λ R 2δ MF,b (t, z, y, Π t )Π t (dy, dz), δ a t ,
+
+The Markovian optimisation problems
+
+With the same notations as before, the optimisation problem of the market-maker is now given bỹ
+V (δ MF , Π) = sup δ∈Ã∞(Π) E δ,δ m ,V(δ MF ,Π) T 0 δ b s 1 {qs−<q} Λ R 2δ MF,a (s, z, y, Π s )Π s (dy, dz), δ b s + δ a s 1 {qs−>−q} Λ R 2δ MF,b (s, z, y, Π s )Π s (dy, dz), δ a s − φσ 2 (q s ) 2 + q s κ R 2 L y,δ MF,b (s, z, y, Π s ),δ MF,a (s, z, y, Π s ) Π s (dy, dz) ds ,(4.1)
+for given (δ MF , Π) ∈ (D m ) 2 × D p (R 2 ). Similarly, the optimisation problem of the representative market-taker is now
+V m (δ MF , Π) = sup δ m ∈Ã m ∞ (Π) E δ,δ m ,V(δ MF ,Π) T 0 δ m,b s 1 {q m s− <q m } Λ m (δ m,b s ) + δ m,a s 1 {q m s− >−q m } Λ m (δ m,a s ) + b m s q m s − γσ 2 (q m s ) 2 + q m s κ R 2 L y,δ MF,b (s, z, y, Π s ),δ MF,a (s, z, y, Π s ) Π s (dy, dz) ds ,(4.2)
+for a givenδ MF ∈ (D m ) 2 and Π ∈ D p (R 2 ). We now define a solution to the mean-field game in the Markovian case.  
+
+
+The master equation
+
+We define the function H :
+[−δ ∞ , δ ∞ ] × R × R −→ R as H(d, z,z) = d +z − z, and the function H : [0, T ] × −q,q × [−δ ∞ , δ ∞ ] 2 × R × R × R × (D m ) 2 × P(R 2 ) −→ R H(t, q, d 1 , d 2 , z,z 1 ,z 2 ,δ MF , Π t ) := 1 {q<q} Λ R 2δ MF,a (t, z, y, Π t )Π t (dy, dz), d 1 H d 1 , z,z 1 + 1 {q>−q} Λ R 2δ MF,b (t, z, y, Π t )Π t (dy, dz), d 2 H d 2 , z,z 2 . (4.3)
+This function corresponds to the Hamiltonian of the market-maker's problem: it accounts for the changes in the value function at each trade, as well as the marked-to-market gain associated with each trade. The first and second terms of the sum correspond respectively to the bid and ask side of the market-maker. We next introduce the function
+K : −b,b × R × R × R −→ R defined by K(b m , z,z 1 ,z 2 ) = 1 {b m <b}λ + (z 1 − z) + 1 {b m >−b}λ − (z 2 − z),
+corresponding to the infinitesimal generator of b m . We define the function H m :
+[0, T ] × −b,b × −q m ,q m × [−δ ∞ , δ ∞ ] 2 × R × R × R −→ R as H m (q m , d 1 , d 2 , z,z 1 ,z 2 ) = 1 {q m <q m } Λ m (d 1 )H(d 1 , z,z 1 ) + 1 {q m >−q m } Λ m (d 2 )H(d 2 , z,z 2 ). (4.4)
+As for the market-maker, this function corresponds to the Hamiltonian of the representative market-taker's problem.
+
+Given the control functionδ MF = (δ MF,b ,δ MF,a ) ∈ (D m ) 2 of the market-takers, if we denote by p : [0, T ] × −q m ,q m × −b,b −→ R the function such that p(t, ·, ·) represents the probability mass function of the distribution Π t , then p verifies, at least formally, the following Fokker-Planck equation 
+                         ∂ t p(t, q m , b m ) − 1 {q m >−q m } Λ m δ MF,b (t, b m , q m − 1, p(t, ·, ·) p(t, q m − 1, b m ) −λ + 1 {b m >−b} p(t, q m , b m − 1) −λ − 1 {b m <b} p(t, q m , b m + 1) − 1 {q m <q m } Λ m δ MF,a (t, b m , q m + 1, p(t, ·, ·)) p(t, q m + 1, b m ) + 1 {q m <q m } Λ m δ MF,b (t, b m , q m , p(t, ·, ·)) + 1 {q m >−q m } Λ m δ MF,a (t, b m , q m , p(t, ·, ·)) +λ − 1 {b m >−b} +λ + 1 {b m <b} p(t, q m , b m ) = 0, (t, q m , b m ) ∈ (0, T ] × −q m ,q m × −b,b , p(0, q m , b m ) = P 0 (q m , b m ), (q m , b m ) ∈ −q m ,q m × −b,b ,d m (z −z 1 ),d m (z −z 2 ) , whered : p ∈ R −→ σ/k + p, andd m : p ∈ R −→ σ/k m + p.
+Finally, we arrive to the following master equation for our problem at the equilibrium
+                                                                                 0 = ∂ t W (t, q) − φσ 2 q 2 + qκ R 2 L y,d m W m (t, z, y) − W m (t, z, y + 1) ,d m W m (t, z, y) − W m (t, z, y − 1) p(t, y, z)dydz + H t, q,d W (t, q) − W (t, q + 1) ,d W (t, q), W (t, q − 1) , W (t, q), W (t, q + 1), W (t, q − 1),δ m , p(t, ·, ·) , 0 = ∂ t W m (t, q m , b m ) − γσ 2 (q m ) 2 + b m q m + K b m , W m (t, q m , b m ), W m (t, q m , b m + 1), W m (t, q m , b m − 1) + q m κ R 2 L y,d m W m (t, z, y) − W m (t, z, y + 1) ,d m W m (t, z, y) − W m (t, z, y − 1) p(t, y, z)dydz + H m q m ,d m W m (t, q m , b m ) − W m (t, q m + 1, b m ) ,d m W m (t, q m , b m ), W m (t, q m − 1, b m ) , W m (t, q m , b m ), W m (t, q m + 1, b m ), W m (t, q m − 1, b m ) , 0 = ∂ t p(t, q m , b m ) − 1 {q m >−q m } Λ m d m W m (t, q m − 1, b m ) − W m (t, q m , b m ) p(t, q m − 1, b m ) − 1 {q m <q m } Λ m d m W m (t, q m + 1, b m ) − W m (t, q m , b m ) p(t, q m + 1, b m ) −λ + 1 {b m >−b} p(t, q m , b m − 1) +λ − 1 {b m <b} p(t, q m , b m + 1) + 1 {q m <q m } Λ m d m W m (t, q m , b m ) − W m (t, q m + 1, b m ) + 1 {q m >−q m } Λ m d m W m (t, q m , b m ) − W m (t, q m − 1, b m ) +λ − 1 {b m >−b} +λ + 1 {b m <b} p(t, q m , b m ), (4.6) whereδ m = δ m,b ,δ m,a ∈ (D m ) 2 is the function such that δ m,b (t, b m , q m , p(t, ·, ·)) =d m W m (t, q m , b m ) − W m (t, q m + 1, b m ) , δ m,a (t, b m , q m , p(t, ·, ·)) =d m W m (t, q m , b m ) − W m (t, q m − 1, b m ) ,
+and where p is the flow of probability mass functions associated with Π, with initial and terminal conditions
+p(0, q m , b m ) = P 0 (q m , b m ), W (T, q) = W m (T, q m , b m ) = 0, for (b m , q m , q) ∈ −b,b × −q m ,q m × −q,q . (4.7)
+
+Main results
+
+The following result guarantees existence of a solution to (4.6), its proof is relegated to Appendix A.  We conclude this section with a verification theorem, whose proof can be found in Appendix B.
+
+
+Theorem 4.4. LetΠ ∈ C [0, T ], P(Q m × B) be a flow of probability measures on Q m × B. We denote byp the associated probability mass functions. Assume that the coupled Hamilton-Jacobi-Bellman equation
+                                         0 = ∂ tW (t, q) − φσ 2 q 2 + qκ R 2 L y,d m W m (t, z, y) −W m (t, z, y + 1) ,d m W m (t, z, y) −W m (t, z, y − 1) p(t, y, z)dydz + H t, q,d W (t, q) −W (t, q + 1) ,d W (t, q),W (t, q − 1) ,W (t, q),W (t, q + 1),W (t, q − 1),δ m ,p(t, ·, ·) , 0 = ∂ tW m (t, q m , b m ) − γσ 2 (q m ) 2 + b m q m + K b m ,W m (t, q m , b m ),W m (t, q m , b m + 1),W m (t, q m , b m − 1) + q m κ R 2 L y,d m W m (t, z, y) −W m (t, z, y + 1) ,d m W m (t, z, y) −W m (t, z, y − 1) p(t, y, z)dydz + H m q m ,d m W m (t, q m , b m ) −W m (t, q m + 1, b m ) ,d m W m (t, q m , b m ),W m (t, q m − 1, b m ) , W m (t, q m , b m ),W m (t, q m + 1, b m ),W m (t, q m − 1, b m ) ,
+with terminal conditionW (T, .) =W m (T, ·, ·) = 0 has a classical solution (W ,W m ) once continuously differentiable in time. We introduce the following feedback controls From these two results , we immediately get the following corollary, which provides us with a Markovian equilibrium. δ ,b (t, q, p(t, ·, ·)) = σ k + W (t, q)−W (t, q + 1),δ ,a (t, q, p(t, ·, ·)) = σ k   
+δ ,b (t, q,p(t, ·, ·)) = σ k +W (t, q)−W (t, q + 1),δ ,a (t, q,p(t, ·, ·)) = σ k +W (t, q) −W (t, q − 1), δ m, ,b (t, b, q m ,p(t, ·, ·)) = σ k m +W m (t, q m , b) −W m (t, q m + 1, b), δ m, ,a (t, b, q m ,p(t, ·, ·)) = σ k m +W m (t, q m , b) −W m (t, q m − 1, b).+ W (t, q) −W (t, q − 1), δ m, ,b (t, b, q m , p(t, ·, ·)) = σ k m + W m (t, q m , b) − W m (t, q m + 1, b), δ m, ,a (t, b, q m , p(t, ·, ·)) = σ k m + W m (t, q m , b) − W m (t, q m − 1, b).
+
+Numerical results
+
+In this section, we apply our model to the case of an asset with the characteristics in Section 5. This time horizon ensures convergence towards stationary quotes at time t = 0. We consider that the asset is traded by a constant trade size of 10 assets. We solve the master equation (4.6) using three explicit Euler schemes, with a loop in order to find the fixed-point defined in Theorem 4.3.
+
+
+Parameter Value
+
+Daily volatility σ = 8 $ · day − 1 2 Permanent market impact κ = 5 · 10 −5 $ Intensity parameters for the signalsλ + =λ − = 1.5 $ · day −2 Signal limitb = 4 $ · day −1  
+
+
+Intensity function of the market-takers
+
+
+Market-takers' behaviour: probability mass function
+
+The probability mass function p is plotted at time t = T in Figure 1. We then plot in Figure 2a 
+
+
+Market-takers' behaviour: value function and optimal quotes
+
+The value function W m is plotted at time t = 0 in Figure 3. We then plot in Figure 4a the same value function at fixed values of q m , and observe some interesting behaviours. Indeed, when q m = 0, the value function is symmetric but its minimum value is in b m = 0, meaning that even with an empty inventory, the market-taker always prefer having a positive or negative signal because this will allow him to make more profit over the time period [0, T ]. This effect is even more striking in the cases q m = −80 and q m = 80: even with an already very long or short inventory, the worst case for the market-taker is a flat signal. Indeed, when the market-taker is short, he prefers having a negative signal, but a positive signal is still better than a flat signal because he knows she can trade fast enough to become long before the signal changes. Finally, we plot in Figure 4a the value function at fixed values of b m . The results are less surprising and match our intuition: when the signal is flat, the value function is symmetric and its maximum is in 0, because the market-taker does not have any interest in deviating from an empty position. When the signal is negative, the optimum of the value function is in the negative values for the inventory, and conversely.   We plot the (stationary) optimal bid and ask quotes of the market-taker as a function of q m and b m in Figure 5. In Figure 6a, we plot his bid quotes as a function of b m for different values of q m . We observe that when his signal is positive enough, if his inventory is non-positive, he agrees to buy the asset at a price higher than the mid price. In particular when q m = −80, this is true as soon as b m is positive. Finally in Figure 6b, we plot the optimal bid quotes as a function q m for different values of b m . Again, the result is expected: when the signal is negative, the bid quotes is always high in comparison to the other cases. Conversely, for a positive signal, if his inventory is negative, the market-maker quotes a negative mid-to-bid, meaning that he agrees to buy at a price higher than the mid price.   
+
+
+Market-maker's behaviour: value function and optimal quotes
+
+We plot in Figure 7 the value function of the market-maker as a function of her inventory. As expected, as the marketmaker is not reacting to any signal, but only make profit by providing liquidity while managing her inventory risk, the value function is symmetric with a maximum at 0. The optimal bid and ask quotes as functions of her inventory are plotted in Figure 8, with the expected behaviour: the bid quote increases with the inventory, while the ask quote decreases. The quotes of the market-maker go higher than that of the market-taker because she is more risk-averse.   
+
+
+Impact of a more volatile signal
+
+We now multiply by 10 the intensities λ + and λ − , in order to study what happens when the trading rate of the market-taker is low compared to the rate at which the signal changes.
+
+As before, we plot in Figure 9, Figure 10a, and Figure 10b the probability mass function p. We notice in particular the difference between Figure 2b and Figure 10b: while the distribution of inventories is still symmetric around 0 when the signal is 0, it is now made of two 'bumps'. This is because traders cannot react fast enough to a change of signal, so they cannot always get back to an empty inventory at the same speed as the signal goes to 0. This is also shown in Figure 10a in comparison with Figure 2a: the probability that the signal is at zero when the inventory is empty is roughly 0.3 in the former case and 0.5 in the latter.    We now plot as above in Figure 11, Figure 12a, and Figure 12b the value function W m of the market-taker at time 0 as a function of q m and b m . Whereas Figure 11 and Figure 12b do not change much in aspect in comparison to Figure 3 and Figure 4b, except that Figure 11 shows less difference between its highest and lowest level, due to the rapid change of the signal. Figure 12a is rather interesting because, unlike in Figure 4a the minimum of the value function when q m = −80 (resp. q m = 80) is now reached at 1 (resp. −1) instead of 0. Unlike in the previous case, it is now less certain that the market-taker will be able to benefit from a slightly positive signal when he is short, because he cannot trade fast enough.     We finally plot in Figure 15 the value function at time 0 of the market-maker, and in Figure 16 her optimal bid and ask quotes. While the general shape of the value function and the optimal quotes do not change much when compared to Figure 7 and Figure 8, we see that the level of the value function is significantly lower. This is due to the fact that the market-maker trades less, because market-takers are more conservatives due to the uncertainty on the signal.   
+
+
+Conclusion
+
+In this article, we tackled the problem of a market-maker on a single underlying asset facing strategical market-takers. The market-maker choses her quotes based on the behaviour of the mean-field of market-takers whose strategy is determined through an exogenous trading signal. We derive the system of HJB-Fokker-Planck equations driving this optimization problem and show existence of a solution through a fixed point argument. As the HJB equations of the market-maker and the mean-field of market-takers are decoupled, numerical resolution is simplified.
+
+We illustrate the results of our model using a set of realistic market parameters and draw some conclusions. As expected, the probability distribution of the market-takers' inventory shifts with the exogenous trading signal and the strategy of the market-makers are adjusted with respect to this flow of probability. Finally, a more volatile exogenous signal leads to a change in inventory distribution for the market-takers: as they cannot react fast enough to a change of signal, they are not able to get back to an empty inventory at the same speed when the signal goes to zero.
+
+This framework can be enhanced by introducing more complex trading signals and deeper interactions between marketmaker and market-takers, at the cost of an increasing numerical complexity. In particular, one could add a common noise into the signals dynamics, and make the intensity function Λ m of the market-takers dependent on the behaviour of the market-maker, but the problem then becomes numerically intractable, and theoretically much more complex to study.
+
+
+A Proof of Theorem 4.3
+
+We divide this proof in 4 steps. First we introduce suitable functional spaces to study these equations. Then we prove in the second step that, given a family ( Then (B(Q m × B), · ∞ ) is a Banach space. We define similarly B(Q). We will also denote byB(0, 1) the closed ball of center 0 and radius 1 in B(Q m × B). Note that, as Q m × B is a finite set, B(Q m × B) has finite dimension and B(0, 1) is compact.
+
+Step 2: HJB equations
+
+If we consider a continuous functionp : t ∈ [0, T ] −→p t ∈B(0, 1) such thatp t is a probability mass function on Q m × B, and if we denote byΠ the probability flow associated withp, we can then define W = W ,W m solution to the differential equation
+∂ t W(t) = F p t ,W (t) , W(T )(q, q m , b m ) = (0, 0) ∀(q, q m , b m ) ∈ Q × Q m × B, (A.1)
+where the unknown is a function W : [0, T ] −→ B(Q) × B(Q m × B), and we denote for all (q, q m , b m ) ∈ Q × Q m × B: 
+W(t)(q, q m , b m ) = W (t)(q),W m (t)(q m , b m ) .F p, (W, W m ) (q, q m , b m ) = φσ 2 q 2 − qκ R 2 L y,d m W m (t, z, y) − W m (t, z, y + 1) ,d m W m (t, z, y) − W m (t, z, y − 1) p(t, y, z)dydz − H t, q,d W (t, q) − W (t, q + 1) ,d W (t, q), W (t, q − 1)
+, W (t, q), W (t, q + 1), W (t, q − 1),δ m , p(t, ·, ·) , Step 3: Fokker-Planck equation Step 4: fixed-point theorem Finally, let us define X the set of time-dependent probability measuresp ∈ C 0 ([0, T ],B(0, 1)) such that p(t, ·, ·) −p(s, ·, ·) ∞ ≤ L|t − s|, ∀ s, t ∈ [0, T ], (A.3) where L = 4 Λ m (−δ ∞ ) +λ . Note that, by Arzelà-Ascoli theorem, it is clear that X is relatively compact for the uniform distance. If we takep ∈ X, we can associate to it the functionW solution to (A.1), and from the associated control we can get a new probability mass function p solution to (A.2). Moreover, by definition of L and of the function G in (A.2), it is clear that p satisfies (A.3), hence p ∈ X. This defines a map φ :p ∈ X −→ p = φ(p) ∈ X.
++ γσ 2 (q m ) 2 + b m q m + K b m , W m (t, q m , b m ), W m (t, q m , b m + 1), W m (t, q m , b m − 1) − q m κ R 2 L y,d m W m (t, z, y) − W m (t, z, y + 1) ,d m W m (t, z, y) − W m (t, z, y − 1) p(t, y, z)dydz − H m q m ,d m W m (t, q m , b m ) − W m (t, q m + 1, b m ) ,d m W m (t, q m , b m ), W m (t, q m − 1, b m ) , W m (t, q m , b m ), W m (t, q m + 1, b m ), W m (t, q m − 1, b m ) ,
+Let us now consider (p ) ∈N a sequence in X converging uniformly top ∈ X. For each ∈ N, let W and p be the corresponding solutions to (A.1) and (A.2), respectively. By continuity of F and G, (W ) ∈N will converge to the unique solution W to the HJB equation (A.1) associated withp, and in the same way (p ) ∈N converges to the unique solution p to the Fokker-Planck equation (A.2) associated with W. This shows the continuity of φ.
+
+By Schauder's fixed-point theorem, we conclude that φ has a fixed-point p, and by denoting W = (W, W m ) the associated solution to (A.1), we get that (W, W m , p) is solution to the master equation (4.6).
+
+
+B Proof of Theorem 4.4
+
+We fix t ∈ [0, T ).
+
+Step 1: First, let us look at the problem of the market-maker. We introduce the arbitrary controls (δ b s ) s∈[t,T ] and (δ a s ) s∈[t,T ] for the market-maker, and denote by (q s ) s∈[t,T ] her inventory process starting at time t, respectively at the value q ∈ Q, and controlled by (δ with equality when the market-maker plays the controls in (4.8).
+
+By taking the supremum in (B.1), we get thatW (0, q 0 ) =Ṽ (δ m ,Π), and the controls given in (4.8) are optimal for the market-maker when the market-taker plays the controls given again in (4.8).
+
+Step 2: We show by the same argument thatW m (0, q m 0 , b m 0 ) =Ṽ m (δ m ,Π) and that the controls given in (4.8) are optimal for the market-taker when the market-maker plays his respective controls in (4.8).
+
+
+Notations: Let N be the set of all positive integers. For any ( , c) ∈ N × N , M ,c (R) will denote the space of × c matrices with real entries. Elements of the matrix M ∈ M ,c (R) are denoted by (M i,j ) (i,j)∈{1,..., }×{1,...,c} and the transpose of M is denoted by M . We identify M ,1 with R . When = c, we let M (R) := M , (R). For any x ∈ M ,c (R), and for any j ∈ {1, . . . , c}, x j ∈ R is the j-th column of M . Moreover, for any x ∈ M ,c (R) and any j ∈ {1, . . . , c}, x −j ∈ M ,c−1 (R) denotes the matrix x without the j-th column. For a pair (x 0 , x) ∈ R × M ,c (R), we denote by x −0 the matrix x −0 := x.
+
+
+and the processes (N b , N a ),(N m,b  , N m,a ), (N + , N − ) are P-independent. We denote by q := N b − N a the inventory process of the market-maker, and by q m := N m,b − N m,a the inventory process of the representative market-taker. We also denote by b m := N + − N − the signal observed by the representative market-taker for the asset. Finally, we denote the canonical P-completed filtration generated by χ by F := (F t ) t∈[0,T ] .
+
+N
+m,b and N m,a have intensities λ m,b and λ m,a respectively given by λ m,b,δ m t := 1 {q m t− <q m } Λ m (δ m,b t ), and λ m,a,δ m t
+
+Definition 3. 2 .
+2A solution of the above game is given by a probability flow V ∈ D p (R 4 ), a control δ ∈ A ∞ , and a control δ m, ∈ A ∞ such that(i) the control δ reaches the supremum in the definition of V (V ); (ii) the control δ m, reaches the supremum in the definition of V m (V ); (iii) V t is the joint distribution of δ m, t , q m t , and b m t under P δ ,δ m, ,V for Lebesgue-almost every t ∈ [0, T ].
+
+
+us denote by P(R 2 ) the space of probability measures on R 2 . Let us also denote by D the space of deterministic measurable functions from [0, T ] × [−q,q] × P(R 2 ) to [−δ ∞ , δ ∞ ], and by D m the space of deterministic measurable functions from [0, T ]×[−b,b]×[−q m ,q m ]×P(R 2 ) to [−δ ∞ , δ ∞ ]. Finally, we denote by D p (R 2 ) the space of deterministic measurable functions from [0, T ] to P(R 2 )
+
+
+t ∈ [0, T ]. and those of N m,b and N m,a are given by λ m,b,δ m t = 1 {q m t− <q m } Λ(δ m,b t ) and λ m,a,δ m t = 1 {q m t− >−q m } Λ(δ m,a t ), t ∈ [0, T ].
+
+Definition 4. 1 .
+1A solution of the above game in the Markovian case is given by functionsδ= (δ ,b ,δ ,a ) ∈ D 2 , δ m, = (δ m, ,b ,δ m, ,a ) ∈ (D m ) 2 ,δ MF, = (δ MF, ,b ,δ MF, ,a ) ∈ (D m ) 2 , and a probability flow Π ∈ D p (R 2 ), such that (i) the control δ t :=δ (t, q t− , Π t ), ∀t ∈ [0, T ],reaches the supremum in the definition ofṼ (δ MF, , Π ); (ii) the control δ m, t :=δ m, (t, b m t− , q m t− , Π t ), ∀t ∈ [0, T ], reaches the supremum in the definition ofṼ m (δ MF, , Π ); (iii)δ m, =δ MF, ; (iv) Π t is the joint distribution of q m t and b m t under P δ ,δ m, ,V(δ MF, ,Π ) for Lebesgue-almost every t ∈ [0, T ].
+
+Remark 4. 2 .
+2Note that there are four items in this definition of a Markovian equilibrium, unlike in Definition 3.2. This is because the probability flow V appearing in Definition 3.2 is now characterised by the pair δ MF, , Π .
+
+
+0 denotes the probability mass function of the initial inventories of the market-takers and their initial signals at time 0. Notice that the supremum in the Hamiltonian (4.3) is reached at (d b , d a ) := d (z −z 1 ),d(z −z 2 ) , and the supremum in the Hamiltonian (4.4) is reached at (d m,b , d m,a ) :=
+
+
+For simplicity of notations, let us introduce in what follows B := −b,b , Q m := −q m ,q m , Q := −q,q .
+
+Theorem 4. 3 .
+3The master equation (4.6) with terminal conditions (4.7) admits a solution W, W m , p , where W is C 1 in time and bounded on [0, T ] × Q, W m is C 1 in time and bounded on [0, T ] × Q m × B, and p is C 1 in time and bounded on [0, T ] × Q m × B.
+
+
+Then the functionsW andW m correspond respectively to the value functions of the market-maker and the markettakers associated with the flow of probability measuresΠ, in the sense that W (0, q 0 ) =Ṽ (δ m ,Π), andW m (0, q m 0 , b m 0 ) =Ṽ m (δ m ,Π), and the controls given in closed-loop by (4.8) are optimal.
+
+Corollary 4. 5 .
+5Consider the solution W, W m , p to the master equation (4.6) with terminal conditions (4.7) defined in Theorem 4.3. We introduce the associated feedback controls as in Theorem 4.4
+
+(4. 9 )
+9These feedback controls and the flow Π ∈ D p constitute a Markovian equilibrium in the sense of Definition 4.1.
+
+Remark
+
+
+
+A m = 70 day −1 and k m = 19 day − 1 2 Intensity function of the market-maker A = 100 day −1 and k = 19 day − 1 2 Risk limitsq =q m = 120 Risk aversion of the market-takers γ = 1 · 10 −4 $ −1 Risk aversion of the market-maker φ = 5 · 10 −4 $ −1 Time horizon T = 5 days
+
+Figure 1 :
+1the distribution of the signal b m conditionally to the value of the inventory q m (for q m = 0, q m = −80, and q m = 80). As expected, the distribution is symmetric when q m = 0. Moreover, when the inventory is very negative, the probability of having a positive signal is almost 0 and the probability of having a negative signal is high, and conversely for a very positive inventory. We finally plot inFigure 2bthe distribution of the inventory q m conditionally to the value of the signal b m (for b m = 0, b m = −2, and b m = 2), and observe the same kind of expected behaviour : the distribution is symmetric when b m = 0, whereas all the weight is on the negative (resp. positive) values of q m when b m = −2 (resp. b m = 2). Joint distribution of b m and q m .
+
+
+signal b m conditionnally to q m (t=T) (a) Distribution of b m for a fixed q m .
+
+
+inventory q m conditionnally to b m (t=T) (b) Distribution of q m for a fixed b m .
+
+Figure 2 :
+2Conditional distributions of b m and q m .
+
+Figure 3 :
+3Value function of the representative market-taker.
+
+
+V m as a function of signal b m for a fixed q m (t=0) (a) For a fixed q m . V m as a function of inventory q m for a fixed b m (t=0) (b) For a fixed b m .
+
+Figure 4 :
+4Value function of the representative market-taker.
+
+Figure 5 :
+5Optimal bid and ask quotes of the representative market-taker.
+
+
+m, , b as a function of signal b m for a fixed q m (t=0) (a) For a fixed q m . m, , b as a function of inventory q m for a fixed b m (t=0) (b) For a fixed b m .
+
+Figure 6 :
+6Optimal bid quote of the representative market-taker.
+
+
+V of the market maker
+
+Figure 7 :
+7Value function of the market-maker.
+
+Figure 8 :
+8Optimal bid and ask quotes of the market-maker.
+
+Figure 9 :
+9Joint distribution of b m and q m .
+
+
+signal b m conditionnally to q m (t=T) (a) Distribution of b m for a fixed q m .
+
+
+inventory q m conditionnally to b m (t=T) (b) Distribution of q m for a fixed b m .
+
+Figure 10 :
+10Conditional distributions of b m and q m .
+
+Figure 11 :
+11Value function of the representative market-taker.
+
+
+V m as a function of signal b m for a fixed q m (t=0) (a) For a fixed q m . V m as a function of inventory q m for a fixed b m (t=0) (b) For a fixed b m .
+
+Figure 12 :Figure 13 :
+1213Value function of the representative market-taker.We then plot inFigure 13,Figure 14a, andFigure 14bthe optimal quotes of the representative market-taker, which are roughly at the same level as before, except for intermediate values at which the market-taker quotes more conservatively. ask quotes of the representative market taker (t=0) Optimal bid and ask quotes of the representative market-taker.
+
+
+m, , b as a function of inventory q m for a fixed b m (t=0) (b) For a fixed b m .
+
+Figure 14 :
+14Optimal bid quote of the representative market-taker.
+
+
+V of the market maker
+
+Figure 15 :
+15Value function of the market-maker.
+
+Figure 16 :
+16Optimal bid and ask quotes of the market-maker.
+
+
+Π t ) t∈[0,T ] of probability measures on Q m × B, there exists a unique solution to the first two equations in (4.6). Conversely, in step 3, we prove that given two functions W : [0, T ] × Q −→ R and W m : [0, T ] × Q m × B −→ R, there exists a unique solution to the last equation in (4.6). Finally, we use a fixed-point theorem to conclude. Step 1: Functional spaces Let us introduce the set B(Q m × B) of functions v : Q m × B −→ R that are bounded on Q m × B. We consider the norm · ∞ on B(Q m × B) such that for all v ∈ B(Q m × B), v ∞ = sup (q m ,b m )∈Q m ×B |v(q m , b m )|.
+
+
+The function F : (p, W) ∈B(0, 1) × B(Q) × B(Q m × B) −→ F (p, W) ∈ B(Q) × B(Q m × B)is defined by the first two equations in Equation (4.6), i.e.
+
+
+is continuous in (p, W ), and is Lipschitz-continuous in W because the controls are bounded (this is proved in details in Bergault and Guéant [10, Proposition 2]). Hence we know by Cauchy-Lipschitz's theorem that for any continuous p : t ∈ [0, T ] −→p t ∈B(0, 1), there exists a unique global solutionW : [0, T ] −→ B(Q) × B(Q m × B) to (A.1).
+
+
+a given pair of functions W = (W ,W m ), we can write the Fokker-Planck equation in (4.6) as∂ t p(t, ·, ·) = G(W m (t), p(t, ·, ·)), p(0, ·, ·) = P 0 , (A.2)where the unknown is a function p :[0, T ] −→ B(Q m × B). The function G : (W m , p) ∈ B(Q m × B) × B(Q m × B) −→ G(W, p) ∈ B(Q m × B),defined by the last equation in (4.6), i.e.G W m , p (q m , b m ) = 1 {q m >−q m } Λ m d m W m (t, q m − 1, b m ) − W m (t, q m , b m ) p(t, q m − 1, b m ) + 1 {q m <q m } Λ m d m W m ( t, q m + 1, b m ) − W m (t, q m , b m ) p(t, q m + 1, b m ) +λ + 1 {b m >−b} p(t, q m , b m − 1) −λ − 1 {b m <b} p(t, q m , b m + 1) − p(t, q m , b m ) 1 {q m <q m } Λ m d m W m (t, q m , b m ) − W m (t, q m + 1, b m ) + 1 {q m >−q m } Λ m d m W m (t, q m , b m ) − W m (t, q m − 1, b m ) +λ − 1 {b m >−b} +λ + 1 {b m <b} ,is continuous in (W m , p) and Lipschitz-continuous (even linear) in p. Hence we know again from Cauchy-Lipschitz's theorem that for any continuousW m : t ∈ [0, T ] −→W m (t) ∈ B(Q m × B), there exists a unique global solution p : [0, T ] −→ B(Q m × B) to Equation (A.2). Moreover, as (A.2) is actually a Fokker-Planck equation, we know that the solution p verifies p(t, ·, ·) ∈B(0, 1) ∀t ∈ [0, T ].
+
+
+b s ) s∈[t,T ] and (δ a s ) s∈[t,T ] . Then, under P δ,δ m, ,V(δ m, ,Π) , we havẽ W (T, q T ) =W (t, q) + T t ∂ tW (s, q s )ds + T t W (s, q s− + 1) −W (s, q s− ) dN b s+ T t W (s, q s− − 1) −W (s, q s− ) s, q s− + 1) −W (s, q s− ) 1 {qs−<q} Λ R 2 δ m, ,a (s, z, y,Π s )Π s (dy, dz), s, q s− − 1) −W (s, q s− ) 1 {qs−>−q} Λ R 2 δ m, ,b (s, z, y,Π s )Π s (dy, dz), s, q s− + 1) −W (s, q s− ) dÑ b s + T t W (s, q s− − 1) −W (s, q s− ) dÑ a s ,whereÑ b andÑ a are the compensated processes associated to N b and N a under P δ,δ m, ,V(δ m, ,Π) . We can then writẽW (T, q T ) =W (t, q) + T t ∂ tW (s, q s ) − φσ 2 (q s ) 2 + δ b s +W (s, q s− + 1) −W (s, q s− ) 1 {qs−<q} Λ R 2 δ m, ,a (s, z, y,Π s )Π s (dy, dz), δ b s + δ a s +W (s, q s− − 1) −W (s, q s− ) 1 {qs−>−q} Λ R 2 δ m, ,b (s, z, y,Π s )Π s (dy, dz), δ a s + q s κ R 2 L y,d m W m (t, z, y) −W m (t, z, y + 1) ,d m W m (t, z, y) −W m (t, z, y − 1) Π t (dy, dz) ds + T t φσ 2 (q s ) 2 − δ b s 1 {qs−<q} Λ R 2 δ m, ,a (s, z, y,Π s )Π s (dy, dz), δ b s − δ a s 1 {qs−>−q} Λ R 2 δ m, ,b (s, z, y,Π s )Π s (dy, dz), δ a s − q s κ R 2 L y,d m W m (t, z, y) −W m (t, z, y + 1) ,d m W m (t, z, y) −W m (t, z, y − 1) Π t (dy, dz) ds + T t W (s, q s− + 1) −W (s, q s− ) dÑ b s + T t W (s, q s− − 1) −W (s, q s− ) dÑ a s .From the HJB equation solved byW and the associated terminal conditionW (T, .) = 0, we deduce0 ≤W (t, q) + T t φσ 2 (q s ) 2 − δ b s 1 {qs−<q} Λ R 2 δ m, ,a (s, z, y,Π s )Π s (dy, dz), δ b s − δ a s 1 {qs−>−q} Λ R 2 δ m, ,b (s, z, y,Π s )Π s (dy, dz), δ a s − q s κ R 2 L y,d m W m (t, z, y) −W m (t, z, y + 1) ,d m W m (t, z, y) −W m (t, z, y − 1) Π t (dy,Notice thatÑ b andÑ a are martingales under P δ,δ m, ,V(δ m, ,Π) , since by definition of A ∞ , their intensities are bounded. Taking expectation yieldsW (t, q) ≥ E δ,δ m, ,V(δ m, ,Π) T t − φσ 2 (q s ) 2 + δ b s 1 {qs−<q} Λ R 2 δ m,,a (s, z, y,Π s )Π s (dy, dz), δ b s + δ a s 1 {qs−>−q} Λ R 2 δ m, ,b (s, z, y,Π s )Π s (dy, dz), δ a s + q s κ R 2 L y,d m W m (t, z, y) −W m (t, z, y + 1) ,d m W m (t, z, y) −W m (t, z, y − 1) Π t (dy, dz) ds , (B.1)
+
+Table 1 :
+1Value of the parameters.
+A similar behaviour in the case of OTC market-making has been studied inBarzykin, Bergault, and Guéant [7], in which the agent can choose to trade 'actively' without waiting for a client, see alsoBarzykin, Bergault, and Guéant [8].3 Notice nonetheless that a framework for multi market-makers competing with each other to propose the best price to the clients is developed in Baldacci, Possamaï, and Rosenbaum[6] in the context of make-take fees policy.
+t ) := S t − δ i,b t , and P a (S t , δ i,a t ) := S t + δ i,a t , where for i ∈ {1, . . . , N }, δ i,b , δ i,a are what we call the control processes of the i-th trader. The i-th trader can trade with any participant of the market. His number of filled bid and ask orders are modelled by counting processes N i,b
+See[38] for a similar set up. In the literature, the drift b is often taken with a dynamics of the typedbt = −θbtdt + ηdBt + dN + t − dN − t ,where (θ, η) ∈ [0, +∞) 2 and B is some Brownian motion independent of everything else. Here we take η = θ = 0 for the sake of simplicity: this allows to reduce our problem to a system of ODEs.
+The existence and uniqueness of P is proved for example in El Euch, Mastrolia, Rosenbaum, and Touzi [25, Lemma A.1]6 We now impose risk limits for the market-maker and the representative market-taker, in terms of boundaries for the processes N b − N a and N m,b − N m,a . Similarly, we bound the process N + − N − . This is mainly for technical reasons, in order to simplify the problem. The boundariesq m andb are assumed to be the same for all the market-takers.
+
+Optimal execution of portfolio transactions. R F Almgren, N Chriss, Journal of Risk. 32R.F. Almgren and N. Chriss. Optimal execution of portfolio transactions. Journal of Risk, 3(2):5-40, 2001.
+
+High-frequency trading in a limit order book. M Avellaneda, S Stoikov, Quantitative Finance. 83M. Avellaneda and S. Stoikov. High-frequency trading in a limit order book. Quantitative Finance, 8(3):217-224, 2008.
+
+Adaptive trading strategies across liquidity pools. B Baldacci, I Manziuk, arXiv:2008.07807ArXiv preprintB. Baldacci and I. Manziuk. Adaptive trading strategies across liquidity pools. ArXiv preprint arXiv:2008.07807, 2020.
+
+On bid and ask side-specific tick sizes. B Baldacci, P Bergault, J Derchu, M Rosenbaum, arXiv:2005.14126ArXiv preprintB. Baldacci, P. Bergault, J. Derchu, and M. Rosenbaum. On bid and ask side-specific tick sizes. ArXiv preprint arXiv:2005.14126, 2020.
+
+Algorithmic market making for options. B Baldacci, P Bergault, O Guéant, Quantitative Finance. 211B. Baldacci, P. Bergault, and O. Guéant. Algorithmic market making for options. Quantitative Finance, 21(1):85-97, 2021.
+
+Optimal make take fees in a multi market maker environment. B Baldacci, D Possamaï, M Rosenbaum, SIAM Journal on Financial Mathematics. 121B. Baldacci, D. Possamaï, and M. Rosenbaum. Optimal make take fees in a multi market maker environment. SIAM Journal on Financial Mathematics, 12(1):446-486, 2021.
+
+Algorithmic market making in foreign exchange cash markets with hedging and market impact. A Barzykin, P Bergault, O Guéant, arXiv:2106.06974ArXiv preprintA. Barzykin, P. Bergault, and O. Guéant. Algorithmic market making in foreign exchange cash markets with hedging and market impact. ArXiv preprint arXiv:2106.06974, 2021.
+
+Market making by an FX dealer: tiers, pricing ladders and hedging rates for optimal risk control. A Barzykin, P Bergault, O Guéant, arXiv:2112.02269ArXiv preprintA. Barzykin, P. Bergault, and O. Guéant. Market making by an FX dealer: tiers, pricing ladders and hedging rates for optimal risk control. ArXiv preprint arXiv:2112.02269, 2021.
+
+Mean field control and finite dimensional approximation for regime-switching jump diffusions. E Bayraktar, P Chakraborty, arXiv:2109.09134arXiv preprintE. Bayraktar and P. Chakraborty. Mean field control and finite dimensional approximation for regime-switching jump diffusions. arXiv preprint arXiv:2109.09134, 2021.
+
+Size matters for OTC market makers: general results and dimensionality reduction techniques. P Bergault, O Guéant, Mathematical Finance. 311P. Bergault and O. Guéant. Size matters for OTC market makers: general results and dimensionality reduction techniques. Mathematical Finance, 31(1):279-322, 2021.
+
+Closed-form approximations in multi-asset market making. P Bergault, D Evangelista, O Guéant, D Vieira, Applied Mathematical Finance. 282P. Bergault, D. Evangelista, O. Guéant, and D. Vieira. Closed-form approximations in multi-asset market making. Applied Mathematical Finance, 28(2):101-142, 2021.
+
+Nonlinear stochastic differential games involving a major player and a large number of collectively acting minor agents. R Buckdahn, J Li, S Peng, SIAM Journal on Control and Optimization. 521R. Buckdahn, J. Li, and S. Peng. Nonlinear stochastic differential games involving a major player and a large number of collectively acting minor agents. SIAM Journal on Control and Optimization, 52(1):451-492, 2014.
+
+Mean field game of controls and an application to trade crowding. P Cardaliaguet, C.-A Lehalle, Mathematics and Financial Economics. 123P. Cardaliaguet and C.-A. Lehalle. Mean field game of controls and an application to trade crowding. Mathematics and Financial Economics, 12(3):335-363, 2018.
+
+Remarks on Nash equilibria in mean field game models with a major player. P Cardaliaguet, M Cirant, A Porretta, Proceedings of the American Mathematical Society. 14810P. Cardaliaguet, M. Cirant, and A. Porretta. Remarks on Nash equilibria in mean field game models with a major player. Proceedings of the American Mathematical Society, 148(10):4241-4255, 2020.
+
+Finite state mean field games with major and minor players. R Carmona, P Wang, arXiv:1610.05408ArXiv preprintR. Carmona and P. Wang. Finite state mean field games with major and minor players. ArXiv preprint arXiv:1610.05408, 2016.
+
+An alternative approach to mean field game with major and minor players, and applications to herders impacts. R Carmona, P Wang, Applied Mathematics & Optimization. 761R. Carmona and P. Wang. An alternative approach to mean field game with major and minor players, and applications to herders impacts. Applied Mathematics & Optimization, 76(1):5-27, 2017.
+
+A probabilistic approach to mean field games with major and minor players. R Carmona, X Zhu, The Annals of Applied Probability. 263R. Carmona and X. Zhu. A probabilistic approach to mean field games with major and minor players. The Annals of Applied Probability, 26(3):1535-1580, 2016.
+
+Incorporating order-flow into optimal execution. Á Cartea, S , Mathematics and Financial Economics. 103Á. Cartea and S. Jaimungal. Incorporating order-flow into optimal execution. Mathematics and Financial Economics, 10 (3):339-364, 2016.
+
+Algorithmic and high-frequency trading. Á Cartea, S Jaimungal, J Penalva, Cambridge University PressÁ. Cartea, S. Jaimungal, and J. Penalva. Algorithmic and high-frequency trading. Cambridge University Press, 2015.
+
+Algorithmic trading with model uncertainty. Á Cartea, R Donnelly, S , SIAM Journal on Financial Mathematics. 81Á. Cartea, R. Donnelly, and S. Jaimungal. Algorithmic trading with model uncertainty. SIAM Journal on Financial Mathematics, 8(1):635-671, 2017.
+
+Enhancing trading strategies with order book signals. Á Cartea, R Donnelly, S , Applied Mathematical Finance. 251Á. Cartea, R. Donnelly, and S. Jaimungal. Enhancing trading strategies with order book signals. Applied Mathematical Finance, 25(1):1-35, 2018.
+
+Mean field games with partial information for algorithmic trading. P Casgrain, S , arXiv:1803.04094ArXiv preprintP. Casgrain and S. Jaimungal. Mean field games with partial information for algorithmic trading. ArXiv preprint arXiv:1803.04094, 2018.
+
+Mean-field games with differing beliefs for algorithmic trading. P Casgrain, S , Mathematical Finance. 303P. Casgrain and S. Jaimungal. Mean-field games with differing beliefs for algorithmic trading. Mathematical Finance, 30 (3):995-1034, 2020.
+
+Large tick assets: implicit spread and optimal tick size. K Dayri, M Rosenbaum, Market Microstructure and Liquidity. 1011550003K. Dayri and M. Rosenbaum. Large tick assets: implicit spread and optimal tick size. Market Microstructure and Liquidity, 1(01):1550003, 2015.
+
+Optimal make-take fees for market making regulation. Mathematical Finance. O El Euch, T Mastrolia, M Rosenbaum, N Touzi, to appearO. El Euch, T. Mastrolia, M. Rosenbaum, and N. Touzi. Optimal make-take fees for market making regulation. Mathe- matical Finance, to appear, 2021.
+
+Belief estimation by agents in major minor LQG mean field games. D Firoozi, P E Caines, 58th IEEE conference on decision and control. C.C. de Wit and R. SepulchreIEEED. Firoozi and P.E. Caines. Belief estimation by agents in major minor LQG mean field games. In C.C. de Wit and R. Sepulchre, editors, 58th IEEE conference on decision and control, 2019, pages 1615-1622. IEEE, 2019.
+
+ε-Nash equilibria for major-minor LQG mean field games with partial observations of all agents. D Firoozi, P E Caines, IEEE Transactions on Automatic Control. 666D. Firoozi and P.E. Caines. ε-Nash equilibria for major-minor LQG mean field games with partial observations of all agents. IEEE Transactions on Automatic Control, 66(6):2778-2786, 2021.
+
+Convex analysis for LQG systems with applications to major-minor lqg mean-field game systems. D Firoozi, S Jaimungal, P E Caines, Systems & Control Letters. 142104734D. Firoozi, S. Jaimungal, and P.E. Caines. Convex analysis for LQG systems with applications to major-minor lqg mean-field game systems. Systems & Control Letters, 142:104734, 2020.
+
+Liquidity and market structure. S J Grossman, M H Miller, The Journal of Finance. 433S.J. Grossman and M.H. Miller. Liquidity and market structure. The Journal of Finance, 43(3):617-633, 1988.
+
+Deep reinforcement learning for market making in corporate bonds: beating the curse of dimensionality. O Guéant, I Manziuk, Applied Mathematical Finance. 265O. Guéant and I. Manziuk. Deep reinforcement learning for market making in corporate bonds: beating the curse of dimensionality. Applied Mathematical Finance, 26(5):387-452, 2019.
+
+Dealing with the inventory risk: a solution to the market making problem. O Guéant, C.-A Lehalle, J Fernandez-Tapia, Mathematics and Financial Economics. 74O. Guéant, C.-A. Lehalle, and J. Fernandez-Tapia. Dealing with the inventory risk: a solution to the market making problem. Mathematics and Financial Economics, 7(4):477-507, 2013.
+
+Optimal high-frequency trading with limit and market orders. F Guilbaud, H Pham, Quantitative Finance. 131F. Guilbaud and H. Pham. Optimal high-frequency trading with limit and market orders. Quantitative Finance, 13(1): 79-94, 2013.
+
+Optimal dealer pricing under transactions and return uncertainty. T Ho, H R Stoll, Journal of Financial Economics. 91T. Ho and H.R. Stoll. Optimal dealer pricing under transactions and return uncertainty. Journal of Financial Economics, 9(1):47-73, 1981.
+
+Backward-forward linear-quadratic mean-field games with major and minor agents. J Huang, S Wang, Z Wu, Probability, Uncertainty and Quantitative Risk. 18J. Huang, S. Wang, and Z. Wu. Backward-forward linear-quadratic mean-field games with major and minor agents. Probability, Uncertainty and Quantitative Risk, 1(8):1-27, 2016.
+
+Large-population LQG games involving a major player: the Nash certainty equivalence principle. M Huang, SIAM Journal on Control and Optimization. 485M. Huang. Large-population LQG games involving a major player: the Nash certainty equivalence principle. SIAM Journal on Control and Optimization, 48(5):3318-3353, 2010.
+
+Linear-quadratic mean field games with a major player: Nash certainty equivalence versus master equations. M Huang, Communications in Information and Systems. 213M. Huang. Linear-quadratic mean field games with a major player: Nash certainty equivalence versus master equations. Communications in Information and Systems, 21(3):441-471, 2021.
+
+Linear-quadratic mean field social optimization with a major player. M Huang, S L Nguyen, arXiv:1904.03346ArXiv preprintM. Huang and S.L. Nguyen. Linear-quadratic mean field social optimization with a major player. ArXiv preprint arXiv:1904.03346, 2019.
+
+Mean-field game strategies for optimal execution. X Huang, S Jaimungal, M Nourian, Applied Mathematical Finance. 262X. Huang, S. Jaimungal, and M. Nourian. Mean-field game strategies for optimal execution. Applied Mathematical Finance, 26(2):153-185, 2019.
+
+Mean-field games with a major player. J.-M Lasry, P.-L Lions, Comptes Rendus Mathématique. 3568J.-M. Lasry and P.-L. Lions. Mean-field games with a major player. Comptes Rendus Mathématique, 356(8):886-890, 2018.
+
+Why do security prices change? A transaction-level analysis of NYSE stocks. A Madhavan, M Richardson, M Roomans, The Review of Financial Studies. 104A. Madhavan, M. Richardson, and M. Roomans. Why do security prices change? A transaction-level analysis of NYSE stocks. The Review of Financial Studies, 10(4):1035-1064, 1997.
+
+Optimal control and machine learning in finance: contributions to the literature on optimal execution, market making, and exotic options. I Manziuk, Université Paris 1 Panthéon-SorbonnePhD thesisI. Manziuk. Optimal control and machine learning in finance: contributions to the literature on optimal execution, market making, and exotic options. PhD thesis, Université Paris 1 Panthéon-Sorbonne, 2019.
+
+The behavior of high-frequency traders under different market stress scenarios. N Megarbane, P Saliba, C.-A Lehalle, M Rosenbaum, Market Microstructure and Liquidity. 303n041850005N. Megarbane, P. Saliba, C.-A. Lehalle, and M. Rosenbaum. The behavior of high-frequency traders under different market stress scenarios. Market Microstructure and Liquidity, 3(03n04):1850005, 2017.
+
+A new approach for the dynamics of ultra-high-frequency data: the model with uncertainty zones. C Y Robert, M Rosenbaum, Journal of Financial Econometrics. 92C.Y. Robert and M. Rosenbaum. A new approach for the dynamics of ultra-high-frequency data: the model with uncer- tainty zones. Journal of Financial Econometrics, 9(2):344-366, 2011.
+
+Relation between bid-ask spread, impact and volatility in order-driven markets. M Wyart, J.-P Bouchaud, J Kockelkoren, M Potters, M Vettorazzo, Quantitative Finance. 81M. Wyart, J.-P. Bouchaud, J. Kockelkoren, M. Potters, and M. Vettorazzo. Relation between bid-ask spread, impact and volatility in order-driven markets. Quantitative Finance, 8(1):41-57, 2008.
